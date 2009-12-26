@@ -20,6 +20,7 @@ public class FilePackage {
 	private Dictionary<String,TextResource> textResources = new Hashtable<String, TextResource>();
 	private Dictionary<String,VectorResource> vectorResources = new Hashtable<String, VectorResource>();
 	private Dictionary<String,ImageResource> imageResources = new Hashtable<String, ImageResource>();
+	private Dictionary<String,GenericResource> genericResource = new Hashtable<String, GenericResource>();
 	
 	public MapResource getMapResource(String name)  throws IOException {
 		MapResource resource = mapResources.get(name);
@@ -67,6 +68,16 @@ public class FilePackage {
 			resource = new ImageResource();
 			loadResource(name,resource);
 			imageResources.put(name,resource);
+		}
+		return resource;
+	}
+	
+	public GenericResource getGenericResource(String name) throws IOException {
+		GenericResource resource = genericResource.get(name);
+		if(resource==null){
+			resource = new GenericResource();
+			loadResource(name,resource);
+			genericResource.put(name,resource);
 		}
 		return resource;
 	}

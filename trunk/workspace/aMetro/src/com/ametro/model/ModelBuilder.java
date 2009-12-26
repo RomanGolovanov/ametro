@@ -10,6 +10,7 @@ import android.graphics.Rect;
 import android.util.Log;
 
 import com.ametro.resources.FilePackage;
+import com.ametro.resources.GenericResource;
 import com.ametro.resources.MapAddiditionalLine;
 import com.ametro.resources.MapLine;
 import com.ametro.resources.MapResource;
@@ -20,31 +21,24 @@ import com.ametro.resources.VectorResource;
 
 public class ModelBuilder {
 
-	public static Model Create(String packageName, String mapName) throws IOException
+	public static Model Create(String libraryPath, String packageName, String mapName) throws IOException
 	{
-		FilePackage pkg = new FilePackage(packageName);
+		
+		
+		FilePackage pkg = new FilePackage(libraryPath +"/"+ packageName + ".pmz");
 		
 		Date startTimestamp = new Date();
-		//Date operationTimestamp;
 		
-		//operationTimestamp = new Date();
-		MapResource map = pkg.getMapResource(mapName);
-		//Log.d("aMetro", String.format("MAP Resource loading is %sms", Long.toString((new Date().getTime() - operationTimestamp.getTime())) ));
-		
-		//operationTimestamp = new Date();
+		GenericResource info = pkg.getGenericResource( packageName + ".cty" );
+		MapResource map = pkg.getMapResource(mapName+".map" );
 		VectorResource vec = pkg.getVectorResource(map.getVectorName());
-		//Log.d("aMetro", String.format("VEC Resource loading is %sms", Long.toString((new Date().getTime() - operationTimestamp.getTime())) ));
-		
-		//operationTimestamp = new Date();
-		TransportResource trp = pkg.getTransportResource(map.getTransportName() != null ? map.getTransportName() : mapName.replace(".map",".trp"));
-		//Log.d("aMetro", String.format("TRP Resource loading is %sms", Long.toString((new Date().getTime() - operationTimestamp.getTime())) ));
-		
-		//Log.d("aMetro", String.format("Overall resource loading is %sms", Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
-		
-		//startTimestamp = new Date();
+		TransportResource trp = pkg.getTransportResource(map.getTransportName() != null ? map.getTransportName() : mapName+".trp");
+
 		int size = map.getStationCount() + map.getAddiditionalStationCount();
 
 		Model model = new Model(size);
+		model.setCountryName(info.getValue("Options", "Country"));
+		model.setCityName(info.getValue("Options", "Name"));
 		model.setDimensions(vec.getWidth(),vec.getHeight());
 		model.setLinesWidth(map.getLinesWidth());
 		model.setStationDiameter(map.getStationDiameter());
@@ -52,8 +46,6 @@ public class ModelBuilder {
 		Hashtable<String, MapLine> mapLines = map.getMapLines();
 		Hashtable<String, TransportLine> transportLines = trp.getLines();
 
-		
-		//operationTimestamp = new Date();
 		Iterator<TransportLine> lines = transportLines.values().iterator();
 		while(lines.hasNext()){
 			TransportLine tl = lines.next();
@@ -64,24 +56,19 @@ public class ModelBuilder {
 			}
 			fillMapLines( model, tl, ml);
 		}
-		//Log.d("aMetro", String.format("Lines data parsing is %sms", Long.toString((new Date().getTime() - operationTimestamp.getTime())) ));
 
-		//operationTimestamp = new Date();
 		Iterator<TransportTransfer> transfers = trp.getTransfers().iterator();
 		while(transfers.hasNext()){
 			TransportTransfer t = transfers.next();
 			fillTransfer(model, t);
 
 		}
-		//Log.d("aMetro", String.format("Transfers data parsing is %sms", Long.toString((new Date().getTime() - operationTimestamp.getTime())) ));
 
-		//operationTimestamp = new Date();
 		Iterator<MapAddiditionalLine> additionalLines = map.getAddiditionalLines().iterator();
 		while(additionalLines.hasNext()){
 			MapAddiditionalLine al = additionalLines.next();
 			fillAdditionalLines(model, al);
 		}
-		//Log.d("aMetro", String.format("Additional lines data parsing is %sms", Long.toString((new Date().getTime() - operationTimestamp.getTime())) ));
 		
 		Log.d("aMetro", String.format("Overall data parsing is %sms", Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
 		return model;

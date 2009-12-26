@@ -31,6 +31,22 @@ public class Model {
 		reallocateLines(10);
 	}
 
+	public String getCityName() {
+		return mCityName;
+	}
+	
+	public String getCountryName() {
+		return mCountryName;
+	}
+	
+	public void setCityName(String cityName) {
+		mCityName = cityName;
+	}
+	
+	public void setCountryName(String countryName) {
+		mCountryName = countryName;
+	}
+	
 	public int getStationId(String lineName, String name){
 		return mStationNameIndex.get( lineName+";"+name );
 	}
@@ -207,6 +223,9 @@ public class Model {
 
 	private MapRenderer mMapRenderer;
 
+	private String mCityName;
+	private String mCountryName;
+	
 	private Dictionary<String, Integer> mStationNameIndex;
 
 	private int mStationCount = 0;
@@ -480,9 +499,9 @@ public class Model {
 					canvas.drawCircle(point.x, point.y, radius, mStationFillPaint);
 					canvas.drawCircle(point.x, point.y, radius, mStationBorderPaint);
 
-					//String name = mStationNames[station];
-					//Rect rect = mStationBoxes[station];
-					//drawText(canvas, name, rect, point);
+					String name = mStationNames[station];
+					Rect rect = mStationBoxes[station];
+					drawText(canvas, name, rect, point);
 
 				}
 			}
