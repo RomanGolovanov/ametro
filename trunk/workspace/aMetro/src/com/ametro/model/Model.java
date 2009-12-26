@@ -12,6 +12,7 @@ import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.util.Log;
 
@@ -34,19 +35,19 @@ public class Model {
 	public String getCityName() {
 		return mCityName;
 	}
-	
+
 	public String getCountryName() {
 		return mCountryName;
 	}
-	
+
 	public void setCityName(String cityName) {
 		mCityName = cityName;
 	}
-	
+
 	public void setCountryName(String countryName) {
 		mCountryName = countryName;
 	}
-	
+
 	public int getStationId(String lineName, String name){
 		return mStationNameIndex.get( lineName+";"+name );
 	}
@@ -181,12 +182,12 @@ public class Model {
 		if(size < mStationPreservedCount)
 			throw new InvalidParameterException("New size cannot be less that current allocated");
 		Log.d("aMetro", String.format("Reallocate stations from %s to %s", Integer.toString(mStationPreservedCount), Integer.toString(size) ));
-		
+
 		mStationNames = Helpers.resizeArray(mStationNames, size);
 		mStationBoxes = Helpers.resizeArray(mStationBoxes, size);
 		mStationPoints = Helpers.resizeArray(mStationPoints, size);
 		mStationLine= Helpers.resizeArray(mStationLine, size);
-		
+
 		mEdgeDelays = Helpers.resizeArray(mEdgeDelays, size,size);
 		mEdgeAdditionalNodes = Helpers.resizeArray(mEdgeAdditionalNodes, size,size);
 		mEdgeFlags = Helpers.resizeArray(mEdgeFlags, size,size);
@@ -225,7 +226,7 @@ public class Model {
 
 	private String mCityName;
 	private String mCountryName;
-	
+
 	private Dictionary<String, Integer> mStationNameIndex;
 
 	private int mStationCount = 0;
@@ -300,6 +301,7 @@ public class Model {
 			mFillPaint = new Paint();
 			mFillPaint.setColor(Color.WHITE);
 			mFillPaint.setStyle(Style.FILL);
+			mFillPaint.setAntiAlias(true);
 
 			mStationFillPaint = new Paint();
 			mStationFillPaint.setStyle(Style.FILL);
@@ -318,7 +320,7 @@ public class Model {
 			mTextPaint.setAntiAlias(true);
 			mTextPaint.setStyle(Style.FILL_AND_STROKE);
 			mTextPaint.setStrokeWidth(0);
-			mTextPaint.setSubpixelText(true);
+			mTextPaint.setTextAlign(Align.LEFT);
 
 		}
 
@@ -330,10 +332,7 @@ public class Model {
 		public void render(Canvas canvas){
 			Date startTimestamp = new Date();
 			prepareObjects();
-			canvas.drawRect(0,0,getWidth(),getHeight(),mFillPaint );
-
-			//canvas.setMatrix(m);
-			//canvas.drawColor(Color.WHITE);
+			canvas.drawColor(Color.WHITE);
 			renderTransportLines(canvas);
 			renderTransfers(canvas);
 			renderStations(canvas);			
@@ -342,7 +341,6 @@ public class Model {
 		}
 
 		private void renderTransfers(Canvas canvas) {
-			//Date startTimestamp = new Date();
 			final int stationCount = mStationCount;
 			final float radius = (float)mStationDiameter/2 + 2.2f;
 			final float radiusBig = (float)mStationDiameter/2 + 3.5f;
@@ -385,7 +383,6 @@ public class Model {
 					}
 				}
 			}
-			//Log.d("aMetro", String.format("Rendering transfers is %sms", Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
 		}
 
 		private void renderTransportLines(Canvas canvas) {
@@ -398,7 +395,7 @@ public class Model {
 				for(int row = 0; row < stationCount; row++){
 					for(int col = 0; col < row; col++){
 						if( mEdgeDelays[row][col] != null && 
-							mEdgeLines[row][col] == line )
+								mEdgeLines[row][col] == line )
 						{
 							int flags = mEdgeFlags[row][col];
 							Point from = mStationPoints[row];
@@ -424,7 +421,7 @@ public class Model {
 			Log.d("aMetro", String.format("Rendering transport lines is %sms", Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
 		}
 
-		
+
 		private float calculateAngle( float x0, float y0, float x, float y )
 		{
 			float angle = (float)(Math.atan( (y-y0)/(x-x0) ) / Math.PI * 180);
@@ -448,7 +445,7 @@ public class Model {
 			}
 			return angle;
 		}
-		
+
 		private void drawArc(Canvas canvas, float x1, float y1, float x2, float y2, float x3, float y3, Paint linePaint) {
 			float x12 = (x1+x2)/2;
 			float y12 = (y1+y2)/2;
@@ -458,15 +455,15 @@ public class Model {
 			float b12 = y12 - k12 * x12;
 			float k23 = -(x2-x3)/(y2-y3); 
 			float b23 = y23 - k23 * x23;
-			
+
 			float y0 = (k12*b23 - k23*b12)/(k12-k23);
 			float x0 = (y0 - b12)/k12;
-			
+
 			float R = (float)Math.sqrt(  (x0-x1)*(x0-x1) + (y0-y1)*(y0-y1)  );
-			
+
 			float angle1 = calculateAngle(x0, y0, x1, y1); //(float)(Math.atan( (y1-y0)/(x1-x0) ) / Math.PI * 180);
 			float angle3 = calculateAngle(x0, y0, x3, y3); //(float)(Math.atan( (y3-y0)/(x3-x0) ) / Math.PI * 180);
-			
+
 			float startAngle = Math.min(angle1, angle3);
 			float endAngle = Math.max(angle1, angle3);
 			float sweepAngle = endAngle-startAngle;
@@ -475,15 +472,14 @@ public class Model {
 				sweepAngle = 360 - endAngle + startAngle;
 				startAngle = endAngle;
 			}
-			
+
 			RectF oval = new RectF(x0-R, y0-R, x0+R, y0+R);
 			canvas.drawArc(oval, startAngle, sweepAngle, false, linePaint);
 
-			
+
 		}
 
 		private void renderStations(Canvas canvas) {
-			//Date startTimestamp = new Date();
 			final int stationCount = mStationCount; 
 			float radius = (float)mStationDiameter/2.0f;
 			for(int station = 0; station < stationCount; station++){
@@ -505,21 +501,60 @@ public class Model {
 
 				}
 			}
-			//Log.d("aMetro", String.format("Rendering stations and texts is %sms", Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
 		}
 
-		private void drawText(Canvas canvas, String text, Rect rect, Point aling){
+		private void drawText(Canvas canvas, String text, Rect rect, Point align){
 			if( rect.width() == 0 || rect.height()==0) return;
 			if( rect.width() > rect.height() ){
-				canvas.drawText(text, rect.left, rect.bottom, mTextPaint);
+				drawRectText(canvas, text, rect, align);
 			}else{
 				Path textPath = new Path();
-				textPath.moveTo(rect.right, rect.bottom);
-				textPath.lineTo(rect.right, rect.top);
+				Rect bounds = new Rect();
+				final int right = rect.right;
+				final int bottom = rect.bottom;
+				mTextPaint.getTextBounds(text, 0, text.length()-1, bounds);
+				textPath.moveTo(right,bottom);
+				textPath.lineTo(right, rect.top);
+				canvas.drawRect(right-bounds.height(), bottom - bounds.width()-10, right+2, bottom, mFillPaint);
 				canvas.drawTextOnPath(text, textPath, 0, 0, mTextPaint);
 			}
-			//canvas.drawRect(rect, mTextPaint);
 		}
+
+		private void drawRectText(Canvas canvas, String text, Rect rect, Point align) {
+			Rect bounds = new Rect();
+			mTextPaint.getTextBounds(text, 0, text.length(), bounds);
+			if(bounds.width()>rect.width()){
+				int space = text.indexOf(' ');
+				drawTextOnWhite(canvas, text.substring(0, space), rect, align);
+				rect.offset(0, bounds.height()+2);
+				drawTextOnWhite(canvas, text.substring(space+1), rect, align);
+			}else{
+				drawTextOnWhite(canvas, text, rect, align);
+			}
+		}
+
+		private void drawTextOnWhite(Canvas canvas, String text, Rect rect, Point align) {
+			final int len = text.length();
+			final int top = rect.top;
+			final int left = rect.left;
+			final int right = rect.right;
+			Rect bounds = new Rect();
+			Rect fill = new Rect();
+			if(align.x > rect.centerX()){ // align to right
+				mTextPaint.setTextAlign(Align.RIGHT);
+				mTextPaint.getTextBounds(text, 0, len, bounds);
+				fill.set(right-bounds.width()-1, top, right+2, top + bounds.height()+1);
+				canvas.drawRect(fill, mFillPaint);
+				canvas.drawText(text, right, top+bounds.height(), mTextPaint);
+			}else{// align to left
+				mTextPaint.setTextAlign(Align.LEFT);
+				mTextPaint.getTextBounds(text, 0, len, bounds);
+				fill.set(left-1, top, left+bounds.width()+2, top+bounds.height()+1);
+				canvas.drawRect(fill, mFillPaint);
+				canvas.drawText(text, left, top+bounds.height(), mTextPaint);
+			}
+		}
+
 	}
 
 }
