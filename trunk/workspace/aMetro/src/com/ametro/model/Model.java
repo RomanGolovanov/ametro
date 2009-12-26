@@ -12,6 +12,7 @@ import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.util.Log;
@@ -321,6 +322,7 @@ public class Model {
 			mTextPaint.setStyle(Style.FILL_AND_STROKE);
 			mTextPaint.setStrokeWidth(0);
 			mTextPaint.setTextAlign(Align.LEFT);
+			mTextPaint.setTypeface(Typeface.MONOSPACE);
 
 		}
 
@@ -505,6 +507,7 @@ public class Model {
 
 		private void drawText(Canvas canvas, String text, Rect rect, Point align){
 			if( rect.width() == 0 || rect.height()==0) return;
+			//text = text.toUpperCase();
 			if( rect.width() > rect.height() ){
 				drawRectText(canvas, text, rect, align);
 			}else{
@@ -525,15 +528,15 @@ public class Model {
 			mTextPaint.getTextBounds(text, 0, text.length(), bounds);
 			if(bounds.width()>rect.width()){
 				int space = text.indexOf(' ');
-				drawTextOnWhite(canvas, text.substring(0, space), rect, align);
-				rect.offset(0, bounds.height()+2);
+				int offset = drawTextOnWhite(canvas, text.substring(0, space), rect, align);
+				rect.offset(0, offset+2);
 				drawTextOnWhite(canvas, text.substring(space+1), rect, align);
 			}else{
 				drawTextOnWhite(canvas, text, rect, align);
 			}
 		}
 
-		private void drawTextOnWhite(Canvas canvas, String text, Rect rect, Point align) {
+		private int drawTextOnWhite(Canvas canvas, String text, Rect rect, Point align) {
 			final int len = text.length();
 			final int top = rect.top;
 			final int left = rect.left;
@@ -546,13 +549,14 @@ public class Model {
 				fill.set(right-bounds.width()-1, top, right+2, top + bounds.height()+1);
 				canvas.drawRect(fill, mFillPaint);
 				canvas.drawText(text, right, top+bounds.height(), mTextPaint);
-			}else{// align to left
+			}else{ // align to left
 				mTextPaint.setTextAlign(Align.LEFT);
 				mTextPaint.getTextBounds(text, 0, len, bounds);
 				fill.set(left-1, top, left+bounds.width()+2, top+bounds.height()+1);
 				canvas.drawRect(fill, mFillPaint);
 				canvas.drawText(text, left, top+bounds.height(), mTextPaint);
 			}
+			return bounds.height();
 		}
 
 	}
