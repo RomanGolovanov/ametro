@@ -135,7 +135,7 @@ public class BrowseMap extends Activity {
 
 		}else{
 			setTitle(
-				String.format("%s - %s (at %s)",
+				String.format("%s - %s (%s)",
 					getString(R.string.app_name), 
 					mModel.getCityName(), 
 					getString(getTimeOfDay()).toLowerCase())
