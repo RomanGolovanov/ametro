@@ -63,6 +63,13 @@ public class MapImageView extends FrameLayout {
 			mModel.render(bufferCanvas);
 			mIsBuffered = true;
 		}
+
+		public void setModel(Model model) {
+			mModel = model;
+			mIsBuffered = false;
+			mBuffer.recycle();
+			mBuffer = null;
+		}
 	}
 
 	public MapImageView(Context context, AttributeSet attrs, int defStyle) {
@@ -368,6 +375,11 @@ public class MapImageView extends FrameLayout {
 			x = docMax - viewMax;
 		}
 		return x;
+	}
+
+	public void setModel(Model model) {
+		mModel = model;
+		mMapImage.setModel(model);
 	}
 
 }

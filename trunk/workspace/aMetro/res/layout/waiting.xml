@@ -1,27 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/FrameLayout01"
-	android:layout_width="fill_parent" 
-	android:layout_height="fill_parent"
-	android:gravity="center"
+	android:orientation="vertical" android:gravity="center"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:background="#000000"
 	>
-	<LinearLayout android:id="@+id/LinearLayout01"
-		android:orientation="horizontal" 
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
+
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:orientation="vertical" 
 		android:gravity="center"
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content"
 		>
 
-		<ProgressBar android:id="@+android:id/progress_large"
-        style="?android:attr/progressBarStyleSmall"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
-		<TextView
-			android:text="Loading...."
-			android:paddingLeft="10px"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
+		<ImageView android:id="@+id/logoImageView" android:src="@drawable/small_logo"
+			android:layout_width="wrap_content" android:layout_height="wrap_content">
+		</ImageView>
+
+		<LinearLayout android:orientation="horizontal"
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content"
+			android:gravity="center" 
+			android:baselineAligned="true"
+			>
+
+			<ProgressBar android:id="@+android:id/progress_small_title"
+				android:paddingRight="10px" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+			<TextView android:text="Loading...." android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
 
 
+		</LinearLayout>
 	</LinearLayout>
 </LinearLayout>
+	
