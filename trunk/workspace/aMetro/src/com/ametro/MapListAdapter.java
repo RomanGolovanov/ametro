@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,8 @@ public class MapListAdapter extends BaseExpandableListAdapter {
 	private String[][] mFiles;
 
 	private Context mContext;
+	private int mSelectedGroup;
+	private int mSelectedChild;
 
 	public String getFileName(int groupId, int childId){
 		return mFiles[groupId][childId];
@@ -99,8 +102,7 @@ public class MapListAdapter extends BaseExpandableListAdapter {
 
 	public TextView getGenericView() {
 		// Layout parameters for the ExpandableListView
-		AbsListView.LayoutParams lp = new AbsListView.LayoutParams(
-				ViewGroup.LayoutParams.FILL_PARENT, 64);
+		AbsListView.LayoutParams lp = new AbsListView.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 64);
 
 		TextView textView = new TextView(mContext);
 		textView.setLayoutParams(lp);
@@ -111,9 +113,25 @@ public class MapListAdapter extends BaseExpandableListAdapter {
 		return textView;
 	}
 
-	public View getChildView(int groupPosition, int childPosition,
-			boolean isLastChild, View convertView, ViewGroup parent) {
-		TextView textView = getGenericView();
+	public TextView getSelectedView() {
+		// Layout parameters for the ExpandableListView
+		AbsListView.LayoutParams lp = new AbsListView.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 64);
+
+		TextView textView = new TextView(mContext);
+		textView.setLayoutParams(lp);
+		textView.setBackgroundColor(Color.DKGRAY);
+
+		// Center the text vertically
+		textView.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
+		// Set the text starting position
+		textView.setPadding(36, 0, 0, 0);
+		return textView;
+	}
+
+	public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+		TextView textView = groupPosition==mSelectedGroup && childPosition==mSelectedChild ?
+				getSelectedView() :
+				getGenericView() ;
 		textView.setText(getChild(groupPosition, childPosition).toString());
 		return textView;
 	}
@@ -146,26 +164,27 @@ public class MapListAdapter extends BaseExpandableListAdapter {
 	}
 
 
-	public int getGroupByFileName(String fileName) {
-		for(int i = 0; i < mFiles.length; i++){
-			String[] cols = mFiles[i];
-			for(int j = 0; j < cols.length; j++){
-				if( cols[j].equals(fileName) )
-					return i;
-			}
-		}
-		return -1;
+	public int getSelectedGroupPosition() {
+		return mSelectedGroup;
 	}
 
-	public int getChildByFileName(int groupPosition, String fileName) {
+	public int getSelectChildPosition() {
+		return mSelectedChild;
+	}
+
+	public void setSelectedFile(String fileName){
 		for(int i = 0; i < mFiles.length; i++){
 			String[] cols = mFiles[i];
 			for(int j = 0; j < cols.length; j++){
-				if( cols[j].equals(fileName) )
-					return j;
+				if( cols[j].equals(fileName) ){
+					mSelectedGroup = i;
+					mSelectedChild = j;
+					return;
+				}
 			}
 		}
-		return -1;
+		mSelectedGroup = -1;
+		mSelectedChild = -1;
 	}
 
 }
