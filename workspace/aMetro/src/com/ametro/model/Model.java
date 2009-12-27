@@ -12,7 +12,6 @@ import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.Typeface;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.util.Log;
@@ -341,7 +340,7 @@ public class Model {
 			mTextPaint.setStyle(Style.FILL_AND_STROKE);
 			mTextPaint.setStrokeWidth(0);
 			mTextPaint.setTextAlign(Align.LEFT);
-			mTextPaint.setTypeface(Typeface.MONOSPACE);
+			//mTextPaint.setTypeface(Typeface.MONOSPACE);
 
 		}
 
