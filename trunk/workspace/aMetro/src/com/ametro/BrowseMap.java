@@ -105,12 +105,6 @@ public class BrowseMap extends Activity {
 		}
 	}
 
-	private void loadPreferences() {
-		SharedPreferences preferences = getSharedPreferences("aMetro", 0);
-		mPackageFileName = preferences.getString(PREFERENCE_PACKAGE_FILE_NAME, null);
-		mPackageMapName = preferences.getString(PREFERENCE_PACKAGE_MAP_NAME, "metro");
-	}
-
 	@Override
 	protected void onStart() {
 		// TODO Auto-generated method stub
@@ -129,12 +123,27 @@ public class BrowseMap extends Activity {
 		super.onStop();
 	}
 
+	private void loadPreferences() {
+		SharedPreferences preferences = getSharedPreferences("aMetro", 0);
+		mPackageFileName = preferences.getString(PREFERENCE_PACKAGE_FILE_NAME, null);
+		mPackageMapName = preferences.getString(PREFERENCE_PACKAGE_MAP_NAME, "metro");
+	}
+
 	private void savePreferences() {
 		SharedPreferences preferences = getSharedPreferences("aMetro", 0);
 		SharedPreferences.Editor editor = preferences.edit();
 		editor.putString(PREFERENCE_PACKAGE_FILE_NAME, mPackageFileName);
 		editor.putString(PREFERENCE_PACKAGE_MAP_NAME, mPackageMapName);
 		editor.commit();
+	}
+
+	private void clearPreferences() {
+		SharedPreferences preferences = getSharedPreferences("aMetro", 0);
+		SharedPreferences.Editor editor = preferences.edit();
+		editor.putString(PREFERENCE_PACKAGE_FILE_NAME, null);
+		editor.putString(PREFERENCE_PACKAGE_MAP_NAME, null);
+		editor.commit();
+		mPackageFileName = null;
 	}
 
 	@Override
@@ -168,12 +177,29 @@ public class BrowseMap extends Activity {
 
 	private final Runnable mUpdateContentView = new Runnable() {
 		public void run() {
-			mMapImageView = new MapImageView(getApplicationContext(), mModel);
-			mMapImageView.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.FILL_PARENT));
-			setProgressBarVisibility(false);
-			setContentView(mMapImageView);
-			updateTitle();
-			savePreferences();
+			try {
+				mMapImageView = new MapImageView(getApplicationContext(),
+						mModel);
+				mMapImageView.setLayoutParams(new LayoutParams(
+						LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+				setProgressBarVisibility(false);
+				setContentView(mMapImageView);
+				updateTitle();
+				mMapImageView.invalidate();
+				savePreferences();
+			} catch (Exception e) {
+				clearPreferences();
+				unloadModel();
+				setContentView(R.layout.no_map_loaded);
+			}
+		}
+	};    
+
+	private final Runnable mSetNoMapContentView = new Runnable() {
+		public void run() {
+			clearPreferences();
+			unloadModel();
+			setContentView(R.layout.no_map_loaded);
 		}
 	};    
 
@@ -189,7 +215,7 @@ public class BrowseMap extends Activity {
 					mHandler.post(mUpdateContentView);
 				} catch (Exception e) {
 					Log.e("aMetro", "Failed to load map", e);
-					finish();
+					mHandler.post(mSetNoMapContentView);
 				}
 			}
 		}.start();

@@ -9,27 +9,27 @@ public class CommandBuilder {
 
 	public static ICommand createVectorCommand(FilePackage owner, VectorResource resource, String commandName, String arguments) {
 		ICommand cmd = null;
-		/* */ if(commandName.equals("Size")){
+		/* */ if(commandName.equalsIgnoreCase("Size")){
 			cmd = new Size();
-		}else if(commandName.equals("PenColor")){
+		}else if(commandName.equalsIgnoreCase("PenColor")){
 			cmd =  new PenColor();
-		}else if(commandName.equals("Spline")){
+		}else if(commandName.equalsIgnoreCase("Spline")){
 			cmd =  new Spline();
-		}else if(commandName.equals("AngleTextOut")){
+		}else if(commandName.equalsIgnoreCase("AngleTextOut")){
 			cmd =  new AngleTextOut();
-		}else if(commandName.equals("BrushColor")){
+		}else if(commandName.equalsIgnoreCase("BrushColor")){
 			cmd =  new BrushColor();
-		}else if(commandName.equals("SpotRect")){
+		}else if(commandName.equalsIgnoreCase("SpotRect")){
 			cmd =  new SpotRect();
-		}else if(commandName.equals("Image")){
+		}else if(commandName.equalsIgnoreCase("Image")){
 			cmd =  new Image();
-		}else if(commandName.equals("TextOut")){
+		}else if(commandName.equalsIgnoreCase("TextOut")){
 			cmd =  new TextOut();
-		}else if(commandName.equals("Polygon")){
+		}else if(commandName.equalsIgnoreCase("Polygon")){
 			cmd =  new Polygon();
-		}else if(commandName.equals("Line")){
+		}else if(commandName.equalsIgnoreCase("Line")){
 			cmd =  new Line();
-		}else if(commandName.equals("SpotCircle")){
+		}else if(commandName.equalsIgnoreCase("SpotCircle")){
 			cmd =  new SpotCircle();
 		}else{
 		throw new InvalidParameterException("Command '" + commandName +"' not found");
