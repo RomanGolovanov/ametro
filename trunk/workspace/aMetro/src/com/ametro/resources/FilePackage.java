@@ -14,14 +14,16 @@ import java.util.zip.ZipFile;
 public class FilePackage {
 
 	private ZipFile file;
-	
+
 	private Dictionary<String,MapResource> mapResources = new Hashtable<String, MapResource>();
 	private Dictionary<String,TransportResource> transportResources = new Hashtable<String, TransportResource>();
 	private Dictionary<String,TextResource> textResources = new Hashtable<String, TextResource>();
 	private Dictionary<String,VectorResource> vectorResources = new Hashtable<String, VectorResource>();
 	private Dictionary<String,ImageResource> imageResources = new Hashtable<String, ImageResource>();
 	private Dictionary<String,GenericResource> genericResource = new Hashtable<String, GenericResource>();
-	
+
+	private GenericResource cityGenericResource;
+
 	public MapResource getMapResource(String name)  throws IOException {
 		MapResource resource = mapResources.get(name);
 		if(resource==null){
@@ -41,7 +43,7 @@ public class FilePackage {
 		}
 		return resource;
 	}
-		
+
 
 	public TextResource getTextResource(String name)  throws IOException {
 		TextResource resource = textResources.get(name);
@@ -71,7 +73,7 @@ public class FilePackage {
 		}
 		return resource;
 	}
-	
+
 	public GenericResource getGenericResource(String name) throws IOException {
 		GenericResource resource = genericResource.get(name);
 		if(resource==null){
@@ -81,15 +83,33 @@ public class FilePackage {
 		}
 		return resource;
 	}
-	
+
+	public GenericResource getCityGenericResource() throws IOException {
+		
+		if(cityGenericResource==null){
+			GenericResource resource = new GenericResource();
+			loadResource(findCityResourceEntry(),resource);
+			cityGenericResource = resource;
+		}
+		return cityGenericResource;
+	}
+
 	public FilePackage(String fileName) throws IOException
 	{
 		file = new ZipFile(fileName);
 	}
-	
+
 	public void close() throws IOException
 	{
 		file.close();
+		file = null;
+		mapResources = null;
+		transportResources = null;
+		textResources = null;
+		vectorResources = null;
+		imageResources = null;
+		genericResource = null;
+		cityGenericResource = null;
 	}
 
 	public String[] getMapNames(){
@@ -122,7 +142,8 @@ public class FilePackage {
 		}
 		return (String[]) names.toArray(new String[names.size()]);
 	}
-	
+
+
 	private ZipEntry findResourceEntry(String name){
 		ZipEntry entry = file.getEntry(name);
 		if(entry==null){
@@ -134,17 +155,34 @@ public class FilePackage {
 					entry = item;
 					break;
 				}
-				
+
 			}
 		}
 		return entry;
 	}
-	
+
+	private ZipEntry findCityResourceEntry(){
+		Enumeration<? extends ZipEntry> entries = file.entries();
+		while(entries.hasMoreElements()){
+			ZipEntry item = entries.nextElement();
+			if(item.getName().endsWith(".cty")){
+				return item;
+			}
+
+		}
+		return null;
+	}
+
 	private void loadResource(String name, IResource observer) throws IOException
 	{
 		ZipEntry entry = findResourceEntry(name);
+		loadResource(entry, observer);
+	}
+
+	private void loadResource(ZipEntry entry, IResource observer) throws IOException
+	{
 		InputStreamReader reader = new InputStreamReader( file.getInputStream(entry), Charset.forName("windows-1251") );
-	    BufferedReader input =  new BufferedReader(reader);
+		BufferedReader input =  new BufferedReader(reader);
 		try {
 			observer.beginInitialize(this);
 			String line = null;
@@ -157,6 +195,6 @@ public class FilePackage {
 			input.close();
 		}
 	}
-	
-	
+
+
 }
