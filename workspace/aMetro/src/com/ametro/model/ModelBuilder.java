@@ -23,13 +23,11 @@ public class ModelBuilder {
 
 	public static Model Create(String libraryPath, String packageName, String mapName) throws IOException
 	{
-		
-		
-		FilePackage pkg = new FilePackage(libraryPath +"/"+ packageName + ".pmz");
+		FilePackage pkg = new FilePackage(libraryPath +"/"+ packageName );
 		
 		Date startTimestamp = new Date();
 		
-		GenericResource info = pkg.getGenericResource( packageName + ".cty" );
+		GenericResource info = pkg.getCityGenericResource();
 		MapResource map = pkg.getMapResource(mapName+".map" );
 		VectorResource vec = pkg.getVectorResource(map.getVectorName());
 		TransportResource trp = pkg.getTransportResource(map.getTransportName() != null ? map.getTransportName() : mapName+".trp");
@@ -42,6 +40,8 @@ public class ModelBuilder {
 		model.setDimensions(vec.getWidth(),vec.getHeight());
 		model.setLinesWidth(map.getLinesWidth());
 		model.setStationDiameter(map.getStationDiameter());
+		model.setWordWrap(map.isWordWrap());
+		model.setUpperCase(map.isUpperCase());
 
 		Hashtable<String, MapLine> mapLines = map.getMapLines();
 		Hashtable<String, TransportLine> transportLines = trp.getLines();

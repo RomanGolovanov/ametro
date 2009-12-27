@@ -256,7 +256,26 @@ public class Model {
 
 	private int mStationDiameter;
 	private int mLinesWidth;
+	private boolean mWordWrap;
+	private boolean mUpperCase;
 
+	
+
+	public boolean isUpperCase() {
+		return mUpperCase;
+	}
+
+	public void setUpperCase(boolean mUpperCase) {
+		this.mUpperCase = mUpperCase;
+	}
+
+	public boolean isWordWrap() {
+		return mWordWrap;
+	}
+
+	public void setWordWrap(boolean mWordWrap) {
+		this.mWordWrap = mWordWrap;
+	}
 
 	public int getLineCount() {
 		return mLineCount;
@@ -499,7 +518,9 @@ public class Model {
 
 					String name = mStationNames[station];
 					Rect rect = mStationBoxes[station];
-					drawText(canvas, name, rect, point);
+					if(rect!=null && name!=null){
+						drawText(canvas, mUpperCase ? name.toUpperCase() : name, rect, point);
+					}
 
 				}
 			}
@@ -526,14 +547,16 @@ public class Model {
 		private void drawRectText(Canvas canvas, String text, Rect rect, Point align) {
 			Rect bounds = new Rect();
 			mTextPaint.getTextBounds(text, 0, text.length(), bounds);
-			if(bounds.width()>rect.width()){
+			if(bounds.width()>rect.width() && mWordWrap){
 				int space = text.indexOf(' ');
-				int offset = drawTextOnWhite(canvas, text.substring(0, space), rect, align);
-				rect.offset(0, offset+2);
-				drawTextOnWhite(canvas, text.substring(space+1), rect, align);
-			}else{
-				drawTextOnWhite(canvas, text, rect, align);
+				if(space!=-1){
+					int offset = drawTextOnWhite(canvas, text.substring(0, space), rect, align);
+					rect.offset(0, offset+2);
+					drawTextOnWhite(canvas, text.substring(space+1), rect, align);
+					return;
+				}
 			}
+			drawTextOnWhite(canvas, text, rect, align);
 		}
 
 		private int drawTextOnWhite(Canvas canvas, String text, Rect rect, Point align) {

@@ -3,11 +3,6 @@ package com.ametro;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Set;
-
-import java.util.TreeMap;
-
 import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
@@ -27,68 +22,21 @@ import com.ametro.resources.GenericResource;
  */
 public class MapListAdapter extends BaseExpandableListAdapter {
 
-	private class FileGroupsDictionary {
-		
-		private static final long serialVersionUID = 1272092376968306671L;
-
-		private class StringArray extends ArrayList<String>{
-			private static final long serialVersionUID = -1990141892280002055L;
-
-		}
-
-		private TreeMap<String, StringArray> groups = new TreeMap<String, StringArray>();
-		private TreeMap<String, String> pathes = new TreeMap<String, String>();
-
-		
-		public void putFile(String groupName, String label, String path){
-			StringArray c = groups.get(groupName);
-			if(c==null){
-				groups.put(groupName, c = new StringArray());
-			}
-			c.add(label);
-			String pathId = groupName+";"+label;
-			pathes.put(pathId, path);
-		}
-
-		public String getFile(String groupName, String label){
-			String pathId = groupName+";"+label;
-			return pathes.get(pathId);
-		}
-
-		public String[] getGroups(){
-			Set<String> keys = groups.keySet();
-			return (String[]) keys.toArray(new String[keys.size()]);
-		}
-
-		public String[] getLabels(String groupName){
-			StringArray c = groups.get(groupName);
-			return (String[]) (c).toArray(new String[c.size()]);
-		}
-
-		public String[] getPathes(String groupName, String[] labels){
-			String[] vals = new String[labels.length];
-			for (int i = 0; i < vals.length; i++) {
-				vals[i] = getFile(groupName, labels[i]);
-			}
-			return vals;
-		}
-
-		//public fillTables() 	
-
-	}
-
 	private String[] mCountries;
 	private String[][] mCities; 
 	private String[][] mFiles;
 
 	private Context mContext;
-	
-	
+
+	public String getFileName(int groupId, int childId){
+		return mFiles[groupId][childId];
+	}
+
 	public MapListAdapter(Context context){
 		mContext = context;
 	}
 
-	public void Initialize(String path){
+	public void init(String path){
 		File dir = new File(path);
 		String[] files = dir.list(new FilenameFilter() {
 			@Override
@@ -195,6 +143,29 @@ public class MapListAdapter extends BaseExpandableListAdapter {
 
 	public boolean hasStableIds() {
 		return true;
+	}
+
+
+	public int getGroupByFileName(String fileName) {
+		for(int i = 0; i < mFiles.length; i++){
+			String[] cols = mFiles[i];
+			for(int j = 0; j < cols.length; j++){
+				if( cols[j].equals(fileName) )
+					return i;
+			}
+		}
+		return -1;
+	}
+
+	public int getChildByFileName(int groupPosition, String fileName) {
+		for(int i = 0; i < mFiles.length; i++){
+			String[] cols = mFiles[i];
+			for(int j = 0; j < cols.length; j++){
+				if( cols[j].equals(fileName) )
+					return j;
+			}
+		}
+		return -1;
 	}
 
 }

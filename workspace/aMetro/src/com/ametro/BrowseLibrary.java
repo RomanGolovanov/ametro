@@ -1,29 +1,40 @@
 package com.ametro;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.MenuItem;
+import android.util.Log;
+import android.view.View;
 import android.view.Window;
 
 import android.widget.ExpandableListView;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 
-public class BrowseLibrary extends Activity {
+public class BrowseLibrary extends Activity implements ExpandableListView.OnChildClickListener {
 	/**
 	 * @see android.app.Activity#onCreate(Bundle)
 	 */
 
-	MapListAdapter mAdapter;
-	ExpandableListView mListView;
+	private MapListAdapter mAdapter;
+	private ExpandableListView mListView;
+	private String mDefaultPackageFileName;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mAdapter = new MapListAdapter(this);
+		mDefaultPackageFileName = null;
 
+		Intent data = getIntent();
+		if(data!=null){
+			Uri uri = data.getData();
+			if(uri!=null){
+				mDefaultPackageFileName = uri.toString().replace("ametro://", "");
+			}
+		}
+
+		
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setContentView(R.layout.waiting);
 		setProgressBarIndeterminate(true);
@@ -33,41 +44,34 @@ public class BrowseLibrary extends Activity {
 		mMapListLoader.start();
 	}
 
+
 	@Override
-	public boolean onContextItemSelected(MenuItem item) {
-		ExpandableListContextMenuInfo info = (ExpandableListContextMenuInfo) item.getMenuInfo();
-		String title = ((TextView) info.targetView).getText().toString();
-
-		int type = ExpandableListView.getPackedPositionType(info.packedPosition);
-		if (type == ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
-			int groupPos = ExpandableListView.getPackedPositionGroup(info.packedPosition);
-			int childPos = ExpandableListView.getPackedPositionChild(info.packedPosition);
-			Toast.makeText(
-					this,
-					title + ": Child " + childPos + " clicked in group "
-					+ groupPos, Toast.LENGTH_SHORT).show();
-			return true;
-		} else if (type == ExpandableListView.PACKED_POSITION_TYPE_GROUP) {
-			int groupPos = ExpandableListView
-			.getPackedPositionGroup(info.packedPosition);
-			Toast.makeText(this, title + ": Group " + groupPos + " clicked",
-					Toast.LENGTH_SHORT).show();
-			return true;
-		}
-
-		return false;
+	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+		String fileName = mAdapter.getFileName(groupPosition, childPosition);
+		Intent i = new Intent();
+		i.setData( Uri.parse( "ametro://" + fileName ));
+		setResult(RESULT_OK, i);
+		finish();
+		return true;
 	}
-
 
 	private final Handler mHandler = new Handler();
 
 	private final Runnable mUpdateContentView = new Runnable() {
 		public void run() {
 			setProgressBarIndeterminateVisibility(false);
-			//setListAdapter(mAdapter);
-			//registerForContextMenu(getExpandableListView());
 			mListView = new ExpandableListView(BrowseLibrary.this);
 			mListView.setAdapter(mAdapter);
+			mListView.setOnChildClickListener(BrowseLibrary.this);
+			
+			if(mDefaultPackageFileName!=null){
+				int groupPosition = mAdapter.getGroupByFileName(mDefaultPackageFileName);
+				int childPosition = mAdapter.getChildByFileName(groupPosition, mDefaultPackageFileName);
+				Log.e("aMetro","Group: " + groupPosition + ", Child:" + childPosition);
+				mListView.expandGroup(groupPosition);
+				mListView.setSelectedChild(groupPosition, childPosition, true);
+			}
+			
 			setContentView(mListView);
 			registerForContextMenu(mListView);
 		}
@@ -75,8 +79,9 @@ public class BrowseLibrary extends Activity {
 
 	private final Thread mMapListLoader = new Thread() {
 		public void run() {
-			mAdapter.Initialize("/sdcard/ametro");
+			mAdapter.init(MapSettings.CATALOG_PATH);
 			mHandler.post(mUpdateContentView);
 		}
 	};
+
 }
