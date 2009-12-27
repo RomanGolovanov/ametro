@@ -63,10 +63,10 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 			mListView = new ExpandableListView(BrowseLibrary.this);
 			mListView.setAdapter(mAdapter);
 			mListView.setOnChildClickListener(BrowseLibrary.this);
-			
 			if(mDefaultPackageFileName!=null){
-				int groupPosition = mAdapter.getGroupByFileName(mDefaultPackageFileName);
-				int childPosition = mAdapter.getChildByFileName(groupPosition, mDefaultPackageFileName);
+				mAdapter.setSelectedFile(mDefaultPackageFileName);
+				int groupPosition = mAdapter.getSelectedGroupPosition();
+				int childPosition = mAdapter.getSelectChildPosition();
 				Log.e("aMetro","Group: " + groupPosition + ", Child:" + childPosition);
 				mListView.expandGroup(groupPosition);
 				mListView.setSelectedChild(groupPosition, childPosition, true);
@@ -83,5 +83,6 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 			mHandler.post(mUpdateContentView);
 		}
 	};
+	
 
 }

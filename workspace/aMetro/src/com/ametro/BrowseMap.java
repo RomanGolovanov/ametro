@@ -178,16 +178,15 @@ public class BrowseMap extends Activity {
 	private final Runnable mUpdateContentView = new Runnable() {
 		public void run() {
 			try {
-				mMapImageView = new MapImageView(getApplicationContext(),
-						mModel);
+				mMapImageView = new MapImageView(getApplicationContext(),mModel);
 				mMapImageView.setLayoutParams(new LayoutParams(
 						LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
 				setProgressBarVisibility(false);
 				setContentView(mMapImageView);
 				updateTitle();
-				mMapImageView.invalidate();
+				mMapImageView.preRender();
 				savePreferences();
-			} catch (Exception e) {
+			} catch (Throwable e) {
 				clearPreferences();
 				unloadModel();
 				setContentView(R.layout.no_map_loaded);

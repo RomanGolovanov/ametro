@@ -58,7 +58,7 @@ public class MapImageView extends FrameLayout {
 			if(mBuffer!=null){
 				mBuffer.recycle();
 			}
-			mBuffer = Bitmap.createBitmap(mModel.getWidth(), mModel.getHeight(), Config.ARGB_4444 );
+			mBuffer = Bitmap.createBitmap(mModel.getWidth(), mModel.getHeight(), Config.RGB_565 );
 			Canvas bufferCanvas = new Canvas(mBuffer);
 			mModel.render(bufferCanvas);
 			mIsBuffered = true;
@@ -69,6 +69,10 @@ public class MapImageView extends FrameLayout {
 			mIsBuffered = false;
 			mBuffer.recycle();
 			mBuffer = null;
+		}
+
+		public void preRender() {
+			fillBuffer();
 		}
 	}
 
@@ -380,6 +384,10 @@ public class MapImageView extends FrameLayout {
 	public void setModel(Model model) {
 		mModel = model;
 		mMapImage.setModel(model);
+	}
+
+	public void preRender() {
+		mMapImage.preRender();
 	}
 
 }
