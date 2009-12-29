@@ -3,6 +3,8 @@ package com.ametro.resources;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+import com.ametro.libs.Helpers;
+
 public class MapResource implements IResource {
 
 	private class MapParser

@@ -3,6 +3,7 @@ package com.ametro;
 
 import com.ametro.model.Model;
 import com.ametro.model.ModelBuilder;
+import com.ametro.widgets.MapImageView;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -34,13 +35,14 @@ public class BrowseMap extends Activity {
 	private static final String PREFERENCE_PACKAGE_FILE_NAME = "PACKAGE_FILE_NAME";
 	private static final String PREFERENCE_PACKAGE_MAP_NAME = "PACKAGE_MAP_NAME";
 
-	private final int MAIN_MENU_FIND 		= 1;
-	private final int MAIN_MENU_LIBRARY 	= 2;
-	private final int MAIN_MENU_ROUTES 		= 3;
-	private final int MAIN_MENU_TIME 		= 4;
-	private final int MAIN_MENU_STATION 	= 5;
-	private final int MAIN_MENU_SETTINGS 	= 6;
-	private final int MAIN_MENU_ABOUT 		= 7;
+	private final int MAIN_MENU_FIND 		 = 1;
+	private final int MAIN_MENU_LIBRARY 	 = 2;
+	private final int MAIN_MENU_ROUTES 		 = 3;
+	private final int MAIN_MENU_TIME 		 = 4;
+	private final int MAIN_MENU_STATION 	 = 5;
+	private final int MAIN_MENU_SETTINGS 	 = 6;
+	private final int MAIN_MENU_ABOUT 		 = 7;
+	private final int MAIN_MENU_EXPERIMENTAL = 8;
 
 	private final int REQUEST_CODE_MAP = 1;
 
@@ -53,6 +55,9 @@ public class BrowseMap extends Activity {
 		menu.add(0, MAIN_MENU_ROUTES, 	2, R.string.menu_routes).setIcon(android.R.drawable.ic_menu_directions);
 		menu.add(0, MAIN_MENU_SETTINGS, 5, R.string.menu_settings).setIcon(android.R.drawable.ic_menu_preferences);
 		menu.add(0, MAIN_MENU_ABOUT, 	6, R.string.menu_about);
+		
+		menu.add(0, MAIN_MENU_EXPERIMENTAL, 	7, R.string.menu_experimental);
+		
 		mMainMenuTime = menu.add(0, MAIN_MENU_TIME, 	3, getNextTimeOfDay() ).setIcon(android.R.drawable.ic_menu_rotate);
 		mMainMenuStation = menu.add(0, MAIN_MENU_STATION, 	4, R.string.menu_station).setIcon(android.R.drawable.ic_menu_info_details).setEnabled(mSelectedStationId!=null);
 		return true;
@@ -83,6 +88,9 @@ public class BrowseMap extends Activity {
 			updateTitle();
 			return true;
 		case MAIN_MENU_STATION:
+			return true;
+		case MAIN_MENU_EXPERIMENTAL:
+			startActivity(new Intent(this,BrowseTileMap.class));
 			return true;
 		}		
 		return super.onOptionsItemSelected(item);
