@@ -1,4 +1,4 @@
-package com.ametro.model;
+package com.ametro.libs;
 
 public class TokenizedString
 {

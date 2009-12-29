@@ -1,12 +1,22 @@
-package com.ametro;
+package com.ametro.widgets;
 
+import java.io.File;
+import java.io.FileOutputStream;
+
+import com.ametro.MapSettings;
 import com.ametro.model.Model;
+import com.ametro.model.TileManager;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Rect;
 import android.graphics.Bitmap.Config;
+import android.provider.Contacts.Settings;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.widget.FrameLayout;
@@ -20,7 +30,7 @@ public class MapImageView extends FrameLayout {
 		private Model mModel;
 		private Bitmap mBuffer;
 		private boolean mIsBuffered;
-		
+
 		public MapImage(Context context, Model model) {
 			super(context);
 			mModel = model;
@@ -34,7 +44,7 @@ public class MapImageView extends FrameLayout {
 			int height = 0;
 			if(mModel!=null){
 				//DisplayMetrics
-				
+
 				width = mModel.getWidth();
 				height = mModel.getHeight();
 			}
@@ -54,6 +64,7 @@ public class MapImageView extends FrameLayout {
 			}
 		}
 
+
 		private void fillBuffer() {
 			if(mBuffer!=null){
 				mBuffer.recycle();
@@ -61,6 +72,10 @@ public class MapImageView extends FrameLayout {
 			mBuffer = Bitmap.createBitmap(mModel.getWidth(), mModel.getHeight(), Config.RGB_565 );
 			Canvas bufferCanvas = new Canvas(mBuffer);
 			mModel.render(bufferCanvas);
+			
+			Rect src = new Rect(0,0,mBuffer.getWidth(), mBuffer.getHeight());
+			TileManager.createTiles(mModel.getCityName(),0,0, mBuffer,src,0);
+			
 			mIsBuffered = true;
 		}
 
@@ -87,7 +102,7 @@ public class MapImageView extends FrameLayout {
 	}
 
 	private Model mModel;
-	
+
 	public MapImageView(Context context, Model model) {
 		super(context);
 		mModel = model;
@@ -270,7 +285,7 @@ public class MapImageView extends FrameLayout {
 					mLastTouchY = y;
 				}
 				mLastTouchTime = eventTime;
-				
+
 				if(mTouchMode == TOUCH_DRAG_MODE && ((mStartTouchTime + MIN_DRAG_TIME ) > eventTime)  ){
 					mTouchMode = TOUCH_DRAG_CONTINUOUS_MODE;
 				}
@@ -278,7 +293,7 @@ public class MapImageView extends FrameLayout {
 				if(mTouchMode == TOUCH_DRAG_CONTINUOUS_MODE){
 					scrollTo(mScrollX, mScrollY);
 				}
-				
+
 			}
 			if (done) {
 				// return false to indicate that we can't pan out of the

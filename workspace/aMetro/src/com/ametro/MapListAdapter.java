@@ -12,6 +12,7 @@ import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
+import com.ametro.libs.FileGroupsDictionary;
 import com.ametro.resources.FilePackage;
 import com.ametro.resources.GenericResource;
 

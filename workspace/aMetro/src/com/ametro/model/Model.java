@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
+import com.ametro.libs.Helpers;
+
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;

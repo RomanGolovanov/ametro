@@ -1,36 +1,97 @@
-package com.ametro.model;
+package com.ametro.libs;
+
+import java.util.ArrayList;
 
 import android.graphics.Point;
 import android.graphics.Rect;
 
+public class Helpers {
 
-class Helpers {
+	private static String[] splitCommaSeparaterString(String value){
+		value = value.replaceAll("/\\(.*\\)/", "");
+		return value.split(",");
+	}
 
-//	public final double angle(double x1, double y1, double x2, double y2) {
-	//
-//				double dx = x2-x1;
-//				double dy = y2-y2;
-//				double angle = 0.0d;
-	//
-//				if (dx == 0.0) {
-//					if(dy == 0.0)     angle = 0.0;
-//					else if(dy > 0.0) angle = Math.PI / 2.0;
-//					else              angle = (Math.PI * 3.0) / 2.0;
-//				}
-//				else if(dy == 0.0) {
-//					if(dx > 0.0)      angle = 0.0;
-//					else              angle = Math.PI;
-//				}
-//				else {
-//					if(dx < 0.0)      angle = Math.atan(dy/dx) + Math.PI;
-//					else if(dy < 0.0) angle = Math.atan(dy/dx) + (2*Math.PI);
-//					else              angle = Math.atan(dy/dx);
-//				}
-//				return (angle * 180) / Math.PI;
-//			}	
+	public static String[] parseStringArray(String value)
+	{
+		return splitCommaSeparaterString(value);
+	}
 
+	public static Integer[] parseIntegerArray(String value)
+	{
+		String[] parts = splitCommaSeparaterString(value);
+		ArrayList<Integer> vals = new ArrayList<Integer>();
+		for (int i = 0; i < parts.length; i++) {
+			try{
+				Integer val = Integer.parseInt(parts[i].trim());
+				vals.add(val);
+			}catch(Exception ex){
+				vals.add(null);
+			}
+		}
+		return (Integer[]) vals.toArray(new Integer[vals.size()]);
+	}		
+
+	public static Double[] parseDoubleArray(String value)
+	{
+		String[] parts = splitCommaSeparaterString(value);
+		ArrayList<Double> vals = new ArrayList<Double>();
+		for (int i = 0; i < parts.length; i++) {
+			try{
+				Double val = Double.parseDouble(parts[i].trim());
+				vals.add(val);
+			}catch(Exception ex){
+				vals.add(null);
+			}
+		}
+		return (Double[]) vals.toArray(new Double[vals.size()]);
+	}		
 	
-	public String convertCommas(String str)
+	public static Point[] parsePointArray(String value)
+	{
+		String[] parts = splitCommaSeparaterString(value);
+		ArrayList<Point> points = new ArrayList<Point>();
+		for (int i = 0; i < parts.length/2; i++) {
+			Point point = new Point();
+			point.x = Integer.parseInt(parts[i*2].trim());
+			point.y = Integer.parseInt(parts[i*2+1].trim());
+			points.add(point);
+		}
+		return (Point[]) points.toArray(new Point[points.size()]);
+	}
+
+	public static Rect[] parseRectangleArray(String value)
+	{
+		String[] parts = splitCommaSeparaterString(value);
+		ArrayList<Rect> rectangles = new ArrayList<Rect>();
+		for (int i = 0; i < parts.length/4; i++) {
+			int x1 = Integer.parseInt(parts[i*4].trim());
+			int y1 = Integer.parseInt(parts[i*4+1].trim());
+			int x2 = x1 + Integer.parseInt(parts[i*4+2].trim());
+			int y2 = y1 + Integer.parseInt(parts[i*4+3].trim());
+			rectangles.add(new Rect(x1, y1, x2, y2));
+		}
+		return (Rect[]) rectangles.toArray(new Rect[rectangles.size()]);
+	}
+	
+	public static Rect parseRectangle(String value)
+	{
+		String[] parts = splitCommaSeparaterString(value);
+		int x1 = Integer.parseInt(parts[0].trim());
+		int y1 = Integer.parseInt(parts[1].trim());
+		int x2 = x1 + Integer.parseInt(parts[2].trim());
+		int y2 = y1 + Integer.parseInt(parts[3].trim());
+		return new Rect(x1, y1, x2, y2);
+	}
+
+	public static Point parsePoint(String value) {
+		String[] parts = splitCommaSeparaterString(value);
+		int x = Integer.parseInt(parts[0].trim());
+		int y = Integer.parseInt(parts[1].trim());
+		return new Point(x,y);
+	}
+	
+	public static String convertCommas(String str)
 	{
 		StringBuilder sb = new StringBuilder(str);
 		boolean f = false;
@@ -57,7 +118,7 @@ class Helpers {
 	}
 	
 
-	static boolean[] resizeArray(boolean[] oldArray, int newSize) {
+	public static boolean[] resizeArray(boolean[] oldArray, int newSize) {
 		if(oldArray!=null){
 			int oldSize = oldArray.length;
 			boolean[] newArray = new boolean[newSize];
@@ -70,7 +131,7 @@ class Helpers {
 		}
 	}	
 
-	static int[] resizeArray(int[] oldArray, int newSize) {
+	public static int[] resizeArray(int[] oldArray, int newSize) {
 		if(oldArray!=null){
 			int oldSize = oldArray.length;
 			int[] newArray = new int[newSize];
@@ -83,7 +144,7 @@ class Helpers {
 		}
 	}	
 
-	static Integer[] resizeArray(Integer[] oldArray, int newSize) {
+	public static Integer[] resizeArray(Integer[] oldArray, int newSize) {
 		if(oldArray!=null){
 			int oldSize = oldArray.length;
 			Integer[] newArray = new Integer[newSize];
@@ -96,7 +157,7 @@ class Helpers {
 		}
 	}	
 	
-	static String[] resizeArray(String[] oldArray, int newSize) {
+	public static String[] resizeArray(String[] oldArray, int newSize) {
 		if(oldArray!=null){
 			int oldSize = oldArray.length;
 			String[] newArray = new String[newSize];
@@ -109,7 +170,7 @@ class Helpers {
 		}
 	}	
 
-	static Rect[] resizeArray(Rect[] oldArray, int newSize) {
+	public static Rect[] resizeArray(Rect[] oldArray, int newSize) {
 		if(oldArray!=null){
 			int oldSize = oldArray.length;
 			Rect[] newArray = new Rect[newSize];
@@ -122,7 +183,7 @@ class Helpers {
 		}
 	}	
 
-	static Point[] resizeArray(Point[] oldArray, int newSize) {
+	public static Point[] resizeArray(Point[] oldArray, int newSize) {
 		if(oldArray!=null){
 			int oldSize = oldArray.length;
 			Point[] newArray = new Point[newSize];
@@ -136,7 +197,7 @@ class Helpers {
 	}	
 
 
-	static Double[] resizeArray(Double[] oldArray, int newSize) {
+	public static Double[] resizeArray(Double[] oldArray, int newSize) {
 		if(oldArray!=null){
 			int oldSize = oldArray.length;
 			Double[] newArray = new Double[newSize];
@@ -151,7 +212,7 @@ class Helpers {
 
 	
 
-	static boolean[][] resizeArray(boolean[][] oldArray, int newSizeRow, int newSizeColumn) {
+	public static boolean[][] resizeArray(boolean[][] oldArray, int newSizeRow, int newSizeColumn) {
 		if(oldArray!=null){
 			boolean[][] newArray = (boolean[][])resizeGenericArray(oldArray,newSizeRow);
 			for (int i=0; i<newArray.length; i++) {
@@ -167,7 +228,7 @@ class Helpers {
 		}
 	}	
 	
-	static int[][] resizeArray(int[][] oldArray, int newSizeRow, int newSizeColumn) {
+	public static int[][] resizeArray(int[][] oldArray, int newSizeRow, int newSizeColumn) {
 		if(oldArray!=null){
 			int[][] newArray = (int[][])resizeGenericArray(oldArray,newSizeRow);
 			for (int i=0; i<newArray.length; i++) {
@@ -183,7 +244,7 @@ class Helpers {
 		}
 	}	
 	
-	static Point[][] resizeArray(Point[][] oldArray, int newSizeRow, int newSizeColumn) {
+	public static Point[][] resizeArray(Point[][] oldArray, int newSizeRow, int newSizeColumn) {
 		if(oldArray!=null){
 			Point[][] newArray = (Point[][])resizeGenericArray(oldArray,newSizeRow);
 			for (int i=0; i<newArray.length; i++) {
@@ -199,7 +260,7 @@ class Helpers {
 		}
 	}	
 	
-	static Double[][] resizeArray(Double[][] oldArray, int newSizeRow, int newSizeColumn) {
+	public static Double[][] resizeArray(Double[][] oldArray, int newSizeRow, int newSizeColumn) {
 		if(oldArray!=null){
 			Double[][] newArray = (Double[][])resizeGenericArray(oldArray,newSizeRow);
 			for (int i=0; i<newArray.length; i++) {
@@ -215,7 +276,7 @@ class Helpers {
 		}
 	}		
 	
-	static Integer[][] resizeArray(Integer[][] oldArray, int newSizeRow, int newSizeColumn) {
+	public static Integer[][] resizeArray(Integer[][] oldArray, int newSizeRow, int newSizeColumn) {
 		if(oldArray!=null){
 			Integer[][] newArray = (Integer[][])resizeGenericArray(oldArray,newSizeRow);
 			for (int i=0; i<newArray.length; i++) {
@@ -242,5 +303,5 @@ class Helpers {
 		return newArray; 
 	}
 
-
+	
 }
