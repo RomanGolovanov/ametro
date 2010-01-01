@@ -9,6 +9,7 @@ import com.ametro.libs.Helpers;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
@@ -20,9 +21,11 @@ import android.util.Log;
 
 public class Model {
 
-	public Model(int size){
+	public Model(String mapName, int size){
 		mMapRenderer = new MapRenderer();
 
+		mMapName = mapName;
+		
 		mStationCount = 0;
 		mStationPreservedCount = 0;
 		mStationNameIndex = new Hashtable<String, Integer>();
@@ -252,6 +255,8 @@ public class Model {
 	private String[]	mLineNames;
 	private int[]		mLineColors;
 
+	private String mMapName;
+	
 	private int mWidth;
 	private int mHeight;
 
@@ -260,7 +265,7 @@ public class Model {
 	private boolean mWordWrap;
 	private boolean mUpperCase;
 
-	
+
 
 	public boolean isUpperCase() {
 		return mUpperCase;
@@ -307,9 +312,18 @@ public class Model {
 	}
 
 	public void render(Canvas canvas){
-		mMapRenderer.render(canvas);
+		mMapRenderer.render(canvas,null);
 	}
 
+	public void render(Canvas canvas, Rect src){
+		mMapRenderer.render(canvas, src);
+	}
+	
+	public String getMapName() {
+		return mMapName;
+	}
+
+	
 	private class MapRenderer {
 
 		Paint mStationBorderPaint;
@@ -351,7 +365,7 @@ public class Model {
 		}
 
 
-		public void render(Canvas canvas){
+		private void render(Canvas canvas){
 			Date startTimestamp = new Date();
 			prepareObjects();
 			canvas.drawColor(Color.WHITE);
@@ -360,6 +374,18 @@ public class Model {
 			renderStations(canvas);			
 			canvas.save();
 			Log.d("aMetro", String.format("Overall rendering time is %sms", Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
+		}
+
+		public void render(Canvas canvas, Rect src)
+		{
+			if(src!=null){
+				Matrix matrix;
+				matrix = canvas.getMatrix();
+				matrix.preTranslate(-src.left, -src.top);
+				//matrix.setTranslate(src.left, src.top);
+				canvas.setMatrix(matrix);
+			}
+			render(canvas);
 		}
 
 		private void renderTransfers(Canvas canvas) {

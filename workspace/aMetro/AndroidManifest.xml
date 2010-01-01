@@ -2,14 +2,15 @@
 <manifest android:versionCode="1" android:versionName="1.0"
     package="com.ametro" xmlns:android="http://schemas.android.com/apk/res/android">
     <application android:icon="@drawable/appicon" android:label="@string/app_name">
-        <activity android:label="@string/app_name" android:name=".BrowseMap">
+        <activity android:label="@string/app_name" android:name=".BrowseTileMap">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity android:name=".BrowseLibrary"/>
-        <activity android:name=".BrowseTileMap"/>
+        <activity android:name=".BrowseMap"/>
+        <activity android:name=".CreateMapCache"/>
     </application>
     <uses-sdk android:minSdkVersion="3"/>
 </manifest>

@@ -42,39 +42,43 @@ public class MapListAdapter extends BaseExpandableListAdapter {
 
 	public void init(String path){
 		File dir = new File(path);
+		FileGroupsDictionary map = new FileGroupsDictionary();
+		
 		String[] files = dir.list(new FilenameFilter() {
 			@Override
 			public boolean accept(File f, String filename) {
 				return filename.endsWith(".pmz");
 			}
-		});
+		}); 
 
-		FileGroupsDictionary map = new FileGroupsDictionary();
-
-		for(int i = 0; i < files.length; i++){
-			String fullFileName = path +'/' + files[i];
-			FilePackage pkg = null;
-			GenericResource res = null;
-			try {
-				pkg = new FilePackage(fullFileName);
-				res = pkg.getCityGenericResource();
-				if(res!=null){
-					String country = res.getValue("Options", "Country");
-					String city = res.getValue("Options", "RusName");
-					if(city==null){
-						city = res.getValue("Options", "Name");
+		
+		
+		if(files!=null){
+			for(int i = 0; i < files.length; i++){
+				String fullFileName = path +'/' + files[i];
+				FilePackage pkg = null;
+				GenericResource res = null;
+				try {
+					pkg = new FilePackage(fullFileName);
+					res = pkg.getCityGenericResource();
+					if(res!=null){
+						String country = res.getValue("Options", "Country");
+						String city = res.getValue("Options", "RusName");
+						if(city==null){
+							city = res.getValue("Options", "Name");
+						}
+						map.putFile(country, city, files[i]);
 					}
-					map.putFile(country, city, files[i]);
-				}
 
-			} catch (Exception e) {
-				// skip this file
-			} finally{
-				res = null;
-				if(pkg!=null){
-					try { pkg.close(); } catch (IOException e) {}
+				} catch (Exception e) {
+					// skip this file
+				} finally{
+					res = null;
+					if(pkg!=null){
+						try { pkg.close(); } catch (IOException e) {}
+					}
+					pkg = null;
 				}
-				pkg = null;
 			}
 		}
 
@@ -132,9 +136,9 @@ public class MapListAdapter extends BaseExpandableListAdapter {
 	public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 		TextView textView = groupPosition==mSelectedGroup && childPosition==mSelectedChild ?
 				getSelectedView() :
-				getGenericView() ;
-		textView.setText(getChild(groupPosition, childPosition).toString());
-		return textView;
+					getGenericView() ;
+				textView.setText(getChild(groupPosition, childPosition).toString());
+				return textView;
 	}
 
 	public Object getGroup(int groupPosition) {

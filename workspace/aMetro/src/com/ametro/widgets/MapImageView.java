@@ -1,27 +1,17 @@
 package com.ametro.widgets;
 
-import java.io.File;
-import java.io.FileOutputStream;
-
-import com.ametro.MapSettings;
-import com.ametro.model.Model;
-import com.ametro.model.TileManager;
-
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Rect;
 import android.graphics.Bitmap.Config;
-import android.provider.Contacts.Settings;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Scroller;
+
+import com.ametro.model.Model;
 
 public class MapImageView extends FrameLayout {
 
@@ -73,8 +63,8 @@ public class MapImageView extends FrameLayout {
 			Canvas bufferCanvas = new Canvas(mBuffer);
 			mModel.render(bufferCanvas);
 			
-			Rect src = new Rect(0,0,mBuffer.getWidth(), mBuffer.getHeight());
-			TileManager.createTiles(mModel.getCityName(),0,0, mBuffer,src,0);
+//			Rect src = new Rect(0,0,mBuffer.getWidth(), mBuffer.getHeight());
+//			TileManager.createTiles(mModel.getCityName(),0,0, mBuffer,src,0);
 			
 			mIsBuffered = true;
 		}

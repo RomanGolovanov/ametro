@@ -8,8 +8,8 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
-
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 
 public class BrowseLibrary extends Activity implements ExpandableListView.OnChildClickListener {
 	/**
@@ -25,16 +25,12 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 		super.onCreate(savedInstanceState);
 		mAdapter = new MapListAdapter(this);
 		mDefaultPackageFileName = null;
-
-		Intent data = getIntent();
-		if(data!=null){
-			Uri uri = data.getData();
-			if(uri!=null){
-				mDefaultPackageFileName = uri.toString().replace("ametro://", "");
-			}
+		Intent intent = getIntent();
+		Uri uri = intent!= null ? intent.getData() : null;
+		if(uri!=null){
+			mDefaultPackageFileName = MapUri.getMapName(uri) + ".pmz";
 		}
 
-		
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setContentView(R.layout.waiting);
 		setProgressBarIndeterminate(true);
@@ -44,12 +40,12 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 		mMapListLoader.start();
 	}
 
-
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 		String fileName = mAdapter.getFileName(groupPosition, childPosition);
+		String mapName = fileName.replace(".pmz", "" );
 		Intent i = new Intent();
-		i.setData( Uri.parse( "ametro://" + fileName ));
+		i.setData( MapUri.create(mapName));
 		setResult(RESULT_OK, i);
 		finish();
 		return true;
@@ -59,21 +55,27 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 
 	private final Runnable mUpdateContentView = new Runnable() {
 		public void run() {
-			setProgressBarIndeterminateVisibility(false);
-			mListView = new ExpandableListView(BrowseLibrary.this);
-			mListView.setAdapter(mAdapter);
-			mListView.setOnChildClickListener(BrowseLibrary.this);
-			if(mDefaultPackageFileName!=null){
-				mAdapter.setSelectedFile(mDefaultPackageFileName);
-				int groupPosition = mAdapter.getSelectedGroupPosition();
-				int childPosition = mAdapter.getSelectChildPosition();
-				Log.e("aMetro","Group: " + groupPosition + ", Child:" + childPosition);
-				mListView.expandGroup(groupPosition);
-				mListView.setSelectedChild(groupPosition, childPosition, true);
+			if(mAdapter.getGroupCount()>0){
+				setProgressBarIndeterminateVisibility(false);
+				mListView = new ExpandableListView(BrowseLibrary.this);
+				mListView.setAdapter(mAdapter);
+				mListView.setOnChildClickListener(BrowseLibrary.this);
+				if(mDefaultPackageFileName!=null){
+					mAdapter.setSelectedFile(mDefaultPackageFileName);
+					int groupPosition = mAdapter.getSelectedGroupPosition();
+					int childPosition = mAdapter.getSelectChildPosition();
+					Log.e("aMetro","Group: " + groupPosition + ", Child:" + childPosition);
+					mListView.expandGroup(groupPosition);
+					mListView.setSelectedChild(groupPosition, childPosition, true);
+				}
+
+				setContentView(mListView);
+				registerForContextMenu(mListView);
+			}else{
+				Toast.makeText(BrowseLibrary.this, "No maps in " + MapSettings.CATALOG_PATH, Toast.LENGTH_LONG).show();
+				setResult(RESULT_CANCELED, null);
+				finish();
 			}
-			
-			setContentView(mListView);
-			registerForContextMenu(mListView);
 		}
 	};
 
@@ -83,6 +85,6 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 			mHandler.post(mUpdateContentView);
 		}
 	};
-	
+
 
 }

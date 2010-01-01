@@ -25,7 +25,7 @@ public class ModelBuilder {
 
 	public static Model Create(String libraryPath, String packageName, String mapName) throws IOException
 	{
-		FilePackage pkg = new FilePackage(libraryPath +"/"+ packageName );
+		FilePackage pkg = new FilePackage(libraryPath +"/"+ packageName+".pmz" );
 		
 		Date startTimestamp = new Date();
 		
@@ -36,7 +36,7 @@ public class ModelBuilder {
 
 		int size = map.getStationCount() + map.getAddiditionalStationCount();
 
-		Model model = new Model(size);
+		Model model = new Model(packageName, size);
 		model.setCountryName(info.getValue("Options", "Country"));
 		model.setCityName(info.getValue("Options", "Name"));
 		model.setDimensions(vec.getWidth(),vec.getHeight());
