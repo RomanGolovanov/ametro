@@ -381,7 +381,7 @@ public class Model {
 			if(src!=null){
 				Matrix matrix;
 				matrix = canvas.getMatrix();
-				matrix.preTranslate(-src.left, -src.top);
+				matrix.setTranslate(-src.left, -src.top);
 				//matrix.setTranslate(src.left, src.top);
 				canvas.setMatrix(matrix);
 			}
@@ -578,8 +578,9 @@ public class Model {
 				int space = text.indexOf(' ');
 				if(space!=-1){
 					int offset = drawTextOnWhite(canvas, text.substring(0, space), rect, align);
-					rect.offset(0, offset+2);
-					drawTextOnWhite(canvas, text.substring(space+1), rect, align);
+					//rect.offset(0, offset+2);
+					Rect nextLineRect = new Rect(rect.left, rect.top+bounds.height()+2, rect.right, rect.bottom+bounds.height()+2);
+					drawTextOnWhite(canvas, text.substring(space+1), nextLineRect, align);
 					return;
 				}
 			}
