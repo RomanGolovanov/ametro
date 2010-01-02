@@ -9,7 +9,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".BrowseLibrary"/>
-        <activity android:name=".BrowseMap"/>
         <activity android:name=".CreateMapCache"/>
     </application>
     <uses-sdk android:minSdkVersion="3"/>
