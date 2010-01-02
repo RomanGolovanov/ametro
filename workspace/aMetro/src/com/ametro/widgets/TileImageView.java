@@ -36,7 +36,7 @@ public class TileImageView extends View {
 		}
 
 
-		public void invalidateTitles(){
+		public void invalidateTiles(){
 			synchronized (mRenderThread) {
 				mUpdatePending = true;
 				mRenderThread.notify();
@@ -97,16 +97,12 @@ public class TileImageView extends View {
 					Bitmap tile = mTiles[i][j];
 					if(tile == null){
 						mTiles[i][j] = mDataProvider.getTile(getTileContentPosition(i,j));
-						//TileImageView.this.postInvalidate();
-						//return false;
 					}
 				}
 			}
 			TileImageView.this.postInvalidate();
 			return true;
 		}
-
-
 	};
 
 	private boolean mInitialized = false;
@@ -134,22 +130,7 @@ public class TileImageView extends View {
 	private Rect mTileRect;
 	private Context mContext;
 
-	//private Handler mHandler = new Handler();
 	private RendererThread mRenderThread;
-
-	//	private Runnable mUpdateUI = new Runnable() {
-	//		@Override
-	//		public void run() {
-	//			TileImageView.this.invalidate();
-	//		}
-	//	};
-
-
-	@Override
-	public void invalidate() {
-		mRenderThread.invalidateTitles();
-		super.invalidate();
-	}
 
 	private void prepareRenderer(){
 		Point contentSize = mDataProvider.getContentSize();
@@ -237,6 +218,7 @@ public class TileImageView extends View {
 	@Override
 	protected void onDraw(Canvas canvas) { 
 		if(mInitialized){
+			boolean needToInvalidateTiles = false;
 			Rect tiles = getVisibleTiles();
 			for(int row = tiles.left; row <= tiles.right; row++){
 				for(int col = tiles.top; col <= tiles.bottom; col++){
@@ -246,10 +228,13 @@ public class TileImageView extends View {
 						canvas.drawBitmap(tile,mTileRect,tilePosition,null);
 					}else{
 						canvas.drawBitmap(mTileLoading,mTileRect,tilePosition,null);
+						needToInvalidateTiles = true;
 					}
 				}
 			}
-			mRenderThread.invalidateTitles();
+			if(needToInvalidateTiles){
+				mRenderThread.invalidateTiles();
+			}
 		}
 		super.onDraw(canvas);
 	}
@@ -301,7 +286,8 @@ public class TileImageView extends View {
 			mScrollY = mScroller.getCurrY();
 			mTileScrollX = mScrollX;
 			mTileScrollY = mScrollY;
-			postInvalidate();
+			//postInvalidate();
+			mRenderThread.invalidateTiles();
 		}
 	}
 
@@ -312,7 +298,8 @@ public class TileImageView extends View {
 		mScrollY = y;
 		mTileScrollX = x;
 		mTileScrollY = y;
-		invalidate();
+		//invalidate();
+		mRenderThread.invalidateTiles();
 	}
 
 	// adjustable parameters
@@ -529,8 +516,8 @@ public class TileImageView extends View {
 
 		if (true /* EMG release: make our fling more like Maps' */) {
 			// maps cuts their velocity in half
-			vx = vx * 3 / 4;
-			vy = vy * 3 / 4;
+			vx = vx / 2;// * 3 / 4;
+			vy = vy / 2;// * 3 / 4;
 		}
 
 		mScroller.fling(mScrollX, mScrollY, -vx, -vy, 0, maxX, 0, maxY);

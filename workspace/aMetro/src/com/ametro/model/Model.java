@@ -577,8 +577,7 @@ public class Model {
 			if(bounds.width()>rect.width() && mWordWrap){
 				int space = text.indexOf(' ');
 				if(space!=-1){
-					int offset = drawTextOnWhite(canvas, text.substring(0, space), rect, align);
-					//rect.offset(0, offset+2);
+					drawTextOnWhite(canvas, text.substring(0, space), rect, align);
 					Rect nextLineRect = new Rect(rect.left, rect.top+bounds.height()+2, rect.right, rect.bottom+bounds.height()+2);
 					drawTextOnWhite(canvas, text.substring(space+1), nextLineRect, align);
 					return;
