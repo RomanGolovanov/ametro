@@ -1,19 +1,18 @@
 package com.ametro.widgets;
 
-import com.ametro.MapSettings;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
 import android.widget.Scroller;
+
+import com.ametro.MapSettings;
 
 public class TileImageView extends View {
 
@@ -27,10 +26,19 @@ public class TileImageView extends View {
 	private class  RendererThread extends Thread{
 
 		private boolean mWork = true;
+		private boolean mUpdatePending = false;
 
-		private void shutdownRendering(){
+		public void shutdownRendering(){
 			synchronized (mRenderThread) {
 				mWork = false;
+				mRenderThread.notify();
+			}
+		}
+
+
+		public void invalidateTitles(){
+			synchronized (mRenderThread) {
+				mUpdatePending = true;
 				mRenderThread.notify();
 			}
 		}
@@ -41,13 +49,15 @@ public class TileImageView extends View {
 					if(mWork){
 						Rect tiles = getVisibleTiles();
 						recycleTiles(new Rect(tiles));
-						if(invalidateTiles(tiles) ){
-							synchronized (this) {
+						invalidateTiles(tiles);
+						synchronized (this) {
+							if(!mUpdatePending){
 								this.wait();
+							}else{
+								this.wait(10);
 							}
-						}else{
-							Thread.sleep(10);
 						}
+
 					}
 				} catch (Exception e) {
 					Log.e("TileImageView", "Exit render thread due error", e);
@@ -73,7 +83,7 @@ public class TileImageView extends View {
 				}
 			}
 			if(cleaned){
-				Runtime.getRuntime().gc();
+				//Runtime.getRuntime().gc();
 			}
 		}
 
@@ -87,16 +97,16 @@ public class TileImageView extends View {
 					Bitmap tile = mTiles[i][j];
 					if(tile == null){
 						mTiles[i][j] = mDataProvider.getTile(getTileContentPosition(i,j));
-						mHandler.post(mUpdateUI);
-						return false;
+						//TileImageView.this.postInvalidate();
+						//return false;
 					}
 				}
 			}
-			
+			TileImageView.this.postInvalidate();
 			return true;
 		}
-		
-		
+
+
 	};
 
 	private boolean mInitialized = false;
@@ -104,8 +114,8 @@ public class TileImageView extends View {
 	private float mScale = 1.0f;
 
 	private final int TILE_RECYCLE_BORDER = 1;
-	private final int TILE_PRELOAD_BORDER = 1;
-	
+	private final int TILE_PRELOAD_BORDER = 0;
+
 
 	private IDataProvider mDataProvider;
 
@@ -124,25 +134,20 @@ public class TileImageView extends View {
 	private Rect mTileRect;
 	private Context mContext;
 
-	private Handler mHandler = new Handler();
+	//private Handler mHandler = new Handler();
 	private RendererThread mRenderThread;
 
-	private Runnable mUpdateUI = new Runnable() {
-		@Override
-		public void run() {
-			TileImageView.this.invalidate();
-		}
-	};
+	//	private Runnable mUpdateUI = new Runnable() {
+	//		@Override
+	//		public void run() {
+	//			TileImageView.this.invalidate();
+	//		}
+	//	};
 
-	private void invalidateTitles(){
-		synchronized (mRenderThread) {
-			mRenderThread.notify();
-		}
-	}
 
 	@Override
 	public void invalidate() {
-		invalidateTitles();
+		mRenderThread.invalidateTitles();
 		super.invalidate();
 	}
 
@@ -244,7 +249,7 @@ public class TileImageView extends View {
 					}
 				}
 			}
-			invalidateTitles();
+			mRenderThread.invalidateTitles();
 		}
 		super.onDraw(canvas);
 	}

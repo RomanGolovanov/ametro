@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Hashtable;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -24,11 +25,11 @@ public class TileManager {
 
 	private TileManagerDescription mDescription;
 	private int mLevel = 0;
-	//private Dictionary<String, byte[]> mFileCache;
+	private Hashtable<String, byte[]> mFileCache;
 
 	private TileManager(Uri uri) throws IOException, ClassNotFoundException {
 		String mapName = MapUri.getMapName(uri);
-		//mFileCache = new Hashtable<String, byte[]>();
+		mFileCache = new Hashtable<String, byte[]>();
 		mDescription = readDescription(mapName);
 	}
 
@@ -160,9 +161,32 @@ public class TileManager {
 	}
 
 	private Bitmap loadTile(String mapName, int row, int column, int level){
+//		String path = getCachePath(mapName, level);
+//		String fileName = path + getTileFileName(row, column);
+//		return BitmapFactory.decodeFile(fileName);
+
 		String path = getCachePath(mapName, level);
 		String fileName = path + getTileFileName(row, column);
-		return BitmapFactory.decodeFile(fileName);
+		byte[] data = mFileCache.get(fileName);
+		if(data == null){
+			File f = new File(fileName);
+			data = new byte[(int)f.length()];
+			FileInputStream fis = null;
+			try {
+				fis = new FileInputStream(f);
+				fis.read(data, 0, data.length);
+				mFileCache.put(fileName, data);
+			} catch (Exception e) {
+				data = null;
+			} finally{
+				if(fis!=null){
+					try {
+						fis.close();
+					} catch (Exception e) {	}
+				}
+			}
+		}
+		return data==null ? null : BitmapFactory.decodeByteArray(data, 0, data.length);
 	}
 
 
