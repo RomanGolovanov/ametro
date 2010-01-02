@@ -143,9 +143,7 @@ public class BrowseTileMap extends Activity implements TileImageView.IDataProvid
 		String mapName = MapUri.getMapName(uri);
 		if(!TileManager.isExist(mapName, 0)){
 			if(allowCreateMapCache){
-				Intent createMapCache = new Intent(this, CreateMapCache.class);
-				createMapCache.setData(uri);
-				startActivityForResult(createMapCache, REQUEST_CREATE_MAP_CACHE);
+				requestCreateMapCache(uri);
 			}
 		}else{
 			try{
@@ -153,9 +151,7 @@ public class BrowseTileMap extends Activity implements TileImageView.IDataProvid
 					mTileManager = TileManager.load(uri);
 				} catch (Exception e) {
 					if(allowCreateMapCache){
-						Intent createMapCache = new Intent(this, CreateMapCache.class);
-						createMapCache.setData(uri);
-						startActivityForResult(createMapCache, REQUEST_CREATE_MAP_CACHE);
+						requestCreateMapCache(uri);
 						return;
 					}else{
 						throw e;
@@ -168,11 +164,18 @@ public class BrowseTileMap extends Activity implements TileImageView.IDataProvid
 				setContentView(layout);
 				mTileImageView.setDataProvider(this);
 				mMapName = mapName;
+				updateTitle();
 				savePreferences();
 			} catch (Exception e) {
 				handleConfigurationException(e);
 			}
 		}
+	}
+
+	private void requestCreateMapCache(Uri uri) {
+		Intent createMapCache = new Intent(this, CreateMapCache.class);
+		createMapCache.setData(uri);
+		startActivityForResult(createMapCache, REQUEST_CREATE_MAP_CACHE);
 	}
 
 	private void loadPreferences() {
