@@ -157,63 +157,64 @@ public class Algorithms {
 	}
 
 	public static QBezierControls interpolateCubicBezierControl(Point p0, Point p1, Point p2, Point p3) {
-		int __p0X        = p0.x;
-		int __p0Y        = p0.y;
-		int __p3X         = p3.x;
-		int __p3Y         = p3.y;
-
-		// currently, this method auto-parameterizes the curve using chord-length parameterization.  
-		// A future version might allow inputting the two t-values, but this is more
-		// user-friendly (what an over-used term :)  As an exercise, try uniform parameterization - t1 = 13/ and 52 = 2/3.
-		int deltaX = p1.x - p0.x;
-		int deltaY = p1.y - p0.y;
-		float d1     = (float)Math.sqrt(deltaX*deltaX + deltaY*deltaY);
-
-		deltaX        = p2.x - p1.x;
-		deltaY        = p2.y - p1.y;
-		float d2     = (float) Math.sqrt(deltaX*deltaX + deltaY*deltaY);
-
-		deltaX        = p3.x - p2.x;
-		deltaY        = p3.y - p2.y;
-		float d3     = (float)Math.sqrt(deltaX*deltaX + deltaY*deltaY);
-
-		float d = d1 + d2 + d3;
-		float __t1 = d1/d;
-		float __t2 = (d1+d2)/d;
-
-		// there are four unknowns (x- and y-coords for P1 and P2), which are solved as two separate sets of two equations in two unknowns
-		float t12 = __t1*__t1;
-		float t13 = __t1*t12;
-
-		float t22 = __t2*__t2;
-		float t23 = __t2*t22;
-
-		// x-coordinates of P1 and P2 (t = t1 and t2) - exercise: eliminate redudant 
-		// computations in these equations
-		float a11 = 3*t13 - 6*t12 + 3*__t1;
-		float a12 = -3*t13 + 3*t12;
-		float a21 = 3*t23 - 6*t22 + 3*__t2;
-		float a22 = -3*t23 + 3*t22;
-
-		float b1 = -t13*__p3X + __p0X*(t13 - 3*t12 + 3*__t1 -1) + p1.x;
-		float b2 = -t23*__p3X + __p0X*(t23 - 3*t22 + 3*__t2 -1) + p2.x;
-
-		Solve2x2 s = new Solve2x2();
-		PointF p = s.solve(a11, a12, a21, a22, b1, b2, 0, false);
-
-		float __p1X       = p.x;
-		float __p2X       = p.y;
-
-		// y-coordinates of P1 and P2 (t = t1 and t2)      
-		b1 = -t13*__p3Y + __p0Y*(t13 - 3*t12 + 3*__t1 -1) + p1.y;
-		b2 = -t23*__p3Y + __p0Y*(t23 - 3*t22 + 3*__t2 -1) + p2.y;
-
-		// resolving with same coefficients, but new RHS
-		p     = s.solve(a11, a12, a21, a22, b1, b2, ZERO_TOLERANCE, true);
-		float __p1Y = p.x;
-		float __p2Y = p.y;
-
-		return new QBezierControls(__p1X, __p1Y, __p2X, __p2Y);
+		return interpolateCubeBezierSmooth(p0, p1, p2, p3, 1.0f);
+		//		int __p0X        = p0.x;
+//		int __p0Y        = p0.y;
+//		int __p3X         = p3.x;
+//		int __p3Y         = p3.y;
+//
+//		// currently, this method auto-parameterizes the curve using chord-length parameterization.  
+//		// A future version might allow inputting the two t-values, but this is more
+//		// user-friendly (what an over-used term :)  As an exercise, try uniform parameterization - t1 = 13/ and 52 = 2/3.
+//		int deltaX = p1.x - p0.x;
+//		int deltaY = p1.y - p0.y;
+//		float d1     = (float)Math.sqrt(deltaX*deltaX + deltaY*deltaY);
+//
+//		deltaX        = p2.x - p1.x;
+//		deltaY        = p2.y - p1.y;
+//		float d2     = (float) Math.sqrt(deltaX*deltaX + deltaY*deltaY);
+//
+//		deltaX        = p3.x - p2.x;
+//		deltaY        = p3.y - p2.y;
+//		float d3     = (float)Math.sqrt(deltaX*deltaX + deltaY*deltaY);
+//
+//		float d = d1 + d2 + d3;
+//		float __t1 = d1/d;
+//		float __t2 = (d1+d2)/d;
+//
+//		// there are four unknowns (x- and y-coords for P1 and P2), which are solved as two separate sets of two equations in two unknowns
+//		float t12 = __t1*__t1;
+//		float t13 = __t1*t12;
+//
+//		float t22 = __t2*__t2;
+//		float t23 = __t2*t22;
+//
+//		// x-coordinates of P1 and P2 (t = t1 and t2) - exercise: eliminate redudant 
+//		// computations in these equations
+//		float a11 = 3*t13 - 6*t12 + 3*__t1;
+//		float a12 = -3*t13 + 3*t12;
+//		float a21 = 3*t23 - 6*t22 + 3*__t2;
+//		float a22 = -3*t23 + 3*t22;
+//
+//		float b1 = -t13*__p3X + __p0X*(t13 - 3*t12 + 3*__t1 -1) + p1.x;
+//		float b2 = -t23*__p3X + __p0X*(t23 - 3*t22 + 3*__t2 -1) + p2.x;
+//
+//		Solve2x2 s = new Solve2x2();
+//		PointF p = s.solve(a11, a12, a21, a22, b1, b2, 0, false);
+//
+//		float __p1X       = p.x;
+//		float __p2X       = p.y;
+//
+//		// y-coordinates of P1 and P2 (t = t1 and t2)      
+//		b1 = -t13*__p3Y + __p0Y*(t13 - 3*t12 + 3*__t1 -1) + p1.y;
+//		b2 = -t23*__p3Y + __p0Y*(t23 - 3*t22 + 3*__t2 -1) + p2.y;
+//
+//		// resolving with same coefficients, but new RHS
+//		p     = s.solve(a11, a12, a21, a22, b1, b2, ZERO_TOLERANCE, true);
+//		float __p1Y = p.x;
+//		float __p2Y = p.y;
+//
+//		return new QBezierControls(__p1X, __p1Y, __p2X, __p2Y);
 	}
 
 }

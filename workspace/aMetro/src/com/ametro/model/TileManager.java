@@ -77,7 +77,7 @@ public class TileManager {
 	}
 
 	private static void writeDescription(TileManagerDescription description) throws IOException {
-		String descriptionFileName = getCacheRootPath(description.mMapName) + ".description";
+		String descriptionFileName = getCacheRootPath(description.mMapName) + MapSettings.CACHE_DESCRIPTION;
 		ObjectOutputStream strm = null;
 		try{
 			strm = new ObjectOutputStream(new FileOutputStream(descriptionFileName));
@@ -92,7 +92,7 @@ public class TileManager {
 
 	private static TileManagerDescription readDescription(String mapName) throws IOException, ClassNotFoundException
 	{
-		String descriptionFileName = getCacheRootPath(mapName) + ".description";
+		String descriptionFileName = getCacheRootPath(mapName) + MapSettings.CACHE_DESCRIPTION;
 		ObjectInputStream strm = null;
 		try{
 			strm = new ObjectInputStream(new FileInputStream(descriptionFileName));
@@ -138,15 +138,6 @@ public class TileManager {
 			if(progress!=null) progress.update( 100 * y / height );
 		}
 	}
-
-//	private static void writeModelTilesEntire(Model model) {
-//		Rect renderRect = new Rect(0, 0, model.getWidth(), model.getHeight());
-//		Bitmap buffer = Bitmap.createBitmap(model.getWidth(), model.getHeight(), Config.RGB_565 );
-//		Canvas bufferCanvas = new Canvas(buffer);
-//		model.render(bufferCanvas,renderRect);		
-//		Rect src = new Rect(0,0,buffer.getWidth(), buffer.getHeight());
-//		TileManager.createTiles(model.getCityName(), 0, 0, buffer, src, 0);
-//	}
 
 	private static String getTileFileName(int row, int column ){
 		return "tile_" + row + "_" + column + ".png";

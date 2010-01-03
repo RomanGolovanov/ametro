@@ -1,10 +1,17 @@
 package com.ametro;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.Date;
+
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +23,7 @@ import com.ametro.libs.FileGroupsDictionary;
 import com.ametro.resources.FilePackage;
 import com.ametro.resources.GenericResource;
 
-/**
- * A simple adapter which maintains an ArrayList of photo resource Ids. Each
- * photo is displayed as an image. This adapter supports clearing the list
- * of photos and adding a new photo.
- * 
- */
+
 public class MapListAdapter extends BaseExpandableListAdapter {
 
 	private String[] mCountries;
@@ -40,9 +42,71 @@ public class MapListAdapter extends BaseExpandableListAdapter {
 		mContext = context;
 	}
 
+	private static void writeMaps(FileGroupsDictionary data) {
+		String fileName = MapSettings.CATALOG_PATH + MapSettings.MAPS_LIST;
+		ObjectOutputStream strm = null;
+		try{
+			strm = new ObjectOutputStream(new FileOutputStream(fileName));
+			strm.writeObject(data);
+			strm.flush();
+		}catch(Exception ex){
+			Log.e("aMetro", "Failed write map cache", ex);
+		}finally{
+			if(strm!=null){
+				try {
+					strm.close();
+				} catch (IOException e) {
+				}
+			}
+		}
+	}
+
+	private static FileGroupsDictionary readMaps()
+	{
+		String fileName = MapSettings.CATALOG_PATH + MapSettings.MAPS_LIST;
+		ObjectInputStream strm = null;
+		try{
+			try {
+				strm = new ObjectInputStream(new FileInputStream(fileName));
+				return (FileGroupsDictionary) strm.readObject();
+			} catch (Exception ex) {
+				Log.e("aMetro", "Failed load map cache", ex);
+				return null;
+			}
+		} finally{
+			if(strm!=null){
+				try {
+					strm.close();
+				} catch (IOException e) {
+				}
+			}
+		}
+
+	}
+	
 	public void init(String path){
+		FileGroupsDictionary map = readMaps();
+		File dir = new File(path);
+		if(map == null || map.getTimestamp() < dir.lastModified() ){
+			map = scanDirectory(path);
+			writeMaps(map);
+		}
+		
+		mCountries = map.getGroups();
+		mCities = new String[mCountries.length][];
+		mFiles = new String[mCountries.length][];
+		for (int i = 0; i < mCountries.length; i++) {
+			String country = mCountries[i];
+			mCities[i] = map.getLabels(country);
+			mFiles[i] = map.getPathes(country, mCities[i]);
+		}
+
+	}
+
+	private FileGroupsDictionary scanDirectory(String path) {
 		File dir = new File(path);
 		FileGroupsDictionary map = new FileGroupsDictionary();
+		map.setTimestamp( (new Date()).getTime() );
 		
 		String[] files = dir.list(new FilenameFilter() {
 			@Override
@@ -81,16 +145,7 @@ public class MapListAdapter extends BaseExpandableListAdapter {
 				}
 			}
 		}
-
-		mCountries = map.getGroups();
-		mCities = new String[mCountries.length][];
-		mFiles = new String[mCountries.length][];
-		for (int i = 0; i < mCountries.length; i++) {
-			String country = mCountries[i];
-			mCities[i] = map.getLabels(country);
-			mFiles[i] = map.getPathes(country, mCities[i]);
-		}
-
+		return map;
 	}
 
 	public Object getChild(int groupPosition, int childPosition) {
