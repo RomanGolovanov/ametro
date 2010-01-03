@@ -1,6 +1,8 @@
 package com.ametro.libs;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -12,9 +14,24 @@ public class Helpers {
 		return value.split(",");
 	}
 
+	private static final Pattern csvPattern = Pattern.compile( "(?:^|,)(\"(?:[^\"]|\"\")*\"|[^,]*)" );
+	
+	public static String[] splitCSV( String line ) { 
+		ArrayList<String> elements = new ArrayList<String>(); 
+		Matcher m = csvPattern.matcher( line ); 
+		while( m.find() ) { 
+			elements.add( m.group() 
+					.replaceAll( "^,", "" ) // remove first comma if any 
+					.replaceAll( "^?\"(.*)\"$", "$1" ) // remove outer quotations if any 
+					.replaceAll( "\"\"", "\"" ) ); // replace double inner quotations if any 
+		} 
+		return (String[])elements.toArray( new String[0] ); 
+	} 
+
 	public static String[] parseStringArray(String value)
 	{
 		return splitCommaSeparaterString(value);
+		//return splitCSV(value);
 	}
 
 	public static Integer[] parseIntegerArray(String value)
@@ -46,7 +63,7 @@ public class Helpers {
 		}
 		return (Double[]) vals.toArray(new Double[vals.size()]);
 	}		
-	
+
 	public static Point[] parsePointArray(String value)
 	{
 		String[] parts = splitCommaSeparaterString(value);
@@ -73,7 +90,7 @@ public class Helpers {
 		}
 		return (Rect[]) rectangles.toArray(new Rect[rectangles.size()]);
 	}
-	
+
 	public static Rect parseRectangle(String value)
 	{
 		String[] parts = splitCommaSeparaterString(value);
@@ -90,7 +107,7 @@ public class Helpers {
 		int y = Integer.parseInt(parts[1].trim());
 		return new Point(x,y);
 	}
-	
+
 	public static String convertCommas(String str)
 	{
 		StringBuilder sb = new StringBuilder(str);
@@ -107,16 +124,16 @@ public class Helpers {
 		}
 		return sb.toString();
 	}
-	
+
 	public static Double parseNullableDouble(String text){
 		if(text != null && !text.equals("")){
 			try{
-			return Double.parseDouble(text);
+				return Double.parseDouble(text);
 			} catch(NumberFormatException ex){}
 		}
 		return null;
 	}
-	
+
 
 	public static boolean[] resizeArray(boolean[] oldArray, int newSize) {
 		if(oldArray!=null){
@@ -156,7 +173,7 @@ public class Helpers {
 			return new Integer[newSize];
 		}
 	}	
-	
+
 	public static String[] resizeArray(String[] oldArray, int newSize) {
 		if(oldArray!=null){
 			int oldSize = oldArray.length;
@@ -222,7 +239,7 @@ public class Helpers {
 		}
 	}	
 
-	
+
 
 	public static boolean[][] resizeArray(boolean[][] oldArray, int newSizeRow, int newSizeColumn) {
 		if(oldArray!=null){
@@ -239,7 +256,7 @@ public class Helpers {
 			return new boolean[newSizeRow][newSizeColumn];
 		}
 	}	
-	
+
 
 	public static Object[][] resizeArray(Object[][] oldArray, int newSizeRow, int newSizeColumn) {
 		if(oldArray!=null){
@@ -256,7 +273,7 @@ public class Helpers {
 			return new Object[newSizeRow][newSizeColumn];
 		}
 	}		
-	
+
 	public static int[][] resizeArray(int[][] oldArray, int newSizeRow, int newSizeColumn) {
 		if(oldArray!=null){
 			int[][] newArray = (int[][])resizeGenericArray(oldArray,newSizeRow);
@@ -272,7 +289,7 @@ public class Helpers {
 			return new int[newSizeRow][newSizeColumn];
 		}
 	}	
-	
+
 	public static Point[][] resizeArray(Point[][] oldArray, int newSizeRow, int newSizeColumn) {
 		if(oldArray!=null){
 			Point[][] newArray = (Point[][])resizeGenericArray(oldArray,newSizeRow);
@@ -288,9 +305,9 @@ public class Helpers {
 			return new Point[newSizeRow][newSizeColumn];
 		}
 	}	
-	
 
-	
+
+
 	public static Double[][] resizeArray(Double[][] oldArray, int newSizeRow, int newSizeColumn) {
 		if(oldArray!=null){
 			Double[][] newArray = (Double[][])resizeGenericArray(oldArray,newSizeRow);
@@ -306,7 +323,7 @@ public class Helpers {
 			return new Double[newSizeRow][newSizeColumn];
 		}
 	}		
-	
+
 	public static Integer[][] resizeArray(Integer[][] oldArray, int newSizeRow, int newSizeColumn) {
 		if(oldArray!=null){
 			Integer[][] newArray = (Integer[][])resizeGenericArray(oldArray,newSizeRow);
@@ -322,7 +339,7 @@ public class Helpers {
 			return new Integer[newSizeRow][newSizeColumn];
 		}
 	}			
-	
+
 	private static Object resizeGenericArray (Object oldArray, int newSize) {
 		int oldSize = java.lang.reflect.Array.getLength(oldArray);
 		Class<?> elementType = oldArray.getClass().getComponentType();
@@ -334,5 +351,5 @@ public class Helpers {
 		return newArray; 
 	}
 
-	
+
 }
