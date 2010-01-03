@@ -109,7 +109,7 @@ public class TileImageView extends View {
 
 	private float mScale = 1.0f;
 
-	private final int TILE_RECYCLE_BORDER = 1;
+	private final int TILE_RECYCLE_BORDER = 2;
 	private final int TILE_PRELOAD_BORDER = 0;
 
 
@@ -287,6 +287,7 @@ public class TileImageView extends View {
 			mTileScrollX = mScrollX;
 			mTileScrollY = mScrollY;
 			//postInvalidate();
+			postInvalidate();
 			mRenderThread.invalidateTiles();
 		}
 	}
@@ -299,6 +300,7 @@ public class TileImageView extends View {
 		mTileScrollX = x;
 		mTileScrollY = y;
 		//invalidate();
+		postInvalidate();
 		mRenderThread.invalidateTiles();
 	}
 

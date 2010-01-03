@@ -3,6 +3,8 @@ package com.ametro.resources;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+import android.graphics.Point;
+
 import com.ametro.libs.Helpers;
 
 public class MapResource implements IResource {
@@ -63,8 +65,19 @@ public class MapResource implements IResource {
 				line.mLineName = parts[0];
 				line.mFromStationName = parts[1];
 				line.mToStationName = parts[2];
-				line.mPoint = Helpers.parsePoint(parts[3] + "," + parts[4]);
-				line.mIsSpline = parts.length > 5 && parts[5].contains("spline");
+				line.mIsSpline = false;
+				int pos = 3;
+				ArrayList<Point> points = new ArrayList<Point>();
+				while(pos < parts.length){
+					if(parts[pos].contains("spline")){
+						line.mIsSpline = true;
+						break;
+					}else{
+						points.add(Helpers.parsePoint(parts[pos] + "," + parts[pos+1]));
+						pos+=2;
+					}
+				}
+				line.mPoints = (Point[]) points.toArray(new Point[points.size()]);
 				addiditionalLines.add(line);
 			}else{ // Lines names
 				MapLine line = mapLines.get(section);
