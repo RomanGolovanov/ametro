@@ -24,7 +24,7 @@ public class MapResource implements IResource {
 				if(parts.length==2){
 					String name = parts[0].trim();
 					String value = parts.length > 1 ? parts[1].trim() : "";
-					handleNaveValuePair(section, name, value);
+					handleNameValuePair(section, name, value);
 				}
 			}
 		}
@@ -39,7 +39,7 @@ public class MapResource implements IResource {
 				mapLines.put(section, new MapLine());
 			}
 		}		
-		private void handleNaveValuePair(String section, String name, String value) {
+		private void handleNameValuePair(String section, String name, String value) {
 			if(section.equals("Options")){
 				if(name.equals("ImageFileName")){
 					vectorName = value;
@@ -59,7 +59,7 @@ public class MapResource implements IResource {
 					transportName = value;
 				}
 			}else if(section.equals("AdditionalNodes")){
-				String[] parts = Helpers.parseStringArray(value);
+				String[] parts = Helpers.splitCSV(value);
 				MapAddiditionalLine line = new MapAddiditionalLine();
 				line.mName = name;
 				line.mLineName = parts[0];

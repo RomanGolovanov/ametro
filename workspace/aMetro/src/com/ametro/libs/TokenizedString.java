@@ -8,6 +8,7 @@ public class TokenizedString
 	private int mLen;
 	
 	private boolean mBracketOpened;
+	private boolean mQuoteOpened;
 	private String mLastDelimeter;
 	private String mNextDelimeter;
 	
@@ -32,6 +33,7 @@ public class TokenizedString
 		mPos = 0;
 		mLen = text.length();
 		mBracketOpened = false;
+		mQuoteOpened = false;
 		mLastDelimeter = null; 
 		skipToContent();
 	}
@@ -46,15 +48,26 @@ public class TokenizedString
 	
 	public String next(){
 		skipToContent();
+		if(mPos==mLen){
+			return "";
+		}
 		int pos = mPos;
 		String symbol = null;
-		while(pos < mLen && !mDelimeters.contains( symbol = mText.substring(pos,pos+1) )){
+		boolean quotes = false;
+		while(pos < mLen && ( !mDelimeters.contains( symbol = mText.substring(pos,pos+1)) || quotes  )  ){
+			if("\"".equals(symbol)){
+				quotes = !quotes;
+			}
 			pos++;
 		}
 		int end = symbol==null ? pos-1 : pos;
 		mNextDelimeter = symbol;
 		String text = mText.substring(mPos,  end);
 		mPos = end;
+		if(text.startsWith("\"")) 
+			text = text.substring(1);
+		if(text.endsWith("\"")) 
+			text = text.substring(0,text.length()-1);
 		return text;
 	}
 	
