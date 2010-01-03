@@ -3,9 +3,11 @@ package com.ametro;
 import java.io.IOException;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +30,6 @@ public class CreateMapCache extends Activity implements IProgressUpdate {
 		setContentView(R.layout.map_caching);
 		mCachingMapText = (TextView)findViewById(R.id.cachingMapText);
 		mCreateCache.start();
-
 	}
 
 	private final Handler mHandler = new Handler();
@@ -41,6 +42,16 @@ public class CreateMapCache extends Activity implements IProgressUpdate {
 			mCachingMapText.setText(text);
 		}
 	};
+	
+	private void clearScroll(String mapName) {
+		if(mapName!=null){
+			SharedPreferences preferences = getSharedPreferences("aMetro",0);
+			SharedPreferences.Editor editor = preferences.edit();
+			editor.remove(BrowseTileMap.PREFERENCE_SCROLL_POSITION + "_" + mapName);
+			editor.commit();
+		}
+	}
+
 	
 	private final Runnable mReturnOk = new Runnable() {
 		public void run() {
@@ -59,12 +70,14 @@ public class CreateMapCache extends Activity implements IProgressUpdate {
 
 	private final Thread mCreateCache = new Thread() {
 		public void run() {
+			Uri uri = getIntent().getData();
+			String mapName = MapUri.getMapName(uri);
 			try {
-				Uri uri = getIntent().getData();
-				String mapName = MapUri.getMapName(uri);
 				Model model = ModelBuilder.Create(MapSettings.CATALOG_PATH, mapName, MapSettings.DEFAULT_MAP);
 				TileManager.recreate(model, CreateMapCache.this);
+				clearScroll(mapName);
 			} catch (IOException e) {
+				Log.e("aMetro","Failed creating map cache for " + mapName, e);
 				failReason = e;
 				mHandler.post(mHandleException);
 			}			

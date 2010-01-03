@@ -203,8 +203,16 @@ public class TileImageView extends View {
 	}
 
 	private Rect getTileScreenPosition(int tileRow, int tileColumn){
-		int left = tileRow * (int)(MapSettings.TILE_WIDTH*mScale) - (int)(mScrollX*mScale);
-		int top = tileColumn * (int)(MapSettings.TILE_HEIGHT*mScale) - (int)(mScrollY*mScale);
+		int dx = 0;
+		int dy = 0;
+		if(mContentWidth<getWidth()) {
+			dx = (getWidth() - mContentWidth) / 2;
+		}
+		if(mContentHeight<getHeight()){
+			dy = (getHeight() - mContentHeight) / 2;
+		}
+		int left = dx + tileRow * (int)(MapSettings.TILE_WIDTH*mScale) - (int)(mScrollX*mScale);
+		int top = dy + tileColumn * (int)(MapSettings.TILE_HEIGHT*mScale) - (int)(mScrollY*mScale);
 		int right = left + (int)(MapSettings.TILE_WIDTH*mScale);
 		int bottom = top + (int)(MapSettings.TILE_HEIGHT*mScale);
 		return new Rect(left,top,right,bottom);
