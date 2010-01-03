@@ -6,8 +6,6 @@ import android.graphics.Rect;
 
 public class Algorithms {
 
-	private final static float ZERO_TOLERANCE=0.00001f;
-
 	private final static int LEFT = 1;
 	private final static int RIGHT = 2;
 	private final static int TOP = 4;

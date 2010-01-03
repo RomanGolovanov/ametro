@@ -64,7 +64,6 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 					mAdapter.setSelectedFile(mDefaultPackageFileName);
 					int groupPosition = mAdapter.getSelectedGroupPosition();
 					int childPosition = mAdapter.getSelectChildPosition();
-					Log.e("aMetro","Group: " + groupPosition + ", Child:" + childPosition);
 					mListView.expandGroup(groupPosition);
 					mListView.setSelectedChild(groupPosition, childPosition, true);
 				}
