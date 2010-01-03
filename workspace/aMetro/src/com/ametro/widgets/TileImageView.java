@@ -154,6 +154,8 @@ public class TileImageView extends View {
 		mRenderThread = new RendererThread();
 		mRenderThread.start();
 
+		mRenderThread.invalidateTiles();
+		
 		mInitialized = true;
 	}
 
