@@ -157,7 +157,7 @@ public class TileImageView extends View {
 		mRenderThread.start();
 
 		mRenderThread.invalidateTiles();
-		
+
 		mInitialized = true;
 	}
 
@@ -227,16 +227,18 @@ public class TileImageView extends View {
 				mNeedToInvalidateScroll = false;
 			}
 			boolean needToInvalidateTiles = false;
+			final int contentWidth = mContentWidth;
+			final int contentHeight = mContentHeight;
 			Rect tiles = getVisibleTiles();
 			for(int row = tiles.left; row <= tiles.right; row++){
 				for(int col = tiles.top; col <= tiles.bottom; col++){
-					Rect tilePosition = getTileScreenPosition(row, col);
-					Bitmap tile = mTiles[row][col];
-					if(tile!=null){
-						canvas.drawBitmap(tile,mTileRect,tilePosition,null);
-					}else{
-						canvas.drawBitmap(mTileLoading,mTileRect,tilePosition,null);
-						needToInvalidateTiles = true;
+					final int bottom = (col+1)*MapSettings.TILE_HEIGHT;
+					final int right = (row+1)*MapSettings.TILE_WIDTH;	
+					if( bottom <= contentHeight && right <= contentWidth ){
+						needToInvalidateTiles |= drawEntireTile(canvas, col, row);
+					}
+					else{
+						needToInvalidateTiles |= drawPartialTile(canvas, col, row);
 					}
 				}
 			}
@@ -245,6 +247,34 @@ public class TileImageView extends View {
 			}
 		}
 		super.onDraw(canvas);
+	}
+
+	private boolean drawPartialTile(Canvas canvas,int col, int row) {
+		final int height = Math.min( MapSettings.TILE_HEIGHT, mContentHeight - col*MapSettings.TILE_HEIGHT);
+		final int width = Math.min( MapSettings.TILE_WIDTH, mContentWidth - row*MapSettings.TILE_WIDTH);
+		Rect dst = getTileScreenPosition(row, col);
+		dst = new Rect(dst.left, dst.top, dst.left + width, dst.top + height);
+		Rect src = new Rect(0,0,width,height);
+		Bitmap tile = mTiles[row][col];
+		if(tile!=null){
+			canvas.drawBitmap(tile,src,dst,null);
+		}else{
+			canvas.drawBitmap(mTileLoading,src,dst,null);
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean drawEntireTile(Canvas canvas, int col, int row) {
+		Rect dst = getTileScreenPosition(row, col);
+		Bitmap tile = mTiles[row][col];
+		if(tile!=null){
+			canvas.drawBitmap(tile,mTileRect,dst,null);
+		}else{
+			canvas.drawBitmap(mTileLoading,mTileRect,dst,null);
+			return true;
+		}
+		return false;
 	}
 
 	public TileImageView(Context context, AttributeSet attrs, int defStyle) {
@@ -297,10 +327,11 @@ public class TileImageView extends View {
 	}
 
 	public void internalScroll(int dx, int dy){
-		int x = Math.min( getContentWidth() - getWidth() , Math.max(0, mScrollX+dx ) );
-		int y = Math.min( getContentHeight() - getHeight() , Math.max(0, mScrollY+dy ) );
+		int x = mScrollX+dx;
+		int y = mScrollY+dy;
 		mScrollX = x;
 		mScrollY = y;
+		invalidateScroll();
 		postInvalidate();
 		mRenderThread.invalidateTiles();
 	}
@@ -315,14 +346,14 @@ public class TileImageView extends View {
 	private void invalidateScroll() {
 		int maxX = Math.max(getContentWidth() - getWidth(), 0);
 		int maxY = Math.max(getContentHeight() - getHeight(), 0);
-		mScrollX = Math.min(maxX, mScrollX);
-		mScrollY = Math.min(maxY, mScrollY);
+		mScrollX = Math.max(0, Math.min(maxX, mScrollX));
+		mScrollY = Math.max(0,Math.min(maxY, mScrollY));
 	} 
-	
+
 	public Point getScroll(){
 		return new Point(mScrollX,mScrollY);
 	}
-	
+
 	// adjustable parameters
 	private static final boolean SNAP_ENABLED = false;
 	private static final float MAX_SLOPE_FOR_DIAG = 1.5f;
