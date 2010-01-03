@@ -119,6 +119,7 @@ public class ModelBuilder {
 			boolean previousBrackedOpened = false;
 			while(tStations.hasNext()){
 				boolean bracketOpened = tStations.isBracketOpened();
+				boolean forward = true;
 				
 				if(!bracketOpened && previousBrackedOpened){
 					mapStationIndex++;
@@ -132,6 +133,10 @@ public class ModelBuilder {
 
 				previousBrackedOpened = bracketOpened;
 				String toStation = tStations.next();
+				if(toStation.startsWith("-")){
+					toStation = toStation.substring(1);
+					forward = false;
+				}
 				int toStationId;
 
 				if(tStations.isBracketOpened()){
@@ -145,7 +150,11 @@ public class ModelBuilder {
 				
 				if(!model.isExistEdge(fromStationId,toStationId)){
 					Double delay = Helpers.parseNullableDouble( tDelays.next() );
-					model.addLineSegment(lineId, fromStationId, toStationId, delay );
+					if(forward){
+						model.addLineSegment(lineId, fromStationId, toStationId, delay );
+					}else{
+						model.addLineSegment(lineId, toStationId, fromStationId, delay );
+					}
 				}
 
 				if(!tStations.isBracketOpened()){
