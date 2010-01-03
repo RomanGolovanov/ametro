@@ -1,13 +1,9 @@
 package com.ametro.model;
 
 import java.security.InvalidParameterException;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Dictionary;
 import java.util.Hashtable;
-
-import com.ametro.libs.ExtendedPath;
-import com.ametro.libs.Helpers;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -17,10 +13,12 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.graphics.RectF;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.util.Log;
+
+import com.ametro.libs.ExtendedPath;
+import com.ametro.libs.Helpers;
 
 public class Model {
 

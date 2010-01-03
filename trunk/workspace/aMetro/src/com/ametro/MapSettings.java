@@ -9,4 +9,6 @@ public class MapSettings {
 
 	public static final String DEFAULT_MAP = "metro";
 	
+	public static final String CACHE_DESCRIPTION = ".description";
+	public static final String MAPS_LIST = ".maps";
 }
