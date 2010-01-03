@@ -9,6 +9,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup.LayoutParams;
@@ -204,8 +205,9 @@ public class BrowseTileMap extends Activity implements TileImageView.IDataProvid
 			}else{
 				Point size = mTileManager.getContentSize();
 				
-				int displayWidth = mTileImageView.getWidth();
-				int displayHeight = mTileImageView.getHeight();
+				Display display = this.getWindowManager().getDefaultDisplay();
+				int displayWidth = display.getWidth();
+				int displayHeight = display.getHeight();
 				pos = new Point((size.x - displayWidth)/2 , (size.y - displayHeight)/2);
 				
 			}
