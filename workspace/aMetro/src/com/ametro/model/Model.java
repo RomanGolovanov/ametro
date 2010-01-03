@@ -1,14 +1,17 @@
 package com.ametro.model;
 
 import java.security.InvalidParameterException;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
+import com.ametro.libs.ExtendedPath;
 import com.ametro.libs.Helpers;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.DashPathEffect;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -25,7 +28,7 @@ public class Model {
 		mMapRenderer = new MapRenderer();
 
 		mMapName = mapName;
-		
+
 		mStationCount = 0;
 		mStationPreservedCount = 0;
 		mStationNameIndex = new Hashtable<String, Integer>();
@@ -34,6 +37,7 @@ public class Model {
 		mLineCount = 0;
 		mLinePreservedCount = 0;
 		mLineNameIndex = new Hashtable<String, Integer>();
+		mLineIndex = new Hashtable<Integer,String>();
 		reallocateLines(10);
 	}
 
@@ -77,34 +81,46 @@ public class Model {
 		return mStationBoxes[id];
 	}
 
-	public void addLineEdge(int fromId, int toId, Double delay, int lineId )
+	public void addLineSegment(int lineId, int fromId, int toId, Double delay )
 	{
-		addGenericEdge(fromId, toId, delay, false, false, null, lineId, 0);
+		addGenericEdge(lineId, fromId, toId, delay, false, false, null, 0);
 	}
 
-	public void addTransferEdge(int fromId, int toId, Double delay, int flags)
+	public void addTransfer(int fromId, int toId, Double delay, int flags)
 	{
-		addGenericEdge(fromId, toId, delay, true, false, null, null, flags);
+		addGenericEdge(null, fromId, toId, delay, true, false, null, flags);
 	}
 
-	public void addAdditionToEdge(int fromId, int toId, Point additionalNode)
+	public void addLineSegmentPoly(int fromId, int toId, Point[] additionalNode)
 	{
-		mEdgeAdditionalNodes[fromId][toId] = mEdgeAdditionalNodes[toId][fromId] = additionalNode;
+		mEdgeAdditionalNodes[fromId][toId] = additionalNode;
 	}
 
-	public void addSplineToEdge(int fromId, int toId, Point additionalNode)
+	public void addLineSegmentSpline(int fromId, int toId, Point[] additionalNode)
 	{
-		mEdgeAdditionalNodes[fromId][toId] = mEdgeAdditionalNodes[toId][fromId] = additionalNode;
-		int flags = mEdgeFlags[fromId][toId] | EDGE_FLAG_SPLINE;
-		mEdgeFlags[fromId][toId] = mEdgeFlags[toId][fromId] = flags;
+		if( (mEdgeFlags[fromId][toId] & EDGE_FLAG_CREATED) != 0){
+			mEdgeAdditionalNodes[fromId][toId] = additionalNode;
+			int flags = mEdgeFlags[fromId][toId] | EDGE_FLAG_SPLINE;
+			mEdgeFlags[fromId][toId] = flags;
+		}else{
+			Point[] revertedNodes = new Point[additionalNode.length];
+			for (int i = 0; i < additionalNode.length; i++) {
+				revertedNodes[additionalNode.length-i-1] = additionalNode[i];
+			}
+			mEdgeAdditionalNodes[toId][fromId] = revertedNodes;
+			int flags = mEdgeFlags[toId][fromId] | EDGE_FLAG_SPLINE;
+			mEdgeFlags[toId][fromId] = flags;
+		}
+
 	}
 
 
-	public int addStation(int lineId, String lineName, String name, Rect rect, Point point)
+	public int addStation(int lineId, String name, Rect rect, Point point)
 	{
+		String lineName = getLineNameById(lineId);
 		Integer id = mStationNameIndex.get(lineName + ";" + name);
 		if(id==null){
-			id = addGenericStation(lineId, lineName, name, rect, point);
+			id = addGenericStation(lineId, name, rect, point);
 		}else{
 			mStationBoxes[id] = rect;
 			mStationPoints[id] = point;
@@ -112,11 +128,16 @@ public class Model {
 		return id;
 	}
 
-	public int addStation(int lineId, String lineName, String name)
+	private String getLineNameById(int lineId) {
+		return mLineIndex.get(lineId);
+	}
+
+	public int addStation(int lineId,String name)
 	{
+		String lineName = getLineNameById(lineId);
 		Integer id = mStationNameIndex.get(lineName + ";" + name);
 		if(id==null){
-			id = addGenericStation(lineId, lineName, name,null,null);
+			id = addGenericStation(lineId, name,null,null);
 		}
 		return id;
 	}
@@ -127,7 +148,8 @@ public class Model {
 	}
 
 	public boolean isExistEdge(int fromStationId, int toStationId) {
-		return (mEdgeFlags[fromStationId][toStationId] & EDGE_FLAG_CREATED)!=0;
+		return (mEdgeFlags[fromStationId][toStationId] & EDGE_FLAG_CREATED)!=0
+		|| (mEdgeFlags[toStationId][fromStationId] & EDGE_FLAG_CREATED)!=0;
 	}
 
 	public int addLine(String name, int color){
@@ -136,6 +158,8 @@ public class Model {
 			id = getNextLineId();
 			mLineNames[id] = name;
 			mLineColors[id] = color;
+			mLineNameIndex.put(name, id);
+			mLineIndex.put(id,name);
 		}
 		return id;
 	}
@@ -144,9 +168,10 @@ public class Model {
 		return mLineNameIndex.get(name);
 	}
 
-	private int addGenericStation(Integer lineId, String lineName, String name, Rect rect, Point point)
+	private int addGenericStation(Integer lineId, String name, Rect rect, Point point)
 	{
 		int id = getNextStationId();
+		String lineName = getLineNameById(lineId);
 		mStationNames[id] = name;
 		mStationBoxes[id] = rect;
 		mStationPoints[id] = point;
@@ -155,12 +180,8 @@ public class Model {
 		return id;
 	}
 
-	private void addGenericEdge(int fromId, int toId, Double delay, boolean isTransfer, boolean isSpline, Point additionalNode, Integer lineId, int flags )
+	private void addGenericEdge(Integer lineId, int fromId, int toId, Double delay, boolean isTransfer, boolean isSpline, Point[] additionalNode, int flags )
 	{
-		mEdgeDelays[fromId][toId] = mEdgeDelays[toId][fromId] = delay;
-		mEdgeAdditionalNodes[fromId][toId] = mEdgeAdditionalNodes[toId][fromId] = additionalNode;
-		mEdgeLines[fromId][toId] = mEdgeLines[toId][fromId] = lineId != null ? lineId : LINE_TRANSFER;
-
 		flags |= EDGE_FLAG_CREATED;
 		if (isTransfer){
 			flags |= EDGE_FLAG_TRANSFER;
@@ -172,7 +193,15 @@ public class Model {
 			flags |= EDGE_FLAG_LINE;
 		}
 
-		mEdgeFlags[fromId][toId] = mEdgeFlags[toId][fromId] = flags;
+		mEdgeDelays[fromId][toId] = delay;
+		mEdgeAdditionalNodes[fromId][toId] = additionalNode;
+		mEdgeLines[fromId][toId] = lineId != null ? lineId : LINE_TRANSFER;
+		mEdgeFlags[fromId][toId] = flags;
+
+		//		mEdgeDelays[fromId][toId] = mEdgeDelays[toId][fromId] = delay;
+		//		mEdgeAdditionalNodes[fromId][toId] = mEdgeAdditionalNodes[toId][fromId] = additionalNode;
+		//		mEdgeLines[fromId][toId] = mEdgeLines[toId][fromId] = lineId != null ? lineId : LINE_TRANSFER;
+		//		mEdgeFlags[fromId][toId] = mEdgeFlags[toId][fromId] = flags;
 	}
 
 	private int getNextStationId()
@@ -243,11 +272,12 @@ public class Model {
 	private Integer[]	mStationLine;
 
 	private Double[][] 	mEdgeDelays; // stores delays
-	private Point[][]	mEdgeAdditionalNodes;
+	private Object[][]	mEdgeAdditionalNodes;
 	private int[][] 	mEdgeFlags;
 	private int[][] 	mEdgeLines;
 
 	private Dictionary<String, Integer> mLineNameIndex;
+	private Dictionary<Integer,String> mLineIndex;
 
 	private int mLineCount = 0;
 	private int mLinePreservedCount = 0;
@@ -256,7 +286,7 @@ public class Model {
 	private int[]		mLineColors;
 
 	private String mMapName;
-	
+
 	private int mWidth;
 	private int mHeight;
 
@@ -318,17 +348,18 @@ public class Model {
 	public void render(Canvas canvas, Rect src){
 		mMapRenderer.render(canvas, src);
 	}
-	
+
 	public String getMapName() {
 		return mMapName;
 	}
 
-	
+
 	private class MapRenderer {
 
 		Paint mStationBorderPaint;
 		Paint mStationFillPaint;
 		Paint mLinePaint;
+		Paint mLineUnavailablePaint;
 		Paint mTextPaint;
 		Paint mFillPaint;
 
@@ -351,6 +382,8 @@ public class Model {
 			mLinePaint.setStyle(Style.STROKE);
 			mLinePaint.setAntiAlias(true);
 
+			mLineUnavailablePaint = new Paint(mLinePaint);
+
 			mTextPaint = new Paint();
 			mTextPaint.setAntiAlias(true);
 			mTextPaint.setStyle(Style.FILL_AND_STROKE);
@@ -362,6 +395,8 @@ public class Model {
 
 		public void prepareObjects(){
 			mLinePaint.setStrokeWidth( mLinesWidth );
+			mLineUnavailablePaint.setStrokeWidth(mLinesWidth);
+			mLineUnavailablePaint.setPathEffect(new DashPathEffect(new float[]{ mLinesWidth, mLinesWidth/3 }, 0));
 		}
 
 
@@ -438,35 +473,60 @@ public class Model {
 			final int lineCount = mLineCount;
 			final int stationCount = mStationCount; 
 			for(int line = 0; line < lineCount; line++){
-				mLinePaint.setColor(mLineColors[line]);
-				Path path = new Path();
+				//mLinePaint.setColor(mLineColors[line]);
+				//mLineUnavailablePaint.setColor(mLineColors[line]);
 				for(int row = 0; row < stationCount; row++){
-					for(int col = 0; col < row; col++){
-						if( mEdgeDelays[row][col] != null && 
+					for(int col = 0; col < stationCount; col++){
+						if( (mEdgeFlags[row][col] & EDGE_FLAG_CREATED )!=0 &&
 								mEdgeLines[row][col] == line )
 						{
-							int flags = mEdgeFlags[row][col];
-							Point from = mStationPoints[row];
-							Point to = mStationPoints[col];
-							Point additionalNode = mEdgeAdditionalNodes[row][col];
-							if(additionalNode!=null){
-								if( (flags & EDGE_FLAG_SPLINE) != 0 ){
-									drawArc(canvas, from.x,from.y,additionalNode.x, additionalNode.y, to.x, to.y, mLinePaint);
-								}else{
-									path.moveTo(from.x, from.y);
-									path.lineTo(additionalNode.x, additionalNode.y);
-									path.lineTo(to.x, to.y);
-								}
-							}else{
-								path.moveTo(from.x, from.y);
-								path.lineTo(to.x, to.y);
-							}
+							Paint linePaint = (mEdgeDelays[row][col] != null && mEdgeDelays[row][col] != 0 )
+								? mLinePaint 
+								: mLineUnavailablePaint;
+							linePaint.setColor(mLineColors[line]);
+							ExtendedPath path = new ExtendedPath();
+							drawLineSegment(line, path, row, col);
+							canvas.drawPath(path, linePaint);
 						}
 					}
 				}
-				canvas.drawPath(path, mLinePaint);
 			}
 			Log.d("aMetro", String.format("Rendering transport lines is %sms", Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
+		}
+
+		private void drawLineSegment(int line, ExtendedPath path, int row, int col) {
+			int flags = mEdgeFlags[row][col];
+			Point from = mStationPoints[row];
+			Point to = mStationPoints[col];
+			Point[] additionalNode = (Point[])mEdgeAdditionalNodes[row][col];
+			if(additionalNode!=null){
+				if( (flags & EDGE_FLAG_SPLINE) != 0 ){
+					//drawArc(canvas, from.x,from.y,additionalNode[0].x, additionalNode[0].y, to.x, to.y, mLinePaint);
+					Point[] points = new Point[additionalNode.length+2];
+					points[0] = from;
+					points[points.length-1] = to;
+					for (int i = 0; i < additionalNode.length; i++) {
+						Point point = additionalNode[i];
+						points[i+1] = point;
+					}
+					path.drawSpline(points, 0, points.length);
+					//path.moveTo(from.x, from.y);
+					//for (int i = 0; i < additionalNode.length; i++) {
+					//	path.lineTo(additionalNode[i].x, additionalNode[i].y);	
+					//}
+					//path.lineTo(to.x, to.y);
+				}else{
+					path.moveTo(from.x, from.y);
+					for (int i = 0; i < additionalNode.length; i++) {
+						path.lineTo(additionalNode[i].x, additionalNode[i].y);	
+					}
+					path.lineTo(to.x, to.y);
+				}
+			}else{
+				path.moveTo(from.x, from.y);
+				path.lineTo(to.x, to.y);
+			}
+
 		}
 
 

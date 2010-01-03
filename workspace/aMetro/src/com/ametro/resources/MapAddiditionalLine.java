@@ -7,6 +7,6 @@ public class MapAddiditionalLine {
 	public String mLineName;
 	public String mFromStationName;
 	public String mToStationName;
-	public Point mPoint;
+	public Point[] mPoints;
 	public boolean mIsSpline;
 }

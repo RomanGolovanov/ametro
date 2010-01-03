@@ -83,18 +83,19 @@ public class ModelBuilder {
 		if(t.mStatus!=null && t.mStatus.contains("invisible")){
 			flags = Model.EDGE_FLAG_INVISIBLE;
 		}
-		model.addTransferEdge(fromStationId, toStationId, t.mDelay, flags);
+		model.addTransfer(fromStationId, toStationId, t.mDelay, flags);
+		model.addTransfer(toStationId, fromStationId, t.mDelay, flags);
 	}
 
 	private static void fillAdditionalLines(Model model, MapAddiditionalLine al) {
 		//int lineId = model.getLineId(al.mLineName);
 		int fromId = model.getStationId(al.mLineName, al.mFromStationName);
 		int toId = model.getStationId(al.mLineName, al.mToStationName);
-		Point point = al.mPoint;
+		Point[] points = al.mPoints;
 		if(al.mIsSpline){
-			model.addSplineToEdge(fromId, toId, point);
+			model.addLineSegmentSpline(fromId, toId, points);
 		}else{
-			model.addAdditionToEdge(fromId, toId, point);
+			model.addLineSegmentPoly(fromId, toId, points);
 		}
 	}
 
@@ -112,7 +113,7 @@ public class ModelBuilder {
 
 			int mapStationIndex = 0;
 			String fromStation = tStations.next();
-			int fromStationId = model.addStation(lineId, lineName, fromStation, 
+			int fromStationId = model.addStation(lineId, fromStation, 
 					rectCount > mapStationIndex ? rects[mapStationIndex] : null, 
 					points[mapStationIndex]);
 			boolean previousBrackedOpened = false;
@@ -122,7 +123,7 @@ public class ModelBuilder {
 				if(!bracketOpened && previousBrackedOpened){
 					mapStationIndex++;
 					fromStation = tStations.next();
-					fromStationId = model.addStation(lineId, lineName, fromStation, 
+					fromStationId = model.addStation(lineId, fromStation, 
 							rectCount > mapStationIndex ? rects[mapStationIndex] : null, 
 							points[mapStationIndex]);
 					previousBrackedOpened = false;
@@ -134,17 +135,17 @@ public class ModelBuilder {
 				int toStationId;
 
 				if(tStations.isBracketOpened()){
-					toStationId = model.addStation(lineId, lineName, toStation);
+					toStationId = model.addStation(lineId, toStation);
 				}else{
 					mapStationIndex++;
-					toStationId = model.addStation(lineId, lineName, toStation, 
+					toStationId = model.addStation(lineId, toStation, 
 							rectCount > mapStationIndex ? rects[mapStationIndex] : null, 
 							points[mapStationIndex]);
 				}
 				
 				if(!model.isExistEdge(fromStationId,toStationId)){
 					Double delay = Helpers.parseNullableDouble( tDelays.next() );
-					model.addLineEdge(fromStationId, toStationId, delay, lineId);
+					model.addLineSegment(lineId, fromStationId, toStationId, delay );
 				}
 
 				if(!tStations.isBracketOpened()){

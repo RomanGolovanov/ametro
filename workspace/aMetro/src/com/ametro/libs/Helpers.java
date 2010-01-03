@@ -196,6 +196,18 @@ public class Helpers {
 		}
 	}	
 
+	public static Object[] resizeArray(Object[] oldArray, int newSize) {
+		if(oldArray!=null){
+			int oldSize = oldArray.length;
+			Object[] newArray = new Object[newSize];
+			int preserveLength = Math.min(oldSize,newSize);
+			if (preserveLength > 0)
+				System.arraycopy (oldArray,0,newArray,0,preserveLength);
+			return newArray; 
+		}else{
+			return new Object[newSize];
+		}
+	}	
 
 	public static Double[] resizeArray(Double[] oldArray, int newSize) {
 		if(oldArray!=null){
@@ -228,6 +240,23 @@ public class Helpers {
 		}
 	}	
 	
+
+	public static Object[][] resizeArray(Object[][] oldArray, int newSizeRow, int newSizeColumn) {
+		if(oldArray!=null){
+			Object[][] newArray = (Object[][])resizeGenericArray(oldArray,newSizeRow);
+			for (int i=0; i<newArray.length; i++) {
+				if (newArray[i] == null){
+					newArray[i] = new Object[newSizeColumn];
+				}else {
+					newArray[i] = (Object[])resizeArray(newArray[i],newSizeColumn); 
+				}	
+			}
+			return newArray;
+		}else{
+			return new Object[newSizeRow][newSizeColumn];
+		}
+	}		
+	
 	public static int[][] resizeArray(int[][] oldArray, int newSizeRow, int newSizeColumn) {
 		if(oldArray!=null){
 			int[][] newArray = (int[][])resizeGenericArray(oldArray,newSizeRow);
@@ -259,6 +288,8 @@ public class Helpers {
 			return new Point[newSizeRow][newSizeColumn];
 		}
 	}	
+	
+
 	
 	public static Double[][] resizeArray(Double[][] oldArray, int newSizeRow, int newSizeColumn) {
 		if(oldArray!=null){
