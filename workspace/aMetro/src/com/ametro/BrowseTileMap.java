@@ -184,7 +184,7 @@ public class BrowseTileMap extends Activity implements TileImageView.IDataProvid
 
 	private void saveScroll() {
 		if(mTileImageView!=null && mTileManager!=null && mMapName!=null){
-			Point pos = mTileImageView.getScroll();
+			Point pos = mTileImageView.getScrollCenter();
 			SharedPreferences preferences = getSharedPreferences("aMetro",0);
 			SharedPreferences.Editor editor = preferences.edit();
 			String scrollPosition =  "" + pos.x + "," + pos.y;
@@ -202,14 +202,10 @@ public class BrowseTileMap extends Activity implements TileImageView.IDataProvid
 				pos = Helpers.parsePoint(pref);
 			}else{
 				Point size = mTileManager.getContentSize();
-				
-				Display display = this.getWindowManager().getDefaultDisplay();
-				int displayWidth = display.getWidth();
-				int displayHeight = display.getHeight();
-				pos = new Point((size.x - displayWidth)/2 , (size.y - displayHeight)/2);
+				pos = new Point(size.x/2 , size.y/2);
 				
 			}
-			mTileImageView.setScroll(pos.x, pos.y);
+			mTileImageView.setScrollCenter(pos.x, pos.y);
 		}
 	}
 
