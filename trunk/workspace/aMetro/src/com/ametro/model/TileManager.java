@@ -129,7 +129,7 @@ public class TileManager {
 			model.render(bufferCanvas,renderRect);
 
 			Rect src = new Rect(0,0,buffer.getWidth(), buffer.getHeight());
-			TileManager.createTiles(model.getCityName(), row, 0, buffer, src, 0);
+			TileManager.createTiles(model.getMapName(), row, 0, buffer, src, 0);
 			buffer.recycle();
 			buffer = null;
 

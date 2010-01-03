@@ -34,7 +34,7 @@ public class BrowseTileMap extends Activity implements TileImageView.IDataProvid
 	private MenuItem mMainMenuStation;
 
 	private static final String PREFERENCE_PACKAGE_FILE_NAME = "PACKAGE_FILE_NAME";
-	private static final String PREFERENCE_SCROLL_POSITION = "SCROLL_POSITION";
+	static final String PREFERENCE_SCROLL_POSITION = "SCROLL_POSITION";
 
 	private final int MAIN_MENU_FIND 		 = 1;
 	private final int MAIN_MENU_LIBRARY 	 = 2;
@@ -142,9 +142,7 @@ public class BrowseTileMap extends Activity implements TileImageView.IDataProvid
 		case MAIN_MENU_STATION:
 			return true;
 		case MAIN_MENU_EXPERIMENTAL:
-			Intent createMapCache = new Intent(this, CreateMapCache.class);
-			createMapCache.setData(MapUri.create(mMapName));
-			startActivityForResult(createMapCache, REQUEST_CREATE_MAP_CACHE);
+			requestCreateMapCache(MapUri.create(mMapName));
 			return true;
 		}		
 		return super.onOptionsItemSelected(item);
@@ -186,9 +184,9 @@ public class BrowseTileMap extends Activity implements TileImageView.IDataProvid
 
 	private void saveScroll() {
 		if(mTileImageView!=null && mTileManager!=null && mMapName!=null){
-			SharedPreferences preferences = getPreferences(MODE_PRIVATE);
-			SharedPreferences.Editor editor = preferences.edit();
 			Point pos = mTileImageView.getScroll();
+			SharedPreferences preferences = getSharedPreferences("aMetro",0);
+			SharedPreferences.Editor editor = preferences.edit();
 			String scrollPosition =  "" + pos.x + "," + pos.y;
 			editor.putString(PREFERENCE_SCROLL_POSITION + "_" + mMapName, scrollPosition  );
 			editor.commit();
@@ -198,7 +196,7 @@ public class BrowseTileMap extends Activity implements TileImageView.IDataProvid
 	private void restoreScroll() {
 		if(mTileImageView!=null && mTileManager!=null && mMapName!=null){
 			Point pos;
-			SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+			SharedPreferences preferences = getSharedPreferences("aMetro",0);
 			String pref = preferences.getString(PREFERENCE_SCROLL_POSITION + "_" + mMapName, null);
 			if(pref!=null){
 				pos = Helpers.parsePoint(pref);
