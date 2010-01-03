@@ -132,7 +132,7 @@ public class TileImageView extends View {
 
 	private RendererThread mRenderThread;
 
-	private boolean mNeedToInvalidateScroll;
+	private boolean mNeedScrollToCenter;
 
 	private void prepareRenderer(){
 		Point contentSize = mDataProvider.getContentSize();
@@ -230,9 +230,11 @@ public class TileImageView extends View {
 	@Override
 	protected void onDraw(Canvas canvas) { 
 		if(mInitialized){
-			if(mNeedToInvalidateScroll){
+			if(mNeedScrollToCenter){
+				mScrollX = mScrollToX - (getWidth()/2);
+				mScrollY = mScrollToY - (getHeight()/2);
 				invalidateScroll();
-				mNeedToInvalidateScroll = false;
+				mNeedScrollToCenter = false;
 			}
 			boolean needToInvalidateTiles = false;
 			final int contentWidth = mContentWidth;
@@ -344,10 +346,10 @@ public class TileImageView extends View {
 		mRenderThread.invalidateTiles();
 	}
 
-	public void setScroll(int x, int y){
-		mScrollX = x;
-		mScrollY = y;
-		mNeedToInvalidateScroll = true;
+	public void setScrollCenter(int x, int y){
+		mScrollToX = x;
+		mScrollToY = y;
+		mNeedScrollToCenter = true;
 		postInvalidate();
 	}
 
@@ -358,8 +360,8 @@ public class TileImageView extends View {
 		mScrollY = Math.max(0,Math.min(maxY, mScrollY));
 	} 
 
-	public Point getScroll(){
-		return new Point(mScrollX,mScrollY);
+	public Point getScrollCenter(){
+		return new Point(mScrollX + (getWidth()/2) ,mScrollY + (getHeight()/2));
 	}
 
 	// adjustable parameters
@@ -368,8 +370,11 @@ public class TileImageView extends View {
 	private static final int MIN_BREAK_SNAP_CROSS_DISTANCE = 20; //20
 	private static final int MIN_FLING_TIME = 250; //250
 
-	public int mScrollX = 0;
-	public int mScrollY = 0;
+	private int mScrollX = 0;
+	private int mScrollY = 0;
+	
+	private int mScrollToX = 0;
+	private int mScrollToY = 0;
 
 	private float mLastTouchX;
 	private float mLastTouchY;
