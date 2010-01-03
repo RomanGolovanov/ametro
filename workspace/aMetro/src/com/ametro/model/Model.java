@@ -369,6 +369,7 @@ public class Model {
 
 			mStationFillPaint = new Paint();
 			mStationFillPaint.setStyle(Style.FILL);
+			mStationFillPaint.setAntiAlias(true);
 
 			mStationBorderPaint = new Paint();
 			mStationBorderPaint.setColor(Color.WHITE);
@@ -529,11 +530,6 @@ public class Model {
 					Point point = mStationPoints[station];
 					int color =  mLineColors[mStationLine[station]];
 
-					mStationFillPaint.setColor(color);
-					mTextPaint.setColor(color);
-					canvas.drawCircle(point.x, point.y, radius, mStationFillPaint);
-					canvas.drawCircle(point.x, point.y, radius, mStationBorderPaint);
-
 					boolean hasConnections = false;
 					for(int i = 0; i < mStationCount; i++)
 					{
@@ -547,10 +543,19 @@ public class Model {
 						}
 					}
 					if(!hasConnections){
+						mStationFillPaint.setColor(color);
+						canvas.drawCircle(point.x, point.y, radius, mStationFillPaint);
 						mStationFillPaint.setColor(Color.WHITE);
-						canvas.drawCircle(point.x, point.y, radius*0.75f, mStationFillPaint);
+						canvas.drawCircle(point.x, point.y, radius*0.7f, mStationFillPaint);
+
+					}else{
+						mStationFillPaint.setColor(color);
+						mTextPaint.setColor(color);
+						canvas.drawCircle(point.x, point.y, radius, mStationFillPaint);
+						canvas.drawCircle(point.x, point.y, radius, mStationBorderPaint);
 					}
 					
+					mTextPaint.setColor(color);
 					String name = mStationNames[station];
 					Rect rect = mStationBoxes[station];
 					if(rect!=null && name!=null){
