@@ -501,7 +501,6 @@ public class Model {
 			Point[] additionalNode = (Point[])mEdgeAdditionalNodes[row][col];
 			if(additionalNode!=null){
 				if( (flags & EDGE_FLAG_SPLINE) != 0 ){
-					//drawArc(canvas, from.x,from.y,additionalNode[0].x, additionalNode[0].y, to.x, to.y, mLinePaint);
 					Point[] points = new Point[additionalNode.length+2];
 					points[0] = from;
 					points[points.length-1] = to;
@@ -510,11 +509,6 @@ public class Model {
 						points[i+1] = point;
 					}
 					path.drawSpline(points, 0, points.length);
-					//path.moveTo(from.x, from.y);
-					//for (int i = 0; i < additionalNode.length; i++) {
-					//	path.lineTo(additionalNode[i].x, additionalNode[i].y);	
-					//}
-					//path.lineTo(to.x, to.y);
 				}else{
 					path.moveTo(from.x, from.y);
 					for (int i = 0; i < additionalNode.length; i++) {
@@ -529,64 +523,6 @@ public class Model {
 
 		}
 
-
-		private float calculateAngle( float x0, float y0, float x, float y )
-		{
-			float angle = (float)(Math.atan( (y-y0)/(x-x0) ) / Math.PI * 180);
-			float dx = x-x0;
-			float dy = y-y0;
-			if( angle > 0 ){
-				if( dx < 0 && dy < 0 ){
-					angle += 180;
-				}
-			}else if(angle < 0){
-				if( dx < 0 && dy > 0 ){
-					angle += 180;
-				}else{
-					angle += 360;
-				}
-			}else{
-				if (dx<0)
-				{
-					angle = 180;
-				}
-			}
-			return angle;
-		}
-
-		private void drawArc(Canvas canvas, float x1, float y1, float x2, float y2, float x3, float y3, Paint linePaint) {
-			float x12 = (x1+x2)/2;
-			float y12 = (y1+y2)/2;
-			float x23 = (x2+x3)/2;
-			float y23 = (y2+y3)/2;
-			float k12 = -(x1-x2)/(y1-y2); 
-			float b12 = y12 - k12 * x12;
-			float k23 = -(x2-x3)/(y2-y3); 
-			float b23 = y23 - k23 * x23;
-
-			float y0 = (k12*b23 - k23*b12)/(k12-k23);
-			float x0 = (y0 - b12)/k12;
-
-			float R = (float)Math.sqrt(  (x0-x1)*(x0-x1) + (y0-y1)*(y0-y1)  );
-
-			float angle1 = calculateAngle(x0, y0, x1, y1); //(float)(Math.atan( (y1-y0)/(x1-x0) ) / Math.PI * 180);
-			float angle3 = calculateAngle(x0, y0, x3, y3); //(float)(Math.atan( (y3-y0)/(x3-x0) ) / Math.PI * 180);
-
-			float startAngle = Math.min(angle1, angle3);
-			float endAngle = Math.max(angle1, angle3);
-			float sweepAngle = endAngle-startAngle;
-			if(startAngle<90 && endAngle>270){
-				//sweepAngle = startAngle - end
-				sweepAngle = 360 - endAngle + startAngle;
-				startAngle = endAngle;
-			}
-
-			RectF oval = new RectF(x0-R, y0-R, x0+R, y0+R);
-			canvas.drawArc(oval, startAngle, sweepAngle, false, linePaint);
-
-
-		}
-
 		private void renderStations(Canvas canvas) {
 			final int stationCount = mStationCount; 
 			float radius = (float)mStationDiameter/2.0f;
@@ -594,15 +530,29 @@ public class Model {
 				if(mStationLine[station]!=null && mStationNames[station]!=null){
 					Point point = mStationPoints[station];
 					int color =  mLineColors[mStationLine[station]];
-					if(point.y < 50){
-						point.y=point.y+50;
-					}
 
 					mStationFillPaint.setColor(color);
 					mTextPaint.setColor(color);
 					canvas.drawCircle(point.x, point.y, radius, mStationFillPaint);
 					canvas.drawCircle(point.x, point.y, radius, mStationBorderPaint);
 
+					boolean hasConnections = false;
+					for(int i = 0; i < mStationCount; i++)
+					{
+						if( 
+							((mEdgeFlags[station][i] & EDGE_FLAG_CREATED)!=0 && mEdgeDelays[station][i] != null && mEdgeDelays[station][i] != 0 )		
+							||
+							((mEdgeFlags[i][station] & EDGE_FLAG_CREATED)!=0 && mEdgeDelays[i][station] != null && mEdgeDelays[i][station] != 0 )		
+						){
+							hasConnections = true;
+							break;
+						}
+					}
+					if(!hasConnections){
+						mStationFillPaint.setColor(Color.WHITE);
+						canvas.drawCircle(point.x, point.y, radius*0.75f, mStationFillPaint);
+					}
+					
 					String name = mStationNames[station];
 					Rect rect = mStationBoxes[station];
 					if(rect!=null && name!=null){
