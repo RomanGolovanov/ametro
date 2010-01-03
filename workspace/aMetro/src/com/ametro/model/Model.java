@@ -480,8 +480,8 @@ public class Model {
 								mEdgeLines[row][col] == line )
 						{
 							Paint linePaint = (mEdgeDelays[row][col] != null && mEdgeDelays[row][col] != 0 )
-								? mLinePaint 
-								: mLineUnavailablePaint;
+							? mLinePaint 
+									: mLineUnavailablePaint;
 							linePaint.setColor(mLineColors[line]);
 							ExtendedPath path = new ExtendedPath();
 							drawLineSegment(line, path, row, col);
@@ -497,6 +497,13 @@ public class Model {
 			int flags = mEdgeFlags[row][col];
 			Point from = mStationPoints[row];
 			Point to = mStationPoints[col];
+			if(from==null || to==null){
+				Log.e("aMetro", 
+						"Error rendering line segment on line " + getLineNameById(line)
+						+ " from " + mStationNames[row] 
+						+ " to " + mStationNames[col] );
+				return;
+			}
 			Point[] additionalNode = (Point[])mEdgeAdditionalNodes[row][col];
 			if(additionalNode!=null){
 				if( (flags & EDGE_FLAG_SPLINE) != 0 ){
@@ -526,43 +533,51 @@ public class Model {
 			final int stationCount = mStationCount; 
 			float radius = (float)mStationDiameter/2.0f;
 			for(int station = 0; station < stationCount; station++){
-				if(mStationLine[station]!=null && mStationNames[station]!=null){
-					Point point = mStationPoints[station];
-					int color =  mLineColors[mStationLine[station]];
-
-					boolean hasConnections = false;
-					for(int i = 0; i < mStationCount; i++)
-					{
-						if( 
-							((mEdgeFlags[station][i] & EDGE_FLAG_CREATED)!=0 && mEdgeDelays[station][i] != null && mEdgeDelays[station][i] != 0 )		
-							||
-							((mEdgeFlags[i][station] & EDGE_FLAG_CREATED)!=0 && mEdgeDelays[i][station] != null && mEdgeDelays[i][station] != 0 )		
-						){
-							hasConnections = true;
-							break;
-						}
-					}
-					if(!hasConnections){
-						mStationFillPaint.setColor(color);
-						canvas.drawCircle(point.x, point.y, radius, mStationFillPaint);
-						mStationFillPaint.setColor(Color.WHITE);
-						canvas.drawCircle(point.x, point.y, radius*0.7f, mStationFillPaint);
-
-					}else{
-						mStationFillPaint.setColor(color);
-						mTextPaint.setColor(color);
-						canvas.drawCircle(point.x, point.y, radius, mStationFillPaint);
-						canvas.drawCircle(point.x, point.y, radius, mStationBorderPaint);
-					}
-					
-					mTextPaint.setColor(color);
-					String name = mStationNames[station];
-					Rect rect = mStationBoxes[station];
-					if(rect!=null && name!=null){
-						drawText(canvas, mUpperCase ? name.toUpperCase() : name, rect, point);
-					}
-
+				if(mStationLine[station]!=null && mStationNames[station]!=null && mStationPoints[station]!=null){
+					drawStation(canvas, radius, station);
+				}else{
+					Log.e("aMetro",
+							"Error rendering station #" + station + 
+							"(name " + mStationNames[station] +  
+							") due unsufficient data");
 				}
+			}
+		}
+
+		private void drawStation(Canvas canvas, float radius, int station) {
+			Point point = mStationPoints[station];
+			int color =  mLineColors[mStationLine[station]];
+
+			boolean hasConnections = false;
+			for(int i = 0; i < mStationCount; i++)
+			{
+				if( 
+						((mEdgeFlags[station][i] & EDGE_FLAG_CREATED)!=0 && mEdgeDelays[station][i] != null && mEdgeDelays[station][i] != 0 )		
+						||
+						((mEdgeFlags[i][station] & EDGE_FLAG_CREATED)!=0 && mEdgeDelays[i][station] != null && mEdgeDelays[i][station] != 0 )		
+				){
+					hasConnections = true;
+					break;
+				}
+			}
+			if(!hasConnections){
+				mStationFillPaint.setColor(color);
+				canvas.drawCircle(point.x, point.y, radius, mStationFillPaint);
+				mStationFillPaint.setColor(Color.WHITE);
+				canvas.drawCircle(point.x, point.y, radius*0.7f, mStationFillPaint);
+
+			}else{
+				mStationFillPaint.setColor(color);
+				mTextPaint.setColor(color);
+				canvas.drawCircle(point.x, point.y, radius, mStationFillPaint);
+				canvas.drawCircle(point.x, point.y, radius, mStationBorderPaint);
+			}
+
+			mTextPaint.setColor(color);
+			String name = mStationNames[station];
+			Rect rect = mStationBoxes[station];
+			if(rect!=null && name!=null){
+				drawText(canvas, mUpperCase ? name.toUpperCase() : name, rect, point);
 			}
 		}
 

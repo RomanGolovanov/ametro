@@ -1,7 +1,5 @@
 package com.ametro.resources.vector;
 
-import java.security.InvalidParameterException;
-
 import com.ametro.resources.FilePackage;
 import com.ametro.resources.VectorResource;
 
@@ -31,8 +29,10 @@ public class CommandBuilder {
 			cmd =  new Line();
 		}else if(commandName.equalsIgnoreCase("SpotCircle")){
 			cmd =  new SpotCircle();
+		}else  if(commandName.equalsIgnoreCase("Arrow")){
+			cmd =  new Arrow();
 		}else{
-		throw new InvalidParameterException("Command '" + commandName +"' not found");
+			cmd = new Empty(); // TODO: return empty command if not recognized!
 		}
 		cmd.initialize(owner, resource, commandName, arguments);
 		return cmd;
