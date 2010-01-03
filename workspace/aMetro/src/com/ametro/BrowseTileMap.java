@@ -15,6 +15,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.ametro.libs.Helpers;
 import com.ametro.model.TileManager;
 import com.ametro.widgets.TileImageView;
 
@@ -32,6 +33,7 @@ public class BrowseTileMap extends Activity implements TileImageView.IDataProvid
 	private MenuItem mMainMenuStation;
 
 	private static final String PREFERENCE_PACKAGE_FILE_NAME = "PACKAGE_FILE_NAME";
+	private static final String PREFERENCE_SCROLL_POSITION = "SCROLL_POSITION";
 
 	private final int MAIN_MENU_FIND 		 = 1;
 	private final int MAIN_MENU_LIBRARY 	 = 2;
@@ -44,6 +46,7 @@ public class BrowseTileMap extends Activity implements TileImageView.IDataProvid
 
 	private final static int REQUEST_BROWSE_LIBRARY = 1;
 	private static final int REQUEST_CREATE_MAP_CACHE = 2;
+	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -64,6 +67,13 @@ public class BrowseTileMap extends Activity implements TileImageView.IDataProvid
 			}
 		}
 	}
+
+	@Override
+	protected void onPause() {
+		saveScroll();
+		super.onPause();
+	}
+	
 
 	private void handleConfigurationException(Exception e) {
 		clearPreferences();
@@ -162,13 +172,44 @@ public class BrowseTileMap extends Activity implements TileImageView.IDataProvid
 				FrameLayout layout = new FrameLayout(this);
 				layout.addView(mTileImageView);
 				setContentView(layout);
-				mTileImageView.setDataProvider(this);
 				mMapName = mapName;
+				mTileImageView.setDataProvider(this);
 				updateTitle();
+				restoreScroll();
 				savePreferences();
 			} catch (Exception e) {
 				handleConfigurationException(e);
 			}
+		}
+	}
+
+	private void saveScroll() {
+		if(mTileImageView!=null && mTileManager!=null && mMapName!=null){
+			SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+			SharedPreferences.Editor editor = preferences.edit();
+			Point pos = mTileImageView.getScroll();
+			String scrollPosition =  "" + pos.x + "," + pos.y;
+			editor.putString(PREFERENCE_SCROLL_POSITION + "_" + mMapName, scrollPosition  );
+			editor.commit();
+		}
+	}
+
+	private void restoreScroll() {
+		if(mTileImageView!=null && mTileManager!=null && mMapName!=null){
+			Point pos;
+			SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+			String pref = preferences.getString(PREFERENCE_SCROLL_POSITION + "_" + mMapName, null);
+			if(pref!=null){
+				pos = Helpers.parsePoint(pref);
+			}else{
+				Point size = mTileManager.getContentSize();
+				
+				int displayWidth = mTileImageView.getWidth();
+				int displayHeight = mTileImageView.getHeight();
+				pos = new Point((size.x - displayWidth)/2 , (size.y - displayHeight)/2);
+				
+			}
+			mTileImageView.setScroll(pos.x, pos.y);
 		}
 	}
 

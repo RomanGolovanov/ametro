@@ -8,7 +8,6 @@ public class TokenizedString
 	private int mLen;
 	
 	private boolean mBracketOpened;
-	private boolean mQuoteOpened;
 	private String mLastDelimeter;
 	private String mNextDelimeter;
 	
@@ -33,7 +32,6 @@ public class TokenizedString
 		mPos = 0;
 		mLen = text.length();
 		mBracketOpened = false;
-		mQuoteOpened = false;
 		mLastDelimeter = null; 
 		skipToContent();
 	}

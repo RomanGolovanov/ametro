@@ -124,13 +124,15 @@ public class TileImageView extends View {
 	private int mContentWidth;
 	private int mContentHeight;
 
-	public int mTileScrollX = 0;
-	public int mTileScrollY = 0;
+	//public int mTileScrollX = 0;
+	//public int mTileScrollY = 0;
 
 	private Rect mTileRect;
 	private Context mContext;
 
 	private RendererThread mRenderThread;
+
+	private boolean mNeedToInvalidateScroll;
 
 	private void prepareRenderer(){
 		Point contentSize = mDataProvider.getContentSize();
@@ -193,16 +195,16 @@ public class TileImageView extends View {
 	}
 
 	private Rect getVisibleTiles(){
-		int left = Math.max(mTileScrollX / MapSettings.TILE_WIDTH, 0);
-		int top = Math.max(mTileScrollY / MapSettings.TILE_HEIGHT, 0);
-		int right = Math.min(getCeil(mTileScrollX+(int)(getWidth()/mScale),MapSettings. TILE_WIDTH), mTileCountWidth-1);
-		int bottom = Math.min(getCeil(mTileScrollY+(int)(getHeight()/mScale), MapSettings.TILE_HEIGHT), mTileCountHeight-1);
+		int left = Math.max(mScrollX / MapSettings.TILE_WIDTH, 0);
+		int top = Math.max(mScrollY / MapSettings.TILE_HEIGHT, 0);
+		int right = Math.min(getCeil(mScrollX+(int)(getWidth()/mScale),MapSettings. TILE_WIDTH), mTileCountWidth-1);
+		int bottom = Math.min(getCeil(mScrollY+(int)(getHeight()/mScale), MapSettings.TILE_HEIGHT), mTileCountHeight-1);
 		return new Rect(left,top,right,bottom);
 	}
 
 	private Rect getTileScreenPosition(int tileRow, int tileColumn){
-		int left = tileRow * (int)(MapSettings.TILE_WIDTH*mScale) - (int)(mTileScrollX*mScale);
-		int top = tileColumn * (int)(MapSettings.TILE_HEIGHT*mScale) - (int)(mTileScrollY*mScale);
+		int left = tileRow * (int)(MapSettings.TILE_WIDTH*mScale) - (int)(mScrollX*mScale);
+		int top = tileColumn * (int)(MapSettings.TILE_HEIGHT*mScale) - (int)(mScrollY*mScale);
 		int right = left + (int)(MapSettings.TILE_WIDTH*mScale);
 		int bottom = top + (int)(MapSettings.TILE_HEIGHT*mScale);
 		return new Rect(left,top,right,bottom);
@@ -220,6 +222,10 @@ public class TileImageView extends View {
 	@Override
 	protected void onDraw(Canvas canvas) { 
 		if(mInitialized){
+			if(mNeedToInvalidateScroll){
+				invalidateScroll();
+				mNeedToInvalidateScroll = false;
+			}
 			boolean needToInvalidateTiles = false;
 			Rect tiles = getVisibleTiles();
 			for(int row = tiles.left; row <= tiles.right; row++){
@@ -283,12 +289,8 @@ public class TileImageView extends View {
 	@Override
 	public void computeScroll() {
 		if (mScroller.computeScrollOffset()) {
-			//scrollTo(0,0);
 			mScrollX = mScroller.getCurrX();
 			mScrollY = mScroller.getCurrY();
-			mTileScrollX = mScrollX;
-			mTileScrollY = mScrollY;
-			//postInvalidate();
 			postInvalidate();
 			mRenderThread.invalidateTiles();
 		}
@@ -299,13 +301,28 @@ public class TileImageView extends View {
 		int y = Math.min( getContentHeight() - getHeight() , Math.max(0, mScrollY+dy ) );
 		mScrollX = x;
 		mScrollY = y;
-		mTileScrollX = x;
-		mTileScrollY = y;
-		//invalidate();
 		postInvalidate();
 		mRenderThread.invalidateTiles();
 	}
 
+	public void setScroll(int x, int y){
+		mScrollX = x;
+		mScrollY = y;
+		mNeedToInvalidateScroll = true;
+		postInvalidate();
+	}
+
+	private void invalidateScroll() {
+		int maxX = Math.max(getContentWidth() - getWidth(), 0);
+		int maxY = Math.max(getContentHeight() - getHeight(), 0);
+		mScrollX = Math.min(maxX, mScrollX);
+		mScrollY = Math.min(maxY, mScrollY);
+	} 
+	
+	public Point getScroll(){
+		return new Point(mScrollX,mScrollY);
+	}
+	
 	// adjustable parameters
 	private static final boolean SNAP_ENABLED = false;
 	private static final float MAX_SLOPE_FOR_DIAG = 1.5f;
