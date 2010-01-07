@@ -9,12 +9,12 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
-import android.view.View;
+import android.widget.ScrollView;
 import android.widget.Scroller;
 
 import com.ametro.MapSettings;
 
-public class TileImageView extends View {
+public class TileImageView extends ScrollView {
 
 	public interface IDataProvider {
 		Point getContentSize();
@@ -187,6 +187,9 @@ public class TileImageView extends View {
 	}
 
 	private void initializeControls() {
+		setVerticalScrollBarEnabled(true);
+		setHorizontalScrollBarEnabled(true);
+		
 		mScroller = new Scroller(mContext);
 		if(mInitialized){
 			cleanupRenderer();			
@@ -194,22 +197,67 @@ public class TileImageView extends View {
 		prepareRenderer();
 	}
 
+	@Override
+	protected int computeVerticalScrollOffset() {
+		return  mInitialized ? mScrollY : 0;
+	}
+	
+	@Override
+	protected int computeVerticalScrollRange() {
+		return mInitialized ? mContentHeight : 0;
+	}
+	
+	@Override
+	protected int computeHorizontalScrollOffset() {
+		return  mInitialized ? mScrollX : 0;
+	}
+	
+	@Override
+	protected int computeHorizontalScrollRange() {
+		return mInitialized ? mContentWidth : 0;
+	}
+		
+    /*
+     * Return the width of the view where the content of WebView should render
+     * to.
+     */
+    private int getViewWidth() {
+        if (!isVerticalScrollBarEnabled() ) {
+            return getWidth();
+        } else {
+            return Math.max(0, getWidth() - getVerticalScrollbarWidth());
+        }
+    }
+
+    /*
+     * Return the height of the view where the content of WebView should render
+     * to.
+     */
+    private int getViewHeight() {
+        if (!isHorizontalScrollBarEnabled() ) {
+            return getHeight();
+        } else {
+            return Math.max(0, getHeight() - getHorizontalScrollbarHeight());
+        }
+    }
+
+
 	private Rect getVisibleTiles(){
 		int left = Math.max(mScrollX / MapSettings.TILE_WIDTH, 0);
 		int top = Math.max(mScrollY / MapSettings.TILE_HEIGHT, 0);
-		int right = Math.min(getCeil(mScrollX+(int)(getWidth()/mScale),MapSettings. TILE_WIDTH), mTileCountWidth-1);
-		int bottom = Math.min(getCeil(mScrollY+(int)(getHeight()/mScale), MapSettings.TILE_HEIGHT), mTileCountHeight-1);
+		int right = Math.min(getCeil(mScrollX+(int)(getViewWidth()/mScale),MapSettings. TILE_WIDTH), mTileCountWidth-1);
+		int bottom = Math.min(getCeil(mScrollY+(int)(getViewHeight()/mScale), MapSettings.TILE_HEIGHT), mTileCountHeight-1);
 		return new Rect(left,top,right,bottom);
 	}
 
 	private Rect getTileScreenPosition(int tileRow, int tileColumn){
 		int dx = 0;
 		int dy = 0;
-		if(mContentWidth<getWidth()) {
-			dx = (getWidth() - mContentWidth) / 2;
+		if(mContentWidth<getViewWidth()) {
+			dx = (getViewWidth() - mContentWidth) / 2;
 		}
-		if(mContentHeight<getHeight()){
-			dy = (getHeight() - mContentHeight) / 2;
+		if(mContentHeight<getViewHeight()){
+			dy = (getViewHeight() - mContentHeight) / 2;
 		}
 		int left = dx + tileRow * (int)(MapSettings.TILE_WIDTH*mScale) - (int)(mScrollX*mScale);
 		int top = dy + tileColumn * (int)(MapSettings.TILE_HEIGHT*mScale) - (int)(mScrollY*mScale);
@@ -230,9 +278,13 @@ public class TileImageView extends View {
 	@Override
 	protected void onDraw(Canvas canvas) { 
 		if(mInitialized){
+			Rect viewClip = new Rect(0,0,getViewWidth(), getViewHeight());
+			int sc = canvas.save();
+			canvas.clipRect(viewClip);
+			
 			if(mNeedScrollToCenter){
-				mScrollX = mScrollToX - (getWidth()/2);
-				mScrollY = mScrollToY - (getHeight()/2);
+				mScrollX = mScrollToX - (getViewWidth()/2);
+				mScrollY = mScrollToY - (getViewHeight()/2);
 				invalidateScroll();
 				mNeedScrollToCenter = false;
 			}
@@ -255,6 +307,7 @@ public class TileImageView extends View {
 			if(needToInvalidateTiles){
 				mRenderThread.invalidateTiles();
 			}
+			canvas.restoreToCount(sc);
 		}
 		super.onDraw(canvas);
 	}
@@ -334,6 +387,8 @@ public class TileImageView extends View {
 			postInvalidate();
 			mRenderThread.invalidateTiles();
 		}
+
+		//scrollTo(0, 0);
 	}
 
 	public void internalScroll(int dx, int dy){
@@ -344,6 +399,8 @@ public class TileImageView extends View {
 		invalidateScroll();
 		postInvalidate();
 		mRenderThread.invalidateTiles();
+
+		//scrollTo(0, 0);
 	}
 
 	public void setScrollCenter(int x, int y){
@@ -354,14 +411,14 @@ public class TileImageView extends View {
 	}
 
 	private void invalidateScroll() {
-		int maxX = Math.max(getContentWidth() - getWidth(), 0);
-		int maxY = Math.max(getContentHeight() - getHeight(), 0);
+		int maxX = Math.max(getContentWidth() - getViewWidth(), 0);
+		int maxY = Math.max(getContentHeight() - getViewHeight(), 0);
 		mScrollX = Math.max(0, Math.min(maxX, mScrollX));
 		mScrollY = Math.max(0,Math.min(maxY, mScrollY));
 	} 
 
 	public Point getScrollCenter(){
-		return new Point(mScrollX + (getWidth()/2) ,mScrollY + (getHeight()/2));
+		return new Point(mScrollX + (getViewWidth()/2) ,mScrollY + (getViewHeight()/2));
 	}
 
 	// adjustable parameters
@@ -405,11 +462,11 @@ public class TileImageView extends View {
 		float x = event.getX();
 		float y = event.getY();
 		long eventTime = event.getEventTime();
-		if (x > getWidth() - 1) {
-			x = getWidth() - 1;
+		if (x > getViewWidth() - 1) {
+			x = getViewWidth() - 1;
 		}
-		if (y > getHeight() - 1) {
-			y = getHeight() - 1;
+		if (y > getViewHeight() - 1) {
+			y = getViewHeight() - 1;
 		}
 
 		int deltaX = (int) (mLastTouchX - x);
@@ -562,8 +619,8 @@ public class TileImageView extends View {
 		if (mVelocityTracker == null) {
 			return;
 		}
-		int maxX = Math.max(getContentWidth() - getWidth(), 0);
-		int maxY = Math.max(getContentHeight() - getHeight(), 0);
+		int maxX = Math.max(getContentWidth() - getViewWidth(), 0);
+		int maxY = Math.max(getContentHeight() - getViewHeight(), 0);
 
 		mVelocityTracker.computeCurrentVelocity(1000);
 		int vx = (int) mVelocityTracker.getXVelocity();
@@ -595,12 +652,12 @@ public class TileImageView extends View {
 
 	// Expects x in view coordinates
 	private int pinLocX(int x) {
-		return pinLoc(x, getWidth(), getContentWidth());
+		return pinLoc(x, getViewWidth(), getContentWidth());
 	}
 
 	// Expects y in view coordinates
 	private int pinLocY(int y) {
-		return pinLoc(y, getHeight(), getContentHeight() ) ;
+		return pinLoc(y, getViewHeight(), getContentHeight() ) ;
 	}
 
 	private static int pinLoc(int x, int viewMax, int docMax) {

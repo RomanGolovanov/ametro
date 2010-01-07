@@ -9,9 +9,9 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.FrameLayout;
 import android.widget.Toast;
@@ -168,7 +168,7 @@ public class BrowseTileMap extends Activity implements TileImageView.IDataProvid
 				}
 				mTileImageView = new TileImageView(this);
 				mTileImageView.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.FILL_PARENT));
-				FrameLayout layout = new FrameLayout(this);
+				ViewGroup layout = new FrameLayout(this);
 				layout.addView(mTileImageView);
 				setContentView(layout);
 				mMapName = mapName;
