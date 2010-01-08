@@ -278,9 +278,9 @@ public class TileImageView extends ScrollView {
 	@Override
 	protected void onDraw(Canvas canvas) { 
 		if(mInitialized){
-			Rect viewClip = new Rect(0,0,getViewWidth(), getViewHeight());
-			int sc = canvas.save();
-			canvas.clipRect(viewClip);
+			//Rect viewClip = new Rect(0,0,getViewWidth(), getViewHeight());
+			//int sc = canvas.save();
+			//canvas.clipRect(viewClip);
 			
 			if(mNeedScrollToCenter){
 				mScrollX = mScrollToX - (getViewWidth()/2);
@@ -307,7 +307,7 @@ public class TileImageView extends ScrollView {
 			if(needToInvalidateTiles){
 				mRenderThread.invalidateTiles();
 			}
-			canvas.restoreToCount(sc);
+			//canvas.restoreToCount(sc);
 		}
 		super.onDraw(canvas);
 	}
@@ -387,8 +387,6 @@ public class TileImageView extends ScrollView {
 			postInvalidate();
 			mRenderThread.invalidateTiles();
 		}
-
-		//scrollTo(0, 0);
 	}
 
 	public void internalScroll(int dx, int dy){
@@ -399,8 +397,6 @@ public class TileImageView extends ScrollView {
 		invalidateScroll();
 		postInvalidate();
 		mRenderThread.invalidateTiles();
-
-		//scrollTo(0, 0);
 	}
 
 	public void setScrollCenter(int x, int y){
@@ -411,8 +407,8 @@ public class TileImageView extends ScrollView {
 	}
 
 	private void invalidateScroll() {
-		int maxX = Math.max(getContentWidth() - getViewWidth(), 0);
-		int maxY = Math.max(getContentHeight() - getViewHeight(), 0);
+		int maxX = Math.max(getContentWidth() - getWidth(), 0);
+		int maxY = Math.max(getContentHeight() - getHeight(), 0);
 		mScrollX = Math.max(0, Math.min(maxX, mScrollX));
 		mScrollY = Math.max(0,Math.min(maxY, mScrollY));
 	} 
@@ -619,8 +615,8 @@ public class TileImageView extends ScrollView {
 		if (mVelocityTracker == null) {
 			return;
 		}
-		int maxX = Math.max(getContentWidth() - getViewWidth(), 0);
-		int maxY = Math.max(getContentHeight() - getViewHeight(), 0);
+		int maxX = Math.max(getContentWidth() - getWidth(), 0);
+		int maxY = Math.max(getContentHeight() - getHeight(), 0);
 
 		mVelocityTracker.computeCurrentVelocity(1000);
 		int vx = (int) mVelocityTracker.getXVelocity();

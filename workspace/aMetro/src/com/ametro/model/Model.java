@@ -55,7 +55,7 @@ public class Model {
 		mCountryName = countryName;
 	}
 
-	public int getStationId(String lineName, String name){
+	public Integer getStationId(String lineName, String name){
 		return mStationNameIndex.get( lineName+";"+name );
 	}
 

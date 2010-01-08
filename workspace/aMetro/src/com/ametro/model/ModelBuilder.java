@@ -26,9 +26,9 @@ public class ModelBuilder {
 	public static Model Create(String libraryPath, String packageName, String mapName) throws IOException
 	{
 		FilePackage pkg = new FilePackage(libraryPath +"/"+ packageName+".pmz" );
-		
+
 		Date startTimestamp = new Date();
-		
+
 		GenericResource info = pkg.getCityGenericResource();
 		MapResource map = pkg.getMapResource(mapName+".map" );
 		VectorResource vec = pkg.getVectorResource(map.getVectorName());
@@ -71,31 +71,35 @@ public class ModelBuilder {
 			MapAddiditionalLine al = additionalLines.next();
 			fillAdditionalLines(model, al);
 		}
-		
+
 		Log.d("aMetro", String.format("Overall data parsing is %sms", Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
 		return model;
 	}
 
 	private static void fillTransfer(Model model, TransportTransfer t) {
-		int fromStationId = model.getStationId(t.mStartLine, t.mStartStation);
-		int toStationId = model.getStationId(t.mEndLine, t.mEndStation);
+		Integer fromStationId = model.getStationId(t.mStartLine, t.mStartStation);
+		Integer toStationId = model.getStationId(t.mEndLine, t.mEndStation);
 		int flags = 0;
 		if(t.mStatus!=null && t.mStatus.contains("invisible")){
 			flags = Model.EDGE_FLAG_INVISIBLE;
 		}
-		model.addTransfer(fromStationId, toStationId, t.mDelay, flags);
-		model.addTransfer(toStationId, fromStationId, t.mDelay, flags);
+		if(fromStationId!=null && toStationId!=null){
+			model.addTransfer(fromStationId, toStationId, t.mDelay, flags);
+			model.addTransfer(toStationId, fromStationId, t.mDelay, flags);
+		}
 	}
 
 	private static void fillAdditionalLines(Model model, MapAddiditionalLine al) {
 		//int lineId = model.getLineId(al.mLineName);
-		int fromId = model.getStationId(al.mLineName, al.mFromStationName);
-		int toId = model.getStationId(al.mLineName, al.mToStationName);
-		Point[] points = al.mPoints;
-		if(al.mIsSpline){
-			model.addLineSegmentSpline(fromId, toId, points);
-		}else{
-			model.addLineSegmentPoly(fromId, toId, points);
+		Integer fromId = model.getStationId(al.mLineName, al.mFromStationName);
+		Integer toId = model.getStationId(al.mLineName, al.mToStationName);
+		if(fromId!=null && toId!=null){
+			Point[] points = al.mPoints;
+			if(al.mIsSpline){
+				model.addLineSegmentSpline(fromId, toId, points);
+			}else{
+				model.addLineSegmentPoly(fromId, toId, points);
+			}
 		}
 	}
 
@@ -115,18 +119,18 @@ public class ModelBuilder {
 			String fromStation = tStations.next();
 			int fromStationId = model.addStation(lineId, fromStation, 
 					rectCount > mapStationIndex ? rects[mapStationIndex] : null, 
-					points[mapStationIndex]);
+							points[mapStationIndex]);
 			boolean previousBrackedOpened = false;
 			while(tStations.hasNext()){
 				boolean bracketOpened = tStations.isBracketOpened();
 				boolean forward = true;
-				
+
 				if(!bracketOpened && previousBrackedOpened){
 					mapStationIndex++;
 					fromStation = tStations.next();
 					fromStationId = model.addStation(lineId, fromStation, 
 							rectCount > mapStationIndex ? rects[mapStationIndex] : null, 
-							points[mapStationIndex]);
+									points[mapStationIndex]);
 					previousBrackedOpened = false;
 					continue;
 				}
@@ -145,9 +149,9 @@ public class ModelBuilder {
 					mapStationIndex++;
 					toStationId = model.addStation(lineId, toStation, 
 							rectCount > mapStationIndex ? rects[mapStationIndex] : null, 
-							points[mapStationIndex]);
+									points[mapStationIndex]);
 				}
-				
+
 				if(!model.isExistEdge(fromStationId,toStationId)){
 					Double delay = Helpers.parseNullableDouble( tDelays.next() );
 					if(forward){
