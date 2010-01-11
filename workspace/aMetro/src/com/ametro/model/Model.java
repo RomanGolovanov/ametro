@@ -150,6 +150,10 @@ public class Model {
 		|| (mEdgeFlags[toStationId][fromStationId] & EDGE_FLAG_CREATED)!=0;
 	}
 
+	public boolean isExistEdgeStrict(int fromStationId, int toStationId) {
+		return (mEdgeFlags[fromStationId][toStationId] & EDGE_FLAG_CREATED)!=0;
+	}
+
 	public int addLine(String name, int color){
 		Integer id = mLineNameIndex.get(name);
 		if(id==null){
@@ -191,15 +195,11 @@ public class Model {
 			flags |= EDGE_FLAG_LINE;
 		}
 
-		mEdgeDelays[fromId][toId] = delay;
+		mEdgeDelays[fromId][toId] = delay != null ? delay : mEdgeDelays[fromId][toId];
 		mEdgeAdditionalNodes[fromId][toId] = additionalNode;
 		mEdgeLines[fromId][toId] = lineId != null ? lineId : LINE_TRANSFER;
 		mEdgeFlags[fromId][toId] = flags;
 
-		//		mEdgeDelays[fromId][toId] = mEdgeDelays[toId][fromId] = delay;
-		//		mEdgeAdditionalNodes[fromId][toId] = mEdgeAdditionalNodes[toId][fromId] = additionalNode;
-		//		mEdgeLines[fromId][toId] = mEdgeLines[toId][fromId] = lineId != null ? lineId : LINE_TRANSFER;
-		//		mEdgeFlags[fromId][toId] = mEdgeFlags[toId][fromId] = flags;
 	}
 
 	private int getNextStationId()
@@ -272,7 +272,7 @@ public class Model {
 	private Double[][] 	mEdgeDelays; // stores delays
 	private Object[][]	mEdgeAdditionalNodes;
 	private int[][] 	mEdgeFlags;
-	private int[][] 	mEdgeLines;
+	private Integer[][]	mEdgeLines;
 
 	private Dictionary<String, Integer> mLineNameIndex;
 	private Dictionary<Integer,String> mLineIndex;
@@ -441,27 +441,31 @@ public class Model {
 
 			for(int row = 0; row < stationCount; row++){
 				for(int col = 0; col < row; col++){
-					if(mEdgeLines[row][col] == LINE_TRANSFER){
+					if(mEdgeLines[row][col] != null && mEdgeLines[row][col] == LINE_TRANSFER){
 						int flags = mEdgeFlags[row][col];
 						if( (flags & EDGE_FLAG_INVISIBLE) != 0) continue;
 						Point from = mStationPoints[row];
 						Point to = mStationPoints[col];
-						canvas.drawCircle(from.x, from.y, radiusBig, blackPaint);
-						canvas.drawCircle(to.x, to.y, radiusBig, blackPaint);
-						canvas.drawLine(from.x, from.y, to.x, to.y, blackPaint);
+						if(from!=null && to!=null){
+							canvas.drawCircle(from.x, from.y, radiusBig, blackPaint);
+							canvas.drawCircle(to.x, to.y, radiusBig, blackPaint);
+							canvas.drawLine(from.x, from.y, to.x, to.y, blackPaint);
+						}
 					}
 				}
 			}
 			for(int row = 0; row < stationCount; row++){
 				for(int col = 0; col < row; col++){
-					if(mEdgeLines[row][col] == LINE_TRANSFER){
+					if(mEdgeLines[row][col] != null && mEdgeLines[row][col] == LINE_TRANSFER){
 						int flags = mEdgeFlags[row][col];
 						if( (flags & EDGE_FLAG_INVISIBLE) != 0) continue;
 						Point from = mStationPoints[row];
 						Point to = mStationPoints[col];
-						canvas.drawCircle(from.x, from.y, radius, whitePaint);
-						canvas.drawCircle(to.x, to.y, radius, whitePaint);
-						canvas.drawLine(from.x, from.y, to.x, to.y, whitePaint);
+						if(from!=null && to!=null){						
+							canvas.drawCircle(from.x, from.y, radius, whitePaint);
+							canvas.drawCircle(to.x, to.y, radius, whitePaint);
+							canvas.drawLine(from.x, from.y, to.x, to.y, whitePaint);
+						}
 					}
 				}
 			}
@@ -469,27 +473,57 @@ public class Model {
 
 		private void renderTransportLines(Canvas canvas) {
 			Date startTimestamp = new Date();
-			final int lineCount = mLineCount;
 			final int stationCount = mStationCount; 
-			for(int line = 0; line < lineCount; line++){
-				//mLinePaint.setColor(mLineColors[line]);
-				//mLineUnavailablePaint.setColor(mLineColors[line]);
-				for(int row = 0; row < stationCount; row++){
-					for(int col = 0; col < stationCount; col++){
-						if( (mEdgeFlags[row][col] & EDGE_FLAG_CREATED )!=0 &&
-								mEdgeLines[row][col] == line )
-						{
-							Paint linePaint = (mEdgeDelays[row][col] != null && mEdgeDelays[row][col] != 0 )
-							? mLinePaint 
-									: mLineUnavailablePaint;
-							linePaint.setColor(mLineColors[line]);
-							ExtendedPath path = new ExtendedPath();
+			for(int row = 0; row < stationCount; row++){
+				for(int col = 0; col < row; col++){
+					if((mEdgeFlags[row][col] & EDGE_FLAG_CREATED )!=0 || (mEdgeFlags[col][row] & EDGE_FLAG_CREATED )!=0)
+					{
+						int line = (mEdgeLines[row][col] != null) ? mEdgeLines[row][col] : mEdgeLines[col][row];
+						if(line == LINE_TRANSFER) continue;
+						
+						boolean lineWorking = (mEdgeDelays[row][col] != null && mEdgeDelays[row][col] != 0 ) || (mEdgeDelays[col][row] != null && mEdgeDelays[col][row] != 0 );
+						//if(lineWorking) continue;
+
+						Paint linePaint = lineWorking ? mLinePaint : mLineUnavailablePaint;
+						linePaint.setColor(mLineColors[line]);
+						ExtendedPath path = new ExtendedPath();
+
+						boolean additionalForward = mEdgeAdditionalNodes[row][col]!=null;
+						boolean additionalBackward = mEdgeAdditionalNodes[col][row]!=null;
+						if(!additionalForward && additionalBackward){
+							drawLineSegment(line, path, col, row);
+						}else{
 							drawLineSegment(line, path, row, col);
-							canvas.drawPath(path, linePaint);
 						}
+						canvas.drawPath(path, linePaint);
 					}
 				}
 			}
+//			for(int row = 0; row < stationCount; row++){
+//				for(int col = 0; col < row; col++){
+//					if((mEdgeFlags[row][col] & EDGE_FLAG_CREATED )!=0 || (mEdgeFlags[col][row] & EDGE_FLAG_CREATED )!=0)
+//					{
+//						int line = (mEdgeLines[row][col] != null) ? mEdgeLines[row][col] : mEdgeLines[col][row];
+//						if(line == LINE_TRANSFER) continue;
+//						
+//						boolean lineWorking = (mEdgeDelays[row][col] != null && mEdgeDelays[row][col] != 0 ) || (mEdgeDelays[col][row] != null && mEdgeDelays[col][row] != 0 );
+//						if(!lineWorking) continue;
+//
+//						Paint linePaint = lineWorking ? mLinePaint : mLineUnavailablePaint;
+//						linePaint.setColor(mLineColors[line]);
+//						ExtendedPath path = new ExtendedPath();
+//
+//						boolean additionalForward = mEdgeAdditionalNodes[row][col]!=null;
+//						boolean additionalBackward = mEdgeAdditionalNodes[col][row]!=null;
+//						if(!additionalForward && additionalBackward){
+//							drawLineSegment(line, path, col, row);
+//						}else{
+//							drawLineSegment(line, path, row, col);
+//						}
+//						canvas.drawPath(path, linePaint);
+//					}
+//				}
+//			}
 			Log.d("aMetro", String.format("Rendering transport lines is %sms", Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
 		}
 
@@ -501,7 +535,7 @@ public class Model {
 				Log.e("aMetro", 
 						"Error rendering line segment on line " + getLineNameById(line)
 						+ " from " + mStationNames[row] 
-						+ " to " + mStationNames[col] );
+						                           + " to " + mStationNames[col] );
 				return;
 			}
 			Point[] additionalNode = (Point[])mEdgeAdditionalNodes[row][col];
@@ -539,7 +573,7 @@ public class Model {
 					Log.e("aMetro",
 							"Error rendering station #" + station + 
 							"(name " + mStationNames[station] +  
-							") due unsufficient data");
+					") due unsufficient data");
 				}
 			}
 		}
@@ -637,6 +671,11 @@ public class Model {
 			return bounds.height();
 		}
 
+	}
+
+
+	public Double getLineDelay(int from, int to) {
+		return mEdgeDelays[from][to];
 	}
 
 }

@@ -11,6 +11,11 @@ public class TokenizedString
 	private String mLastDelimeter;
 	private String mNextDelimeter;
 	
+	private int mSavedPos;
+	private String mSavedLastDelimeter;
+	private String mSavedNextDelimeter;
+	private boolean mSavedBrackedOpened;
+		
 	public boolean isBracketOpened() {
 		return mBracketOpened;
 	}
@@ -24,9 +29,9 @@ public class TokenizedString
 	}
 
 	public TokenizedString(String text, String delimeters){
-		text = text.replaceAll(",,",",");
-		text = text.replaceAll("\\(,","(");
-		text = text.replaceAll(",\\)",")");
+		//text = text.replaceAll(",,",",");
+		//text = text.replaceAll("\\(,","(");
+		//text = text.replaceAll(",\\)",")");
 		mText = text;
 		mDelimeters = delimeters;
 		mPos = 0;
@@ -66,19 +71,48 @@ public class TokenizedString
 			text = text.substring(1,text.length()-1);
 		return text;
 	}
+
+
+	private void save(){
+		mSavedPos = mPos;
+		mSavedLastDelimeter = mLastDelimeter;
+		mSavedNextDelimeter = mNextDelimeter;
+		mSavedBrackedOpened = mBracketOpened;
+	}
+	
+	private void restore(){
+		mPos = mSavedPos;
+		mLastDelimeter = mSavedLastDelimeter;
+		mNextDelimeter = mSavedNextDelimeter;
+		mBracketOpened = mSavedBrackedOpened;
+	}
+	
+	public String ahead(){
+		save();
+		String text = next();
+		restore();
+		return text;
+	}
 	
 	private void skipToContent(){
 		String symbol = null;
-		while(mPos < mLen && mDelimeters.contains( symbol = mText.substring(mPos,mPos+1) )){
+		String symbolNext = (mPos < mLen) ? mText.substring(mPos,mPos+1) : null;
+		while(mPos < mLen && mDelimeters.contains( symbol = symbolNext )){
 			mLastDelimeter = symbol;
 			if(symbol.equals("(")){
 				mBracketOpened = true;
+				mPos++;
+				return;
+				
 			}else if(symbol.equals(")")){
 				mBracketOpened = false;
 			}
 			mPos++;
+			symbolNext = (mPos < mLen) ? mText.substring(mPos,mPos+1) : null;
+			if(",".equals(symbol) && !"(".equals(symbolNext))return;
 		}
 	}
+	
 	
 }
 
