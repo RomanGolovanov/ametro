@@ -66,6 +66,7 @@ public class ModelBuilder {
 
 		}
 
+		
 		Iterator<MapAddiditionalLine> additionalLines = map.getAddiditionalLines().iterator();
 		while(additionalLines.hasNext()){
 			MapAddiditionalLine al = additionalLines.next();
@@ -115,57 +116,93 @@ public class ModelBuilder {
 			Rect[] rects = ml.rectangles;
 			final int rectCount  = rects!=null ? rects.length : 0;
 
-			int mapStationIndex = 0;
-			String fromStation = tStations.next();
-			int fromStationId = model.addStation(lineId, fromStation, 
-					rectCount > mapStationIndex ? rects[mapStationIndex] : null, 
-							points[mapStationIndex]);
-			boolean previousBrackedOpened = false;
-			while(tStations.hasNext()){
-				boolean bracketOpened = tStations.isBracketOpened();
-				boolean forward = true;
+			int stationIndex = 0;
 
-				if(!bracketOpened && previousBrackedOpened){
-					mapStationIndex++;
-					fromStation = tStations.next();
-					fromStationId = model.addStation(lineId, fromStation, 
-							rectCount > mapStationIndex ? rects[mapStationIndex] : null, 
-									points[mapStationIndex]);
-					previousBrackedOpened = false;
-					continue;
-				}
+			String toStation = null;
+			int toStationId = 0;
+			Double toDelay = null;
 
-				previousBrackedOpened = bracketOpened;
-				String toStation = tStations.next();
-				if(toStation.startsWith("-")){
-					toStation = toStation.substring(1);
-					forward = false;
-				}
-				int toStationId;
+			String fromStation = null;
+			int fromStationId = 0;
+			Double fromDelay = null;
 
-				if(tStations.isBracketOpened()){
-					toStationId = model.addStation(lineId, toStation);
-				}else{
-					mapStationIndex++;
-					toStationId = model.addStation(lineId, toStation, 
-							rectCount > mapStationIndex ? rects[mapStationIndex] : null, 
-									points[mapStationIndex]);
-				}
-
-				if(!model.isExistEdge(fromStationId,toStationId)){
-					Double delay = Helpers.parseNullableDouble( tDelays.next() );
-					if(forward){
-						model.addLineSegment(lineId, fromStationId, toStationId, delay );
-					}else{
-						model.addLineSegment(lineId, toStationId, fromStationId, delay );
+			String thisStation = tStations.next();
+			int thisStationId = model.addStation(
+					lineId, 
+					thisStation, 
+					rectCount > stationIndex ? rects[stationIndex] : null, 
+					points[stationIndex]);
+			
+			do{
+				
+				if("(".equals(tStations.getNextDelimeter())){
+					tDelays.next();
+					boolean forward = true;
+					while(tStations.hasNext() && !")".equals(tStations.getNextDelimeter())){
+						String bracketedStation = tStations.next();
+						Double bracketedDelay = Helpers.parseNullableDouble( tDelays.next() );
+						if(bracketedStation!=null && bracketedStation.length() > 0 ){
+							int  bracketedStationId = model.addStation(lineId, bracketedStation);
+							if(forward){
+								model.addLineSegment(lineId, thisStationId, bracketedStationId, bracketedDelay);
+							}else{
+								model.addLineSegment(lineId, bracketedStationId, thisStationId, bracketedDelay);
+							}
+						}
+						forward = !forward;
 					}
+
+					fromStation = thisStation;
+					fromStationId = thisStationId;
+
+					fromDelay = toDelay;
+					toDelay = null;
+
+					if(!tStations.hasNext()){
+						break;
+					}
+					
+					thisStation = tStations.next();
+					stationIndex++;
+					thisStationId = model.addStation(
+							lineId, 
+							thisStation, 
+							rectCount > stationIndex ? rects[stationIndex] : null, 
+									points[stationIndex]);
+					
+				}else{
+
+					toStation = tStations.next();
+					stationIndex++;
+					toStationId = model.addStation(lineId, toStation, 
+							rectCount > stationIndex ? rects[stationIndex] : null, 
+									points[stationIndex]);
+
+					toDelay = Helpers.parseNullableDouble( tDelays.next() );
+
+					if(fromStation!=null && !model.isExistEdgeStrict(thisStationId, fromStationId))
+					{
+						if(fromDelay == null && model.isExistEdgeStrict(fromStationId, thisStationId)){
+							fromDelay = model.getLineDelay(fromStationId, thisStationId);
+						}
+						model.addLineSegment(lineId, thisStationId, fromStationId, fromDelay );
+					}
+					
+					if(toStation!=null && !model.isExistEdgeStrict(thisStationId, toStationId)){
+						model.addLineSegment(lineId, thisStationId, toStationId, toDelay );
+					}
+
+					fromStation = thisStation;
+					fromStationId = thisStationId;
+
+					fromDelay = toDelay;
+					toDelay = null;
+					
+					thisStation = toStation;
+					thisStationId = toStationId;
 				}
 
-				if(!tStations.isBracketOpened()){
-					fromStation = toStation;
-					fromStationId = toStationId;
-				}
-			}
+			}while(tStations.hasNext());
 		}
 	}
 
