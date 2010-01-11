@@ -15,19 +15,25 @@ public final class R {
         public static final int full_screen_logo=0x7f020001;
         public static final int icon=0x7f020002;
         public static final int small_logo=0x7f020003;
+        public static final int tile=0x7f020004;
     }
     public static final class id {
+        public static final int cachingMapText=0x7f050001;
         public static final int logoImageView=0x7f050000;
         public static final int progress_small_title=0x01010000;
     }
     public static final class layout {
         public static final int logo=0x7f030000;
         public static final int main=0x7f030001;
+        public static final int map_caching=0x7f030002;
+        public static final int no_map_loaded=0x7f030003;
+        public static final int waiting=0x7f030004;
     }
     public static final class string {
         public static final int app_name=0x7f040000;
         public static final int day=0x7f040009;
         public static final int menu_about=0x7f040008;
+        public static final int menu_experimental=0x7f04000c;
         public static final int menu_library=0x7f040003;
         public static final int menu_routes=0x7f040004;
         public static final int menu_search=0x7f040002;
