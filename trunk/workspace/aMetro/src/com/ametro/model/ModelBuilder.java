@@ -19,7 +19,6 @@ import com.ametro.resources.MapResource;
 import com.ametro.resources.TransportLine;
 import com.ametro.resources.TransportResource;
 import com.ametro.resources.TransportTransfer;
-import com.ametro.resources.VectorResource;
 
 public class ModelBuilder {
 
@@ -31,7 +30,6 @@ public class ModelBuilder {
 
 		GenericResource info = pkg.getCityGenericResource();
 		MapResource map = pkg.getMapResource(mapName+".map" );
-		VectorResource vec = pkg.getVectorResource(map.getVectorName());
 		TransportResource trp = pkg.getTransportResource(map.getTransportName() != null ? map.getTransportName() : mapName+".trp");
 
 		int size = map.getStationCount() + map.getAddiditionalStationCount();
@@ -39,7 +37,7 @@ public class ModelBuilder {
 		Model model = new Model(packageName, size);
 		model.setCountryName(info.getValue("Options", "Country"));
 		model.setCityName(info.getValue("Options", "Name"));
-		model.setDimensions(vec.getWidth(),vec.getHeight());
+		//model.setDimensions(vec.getWidth(),vec.getHeight());
 		model.setLinesWidth(map.getLinesWidth());
 		model.setStationDiameter(map.getStationDiameter());
 		model.setWordWrap(map.isWordWrap());
@@ -73,6 +71,8 @@ public class ModelBuilder {
 			fillAdditionalLines(model, al);
 		}
 
+		model.calculateDimensions();
+		
 		Log.d("aMetro", String.format("Overall data parsing is %sms", Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
 		return model;
 	}
