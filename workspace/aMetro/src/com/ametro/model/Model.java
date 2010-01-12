@@ -413,12 +413,9 @@ public class Model {
 		public void render(Canvas canvas, Rect src)
 		{
 			if(src!=null){
-				Matrix matrix;
-				matrix = canvas.getMatrix();
-				matrix.setTranslate(-src.left, -src.top);
-				//matrix.setTranslate(src.left, src.top);
-				canvas.setMatrix(matrix);
+				canvas.translate(-src.left, -src.top);
 			}
+			canvas.translate(50, 50);
 			render(canvas);
 		}
 
@@ -686,6 +683,25 @@ public class Model {
 
 	public Double getLineDelay(int from, int to) {
 		return mEdgeDelays[from][to];
+	}
+
+	public void calculateDimensions() {
+		final int stationCount = mStationCount; 
+		Rect bounds = new Rect(0,0,0,0);
+		for (int i = 0; i < stationCount; i++) {
+			Point p = mStationPoints[i];
+			if(p!=null){
+				bounds.union(p.x, p.y);
+			}
+		}
+		for (int i = 0; i < stationCount; i++) {
+			Rect r = mStationBoxes[i];
+			if(r!=null){
+				bounds.union(r);
+			}
+		}
+		mWidth = bounds.width()+100;
+		mHeight = bounds.height()+100;
 	}
 
 }
