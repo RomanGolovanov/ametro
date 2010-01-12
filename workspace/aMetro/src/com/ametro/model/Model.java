@@ -195,7 +195,7 @@ public class Model {
 			flags |= EDGE_FLAG_LINE;
 		}
 
-		mEdgeDelays[fromId][toId] = delay != null ? delay : mEdgeDelays[fromId][toId];
+		mEdgeDelays[fromId][toId] = delay;// != null ? delay : mEdgeDelays[fromId][toId];
 		mEdgeAdditionalNodes[fromId][toId] = additionalNode;
 		mEdgeLines[fromId][toId] = lineId != null ? lineId : LINE_TRANSFER;
 		mEdgeFlags[fromId][toId] = flags;
@@ -394,8 +394,8 @@ public class Model {
 
 		public void prepareObjects(){
 			mLinePaint.setStrokeWidth( mLinesWidth );
-			mLineUnavailablePaint.setStrokeWidth(mLinesWidth);
-			mLineUnavailablePaint.setPathEffect(new DashPathEffect(new float[]{ mLinesWidth, mLinesWidth/3 }, 0));
+			mLineUnavailablePaint.setStrokeWidth( mLinesWidth*0.8f );
+			mLineUnavailablePaint.setPathEffect(new DashPathEffect(new float[]{ mLinesWidth*0.8f, mLinesWidth*0.4f }, 0));
 		}
 
 
@@ -472,15 +472,19 @@ public class Model {
 		}
 
 		private void renderTransportLines(Canvas canvas) {
-			Date startTimestamp = new Date();
 			final int stationCount = mStationCount; 
 			for(int row = 0; row < stationCount; row++){
 				for(int col = 0; col < row; col++){
-					if((mEdgeFlags[row][col] & EDGE_FLAG_CREATED )!=0 || (mEdgeFlags[col][row] & EDGE_FLAG_CREATED )!=0)
+					boolean lineExist = 
+						( (mEdgeFlags[row][col] & EDGE_FLAG_CREATED )!=0 || (mEdgeFlags[col][row] & EDGE_FLAG_CREATED)!=0 );
+					//&&
+					//( (mEdgeDelays[row][col] != null) || (mEdgeDelays[col][row] != null ) );
+					if(lineExist)
 					{
 						int line = (mEdgeLines[row][col] != null) ? mEdgeLines[row][col] : mEdgeLines[col][row];
 						if(line == LINE_TRANSFER) continue;
-						
+
+
 						boolean lineWorking = (mEdgeDelays[row][col] != null && mEdgeDelays[row][col] != 0 ) || (mEdgeDelays[col][row] != null && mEdgeDelays[col][row] != 0 );
 						//if(lineWorking) continue;
 
@@ -499,32 +503,6 @@ public class Model {
 					}
 				}
 			}
-//			for(int row = 0; row < stationCount; row++){
-//				for(int col = 0; col < row; col++){
-//					if((mEdgeFlags[row][col] & EDGE_FLAG_CREATED )!=0 || (mEdgeFlags[col][row] & EDGE_FLAG_CREATED )!=0)
-//					{
-//						int line = (mEdgeLines[row][col] != null) ? mEdgeLines[row][col] : mEdgeLines[col][row];
-//						if(line == LINE_TRANSFER) continue;
-//						
-//						boolean lineWorking = (mEdgeDelays[row][col] != null && mEdgeDelays[row][col] != 0 ) || (mEdgeDelays[col][row] != null && mEdgeDelays[col][row] != 0 );
-//						if(!lineWorking) continue;
-//
-//						Paint linePaint = lineWorking ? mLinePaint : mLineUnavailablePaint;
-//						linePaint.setColor(mLineColors[line]);
-//						ExtendedPath path = new ExtendedPath();
-//
-//						boolean additionalForward = mEdgeAdditionalNodes[row][col]!=null;
-//						boolean additionalBackward = mEdgeAdditionalNodes[col][row]!=null;
-//						if(!additionalForward && additionalBackward){
-//							drawLineSegment(line, path, col, row);
-//						}else{
-//							drawLineSegment(line, path, row, col);
-//						}
-//						canvas.drawPath(path, linePaint);
-//					}
-//				}
-//			}
-			Log.d("aMetro", String.format("Rendering transport lines is %sms", Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
 		}
 
 		private void drawLineSegment(int line, ExtendedPath path, int row, int col) {
@@ -578,6 +556,37 @@ public class Model {
 			}
 		}
 
+		private void renderLineDelays(Canvas canvas)
+		{
+			final int stationCount = mStationCount; 
+			for(int row = 0; row < stationCount; row++){
+				for(int col = 0; col < row; col++){
+					boolean lineExist = (mEdgeFlags[row][col] & EDGE_FLAG_CREATED )!=EDGE_FLAG_TRANSFER &&
+					( (mEdgeFlags[row][col] & EDGE_FLAG_CREATED )!=0 || (mEdgeFlags[col][row] & EDGE_FLAG_CREATED)!=0 );
+					if(lineExist)
+					{
+						Point from = mStationPoints[row];
+						Point to = mStationPoints[col];
+						if(from!=null && to!=null && mEdgeDelays[row][col]!=null){
+							Double delay = mEdgeDelays[row][col];
+							Rect pos = new Rect(from.x, from.y, to.x, to.y); 
+							mTextPaint.setColor(Color.BLACK);
+							canvas.drawText("" + delay, pos.centerX(), pos.centerY(), mTextPaint  );
+						}else if(from!=null && to!=null && mEdgeDelays[col][row]!=null){
+							Double delay = mEdgeDelays[col][row];
+							String txt = "" + delay;
+							Rect pos = new Rect(from.x, from.y, to.x, to.y); 
+							mTextPaint.setColor(Color.BLACK);
+							Rect size = new Rect();
+							mTextPaint.getTextBounds(txt, 0, txt.length(), size);
+							mTextPaint.setTextAlign(Align.CENTER);
+							canvas.drawText("" + delay, pos.centerX(), pos.centerY() - size.height()/2, mTextPaint  );
+						}
+					}
+				}
+			}
+		}
+
 		private void drawStation(Canvas canvas, float radius, int station) {
 			Point point = mStationPoints[station];
 			int color =  mLineColors[mStationLine[station]];
@@ -613,6 +622,7 @@ public class Model {
 			if(rect!=null && name!=null){
 				drawText(canvas, mUpperCase ? name.toUpperCase() : name, rect, point);
 			}
+
 		}
 
 		private void drawText(Canvas canvas, String text, Rect rect, Point align){

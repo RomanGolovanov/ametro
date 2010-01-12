@@ -9,8 +9,8 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.util.Log;
 
-import com.ametro.libs.Helpers;
-import com.ametro.libs.TokenizedString;
+import com.ametro.libs.DelaysString;
+import com.ametro.libs.StationsString;
 import com.ametro.resources.FilePackage;
 import com.ametro.resources.GenericResource;
 import com.ametro.resources.MapAddiditionalLine;
@@ -66,7 +66,7 @@ public class ModelBuilder {
 
 		}
 
-		
+
 		Iterator<MapAddiditionalLine> additionalLines = map.getAddiditionalLines().iterator();
 		while(additionalLines.hasNext()){
 			MapAddiditionalLine al = additionalLines.next();
@@ -107,11 +107,10 @@ public class ModelBuilder {
 	private static void fillMapLines(Model model, TransportLine tl, MapLine ml) throws IOException {
 		String lineName = tl.mName;
 		int lineId = model.addLine(lineName, (ml.linesColor | 0xFF000000));
-		Log.v("aMetro", String.format("Loading transport line '%s'", lineName));
 		if(ml.coordinates!=null){
 
-			TokenizedString tDelays = new TokenizedString(tl.mDrivingDelaysText, ",()");
-			TokenizedString tStations = new TokenizedString(tl.mStationText, ",()");
+			DelaysString tDelays = new DelaysString(tl.mDrivingDelaysText);
+			StationsString tStations = new StationsString(tl.mStationText);
 			Point[] points = ml.coordinates;
 			Rect[] rects = ml.rectangles;
 			final int rectCount  = rects!=null ? rects.length : 0;
@@ -125,43 +124,48 @@ public class ModelBuilder {
 			String fromStation = null;
 			int fromStationId = 0;
 			Double fromDelay = null;
-
+			
 			String thisStation = tStations.next();
 			int thisStationId = model.addStation(
 					lineId, 
 					thisStation, 
 					rectCount > stationIndex ? rects[stationIndex] : null, 
-					points[stationIndex]);
-			
+							points[stationIndex]);
+
 			do{
-				
+
 				if("(".equals(tStations.getNextDelimeter())){
-					tDelays.next();
-					boolean forward = true;
+					int idx = 0;
+					Double[] delays = tDelays.nextBracket(); 
 					while(tStations.hasNext() && !")".equals(tStations.getNextDelimeter())){
+						boolean isForwardDirection = (idx%2)==0;
 						String bracketedStation = tStations.next();
-						Double bracketedDelay = Helpers.parseNullableDouble( tDelays.next() );
+						if(bracketedStation.startsWith("-")){
+							bracketedStation = bracketedStation.substring(1);
+							isForwardDirection = !isForwardDirection;
+						}
+						
 						if(bracketedStation!=null && bracketedStation.length() > 0 ){
 							int  bracketedStationId = model.addStation(lineId, bracketedStation);
-							if(forward){
-								model.addLineSegment(lineId, thisStationId, bracketedStationId, bracketedDelay);
+							if(isForwardDirection){
+								model.addLineSegment(lineId, thisStationId, bracketedStationId, delays[idx]);
 							}else{
-								model.addLineSegment(lineId, bracketedStationId, thisStationId, bracketedDelay);
+								model.addLineSegment(lineId, bracketedStationId, thisStationId, delays[idx]);
 							}
 						}
-						forward = !forward;
+						idx++;
 					}
 
 					fromStation = thisStation;
 					fromStationId = thisStationId;
 
-					fromDelay = toDelay;
+					fromDelay = null;
 					toDelay = null;
 
 					if(!tStations.hasNext()){
 						break;
 					}
-					
+
 					thisStation = tStations.next();
 					stationIndex++;
 					thisStationId = model.addStation(
@@ -169,7 +173,7 @@ public class ModelBuilder {
 							thisStation, 
 							rectCount > stationIndex ? rects[stationIndex] : null, 
 									points[stationIndex]);
-					
+
 				}else{
 
 					toStation = tStations.next();
@@ -178,17 +182,22 @@ public class ModelBuilder {
 							rectCount > stationIndex ? rects[stationIndex] : null, 
 									points[stationIndex]);
 
-					toDelay = Helpers.parseNullableDouble( tDelays.next() );
+					if(tDelays.beginBracket()){
+						Double[] delays = tDelays.nextBracket();
+						toDelay = delays[0];
+						fromDelay = delays[1];
+					}else{
+						toDelay = tDelays.next();
+					}
+					
 
 					if(fromStation!=null && !model.isExistEdgeStrict(thisStationId, fromStationId))
 					{
-						if(fromDelay == null && model.isExistEdgeStrict(fromStationId, thisStationId)){
-							fromDelay = model.getLineDelay(fromStationId, thisStationId);
-						}
 						model.addLineSegment(lineId, thisStationId, fromStationId, fromDelay );
 					}
-					
-					if(toStation!=null && !model.isExistEdgeStrict(thisStationId, toStationId)){
+
+					if(toStation!=null && !model.isExistEdgeStrict(thisStationId, toStationId))
+					{
 						model.addLineSegment(lineId, thisStationId, toStationId, toDelay );
 					}
 
@@ -197,7 +206,7 @@ public class ModelBuilder {
 
 					fromDelay = toDelay;
 					toDelay = null;
-					
+
 					thisStation = toStation;
 					thisStationId = toStationId;
 				}
