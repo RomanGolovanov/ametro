@@ -1,6 +1,6 @@
 package com.ametro.libs;
 
-public class TokenizedString
+public class StationsString
 {
 	private String mText;
 	private String mDelimeters;
@@ -11,11 +11,6 @@ public class TokenizedString
 	private String mLastDelimeter;
 	private String mNextDelimeter;
 	
-	private int mSavedPos;
-	private String mSavedLastDelimeter;
-	private String mSavedNextDelimeter;
-	private boolean mSavedBrackedOpened;
-		
 	public boolean isBracketOpened() {
 		return mBracketOpened;
 	}
@@ -28,12 +23,9 @@ public class TokenizedString
 		return mNextDelimeter;
 	}
 
-	public TokenizedString(String text, String delimeters){
-		//text = text.replaceAll(",,",",");
-		//text = text.replaceAll("\\(,","(");
-		//text = text.replaceAll(",\\)",")");
+	public StationsString(String text){
 		mText = text;
-		mDelimeters = delimeters;
+		mDelimeters = ",()";
 		mPos = 0;
 		mLen = text.length();
 		mBracketOpened = false;
@@ -72,28 +64,6 @@ public class TokenizedString
 		return text;
 	}
 
-
-	private void save(){
-		mSavedPos = mPos;
-		mSavedLastDelimeter = mLastDelimeter;
-		mSavedNextDelimeter = mNextDelimeter;
-		mSavedBrackedOpened = mBracketOpened;
-	}
-	
-	private void restore(){
-		mPos = mSavedPos;
-		mLastDelimeter = mSavedLastDelimeter;
-		mNextDelimeter = mSavedNextDelimeter;
-		mBracketOpened = mSavedBrackedOpened;
-	}
-	
-	public String ahead(){
-		save();
-		String text = next();
-		restore();
-		return text;
-	}
-	
 	private void skipToContent(){
 		String symbol = null;
 		String symbolNext = (mPos < mLen) ? mText.substring(mPos,mPos+1) : null;
