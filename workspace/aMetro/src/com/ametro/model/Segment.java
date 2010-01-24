@@ -9,6 +9,7 @@ public class Segment implements Serializable {
 	private static final long serialVersionUID = -3800882714522185877L;
 
 	public static final int SPLINE = 1;
+	public static final int INVISIBLE = 2;
 	
 	private Double mDelay;
 	private Point[]	mAdditionalNodes;
@@ -21,6 +22,7 @@ public class Segment implements Serializable {
 		this.mDelay = delay;
 		this.mFrom = from;
 		this.mTo = to;
+		this.mFlags = 0;
 	}
 
 	public Point[] getAdditionalNodes() {
@@ -51,6 +53,9 @@ public class Segment implements Serializable {
 		this.mFlags = flags;
 	}
 
+	public void addFlag(int flag){
+		this.mFlags |= flag;
+	}
 	
 	@Override
 	public String toString() {
