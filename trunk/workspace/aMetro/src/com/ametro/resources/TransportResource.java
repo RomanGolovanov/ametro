@@ -3,6 +3,8 @@ package com.ametro.resources;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+import com.ametro.libs.Helpers;
+
 public class TransportResource implements IResource {
 
 	private class TransportParser
@@ -41,7 +43,7 @@ public class TransportResource implements IResource {
 					mType = value;
 				}
 			}else if(section.equals("Transfers")){
-				String[] parts = value.split(",");
+				String[] parts = Helpers.splitCSV( value );
 				TransportTransfer transfer = new TransportTransfer();
 				transfer.mStartLine = parts[0].trim();
 				transfer.mStartStation = parts[1].trim();
