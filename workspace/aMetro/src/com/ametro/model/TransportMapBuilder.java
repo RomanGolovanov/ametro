@@ -51,8 +51,9 @@ public class TransportMapBuilder {
 			TransportLine tl = lines.next();
 			MapLine ml = mapLines.get(tl.mName);
 			if(ml == null && tl.mName!=null) {
-				MapResource lineMap = pkg.getMapResource(tl.mMapName);
-				ml = lineMap.getMapLines().get(tl.mName); 
+				continue;
+				//MapResource lineMap = pkg.getMapResource(tl.mMapName);
+				//ml = lineMap.getMapLines().get(tl.mName); 
 			}
 			fillMapLines( model, tl, ml);
 		}
