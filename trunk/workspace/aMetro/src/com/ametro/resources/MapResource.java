@@ -86,6 +86,8 @@ public class MapResource implements IResource {
 					line.linesColor = Integer.parseInt(value,16);
 				}else if(name.equals("LabelsColor")){
 					line.labelColor = Integer.parseInt(value,16);
+				}else if(name.equals("LabelsBColor")){
+					line.backgroundColor = Integer.parseInt(value,16);
 				}else if(name.equals("Coordinates")){
 					line.coordinates = Helpers.parsePointArray(value);
 					if(line.coordinates!=null){

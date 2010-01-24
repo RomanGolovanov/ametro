@@ -7,6 +7,7 @@ public class MapLine
 {
 	public int linesColor;
 	public int labelColor;
+	public int backgroundColor;
 	public Point[] coordinates;
 	public Rect[] rectangles;
 	public Double[] heights;
