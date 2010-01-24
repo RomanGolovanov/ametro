@@ -6,6 +6,7 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
 
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.util.Log;
@@ -117,7 +118,7 @@ public class TransportMapBuilder {
 		Station to = model.getStation(al.mLineName, al.mToStationName);
 		if(from!=null && to!=null){
 			Segment segment = line.getSegment(from,to);
-			if(segment!=null){
+			if(segment!=null && segment.getAdditionalNodes() == null){
 				Point[] points = al.mPoints;
 				segment.setAdditionalNodes(points);
 				if(al.mIsSpline){
@@ -142,7 +143,16 @@ public class TransportMapBuilder {
 	
 	private static void fillMapLines(TransportMap model, TransportLine tl, MapLine ml) throws IOException {
 		String lineName = tl.mName;
-		Line line = model.addLine(lineName,(ml.linesColor | 0xFF000000));
+		int lineColor = ml.linesColor | 0xFF000000;
+		int labelColor = ml.labelColor > 0 ? ml.labelColor | 0xFF000000 : lineColor;
+		int labelBgColor = ml.backgroundColor;
+		if(labelBgColor != -1){
+			labelBgColor = labelBgColor == 0 ? Color.WHITE : labelBgColor | 0xFF000000;
+		}else{
+			labelBgColor = 0;
+		}
+		
+		Line line = model.addLine(lineName,lineColor, labelColor, labelBgColor);
 		if(ml.coordinates!=null){
 
 			DelaysString tDelays = new DelaysString(tl.mDrivingDelaysText);

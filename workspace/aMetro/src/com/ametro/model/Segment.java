@@ -8,8 +8,11 @@ public class Segment implements Serializable {
 
 	private static final long serialVersionUID = -3800882714522185877L;
 
-	public static final int SPLINE = 1;
-	public static final int INVISIBLE = 2;
+	public static final int SPLINE		= 0x01;
+	public static final int INVISIBLE 	= 0x02;
+
+	public static final int SEGMENT_BEGIN 	= 0x01;
+	public static final int SEGMENT_END 	= 0x02;
 	
 	private Double mDelay;
 	private Point[]	mAdditionalNodes;
@@ -23,6 +26,9 @@ public class Segment implements Serializable {
 		this.mFrom = from;
 		this.mTo = to;
 		this.mFlags = 0;
+		
+		from.addSegment(this,Segment.SEGMENT_BEGIN);
+		to.addSegment(this,Segment.SEGMENT_END);
 	}
 
 	public Point[] getAdditionalNodes() {

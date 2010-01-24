@@ -115,8 +115,8 @@ public class TransportMap {
 		return tr;
 	}
 
-	public Line addLine(String lineName, int color) {
-		Line line = new Line(lineName, color);
+	public Line addLine(String lineName, int color, int labelColor, int labelBgColor) {
+		Line line = new Line(lineName, color, labelColor, labelBgColor);
 		mLines.put(lineName, line);
 		return line;
 	}

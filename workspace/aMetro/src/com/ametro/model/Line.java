@@ -16,14 +16,18 @@ public class Line implements Serializable {
 	
 	private String mName;
 	private int mColor;
+	private int mLabelColor;
+	private int mLabelBgColor;
 	
 	private Dictionary<String, Station> mStations = new Hashtable<String, Station>();
 	private ArrayList<Segment> mSegments = new ArrayList<Segment>();
 	
-	public Line(String mName, int mColor) {
+	public Line(String name, int color, int labelColor, int labelBgColor) {
 		super();
-		this.mName = mName;
-		this.mColor = mColor;
+		this.mName = name;
+		this.mColor = color;
+		this.mLabelColor = labelColor;
+		this.mLabelBgColor = labelBgColor;
 	}
 
 	public String getName() {
@@ -32,6 +36,14 @@ public class Line implements Serializable {
 
 	public int getColor() {
 		return mColor;
+	}
+
+	public int getLabelColor() {
+		return mLabelColor;
+	}
+
+	public int getLabelBgColor() {
+		return mLabelBgColor;
 	}
 
 	public Station getStation(String name){

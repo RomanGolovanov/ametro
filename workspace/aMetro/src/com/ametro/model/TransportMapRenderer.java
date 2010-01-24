@@ -8,6 +8,7 @@ import com.ametro.libs.ExtendedPath;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.CornerPathEffect;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -26,6 +27,7 @@ public class TransportMapRenderer {
 	private Paint mLinePaint;
 	private Paint mLineUnavailablePaint;
 	private Paint mTextPaint;
+	private Paint mTextBackgroundPaint;
 	private Paint mFillPaint;
 
 	private int mLinesWidth;
@@ -41,11 +43,6 @@ public class TransportMapRenderer {
 		mUpperCase = mMap.isUpperCase();
 		mStationDiameter = mMap.getStationDiameter();
 
-		mFillPaint = new Paint();
-		mFillPaint.setColor(Color.WHITE);
-		mFillPaint.setStyle(Style.FILL);
-		mFillPaint.setAntiAlias(true);
-
 		mStationFillPaint = new Paint();
 		mStationFillPaint.setStyle(Style.FILL);
 		mStationFillPaint.setAntiAlias(true);
@@ -59,6 +56,7 @@ public class TransportMapRenderer {
 		mLinePaint = new Paint();
 		mLinePaint.setStyle(Style.STROKE);
 		mLinePaint.setAntiAlias(true);
+		mLinePaint.setPathEffect(new  CornerPathEffect(mLinesWidth*0.6f));
 
 		mLineUnavailablePaint = new Paint(mLinePaint);
 
@@ -66,10 +64,9 @@ public class TransportMapRenderer {
 		mTextPaint.setAntiAlias(true);
 		mTextPaint.setStyle(Style.FILL_AND_STROKE);
 		mTextPaint.setStrokeWidth(0);
+		//mTextPaint.setFlags(Paint.FAKE_BOLD_TEXT_FLAG | Paint.SUBPIXEL_TEXT_FLAG);
 		mTextPaint.setTextAlign(Align.LEFT);
-	}
-
-	public void prepareObjects(){
+		
 		mLinePaint.setStrokeWidth( mLinesWidth );
 		mLineUnavailablePaint.setStrokeWidth( mLinesWidth*0.8f );
 		mLineUnavailablePaint.setPathEffect(new DashPathEffect(new float[]{ mLinesWidth*0.8f, mLinesWidth*0.4f }, 0));
@@ -78,7 +75,6 @@ public class TransportMapRenderer {
 
 	private void render(Canvas canvas){
 		Date startTimestamp = new Date();
-		prepareObjects();
 		canvas.drawColor(Color.WHITE);
 		drawLines(canvas);
 		drawTransfers(canvas);
@@ -220,7 +216,7 @@ public class TransportMapRenderer {
 			Enumeration<Station> stations = line.getStations();
 			while(stations.hasMoreElements()){
 				Station station = stations.nextElement();
-				if(station.getPoint()!=null && station.getRect()!=null){
+				if(station.getPoint()!=null){
 					drawStation(canvas, radius, station);
 				}
 			}
@@ -228,8 +224,11 @@ public class TransportMapRenderer {
 	}
 
 	private void drawStation(Canvas canvas, float radius, Station station) {
-		Point point = station.getPoint();;
-		int color =  station.getLine().getColor();
+		Point point = station.getPoint();
+		Line line = station.getLine();
+		int color =  line.getColor();
+		int labelColor = line.getLabelColor();
+		int bgColor = line.getLabelBgColor();
 		boolean hasConnections = station.hasConnections();
 		if(!hasConnections){
 			mStationFillPaint.setColor(color);
@@ -244,7 +243,21 @@ public class TransportMapRenderer {
 			canvas.drawCircle(point.x, point.y, radius, mStationBorderPaint);
 		}
 
-		mTextPaint.setColor(color);
+		mTextPaint.setColor(labelColor);
+		
+		if(bgColor == 0){
+			mTextBackgroundPaint = new Paint(mTextPaint);
+			mTextBackgroundPaint.setColor(Color.BLACK);
+			
+			mFillPaint = null;
+		}else{
+			mTextBackgroundPaint = null;
+
+			mFillPaint = new Paint();
+			mFillPaint.setColor(bgColor);
+			mFillPaint.setStyle(Style.FILL);
+		}
+		
 		String name = station.getName();
 		Rect rect = station.getRect();
 		if(rect!=null && name!=null){
@@ -265,7 +278,8 @@ public class TransportMapRenderer {
 			mTextPaint.getTextBounds(text, 0, text.length()-1, bounds);
 			textPath.moveTo(right,bottom);
 			textPath.lineTo(right, rect.top);
-			canvas.drawRect(right-bounds.height(), bottom - bounds.width()-10, right+2, bottom, mFillPaint);
+			if(mFillPaint!=null) canvas.drawRect(right-bounds.height(), bottom - bounds.width()-2, right+2, bottom, mFillPaint);
+			if(mTextBackgroundPaint!=null) canvas.drawTextOnPath(text, textPath, 1, -1, mTextBackgroundPaint);
 			canvas.drawTextOnPath(text, textPath, 0, 0, mTextPaint);
 		}
 	}
@@ -294,15 +308,23 @@ public class TransportMapRenderer {
 		Rect fill = new Rect();
 		if(align.x > rect.centerX()){ // align to right
 			mTextPaint.setTextAlign(Align.RIGHT);
+			if(mTextBackgroundPaint!=null) mTextBackgroundPaint.setTextAlign(Align.RIGHT);
 			mTextPaint.getTextBounds(text, 0, len, bounds);
 			fill.set(right-bounds.width()-1, top, right+2, top + bounds.height()+1);
-			canvas.drawRect(fill, mFillPaint);
+			if(mFillPaint!=null) canvas.drawRect(fill, mFillPaint);
+			if(mTextBackgroundPaint!=null){
+				canvas.drawText(text, right+1, top+bounds.height()+1, mTextBackgroundPaint);
+			}
 			canvas.drawText(text, right, top+bounds.height(), mTextPaint);
 		}else{ // align to left
 			mTextPaint.setTextAlign(Align.LEFT);
+			if(mTextBackgroundPaint!=null) mTextBackgroundPaint.setTextAlign(Align.LEFT);
 			mTextPaint.getTextBounds(text, 0, len, bounds);
 			fill.set(left-1, top, left+bounds.width()+2, top+bounds.height()+1);
-			canvas.drawRect(fill, mFillPaint);
+			if(mFillPaint!=null) canvas.drawRect(fill, mFillPaint);
+			if(mTextBackgroundPaint!=null) {
+				canvas.drawText(text, left+1, top+bounds.height()+1, mTextBackgroundPaint);
+			}
 			canvas.drawText(text, left, top+bounds.height(), mTextPaint);
 		}
 		return bounds.height();

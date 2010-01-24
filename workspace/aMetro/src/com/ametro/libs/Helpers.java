@@ -22,7 +22,8 @@ public class Helpers {
 		while( m.find() ) { 
 			elements.add( m.group() 
 					.replaceAll( "^,", "" ) // remove first comma if any 
-					.replaceAll( "^?\"(.*)\"$", "$1" ) // remove outer quotations if any 
+					//.replaceAll( "^?\"(.*)\"$", "$1" ) // remove outer quotations if any 
+					.replaceAll( "^\"(.*)\"$", "$1" ) // remove outer quotations if any
 					.replaceAll( "\"\"", "\"" ) ); // replace double inner quotations if any 
 		} 
 		return (String[])elements.toArray( new String[0] ); 
