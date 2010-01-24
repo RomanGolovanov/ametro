@@ -16,7 +16,6 @@ import android.graphics.Rect;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.util.Log;
-import android.widget.ToggleButton;
 
 public class TransportMapRenderer {
 
@@ -148,7 +147,9 @@ public class TransportMapRenderer {
 			Line line = lines.nextElement();
 			for (Iterator<Segment> segments = line.getSegments(); segments.hasNext();) {
 				Segment segment = segments.next();
-				drawSegment(canvas, line, segment);					 
+				if( (segment.getFlags() & Segment.INVISIBLE ) == 0 ){
+					drawSegment(canvas, line, segment);
+				}
 			}			
 		}		
 
@@ -159,10 +160,6 @@ public class TransportMapRenderer {
 		Station to = segment.getTo();
 
 		if(from.getPoint()==null || to.getPoint()==null){
-			Log.e("aMetro", 
-					"Error rendering line segment on line " + line.getName()
-					+ " from " + from.getName() 
-					+ " to " + to.getName() );
 			return;
 		}
 		
@@ -223,7 +220,9 @@ public class TransportMapRenderer {
 			Enumeration<Station> stations = line.getStations();
 			while(stations.hasMoreElements()){
 				Station station = stations.nextElement();
-				drawStation(canvas, radius, station);
+				if(station.getPoint()!=null && station.getRect()!=null){
+					drawStation(canvas, radius, station);
+				}
 			}
 		}		
 	}

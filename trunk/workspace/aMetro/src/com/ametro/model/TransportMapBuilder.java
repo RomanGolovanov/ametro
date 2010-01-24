@@ -121,12 +121,23 @@ public class TransportMapBuilder {
 				Point[] points = al.mPoints;
 				segment.setAdditionalNodes(points);
 				if(al.mIsSpline){
-					segment.setFlags(Segment.SPLINE);
+					segment.addFlag(Segment.SPLINE);
 				}
 			}
 		}
 	}
 
+	private static final Point zeroPoint = new Point(0,0);
+	private static final Rect zeroRect = new Rect(0,0,0,0);
+	
+	private static Point getPoint(Point[] array, int index){
+		return index >= array.length ? null : ( !zeroPoint.equals(array[index]) ? array[index] : null); 
+	}
+	
+	private static Rect getRect(Rect[] array, int index){
+		return index >= array.length ? null : ( !zeroRect.equals(array[index]) ? array[index] : null); 
+	}
+	
 	private static void fillMapLines(TransportMap model, TransportLine tl, MapLine ml) throws IOException {
 		String lineName = tl.mName;
 		Line line = model.addLine(lineName,(ml.linesColor | 0xFF000000));
@@ -136,20 +147,19 @@ public class TransportMapBuilder {
 			StationsString tStations = new StationsString(tl.mStationText);
 			Point[] points = ml.coordinates;
 			Rect[] rects = ml.rectangles;
-			final int rectCount  = rects!=null ? rects.length : 0;
 
 			int stationIndex = 0;
 
 			Station toStation = null;
 			Double toDelay = null;
 
-			Station fromStation = null;
+			Station fromStation = null; 
 			Double fromDelay = null;
 
 			Station thisStation = line.invalidateStation(
 					tStations.next(), 
-					rectCount > stationIndex ? rects[stationIndex] : null, 
-							points[stationIndex]);
+					getRect(rects, stationIndex), 
+					getPoint(points,stationIndex));
 
 			do{
 
@@ -187,15 +197,15 @@ public class TransportMapBuilder {
 					stationIndex++;
 					thisStation = line.invalidateStation(
 							tStations.next(), 
-							rectCount > stationIndex ? rects[stationIndex] : null, 
-									points[stationIndex]);
+							getRect(rects, stationIndex), 
+							getPoint(points,stationIndex));
 
 				}else{
 
 					stationIndex++;
 					toStation = line.invalidateStation(tStations.next(), 
-							rectCount > stationIndex ? rects[stationIndex] : null, 
-									points[stationIndex]);
+							getRect(rects, stationIndex), 
+							getPoint(points,stationIndex));
 
 					if(tDelays.beginBracket()){
 						Double[] delays = tDelays.nextBracket();
