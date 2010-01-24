@@ -2,6 +2,7 @@ package com.ametro.model;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
 
@@ -20,9 +21,9 @@ import com.ametro.resources.TransportLine;
 import com.ametro.resources.TransportResource;
 import com.ametro.resources.TransportTransfer;
 
-public class ModelBuilder {
+public class TransportMapBuilder {
 
-	public static Model Create(String libraryPath, String packageName, String mapName) throws IOException
+	public static TransportMap Create(String libraryPath, String packageName, String mapName) throws IOException
 	{
 		FilePackage pkg = new FilePackage(libraryPath +"/"+ packageName+".pmz" );
 
@@ -34,10 +35,9 @@ public class ModelBuilder {
 
 		int size = map.getStationCount() + map.getAddiditionalStationCount();
 
-		Model model = new Model(packageName, size);
+		TransportMap model = new TransportMap(packageName, size);
 		model.setCountryName(info.getValue("Options", "Country"));
 		model.setCityName(info.getValue("Options", "Name"));
-		//model.setDimensions(vec.getWidth(),vec.getHeight());
 		model.setLinesWidth(map.getLinesWidth());
 		model.setStationDiameter(map.getStationDiameter());
 		model.setWordWrap(map.isWordWrap());
@@ -71,42 +71,64 @@ public class ModelBuilder {
 			fillAdditionalLines(model, al);
 		}
 
-		model.calculateDimensions();
-		
+		calculateDimensions(model);
+
 		Log.d("aMetro", String.format("Overall data parsing is %sms", Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
 		return model;
 	}
 
-	private static void fillTransfer(Model model, TransportTransfer t) {
-		Integer fromStationId = model.getStationId(t.mStartLine, t.mStartStation);
-		Integer toStationId = model.getStationId(t.mEndLine, t.mEndStation);
+	private static void calculateDimensions(TransportMap model){
+		Rect bounds = new Rect(0,0,0,0);
+		Enumeration<Line> lines = model.getLines();
+		while(lines.hasMoreElements()){
+			Line line = lines.nextElement();
+			Enumeration<Station> stations = line.getStations();
+			while(stations.hasMoreElements()){
+				Station station = stations.nextElement();
+				Point p = station.getPoint();
+				if(p!=null){
+					bounds.union(p.x, p.y);
+				}
+				Rect r = station.getRect();
+				if(r!=null){
+					bounds.union(r);
+				}				
+			}
+		}
+		model.setDimension(bounds.width()+100, bounds.height()+100);
+	}
+
+	private static void fillTransfer(TransportMap model, TransportTransfer t) {
+		Station from = model.getStation(t.mStartLine, t.mStartStation);
+		Station to = model.getStation(t.mEndLine, t.mEndStation);
 		int flags = 0;
 		if(t.mStatus!=null && t.mStatus.contains("invisible")){
-			flags = Model.EDGE_FLAG_INVISIBLE;
+			flags = Transfer.INVISIBLE;
 		}
-		if(fromStationId!=null && toStationId!=null){
-			model.addTransfer(fromStationId, toStationId, t.mDelay, flags);
-			model.addTransfer(toStationId, fromStationId, t.mDelay, flags);
+		if(from!=null && to!=null){
+			model.addTransfer(from,to,t.mDelay, flags);
 		}
 	}
 
-	private static void fillAdditionalLines(Model model, MapAddiditionalLine al) {
-		//int lineId = model.getLineId(al.mLineName);
-		Integer fromId = model.getStationId(al.mLineName, al.mFromStationName);
-		Integer toId = model.getStationId(al.mLineName, al.mToStationName);
-		if(fromId!=null && toId!=null){
-			Point[] points = al.mPoints;
-			if(al.mIsSpline){
-				model.addLineSegmentSpline(fromId, toId, points);
-			}else{
-				model.addLineSegmentPoly(fromId, toId, points);
+	private static void fillAdditionalLines(TransportMap model, MapAddiditionalLine al) {
+		Line line = model.getLine(al.mLineName);
+		Station from = model.getStation(al.mLineName, al.mFromStationName);
+		Station to = model.getStation(al.mLineName, al.mToStationName);
+		if(from!=null && to!=null){
+			Segment segment = line.getSegment(from,to);
+			if(segment!=null){
+				Point[] points = al.mPoints;
+				segment.setAdditionalNodes(points);
+				if(al.mIsSpline){
+					segment.setFlags(Segment.SPLINE);
+				}
 			}
 		}
 	}
 
-	private static void fillMapLines(Model model, TransportLine tl, MapLine ml) throws IOException {
+	private static void fillMapLines(TransportMap model, TransportLine tl, MapLine ml) throws IOException {
 		String lineName = tl.mName;
-		int lineId = model.addLine(lineName, (ml.linesColor | 0xFF000000));
+		Line line = model.addLine(lineName,(ml.linesColor | 0xFF000000));
 		if(ml.coordinates!=null){
 
 			DelaysString tDelays = new DelaysString(tl.mDrivingDelaysText);
@@ -117,18 +139,14 @@ public class ModelBuilder {
 
 			int stationIndex = 0;
 
-			String toStation = null;
-			int toStationId = 0;
+			Station toStation = null;
 			Double toDelay = null;
 
-			String fromStation = null;
-			int fromStationId = 0;
+			Station fromStation = null;
 			Double fromDelay = null;
-			
-			String thisStation = tStations.next();
-			int thisStationId = model.addStation(
-					lineId, 
-					thisStation, 
+
+			Station thisStation = line.invalidateStation(
+					tStations.next(), 
 					rectCount > stationIndex ? rects[stationIndex] : null, 
 							points[stationIndex]);
 
@@ -138,26 +156,25 @@ public class ModelBuilder {
 					int idx = 0;
 					Double[] delays = tDelays.nextBracket(); 
 					while(tStations.hasNext() && !")".equals(tStations.getNextDelimeter())){
-						boolean isForwardDirection = (idx%2)==0;
-						String bracketedStation = tStations.next();
-						if(bracketedStation.startsWith("-")){
-							bracketedStation = bracketedStation.substring(1);
+						boolean isForwardDirection = true;
+						String bracketedStationName = tStations.next();
+						if(bracketedStationName.startsWith("-")){
+							bracketedStationName = bracketedStationName.substring(1);
 							isForwardDirection = !isForwardDirection;
 						}
-						
-						if(bracketedStation!=null && bracketedStation.length() > 0 ){
-							int  bracketedStationId = model.addStation(lineId, bracketedStation);
+
+						if(bracketedStationName!=null && bracketedStationName.length() > 0 ){
+							Station bracketedStation = line.invalidateStation(bracketedStationName);
 							if(isForwardDirection){
-								model.addLineSegment(lineId, thisStationId, bracketedStationId, delays[idx]);
+								line.addSegment(thisStation, bracketedStation, delays[idx]);
 							}else{
-								model.addLineSegment(lineId, bracketedStationId, thisStationId, delays[idx]);
+								line.addSegment(bracketedStation, thisStation, delays[idx]);
 							}
 						}
 						idx++;
 					}
 
 					fromStation = thisStation;
-					fromStationId = thisStationId;
 
 					fromDelay = null;
 					toDelay = null;
@@ -166,19 +183,16 @@ public class ModelBuilder {
 						break;
 					}
 
-					thisStation = tStations.next();
 					stationIndex++;
-					thisStationId = model.addStation(
-							lineId, 
-							thisStation, 
+					thisStation = line.invalidateStation(
+							tStations.next(), 
 							rectCount > stationIndex ? rects[stationIndex] : null, 
 									points[stationIndex]);
 
 				}else{
 
-					toStation = tStations.next();
 					stationIndex++;
-					toStationId = model.addStation(lineId, toStation, 
+					toStation = line.invalidateStation(tStations.next(), 
 							rectCount > stationIndex ? rects[stationIndex] : null, 
 									points[stationIndex]);
 
@@ -189,26 +203,27 @@ public class ModelBuilder {
 					}else{
 						toDelay = tDelays.next();
 					}
-					
 
-					if(fromStation!=null && !model.isExistEdgeStrict(thisStationId, fromStationId))
+					if(fromStation!=null && line.getSegment(thisStation, fromStation)==null)
 					{
-						model.addLineSegment(lineId, thisStationId, fromStationId, fromDelay );
+						if(fromDelay == null){
+							Segment opposite = line.getSegment(fromStation, thisStation);
+							fromDelay = opposite!=null ? opposite.getDelay() : null;
+						}
+						line.addSegment(thisStation, fromStation, fromDelay);
+					}
+					if(toStation!=null && line.getSegment(thisStation, toStation)==null)
+					{
+						line.addSegment(thisStation, toStation, toDelay);
 					}
 
-					if(toStation!=null && !model.isExistEdgeStrict(thisStationId, toStationId))
-					{
-						model.addLineSegment(lineId, thisStationId, toStationId, toDelay );
-					}
 
 					fromStation = thisStation;
-					fromStationId = thisStationId;
 
 					fromDelay = toDelay;
 					toDelay = null;
 
 					thisStation = toStation;
-					thisStationId = toStationId;
 				}
 
 			}while(tStations.hasNext());
