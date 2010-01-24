@@ -70,7 +70,7 @@ public class TileManager {
 		return new TileManager(uri);
 	}
 
-	public static void recreate(Model model, IProgressUpdate progress) throws IOException{
+	public static void recreate(TransportMap model, IProgressUpdate progress) throws IOException{
 		cleanupTiles(model.getMapName(), 0);
 		writeModelTiles(model, progress);
 		writeDescription(new TileManagerDescription(model));
@@ -105,31 +105,32 @@ public class TileManager {
 
 	}
 
-	private static void writeModelTiles(Model model, IProgressUpdate progress) {
-
-		//writeModelTilesEntire(model);
+	private static void writeModelTiles(TransportMap model, IProgressUpdate progress) {
 		writeModelTilesStepByStep(model, progress);
 	}
 
-	private static void writeModelTilesStepByStep(Model model, IProgressUpdate progress) {
+	private static void writeModelTilesStepByStep(TransportMap map, IProgressUpdate progress) {
 		int y = 0;
-		int height = model.getHeight();
-		int width = model.getWidth();
+		int height = map.getHeight();
+		int width = map.getWidth();
 		int columns = width / MapSettings.TILE_WIDTH + ( width % MapSettings.TILE_WIDTH != 0 ? 1 : 0 );
 		int heightStepMax = Math.max(MapSettings.TILE_HEIGHT, MapSettings.TILE_HEIGHT * 50 / columns);
 		int step = Math.min(MapSettings.TILE_HEIGHT, heightStepMax - (heightStepMax % MapSettings.TILE_HEIGHT));
 		int row = 0; 
+		String mapName = map.getMapName();
 		if(progress!=null) progress.update(0);
+		
+		TransportMapRenderer renderer = new TransportMapRenderer(map);
 		while(y<height){
 			int renderHeight = Math.min(step, height - y);
 
 			Rect renderRect = new Rect(0, y, width, y + renderHeight);
 			Bitmap buffer = Bitmap.createBitmap(width, renderHeight, Config.RGB_565 );
 			Canvas bufferCanvas = new Canvas(buffer);
-			model.render(bufferCanvas,renderRect);
+			renderer.render(bufferCanvas,renderRect);
 
 			Rect src = new Rect(0,0,buffer.getWidth(), buffer.getHeight());
-			TileManager.createTiles(model.getMapName(), row, 0, buffer, src, 0);
+			TileManager.createTiles(mapName, row, 0, buffer, src, 0);
 			buffer.recycle();
 			buffer = null;
 

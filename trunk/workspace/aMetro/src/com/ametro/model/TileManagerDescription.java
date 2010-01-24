@@ -8,7 +8,6 @@ public class TileManagerDescription  implements Serializable{
 	 */
 	private static final long serialVersionUID = 2583296356317936507L;
 	
-	
 	public String mMapName;
 	public String mCityName;
 	public String countryName;
@@ -17,12 +16,12 @@ public class TileManagerDescription  implements Serializable{
 	public int minimumLevel;
 	public int maximumLevel;
 	
-	public TileManagerDescription(Model model){
-		mMapName = model.getMapName();
-		mCityName = model.getCityName();
-		countryName = model.getCountryName();
-		width = model.getWidth();
-		height = model.getHeight();
+	public TileManagerDescription(TransportMap map){
+		mMapName = map.getMapName();
+		mCityName = map.getCityName();
+		countryName = map.getCountryName();
+		width = map.getWidth();
+		height = map.getHeight();
 		minimumLevel = 0;
 		maximumLevel = 0;
 	}

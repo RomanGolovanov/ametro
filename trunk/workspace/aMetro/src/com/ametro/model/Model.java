@@ -8,7 +8,6 @@ import java.util.Hashtable;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
@@ -20,7 +19,7 @@ import android.util.Log;
 import com.ametro.libs.ExtendedPath;
 import com.ametro.libs.Helpers;
 
-public class Model {
+class Model {
 
 	public Model(String mapName, int size){
 		mMapRenderer = new MapRenderer();

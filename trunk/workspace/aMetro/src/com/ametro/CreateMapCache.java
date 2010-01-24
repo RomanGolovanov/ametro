@@ -12,8 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ametro.model.IProgressUpdate;
-import com.ametro.model.Model;
-import com.ametro.model.ModelBuilder;
+import com.ametro.model.TransportMap;
+import com.ametro.model.TransportMapBuilder;
 import com.ametro.model.TileManager;
 
 public class CreateMapCache extends Activity implements IProgressUpdate {
@@ -73,8 +73,8 @@ public class CreateMapCache extends Activity implements IProgressUpdate {
 			Uri uri = getIntent().getData();
 			String mapName = MapUri.getMapName(uri);
 			try {
-				Model model = ModelBuilder.Create(MapSettings.CATALOG_PATH, mapName, MapSettings.DEFAULT_MAP);
-				TileManager.recreate(model, CreateMapCache.this);
+				TransportMap map = TransportMapBuilder.Create(MapSettings.CATALOG_PATH, mapName, MapSettings.DEFAULT_MAP);
+				TileManager.recreate(map, CreateMapCache.this);
 				clearScroll(mapName);
 			} catch (IOException e) {
 				Log.e("aMetro","Failed creating map cache for " + mapName, e);
