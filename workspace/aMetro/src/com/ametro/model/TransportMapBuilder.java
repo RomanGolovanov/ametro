@@ -131,10 +131,12 @@ public class TransportMapBuilder {
 	private static final Rect zeroRect = new Rect(0,0,0,0);
 	
 	private static Point getPoint(Point[] array, int index){
+		if(array == null) return null;
 		return index >= array.length ? null : ( !zeroPoint.equals(array[index]) ? array[index] : null); 
 	}
 	
 	private static Rect getRect(Rect[] array, int index){
+		if(array == null) return null;
 		return index >= array.length ? null : ( !zeroRect.equals(array[index]) ? array[index] : null); 
 	}
 	
@@ -177,9 +179,9 @@ public class TransportMapBuilder {
 						if(bracketedStationName!=null && bracketedStationName.length() > 0 ){
 							Station bracketedStation = line.invalidateStation(bracketedStationName);
 							if(isForwardDirection){
-								line.addSegment(thisStation, bracketedStation, delays[idx]);
+								line.addSegment(thisStation, bracketedStation, delays.length <= idx ? null : delays[idx] );
 							}else{
-								line.addSegment(bracketedStation, thisStation, delays[idx]);
+								line.addSegment(bracketedStation, thisStation, delays.length <= idx ? null : delays[idx] );
 							}
 						}
 						idx++;
