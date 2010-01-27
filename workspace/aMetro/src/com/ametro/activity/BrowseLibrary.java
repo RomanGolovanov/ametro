@@ -9,15 +9,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Date;
 
-import com.ametro.MapSettings;
-import com.ametro.MapUri;
-import com.ametro.R;
-import com.ametro.libs.FileGroupsDictionary;
-import com.ametro.model.MapBuilder;
-import com.ametro.model.Model;
-import com.ametro.pmz.FilePackage;
-import com.ametro.pmz.GenericResource;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -35,6 +26,13 @@ import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
+
+import com.ametro.MapSettings;
+import com.ametro.MapUri;
+import com.ametro.R;
+import com.ametro.libs.FileGroupsDictionary;
+import com.ametro.model.MapBuilder;
+import com.ametro.model.Model;
 
 public class BrowseLibrary extends Activity implements ExpandableListView.OnChildClickListener {
 
@@ -57,7 +55,7 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 		}
 
 		private static void writeMaps(FileGroupsDictionary data) {
-			String fileName = MapSettings.CATALOG_PATH + MapSettings.MAPS_LIST;
+			String fileName = MapSettings.MAPS_PATH + MapSettings.MAPS_LIST;
 			ObjectOutputStream strm = null;
 			try{
 				strm = new ObjectOutputStream(new FileOutputStream(fileName));
@@ -77,14 +75,16 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 
 		private static FileGroupsDictionary readMaps()
 		{
-			String fileName = MapSettings.CATALOG_PATH + MapSettings.MAPS_LIST;
+			String fileName = MapSettings.MAPS_PATH + MapSettings.MAPS_LIST;
 			ObjectInputStream strm = null;
 			try{
 				try {
 					strm = new ObjectInputStream(new FileInputStream(fileName));
-					return (FileGroupsDictionary) strm.readObject();
+					FileGroupsDictionary map = (FileGroupsDictionary) strm.readObject();
+					Log.i("aMetro", "Loaded map cache");
+					return map;
 				} catch (Exception ex) {
-					Log.e("aMetro", "Failed load map cache", ex);
+					Log.i("aMetro", "Cannot load map cache");
 					return null;
 				}
 			} finally{
@@ -98,8 +98,9 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 
 		}
 		
-		public void init(String path){
-			FileGroupsDictionary map = readMaps();
+		public void init(String path, boolean refresh){
+			FileGroupsDictionary map = null;
+			if(!refresh) map = readMaps();
 			File dir = new File(path);
 			if(map == null || map.getTimestamp() < dir.lastModified() ){
 				map = scanDirectory(path);
@@ -145,37 +146,12 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 				Model model = MapBuilder.loadModel(fullFileName);
 				map.putFile(model.getCountryName(), model.getCityName(), fileName);
 			} catch (Exception e) {
+				Log.d("aMetro", "Map indexing failed for " + fileName);
 				// skip this file
 			} 
 		
 		}
 		
-//		private void scanPmzFileContent(FileGroupsDictionary map, String fileName, String fullFileName) {
-//			FilePackage pkg = null;
-//			GenericResource res = null;
-//			try {
-//				pkg = new FilePackage(fullFileName);
-//				res = pkg.getCityGenericResource();
-//				if(res!=null){
-//					String country = res.getValue("Options", "Country");
-//					String city = res.getValue("Options", "RusName");
-//					if(city==null){
-//						city = res.getValue("Options", "Name");
-//					}
-//					map.putFile(country, city, fileName);
-//				}
-//
-//			} catch (Exception e) {
-//				// skip this file
-//			} finally{
-//				res = null;
-//				if(pkg!=null){
-//					try { pkg.close(); } catch (IOException e) {}
-//				}
-//				pkg = null;
-//			}
-//		}
-
 		public Object getChild(int groupPosition, int childPosition) {
 			return mCities[groupPosition][childPosition];
 		}
@@ -308,6 +284,7 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case MAIN_MENU_REFRESH:
+			initializeControls(true);
 			return true;
 		case MAIN_MENU_ALL_MAPS:
 			mMainMenuAllMaps.setVisible(false);
@@ -331,18 +308,22 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch(requestCode){
 		case REQUEST_IMPORT:
-			initializeControls();
+			if(resultCode == RESULT_OK){
+				initializeControls(true);
+			}
 			break;
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		initializeControls();
+		initializeControls(false);
 	}
 
-	private void initializeControls() {
+	private void initializeControls(final boolean refresh) {
+		setContentView(R.layout.waiting);
 		mAdapter = new MapListAdapter(this);
 		mDefaultPackageFileName = null;
 		Intent intent = getIntent();
@@ -350,14 +331,9 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 		if(uri!=null){
 			mDefaultPackageFileName = MapUri.getMapName(uri) + MapSettings.MAP_FILE_TYPE;
 		}
-		//requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-		setContentView(R.layout.waiting);
-		//setProgressBarIndeterminate(true);
-		//setProgressBarIndeterminateVisibility(true);
-		//setProgressBarVisibility(true);
 		mMapListLoader = new Thread() {
 			public void run() {
-				mAdapter.init(MapSettings.CATALOG_PATH);
+				mAdapter.init(MapSettings.MAPS_PATH, refresh);
 				mHandler.post(mUpdateContentView);
 			}
 		};
@@ -367,7 +343,7 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 		String fileName = mAdapter.getFileName(groupPosition, childPosition);
-		String mapName = fileName.replace(".pmz", "" );
+		String mapName = fileName.replace(".ametro", "");
 		Intent i = new Intent();
 		i.setData( MapUri.create(mapName));
 		setResult(RESULT_OK, i);

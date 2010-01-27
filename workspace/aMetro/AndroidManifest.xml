@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest android:versionCode="1" android:versionName="1.0"
     package="com.ametro" xmlns:android="http://schemas.android.com/apk/res/android">
-    <application android:icon="@drawable/appicon" android:debuggable="true" android:label="@string/app_name">
-        <activity android:label="@string/app_name" android:name=".BrowseTileMap">
+    <application android:debuggable="true"
+        android:icon="@drawable/appicon" android:label="@string/app_name">
+        <activity android:label="@string/app_name" android:name=".activity.BrowseMap">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".BrowseLibrary"/>
-        <activity android:name=".CreateMapCache"/>
+        <activity android:name=".activity.BrowseLibrary"/>
+        <activity android:name=".activity.RenderMap"/>
+        <activity android:name=".activity.ImportPmz"/>
+        <activity android:name=".activity.CreatePrerequisites"/>
     </application>
     <uses-sdk android:minSdkVersion="3"/>
 </manifest>

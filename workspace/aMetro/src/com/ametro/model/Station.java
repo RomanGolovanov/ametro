@@ -1,21 +1,43 @@
 package com.ametro.model;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import com.ametro.libs.Helpers;
+
+import android.graphics.Point;
+import android.graphics.Rect;
 
 public class Station implements Serializable {
 
 	private static final long serialVersionUID = 584570784752337438L;
 
+	private void writeObject(java.io.ObjectOutputStream out) throws IOException
+	{
+		out.writeObject(mName);
+		Helpers.serializeRect(out,mRect);
+		Helpers.serializePoint(out,mPoint);
+		out.writeObject(mLine);
+
+	}
+
+	private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException
+	{
+		mName = (String)in.readObject();
+		mRect = Helpers.deserializeRect(in);
+		mPoint = Helpers.deserializePoint(in);
+		mLine = (Line)in.readObject();
+		mSegments = new ArrayList<Segment>();
+	}	
+	
 	private String mName;
 	private Rect mRect;
 	private Point mPoint;
 	private Line mLine;
 
 	private ArrayList<Segment> mSegments = new ArrayList<Segment>();
-	private ArrayList<Segment> mSegmentsIn = new ArrayList<Segment>();
-	private ArrayList<Segment> mSegmentsOut = new ArrayList<Segment>();
 
 	public Station(String mName, Rect mRect, Point mPoint, Line mLine) {
 		super();
@@ -62,12 +84,6 @@ public class Station implements Serializable {
 	
 	public Segment addSegment(Segment segment, int segmentMode){
 		mSegments.add(segment);
-		if(segmentMode == Segment.SEGMENT_BEGIN){
-			mSegmentsOut.add(segment);
-		}
-		if(segmentMode == Segment.SEGMENT_END){
-			mSegmentsIn.add(segment);
-		}
 		return segment;
 	}
 

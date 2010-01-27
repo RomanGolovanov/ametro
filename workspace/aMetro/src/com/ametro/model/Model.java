@@ -1,5 +1,6 @@
 package com.ametro.model;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Dictionary;
@@ -10,18 +11,71 @@ import java.util.Iterator;
 public class Model implements Serializable {
 
 	private static final long serialVersionUID = 8360920748660733331L;
-	
+
+	private void writeObject(java.io.ObjectOutputStream out) throws IOException
+	{
+		out.writeObject(mMapName);
+		out.writeObject(mCountryName);
+		out.writeObject(mCityName);
+		out.writeInt(mWidth);
+		out.writeInt(mHeight);
+
+		out.writeInt(mStationDiameter);
+		out.writeInt(mLinesWidth);
+
+		out.writeBoolean(mWordWrap);
+		out.writeBoolean(mUpperCase);
+
+		out.writeInt(mLines.size());
+		Enumeration<Line> lines = mLines.elements();
+		while(lines.hasMoreElements()) {
+			out.writeObject(lines.nextElement());
+		}
+
+		out.writeInt(mTransfers.size());
+		for (Iterator<Transfer> transfers = mTransfers.iterator(); transfers.hasNext();) {
+			out.writeObject(transfers.next());
+		}
+	}
+
+	private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException
+	{
+
+		mMapName = (String)in.readObject();
+		mCountryName = (String)in.readObject();
+		mCityName = (String)in.readObject();
+		mWidth = in.readInt();
+		mHeight = in.readInt();
+
+		mStationDiameter = in.readInt();
+		mLinesWidth = in.readInt();
+
+		mWordWrap = in.readBoolean();
+		mUpperCase = in.readBoolean();
+
+		mLines = new Hashtable<String, Line>();
+		int lineCount = in.readInt();
+		for(int i = 0; i < lineCount; i++) {
+			Line line = (Line)in.readObject();
+			mLines.put(line.getName(), line);
+		}
+
+		mTransfers = new ArrayList<Transfer>();
+		int transferCount = in.readInt();
+		for (int i = 0; i < transferCount; i++) {
+			mTransfers.add((Transfer)in.readObject());
+		}		
+	}
+
+
 	public Model(String mapName, int size){
 		mMapName = mapName;
 	}
 
+	private String mMapName;
+
 	private String mCityName;
 	private String mCountryName;
-
-	private Dictionary<String, Line> mLines = new Hashtable<String, Line>();
-	private ArrayList<Transfer> mTransfers = new ArrayList<Transfer>();
-
-	private String mMapName;
 
 	private int mWidth;
 	private int mHeight;
@@ -31,8 +85,9 @@ public class Model implements Serializable {
 	private boolean mWordWrap;
 	private boolean mUpperCase;
 
-	
-	
+	private Dictionary<String, Line> mLines = new Hashtable<String, Line>();
+	private ArrayList<Transfer> mTransfers = new ArrayList<Transfer>();
+
 	public void setCityName(String cityName) {
 		mCityName = cityName;
 	}
@@ -48,7 +103,7 @@ public class Model implements Serializable {
 	public String getCountryName() {
 		return mCountryName;
 	}
-	
+
 	public boolean isUpperCase() {
 		return mUpperCase;
 	}
@@ -97,8 +152,8 @@ public class Model implements Serializable {
 		mWidth = width;
 		mHeight = height;
 	}
-	
-	
+
+
 	public Station getStation(String lineName, String stationName) {
 		Line line = mLines.get(lineName);
 		if(line!=null){
@@ -110,7 +165,7 @@ public class Model implements Serializable {
 	public Line getLine(String lineName) {
 		return mLines.get(lineName);
 	}
-	
+
 	public Transfer addTransfer(Station from, Station to, Double delay, int flags) {
 		Transfer tr= new Transfer(from, to, delay, flags);
 		mTransfers.add(tr);
@@ -126,7 +181,7 @@ public class Model implements Serializable {
 	public Enumeration<Line> getLines() {
 		return mLines.elements();
 	}
-	
+
 	public Iterator<Transfer> getTransfers(){
 		return mTransfers.iterator();
 	}

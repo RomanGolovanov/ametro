@@ -43,7 +43,7 @@ public class CreatePrerequisites extends Activity {
 	private final Thread mExecute = new Thread() {
 		public void run() {
 			try {
-				createDirectory(MapSettings.CATALOG_PATH);
+				createDirectory(MapSettings.MAPS_PATH);
 				createDirectory(MapSettings.IMPORT_PATH);
 				createDirectory(MapSettings.CACHE_PATH);
 				createFile(MapSettings.ROOT_PATH + MapSettings.NO_MEDIA_TAG);

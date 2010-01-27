@@ -1,7 +1,5 @@
 package com.ametro.activity;
 
-import java.io.IOException;
-
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
@@ -65,10 +63,10 @@ public class RenderMap extends Activity implements IProgressUpdate {
 			Uri uri = getIntent().getData();
 			String mapName = MapUri.getMapName(uri);
 			try {
-				Model map = MapBuilder.ImportPmz(MapSettings.CATALOG_PATH, mapName, MapSettings.DEFAULT_MAP);
+				Model map = MapBuilder.loadModel(MapSettings.getMapFileName(mapName));
 				ModelTileManager.recreate(map, RenderMap.this);
 				MapSettings.clearScrollPosition(RenderMap.this, mapName);
-			} catch (IOException e) {
+			} catch (Exception e) {
 				Log.e("aMetro","Failed creating map cache for " + mapName, e);
 				failReason = e;
 				mHandler.post(mHandleException);

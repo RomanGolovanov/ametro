@@ -1,5 +1,8 @@
 package com.ametro.libs;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,22 +18,8 @@ public class Helpers {
 	}
 
 	private static final Pattern csvPattern = Pattern.compile( "(?:^|,)(\"(?:[^\"]|\"\")*\"|[^,]*)" );
-	
-	public static com.ametro.model.Point[] convertPoints(android.graphics.Point[] points){
-		com.ametro.model.Point[] res = new com.ametro.model.Point[points.length];
-		for (int i = 0; i < points.length; i++) {
-			res[i] = new com.ametro.model.Point(points[i]);
-		}
-		return res;
-	}
 
-	public static com.ametro.model.Rect[] convertRects(android.graphics.Rect[] rects){
-		com.ametro.model.Rect[] res = new com.ametro.model.Rect[rects.length];
-		for (int i = 0; i < rects.length; i++) {
-			res[i] = new com.ametro.model.Rect(rects[i]);
-		}
-		return res;
-	}	
+
 	public static String[] splitCSV( String line ) { 
 		ArrayList<String> elements = new ArrayList<String>(); 
 		Matcher m = csvPattern.matcher( line ); 
@@ -367,5 +356,86 @@ public class Helpers {
 		return newArray; 
 	}
 
+	public static void serializePoint(ObjectOutputStream out, Point point) throws IOException {
+		out.writeBoolean(point!=null);
+		if(point!=null){
+			out.writeInt(point.x);
+			out.writeInt(point.y);
+		}
+	}
+
+	public static Point deserializePoint(ObjectInputStream in) throws IOException {
+		boolean isNotNull = in.readBoolean();
+		if(isNotNull) return new Point(in.readInt(),in.readInt());
+		return null;
+	}
+
+	public static void serializePointArray(ObjectOutputStream out, Point[] points) throws IOException {
+		out.writeBoolean(points!=null);
+		if(points!=null){
+			int len = points.length;
+			out.writeInt(len);
+			for(int i =0;i<len;i++){
+				out.writeInt(points[i].x);
+				out.writeInt(points[i].y);
+			}
+		}
+	}
+
+	public static Point[] deserializePointArray(ObjectInputStream in) throws IOException {
+		boolean isNotNull = in.readBoolean();
+		if(isNotNull){
+			int len = in.readInt();
+			Point[] points = new Point[len];
+			for(int i=0;i<len;i++){
+				points[i] = new Point(in.readInt(),in.readInt());
+			}
+			return points;
+		}
+		return null;
+
+	}
+
+	public static void serializeRect(ObjectOutputStream out, Rect rect) throws IOException {
+		out.writeBoolean(rect!=null);
+		if(rect!=null){
+			out.writeInt(rect.left);
+			out.writeInt(rect.top);
+			out.writeInt(rect.right);
+			out.writeInt(rect.bottom);
+		}
+	}
+
+	public static Rect deserializeRect(ObjectInputStream in) throws IOException {
+		boolean isNotNull = in.readBoolean();
+		if(isNotNull) return new Rect(in.readInt(),in.readInt(),in.readInt(),in.readInt());
+		return null;
+	}
+
+	public static void serializeRectArray(ObjectOutputStream out, Rect[] rects) throws IOException {
+		out.writeBoolean(rects!=null);
+		if(rects!=null){
+			int len = rects.length;
+			out.writeInt(len);
+			for(int i =0;i<len;i++){
+				out.writeInt(rects[i].left);
+				out.writeInt(rects[i].top);
+				out.writeInt(rects[i].right);
+				out.writeInt(rects[i].bottom);		}
+		}
+	}
+
+	public static Rect[] deserializeRectArray(ObjectInputStream in) throws IOException {
+		boolean isNotNull = in.readBoolean();
+		if(isNotNull){
+			int len = in.readInt();
+			Rect[] rects = new Rect[len];
+			for(int i=0;i<len;i++){
+				rects[i] = new Rect(in.readInt(),in.readInt(),in.readInt(),in.readInt());
+			}
+			return rects;
+		}
+		return null;
+	}
 
 }

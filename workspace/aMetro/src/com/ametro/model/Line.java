@@ -1,5 +1,6 @@
 package com.ametro.model;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Dictionary;
@@ -7,9 +8,64 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
 
+import android.graphics.Point;
+import android.graphics.Rect;
+
 public class Line implements Serializable {
 
 	private static final long serialVersionUID = -6298848654051375920L;
+
+	private void writeObject(java.io.ObjectOutputStream out) throws IOException
+	{
+		out.writeObject(mName);
+
+		out.writeInt(mColor);
+		out.writeInt(mLabelColor);
+		out.writeInt(mLabelBgColor);
+
+
+		out.writeInt(mSegments.size());
+		for (Iterator<Segment> segments = mSegments.iterator(); segments.hasNext();) {
+			out.writeObject(segments.next());
+		}
+
+		out.writeInt(mStations.size());
+		Enumeration<Station> stations = mStations.elements();
+		while(stations.hasMoreElements()) {
+			out.writeObject(stations.nextElement());
+		}
+	}
+
+	private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException
+	{
+
+		mName = (String)in.readObject();
+
+		mColor = in.readInt();
+		mLabelColor = in.readInt();
+		mLabelBgColor = in.readInt();
+
+		mSegments = new ArrayList<Segment>();
+		int segmentCount = in.readInt();
+		for (int i = 0; i < segmentCount; i++) {
+			mSegments.add((Segment)in.readObject());
+		}		
+
+		mStations = new Hashtable<String, Station>();
+		int stationCount = in.readInt();
+		for(int i = 0; i < stationCount; i++) {
+			Station station = (Station)in.readObject();
+			mStations.put(station.getName(), station);
+		}
+
+		for (Iterator<Segment> segments = mSegments.iterator(); segments.hasNext();) {
+			Segment segment = segments.next();
+			segment.getFrom().addSegment(segment, Segment.SEGMENT_BEGIN);
+			segment.getTo().addSegment(segment, Segment.SEGMENT_END);
+		}		
+		
+	}
+	
 	
 	private String mName;
 	private int mColor;
@@ -28,7 +84,7 @@ public class Line implements Serializable {
 	}
 
 	public String getName() {
-		return mName;
+		return mName; 
 	}
 
 	public int getColor() {

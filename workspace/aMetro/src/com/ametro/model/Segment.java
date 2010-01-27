@@ -1,11 +1,36 @@
 package com.ametro.model;
 
+import java.io.IOException;
 import java.io.Serializable;
+
+import android.graphics.Point;
+
+import com.ametro.libs.Helpers;
 
 public class Segment implements Serializable {
 
 	private static final long serialVersionUID = -3800882714522185877L;
 
+	
+	private void writeObject(java.io.ObjectOutputStream out) throws IOException
+	{
+		out.writeObject(mDelay);
+		out.writeObject(mFrom);
+		out.writeObject(mTo);
+		out.writeInt(mFlags);
+		Helpers.serializePointArray(out, mAdditionalNodes);
+	}
+
+	private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException
+	{
+		mDelay = (Double)in.readObject();
+		mFrom = (Station)in.readObject();
+		mTo = (Station)in.readObject();
+		mFlags = in.readInt();
+		mAdditionalNodes = Helpers.deserializePointArray(in);
+	}
+	
+	
 	public static final int SPLINE		= 0x01;
 	public static final int INVISIBLE 	= 0x02;
 
