@@ -11,11 +11,12 @@ import java.util.Hashtable;
 import java.util.Iterator;
 
 import android.graphics.Color;
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.util.Log;
 
 import com.ametro.MapSettings;
 
-import com.ametro.libs.Helpers;
 import com.ametro.libs.DelaysString;
 import com.ametro.libs.StationsString;
 import com.ametro.pmz.FilePackage;
@@ -30,10 +31,13 @@ import com.ametro.pmz.TransportResource.TransportTransfer;
 public class MapBuilder {
 
 	public static Model loadModel(String fileName) throws IOException, ClassNotFoundException {
+		Date startTimestamp = new Date();
 		ObjectInputStream strm = null;
 		try{
 			strm = new ObjectInputStream( new FileInputStream(fileName) );
-			return (Model)strm.readObject();
+			Model model = (Model)strm.readObject();
+			Log.i("aMetro", String.format("Model file '%s' loading time is %sms", fileName, Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
+			return model;
 		} finally{
 			if(strm!=null){
 				strm.close();
@@ -42,11 +46,13 @@ public class MapBuilder {
 	}
 
 	public static void saveModel(Model model) throws IOException {
+		Date startTimestamp = new Date();
 		String fileName = MapSettings.getMapFileName(model.getMapName());
 		ObjectOutputStream strm = new ObjectOutputStream(new FileOutputStream(fileName));
 		strm.writeObject(model);
 		strm.flush();
 		strm.close();
+		Log.i("aMetro", String.format("Model file '%s' saving time is %sms", fileName, Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
 	}
 
 
@@ -101,7 +107,7 @@ public class MapBuilder {
 
 		calculateDimensions(model);
 
-		Log.d("aMetro", String.format("Overall data parsing is %sms", Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
+		Log.i("aMetro", String.format("PMZ file '%s' parsing time is %sms", packageName, Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
 		return model;
 	}
 
@@ -145,7 +151,7 @@ public class MapBuilder {
 		if(from!=null && to!=null){
 			Segment segment = line.getSegment(from,to);
 			if(segment!=null && segment.getAdditionalNodes() == null){
-				Point[] points = Helpers.convertPoints(al.mPoints);
+				Point[] points = al.mPoints;
 				segment.setAdditionalNodes(points);
 				if(al.mIsSpline){
 					segment.addFlag(Segment.SPLINE);
@@ -185,8 +191,8 @@ public class MapBuilder {
 
 			DelaysString tDelays = new DelaysString(tl.mDrivingDelaysText);
 			StationsString tStations = new StationsString(tl.mStationText);
-			Point[] points = Helpers.convertPoints(ml.coordinates);
-			Rect[] rects = Helpers.convertRects(ml.rectangles);
+			Point[] points = ml.coordinates;
+			Rect[] rects = ml.rectangles;
 
 			int stationIndex = 0;
 

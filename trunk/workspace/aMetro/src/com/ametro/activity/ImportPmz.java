@@ -1,15 +1,15 @@
 package com.ametro.activity;
 
+import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 
 import com.ametro.MapSettings;
-import com.ametro.MapUri;
 import com.ametro.R;
 import com.ametro.model.MapBuilder;
 import com.ametro.model.Model;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -46,8 +46,21 @@ public class ImportPmz extends Activity {
 	private final Thread mImport = new Thread() {
 		public void run() {
 			try {
-				Model map = MapBuilder.ImportPmz(MapSettings.IMPORT_PATH, "Peterburg", MapSettings.DEFAULT_MAP);
-				MapBuilder.saveModel(map);
+				File dir = new File(MapSettings.IMPORT_PATH);
+				String[] files = dir.list(new FilenameFilter() {
+					@Override
+					public boolean accept(File f, String filename) {
+						return filename.endsWith(MapSettings.PMZ_FILE_TYPE);
+					}
+				}); 
+				if(files!=null){
+					for(int i = 0; i < files.length; i++){
+						String fileName = files[i].replace(".pmz", "");
+						Model map = MapBuilder.ImportPmz(MapSettings.IMPORT_PATH, fileName, MapSettings.DEFAULT_MAP);
+						MapBuilder.saveModel(map);
+					}
+				}				
+				
 			} catch (IOException e) {
 				Log.e("aMetro","Failed import map", e);
 				failReason = e;

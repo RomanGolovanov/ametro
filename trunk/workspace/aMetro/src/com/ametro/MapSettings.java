@@ -17,7 +17,7 @@ public class MapSettings {
 	public static final String PREFERENCE_SCROLL_POSITION = "SCROLL_POSITION";
 	
 	public static final String ROOT_PATH = "/sdcard/ametro/";
-	public static final String CATALOG_PATH = ROOT_PATH + "maps/";
+	public static final String MAPS_PATH = ROOT_PATH + "maps/";
 	public static final String CACHE_PATH = ROOT_PATH + "cache/";
 	public static final String IMPORT_PATH = ROOT_PATH + "import/";
 
@@ -51,15 +51,15 @@ public class MapSettings {
 	
 	public static void checkPrerequisite(Context context){
 		File root = new File(ROOT_PATH);
-		File maps = new File(CATALOG_PATH);
+		File maps = new File(MAPS_PATH);
 		File cache = new File(CACHE_PATH);
-		if(!( root.exists() && maps.exists() && cache.exists() )){
+		if( !root.exists() || !maps.exists() || !cache.exists() ){
 			context.startActivity(new Intent(context,CreatePrerequisites.class));
 		}
 	}
 	
 	public static String getMapFileName(String mapName) {
-		return (MapSettings.CATALOG_PATH + mapName + MAP_FILE_TYPE).toLowerCase();
+		return (MapSettings.MAPS_PATH + mapName + MAP_FILE_TYPE).toLowerCase();
 	}
 
 	public static String getCacheFileName(String mapName){
