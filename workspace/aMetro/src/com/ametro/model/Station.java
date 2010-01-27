@@ -4,9 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import android.graphics.Point;
-import android.graphics.Rect;
-
 public class Station implements Serializable {
 
 	private static final long serialVersionUID = 584570784752337438L;

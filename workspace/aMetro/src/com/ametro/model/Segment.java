@@ -2,8 +2,6 @@ package com.ametro.model;
 
 import java.io.Serializable;
 
-import android.graphics.Point;
-
 public class Segment implements Serializable {
 
 	private static final long serialVersionUID = -3800882714522185877L;

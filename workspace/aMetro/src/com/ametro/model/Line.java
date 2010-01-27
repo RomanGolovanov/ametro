@@ -7,9 +7,6 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
 
-import android.graphics.Point;
-import android.graphics.Rect;
-
 public class Line implements Serializable {
 
 	private static final long serialVersionUID = -6298848654051375920L;
