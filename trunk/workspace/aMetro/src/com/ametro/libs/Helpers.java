@@ -16,6 +16,21 @@ public class Helpers {
 
 	private static final Pattern csvPattern = Pattern.compile( "(?:^|,)(\"(?:[^\"]|\"\")*\"|[^,]*)" );
 	
+	public static com.ametro.model.Point[] convertPoints(android.graphics.Point[] points){
+		com.ametro.model.Point[] res = new com.ametro.model.Point[points.length];
+		for (int i = 0; i < points.length; i++) {
+			res[i] = new com.ametro.model.Point(points[i]);
+		}
+		return res;
+	}
+
+	public static com.ametro.model.Rect[] convertRects(android.graphics.Rect[] rects){
+		com.ametro.model.Rect[] res = new com.ametro.model.Rect[rects.length];
+		for (int i = 0; i < rects.length; i++) {
+			res[i] = new com.ametro.model.Rect(rects[i]);
+		}
+		return res;
+	}	
 	public static String[] splitCSV( String line ) { 
 		ArrayList<String> elements = new ArrayList<String>(); 
 		Matcher m = csvPattern.matcher( line ); 
