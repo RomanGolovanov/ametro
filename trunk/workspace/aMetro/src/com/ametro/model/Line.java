@@ -133,15 +133,15 @@ public class Line implements Serializable {
 	
 	public Segment addSegment(Station from, Station to, Double delay){
 		Segment sg = new Segment(from, to, delay);
-		Segment opposite = getSegment(to, from); 
 		mSegments.add(sg);
+		Segment opposite = getSegment(to, from); 
 		if(opposite!=null && (opposite.getFlags() & Segment.INVISIBLE)==0){
 			if(delay == null && opposite.getDelay()!=null){
 				sg.addFlag(Segment.INVISIBLE);
 			}else if(delay != null && opposite.getDelay()==null){
 				opposite.addFlag(Segment.INVISIBLE);
 			}else if(delay == null && opposite.getDelay()==null){
-				sg.addFlag(Segment.INVISIBLE);
+				sg.addFlag(Segment.INVISIBLE); 
 			}
 		}
 		return sg;

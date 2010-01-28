@@ -68,7 +68,7 @@ public class MapRenderer {
 		mTextPaint.setTextAlign(Align.LEFT);
 		
 		mLinePaint.setStrokeWidth( mLinesWidth );
-		mLineUnavailablePaint.setStrokeWidth( mLinesWidth*0.8f );
+		mLineUnavailablePaint.setStrokeWidth( mLinesWidth*0.75f );
 		mLineUnavailablePaint.setPathEffect(new DashPathEffect(new float[]{ mLinesWidth*0.8f, mLinesWidth*0.4f }, 0));
 	}
 
@@ -80,7 +80,7 @@ public class MapRenderer {
 		drawTransfers(canvas);
 		drawStations(canvas);			
 		canvas.save();
-		Log.d("aMetro", String.format("Overall rendering time is %sms", Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
+		Log.i("aMetro", String.format("Model %s rendering time: %sms", mMap.getMapName(), Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
 	}
 
 	public void render(Canvas canvas, android.graphics.Rect src)
