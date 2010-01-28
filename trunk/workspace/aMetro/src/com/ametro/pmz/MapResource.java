@@ -198,11 +198,11 @@ public class MapResource implements IResource {
 	private int stationCount = 0;
 	private int addiditionalStationCount = 0;
 	
-	private int stationDiameter;
-	private int linesWidth;
-	private boolean upperCase;
-	private boolean wordWrap;
-	private boolean isVector;
+	private int stationDiameter = 11;
+	private int linesWidth = 9;
+	private boolean upperCase = true;
+	private boolean wordWrap = true;
+	private boolean isVector = true;
 	
 	private String vectorName;
 	private String transportName;
