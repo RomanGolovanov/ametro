@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -136,12 +137,23 @@ public class ModelTileManager {
 		int y = 0;
 		int height = map.getHeight();
 		int width = map.getWidth();
-		int columns = width / MapSettings.TILE_WIDTH + ( width % MapSettings.TILE_WIDTH != 0 ? 1 : 0 );
-		int heightStepMax = Math.max(MapSettings.TILE_HEIGHT, MapSettings.TILE_HEIGHT * 50 / columns);
-		int step = Math.min(MapSettings.TILE_HEIGHT, heightStepMax - (heightStepMax % MapSettings.TILE_HEIGHT));
+		int columns = width / MapSettings.TILE_WIDTH + (width % MapSettings.TILE_WIDTH!=0?1:0);
+		int rows = height / MapSettings.TILE_HEIGHT + (height%MapSettings.TILE_HEIGHT!=0?1:0);
+		int heightStepMax = Math.max(MapSettings.TILE_HEIGHT, MapSettings.TILE_HEIGHT * 150 / columns);
+		int step = Math.max(MapSettings.TILE_HEIGHT, heightStepMax - (heightStepMax % MapSettings.TILE_HEIGHT));
 		int row = 0; 
 		if(progress!=null) progress.update(0);
 
+		Log.i("aMetro",String.format("Model %s render size %s x %s, cols: %s, rows: %s, step: %s",
+				map.getMapName(),
+				Integer.toString(width),
+				Integer.toString(height),
+				Integer.toString(columns),
+				Integer.toString(rows),
+				Integer.toString(step/MapSettings.TILE_HEIGHT)
+				));
+		Date startTimestamp = new Date();
+		
 		MapRenderer renderer = new MapRenderer(map);
 		while(y<height){
 			int renderHeight = Math.min(step, height - y);
@@ -152,48 +164,19 @@ public class ModelTileManager {
 			renderer.render(bufferCanvas,renderRect);
 
 			Rect src = new Rect(0,0,buffer.getWidth(), buffer.getHeight());
-			ModelTileManager.createTiles(content, row, 0, buffer, src, 0);
+			ModelTileManager.createTiles(content, row, 0, buffer, src, 0, rows, columns, progress);
 			buffer.recycle();
-			buffer = null;
+			buffer = null; 
 
 			y += renderHeight;
 			row += (renderHeight / MapSettings.TILE_HEIGHT);
 			if(progress!=null) progress.update( 100 * y / height );
 		}
-	}
-
-	private static String getTileEntityName(int level, int row, int column ){
-		return "tile_" + level + "_" + row + "_" + column + ".png";
-	}
-
-	private Bitmap loadTile(int row, int column, int level){
-		String fileName = getTileEntityName(level, row, column);
-
-//		byte[] data = mFileCache.get(fileName);
-//		if(data != null){
-//			return  BitmapFactory.decodeByteArray(data, 0, data.length);
-//		}
+		Log.i("aMetro", String.format("Model '%s' render time is %sms", map.getMapName(), Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
 		
-		ZipEntry f = mContent.getEntry(fileName);
-		InputStream fis = null;
-		Bitmap bmp = null;
-		try {
-			fis = mContent.getInputStream( f );
-			bmp = BitmapFactory.decodeStream(fis);
-		} catch (Exception e) {
-			bmp = Bitmap.createBitmap(MapSettings.TILE_WIDTH, MapSettings.TILE_HEIGHT, Config.RGB_565);
-		} finally{
-			if(fis!=null){
-				try {
-					fis.close();
-				} catch (Exception e) {	}
-			}
-		}
-		return bmp;
-	}	
+	}
 
-	
-	private static void createTiles(ZipOutputStream content, int row, int column, Bitmap buffer, Rect bufferRect, int level) {
+	private static void createTiles(ZipOutputStream content, int row, int column, Bitmap buffer, Rect bufferRect, int level, int rowTotal, int columnTotal, IProgressUpdate progress) {
 
 		int height = bufferRect.height();
 		int width = bufferRect.width(); 
@@ -213,23 +196,52 @@ public class ModelTileManager {
 				dst.right = right - left;
 				dst.bottom = bottom - top;
 
+				if(progress!=null) 
+					progress.update( (int)( ( i * columnTotal + j ) * 100.0f / (rowTotal * columnTotal)  ) );				
+				
 				Canvas c = new Canvas(bmp);
 				c.drawColor(Color.MAGENTA);
 				c.drawBitmap(buffer, src, dst, null);
 				c.save();
-				try {
+				try { 
 					ZipEntry entry = new ZipEntry(fileName);
 					content.putNextEntry(entry);
+					content.setLevel(-1);
 					bmp.compress(Bitmap.CompressFormat.PNG, 90, content);
 					content.flush();
 					content.closeEntry();
 				} catch (Exception e) {
 					Log.e("aMetro", "Cannot write a map tile to " + fileName);
-				}				
+				}	
 			}
 		}
 		bmp.recycle();
 	}
+
+	private static String getTileEntityName(int level, int row, int column ){
+		return "tile_" + level + "_" + row + "_" + column + ".png";
+	}
+
+	private Bitmap loadTile(int row, int column, int level){
+		String fileName = getTileEntityName(level, row, column);
+
+		ZipEntry f = mContent.getEntry(fileName);
+		InputStream fis = null;
+		Bitmap bmp = null;
+		try {
+			fis = mContent.getInputStream( f );
+			bmp = BitmapFactory.decodeStream(fis);
+		} catch (Exception e) {
+			bmp = Bitmap.createBitmap(MapSettings.TILE_WIDTH, MapSettings.TILE_HEIGHT, Config.RGB_565);
+		} finally{
+			if(fis!=null){
+				try {
+					fis.close();
+				} catch (Exception e) {	}
+			}
+		}
+		return bmp;
+	}	
 
 	public Point getContentSize() {
 		return new Point(mDescription.width, mDescription.height);

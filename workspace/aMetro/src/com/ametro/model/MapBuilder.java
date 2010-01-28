@@ -145,6 +145,7 @@ public class MapBuilder {
 	}
 
 	private static void fillAdditionalLines(Model model, MapAddiditionalLine al) {
+		if(al.mPoints==null) return;
 		Line line = model.getLine(al.mLineName);
 		Station from = model.getStation(al.mLineName, al.mFromStationName);
 		Station to = model.getStation(al.mLineName, al.mToStationName);
@@ -154,8 +155,20 @@ public class MapBuilder {
 				Point[] points = al.mPoints;
 				segment.setAdditionalNodes(points);
 				if(al.mIsSpline){
-					segment.addFlag(Segment.SPLINE);
+					segment.setFlags(Segment.SPLINE);
 				}
+			}else{
+				Segment opposite = line.getSegment(to,from);
+				if(opposite!=null && opposite.getAdditionalNodes() == null){
+					Point[] points = new Point[ al.mPoints.length ];
+					for(int i = 0;i < points.length; i++){
+						points[i] = al.mPoints[(points.length-1)-i];
+					}
+					opposite.setAdditionalNodes(points);
+					if(al.mIsSpline){
+						opposite.setFlags(Segment.SPLINE);
+					}
+				}				
 			}
 		}
 	}
