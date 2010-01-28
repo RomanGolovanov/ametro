@@ -32,7 +32,7 @@ import com.ametro.MapUri;
 import com.ametro.R;
 import com.ametro.libs.FileGroupsDictionary;
 import com.ametro.model.MapBuilder;
-import com.ametro.model.Model;
+import com.ametro.model.ModelDescription;
 
 public class BrowseLibrary extends Activity implements ExpandableListView.OnChildClickListener {
 
@@ -143,10 +143,10 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 
 		private void scanModelFileContent(FileGroupsDictionary map, String fileName, String fullFileName) {
 			try {
-				Model model = MapBuilder.loadModel(fullFileName);
-				map.putFile(model.getCountryName(), model.getCityName(), fileName);
+				ModelDescription modelDescription = MapBuilder.loadModelDescription(fullFileName);
+				map.putFile(modelDescription.getCountryName(), modelDescription.getCityName(), fileName);
 			} catch (Exception e) {
-				Log.d("aMetro", "Map indexing failed for " + fileName);
+				Log.d("aMetro", "Map indexing failed for " + fileName, (Throwable)e);
 				// skip this file
 			} 
 		

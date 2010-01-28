@@ -1,6 +1,6 @@
 package com.ametro.model;
 
-import java.io.FileInputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -9,6 +9,9 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+import java.util.zip.ZipOutputStream;
 
 import android.graphics.Color;
 import android.graphics.Point;
@@ -16,7 +19,6 @@ import android.graphics.Rect;
 import android.util.Log;
 
 import com.ametro.MapSettings;
-
 import com.ametro.libs.DelaysString;
 import com.ametro.libs.StationsString;
 import com.ametro.pmz.FilePackage;
@@ -30,17 +32,43 @@ import com.ametro.pmz.TransportResource.TransportTransfer;
 
 public class MapBuilder {
 
+	public static ModelDescription loadModelDescription(String fileName)  throws IOException, ClassNotFoundException {
+		Date startTimestamp = new Date();
+		ObjectInputStream strm = null;
+		ZipFile zip = null;
+		try{
+			zip = new ZipFile(fileName);
+			ZipEntry entry = zip.getEntry(MapSettings.DESCRIPTION_ENTRY_NAME);
+			strm = new ObjectInputStream( zip.getInputStream(entry) );
+			ModelDescription modelDescription = (ModelDescription)strm.readObject();
+			Log.i("aMetro", String.format("Model description '%s' loading time is %sms", fileName, Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
+			return modelDescription;
+		} finally{
+			if(strm!=null){
+				try { strm.close(); } catch (Exception e) { }
+			}
+			if(zip!=null){
+				try { zip.close(); } catch (Exception e) { }
+			}
+		}	}
+	
 	public static Model loadModel(String fileName) throws IOException, ClassNotFoundException {
 		Date startTimestamp = new Date();
 		ObjectInputStream strm = null;
+		ZipFile zip = null;
 		try{
-			strm = new ObjectInputStream( new FileInputStream(fileName) );
+			zip = new ZipFile(fileName);
+			ZipEntry entry = zip.getEntry(MapSettings.MAP_ENTRY_NAME);
+			strm = new ObjectInputStream( zip.getInputStream(entry) );
 			Model model = (Model)strm.readObject();
-			Log.i("aMetro", String.format("Model file '%s' loading time is %sms", fileName, Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
+			Log.i("aMetro", String.format("Model data '%s' loading time is %sms", fileName, Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
 			return model;
 		} finally{
 			if(strm!=null){
-				strm.close();
+				try { strm.close(); } catch (Exception e) { }
+			}
+			if(zip!=null){
+				try { zip.close(); } catch (Exception e) { }
 			}
 		}
 	}
@@ -48,29 +76,59 @@ public class MapBuilder {
 	public static void saveModel(Model model) throws IOException {
 		Date startTimestamp = new Date();
 		String fileName = MapSettings.getMapFileName(model.getMapName());
-		ObjectOutputStream strm = new ObjectOutputStream(new FileOutputStream(fileName));
-		strm.writeObject(model);
-		strm.flush();
-		strm.close();
+		ZipOutputStream zip = new ZipOutputStream(new FileOutputStream(fileName));
+		saveModelDescriptionEntry(model, zip);
+		saveModelEntry(model, zip);
+		zip.flush();
+		zip.close();
 		Log.i("aMetro", String.format("Model file '%s' saving time is %sms", fileName, Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
 	}
 
+	private static void saveModelDescriptionEntry(Model model, ZipOutputStream zip) throws IOException {
+		ZipEntry entry = new ZipEntry(MapSettings.DESCRIPTION_ENTRY_NAME);
+		zip.putNextEntry(entry);
+		ObjectOutputStream strm = new ObjectOutputStream(zip);
+		strm.writeObject(new ModelDescription(model));
+		strm.flush();
+		zip.closeEntry();
+	}
+	
+	private static void saveModelEntry(Model model, ZipOutputStream zip) throws IOException {
+		ZipEntry entry = new ZipEntry(MapSettings.MAP_ENTRY_NAME);
+		zip.putNextEntry(entry);
+		ObjectOutputStream strm = new ObjectOutputStream(zip);
+		strm.writeObject(model);
+		strm.flush();
+		zip.closeEntry();
+	}
 
-	public static Model ImportPmz(String libraryPath, String packageName, String mapName) throws IOException
+	public static ModelDescription indexPmz(String fileName) throws IOException
 	{
-		FilePackage pkg = new FilePackage(libraryPath +"/"+ packageName+".pmz" );
-
 		Date startTimestamp = new Date();
+		ModelDescription model = new ModelDescription();
+		FilePackage pkg = new FilePackage(fileName);
+		GenericResource info = pkg.getCityGenericResource();
+		model.setCountryName(info.getValue("Options", "Country"));
+		model.setCityName(info.getValue("Options", "RusName"));
+		Log.i("aMetro", String.format("PMZ description '%s' loading time is %sms", fileName, Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
+		return model;
+	}
+
+	public static Model importPmz(String fileName) throws IOException
+	{
+		Date startTimestamp = new Date();
+		File file = new File(fileName);
+		FilePackage pkg = new FilePackage(fileName);
 
 		GenericResource info = pkg.getCityGenericResource();
-		MapResource map = pkg.getMapResource(mapName+".map" );
-		TransportResource trp = pkg.getTransportResource(map.getTransportName() != null ? map.getTransportName() : mapName+".trp");
+		MapResource map = pkg.getMapResource("metro.map" );
+		TransportResource trp = pkg.getTransportResource(map.getTransportName() != null ? map.getTransportName() : "metro.trp");
 
 		int size = map.getStationCount() + map.getAddiditionalStationCount();
-
-		Model model = new Model(packageName, size);
+		
+		Model model = new Model( file.getName().replace(".pmz", "") , size);
 		model.setCountryName(info.getValue("Options", "Country"));
-		model.setCityName(info.getValue("Options", "Name"));
+		model.setCityName(info.getValue("Options", "RusName"));
 		model.setLinesWidth(map.getLinesWidth());
 		model.setStationDiameter(map.getStationDiameter());
 		model.setWordWrap(map.isWordWrap());
@@ -107,7 +165,7 @@ public class MapBuilder {
 
 		calculateDimensions(model);
 
-		Log.i("aMetro", String.format("PMZ file '%s' parsing time is %sms", packageName, Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
+		Log.i("aMetro", String.format("PMZ file '%s' parsing time is %sms", file.getName(), Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
 		return model;
 	}
 
