@@ -175,30 +175,39 @@ public class ImportPmz extends Activity {
 	private TextView mProgressText;
 
 	private final int MAIN_MENU_IMPORT	= 1;
+	private final int MAIN_MENU_SELECT_ALL	= 2;
+	private final int MAIN_MENU_SELECT_NONE	= 3;
 
 	private MenuItem mMainMenuImport;
+	private MenuItem mMainMenuSelectAll;
+	private MenuItem mMainMenuSelectNone;
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		mMainMenuImport = menu.add(0, MAIN_MENU_IMPORT, 	0, R.string.menu_import);
-		mMainMenuImport.setIcon(android.R.drawable.ic_menu_add);
+		mMainMenuImport = menu.add(0, MAIN_MENU_IMPORT, 	0, R.string.menu_import).setIcon(android.R.drawable.ic_menu_add);
+		mMainMenuSelectAll = menu.add(0, MAIN_MENU_SELECT_ALL, 1, R.string.menu_select_all).setIcon(android.R.drawable.ic_menu_more);
+		mMainMenuSelectNone = menu.add(0, MAIN_MENU_SELECT_NONE, 1, R.string.menu_select_none).setIcon(android.R.drawable.ic_menu_revert);
+
 		updateMenuStatus();
+
+
 		return true;
 	}
 
 	private void updateMenuStatus() {
 		if(mMainMenuImport == null) return;
 		if(mPrepared){
-			for (Iterator<ImportRecord> iterator = mAdapter.getData().iterator(); iterator.hasNext();) {
-				ImportRecord importRecord = iterator.next();
-				if(importRecord.isChecked()) {
-					mMainMenuImport.setEnabled(true);
-					return;
-				}
-			}
+			final List<ImportRecord> dataChecked = mAdapter.getCheckedData();
+			final List<ImportRecord> data = mAdapter.getCheckedData();
+			mMainMenuImport.setEnabled(dataChecked.size()>0);
+			mMainMenuSelectAll.setEnabled(dataChecked.size() < data.size());
+			mMainMenuSelectNone.setEnabled(dataChecked.size()>0);
+			return;
 		}
 		mMainMenuImport.setEnabled(false);
+		mMainMenuSelectAll.setEnabled(false);
+		mMainMenuSelectNone.setEnabled(false);
 	}
 
 	@Override
@@ -210,6 +219,25 @@ public class ImportPmz extends Activity {
 			mProgressText = (TextView)findViewById(R.id.import_pmz_progress_text);
 			mImport.start();
 			return true;
+		case MAIN_MENU_SELECT_ALL:
+			for (Iterator<ImportRecord> iterator = mAdapter.getCheckedData().iterator(); iterator.hasNext();) {
+				ImportRecord importRecord = iterator.next();
+				importRecord.setChecked(true);
+			}
+			mListView.invalidateViews();
+			mMainMenuSelectAll.setEnabled(false);
+			mMainMenuSelectNone.setEnabled(true);
+			return true;
+		case MAIN_MENU_SELECT_NONE:
+			for (Iterator<ImportRecord> iterator = mAdapter.getCheckedData().iterator(); iterator.hasNext();) {
+				ImportRecord importRecord = iterator.next();
+				importRecord.setChecked(false);
+				
+			}
+			mListView.invalidateViews();
+			mMainMenuSelectAll.setEnabled(true);
+			mMainMenuSelectNone.setEnabled(false);
+			return true;
 		}		
 		return super.onOptionsItemSelected(item);
 	}		
@@ -217,6 +245,7 @@ public class ImportPmz extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		MapSettings.checkPrerequisite(this);
 		mPrepared = false;
 		setContentView(R.layout.waiting);
 		mIndex.start();
@@ -356,7 +385,7 @@ public class ImportPmz extends Activity {
 					mFailReason = e;
 					mHandler.post(mHandleException);
 				}
-				
+
 			}
 
 			mHandler.post(mReturnOk);
