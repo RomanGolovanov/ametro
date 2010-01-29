@@ -7,7 +7,6 @@ import com.ametro.libs.Helpers;
 import com.ametro.model.Model;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Point;
 
@@ -32,6 +31,7 @@ public class MapSettings {
 	
 	public static final String MAP_FILE_TYPE = ".ametro";
 	public static final String PMZ_FILE_TYPE = ".pmz";
+	public static final String TEMP_FILE_TYPE = ".tmp"; 
 	public static final String CACHE_FILE_TYPE = ".zip";
 	public static final String MAP_ENTRY_NAME = "map.dat";
 	public static final String DESCRIPTION_ENTRY_NAME = "description.txt";
@@ -83,6 +83,11 @@ public class MapSettings {
 		return (MAPS_PATH + mapName + MAP_FILE_TYPE).toLowerCase();
 	}
 
+	public static String getTemporaryMapFile(String mapName) {
+		return (MAPS_PATH + mapName + TEMP_FILE_TYPE).toLowerCase();
+	}
+	
+	
 	public static String getCacheFileName(String mapName){
 		return (CACHE_PATH + mapName + CACHE_FILE_TYPE).toLowerCase();
 	}
@@ -138,5 +143,5 @@ public class MapSettings {
 			editor.commit();
 		}
 	}
-	
+
 }

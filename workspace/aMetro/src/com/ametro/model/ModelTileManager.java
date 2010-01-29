@@ -91,7 +91,8 @@ public class ModelTileManager {
 	}
 
 	public static void recreate(Model model, IProgressUpdate progress) throws IOException{
-		File file = new File(MapSettings.getCacheFileName(model.getMapName()));
+		final String mapName = model.getMapName();
+		final File file = new File(MapSettings.getTemporaryMapFile(mapName));
 		if(file.exists()){
 			file.delete();
 		}
@@ -100,11 +101,16 @@ public class ModelTileManager {
 			content = new ZipOutputStream(new FileOutputStream(file));
 			renderDescription(content, model);
 			renderTiles(content, model, progress);
+			content.close();
+			final File destFile = new File(MapSettings.getCacheFileName(mapName));
+			file.renameTo(destFile);
+			
 		}finally{
 			if(content!=null){
 				try{ content.close(); }catch(Exception ex){}
 			}
 		}
+		
 	}
 
 	private static void renderDescription(ZipOutputStream content, Model model) throws IOException {
