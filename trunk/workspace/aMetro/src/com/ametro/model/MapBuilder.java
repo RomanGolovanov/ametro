@@ -108,9 +108,13 @@ public class MapBuilder {
 		ModelDescription model = new ModelDescription();
 		FilePackage pkg = new FilePackage(fileName);
 		GenericResource info = pkg.getCityGenericResource();
-		model.setCountryName(info.getValue("Options", "Country"));
-		model.setCityName(info.getValue("Options", "RusName"));
-		
+		String countryName = info.getValue("Options", "Country");
+		String cityName = info.getValue("Options", "RusName");
+		if(cityName == null){
+			cityName = info.getValue("Options", "CityName");
+		}
+		model.setCountryName(countryName);
+		model.setCityName(cityName);
 		File pmzFile = new File(fileName);
 		model.setTimestamp( pmzFile.lastModified() );
 		Log.i("aMetro", String.format("PMZ description '%s' loading time is %sms", fileName, Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
@@ -131,8 +135,14 @@ public class MapBuilder {
 		int size = map.getStationCount() + map.getAddiditionalStationCount();
 		
 		Model model = new Model( file.getName().replace(".pmz", "") , size);
-		model.setCountryName(info.getValue("Options", "Country"));
-		model.setCityName(info.getValue("Options", "RusName"));
+		
+		String countryName = info.getValue("Options", "Country");
+		String cityName = info.getValue("Options", "RusName");
+		if(cityName == null){
+			cityName = info.getValue("Options", "CityName");
+		}
+		model.setCountryName(countryName);
+		model.setCityName(cityName);
 		model.setLinesWidth(map.getLinesWidth());
 		model.setStationDiameter(map.getStationDiameter());
 		model.setWordWrap(map.isWordWrap());
