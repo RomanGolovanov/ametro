@@ -97,6 +97,12 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 			if(resultCode == RESULT_CANCELED && requestCode == REQUEST_RENDER_MAP){
 				MapSettings.clearDefaultMapName(this);
 			}
+			if(resultCode == RESULT_CANCELED && requestCode == REQUEST_BROWSE_LIBRARY){
+				String mapName = MapSettings.getMapName();
+				if(!ModelTileManager.isExist(mapName, 0)){
+					initializeMapView(MapUri.create(MapSettings.getMapName()), true);
+				}
+			}
 			break;
 		}
 		super.onActivityResult(requestCode, resultCode, data);
