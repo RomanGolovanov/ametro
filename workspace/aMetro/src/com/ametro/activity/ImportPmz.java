@@ -87,6 +87,10 @@ public class ImportPmz extends Activity {
 			return x != 0 ? x : this.mMapName.compareTo(another.mMapName);
 		}
 
+		public boolean isCheckable() {
+			return mSeverity>0;
+		}
+
 	}
 
 	private class ImportListAdapter extends ArrayAdapter<ImportRecord> 
@@ -131,7 +135,7 @@ public class ImportPmz extends Activity {
 			holder.mCheckbox.setTag(data);
 			holder.mCheckbox.setChecked(data.isChecked());
 			holder.mCheckbox.setClickable(false);
-			holder.mCheckbox .setVisibility(data.getSeverity()>0 ? View.VISIBLE : View.INVISIBLE );
+			holder.mCheckbox .setVisibility(data.isCheckable() ? View.VISIBLE : View.INVISIBLE );
 			return convertView;
 		}
 
@@ -220,9 +224,11 @@ public class ImportPmz extends Activity {
 			mImport.start();
 			return true;
 		case MAIN_MENU_SELECT_ALL:
-			for (Iterator<ImportRecord> iterator = mAdapter.getCheckedData().iterator(); iterator.hasNext();) {
+			for (Iterator<ImportRecord> iterator = mAdapter.getData().iterator(); iterator.hasNext();) {
 				ImportRecord importRecord = iterator.next();
-				importRecord.setChecked(true);
+				if(importRecord.isCheckable()){
+					importRecord.setChecked(true);
+				}
 			}
 			mListView.invalidateViews();
 			mMainMenuSelectAll.setEnabled(false);
