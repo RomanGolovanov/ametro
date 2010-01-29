@@ -214,11 +214,11 @@ public class ImportPmz extends Activity {
 		mMainMenuSelectNone.setEnabled(false);
 	}
 
-	@Override
+	@Override 
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case MAIN_MENU_IMPORT:
-			setContentView(R.layout.import_pmz);
+			setContentView(R.layout.import_pmz_progress);
 			mProgressTitle = (TextView)findViewById(R.id.import_pmz_progress_title);
 			mProgressText = (TextView)findViewById(R.id.import_pmz_progress_text);
 			mImport.start();
@@ -287,9 +287,9 @@ public class ImportPmz extends Activity {
 
 	private final Runnable mHandleIndexed = new Runnable() {
 		public void run() {
-			mListView = new ListView(ImportPmz.this);
+			setContentView(R.layout.import_pmz_confirm);
+			mListView = (ListView)findViewById(R.id.import_pmz_confirm_list);
 			mListView.setAdapter(mAdapter);
-			setContentView(mListView);
 			mPrepared = true;
 		}
 	};	
@@ -325,25 +325,24 @@ public class ImportPmz extends Activity {
 		private void indexPmzFile(ArrayList<ImportRecord> imports, String fileName) {
 			String mapFileName = MapSettings.getMapFileName(fileName.replace(MapSettings.PMZ_FILE_TYPE, ""));
 			File mapFile = new File( mapFileName );
-			File importFile = new File(fileName);
 			String fullFileName = MapSettings.IMPORT_PATH + fileName;
 			try {
-				ModelDescription importDescription = MapBuilder.indexPmz(fullFileName);
-				String mapName = String.format("%s - %s" , importDescription.getCountryName() , importDescription.getCityName() );
+				ModelDescription pmz = MapBuilder.indexPmz(fullFileName);
+				String mapName = String.format("%s - %s" , pmz.getCountryName() , pmz.getCityName() );
 				int severity = 4;
 				int statusId = R.string.import_status_not_imported;
 				int color = Color.RED;
 				if(mapFile.exists()){
-					ModelDescription modelDescription = MapBuilder.loadModelDescription(mapFileName);
-					if( modelDescription.equals(importDescription) ){
-						if( importFile.lastModified() > mapFile.lastModified() ){
-							statusId = R.string.import_status_deprecated;
-							color = Color.YELLOW;
-							severity = 3;
-						}else{
+					ModelDescription map = MapBuilder.loadModelDescription(mapFileName);
+					if( map.locationEqual(pmz) ){
+						if( map.completeEqual(pmz) ){
 							statusId = R.string.import_status_uptodate;
 							color = Color.GREEN;
 							severity = 1;
+						}else{
+							statusId = R.string.import_status_deprecated;
+							color = Color.YELLOW;
+							severity = 3;
 						}
 					}else{
 						statusId = R.string.import_status_override;
@@ -351,7 +350,6 @@ public class ImportPmz extends Activity {
 						severity = 2;
 					}
 				}
-
 				imports.add(new ImportRecord(
 						severity,
 						mapName, 

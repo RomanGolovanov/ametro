@@ -13,13 +13,13 @@ import java.util.zip.ZipFile;
 
 public class FilePackage {
 
+	
+	
 	private ZipFile file;
 
 	private Dictionary<String,MapResource> mapResources = new Hashtable<String, MapResource>();
 	private Dictionary<String,TransportResource> transportResources = new Hashtable<String, TransportResource>();
-	private Dictionary<String,TextResource> textResources = new Hashtable<String, TextResource>();
 	private Dictionary<String,VectorResource> vectorResources = new Hashtable<String, VectorResource>();
-	private Dictionary<String,ImageResource> imageResources = new Hashtable<String, ImageResource>();
 	private Dictionary<String,GenericResource> genericResource = new Hashtable<String, GenericResource>();
 
 	private GenericResource cityGenericResource;
@@ -44,16 +44,6 @@ public class FilePackage {
 		return resource;
 	}
 
-
-	public TextResource getTextResource(String name)  throws IOException {
-		TextResource resource = textResources.get(name);
-		if(resource==null){
-			resource = new TextResource();
-			loadResource(name,resource);
-			textResources.put(name,resource);
-		}
-		return resource;
-	}
 	public VectorResource getVectorResource(String name) throws IOException {
 		VectorResource resource = vectorResources.get(name);
 		if(resource==null){
@@ -64,15 +54,6 @@ public class FilePackage {
 		return resource;
 	}
 
-	public ImageResource getImageResource(String name) throws IOException {
-		ImageResource resource = imageResources.get(name);
-		if(resource==null){
-			resource = new ImageResource();
-			loadResource(name,resource);
-			imageResources.put(name,resource);
-		}
-		return resource;
-	}
 
 	public GenericResource getGenericResource(String name) throws IOException {
 		GenericResource resource = genericResource.get(name);
@@ -105,9 +86,7 @@ public class FilePackage {
 		file = null;
 		mapResources = null;
 		transportResources = null;
-		textResources = null;
 		vectorResources = null;
-		imageResources = null;
 		genericResource = null;
 		cityGenericResource = null;
 	}
@@ -190,6 +169,7 @@ public class FilePackage {
 				observer.parseLine(line);
 			}
 			observer.doneInitialize();
+			observer.setCrc(entry.getCrc());
 		}
 		finally {
 			input.close();

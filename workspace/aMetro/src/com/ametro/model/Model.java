@@ -72,6 +72,9 @@ public class Model implements Serializable {
 		mMapName = mapName;
 	}
 
+	private long mTimestamp;
+	private long mCrc;
+	
 	private String mMapName;
 
 	private String mCityName;
@@ -87,6 +90,24 @@ public class Model implements Serializable {
 
 	private Dictionary<String, Line> mLines = new Hashtable<String, Line>();
 	private ArrayList<Transfer> mTransfers = new ArrayList<Transfer>();
+
+	
+	
+	public long getTimestamp() {
+		return mTimestamp;
+	}
+
+	public void setTimestamp(long mTimestamp) {
+		this.mTimestamp = mTimestamp;
+	}
+
+	public long getCrc() {
+		return mCrc;
+	}
+
+	public void setCrc(long mCrc) {
+		this.mCrc = mCrc;
+	}
 
 	public void setCityName(String cityName) {
 		mCityName = cityName;

@@ -88,7 +88,6 @@ public class MapRenderer {
 		if(src!=null){
 			canvas.translate(-src.left, -src.top);
 		}
-		canvas.translate(50, 50);
 		render(canvas);
 	}
 

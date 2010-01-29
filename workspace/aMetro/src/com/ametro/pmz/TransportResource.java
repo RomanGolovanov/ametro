@@ -128,5 +128,15 @@ public class TransportResource implements IResource {
 	
 	private Hashtable<String, TransportLine> mLines;
 	private ArrayList<TransportTransfer> mTransfers;
+	private long mCrc;
 
+	public long getCrc() {
+		return mCrc;
+	}
+
+	public void setCrc(long crc) {
+		mCrc = crc;
+	}	
+
+	
 }
