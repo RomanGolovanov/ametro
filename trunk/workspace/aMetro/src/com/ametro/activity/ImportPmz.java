@@ -2,7 +2,6 @@ package com.ametro.activity;
 
 import java.io.File;
 import java.io.FilenameFilter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -20,11 +19,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.ametro.MapSettings;
 import com.ametro.R;
@@ -42,6 +43,7 @@ public class ImportPmz extends Activity {
 		private String mStatus;
 		private int mStatusColor;
 		private boolean mChecked;
+
 
 		public ImportRecord(int severity, String mapName, String fileName, String status, int statusColor, boolean checked) {
 			super();
@@ -192,10 +194,7 @@ public class ImportPmz extends Activity {
 		mMainMenuImport = menu.add(0, MAIN_MENU_IMPORT, 	0, R.string.menu_import).setIcon(android.R.drawable.ic_menu_add);
 		mMainMenuSelectAll = menu.add(0, MAIN_MENU_SELECT_ALL, 1, R.string.menu_select_all).setIcon(android.R.drawable.ic_menu_more);
 		mMainMenuSelectNone = menu.add(0, MAIN_MENU_SELECT_NONE, 1, R.string.menu_select_none).setIcon(android.R.drawable.ic_menu_revert);
-
 		updateMenuStatus();
-
-
 		return true;
 	}
 
@@ -203,7 +202,7 @@ public class ImportPmz extends Activity {
 		if(mMainMenuImport == null) return;
 		if(mPrepared){
 			final List<ImportRecord> dataChecked = mAdapter.getCheckedData();
-			final List<ImportRecord> data = mAdapter.getCheckedData();
+			final List<ImportRecord> data = mAdapter.getData();
 			mMainMenuImport.setEnabled(dataChecked.size()>0);
 			mMainMenuSelectAll.setEnabled(dataChecked.size() < data.size());
 			mMainMenuSelectNone.setEnabled(dataChecked.size()>0);
@@ -219,6 +218,7 @@ public class ImportPmz extends Activity {
 		switch (item.getItemId()) {
 		case MAIN_MENU_IMPORT:
 			setContentView(R.layout.import_pmz_progress);
+			setTitle(R.string.import_title_indexing);
 			mProgressTitle = (TextView)findViewById(R.id.import_pmz_progress_title);
 			mProgressText = (TextView)findViewById(R.id.import_pmz_progress_text);
 			mImport.start();
@@ -231,8 +231,7 @@ public class ImportPmz extends Activity {
 				}
 			}
 			mListView.invalidateViews();
-			mMainMenuSelectAll.setEnabled(false);
-			mMainMenuSelectNone.setEnabled(true);
+			updateMenuStatus();
 			return true;
 		case MAIN_MENU_SELECT_NONE:
 			for (Iterator<ImportRecord> iterator = mAdapter.getCheckedData().iterator(); iterator.hasNext();) {
@@ -241,8 +240,7 @@ public class ImportPmz extends Activity {
 				
 			}
 			mListView.invalidateViews();
-			mMainMenuSelectAll.setEnabled(true);
-			mMainMenuSelectNone.setEnabled(false);
+			updateMenuStatus();
 			return true;
 		}		
 		return super.onOptionsItemSelected(item);
@@ -254,15 +252,9 @@ public class ImportPmz extends Activity {
 		MapSettings.checkPrerequisite(this);
 		mPrepared = false;
 		setContentView(R.layout.waiting);
+		setTitle(R.string.import_title_indexing);
 		mIndex.start();
 	}
-
-	private final Runnable mReturnOk = new Runnable() {
-		public void run() {
-			setResult(RESULT_OK, null);
-			finish();
-		}
-	};
 
 	private final Runnable mHandleException = new Runnable() {
 		public void run() {
@@ -278,9 +270,7 @@ public class ImportPmz extends Activity {
 
 	private final Runnable mHandleImportUpdateProgress = new Runnable() {
 		public void run() {
-			mProgressTitle.setText(
-					String.format("Importing map %s/%s", Integer.toString(mImportPosition), Integer.toString(mImportCount))
-			);
+			mProgressTitle.setText( String.format("Importing map %s/%s", Integer.toString(mImportPosition), Integer.toString(mImportCount)) );
 			mProgressText.setText(mImportMapName);
 		}
 	};
@@ -288,6 +278,7 @@ public class ImportPmz extends Activity {
 	private final Runnable mHandleIndexed = new Runnable() {
 		public void run() {
 			setContentView(R.layout.import_pmz_confirm);
+			setTitle(R.string.import_title_confirm);
 			mListView = (ListView)findViewById(R.id.import_pmz_confirm_list);
 			mListView.setAdapter(mAdapter);
 			mPrepared = true;
@@ -374,6 +365,7 @@ public class ImportPmz extends Activity {
 	private final Thread mImport = new Thread() {
 		public void run() {
 			List<ImportRecord> imports = mAdapter.getCheckedData();
+			ArrayList<ImportRecord> results = new ArrayList<ImportRecord>();
 			mImportCount = imports.size();
 			mImportPosition = 0;
 			for (Iterator<ImportRecord> iterator = imports.iterator(); iterator.hasNext();) {
@@ -381,19 +373,52 @@ public class ImportPmz extends Activity {
 				mImportPosition++;
 				mImportMapName = importRecord.getMapName();
 				mHandler.post(mHandleImportUpdateProgress);
+				
 				try {
 					Model map = MapBuilder.importPmz(importRecord.getFileName());
 					MapBuilder.saveModel(map);
-				} catch (IOException e) {
-					Log.e("aMetro","Failed import map", e);
-					mFailReason = e;
-					mHandler.post(mHandleException);
+				} catch (Exception e) {
+					results.add(new ImportRecord(
+							-1, 
+							importRecord.getMapName(), 
+							importRecord.getFileName(), 
+							"import failed", 
+							Color.RED, 
+							false));
 				}
-
 			}
-
-			mHandler.post(mReturnOk);
+			Collections.sort(results);
+			mAdapter = new ImportListAdapter(ImportPmz.this, 0, results);
+			mHandler.post(mFinishImport);
 		}
 	};
 
+	private final Runnable mFinishImport = new Runnable() {
+		public void run() {
+			if(mAdapter.getData().size() == 0){
+				ImportPmz.this.setResult(RESULT_OK);
+				ImportPmz.this.finish();
+			}
+			setContentView(R.layout.import_pmz_confirm);
+			setTitle(R.string.import_title_report);
+			mListView = (ListView)findViewById(R.id.import_pmz_confirm_list);
+			mListView.setAdapter(mAdapter);
+			
+			mListView.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> arg0, View arg1,
+						int arg2, long arg3) {
+					ImportPmz.this.setResult(RESULT_OK);
+					ImportPmz.this.finish();
+					
+				}
+				
+			});
+			mPrepared = false;
+			mMainMenuImport.setVisible(false);
+			mMainMenuSelectAll.setVisible(false);
+			mMainMenuSelectNone.setVisible(false);
+		}
+	};	
 }
