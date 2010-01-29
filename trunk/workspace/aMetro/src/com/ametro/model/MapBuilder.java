@@ -110,10 +110,14 @@ public class MapBuilder {
 		GenericResource info = pkg.getCityGenericResource();
 		model.setCountryName(info.getValue("Options", "Country"));
 		model.setCityName(info.getValue("Options", "RusName"));
+		
+		File pmzFile = new File(fileName);
+		model.setTimestamp( pmzFile.lastModified() );
 		Log.i("aMetro", String.format("PMZ description '%s' loading time is %sms", fileName, Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
 		return model;
 	}
 
+	
 	public static Model importPmz(String fileName) throws IOException
 	{
 		Date startTimestamp = new Date();
@@ -133,6 +137,7 @@ public class MapBuilder {
 		model.setStationDiameter(map.getStationDiameter());
 		model.setWordWrap(map.isWordWrap());
 		model.setUpperCase(map.isUpperCase());
+		model.setTimestamp(file.lastModified());
 
 		Hashtable<String, MapLine> mapLines = map.getMapLines();
 		Hashtable<String, TransportLine> transportLines = trp.getLines();
@@ -163,15 +168,18 @@ public class MapBuilder {
 			fillAdditionalLines(model, al);
 		}
 
-		calculateDimensions(model);
+		fixDimensions(model);
 
 		Log.i("aMetro", String.format("PMZ file '%s' parsing time is %sms", file.getName(), Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
 		return model;
 	}
 
-	private static void calculateDimensions(Model model){
-		android.graphics.Rect bounds = new android.graphics.Rect(0,0,0,0);
+	private static void fixDimensions(Model model){
 		Enumeration<Line> lines = model.getLines();
+		int xmin = Integer.MAX_VALUE;
+		int ymin = Integer.MAX_VALUE;
+		int xmax = Integer.MIN_VALUE;
+		int ymax = Integer.MIN_VALUE;
 		while(lines.hasMoreElements()){
 			Line line = lines.nextElement();
 			Enumeration<Station> stations = line.getStations();
@@ -179,15 +187,58 @@ public class MapBuilder {
 				Station station = stations.nextElement();
 				Point p = station.getPoint();
 				if(p!=null){
-					bounds.union(p.x, p.y);
+					if(xmin>p.x) xmin = p.x;
+					if(ymin>p.y) ymin = p.y;
+					
+					if(xmax<p.x) xmax = p.x;
+					if(ymax<p.y) ymax = p.y;
 				}
 				Rect r = station.getRect();
 				if(r!=null){
-					bounds.union(r.left, r.top, r.right, r.bottom);
+					if(xmin>r.left) xmin = r.left;
+					if(ymin>r.top) ymin = r.top;
+					if(xmin>r.right) xmin = r.right;
+					if(ymin>r.bottom) ymin = r.bottom;
+					
+					if(xmax<r.left) xmax = r.left;
+					if(ymax<r.top) ymax = r.top;
+					if(xmax<r.right) xmax = r.right;
+					if(ymax<r.bottom) ymax = r.bottom;
 				}				
 			}
 		}
-		model.setDimension(bounds.width()+100, bounds.height()+100);
+
+		int dx = 50 - xmin;
+		int dy = 50 - ymin;
+		
+		lines = model.getLines();
+		while(lines.hasMoreElements()){
+			Line line = lines.nextElement();
+			Enumeration<Station> stations = line.getStations();
+			while(stations.hasMoreElements()){
+				Station station = stations.nextElement();
+				Point p = station.getPoint();
+				if(p!=null){
+					p.offset(dx, dy);
+				}
+				Rect r = station.getRect();
+				if(r!=null){
+					r.offset(dx, dy);
+				}				
+			}
+			for (Iterator<Segment> segments = line.getSegments(); segments.hasNext();) {
+				Segment segment =  segments.next();
+				Point[] points = segment.getAdditionalNodes();
+				if(points!=null){
+					for (int i = 0; i < points.length; i++) {
+						points[i].offset(dx, dy);
+					}
+				}
+				
+			}
+		}
+		
+		model.setDimension(xmax-xmin+100, ymax-ymin+100);
 	}
 
 	private static void fillTransfer(Model model, TransportTransfer t) {

@@ -66,5 +66,14 @@ public class VectorResource implements IResource {
 
 	private int width;
 	private int height;
+	private long mCrc;
+
+	public long getCrc() {
+		return mCrc;
+	}
+
+	public void setCrc(long crc) {
+		mCrc = crc;
+	}	
 
 }

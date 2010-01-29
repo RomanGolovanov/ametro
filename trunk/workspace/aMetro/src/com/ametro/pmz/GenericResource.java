@@ -71,4 +71,15 @@ public class GenericResource implements IResource {
 	private ArrayList<String> mKeys;
 	private Dictionary<String, Dictionary<String, String>> mSections;
 	private Parser mParser;
+	private long mCrc;
+
+	@Override
+	public long getCrc() {
+		return mCrc;
+	}
+
+	@Override
+	public void setCrc(long crc) {
+		mCrc = crc;
+	}
 }
