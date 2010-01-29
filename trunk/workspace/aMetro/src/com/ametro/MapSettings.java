@@ -1,8 +1,8 @@
 package com.ametro;
 
 import java.io.File;
+import java.io.IOException;
 
-import com.ametro.activity.CreatePrerequisites;
 import com.ametro.libs.Helpers;
 import com.ametro.model.Model;
 
@@ -56,16 +56,35 @@ public class MapSettings {
 		File maps = new File(MAPS_PATH);
 		File cache = new File(CACHE_PATH);
 		if( !root.exists() || !maps.exists() || !cache.exists() ){
-			context.startActivity(new Intent(context,CreatePrerequisites.class));
+			//context.startActivity(new Intent(context,CreatePrerequisites.class));
+
+			createDirectory(MAPS_PATH);
+			createDirectory(IMPORT_PATH);
+			createDirectory(CACHE_PATH);
+			createFile(ROOT_PATH + NO_MEDIA_TAG);			
+			
 		}
 	}
 	
+	private static void createFile(String path) {
+		try {
+			File f = new File(path);
+			f.createNewFile();
+		} catch (IOException e) {
+			// scoop exception
+		}
+	}
+	private static void createDirectory(String path){
+		File f = new File(path);
+		f.mkdirs();
+	}	
+	
 	public static String getMapFileName(String mapName) {
-		return (MapSettings.MAPS_PATH + mapName + MAP_FILE_TYPE).toLowerCase();
+		return (MAPS_PATH + mapName + MAP_FILE_TYPE).toLowerCase();
 	}
 
 	public static String getCacheFileName(String mapName){
-		return (MapSettings.CACHE_PATH + mapName + CACHE_FILE_TYPE).toLowerCase();
+		return (CACHE_PATH + mapName + CACHE_FILE_TYPE).toLowerCase();
 	}
 
 	public static void loadDefaultMapName(Context context) {

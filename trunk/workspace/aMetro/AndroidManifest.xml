@@ -12,7 +12,6 @@
         <activity android:name=".activity.BrowseLibrary"/>
         <activity android:name=".activity.RenderMap"/>
         <activity android:name=".activity.ImportPmz"/>
-        <activity android:name=".activity.CreatePrerequisites"/>
     </application>
     <uses-sdk android:minSdkVersion="3"/>
 </manifest>

@@ -209,22 +209,26 @@ public class MapBuilder {
 		Station to = model.getStation(al.mLineName, al.mToStationName);
 		if(from!=null && to!=null){
 			Segment segment = line.getSegment(from,to);
-			if(segment!=null && segment.getAdditionalNodes() == null){
-				Point[] points = al.mPoints;
-				segment.setAdditionalNodes(points);
-				if(al.mIsSpline){
-					segment.setFlags(Segment.SPLINE);
+			if(segment!=null){
+				if(segment.getAdditionalNodes() == null){
+					Point[] points = al.mPoints;
+					segment.setAdditionalNodes(points);
+					if(al.mIsSpline){
+						segment.setFlags(Segment.SPLINE);
+					}
 				}
 			}else{
 				Segment opposite = line.getSegment(to,from);
-				if(opposite!=null && opposite.getAdditionalNodes() == null){
-					Point[] points = new Point[ al.mPoints.length ];
-					for(int i = 0;i < points.length; i++){
-						points[i] = al.mPoints[(points.length-1)-i];
-					}
-					opposite.setAdditionalNodes(points);
-					if(al.mIsSpline){
-						opposite.setFlags(Segment.SPLINE);
+				if(opposite!=null){
+					if(opposite.getAdditionalNodes() == null){
+						Point[] points = new Point[ al.mPoints.length ];
+						for(int i = 0;i < points.length; i++){
+							points[i] = al.mPoints[(points.length-1)-i];
+						}
+						opposite.setAdditionalNodes(points);
+						if(al.mIsSpline){
+							opposite.setFlags(Segment.SPLINE);
+						}
 					}
 				}				
 			}
@@ -339,7 +343,7 @@ public class MapBuilder {
 							fromDelay = opposite!=null ? opposite.getDelay() : null;
 						}
 						line.addSegment(thisStation, fromStation, fromDelay);
-					}
+					} 
 					if(toStation!=null && line.getSegment(thisStation, toStation)==null)
 					{
 						line.addSegment(thisStation, toStation, toDelay);
