@@ -151,4 +151,14 @@ public class MapSettings {
 		return getMapFileName(MapUri.getMapName(uri));
 	}
 
+	private static boolean mRefreshOverride = false;
+	
+	public static boolean isRefreshOverride(Context context) {
+		return mRefreshOverride;
+	}
+	public static void setRefreshOverride(Context context, boolean enabled) {
+		mRefreshOverride = enabled;
+	}
+	
+
 }

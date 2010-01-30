@@ -157,11 +157,7 @@ public class MapBuilder {
 		while(lines.hasNext()){
 			TransportLine tl = lines.next();
 			MapResource.MapLine ml = mapLines.get(tl.mName);
-			if(ml == null && tl.mName!=null) {
-				continue;
-				//MapResource lineMap = pkg.getMapResource(tl.mMapName);
-				//ml = lineMap.getMapLines().get(tl.mName); 
-			}
+			if(ml == null && tl.mName!=null) continue;
 			fillMapLines( model, tl, ml);
 		}
 

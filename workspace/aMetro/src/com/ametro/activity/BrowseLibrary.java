@@ -311,7 +311,8 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch(requestCode){
 		case REQUEST_IMPORT:
-			if(resultCode == RESULT_OK){
+			if(resultCode == RESULT_OK || MapSettings.isRefreshOverride(this)){
+				MapSettings.setRefreshOverride(this, false);
 				initializeControls(true);
 			}
 			break;

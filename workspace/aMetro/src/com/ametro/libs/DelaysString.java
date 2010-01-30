@@ -12,15 +12,17 @@ public class DelaysString {
 		//text = text.replaceAll("\\)","");
 		//mParts = text.split(",");
 		mText = text;
-		mLen = mText.length();
+		mLen = text!=null ? mText.length() : 0;
 		mPos = 0;
 	}
 
 	public boolean beginBracket(){
+		if(mText == null) return false; 
 		return mPos < mLen && mText.charAt(mPos) == '(';
 	}
 
 	private String nextBlock(){
+		if(mText == null) return null; 
 		int nextComma = mText.indexOf(",", beginBracket() ? mText.indexOf(")", mPos) : mPos);
 		String block = nextComma!=-1 ? mText.substring(mPos, nextComma) : mText.substring(mPos);
 		mPos =  nextComma!=-1 ? nextComma+1 : mLen;
@@ -32,6 +34,7 @@ public class DelaysString {
 	}
 
 	public Double[] nextBracket(){
+		if(mText == null) return null; 
 		String block = nextBlock();
 		return Helpers.parseDoubleArray( block.substring(1, block.length()-1) );
 	}
