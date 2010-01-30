@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public class ModelDescription implements Serializable {
 
-	private static final long serialVersionUID = -7235384948740168505L;
-	
+	private static final long serialVersionUID = 7999055006455680808L;
+
 	private String mMapName;
 	private String mCountryName;
 	private String mCityName;
@@ -16,11 +16,14 @@ public class ModelDescription implements Serializable {
 	private long mTimestamp;
 	private long mCrc;
 	
+	private long mRenderVersion;
+	private long mSourceVersion;
+	
 	public ModelDescription(){
 		super();
 	}
 
-	public ModelDescription(String mapName, String countryName, String cityName, int width, int height, long crc, long timestamp) {
+	public ModelDescription(String mapName, String countryName, String cityName, int width, int height, long crc, long timestamp, long sourceVersion, long renderVersion) {
 		super();
 		this.mMapName = mapName;
 		this.mCountryName = countryName;
@@ -29,6 +32,8 @@ public class ModelDescription implements Serializable {
 		this.mHeight = height;
 		this.mCrc = crc;
 		this.mTimestamp = timestamp;
+		this.mSourceVersion = sourceVersion;
+		this.mRenderVersion = renderVersion;
 	}
 
 	public ModelDescription(Model model) {
@@ -40,55 +45,86 @@ public class ModelDescription implements Serializable {
 		mHeight = model.getHeight();
 		mCrc = model.getCrc();
 		mTimestamp = model.getTimestamp();
+		mSourceVersion = model.getSourceVersion();
 	}
 
 	public String getMapName() {
 		return mMapName;
 	}
+	
 	public void setMapName(String mapName) {
 		this.mMapName = mapName;
 	}
+	
 	public String getCountryName() {
 		return mCountryName;
 	}
+	
 	public void setCountryName(String countryName) {
 		this.mCountryName = countryName;
 	}
+	
 	public String getCityName() {
 		return mCityName;
 	}
+	
 	public void setCityName(String cityName) {
 		this.mCityName = cityName;
 	}
+	
 	public int getWidth() {
 		return mWidth;
 	}
+	
 	public void setWidth(int width) {
 		this.mWidth = width;
 	}
+	
 	public int getHeight() {
 		return mHeight;
 	}
+	
 	public void setHeight(int height) {
 		this.mHeight = height;
 	}
+	
 	public long getTimestamp() {
 		return mTimestamp;
 	}
+	
 	public void setTimestamp(long mTimestamp) {
 		this.mTimestamp = mTimestamp;
 	}
+	
 	public long getCrc() {
 		return mCrc;
 	}
+
 	public void setCrc(long mCrc) {
 		this.mCrc = mCrc;
+	}
+	
+	public long getRenderVersion() {
+		return mRenderVersion;
+	}
+
+	public void setRenderVersion(long mRenderVersion) {
+		this.mRenderVersion = mRenderVersion;
+	}
+
+	public long getSourceVersion() {
+		return mSourceVersion;
+	}
+
+	public void setSourceVersion(long mSourceVersion) {
+		this.mSourceVersion = mSourceVersion;
 	}
 
 	public boolean completeEqual(ModelDescription model) {
 		return locationEqual(model)
 			&& mCrc == model.getCrc()
 			&& mTimestamp == model.getTimestamp()
+			&& mSourceVersion == model.getSourceVersion()
 			;
 	}
 

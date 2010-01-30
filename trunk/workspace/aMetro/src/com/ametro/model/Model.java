@@ -10,7 +10,7 @@ import java.util.Iterator;
 
 public class Model implements Serializable {
 
-	private static final long serialVersionUID = 8360920748660733331L;
+	private static final long serialVersionUID = 8311233148747348420L;
 
 	private void writeObject(java.io.ObjectOutputStream out) throws IOException
 	{
@@ -25,6 +25,10 @@ public class Model implements Serializable {
 
 		out.writeBoolean(mWordWrap);
 		out.writeBoolean(mUpperCase);
+		
+		out.writeLong(mTimestamp);
+		out.writeLong(mCrc);
+		out.writeLong(mSourceVersion);
 
 		out.writeInt(mLines.size());
 		Enumeration<Line> lines = mLines.elements();
@@ -53,6 +57,10 @@ public class Model implements Serializable {
 		mWordWrap = in.readBoolean();
 		mUpperCase = in.readBoolean();
 
+		mTimestamp = in.readLong();
+		mCrc = in.readLong();
+		mSourceVersion = in.readLong();
+		
 		mLines = new Hashtable<String, Line>();
 		int lineCount = in.readInt();
 		for(int i = 0; i < lineCount; i++) {
@@ -68,7 +76,7 @@ public class Model implements Serializable {
 	}
 
 
-	public Model(String mapName, int size){
+	public Model(String mapName){
 		mMapName = mapName;
 	}
 
@@ -88,10 +96,18 @@ public class Model implements Serializable {
 	private boolean mWordWrap;
 	private boolean mUpperCase;
 
+	private long mSourceVersion;
+	
 	private Dictionary<String, Line> mLines = new Hashtable<String, Line>();
 	private ArrayList<Transfer> mTransfers = new ArrayList<Transfer>();
 
-	
+	public long getSourceVersion() {
+		return mSourceVersion;
+	}
+
+	public void setSourceVersion(long mSourceVersion) {
+		this.mSourceVersion = mSourceVersion;
+	}
 	
 	public long getTimestamp() {
 		return mTimestamp;
@@ -207,4 +223,5 @@ public class Model implements Serializable {
 		return mTransfers.iterator();
 	}
 
+	
 }

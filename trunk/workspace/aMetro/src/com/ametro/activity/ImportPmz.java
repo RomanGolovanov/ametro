@@ -237,7 +237,7 @@ public class ImportPmz extends Activity {
 			for (Iterator<ImportRecord> iterator = mAdapter.getCheckedData().iterator(); iterator.hasNext();) {
 				ImportRecord importRecord = iterator.next();
 				importRecord.setChecked(false);
-				
+
 			}
 			mListView.invalidateViews();
 			updateMenuStatus();
@@ -324,21 +324,28 @@ public class ImportPmz extends Activity {
 				int statusId = R.string.import_status_not_imported;
 				int color = Color.RED;
 				if(mapFile.exists()){
-					ModelDescription map = MapBuilder.loadModelDescription(mapFileName);
-					if( map.locationEqual(pmz) ){
-						if( map.completeEqual(pmz) ){
-							statusId = R.string.import_status_uptodate;
-							color = Color.GREEN;
-							severity = 1;
+					ModelDescription map = null;
+					try{
+						map = MapBuilder.loadModelDescription(mapFileName);
+					}catch(Exception ex){
+						map = null;
+					}
+					if(map != null){
+						if( map.locationEqual(pmz) ){
+							if( map.completeEqual(pmz) ){
+								statusId = R.string.import_status_uptodate;
+								color = Color.GREEN;
+								severity = 1;
+							}else{
+								statusId = R.string.import_status_deprecated;
+								color = Color.YELLOW;
+								severity = 3;
+							}
 						}else{
-							statusId = R.string.import_status_deprecated;
-							color = Color.YELLOW;
-							severity = 3;
+							statusId = R.string.import_status_override;
+							color = Color.GRAY;
+							severity = 2;
 						}
-					}else{
-						statusId = R.string.import_status_override;
-						color = Color.GRAY;
-						severity = 2;
 					}
 				}
 				imports.add(new ImportRecord(
@@ -373,7 +380,7 @@ public class ImportPmz extends Activity {
 				mImportPosition++;
 				mImportMapName = importRecord.getMapName();
 				mHandler.post(mHandleImportUpdateProgress);
-				
+
 				try {
 					Model map = MapBuilder.importPmz(importRecord.getFileName());
 					MapBuilder.saveModel(map);
@@ -403,7 +410,7 @@ public class ImportPmz extends Activity {
 			setTitle(R.string.import_title_report);
 			mListView = (ListView)findViewById(R.id.import_pmz_confirm_list);
 			mListView.setAdapter(mAdapter);
-			
+
 			mListView.setOnItemClickListener(new OnItemClickListener() {
 
 				@Override
@@ -411,9 +418,9 @@ public class ImportPmz extends Activity {
 						int arg2, long arg3) {
 					ImportPmz.this.setResult(RESULT_OK);
 					ImportPmz.this.finish();
-					
+
 				}
-				
+
 			});
 			mPrepared = false;
 			mMainMenuImport.setVisible(false);

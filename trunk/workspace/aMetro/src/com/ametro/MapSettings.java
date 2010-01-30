@@ -9,9 +9,13 @@ import com.ametro.model.Model;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Point;
+import android.net.Uri;
 
 public class MapSettings {
 
+	public static final long SOURCE_VERSION = 2;
+	public static final long RENDER_VERSION = 3;
+	
 	public static final String PREFERENCE_PACKAGE_FILE_NAME = "PACKAGE_FILE_NAME";
 	public static final String PREFERENCE_SCROLL_POSITION = "SCROLL_POSITION";
 	
@@ -25,7 +29,6 @@ public class MapSettings {
 
 	public static final String DEFAULT_MAP = "metro";
 	
-	public static final String CACHE_DESCRIPTION = ".description";
 	public static final String MAPS_LIST = ".maps";
 	public static final String NO_MEDIA_TAG = ".nomedia";
 	
@@ -142,6 +145,10 @@ public class MapSettings {
 			editor.remove(PREFERENCE_SCROLL_POSITION + "_" + mapName);
 			editor.commit();
 		}
+	}
+
+	public static String getMapFileName(Uri uri) {
+		return getMapFileName(MapUri.getMapName(uri));
 	}
 
 }

@@ -115,6 +115,7 @@ public class MapBuilder {
 		}
 		model.setCountryName(countryName);
 		model.setCityName(cityName);
+		model.setSourceVersion(MapSettings.SOURCE_VERSION);
 		File pmzFile = new File(fileName);
 		model.setTimestamp( pmzFile.lastModified() );
 		Log.i("aMetro", String.format("PMZ description '%s' loading time is %sms", fileName, Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
@@ -132,9 +133,7 @@ public class MapBuilder {
 		MapResource map = pkg.getMapResource("metro.map" );
 		TransportResource trp = pkg.getTransportResource(map.getTransportName() != null ? map.getTransportName() : "metro.trp");
 
-		int size = map.getStationCount() + map.getAddiditionalStationCount();
-		
-		Model model = new Model( file.getName().replace(".pmz", "") , size);
+		Model model = new Model( file.getName().replace(".pmz", ""));
 		
 		String countryName = info.getValue("Options", "Country");
 		String cityName = info.getValue("Options", "RusName");
@@ -147,7 +146,9 @@ public class MapBuilder {
 		model.setStationDiameter(map.getStationDiameter());
 		model.setWordWrap(map.isWordWrap());
 		model.setUpperCase(map.isUpperCase());
+		
 		model.setTimestamp(file.lastModified());
+		model.setSourceVersion(MapSettings.SOURCE_VERSION);
 
 		Hashtable<String, MapLine> mapLines = map.getMapLines();
 		Hashtable<String, TransportLine> transportLines = trp.getLines();

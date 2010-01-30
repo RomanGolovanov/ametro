@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.ametro.MapSettings;
@@ -144,7 +145,9 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 		private void scanModelFileContent(FileGroupsDictionary map, String fileName, String fullFileName) {
 			try {
 				ModelDescription modelDescription = MapBuilder.loadModelDescription(fullFileName);
-				map.putFile(modelDescription.getCountryName(), modelDescription.getCityName(), fileName);
+				if(modelDescription.getSourceVersion() == MapSettings.SOURCE_VERSION){
+					map.putFile(modelDescription.getCountryName(), modelDescription.getCityName(), fileName);
+				}
 			} catch (Exception e) {
 				Log.d("aMetro", "Map indexing failed for " + fileName, (Throwable)e);
 				// skip this file
@@ -357,8 +360,9 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 	private final Runnable mUpdateContentView = new Runnable() {
 		public void run() {
 			if(mAdapter.getGroupCount()>0){
+				setContentView(R.layout.library_browse);
+				mListView = (ExpandableListView)findViewById(R.id.library_map_list);
 				setProgressBarIndeterminateVisibility(false);
-				mListView = new ExpandableListView(BrowseLibrary.this);
 				mListView.setAdapter(mAdapter);
 				mListView.setOnChildClickListener(BrowseLibrary.this);
 				if(mDefaultPackageFileName!=null){
@@ -373,10 +377,9 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 					}
 				}
 
-				setContentView(mListView);
 				registerForContextMenu(mListView);
 			}else{
-				setContentView(R.layout.no_map_loaded);
+				setContentView(R.layout.library_empty);
 			}
 		}
 	};
