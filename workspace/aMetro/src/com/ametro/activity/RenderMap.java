@@ -30,8 +30,8 @@ public class RenderMap extends Activity implements IProgressUpdate {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.map_caching);
-		mCachingMapText = (TextView)findViewById(R.id.cachingMapText);
+		setContentView(R.layout.render_map_progress);
+		mCachingMapText = (TextView)findViewById(R.id.render_map_progress_text);
 		mCreateCache.start();
 	}
 

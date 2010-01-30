@@ -334,7 +334,7 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 	}
 
 	private void initializeControls(final boolean refresh) {
-		setContentView(R.layout.waiting);
+		setContentView(R.layout.global_wait);
 		mAdapter = new MapListAdapter(this);
 		mDefaultPackageFileName = null;
 		Intent intent = getIntent();
@@ -367,7 +367,7 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 	private final Runnable mUpdateContentView = new Runnable() {
 		public void run() {
 			if(mAdapter.getGroupCount()>0){
-				setContentView(R.layout.library_browse);
+				setContentView(R.layout.browse_library_main);
 				mListView = (ExpandableListView)findViewById(R.id.library_map_list);
 				setProgressBarIndeterminateVisibility(false);
 				mListView.setAdapter(mAdapter);
@@ -386,7 +386,7 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 
 				registerForContextMenu(mListView);
 			}else{
-				setContentView(R.layout.library_empty);
+				setContentView(R.layout.browse_library_empty);
 			}
 		}
 	};

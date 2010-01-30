@@ -12,7 +12,7 @@
 		android:layout_height="wrap_content"
 		>
 
-		<ImageView android:id="@+id/logoImageView" android:src="@drawable/small_logo"
+		<ImageView android:src="@drawable/small_logo"
 			android:layout_width="wrap_content" android:layout_height="wrap_content">
 		</ImageView>
 
@@ -23,10 +23,10 @@
 			android:baselineAligned="true"
 			>
 
-			<ProgressBar android:id="@+android:id/progress_small_title"
+			<ProgressBar
 				android:paddingRight="10px" android:layout_width="wrap_content"
 				android:layout_height="wrap_content" />
-			<TextView android:text="Loading...." android:layout_width="wrap_content"
+			<TextView android:text="@string/msg_loading" android:layout_width="wrap_content"
 				android:layout_height="wrap_content" />
 
 
