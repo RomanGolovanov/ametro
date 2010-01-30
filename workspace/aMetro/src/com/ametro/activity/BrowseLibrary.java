@@ -56,7 +56,7 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 		}
 
 		private static void writeMaps(FileGroupsDictionary data) {
-			String fileName = MapSettings.MAPS_PATH + MapSettings.MAPS_LIST;
+			String fileName = MapSettings.ROOT_PATH + MapSettings.MAPS_LIST;
 			ObjectOutputStream strm = null;
 			try{
 				strm = new ObjectOutputStream(new FileOutputStream(fileName));
@@ -76,11 +76,12 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 
 		private static FileGroupsDictionary readMaps()
 		{
-			String fileName = MapSettings.MAPS_PATH + MapSettings.MAPS_LIST;
+			File file = new File( MapSettings.ROOT_PATH + MapSettings.MAPS_LIST );
+			if(!file.exists()) return null;
 			ObjectInputStream strm = null;
 			try{
 				try {
-					strm = new ObjectInputStream(new FileInputStream(fileName));
+					strm = new ObjectInputStream(new FileInputStream(file));
 					FileGroupsDictionary map = (FileGroupsDictionary) strm.readObject();
 					Log.i("aMetro", "Loaded map cache");
 					return map;

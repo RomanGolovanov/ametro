@@ -356,7 +356,7 @@ public class ImportPmz extends Activity {
 									statusText =  ImportPmz.this.getString(statusId);
 									color = Color.CYAN;
 									severity = 3;
-								}else{
+								}else{ 
 									statusId = R.string.import_status_deprecated;
 									statusText =  ImportPmz.this.getString(statusId);
 									color = Color.YELLOW;
