@@ -12,6 +12,7 @@ import java.util.Date;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,7 +26,6 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.ametro.MapSettings;
@@ -145,7 +145,7 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 		private void scanModelFileContent(FileGroupsDictionary map, String fileName, String fullFileName) {
 			try {
 				ModelDescription modelDescription = MapBuilder.loadModelDescription(fullFileName);
-				if(modelDescription.getSourceVersion() == MapSettings.SOURCE_VERSION){
+				if(modelDescription.getSourceVersion() == MapSettings.getSourceVersion()){
 					map.putFile(modelDescription.getCountryName(), modelDescription.getCityName(), fileName);
 				}
 			} catch (Exception e) {
@@ -283,6 +283,11 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 		return true;
 	}
 
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+	}
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {

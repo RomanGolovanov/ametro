@@ -4,9 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -56,13 +54,13 @@ public class ModelTileManager {
 	{
 		File mapFile = new File(MapSettings.getMapFileName(mapName));
 		File contentFile = new File(MapSettings.getCacheFileName(mapName));
-		if( mapFile.exists() && mapFile.lastModified() <= contentFile.lastModified()){
+		if( mapFile.exists() && contentFile.exists()){
 			try{
 				ModelDescription cacheDescription = MapBuilder.loadModelDescription(contentFile.getAbsolutePath());
 				ModelDescription mapDescription = MapBuilder.loadModelDescription(mapFile.getAbsolutePath());
 				return cacheDescription.completeEqual(mapDescription) 
-					&& cacheDescription.getRenderVersion() == MapSettings.RENDER_VERSION
-					&& cacheDescription.getSourceVersion() == MapSettings.SOURCE_VERSION;
+					&& cacheDescription.getRenderVersion() == MapSettings.getRenderVersion()
+					&& cacheDescription.getSourceVersion() == MapSettings.getSourceVersion();
 			}catch(Exception ex){}
 			
 		}
@@ -85,7 +83,7 @@ public class ModelTileManager {
 
 			ZipEntry entry = new ZipEntry(MapSettings.DESCRIPTION_ENTRY_NAME);
 			ModelDescription description = new ModelDescription(model);
-			description.setRenderVersion(MapSettings.RENDER_VERSION);
+			description.setRenderVersion(MapSettings.getRenderVersion());
 			content.putNextEntry(entry);
 			ObjectOutputStream strm = new ObjectOutputStream(content);
 			strm.writeObject(description);

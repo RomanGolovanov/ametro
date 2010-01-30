@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest android:versionCode="1" android:versionName="1.0"
-    package="com.ametro" xmlns:android="http://schemas.android.com/apk/res/android">
-    <application android:debuggable="true"
-        android:icon="@drawable/appicon" android:label="@string/app_name">
-        <activity android:label="@string/app_name" android:name=".activity.BrowseMap">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
-        <activity android:name=".activity.BrowseLibrary"/>
-        <activity android:name=".activity.RenderMap"/>
-        <activity android:name=".activity.ImportPmz"/>
-    </application>
-    <uses-sdk android:minSdkVersion="3"/>
+	package="com.ametro" xmlns:android="http://schemas.android.com/apk/res/android">
+	<application android:debuggable="true" android:icon="@drawable/appicon"
+		android:label="@string/app_name">
+		<activity android:label="@string/app_name" android:name=".activity.BrowseMap">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+		<activity android:name=".activity.BrowseLibrary"
+			android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden" />
+		<activity android:name=".activity.RenderMap"
+			android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden" />
+		<activity android:name=".activity.ImportPmz"
+			android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden" />
+	</application>
+	<uses-sdk android:minSdkVersion="3" />
 </manifest>

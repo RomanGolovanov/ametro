@@ -115,7 +115,7 @@ public class MapBuilder {
 		}
 		model.setCountryName(countryName);
 		model.setCityName(cityName);
-		model.setSourceVersion(MapSettings.SOURCE_VERSION);
+		model.setSourceVersion(MapSettings.getSourceVersion());
 		File pmzFile = new File(fileName);
 		model.setTimestamp( pmzFile.lastModified() );
 		Log.i("aMetro", String.format("PMZ description '%s' loading time is %sms", fileName, Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
@@ -148,7 +148,7 @@ public class MapBuilder {
 		model.setUpperCase(map.isUpperCase());
 		
 		model.setTimestamp(file.lastModified());
-		model.setSourceVersion(MapSettings.SOURCE_VERSION);
+		model.setSourceVersion(MapSettings.getSourceVersion());
 
 		Hashtable<String, MapLine> mapLines = map.getMapLines();
 		Hashtable<String, TransportLine> transportLines = trp.getLines();

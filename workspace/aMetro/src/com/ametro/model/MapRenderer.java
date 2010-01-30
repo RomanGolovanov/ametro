@@ -302,7 +302,7 @@ public class MapRenderer {
 			final int right = rect.right;
 			final int bottom = rect.bottom;
 			final int top = rect.top;
-			final int left = rect.left;
+			//final int left = rect.left;
 			final int textHeight = bounds.height();
 			final int textWidth = bounds.width();
 			Rect textRect; 

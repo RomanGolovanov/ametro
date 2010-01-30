@@ -21,11 +21,12 @@
     <string name="import_status_not_imported">not imported</string>
     <string name="import_status_deprecated">new version</string>
     <string name="import_status_uptodate">already imported</string>
-    <string name="import_status_override">other city map</string>
+    <string name="import_status_override">file name conflict with %s - %s</string>
     <string name="import_status_invalid">invalid .pmz file</string>
     <string name="menu_select_all">Select All</string>
     <string name="menu_select_none">Select None</string>
     <string name="import_title_confirm">Import  - press import to start</string>
     <string name="import_title_indexing">Import </string>
     <string name="import_title_report">Import  - press back to return</string>
+    <string name="import_status_old_version">old version</string>
 </resources>

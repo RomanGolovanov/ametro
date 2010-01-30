@@ -1,7 +1,5 @@
 package com.ametro.activity;
 
-import java.io.IOException;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -19,10 +17,10 @@ import android.widget.Toast;
 
 import com.ametro.MapSettings;
 import com.ametro.MapUri;
+import com.ametro.R;
 import com.ametro.model.MapBuilder;
 import com.ametro.model.ModelDescription;
 import com.ametro.model.ModelTileManager;
-import com.ametro.R;
 import com.ametro.widget.TileImageView;
 
 public class BrowseMap extends Activity implements TileImageView.IDataProvider{
@@ -61,13 +59,13 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 		Intent intent = getIntent();
 		Uri uri = intent!= null ? intent.getData() : null;
 		if(uri!=null){
-			initializeMapView(uri, true);
+			initializeMapView(uri, true, false);
 		}else{
 			MapSettings.loadDefaultMapName(this);
 			if(MapSettings.getMapName()==null){
 				requestBrowseLibrary(true);
 			}else{
-				initializeMapView(MapUri.create(MapSettings.getMapName()), true);
+				initializeMapView(MapUri.create(MapSettings.getMapName()), true, false);
 			}
 		}
 	}
@@ -93,7 +91,7 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 			if(resultCode == RESULT_OK){
 				Uri uri = data.getData();
 				if(uri!=null){
-					initializeMapView(uri, requestCode!=REQUEST_RENDER_MAP);
+					initializeMapView(uri, requestCode!=REQUEST_RENDER_MAP, false);
 				}
 			}
 			if(resultCode == RESULT_CANCELED && requestCode == REQUEST_RENDER_MAP){
@@ -102,7 +100,7 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 			if(resultCode == RESULT_CANCELED && requestCode == REQUEST_BROWSE_LIBRARY){
 				String mapName = MapSettings.getMapName();
 				if(!ModelTileManager.isExist(mapName, 0)){
-					initializeMapView(MapUri.create(MapSettings.getMapName()), true);
+					initializeMapView(MapUri.create(MapSettings.getMapName()), true, true);
 				}
 			}
 			break;
@@ -149,17 +147,17 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 		case MAIN_MENU_STATION:
 			return true;
 		case MAIN_MENU_EXPERIMENTAL:
-			requestCreateMapCache(MapUri.create(MapSettings.getMapName()));
+			requestCreateMapCache(MapUri.create(MapSettings.getMapName()),false);
 			return true;
 		}		
 		return super.onOptionsItemSelected(item);
 	}	
 
-	private void initializeMapView(Uri uri, boolean allowCreateMapCache)  {
+	private void initializeMapView(Uri uri, boolean allowCreateMapCache, boolean finishOnNoMapLoaded)  {
 		String mapName = MapUri.getMapName(uri);
 		if(!ModelTileManager.isExist(mapName, 0)){
 			if(allowCreateMapCache){
-				requestCreateMapCache(uri);
+				requestCreateMapCache(uri,finishOnNoMapLoaded);
 			}
 		}else{
 			try{
@@ -167,7 +165,7 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 					mTileManager = ModelTileManager.load(uri);
 				} catch (Exception e) {
 					if(allowCreateMapCache){
-						requestCreateMapCache(uri);
+						requestCreateMapCache(uri,finishOnNoMapLoaded);
 						return;
 					}else{
 						throw e;
@@ -209,7 +207,7 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 	}
 
 
-	private void requestCreateMapCache(Uri uri) {
+	private void requestCreateMapCache(Uri uri, boolean finishOnNoMapLoaded) {
 		String fileName = MapSettings.getMapFileName(uri);
 		ModelDescription modelDescription;
 		
@@ -218,12 +216,16 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 		} catch (Exception e) {
 			modelDescription = null;
 		}
-		if(modelDescription!=null && modelDescription.getSourceVersion() == MapSettings.SOURCE_VERSION){
+		if(modelDescription!=null && modelDescription.getSourceVersion() == MapSettings.getSourceVersion()){
 			Intent createMapCache = new Intent(this, RenderMap.class);
 			createMapCache.setData(uri);
 			startActivityForResult(createMapCache, REQUEST_RENDER_MAP);
 		}else{
-			requestBrowseLibrary(true);
+			if(!finishOnNoMapLoaded){
+				requestBrowseLibrary(true);
+			}else{
+				finish();
+			}
 		}
 	}
 
