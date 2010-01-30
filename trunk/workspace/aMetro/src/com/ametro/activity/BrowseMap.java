@@ -54,7 +54,7 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		MapSettings.checkPrerequisite(this);
-		setContentView(R.layout.no_map_loaded);
+		setContentView(R.layout.browse_map_empty);
 		
 		Intent intent = getIntent();
 		Uri uri = intent!= null ? intent.getData() : null;
@@ -80,7 +80,7 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 	private void handleConfigurationException(Exception e) {
 		MapSettings.clearDefaultMapName(this);
 		Toast.makeText(this, "Configuration error: " + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-		setContentView(R.layout.no_map_loaded);
+		setContentView(R.layout.browse_map_empty);
 	}
 
 	@Override
@@ -231,7 +231,7 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 
 	private void requestBrowseLibrary(boolean setNoMapLoadingView) {
 		if(setNoMapLoadingView){
-			setContentView(R.layout.no_map_loaded);
+			setContentView(R.layout.browse_map_empty);
 		}
 		Intent browseLibrary = new Intent(this, BrowseLibrary.class);
 		if(MapSettings.getMapName()!=null){

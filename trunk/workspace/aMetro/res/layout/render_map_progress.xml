@@ -2,31 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:gravity="center"
 	android:layout_width="fill_parent" android:layout_height="fill_parent"
-	android:background="#000000"
-	>
+	android:background="#000000">
 
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:orientation="vertical" 
-		android:gravity="center"
-		android:layout_width="wrap_content" 
-		android:layout_height="wrap_content"
-		>
+		android:orientation="vertical" android:gravity="center"
+		android:layout_width="wrap_content" android:layout_height="wrap_content">
 
 		<ImageView android:id="@+id/logoImageView" android:src="@drawable/small_logo"
 			android:layout_width="wrap_content" android:layout_height="wrap_content">
 		</ImageView>
 
 		<LinearLayout android:orientation="horizontal"
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content"
-			android:gravity="center" 
-			android:baselineAligned="true"
-			>
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:gravity="center" android:baselineAligned="true">
 
-			<ProgressBar android:id="@+android:id/progress_small_title"
-				android:paddingRight="10px" android:layout_width="wrap_content"
-				android:layout_height="wrap_content" />
-			<TextView android:id="@+id/cachingMapText" android:text="Caching map..." android:layout_width="wrap_content"
+			<ProgressBar android:paddingRight="10px"
+				android:layout_width="wrap_content" android:layout_height="wrap_content" />
+			<TextView android:id="@+id/render_map_progress_text"
+				android:text="@string/msg_caching"
+				android:layout_width="wrap_content"
 				android:layout_height="wrap_content" />
 
 		</LinearLayout>

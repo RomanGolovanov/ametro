@@ -2,6 +2,12 @@
 <resources>
     <string name="app_name">aMetro</string>
     <string name="msg_loading">Loading... </string>
+    <string name="msg_caching">Caching map...</string>
+    <string name="msg_no_maps_in_library">No maps in library</string>
+    <string name="msg_press_menu_import">press menu and import new maps</string>
+    <string name="msg_no_map_loaded">No map loaded</string>
+    <string name="msg_press_menu_maps">press menu and select map</string>
+    
     <string name="menu_search">Search</string>
     <string name="menu_library">Maps</string>
     <string name="menu_routes">Routes</string>
@@ -18,15 +24,16 @@
     <string name="menu_import">Import</string>
     <string name="menu_all_maps">All Maps</string>
     <string name="menu_my_maps">My Maps</string>
+    <string name="menu_select_all">Select All</string>
+    <string name="menu_select_none">Select None</string>
     <string name="import_status_not_imported">not imported</string>
     <string name="import_status_deprecated">new version</string>
     <string name="import_status_uptodate">already imported</string>
     <string name="import_status_override">file name conflict with %s - %s</string>
     <string name="import_status_invalid">invalid .pmz file</string>
-    <string name="menu_select_all">Select All</string>
-    <string name="menu_select_none">Select None</string>
     <string name="import_title_confirm">Import  - press import to start</string>
     <string name="import_title_indexing">Import </string>
     <string name="import_title_report">Import  - press back to return</string>
     <string name="import_status_old_version">old version</string>
+    <string name="msg_import_pmz_progress">"Importing map %s/%s"</string>
 </resources>

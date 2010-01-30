@@ -25,7 +25,6 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.ametro.MapSettings;
@@ -173,7 +172,6 @@ public class ImportPmz extends Activity {
 	}
 
 	private final Handler mHandler = new Handler();
-	private Throwable mFailReason = null;
 
 	private ImportListAdapter mAdapter;
 	private ListView mListView;
@@ -189,13 +187,13 @@ public class ImportPmz extends Activity {
 	private MenuItem mMainMenuSelectAll;
 	private MenuItem mMainMenuSelectNone;
 
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		mMainMenuImport = menu.add(0, MAIN_MENU_IMPORT, 	0, R.string.menu_import).setIcon(android.R.drawable.ic_menu_add);
-		mMainMenuSelectAll = menu.add(0, MAIN_MENU_SELECT_ALL, 1, R.string.menu_select_all).setIcon(android.R.drawable.ic_menu_more);
-		mMainMenuSelectNone = menu.add(0, MAIN_MENU_SELECT_NONE, 1, R.string.menu_select_none).setIcon(android.R.drawable.ic_menu_revert);
+		mMainMenuSelectAll = menu.add(0, MAIN_MENU_SELECT_ALL, 1, R.string.menu_select_all).setIcon(android.R.drawable.ic_menu_agenda);
+		mMainMenuSelectNone = menu.add(0, MAIN_MENU_SELECT_NONE, 1, R.string.menu_select_none).setIcon(android.R.drawable.ic_menu_close_clear_cancel);
 		updateMenuStatus();
 		return true;
 	}
@@ -223,6 +221,7 @@ public class ImportPmz extends Activity {
 			setTitle(R.string.import_title_indexing);
 			mProgressTitle = (TextView)findViewById(R.id.import_pmz_progress_title);
 			mProgressText = (TextView)findViewById(R.id.import_pmz_progress_text);
+			mImportProgressTemplate=ImportPmz.this.getString(R.string.msg_import_pmz_progress);
 			mImport.start();
 			return true;
 		case MAIN_MENU_SELECT_ALL:
@@ -259,35 +258,28 @@ public class ImportPmz extends Activity {
 		super.onCreate(savedInstanceState);
 		MapSettings.checkPrerequisite(this);
 		mPrepared = false;
-		setContentView(R.layout.waiting);
+		setContentView(R.layout.global_wait);
 		setTitle(R.string.import_title_indexing);
 		mIndex.start();
 	}
 
-	private final Runnable mHandleException = new Runnable() {
-		public void run() {
-			Toast.makeText(ImportPmz.this, "Import failed: " + mFailReason.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-			setResult(RESULT_CANCELED, null);
-			finish();
-		}
-	};
-
 	private int mImportCount;
 	private int mImportPosition;
 	private String mImportMapName;
+	private String mImportProgressTemplate;
 
 	private final Runnable mHandleImportUpdateProgress = new Runnable() {
 		public void run() {
-			mProgressTitle.setText( String.format("Importing map %s/%s", Integer.toString(mImportPosition), Integer.toString(mImportCount)) );
+			mProgressTitle.setText( String.format(mImportProgressTemplate , Integer.toString(mImportPosition), Integer.toString(mImportCount)) );
 			mProgressText.setText(mImportMapName);
 		}
 	};
 
 	private final Runnable mHandleIndexed = new Runnable() {
 		public void run() {
-			setContentView(R.layout.import_pmz_confirm);
+			setContentView(R.layout.import_pmz_main);
 			setTitle(R.string.import_title_confirm);
-			mListView = (ListView)findViewById(R.id.import_pmz_confirm_list);
+			mListView = (ListView)findViewById(R.id.import_pmz_list);
 			mListView.setAdapter(mAdapter);
 			mPrepared = true;
 		}
@@ -295,30 +287,24 @@ public class ImportPmz extends Activity {
 
 	private final Thread mIndex = new Thread() {
 		public void run() {
-			try {
-				File dir = new File(MapSettings.IMPORT_PATH);
-				String[] files = dir.list(new FilenameFilter() {
-					@Override
-					public boolean accept(File f, String filename) {
-						return filename.endsWith(MapSettings.PMZ_FILE_TYPE);
-					}
-				});
-				ArrayList<ImportRecord> imports = new ArrayList<ImportRecord>();
-				if(files!=null){
-					for(int i = 0; i < files.length; i++){
-						String fileName = files[i];
-						indexPmzFile(imports, fileName);
-					}
-				}	
-				Collections.sort(imports);
-				mAdapter = new ImportListAdapter(ImportPmz.this, 0, imports);
-				mHandler.post(mHandleIndexed);
+			File dir = new File(MapSettings.IMPORT_PATH);
+			String[] files = dir.list(new FilenameFilter() {
+				@Override
+				public boolean accept(File f, String filename) {
+					return filename.endsWith(MapSettings.PMZ_FILE_TYPE);
+				}
+			});
+			ArrayList<ImportRecord> imports = new ArrayList<ImportRecord>();
+			if(files!=null){
+				for(int i = 0; i < files.length; i++){
+					String fileName = files[i];
+					indexPmzFile(imports, fileName);
+				}
+			}	
+			Collections.sort(imports);
+			mAdapter = new ImportListAdapter(ImportPmz.this, 0, imports);
+			mHandler.post(mHandleIndexed);
 
-			} catch (Exception e) {
-				Log.e("aMetro","Failed import map", e);
-				mFailReason = e;
-				mHandler.post(mHandleException);
-			}			
 		}
 
 		private void indexPmzFile(ArrayList<ImportRecord> imports, String fileName) {
@@ -331,7 +317,7 @@ public class ImportPmz extends Activity {
 						pmz.getCountryName(), 
 						pmz.getCityName(),
 						fileName
-						);
+				);
 				int severity = 5;
 				int statusId = R.string.import_status_not_imported;
 				int color = Color.RED;
@@ -370,7 +356,7 @@ public class ImportPmz extends Activity {
 									ImportPmz.this.getString(statusId),
 									map.getCountryName(),
 									map.getCityName()
-									);
+							);
 							color = Color.GRAY;
 							severity = 2;
 						}
@@ -385,7 +371,7 @@ public class ImportPmz extends Activity {
 						statusId == R.string.import_status_not_imported
 						||
 						statusId == R.string.import_status_deprecated
-						));
+				));
 
 			} catch (Exception e) {
 				Log.e("aMetro", "PMZ indexing error", (Throwable)e);
@@ -441,9 +427,9 @@ public class ImportPmz extends Activity {
 				ImportPmz.this.setResult(RESULT_OK);
 				ImportPmz.this.finish();
 			}
-			setContentView(R.layout.import_pmz_confirm);
+			setContentView(R.layout.import_pmz_main);
 			setTitle(R.string.import_title_report);
-			mListView = (ListView)findViewById(R.id.import_pmz_confirm_list);
+			mListView = (ListView)findViewById(R.id.import_pmz_list);
 			mListView.setAdapter(mAdapter);
 
 			mListView.setOnItemClickListener(new OnItemClickListener() {
