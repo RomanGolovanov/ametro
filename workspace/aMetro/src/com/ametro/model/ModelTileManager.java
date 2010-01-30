@@ -28,42 +28,15 @@ import com.ametro.libs.IProgressUpdate;
 
 public class ModelTileManager {
 
-	public static class Description  implements Serializable{
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 2583296356317936507L;
-
-		public String mMapName;
-		public String mCityName;
-		public String countryName;
-		public int width;
-		public int height;
-		public int minimumLevel;
-		public int maximumLevel;
-
-		public Description(Model map){
-			mMapName = map.getMapName();
-			mCityName = map.getCityName();
-			countryName = map.getCountryName();
-			width = map.getWidth();
-			height = map.getHeight();
-			minimumLevel = 0;
-			maximumLevel = 0;
-		}
-
-	}	
-
 	private int mLevel = 0;
-//	private Hashtable<String, byte[]> mFileCache;
-	private Description mDescription; 
+	private ModelDescription mDescription; 
 	private ZipFile mContent;
 
 	private ModelTileManager(Uri uri) throws IOException, ClassNotFoundException {
 		String mapName = MapUri.getMapName(uri);
-//		mFileCache = new Hashtable<String, byte[]>();
-		mContent = new ZipFile(MapSettings.getCacheFileName(mapName));
-		mDescription = loadDescription(mContent);
+		final String fileName = MapSettings.getCacheFileName(mapName);
+		mDescription = MapBuilder.loadModelDescription(fileName);
+		mContent = new ZipFile(fileName);
 	}
 
 	public Bitmap getTile(Rect rect) {
@@ -83,7 +56,17 @@ public class ModelTileManager {
 	{
 		File mapFile = new File(MapSettings.getMapFileName(mapName));
 		File contentFile = new File(MapSettings.getCacheFileName(mapName));
-		return mapFile.exists() && mapFile.lastModified() <= contentFile.lastModified();
+		if( mapFile.exists() && mapFile.lastModified() <= contentFile.lastModified()){
+			try{
+				ModelDescription cacheDescription = MapBuilder.loadModelDescription(contentFile.getAbsolutePath());
+				ModelDescription mapDescription = MapBuilder.loadModelDescription(mapFile.getAbsolutePath());
+				return cacheDescription.completeEqual(mapDescription) 
+					&& cacheDescription.getRenderVersion() == MapSettings.RENDER_VERSION
+					&& cacheDescription.getSourceVersion() == MapSettings.SOURCE_VERSION;
+			}catch(Exception ex){}
+			
+		}
+		return false;
 	}
 
 	public static ModelTileManager load(Uri uri) throws IOException, ClassNotFoundException{
@@ -99,7 +82,16 @@ public class ModelTileManager {
 		ZipOutputStream content = null;
 		try{
 			content = new ZipOutputStream(new FileOutputStream(file));
-			renderDescription(content, model);
+
+			ZipEntry entry = new ZipEntry(MapSettings.DESCRIPTION_ENTRY_NAME);
+			ModelDescription description = new ModelDescription(model);
+			description.setRenderVersion(MapSettings.RENDER_VERSION);
+			content.putNextEntry(entry);
+			ObjectOutputStream strm = new ObjectOutputStream(content);
+			strm.writeObject(description);
+			strm.flush();
+			content.closeEntry();
+
 			renderTiles(content, model, progress);
 			content.close();
 			final File destFile = new File(MapSettings.getCacheFileName(mapName));
@@ -113,30 +105,23 @@ public class ModelTileManager {
 		
 	}
 
-	private static void renderDescription(ZipOutputStream content, Model model) throws IOException {
-		ZipEntry entry = new ZipEntry(MapSettings.CACHE_DESCRIPTION);
-		Description description = new Description(model);
-
-		content.putNextEntry(entry);
-		ObjectOutputStream strm = new ObjectOutputStream(content);
-		strm.writeObject(description);
-		strm.flush();
-		content.closeEntry();
-
-	}
-
-	private Description loadDescription(ZipFile content) throws IOException, ClassNotFoundException {
-		ObjectInputStream strm = null;
-		try{
-			strm = new ObjectInputStream( content.getInputStream(content.getEntry(MapSettings.CACHE_DESCRIPTION)) );
-			return (Description)strm.readObject();
-		} finally{
-			if(strm!=null){
-				strm.close();
-			}
-		}
-
-	}
+//	private static ModelDescription loadDescription(String fileName) throws IOException, ClassNotFoundException {
+//		ZipFile content = null; 
+//		ObjectInputStream strm = null;
+//		try{
+//			content = new ZipFile(fileName);
+//			strm = new ObjectInputStream( content.getInputStream(content.getEntry(MapSettings.CACHE_DESCRIPTION)) );
+//			return (ModelDescription)strm.readObject();
+//		} finally{
+//			if(strm!=null){
+//				strm.close();
+//			}
+//			if(content!=null){
+//				content.close();
+//			}
+//		}
+//
+//	}
 
 	private static void renderTiles(ZipOutputStream content, Model map, IProgressUpdate progress) {
 		int y = 0;
@@ -249,10 +234,10 @@ public class ModelTileManager {
 	}	
 
 	public Point getContentSize() {
-		return new Point(mDescription.width, mDescription.height);
+		return new Point(mDescription.getWidth(), mDescription.getHeight());
 	}
 
 	public Object getCityName() {
-		return mDescription.mCityName;
+		return mDescription.getCityName();
 	}
 }

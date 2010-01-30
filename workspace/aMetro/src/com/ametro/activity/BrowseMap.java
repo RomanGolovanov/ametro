@@ -1,5 +1,7 @@
 package com.ametro.activity;
 
+import java.io.IOException;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -17,6 +19,8 @@ import android.widget.Toast;
 
 import com.ametro.MapSettings;
 import com.ametro.MapUri;
+import com.ametro.model.MapBuilder;
+import com.ametro.model.ModelDescription;
 import com.ametro.model.ModelTileManager;
 import com.ametro.R;
 import com.ametro.widget.TileImageView;
@@ -61,9 +65,7 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 		}else{
 			MapSettings.loadDefaultMapName(this);
 			if(MapSettings.getMapName()==null){
-				setContentView(R.layout.no_map_loaded);
-				Intent browseLibraryIntent = new Intent(this,BrowseLibrary.class);
-				startActivityForResult(browseLibraryIntent,REQUEST_BROWSE_LIBRARY);
+				requestBrowseLibrary(true);
 			}else{
 				initializeMapView(MapUri.create(MapSettings.getMapName()), true);
 			}
@@ -130,12 +132,7 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 		case MAIN_MENU_FIND:
 			return true;
 		case MAIN_MENU_LIBRARY:
-			Intent i = new Intent(this,BrowseLibrary.class);
-
-			if(MapSettings.getMapName()!=null){
-				i.setData(MapUri.create(MapSettings.getMapName() ));
-			}
-			startActivityForResult(i, REQUEST_BROWSE_LIBRARY);
+			requestBrowseLibrary(false);
 			return true;
 		case MAIN_MENU_ROUTES:
 			return true;
@@ -213,9 +210,32 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 
 
 	private void requestCreateMapCache(Uri uri) {
-		Intent createMapCache = new Intent(this, RenderMap.class);
-		createMapCache.setData(uri);
-		startActivityForResult(createMapCache, REQUEST_RENDER_MAP);
+		String fileName = MapSettings.getMapFileName(uri);
+		ModelDescription modelDescription;
+		
+		try {
+			modelDescription = MapBuilder.loadModelDescription(fileName);
+		} catch (Exception e) {
+			modelDescription = null;
+		}
+		if(modelDescription!=null && modelDescription.getSourceVersion() == MapSettings.SOURCE_VERSION){
+			Intent createMapCache = new Intent(this, RenderMap.class);
+			createMapCache.setData(uri);
+			startActivityForResult(createMapCache, REQUEST_RENDER_MAP);
+		}else{
+			requestBrowseLibrary(true);
+		}
+	}
+
+	private void requestBrowseLibrary(boolean setNoMapLoadingView) {
+		if(setNoMapLoadingView){
+			setContentView(R.layout.no_map_loaded);
+		}
+		Intent browseLibrary = new Intent(this, BrowseLibrary.class);
+		if(MapSettings.getMapName()!=null){
+			browseLibrary.setData(MapUri.create(MapSettings.getMapName() ));
+		}
+		startActivityForResult(browseLibrary, REQUEST_BROWSE_LIBRARY);
 	}
 
 
