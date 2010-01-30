@@ -375,6 +375,7 @@ public class ImportPmz extends Activity {
 			ArrayList<ImportRecord> results = new ArrayList<ImportRecord>();
 			mImportCount = imports.size();
 			mImportPosition = 0;
+			boolean mRefresh = false;
 			for (Iterator<ImportRecord> iterator = imports.iterator(); iterator.hasNext();) {
 				ImportRecord importRecord = iterator.next();
 				mImportPosition++;
@@ -384,16 +385,19 @@ public class ImportPmz extends Activity {
 				try {
 					Model map = MapBuilder.importPmz(importRecord.getFileName());
 					MapBuilder.saveModel(map);
-				} catch (Exception e) {
+					mRefresh = true;
+				} catch (Throwable e) {
+					Log.e("aMetro","Import failed",(Throwable)e);
 					results.add(new ImportRecord(
 							-1, 
 							importRecord.getMapName(), 
 							importRecord.getFileName(), 
-							"import failed", 
+							"Import failed\n" + e.toString(), 
 							Color.RED, 
 							false));
 				}
-			}
+			} 
+			if(mRefresh)MapSettings.setRefreshOverride(ImportPmz.this, true);
 			Collections.sort(results);
 			mAdapter = new ImportListAdapter(ImportPmz.this, 0, results);
 			mHandler.post(mFinishImport);
