@@ -13,8 +13,8 @@ import android.net.Uri;
 
 public class MapSettings {
 
-	public static final long SOURCE_VERSION = 2;
-	public static final long RENDER_VERSION = 3;
+	public static long getSourceVersion() { return 2; }
+	public static long getRenderVersion() { return 3; }
 	
 	public static final String PREFERENCE_PACKAGE_FILE_NAME = "PACKAGE_FILE_NAME";
 	public static final String PREFERENCE_SCROLL_POSITION = "SCROLL_POSITION";

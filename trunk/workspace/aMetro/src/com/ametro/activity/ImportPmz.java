@@ -9,6 +9,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -188,6 +189,7 @@ public class ImportPmz extends Activity {
 	private MenuItem mMainMenuSelectAll;
 	private MenuItem mMainMenuSelectNone;
 
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
@@ -245,6 +247,12 @@ public class ImportPmz extends Activity {
 		}		
 		return super.onOptionsItemSelected(item);
 	}		
+
+
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -319,10 +327,15 @@ public class ImportPmz extends Activity {
 			String fullFileName = MapSettings.IMPORT_PATH + fileName;
 			try {
 				ModelDescription pmz = MapBuilder.indexPmz(fullFileName);
-				String mapName = String.format("%s - %s" , pmz.getCountryName() , pmz.getCityName() );
-				int severity = 4;
+				String mapName = String.format("%s - %s (%s)" , 
+						pmz.getCountryName(), 
+						pmz.getCityName(),
+						fileName
+						);
+				int severity = 5;
 				int statusId = R.string.import_status_not_imported;
 				int color = Color.RED;
+				String statusText = ImportPmz.this.getString(statusId);
 				if(mapFile.exists()){
 					ModelDescription map = null;
 					try{
@@ -330,19 +343,34 @@ public class ImportPmz extends Activity {
 					}catch(Exception ex){
 						map = null;
 					}
-					if(map != null){
+					if(map != null && map.getSourceVersion() == MapSettings.getSourceVersion()){
 						if( map.locationEqual(pmz) ){
 							if( map.completeEqual(pmz) ){
 								statusId = R.string.import_status_uptodate;
+								statusText =  ImportPmz.this.getString(statusId);
 								color = Color.GREEN;
 								severity = 1;
 							}else{
-								statusId = R.string.import_status_deprecated;
-								color = Color.YELLOW;
-								severity = 3;
+								if(map.getTimestamp() > pmz.getTimestamp()){
+									statusId = R.string.import_status_old_version;
+									statusText =  ImportPmz.this.getString(statusId);
+									color = Color.CYAN;
+									severity = 3;
+								}else{
+									statusId = R.string.import_status_deprecated;
+									statusText =  ImportPmz.this.getString(statusId);
+									color = Color.YELLOW;
+									severity = 4;
+								}
 							}
 						}else{
-							statusId = R.string.import_status_override;
+							//String.format( ImportPmz.this.getString(statusId), mapFileName) 
+							statusId =  R.string.import_status_override;
+							statusText = String.format( 
+									ImportPmz.this.getString(statusId),
+									map.getCountryName(),
+									map.getCityName()
+									);
 							color = Color.GRAY;
 							severity = 2;
 						}
@@ -352,9 +380,12 @@ public class ImportPmz extends Activity {
 						severity,
 						mapName, 
 						fullFileName, 
-						ImportPmz.this.getString(statusId),
+						statusText,
 						color,
-						statusId == R.string.import_status_not_imported ));
+						statusId == R.string.import_status_not_imported
+						||
+						statusId == R.string.import_status_deprecated
+						));
 
 			} catch (Exception e) {
 				Log.e("aMetro", "PMZ indexing error", (Throwable)e);

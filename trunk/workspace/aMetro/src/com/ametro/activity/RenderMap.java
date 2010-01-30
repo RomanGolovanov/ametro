@@ -1,6 +1,7 @@
 package com.ametro.activity;
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,10 +21,12 @@ public class RenderMap extends Activity implements IProgressUpdate {
 	
 	private TextView mCachingMapText;
 	private int mProgress;
-	
-	/**
-	 * @see android.app.Activity#onCreate(Bundle)
-	 */
+
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
