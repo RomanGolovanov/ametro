@@ -9,9 +9,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.BrowseLibrary" android:screenOrientation="portrait"/>
-        <activity android:name=".activity.RenderMap" android:screenOrientation="portrait"/>
-        <activity android:name=".activity.ImportPmz" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.BrowseLibrary" android:configChanges="orientation|keyboardHidden" />
+        <activity android:name=".activity.RenderMap" android:configChanges="orientation|keyboardHidden" />
+        <activity android:name=".activity.ImportPmz" android:configChanges="orientation|keyboardHidden" />
         <activity android:name="com.ametro.activity.BrowseMapDetails"/>
         <activity android:name="com.ametro.activity.BrowseRoute"/>
         <activity android:name="com.ametro.activity.CreateRoute"/>
