@@ -17,6 +17,7 @@
 			android:gravity="center" android:baselineAligned="true">
 
 			<ProgressBar android:paddingRight="10px"
+			 	android:keepScreenOn="true"
 				android:layout_width="wrap_content" android:layout_height="wrap_content" />
 			<TextView android:id="@+id/render_map_progress_text"
 				android:text="@string/msg_caching"
