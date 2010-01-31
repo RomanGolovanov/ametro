@@ -135,8 +135,10 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 		case MAIN_MENU_ROUTES:
 			return true;
 		case MAIN_MENU_SETTINGS:
+			startActivity(new Intent(this, Settings.class));
 			return true;
 		case MAIN_MENU_ABOUT:
+			startActivity(new Intent(this, About.class));
 			return true;
 		case MAIN_MENU_TIME:
 			mTimeOfDay++;
