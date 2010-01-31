@@ -8,7 +8,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -117,7 +120,7 @@ public class ImportPmz extends Activity {
 		public final int Maximum;
 		public final String Message;
 		public final String Title;
-		
+
 		public ProgressInfo(int progress, int maximum, String message, String title) {
 			super();
 			this.Progress = progress;
@@ -125,7 +128,7 @@ public class ImportPmz extends Activity {
 			this.Message = message;
 			this.Title = title;
 		}
-		
+
 		public static void ChangeProgress(ProgressInfo pi, ProgressBar bar, TextView title, TextView msg){
 			if(bar == null || pi == null) return;
 			bar.setMax(pi.Maximum);
@@ -138,7 +141,7 @@ public class ImportPmz extends Activity {
 			}
 		}
 	}
-	
+
 	private class ImportListAdapter extends ArrayAdapter<ImportRecord> implements OnClickListener
 	{
 
@@ -203,29 +206,53 @@ public class ImportPmz extends Activity {
 		public List<ImportRecord> getCheckedData(){
 			ArrayList<ImportRecord> lst = new ArrayList<ImportRecord>();
 			for (Iterator<ImportRecord> iterator = mAdapter.getData().iterator(); iterator.hasNext();) {
-				ImportRecord importRecord = iterator.next();
-				if(importRecord.isChecked()){
-					lst.add(importRecord);
+				ImportRecord record = iterator.next();
+				if(record.isChecked()){
+					lst.add(record);
 				}
 			}			
 			return lst;
 		}
 
+		public List<ImportRecord> getInvalidData() {
+			ArrayList<ImportRecord> lst = new ArrayList<ImportRecord>();
+			for (Iterator<ImportRecord> iterator = mAdapter.getData().iterator(); iterator.hasNext();) {
+				ImportRecord record = iterator.next();
+				final int severity = record.getSeverity();
+				if(severity == 2 || severity == 0){
+					lst.add(record);
+				}
+			}			
+			return lst;
+		}
+
+		public List<ImportRecord> getObsoleteData() {
+			ArrayList<ImportRecord> lst = new ArrayList<ImportRecord>();
+			for (Iterator<ImportRecord> iterator = mAdapter.getData().iterator(); iterator.hasNext();) {
+				ImportRecord record = iterator.next();
+				final int severity = record.getSeverity();
+				if(severity == 3 || severity == 1){
+					lst.add(record);
+				}
+			}			
+			return lst;
+		}
+		
 		public void setCheckAll() {
 			for (Iterator<ImportRecord> iterator = mData.iterator(); iterator.hasNext();) {
-				ImportRecord importRecord = iterator.next();
-				if(importRecord.isCheckable()){
-					importRecord.setChecked(true);
+				ImportRecord record = iterator.next();
+				if(record.isCheckable()){
+					record.setChecked(true);
 				}
 			}		
 		}
 
 		public void setCheckNone() {
 			for (Iterator<ImportRecord> iterator = mData.iterator(); iterator.hasNext();) {
-				ImportRecord importRecord = iterator.next();
-				importRecord.setChecked(false);
+				iterator.next().setChecked(false);
 			}
 		}
+
 
 	}
 
@@ -407,15 +434,24 @@ public class ImportPmz extends Activity {
 		Report,
 		Empty
 	}
+	
+	private enum CleanupMode{
+		Selected,
+		Obsolete,
+		Invalid,
+		All
+	}
 
 	private Mode mMode;
+	private CleanupMode mCleanupMode = CleanupMode.Obsolete;
+	
 	private ImportListAdapter mAdapter;
 	private ListView mListView;
 
 	private ProgressBar mProgressBar;
 	private TextView mProgressTitle;
 	private TextView mProgressText;
-	
+
 	private IndexTask mIndexTask;
 	private ImportTask mImportTask;
 
@@ -504,10 +540,10 @@ public class ImportPmz extends Activity {
 			return true;
 		case MAIN_MENU_CLEANUP:
 			if(mMode == Mode.Select){
-				cleanupSelectMode();
+				requestCleanupSelectMode();
 			}
 			if(mMode == Mode.Report){
-				cleanupReportMode();
+				requestCleanupReportMode();
 			}
 			return true;
 		case MAIN_MENU_STOP:
@@ -543,18 +579,61 @@ public class ImportPmz extends Activity {
 		}
 		super.onStop();
 	}
-	
+
 	private void startIndexMode() {
 		mIndexTask = new IndexTask();
 		mIndexTask.execute();
 	}
 
-	private void cleanupSelectMode() {
+	private void requestCleanupSelectMode() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this); 
+		builder.setTitle(R.string.menu_cleanup); 
+		builder.setSingleChoiceItems(R.array.import_pmz_cleanup_items, mCleanupMode.ordinal() , new Dialog.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				String itemName = getResources().getStringArray(R.array.import_pmz_cleanup_items)[which];
+				mCleanupMode = CleanupMode.valueOf( itemName );
+			}
+		});        
+		builder.setPositiveButton(android.R.string.ok, new Dialog.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				cleanupSelectMode();
+			}
+		}); 
+		builder.setNegativeButton(android.R.string.cancel, null);
+		builder.show(); 	
 	}
 
-	private void cleanupReportMode() {
+	private void requestCleanupReportMode() {
 	}	
 	
+	private void cleanupSelectMode(){
+		List<ImportRecord> list = null;
+		switch(mCleanupMode){
+		case All:
+			list = mAdapter.getData();
+			break;
+		case Invalid:
+			list = mAdapter.getInvalidData();
+			break;
+		case Selected:
+			list = mAdapter.getCheckedData();
+			break;
+		case Obsolete:
+			list = mAdapter.getObsoleteData();
+			break;
+		}
+		if(list!=null){
+			for (Iterator<ImportRecord> records = list.iterator(); records.hasNext();) {
+				ImportRecord record = records.next();
+				File file = new File(record.getFileName());
+				file.delete();
+			}
+		}
+		startIndexMode();
+	}
+
 	private void cancelIndexMode() {
 		mIndexTask.cancel(false);
 		mIndexTask = null;
@@ -618,5 +697,5 @@ public class ImportPmz extends Activity {
 		updateMenuStatus(Mode.Report);
 	}
 
-	
+
 }
