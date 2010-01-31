@@ -84,6 +84,20 @@ public class ImportPmz extends Activity {
 			return mSeverity;
 		}
 
+		
+		
+		public void setSeverity(int mSeverity) {
+			this.mSeverity = mSeverity;
+		}
+
+		public void setStatus(String mStatus) {
+			this.mStatus = mStatus;
+		}
+
+		public void setStatusColor(int mStatusColor) {
+			this.mStatusColor = mStatusColor;
+		}
+
 		@Override
 		public int compareTo(ImportRecord another) {
 			final int x = another.mSeverity - mSeverity; 
@@ -260,7 +274,7 @@ public class ImportPmz extends Activity {
 					indexPmzFile(imports, fileName);
 				}
 			}
-			Collections.sort(imports);			
+			Collections.sort(imports);	
 			return imports;
 		}
 	
@@ -280,12 +294,8 @@ public class ImportPmz extends Activity {
 		
 		@Override
 		protected void onPostExecute(List<ImportRecord> result) {
-			setContentView(R.layout.import_pmz_main);
-			setTitle(R.string.import_title_confirm);
-			mAdapter = new ImportListAdapter(ImportPmz.this, 0, result);
-			mListView = (ListView)findViewById(R.id.import_pmz_list);
-			mListView.setAdapter(mAdapter);
-			updateMenuStatus(Mode.Select);
+			mFiles = result;
+			setupSelectMode(result);
 			super.onPostExecute(result);
 		}
 	}
@@ -305,10 +315,9 @@ public class ImportPmz extends Activity {
 		@Override
 		protected List<ImportRecord> doInBackground(ImportRecord... imports) {
 			ArrayList<ImportRecord> result = new ArrayList<ImportRecord>();
-			
 			mImportCount = imports.length;
 			mImportPosition = 0;
-			boolean mRefresh = false;
+			String updateStatus = getString(R.string.import_status_uptodate);
 			for (int i = 0; i < mImportCount && !mIsCanceled; i++) {
 				ImportRecord importRecord = imports[i];
 				mImportPosition++;
@@ -317,14 +326,16 @@ public class ImportPmz extends Activity {
 				try {
 					Model map = MapBuilder.importPmz(importRecord.getFileName());
 					MapBuilder.saveModel(map);
-					mRefresh = true;
+					importRecord.setChecked(false);
+					importRecord.setStatus(updateStatus);
+					importRecord.setStatusColor(Color.GREEN);
+					importRecord.setSeverity(1);
+					MapSettings.setRefreshOverride(ImportPmz.this, true);
 				} catch (Throwable e) {
 					Log.e("aMetro","Import failed",(Throwable)e);
 					result.add(new ImportRecord(-1, importRecord.getMapName(), importRecord.getFileName(), "Import failed\n" + e.toString(), Color.RED, false));
 				}
 			} 
-			if(mRefresh)
-				MapSettings.setRefreshOverride(ImportPmz.this, true);
 			Collections.sort(result);
 			return result;
 		}
@@ -392,6 +403,8 @@ public class ImportPmz extends Activity {
 	
 	private IndexTask mIndexTask;
 	private ImportTask mImportTask;
+	
+	private List<ImportRecord> mFiles;
 
 	private final int MAIN_MENU_IMPORT	= 1;
 	private final int MAIN_MENU_SELECT_ALL	= 2;
@@ -470,12 +483,13 @@ public class ImportPmz extends Activity {
 			return true;
 		case MAIN_MENU_STOP:
 			if(mMode == Mode.Index){
-				mIndexTask.cancel(true);
+				mIndexTask.cancel(false);
 				setResult(RESULT_CANCELED);
 				finish();
 			}
 			if(mMode == Mode.Import){
-				mImportTask.cancel(true);
+				mImportTask.cancel(false);
+				setupSelectMode( mFiles );				
 			}
 		}		
 		return super.onOptionsItemSelected(item);
@@ -498,12 +512,22 @@ public class ImportPmz extends Activity {
 	@Override
 	protected void onStop() {
 		if(mImportTask!=null && mImportTask.getStatus() != Status.FINISHED){
-			mImportTask.cancel(true);
+			mImportTask.cancel(false);
 		}
 		if(mIndexTask!=null && mIndexTask.getStatus() != Status.FINISHED){
-			mIndexTask.cancel(true);
+			mIndexTask.cancel(false);
 		}
 		super.onStop();
 	}
 
+	private void setupSelectMode(List<ImportRecord> result){
+		setContentView(R.layout.import_pmz_main);
+		setTitle(R.string.import_title_confirm);
+		mAdapter = new ImportListAdapter(ImportPmz.this, 0, result);
+		mListView = (ListView)findViewById(R.id.import_pmz_list);
+		mListView.setAdapter(mAdapter);
+		updateMenuStatus(Mode.Select);
+	}
+	
+	
 }
