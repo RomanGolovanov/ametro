@@ -90,6 +90,9 @@ public class MapSettings {
 		return (MAPS_PATH + mapName + TEMP_FILE_TYPE).toLowerCase();
 	}
 	
+	public static String getTemporaryCacheFile(String mapName) {
+		return (CACHE_PATH + mapName + TEMP_FILE_TYPE).toLowerCase();
+	}
 	
 	public static String getCacheFileName(String mapName){
 		return (CACHE_PATH + mapName + CACHE_FILE_TYPE).toLowerCase();
@@ -151,13 +154,11 @@ public class MapSettings {
 		return getMapFileName(MapUri.getMapName(uri));
 	}
 
-	private static boolean mRefreshOverride = false;
-	
-	public static boolean isRefreshOverride(Context context) {
-		return mRefreshOverride;
-	}
-	public static void setRefreshOverride(Context context, boolean enabled) {
-		mRefreshOverride = enabled;
+	public static void refreshMapList() {
+		File cache = new File(ROOT_PATH + MAPS_LIST);
+		if(cache.exists()){
+			cache.delete();
+		}
 	}
 	
 
