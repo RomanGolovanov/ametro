@@ -103,24 +103,6 @@ public class ModelTileManager {
 		
 	}
 
-//	private static ModelDescription loadDescription(String fileName) throws IOException, ClassNotFoundException {
-//		ZipFile content = null; 
-//		ObjectInputStream strm = null;
-//		try{
-//			content = new ZipFile(fileName);
-//			strm = new ObjectInputStream( content.getInputStream(content.getEntry(MapSettings.CACHE_DESCRIPTION)) );
-//			return (ModelDescription)strm.readObject();
-//		} finally{
-//			if(strm!=null){
-//				strm.close();
-//			}
-//			if(content!=null){
-//				content.close();
-//			}
-//		}
-//
-//	}
-
 	private static void renderTiles(ZipOutputStream content, Model map, IProgressUpdate progress) {
 		int y = 0;
 		int height = map.getHeight();
@@ -206,7 +188,7 @@ public class ModelTileManager {
 		bmp.recycle();
 	}
 
-	private static String getTileEntityName(int level, int row, int column ){
+	public static String getTileEntityName(int level, int row, int column ){
 		return "tile_" + level + "_" + row + "_" + column + ".png";
 	}
 

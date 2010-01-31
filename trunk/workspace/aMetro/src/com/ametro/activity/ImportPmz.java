@@ -34,6 +34,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import com.ametro.MapSettings;
 import com.ametro.R;
+import com.ametro.libs.ProgressInfo;
 import com.ametro.model.MapBuilder;
 import com.ametro.model.Model;
 import com.ametro.model.ModelDescription;
@@ -112,37 +113,6 @@ public class ImportPmz extends Activity {
 			return mSeverity>0;
 		}
 
-	}
-
-	private static class ProgressInfo
-	{
-		public int Progress;
-		public int Maximum;
-		public String Message;
-		public String Title;
-
-		public ProgressInfo(int progress, int maximum, String message, String title) {
-			super();
-			this.Progress = progress;
-			this.Maximum = maximum;
-			this.Message = message;
-			this.Title = title;
-		}
-
-		public static void ChangeProgress(ProgressInfo pi, ProgressBar bar, TextView title, TextView msg, TextView counter, String counterTemplate){
-			if(bar == null || pi == null) return;
-			bar.setMax(pi.Maximum);
-			bar.setProgress(pi.Progress);
-			if(pi.Message!=null && msg!=null){
-				msg.setText(pi.Message);
-			}
-			if(pi.Title!=null && title!=null){
-				title.setText(pi.Title);
-			}
-			if(counter!=null){
-				counter.setText( String.format(counterTemplate, pi.Progress, pi.Maximum) );
-			}
-		}
 	}
 
 	private class ImportListAdapter extends ArrayAdapter<ImportRecord> implements OnClickListener
@@ -320,7 +290,7 @@ public class ImportPmz extends Activity {
 		@Override
 		protected List<ImportRecord> doInBackground(Void... params) {
 			File dir = new File(MapSettings.IMPORT_PATH);
-			ProgressInfo pi = new ProgressInfo(0,100, null, "Search PMZ files...");
+			ProgressInfo pi = new ProgressInfo(0,0, null, "Search PMZ files...");
 			this.publishProgress(pi);
 			String[] files = dir.list(new FilenameFilter() {
 				@Override
@@ -405,7 +375,7 @@ public class ImportPmz extends Activity {
 					record.setStatus(updateStatus);
 					record.setStatusColor(Color.GREEN);
 					record.setSeverity(1);
-					MapSettings.setRefreshOverride(ImportPmz.this, true);
+					MapSettings.refreshMapList();
 				} catch (Throwable e) {
 					Log.e("aMetro","Import failed",(Throwable)e);
 					result.add(new ImportRecord(-1, record.getMapName(), record.getFileName(), "Import failed\n" + e.toString(), Color.RED, false));

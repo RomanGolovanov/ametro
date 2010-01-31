@@ -1,9 +1,17 @@
 package com.ametro.libs;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+
+import android.util.Log;
 
 public class FileGroupsDictionary implements Serializable{
 	
@@ -58,6 +66,10 @@ public class FileGroupsDictionary implements Serializable{
 		Set<String> keys = groups.keySet();
 		return (String[]) keys.toArray(new String[keys.size()]);
 	}
+	
+	public int getGroupCount(){
+		return groups.keySet().size();
+	}
 
 	public String[] getLabels(String groupName){
 		StringArray c = groups.get(groupName);
@@ -72,6 +84,49 @@ public class FileGroupsDictionary implements Serializable{
 		return vals;
 	}
 
-	//public fillTables() 	
+	public static void write(FileGroupsDictionary data, String fileName) {
+		ObjectOutputStream strm = null;
+		try{
+			strm = new ObjectOutputStream(new FileOutputStream(fileName));
+			strm.writeObject(data);
+			strm.flush();
+		}catch(Exception ex){
+			Log.e("aMetro", "Failed write map cache", ex);
+		}finally{
+			if(strm!=null){
+				try {
+					strm.close();
+				} catch (IOException e) {
+				}
+			}
+		}
+	}
+
+	public static FileGroupsDictionary read(String fileName)
+	{
+		File file = new File(fileName);
+		if(!file.exists()) return null;
+		ObjectInputStream strm = null;
+		try{
+			try {
+				strm = new ObjectInputStream(new FileInputStream(file));
+				FileGroupsDictionary map = (FileGroupsDictionary) strm.readObject();
+				Log.i("aMetro", "Loaded map cache");
+				return map;
+			} catch (Exception ex) {
+				Log.i("aMetro", "Cannot load map cache");
+				return null;
+			}
+		} finally{
+			if(strm!=null){
+				try {
+					strm.close();
+				} catch (IOException e) {
+				}
+			}
+		}
+
+	}
+
 
 }
