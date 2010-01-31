@@ -157,6 +157,9 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 
 	private void initializeMapView(Uri uri, boolean allowCreateMapCache, boolean finishOnNoMapLoaded)  {
 		String mapName = MapUri.getMapName(uri);
+		if(mTileManager!=null && mapName.equals(MapSettings.getMapName())){
+			return;
+		}
 		if(!ModelTileManager.isExist(mapName, 0)){
 			if(allowCreateMapCache){
 				requestCreateMapCache(uri,finishOnNoMapLoaded);

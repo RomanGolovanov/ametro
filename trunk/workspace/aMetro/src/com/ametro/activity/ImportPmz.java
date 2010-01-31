@@ -116,10 +116,10 @@ public class ImportPmz extends Activity {
 
 	private static class ProgressInfo
 	{
-		public final int Progress;
-		public final int Maximum;
-		public final String Message;
-		public final String Title;
+		public int Progress;
+		public int Maximum;
+		public String Message;
+		public String Title;
 
 		public ProgressInfo(int progress, int maximum, String message, String title) {
 			super();
@@ -129,7 +129,7 @@ public class ImportPmz extends Activity {
 			this.Title = title;
 		}
 
-		public static void ChangeProgress(ProgressInfo pi, ProgressBar bar, TextView title, TextView msg){
+		public static void ChangeProgress(ProgressInfo pi, ProgressBar bar, TextView title, TextView msg, TextView counter, String counterTemplate){
 			if(bar == null || pi == null) return;
 			bar.setMax(pi.Maximum);
 			bar.setProgress(pi.Progress);
@@ -138,6 +138,9 @@ public class ImportPmz extends Activity {
 			}
 			if(pi.Title!=null && title!=null){
 				title.setText(pi.Title);
+			}
+			if(counter!=null){
+				counter.setText( String.format(counterTemplate, pi.Progress, pi.Maximum) );
 			}
 		}
 	}
@@ -317,7 +320,8 @@ public class ImportPmz extends Activity {
 		@Override
 		protected List<ImportRecord> doInBackground(Void... params) {
 			File dir = new File(MapSettings.IMPORT_PATH);
-			this.publishProgress(new ProgressInfo(0,100, null, "Search PMZ files..."));
+			ProgressInfo pi = new ProgressInfo(0,100, null, "Search PMZ files...");
+			this.publishProgress(pi);
 			String[] files = dir.list(new FilenameFilter() {
 				@Override
 				public boolean accept(File f, String filename) {
@@ -326,11 +330,16 @@ public class ImportPmz extends Activity {
 			});
 			ArrayList<ImportRecord> imports = new ArrayList<ImportRecord>();
 			int count = files.length;
-			this.publishProgress(new ProgressInfo(0,count, null, "Read PMZ files..."));
+			pi.Title = "Read PMZ files...";
+			pi.Maximum = count;
+			pi.Progress = 0;
+			this.publishProgress(pi);
 			if(files!=null){
 				for(int i = 0; i < count && !mIsCanceled; i++){
 					String fileName = files[i];
-					this.publishProgress(new ProgressInfo(i,count, fileName, null));
+					pi.Progress = i;
+					pi.Message= fileName;
+					this.publishProgress(pi);
 					indexPmzFile(imports, fileName);
 				}
 			}
@@ -346,7 +355,14 @@ public class ImportPmz extends Activity {
 
 		@Override
 		protected void onProgressUpdate(ProgressInfo... values) {
-			ProgressInfo.ChangeProgress(values[0], mProgressBar, mProgressTitle, mProgressText);
+			ProgressInfo.ChangeProgress(
+					values[0], 
+					mProgressBar, 
+					mProgressTitle, 
+					mProgressText, 
+					mProgressCounter,
+					getString(R.string.template_progress_count)
+					);
 			super.onProgressUpdate(values);
 		}
 
@@ -373,22 +389,26 @@ public class ImportPmz extends Activity {
 		protected List<ImportRecord> doInBackground(ImportRecord... imports) {
 			ArrayList<ImportRecord> result = new ArrayList<ImportRecord>();
 			final int count = imports.length;
-			publishProgress(new ProgressInfo(0, imports.length, null, "Importing PMZ files..."));
+			ProgressInfo pi = new ProgressInfo(0, count, null, "Importing PMZ files...");
+			publishProgress(pi);
 			String updateStatus = getString(R.string.import_status_uptodate);
 			for (int i = 0; i < count && !mIsCanceled; i++) {
-				ImportRecord importRecord = imports[i];
-				publishProgress(new ProgressInfo(i, imports.length,importRecord.getMapName(),null));
+				ImportRecord record = imports[i];
+				//new ProgressInfo(i, imports.length,importRecord.getMapName(),null)
+				pi.Progress = i;
+				pi.Message = record.getMapName();
+				publishProgress(pi);
 				try {
-					Model map = MapBuilder.importPmz(importRecord.getFileName());
+					Model map = MapBuilder.importPmz(record.getFileName());
 					MapBuilder.saveModel(map);
-					importRecord.setChecked(false);
-					importRecord.setStatus(updateStatus);
-					importRecord.setStatusColor(Color.GREEN);
-					importRecord.setSeverity(1);
+					record.setChecked(false);
+					record.setStatus(updateStatus);
+					record.setStatusColor(Color.GREEN);
+					record.setSeverity(1);
 					MapSettings.setRefreshOverride(ImportPmz.this, true);
 				} catch (Throwable e) {
 					Log.e("aMetro","Import failed",(Throwable)e);
-					result.add(new ImportRecord(-1, importRecord.getMapName(), importRecord.getFileName(), "Import failed\n" + e.toString(), Color.RED, false));
+					result.add(new ImportRecord(-1, record.getMapName(), record.getFileName(), "Import failed\n" + e.toString(), Color.RED, false));
 				}
 			} 
 			Collections.sort(result);
@@ -403,7 +423,14 @@ public class ImportPmz extends Activity {
 
 		@Override
 		protected void onProgressUpdate(ProgressInfo... values) {
-			ProgressInfo.ChangeProgress(values[0], mProgressBar, mProgressTitle, mProgressText);
+			ProgressInfo.ChangeProgress(
+					values[0], 
+					mProgressBar, 
+					mProgressTitle, 
+					mProgressText, 
+					mProgressCounter,
+					getString(R.string.template_progress_count)
+					);
 			super.onProgressUpdate(values);
 		}
 
@@ -451,6 +478,7 @@ public class ImportPmz extends Activity {
 	private ProgressBar mProgressBar;
 	private TextView mProgressTitle;
 	private TextView mProgressText;
+	private TextView mProgressCounter;
 
 	private IndexTask mIndexTask;
 	private ImportTask mImportTask;
@@ -668,6 +696,7 @@ public class ImportPmz extends Activity {
 		mProgressBar  = (ProgressBar) findViewById(R.id.import_pmz_progress_bar);
 		mProgressTitle = (TextView)findViewById(R.id.import_pmz_progress_title);
 		mProgressText = (TextView)findViewById(R.id.import_pmz_progress_text);
+		mProgressCounter = (TextView)findViewById(R.id.import_pmz_progress_counter);
 		updateMenuStatus(Mode.Import);
 	}
 
@@ -677,6 +706,7 @@ public class ImportPmz extends Activity {
 		mProgressBar  = (ProgressBar) findViewById(R.id.import_pmz_progress_bar);
 		mProgressTitle = (TextView)findViewById(R.id.import_pmz_progress_title);
 		mProgressText = (TextView)findViewById(R.id.import_pmz_progress_text);
+		mProgressCounter = (TextView)findViewById(R.id.import_pmz_progress_counter);
 		updateMenuStatus(Mode.Index);
 	}
 
