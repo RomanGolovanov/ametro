@@ -11,8 +11,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
+import android.os.AsyncTask.Status;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -95,8 +96,7 @@ public class ImportPmz extends Activity {
 
 	}
 
-	private class ImportListAdapter extends ArrayAdapter<ImportRecord> 
-	implements OnClickListener
+	private class ImportListAdapter extends ArrayAdapter<ImportRecord> implements OnClickListener
 	{
 
 		private LayoutInflater mInflater;
@@ -149,7 +149,7 @@ public class ImportPmz extends Activity {
 			if(data.getSeverity()>0){
 				data.setChecked(!data.isChecked());
 				checkbox.setChecked(data.isChecked());
-				ImportPmz.this.updateMenuStatus();
+				ImportPmz.this.updateMenuStatus(null);
 			}
 		}
 
@@ -168,144 +168,27 @@ public class ImportPmz extends Activity {
 			return lst;
 		}
 
-
-	}
-
-	private final Handler mHandler = new Handler();
-
-	private ImportListAdapter mAdapter;
-	private ListView mListView;
-	private boolean mPrepared;
-	private TextView mProgressTitle;
-	private TextView mProgressText;
-
-	private final int MAIN_MENU_IMPORT	= 1;
-	private final int MAIN_MENU_SELECT_ALL	= 2;
-	private final int MAIN_MENU_SELECT_NONE	= 3;
-
-	private MenuItem mMainMenuImport;
-	private MenuItem mMainMenuSelectAll;
-	private MenuItem mMainMenuSelectNone;
-
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		super.onCreateOptionsMenu(menu);
-		mMainMenuImport = menu.add(0, MAIN_MENU_IMPORT, 	0, R.string.menu_import).setIcon(android.R.drawable.ic_menu_add);
-		mMainMenuSelectAll = menu.add(0, MAIN_MENU_SELECT_ALL, 1, R.string.menu_select_all).setIcon(android.R.drawable.ic_menu_agenda);
-		mMainMenuSelectNone = menu.add(0, MAIN_MENU_SELECT_NONE, 1, R.string.menu_select_none).setIcon(android.R.drawable.ic_menu_close_clear_cancel);
-		updateMenuStatus();
-		return true;
-	}
-
-	private void updateMenuStatus() {
-		if(mMainMenuImport == null) return;
-		if(mPrepared){
-			final List<ImportRecord> dataChecked = mAdapter.getCheckedData();
-			final List<ImportRecord> data = mAdapter.getData();
-			mMainMenuImport.setEnabled(dataChecked.size()>0);
-			mMainMenuSelectAll.setEnabled(dataChecked.size() < data.size());
-			mMainMenuSelectNone.setEnabled(dataChecked.size()>0);
-			return;
-		}
-		mMainMenuImport.setEnabled(false);
-		mMainMenuSelectAll.setEnabled(false);
-		mMainMenuSelectNone.setEnabled(false);
-	}
-
-	@Override 
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case MAIN_MENU_IMPORT:
-			setContentView(R.layout.import_pmz_progress);
-			setTitle(R.string.import_title_indexing);
-			mProgressTitle = (TextView)findViewById(R.id.import_pmz_progress_title);
-			mProgressText = (TextView)findViewById(R.id.import_pmz_progress_text);
-			mImportProgressTemplate=ImportPmz.this.getString(R.string.msg_import_pmz_progress);
-			mImport.start();
-			return true;
-		case MAIN_MENU_SELECT_ALL:
-			for (Iterator<ImportRecord> iterator = mAdapter.getData().iterator(); iterator.hasNext();) {
+		public void setCheckAll() {
+			for (Iterator<ImportRecord> iterator = mData.iterator(); iterator.hasNext();) {
 				ImportRecord importRecord = iterator.next();
 				if(importRecord.isCheckable()){
 					importRecord.setChecked(true);
 				}
-			}
-			mListView.invalidateViews();
-			updateMenuStatus();
-			return true;
-		case MAIN_MENU_SELECT_NONE:
-			for (Iterator<ImportRecord> iterator = mAdapter.getCheckedData().iterator(); iterator.hasNext();) {
+			}		
+		}
+
+		public void setCheckNone() {
+			for (Iterator<ImportRecord> iterator = mData.iterator(); iterator.hasNext();) {
 				ImportRecord importRecord = iterator.next();
 				importRecord.setChecked(false);
-
 			}
-			mListView.invalidateViews();
-			updateMenuStatus();
-			return true;
-		}		
-		return super.onOptionsItemSelected(item);
-	}		
+		}
 
-
-	@Override
-	public void onConfigurationChanged(Configuration newConfig) {
-		super.onConfigurationChanged(newConfig);
 	}
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		MapSettings.checkPrerequisite(this);
-		mPrepared = false;
-		setContentView(R.layout.global_wait);
-		setTitle(R.string.import_title_indexing);
-		mIndex.start();
-	}
-
-	private int mImportCount;
-	private int mImportPosition;
-	private String mImportMapName;
-	private String mImportProgressTemplate;
-
-	private final Runnable mHandleImportUpdateProgress = new Runnable() {
-		public void run() {
-			mProgressTitle.setText( String.format(mImportProgressTemplate , Integer.toString(mImportPosition), Integer.toString(mImportCount)) );
-			mProgressText.setText(mImportMapName);
-		}
-	};
-
-	private final Runnable mHandleIndexed = new Runnable() {
-		public void run() {
-			setContentView(R.layout.import_pmz_main);
-			setTitle(R.string.import_title_confirm);
-			mListView = (ListView)findViewById(R.id.import_pmz_list);
-			mListView.setAdapter(mAdapter);
-			mPrepared = true;
-		}
-	};	
-
-	private final Thread mIndex = new Thread() {
-		public void run() {
-			File dir = new File(MapSettings.IMPORT_PATH);
-			String[] files = dir.list(new FilenameFilter() {
-				@Override
-				public boolean accept(File f, String filename) {
-					return filename.endsWith(MapSettings.PMZ_FILE_TYPE);
-				}
-			});
-			ArrayList<ImportRecord> imports = new ArrayList<ImportRecord>();
-			if(files!=null){
-				for(int i = 0; i < files.length; i++){
-					String fileName = files[i];
-					indexPmzFile(imports, fileName);
-				}
-			}	
-			Collections.sort(imports);
-			mAdapter = new ImportListAdapter(ImportPmz.this, 0, imports);
-			mHandler.post(mHandleIndexed);
-
-		}
+	private class IndexTask extends AsyncTask<Void, Void, List<ImportRecord>>
+	{
+		private boolean mIsCanceled = false;
 
 		private void indexPmzFile(ArrayList<ImportRecord> imports, String fileName) {
 			String mapFileName = MapSettings.getMapFileName(fileName.replace(MapSettings.PMZ_FILE_TYPE, ""));
@@ -313,11 +196,7 @@ public class ImportPmz extends Activity {
 			String fullFileName = MapSettings.IMPORT_PATH + fileName;
 			try {
 				ModelDescription pmz = MapBuilder.indexPmz(fullFileName);
-				String mapName = String.format("%s - %s (%s)" , 
-						pmz.getCountryName(), 
-						pmz.getCityName(),
-						fileName
-				);
+				String mapName = String.format("%s - %s (%s)" , pmz.getCountryName(), pmz.getCityName(), fileName );
 				int severity = 5;
 				int statusId = R.string.import_status_not_imported;
 				int color = Color.RED;
@@ -350,103 +229,281 @@ public class ImportPmz extends Activity {
 								}
 							}
 						}else{
-							//String.format( ImportPmz.this.getString(statusId), mapFileName) 
 							statusId =  R.string.import_status_override;
-							statusText = String.format( 
-									ImportPmz.this.getString(statusId),
-									map.getCountryName(),
-									map.getCityName()
-							);
+							statusText = String.format( ImportPmz.this.getString(statusId), map.getCountryName(),map.getCityName() );
 							color = Color.GRAY;
 							severity = 2;
 						}
 					}
 				}
-				imports.add(new ImportRecord(
-						severity,
-						mapName, 
-						fullFileName, 
-						statusText,
-						color,
-						statusId == R.string.import_status_not_imported
-						||
-						statusId == R.string.import_status_deprecated
-				));
-
-			} catch (Exception e) {
+				boolean checked = statusId == R.string.import_status_not_imported || statusId == R.string.import_status_deprecated;
+				imports.add(new ImportRecord( severity, mapName, fullFileName, statusText, color, checked));
+			}catch (Exception e) {
 				Log.e("aMetro", "PMZ indexing error", (Throwable)e);
-				imports.add(new ImportRecord(
-						0,
-						fileName, 
-						fullFileName, 
-						ImportPmz.this.getString(R.string.import_status_invalid),
-						Color.RED,
-						false ));
+				imports.add(new ImportRecord(0, fileName, fullFileName, ImportPmz.this.getString(R.string.import_status_invalid), Color.RED, false ));
 			} 
+		}	
+		
+		@Override
+		protected List<ImportRecord> doInBackground(Void... params) {
+			File dir = new File(MapSettings.IMPORT_PATH);
+			String[] files = dir.list(new FilenameFilter() {
+				@Override
+				public boolean accept(File f, String filename) {
+					return filename.endsWith(MapSettings.PMZ_FILE_TYPE);
+				}
+			});
+			ArrayList<ImportRecord> imports = new ArrayList<ImportRecord>();
+			if(files!=null){
+				for(int i = 0; i < files.length && !mIsCanceled; i++){
+					String fileName = files[i];
+					indexPmzFile(imports, fileName);
+				}
+			}
+			Collections.sort(imports);			
+			return imports;
 		}
-	};
+	
+		@Override
+		protected void onCancelled() {
+			mIsCanceled = true;
+			super.onCancelled();
+		}
+		
+		@Override
+		protected void onPreExecute() {
+			setContentView(R.layout.global_wait);
+			setTitle(R.string.import_title_indexing);
+			updateMenuStatus(Mode.Index);
+			super.onPreExecute();
+		}
+		
+		@Override
+		protected void onPostExecute(List<ImportRecord> result) {
+			setContentView(R.layout.import_pmz_main);
+			setTitle(R.string.import_title_confirm);
+			mAdapter = new ImportListAdapter(ImportPmz.this, 0, result);
+			mListView = (ListView)findViewById(R.id.import_pmz_list);
+			mListView.setAdapter(mAdapter);
+			updateMenuStatus(Mode.Select);
+			super.onPostExecute(result);
+		}
+	}
 
-	private final Thread mImport = new Thread() {
-		public void run() {
-			List<ImportRecord> imports = mAdapter.getCheckedData();
-			ArrayList<ImportRecord> results = new ArrayList<ImportRecord>();
-			mImportCount = imports.size();
+	private class ImportTask extends AsyncTask<ImportRecord, Void, List<ImportRecord>>
+	{
+		private boolean mIsCanceled = false;
+
+		private int mImportCount;
+		private int mImportPosition;
+		private String mImportMapName;
+		private String mImportProgressTemplate;
+
+		private TextView mProgressTitle;
+		private TextView mProgressText;
+
+		@Override
+		protected List<ImportRecord> doInBackground(ImportRecord... imports) {
+			ArrayList<ImportRecord> result = new ArrayList<ImportRecord>();
+			
+			mImportCount = imports.length;
 			mImportPosition = 0;
 			boolean mRefresh = false;
-			for (Iterator<ImportRecord> iterator = imports.iterator(); iterator.hasNext();) {
-				ImportRecord importRecord = iterator.next();
+			for (int i = 0; i < mImportCount && !mIsCanceled; i++) {
+				ImportRecord importRecord = imports[i];
 				mImportPosition++;
 				mImportMapName = importRecord.getMapName();
-				mHandler.post(mHandleImportUpdateProgress);
-
+				publishProgress();
 				try {
 					Model map = MapBuilder.importPmz(importRecord.getFileName());
 					MapBuilder.saveModel(map);
 					mRefresh = true;
 				} catch (Throwable e) {
 					Log.e("aMetro","Import failed",(Throwable)e);
-					results.add(new ImportRecord(
-							-1, 
-							importRecord.getMapName(), 
-							importRecord.getFileName(), 
-							"Import failed\n" + e.toString(), 
-							Color.RED, 
-							false));
+					result.add(new ImportRecord(-1, importRecord.getMapName(), importRecord.getFileName(), "Import failed\n" + e.toString(), Color.RED, false));
 				}
 			} 
-			if(mRefresh)MapSettings.setRefreshOverride(ImportPmz.this, true);
-			Collections.sort(results);
-			mAdapter = new ImportListAdapter(ImportPmz.this, 0, results);
-			mHandler.post(mFinishImport);
+			if(mRefresh)
+				MapSettings.setRefreshOverride(ImportPmz.this, true);
+			Collections.sort(result);
+			return result;
 		}
-	};
+		
+		@Override
+		protected void onCancelled() {
+			mIsCanceled = true;
+			super.onCancelled();
+		}
+		
+		@Override
+		protected void onProgressUpdate(Void... values) {
+			mProgressTitle.setText( String.format(mImportProgressTemplate , Integer.toString(mImportPosition), Integer.toString(mImportCount)) );
+			mProgressText.setText(mImportMapName);
+			super.onProgressUpdate(values);
+		}
 
-	private final Runnable mFinishImport = new Runnable() {
-		public void run() {
-			if(mAdapter.getData().size() == 0){
-				ImportPmz.this.setResult(RESULT_OK);
-				ImportPmz.this.finish();
+		@Override
+		protected void onPreExecute() {
+			updateMenuStatus(Mode.Import);
+			setContentView(R.layout.import_pmz_progress);
+			setTitle(R.string.import_title_indexing);
+			mProgressTitle = (TextView)findViewById(R.id.import_pmz_progress_title);
+			mProgressText = (TextView)findViewById(R.id.import_pmz_progress_text);
+			mImportProgressTemplate=ImportPmz.this.getString(R.string.msg_import_pmz_progress);
+			super.onPreExecute();
+		}
+		
+		
+		@Override
+		protected void onPostExecute(List<ImportRecord> result) {
+			if(result.size() == 0){
+				setResult(RESULT_OK);
+				finish();
 			}
 			setContentView(R.layout.import_pmz_main);
 			setTitle(R.string.import_title_report);
+			mAdapter = new ImportListAdapter(ImportPmz.this, 0, result);
 			mListView = (ListView)findViewById(R.id.import_pmz_list);
 			mListView.setAdapter(mAdapter);
-
 			mListView.setOnItemClickListener(new OnItemClickListener() {
-
 				@Override
-				public void onItemClick(AdapterView<?> arg0, View arg1,
-						int arg2, long arg3) {
+				public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 					ImportPmz.this.setResult(RESULT_OK);
 					ImportPmz.this.finish();
 
 				}
-
 			});
-			mPrepared = false;
-			mMainMenuImport.setVisible(false);
-			mMainMenuSelectAll.setVisible(false);
-			mMainMenuSelectNone.setVisible(false);
+			updateMenuStatus(Mode.Report);			
+			super.onPostExecute(result);
 		}
-	};	
+		
+	}
+	
+	private enum Mode{
+		Index,
+		Select,
+		Import,
+		Report
+	}
+	
+	private Mode mMode;
+	private ImportListAdapter mAdapter;
+	private ListView mListView;
+	
+	private IndexTask mIndexTask;
+	private ImportTask mImportTask;
+
+	private final int MAIN_MENU_IMPORT	= 1;
+	private final int MAIN_MENU_SELECT_ALL	= 2;
+	private final int MAIN_MENU_SELECT_NONE	= 3;
+	private final int MAIN_MENU_CLEANUP = 4;
+	private final int MAIN_MENU_STOP = 5;
+
+	private MenuItem mMainMenuImport;
+	private MenuItem mMainMenuSelectAll;
+	private MenuItem mMainMenuSelectNone;
+	private MenuItem mMainMenuCleanup;
+	private MenuItem mMainMenuStop;
+
+	private boolean mMainMenuCreated = false;
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		mMainMenuImport = menu.add(0, MAIN_MENU_IMPORT, 	0, R.string.menu_import).setIcon(android.R.drawable.ic_menu_add);
+		mMainMenuSelectAll = menu.add(0, MAIN_MENU_SELECT_ALL, 1, R.string.menu_select_all).setIcon(android.R.drawable.ic_menu_agenda);
+		mMainMenuSelectNone = menu.add(0, MAIN_MENU_SELECT_NONE, 2, R.string.menu_select_none).setIcon(android.R.drawable.ic_menu_close_clear_cancel);
+		mMainMenuCleanup = menu.add(0, MAIN_MENU_CLEANUP, 3, R.string.menu_cleanup).setIcon(android.R.drawable.ic_menu_delete);
+		mMainMenuStop = menu.add(0, MAIN_MENU_STOP, 4, R.string.menu_stop).setIcon(android.R.drawable.ic_menu_close_clear_cancel);
+		mMainMenuCreated = true;
+		updateMenuStatus(null);
+		return true;
+	}
+
+	private void updateMenuStatus(Mode mode) {
+		if(mode!=null){
+			mMode = mode;
+		}
+		
+		if(!mMainMenuCreated) return;
+
+		mMainMenuImport.setVisible(mMode == Mode.Select);
+		mMainMenuSelectAll.setVisible(mMode == Mode.Select);
+		mMainMenuSelectNone.setVisible(mMode == Mode.Select);
+		mMainMenuCleanup.setVisible(mMode == Mode.Select || mMode == Mode.Report);
+		mMainMenuStop.setVisible(mMode == Mode.Index || mMode == Mode.Import);
+		
+		if(mMode == Mode.Select){
+			final List<ImportRecord> dataChecked = mAdapter.getCheckedData();
+			final List<ImportRecord> data = mAdapter.getData();
+			mMainMenuImport.setEnabled(dataChecked.size()>0);
+			mMainMenuSelectAll.setEnabled(dataChecked.size() < data.size());
+			mMainMenuSelectNone.setEnabled(dataChecked.size()>0);
+		}else{
+			mMainMenuImport.setEnabled(false);
+			mMainMenuSelectAll.setEnabled(false);
+			mMainMenuSelectNone.setEnabled(false);
+		}
+		mMainMenuCleanup.setEnabled(mMode == Mode.Select || mMode == Mode.Report);
+		mMainMenuStop.setEnabled(mMode == Mode.Index || mMode == Mode.Import);
+	}
+
+	@Override 
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case MAIN_MENU_IMPORT:
+			List<ImportRecord> checkedImports = mAdapter.getCheckedData();
+			mImportTask = new ImportTask();
+			mImportTask.execute((ImportRecord[]) checkedImports.toArray(new ImportRecord[checkedImports.size()]));
+			return true;
+		case MAIN_MENU_SELECT_ALL:
+			mAdapter.setCheckAll();
+			mListView.invalidateViews();
+			updateMenuStatus(null);
+			return true;
+		case MAIN_MENU_SELECT_NONE:
+			mAdapter.setCheckNone();
+			mListView.invalidateViews();
+			updateMenuStatus(null);
+			return true;
+		case MAIN_MENU_CLEANUP:
+			return true;
+		case MAIN_MENU_STOP:
+			if(mMode == Mode.Index){
+				mIndexTask.cancel(true);
+				setResult(RESULT_CANCELED);
+				finish();
+			}
+			if(mMode == Mode.Import){
+				mImportTask.cancel(true);
+			}
+		}		
+		return super.onOptionsItemSelected(item);
+	}		
+
+
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+	}
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		MapSettings.checkPrerequisite(this);
+		mIndexTask = new IndexTask();
+		mIndexTask.execute();
+	}
+
+	@Override
+	protected void onStop() {
+		if(mImportTask!=null && mImportTask.getStatus() != Status.FINISHED){
+			mImportTask.cancel(true);
+		}
+		if(mIndexTask!=null && mIndexTask.getStatus() != Status.FINISHED){
+			mIndexTask.cancel(true);
+		}
+		super.onStop();
+	}
+
 }
