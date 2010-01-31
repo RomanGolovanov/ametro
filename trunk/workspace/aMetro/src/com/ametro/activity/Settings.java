@@ -14,6 +14,4 @@ public class Settings extends PreferenceActivity {
 		addPreferencesFromResource(R.xml.settings);
 	}
 
-
-
 }

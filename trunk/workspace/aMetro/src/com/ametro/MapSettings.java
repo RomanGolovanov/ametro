@@ -13,8 +13,8 @@ import android.net.Uri;
 
 public class MapSettings {
 
-	public static long getSourceVersion() { return 2; }
-	public static long getRenderVersion() { return 3; }
+	public static long getSourceVersion() { return 3; }
+	public static long getRenderVersion() { return 4; }
 	
 	public static final String PREFERENCE_PACKAGE_FILE_NAME = "PACKAGE_FILE_NAME";
 	public static final String PREFERENCE_SCROLL_POSITION = "SCROLL_POSITION";
@@ -29,7 +29,7 @@ public class MapSettings {
 
 	public static final String DEFAULT_MAP = "metro";
 	
-	public static final String MAPS_LIST = ".maps";
+	public static final String MAPS_LIST = "maps.dat";
 	public static final String NO_MEDIA_TAG = ".nomedia";
 	
 	public static final String MAP_FILE_TYPE = ".ametro";
@@ -37,7 +37,7 @@ public class MapSettings {
 	public static final String TEMP_FILE_TYPE = ".tmp"; 
 	public static final String CACHE_FILE_TYPE = ".zip";
 	public static final String MAP_ENTRY_NAME = "map.dat";
-	public static final String DESCRIPTION_ENTRY_NAME = "description.txt";
+	public static final String DESCRIPTION_ENTRY_NAME = "description.dat";
 	
 	private static Model mCurrentModel;
 	private static String mMapName;
