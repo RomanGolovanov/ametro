@@ -24,7 +24,7 @@ import com.ametro.R;
 import com.ametro.adapter.MapListAdapter;
 import com.ametro.libs.FileGroupsDictionary;
 import com.ametro.libs.ProgressInfo;
-import com.ametro.model.MapBuilder;
+import com.ametro.model.ModelBuilder;
 import com.ametro.model.ModelDescription;
 
 public class BrowseLibrary extends Activity implements ExpandableListView.OnChildClickListener {
@@ -36,7 +36,7 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 
 		private void scanModelFileContent(FileGroupsDictionary map, String fileName, String fullFileName) {
 			try {
-				ModelDescription modelDescription = MapBuilder.loadModelDescription(fullFileName);
+				ModelDescription modelDescription = ModelBuilder.loadModelDescription(fullFileName);
 				if(modelDescription.getSourceVersion() == MapSettings.getSourceVersion()){
 					map.putFile(modelDescription.getCountryName(), modelDescription.getCityName(), fileName);
 				}

@@ -35,7 +35,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import com.ametro.MapSettings;
 import com.ametro.R;
 import com.ametro.libs.ProgressInfo;
-import com.ametro.model.MapBuilder;
+import com.ametro.model.ModelBuilder;
 import com.ametro.model.Model;
 import com.ametro.model.ModelDescription;
 
@@ -238,7 +238,7 @@ public class ImportPmz extends Activity {
 			File mapFile = new File( mapFileName );
 			String fullFileName = MapSettings.IMPORT_PATH + fileName;
 			try {
-				ModelDescription pmz = MapBuilder.indexPmz(fullFileName);
+				ModelDescription pmz = ModelBuilder.indexPmz(fullFileName);
 				String mapName = String.format("%s - %s (%s)" , pmz.getCountryName(), pmz.getCityName(), fileName );
 				int severity = 5;
 				int statusId = R.string.import_status_not_imported;
@@ -247,7 +247,7 @@ public class ImportPmz extends Activity {
 				if(mapFile.exists()){
 					ModelDescription map = null;
 					try{
-						map = MapBuilder.loadModelDescription(mapFileName);
+						map = ModelBuilder.loadModelDescription(mapFileName);
 					}catch(Exception ex){
 						map = null;
 					}
@@ -369,8 +369,8 @@ public class ImportPmz extends Activity {
 				pi.Message = record.getMapName();
 				publishProgress(pi);
 				try {
-					Model map = MapBuilder.importPmz(record.getFileName());
-					MapBuilder.saveModel(map);
+					Model map = ModelBuilder.importPmz(record.getFileName());
+					ModelBuilder.saveModel(map);
 					record.setChecked(false);
 					record.setStatus(updateStatus);
 					record.setStatusColor(Color.GREEN);

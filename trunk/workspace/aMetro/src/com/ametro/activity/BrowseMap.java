@@ -18,15 +18,15 @@ import android.widget.Toast;
 import com.ametro.MapSettings;
 import com.ametro.MapUri;
 import com.ametro.R;
-import com.ametro.model.MapBuilder;
+import com.ametro.model.ModelBuilder;
 import com.ametro.model.ModelDescription;
-import com.ametro.model.ModelTileManager;
+import com.ametro.model.ModelTileContainer;
 import com.ametro.widget.TileImageView;
 
 public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 
 	TileImageView mTileImageView;
-	ModelTileManager mTileManager;
+	ModelTileContainer mTileManager;
 	
 	//private String mMapName;
 
@@ -99,7 +99,7 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 			}
 			if(resultCode == RESULT_CANCELED && requestCode == REQUEST_BROWSE_LIBRARY){
 				String mapName = MapSettings.getMapName();
-				if(!ModelTileManager.isExist(mapName, 0)){
+				if(!ModelTileContainer.isExist(mapName, 0)){
 					initializeMapView(MapUri.create(MapSettings.getMapName()), true, true);
 				}
 			}
@@ -160,14 +160,14 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 		if(mTileManager!=null && mapName.equals(MapSettings.getMapName())){
 			return;
 		}
-		if(!ModelTileManager.isExist(mapName, 0)){
+		if(!ModelTileContainer.isExist(mapName, 0)){
 			if(allowCreateMapCache){
 				requestCreateMapCache(uri,finishOnNoMapLoaded);
 			}
 		}else{
 			try{
 				try {
-					mTileManager = ModelTileManager.load(uri);
+					mTileManager = ModelTileContainer.load(uri);
 				} catch (Exception e) {
 					if(allowCreateMapCache){
 						requestCreateMapCache(uri,finishOnNoMapLoaded);
@@ -217,7 +217,7 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 		ModelDescription modelDescription;
 		
 		try {
-			modelDescription = MapBuilder.loadModelDescription(fileName);
+			modelDescription = ModelBuilder.loadModelDescription(fileName);
 		} catch (Exception e) {
 			modelDescription = null;
 		}
