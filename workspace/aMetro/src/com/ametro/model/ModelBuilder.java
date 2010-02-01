@@ -30,7 +30,7 @@ import com.ametro.pmz.MapResource.MapLine;
 import com.ametro.pmz.TransportResource.TransportLine;
 import com.ametro.pmz.TransportResource.TransportTransfer;
 
-public class MapBuilder {
+public class ModelBuilder {
 
 	public static ModelDescription loadModelDescription(String fileName)  throws IOException, ClassNotFoundException {
 		Date startTimestamp = new Date();

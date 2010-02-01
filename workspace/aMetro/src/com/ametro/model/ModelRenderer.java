@@ -6,6 +6,7 @@ import java.util.Iterator;
 
 import com.ametro.libs.ExtendedPath;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.CornerPathEffect;
@@ -15,13 +16,150 @@ import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.graphics.Bitmap.Config;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.util.Log;
 
-public class MapRenderer {
+public class ModelRenderer {
+	
+	public static class RenderIterator implements Iterator<Tile>{
 
-	private Model mMap;
+		@Override
+		public boolean hasNext() {
+			return !mIsRecycled && (mCurrentTileNumber < mTileCount);
+		}
+
+		@Override
+		public Tile next() {
+			if(mIsRecycled || mCurrentTileNumber >= mTileCount) {
+				return null; // if iterator out of range or recycled - return null;
+			}
+			invalidateRenderTarget(); // check for render target update
+			Tile tile = currentTile();
+			advanceTilePosition();
+			return tile;
+		}
+		
+		@Override
+		public void remove() {
+			// do nothing
+		}
+		
+		public int size(){
+			return mTileCount;
+		}
+		
+		public int position(){
+			return mCurrentTileNumber;
+		}
+		
+		public RenderIterator(Model model){
+			mRenderer = new ModelRenderer(model);
+			
+			mRenderTargetOffset = 0;
+			mHeight = model.getHeight();
+			mWidth = model.getWidth();
+			mColumnCount = getTileDimension(mWidth , Tile.WIDTH );
+			mRowCount = getTileDimension(mHeight , Tile.HEIGHT );
+			int maxRenderHeight = Math.max(Tile.HEIGHT, Tile.HEIGHT * 150 / mColumnCount);
+			mRenderTargetHeight = Math.max(mHeight, maxRenderHeight - (maxRenderHeight % Tile.HEIGHT));//mRowStepSize * Tile.HEIGHT;
+			mTileCount = mColumnCount * mRowCount;
+			
+			mRenderTarget = null;
+			mRenderRect = new Rect(0,0,mWidth,mRenderTargetHeight);
+			mTileRect = new Rect(0,0,Tile.WIDTH,Tile.HEIGHT);
+			mCurrentTileNumber = 0;
+			
+			mIsRecycled = false;
+		}
+
+		public void recycle(){
+			mIsRecycled = true;
+			mRenderTarget.recycle();
+			mRenderTarget = null;
+		}
+		
+
+		private void advanceTilePosition() {
+			mCurrentTileNumber++;
+			if(mCurrentTileNumber>=mTileCount){
+				recycle();
+			}
+		}	
+		
+		private static int getTileDimension(int dimensionSize, int tileSize){
+			return dimensionSize / tileSize + ( (dimensionSize % tileSize)!=0 ? 1 : 0);
+		}
+		
+
+		private Tile currentTile(){
+			// calculate current cell row and column
+			final int row = mCurrentTileNumber / mColumnCount; 
+			final int column = mCurrentTileNumber % mColumnCount; 
+
+			// calculate render targets rect
+			final int left = column * Tile.WIDTH;
+			final int top = row * Tile.HEIGHT - mRenderRect.top;
+			final int right = Math.min( left + Tile.WIDTH, mRenderRect.right );
+			final int bottom = Math.min( top + Tile.HEIGHT, mRenderRect.bottom );
+			Rect source = new Rect(left,top,right,bottom);
+			
+			// resize destination size at borders 
+			mTileRect.right = right - left;
+			mTileRect.bottom = bottom - top;
+			
+			Bitmap image = Bitmap.createBitmap(Tile.WIDTH, Tile.HEIGHT, Config.RGB_565);	
+			Canvas c = new Canvas(image);
+			c.drawColor(Color.MAGENTA); // fill image and copy tile from render target
+			c.drawBitmap(mRenderTarget, source, mTileRect, null);
+			c.save();
+
+			return new Tile(row, column, image);
+		}
+		
+		private void invalidateRenderTarget(){
+			int row = mCurrentTileNumber / mColumnCount; 
+			boolean outOfTarget = (row * Tile.HEIGHT) > mRenderTargetOffset;
+			if(mRenderTarget == null){
+				mRenderTarget = Bitmap.createBitmap(mWidth, mRenderTargetHeight, Config.RGB_565);
+				outOfTarget = true;
+			}
+			if(outOfTarget){
+				nextRenderTarget();
+			}
+		}
+		
+		private void nextRenderTarget(){
+			mRenderRect.top = mRenderTargetOffset;
+			mRenderRect.bottom = mRenderTargetOffset + Math.min(mRenderTargetHeight, mHeight - mRenderTargetOffset);
+			Canvas canvas = new Canvas(mRenderTarget);
+			mRenderer.render(canvas,mRenderRect);
+			mRenderTargetOffset += mRenderTargetHeight;
+		}
+		
+		private boolean mIsRecycled;
+		
+		private ModelRenderer mRenderer;
+		private Rect mRenderRect;
+		private Rect mTileRect;
+		
+		private int mWidth;
+		private int mHeight;
+		
+		private int mRowCount;
+		private int mColumnCount;
+		
+		private int mCurrentTileNumber;
+		private int mTileCount;
+		
+		private Bitmap mRenderTarget;
+		private int mRenderTargetOffset;
+		private int mRenderTargetHeight;
+
+	}
+	
+	private Model mModel;
 
 	private Paint mStationBorderPaint;
 	private Paint mStationFillPaint;
@@ -37,13 +175,13 @@ public class MapRenderer {
 	private boolean mUpperCase;
 	private int mStationDiameter;
 
-	public MapRenderer(Model map) {
-		mMap = map;
+	public ModelRenderer(Model model) {
+		mModel = model;
 
-		mLinesWidth = mMap.getLinesWidth();
-		mWordWrap = mMap.isWordWrap();
-		mUpperCase = mMap.isUpperCase();
-		mStationDiameter = mMap.getStationDiameter();
+		mLinesWidth = mModel.getLinesWidth();
+		mWordWrap = mModel.isWordWrap();
+		mUpperCase = mModel.isUpperCase();
+		mStationDiameter = mModel.getStationDiameter();
 
 		mStationFillPaint = new Paint();
 		mStationFillPaint.setStyle(Style.FILL);
@@ -85,7 +223,7 @@ public class MapRenderer {
 		drawTransfers(canvas);
 		drawStations(canvas);			
 		canvas.save();
-		Log.i("aMetro", String.format("Model %s rendering time: %sms", mMap.getMapName(), Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
+		Log.i("aMetro", String.format("Model %s rendering time: %sms", mModel.getMapName(), Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
 	}
 
 	public void render(Canvas canvas, Rect src)
@@ -113,7 +251,7 @@ public class MapRenderer {
 		blackPaint.setAntiAlias(true);
 
 
-		for (Iterator<Transfer> transfers = mMap.getTransfers(); transfers.hasNext();) {
+		for (Iterator<Transfer> transfers = mModel.getTransfers(); transfers.hasNext();) {
 			Transfer transfer = transfers.next();
 			int flags = transfer.getFlags();
 			if( (flags & Transfer.INVISIBLE) != 0) continue;
@@ -126,7 +264,7 @@ public class MapRenderer {
 			}
 
 		}
-		for (Iterator<Transfer> transfers = mMap.getTransfers(); transfers.hasNext();) {
+		for (Iterator<Transfer> transfers = mModel.getTransfers(); transfers.hasNext();) {
 			Transfer transfer = transfers.next();
 			int flags = transfer.getFlags();
 			if( (flags & Transfer.INVISIBLE) != 0) continue;
@@ -142,7 +280,7 @@ public class MapRenderer {
 	}
 
 	private void drawLines(Canvas canvas) {
-		Enumeration<Line> lines = mMap.getLines();
+		Enumeration<Line> lines = mModel.getLines();
 		while(lines.hasMoreElements()){
 			Line line = lines.nextElement();
 			for (Iterator<Segment> segments = line.getSegments(); segments.hasNext();) {
@@ -214,7 +352,7 @@ public class MapRenderer {
 
 	private void drawStations(Canvas canvas) {
 		float radius = (float)mStationDiameter/2.0f;
-		Enumeration<Line> lines = mMap.getLines();
+		Enumeration<Line> lines = mModel.getLines();
 		while(lines.hasMoreElements()){
 			Line line = lines.nextElement();
 			Enumeration<Station> stations = line.getStations();
@@ -225,7 +363,7 @@ public class MapRenderer {
 				}
 			}
 		}	
-		lines = mMap.getLines();
+		lines = mModel.getLines();
 		while(lines.hasMoreElements()){
 			Line line = lines.nextElement();
 			Enumeration<Station> stations = line.getStations();
