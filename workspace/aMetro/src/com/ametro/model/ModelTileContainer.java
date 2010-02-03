@@ -65,8 +65,6 @@ public class ModelTileContainer {
 	private int mLevel = 0;
 	private ModelDescription mDescription; 
 	private ZipFile mContent;
-//	private int mTileWidth;
-//	private int mTileHeight;
 
 	public boolean zoomIn(){
 		if(mLevel>0){
@@ -77,7 +75,7 @@ public class ModelTileContainer {
 	}
 
 	public boolean zoomOut(){
-		if(mLevel < 3){
+		if((mLevel+1) < Tile.MIP_MAP_LEVELS){
 			mLevel++;
 			return true;
 		}
@@ -86,8 +84,6 @@ public class ModelTileContainer {
 	private ModelTileContainer(Uri uri, int level) throws IOException, ClassNotFoundException {
 		String mapName = MapUri.getMapName(uri);
 		mLevel = level;
-//		mTileWidth = Tile.WIDTH * (2 << mLevel) / 2;
-//		mTileHeight = Tile.HEIGHT * (2 << mLevel) / 2;
 		final String fileName = MapSettings.getCacheFileName(mapName);
 		mDescription = ModelBuilder.loadModelDescription(fileName);
 		mContent = new ZipFile(fileName);
@@ -154,7 +150,10 @@ public class ModelTileContainer {
 	}	
 
 	public Point getContentSize() {
-		return new Point(mDescription.getWidth()/ (2 << mLevel) * 2 , mDescription.getHeight() / (2 << mLevel) *2 );
+		return new Point( 
+				Tile.getDimension(mDescription.getWidth(), mLevel) , 
+				Tile.getDimension(mDescription.getHeight(), mLevel)  
+				);
 	}
 
 	public Object getCityName() {

@@ -13,6 +13,7 @@ import android.widget.ScrollView;
 import android.widget.Scroller;
 
 import com.ametro.MapSettings;
+import com.ametro.model.Tile;
 
 public class TileImageView extends ScrollView {
 
@@ -668,10 +669,13 @@ public class TileImageView extends ScrollView {
 		return x;
 	}
 
+	private int mLevel = 0;
+	
 	public void zoomIn() {
+		mLevel++;
 		Point p = this.getScrollCenter();
-		p.x = p.x * 2;
-		p.y = p.y * 2;
+		p.x = (int)( p.x * Tile.getScale(mLevel) );
+		p.y = (int)( p.y * Tile.getScale(mLevel) );
 		cleanupRenderer();
 		setScrollCenter(p.x, p.y);
 		prepareRenderer();
@@ -680,9 +684,10 @@ public class TileImageView extends ScrollView {
 	}
 
 	public void zoomOut() {
+		mLevel--;
 		Point p = this.getScrollCenter();
-		p.x = p.x / 2;
-		p.y = p.y / 2;
+		p.x = (int)( p.x / Tile.getScale(mLevel) );
+		p.y = (int)( p.y / Tile.getScale(mLevel) );
 		cleanupRenderer();
 		setScrollCenter(p.x, p.y);
 		prepareRenderer();
