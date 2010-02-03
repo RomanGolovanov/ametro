@@ -13,7 +13,9 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
+import android.widget.ZoomControls;
 
 import com.ametro.MapSettings;
 import com.ametro.MapUri;
@@ -178,8 +180,24 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 				}
 				mTileImageView = new TileImageView(this);
 				mTileImageView.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.FILL_PARENT));
-				ViewGroup layout = new FrameLayout(this);
+				
+				RelativeLayout.LayoutParams zoomLayout = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+				zoomLayout.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+				zoomLayout.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+				
+				FrameLayout zoomFrame = new FrameLayout(this);
+				FrameLayout.LayoutParams zoomInternalLayout = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+				zoomInternalLayout.setMargins(0, 0, 10, 10);
+				zoomFrame.setLayoutParams(zoomLayout);
+				ZoomControls zoomControls = new ZoomControls(this);
+				zoomControls.setLayoutParams(zoomInternalLayout);
+				zoomFrame.addView(zoomControls);
+
+				ViewGroup layout; // = new FrameLayout(this);
+				layout = new RelativeLayout(this);
 				layout.addView(mTileImageView);
+				layout.addView(zoomFrame);
+				
 				setContentView(layout);
 				MapSettings.setMapName(mapName);
 				mTileImageView.setDataProvider(this);
