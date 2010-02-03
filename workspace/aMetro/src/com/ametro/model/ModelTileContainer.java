@@ -22,18 +22,18 @@ import com.ametro.MapUri;
 
 public class ModelTileContainer {
 
-	public static class ModelTileContainerOutputStream {
+	public static class ModelTileOutputStream {
 
 		private ZipOutputStream content;
 
-		public ModelTileContainerOutputStream(String fileName) throws FileNotFoundException{
+		public ModelTileOutputStream(String fileName) throws FileNotFoundException{
 			this(new File(fileName));
 		}
 
-		public ModelTileContainerOutputStream(File file) throws FileNotFoundException{
+		public ModelTileOutputStream(File file) throws FileNotFoundException{
 			content = new ZipOutputStream(new FileOutputStream(file) );
 		}
-		
+
 		public void write(ModelDescription description) throws IOException{
 			ZipEntry entry = new ZipEntry(MapSettings.DESCRIPTION_ENTRY_NAME);
 			description.setRenderVersion(MapSettings.getRenderVersion());
@@ -46,7 +46,7 @@ public class ModelTileContainer {
 
 		public void write(Tile tile) throws IOException{
 			Bitmap bmp = tile.getImage();
-			String fileName = ModelTileContainer.getTileEntityName(0, tile.getRow(), tile.getColumn()); 
+			String fileName = ModelTileContainer.getTileEntityName(tile.getMapMapLevel(), tile.getRow(), tile.getColumn()); 
 			ZipEntry entry = new ZipEntry(fileName);
 			content.putNextEntry(entry);
 			content.setLevel(-1);
@@ -65,9 +65,29 @@ public class ModelTileContainer {
 	private int mLevel = 0;
 	private ModelDescription mDescription; 
 	private ZipFile mContent;
+//	private int mTileWidth;
+//	private int mTileHeight;
 
-	private ModelTileContainer(Uri uri) throws IOException, ClassNotFoundException {
+	public boolean zoomIn(){
+		if(mLevel>0){
+			mLevel--;
+			return true;
+		}
+		return false;
+	}
+
+	public boolean zoomOut(){
+		if(mLevel < 3){
+			mLevel++;
+			return true;
+		}
+		return false;
+	}	
+	private ModelTileContainer(Uri uri, int level) throws IOException, ClassNotFoundException {
 		String mapName = MapUri.getMapName(uri);
+		mLevel = level;
+//		mTileWidth = Tile.WIDTH * (2 << mLevel) / 2;
+//		mTileHeight = Tile.HEIGHT * (2 << mLevel) / 2;
 		final String fileName = MapSettings.getCacheFileName(mapName);
 		mDescription = ModelBuilder.loadModelDescription(fileName);
 		mContent = new ZipFile(fileName);
@@ -103,8 +123,8 @@ public class ModelTileContainer {
 		return false;
 	}
 
-	public static ModelTileContainer load(Uri uri) throws IOException, ClassNotFoundException{
-		return new ModelTileContainer(uri);
+	public static ModelTileContainer load(Uri uri, int level) throws IOException, ClassNotFoundException{
+		return new ModelTileContainer(uri,level);
 	}
 
 
@@ -134,7 +154,7 @@ public class ModelTileContainer {
 	}	
 
 	public Point getContentSize() {
-		return new Point(mDescription.getWidth(), mDescription.getHeight());
+		return new Point(mDescription.getWidth()/ (2 << mLevel) * 2 , mDescription.getHeight() / (2 << mLevel) *2 );
 	}
 
 	public Object getCityName() {

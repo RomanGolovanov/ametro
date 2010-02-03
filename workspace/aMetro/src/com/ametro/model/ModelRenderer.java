@@ -47,28 +47,38 @@ public class ModelRenderer {
 		}
 		
 		public int size(){
-			return mTileCount;
+			return mOverallTileCount;
 		}
 		
 		public int position(){
-			return mCurrentTileNumber;
+			return mOverallTileNumber;
 		}
 		
 		public RenderIterator(Model model){
+			mPaint = new Paint();
+			mPaint.setAntiAlias(true);
 			mRenderer = new ModelRenderer(model);
-			
-			mRenderTargetOffset = 0;
 			mHeight = model.getHeight();
 			mWidth = model.getWidth();
-			mColumnCount = getTileDimension(mWidth , Tile.WIDTH );
-			mRowCount = getTileDimension(mHeight , Tile.HEIGHT );
-			int maxRenderHeight = Math.max(Tile.HEIGHT, Tile.HEIGHT * 150 / mColumnCount);
-			mRenderTargetHeight = Math.max(mHeight, maxRenderHeight - (maxRenderHeight % Tile.HEIGHT));//mRowStepSize * Tile.HEIGHT;
+			mMipMapLevel = 0;
+			mOverallTileNumber = 0;
+			mOverallTileCount = getOverallTileCount(mWidth, mHeight, mMipMapLevel);
+			prepareRenderer();
+		}
+
+		private void prepareRenderer() {
+			mRenderTargetOffset = 0;
+			mTileWidth = Tile.WIDTH * (2 << mMipMapLevel) / 2;
+			mTileHeight = Tile.HEIGHT * (2 << mMipMapLevel) / 2;
+			mColumnCount = getTileCount(mWidth , mTileWidth );
+			mRowCount = getTileCount(mHeight , mTileHeight );
+			int maxRenderHeight = Math.max(mTileHeight, mTileHeight * (150 / (mMipMapLevel+1)*(mMipMapLevel+1)) / mColumnCount);
+			mRenderTargetHeight = Math.min(mHeight, maxRenderHeight - (maxRenderHeight % mTileHeight));
 			mTileCount = mColumnCount * mRowCount;
 			
 			mRenderTarget = null;
 			mRenderRect = new Rect(0,0,mWidth,mRenderTargetHeight);
-			mTileRect = new Rect(0,0,Tile.WIDTH,Tile.HEIGHT);
+			mTileRect = new Rect(0,0,mTileWidth,mTileHeight);
 			mCurrentTileNumber = 0;
 			
 			mIsRecycled = false;
@@ -83,15 +93,28 @@ public class ModelRenderer {
 
 		private void advanceTilePosition() {
 			mCurrentTileNumber++;
+			mOverallTileNumber++;
 			if(mCurrentTileNumber>=mTileCount){
 				recycle();
+				if(mColumnCount > 1 && mRowCount > 1){
+					mMipMapLevel++;
+					prepareRenderer();
+				}
 			}
 		}	
 		
-		private static int getTileDimension(int dimensionSize, int tileSize){
+		private static int getTileCount(int dimensionSize, int tileSize){
 			return dimensionSize / tileSize + ( (dimensionSize % tileSize)!=0 ? 1 : 0);
 		}
 		
+		private static int getOverallTileCount(int x, int y, int level){
+			final int xc = getTileCount(x, Tile.WIDTH * (2 << level) / 2);
+			final int yc = getTileCount(y, Tile.HEIGHT * (2 << level) / 2);
+			if(xc == 1 && yc == 1){
+				return 1;
+			}
+			return xc*yc + getOverallTileCount(x, y, level+1);
+		}
 
 		private Tile currentTile(){
 			// calculate current cell row and column
@@ -99,28 +122,28 @@ public class ModelRenderer {
 			final int column = mCurrentTileNumber % mColumnCount; 
 
 			// calculate render targets rect
-			final int left = column * Tile.WIDTH;
-			final int top = row * Tile.HEIGHT - mRenderRect.top;
-			final int right = Math.min( left + Tile.WIDTH, mRenderRect.right );
-			final int bottom = Math.min( top + Tile.HEIGHT, mRenderRect.bottom );
+			final int left = column * mTileWidth;
+			final int top = row * mTileHeight - mRenderRect.top;
+			final int right = Math.min( left + mTileWidth, mRenderRect.right );
+			final int bottom = Math.min( top + mTileHeight, mRenderRect.bottom );
 			Rect source = new Rect(left,top,right,bottom);
 			
 			// resize destination size at borders 
-			mTileRect.right = right - left;
-			mTileRect.bottom = bottom - top;
+			mTileRect.right = (right - left)/(2 << mMipMapLevel) * 2;
+			mTileRect.bottom = (bottom - top)/(2 << mMipMapLevel) * 2;
 			
 			Bitmap image = Bitmap.createBitmap(Tile.WIDTH, Tile.HEIGHT, Config.RGB_565);	
 			Canvas c = new Canvas(image);
 			c.drawColor(Color.MAGENTA); // fill image and copy tile from render target
-			c.drawBitmap(mRenderTarget, source, mTileRect, null);
+			c.drawBitmap(mRenderTarget, source, mTileRect, mPaint);
 			c.save();
 
-			return new Tile(row, column, image);
+			return new Tile(row, column, mMipMapLevel, image);
 		}
 		
 		private void invalidateRenderTarget(){
 			int row = mCurrentTileNumber / mColumnCount; 
-			boolean outOfTarget = (row * Tile.HEIGHT) > mRenderTargetOffset;
+			boolean outOfTarget = (row * mTileHeight) > mRenderTargetOffset;
 			if(mRenderTarget == null){
 				mRenderTarget = Bitmap.createBitmap(mWidth, mRenderTargetHeight, Config.RGB_565);
 				outOfTarget = true;
@@ -140,9 +163,14 @@ public class ModelRenderer {
 		
 		private boolean mIsRecycled;
 		
+		private Paint mPaint;
+		
 		private ModelRenderer mRenderer;
 		private Rect mRenderRect;
 		private Rect mTileRect;
+		
+		private int mTileWidth;
+		private int mTileHeight;
 		
 		private int mWidth;
 		private int mHeight;
@@ -150,8 +178,13 @@ public class ModelRenderer {
 		private int mRowCount;
 		private int mColumnCount;
 		
+		private int mMipMapLevel;
+		
 		private int mCurrentTileNumber;
 		private int mTileCount;
+		
+		private int mOverallTileCount;
+		private int mOverallTileNumber;
 		
 		private Bitmap mRenderTarget;
 		private int mRenderTargetOffset;

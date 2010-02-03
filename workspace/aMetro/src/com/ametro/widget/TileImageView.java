@@ -164,7 +164,7 @@ public class TileImageView extends ScrollView {
 
 	private void cleanupRenderer() {
 		mInitialized = false;
-		mDataProvider = null;
+		//mDataProvider = null;
 		mContentWidth = 0;
 		mContentHeight = 0;
 		mRenderThread.shutdownRendering();
@@ -666,6 +666,28 @@ public class TileImageView extends ScrollView {
 			x = docMax - viewMax;
 		}
 		return x;
+	}
+
+	public void zoomIn() {
+		Point p = this.getScrollCenter();
+		p.x = p.x * 2;
+		p.y = p.y * 2;
+		cleanupRenderer();
+		setScrollCenter(p.x, p.y);
+		prepareRenderer();
+		invalidateScroll();
+		postInvalidate();
+	}
+
+	public void zoomOut() {
+		Point p = this.getScrollCenter();
+		p.x = p.x / 2;
+		p.y = p.y / 2;
+		cleanupRenderer();
+		setScrollCenter(p.x, p.y);
+		prepareRenderer();
+		invalidateScroll();
+		postInvalidate();
 	}
 
 

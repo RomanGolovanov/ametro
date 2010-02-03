@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.FrameLayout;
@@ -169,7 +170,7 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 		}else{
 			try{
 				try {
-					mTileManager = ModelTileContainer.load(uri);
+					mTileManager = ModelTileContainer.load(uri,0);
 				} catch (Exception e) {
 					if(allowCreateMapCache){
 						requestCreateMapCache(uri,finishOnNoMapLoaded);
@@ -191,6 +192,22 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 				zoomFrame.setLayoutParams(zoomLayout);
 				ZoomControls zoomControls = new ZoomControls(this);
 				zoomControls.setLayoutParams(zoomInternalLayout);
+				zoomControls.setOnZoomInClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if(mTileManager.zoomIn()){
+							mTileImageView.zoomIn();
+						}
+					}
+				});
+				zoomControls.setOnZoomOutClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if(mTileManager.zoomOut()){
+							mTileImageView.zoomOut();
+						}
+					}
+				});
 				zoomFrame.addView(zoomControls);
 
 				ViewGroup layout; // = new FrameLayout(this);

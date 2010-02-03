@@ -7,6 +7,7 @@ public class Tile {
 	public static final int WIDTH = 100;
 	public static final int HEIGHT = 100;
 	
+	private int mMipMapLevel;
 	private int mRow;
 	private int mColumn;
 	private Bitmap mImage;
@@ -15,30 +16,23 @@ public class Tile {
 		return mRow;
 	}
 
-	public void setRow(int row) {
-		this.mRow = row;
-	}
-
 	public int getColumn() {
 		return mColumn;
 	}
 
-	public void setColumn(int column) {
-		this.mColumn = column;
+	public int getMapMapLevel(){
+		return mMipMapLevel;
 	}
-
+	
 	public Bitmap getImage() {
 		return mImage;
 	}
 
-	public void setImage(Bitmap image) {
-		this.mImage = image;
-	}
-
-	public Tile(int row, int column, Bitmap image) {
+	public Tile(int row, int column, int mipMapLevel, Bitmap image) {
 		super();
 		this.mRow = row;
 		this.mColumn = column;
+		this.mMipMapLevel = mipMapLevel;
 		this.mImage = image;
 	}
 
