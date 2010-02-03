@@ -4,8 +4,6 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.Iterator;
 
-import com.ametro.libs.ExtendedPath;
-
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -20,6 +18,8 @@ import android.graphics.Bitmap.Config;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.util.Log;
+
+import com.ametro.libs.ExtendedPath;
 
 public class ModelRenderer {
 	
@@ -58,30 +58,34 @@ public class ModelRenderer {
 			mPaint = new Paint();
 			mPaint.setAntiAlias(true);
 			mRenderer = new ModelRenderer(model);
-			mHeight = model.getHeight();
-			mWidth = model.getWidth();
+			mModelHeight = model.getHeight();
+			mModelWidth = model.getWidth();
 			mMipMapLevel = 0;
 			mOverallTileNumber = 0;
-			mOverallTileCount = getOverallTileCount(mWidth, mHeight, mMipMapLevel);
+			mOverallTileCount = getOverallTileCount(mModelWidth, mModelHeight, mMipMapLevel);
+			mTileRect = new Rect(0,0,Tile.WIDTH,Tile.HEIGHT);
 			prepareRenderer();
 		}
 
+		
 		private void prepareRenderer() {
 			mRenderTargetOffset = 0;
-			mTileWidth = Tile.WIDTH * (2 << mMipMapLevel) / 2;
-			mTileHeight = Tile.HEIGHT * (2 << mMipMapLevel) / 2;
-			mColumnCount = getTileCount(mWidth , mTileWidth );
-			mRowCount = getTileCount(mHeight , mTileHeight );
-			int maxRenderHeight = Math.max(mTileHeight, mTileHeight * (150 / (mMipMapLevel+1)*(mMipMapLevel+1)) / mColumnCount);
-			mRenderTargetHeight = Math.min(mHeight, maxRenderHeight - (maxRenderHeight % mTileHeight));
+			mWidth = Tile.getDimension(mModelWidth , mMipMapLevel);
+			mHeight = Tile.getDimension(mModelHeight , mMipMapLevel);
+			mColumnCount = Tile.getTileCount(mWidth);
+			mRowCount = Tile.getTileCount(mHeight);
+			int maxRenderHeight = Math.max(Tile.HEIGHT, Tile.HEIGHT * 150 / mColumnCount);
+			mRenderTargetHeight = Math.min(mHeight, maxRenderHeight - (maxRenderHeight % Tile.HEIGHT));
 			mTileCount = mColumnCount * mRowCount;
 			
 			mRenderTarget = null;
 			mRenderRect = new Rect(0,0,mWidth,mRenderTargetHeight);
-			mTileRect = new Rect(0,0,mTileWidth,mTileHeight);
 			mCurrentTileNumber = 0;
 			
 			mIsRecycled = false;
+			
+			Log.i("aMetro", "Prepaired for rendering mipmap level " + mMipMapLevel + ", height: " + mHeight + ", step: " + mRenderTargetHeight);
+			
 		}
 
 		public void recycle(){
@@ -90,29 +94,14 @@ public class ModelRenderer {
 			mRenderTarget = null;
 		}
 		
-
-		private void advanceTilePosition() {
-			mCurrentTileNumber++;
-			mOverallTileNumber++;
-			if(mCurrentTileNumber>=mTileCount){
-				recycle();
-				if(mColumnCount > 1 && mRowCount > 1){
-					mMipMapLevel++;
-					prepareRenderer();
-				}
-			}
-		}	
-		
-		private static int getTileCount(int dimensionSize, int tileSize){
-			return dimensionSize / tileSize + ( (dimensionSize % tileSize)!=0 ? 1 : 0);
-		}
-		
 		private static int getOverallTileCount(int x, int y, int level){
-			final int xc = getTileCount(x, Tile.WIDTH * (2 << level) / 2);
-			final int yc = getTileCount(y, Tile.HEIGHT * (2 << level) / 2);
-			if(xc == 1 && yc == 1){
-				return 1;
+			if(level >= Tile.MIP_MAP_LEVELS){
+				return 0;
 			}
+			final int xc = Tile.getTileCount(x, level);
+			final int yc = Tile.getTileCount(y, level);
+			final int count = xc*yc;
+			Log.i("aMetro", "Level " + level + " tile count: " + count);
 			return xc*yc + getOverallTileCount(x, y, level+1);
 		}
 
@@ -122,15 +111,15 @@ public class ModelRenderer {
 			final int column = mCurrentTileNumber % mColumnCount; 
 
 			// calculate render targets rect
-			final int left = column * mTileWidth;
-			final int top = row * mTileHeight - mRenderRect.top;
-			final int right = Math.min( left + mTileWidth, mRenderRect.right );
-			final int bottom = Math.min( top + mTileHeight, mRenderRect.bottom );
+			final int left = column * Tile.WIDTH;
+			final int top = row * Tile.HEIGHT - mRenderRect.top;
+			final int right = Math.min( left + Tile.WIDTH, mWidth );
+			final int bottom = Math.min( top + Tile.HEIGHT, mHeight );
 			Rect source = new Rect(left,top,right,bottom);
 			
 			// resize destination size at borders 
-			mTileRect.right = (right - left)/(2 << mMipMapLevel) * 2;
-			mTileRect.bottom = (bottom - top)/(2 << mMipMapLevel) * 2;
+			mTileRect.right = (right - left);
+			mTileRect.bottom = (bottom - top);
 			
 			Bitmap image = Bitmap.createBitmap(Tile.WIDTH, Tile.HEIGHT, Config.RGB_565);	
 			Canvas c = new Canvas(image);
@@ -141,9 +130,23 @@ public class ModelRenderer {
 			return new Tile(row, column, mMipMapLevel, image);
 		}
 		
+
+		private void advanceTilePosition() {
+			mCurrentTileNumber++;
+			mOverallTileNumber++;
+			if(mCurrentTileNumber>=mTileCount){
+				recycle();
+				
+				mMipMapLevel++;
+				if(mMipMapLevel<Tile.MIP_MAP_LEVELS){
+					prepareRenderer();
+				}
+			}
+		}	
+		
 		private void invalidateRenderTarget(){
 			int row = mCurrentTileNumber / mColumnCount; 
-			boolean outOfTarget = (row * mTileHeight) > mRenderTargetOffset;
+			boolean outOfTarget = (row * Tile.HEIGHT) >= mRenderTargetOffset;
 			if(mRenderTarget == null){
 				mRenderTarget = Bitmap.createBitmap(mWidth, mRenderTargetHeight, Config.RGB_565);
 				outOfTarget = true;
@@ -157,9 +160,26 @@ public class ModelRenderer {
 			mRenderRect.top = mRenderTargetOffset;
 			mRenderRect.bottom = mRenderTargetOffset + Math.min(mRenderTargetHeight, mHeight - mRenderTargetOffset);
 			Canvas canvas = new Canvas(mRenderTarget);
-			mRenderer.render(canvas,mRenderRect);
+			
+			
+			canvas.translate(-mRenderRect.left, -mRenderRect.top);
+			if(mMipMapLevel>0){
+			float scale = 1.0f/Tile.getScale(mMipMapLevel);
+			canvas.scale(scale, scale);
+			}
+
+			Log.i("aMetro",String.format("Render target %s,%s,%s,%s ",
+					Integer.toString(mRenderRect.left),
+					Integer.toString(mRenderRect.top),
+					Integer.toString(mRenderRect.right),
+					Integer.toString(mRenderRect.bottom)
+					));
+			
+			mRenderer.render(canvas,null);
 			mRenderTargetOffset += mRenderTargetHeight;
 		}
+
+
 		
 		private boolean mIsRecycled;
 		
@@ -169,8 +189,8 @@ public class ModelRenderer {
 		private Rect mRenderRect;
 		private Rect mTileRect;
 		
-		private int mTileWidth;
-		private int mTileHeight;
+		private int mModelWidth;
+		private int mModelHeight;
 		
 		private int mWidth;
 		private int mHeight;

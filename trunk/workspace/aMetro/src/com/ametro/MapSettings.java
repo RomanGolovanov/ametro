@@ -14,7 +14,7 @@ import android.net.Uri;
 public class MapSettings {
 
 	public static long getSourceVersion() { return 3; }
-	public static long getRenderVersion() { return 5; }
+	public static long getRenderVersion() { return 6; }
 	
 	public static final String PREFERENCE_PACKAGE_FILE_NAME = "PACKAGE_FILE_NAME";
 	public static final String PREFERENCE_SCROLL_POSITION = "SCROLL_POSITION";
