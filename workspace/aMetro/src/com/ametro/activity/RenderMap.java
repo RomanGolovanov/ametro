@@ -53,7 +53,8 @@ public class RenderMap extends Activity {
 				container.write(description);
 				RenderIterator iterator = new RenderIterator(model);
 				while(iterator.hasNext() && !mIsCanceled){
-					publishProgress(new ProgressInfo( iterator.position(), iterator.size() ,"Rendering...","Create map image"));
+					int progress = 100 * iterator.position() / iterator.size();
+					publishProgress(new ProgressInfo( progress, 100 ,"Rendering...","Create map image"));
 					Tile tile = iterator.next();
 					container.write(tile);
 				}
