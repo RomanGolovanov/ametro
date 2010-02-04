@@ -1,5 +1,6 @@
 package com.ametro.model;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -55,8 +56,6 @@ public class ModelRenderer {
 		}
 		
 		public RenderIterator(Model model){
-			mPaint = new Paint();
-			mPaint.setAntiAlias(true);
 			mRenderer = new ModelRenderer(model);
 			mModelHeight = model.getHeight();
 			mModelWidth = model.getWidth();
@@ -64,6 +63,7 @@ public class ModelRenderer {
 			mOverallTileNumber = 0;
 			mOverallTileCount = getOverallTileCount(mModelWidth, mModelHeight, mMipMapLevel);
 			mTileRect = new Rect(0,0,Tile.WIDTH,Tile.HEIGHT);
+			mTileImage = Bitmap.createBitmap(Tile.WIDTH, Tile.HEIGHT, Config.RGB_565);
 			prepareRenderer();
 		}
 
@@ -74,7 +74,7 @@ public class ModelRenderer {
 			mHeight = Tile.getDimension(mModelHeight , mMipMapLevel);
 			mColumnCount = Tile.getTileCount(mWidth);
 			mRowCount = Tile.getTileCount(mHeight);
-			int maxRenderHeight = Math.max(Tile.HEIGHT, Tile.HEIGHT * 150 / mColumnCount);
+			int maxRenderHeight = Math.max(Tile.HEIGHT, Tile.HEIGHT * 100 / mColumnCount);
 			mRenderTargetHeight = Math.min(mHeight, maxRenderHeight - (maxRenderHeight % Tile.HEIGHT));
 			mTileCount = mColumnCount * mRowCount;
 			
@@ -121,13 +121,14 @@ public class ModelRenderer {
 			mTileRect.right = (right - left);
 			mTileRect.bottom = (bottom - top);
 			
-			Bitmap image = Bitmap.createBitmap(Tile.WIDTH, Tile.HEIGHT, Config.RGB_565);	
-			Canvas c = new Canvas(image);
+			Canvas c = new Canvas(mTileImage);
 			c.drawColor(Color.MAGENTA); // fill image and copy tile from render target
-			c.drawBitmap(mRenderTarget, source, mTileRect, mPaint);
+			c.drawBitmap(mRenderTarget, source, mTileRect, null);
 			c.save();
+			ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
+			mTileImage.compress(Bitmap.CompressFormat.PNG, 90, byteArray);
 
-			return new Tile(row, column, mMipMapLevel, image);
+			return new Tile(row, column, mMipMapLevel, byteArray.toByteArray());
 		}
 		
 
@@ -183,7 +184,7 @@ public class ModelRenderer {
 		
 		private boolean mIsRecycled;
 		
-		private Paint mPaint;
+		private Bitmap mTileImage;	
 		
 		private ModelRenderer mRenderer;
 		private Rect mRenderRect;

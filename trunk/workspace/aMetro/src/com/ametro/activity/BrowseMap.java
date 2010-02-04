@@ -23,14 +23,18 @@ import com.ametro.MapUri;
 import com.ametro.R;
 import com.ametro.model.ModelBuilder;
 import com.ametro.model.ModelDescription;
-import com.ametro.model.ModelTileContainer;
+import com.ametro.model.Tile;
+import com.ametro.model.TileContainer;
 import com.ametro.widget.TileImageView;
 
-public class BrowseMap extends Activity implements TileImageView.IDataProvider{
+public class BrowseMap extends Activity implements TileImageView.IDataProvider {
 
-	TileImageView mTileImageView;
-	ModelTileContainer mTileManager;
-	
+	private TileImageView mTileImageView;
+	private TileContainer mTileContainer;
+	private ZoomControls mZoomControls;
+
+	private int mMipMapLevel;
+
 	//private String mMapName;
 
 	private int mTimeOfDay = 0;
@@ -51,14 +55,14 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 
 	private final static int REQUEST_BROWSE_LIBRARY = 1;
 	private static final int REQUEST_RENDER_MAP = 2;
-	
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		MapSettings.checkPrerequisite(this);
 		setContentView(R.layout.browse_map_empty);
-		
+
 		Intent intent = getIntent();
 		Uri uri = intent!= null ? intent.getData() : null;
 		if(uri!=null){
@@ -78,7 +82,7 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 		saveScroll();
 		super.onPause();
 	}
-	
+
 
 	private void handleConfigurationException(Exception e) {
 		MapSettings.clearDefaultMapName(this);
@@ -102,7 +106,7 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 			}
 			if(resultCode == RESULT_CANCELED && requestCode == REQUEST_BROWSE_LIBRARY){
 				String mapName = MapSettings.getMapName();
-				if(!ModelTileContainer.isExist(mapName, 0)){
+				if(!TileContainer.isExist(mapName)){
 					initializeMapView(MapUri.create(MapSettings.getMapName()), true, true);
 				}
 			}
@@ -160,17 +164,17 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 
 	private void initializeMapView(Uri uri, boolean allowCreateMapCache, boolean finishOnNoMapLoaded)  {
 		String mapName = MapUri.getMapName(uri);
-		if(mTileManager!=null && mapName.equals(MapSettings.getMapName())){
+		if(mTileContainer!=null && mapName.equals(MapSettings.getMapName())){
 			return;
 		}
-		if(!ModelTileContainer.isExist(mapName, 0)){
+		if(!TileContainer.isExist(mapName)){
 			if(allowCreateMapCache){
 				requestCreateMapCache(uri,finishOnNoMapLoaded);
 			}
 		}else{
 			try{
 				try {
-					mTileManager = ModelTileContainer.load(uri,0);
+					mTileContainer =  new TileContainer(uri);
 				} catch (Exception e) {
 					if(allowCreateMapCache){
 						requestCreateMapCache(uri,finishOnNoMapLoaded);
@@ -179,43 +183,21 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 						throw e;
 					}
 				}
-				mTileImageView = new TileImageView(this);
-				mTileImageView.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.FILL_PARENT));
-				
-				RelativeLayout.LayoutParams zoomLayout = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-				zoomLayout.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-				zoomLayout.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-				
-				FrameLayout zoomFrame = new FrameLayout(this);
-				FrameLayout.LayoutParams zoomInternalLayout = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-				zoomInternalLayout.setMargins(0, 0, 10, 10);
-				zoomFrame.setLayoutParams(zoomLayout);
-				ZoomControls zoomControls = new ZoomControls(this);
-				zoomControls.setLayoutParams(zoomInternalLayout);
-				zoomControls.setOnZoomInClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if(mTileManager.zoomIn()){
-							mTileImageView.zoomIn();
-						}
-					}
-				});
-				zoomControls.setOnZoomOutClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if(mTileManager.zoomOut()){
-							mTileImageView.zoomOut();
-						}
-					}
-				});
-				zoomFrame.addView(zoomControls);
 
-				ViewGroup layout; // = new FrameLayout(this);
-				layout = new RelativeLayout(this);
-				layout.addView(mTileImageView);
-				layout.addView(zoomFrame);
-				
-				setContentView(layout);
+				setContentView(R.layout.browse_map_main);
+				mTileImageView = (TileImageView)findViewById(R.id.browse_map_tile_view);
+				mZoomControls = (ZoomControls)findViewById(R.id.browse_map_zoom);
+				mZoomControls.setOnZoomInClickListener(new View.OnClickListener() { 
+					public void onClick(View v) {
+						BrowseMap.this.onZoomIn();
+					}
+				});
+				mZoomControls.setOnZoomOutClickListener(new View.OnClickListener() {
+					public void onClick(View v) {
+						BrowseMap.this.onZoomOut();
+					}
+				});
+
 				MapSettings.setMapName(mapName);
 				mTileImageView.setDataProvider(this);
 				updateTitle();
@@ -228,19 +210,19 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 	}
 
 	private void saveScroll() {
-		if(mTileImageView!=null && mTileManager!=null && MapSettings.getMapName()!=null){
+		if(mTileImageView!=null && mTileContainer!=null && MapSettings.getMapName()!=null){
 			MapSettings.saveScrollPosition(this, mTileImageView.getScrollCenter());
 		}
 	}
 
 	private void restoreScroll() {
-		if(mTileImageView!=null && mTileManager!=null && MapSettings.getMapName()!=null){
+		if(mTileImageView!=null && mTileContainer!=null && MapSettings.getMapName()!=null){
 			Point position  = MapSettings.loadScrollPosition(this);
 
 			if(position == null){
-				Point size = mTileManager.getContentSize();
+				Point size = mTileContainer.getContentSize(mMipMapLevel);
 				position = new Point(size.x/2 , size.y/2);
-				
+
 			}			
 			mTileImageView.setScrollCenter(position.x, position.y);
 		}
@@ -250,7 +232,7 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 	private void requestCreateMapCache(Uri uri, boolean finishOnNoMapLoaded) {
 		String fileName = MapSettings.getMapFileName(uri);
 		ModelDescription modelDescription;
-		
+
 		try {
 			modelDescription = ModelBuilder.loadModelDescription(fileName);
 		} catch (Exception e) {
@@ -283,10 +265,10 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 
 	private void updateTitle()
 	{
-		if(mTileManager==null){
+		if(mTileContainer==null){
 			setTitle(R.string.app_name);
 		}else{
-			setTitle(String.format("%s - %s (%s)", getString(R.string.app_name), mTileManager.getCityName(), getString(getTimeOfDay()).toLowerCase()) );
+			setTitle(String.format("%s - %s (%s)", getString(R.string.app_name), mTileContainer.getCityName(), getString(getTimeOfDay()).toLowerCase()) );
 		}
 	}
 
@@ -325,7 +307,7 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 
 	@Override
 	public Bitmap getTile(Rect rect) {
-		return mTileManager.getTile(rect);
+		return mTileContainer.getTile(rect,mMipMapLevel>0?mMipMapLevel:0);
 	}
 
 	@Override
@@ -335,7 +317,33 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider{
 
 	@Override
 	public Point getContentSize() {
-		return mTileManager.getContentSize();
+		return mTileContainer.getContentSize(mMipMapLevel>0?mMipMapLevel:0);
+	}
+
+	public void onZoomIn(){
+		if(mMipMapLevel >=0){
+			mMipMapLevel--;
+			if(mMipMapLevel >=0){
+				mTileImageView.zoomIn();
+			}else{
+				mTileImageView.setScale(2.0f);
+			}
+		}
+		mZoomControls.setIsZoomInEnabled(mMipMapLevel > -1);
+		mZoomControls.setIsZoomOutEnabled(mMipMapLevel+1 < Tile.MIP_MAP_LEVELS);
+	}
+
+	public void onZoomOut(){
+		if((mMipMapLevel+1) < Tile.MIP_MAP_LEVELS){
+			mMipMapLevel++;
+			if(mMipMapLevel>0){
+				mTileImageView.zoomOut();
+			}else{
+				mTileImageView.setScale(1.0f);
+			}
+		}
+		mZoomControls.setIsZoomInEnabled(mMipMapLevel > -1);
+		mZoomControls.setIsZoomOutEnabled(mMipMapLevel+1 < Tile.MIP_MAP_LEVELS);
 	}
 
 }

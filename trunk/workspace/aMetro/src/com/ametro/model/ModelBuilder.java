@@ -50,8 +50,9 @@ public class ModelBuilder {
 			if(zip!=null){
 				try { zip.close(); } catch (Exception e) { }
 			}
-		}	}
-	
+		}	
+	}
+
 	public static Model loadModel(String fileName) throws IOException, ClassNotFoundException {
 		Date startTimestamp = new Date();
 		ObjectInputStream strm = null;
@@ -92,7 +93,7 @@ public class ModelBuilder {
 		strm.flush();
 		zip.closeEntry();
 	}
-	
+
 	private static void saveModelEntry(Model model, ZipOutputStream zip) throws IOException {
 		ZipEntry entry = new ZipEntry(MapSettings.MAP_ENTRY_NAME);
 		zip.putNextEntry(entry);
@@ -122,7 +123,7 @@ public class ModelBuilder {
 		return model;
 	}
 
-	
+
 	public static Model importPmz(String fileName) throws IOException
 	{
 		Date startTimestamp = new Date();
@@ -134,7 +135,7 @@ public class ModelBuilder {
 		TransportResource trp = pkg.getTransportResource(map.getTransportName() != null ? map.getTransportName() : "metro.trp");
 
 		Model model = new Model( file.getName().replace(".pmz", ""));
-		
+
 		String countryName = info.getValue("Options", "Country");
 		String cityName = info.getValue("Options", "RusName");
 		if(cityName == null){
@@ -146,7 +147,7 @@ public class ModelBuilder {
 		model.setStationDiameter(map.getStationDiameter());
 		model.setWordWrap(map.isWordWrap());
 		model.setUpperCase(map.isUpperCase());
-		
+
 		model.setTimestamp(file.lastModified());
 		model.setSourceVersion(MapSettings.getSourceVersion());
 
@@ -196,7 +197,7 @@ public class ModelBuilder {
 				if(p!=null){
 					if(xmin>p.x) xmin = p.x;
 					if(ymin>p.y) ymin = p.y;
-					
+
 					if(xmax<p.x) xmax = p.x;
 					if(ymax<p.y) ymax = p.y;
 				}
@@ -206,7 +207,7 @@ public class ModelBuilder {
 					if(ymin>r.top) ymin = r.top;
 					if(xmin>r.right) xmin = r.right;
 					if(ymin>r.bottom) ymin = r.bottom;
-					
+
 					if(xmax<r.left) xmax = r.left;
 					if(ymax<r.top) ymax = r.top;
 					if(xmax<r.right) xmax = r.right;
@@ -217,7 +218,7 @@ public class ModelBuilder {
 
 		int dx = 50 - xmin;
 		int dy = 50 - ymin;
-		
+
 		lines = model.getLines();
 		while(lines.hasMoreElements()){
 			Line line = lines.nextElement();
@@ -241,10 +242,10 @@ public class ModelBuilder {
 						points[i].offset(dx, dy);
 					}
 				}
-				
+
 			}
 		}
-		
+
 		model.setDimension(xmax-xmin+100, ymax-ymin+100);
 	}
 

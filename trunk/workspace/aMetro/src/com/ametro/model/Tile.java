@@ -1,11 +1,10 @@
 package com.ametro.model;
 
-import android.graphics.Bitmap;
 
 public class Tile {
 
-	public static final float SCALE = 1.3f;
-	public static final int MIP_MAP_LEVELS = 3;
+	public static final float SCALE = 1.4f;
+	public static final int MIP_MAP_LEVELS = 5;
 	
 	public static final int WIDTH = 100;
 	public static final int HEIGHT = 100;
@@ -13,7 +12,7 @@ public class Tile {
 	private int mMipMapLevel;
 	private int mRow;
 	private int mColumn;
-	private Bitmap mImage;
+	private byte[] mImage;
 	
 	public int getRow() {
 		return mRow;
@@ -27,22 +26,17 @@ public class Tile {
 		return mMipMapLevel;
 	}
 	
-	public Bitmap getImage() {
+	public byte[] getImage() {
 		return mImage;
 	}
 
-	public Tile(int row, int column, int mipMapLevel, Bitmap image) {
+	public Tile(int row, int column, int mipMapLevel, byte[] image) {
 		super();
 		this.mRow = row;
 		this.mColumn = column;
 		this.mMipMapLevel = mipMapLevel;
 		this.mImage = image;
 	}
-
-	public void recycle(){
-		mImage.recycle();
-		mImage = null;
-	}	
 	
 	public static float getScale(int level){
 		if(level == 0) return 1.0f;
