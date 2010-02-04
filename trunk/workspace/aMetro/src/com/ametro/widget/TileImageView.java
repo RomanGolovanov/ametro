@@ -674,8 +674,8 @@ public class TileImageView extends ScrollView {
 	public void zoomIn() {
 		mLevel++;
 		Point p = this.getScrollCenter();
-		p.x = (int)( p.x * Tile.getScale(mLevel) );
-		p.y = (int)( p.y * Tile.getScale(mLevel) );
+		p.x = (int)( p.x * Tile.SCALE );
+		p.y = (int)( p.y * Tile.SCALE );
 		cleanupRenderer();
 		setScrollCenter(p.x, p.y);
 		prepareRenderer();
@@ -686,8 +686,8 @@ public class TileImageView extends ScrollView {
 	public void zoomOut() {
 		mLevel--;
 		Point p = this.getScrollCenter();
-		p.x = (int)( p.x / Tile.getScale(mLevel) );
-		p.y = (int)( p.y / Tile.getScale(mLevel) );
+		p.x = (int)( p.x / Tile.SCALE );
+		p.y = (int)( p.y / Tile.SCALE );
 		cleanupRenderer();
 		setScrollCenter(p.x, p.y);
 		prepareRenderer();
