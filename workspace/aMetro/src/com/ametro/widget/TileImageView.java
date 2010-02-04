@@ -12,7 +12,6 @@ import android.view.VelocityTracker;
 import android.widget.ScrollView;
 import android.widget.Scroller;
 
-import com.ametro.MapSettings;
 import com.ametro.model.Tile;
 
 public class TileImageView extends ScrollView {
@@ -27,7 +26,6 @@ public class TileImageView extends ScrollView {
 	private class  RendererThread extends Thread{
 
 		private boolean mWork = true;
-		private boolean mUpdatePending = false;
 
 		public void shutdownRendering(){
 			synchronized (mRenderThread) {
@@ -39,7 +37,6 @@ public class TileImageView extends ScrollView {
 
 		public void invalidateTiles(){
 			synchronized (mRenderThread) {
-				mUpdatePending = true;
 				mRenderThread.notify();
 			}
 		}
@@ -52,14 +49,8 @@ public class TileImageView extends ScrollView {
 						recycleTiles(new Rect(tiles));
 						loadTiles(tiles);
 						synchronized (this) {
-							if(mUpdatePending){
-								this.wait(10);
-							}else{
-								this.wait();
-								mUpdatePending = false;
-							}
+							this.wait();
 						}
-
 					}
 				} catch (Exception e) {
 					Log.e("TileImageView", "Exit render thread due error", e);
@@ -98,7 +89,8 @@ public class TileImageView extends ScrollView {
 				for(int j = top; j <= bottom; j++){
 					Bitmap tile = mTiles[i][j];
 					if(tile == null){
-						mTiles[i][j] = mDataProvider.getTile(getTileContentPosition(i,j));
+						tile = mDataProvider.getTile(getTileContentPosition(i,j));
+						mTiles[i][j] = tile!=null ? tile : mDataProvider.getLoadingTile();
 					}
 				}
 			}
@@ -126,8 +118,6 @@ public class TileImageView extends ScrollView {
 	private int mContentWidth;
 	private int mContentHeight;
 
-	//public int mTileScrollX = 0;
-	//public int mTileScrollY = 0;
 
 	private Rect mTileRect;
 	private Context mContext;
@@ -142,10 +132,10 @@ public class TileImageView extends ScrollView {
 		mContentWidth = contentSize.x;
 		mContentHeight = contentSize.y;
 
-		mTileRect = new Rect(0,0,MapSettings.TILE_WIDTH,MapSettings.TILE_HEIGHT);
+		mTileRect = new Rect(0,0,Tile.WIDTH,Tile.HEIGHT);
 
-		mTileCountWidth = getCeil(mContentWidth, MapSettings.TILE_WIDTH);
-		mTileCountHeight = getCeil(mContentHeight, MapSettings.TILE_HEIGHT);
+		mTileCountWidth = getCeil(mContentWidth, Tile.WIDTH);
+		mTileCountHeight = getCeil(mContentHeight, Tile.HEIGHT);
 
 		mTileLoading = mDataProvider.getLoadingTile();
 		mTiles = new Bitmap[mTileCountWidth][mTileCountHeight];
@@ -165,7 +155,6 @@ public class TileImageView extends ScrollView {
 
 	private void cleanupRenderer() {
 		mInitialized = false;
-		//mDataProvider = null;
 		mContentWidth = 0;
 		mContentHeight = 0;
 		mRenderThread.shutdownRendering();
@@ -183,7 +172,7 @@ public class TileImageView extends ScrollView {
 	}
 
 
-	private int getCeil(int value, int divider){
+	private static int getCeil(int value, int divider){
 		int mod = value % divider;
 		return value / divider + ( mod!=0 ? 1 : 0 ) ;
 	}
@@ -245,10 +234,10 @@ public class TileImageView extends ScrollView {
 
 
 	private Rect getVisibleTiles(){
-		int left = Math.max(mScrollX / MapSettings.TILE_WIDTH, 0);
-		int top = Math.max(mScrollY / MapSettings.TILE_HEIGHT, 0);
-		int right = Math.min(getCeil(mScrollX+(int)(getViewWidth()/mScale),MapSettings. TILE_WIDTH), mTileCountWidth-1);
-		int bottom = Math.min(getCeil(mScrollY+(int)(getViewHeight()/mScale), MapSettings.TILE_HEIGHT), mTileCountHeight-1);
+		int left = Math.max(mScrollX / Tile.WIDTH, 0);
+		int top = Math.max(mScrollY / Tile.HEIGHT, 0);
+		int right = Math.min(getCeil(mScrollX+(int)(getViewWidth()/mScale),Tile.WIDTH), mTileCountWidth-1);
+		int bottom = Math.min(getCeil(mScrollY+(int)(getViewHeight()/mScale), Tile.HEIGHT), mTileCountHeight-1);
 		return new Rect(left,top,right,bottom);
 	}
 
@@ -261,18 +250,18 @@ public class TileImageView extends ScrollView {
 		if(mContentHeight<getViewHeight()){
 			dy = (getViewHeight() - mContentHeight) / 2;
 		}
-		int left = dx + tileRow * (int)(MapSettings.TILE_WIDTH*mScale) - (int)(mScrollX*mScale);
-		int top = dy + tileColumn * (int)(MapSettings.TILE_HEIGHT*mScale) - (int)(mScrollY*mScale);
-		int right = left + (int)(MapSettings.TILE_WIDTH*mScale);
-		int bottom = top + (int)(MapSettings.TILE_HEIGHT*mScale);
+		int left = dx + tileRow * (int)(Tile.WIDTH*mScale) - (int)(mScrollX*mScale);
+		int top = dy + tileColumn * (int)(Tile.HEIGHT*mScale) - (int)(mScrollY*mScale);
+		int right = left + (int)(Tile.WIDTH*mScale);
+		int bottom = top + (int)(Tile.HEIGHT*mScale);
 		return new Rect(left,top,right,bottom);
 	}
 
 	private Rect getTileContentPosition(int tileRow, int tileColumn) {
-		int left = tileRow * MapSettings.TILE_WIDTH;
-		int top = tileColumn * MapSettings.TILE_HEIGHT;
-		int right = left + MapSettings.TILE_WIDTH;
-		int bottom = top + MapSettings.TILE_HEIGHT;
+		int left = tileRow * Tile.WIDTH;
+		int top = tileColumn * Tile.HEIGHT;
+		int right = left + Tile.WIDTH;
+		int bottom = top + Tile.HEIGHT;
 		return new Rect(left,top,right,bottom);
 	}
 
@@ -296,8 +285,8 @@ public class TileImageView extends ScrollView {
 			Rect tiles = getVisibleTiles();
 			for(int row = tiles.left; row <= tiles.right; row++){
 				for(int col = tiles.top; col <= tiles.bottom; col++){
-					final int bottom = (col+1)*MapSettings.TILE_HEIGHT;
-					final int right = (row+1)*MapSettings.TILE_WIDTH;	
+					final int bottom = (col+1)*Tile.HEIGHT;
+					final int right = (row+1)*Tile.WIDTH;	
 					if( bottom <= contentHeight && right <= contentWidth ){
 						needToInvalidateTiles |= drawEntireTile(canvas, col, row);
 					}
@@ -315,8 +304,8 @@ public class TileImageView extends ScrollView {
 	}
 
 	private boolean drawPartialTile(Canvas canvas,int col, int row) {
-		final int height = Math.min( MapSettings.TILE_HEIGHT, mContentHeight - col*MapSettings.TILE_HEIGHT);
-		final int width = Math.min( MapSettings.TILE_WIDTH, mContentWidth - row*MapSettings.TILE_WIDTH);
+		final int height = Math.min( Tile.HEIGHT, mContentHeight - col*Tile.HEIGHT);
+		final int width = Math.min( Tile.WIDTH, mContentWidth - row*Tile.WIDTH);
 		Rect dst = getTileScreenPosition(row, col);
 		dst = new Rect(dst.left, dst.top, dst.left + width, dst.top + height);
 		Rect src = new Rect(0,0,width,height);
@@ -356,12 +345,6 @@ public class TileImageView extends ScrollView {
 	public TileImageView(Context context) {
 		super(context);
 		mContext = context;
-	}
-
-	public TileImageView(Context context, IDataProvider dataProvider) {
-		super(context);
-		mContext = context;
-		setDataProvider(dataProvider);
 	}
 
 	public IDataProvider getDataProvider(){
@@ -670,6 +653,11 @@ public class TileImageView extends ScrollView {
 	}
 
 	private int mLevel = 0;
+	
+	public void setScale(float scale){
+		mScale = scale;
+		postInvalidate();
+	}
 	
 	public void zoomIn() {
 		mLevel++;

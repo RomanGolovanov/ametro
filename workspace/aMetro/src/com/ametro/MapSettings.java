@@ -14,7 +14,7 @@ import android.net.Uri;
 public class MapSettings {
 
 	public static long getSourceVersion() { return 3; }
-	public static long getRenderVersion() { return 6; }
+	public static long getRenderVersion() { return 7; }
 	
 	public static final String PREFERENCE_PACKAGE_FILE_NAME = "PACKAGE_FILE_NAME";
 	public static final String PREFERENCE_SCROLL_POSITION = "SCROLL_POSITION";
@@ -24,8 +24,6 @@ public class MapSettings {
 	public static final String CACHE_PATH = ROOT_PATH + "cache/";
 	public static final String IMPORT_PATH = ROOT_PATH + "import/";
 
-	public static final int TILE_WIDTH = 100;
-	public static final int TILE_HEIGHT = 100;
 
 	public static final String DEFAULT_MAP = "metro";
 	

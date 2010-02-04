@@ -23,7 +23,7 @@ import com.ametro.model.ModelBuilder;
 import com.ametro.model.ModelDescription;
 import com.ametro.model.Tile;
 import com.ametro.model.ModelRenderer.RenderIterator;
-import com.ametro.model.ModelTileContainer.ModelTileOutputStream;
+import com.ametro.model.TileOutputStream;
 
 public class RenderMap extends Activity {
 	
@@ -46,10 +46,10 @@ public class RenderMap extends Activity {
 			ModelDescription description = new ModelDescription(model);
 			description.setRenderVersion(MapSettings.getRenderVersion());
 			
-			ModelTileOutputStream container = null;
+			TileOutputStream container = null;
 			try{
 				Date startTimestamp = new Date();
-				container = new ModelTileOutputStream(file);
+				container = new TileOutputStream(file);
 				container.write(description);
 				RenderIterator iterator = new RenderIterator(model);
 				while(iterator.hasNext() && !mIsCanceled){
