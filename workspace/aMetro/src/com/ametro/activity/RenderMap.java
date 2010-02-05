@@ -22,8 +22,8 @@ import com.ametro.model.Model;
 import com.ametro.model.ModelBuilder;
 import com.ametro.model.ModelDescription;
 import com.ametro.model.Tile;
-import com.ametro.model.ModelRenderer.RenderIterator;
 import com.ametro.model.TileOutputStream;
+import com.ametro.model.ModelRenderer.RenderIterator;
 
 public class RenderMap extends Activity {
 	
@@ -38,6 +38,7 @@ public class RenderMap extends Activity {
 		private TextView mProgressCounter;
 		
 		public void recreate(Model model){
+
 			final String mapName = model.getMapName();
 			final File file = new File(MapSettings.getTemporaryCacheFile(mapName));
 			if(file.exists()){
@@ -154,6 +155,7 @@ public class RenderMap extends Activity {
 		setContentView(R.layout.render_map_progress);
 		mRenderTask = new RenderTask();
 		mRenderTask.execute();
+		
 	}
 
 	@Override

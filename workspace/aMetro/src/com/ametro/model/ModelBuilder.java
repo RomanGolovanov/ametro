@@ -1,5 +1,7 @@
 package com.ametro.model;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -32,6 +34,8 @@ import com.ametro.pmz.TransportResource.TransportTransfer;
 
 public class ModelBuilder {
 
+	private static final int BUFFER_SIZE = 8192;
+	
 	public static ModelDescription loadModelDescription(String fileName)  throws IOException, ClassNotFoundException {
 		Date startTimestamp = new Date();
 		ObjectInputStream strm = null;
@@ -39,7 +43,7 @@ public class ModelBuilder {
 		try{
 			zip = new ZipFile(fileName);
 			ZipEntry entry = zip.getEntry(MapSettings.DESCRIPTION_ENTRY_NAME);
-			strm = new ObjectInputStream( zip.getInputStream(entry) );
+			strm = new ObjectInputStream( new BufferedInputStream( zip.getInputStream(entry), BUFFER_SIZE) );
 			ModelDescription modelDescription = (ModelDescription)strm.readObject();
 			Log.i("aMetro", String.format("Model description '%s' loading time is %sms", fileName, Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
 			return modelDescription;
@@ -60,7 +64,7 @@ public class ModelBuilder {
 		try{
 			zip = new ZipFile(fileName);
 			ZipEntry entry = zip.getEntry(MapSettings.MAP_ENTRY_NAME);
-			strm = new ObjectInputStream( zip.getInputStream(entry) );
+			strm = new ObjectInputStream( new BufferedInputStream(zip.getInputStream(entry), BUFFER_SIZE) );
 			Model model = (Model)strm.readObject();
 			Log.i("aMetro", String.format("Model data '%s' loading time is %sms", fileName, Long.toString((new Date().getTime() - startTimestamp.getTime())) ));
 			return model;
@@ -77,7 +81,7 @@ public class ModelBuilder {
 	public static void saveModel(Model model) throws IOException {
 		Date startTimestamp = new Date();
 		String fileName = MapSettings.getMapFileName(model.getMapName());
-		ZipOutputStream zip = new ZipOutputStream(new FileOutputStream(fileName));
+		ZipOutputStream zip = new ZipOutputStream( new BufferedOutputStream( new FileOutputStream(fileName), BUFFER_SIZE ));
 		saveModelDescriptionEntry(model, zip);
 		saveModelEntry(model, zip);
 		zip.flush();
