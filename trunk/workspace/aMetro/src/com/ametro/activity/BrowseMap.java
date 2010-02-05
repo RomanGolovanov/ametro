@@ -11,10 +11,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.widget.ZoomControls;
 
@@ -62,7 +58,7 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider {
 		super.onCreate(savedInstanceState);
 		MapSettings.checkPrerequisite(this);
 		setContentView(R.layout.browse_map_empty);
-
+		
 		Intent intent = getIntent();
 		Uri uri = intent!= null ? intent.getData() : null;
 		if(uri!=null){
@@ -75,6 +71,7 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider {
 				initializeMapView(MapUri.create(MapSettings.getMapName()), true, false);
 			}
 		}
+		
 	}
 
 	@Override
