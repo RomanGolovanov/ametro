@@ -31,7 +31,7 @@ public class VectorResource implements IResource {
         private ArrayList<IVectorCommand> parsedCommands = new ArrayList<IVectorCommand>();
 
         private IVectorCommand[] getCommands() {
-            return (IVectorCommand[]) parsedCommands.toArray(new IVectorCommand[parsedCommands.size()]);
+            return parsedCommands.toArray(new IVectorCommand[parsedCommands.size()]);
         }
 
         public void parseLine(String line) {

@@ -60,7 +60,7 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
                     map.putFile(modelDescription.getCountryName(), modelDescription.getCityName(), fileName);
                 }
             } catch (Exception e) {
-                Log.d("aMetro", "Map indexing failed for " + fileName, (Throwable) e);
+                Log.d("aMetro", "Map indexing failed for " + fileName, e);
             }
         }
 

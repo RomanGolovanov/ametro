@@ -26,6 +26,7 @@ import android.graphics.Point;
 import android.net.Uri;
 import org.ametro.libs.Helpers;
 import org.ametro.model.Model;
+import org.ametro.util.FileUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -178,10 +179,7 @@ public class MapSettings {
     }
 
     public static void refreshMapList() {
-        File cache = new File(ROOT_PATH + MAPS_LIST);
-        if (cache.exists()) {
-            cache.delete();
-        }
+        FileUtil.delete(new File(ROOT_PATH + MAPS_LIST));
     }
 
 

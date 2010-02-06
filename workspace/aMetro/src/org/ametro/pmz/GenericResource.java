@@ -71,7 +71,7 @@ public class GenericResource implements IResource {
     }
 
     public String[] getSections() {
-        return (String[]) mKeys.toArray(new String[mKeys.size()]);
+        return mKeys.toArray(new String[mKeys.size()]);
     }
 
     public Dictionary<String, String> getSection(String sectionName) {

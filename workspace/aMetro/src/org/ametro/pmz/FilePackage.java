@@ -136,7 +136,7 @@ public class FilePackage {
             if (name.endsWith(ext))
                 names.add(name);
         }
-        return (String[]) names.toArray(new String[names.size()]);
+        return names.toArray(new String[names.size()]);
     }
 
 
@@ -179,7 +179,7 @@ public class FilePackage {
         BufferedReader input = new BufferedReader(reader);
         try {
             observer.beginInitialize(this);
-            String line = null;
+            String line;
             while ((line = input.readLine()) != null) {
                 observer.parseLine(line);
             }

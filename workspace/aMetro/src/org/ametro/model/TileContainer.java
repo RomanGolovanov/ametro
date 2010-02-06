@@ -58,7 +58,7 @@ public class TileContainer {
                 return cacheDescription.completeEqual(mapDescription)
                         && cacheDescription.getRenderVersion() == MapSettings.getRenderVersion()
                         && cacheDescription.getSourceVersion() == MapSettings.getSourceVersion();
-            } catch (Exception ex) {
+            } catch (Exception ignored) {
             }
 
         }
@@ -101,7 +101,7 @@ public class TileContainer {
             if (fis != null) {
                 try {
                     fis.close();
-                } catch (Exception e) {
+                } catch (Exception ignored) {
                 }
             }
         }

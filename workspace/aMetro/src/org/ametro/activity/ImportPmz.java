@@ -41,12 +41,12 @@ import org.ametro.libs.ProgressInfo;
 import org.ametro.model.Model;
 import org.ametro.model.ModelBuilder;
 import org.ametro.model.ModelDescription;
+import org.ametro.util.FileUtil;
 
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 
@@ -185,8 +185,7 @@ public class ImportPmz extends Activity {
 
         public List<ImportRecord> getCheckedData() {
             ArrayList<ImportRecord> lst = new ArrayList<ImportRecord>();
-            for (Iterator<ImportRecord> iterator = mAdapter.getData().iterator(); iterator.hasNext();) {
-                ImportRecord record = iterator.next();
+            for (ImportRecord record : mAdapter.getData()) {
                 if (record.isChecked()) {
                     lst.add(record);
                 }
@@ -196,8 +195,7 @@ public class ImportPmz extends Activity {
 
         public List<ImportRecord> getInvalidData() {
             ArrayList<ImportRecord> lst = new ArrayList<ImportRecord>();
-            for (Iterator<ImportRecord> iterator = mAdapter.getData().iterator(); iterator.hasNext();) {
-                ImportRecord record = iterator.next();
+            for (ImportRecord record : mAdapter.getData()) {
                 final int severity = record.getSeverity();
                 if (severity == 2 || severity == 0) {
                     lst.add(record);
@@ -208,8 +206,7 @@ public class ImportPmz extends Activity {
 
         public List<ImportRecord> getObsoleteData() {
             ArrayList<ImportRecord> lst = new ArrayList<ImportRecord>();
-            for (Iterator<ImportRecord> iterator = mAdapter.getData().iterator(); iterator.hasNext();) {
-                ImportRecord record = iterator.next();
+            for (ImportRecord record : mAdapter.getData()) {
                 final int severity = record.getSeverity();
                 if (severity == 3 || severity == 1) {
                     lst.add(record);
@@ -219,8 +216,7 @@ public class ImportPmz extends Activity {
         }
 
         public void setCheckAll() {
-            for (Iterator<ImportRecord> iterator = mData.iterator(); iterator.hasNext();) {
-                ImportRecord record = iterator.next();
+            for (ImportRecord record : mData) {
                 if (record.isCheckable()) {
                     record.setChecked(true);
                 }
@@ -228,8 +224,8 @@ public class ImportPmz extends Activity {
         }
 
         public void setCheckNone() {
-            for (Iterator<ImportRecord> iterator = mData.iterator(); iterator.hasNext();) {
-                iterator.next().setChecked(false);
+            for (ImportRecord record : mData) {
+                record.setChecked(false);
             }
         }
 
@@ -251,7 +247,7 @@ public class ImportPmz extends Activity {
                 int color = Color.RED;
                 String statusText = ImportPmz.this.getString(statusId);
                 if (mapFile.exists()) {
-                    ModelDescription map = null;
+                    ModelDescription map;
                     try {
                         map = ModelBuilder.loadModelDescription(mapFileName);
                     } catch (Exception ex) {
@@ -288,7 +284,7 @@ public class ImportPmz extends Activity {
                 boolean checked = statusId == R.string.import_status_not_imported || statusId == R.string.import_status_deprecated;
                 imports.add(new ImportRecord(severity, mapName, fullFileName, statusText, color, checked));
             } catch (Exception e) {
-                Log.e("aMetro", "PMZ indexing error", (Throwable) e);
+                Log.e("aMetro", "PMZ indexing error", e);
                 imports.add(new ImportRecord(0, fileName, fullFileName, ImportPmz.this.getString(R.string.import_status_invalid), Color.RED, false));
             }
         }
@@ -304,12 +300,12 @@ public class ImportPmz extends Activity {
                 }
             });
             ArrayList<ImportRecord> imports = new ArrayList<ImportRecord>();
-            int count = files.length;
-            pi.Title = "Read PMZ files...";
-            pi.Maximum = count;
-            pi.Progress = 0;
-            this.publishProgress(pi);
             if (files != null) {
+                int count = files.length;
+                pi.Title = "Read PMZ files...";
+                pi.Maximum = count;
+                pi.Progress = 0;
+                this.publishProgress(pi);
                 for (int i = 0; i < count && !mIsCanceled; i++) {
                     String fileName = files[i];
                     pi.Progress = i;
@@ -381,7 +377,7 @@ public class ImportPmz extends Activity {
                     record.setSeverity(1);
                     MapSettings.refreshMapList();
                 } catch (Throwable e) {
-                    Log.e("aMetro", "Import failed", (Throwable) e);
+                    Log.e("aMetro", "Import failed", e);
                     result.add(new ImportRecord(-1, record.getMapName(), record.getFileName(), "Import failed\n" + e.toString(), Color.RED, false));
                 }
             }
@@ -625,10 +621,8 @@ public class ImportPmz extends Activity {
                 break;
         }
         if (list != null) {
-            for (Iterator<ImportRecord> records = list.iterator(); records.hasNext();) {
-                ImportRecord record = records.next();
-                File file = new File(record.getFileName());
-                file.delete();
+            for (ImportRecord record : list) {
+                FileUtil.delete(new File(record.getFileName()));
             }
         }
         startIndexMode();

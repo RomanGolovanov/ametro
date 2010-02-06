@@ -65,13 +65,13 @@ public class ModelBuilder {
             if (strm != null) {
                 try {
                     strm.close();
-                } catch (Exception e) {
+                } catch (Exception ignored) {
                 }
             }
             if (zip != null) {
                 try {
                     zip.close();
-                } catch (Exception e) {
+                } catch (Exception ingnored) {
                 }
             }
         }
@@ -92,13 +92,13 @@ public class ModelBuilder {
             if (strm != null) {
                 try {
                     strm.close();
-                } catch (Exception e) {
+                } catch (Exception ignored) {
                 }
             }
             if (zip != null) {
                 try {
                     zip.close();
-                } catch (Exception e) {
+                } catch (Exception ignored) {
                 }
             }
         }
@@ -182,25 +182,19 @@ public class ModelBuilder {
         Hashtable<String, MapLine> mapLines = map.getMapLines();
         Hashtable<String, TransportLine> transportLines = trp.getLines();
 
-        Iterator<TransportLine> lines = transportLines.values().iterator();
-        while (lines.hasNext()) {
-            TransportLine tl = lines.next();
-            MapResource.MapLine ml = mapLines.get(tl.mName);
-            if (ml == null && tl.mName != null) continue;
+        for (TransportLine tl : transportLines.values()) {
+            MapLine ml = mapLines.get(tl.mName);
+            if (ml == null && tl.mName != null) {
+                continue;
+            }
             fillMapLines(model, tl, ml);
         }
 
-        Iterator<TransportTransfer> transfers = trp.getTransfers().iterator();
-        while (transfers.hasNext()) {
-            TransportTransfer t = transfers.next();
+        for (TransportTransfer t : trp.getTransfers()) {
             fillTransfer(model, t);
-
         }
 
-
-        Iterator<MapAddiditionalLine> additionalLines = map.getAddiditionalLines().iterator();
-        while (additionalLines.hasNext()) {
-            MapAddiditionalLine al = additionalLines.next();
+        for (MapAddiditionalLine al : map.getAddiditionalLines()) {
             fillAdditionalLines(model, al);
         }
 
@@ -357,8 +351,8 @@ public class ModelBuilder {
 
             int stationIndex = 0;
 
-            Station toStation = null;
-            Double toDelay = null;
+            Station toStation;
+            Double toDelay;
 
             Station fromStation = null;
             Double fromDelay = null;
@@ -369,7 +363,6 @@ public class ModelBuilder {
                     getPoint(points, stationIndex));
 
             do {
-
                 if ("(".equals(tStations.getNextDelimeter())) {
                     int idx = 0;
                     Double[] delays = tDelays.nextBracket();

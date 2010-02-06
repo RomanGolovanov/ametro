@@ -89,8 +89,7 @@ public class Station implements Serializable {
     }
 
     public boolean hasConnections() {
-        for (Iterator<Segment> segments = mSegments.iterator(); segments.hasNext();) {
-            Segment segment = segments.next();
+        for (Segment segment : mSegments) {
             Double delay = segment.getDelay();
             if (delay != null && delay != 0) {
                 return true;
