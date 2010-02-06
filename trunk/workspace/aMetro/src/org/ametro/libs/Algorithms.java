@@ -1,7 +1,8 @@
 /*
  * http://code.google.com/p/ametro/
  * Transport map viewer for Android platform
- * Copyright (C) 2009-2010 Roman.Golovanov@gmail.com
+ * Copyright (C) 2009-2010 Roman.Golovanov@gmail.com and other
+ * respective project committers (see project home page)
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
