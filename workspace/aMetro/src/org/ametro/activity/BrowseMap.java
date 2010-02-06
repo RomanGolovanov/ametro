@@ -52,15 +52,6 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider {
 
     private int mMipMapLevel;
 
-    //private String mMapName;
-
-    private int mTimeOfDay = 0;
-    private Integer mSelectedStationId = null;
-
-    private MenuItem mMainMenuTime;
-    private MenuItem mMainMenuStation;
-
-
     private final int MAIN_MENU_FIND = 1;
     private final int MAIN_MENU_LIBRARY = 2;
     private final int MAIN_MENU_ROUTES = 3;
@@ -68,7 +59,8 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider {
     private final int MAIN_MENU_STATION = 5;
     private final int MAIN_MENU_SETTINGS = 6;
     private final int MAIN_MENU_ABOUT = 7;
-    private final int MAIN_MENU_EXPERIMENTAL = 8;
+    private final int MAIN_MENU_REFRESH = 8;
+    private final int MAIN_MENU_EXPERIMENTAL = 9;
 
     private final static int REQUEST_BROWSE_LIBRARY = 1;
     private static final int REQUEST_RENDER_MAP = 2;
@@ -139,13 +131,12 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider {
         menu.add(0, MAIN_MENU_FIND, 0, R.string.menu_search).setIcon(android.R.drawable.ic_menu_search);
         menu.add(0, MAIN_MENU_LIBRARY, 1, R.string.menu_library).setIcon(android.R.drawable.ic_menu_mapmode);
         menu.add(0, MAIN_MENU_ROUTES, 2, R.string.menu_routes).setIcon(android.R.drawable.ic_menu_directions);
+        menu.add(0, MAIN_MENU_TIME, 3, R.string.menu_time).setIcon(android.R.drawable.ic_menu_rotate);
+        menu.add(0, MAIN_MENU_STATION, 4, R.string.menu_station).setIcon(android.R.drawable.ic_menu_info_details);
         menu.add(0, MAIN_MENU_SETTINGS, 5, R.string.menu_settings).setIcon(android.R.drawable.ic_menu_preferences);
         menu.add(0, MAIN_MENU_ABOUT, 6, R.string.menu_about);
-
+        menu.add(0, MAIN_MENU_REFRESH, 7, R.string.menu_refresh).setIcon(android.R.drawable.ic_menu_rotate);
         menu.add(0, MAIN_MENU_EXPERIMENTAL, 7, R.string.menu_experimental);
-
-        mMainMenuTime = menu.add(0, MAIN_MENU_TIME, 3, getNextTimeOfDay()).setIcon(android.R.drawable.ic_menu_rotate);
-        mMainMenuStation = menu.add(0, MAIN_MENU_STATION, 4, R.string.menu_station).setIcon(android.R.drawable.ic_menu_info_details).setEnabled(mSelectedStationId != null);
         return true;
     }
 
@@ -166,15 +157,15 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider {
                 startActivity(new Intent(this, About.class));
                 return true;
             case MAIN_MENU_TIME:
-                mTimeOfDay++;
-                if (mTimeOfDay > 2) mTimeOfDay = 0;
-                mMainMenuTime.setTitle(getNextTimeOfDay());
                 updateTitle();
                 return true;
             case MAIN_MENU_STATION:
                 return true;
-            case MAIN_MENU_EXPERIMENTAL:
+            case MAIN_MENU_REFRESH:
                 requestCreateMapCache(MapUri.create(MapSettings.getMapName()), false);
+                return true;
+            case MAIN_MENU_EXPERIMENTAL:
+                startActivity(new Intent(this, BrowseVectorMap.class));
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -285,41 +276,11 @@ public class BrowseMap extends Activity implements TileImageView.IDataProvider {
         if (mTileContainer == null) {
             setTitle(R.string.app_name);
         } else {
-            setTitle(String.format("%s - %s (%s)", getString(R.string.app_name), mTileContainer.getCityName(), getString(getTimeOfDay()).toLowerCase()));
+            setTitle(String.format("%s - %s", getString(R.string.app_name), mTileContainer.getCityName()));
         }
     }
 
-    private void updateSelectedStation(Integer stationId) {
-        mSelectedStationId = stationId;
-        if (mMainMenuStation != null) {
-            mMainMenuStation.setEnabled(mSelectedStationId != null);
-        }
-    }
-
-    private int getNextTimeOfDay() {
-        switch (mTimeOfDay) {
-            case 2:
-                return R.string.day;
-            case 0:
-                return R.string.stress;
-            case 1:
-                return R.string.night;
-        }
-        return -1;
-    }
-
-    private int getTimeOfDay() {
-        switch (mTimeOfDay) {
-            case 0:
-                return R.string.day;
-            case 1:
-                return R.string.stress;
-            case 2:
-                return R.string.night;
-        }
-        return -1;
-    }
-
+ 
     /// TILE RENDERER INTERFACE
 
     public Bitmap getTile(Rect rect) {
