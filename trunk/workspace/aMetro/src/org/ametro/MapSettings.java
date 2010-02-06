@@ -1,10 +1,11 @@
-package com.ametro;
+package org.ametro;
 
 import java.io.File;
 import java.io.IOException;
 
-import com.ametro.libs.Helpers;
-import com.ametro.model.Model;
+import org.ametro.libs.Helpers;
+import org.ametro.model.Model;
+
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -13,8 +14,8 @@ import android.net.Uri;
 
 public class MapSettings {
 
-	public static long getSourceVersion() { return 3; }
-	public static long getRenderVersion() { return 7; }
+	public static long getSourceVersion() { return 5; }
+	public static long getRenderVersion() { return 10; }
 	
 	public static final String PREFERENCE_PACKAGE_FILE_NAME = "PACKAGE_FILE_NAME";
 	public static final String PREFERENCE_SCROLL_POSITION = "SCROLL_POSITION";

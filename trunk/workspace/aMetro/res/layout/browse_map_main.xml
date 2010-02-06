@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent" android:layout_height="fill_parent">
 
-	<com.ametro.widget.TileImageView
+	<org.ametro.widget.TileImageView
 		android:id="@+id/browse_map_tile_view" android:layout_width="fill_parent"
 		android:layout_height="fill_parent" />
 
