@@ -67,10 +67,10 @@ public class RenderSegment extends RenderElement {
         drawSegmentPath(line, segment, from, to, path);
         this.Path = path;
 
-        final int minx = Math.min(from.getPoint().x, to.getPoint().x);
-        final int maxx = Math.max(from.getPoint().x, to.getPoint().x);
-        final int miny = Math.min(from.getPoint().y, to.getPoint().y);
-        final int maxy = Math.max(from.getPoint().y, to.getPoint().y);
+        final int minx = Math.min(from.getPoint().x, to.getPoint().x) - lineWidth;
+        final int maxx = Math.max(from.getPoint().x, to.getPoint().x) + lineWidth;
+        final int miny = Math.min(from.getPoint().y, to.getPoint().y) - lineWidth;
+        final int maxy = Math.max(from.getPoint().y, to.getPoint().y) + lineWidth;
         final Rect box = new Rect(minx, miny, maxx, maxy);
         final Point[] nodes = segment.getAdditionalNodes();
         if (nodes != null) {

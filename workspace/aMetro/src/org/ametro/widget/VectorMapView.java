@@ -21,6 +21,8 @@
 
 package org.ametro.widget;
 
+import java.util.Date;
+
 import org.ametro.model.Model;
 import org.ametro.render.RenderProgram;
 
@@ -29,6 +31,7 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.widget.ScrollView;
@@ -72,13 +75,16 @@ public class VectorMapView extends ScrollView {
 			final int bottom = top + (int)((height));
 			
 			Rect viewport = new Rect(left,top,right, bottom);
-			mRenderProgram.invalidateVisible(viewport);
 			
+			//Date time = new Date();
+			mRenderProgram.invalidateVisible(viewport);
 			canvas.save();
 			canvas.scale(mScale, mScale);
 			canvas.translate(-scrollX, -scrollY);
 			mRenderProgram.draw(canvas);
 			canvas.restore();
+            //Log.i("aMetro", String.format("Rendering time is %sms", Long.toString((new Date().getTime() - time.getTime()))));
+			
 			super.onDraw(canvas);
 		}
 	}
@@ -88,7 +94,7 @@ public class VectorMapView extends ScrollView {
 		if(model!=null){
 			mModel = model;
 			mRenderProgram = new RenderProgram(model);
-			mRenderProgram.setRenderFilter(RenderProgram.ONLY_TRANSPORT);
+			//mRenderProgram.setRenderFilter(RenderProgram.ONLY_TRANSPORT);
 			mInitialized = true;
 			calculateDimensions();
 		}else{
@@ -119,6 +125,17 @@ public class VectorMapView extends ScrollView {
 		if (mScroller.computeScrollOffset()) {
 			mScrollX = mScroller.getCurrX();
 			mScrollY = mScroller.getCurrY();
+
+//			if(mScroller.isFinished()){
+//				mRenderProgram.setRenderFilter(RenderProgram.ALL);
+//			}
+			
+//            Log.i("aMetro", String.format("Scroll to %sx%s"
+//            		,Integer.toString(mScrollX)
+//            		,Integer.toString(mScrollY)
+//            		));
+			
+            postInvalidate();
 		}
 	}
 	
@@ -134,8 +151,8 @@ public class VectorMapView extends ScrollView {
 	}
 
 	public Point getScrollCenter(){
-		final int screenX = mScrollX;// + (int)(getViewWidth()/2);
-		final int screenY = mScrollY;// + (int)(getViewHeight()/2);
+		final int screenX = mScrollX;
+		final int screenY = mScrollY;
 		return new Point( (int)(screenX/mScale), (int)(screenY/mScale) );
 	}
 
@@ -147,7 +164,6 @@ public class VectorMapView extends ScrollView {
 		postInvalidate();
 	}
 	
-	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 
 		int action = event.getAction();
@@ -327,15 +343,11 @@ public class VectorMapView extends ScrollView {
 				}
 			}
 		}
+		vx = vx / 2;
+		vy = vy / 2;
 
-		if (true /* EMG release: make our fling more like Maps' */) {
-			// maps cuts their velocity in half
-			vx = vx / 2;// * 3 / 4;
-			vy = vy / 2;// * 3 / 4;
-		}
-
+		//mRenderProgram.setRenderFilter(RenderProgram.ONLY_TRANSPORT);
 		mScroller.fling(mScrollX, mScrollY, -vx, -vy, 0, maxX, 0, maxY);
-		//final int time = mScroller.getDuration();
 		postInvalidate();
 	}
 
