@@ -43,9 +43,9 @@ public class ByteLoader {
      * Loads the specified zentry from the supplied ZipInputStream
      * into a byte array.
      *
-     * @param zip input stream for the archive file
-     * @param the actual zip entry to be read from the stream
-     * @return bytes for the zip entry or null if not found in stream
+     * @param zin Zip input stream for the archive file
+     * @param zentry The actual zip entry to be read from the stream
+     * @return Bytes for the zip entry or null if not found in stream
      * @throws java.io.IOException reports any IO problems that occur in the process
      */
     public byte[] loadBytesFromZipEntry(ZipInputStream zin, ZipEntry zentry)
@@ -71,9 +71,9 @@ public class ByteLoader {
      * A convenience method for loading a collection of ZipEntrys from
      * the supplied ZipInputStream.
      *
-     * @param input stream for the archive file to be searched
-     * @param table of resource names mapped against their ZipEntry
-     * @return the resource names mapped against their byte arrays
+     * @param zin Input stream for the archive file to be searched
+     * @param zipEntries Table of resource names mapped against their ZipEntry
+     * @return The resource names mapped against their byte arrays
      * @throws java.io.IOException reports io errors that occurred during processing
      */
     public Hashtable<String, byte[]> loadBytesFromZipEntries(ZipInputStream zin, Hashtable<String, ZipEntry> zipEntries)
@@ -118,8 +118,8 @@ public class ByteLoader {
     /**
      * Load an array of bytes from the supplied url data source
      *
-     * @param the url to load the bytes from
-     * @return bytes from the url
+     * @param url The url to load the bytes from
+     * @return Bytes from the url
      * @throws java.io.IOException reports io errors occurring during the method
      */
     public byte[] loadBytesFromURL(URL url) throws IOException {
@@ -137,7 +137,7 @@ public class ByteLoader {
                 try {
                     in.close();
                 }
-                catch (IOException ioe) {
+                catch (IOException ignored) {
                 }
         }
         return b;
@@ -146,8 +146,8 @@ public class ByteLoader {
     /**
      * Loads the supplied number bytes from the given input stream
      *
-     * @param stream to read the bytes from
-     * @param the    number of bytes to read
+     * @param in Stream to read the bytes from
+     * @param size The number of bytes to read
      * @return bytes read from the stream
      * @throws java.io.IOException reports IO failures
      */
@@ -168,8 +168,8 @@ public class ByteLoader {
      * Loads bytes from the given input stream until the end of stream
      * is reached.  It reads in at kDEFAULT_CHUNK_SIZE chunks.
      *
-     * @param stream to read the bytes from
-     * @return bytes read from the stream
+     * @param in Stream to read the bytes from
+     * @return Bytes read from the stream
      * @throws java.io.IOException reports IO failures
      */
     public byte[] loadBytesFromStream(InputStream in) throws IOException {
@@ -181,8 +181,8 @@ public class ByteLoader {
      * is reached.  Bytes are read in at the supplied <code>chunkSize</code>
      * rate.
      *
-     * @param stream to read the bytes from
-     * @return bytes read from the stream
+     * @param in Stream to read the bytes from
+     * @return Bytes read from the stream
      * @throws java.io.IOException reports IO failures
      */
     public byte[] loadBytesFromStream(InputStream in, int chunkSize)
