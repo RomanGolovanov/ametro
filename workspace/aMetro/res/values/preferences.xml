@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="pref_section_general">General</string>
-	<string name="pref_section_debug">Debug</string>
+    <string name="pref_section_general">General</string>
+    <string name="pref_section_debug">Debug</string>
 
-	<string name="pref_locale_key">LOCALE</string>
-	<string name="pref_locale">Language</string>
-	<string name="pref_auto_update_map_index">Auto update map index</string>
-	<string name="pref_auto_update_map_index_key">AUTO_UPDATE_INDEX</string>
-	<string name="pref_auto_update_maps">Auto update maps</string>
-	<string name="pref_auto_update_maps_key">AUTO_UPDATE_MAPS</string>
-	<string name="pref_auto_locate">Auto check Your location</string>
-	<string name="pref_auto_locate_key">AUTO_LOCATION</string>
+    <string name="pref_locale_key">LOCALE</string>
+    <string name="pref_locale">Language</string>
+    <string name="pref_auto_update_map_index">Auto update map index</string>
+    <string name="pref_auto_update_map_index_key">AUTO_UPDATE_INDEX</string>
+    <string name="pref_auto_update_maps">Auto update maps</string>
+    <string name="pref_auto_update_maps_key">AUTO_UPDATE_MAPS</string>
+    <string name="pref_auto_locate">Auto check Your location</string>
+    <string name="pref_auto_locate_key">AUTO_LOCATION</string>
 
-	<string name="pref_locale_description">Language with used to display UI and data</string>
-	<string name="pref_auto_update_map_index_description">Update map list when Internet available</string>
-	<string name="pref_auto_update_maps_description">Update maps when Internet available</string>
-	<string name="pref_auto_locate_description">Use GPS/GSM location to locate Your position</string>
+    <string name="pref_locale_description">Language with used to display UI and data</string>
+    <string name="pref_auto_update_map_index_description">Update map list when Internet available</string>
+    <string name="pref_auto_update_maps_description">Update maps when Internet available</string>
+    <string name="pref_auto_locate_description">Use GPS/GSM location to locate Your position</string>
 
-	<string name="pref_debug">Debug enabled</string>
-	<string name="pref_debug_key">DEBUG</string>
-	<string name="pref_debug_description">Check for display debug messages</string>
+    <string name="pref_debug">Debug enabled</string>
+    <string name="pref_debug_key">DEBUG</string>
+    <string name="pref_debug_description">Check for display debug messages</string>
 
 
 </resources>

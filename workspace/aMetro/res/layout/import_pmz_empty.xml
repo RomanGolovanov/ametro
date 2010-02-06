@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="horizontal" android:gravity="center"
-	android:layout_width="fill_parent" android:layout_height="fill_parent"
-	android:background="#000000">
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:orientation="vertical" android:gravity="center"
-		android:layout_width="wrap_content" android:layout_height="wrap_content">
-		<ImageView android:id="@+id/logoImageView" android:src="@drawable/small_logo"
-			android:layout_width="wrap_content" android:layout_height="wrap_content">
-		</ImageView>
-		<TextView android:text="@string/msg_no_maps_in_import"
-			android:textSize="10pt" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
-		<TextView android:text="@string/msg_copy_files_to_import"
-			android:textSize="6pt"
-			android:layout_width="wrap_content" android:layout_height="wrap_content" />
-		<TextView android:text="@string/msg_import_path"
-			android:textSize="6pt"
-			android:layout_width="wrap_content" android:layout_height="wrap_content" />
-	</LinearLayout>
+              android:orientation="horizontal" android:gravity="center"
+              android:layout_width="fill_parent" android:layout_height="fill_parent"
+              android:background="#000000">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:orientation="vertical" android:gravity="center"
+                  android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <ImageView android:id="@+id/logoImageView" android:src="@drawable/small_logo"
+                   android:layout_width="wrap_content" android:layout_height="wrap_content">
+        </ImageView>
+        <TextView android:text="@string/msg_no_maps_in_import"
+                  android:textSize="10pt" android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"/>
+        <TextView android:text="@string/msg_copy_files_to_import"
+                  android:textSize="6pt"
+                  android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+        <TextView android:text="@string/msg_import_path"
+                  android:textSize="6pt"
+                  android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    </LinearLayout>
 </LinearLayout>
