@@ -27,9 +27,14 @@ import org.ametro.model.Model;
 import org.ametro.render.RenderProgram;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.graphics.Region;
+import android.graphics.Bitmap.Config;
+import android.graphics.Region.Op;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -61,34 +66,144 @@ public class VectorMapView extends ScrollView {
 		initializeControls();
 	}
 
+	private Bitmap mCache;
+	private Bitmap mCacheBuffer;
+	private Rect mCacheViewport;
+	private float mCacheScale;
+
+
 	protected void onDraw(Canvas canvas) {
 		if(mInitialized){
-			
-			final int scrollX = mScrollX;
-			final int scrollY = mScrollY;
-			final int width = (int)( getViewWidth() / mScale );
-			final int height = (int)( getViewHeight() / mScale );
-			
-			final int left = (int)(scrollX);
-			final int top = (int)(scrollY);
-			final int right = left + (int)((width));
-			final int bottom = top + (int)((height));
-			
+
+			final int left = mScrollX;
+			final int top = mScrollY;
+			final int right = left + (int)( getViewWidth() / mScale );
+			final int bottom = top + (int)( getViewHeight() / mScale );
 			Rect viewport = new Rect(left,top,right, bottom);
+
+
+			invalidateCache(viewport,false);
+
+			if(mCacheViewport.equals(viewport)){
+				canvas.drawBitmap(mCache, 0, 0, null);
+			}else{
+				if(!Rect.intersects(mCacheViewport, viewport)){
+					invalidateCache(viewport,true);
+					canvas.drawBitmap(mCache, 0, 0, null);
+				}else{
+					updateCache(viewport);
+					canvas.drawBitmap(mCache, 0, 0, null);
+					mCacheViewport = viewport;
+
+
+				}
+			}
+		}
+		super.onDraw(canvas);
+	}
+
+	private void updateCache(Rect viewport) {
+		final Rect crect = mCacheViewport;
+		
+		Rect rect = new Rect(mCacheViewport);
+		rect.intersect(viewport);
+
+		Rect dst = new Rect(rect); // control canvas position
+		dst.offsetTo(rect.left - viewport.left , rect.top - viewport.top );
+
+		Rect src = new Rect(rect); // cache canvas position
+		src.offsetTo(rect.left - crect.left, rect.top - crect.top);
+
+		//canvas.drawBitmap(mCache, src, dst, null);
+		
+		Rect verticalSpan = new Rect(viewport);
+		Rect horizontalSpan = new Rect(viewport);
+
+		if(viewport.right == rect.right && viewport.bottom == rect.bottom){
+			horizontalSpan.bottom = rect.top;
+			verticalSpan.top = rect.top;
+			verticalSpan.right = rect.left;
+		}else if(viewport.right == rect.right && viewport.top == rect.top){
+			horizontalSpan.top = rect.bottom;
+			verticalSpan.bottom = rect.bottom;
+			verticalSpan.right = rect.left;
+		}else if(viewport.left == rect.left && viewport.bottom == rect.bottom){
+			horizontalSpan.bottom = rect.top;
+			verticalSpan.top = rect.top;
+			verticalSpan.left = rect.right;
+		}else if(viewport.left == rect.left && viewport.top == rect.top){
+			horizontalSpan.top = rect.bottom;
+			verticalSpan.bottom = rect.bottom;
+			verticalSpan.left = rect.right;
+		}else{
+			throw new RuntimeException("Invalid viewport splitting algorithm");
+		}
+
+
+		int hx = horizontalSpan.left - viewport.left; 
+		int hy = horizontalSpan.top - viewport.top; 
+
+		int vx = verticalSpan.left - viewport.left; 
+		int vy = verticalSpan.top - viewport.top; 
+
+
+		Canvas cacheCanvas = new Canvas(mCacheBuffer);
+		cacheCanvas.drawColor(Color.MAGENTA);
+
+		// show previous map block
+		cacheCanvas.drawBitmap(mCache, src, dst, null);
+		// scale to current coordinated
+		cacheCanvas.scale(mScale,mScale);
+		// draw horizontal line
+		if(!horizontalSpan.isEmpty()){
+			cacheCanvas.save();
+			cacheCanvas.clipRect(hx, hy, hx+horizontalSpan.width(), hy+horizontalSpan.height(),Op.REPLACE);
+			cacheCanvas.scale(mScale, mScale);
+			cacheCanvas.translate(-horizontalSpan.left, -horizontalSpan.top);
+			mRenderProgram.invalidateVisible(horizontalSpan);
+			mRenderProgram.draw(cacheCanvas);
+			cacheCanvas.restore();
+		}
+		// draw vertical line
+		if(!verticalSpan.isEmpty()){
+			cacheCanvas.save();
+			cacheCanvas.clipRect(vx, vy, vx+verticalSpan.width(), vy+verticalSpan.height(),Op.REPLACE);
 			
-			//Date time = new Date();
+			cacheCanvas.scale(mScale, mScale);
+			cacheCanvas.translate(-verticalSpan.left, -verticalSpan.top);
+			mRenderProgram.invalidateVisible(verticalSpan);
+			mRenderProgram.draw(cacheCanvas);
+			cacheCanvas.restore();
+		}
+		Bitmap swap = mCache;
+		mCache = mCacheBuffer;
+		mCacheBuffer = swap;
+	}
+
+	private void invalidateCache(Rect viewport, boolean force) {
+		if(mCache==null || force){
+			if(mCache==null){
+				mCache = Bitmap.createBitmap(getViewWidth(), getViewHeight(), Config.RGB_565);
+				mCacheBuffer = Bitmap.createBitmap(getViewWidth(), getViewHeight(), Config.RGB_565);
+			}
+			Canvas cacheCanvas = new Canvas(mCache);
+			cacheCanvas.scale(mScale, mScale);
+			cacheCanvas.translate(-viewport.left, -viewport.top);
 			mRenderProgram.invalidateVisible(viewport);
-			canvas.save();
-			canvas.scale(mScale, mScale);
-			canvas.translate(-scrollX, -scrollY);
-			mRenderProgram.draw(canvas);
-			canvas.restore();
-            //Log.i("aMetro", String.format("Rendering time is %sms", Long.toString((new Date().getTime() - time.getTime()))));
-			
-			super.onDraw(canvas);
+			mRenderProgram.draw(cacheCanvas);
+			mCacheViewport = viewport;
+			mCacheScale = mScale;		
 		}
 	}
 
+	private void destroyCache(Rect viewport) {
+		if(mCache!=null){
+			mCache.recycle();
+			mCache = null;
+			mCacheBuffer.recycle();
+			mCacheBuffer = null;
+		}
+	}
 
 	public void setModel(Model model) {
 		if(model!=null){
@@ -126,23 +241,23 @@ public class VectorMapView extends ScrollView {
 			mScrollX = mScroller.getCurrX();
 			mScrollY = mScroller.getCurrY();
 
-//			if(mScroller.isFinished()){
-//				mRenderProgram.setRenderFilter(RenderProgram.ALL);
-//			}
-			
-//            Log.i("aMetro", String.format("Scroll to %sx%s"
-//            		,Integer.toString(mScrollX)
-//            		,Integer.toString(mScrollY)
-//            		));
-			
-            postInvalidate();
+			//			if(mScroller.isFinished()){
+			//				mRenderProgram.setRenderFilter(RenderProgram.ALL);
+			//			}
+
+			//            Log.i("aMetro", String.format("Scroll to %sx%s"
+			//            		,Integer.toString(mScrollX)
+			//            		,Integer.toString(mScrollY)
+			//            		));
+
+			postInvalidate();
 		}
 	}
-	
+
 	public void setScrollCenter(int x, int y){
 		setScrollCenter(new Point(x,y));
 	}
-	
+
 	public void setScrollCenter(Point p) {
 		mScrollX = (int)(p.x*mScale);
 		mScrollY = (int)(p.y*mScale);
@@ -163,7 +278,7 @@ public class VectorMapView extends ScrollView {
 		setScrollCenter(p);
 		postInvalidate();
 	}
-	
+
 	public boolean onTouchEvent(MotionEvent event) {
 
 		int action = event.getAction();
@@ -358,7 +473,7 @@ public class VectorMapView extends ScrollView {
 		mContentWidth = (int)(mModel.getWidth() * mScale);
 		mContentHeight = (int)(mModel.getHeight() * mScale);
 	}
-		
+
 	private void initializeControls() {
 		setVerticalScrollBarEnabled(true);
 		setHorizontalScrollBarEnabled(true);
@@ -381,7 +496,7 @@ public class VectorMapView extends ScrollView {
 		mScrollX = Math.max(0, Math.min(maxX, mScrollX));
 		mScrollY = Math.max(0,Math.min(maxY, mScrollY));
 	} 	
-	
+
 	// Expects x in view coordinates
 	private int pinLocX(int x) {
 		return pinLoc(x, getViewWidth(), mContentWidth);
@@ -418,21 +533,21 @@ public class VectorMapView extends ScrollView {
 			return Math.max(0, getHeight() - getHorizontalScrollbarHeight());
 		}
 	}
-	
+
 	private int mContentWidth;
 	private int mContentHeight;
 	private boolean mInitialized;
 	private float mScale = 1.0f;
-	
-	
+
+
 	// adjustable parameters
 	private static final boolean SNAP_ENABLED = false;
 	private static final float MAX_SLOPE_FOR_DIAG = 1.5f;
 	private static final int MIN_BREAK_SNAP_CROSS_DISTANCE = 20; //20
 	private static final int MIN_FLING_TIME = 250; //250
 
-	private int mScrollX = 0;
-	private int mScrollY = 0;
+	private int mScrollX = 400;
+	private int mScrollY = 400;
 
 	private float mLastTouchX;
 	private float mLastTouchY;
