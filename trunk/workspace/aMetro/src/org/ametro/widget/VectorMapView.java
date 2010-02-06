@@ -21,8 +21,6 @@
 
 package org.ametro.widget;
 
-import java.util.Date;
-
 import org.ametro.model.Model;
 import org.ametro.render.RenderProgram;
 
@@ -32,11 +30,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.graphics.Region;
 import android.graphics.Bitmap.Config;
 import android.graphics.Region.Op;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.widget.ScrollView;
@@ -77,8 +73,8 @@ public class VectorMapView extends ScrollView {
 
 			final int left = mScrollX;
 			final int top = mScrollY;
-			final int right = left + (int)( getViewWidth() / mScale );
-			final int bottom = top + (int)( getViewHeight() / mScale );
+			final int right = left + (int)( getWidth() / mScale );
+			final int bottom = top + (int)( getHeight() / mScale );
 			Rect viewport = new Rect(left,top,right, bottom);
 
 
@@ -91,11 +87,18 @@ public class VectorMapView extends ScrollView {
 					invalidateCache(viewport,true);
 					canvas.drawBitmap(mCache, 0, 0, null);
 				}else{
+
+//					final Rect crect = mCacheViewport;
+//					Rect rect = new Rect(mCacheViewport);
+//					rect.intersect(viewport);
+//					Rect dst = new Rect(rect); // control canvas position
+//					dst.offsetTo(rect.left - viewport.left , rect.top - viewport.top );
+//					Rect src = new Rect(rect); // cache canvas position
+//					src.offsetTo(rect.left - crect.left, rect.top - crect.top);
+//					canvas.drawBitmap(mCache, src, dst, null);					
+					
 					updateCache(viewport);
 					canvas.drawBitmap(mCache, 0, 0, null);
-					mCacheViewport = viewport;
-
-
 				}
 			}
 		}
@@ -121,19 +124,15 @@ public class VectorMapView extends ScrollView {
 
 		if(viewport.right == rect.right && viewport.bottom == rect.bottom){
 			horizontalSpan.bottom = rect.top;
-			verticalSpan.top = rect.top;
 			verticalSpan.right = rect.left;
 		}else if(viewport.right == rect.right && viewport.top == rect.top){
 			horizontalSpan.top = rect.bottom;
-			verticalSpan.bottom = rect.bottom;
 			verticalSpan.right = rect.left;
 		}else if(viewport.left == rect.left && viewport.bottom == rect.bottom){
 			horizontalSpan.bottom = rect.top;
-			verticalSpan.top = rect.top;
 			verticalSpan.left = rect.right;
 		}else if(viewport.left == rect.left && viewport.top == rect.top){
 			horizontalSpan.top = rect.bottom;
-			verticalSpan.bottom = rect.bottom;
 			verticalSpan.left = rect.right;
 		}else{
 			throw new RuntimeException("Invalid viewport splitting algorithm");
@@ -159,7 +158,7 @@ public class VectorMapView extends ScrollView {
 			cacheCanvas.save();
 			cacheCanvas.clipRect(hx, hy, hx+horizontalSpan.width(), hy+horizontalSpan.height(),Op.REPLACE);
 			cacheCanvas.scale(mScale, mScale);
-			cacheCanvas.translate(-horizontalSpan.left, -horizontalSpan.top);
+			cacheCanvas.translate(hx-horizontalSpan.left, hy-horizontalSpan.top);
 			mRenderProgram.invalidateVisible(horizontalSpan);
 			mRenderProgram.draw(cacheCanvas);
 			cacheCanvas.restore();
@@ -170,7 +169,7 @@ public class VectorMapView extends ScrollView {
 			cacheCanvas.clipRect(vx, vy, vx+verticalSpan.width(), vy+verticalSpan.height(),Op.REPLACE);
 			
 			cacheCanvas.scale(mScale, mScale);
-			cacheCanvas.translate(-verticalSpan.left, -verticalSpan.top);
+			cacheCanvas.translate(vx-verticalSpan.left, vy-verticalSpan.top);
 			mRenderProgram.invalidateVisible(verticalSpan);
 			mRenderProgram.draw(cacheCanvas);
 			cacheCanvas.restore();
@@ -178,13 +177,18 @@ public class VectorMapView extends ScrollView {
 		Bitmap swap = mCache;
 		mCache = mCacheBuffer;
 		mCacheBuffer = swap;
+		mCacheViewport = viewport;
+		mCacheScale = mScale;
 	}
 
 	private void invalidateCache(Rect viewport, boolean force) {
-		if(mCache==null || force){
+		if(mCache==null || mCacheScale!=mScale || force){
+			if(mCacheScale!=mScale){
+				destroyCache();
+			}
 			if(mCache==null){
-				mCache = Bitmap.createBitmap(getViewWidth(), getViewHeight(), Config.RGB_565);
-				mCacheBuffer = Bitmap.createBitmap(getViewWidth(), getViewHeight(), Config.RGB_565);
+				mCache = Bitmap.createBitmap(getWidth(), getHeight(), Config.RGB_565);
+				mCacheBuffer = Bitmap.createBitmap(getWidth(), getHeight(), Config.RGB_565);
 			}
 			Canvas cacheCanvas = new Canvas(mCache);
 			cacheCanvas.scale(mScale, mScale);
@@ -196,7 +200,7 @@ public class VectorMapView extends ScrollView {
 		}
 	}
 
-	private void destroyCache(Rect viewport) {
+	private void destroyCache() {
 		if(mCache!=null){
 			mCache.recycle();
 			mCache = null;
@@ -240,16 +244,6 @@ public class VectorMapView extends ScrollView {
 		if (mScroller.computeScrollOffset()) {
 			mScrollX = mScroller.getCurrX();
 			mScrollY = mScroller.getCurrY();
-
-			//			if(mScroller.isFinished()){
-			//				mRenderProgram.setRenderFilter(RenderProgram.ALL);
-			//			}
-
-			//            Log.i("aMetro", String.format("Scroll to %sx%s"
-			//            		,Integer.toString(mScrollX)
-			//            		,Integer.toString(mScrollY)
-			//            		));
-
 			postInvalidate();
 		}
 	}
