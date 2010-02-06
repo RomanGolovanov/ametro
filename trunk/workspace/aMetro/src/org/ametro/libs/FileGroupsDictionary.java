@@ -78,7 +78,7 @@ public class FileGroupsDictionary implements Serializable {
 
     public String[] getGroups() {
         Set<String> keys = groups.keySet();
-        return (String[]) keys.toArray(new String[keys.size()]);
+        return keys.toArray(new String[keys.size()]);
     }
 
     public int getGroupCount() {
@@ -87,7 +87,7 @@ public class FileGroupsDictionary implements Serializable {
 
     public String[] getLabels(String groupName) {
         StringArray c = groups.get(groupName);
-        return (String[]) (c).toArray(new String[c.size()]);
+        return c.toArray(new String[c.size()]);
     }
 
     public String[] getPathes(String groupName, String[] labels) {
@@ -110,7 +110,7 @@ public class FileGroupsDictionary implements Serializable {
             if (strm != null) {
                 try {
                     strm.close();
-                } catch (IOException e) {
+                } catch (IOException ignored) {
                 }
             }
         }
@@ -134,7 +134,7 @@ public class FileGroupsDictionary implements Serializable {
             if (strm != null) {
                 try {
                     strm.close();
-                } catch (IOException e) {
+                } catch (IOException ignored) {
                 }
             }
         }

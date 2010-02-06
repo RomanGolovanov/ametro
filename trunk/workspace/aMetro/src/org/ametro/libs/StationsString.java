@@ -84,16 +84,15 @@ public class StationsString {
     }
 
     private void skipToContent() {
-        String symbol = null;
+        String symbol;
         String symbolNext = (mPos < mLen) ? mText.substring(mPos, mPos + 1) : null;
         while (mPos < mLen && mDelimeters.contains(symbol = symbolNext)) {
             mLastDelimeter = symbol;
-            if (symbol.equals("(")) {
+            if ("(".equals(symbol)) {
                 mBracketOpened = true;
                 mPos++;
                 return;
-
-            } else if (symbol.equals(")")) {
+            } else if (")".equals(symbol)) {
                 mBracketOpened = false;
             }
             mPos++;

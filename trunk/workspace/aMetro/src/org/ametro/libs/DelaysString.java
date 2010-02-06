@@ -37,8 +37,7 @@ public class DelaysString {
     }
 
     public boolean beginBracket() {
-        if (mText == null) return false;
-        return mPos < mLen && mText.charAt(mPos) == '(';
+        return mText != null && mPos < mLen && mText.charAt(mPos) == '(';
     }
 
     private String nextBlock() {

@@ -40,8 +40,8 @@ public class Line implements Serializable {
 
 
         out.writeInt(mSegments.size());
-        for (Iterator<Segment> segments = mSegments.iterator(); segments.hasNext();) {
-            out.writeObject(segments.next());
+        for (Segment mSegment : mSegments) {
+            out.writeObject(mSegment);
         }
 
         out.writeInt(mStations.size());
@@ -72,8 +72,7 @@ public class Line implements Serializable {
             mStations.put(station.getName(), station);
         }
 
-        for (Iterator<Segment> segments = mSegments.iterator(); segments.hasNext();) {
-            Segment segment = segments.next();
+        for (Segment segment : mSegments) {
             segment.getFrom().addSegment(segment, Segment.SEGMENT_BEGIN);
             segment.getTo().addSegment(segment, Segment.SEGMENT_END);
         }
@@ -169,8 +168,7 @@ public class Line implements Serializable {
     public Segment getSegment(Station from, Station to) {
         final String fromName = from.getName();
         final String toName = to.getName();
-        for (Iterator<Segment> iterator = mSegments.iterator(); iterator.hasNext();) {
-            Segment seg = iterator.next();
+        for (Segment seg : mSegments) {
             if (seg.getFrom().getName().equals(fromName) && seg.getTo().getName().equals(toName)) {
                 return seg;
             }

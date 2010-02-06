@@ -52,8 +52,8 @@ public class Model implements Serializable {
         }
 
         out.writeInt(mTransfers.size());
-        for (Iterator<Transfer> transfers = mTransfers.iterator(); transfers.hasNext();) {
-            out.writeObject(transfers.next());
+        for (Transfer transfer : mTransfers) {
+            out.writeObject(transfer);
         }
     }
 

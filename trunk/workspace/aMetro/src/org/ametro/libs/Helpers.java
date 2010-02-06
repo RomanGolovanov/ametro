@@ -50,7 +50,7 @@ public class Helpers {
                     .replaceAll("^\"(.*)\"$", "$1") // remove outer quotations if any
                     .replaceAll("\"\"", "\"")); // replace double inner quotations if any
         }
-        return (String[]) elements.toArray(new String[0]);
+        return elements.toArray(new String[elements.size()]);
     }
 
     public static String[] parseStringArray(String value) {
@@ -69,7 +69,7 @@ public class Helpers {
                 vals.add(null);
             }
         }
-        return (Integer[]) vals.toArray(new Integer[vals.size()]);
+        return vals.toArray(new Integer[vals.size()]);
     }
 
     public static Double[] parseDoubleArray(String value) {
@@ -83,7 +83,7 @@ public class Helpers {
                 vals.add(null);
             }
         }
-        return (Double[]) vals.toArray(new Double[vals.size()]);
+        return vals.toArray(new Double[vals.size()]);
     }
 
     public static Point[] parsePointArray(String value) {
@@ -95,7 +95,7 @@ public class Helpers {
             point.y = Integer.parseInt(parts[i * 2 + 1].trim());
             points.add(point);
         }
-        return (Point[]) points.toArray(new Point[points.size()]);
+        return points.toArray(new Point[points.size()]);
     }
 
     public static Rect[] parseRectangleArray(String value) {
@@ -108,7 +108,7 @@ public class Helpers {
             int y2 = y1 + Integer.parseInt(parts[i * 4 + 3].trim());
             rectangles.add(new Rect(x1, y1, x2, y2));
         }
-        return (Rect[]) rectangles.toArray(new Rect[rectangles.size()]);
+        return rectangles.toArray(new Rect[rectangles.size()]);
     }
 
     public static Rect parseRectangle(String value) {
@@ -147,7 +147,7 @@ public class Helpers {
         if (text != null && !text.equals("")) {
             try {
                 return Double.parseDouble(text);
-            } catch (NumberFormatException ex) {
+            } catch (NumberFormatException ignored) {
             }
         }
         return null;
@@ -266,7 +266,7 @@ public class Helpers {
                 if (newArray[i] == null) {
                     newArray[i] = new boolean[newSizeColumn];
                 } else {
-                    newArray[i] = (boolean[]) resizeArray(newArray[i], newSizeColumn);
+                    newArray[i] = resizeArray(newArray[i], newSizeColumn);
                 }
             }
             return newArray;
@@ -283,7 +283,7 @@ public class Helpers {
                 if (newArray[i] == null) {
                     newArray[i] = new Object[newSizeColumn];
                 } else {
-                    newArray[i] = (Object[]) resizeArray(newArray[i], newSizeColumn);
+                    newArray[i] = resizeArray(newArray[i], newSizeColumn);
                 }
             }
             return newArray;
@@ -299,7 +299,7 @@ public class Helpers {
                 if (newArray[i] == null) {
                     newArray[i] = new int[newSizeColumn];
                 } else {
-                    newArray[i] = (int[]) resizeArray(newArray[i], newSizeColumn);
+                    newArray[i] = resizeArray(newArray[i], newSizeColumn);
                 }
             }
             return newArray;
@@ -315,7 +315,7 @@ public class Helpers {
                 if (newArray[i] == null) {
                     newArray[i] = new Point[newSizeColumn];
                 } else {
-                    newArray[i] = (Point[]) resizeArray(newArray[i], newSizeColumn);
+                    newArray[i] = resizeArray(newArray[i], newSizeColumn);
                 }
             }
             return newArray;
@@ -332,7 +332,7 @@ public class Helpers {
                 if (newArray[i] == null) {
                     newArray[i] = new Double[newSizeColumn];
                 } else {
-                    newArray[i] = (Double[]) resizeArray(newArray[i], newSizeColumn);
+                    newArray[i] = resizeArray(newArray[i], newSizeColumn);
                 }
             }
             return newArray;
@@ -348,7 +348,7 @@ public class Helpers {
                 if (newArray[i] == null) {
                     newArray[i] = new Integer[newSizeColumn];
                 } else {
-                    newArray[i] = (Integer[]) resizeArray(newArray[i], newSizeColumn);
+                    newArray[i] = resizeArray(newArray[i], newSizeColumn);
                 }
             }
             return newArray;

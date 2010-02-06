@@ -57,7 +57,7 @@ public class RenderProgram {
         drawTransfers(model, renderQueue);
         drawStations(model, renderQueue);
         Collections.sort(renderQueue);
-        mElements = (RenderElement[]) renderQueue.toArray(new RenderElement[renderQueue.size()]);
+        mElements = renderQueue.toArray(new RenderElement[renderQueue.size()]);
         final int count = mElements.length;
         mVisibility = new boolean[count];
         mBounds = new Rect[count];

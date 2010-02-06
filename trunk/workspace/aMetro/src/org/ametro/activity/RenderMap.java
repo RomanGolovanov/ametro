@@ -36,6 +36,7 @@ import org.ametro.R;
 import org.ametro.libs.ProgressInfo;
 import org.ametro.model.*;
 import org.ametro.model.ModelRenderer.RenderIterator;
+import org.ametro.util.FileUtil;
 
 import java.io.File;
 import java.util.Date;
@@ -57,9 +58,7 @@ public class RenderMap extends Activity {
 
             final String mapName = model.getMapName();
             final File file = new File(MapSettings.getTemporaryCacheFile(mapName));
-            if (file.exists()) {
-                file.delete();
-            }
+            FileUtil.delete(file);
             ModelDescription description = new ModelDescription(model);
             description.setRenderVersion(MapSettings.getRenderVersion());
 
@@ -79,20 +78,20 @@ public class RenderMap extends Activity {
                 container = null;
                 if (!mIsCanceled) {
                     Log.i("aMetro", "Commit model cache");
-                    file.renameTo(new File(MapSettings.getCacheFileName(mapName)));
+                    FileUtil.move(file, new File(MapSettings.getCacheFileName(mapName)));
                 } else {
                     Log.i("aMetro", "Rollback model cache due cancelation");
-                    file.delete();
+                    FileUtil.delete(file);
                 }
                 Log.i("aMetro", String.format("Model '%s' render time is %sms", model.getMapName(), Long.toString((new Date().getTime() - startTimestamp.getTime()))));
             } catch (Exception ex) {
                 Log.i("aMetro", "Rollback model cache due exception");
-                file.delete();
+                FileUtil.delete(file);
             } finally {
                 if (container != null) {
                     try {
                         container.close();
-                    } catch (Exception ex) {
+                    } catch (Exception ignored) {
                     }
                 }
             }

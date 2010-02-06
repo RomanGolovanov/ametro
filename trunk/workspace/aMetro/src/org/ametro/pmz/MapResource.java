@@ -117,7 +117,7 @@ public class MapResource implements IResource {
                         pos += 2;
                     }
                 }
-                line.mPoints = (Point[]) points.toArray(new Point[points.size()]);
+                line.mPoints = points.toArray(new Point[points.size()]);
                 addiditionalLines.add(line);
             } else { // Lines names
                 MapLine line = mapLines.get(section);
