@@ -1,4 +1,4 @@
-package com.ametro;
+package org.ametro;
 
 import android.net.Uri;
 
