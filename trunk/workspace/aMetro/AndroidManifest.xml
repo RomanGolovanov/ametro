@@ -9,6 +9,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".activity.BrowseVectorMap"/>
         <activity android:name=".activity.BrowseLibrary"/>
         <activity android:name=".activity.RenderMap"/>
         <activity android:name=".activity.ImportPmz"/>
