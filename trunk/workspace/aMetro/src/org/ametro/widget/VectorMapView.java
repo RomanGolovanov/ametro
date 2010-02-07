@@ -95,7 +95,9 @@ public class VectorMapView extends ScrollView {
 //					dst.offsetTo(rect.left - viewport.left , rect.top - viewport.top );
 //					Rect src = new Rect(rect); // cache canvas position
 //					src.offsetTo(rect.left - crect.left, rect.top - crect.top);
-//					canvas.drawBitmap(mCache, src, dst, null);					
+//					convertToScreen(src,mScale);
+//					convertToScreen(dst,mScale);
+//					canvas.drawBitmap(mCache,src,dst,null);					
 					
 					updateCache(viewport);
 					canvas.drawBitmap(mCache, 0, 0, null);
@@ -105,6 +107,15 @@ public class VectorMapView extends ScrollView {
 		super.onDraw(canvas);
 	}
 
+	private static Rect convertToScreen(Rect rect, float scale)
+	{
+		rect.left = Math.round(rect.left * scale);
+		rect.top = Math.round(rect.top * scale);
+		rect.right = Math.round(rect.right * scale);
+		rect.bottom = Math.round(rect.bottom * scale);
+		return rect;
+	}
+	
 	private void updateCache(Rect viewport) {
 		final Rect crect = mCacheViewport;
 		
@@ -114,6 +125,7 @@ public class VectorMapView extends ScrollView {
 		Rect dst = new Rect(rect); // control canvas position
 		dst.offsetTo(rect.left - viewport.left , rect.top - viewport.top );
 
+		
 		Rect src = new Rect(rect); // cache canvas position
 		src.offsetTo(rect.left - crect.left, rect.top - crect.top);
 
@@ -138,25 +150,29 @@ public class VectorMapView extends ScrollView {
 			throw new RuntimeException("Invalid viewport splitting algorithm");
 		}
 
-
 		int hx = horizontalSpan.left - viewport.left; 
-		int hy = horizontalSpan.top - viewport.top; 
+		int hy = horizontalSpan.top - viewport.top;
+		Rect horizontalClip = new Rect(hx,hy,hx+horizontalSpan.width(), hy+horizontalSpan.height());
+		convertToScreen(horizontalClip,mScale);
 
 		int vx = verticalSpan.left - viewport.left; 
-		int vy = verticalSpan.top - viewport.top; 
-
+		int vy = verticalSpan.top - viewport.top;
+		Rect verticalClip = new Rect(vx, vy, vx+verticalSpan.width(), vy+verticalSpan.height());
+		convertToScreen(verticalClip, mScale);
 
 		Canvas cacheCanvas = new Canvas(mCacheBuffer);
 		cacheCanvas.drawColor(Color.MAGENTA);
 
 		// show previous map block
+		convertToScreen(src,mScale);
+		convertToScreen(dst,mScale);
 		cacheCanvas.drawBitmap(mCache, src, dst, null);
 		// scale to current coordinated
 		cacheCanvas.scale(mScale,mScale);
 		// draw horizontal line
 		if(!horizontalSpan.isEmpty()){
 			cacheCanvas.save();
-			cacheCanvas.clipRect(hx, hy, hx+horizontalSpan.width(), hy+horizontalSpan.height(),Op.REPLACE);
+			cacheCanvas.clipRect(horizontalClip,Op.REPLACE);
 			cacheCanvas.scale(mScale, mScale);
 			cacheCanvas.translate(hx-horizontalSpan.left, hy-horizontalSpan.top);
 			mRenderProgram.invalidateVisible(horizontalSpan);
@@ -166,8 +182,7 @@ public class VectorMapView extends ScrollView {
 		// draw vertical line
 		if(!verticalSpan.isEmpty()){
 			cacheCanvas.save();
-			cacheCanvas.clipRect(vx, vy, vx+verticalSpan.width(), vy+verticalSpan.height(),Op.REPLACE);
-			
+			cacheCanvas.clipRect(verticalClip,Op.REPLACE);
 			cacheCanvas.scale(mScale, mScale);
 			cacheCanvas.translate(vx-verticalSpan.left, vy-verticalSpan.top);
 			mRenderProgram.invalidateVisible(verticalSpan);
