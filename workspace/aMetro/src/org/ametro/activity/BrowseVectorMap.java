@@ -183,17 +183,21 @@ public class BrowseVectorMap extends Activity {
 		}
 	}
 
-	private final float ZOOM_STEP = 1.4f;
+	private final float ZOOM_STEP = 1.3f;
 	
 	private void onZoomIn(){
 		mZoom = Math.max(mZoom-1, MIN_ZOOM_LEVEL);
 		float scale = 1.0f/(float)Math.exp( (mZoom-1) * Math.log(ZOOM_STEP) );
+		mZoomControls.setIsZoomInEnabled(mZoom > MIN_ZOOM_LEVEL);
+		mZoomControls.setIsZoomOutEnabled(mZoom < MAX_ZOOM_LEVEL);
 		mMapView.setScale(scale);
 	}
 	
 	private void onZoomOut(){
 		mZoom = Math.min(mZoom+1, MAX_ZOOM_LEVEL);
 		float scale = 1.0f/(float)Math.exp( (mZoom-1) * Math.log(ZOOM_STEP) );
+		mZoomControls.setIsZoomInEnabled(mZoom > MIN_ZOOM_LEVEL);
+		mZoomControls.setIsZoomOutEnabled(mZoom < MAX_ZOOM_LEVEL);
 		mMapView.setScale(scale);
 	}
 	
