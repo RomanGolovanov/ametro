@@ -87,18 +87,6 @@ public class VectorMapView extends ScrollView {
 					invalidateCache(viewport,true);
 					canvas.drawBitmap(mCache, 0, 0, null);
 				}else{
-
-//					final Rect crect = mCacheViewport;
-//					Rect rect = new Rect(mCacheViewport);
-//					rect.intersect(viewport);
-//					Rect dst = new Rect(rect); // control canvas position
-//					dst.offsetTo(rect.left - viewport.left , rect.top - viewport.top );
-//					Rect src = new Rect(rect); // cache canvas position
-//					src.offsetTo(rect.left - crect.left, rect.top - crect.top);
-//					convertToScreen(src,mScale);
-//					convertToScreen(dst,mScale);
-//					canvas.drawBitmap(mCache,src,dst,null);					
-					
 					updateCache(viewport);
 					canvas.drawBitmap(mCache, 0, 0, null);
 				}
@@ -124,12 +112,9 @@ public class VectorMapView extends ScrollView {
 
 		Rect dst = new Rect(rect); // control canvas position
 		dst.offsetTo(rect.left - viewport.left , rect.top - viewport.top );
-
 		
 		Rect src = new Rect(rect); // cache canvas position
 		src.offsetTo(rect.left - crect.left, rect.top - crect.top);
-
-		//canvas.drawBitmap(mCache, src, dst, null);
 		
 		Rect verticalSpan = new Rect(viewport);
 		Rect horizontalSpan = new Rect(viewport);
@@ -153,27 +138,22 @@ public class VectorMapView extends ScrollView {
 		int hx = horizontalSpan.left - viewport.left; 
 		int hy = horizontalSpan.top - viewport.top;
 		Rect horizontalClip = new Rect(hx,hy,hx+horizontalSpan.width(), hy+horizontalSpan.height());
-		convertToScreen(horizontalClip,mScale);
 
 		int vx = verticalSpan.left - viewport.left; 
 		int vy = verticalSpan.top - viewport.top;
 		Rect verticalClip = new Rect(vx, vy, vx+verticalSpan.width(), vy+verticalSpan.height());
-		convertToScreen(verticalClip, mScale);
 
+		
 		Canvas cacheCanvas = new Canvas(mCacheBuffer);
 		cacheCanvas.drawColor(Color.MAGENTA);
 
-		// show previous map block
-		convertToScreen(src,mScale);
-		convertToScreen(dst,mScale);
-		cacheCanvas.drawBitmap(mCache, src, dst, null);
-		// scale to current coordinated
+		cacheCanvas.save();
 		cacheCanvas.scale(mScale,mScale);
+		
 		// draw horizontal line
 		if(!horizontalSpan.isEmpty()){
 			cacheCanvas.save();
 			cacheCanvas.clipRect(horizontalClip,Op.REPLACE);
-			cacheCanvas.scale(mScale, mScale);
 			cacheCanvas.translate(hx-horizontalSpan.left, hy-horizontalSpan.top);
 			mRenderProgram.invalidateVisible(horizontalSpan);
 			mRenderProgram.draw(cacheCanvas);
@@ -183,12 +163,18 @@ public class VectorMapView extends ScrollView {
 		if(!verticalSpan.isEmpty()){
 			cacheCanvas.save();
 			cacheCanvas.clipRect(verticalClip,Op.REPLACE);
-			cacheCanvas.scale(mScale, mScale);
 			cacheCanvas.translate(vx-verticalSpan.left, vy-verticalSpan.top);
 			mRenderProgram.invalidateVisible(verticalSpan);
 			mRenderProgram.draw(cacheCanvas);
 			cacheCanvas.restore();
 		}
+		cacheCanvas.restore();
+
+		// show previous map block
+		convertToScreen(src,mScale);
+		convertToScreen(dst,mScale);
+		cacheCanvas.drawBitmap(mCache, src, dst, null);
+		
 		Bitmap swap = mCache;
 		mCache = mCacheBuffer;
 		mCacheBuffer = swap;
@@ -479,8 +465,8 @@ public class VectorMapView extends ScrollView {
 	}
 
 	private void calculateDimensions(){
-		mContentWidth = (int)(mModel.getWidth() * mScale);
-		mContentHeight = (int)(mModel.getHeight() * mScale);
+		mContentWidth = Math.round(mModel.getWidth() * mScale);
+		mContentHeight = Math.round(mModel.getHeight() * mScale);
 	}
 
 	private void initializeControls() {
