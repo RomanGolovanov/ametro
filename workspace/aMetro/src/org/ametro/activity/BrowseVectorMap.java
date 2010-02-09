@@ -41,9 +41,6 @@ import android.widget.ZoomControls;
 
 public class BrowseVectorMap extends Activity {
 
-	private final int MIN_ZOOM_LEVEL = 0;
-	private final int START_ZOOM_LEVEL = 1;
-	private final int MAX_ZOOM_LEVEL = 5;
 	
 	private final int MAIN_MENU_FIND 		 = 1;
 	private final int MAIN_MENU_LIBRARY 	 = 2;
@@ -57,7 +54,6 @@ public class BrowseVectorMap extends Activity {
 	private VectorMapView mMapView;
 	private ZoomControls mZoomControls;
 
-	private int mZoom = START_ZOOM_LEVEL;
 
 	private InitTask mInitTask;
 
@@ -183,22 +179,25 @@ public class BrowseVectorMap extends Activity {
 		}
 	}
 
-	private final float ZOOM_STEP = 1.3f;
+	private final float[] ZOOMS = new float[] {2.0f, 1.0f, 0.8f, 0.6f, 0.4f, 0.2f };
+	private final int[]   STEPS = new int[] {20, 10, 8, 6, 4, 2};
+	private final int MIN_ZOOM_LEVEL = 0;
+	private final int START_ZOOM_LEVEL = 1;
+	private final int MAX_ZOOM_LEVEL = 5;
+	private int mZoom = START_ZOOM_LEVEL;
 	
 	private void onZoomIn(){
 		mZoom = Math.max(mZoom-1, MIN_ZOOM_LEVEL);
-		float scale = 1.0f/(float)Math.exp( (mZoom-1) * Math.log(ZOOM_STEP) );
 		mZoomControls.setIsZoomInEnabled(mZoom > MIN_ZOOM_LEVEL);
 		mZoomControls.setIsZoomOutEnabled(mZoom < MAX_ZOOM_LEVEL);
-		mMapView.setScale(scale);
+		mMapView.setScale(ZOOMS[mZoom], STEPS[mZoom]);
 	}
 	
 	private void onZoomOut(){
 		mZoom = Math.min(mZoom+1, MAX_ZOOM_LEVEL);
-		float scale = 1.0f/(float)Math.exp( (mZoom-1) * Math.log(ZOOM_STEP) );
 		mZoomControls.setIsZoomInEnabled(mZoom > MIN_ZOOM_LEVEL);
 		mZoomControls.setIsZoomOutEnabled(mZoom < MAX_ZOOM_LEVEL);
-		mMapView.setScale(scale);
+		mMapView.setScale(ZOOMS[mZoom], STEPS[mZoom]);
 	}
 	
 	private class InitTask extends AsyncTask<Uri, Void, Model>

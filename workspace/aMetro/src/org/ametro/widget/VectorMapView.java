@@ -31,540 +31,259 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.Bitmap.Config;
-import android.graphics.Region.Op;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
-import android.view.VelocityTracker;
-import android.widget.ScrollView;
-import android.widget.Scroller;
 
-public class VectorMapView extends ScrollView {
-
-	private Model mModel;
-	private RenderProgram mRenderProgram;
-	private Context mContext;
+public class VectorMapView extends BaseMapView {
 
 	public VectorMapView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-		mContext = context;
-		initializeControls();
 	}
 
 	public VectorMapView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		mContext = context;
-		initializeControls();
 	}
 
 	public VectorMapView(Context context) {
 		super(context);
-		mContext = context;
-		initializeControls();
 	}
 
-	private Bitmap mCache;
-	private Bitmap mCacheBuffer;
-	private Rect mCacheViewport;
-	private float mCacheScale;
-
-
-	protected void onDraw(Canvas canvas) {
-		if(mInitialized){
-
-			final int left = mScrollX;
-			final int top = mScrollY;
-			final int right = left + (int)( getWidth() / mScale );
-			final int bottom = top + (int)( getHeight() / mScale );
-			Rect viewport = new Rect(left,top,right, bottom);
-
-
-			invalidateCache(viewport,false);
-
-			if(mCacheViewport.equals(viewport)){
-				canvas.drawBitmap(mCache, 0, 0, null);
-			}else{
-				if(!Rect.intersects(mCacheViewport, viewport)){
-					invalidateCache(viewport,true);
-					canvas.drawBitmap(mCache, 0, 0, null);
-				}else{
-					updateCache(viewport);
-					canvas.drawBitmap(mCache, 0, 0, null);
-				}
-			}
+	public void setModel(Model model) {
+		if (model != null) {
+			mModel = model;
+			mRenderProgram = new RenderProgram(model);
+			setInitialized(true);
+			calculateDimensions();
+		} else {
+			setInitialized(false);
+			mRenderProgram = null;
+			mModel = null;
 		}
-		super.onDraw(canvas);
 	}
 
-	private static Rect convertToScreen(Rect rect, float scale)
-	{
-		rect.left = Math.round(rect.left * scale);
-		rect.top = Math.round(rect.top * scale);
-		rect.right = Math.round(rect.right * scale);
-		rect.bottom = Math.round(rect.bottom * scale);
-		return rect;
+	public void setScale(float scale, int step) {
+		Point p = getScrollCenter();
+		float x = p.x / mScale;
+		float y = p.y / mScale;
+
+		mScale = scale;
+		mTileSize = (int) (step / scale);
+		calculateDimensions();
+
+		p.x = (int) (x * mScale);
+		p.y = (int) (y * mScale);
+		setScrollCenter(p);
+
+		postInvalidate();
 	}
-	
-	private void updateCache(Rect viewport) {
-		final Rect crect = mCacheViewport;
-		
-		Rect rect = new Rect(mCacheViewport);
-		rect.intersect(viewport);
 
-		Rect dst = new Rect(rect); // control canvas position
-		dst.offsetTo(rect.left - viewport.left , rect.top - viewport.top );
-		
-		Rect src = new Rect(rect); // cache canvas position
-		src.offsetTo(rect.left - crect.left, rect.top - crect.top);
-		
-		Rect verticalSpan = new Rect(viewport);
-		Rect horizontalSpan = new Rect(viewport);
+	@Override
+	protected int getContentHeight() {
+		return mContentWidth;
+	}
 
-		if(viewport.right == rect.right && viewport.bottom == rect.bottom){
-			horizontalSpan.bottom = rect.top;
-			verticalSpan.right = rect.left;
-		}else if(viewport.right == rect.right && viewport.top == rect.top){
-			horizontalSpan.top = rect.bottom;
-			verticalSpan.right = rect.left;
-		}else if(viewport.left == rect.left && viewport.bottom == rect.bottom){
-			horizontalSpan.bottom = rect.top;
-			verticalSpan.left = rect.right;
-		}else if(viewport.left == rect.left && viewport.top == rect.top){
-			horizontalSpan.top = rect.bottom;
-			verticalSpan.left = rect.right;
+	@Override
+	protected int getContentWidth() {
+		return mContentHeight;
+	}
+
+	protected void onDrawRect(Canvas canvas, Rect viewport) {
+//		long time = System.currentTimeMillis();
+
+		invalidateTileCache(viewport, false);
+		Rect tileOuter = screenToOuterTileRect(viewport);
+		Rect cache = mTileCacheRect;
+
+		if(!Rect.intersects(tileOuter, cache)){
+			// redraw entire page
+			invalidateTileCache(viewport, true);
+		}else if (!cache.contains(tileOuter)){
+			// redraw part of page
+			updateTileCache(viewport);
+		}
+		cache = mTileCacheRect;
+		int dx = cache.left * mTileSize - viewport.left;
+		int dy = cache.top * mTileSize - viewport.top;
+		canvas.drawBitmap(mTileCache, dx, dy, null);
+
+//		if(LogUtil.loggable(Log.INFO)){
+//			LogUtil.info("draw time: " + (System.currentTimeMillis() - time) + "ms");
+//		}
+	}
+
+	private void updateTileCache(Rect screenCoords) {
+		Rect tileOuter = screenToOuterTileRect(screenCoords);
+		Rect modelOuter = tileToModelRect(tileOuter);
+		Rect entireCache = mTileCacheRect;
+		Rect cache = new Rect(entireCache);
+		cache.intersect(tileOuter);
+
+		Rect dst = new Rect(cache); // control canvas position
+		dst.offsetTo(cache.left - tileOuter.left , cache.top - tileOuter.top );
+		Rect dstOnScreen = tileToScreenRect(dst);
+
+		Rect src = new Rect(cache); // cache canvas position
+		src.offsetTo(cache.left - entireCache.left, cache.top - entireCache.top);
+		Rect srcOnScreen = tileToScreenRect(src);
+
+		Rect verticalSpan = new Rect(tileOuter);
+		Rect horizontalSpan = new Rect(tileOuter);
+
+		if(tileOuter.right == cache.right && tileOuter.bottom == cache.bottom){
+			horizontalSpan.bottom = cache.top;
+			verticalSpan.right = cache.left;
+		}else if(tileOuter.right == cache.right && tileOuter.top == cache.top){
+			horizontalSpan.top = cache.bottom;
+			verticalSpan.right = cache.left;
+		}else if(tileOuter.left == cache.left && tileOuter.bottom == cache.bottom){
+			horizontalSpan.bottom = cache.top;
+			verticalSpan.left = cache.right;
+		}else if(tileOuter.left == cache.left && tileOuter.top == cache.top){
+			horizontalSpan.top = cache.bottom;
+			verticalSpan.left = cache.right;
 		}else{
 			throw new RuntimeException("Invalid viewport splitting algorithm");
 		}
 
-		int hx = horizontalSpan.left - viewport.left; 
-		int hy = horizontalSpan.top - viewport.top;
-		Rect horizontalClip = new Rect(hx,hy,hx+horizontalSpan.width(), hy+horizontalSpan.height());
+		Rect horizontalSpanInModel = tileToModelRect(horizontalSpan);
+		Rect verticalSpanInModel = tileToModelRect(verticalSpan);
 
-		int vx = verticalSpan.left - viewport.left; 
-		int vy = verticalSpan.top - viewport.top;
-		Rect verticalClip = new Rect(vx, vy, vx+verticalSpan.width(), vy+verticalSpan.height());
+		Canvas canvas = new Canvas(mTileCacheBuffer);
+		canvas.drawColor(Color.MAGENTA);
 
+		canvas.save();
+		canvas.scale(mScale,mScale);
+		canvas.translate(-modelOuter.left,-modelOuter.top);
 		
-		Canvas cacheCanvas = new Canvas(mCacheBuffer);
-		cacheCanvas.drawColor(Color.MAGENTA);
-
-		cacheCanvas.save();
-		cacheCanvas.scale(mScale,mScale);
+		mRenderProgram.clearVisibility();
+		mRenderProgram.addVisibility(horizontalSpanInModel);
+		mRenderProgram.addVisibility(verticalSpanInModel);
+		mRenderProgram.draw(canvas);
 		
-		// draw horizontal line
-		if(!horizontalSpan.isEmpty()){
-			cacheCanvas.save();
-			cacheCanvas.clipRect(horizontalClip,Op.REPLACE);
-			cacheCanvas.translate(hx-horizontalSpan.left, hy-horizontalSpan.top);
-			mRenderProgram.invalidateVisible(horizontalSpan);
-			mRenderProgram.draw(cacheCanvas);
-			cacheCanvas.restore();
-		}
-		// draw vertical line
-		if(!verticalSpan.isEmpty()){
-			cacheCanvas.save();
-			cacheCanvas.clipRect(verticalClip,Op.REPLACE);
-			cacheCanvas.translate(vx-verticalSpan.left, vy-verticalSpan.top);
-			mRenderProgram.invalidateVisible(verticalSpan);
-			mRenderProgram.draw(cacheCanvas);
-			cacheCanvas.restore();
-		}
-		cacheCanvas.restore();
+		canvas.restore();		
 
-		// show previous map block
-		convertToScreen(src,mScale);
-		convertToScreen(dst,mScale);
-		cacheCanvas.drawBitmap(mCache, src, dst, null);
-		
-		Bitmap swap = mCache;
-		mCache = mCacheBuffer;
-		mCacheBuffer = swap;
-		mCacheViewport = viewport;
-		mCacheScale = mScale;
+		canvas.save();
+		canvas.clipRect(dstOnScreen);
+		canvas.drawColor(Color.GRAY);
+		canvas.drawBitmap(mTileCache, srcOnScreen, dstOnScreen, null);
+		canvas.restore();
+
+
+		mTileCacheRect = tileOuter;
+		Bitmap swap = mTileCache;
+		mTileCache = mTileCacheBuffer;
+		mTileCacheBuffer = swap;
+
 	}
 
-	private void invalidateCache(Rect viewport, boolean force) {
-		if(mCache==null || mCacheScale!=mScale || force){
-			if(mCacheScale!=mScale){
-				destroyCache();
+
+	private void invalidateTileCache(Rect screenCoords, boolean force) {
+		Rect tileOuter = screenToOuterTileRect(screenCoords);
+		final int width = getWidth() + mTileSize*2;
+		final int height = getHeight() + mTileSize*2;
+		final boolean isViewportChanged = mTileCacheScale != mScale || mTileCacheWidth != width || mTileCacheHeight != height;
+		if (mTileCache == null || isViewportChanged || force) {
+			if (isViewportChanged) {
+				destroyTileCache();
 			}
-			if(mCache==null){
-				mCache = Bitmap.createBitmap(getWidth(), getHeight(), Config.RGB_565);
-				mCacheBuffer = Bitmap.createBitmap(getWidth(), getHeight(), Config.RGB_565);
+			if (mTileCache == null) {
+				mTileCache = Bitmap.createBitmap(width, height, Config.RGB_565);
+				mTileCacheBuffer = Bitmap.createBitmap(width, height, Config.RGB_565);
 			}
-			Canvas cacheCanvas = new Canvas(mCache);
-			cacheCanvas.scale(mScale, mScale);
-			cacheCanvas.translate(-viewport.left, -viewport.top);
-			mRenderProgram.invalidateVisible(viewport);
-			mRenderProgram.draw(cacheCanvas);
-			mCacheViewport = viewport;
-			mCacheScale = mScale;		
+
+			Rect modelOuter = tileToModelRect(tileOuter);
+
+			Canvas canvas = new Canvas(mTileCache);
+			canvas.drawColor(Color.MAGENTA);
+			canvas.clipRect(0, 0, tileOuter.width()*mTileSize, tileOuter.height()*mTileSize);
+
+			canvas.scale(mScale, mScale);
+			canvas.translate(-modelOuter.left, -modelOuter.top);
+			mRenderProgram.invalidateVisible(modelOuter);
+			mRenderProgram.draw(canvas);
+
+			mTileCacheRect = tileOuter;
+			mTileCacheScale = mScale;
+			mTileCacheWidth = width;
+			mTileCacheHeight = height;
 		}
 	}
 
-	private void destroyCache() {
-		if(mCache!=null){
-			mCache.recycle();
-			mCache = null;
-			mCacheBuffer.recycle();
-			mCacheBuffer = null;
+	private void destroyTileCache() {
+		if (mTileCache != null) {
+			mTileCache.recycle();
+			mTileCache = null;
+			mTileCacheBuffer.recycle();
+			mTileCacheBuffer = null;
 		}
 	}
 
-	public void setModel(Model model) {
-		if(model!=null){
-			mModel = model;
-			mRenderProgram = new RenderProgram(model);
-			//mRenderProgram.setRenderFilter(RenderProgram.ONLY_TRANSPORT);
-			mInitialized = true;
-			calculateDimensions();
-		}else{
-			mInitialized = false;
-			mRenderProgram = null;
-			mModel = null;
-		}
+	private Rect mTileCacheRect;
+	private float mTileCacheScale;
+	private int mTileCacheWidth;
+	private int mTileCacheHeight;
+
+	private Bitmap mTileCache;
+	private Bitmap mTileCacheBuffer;
+
+	private Rect tileToScreenRect(Rect src) {
+		return new Rect(
+				src.left*mTileSize, 
+				src.top*mTileSize, 
+				src.right*mTileSize, 
+				src.bottom*mTileSize);
 	}	
+	private Rect screenToOuterTileRect(Rect src) {
+		final int step = mTileSize;
 
-	protected int computeVerticalScrollOffset() {
-		return  mInitialized ? mScrollY : 0;
+		final int left = src.left;
+		final int top = src.top;
+		final int right = src.right;
+		final int bottom = src.bottom;
+
+		final int rightMod = right % step;
+		final int bottomMod = bottom % step;
+
+		return new Rect(
+				left / step, 
+				top / step,
+				right / step + (rightMod > 0 ? 1 : 0),
+				bottom / step + (bottomMod > 0 ? 1 : 0));
 	}
 
-	protected int computeVerticalScrollRange() {
-		return mInitialized ? mContentHeight : 0;
-	}
+	private Rect tileToModelRect(Rect src) {
 
-	protected int computeHorizontalScrollOffset() {
-		return  mInitialized ? mScrollX : 0;
-	}
+		final int size = mTileSize;
+		final float scale = mScale;
 
-	protected int computeHorizontalScrollRange() {
-		return mInitialized ? mContentWidth : 0;
-	}
+		int screenLeft = src.left * size;
+		int screenTop = src.top * size;
+		int screenRight = src.right * size;
+		int screenBottom = src.bottom * size;
 
-
-	public void computeScroll() {
-		if (mScroller.computeScrollOffset()) {
-			mScrollX = mScroller.getCurrX();
-			mScrollY = mScroller.getCurrY();
-			postInvalidate();
-		}
-	}
-
-	public void setScrollCenter(int x, int y){
-		setScrollCenter(new Point(x,y));
-	}
-
-	public void setScrollCenter(Point p) {
-		mScrollX = (int)(p.x*mScale);
-		mScrollY = (int)(p.y*mScale);
-		invalidateScroll();
-		postInvalidate();
-	}
-
-	public Point getScrollCenter(){
-		final int screenX = mScrollX;
-		final int screenY = mScrollY;
-		return new Point( (int)(screenX/mScale), (int)(screenY/mScale) );
-	}
-
-	public void setScale(float scale){
-		Point p = getScrollCenter();
-		mScale = scale;
-		calculateDimensions();
-		setScrollCenter(p);
-		postInvalidate();
-	}
-
-	public boolean onTouchEvent(MotionEvent event) {
-
-		int action = event.getAction();
-		float x = event.getX();
-		float y = event.getY();
-		long eventTime = event.getEventTime();
-		if (x > getViewWidth() - 1) {
-			x = getViewWidth() - 1;
-		}
-		if (y > getViewHeight() - 1) {
-			y = getViewHeight() - 1;
-		}
-
-		int deltaX = (int) (mLastTouchX - x);
-		int deltaY = (int) (mLastTouchY - y);
-
-		switch(action){
-		case MotionEvent.ACTION_DOWN:
-			if (!mScroller.isFinished()) {
-				mScroller.abortAnimation();
-				mTouchMode = TOUCH_DRAG_START_MODE;
-			}else{
-				mTouchMode = TOUCH_INIT_MODE;				
-			}
-			mTouchMode = TOUCH_INIT_MODE;
-			mLastTouchX = x;
-			mLastTouchY = y;
-			mLastTouchTime = eventTime;
-			mSnapScrollMode = SNAP_NONE;
-			mVelocityTracker = VelocityTracker.obtain();
-			break;
-		case MotionEvent.ACTION_MOVE:
-			if (mTouchMode == TOUCH_DONE_MODE) {
-				// no dragging during scroll zoom animation
-				break;
-			}
-			mVelocityTracker.addMovement(event);
-
-			if (mTouchMode != TOUCH_DRAG_MODE) {
-
-				// if it starts nearly horizontal or vertical, enforce it
-				if(SNAP_ENABLED){
-					int ax = Math.abs(deltaX);
-					int ay = Math.abs(deltaY);
-					if (ax > MAX_SLOPE_FOR_DIAG * ay) {
-						mSnapScrollMode = SNAP_X;
-						mSnapPositive = deltaX > 0;
-					} else if (ay > MAX_SLOPE_FOR_DIAG * ax) {
-						mSnapScrollMode = SNAP_Y;
-						mSnapPositive = deltaY > 0;
-					}
-				}
-				mTouchMode = TOUCH_DRAG_MODE;
-
-			}
-
-			// do pan
-			int newScrollX = pinLocX(mScrollX + deltaX);
-			deltaX = newScrollX - mScrollX;
-			int newScrollY = pinLocY(mScrollY + deltaY);
-			deltaY = newScrollY - mScrollY;
-			boolean done = false;
-			if (deltaX == 0 && deltaY == 0) {
-				done = true;
-			} else {
-				if (mSnapScrollMode == SNAP_X || mSnapScrollMode == SNAP_Y) {
-					int ax = Math.abs(deltaX);
-					int ay = Math.abs(deltaY);
-					if (mSnapScrollMode == SNAP_X) {
-						// radical change means getting out of snap mode
-						if (ay > MAX_SLOPE_FOR_DIAG * ax
-								&& ay > MIN_BREAK_SNAP_CROSS_DISTANCE) {
-							mSnapScrollMode = SNAP_NONE;
-						}
-						// reverse direction means lock in the snap mode
-						if ((ax > MAX_SLOPE_FOR_DIAG * ay) &&
-								((mSnapPositive && 
-										deltaX < -mMinLockSnapReverseDistance)
-										|| (!mSnapPositive &&
-												deltaX > mMinLockSnapReverseDistance))) {
-							mSnapScrollMode = SNAP_X_LOCK;
-						}
-					} else {
-						// radical change means getting out of snap mode
-						if ((ax > MAX_SLOPE_FOR_DIAG * ay)
-								&& ax > MIN_BREAK_SNAP_CROSS_DISTANCE) {
-							mSnapScrollMode = SNAP_NONE;
-						}
-						// reverse direction means lock in the snap mode
-						if ((ay > MAX_SLOPE_FOR_DIAG * ax) &&
-								((mSnapPositive && 
-										deltaY < -mMinLockSnapReverseDistance)
-										|| (!mSnapPositive && 
-												deltaY > mMinLockSnapReverseDistance))) {
-							mSnapScrollMode = SNAP_Y_LOCK;
-						}
-					}
-				}
-
-				if (mSnapScrollMode == SNAP_X
-						|| mSnapScrollMode == SNAP_X_LOCK) {
-					//scrollBy(deltaX, 0);
-					internalScroll(deltaX,0);
-					mLastTouchX = x;
-				} else if (mSnapScrollMode == SNAP_Y
-						|| mSnapScrollMode == SNAP_Y_LOCK) {
-					//scrollBy(0, deltaY);
-					internalScroll(0,deltaY);
-					mLastTouchY = y;
-				} else {
-					//scrollBy(deltaX, deltaY);
-					internalScroll(deltaX,deltaY);
-					mLastTouchX = x;
-					mLastTouchY = y;
-				}
-				mLastTouchTime = eventTime;
-			}
-			if (done) {
-				// return false to indicate that we can't pan out of the
-				// view space
-				return false;
-			}
-			break;
-		case MotionEvent.ACTION_UP:
-			switch (mTouchMode) {
-			case TOUCH_INIT_MODE: // tap
-				mTouchMode = TOUCH_DONE_MODE;
-				doShortPress();
-				break;
-			case TOUCH_DRAG_MODE:
-				// if the user waits a while w/o moving before the
-				// up, we don't want to do a fling
-				if (eventTime - mLastTouchTime <= MIN_FLING_TIME) {
-					mVelocityTracker.addMovement(event);
-					doFling();
-					break;
-				}
-				break;
-			case TOUCH_DRAG_START_MODE:
-			case TOUCH_DONE_MODE:
-				// do nothing
-				break;
-			}
-			if (mVelocityTracker != null) {
-				mVelocityTracker.recycle();
-				mVelocityTracker = null;
-			}
-			break;
-		case MotionEvent.ACTION_CANCEL: 
-			if (mVelocityTracker != null) {
-				mVelocityTracker.recycle();
-				mVelocityTracker = null;
-			}
-			mTouchMode = TOUCH_DONE_MODE;
-			break;
-		}
-		return true;
-	}
-
-	private void doFling() {
-		if (mVelocityTracker == null) {
-			return;
-		}
-		int maxX = Math.max(mContentWidth - getWidth(), 0);
-		int maxY = Math.max(mContentHeight - getHeight(), 0);
-
-		mVelocityTracker.computeCurrentVelocity(1000);
-		int vx = (int) mVelocityTracker.getXVelocity();
-		int vy = (int) mVelocityTracker.getYVelocity();
-
-		if(SNAP_ENABLED){
-			if (mSnapScrollMode != SNAP_NONE) {
-				if (mSnapScrollMode == SNAP_X || mSnapScrollMode == SNAP_X_LOCK) {
-					vy = 0;
-				} else {
-					vx = 0;
-				}
-			}
-		}
-		vx = vx / 2;
-		vy = vy / 2;
-
-		//mRenderProgram.setRenderFilter(RenderProgram.ONLY_TRANSPORT);
-		mScroller.fling(mScrollX, mScrollY, -vx, -vy, 0, maxX, 0, maxY);
-		postInvalidate();
-	}
-
-	private void doShortPress() {
-	}
-
-	private void calculateDimensions(){
-		mContentWidth = Math.round(mModel.getWidth() * mScale);
-		mContentHeight = Math.round(mModel.getHeight() * mScale);
-	}
-
-	private void initializeControls() {
-		setVerticalScrollBarEnabled(true);
-		setHorizontalScrollBarEnabled(true);
-		mScroller = new Scroller(mContext);
-	}
-
-	private void internalScroll(int dx, int dy){
-		int x = mScrollX+dx;
-		int y = mScrollY+dy;
-		mScrollX = x;
-		mScrollY = y;
-		invalidateScroll();
-		postInvalidate();
+		float modelLeft = screenLeft / scale;
+		float modelTop = screenTop / scale;
+		float modelRight = screenRight / scale;
+		float modelBottom = screenBottom / scale;
+		return new Rect(
+				(int) Math.floor(modelLeft),
+				(int) Math.floor(modelTop), 
+				(int) Math.ceil(modelRight),
+				(int) Math.ceil(modelBottom));
 	}
 
 
-	private void invalidateScroll() {
-		int maxX = Math.max(mContentWidth - (int)(getWidth()*mScale), 0);
-		int maxY = Math.max(mContentHeight - (int)(getHeight()*mScale), 0);
-		mScrollX = Math.max(0, Math.min(maxX, mScrollX));
-		mScrollY = Math.max(0,Math.min(maxY, mScrollY));
-	} 	
-
-	// Expects x in view coordinates
-	private int pinLocX(int x) {
-		return pinLoc(x, getViewWidth(), mContentWidth);
+	private void calculateDimensions() {
+		mContentWidth = (int) Math.ceil(mModel.getWidth() * mScale);
+		mContentHeight = (int) Math.ceil(mModel.getHeight() * mScale);
 	}
 
-	// Expects y in view coordinates
-	private int pinLocY(int y) {
-		return pinLoc(y, getViewHeight(), mContentHeight) ;
-	}
-
-	private static int pinLoc(int x, int viewMax, int docMax) {
-		if (docMax < viewMax) {   // the doc has room on the sides for "blank"
-			x = 0;
-		} else if (x < 0) {
-			x = 0;
-		} else if (x + viewMax > docMax) {
-			x = docMax - viewMax;
-		}
-		return x;
-	}
-
-	private int getViewWidth() {
-		if (!isVerticalScrollBarEnabled() ) {
-			return getWidth();
-		} else {
-			return Math.max(0, getWidth() - getVerticalScrollbarWidth());
-		}
-	}
-
-	private int getViewHeight() {
-		if (!isHorizontalScrollBarEnabled() ) {
-			return getHeight();
-		} else {
-			return Math.max(0, getHeight() - getHorizontalScrollbarHeight());
-		}
-	}
+	private Model mModel;
+	private RenderProgram mRenderProgram;
 
 	private int mContentWidth;
 	private int mContentHeight;
-	private boolean mInitialized;
+
 	private float mScale = 1.0f;
-
-
-	// adjustable parameters
-	private static final boolean SNAP_ENABLED = false;
-	private static final float MAX_SLOPE_FOR_DIAG = 1.5f;
-	private static final int MIN_BREAK_SNAP_CROSS_DISTANCE = 20; //20
-	private static final int MIN_FLING_TIME = 250; //250
-
-	private int mScrollX = 400;
-	private int mScrollY = 400;
-
-	private float mLastTouchX;
-	private float mLastTouchY;
-	private long mLastTouchTime;
-	private int mMinLockSnapReverseDistance;
-
-	private int mTouchMode = TOUCH_DONE_MODE;
-	private static final int TOUCH_INIT_MODE = 1;
-	private static final int TOUCH_DRAG_START_MODE = 2;
-	private static final int TOUCH_DRAG_MODE = 3;
-	private static final int TOUCH_DONE_MODE = 7;
-
-	private int mSnapScrollMode = SNAP_NONE;
-	private static final int SNAP_NONE = 1;
-	private static final int SNAP_X = 2;
-	private static final int SNAP_Y = 3;
-	private static final int SNAP_X_LOCK = 4;
-	private static final int SNAP_Y_LOCK = 5;
-	private boolean mSnapPositive;
-
-	private Scroller mScroller;
-	private VelocityTracker mVelocityTracker;
-
+	private int mTileSize = 10;
 
 }
