@@ -93,12 +93,12 @@ public class VectorMapView extends BaseMapView {
 	
 	@Override
 	protected int getContentHeight() {
-		return mContentWidth;
+		return mContentHeight;
 	}
 
 	@Override
 	protected int getContentWidth() {
-		return mContentHeight;
+		return mContentWidth;
 	}
 
 	protected void onDrawRect(Canvas canvas, Rect viewport) {
