@@ -22,6 +22,7 @@
 package org.ametro.libs;
 
 import android.graphics.Point;
+import android.graphics.PointF;
 import android.graphics.Rect;
 
 import java.io.IOException;
@@ -128,6 +129,13 @@ public class Helpers {
         return new Point(x, y);
     }
 
+    public static PointF parsePointF(String value) {
+        String[] parts = splitCommaSeparaterString(value);
+        float x = Float.parseFloat(parts[0].trim());
+        float y = Float.parseFloat(parts[1].trim());
+        return new PointF(x, y);
+    }
+    
     public static String convertCommas(String str) {
         StringBuilder sb = new StringBuilder(str);
         boolean f = false;
@@ -144,6 +152,16 @@ public class Helpers {
         return sb.toString();
     }
 
+	public static Integer parseNullableInteger(String text) {
+        if (text != null && !text.equals("")) {
+            try {
+                return Integer.parseInt(text);
+            } catch (NumberFormatException ignored) {
+            }
+        }
+        return null;
+	}
+	
     public static Double parseNullableDouble(String text) {
         if (text != null && !text.equals("")) {
             try {
@@ -154,220 +172,6 @@ public class Helpers {
         return null;
     }
 
-
-    public static boolean[] resizeArray(boolean[] oldArray, int newSize) {
-        if (oldArray != null) {
-            int oldSize = oldArray.length;
-            boolean[] newArray = new boolean[newSize];
-            int preserveLength = Math.min(oldSize, newSize);
-            if (preserveLength > 0)
-                System.arraycopy(oldArray, 0, newArray, 0, preserveLength);
-            return newArray;
-        } else {
-            return new boolean[newSize];
-        }
-    }
-
-    public static int[] resizeArray(int[] oldArray, int newSize) {
-        if (oldArray != null) {
-            int oldSize = oldArray.length;
-            int[] newArray = new int[newSize];
-            int preserveLength = Math.min(oldSize, newSize);
-            if (preserveLength > 0)
-                System.arraycopy(oldArray, 0, newArray, 0, preserveLength);
-            return newArray;
-        } else {
-            return new int[newSize];
-        }
-    }
-
-    public static Integer[] resizeArray(Integer[] oldArray, int newSize) {
-        if (oldArray != null) {
-            int oldSize = oldArray.length;
-            Integer[] newArray = new Integer[newSize];
-            int preserveLength = Math.min(oldSize, newSize);
-            if (preserveLength > 0)
-                System.arraycopy(oldArray, 0, newArray, 0, preserveLength);
-            return newArray;
-        } else {
-            return new Integer[newSize];
-        }
-    }
-
-    public static String[] resizeArray(String[] oldArray, int newSize) {
-        if (oldArray != null) {
-            int oldSize = oldArray.length;
-            String[] newArray = new String[newSize];
-            int preserveLength = Math.min(oldSize, newSize);
-            if (preserveLength > 0)
-                System.arraycopy(oldArray, 0, newArray, 0, preserveLength);
-            return newArray;
-        } else {
-            return new String[newSize];
-        }
-    }
-
-    public static Rect[] resizeArray(Rect[] oldArray, int newSize) {
-        if (oldArray != null) {
-            int oldSize = oldArray.length;
-            Rect[] newArray = new Rect[newSize];
-            int preserveLength = Math.min(oldSize, newSize);
-            if (preserveLength > 0)
-                System.arraycopy(oldArray, 0, newArray, 0, preserveLength);
-            return newArray;
-        } else {
-            return new Rect[newSize];
-        }
-    }
-
-    public static Point[] resizeArray(Point[] oldArray, int newSize) {
-        if (oldArray != null) {
-            int oldSize = oldArray.length;
-            Point[] newArray = new Point[newSize];
-            int preserveLength = Math.min(oldSize, newSize);
-            if (preserveLength > 0)
-                System.arraycopy(oldArray, 0, newArray, 0, preserveLength);
-            return newArray;
-        } else {
-            return new Point[newSize];
-        }
-    }
-
-    public static Object[] resizeArray(Object[] oldArray, int newSize) {
-        if (oldArray != null) {
-            int oldSize = oldArray.length;
-            Object[] newArray = new Object[newSize];
-            int preserveLength = Math.min(oldSize, newSize);
-            if (preserveLength > 0)
-                System.arraycopy(oldArray, 0, newArray, 0, preserveLength);
-            return newArray;
-        } else {
-            return new Object[newSize];
-        }
-    }
-
-    public static Double[] resizeArray(Double[] oldArray, int newSize) {
-        if (oldArray != null) {
-            int oldSize = oldArray.length;
-            Double[] newArray = new Double[newSize];
-            int preserveLength = Math.min(oldSize, newSize);
-            if (preserveLength > 0)
-                System.arraycopy(oldArray, 0, newArray, 0, preserveLength);
-            return newArray;
-        } else {
-            return new Double[newSize];
-        }
-    }
-
-
-    public static boolean[][] resizeArray(boolean[][] oldArray, int newSizeRow, int newSizeColumn) {
-        if (oldArray != null) {
-            boolean[][] newArray = (boolean[][]) resizeGenericArray(oldArray, newSizeRow);
-            for (int i = 0; i < newArray.length; i++) {
-                if (newArray[i] == null) {
-                    newArray[i] = new boolean[newSizeColumn];
-                } else {
-                    newArray[i] = resizeArray(newArray[i], newSizeColumn);
-                }
-            }
-            return newArray;
-        } else {
-            return new boolean[newSizeRow][newSizeColumn];
-        }
-    }
-
-
-    public static Object[][] resizeArray(Object[][] oldArray, int newSizeRow, int newSizeColumn) {
-        if (oldArray != null) {
-            Object[][] newArray = (Object[][]) resizeGenericArray(oldArray, newSizeRow);
-            for (int i = 0; i < newArray.length; i++) {
-                if (newArray[i] == null) {
-                    newArray[i] = new Object[newSizeColumn];
-                } else {
-                    newArray[i] = resizeArray(newArray[i], newSizeColumn);
-                }
-            }
-            return newArray;
-        } else {
-            return new Object[newSizeRow][newSizeColumn];
-        }
-    }
-
-    public static int[][] resizeArray(int[][] oldArray, int newSizeRow, int newSizeColumn) {
-        if (oldArray != null) {
-            int[][] newArray = (int[][]) resizeGenericArray(oldArray, newSizeRow);
-            for (int i = 0; i < newArray.length; i++) {
-                if (newArray[i] == null) {
-                    newArray[i] = new int[newSizeColumn];
-                } else {
-                    newArray[i] = resizeArray(newArray[i], newSizeColumn);
-                }
-            }
-            return newArray;
-        } else {
-            return new int[newSizeRow][newSizeColumn];
-        }
-    }
-
-    public static Point[][] resizeArray(Point[][] oldArray, int newSizeRow, int newSizeColumn) {
-        if (oldArray != null) {
-            Point[][] newArray = (Point[][]) resizeGenericArray(oldArray, newSizeRow);
-            for (int i = 0; i < newArray.length; i++) {
-                if (newArray[i] == null) {
-                    newArray[i] = new Point[newSizeColumn];
-                } else {
-                    newArray[i] = resizeArray(newArray[i], newSizeColumn);
-                }
-            }
-            return newArray;
-        } else {
-            return new Point[newSizeRow][newSizeColumn];
-        }
-    }
-
-
-    public static Double[][] resizeArray(Double[][] oldArray, int newSizeRow, int newSizeColumn) {
-        if (oldArray != null) {
-            Double[][] newArray = (Double[][]) resizeGenericArray(oldArray, newSizeRow);
-            for (int i = 0; i < newArray.length; i++) {
-                if (newArray[i] == null) {
-                    newArray[i] = new Double[newSizeColumn];
-                } else {
-                    newArray[i] = resizeArray(newArray[i], newSizeColumn);
-                }
-            }
-            return newArray;
-        } else {
-            return new Double[newSizeRow][newSizeColumn];
-        }
-    }
-
-    public static Integer[][] resizeArray(Integer[][] oldArray, int newSizeRow, int newSizeColumn) {
-        if (oldArray != null) {
-            Integer[][] newArray = (Integer[][]) resizeGenericArray(oldArray, newSizeRow);
-            for (int i = 0; i < newArray.length; i++) {
-                if (newArray[i] == null) {
-                    newArray[i] = new Integer[newSizeColumn];
-                } else {
-                    newArray[i] = resizeArray(newArray[i], newSizeColumn);
-                }
-            }
-            return newArray;
-        } else {
-            return new Integer[newSizeRow][newSizeColumn];
-        }
-    }
-
-    private static Object resizeGenericArray(Object oldArray, int newSize) {
-        int oldSize = java.lang.reflect.Array.getLength(oldArray);
-        Class<?> elementType = oldArray.getClass().getComponentType();
-        Object newArray = java.lang.reflect.Array.newInstance(
-                elementType, newSize);
-        int preserveLength = Math.min(oldSize, newSize);
-        if (preserveLength > 0)
-            System.arraycopy(oldArray, 0, newArray, 0, preserveLength);
-        return newArray;
-    }
 
     public static void serializePoint(ObjectOutputStream out, Point point) throws IOException {
         out.writeBoolean(point != null);
@@ -451,5 +255,6 @@ public class Helpers {
         }
         return null;
     }
+
 
 }
