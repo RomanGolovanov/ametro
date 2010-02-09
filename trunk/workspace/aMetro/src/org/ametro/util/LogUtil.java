@@ -40,4 +40,8 @@ public class LogUtil {
         Log.w(LOG_TAG_MAIN, message);
     }
 
+	public static void info(String message) {
+        Log.i(LOG_TAG_MAIN, message);
+	}
+
 }

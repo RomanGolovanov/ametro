@@ -25,6 +25,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.graphics.RectF;
+
 import org.ametro.model.*;
 
 import java.util.*;
@@ -73,7 +75,7 @@ public class RenderProgram {
 
 	public void invalidateVisible(Rect viewport) {
 		final int offset = 10;
-		final Rect v = viewport; new Rect(
+		final Rect v = new Rect(
 				viewport.left-offset,
 				viewport.top-offset,
 				viewport.right+offset,
@@ -84,8 +86,8 @@ public class RenderProgram {
 		final int filter = mRenderFilter;
 		final int count = bounds.length;
 		for (int i = 0; i < count; i++) {
-			final Rect box = bounds[i];
-
+			final Rect box = new Rect( bounds[i] );
+			
 			visibility[i] = ((filters[i] & filter) > 0) && Rect.intersects(v, box);
 		}
 	}
@@ -156,4 +158,31 @@ public class RenderProgram {
 			}
 		}
 	}
+
+	public void clearVisibility() {
+		final boolean[] visibility = mVisibility;
+		final int count = visibility.length;
+		for (int i = 0; i < count; i++) {
+			visibility[i] = false;
+		}	
+	}
+	
+	public void addVisibility(Rect viewport) {
+		final int offset = 10;
+		final Rect v = new Rect(
+				viewport.left-offset,
+				viewport.top-offset,
+				viewport.right+offset,
+				viewport.bottom+offset);
+		final Rect[] bounds = mBounds;
+		final boolean[] visibility = mVisibility;
+		final int[] filters = mTypes;
+		final int filter = mRenderFilter;
+		final int count = bounds.length;
+		for (int i = 0; i < count; i++) {
+			final Rect box = new Rect( bounds[i] );
+			
+			visibility[i] |= ((filters[i] & filter) > 0) && Rect.intersects(v, box);
+		}
+	}	
 }
