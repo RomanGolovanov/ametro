@@ -29,6 +29,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.Bitmap.Config;
 import android.util.AttributeSet;
@@ -61,21 +62,35 @@ public class VectorMapView extends BaseMapView {
 	}
 
 	public void setScale(float scale, int step) {
-		Point p = getScrollCenter();
-		float x = p.x / mScale;
-		float y = p.y / mScale;
+		PointF p = getModelScrollCenter();
 
 		mScale = scale;
 		mTileSize = (int) (step / scale);
 		calculateDimensions();
 
-		p.x = (int) (x * mScale);
-		p.y = (int) (y * mScale);
-		setScrollCenter(p);
+		setModelScrollCenter(p);
 
 		postInvalidate();
 	}
 
+	public void setModelScrollCenter(float x, float y) {
+		Point p0 = new Point();
+		p0.x = (int) (x * mScale);
+		p0.y = (int) (y * mScale);
+		super.setScrollCenter(p0);
+	}
+	
+	public void setModelScrollCenter(PointF p) {
+		setModelScrollCenter(p.x,p.y);
+	}
+
+	public PointF getModelScrollCenter(){
+		Point p = super.getScrollCenter();
+		float x = p.x / mScale;
+		float y = p.y / mScale;
+		return new PointF(x,y);
+	}	
+	
 	@Override
 	protected int getContentHeight() {
 		return mContentWidth;
@@ -217,14 +232,6 @@ public class VectorMapView extends BaseMapView {
 		}
 	}
 
-	private Rect mTileCacheRect;
-	private float mTileCacheScale;
-	private int mTileCacheWidth;
-	private int mTileCacheHeight;
-
-	private Bitmap mTileCache;
-	private Bitmap mTileCacheBuffer;
-
 	private Rect tileToScreenRect(Rect src) {
 		return new Rect(
 				src.left*mTileSize, 
@@ -232,6 +239,7 @@ public class VectorMapView extends BaseMapView {
 				src.right*mTileSize, 
 				src.bottom*mTileSize);
 	}	
+	
 	private Rect screenToOuterTileRect(Rect src) {
 		final int step = mTileSize;
 
@@ -286,4 +294,12 @@ public class VectorMapView extends BaseMapView {
 	private float mScale = 1.0f;
 	private int mTileSize = 10;
 
+
+	private Rect mTileCacheRect;
+	private float mTileCacheScale;
+	private int mTileCacheWidth;
+	private int mTileCacheHeight;
+
+	private Bitmap mTileCache;
+	private Bitmap mTileCacheBuffer;
 }

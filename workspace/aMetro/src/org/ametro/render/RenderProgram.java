@@ -21,15 +21,22 @@
 
 package org.ametro.render;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.Iterator;
+
+import org.ametro.model.Line;
+import org.ametro.model.Model;
+import org.ametro.model.Segment;
+import org.ametro.model.Station;
+import org.ametro.model.Transfer;
+
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.graphics.RectF;
-
-import org.ametro.model.*;
-
-import java.util.*;
 
 
 public class RenderProgram {

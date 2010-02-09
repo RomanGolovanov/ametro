@@ -21,16 +21,17 @@
 
 package org.ametro;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.Point;
-import android.net.Uri;
+import java.io.File;
+import java.io.IOException;
+
 import org.ametro.libs.Helpers;
 import org.ametro.model.Model;
 import org.ametro.util.FileUtil;
 
-import java.io.File;
-import java.io.IOException;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.PointF;
+import android.net.Uri;
 
 public class MapSettings {
 
@@ -44,6 +45,7 @@ public class MapSettings {
 
     public static final String PREFERENCE_PACKAGE_FILE_NAME = "PACKAGE_FILE_NAME";
     public static final String PREFERENCE_SCROLL_POSITION = "SCROLL_POSITION";
+    public static final String PREFERENCE_ZOOM_LEVEL = "ZOOM_LEVEL";
 
     public static final String ROOT_PATH = "/sdcard/ametro/";
     public static final String MAPS_PATH = ROOT_PATH + "maps/";
@@ -147,7 +149,7 @@ public class MapSettings {
         mMapName = mapName;
     }
 
-    public static void saveScrollPosition(Context context, Point position) {
+    public static void saveScrollPosition(Context context, PointF position) {
         SharedPreferences preferences = context.getSharedPreferences("aMetro", 0);
         SharedPreferences.Editor editor = preferences.edit();
         String scrollPosition = "" + position.x + "," + position.y;
@@ -156,11 +158,11 @@ public class MapSettings {
 
     }
 
-    public static Point loadScrollPosition(Context context) {
+    public static PointF loadScrollPosition(Context context) {
         SharedPreferences preferences = context.getSharedPreferences("aMetro", 0);
         String pref = preferences.getString(PREFERENCE_SCROLL_POSITION + "_" + mMapName, null);
         if (pref != null) {
-            return Helpers.parsePoint(pref);
+            return Helpers.parsePointF(pref);
         } else {
             return null;
         }
@@ -174,6 +176,34 @@ public class MapSettings {
             editor.commit();
         }
     }
+    
+    public static void saveZoom(Context context, int zoomLevel) {
+        SharedPreferences preferences = context.getSharedPreferences("aMetro", 0);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(PREFERENCE_ZOOM_LEVEL + "_" + MapSettings.getMapName(), Integer.toString(zoomLevel));
+        editor.commit();
+
+    }
+
+    public static Integer loadZoom(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences("aMetro", 0);
+        String pref = preferences.getString(PREFERENCE_ZOOM_LEVEL + "_" + mMapName, null);
+        if (pref != null) {
+            return Helpers.parseNullableInteger(pref);
+        } else {
+            return null;
+        }
+    }
+
+    public static void clearZoom(Context context, String mapName) {
+        if (mapName != null) {
+            SharedPreferences preferences = context.getSharedPreferences("aMetro", 0);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.remove(PREFERENCE_ZOOM_LEVEL + "_" + mapName);
+            editor.commit();
+        }
+    }
+    
 
     public static String getMapFileName(Uri uri) {
         return getMapFileName(MapUri.getMapName(uri));
