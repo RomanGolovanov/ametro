@@ -46,13 +46,15 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
+import static org.ametro.Constants.LOG_TAG_MAIN;
+
 
 public class ModelBuilder {
 
     private static final int BUFFER_SIZE = 8192;
 
     public static ModelDescription loadModelDescription(String fileName) throws IOException, ClassNotFoundException {
-        Date startTimestamp = new Date();
+        long startTime = System.currentTimeMillis();
         ObjectInputStream strm = null;
         ZipFile zip = null;
         try {
@@ -60,7 +62,10 @@ public class ModelBuilder {
             ZipEntry entry = zip.getEntry(MapSettings.DESCRIPTION_ENTRY_NAME);
             strm = new ObjectInputStream(new BufferedInputStream(zip.getInputStream(entry), BUFFER_SIZE));
             ModelDescription modelDescription = (ModelDescription) strm.readObject();
-            Log.i("aMetro", String.format("Model description '%s' loading time is %sms", fileName, Long.toString((new Date().getTime() - startTimestamp.getTime()))));
+            if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO)) {
+                Log.i(LOG_TAG_MAIN, "Model description '" + fileName
+                        + "' loading time is " + (System.currentTimeMillis() - startTime) + "ms");
+            }
             return modelDescription;
         } finally {
             if (strm != null) {
@@ -72,7 +77,7 @@ public class ModelBuilder {
             if (zip != null) {
                 try {
                     zip.close();
-                } catch (Exception ingnored) {
+                } catch (Exception ignored) {
                 }
             }
         }
@@ -87,7 +92,9 @@ public class ModelBuilder {
             ZipEntry entry = zip.getEntry(MapSettings.MAP_ENTRY_NAME);
             strm = new ObjectInputStream(new BufferedInputStream(zip.getInputStream(entry), BUFFER_SIZE));
             Model model = (Model) strm.readObject();
-            Log.i("aMetro", String.format("Model data '%s' loading time is %sms", fileName, Long.toString((new Date().getTime() - startTimestamp.getTime()))));
+            if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO)) {
+                Log.i(LOG_TAG_MAIN, String.format("Model data '%s' loading time is %sms", fileName, Long.toString((new Date().getTime() - startTimestamp.getTime()))));
+            }
             return model;
         } finally {
             if (strm != null) {
@@ -113,7 +120,9 @@ public class ModelBuilder {
         saveModelEntry(model, zip);
         zip.flush();
         zip.close();
-        Log.i("aMetro", String.format("Model file '%s' saving time is %sms", fileName, Long.toString((new Date().getTime() - startTimestamp.getTime()))));
+        if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO)) {
+            Log.i(LOG_TAG_MAIN, String.format("Model file '%s' saving time is %sms", fileName, Long.toString((new Date().getTime() - startTimestamp.getTime()))));
+        }
     }
 
     private static void saveModelDescriptionEntry(Model model, ZipOutputStream zip) throws IOException {
@@ -149,7 +158,9 @@ public class ModelBuilder {
         model.setSourceVersion(MapSettings.getSourceVersion());
         File pmzFile = new File(fileName);
         model.setTimestamp(pmzFile.lastModified());
-        Log.i("aMetro", String.format("PMZ description '%s' loading time is %sms", fileName, Long.toString((new Date().getTime() - startTimestamp.getTime()))));
+        if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO)) {
+            Log.i(LOG_TAG_MAIN, String.format("PMZ description '%s' loading time is %sms", fileName, Long.toString((new Date().getTime() - startTimestamp.getTime()))));
+        }
         return model;
     }
 
@@ -201,7 +212,9 @@ public class ModelBuilder {
 
         fixDimensions(model);
 
-        Log.i("aMetro", String.format("PMZ file '%s' parsing time is %sms", file.getName(), Long.toString((new Date().getTime() - startTimestamp.getTime()))));
+        if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO)) {
+            Log.i(LOG_TAG_MAIN, String.format("PMZ file '%s' parsing time is %sms", file.getName(), Long.toString((new Date().getTime() - startTimestamp.getTime()))));
+        }
         return model;
     }
 

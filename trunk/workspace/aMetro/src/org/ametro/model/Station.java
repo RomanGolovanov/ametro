@@ -21,14 +21,13 @@
 
 package org.ametro.model;
 
+import android.graphics.Point;
+import android.graphics.Rect;
+import org.ametro.libs.Helpers;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-
-import org.ametro.libs.Helpers;
-
-import android.graphics.Point;
-import android.graphics.Rect;
 
 public class Station implements Serializable {
 

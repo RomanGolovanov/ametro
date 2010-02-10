@@ -25,6 +25,8 @@ import android.util.Log;
 
 import java.io.File;
 
+import static org.ametro.Constants.LOG_TAG_MAIN;
+
 /**
  * @author Vlad Vinichenko (akerigan@gmail.com)
  *         Date: 06.02.2010
@@ -33,14 +35,14 @@ import java.io.File;
 public class FileUtil {
 
     public static void delete(File file) {
-        if (file != null && file.exists() && !file.delete() && LogUtil.loggable(Log.WARN)) {
-            LogUtil.warn("Can't delete file: '" + file.toString() + "'");
+        if (file != null && file.exists() && !file.delete() && Log.isLoggable(LOG_TAG_MAIN, Log.WARN)) {
+            Log.w(LOG_TAG_MAIN, "Can't delete file: '" + file.toString() + "'");
         }
     }
 
     public static void move(File src, File dest) {
-        if (src != null && src.exists() && !src.renameTo(dest) && LogUtil.loggable(Log.WARN)) {
-            LogUtil.warn("Can't move file '" + src.toString() + "' to '" + dest.toString() + "'");
+        if (src != null && src.exists() && !src.renameTo(dest) && Log.isLoggable(LOG_TAG_MAIN, Log.WARN)) {
+            Log.w(LOG_TAG_MAIN, "Can't move file '" + src.toString() + "' to '" + dest.toString() + "'");
         }
     }
 

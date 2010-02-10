@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent" android:layout_height="fill_parent">
+                android:layout_width="fill_parent" android:layout_height="fill_parent">
 
-	<org.ametro.widget.VectorMapView
-		android:id="@+id/browse_vector_map_view" android:layout_width="fill_parent"
-		android:layout_height="fill_parent" />
+    <org.ametro.widget.VectorMapView
+            android:id="@+id/browse_vector_map_view" android:layout_width="fill_parent"
+            android:layout_height="fill_parent"/>
 
-	<FrameLayout 
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content" 
-		android:layout_alignParentRight="true"
-		android:layout_alignParentBottom="true"
-		>
-		<ZoomControls android:id="@+id/browse_vector_map_zoom"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:layout_marginBottom="10px" android:layout_marginRight="10px" />
-	</FrameLayout>
+    <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            >
+        <ZoomControls android:id="@+id/browse_vector_map_zoom"
+                      android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:layout_marginBottom="10px" android:layout_marginRight="10px"/>
+    </FrameLayout>
 
 </RelativeLayout>
