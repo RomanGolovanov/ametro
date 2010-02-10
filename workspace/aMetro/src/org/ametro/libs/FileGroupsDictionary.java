@@ -28,6 +28,8 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import static org.ametro.Constants.LOG_TAG_MAIN;
+
 public class FileGroupsDictionary implements Serializable {
 
     private static final long serialVersionUID = -4607416163824014049L;
@@ -125,10 +127,10 @@ public class FileGroupsDictionary implements Serializable {
             try {
                 strm = new ObjectInputStream(new FileInputStream(file));
                 FileGroupsDictionary map = (FileGroupsDictionary) strm.readObject();
-                Log.i("aMetro", "Loaded map cache");
+                Log.i(LOG_TAG_MAIN, "Loaded map cache");
                 return map;
             } catch (Exception ex) {
-                Log.i("aMetro", "Cannot load map cache");
+                Log.i(LOG_TAG_MAIN, "Cannot load map cache");
                 return null;
             }
         } finally {

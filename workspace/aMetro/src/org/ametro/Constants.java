@@ -19,29 +19,15 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-package org.ametro.util;
-
-import android.util.Log;
+package org.ametro;
 
 /**
  * @author Vlad Vinichenko (akerigan@gmail.com)
- *         Date: 06.02.2010
- *         Time: 20:01:32
+ *         Date: 10.02.2010
+ *         Time: 22:50:44
  */
-public class LogUtil {
+public class Constants {
 
     public static final String LOG_TAG_MAIN = "aMetro";
-
-    public static boolean loggable(int level) {
-        return Log.isLoggable(LOG_TAG_MAIN, level);
-    }
-
-    public static void warn(String message) {
-        Log.w(LOG_TAG_MAIN, message);
-    }
-
-	public static void info(String message) {
-        Log.i(LOG_TAG_MAIN, message);
-	}
 
 }

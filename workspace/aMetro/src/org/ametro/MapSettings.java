@@ -21,17 +21,16 @@
 
 package org.ametro;
 
-import java.io.File;
-import java.io.IOException;
-
-import org.ametro.libs.Helpers;
-import org.ametro.model.Model;
-import org.ametro.util.FileUtil;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.PointF;
 import android.net.Uri;
+import org.ametro.libs.Helpers;
+import org.ametro.model.Model;
+import org.ametro.util.FileUtil;
+
+import java.io.File;
+import java.io.IOException;
 
 public class MapSettings {
 
@@ -176,7 +175,7 @@ public class MapSettings {
             editor.commit();
         }
     }
-    
+
     public static void saveZoom(Context context, int zoomLevel) {
         SharedPreferences preferences = context.getSharedPreferences("aMetro", 0);
         SharedPreferences.Editor editor = preferences.edit();
@@ -203,7 +202,7 @@ public class MapSettings {
             editor.commit();
         }
     }
-    
+
 
     public static String getMapFileName(Uri uri) {
         return getMapFileName(MapUri.getMapName(uri));

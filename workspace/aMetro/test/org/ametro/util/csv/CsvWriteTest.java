@@ -21,13 +21,11 @@
 
 package org.ametro.util.csv;
 
-import junit.framework.TestCase;
 import org.ametro.util.DateUtil;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.io.StringWriter;
 import java.text.ParseException;
 
 /**

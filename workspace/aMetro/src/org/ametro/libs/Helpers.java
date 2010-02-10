@@ -135,7 +135,7 @@ public class Helpers {
         float y = Float.parseFloat(parts[1].trim());
         return new PointF(x, y);
     }
-    
+
     public static String convertCommas(String str) {
         StringBuilder sb = new StringBuilder(str);
         boolean f = false;
@@ -152,7 +152,7 @@ public class Helpers {
         return sb.toString();
     }
 
-	public static Integer parseNullableInteger(String text) {
+    public static Integer parseNullableInteger(String text) {
         if (text != null && !text.equals("")) {
             try {
                 return Integer.parseInt(text);
@@ -160,8 +160,8 @@ public class Helpers {
             }
         }
         return null;
-	}
-	
+    }
+
     public static Double parseNullableDouble(String text) {
         if (text != null && !text.equals("")) {
             try {

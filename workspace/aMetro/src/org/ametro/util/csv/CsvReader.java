@@ -87,27 +87,31 @@ public class CsvReader {
         }
     }
 
-    public String getString() {
-        if (mCurrentColumn < mTotalColumns) {
-            return StringUtil.notEmptyElseNull(mRecord[mCurrentColumn++]);
+    private static String getValue(String[] record, int currentColumn, int totalColumns) {
+        if (currentColumn < totalColumns) {
+            return StringUtil.notEmptyElseNull(record[currentColumn]);
         } else {
             return null;
         }
     }
 
+    public String getString() {
+        return getValue(mRecord, mCurrentColumn++, mTotalColumns);
+    }
+
     public int getInt() {
-        return StringUtil.parseInt(getString(), 0);
+        return StringUtil.parseInt(getValue(mRecord, mCurrentColumn++, mTotalColumns), 0);
     }
 
     public double getDouble() {
-        return StringUtil.parseDouble(getString(), 0);
+        return StringUtil.parseDouble(getValue(mRecord, mCurrentColumn++, mTotalColumns), 0);
     }
 
     public boolean getBoolean() {
-        return StringUtil.parseBoolean(getString(), false);
+        return StringUtil.parseBoolean(getValue(mRecord, mCurrentColumn++, mTotalColumns), false);
     }
 
     public Date getDate() {
-        return StringUtil.parseDate(getString(), null);
+        return StringUtil.parseDate(getValue(mRecord, mCurrentColumn++, mTotalColumns), null);
     }
 }

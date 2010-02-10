@@ -34,7 +34,7 @@ public class CsvReadTest {
 
     public static void main(String[] args) throws IOException {
 
-        String src = "1;test1;1.1;1;01.01.2010\n2;test2;2.2;0;02.02.2010";
+        String src = "1;test1;1.1;1;01.01.2010\n2;test2;2.2;0;02.02.2010\n3;;;;;;";
         StringReader sr = new StringReader(src);
         CsvReader csvReader = new CsvReader(new BufferedReader(sr));
 
