@@ -122,7 +122,7 @@ public class VectorMapView extends BaseMapView {
 
     private void updateTileCache(Rect screenCoords) {
         Rect tileOuter = screenToOuterTileRect(screenCoords);
-        Rect modelOuter = tileToModelRect(tileOuter);
+        RectF modelOuter = tileToModelRect(tileOuter);
         Rect entireCache = mTileCacheRect;
         Rect cache = new Rect(entireCache);
         cache.intersect(tileOuter);
@@ -154,8 +154,8 @@ public class VectorMapView extends BaseMapView {
             throw new RuntimeException("Invalid viewport splitting algorithm");
         }
 
-        Rect horizontalSpanInModel = tileToModelRect(horizontalSpan);
-        Rect verticalSpanInModel = tileToModelRect(verticalSpan);
+        RectF horizontalSpanInModel = tileToModelRect(horizontalSpan);
+        RectF verticalSpanInModel = tileToModelRect(verticalSpan);
 
         Canvas canvas = new Canvas(mTileCacheBuffer);
         canvas.drawColor(Color.MAGENTA);
@@ -200,7 +200,7 @@ public class VectorMapView extends BaseMapView {
                 mTileCacheBuffer = Bitmap.createBitmap(width, height, Config.RGB_565);
             }
 
-            Rect modelOuter = tileToModelRect(tileOuter);
+            RectF modelOuter = tileToModelRect(tileOuter);
 
             Canvas canvas = new Canvas(mTileCache);
             canvas.drawColor(Color.MAGENTA);
@@ -253,7 +253,7 @@ public class VectorMapView extends BaseMapView {
                 bottom / step + (bottomMod > 0 ? 1 : 0));
     }
 
-    private Rect tileToModelRect(Rect src) {
+    private RectF tileToModelRect(Rect src) {
 
         final int size = mTileSize;
         final float scale = mScale;
@@ -267,11 +267,11 @@ public class VectorMapView extends BaseMapView {
         float modelTop = screenTop / scale;
         float modelRight = screenRight / scale;
         float modelBottom = screenBottom / scale;
-        return new Rect(
-                (int) Math.floor(modelLeft),
-                (int) Math.floor(modelTop),
-                (int) Math.ceil(modelRight),
-                (int) Math.ceil(modelBottom));
+        return new RectF(
+                modelLeft,
+                modelTop,
+                modelRight,
+                modelBottom);
     }
 
 

@@ -25,6 +25,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.graphics.RectF;
+
 import org.ametro.model.*;
 
 import java.util.*;
@@ -71,13 +73,13 @@ public class RenderProgram {
         mRenderFilter = ALL;
     }
 
-    public void invalidateVisible(Rect viewport) {
+    public void invalidateVisible(RectF viewport) {
         final int offset = 10;
         final Rect v = new Rect(
-                viewport.left - offset,
-                viewport.top - offset,
-                viewport.right + offset,
-                viewport.bottom + offset);
+        		(int)(viewport.left - offset),
+        		(int)(viewport.top - offset),
+        		(int)(viewport.right + offset),
+        		(int)(viewport.bottom + offset));
         final Rect[] bounds = mBounds;
         final boolean[] visibility = mVisibility;
         final int[] filters = mTypes;
@@ -158,13 +160,13 @@ public class RenderProgram {
         }
     }
 
-    public void addVisibility(Rect viewport) {
+    public void addVisibility(RectF viewport) {
         final int offset = 10;
         final Rect v = new Rect(
-                viewport.left - offset,
-                viewport.top - offset,
-                viewport.right + offset,
-                viewport.bottom + offset);
+        		(int)(viewport.left - offset),
+        		(int)(viewport.top - offset),
+        		(int)(viewport.right + offset),
+        		(int)(viewport.bottom + offset));
         final Rect[] bounds = mBounds;
         final boolean[] visibility = mVisibility;
         final int[] filters = mTypes;
