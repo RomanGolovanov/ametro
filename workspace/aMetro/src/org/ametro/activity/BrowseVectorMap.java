@@ -26,6 +26,7 @@ import org.ametro.MapUri;
 import org.ametro.R;
 import org.ametro.model.Model;
 import org.ametro.model.ModelBuilder;
+import org.ametro.util.LogUtil;
 import org.ametro.widget.VectorMapView;
 
 import android.app.Activity;
@@ -34,6 +35,7 @@ import android.graphics.PointF;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -156,25 +158,34 @@ public class BrowseVectorMap extends Activity {
 	private void onSaveMapState() {
 		if (mModel != null && mMapView != null
 				&& MapSettings.getMapName() != null) {
-			MapSettings.saveScrollPosition(this, getPosition());
-			MapSettings.saveZoom(this, getZoom());
+			PointF pos =  getPosition();
+			int zoom = getZoom();
+			if(LogUtil.loggable(Log.INFO)) LogUtil.info("Saved map zoom "+ zoom);
+			if(LogUtil.loggable(Log.INFO)) LogUtil.info("Save map position at " + pos.x + "x" + pos.y);
+			MapSettings.saveScrollPosition(this,pos);
+			MapSettings.saveZoom(this, zoom);
 		}
 	}
 
 	private void onRestoreMapState() {
 		if (mModel != null && mMapView != null && MapSettings.getMapName() != null) {
-
-			PointF position = MapSettings.loadScrollPosition(this);
-			if (position != null) {
-				setPosition(position.x, position.y);
-			} else {
-				setPosition(mModel.getWidth() / 2, mModel.getHeight() / 2);
-			}
 			Integer zoom = MapSettings.loadZoom(this);
 			if (zoom != null) {
+				if(LogUtil.loggable(Log.INFO)) LogUtil.info("Use saved map zoom "+ zoom);
 				setZoom(zoom);
 			} else {
+				if(LogUtil.loggable(Log.INFO)) LogUtil.info("Use default map zoom "+ zoom);
 				setZoom(DEFAULT_ZOOM_LEVEL);
+			}
+			PointF pos = MapSettings.loadScrollPosition(this);
+			if (pos != null) {
+				if(LogUtil.loggable(Log.INFO)) LogUtil.info("Use saved map position at " + pos.x + "x" + pos.y);
+				setPosition(pos);
+			} else {
+				int x = mModel.getWidth() / 2;
+				int y = mModel.getHeight() / 2;
+				if(LogUtil.loggable(Log.INFO)) LogUtil.info("Use default map position at " + x + "x" + y);
+				setPosition(new PointF(x,y));
 			}
 
 		}
@@ -219,8 +230,8 @@ public class BrowseVectorMap extends Activity {
 		mMapView.setScale(ZOOMS[mZoom], STEPS[mZoom]);
 	}
 
-	private void setPosition(float x, float y) {
-		mMapView.setModelScrollCenter(x, y);
+	private void setPosition(PointF p) {
+		mMapView.setModelScrollCenter(p);
 	}
 
 	private PointF getPosition() {
@@ -256,6 +267,8 @@ public class BrowseVectorMap extends Activity {
 		protected void onPostExecute(Model result) {
 			if (result != null) {
 				mModel = result;
+				if(LogUtil.loggable(Log.INFO)) LogUtil.info("Loaded model " + mModel.getMapName() + " width size " + mModel.getWidth() + "x" + mModel.getHeight());
+				
 				setContentView(R.layout.browse_vector_map_main);
 
 				mMapView = (VectorMapView) findViewById(R.id.browse_vector_map_view);
