@@ -116,7 +116,6 @@ public abstract class BaseMapView extends ScrollView {
 		}
 	}
 
-	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		switch(keyCode){
 		case KeyEvent.KEYCODE_DPAD_UP:
@@ -146,7 +145,6 @@ public abstract class BaseMapView extends ScrollView {
 		return super.onKeyDown(keyCode, event);
 	}
 
-	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		switch(keyCode){
 		case KeyEvent.KEYCODE_DPAD_UP:
@@ -158,27 +156,13 @@ public abstract class BaseMapView extends ScrollView {
 		}
 		return super.onKeyUp(keyCode, event);
 	}
-	
-	private static final int KEY_SCROLL_MIN_SPEED = 2;
-	private static final int KEY_SCROLL_MAX_SPEED = 20;
-	private static final int KEY_SCROLL_ACCELERATION_DELAY = 100;
-	private static final int KEY_SCROLL_ACCELERATION_STEP = 2;
-	
-	private int mKeyScrollSpeed = KEY_SCROLL_MIN_SPEED;
-	private long mKeyScrollLastSpeedTime;
-	private int mKeyScrollMode = KEY_SCROLL_MODE_DONE;
-	
-	private static final int KEY_SCROLL_MODE_DONE = 0;
-	private static final int KEY_SCROLL_MODE_DRAG = 1;
-	
-	
-	@Override
+
 	public boolean onTrackballEvent(MotionEvent event) {
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_MOVE:
 			if (mContext != null) {
-				float x = event.getX() * event.getXPrecision();
-				float y = event.getY() * event.getYPrecision();
+				float x = event.getX() * event.getXPrecision() * TRACKBALL_SCROLL_SPEED;
+				float y = event.getY() * event.getYPrecision() * TRACKBALL_SCROLL_SPEED;
 				internalScroll((int)x, (int)y);
 				return true;
 			}
@@ -448,6 +432,21 @@ public abstract class BaseMapView extends ScrollView {
 	private int mScrollX;
 	private int mScrollY;
 
+	private int mKeyScrollSpeed = KEY_SCROLL_MIN_SPEED;
+	private long mKeyScrollLastSpeedTime;
+	private int mKeyScrollMode = KEY_SCROLL_MODE_DONE;
+	
+	private static final int KEY_SCROLL_MIN_SPEED = 2;
+	private static final int KEY_SCROLL_MAX_SPEED = 20;
+	private static final int KEY_SCROLL_ACCELERATION_DELAY = 100;
+	private static final int KEY_SCROLL_ACCELERATION_STEP = 2;
+	
+	private static final int KEY_SCROLL_MODE_DONE = 0;
+	private static final int KEY_SCROLL_MODE_DRAG = 1;
+	
+	private static final int TRACKBALL_SCROLL_SPEED = 10;
+	
+	
 	private float mLastTouchX;
 	private float mLastTouchY;
 	private long mLastTouchTime;
