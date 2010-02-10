@@ -19,7 +19,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-package org.ametro.libs;
+package org.ametro.util;
 
 import android.graphics.Point;
 import android.graphics.PointF;
@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Helpers {
+public class SerializeUtil {
 
     private static String[] splitCommaSeparaterString(String value) {
         value = value.replaceAll("/\\(.*\\)/", "");
@@ -42,7 +42,7 @@ public class Helpers {
     private static final Pattern csvPattern = Pattern.compile("(?:^|,)(\"(?:[^\"]|\"\")*\"|[^,]*)");
 
 
-    public static String[] splitCSV(String line) {
+    public static String[] parseStringArray(String line) {
         ArrayList<String> elements = new ArrayList<String>();
         Matcher m = csvPattern.matcher(line);
         while (m.find()) {
@@ -53,11 +53,6 @@ public class Helpers {
                     .replaceAll("\"\"", "\"")); // replace double inner quotations if any
         }
         return elements.toArray(new String[elements.size()]);
-    }
-
-    public static String[] parseStringArray(String value) {
-        return splitCommaSeparaterString(value);
-        //return splitCSV(value);
     }
 
     public static Integer[] parseIntegerArray(String value) {
@@ -135,24 +130,8 @@ public class Helpers {
         float y = Float.parseFloat(parts[1].trim());
         return new PointF(x, y);
     }
-
-    public static String convertCommas(String str) {
-        StringBuilder sb = new StringBuilder(str);
-        boolean f = false;
-        for (int i = 0; i < str.length(); i++) {
-            char ch = str.charAt(i);
-            if (ch == '(') {
-                f = true;
-            } else if (ch == ')') {
-                f = false;
-            } else if (f && ch == ',') {
-                sb.setCharAt(i, ';');
-            }
-        }
-        return sb.toString();
-    }
-
-    public static Integer parseNullableInteger(String text) {
+    
+	public static Integer parseNullableInteger(String text) {
         if (text != null && !text.equals("")) {
             try {
                 return Integer.parseInt(text);
@@ -160,8 +139,8 @@ public class Helpers {
             }
         }
         return null;
-    }
-
+	}
+	
     public static Double parseNullableDouble(String text) {
         if (text != null && !text.equals("")) {
             try {
@@ -171,7 +150,6 @@ public class Helpers {
         }
         return null;
     }
-
 
     public static void serializePoint(ObjectOutputStream out, Point point) throws IOException {
         out.writeBoolean(point != null);

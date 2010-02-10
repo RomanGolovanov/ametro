@@ -23,7 +23,8 @@ package org.ametro.render;
 
 import android.graphics.*;
 import android.graphics.Paint.Style;
-import org.ametro.libs.ExtendedPath;
+
+import org.ametro.graphics.ExtendedPath;
 import org.ametro.model.Line;
 import org.ametro.model.Model;
 import org.ametro.model.Segment;

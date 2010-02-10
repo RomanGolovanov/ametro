@@ -23,11 +23,12 @@ package org.ametro.model;
 
 import android.graphics.Point;
 import android.graphics.Rect;
-import org.ametro.libs.Helpers;
 
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import org.ametro.util.SerializeUtil;
 
 public class Station implements Serializable {
 
@@ -35,16 +36,16 @@ public class Station implements Serializable {
 
     private void writeObject(java.io.ObjectOutputStream out) throws IOException {
         out.writeObject(mName);
-        Helpers.serializeRect(out, mRect);
-        Helpers.serializePoint(out, mPoint);
+        SerializeUtil.serializeRect(out, mRect);
+        SerializeUtil.serializePoint(out, mPoint);
         out.writeObject(mLine);
 
     }
 
     private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
         mName = (String) in.readObject();
-        mRect = Helpers.deserializeRect(in);
-        mPoint = Helpers.deserializePoint(in);
+        mRect = SerializeUtil.deserializeRect(in);
+        mPoint = SerializeUtil.deserializePoint(in);
         mLine = (Line) in.readObject();
         mSegments = new ArrayList<Segment>();
     }
