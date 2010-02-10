@@ -21,11 +21,14 @@
 
 package org.ametro.widget;
 
+import org.ametro.util.LogUtil;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
@@ -59,6 +62,7 @@ public abstract class BaseMapView extends ScrollView {
 	protected abstract int getContentHeight();
 
 	protected void setInitialized(boolean status){
+		invalidateScroll();
 		mInitialized = status;
 	}
 
@@ -69,6 +73,11 @@ public abstract class BaseMapView extends ScrollView {
 			final int right = left + getWidth();
 			final int bottom = top + getHeight();
 			Rect viewport = new Rect(left,top,right, bottom);
+			final int dx = Math.max(getWidth()-getContentWidth(), 0);
+			final int dy = Math.max(getHeight()-getContentHeight(), 0);
+			if(dx!=0 || dy!=0){
+				canvas.translate(dx/2, dy/2);
+			}
 			onDrawRect(canvas, viewport);
 		}
 		super.onDraw(canvas);
@@ -79,6 +88,7 @@ public abstract class BaseMapView extends ScrollView {
 	}
 
 	public void setScrollCenter(Point p) {
+		//if(LogUtil.loggable(Log.INFO)) LogUtil.info("Set scroll center " + p.x + "x" + p.y);
 		mScrollX = p.x - getWidth()/2;
 		mScrollY = p.y - getHeight()/2;
 		invalidateScroll();
@@ -86,9 +96,10 @@ public abstract class BaseMapView extends ScrollView {
 	}
 
 	public Point getScrollCenter(){
-		final int screenX = mScrollX + getWidth()/2;
-		final int screenY = mScrollY + getHeight()/2;
-		return new Point( screenX, screenY );
+		final int x = mScrollX + getWidth()/2;
+		final int y = mScrollY + getHeight()/2;
+		if(LogUtil.loggable(Log.INFO)) LogUtil.info("Get scroll center " + x + "x" + y);
+		return new Point( x, y );
 	}
 
 	protected int computeVerticalScrollOffset() {

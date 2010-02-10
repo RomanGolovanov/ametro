@@ -52,8 +52,8 @@ public class VectorMapView extends BaseMapView {
 		if (model != null) {
 			mModel = model;
 			mRenderProgram = new RenderProgram(model);
-			setInitialized(true);
 			calculateDimensions();
+			setInitialized(true);
 		} else {
 			setInitialized(false);
 			mRenderProgram = null;
@@ -118,6 +118,7 @@ public class VectorMapView extends BaseMapView {
 		cache = mTileCacheRect;
 		int dx = cache.left * mTileSize - viewport.left;
 		int dy = cache.top * mTileSize - viewport.top;
+		canvas.drawColor(Color.WHITE);
 		canvas.drawBitmap(mTileCache, dx, dy, null);
 
 //		if(LogUtil.loggable(Log.INFO)){
