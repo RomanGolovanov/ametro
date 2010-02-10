@@ -36,7 +36,7 @@ import java.util.Date;
 public class CsvWriter {
 
     private static final String DEFAULT_SEPARATOR = ";";
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-dd-MM HH:mm:ss z");
 
     private BufferedWriter mWriter;
     private String mSeparator;
@@ -78,8 +78,16 @@ public class CsvWriter {
         writeString(Integer.toString(value));
     }
 
+    public void writeLong(long value) throws IOException {
+        writeString(Long.toString(value));
+    }
+
     public void writeDouble(double value) throws IOException {
         writeString(Double.toString(value));
+    }
+
+    public void writeFloat(float value) throws IOException {
+        writeString(Float.toString(value));
     }
 
     public void writeBoolean(boolean value) throws IOException {

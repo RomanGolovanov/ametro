@@ -30,10 +30,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.Hashtable;
-import java.util.Iterator;
+import java.util.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
@@ -225,16 +222,12 @@ public class ModelBuilder {
     }
 
     private static void fixDimensions(Model model) {
-        Enumeration<Line> lines = model.getLines();
         int xmin = Integer.MAX_VALUE;
         int ymin = Integer.MAX_VALUE;
         int xmax = Integer.MIN_VALUE;
         int ymax = Integer.MIN_VALUE;
-        while (lines.hasMoreElements()) {
-            Line line = lines.nextElement();
-            Enumeration<Station> stations = line.getStations();
-            while (stations.hasMoreElements()) {
-                Station station = stations.nextElement();
+        for (Line line : model.getLines()) {
+            for (Station station : line.getStations()) {
                 Point p = station.getPoint();
                 if (p != null) {
                     if (xmin > p.x) xmin = p.x;
@@ -261,12 +254,8 @@ public class ModelBuilder {
         int dx = 50 - xmin;
         int dy = 50 - ymin;
 
-        lines = model.getLines();
-        while (lines.hasMoreElements()) {
-            Line line = lines.nextElement();
-            Enumeration<Station> stations = line.getStations();
-            while (stations.hasMoreElements()) {
-                Station station = stations.nextElement();
+        for (Line line : model.getLines()) {
+            for (Station station : line.getStations()) {
                 Point p = station.getPoint();
                 if (p != null) {
                     p.offset(dx, dy);
@@ -276,8 +265,7 @@ public class ModelBuilder {
                     r.offset(dx, dy);
                 }
             }
-            for (Iterator<Segment> segments = line.getSegments(); segments.hasNext();) {
-                Segment segment = segments.next();
+            for (Segment segment : line.getSegments()) {
                 Point[] points = segment.getAdditionalNodes();
                 if (points != null) {
                     for (int i = 0; i < points.length; i++) {
