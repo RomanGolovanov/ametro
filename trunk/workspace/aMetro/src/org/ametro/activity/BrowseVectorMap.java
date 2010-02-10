@@ -277,6 +277,7 @@ public class BrowseVectorMap extends Activity {
 				MapSettings.setMapName(mModel.getMapName());
 				onRestoreMapState();
 				onUpdateTitle();
+				mMapView.requestFocus();
 			} else {
 
 			}
