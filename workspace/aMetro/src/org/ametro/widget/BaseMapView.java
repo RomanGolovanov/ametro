@@ -26,6 +26,7 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.widget.ScrollView;
@@ -60,7 +61,7 @@ public abstract class BaseMapView extends ScrollView {
 	protected void setInitialized(boolean status){
 		mInitialized = status;
 	}
-	
+
 	protected void onDraw(Canvas canvas) {
 		if(mInitialized){
 			final int left = mScrollX;
@@ -89,7 +90,7 @@ public abstract class BaseMapView extends ScrollView {
 		final int screenY = mScrollY + getHeight()/2;
 		return new Point( screenX, screenY );
 	}
-	
+
 	protected int computeVerticalScrollOffset() {
 		return  mInitialized ? mScrollY : 0;
 	}
@@ -113,6 +114,76 @@ public abstract class BaseMapView extends ScrollView {
 			mScrollY = mScroller.getCurrY();
 			postInvalidate();
 		}
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		switch(keyCode){
+		case KeyEvent.KEYCODE_DPAD_UP:
+		case KeyEvent.KEYCODE_DPAD_DOWN:
+		case KeyEvent.KEYCODE_DPAD_LEFT:
+		case KeyEvent.KEYCODE_DPAD_RIGHT:
+			long eventTime = System.currentTimeMillis();
+			if(mKeyScrollMode == KEY_SCROLL_MODE_DONE){
+				mKeyScrollMode = KEY_SCROLL_MODE_DRAG;
+				mKeyScrollSpeed = KEY_SCROLL_MIN_SPEED;
+				mKeyScrollLastSpeedTime = eventTime;
+			}
+			if(mKeyScrollSpeed < KEY_SCROLL_MAX_SPEED && ( mKeyScrollLastSpeedTime + KEY_SCROLL_ACCELERATION_DELAY ) < eventTime )
+			{
+				mKeyScrollSpeed = Math.min(mKeyScrollSpeed+KEY_SCROLL_ACCELERATION_STEP, KEY_SCROLL_MAX_SPEED);
+				mKeyScrollLastSpeedTime = eventTime;
+			}
+			int dx = 0;
+			int dy = 0;
+			if(keyCode == KeyEvent.KEYCODE_DPAD_LEFT) dx = -mKeyScrollSpeed;
+			if(keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) dx = mKeyScrollSpeed;
+			if(keyCode == KeyEvent.KEYCODE_DPAD_UP) dy = -mKeyScrollSpeed;
+			if(keyCode == KeyEvent.KEYCODE_DPAD_DOWN) dy = mKeyScrollSpeed;
+			internalScroll(dx, dy);
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+
+	@Override
+	public boolean onKeyUp(int keyCode, KeyEvent event) {
+		switch(keyCode){
+		case KeyEvent.KEYCODE_DPAD_UP:
+		case KeyEvent.KEYCODE_DPAD_DOWN:
+		case KeyEvent.KEYCODE_DPAD_LEFT:
+		case KeyEvent.KEYCODE_DPAD_RIGHT:
+			mKeyScrollMode = KEY_SCROLL_MODE_DONE;
+			return true;
+		}
+		return super.onKeyUp(keyCode, event);
+	}
+	
+	private static final int KEY_SCROLL_MIN_SPEED = 2;
+	private static final int KEY_SCROLL_MAX_SPEED = 20;
+	private static final int KEY_SCROLL_ACCELERATION_DELAY = 100;
+	private static final int KEY_SCROLL_ACCELERATION_STEP = 2;
+	
+	private int mKeyScrollSpeed = KEY_SCROLL_MIN_SPEED;
+	private long mKeyScrollLastSpeedTime;
+	private int mKeyScrollMode = KEY_SCROLL_MODE_DONE;
+	
+	private static final int KEY_SCROLL_MODE_DONE = 0;
+	private static final int KEY_SCROLL_MODE_DRAG = 1;
+	
+	
+	@Override
+	public boolean onTrackballEvent(MotionEvent event) {
+		switch (event.getAction()) {
+		case MotionEvent.ACTION_MOVE:
+			if (mContext != null) {
+				float x = event.getX() * event.getXPrecision();
+				float y = event.getY() * event.getYPrecision();
+				internalScroll((int)x, (int)y);
+				return true;
+			}
+		}
+		return super.onTrackballEvent(event);	
 	}
 
 	public boolean onTouchEvent(MotionEvent event) {
@@ -399,6 +470,6 @@ public abstract class BaseMapView extends ScrollView {
 	private Scroller mScroller;
 	private VelocityTracker mVelocityTracker;
 
-	
-	
+
+
 }
