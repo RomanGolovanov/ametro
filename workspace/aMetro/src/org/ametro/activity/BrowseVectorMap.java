@@ -171,7 +171,7 @@ public class BrowseVectorMap extends Activity {
 	private void onRestoreMapState() {
 		if (mModel != null && mMapView != null
 				&& MapSettings.getMapName() != null) {
-			Integer zoom = null;//MapSettings.loadZoom(this);
+			Integer zoom = MapSettings.loadZoom(this);
 			if (zoom != null) {
 				if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO))
 					Log.i(LOG_TAG_MAIN, "Use saved map zoom " + zoom);
@@ -224,6 +224,37 @@ public class BrowseVectorMap extends Activity {
 		startActivityForResult(browseLibrary, REQUEST_BROWSE_LIBRARY);
 	}
 
+	private void onShowMap(Model model) {
+		mModel = model;
+		if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO))
+			Log.i(LOG_TAG_MAIN, "Loaded model " + mModel.getMapName()
+					+ " width size " + mModel.getWidth() + "x"
+					+ mModel.getHeight());
+
+		setContentView(R.layout.browse_vector_map_main);
+
+		mMapView = (VectorMapView) findViewById(R.id.browse_vector_map_view);
+		mMapView.setModel(mModel);
+		mZoomControls = (ZoomControls) findViewById(R.id.browse_vector_map_zoom);
+		mZoomControls
+				.setOnZoomInClickListener(new View.OnClickListener() {
+					public void onClick(View v) {
+						BrowseVectorMap.this.onZoomIn();
+					}
+				});
+		mZoomControls
+				.setOnZoomOutClickListener(new View.OnClickListener() {
+					public void onClick(View v) {
+						BrowseVectorMap.this.onZoomOut();
+					}
+				});
+
+		MapSettings.setMapName(mModel.getMapName());
+		onRestoreMapState();
+		onUpdateTitle();
+		mMapView.requestFocus();
+		MapSettings.saveDefaultMapName(BrowseVectorMap.this);
+	}	
 	private void onUpdateTitle() {
 		if (mModel == null) {
 			setTitle(R.string.app_name);
@@ -272,39 +303,16 @@ public class BrowseVectorMap extends Activity {
 
 		protected void onPostExecute(Model result) {
 			if (result != null) {
-				mModel = result;
-				if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO))
-					Log.i(LOG_TAG_MAIN, "Loaded model " + mModel.getMapName()
-							+ " width size " + mModel.getWidth() + "x"
-							+ mModel.getHeight());
-
-				setContentView(R.layout.browse_vector_map_main);
-
-				mMapView = (VectorMapView) findViewById(R.id.browse_vector_map_view);
-				mMapView.setModel(mModel);
-				mZoomControls = (ZoomControls) findViewById(R.id.browse_vector_map_zoom);
-				mZoomControls
-						.setOnZoomInClickListener(new View.OnClickListener() {
-							public void onClick(View v) {
-								BrowseVectorMap.this.onZoomIn();
-							}
-						});
-				mZoomControls
-						.setOnZoomOutClickListener(new View.OnClickListener() {
-							public void onClick(View v) {
-								BrowseVectorMap.this.onZoomOut();
-							}
-						});
-
-				MapSettings.setMapName(mModel.getMapName());
-				onRestoreMapState();
-				onUpdateTitle();
-				mMapView.requestFocus();
-			} else {
-
+				onShowMap(result);
+			} else{
+				MapSettings.clearDefaultMapName(BrowseVectorMap.this);
+				onRequestBrowseLibrary(true);
+				
 			}
 			super.onPostExecute(result);
 		}
+
+	
 
 	}
 
