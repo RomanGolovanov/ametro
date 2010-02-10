@@ -25,6 +25,8 @@ import java.io.Serializable;
 
 public class ModelDescription implements Serializable {
 
+    public static final int VERSION = 1;
+
     private static final long serialVersionUID = 7999055006455680808L;
 
     private String mMapName;

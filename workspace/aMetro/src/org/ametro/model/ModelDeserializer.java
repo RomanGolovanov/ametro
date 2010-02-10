@@ -19,42 +19,40 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-package org.ametro.util.csv;
+package org.ametro.model;
 
-import org.ametro.util.DateUtil;
+import android.util.Log;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.text.ParseException;
+import java.io.InputStream;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+
+import static org.ametro.Constants.LOG_TAG_MAIN;
 
 /**
  * @author Vlad Vinichenko (akerigan@gmail.com)
- *         Date: 08.02.2010
- *         Time: 23:41:49
+ *         Date: 11.02.2010
+ *         Time: 0:06:46
  */
-public class CsvWriteTest {
+public class ModelDeserializer {
 
-    public static void main(String[] args) throws IOException, ParseException {
-        CsvWriter csvWriter = new CsvWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
-        // first record
-        csvWriter.newRecord();
-        csvWriter.writeInt(1);
-        csvWriter.writeString("test1");
-        csvWriter.writeDouble(1.1);
-        csvWriter.writeBoolean(true);
-        csvWriter.writeDate(DateUtil.parseDate("01.01.2010"));
+    public static Model load(InputStream in) throws IOException {
+        long startTime = System.currentTimeMillis();
+        ZipInputStream zipIn = new ZipInputStream(in);
+        ZipEntry zipEntry = zipIn.getNextEntry();
 
-        // second record
-        csvWriter.newRecord();
-        csvWriter.writeInt(2);
-        csvWriter.writeString("test2");
-        csvWriter.writeDouble(2.2);
-        csvWriter.writeBoolean(false);
-        csvWriter.writeDate(DateUtil.parseDate("02.02.2010"));
+        zipIn.closeEntry();
+        zipIn.close();
 
-        csvWriter.close();
+        zipEntry = null;
+        zipIn = null;
 
+        if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO)) {
+            Log.i(LOG_TAG_MAIN, "Model loading time is " + (System.currentTimeMillis() - startTime) + "ms");
+        }
+
+        return null;
     }
 
 }

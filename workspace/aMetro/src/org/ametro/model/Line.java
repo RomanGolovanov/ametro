@@ -26,9 +26,13 @@ import android.graphics.Rect;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 
 public class Line implements Serializable {
+
+    public static final int VERSION = 1;
 
     private static final long serialVersionUID = -957788093146079549L;
 
@@ -46,9 +50,8 @@ public class Line implements Serializable {
         }
 
         out.writeInt(mStations.size());
-        Enumeration<Station> stations = mStations.elements();
-        while (stations.hasMoreElements()) {
-            out.writeObject(stations.nextElement());
+        for (Station station : mStations.values()) {
+            out.writeObject(station);
         }
     }
 
@@ -66,7 +69,7 @@ public class Line implements Serializable {
             mSegments.add((Segment) in.readObject());
         }
 
-        mStations = new Hashtable<String, Station>();
+        mStations.clear();
         int stationCount = in.readInt();
         for (int i = 0; i < stationCount; i++) {
             Station station = (Station) in.readObject();
@@ -81,13 +84,13 @@ public class Line implements Serializable {
     }
 
 
-    private String mName;
-    private int mColor;
-    private int mLabelColor;
-    private int mLabelBgColor;
+    public String mName;
+    public int mColor;
+    public int mLabelColor;
+    public int mLabelBgColor;
 
-    private Dictionary<String, Station> mStations = new Hashtable<String, Station>();
-    private ArrayList<Segment> mSegments = new ArrayList<Segment>();
+    public HashMap<String, Station> mStations = new HashMap<String, Station>();
+    public ArrayList<Segment> mSegments = new ArrayList<Segment>();
 
     public Line(String name, int color, int labelColor, int labelBgColor) {
         super();
@@ -158,12 +161,12 @@ public class Line implements Serializable {
         return sg;
     }
 
-    public Enumeration<Station> getStations() {
-        return mStations.elements();
+    public Collection<Station> getStations() {
+        return mStations.values();
     }
 
-    public Iterator<Segment> getSegments() {
-        return mSegments.iterator();
+    public ArrayList<Segment> getSegments() {
+        return mSegments;
     }
 
     public Segment getSegment(Station from, Station to) {

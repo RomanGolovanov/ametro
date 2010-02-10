@@ -103,12 +103,8 @@ public class RenderProgram {
     }
 
     private void drawStations(Model model, ArrayList<RenderElement> renderQueue) {
-        Enumeration<Line> lines = model.getLines();
-        while (lines.hasMoreElements()) {
-            Line line = lines.nextElement();
-            Enumeration<Station> stations = line.getStations();
-            while (stations.hasMoreElements()) {
-                Station station = stations.nextElement();
+        for (Line line : model.getLines()) {
+            for (Station station : line.getStations()) {
                 if (station.getPoint() != null) {
                     renderQueue.add(new RenderStation(model, station));
                     if (station.getRect() != null && station.getName() != null) {
@@ -128,12 +124,9 @@ public class RenderProgram {
     }
 
     private void drawLines(Model model, ArrayList<RenderElement> renderQueue) {
-        Enumeration<Line> lines = model.getLines();
         HashSet<Segment> exclusions = new HashSet<Segment>();
-        while (lines.hasMoreElements()) {
-            Line line = lines.nextElement();
-            for (Iterator<Segment> segments = line.getSegments(); segments.hasNext();) {
-                Segment segment = segments.next();
+        for (Line line : model.getLines()) {
+            for (Segment segment : line.getSegments()) {
                 if (exclusions.contains(segment)) continue;
                 if ((segment.getFlags() & Segment.INVISIBLE) == 0) {
                     Station from = segment.getFrom();

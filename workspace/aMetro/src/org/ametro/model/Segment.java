@@ -31,6 +31,8 @@ import org.ametro.util.SerializeUtil;
 
 public class Segment implements Serializable {
 
+    public static final int VERSION = 1;
+
     private static final long serialVersionUID = 4225862817281735747L;
 
     private void writeObject(java.io.ObjectOutputStream out) throws IOException {
@@ -56,11 +58,11 @@ public class Segment implements Serializable {
     public static final int SEGMENT_BEGIN = 0x01;
     public static final int SEGMENT_END = 0x02;
 
-    private Double mDelay;
-    private Point[] mAdditionalNodes;
-    private Station mFrom;
-    private Station mTo;
-    private int mFlags;
+    public Double mDelay;
+    public Point[] mAdditionalNodes;
+    public Station mFrom;
+    public Station mTo;
+    public int mFlags;
 
     public Segment(Station from, Station to, Double delay) {
         super();

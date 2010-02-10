@@ -32,6 +32,8 @@ import org.ametro.util.SerializeUtil;
 
 public class Station implements Serializable {
 
+    public static final int VERSION = 1;
+
     private static final long serialVersionUID = 8903734927284011978L;
 
     private void writeObject(java.io.ObjectOutputStream out) throws IOException {
@@ -50,12 +52,12 @@ public class Station implements Serializable {
         mSegments = new ArrayList<Segment>();
     }
 
-    private String mName;
-    private Rect mRect;
-    private Point mPoint;
-    private Line mLine;
+    public String mName;
+    public Rect mRect;
+    public Point mPoint;
+    public Line mLine;
 
-    private ArrayList<Segment> mSegments = new ArrayList<Segment>();
+    public ArrayList<Segment> mSegments = new ArrayList<Segment>();
 
     public Station(String mName, Rect mRect, Point mPoint, Line mLine) {
         super();

@@ -27,6 +27,8 @@ import java.util.*;
 
 public class Model implements Serializable {
 
+    public static final int VERSION = 1;
+
     private static final long serialVersionUID = -9024425235347648279L;
 
     private void writeObject(java.io.ObjectOutputStream out) throws IOException {
@@ -47,9 +49,8 @@ public class Model implements Serializable {
         out.writeLong(mSourceVersion);
 
         out.writeInt(mLines.size());
-        Enumeration<Line> lines = mLines.elements();
-        while (lines.hasMoreElements()) {
-            out.writeObject(lines.nextElement());
+        for (Line line : mLines.values()) {
+            out.writeObject(line);
         }
 
         out.writeInt(mTransfers.size());
@@ -76,14 +77,14 @@ public class Model implements Serializable {
         mCrc = in.readLong();
         mSourceVersion = in.readLong();
 
-        mLines = new Hashtable<String, Line>();
+        mLines.clear();
         int lineCount = in.readInt();
         for (int i = 0; i < lineCount; i++) {
             Line line = (Line) in.readObject();
             mLines.put(line.getName(), line);
         }
 
-        mTransfers = new ArrayList<Transfer>();
+        mTransfers.clear();
         int transferCount = in.readInt();
         for (int i = 0; i < transferCount; i++) {
             mTransfers.add((Transfer) in.readObject());
@@ -95,26 +96,26 @@ public class Model implements Serializable {
         mMapName = mapName;
     }
 
-    private long mTimestamp;
-    private long mCrc;
+    public long mTimestamp;
+    public long mCrc;
 
-    private String mMapName;
+    public String mMapName;
 
-    private String mCityName;
-    private String mCountryName;
+    public String mCityName;
+    public String mCountryName;
 
-    private int mWidth;
-    private int mHeight;
+    public int mWidth;
+    public int mHeight;
 
-    private int mStationDiameter;
-    private int mLinesWidth;
-    private boolean mWordWrap;
-    private boolean mUpperCase;
+    public int mStationDiameter;
+    public int mLinesWidth;
+    public boolean mWordWrap;
+    public boolean mUpperCase;
 
-    private long mSourceVersion;
+    public long mSourceVersion;
 
-    private Dictionary<String, Line> mLines = new Hashtable<String, Line>();
-    private ArrayList<Transfer> mTransfers = new ArrayList<Transfer>();
+    public HashMap<String, Line> mLines = new HashMap<String, Line>();
+    public ArrayList<Transfer> mTransfers = new ArrayList<Transfer>();
 
     public long getSourceVersion() {
         return mSourceVersion;
@@ -230,8 +231,8 @@ public class Model implements Serializable {
         return line;
     }
 
-    public Enumeration<Line> getLines() {
-        return mLines.elements();
+    public Collection<Line> getLines() {
+        return mLines.values();
     }
 
     public Iterator<Transfer> getTransfers() {

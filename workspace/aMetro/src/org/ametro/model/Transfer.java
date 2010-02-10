@@ -25,14 +25,16 @@ import java.io.Serializable;
 
 public class Transfer implements Serializable {
 
+    public static final int VERSION = 1;
+
     private static final long serialVersionUID = 5468026097510797847L;
 
     public static final int INVISIBLE = 1;
 
-    private Double mDelay;
-    private Station mFrom;
-    private Station mTo;
-    private int mFlags;
+    public Double mDelay;
+    public Station mFrom;
+    public Station mTo;
+    public int mFlags;
 
     public Transfer(Station from, Station to, Double delay, int flags) {
         super();
