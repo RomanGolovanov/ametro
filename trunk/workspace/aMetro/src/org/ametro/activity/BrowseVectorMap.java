@@ -21,6 +21,15 @@
 
 package org.ametro.activity;
 
+import static org.ametro.Constants.LOG_TAG_MAIN;
+
+import org.ametro.MapSettings;
+import org.ametro.MapUri;
+import org.ametro.R;
+import org.ametro.model.Model;
+import org.ametro.model.ModelBuilder;
+import org.ametro.widget.VectorMapView;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PointF;
@@ -33,15 +42,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 import android.widget.ZoomControls;
-import org.ametro.MapSettings;
-import org.ametro.MapUri;
-import org.ametro.R;
-import org.ametro.model.Model;
-import org.ametro.model.ModelBuilder;
-import org.ametro.widget.VectorMapView;
-
-import static org.ametro.Constants.LOG_TAG_MAIN;
 
 public class BrowseVectorMap extends Activity {
 
@@ -281,17 +283,23 @@ public class BrowseVectorMap extends Activity {
 
 	private class InitTask extends AsyncTask<Uri, Void, Model> {
 
+		Throwable mError;
+		
 		protected void onPreExecute() {
+			mError = null;
 			setContentView(R.layout.global_wait);
 			super.onPreExecute();
 		}
 
 		protected Model doInBackground(Uri... params) {
-			Uri mapUri = params[0];
 			try {
+				Uri mapUri = params[0];
 				return ModelBuilder.loadModel(MapSettings
 						.getMapFileName(mapUri));
 			} catch (Exception e) {
+				mError = e;
+				if(Log.isLoggable(LOG_TAG_MAIN, Log.ERROR))
+				Log.e(LOG_TAG_MAIN, "Failed model loading", e);
 				return null;
 			}
 		}
@@ -306,6 +314,13 @@ public class BrowseVectorMap extends Activity {
 				onShowMap(result);
 			} else{
 				MapSettings.clearDefaultMapName(BrowseVectorMap.this);
+				
+				if(mError!=null){
+				Toast.makeText(BrowseVectorMap.this, 
+						"Error map loading: " + mError.toString(), 
+						Toast.LENGTH_SHORT).show();
+				}
+				
 				onRequestBrowseLibrary(true);
 				
 			}

@@ -69,7 +69,7 @@ public class Line implements Serializable {
             mSegments.add((Segment) in.readObject());
         }
 
-        mStations.clear();
+        mStations = new HashMap<String, Station>();
         int stationCount = in.readInt();
         for (int i = 0; i < stationCount; i++) {
             Station station = (Station) in.readObject();

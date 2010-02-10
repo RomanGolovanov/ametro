@@ -77,14 +77,14 @@ public class Model implements Serializable {
         mCrc = in.readLong();
         mSourceVersion = in.readLong();
 
-        mLines.clear();
+        mLines = new HashMap<String, Line>();
         int lineCount = in.readInt();
         for (int i = 0; i < lineCount; i++) {
             Line line = (Line) in.readObject();
             mLines.put(line.getName(), line);
         }
 
-        mTransfers.clear();
+        mTransfers = new ArrayList<Transfer>();
         int transferCount = in.readInt();
         for (int i = 0; i < transferCount; i++) {
             mTransfers.add((Transfer) in.readObject());
