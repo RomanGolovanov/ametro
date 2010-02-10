@@ -22,10 +22,11 @@
 package org.ametro.model;
 
 import android.graphics.Point;
-import org.ametro.libs.Helpers;
 
 import java.io.IOException;
 import java.io.Serializable;
+
+import org.ametro.util.SerializeUtil;
 
 
 public class Segment implements Serializable {
@@ -37,7 +38,7 @@ public class Segment implements Serializable {
         out.writeObject(mFrom);
         out.writeObject(mTo);
         out.writeInt(mFlags);
-        Helpers.serializePointArray(out, mAdditionalNodes);
+        SerializeUtil.serializePointArray(out, mAdditionalNodes);
     }
 
     private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
@@ -45,7 +46,7 @@ public class Segment implements Serializable {
         mFrom = (Station) in.readObject();
         mTo = (Station) in.readObject();
         mFlags = in.readInt();
-        mAdditionalNodes = Helpers.deserializePointArray(in);
+        mAdditionalNodes = SerializeUtil.deserializePointArray(in);
     }
 
 

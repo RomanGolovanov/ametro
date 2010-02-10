@@ -21,10 +21,11 @@
 
 package org.ametro.pmz;
 
-import org.ametro.libs.Helpers;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+
+import org.ametro.util.SerializeUtil;
 
 
 public class TransportResource implements IResource {
@@ -84,7 +85,7 @@ public class TransportResource implements IResource {
                     mType = value;
                 }
             } else if (section.equals("Transfers")) {
-                String[] parts = Helpers.splitCSV(value);
+                String[] parts = SerializeUtil.parseStringArray(value);
                 TransportTransfer transfer = new TransportTransfer();
                 transfer.mStartLine = parts[0].trim();
                 transfer.mStartStation = parts[1].trim();

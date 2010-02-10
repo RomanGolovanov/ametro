@@ -19,7 +19,9 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-package org.ametro.libs;
+package org.ametro.graphics;
+
+import org.ametro.graphics.Algorithms.QBezierControls;
 
 import android.graphics.Path;
 import android.graphics.Point;
@@ -156,10 +158,5 @@ public class ExtendedPath extends Path {
             }
         }
     }
-
-    public void drawCircleArc(float x1, float y1, float x2, float y2, float x3, float y3) {
-        ExtendedGraphic2D.drawCircleArc(this, x1, y1, x2, y2, x3, y3);
-    }
-
 
 }

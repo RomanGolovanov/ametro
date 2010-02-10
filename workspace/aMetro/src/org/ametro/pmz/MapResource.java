@@ -23,10 +23,11 @@ package org.ametro.pmz;
 
 import android.graphics.Point;
 import android.graphics.Rect;
-import org.ametro.libs.Helpers;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+
+import org.ametro.util.SerializeUtil;
 
 
 public class MapResource implements IResource {
@@ -95,12 +96,12 @@ public class MapResource implements IResource {
                 } else if (name.equals("IsVector")) {
                     isVector = Boolean.parseBoolean(value);
                 } else if (name.equals("Transports")) {
-                    transportNames = Helpers.parseStringArray(value);
+                    transportNames = SerializeUtil.parseStringArray(value);
                 } else if (name.equals("CheckedTransports")) {
                     transportName = value;
                 }
             } else if (section.equals("AdditionalNodes")) {
-                String[] parts = Helpers.splitCSV(value);
+                String[] parts = SerializeUtil.parseStringArray(value);
                 MapAddiditionalLine line = new MapAddiditionalLine();
                 line.mName = name;
                 line.mLineName = parts[0];
@@ -114,7 +115,7 @@ public class MapResource implements IResource {
                         line.mIsSpline = true;
                         break;
                     } else {
-                        points.add(Helpers.parsePoint(parts[pos] + "," + parts[pos + 1]));
+                        points.add(SerializeUtil.parsePoint(parts[pos] + "," + parts[pos + 1]));
                         pos += 2;
                     }
                 }
@@ -130,16 +131,16 @@ public class MapResource implements IResource {
                 } else if (name.equals("LabelsBColor")) {
                     line.backgroundColor = Integer.parseInt(value, 16);
                 } else if (name.equals("Coordinates")) {
-                    line.coordinates = Helpers.parsePointArray(value);
+                    line.coordinates = SerializeUtil.parsePointArray(value);
                     if (line.coordinates != null) {
                         stationCount += line.coordinates.length - 1;
                     }
                 } else if (name.equals("Rects")) {
-                    line.rectangles = Helpers.parseRectangleArray(value);
+                    line.rectangles = SerializeUtil.parseRectangleArray(value);
                 } else if (name.equals("Heights")) {
-                    line.heights = Helpers.parseDoubleArray(value);
+                    line.heights = SerializeUtil.parseDoubleArray(value);
                 } else if (name.equals("Rect")) {
-                    line.rectangle = Helpers.parseRectangle(value);
+                    line.rectangle = SerializeUtil.parseRectangle(value);
                 }
             }
         }

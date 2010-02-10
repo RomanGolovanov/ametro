@@ -38,10 +38,10 @@ import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
 import org.ametro.MapSettings;
 import org.ametro.R;
-import org.ametro.libs.ProgressInfo;
 import org.ametro.model.Model;
 import org.ametro.model.ModelBuilder;
 import org.ametro.model.ModelDescription;
+import org.ametro.other.ProgressInfo;
 import org.ametro.util.FileUtil;
 
 import java.io.File;

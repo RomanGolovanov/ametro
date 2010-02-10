@@ -25,9 +25,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.PointF;
 import android.net.Uri;
-import org.ametro.libs.Helpers;
 import org.ametro.model.Model;
 import org.ametro.util.FileUtil;
+import org.ametro.util.SerializeUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -161,7 +161,7 @@ public class MapSettings {
         SharedPreferences preferences = context.getSharedPreferences("aMetro", 0);
         String pref = preferences.getString(PREFERENCE_SCROLL_POSITION + "_" + mMapName, null);
         if (pref != null) {
-            return Helpers.parsePointF(pref);
+            return SerializeUtil.parsePointF(pref);
         } else {
             return null;
         }
@@ -188,7 +188,7 @@ public class MapSettings {
         SharedPreferences preferences = context.getSharedPreferences("aMetro", 0);
         String pref = preferences.getString(PREFERENCE_ZOOM_LEVEL + "_" + mMapName, null);
         if (pref != null) {
-            return Helpers.parseNullableInteger(pref);
+            return SerializeUtil.parseNullableInteger(pref);
         } else {
             return null;
         }

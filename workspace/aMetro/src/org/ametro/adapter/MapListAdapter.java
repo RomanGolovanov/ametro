@@ -29,7 +29,8 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
-import org.ametro.libs.FileGroupsDictionary;
+
+import org.ametro.other.FileGroupsDictionary;
 
 
 public class MapListAdapter extends BaseExpandableListAdapter {

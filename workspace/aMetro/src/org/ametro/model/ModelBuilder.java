@@ -21,23 +21,15 @@
 
 package org.ametro.model;
 
-import android.graphics.Color;
-import android.graphics.Point;
-import android.graphics.Rect;
-import android.util.Log;
-import org.ametro.MapSettings;
-import org.ametro.libs.DelaysString;
-import org.ametro.libs.StationsString;
-import org.ametro.pmz.FilePackage;
-import org.ametro.pmz.GenericResource;
-import org.ametro.pmz.MapResource;
-import org.ametro.pmz.MapResource.MapAddiditionalLine;
-import org.ametro.pmz.MapResource.MapLine;
-import org.ametro.pmz.TransportResource;
-import org.ametro.pmz.TransportResource.TransportLine;
-import org.ametro.pmz.TransportResource.TransportTransfer;
+import static org.ametro.Constants.LOG_TAG_MAIN;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -46,7 +38,21 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
-import static org.ametro.Constants.LOG_TAG_MAIN;
+import org.ametro.MapSettings;
+import org.ametro.pmz.FilePackage;
+import org.ametro.pmz.GenericResource;
+import org.ametro.pmz.MapResource;
+import org.ametro.pmz.TransportResource;
+import org.ametro.pmz.MapResource.MapAddiditionalLine;
+import org.ametro.pmz.MapResource.MapLine;
+import org.ametro.pmz.TransportResource.TransportLine;
+import org.ametro.pmz.TransportResource.TransportTransfer;
+import org.ametro.util.SerializeUtil;
+
+import android.graphics.Color;
+import android.graphics.Point;
+import android.graphics.Rect;
+import android.util.Log;
 
 
 public class ModelBuilder {
@@ -453,4 +459,114 @@ public class ModelBuilder {
         }
     }
 
+    private static class DelaysString {
+
+        private String mText;
+        //private String[] mParts;
+        private int mPos;
+        private int mLen;
+
+        public DelaysString(String text) {
+            //text = text.replaceAll("\\(","");
+            //text = text.replaceAll("\\)","");
+            //mParts = text.split(",");
+            mText = text;
+            mLen = text != null ? mText.length() : 0;
+            mPos = 0;
+        }
+
+        public boolean beginBracket() {
+            return mText != null && mPos < mLen && mText.charAt(mPos) == '(';
+        }
+
+        private String nextBlock() {
+            if (mText == null) return null;
+            int nextComma = mText.indexOf(",", beginBracket() ? mText.indexOf(")", mPos) : mPos);
+            String block = nextComma != -1 ? mText.substring(mPos, nextComma) : mText.substring(mPos);
+            mPos = nextComma != -1 ? nextComma + 1 : mLen;
+            return block;
+        }
+
+        public Double next() {
+            return SerializeUtil.parseNullableDouble(nextBlock());
+        }
+
+        public Double[] nextBracket() {
+            if (mText == null) return null;
+            String block = nextBlock();
+            return SerializeUtil.parseDoubleArray(block.substring(1, block.length() - 1));
+        }
+
+    }
+
+    private static class StationsString {
+        private String mText;
+        private String mDelimeters;
+        private int mPos;
+        private int mLen;
+        private String mNextDelimeter;
+
+
+        public String getNextDelimeter() {
+            return mNextDelimeter;
+        }
+
+        public StationsString(String text) {
+            mText = text;
+            mDelimeters = ",()";
+            mPos = 0;
+            mLen = text.length();
+            skipToContent();
+        }
+
+        public boolean hasNext() {
+            int saved = mPos;
+            skipToContent();
+            boolean result = mPos != mLen;
+            mPos = saved;
+            return result;
+        }
+
+        public String next() {
+            skipToContent();
+            if (mPos == mLen) {
+                return "";
+            }
+            int pos = mPos;
+            String symbol = null;
+            boolean quotes = false;
+            while (pos < mLen && (!mDelimeters.contains(symbol = mText.substring(pos, pos + 1)) || quotes)) {
+                if ("\"".equals(symbol)) {
+                    quotes = !quotes;
+                }
+                pos++;
+            }
+            int end = symbol == null ? pos - 1 : pos;
+            mNextDelimeter = symbol;
+            String text = mText.substring(mPos, end);
+            mPos = end;
+            if (text.startsWith("\"") && text.endsWith("\""))
+                text = text.substring(1, text.length() - 1);
+            return text;
+        }
+
+        private void skipToContent() {
+            String symbol;
+            String symbolNext = (mPos < mLen) ? mText.substring(mPos, mPos + 1) : null;
+            while (mPos < mLen && mDelimeters.contains(symbol = symbolNext)) {
+                if ("(".equals(symbol)) {
+                    mPos++;
+                    return;
+                } else if (")".equals(symbol)) {
+                }
+                mPos++;
+                symbolNext = (mPos < mLen) ? mText.substring(mPos, mPos + 1) : null;
+                if (",".equals(symbol) && !"(".equals(symbolNext)) return;
+            }
+        }
+
+
+    }
+
+    
 }
