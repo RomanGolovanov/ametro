@@ -68,6 +68,26 @@ public abstract class BaseMapView extends ScrollView {
 		mInitialized = status;
 	}
 
+	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+		final int cw = getContentWidth();
+		final int ch = getContentHeight();
+		int x = mScrollX + oldw / 2;
+		int y = mScrollY + oldh / 2;
+		if(oldw>cw){
+			x = cw/2;
+		}
+		if(oldh>ch){
+			y = ch/2;
+		}
+		int scrollX = x - w / 2;
+		int scrollY = y - h / 2;
+		int maxX = Math.max(cw - w, 0);
+		int maxY = Math.max(ch - w, 0);
+		mScrollX = Math.max(0, Math.min(maxX, scrollX));
+		mScrollY = Math.max(0, Math.min(maxY, scrollY));
+		super.onSizeChanged(w, h, oldw, oldh);
+	}
+	
 	protected void onDraw(Canvas canvas) {
 		if (mInitialized) {
 			if (mIsScrollNeeded) {
