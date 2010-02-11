@@ -63,7 +63,6 @@ public class VectorMapView extends BaseMapView {
         calculateDimensions();
 
         setModelScrollCenter(p);
-
         postInvalidate();
     }
 
@@ -297,4 +296,5 @@ public class VectorMapView extends BaseMapView {
 
     private Bitmap mTileCache;
     private Bitmap mTileCacheBuffer;
+    
 }

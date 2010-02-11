@@ -29,6 +29,7 @@ import org.ametro.R;
 import org.ametro.model.Model;
 import org.ametro.model.ModelBuilder;
 import org.ametro.widget.VectorMapView;
+import org.ametro.widget.BaseMapView.OnMapEventListener;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -36,12 +37,14 @@ import android.graphics.PointF;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.AlphaAnimation;
 import android.widget.Toast;
 import android.widget.ZoomControls;
 
@@ -60,11 +63,14 @@ public class BrowseVectorMap extends Activity {
 	private final int MIN_ZOOM_LEVEL = 0;
 	private final int MAX_ZOOM_LEVEL = 7;
 	private final int DEFAULT_ZOOM_LEVEL = 1;
+	private final int ZOOM_CONTROLS_TIMEOUT = 3000;
 	private int mZoom = DEFAULT_ZOOM_LEVEL;
 
 	private Model mModel;
 	private VectorMapView mMapView;
 	private ZoomControls mZoomControls;
+	private Runnable mZoomControlRunnable;
+	private Handler mPrivateHandler = new Handler();
 
 	private InitTask mInitTask;
 
@@ -238,6 +244,24 @@ public class BrowseVectorMap extends Activity {
 		mMapView = (VectorMapView) findViewById(R.id.browse_vector_map_view);
 		mMapView.setModel(mModel);
 		mZoomControls = (ZoomControls) findViewById(R.id.browse_vector_map_zoom);
+        mZoomControls.setVisibility(View.INVISIBLE);
+        mMapView.setOnMapEventListener(new OnMapEventListener() {
+			public void onShortClick(int x, int y) {
+				if(mZoomControls.getVisibility() != View.VISIBLE){
+					showZoom();
+				}
+				delayZoom();
+			}
+			public void onMove(int newx, int newy, int oldx, int oldy) {
+				if(mZoomControls.getVisibility() != View.VISIBLE){
+					showZoom();
+				}
+				delayZoom();
+			}
+			public void onLongClick(int x, int y) {
+			}
+		});
+        
 		mZoomControls
 				.setOnZoomInClickListener(new View.OnClickListener() {
 					public void onClick(View v) {
@@ -251,6 +275,16 @@ public class BrowseVectorMap extends Activity {
 					}
 				});
 
+        mZoomControlRunnable = new Runnable() {
+            public void run() {
+                if (!mZoomControls.hasFocus()) {
+                    hideZoom();
+                } else {
+                	delayZoom();
+                }
+            }
+        };
+        
 		MapSettings.setMapName(mModel.getMapName());
 		onRestoreMapState();
 		onUpdateTitle();
@@ -281,6 +315,26 @@ public class BrowseVectorMap extends Activity {
 		mMapView.setScale(ZOOMS[mZoom], STEPS[mZoom]);
 	}
 
+	private void delayZoom() {
+        mPrivateHandler.removeCallbacks(mZoomControlRunnable);
+        mPrivateHandler.postDelayed(mZoomControlRunnable, ZOOM_CONTROLS_TIMEOUT);
+	}
+	
+    public void showZoom() {
+        fadeZoom(View.VISIBLE, 0.0f, 1.0f);
+    }
+    
+    public void hideZoom() {
+        fadeZoom(View.INVISIBLE, 1.0f, 0.0f);
+    }
+    
+    private void fadeZoom(int visibility, float startAlpha, float endAlpha) {
+        AlphaAnimation anim = new AlphaAnimation(startAlpha, endAlpha);
+        anim.setDuration(500);
+        mZoomControls.startAnimation(anim);
+        mZoomControls.setVisibility(visibility);
+    }
+	
 	private class InitTask extends AsyncTask<Uri, Void, Model> {
 
 		Throwable mError;
@@ -327,8 +381,6 @@ public class BrowseVectorMap extends Activity {
 			super.onPostExecute(result);
 		}
 
-	
-
 	}
-
+	
 }

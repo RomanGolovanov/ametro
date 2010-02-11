@@ -37,7 +37,15 @@ import static org.ametro.Constants.LOG_TAG_MAIN;
 
 public abstract class BaseMapView extends ScrollView {
 
+	public static interface OnMapEventListener
+	{
+		void onShortClick(int x, int y);
+		void onLongClick(int x, int y);
+		void onMove(int newx, int newy, int oldx, int oldy);
+	}
+	
 	private Context mContext;
+	private OnMapEventListener mEventListener;
 
 	public BaseMapView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -57,6 +65,11 @@ public abstract class BaseMapView extends ScrollView {
 		initializeControls();
 	}
 
+	public void setOnMapEventListener(OnMapEventListener listener){
+		mEventListener = listener;
+	}
+
+	
 	protected abstract void onDrawRect(Canvas canvas, Rect viewport);
 
 	protected abstract int getContentWidth();
@@ -165,6 +178,7 @@ public abstract class BaseMapView extends ScrollView {
 		if (mScroller.computeScrollOffset()) {
 			mScrollX = mScroller.getCurrX();
 			mScrollY = mScroller.getCurrY();
+			invalidateScroll();
 			postInvalidate();
 		}
 	}
@@ -350,7 +364,7 @@ public abstract class BaseMapView extends ScrollView {
 			switch (mTouchMode) {
 			case TOUCH_INIT_MODE: // tap
 				mTouchMode = TOUCH_DONE_MODE;
-				doShortPress();
+				fireShortClickEvent((int)(mScrollX + event.getX()),(int)(mScrollY + event.getY()));
 				break;
 			case TOUCH_DRAG_MODE:
 				// if the user waits a while w/o moving before the
@@ -410,9 +424,6 @@ public abstract class BaseMapView extends ScrollView {
 		postInvalidate();
 	}
 
-	private void doShortPress() {
-	}
-
 	private void initializeControls() {
 		mInitialized = false;
 		setVerticalScrollBarEnabled(true);
@@ -434,6 +445,11 @@ public abstract class BaseMapView extends ScrollView {
 		int maxY = Math.max(getContentHeight() - getHeight(), 0);
 		mScrollX = Math.max(0, Math.min(maxX, mScrollX));
 		mScrollY = Math.max(0, Math.min(maxY, mScrollY));
+		if(mScrollX!=mPreviousScrollX || mScrollCenterY!=mPreviousScrollY){
+			fireMoveEvent(mScrollX, mScrollY, mPreviousScrollX, mPreviousScrollY);
+			mPreviousScrollX = mScrollX;
+			mPreviousScrollY = mScrollY;
+		}
 	}
 
 	// Expects x in view coordinates
@@ -472,7 +488,24 @@ public abstract class BaseMapView extends ScrollView {
 			return Math.max(0, getHeight() - getHorizontalScrollbarHeight());
 		}
 	}
-
+	
+	private void fireShortClickEvent(int x, int y){
+		if(mInitialized && mEventListener!=null){
+			mEventListener.onShortClick(x, y);
+		}
+	}
+	
+	private void fireLongClickEvent(int x, int y){
+		if(mInitialized && mEventListener!=null){
+			mEventListener.onLongClick(x, y);
+		}
+	}
+	
+	private void fireMoveEvent(int newx, int newy, int oldx, int oldy){
+		if(mInitialized && mEventListener!=null){
+			mEventListener.onMove(newx, newy, oldx, oldy);
+		}
+	}	
 	private boolean mInitialized;
 
 	// adjustable parameters
@@ -483,6 +516,9 @@ public abstract class BaseMapView extends ScrollView {
 
 	private int mScrollX;
 	private int mScrollY;
+
+	private int mPreviousScrollX;
+	private int mPreviousScrollY;
 
 	private boolean mIsScrollNeeded;
 	private int mScrollCenterX;
