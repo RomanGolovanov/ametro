@@ -60,6 +60,7 @@ public class BrowseVectorMap extends Activity {
 
 	private final float[] ZOOMS = new float[] { 1.5f, 1.0f, 0.8f, 0.6f, 0.4f, 0.3f, 0.2f, 0.1f };
 	private final int[] STEPS = new int[] { 15, 10, 8, 6, 4, 3, 2, 1 };
+	
 	private final int MIN_ZOOM_LEVEL = 0;
 	private final int MAX_ZOOM_LEVEL = 7;
 	private final int DEFAULT_ZOOM_LEVEL = 1;
