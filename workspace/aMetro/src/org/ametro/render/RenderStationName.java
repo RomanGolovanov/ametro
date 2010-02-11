@@ -47,8 +47,8 @@ public class RenderStationName extends RenderElement {
     private Point mPointSecondLine;
 
     public RenderStationName(Model model, Station station) {
-        final boolean isUpperCase = model.isUpperCase();
-        final boolean isWordWrap = model.isWordWrap();
+        final boolean isUpperCase = model.upperCase;
+        final boolean isWordWrap = model.wordWrap;
 
         final String text = isUpperCase ? station.getName().toUpperCase() : station.getName();
         final int textLength = text.length();
@@ -56,8 +56,8 @@ public class RenderStationName extends RenderElement {
         final Point point = station.getPoint();
 
         final Line line = station.getLine();
-        final int textColor = line.getLabelColor();
-        final int backColor = line.getLabelBgColor();
+        final int textColor = line.labelColor;
+        final int backColor = line.labelBgColor;
 
         final Paint textPaint = new Paint();
         final Paint fillPaint = new Paint();

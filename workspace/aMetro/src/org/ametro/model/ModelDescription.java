@@ -61,14 +61,14 @@ public class ModelDescription implements Serializable {
 
     public ModelDescription(Model model) {
         super();
-        mMapName = model.getMapName();
-        mCountryName = model.getCountryName();
-        mCityName = model.getCityName();
-        mWidth = model.getWidth();
-        mHeight = model.getHeight();
-        mCrc = model.getCrc();
-        mTimestamp = model.getTimestamp();
-        mSourceVersion = model.getSourceVersion();
+        mMapName = model.mapName;
+        mCountryName = model.countryName;
+        mCityName = model.cityName;
+        mWidth = model.width;
+        mHeight = model.height;
+        mCrc = model.crc;
+        mTimestamp = model.timestamp;
+        mSourceVersion = model.sourceVersion;
     }
 
     public String getMapName() {

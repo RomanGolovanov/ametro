@@ -22,49 +22,58 @@
 package org.ametro.pmz;
 
 
-import java.util.ArrayList;
-import java.util.Hashtable;
-
 import org.ametro.util.SerializeUtil;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class TransportResource implements IResource {
 
+    //private FilePackage owner;
+    private TransportParser parser;
+
+    private String type;
+
+    private HashMap<String, TransportLine> lines;
+    private ArrayList<TransportTransfer> transfers;
+    private long crc;
+
     public static class TransportLine {
-        public String mName;
-        public String mMapName;
-        public String mStationText;
-        public String mDrivingDelaysText;
-        public String mTimeDelaysText;
+        public String name;
+        public String mapName;
+        public String stationText;
+        public String drivingDelaysText;
+        public String timeDelaysText;
     }
 
     public static class TransportTransfer {
 
-        public String mName;
-        public String mStartLine;
-        public String mStartStation;
-        public String mEndLine;
-        public String mEndStation;
+        public String name;
+        public String startLine;
+        public String startStation;
+        public String endLine;
+        public String endStation;
 
-        public Double mDelay;
-        public String mStatus;
+        public Double delay;
+        public String status;
     }
 
     private class TransportParser {
-        private String mSection = null;
-        private TransportLine mLine = null;
+        private String section;
+        private TransportLine line;
 
         public void parseLine(String line) {
             if (line.startsWith(";")) return;
             if (line.startsWith("[") && line.endsWith("]")) {
-                mSection = line.substring(1, line.length() - 1);
-                handleSection(mSection);
+                section = line.substring(1, line.length() - 1);
+                handleSection(section);
             } else if (line.contains("=")) {
                 String[] parts = line.split("=");
                 if (parts.length == 2) {
                     String name = parts[0].trim();
                     String value = parts.length > 1 ? parts[1].trim() : "";
-                    handleNaveValuePair(mSection, name, value);
+                    handleNaveValuePair(section, name, value);
                 }
             }
         }
@@ -75,37 +84,37 @@ public class TransportResource implements IResource {
             } else if (section.equals("Transfers")) {
             } else { // Lines names
                 // add line
-                mLine = new TransportLine();
+                line = new TransportLine();
             }
         }
 
         private void handleNaveValuePair(String section, String name, String value) {
             if (section.equals("Options")) {
                 if (name.equals("Type")) {
-                    mType = value;
+                    type = value;
                 }
             } else if (section.equals("Transfers")) {
                 String[] parts = SerializeUtil.parseStringArray(value);
                 TransportTransfer transfer = new TransportTransfer();
-                transfer.mStartLine = parts[0].trim();
-                transfer.mStartStation = parts[1].trim();
-                transfer.mEndLine = parts[2].trim();
-                transfer.mEndStation = parts[3].trim();
-                transfer.mDelay = parts.length > 4 && parts[4].length() > 0 ? Double.parseDouble(parts[4]) : null;
-                transfer.mStatus = parts.length > 5 ? parts[5] : null;
-                mTransfers.add(transfer);
+                transfer.startLine = parts[0].trim();
+                transfer.startStation = parts[1].trim();
+                transfer.endLine = parts[2].trim();
+                transfer.endStation = parts[3].trim();
+                transfer.delay = parts.length > 4 && parts[4].length() > 0 ? Double.parseDouble(parts[4]) : null;
+                transfer.status = parts.length > 5 ? parts[5] : null;
+                transfers.add(transfer);
             } else { // Lines names
                 if (name.equals("Name")) {
-                    mLine.mName = value;
-                    mLines.put(mLine.mName, mLine);
+                    line.name = value;
+                    lines.put(line.name, line);
                 } else if (name.equals("LineMap")) {
-                    mLine.mMapName = value;
+                    line.mapName = value;
                 } else if (name.equals("Stations")) {
-                    mLine.mStationText = value;
+                    line.stationText = value;
                 } else if (name.equals("Driving")) {
-                    mLine.mDrivingDelaysText = value;
+                    line.drivingDelaysText = value;
                 } else if (name.equals("Delays")) {
-                    mLine.mTimeDelaysText = value;
+                    line.timeDelaysText = value;
                 }
             }
         }
@@ -114,17 +123,17 @@ public class TransportResource implements IResource {
 
     public void beginInitialize(FilePackage owner) {
         //this.owner = owner;
-        this.mLines = new Hashtable<String, TransportLine>();
-        this.mTransfers = new ArrayList<TransportTransfer>();
-        mParser = new TransportParser();
+        lines = new HashMap<String, TransportLine>();
+        transfers = new ArrayList<TransportTransfer>();
+        parser = new TransportParser();
     }
 
     public void doneInitialize() {
-        mParser = null;
+        parser = null;
     }
 
     public void parseLine(String line) {
-        mParser.parseLine(line.trim());
+        parser.parseLine(line.trim());
     }
 
     public TransportResource() {
@@ -132,32 +141,23 @@ public class TransportResource implements IResource {
     }
 
     public String getType() {
-        return mType;
+        return type;
     }
 
-    public Hashtable<String, TransportLine> getLines() {
-        return mLines;
+    public HashMap<String, TransportLine> getLines() {
+        return lines;
     }
 
     public ArrayList<TransportTransfer> getTransfers() {
-        return mTransfers;
+        return transfers;
     }
 
-    //private FilePackage owner;
-    private TransportParser mParser;
-
-    private String mType;
-
-    private Hashtable<String, TransportLine> mLines;
-    private ArrayList<TransportTransfer> mTransfers;
-    private long mCrc;
-
     public long getCrc() {
-        return mCrc;
+        return crc;
     }
 
     public void setCrc(long crc) {
-        mCrc = crc;
+        this.crc = crc;
     }
 
 

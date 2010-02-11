@@ -21,15 +21,12 @@
 
 package org.ametro.render;
 
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Point;
-import android.graphics.Rect;
-import android.graphics.RectF;
-
+import android.graphics.*;
 import org.ametro.model.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 
 
 public class RenderProgram {
@@ -76,10 +73,10 @@ public class RenderProgram {
     public void invalidateVisible(RectF viewport) {
         final int offset = 10;
         final Rect v = new Rect(
-        		(int)(viewport.left - offset),
-        		(int)(viewport.top - offset),
-        		(int)(viewport.right + offset),
-        		(int)(viewport.bottom + offset));
+                (int) (viewport.left - offset),
+                (int) (viewport.top - offset),
+                (int) (viewport.right + offset),
+                (int) (viewport.bottom + offset));
         final Rect[] bounds = mBounds;
         final boolean[] visibility = mVisibility;
         final int[] filters = mTypes;
@@ -105,8 +102,10 @@ public class RenderProgram {
     }
 
     private void drawStations(Model model, ArrayList<RenderElement> renderQueue) {
-        for (Line line : model.getLines()) {
-            for (Station station : line.getStations()) {
+        final Line[] lines = model.lines;
+        for (int i = 0; i < lines.length; i++) {
+            final Line line = lines[i];
+            for (Station station : line.stations) {
                 if (station.getPoint() != null) {
                     renderQueue.add(new RenderStation(model, station));
                     if (station.getRect() != null && station.getName() != null) {
@@ -118,8 +117,7 @@ public class RenderProgram {
     }
 
     private void drawTransfers(Model model, ArrayList<RenderElement> renderQueue) {
-        for (Iterator<Transfer> transfers = model.getTransfers(); transfers.hasNext();) {
-            Transfer transfer = transfers.next();
+        for (Transfer transfer : model.transfers) {
             renderQueue.add(new RenderTransferBackground(model, transfer));
             renderQueue.add(new RenderTransfer(model, transfer));
         }
@@ -127,8 +125,8 @@ public class RenderProgram {
 
     private void drawLines(Model model, ArrayList<RenderElement> renderQueue) {
         HashSet<Segment> exclusions = new HashSet<Segment>();
-        for (Line line : model.getLines()) {
-            for (Segment segment : line.getSegments()) {
+        for (Line line : model.lines) {
+            for (Segment segment : line.segments) {
                 if (exclusions.contains(segment)) continue;
                 if ((segment.getFlags() & Segment.INVISIBLE) == 0) {
                     Station from = segment.getFrom();
@@ -163,10 +161,10 @@ public class RenderProgram {
     public void addVisibility(RectF viewport) {
         final int offset = 10;
         final Rect v = new Rect(
-        		(int)(viewport.left - offset),
-        		(int)(viewport.top - offset),
-        		(int)(viewport.right + offset),
-        		(int)(viewport.bottom + offset));
+                (int) (viewport.left - offset),
+                (int) (viewport.top - offset),
+                (int) (viewport.right + offset),
+                (int) (viewport.bottom + offset));
         final Rect[] bounds = mBounds;
         final boolean[] visibility = mVisibility;
         final int[] filters = mTypes;

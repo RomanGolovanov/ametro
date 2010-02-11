@@ -275,8 +275,8 @@ public class VectorMapView extends BaseMapView {
 
 
     private void calculateDimensions() {
-        mContentWidth = (int) Math.ceil(mModel.getWidth() * mScale);
-        mContentHeight = (int) Math.ceil(mModel.getHeight() * mScale);
+        mContentWidth = (int) Math.ceil(mModel.width * mScale);
+        mContentHeight = (int) Math.ceil(mModel.height * mScale);
     }
 
     private Model mModel;

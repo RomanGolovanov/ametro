@@ -51,9 +51,9 @@ public class RenderTransfer extends RenderElement {
         ToX = to.x;
         ToY = to.y;
 
-        final int radius = model.getStationDiameter() / 2;
+        final int radius = model.stationDiameter / 2;
 
-        final int lineWidth = model.getLinesWidth();
+        final int lineWidth = model.linesWidth;
         final Paint paint = new Paint();
         paint.setColor(Color.WHITE);
         paint.setStyle(Style.FILL);

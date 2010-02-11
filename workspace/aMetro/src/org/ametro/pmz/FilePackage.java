@@ -28,7 +28,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Enumeration;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -37,10 +37,10 @@ public class FilePackage {
 
     private ZipFile file;
 
-    private Dictionary<String, MapResource> mapResources = new Hashtable<String, MapResource>();
-    private Dictionary<String, TransportResource> transportResources = new Hashtable<String, TransportResource>();
-    private Dictionary<String, VectorResource> vectorResources = new Hashtable<String, VectorResource>();
-    private Dictionary<String, GenericResource> genericResource = new Hashtable<String, GenericResource>();
+    private HashMap<String, MapResource> mapResources = new HashMap<String, MapResource>();
+    private HashMap<String, TransportResource> transportResources = new HashMap<String, TransportResource>();
+    private HashMap<String, VectorResource> vectorResources = new HashMap<String, VectorResource>();
+    private HashMap<String, GenericResource> genericResource = new HashMap<String, GenericResource>();
 
     private GenericResource cityGenericResource;
 

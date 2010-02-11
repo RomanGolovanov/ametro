@@ -21,7 +21,6 @@
 
 package org.ametro.model;
 
-import android.graphics.Point;
 import android.util.Log;
 import org.ametro.util.csv.CsvWriter;
 
@@ -29,10 +28,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -45,6 +41,7 @@ import static org.ametro.Constants.LOG_TAG_MAIN;
  */
 public class ModelSerializer {
 
+    private static final int HEADER_TYPE = 0;
     private static final int MODEL_TYPE = 1;
     private static final int LINE_TYPE = 2;
     private static final int TRANSFER_TYPE = 3;
@@ -69,6 +66,8 @@ public class ModelSerializer {
         csvWriter.writeDate(new Date());
 
         csvWriter.newRecord();
+        // header flag
+        csvWriter.writeInt(HEADER_TYPE);
         // Object type
         csvWriter.writeString("Model");
         // its type code
@@ -77,30 +76,36 @@ public class ModelSerializer {
         csvWriter.writeInt(Model.VERSION);
 
         csvWriter.newRecord();
+        csvWriter.writeInt(HEADER_TYPE);
         csvWriter.writeString("Line");
         csvWriter.writeInt(LINE_TYPE);
         csvWriter.writeInt(Line.VERSION);
 
         csvWriter.newRecord();
+        csvWriter.writeInt(HEADER_TYPE);
         csvWriter.writeString("Transfer");
         csvWriter.writeInt(TRANSFER_TYPE);
         csvWriter.writeInt(Transfer.VERSION);
 
         csvWriter.newRecord();
+        csvWriter.writeInt(HEADER_TYPE);
         csvWriter.writeString("Station");
         csvWriter.writeInt(STATION_TYPE);
         csvWriter.writeInt(Station.VERSION);
 
         csvWriter.newRecord();
+        csvWriter.writeInt(HEADER_TYPE);
         csvWriter.writeString("Segment");
         csvWriter.writeInt(SEGMENT_TYPE);
         csvWriter.writeInt(Segment.VERSION);
 
         csvWriter.newRecord();
+        csvWriter.writeInt(HEADER_TYPE);
         csvWriter.writeString("Rect");
         csvWriter.writeInt(RECT_TYPE);
 
         csvWriter.newRecord();
+        csvWriter.writeInt(HEADER_TYPE);
         csvWriter.writeString("Point");
         csvWriter.writeInt(POINT_TYPE);
 
@@ -120,59 +125,66 @@ public class ModelSerializer {
     private static void serialize(Model model, CsvWriter csvWriter) throws IOException {
         csvWriter.newRecord();
         csvWriter.writeInt(MODEL_TYPE);
-        csvWriter.writeLong(model.mTimestamp);
-        csvWriter.writeLong(model.mCrc);
-        csvWriter.writeString(model.mMapName);
-        csvWriter.writeString(model.mCityName);
-        csvWriter.writeString(model.mCountryName);
-        csvWriter.writeInt(model.mWidth);
-        csvWriter.writeInt(model.mHeight);
-        csvWriter.writeInt(model.mStationDiameter);
-        csvWriter.writeInt(model.mLinesWidth);
-        csvWriter.writeBoolean(model.mWordWrap);
-        csvWriter.writeBoolean(model.mUpperCase);
-        csvWriter.writeLong(model.mSourceVersion);
+        csvWriter.writeLong(model.timestamp);
+        csvWriter.writeLong(model.crc);
+        csvWriter.writeString(model.mapName);
+        csvWriter.writeString(model.cityName);
+        csvWriter.writeString(model.countryName);
+        csvWriter.writeInt(model.width);
+        csvWriter.writeInt(model.height);
+        csvWriter.writeInt(model.stationDiameter);
+        csvWriter.writeInt(model.linesWidth);
+        csvWriter.writeBoolean(model.wordWrap);
+        csvWriter.writeBoolean(model.upperCase);
+        csvWriter.writeLong(model.sourceVersion);
 
-        final HashMap<String,Line> lines = model.mLines;
-        final ArrayList<Transfer> transfers = model.mTransfers;
-        csvWriter.writeInt(lines.size());
-        csvWriter.writeInt(transfers.size());
+        final Line[] lines = model.lines;
+        final Transfer[] transfers = model.transfers;
+        int linesCount = lines.length;
+        int transfersCount = transfers.length;
 
-        int index = 0;
-        for (Line line : lines.values()) {
-            serialize(line, csvWriter, index++);
+        csvWriter.writeInt(linesCount);
+        csvWriter.writeInt(transfersCount);
+
+        for (int i = 0; i < lines.length; i++) {
+            serialize(lines[i], csvWriter);
         }
-        index = 0;
-        for (Transfer transfer : transfers) {
-            serialize(transfer, csvWriter, index++);
+
+        for (int i = 0; i < transfers.length; i++) {
+            serialize(transfers[i], csvWriter);
         }
     }
 
-    private static void serialize(Line line, CsvWriter csvWriter, int index) throws IOException {
+    private static void serialize(Line line, CsvWriter csvWriter) throws IOException {
         csvWriter.newRecord();
         csvWriter.writeInt(LINE_TYPE);
-        csvWriter.writeInt(index);
-        csvWriter.writeString(line.mName);
-        csvWriter.writeInt(line.mColor);
-        csvWriter.writeInt(line.mLabelColor);
-        csvWriter.writeInt(line.mLabelBgColor);
+        csvWriter.writeString(line.name);
+        csvWriter.writeInt(line.color);
+        csvWriter.writeInt(line.labelColor);
+        csvWriter.writeInt(line.labelBgColor);
 
-        final Collection<Station> stations = line.mStations.values();
-        final ArrayList<Segment> segments = line.mSegments;
-        csvWriter.writeInt(stations.size());
-        csvWriter.writeInt(segments.size());
+        final Station[] stations = line.stations;
+        final Segment[] segments = line.segments;
+        int stationsCount = stations.length;
+        int segmentsCount = segments.length;
 
-        for (Station station : stations) {
-            serialize(station, csvWriter);
+        csvWriter.writeInt(stationsCount);
+        csvWriter.writeInt(segmentsCount);
+
+        for (int i = 0; i < stations.length; i++) {
+            serialize(stations[i], csvWriter);
         }
-        for (Segment segment : segments) {
-            serialize(segment, csvWriter);
+
+        for (int i = 0; i < segmentsCount; i++) {
+            serialize(segments[i], csvWriter);
         }
     }
 
     private static void serialize(Station station, CsvWriter csvWriter) throws IOException {
         csvWriter.newRecord();
         csvWriter.writeInt(STATION_TYPE);
+        csvWriter.writeString(station.mName);
+
     }
 
     private static void serialize(Segment segment, CsvWriter csvWriter) throws IOException {
@@ -180,10 +192,9 @@ public class ModelSerializer {
         csvWriter.writeInt(SEGMENT_TYPE);
     }
 
-    private static void serialize(Transfer transfer, CsvWriter csvWriter, int index) throws IOException {
+    private static void serialize(Transfer transfer, CsvWriter csvWriter) throws IOException {
         csvWriter.newRecord();
         csvWriter.writeInt(TRANSFER_TYPE);
-        csvWriter.writeInt(index);
     }
 
 }

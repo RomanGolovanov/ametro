@@ -21,35 +21,30 @@
 
 package org.ametro.model;
 
-import static org.ametro.Constants.LOG_TAG_MAIN;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.*;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
-import java.util.zip.ZipOutputStream;
-
-import org.ametro.MapSettings;
-import org.ametro.pmz.FilePackage;
-import org.ametro.pmz.GenericResource;
-import org.ametro.pmz.MapResource;
-import org.ametro.pmz.TransportResource;
-import org.ametro.pmz.MapResource.MapAddiditionalLine;
-import org.ametro.pmz.MapResource.MapLine;
-import org.ametro.pmz.TransportResource.TransportLine;
-import org.ametro.pmz.TransportResource.TransportTransfer;
-import org.ametro.util.SerializeUtil;
-
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.util.Log;
+import org.ametro.MapSettings;
+import org.ametro.pmz.FilePackage;
+import org.ametro.pmz.GenericResource;
+import org.ametro.pmz.MapResource;
+import org.ametro.pmz.MapResource.MapAddiditionalLine;
+import org.ametro.pmz.MapResource.MapLine;
+import org.ametro.pmz.TransportResource;
+import org.ametro.pmz.TransportResource.TransportLine;
+import org.ametro.pmz.TransportResource.TransportTransfer;
+import org.ametro.util.SerializeUtil;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+import java.util.zip.ZipOutputStream;
+
+import static org.ametro.Constants.LOG_TAG_MAIN;
 
 
 public class ModelBuilder {
@@ -117,7 +112,7 @@ public class ModelBuilder {
 
     public static void saveModel(Model model) throws IOException {
         Date startTimestamp = new Date();
-        String fileName = MapSettings.getMapFileName(model.getMapName());
+        String fileName = MapSettings.getMapFileName(model.mapName);
         ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(fileName), BUFFER_SIZE));
         saveModelDescriptionEntry(model, zip);
         saveModelEntry(model, zip);
@@ -184,30 +179,153 @@ public class ModelBuilder {
         if (cityName == null) {
             cityName = info.getValue("Options", "CityName");
         }
-        model.setCountryName(countryName);
-        model.setCityName(cityName);
-        model.setLinesWidth(map.getLinesWidth());
-        model.setStationDiameter(map.getStationDiameter());
-        model.setWordWrap(map.isWordWrap());
-        model.setUpperCase(map.isUpperCase());
+        model.countryName = countryName;
+        model.cityName = cityName;
+        model.linesWidth = map.getLinesWidth();
+        model.stationDiameter = map.getStationDiameter();
+        model.wordWrap = map.isWordWrap();
+        model.upperCase = map.isUpperCase();
 
-        model.setTimestamp(file.lastModified());
-        model.setSourceVersion(MapSettings.getSourceVersion());
+        model.timestamp = file.lastModified();
+        model.sourceVersion = MapSettings.getSourceVersion();
 
-        Hashtable<String, MapLine> mapLines = map.getMapLines();
-        Hashtable<String, TransportLine> transportLines = trp.getLines();
+        HashMap<String, MapLine> mapLines = map.getMapLines();
+        HashMap<String, TransportLine> transportLines = trp.getLines();
 
+        // lines construction
+        ArrayList<Line> lines = new ArrayList<Line>();
         for (TransportLine tl : transportLines.values()) {
-            MapLine ml = mapLines.get(tl.mName);
-            if (ml == null && tl.mName != null) {
+            MapLine ml = mapLines.get(tl.name);
+            if (ml == null && tl.name != null) {
                 continue;
             }
-            fillMapLines(model, tl, ml);
-        }
+            String lineName = tl.name;
+            int lineColor = ml.linesColor | 0xFF000000;
+            int labelColor = ml.labelColor > 0 ? ml.labelColor | 0xFF000000 : lineColor;
+            int labelBgColor = ml.backgroundColor;
+            if (labelBgColor != -1) {
+                labelBgColor = labelBgColor == 0 ? Color.WHITE : labelBgColor | 0xFF000000;
+            } else {
+                labelBgColor = 0;
+            }
 
-        for (TransportTransfer t : trp.getTransfers()) {
-            fillTransfer(model, t);
+            Line line = new Line(lineName, lineColor, labelColor, labelBgColor);
+            lines.add(line);
+            if (ml.coordinates != null) {
+
+                DelaysString tDelays = new DelaysString(tl.drivingDelaysText);
+                StationsString tStations = new StationsString(tl.stationText);
+                Point[] points = ml.coordinates;
+                Rect[] rects = ml.rectangles;
+
+                int stationIndex = 0;
+
+                Station toStation;
+                Double toDelay;
+
+                Station fromStation = null;
+                Double fromDelay = null;
+
+                Station thisStation = line.invalidateStation(
+                        tStations.next(),
+                        getRect(rects, stationIndex),
+                        getPoint(points, stationIndex));
+
+                ArrayList<Segment> segments = new ArrayList<Segment>();
+                do {
+                    if ("(".equals(tStations.getNextDelimeter())) {
+                        int idx = 0;
+                        Double[] delays = tDelays.nextBracket();
+                        while (tStations.hasNext() && !")".equals(tStations.getNextDelimeter())) {
+                            boolean isForwardDirection = true;
+                            String bracketedStationName = tStations.next();
+                            if (bracketedStationName.startsWith("-")) {
+                                bracketedStationName = bracketedStationName.substring(1);
+                                isForwardDirection = !isForwardDirection;
+                            }
+
+                            if (bracketedStationName != null && bracketedStationName.length() > 0) {
+                                Station bracketedStation = line.invalidateStation(bracketedStationName);
+                                if (isForwardDirection) {
+                                    addSegment(segments, thisStation, bracketedStation, delays.length <= idx ? null : delays[idx]);
+                                } else {
+                                    addSegment(segments, bracketedStation, thisStation, delays.length <= idx ? null : delays[idx]);
+                                }
+                            }
+                            idx++;
+                        }
+
+                        fromStation = thisStation;
+
+                        fromDelay = null;
+                        toDelay = null;
+
+                        if (!tStations.hasNext()) {
+                            break;
+                        }
+
+                        stationIndex++;
+                        thisStation = line.invalidateStation(
+                                tStations.next(),
+                                getRect(rects, stationIndex),
+                                getPoint(points, stationIndex));
+
+                    } else {
+
+                        stationIndex++;
+                        toStation = line.invalidateStation(tStations.next(),
+                                getRect(rects, stationIndex),
+                                getPoint(points, stationIndex));
+
+                        if (tDelays.beginBracket()) {
+                            Double[] delays = tDelays.nextBracket();
+                            toDelay = delays[0];
+                            fromDelay = delays[1];
+                        } else {
+                            toDelay = tDelays.next();
+                        }
+
+                        if (fromStation != null && line.getSegment(thisStation, fromStation) == null) {
+                            if (fromDelay == null) {
+                                Segment opposite = line.getSegment(fromStation, thisStation);
+                                fromDelay = opposite != null ? opposite.getDelay() : null;
+                            }
+                            addSegment(segments, thisStation, fromStation, fromDelay);
+                        }
+                        if (toStation != null && line.getSegment(thisStation, toStation) == null) {
+                            addSegment(segments, thisStation, toStation, toDelay);
+                        }
+
+
+                        fromStation = thisStation;
+
+                        fromDelay = toDelay;
+                        toDelay = null;
+
+                        thisStation = toStation;
+                    }
+
+                } while (tStations.hasNext());
+                line.segments = segments.toArray(new Segment[segments.size()]);
+            }
         }
+        model.lines = lines.toArray(new Line[lines.size()]);
+
+        // transfers construction
+        ArrayList<Transfer> transfers = new ArrayList<Transfer>();
+        for (TransportTransfer t : trp.getTransfers()) {
+            Station from = model.getStation(t.startLine, t.startStation);
+            Station to = model.getStation(t.endLine, t.endStation);
+            int flags = 0;
+            if (t.status != null && t.status.contains("invisible")) {
+                flags = Transfer.INVISIBLE;
+            }
+            if (from != null && to != null) {
+                transfers.add(new Transfer(from, to, t.delay, flags));
+            }
+        }
+        model.transfers = transfers.toArray(new Transfer[transfers.size()]);
+
 
         for (MapAddiditionalLine al : map.getAddiditionalLines()) {
             fillAdditionalLines(model, al);
@@ -221,13 +339,47 @@ public class ModelBuilder {
         return model;
     }
 
+    private static Segment addSegment(ArrayList<Segment> segments, Station from, Station to, Double delay) {
+        Segment sg = new Segment(from, to, delay);
+        segments.add(sg);
+        Segment opposite = getSegment(segments, to, from);
+        if (opposite != null && (opposite.getFlags() & Segment.INVISIBLE) == 0) {
+            if (delay == null && opposite.getDelay() != null) {
+                sg.addFlag(Segment.INVISIBLE);
+            } else if (delay != null && opposite.getDelay() == null) {
+                opposite.addFlag(Segment.INVISIBLE);
+            } else if (delay == null && opposite.getDelay() == null) {
+                sg.addFlag(Segment.INVISIBLE);
+            }
+        }
+        return sg;
+    }
+
+    public static Segment getSegment(ArrayList<Segment> segments, Station from, Station to) {
+        final String fromName = from.getName();
+        final String toName = to.getName();
+        for (Segment seg : segments) {
+            if (seg.getFrom().getName().equals(fromName) && seg.getTo().getName().equals(toName)) {
+                return seg;
+            }
+        }
+        return null;
+    }
+
     private static void fixDimensions(Model model) {
         int xmin = Integer.MAX_VALUE;
         int ymin = Integer.MAX_VALUE;
         int xmax = Integer.MIN_VALUE;
         int ymax = Integer.MIN_VALUE;
-        for (Line line : model.getLines()) {
-            for (Station station : line.getStations()) {
+
+        Line[] lines = model.lines;
+        int linesCount = lines.length;
+
+        for (int i = 0; i < linesCount; i++) {
+            Station[] stations = lines[i].stations;
+            int stationsCount = stations.length;
+            for (int j = 0; j < stationsCount; j++) {
+                Station station = stations[j];
                 Point p = station.getPoint();
                 if (p != null) {
                     if (xmin > p.x) xmin = p.x;
@@ -254,8 +406,12 @@ public class ModelBuilder {
         int dx = 50 - xmin;
         int dy = 50 - ymin;
 
-        for (Line line : model.getLines()) {
-            for (Station station : line.getStations()) {
+        for (int i = 0; i < linesCount; i++) {
+            Line line = lines[i];
+            Station[] stations = line.stations;
+            int stationsCount = stations.length;
+            for (int j = 0; j < stationsCount; j++) {
+                Station station = stations[j];
                 Point p = station.getPoint();
                 if (p != null) {
                     p.offset(dx, dy);
@@ -265,30 +421,22 @@ public class ModelBuilder {
                     r.offset(dx, dy);
                 }
             }
-            for (Segment segment : line.getSegments()) {
-                Point[] points = segment.getAdditionalNodes();
+            Segment[] segments = line.segments;
+            int segmentsCount = segments.length;
+            for (int j = 0; j < segmentsCount; j++) {
+                Point[] points = segments[j].getAdditionalNodes();
                 if (points != null) {
-                    for (int i = 0; i < points.length; i++) {
-                        points[i].offset(dx, dy);
+                    int pointsCount = points.length;
+                    for (int k = 0; k < pointsCount; k++) {
+                        points[k].offset(dx, dy);
                     }
                 }
 
             }
         }
 
-        model.setDimension(xmax - xmin + 100, ymax - ymin + 100);
-    }
-
-    private static void fillTransfer(Model model, TransportTransfer t) {
-        Station from = model.getStation(t.mStartLine, t.mStartStation);
-        Station to = model.getStation(t.mEndLine, t.mEndStation);
-        int flags = 0;
-        if (t.mStatus != null && t.mStatus.contains("invisible")) {
-            flags = Transfer.INVISIBLE;
-        }
-        if (from != null && to != null) {
-            model.addTransfer(from, to, t.mDelay, flags);
-        }
+        model.width = xmax - xmin + 100;
+        model.height = ymax - ymin + 100;
     }
 
     private static void fillAdditionalLines(Model model, MapAddiditionalLine al) {
@@ -337,115 +485,6 @@ public class ModelBuilder {
         return index >= array.length ? null : (!zeroRect.equals(array[index]) ? array[index] : null);
     }
 
-
-    private static void fillMapLines(Model model, TransportLine tl, MapResource.MapLine ml) throws IOException {
-        String lineName = tl.mName;
-        int lineColor = ml.linesColor | 0xFF000000;
-        int labelColor = ml.labelColor > 0 ? ml.labelColor | 0xFF000000 : lineColor;
-        int labelBgColor = ml.backgroundColor;
-        if (labelBgColor != -1) {
-            labelBgColor = labelBgColor == 0 ? Color.WHITE : labelBgColor | 0xFF000000;
-        } else {
-            labelBgColor = 0;
-        }
-
-        Line line = model.addLine(lineName, lineColor, labelColor, labelBgColor);
-        if (ml.coordinates != null) {
-
-            DelaysString tDelays = new DelaysString(tl.mDrivingDelaysText);
-            StationsString tStations = new StationsString(tl.mStationText);
-            Point[] points = ml.coordinates;
-            Rect[] rects = ml.rectangles;
-
-            int stationIndex = 0;
-
-            Station toStation;
-            Double toDelay;
-
-            Station fromStation = null;
-            Double fromDelay = null;
-
-            Station thisStation = line.invalidateStation(
-                    tStations.next(),
-                    getRect(rects, stationIndex),
-                    getPoint(points, stationIndex));
-
-            do {
-                if ("(".equals(tStations.getNextDelimeter())) {
-                    int idx = 0;
-                    Double[] delays = tDelays.nextBracket();
-                    while (tStations.hasNext() && !")".equals(tStations.getNextDelimeter())) {
-                        boolean isForwardDirection = true;
-                        String bracketedStationName = tStations.next();
-                        if (bracketedStationName.startsWith("-")) {
-                            bracketedStationName = bracketedStationName.substring(1);
-                            isForwardDirection = !isForwardDirection;
-                        }
-
-                        if (bracketedStationName != null && bracketedStationName.length() > 0) {
-                            Station bracketedStation = line.invalidateStation(bracketedStationName);
-                            if (isForwardDirection) {
-                                line.addSegment(thisStation, bracketedStation, delays.length <= idx ? null : delays[idx]);
-                            } else {
-                                line.addSegment(bracketedStation, thisStation, delays.length <= idx ? null : delays[idx]);
-                            }
-                        }
-                        idx++;
-                    }
-
-                    fromStation = thisStation;
-
-                    fromDelay = null;
-                    toDelay = null;
-
-                    if (!tStations.hasNext()) {
-                        break;
-                    }
-
-                    stationIndex++;
-                    thisStation = line.invalidateStation(
-                            tStations.next(),
-                            getRect(rects, stationIndex),
-                            getPoint(points, stationIndex));
-
-                } else {
-
-                    stationIndex++;
-                    toStation = line.invalidateStation(tStations.next(),
-                            getRect(rects, stationIndex),
-                            getPoint(points, stationIndex));
-
-                    if (tDelays.beginBracket()) {
-                        Double[] delays = tDelays.nextBracket();
-                        toDelay = delays[0];
-                        fromDelay = delays[1];
-                    } else {
-                        toDelay = tDelays.next();
-                    }
-
-                    if (fromStation != null && line.getSegment(thisStation, fromStation) == null) {
-                        if (fromDelay == null) {
-                            Segment opposite = line.getSegment(fromStation, thisStation);
-                            fromDelay = opposite != null ? opposite.getDelay() : null;
-                        }
-                        line.addSegment(thisStation, fromStation, fromDelay);
-                    }
-                    if (toStation != null && line.getSegment(thisStation, toStation) == null) {
-                        line.addSegment(thisStation, toStation, toDelay);
-                    }
-
-
-                    fromStation = thisStation;
-
-                    fromDelay = toDelay;
-                    toDelay = null;
-
-                    thisStation = toStation;
-                }
-
-            } while (tStations.hasNext());
-        }
-    }
 
     private static class DelaysString {
 
@@ -556,5 +595,5 @@ public class ModelBuilder {
 
     }
 
-    
+
 }

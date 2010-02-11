@@ -23,7 +23,7 @@ package org.ametro.pmz;
 
 import java.util.ArrayList;
 import java.util.Dictionary;
-import java.util.Hashtable;
+import java.util.HashMap;
 
 public class GenericResource implements IResource {
 
@@ -47,7 +47,7 @@ public class GenericResource implements IResource {
 
         private void handleSection(String section) {
             mKeys.add(section);
-            mSections.put(section, new Hashtable<String, String>());
+            mSections.put(section, new HashMap<String, String>());
         }
 
         private void handleNaveValuePair(String section, String name, String value) {
@@ -58,7 +58,7 @@ public class GenericResource implements IResource {
 
     public void beginInitialize(FilePackage owner) {
         mKeys = new ArrayList<String>();
-        mSections = new Hashtable<String, Dictionary<String, String>>();
+        mSections = new HashMap<String, HashMap<String, String>>();
         mParser = new Parser();
 
     }
@@ -75,17 +75,17 @@ public class GenericResource implements IResource {
         return mKeys.toArray(new String[mKeys.size()]);
     }
 
-    public Dictionary<String, String> getSection(String sectionName) {
+    public HashMap<String, String> getSection(String sectionName) {
         return mSections.get(sectionName);
     }
 
     public String getValue(String sectionName, String parameter) {
-        Dictionary<String, String> section = mSections.get(sectionName);
+        HashMap<String, String> section = mSections.get(sectionName);
         return section != null ? section.get(parameter) : null;
     }
 
     private ArrayList<String> mKeys;
-    private Dictionary<String, Dictionary<String, String>> mSections;
+    private HashMap<String, HashMap<String, String>> mSections;
     private Parser mParser;
     private long mCrc;
 
