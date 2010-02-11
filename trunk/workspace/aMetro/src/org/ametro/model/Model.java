@@ -32,183 +32,103 @@ public class Model implements Serializable {
     private static final long serialVersionUID = -9024425235347648279L;
 
     private void writeObject(java.io.ObjectOutputStream out) throws IOException {
-        out.writeObject(mMapName);
-        out.writeObject(mCountryName);
-        out.writeObject(mCityName);
-        out.writeInt(mWidth);
-        out.writeInt(mHeight);
+        out.writeObject(mapName);
+        out.writeObject(countryName);
+        out.writeObject(cityName);
+        out.writeInt(width);
+        out.writeInt(height);
 
-        out.writeInt(mStationDiameter);
-        out.writeInt(mLinesWidth);
+        out.writeInt(stationDiameter);
+        out.writeInt(linesWidth);
 
-        out.writeBoolean(mWordWrap);
-        out.writeBoolean(mUpperCase);
+        out.writeBoolean(wordWrap);
+        out.writeBoolean(upperCase);
 
-        out.writeLong(mTimestamp);
-        out.writeLong(mCrc);
-        out.writeLong(mSourceVersion);
+        out.writeLong(timestamp);
+        out.writeLong(crc);
+        out.writeLong(sourceVersion);
 
-        out.writeInt(mLines.size());
-        for (Line line : mLines.values()) {
-            out.writeObject(line);
+        final Line[] localLines = lines;
+        int linesCount = localLines.length;
+        out.writeInt(linesCount);
+        for (int i = 0; i < linesCount; i++) {
+            out.writeObject(localLines[i]);
         }
 
-        out.writeInt(mTransfers.size());
-        for (Transfer transfer : mTransfers) {
-            out.writeObject(transfer);
+        final Transfer[] localTransfers = transfers;
+        final int transfersCount = localTransfers.length;
+        out.writeInt(transfersCount);
+        for (int i = 0; i < transfersCount; i++) {
+            out.writeObject(localTransfers[i]);
         }
     }
 
     private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
 
-        mMapName = (String) in.readObject();
-        mCountryName = (String) in.readObject();
-        mCityName = (String) in.readObject();
-        mWidth = in.readInt();
-        mHeight = in.readInt();
+        mapName = (String) in.readObject();
+        countryName = (String) in.readObject();
+        cityName = (String) in.readObject();
+        width = in.readInt();
+        height = in.readInt();
 
-        mStationDiameter = in.readInt();
-        mLinesWidth = in.readInt();
+        stationDiameter = in.readInt();
+        linesWidth = in.readInt();
 
-        mWordWrap = in.readBoolean();
-        mUpperCase = in.readBoolean();
+        wordWrap = in.readBoolean();
+        upperCase = in.readBoolean();
 
-        mTimestamp = in.readLong();
-        mCrc = in.readLong();
-        mSourceVersion = in.readLong();
+        timestamp = in.readLong();
+        crc = in.readLong();
+        sourceVersion = in.readLong();
 
-        mLines = new HashMap<String, Line>();
-        int lineCount = in.readInt();
+        final HashMap<String, Line> localLinesMap = new HashMap<String, Line>();
+        final int lineCount = in.readInt();
+        final Line[] localLines = new Line[lineCount];
         for (int i = 0; i < lineCount; i++) {
             Line line = (Line) in.readObject();
-            mLines.put(line.getName(), line);
+            localLinesMap.put(line.name, line);
+            localLines[i] = line;
         }
+        linesMap = localLinesMap;
+        lines = localLines;
 
-        mTransfers = new ArrayList<Transfer>();
-        int transferCount = in.readInt();
+        final int transferCount = in.readInt();
+        final Transfer[] localTransfers = new Transfer[transferCount];
         for (int i = 0; i < transferCount; i++) {
-            mTransfers.add((Transfer) in.readObject());
+            localTransfers[i] = (Transfer) in.readObject();
         }
+        transfers = localTransfers;
     }
 
 
-    public Model(String mapName) {
-        mMapName = mapName;
+    public Model(String newMapName) {
+        mapName = newMapName;
     }
 
-    public long mTimestamp;
-    public long mCrc;
+    public long timestamp;
+    public long crc;
 
-    public String mMapName;
+    public String mapName;
 
-    public String mCityName;
-    public String mCountryName;
+    public String cityName;
+    public String countryName;
 
-    public int mWidth;
-    public int mHeight;
+    public int width;
+    public int height;
 
-    public int mStationDiameter;
-    public int mLinesWidth;
-    public boolean mWordWrap;
-    public boolean mUpperCase;
+    public int stationDiameter;
+    public int linesWidth;
+    public boolean wordWrap;
+    public boolean upperCase;
 
-    public long mSourceVersion;
+    public long sourceVersion;
 
-    public HashMap<String, Line> mLines = new HashMap<String, Line>();
-    public ArrayList<Transfer> mTransfers = new ArrayList<Transfer>();
-
-    public long getSourceVersion() {
-        return mSourceVersion;
-    }
-
-    public void setSourceVersion(long mSourceVersion) {
-        this.mSourceVersion = mSourceVersion;
-    }
-
-    public long getTimestamp() {
-        return mTimestamp;
-    }
-
-    public void setTimestamp(long mTimestamp) {
-        this.mTimestamp = mTimestamp;
-    }
-
-    public long getCrc() {
-        return mCrc;
-    }
-
-    public void setCrc(long mCrc) {
-        this.mCrc = mCrc;
-    }
-
-    public void setCityName(String cityName) {
-        mCityName = cityName;
-    }
-
-    public String getCityName() {
-        return mCityName;
-    }
-
-    public void setCountryName(String countryName) {
-        mCountryName = countryName;
-    }
-
-    public String getCountryName() {
-        return mCountryName;
-    }
-
-    public boolean isUpperCase() {
-        return mUpperCase;
-    }
-
-    public void setUpperCase(boolean mUpperCase) {
-        this.mUpperCase = mUpperCase;
-    }
-
-    public boolean isWordWrap() {
-        return mWordWrap;
-    }
-
-    public void setWordWrap(boolean mWordWrap) {
-        this.mWordWrap = mWordWrap;
-    }
-
-    public int getWidth() {
-        return mWidth;
-    }
-
-    public int getHeight() {
-        return mHeight;
-    }
-
-    public int getStationDiameter() {
-        return mStationDiameter;
-    }
-
-    public int getLinesWidth() {
-        return mLinesWidth;
-    }
-
-    public void setStationDiameter(int mStationDiameter) {
-        this.mStationDiameter = mStationDiameter;
-    }
-
-    public void setLinesWidth(int mLineWidth) {
-        this.mLinesWidth = mLineWidth;
-    }
-
-    public String getMapName() {
-        return mMapName;
-    }
-
-    public void setDimension(int width, int height) {
-        mWidth = width;
-        mHeight = height;
-    }
-
+    public HashMap<String, Line> linesMap = new HashMap<String, Line>();
+    public Line[] lines;
+    public Transfer[] transfers;
 
     public Station getStation(String lineName, String stationName) {
-        Line line = mLines.get(lineName);
+        Line line = linesMap.get(lineName);
         if (line != null) {
             return line.getStation(stationName);
         }
@@ -216,28 +136,7 @@ public class Model implements Serializable {
     }
 
     public Line getLine(String lineName) {
-        return mLines.get(lineName);
+        return linesMap.get(lineName);
     }
-
-    public Transfer addTransfer(Station from, Station to, Double delay, int flags) {
-        Transfer tr = new Transfer(from, to, delay, flags);
-        mTransfers.add(tr);
-        return tr;
-    }
-
-    public Line addLine(String lineName, int color, int labelColor, int labelBgColor) {
-        Line line = new Line(lineName, color, labelColor, labelBgColor);
-        mLines.put(lineName, line);
-        return line;
-    }
-
-    public Collection<Line> getLines() {
-        return mLines.values();
-    }
-
-    public Iterator<Transfer> getTransfers() {
-        return mTransfers.iterator();
-    }
-
 
 }

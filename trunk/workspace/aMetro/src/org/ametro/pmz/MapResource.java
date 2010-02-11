@@ -25,7 +25,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.HashMap;
 
 import org.ametro.util.SerializeUtil;
 
@@ -148,7 +148,7 @@ public class MapResource implements IResource {
     }
 
     public void beginInitialize(FilePackage owner) {
-        this.mapLines = new Hashtable<String, MapLine>();
+        this.mapLines = new HashMap<String, MapLine>();
         this.addiditionalLines = new ArrayList<MapAddiditionalLine>();
         parser = new MapParser();
     }
@@ -201,7 +201,7 @@ public class MapResource implements IResource {
         return transportNames;
     }
 
-    public Hashtable<String, MapLine> getMapLines() {
+    public HashMap<String, MapLine> getMapLines() {
         return mapLines;
     }
 
@@ -228,7 +228,7 @@ public class MapResource implements IResource {
     private String transportName;
 
     private String[] transportNames;
-    private Hashtable<String, MapLine> mapLines;
+    private HashMap<String, MapLine> mapLines;
     private ArrayList<MapAddiditionalLine> addiditionalLines;
     private long mCrc;
 

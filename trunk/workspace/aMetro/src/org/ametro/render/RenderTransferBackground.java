@@ -48,8 +48,8 @@ public class RenderTransferBackground extends RenderElement {
         ToX = to.x;
         ToY = to.y;
 
-        final int lineWidth = model.getLinesWidth();
-        final int radius = model.getStationDiameter() / 2;
+        final int lineWidth = model.linesWidth;
+        final int radius = model.stationDiameter / 2;
 
         RadiusBig = (float) radius + 3.5f;
 

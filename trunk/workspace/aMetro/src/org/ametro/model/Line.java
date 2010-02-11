@@ -26,8 +26,6 @@ import android.graphics.Rect;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 
 public class Line implements Serializable {
@@ -37,97 +35,90 @@ public class Line implements Serializable {
     private static final long serialVersionUID = -957788093146079549L;
 
     private void writeObject(java.io.ObjectOutputStream out) throws IOException {
-        out.writeObject(mName);
+        out.writeObject(name);
 
-        out.writeInt(mColor);
-        out.writeInt(mLabelColor);
-        out.writeInt(mLabelBgColor);
+        out.writeInt(color);
+        out.writeInt(labelColor);
+        out.writeInt(labelBgColor);
 
 
-        out.writeInt(mSegments.size());
-        for (Segment mSegment : mSegments) {
-            out.writeObject(mSegment);
+        final Segment[] localSegments = segments;
+        int segmentsCount = localSegments.length;
+        out.writeInt(segmentsCount);
+        for (int i = 0; i < segmentsCount; i++) {
+            out.writeObject(localSegments[i]);
         }
 
-        out.writeInt(mStations.size());
-        for (Station station : mStations.values()) {
-            out.writeObject(station);
+        final Station[] localStations = stations;
+        final int stationsCount = localStations.length;
+        out.writeInt(stationsCount);
+        for (int i = 0; i < stationsCount; i++) {
+            out.writeObject(localStations[i]);
         }
     }
 
     private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
 
-        mName = (String) in.readObject();
+        name = (String) in.readObject();
 
-        mColor = in.readInt();
-        mLabelColor = in.readInt();
-        mLabelBgColor = in.readInt();
+        color = in.readInt();
+        labelColor = in.readInt();
+        labelBgColor = in.readInt();
 
-        mSegments = new ArrayList<Segment>();
-        int segmentCount = in.readInt();
-        for (int i = 0; i < segmentCount; i++) {
-            mSegments.add((Segment) in.readObject());
-        }
-
-        mStations = new HashMap<String, Station>();
-        int stationCount = in.readInt();
-        for (int i = 0; i < stationCount; i++) {
-            Station station = (Station) in.readObject();
-            mStations.put(station.getName(), station);
-        }
-
-        for (Segment segment : mSegments) {
+        final int segmentsCount = in.readInt();
+        final Segment[] localSegments = new Segment[segmentsCount];
+        for (int i = 0; i < segmentsCount; i++) {
+            final Segment segment = (Segment) in.readObject();
+            localSegments[i] = segment;
             segment.getFrom().addSegment(segment, Segment.SEGMENT_BEGIN);
             segment.getTo().addSegment(segment, Segment.SEGMENT_END);
         }
+        segments = localSegments;
+
+        final HashMap<String, Station> localStationsMap = new HashMap<String, Station>();
+        final int stationsCount = in.readInt();
+        final Station[] localStations = new Station[stationsCount];
+        for (int i = 0; i < stationsCount; i++) {
+            final Station station = (Station) in.readObject();
+            localStationsMap.put(station.getName(), station);
+            localStations[i] = station;
+        }
+
+        stationsMap = localStationsMap;
+        stations = localStations;
 
     }
 
 
-    public String mName;
-    public int mColor;
-    public int mLabelColor;
-    public int mLabelBgColor;
+    public String name;
+    public int color;
+    public int labelColor;
+    public int labelBgColor;
 
-    public HashMap<String, Station> mStations = new HashMap<String, Station>();
-    public ArrayList<Segment> mSegments = new ArrayList<Segment>();
+    public HashMap<String, Station> stationsMap = new HashMap<String, Station>();
+    public Station[] stations;
+    public Segment[] segments;
 
-    public Line(String name, int color, int labelColor, int labelBgColor) {
+    public Line(String newName, int newColor, int newLabelColor, int newLabelBgColor) {
         super();
-        this.mName = name;
-        this.mColor = color;
-        this.mLabelColor = labelColor;
-        this.mLabelBgColor = labelBgColor;
-    }
-
-    public String getName() {
-        return mName;
-    }
-
-    public int getColor() {
-        return mColor;
-    }
-
-    public int getLabelColor() {
-        return mLabelColor;
-    }
-
-    public int getLabelBgColor() {
-        return mLabelBgColor;
+        name = newName;
+        color = newColor;
+        labelColor = newLabelColor;
+        labelBgColor = newLabelBgColor;
     }
 
     public Station getStation(String name) {
-        return mStations.get(name);
+        return stationsMap.get(name);
     }
 
     private Station addStation(String name, Rect r, Point p) {
         Station st = new Station(name, r, p, this);
-        mStations.put(name, st);
+        stationsMap.put(name, st);
         return st;
     }
 
     public Station invalidateStation(String name) {
-        Station st = mStations.get(name);
+        Station st = stationsMap.get(name);
         if (st == null) {
             st = addStation(name, null, null);
         }
@@ -135,7 +126,7 @@ public class Line implements Serializable {
     }
 
     public Station invalidateStation(String name, Rect r, Point p) {
-        Station st = mStations.get(name);
+        Station st = stationsMap.get(name);
         if (st == null) {
             st = addStation(name, r, p);
         } else {
@@ -145,34 +136,10 @@ public class Line implements Serializable {
         return st;
     }
 
-    public Segment addSegment(Station from, Station to, Double delay) {
-        Segment sg = new Segment(from, to, delay);
-        mSegments.add(sg);
-        Segment opposite = getSegment(to, from);
-        if (opposite != null && (opposite.getFlags() & Segment.INVISIBLE) == 0) {
-            if (delay == null && opposite.getDelay() != null) {
-                sg.addFlag(Segment.INVISIBLE);
-            } else if (delay != null && opposite.getDelay() == null) {
-                opposite.addFlag(Segment.INVISIBLE);
-            } else if (delay == null && opposite.getDelay() == null) {
-                sg.addFlag(Segment.INVISIBLE);
-            }
-        }
-        return sg;
-    }
-
-    public Collection<Station> getStations() {
-        return mStations.values();
-    }
-
-    public ArrayList<Segment> getSegments() {
-        return mSegments;
-    }
-
     public Segment getSegment(Station from, Station to) {
         final String fromName = from.getName();
         final String toName = to.getName();
-        for (Segment seg : mSegments) {
+        for (Segment seg : segments) {
             if (seg.getFrom().getName().equals(fromName) && seg.getTo().getName().equals(toName)) {
                 return seg;
             }

@@ -47,7 +47,7 @@ public class RenderSegment extends RenderElement {
 
         final Double delay = segment.getDelay();
         final boolean lineWorking = (delay != null && delay > 0);
-        final int lineWidth = model.getLinesWidth();
+        final int lineWidth = model.linesWidth;
 
         paint.setStyle(Style.STROKE);
         paint.setAntiAlias(true);
@@ -62,7 +62,7 @@ public class RenderSegment extends RenderElement {
                     new CornerPathEffect(lineWidth * 0.6f)
             ));
         }
-        paint.setColor(segment.getFrom().getLine().getColor());
+        paint.setColor(segment.getFrom().getLine().color);
 
         this.Paint = paint;
         drawSegmentPath(line, segment, from, to, path);

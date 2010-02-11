@@ -45,12 +45,12 @@ public class RenderStation extends RenderElement {
 
         final int x = station.getPoint().x;
         final int y = station.getPoint().y;
-        final int radius = model.getStationDiameter() / 2;
+        final int radius = model.stationDiameter / 2;
         final float radiusFirst = (float) radius;
         final Paint paintFirst = new Paint();
         final Paint paintSecond = new Paint();
 
-        paintFirst.setColor(station.getLine().getColor());
+        paintFirst.setColor(station.getLine().color);
         paintFirst.setStyle(Style.FILL);
         paintFirst.setAntiAlias(true);
 
