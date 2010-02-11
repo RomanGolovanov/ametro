@@ -137,7 +137,7 @@ public class MapListAdapter extends BaseExpandableListAdapter {
         for (int i = 0; i < mFiles.length; i++) {
             String[] cols = mFiles[i];
             for (int j = 0; j < cols.length; j++) {
-                if (cols[j].equals(fileName)) {
+                if (cols[j].equalsIgnoreCase(fileName)) {
                     mSelectedGroup = i;
                     mSelectedChild = j;
                     return;
