@@ -63,7 +63,7 @@ public class BrowseVectorMap extends Activity {
 	private final int MIN_ZOOM_LEVEL = 0;
 	private final int MAX_ZOOM_LEVEL = 7;
 	private final int DEFAULT_ZOOM_LEVEL = 1;
-	private final int ZOOM_CONTROLS_TIMEOUT = 3000;
+	private final int ZOOM_CONTROLS_TIMEOUT = 2000;
 	private int mZoom = DEFAULT_ZOOM_LEVEL;
 
 	private Model mModel;
@@ -245,7 +245,17 @@ public class BrowseVectorMap extends Activity {
 		mMapView.setModel(mModel);
 		mZoomControls = (ZoomControls) findViewById(R.id.browse_vector_map_zoom);
         mZoomControls.setVisibility(View.INVISIBLE);
-        mMapView.setOnMapEventListener(new OnMapEventListener() {
+        
+		MapSettings.setMapName(mModel.getMapName());
+		onRestoreMapState();
+		onUpdateTitle();
+        bindMapEvents();
+		mMapView.requestFocus();
+		MapSettings.saveDefaultMapName(BrowseVectorMap.this);
+	}
+
+	private void bindMapEvents() {
+		mMapView.setOnMapEventListener(new OnMapEventListener() {
 			public void onShortClick(int x, int y) {
 				if(mZoomControls.getVisibility() != View.VISIBLE){
 					showZoom();
@@ -284,12 +294,6 @@ public class BrowseVectorMap extends Activity {
                 }
             }
         };
-        
-		MapSettings.setMapName(mModel.getMapName());
-		onRestoreMapState();
-		onUpdateTitle();
-		mMapView.requestFocus();
-		MapSettings.saveDefaultMapName(BrowseVectorMap.this);
 	}	
 	private void onUpdateTitle() {
 		if (mModel == null) {
