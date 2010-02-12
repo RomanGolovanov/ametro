@@ -24,8 +24,8 @@ package org.ametro.render;
 import android.graphics.*;
 import android.graphics.Paint.Style;
 import org.ametro.model.SubwayMap;
+import org.ametro.model.SubwaySegment;
 import org.ametro.model.SubwayStation;
-import org.ametro.model.SubwayStationsTransfer;
 
 public class RenderTransfer extends RenderElement {
 
@@ -39,7 +39,7 @@ public class RenderTransfer extends RenderElement {
     private Paint Paint;
 
 
-    public RenderTransfer(SubwayMap subwayMap, SubwayStationsTransfer transfer) {
+    public RenderTransfer(SubwayMap subwayMap, SubwaySegment transfer) {
         super();
         final SubwayStation fromStation = transfer.from;
         final Point from = fromStation.point;

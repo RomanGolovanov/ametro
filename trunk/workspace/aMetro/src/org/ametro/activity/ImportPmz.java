@@ -38,11 +38,12 @@ import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
 import org.ametro.MapSettings;
 import org.ametro.R;
+import org.ametro.model.Model;
 import org.ametro.model.SubwayMap;
-import org.ametro.model.ModelBuilder;
 import org.ametro.model.ModelDescription;
 import org.ametro.other.ProgressInfo;
 import org.ametro.util.FileUtil;
+import org.ametro.util.ModelUtil;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -202,7 +203,7 @@ public class ImportPmz extends Activity {
             File mapFile = new File(mapFileName);
             String fullFileName = MapSettings.IMPORT_PATH + fileName;
             try {
-                ModelDescription pmz = ModelBuilder.indexPmz(fullFileName);
+                ModelDescription pmz = ModelUtil.indexPmz(fullFileName);
                 String mapName = String.format("%s - %s (%s)", pmz.countryName, pmz.cityName, fileName);
                 int severity = 5;
                 int statusId = R.string.import_status_not_imported;
@@ -211,7 +212,7 @@ public class ImportPmz extends Activity {
                 if (mapFile.exists()) {
                     ModelDescription map;
                     try {
-                        map = ModelBuilder.loadModelDescription(mapFileName);
+                        map = ModelUtil.loadModelDescription(mapFileName);
                     } catch (Exception ex) {
                         map = null;
                     }
@@ -331,8 +332,9 @@ public class ImportPmz extends Activity {
                 pi.message = record.mapName;
                 publishProgress(pi);
                 try {
-                    SubwayMap map = ModelBuilder.importPmz(record.fileName);
-                    ModelBuilder.saveModel(map);
+                    Model model = ModelUtil.importPmz(record.fileName);
+                    SubwayMap map = model.subwayMap;
+                    ModelUtil.saveModel(map);
                     record.checked = false;
                     record.status = updateStatus;
                     record.statusColor = Color.GREEN;

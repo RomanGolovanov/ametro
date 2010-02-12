@@ -23,21 +23,20 @@ package org.ametro.model;
 
 import android.graphics.Point;
 import android.graphics.Rect;
-import org.ametro.util.SerializeUtil;
-
-import java.io.IOException;
-import java.io.Serializable;
 
 public class SubwayStation {
 
     public static final int VERSION = 1;
+
+    public int id;
 
     public String name;
     public Rect rect;
     public Point point;
     public SubwayLine line;
 
-    public SubwayStation(String newName, Rect newRect, Point newPoint, SubwayLine newLine) {
+    public SubwayStation(int newId, String newName, Rect newRect, Point newPoint, SubwayLine newLine) {
+        id = newId;
         name = newName;
         rect = newRect;
         point = newPoint;
@@ -46,15 +45,13 @@ public class SubwayStation {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof SubwayStation)) return false;
-        SubwayStation that = (SubwayStation) o;
-        return name.equals(that.name);
+        return this == o || o != null && getClass() == o.getClass() && id == ((SubwayStation) o).id;
+
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode();
+        return id;
     }
 
     @Override

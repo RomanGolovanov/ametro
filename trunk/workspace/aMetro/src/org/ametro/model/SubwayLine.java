@@ -25,12 +25,15 @@ public class SubwayLine {
 
     public static final int VERSION = 1;
 
+    public int id;
+
     public String name;
     public int color;
     public int labelColor;
     public int labelBgColor;
 
-    public SubwayLine(String newName, int newColor, int newLabelColor, int newLabelBgColor) {
+    public SubwayLine(int newId, String newName, int newColor, int newLabelColor, int newLabelBgColor) {
+        id = newId;
         name = newName;
         color = newColor;
         labelColor = newLabelColor;
@@ -39,14 +42,11 @@ public class SubwayLine {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof SubwayLine)) return false;
-        SubwayLine that = (SubwayLine) o;
-        return name.equals(that.name);
+        return this == o || o != null && getClass() == o.getClass() && id == ((SubwayLine) o).id;
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode();
+        return id;
     }
 }

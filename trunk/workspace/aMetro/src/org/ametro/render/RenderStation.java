@@ -41,7 +41,7 @@ public class RenderStation extends RenderElement {
 
     public RenderStation(SubwayMap subwayMap, SubwayStation station) {
         super();
-        final boolean hasConnections = station.hasConnections();
+        final boolean hasConnections = subwayMap.hasConnections(station);
 
         final int localX = station.point.x;
         final int localY = station.point.y;

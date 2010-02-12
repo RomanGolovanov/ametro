@@ -37,7 +37,7 @@ import org.ametro.MapSettings;
 import org.ametro.MapUri;
 import org.ametro.R;
 import org.ametro.model.SubwayMap;
-import org.ametro.model.ModelBuilder;
+import org.ametro.util.ModelUtil;
 import org.ametro.widget.BaseMapView.OnMapEventListener;
 import org.ametro.widget.VectorMapView;
 
@@ -351,7 +351,7 @@ public class BrowseVectorMap extends Activity {
         protected SubwayMap doInBackground(Uri... params) {
             try {
                 Uri mapUri = params[0];
-                return ModelBuilder.loadModel(MapSettings
+                return ModelUtil.loadModel(MapSettings
                         .getMapFileName(mapUri));
             } catch (Exception e) {
                 mError = e;

@@ -24,7 +24,6 @@ package org.ametro.render;
 import android.graphics.*;
 import android.graphics.Paint.Style;
 import org.ametro.graphics.ExtendedPath;
-import org.ametro.model.SubwayLine;
 import org.ametro.model.SubwayMap;
 import org.ametro.model.SubwaySegment;
 import org.ametro.model.SubwayStation;
@@ -39,7 +38,6 @@ public class RenderSegment extends RenderElement {
         super();
         final SubwayStation from = segment.from;
         final SubwayStation to = segment.to;
-        final SubwayLine line = from.line;
 
         final Paint localPaint = new Paint();
         final ExtendedPath localPath = new ExtendedPath();
@@ -64,7 +62,7 @@ public class RenderSegment extends RenderElement {
         localPaint.setColor(segment.from.line.color);
 
         paint = localPaint;
-        drawSegmentPath(line, segment, from, to, localPath);
+        drawSegmentPath(subwayMap, segment, from, to, localPath);
         path = localPath;
 
         final int minx = Math.min(from.point.x, to.point.x) - lineWidth;
@@ -72,7 +70,7 @@ public class RenderSegment extends RenderElement {
         final int miny = Math.min(from.point.y, to.point.y) - lineWidth;
         final int maxy = Math.max(from.point.y, to.point.y) + lineWidth;
         final Rect box = new Rect(minx, miny, maxx, maxy);
-        final Point[] nodes = segment.additionalNodes;
+        final Point[] nodes = subwayMap.getSegmentsNodes(segment.id);
         if (nodes != null) {
             final int length = nodes.length;
             for (int i = 0; i < length; i++) {
@@ -83,10 +81,10 @@ public class RenderSegment extends RenderElement {
         setProperties(RenderProgram.TYPE_LINE, box);
     }
 
-    private void drawSegmentPath(SubwayLine line, SubwaySegment segment, SubwayStation from, SubwayStation to, ExtendedPath path) {
+    private void drawSegmentPath(SubwayMap map, SubwaySegment segment, SubwayStation from, SubwayStation to, ExtendedPath path) {
         final Point pointFrom = from.point;
         final Point pointTo = to.point;
-        final Point[] additionalPoints = segment.additionalNodes;
+        final Point[] additionalPoints = map.getSegmentsNodes(segment.id);
         if (additionalPoints != null) {
             if ((segment.flags & SubwaySegment.SPLINE) != 0) {
                 Point[] points = new Point[additionalPoints.length + 2];
@@ -99,8 +97,8 @@ public class RenderSegment extends RenderElement {
                 path.drawSpline(points, 0, points.length);
             } else {
                 path.moveTo(pointFrom.x, pointFrom.y);
-                for (int i = 0; i < additionalPoints.length; i++) {
-                    path.lineTo(additionalPoints[i].x, additionalPoints[i].y);
+                for (Point additionalPoint : additionalPoints) {
+                    path.lineTo(additionalPoint.x, additionalPoint.y);
                 }
                 path.lineTo(pointTo.x, pointTo.y);
             }

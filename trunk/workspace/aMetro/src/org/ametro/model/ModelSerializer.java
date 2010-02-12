@@ -83,12 +83,6 @@ public class ModelSerializer {
 
         csvWriter.newRecord();
         csvWriter.writeInt(HEADER_TYPE);
-        csvWriter.writeString("Transfer");
-        csvWriter.writeInt(TRANSFER_TYPE);
-        csvWriter.writeInt(SubwayStationsTransfer.VERSION);
-
-        csvWriter.newRecord();
-        csvWriter.writeInt(HEADER_TYPE);
         csvWriter.writeString("Station");
         csvWriter.writeInt(STATION_TYPE);
         csvWriter.writeInt(SubwayStation.VERSION);
@@ -139,19 +133,19 @@ public class ModelSerializer {
         csvWriter.writeLong(subwayMap.sourceVersion);
 
         final SubwayLine[] lines = subwayMap.lines;
-        final SubwayStationsTransfer[] transfers = subwayMap.transfers;
+        final SubwaySegment[] transfers = subwayMap.transfers;
         int linesCount = lines.length;
         int transfersCount = transfers.length;
 
         csvWriter.writeInt(linesCount);
         csvWriter.writeInt(transfersCount);
 
-        for (int i = 0; i < lines.length; i++) {
-            serialize(lines[i], csvWriter);
+        for (SubwayLine line : lines) {
+            serialize(line, csvWriter);
         }
 
-        for (int i = 0; i < transfers.length; i++) {
-            serialize(transfers[i], csvWriter);
+        for (SubwaySegment transfer : transfers) {
+            serialize(transfer, csvWriter);
         }
     }
 
@@ -162,22 +156,6 @@ public class ModelSerializer {
         csvWriter.writeInt(line.color);
         csvWriter.writeInt(line.labelColor);
         csvWriter.writeInt(line.labelBgColor);
-
-        final SubwayStation[] stations = line.stations;
-        final SubwaySegment[] segments = line.segments;
-        int stationsCount = stations.length;
-        int segmentsCount = segments.length;
-
-        csvWriter.writeInt(stationsCount);
-        csvWriter.writeInt(segmentsCount);
-
-        for (int i = 0; i < stations.length; i++) {
-            serialize(stations[i], csvWriter);
-        }
-
-        for (int i = 0; i < segmentsCount; i++) {
-            serialize(segments[i], csvWriter);
-        }
     }
 
     private static void serialize(SubwayStation station, CsvWriter csvWriter) throws IOException {
@@ -190,11 +168,6 @@ public class ModelSerializer {
     private static void serialize(SubwaySegment segment, CsvWriter csvWriter) throws IOException {
         csvWriter.newRecord();
         csvWriter.writeInt(SEGMENT_TYPE);
-    }
-
-    private static void serialize(SubwayStationsTransfer transfer, CsvWriter csvWriter) throws IOException {
-        csvWriter.newRecord();
-        csvWriter.writeInt(TRANSFER_TYPE);
     }
 
 }
