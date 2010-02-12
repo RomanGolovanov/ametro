@@ -19,26 +19,34 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-package org.ametro.render;
+package org.ametro.model;
 
-import android.graphics.Canvas;
-import android.graphics.Rect;
+public class SubwayLine {
 
-public abstract class RenderElement implements Comparable<RenderElement> {
+    public static final int VERSION = 1;
 
-    public int type;
-    public Rect boundingBox;
-    public boolean visible;
+    public String name;
+    public int color;
+    public int labelColor;
+    public int labelBgColor;
 
-    public void setProperties(int newPriority, Rect newBoundingBox) {
-        type = newPriority;
-        boundingBox = newBoundingBox;
+    public SubwayLine(String newName, int newColor, int newLabelColor, int newLabelBgColor) {
+        name = newName;
+        color = newColor;
+        labelColor = newLabelColor;
+        labelBgColor = newLabelBgColor;
     }
 
-    public abstract void draw(Canvas canvas);
-
-    public int compareTo(RenderElement another) {
-        return type - another.type;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SubwayLine)) return false;
+        SubwayLine that = (SubwayLine) o;
+        return name.equals(that.name);
     }
 
+    @Override
+    public int hashCode() {
+        return name.hashCode();
+    }
 }

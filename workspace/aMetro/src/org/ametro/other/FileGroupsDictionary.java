@@ -40,29 +40,9 @@ public class FileGroupsDictionary implements Serializable {
 
     }
 
-    private TreeMap<String, StringArray> groups = new TreeMap<String, StringArray>();
-    private TreeMap<String, String> pathes = new TreeMap<String, String>();
-    private long timestamp;
-
-    public TreeMap<String, String> getPathes() {
-        return pathes;
-    }
-
-    public void setPathes(TreeMap<String, String> pathes) {
-        this.pathes = pathes;
-    }
-
-    public long getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    public void setGroups(TreeMap<String, StringArray> groups) {
-        this.groups = groups;
-    }
+    public TreeMap<String, StringArray> groups = new TreeMap<String, StringArray>();
+    public TreeMap<String, String> pathes = new TreeMap<String, String>();
+    public long timestamp;
 
     public void putFile(String groupName, String label, String path) {
         StringArray c = groups.get(groupName);

@@ -50,10 +50,10 @@ public class ModelSerializer {
     private static final int RECT_TYPE = 6;
     private static final int POINT_TYPE = 7;
 
-    public static void serialize(Model model, OutputStream out) throws IOException {
+    public static void serialize(SubwayMap subwayMap, OutputStream out) throws IOException {
         long startTime = System.currentTimeMillis();
         ZipOutputStream zipOut = new ZipOutputStream(out);
-        ZipEntry zipEntry = new ZipEntry("model.csv");
+        ZipEntry zipEntry = new ZipEntry("subwayMap.csv");
 
         zipOut.putNextEntry(zipEntry);
 
@@ -69,35 +69,35 @@ public class ModelSerializer {
         // header flag
         csvWriter.writeInt(HEADER_TYPE);
         // Object type
-        csvWriter.writeString("Model");
+        csvWriter.writeString("SubwayMap");
         // its type code
         csvWriter.writeInt(MODEL_TYPE);
         // and its version for future deprecated (or too new) file recognition
-        csvWriter.writeInt(Model.VERSION);
+        csvWriter.writeInt(SubwayMap.VERSION);
 
         csvWriter.newRecord();
         csvWriter.writeInt(HEADER_TYPE);
         csvWriter.writeString("Line");
         csvWriter.writeInt(LINE_TYPE);
-        csvWriter.writeInt(Line.VERSION);
+        csvWriter.writeInt(SubwayLine.VERSION);
 
         csvWriter.newRecord();
         csvWriter.writeInt(HEADER_TYPE);
         csvWriter.writeString("Transfer");
         csvWriter.writeInt(TRANSFER_TYPE);
-        csvWriter.writeInt(Transfer.VERSION);
+        csvWriter.writeInt(SubwayStationsTransfer.VERSION);
 
         csvWriter.newRecord();
         csvWriter.writeInt(HEADER_TYPE);
         csvWriter.writeString("Station");
         csvWriter.writeInt(STATION_TYPE);
-        csvWriter.writeInt(Station.VERSION);
+        csvWriter.writeInt(SubwayStation.VERSION);
 
         csvWriter.newRecord();
         csvWriter.writeInt(HEADER_TYPE);
         csvWriter.writeString("Segment");
         csvWriter.writeInt(SEGMENT_TYPE);
-        csvWriter.writeInt(Segment.VERSION);
+        csvWriter.writeInt(SubwaySegment.VERSION);
 
         csvWriter.newRecord();
         csvWriter.writeInt(HEADER_TYPE);
@@ -109,7 +109,7 @@ public class ModelSerializer {
         csvWriter.writeString("Point");
         csvWriter.writeInt(POINT_TYPE);
 
-        serialize(model, csvWriter);
+        serialize(subwayMap, csvWriter);
 
         csvWriter.flush();
 
@@ -117,29 +117,29 @@ public class ModelSerializer {
         zipOut.close();
 
         if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO)) {
-            Log.i(LOG_TAG_MAIN, "Model saving time is " + (System.currentTimeMillis() - startTime) + "ms");
+            Log.i(LOG_TAG_MAIN, "SubwayMap saving time is " + (System.currentTimeMillis() - startTime) + "ms");
         }
 
     }
 
-    private static void serialize(Model model, CsvWriter csvWriter) throws IOException {
+    private static void serialize(SubwayMap subwayMap, CsvWriter csvWriter) throws IOException {
         csvWriter.newRecord();
         csvWriter.writeInt(MODEL_TYPE);
-        csvWriter.writeLong(model.timestamp);
-        csvWriter.writeLong(model.crc);
-        csvWriter.writeString(model.mapName);
-        csvWriter.writeString(model.cityName);
-        csvWriter.writeString(model.countryName);
-        csvWriter.writeInt(model.width);
-        csvWriter.writeInt(model.height);
-        csvWriter.writeInt(model.stationDiameter);
-        csvWriter.writeInt(model.linesWidth);
-        csvWriter.writeBoolean(model.wordWrap);
-        csvWriter.writeBoolean(model.upperCase);
-        csvWriter.writeLong(model.sourceVersion);
+        csvWriter.writeLong(subwayMap.timestamp);
+        csvWriter.writeLong(subwayMap.crc);
+        csvWriter.writeString(subwayMap.mapName);
+        csvWriter.writeString(subwayMap.cityName);
+        csvWriter.writeString(subwayMap.countryName);
+        csvWriter.writeInt(subwayMap.width);
+        csvWriter.writeInt(subwayMap.height);
+        csvWriter.writeInt(subwayMap.stationDiameter);
+        csvWriter.writeInt(subwayMap.linesWidth);
+        csvWriter.writeBoolean(subwayMap.wordWrap);
+        csvWriter.writeBoolean(subwayMap.upperCase);
+        csvWriter.writeLong(subwayMap.sourceVersion);
 
-        final Line[] lines = model.lines;
-        final Transfer[] transfers = model.transfers;
+        final SubwayLine[] lines = subwayMap.lines;
+        final SubwayStationsTransfer[] transfers = subwayMap.transfers;
         int linesCount = lines.length;
         int transfersCount = transfers.length;
 
@@ -155,7 +155,7 @@ public class ModelSerializer {
         }
     }
 
-    private static void serialize(Line line, CsvWriter csvWriter) throws IOException {
+    private static void serialize(SubwayLine line, CsvWriter csvWriter) throws IOException {
         csvWriter.newRecord();
         csvWriter.writeInt(LINE_TYPE);
         csvWriter.writeString(line.name);
@@ -163,8 +163,8 @@ public class ModelSerializer {
         csvWriter.writeInt(line.labelColor);
         csvWriter.writeInt(line.labelBgColor);
 
-        final Station[] stations = line.stations;
-        final Segment[] segments = line.segments;
+        final SubwayStation[] stations = line.stations;
+        final SubwaySegment[] segments = line.segments;
         int stationsCount = stations.length;
         int segmentsCount = segments.length;
 
@@ -180,19 +180,19 @@ public class ModelSerializer {
         }
     }
 
-    private static void serialize(Station station, CsvWriter csvWriter) throws IOException {
+    private static void serialize(SubwayStation station, CsvWriter csvWriter) throws IOException {
         csvWriter.newRecord();
         csvWriter.writeInt(STATION_TYPE);
-        csvWriter.writeString(station.mName);
+        csvWriter.writeString(station.name);
 
     }
 
-    private static void serialize(Segment segment, CsvWriter csvWriter) throws IOException {
+    private static void serialize(SubwaySegment segment, CsvWriter csvWriter) throws IOException {
         csvWriter.newRecord();
         csvWriter.writeInt(SEGMENT_TYPE);
     }
 
-    private static void serialize(Transfer transfer, CsvWriter csvWriter) throws IOException {
+    private static void serialize(SubwayStationsTransfer transfer, CsvWriter csvWriter) throws IOException {
         csvWriter.newRecord();
         csvWriter.writeInt(TRANSFER_TYPE);
     }

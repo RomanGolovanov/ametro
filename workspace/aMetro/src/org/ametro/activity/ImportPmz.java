@@ -38,7 +38,7 @@ import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
 import org.ametro.MapSettings;
 import org.ametro.R;
-import org.ametro.model.Model;
+import org.ametro.model.SubwayMap;
 import org.ametro.model.ModelBuilder;
 import org.ametro.model.ModelDescription;
 import org.ametro.other.ProgressInfo;
@@ -55,72 +55,33 @@ public class ImportPmz extends Activity {
 
     private static class ImportRecord implements Comparable<ImportRecord> {
 
-        private int mSeverity;
-        private String mMapName;
-        private String mFileName;
-        private String mStatus;
-        private int mStatusColor;
-        private boolean mChecked;
+        private int severity;
+        private String mapName;
+        private String fileName;
+        private String status;
+        private int statusColor;
+        private boolean checked;
 
 
-        public ImportRecord(int severity, String mapName, String fileName, String status, int statusColor, boolean checked) {
+        public ImportRecord(
+                int newSeverity, String newMapName, String newFileName,
+                String newStatus, int newStatusColor, boolean newChecked) {
             super();
-            this.mSeverity = severity;
-            this.mMapName = mapName;
-            this.mFileName = fileName;
-            this.mStatus = status;
-            this.mStatusColor = statusColor;
-            this.mChecked = checked;
-        }
-
-        public boolean isChecked() {
-            return mChecked;
-        }
-
-        public void setChecked(boolean checked) {
-            this.mChecked = checked;
-        }
-
-        public String getMapName() {
-            return mMapName;
-        }
-
-        public String getFileName() {
-            return mFileName;
-        }
-
-        public String getStatus() {
-            return mStatus;
-        }
-
-        public int getColor() {
-            return mStatusColor;
-        }
-
-        public int getSeverity() {
-            return mSeverity;
-        }
-
-
-        public void setSeverity(int mSeverity) {
-            this.mSeverity = mSeverity;
-        }
-
-        public void setStatus(String mStatus) {
-            this.mStatus = mStatus;
-        }
-
-        public void setStatusColor(int mStatusColor) {
-            this.mStatusColor = mStatusColor;
+            severity = newSeverity;
+            mapName = newMapName;
+            fileName = newFileName;
+            status = newStatus;
+            statusColor = newStatusColor;
+            checked = newChecked;
         }
 
         public int compareTo(ImportRecord another) {
-            final int x = another.mSeverity - mSeverity;
-            return x != 0 ? x : this.mMapName.compareTo(another.mMapName);
+            final int x = another.severity - severity;
+            return x != 0 ? x : this.mapName.compareTo(another.mapName);
         }
 
         public boolean isCheckable() {
-            return mSeverity > 0;
+            return severity > 0;
         }
 
     }
@@ -159,11 +120,11 @@ public class ImportPmz extends Activity {
                 holder = (ViewHolder) convertView.getTag();
             }
             final ImportRecord data = mData.get(position);
-            holder.mText.setText(data.getMapName());
-            holder.mStatus.setText(data.getStatus());
-            holder.mStatus.setTextColor(data.getColor());
+            holder.mText.setText(data.mapName);
+            holder.mStatus.setText(data.status);
+            holder.mStatus.setTextColor(data.statusColor);
             holder.mCheckbox.setTag(data);
-            holder.mCheckbox.setChecked(data.isChecked());
+            holder.mCheckbox.setChecked(data.checked);
             holder.mCheckbox.setClickable(false);
             holder.mCheckbox.setVisibility(data.isCheckable() ? View.VISIBLE : View.INVISIBLE);
             return convertView;
@@ -173,9 +134,9 @@ public class ImportPmz extends Activity {
             final ViewHolder holder = (ViewHolder) v.getTag();
             final CheckBox checkbox = holder.mCheckbox;
             ImportRecord data = (ImportRecord) checkbox.getTag();
-            if (data.getSeverity() > 0) {
-                data.setChecked(!data.isChecked());
-                checkbox.setChecked(data.isChecked());
+            if (data.severity > 0) {
+                data.checked = !data.checked;
+                checkbox.setChecked(data.checked);
                 ImportPmz.this.updateMenuStatus(null);
             }
         }
@@ -187,7 +148,7 @@ public class ImportPmz extends Activity {
         public List<ImportRecord> getCheckedData() {
             ArrayList<ImportRecord> lst = new ArrayList<ImportRecord>();
             for (ImportRecord record : mAdapter.getData()) {
-                if (record.isChecked()) {
+                if (record.checked) {
                     lst.add(record);
                 }
             }
@@ -197,7 +158,7 @@ public class ImportPmz extends Activity {
         public List<ImportRecord> getInvalidData() {
             ArrayList<ImportRecord> lst = new ArrayList<ImportRecord>();
             for (ImportRecord record : mAdapter.getData()) {
-                final int severity = record.getSeverity();
+                final int severity = record.severity;
                 if (severity == 2 || severity == 0) {
                     lst.add(record);
                 }
@@ -208,7 +169,7 @@ public class ImportPmz extends Activity {
         public List<ImportRecord> getObsoleteData() {
             ArrayList<ImportRecord> lst = new ArrayList<ImportRecord>();
             for (ImportRecord record : mAdapter.getData()) {
-                final int severity = record.getSeverity();
+                final int severity = record.severity;
                 if (severity == 3 || severity == 1) {
                     lst.add(record);
                 }
@@ -219,14 +180,14 @@ public class ImportPmz extends Activity {
         public void setCheckAll() {
             for (ImportRecord record : mData) {
                 if (record.isCheckable()) {
-                    record.setChecked(true);
+                    record.checked = true;
                 }
             }
         }
 
         public void setCheckNone() {
             for (ImportRecord record : mData) {
-                record.setChecked(false);
+                record.checked = false;
             }
         }
 
@@ -242,7 +203,7 @@ public class ImportPmz extends Activity {
             String fullFileName = MapSettings.IMPORT_PATH + fileName;
             try {
                 ModelDescription pmz = ModelBuilder.indexPmz(fullFileName);
-                String mapName = String.format("%s - %s (%s)", pmz.getCountryName(), pmz.getCityName(), fileName);
+                String mapName = String.format("%s - %s (%s)", pmz.countryName, pmz.cityName, fileName);
                 int severity = 5;
                 int statusId = R.string.import_status_not_imported;
                 int color = Color.RED;
@@ -254,7 +215,7 @@ public class ImportPmz extends Activity {
                     } catch (Exception ex) {
                         map = null;
                     }
-                    if (map != null && map.getSourceVersion() == MapSettings.getSourceVersion()) {
+                    if (map != null && map.sourceVersion == MapSettings.getSourceVersion()) {
                         if (map.locationEqual(pmz)) {
                             if (map.completeEqual(pmz)) {
                                 statusId = R.string.import_status_uptodate;
@@ -262,7 +223,7 @@ public class ImportPmz extends Activity {
                                 color = Color.GREEN;
                                 severity = 1;
                             } else {
-                                if (map.getTimestamp() > pmz.getTimestamp()) {
+                                if (map.timestamp > pmz.timestamp) {
                                     statusId = R.string.import_status_old_version;
                                     statusText = ImportPmz.this.getString(statusId);
                                     color = Color.CYAN;
@@ -276,7 +237,7 @@ public class ImportPmz extends Activity {
                             }
                         } else {
                             statusId = R.string.import_status_override;
-                            statusText = String.format(ImportPmz.this.getString(statusId), map.getCountryName(), map.getCityName());
+                            statusText = String.format(ImportPmz.this.getString(statusId), map.countryName, map.cityName);
                             color = Color.GRAY;
                             severity = 2;
                         }
@@ -303,14 +264,14 @@ public class ImportPmz extends Activity {
             ArrayList<ImportRecord> imports = new ArrayList<ImportRecord>();
             if (files != null) {
                 int count = files.length;
-                pi.Title = "Read PMZ files...";
-                pi.Maximum = count;
-                pi.Progress = 0;
+                pi.title = "Read PMZ files...";
+                pi.maximum = count;
+                pi.progress = 0;
                 this.publishProgress(pi);
                 for (int i = 0; i < count && !mIsCanceled; i++) {
                     String fileName = files[i];
-                    pi.Progress = i;
-                    pi.Message = fileName;
+                    pi.progress = i;
+                    pi.message = fileName;
                     this.publishProgress(pi);
                     indexPmzFile(imports, fileName);
                 }
@@ -366,20 +327,20 @@ public class ImportPmz extends Activity {
             for (int i = 0; i < count && !mIsCanceled; i++) {
                 ImportRecord record = imports[i];
                 //new ProgressInfo(i, imports.length,importRecord.getMapName(),null)
-                pi.Progress = i;
-                pi.Message = record.getMapName();
+                pi.progress = i;
+                pi.message = record.mapName;
                 publishProgress(pi);
                 try {
-                    Model map = ModelBuilder.importPmz(record.getFileName());
+                    SubwayMap map = ModelBuilder.importPmz(record.fileName);
                     ModelBuilder.saveModel(map);
-                    record.setChecked(false);
-                    record.setStatus(updateStatus);
-                    record.setStatusColor(Color.GREEN);
-                    record.setSeverity(1);
+                    record.checked = false;
+                    record.status = updateStatus;
+                    record.statusColor = Color.GREEN;
+                    record.severity = 1;
                     MapSettings.refreshMapList();
                 } catch (Throwable e) {
                     Log.e("aMetro", "Import failed", e);
-                    result.add(new ImportRecord(-1, record.getMapName(), record.getFileName(), "Import failed\n" + e.toString(), Color.RED, false));
+                    result.add(new ImportRecord(-1, record.mapName, record.fileName, "Import failed\n" + e.toString(), Color.RED, false));
                 }
             }
             Collections.sort(result);
@@ -623,7 +584,7 @@ public class ImportPmz extends Activity {
         }
         if (list != null) {
             for (ImportRecord record : list) {
-                FileUtil.delete(new File(record.getFileName()));
+                FileUtil.delete(new File(record.fileName));
             }
         }
         startIndexMode();

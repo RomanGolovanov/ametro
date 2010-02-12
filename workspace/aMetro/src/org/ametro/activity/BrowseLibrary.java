@@ -57,8 +57,8 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
         private void scanModelFileContent(FileGroupsDictionary map, String fileName, String fullFileName) {
             try {
                 ModelDescription modelDescription = ModelBuilder.loadModelDescription(fullFileName);
-                if (modelDescription.getSourceVersion() == MapSettings.getSourceVersion()) {
-                    map.putFile(modelDescription.getCountryName(), modelDescription.getCityName(), fileName);
+                if (modelDescription.sourceVersion == MapSettings.getSourceVersion()) {
+                    map.putFile(modelDescription.countryName, modelDescription.cityName, fileName);
                 }
             } catch (Exception e) {
                 Log.d("aMetro", "Map indexing failed for " + fileName, e);
@@ -70,7 +70,7 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
             ProgressInfo pi = new ProgressInfo(0, 0, null, "Search maps...");
             publishProgress(pi);
             map = new FileGroupsDictionary();
-            map.setTimestamp(dir.lastModified());
+            map.timestamp = dir.lastModified();
             String[] files = dir.list(new FilenameFilter() {
                 public boolean accept(File f, String filename) {
                     return filename.endsWith(MapSettings.MAP_FILE_TYPE);
@@ -79,13 +79,13 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 
             if (files != null) {
                 final int count = files.length;
-                pi.Title = "Read maps...";
-                pi.Maximum = count;
+                pi.title = "Read maps...";
+                pi.maximum = count;
 
                 for (int i = 0; i < count && !mIsCanceled; i++) {
                     String fileName = files[i];
-                    pi.Progress = i;
-                    pi.Message = fileName;
+                    pi.progress = i;
+                    pi.message = fileName;
                     publishProgress(pi);
                     String fullFileName = dir.getAbsolutePath() + '/' + files[i];
                     scanModelFileContent(map, fileName, fullFileName);
@@ -99,7 +99,7 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
             final String cacheFileName = MapSettings.ROOT_PATH + MapSettings.MAPS_LIST;
             final File dir = new File(MapSettings.MAPS_PATH);
             FileGroupsDictionary map = FileGroupsDictionary.read(cacheFileName);
-            if (map == null || map.getTimestamp() < dir.lastModified()) {
+            if (map == null || map.timestamp < dir.lastModified()) {
                 map = scanMapDirectory(dir);
                 FileGroupsDictionary.write(map, cacheFileName);
             }

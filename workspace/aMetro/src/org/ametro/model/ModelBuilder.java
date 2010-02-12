@@ -61,7 +61,7 @@ public class ModelBuilder {
             strm = new ObjectInputStream(new BufferedInputStream(zip.getInputStream(entry), BUFFER_SIZE));
             ModelDescription modelDescription = (ModelDescription) strm.readObject();
             if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO)) {
-                Log.i(LOG_TAG_MAIN, "Model description '" + fileName
+                Log.i(LOG_TAG_MAIN, "SubwayMap description '" + fileName
                         + "' loading time is " + (System.currentTimeMillis() - startTime) + "ms");
             }
             return modelDescription;
@@ -81,7 +81,7 @@ public class ModelBuilder {
         }
     }
 
-    public static Model loadModel(String fileName) throws IOException, ClassNotFoundException {
+    public static SubwayMap loadModel(String fileName) throws IOException, ClassNotFoundException {
         Date startTimestamp = new Date();
         ObjectInputStream strm = null;
         ZipFile zip = null;
@@ -89,11 +89,11 @@ public class ModelBuilder {
             zip = new ZipFile(fileName);
             ZipEntry entry = zip.getEntry(MapSettings.MAP_ENTRY_NAME);
             strm = new ObjectInputStream(new BufferedInputStream(zip.getInputStream(entry), BUFFER_SIZE));
-            Model model = (Model) strm.readObject();
+            SubwayMap subwayMap = (SubwayMap) strm.readObject();
             if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO)) {
-                Log.i(LOG_TAG_MAIN, String.format("Model data '%s' loading time is %sms", fileName, Long.toString((new Date().getTime() - startTimestamp.getTime()))));
+                Log.i(LOG_TAG_MAIN, String.format("SubwayMap data '%s' loading time is %sms", fileName, Long.toString((new Date().getTime() - startTimestamp.getTime()))));
             }
-            return model;
+            return subwayMap;
         } finally {
             if (strm != null) {
                 try {
@@ -110,33 +110,33 @@ public class ModelBuilder {
         }
     }
 
-    public static void saveModel(Model model) throws IOException {
+    public static void saveModel(SubwayMap subwayMap) throws IOException {
         Date startTimestamp = new Date();
-        String fileName = MapSettings.getMapFileName(model.mapName);
+        String fileName = MapSettings.getMapFileName(subwayMap.mapName);
         ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(fileName), BUFFER_SIZE));
-        saveModelDescriptionEntry(model, zip);
-        saveModelEntry(model, zip);
+        saveModelDescriptionEntry(subwayMap, zip);
+        saveModelEntry(subwayMap, zip);
         zip.flush();
         zip.close();
         if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO)) {
-            Log.i(LOG_TAG_MAIN, String.format("Model file '%s' saving time is %sms", fileName, Long.toString((new Date().getTime() - startTimestamp.getTime()))));
+            Log.i(LOG_TAG_MAIN, String.format("SubwayMap file '%s' saving time is %sms", fileName, Long.toString((new Date().getTime() - startTimestamp.getTime()))));
         }
     }
 
-    private static void saveModelDescriptionEntry(Model model, ZipOutputStream zip) throws IOException {
+    private static void saveModelDescriptionEntry(SubwayMap subwayMap, ZipOutputStream zip) throws IOException {
         ZipEntry entry = new ZipEntry(MapSettings.DESCRIPTION_ENTRY_NAME);
         zip.putNextEntry(entry);
         ObjectOutputStream strm = new ObjectOutputStream(zip);
-        strm.writeObject(new ModelDescription(model));
+        strm.writeObject(new ModelDescription(subwayMap));
         strm.flush();
         zip.closeEntry();
     }
 
-    private static void saveModelEntry(Model model, ZipOutputStream zip) throws IOException {
+    private static void saveModelEntry(SubwayMap subwayMap, ZipOutputStream zip) throws IOException {
         ZipEntry entry = new ZipEntry(MapSettings.MAP_ENTRY_NAME);
         zip.putNextEntry(entry);
         ObjectOutputStream strm = new ObjectOutputStream(zip);
-        strm.writeObject(model);
+        strm.writeObject(subwayMap);
         strm.flush();
         zip.closeEntry();
     }
@@ -151,11 +151,11 @@ public class ModelBuilder {
         if (cityName == null) {
             cityName = info.getValue("Options", "CityName");
         }
-        model.setCountryName(countryName);
-        model.setCityName(cityName);
-        model.setSourceVersion(MapSettings.getSourceVersion());
+        model.countryName = countryName;
+        model.cityName = cityName;
+        model.sourceVersion = MapSettings.getSourceVersion();
         File pmzFile = new File(fileName);
-        model.setTimestamp(pmzFile.lastModified());
+        model.timestamp = pmzFile.lastModified();
         if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO)) {
             Log.i(LOG_TAG_MAIN, String.format("PMZ description '%s' loading time is %sms", fileName, Long.toString((new Date().getTime() - startTimestamp.getTime()))));
         }
@@ -163,7 +163,7 @@ public class ModelBuilder {
     }
 
 
-    public static Model importPmz(String fileName) throws IOException {
+    public static SubwayMap importPmz(String fileName) throws IOException {
         Date startTimestamp = new Date();
         File file = new File(fileName);
         FilePackage pkg = new FilePackage(fileName);
@@ -172,28 +172,28 @@ public class ModelBuilder {
         MapResource map = pkg.getMapResource("metro.map");
         TransportResource trp = pkg.getTransportResource(map.getTransportName() != null ? map.getTransportName() : "metro.trp");
 
-        Model model = new Model(file.getName().replace(".pmz", ""));
+        SubwayMap subwayMap = new SubwayMap(file.getName().replace(".pmz", ""));
 
         String countryName = info.getValue("Options", "Country");
         String cityName = info.getValue("Options", "RusName");
         if (cityName == null) {
             cityName = info.getValue("Options", "CityName");
         }
-        model.countryName = countryName;
-        model.cityName = cityName;
-        model.linesWidth = map.getLinesWidth();
-        model.stationDiameter = map.getStationDiameter();
-        model.wordWrap = map.isWordWrap();
-        model.upperCase = map.isUpperCase();
+        subwayMap.countryName = countryName;
+        subwayMap.cityName = cityName;
+        subwayMap.linesWidth = map.getLinesWidth();
+        subwayMap.stationDiameter = map.getStationDiameter();
+        subwayMap.wordWrap = map.isWordWrap();
+        subwayMap.upperCase = map.isUpperCase();
 
-        model.timestamp = file.lastModified();
-        model.sourceVersion = MapSettings.getSourceVersion();
+        subwayMap.timestamp = file.lastModified();
+        subwayMap.sourceVersion = MapSettings.getSourceVersion();
 
         HashMap<String, MapLine> mapLines = map.getMapLines();
         HashMap<String, TransportLine> transportLines = trp.getLines();
 
         // lines construction
-        ArrayList<Line> lines = new ArrayList<Line>();
+        ArrayList<SubwayLine> lines = new ArrayList<SubwayLine>();
         for (TransportLine tl : transportLines.values()) {
             MapLine ml = mapLines.get(tl.name);
             if (ml == null && tl.name != null) {
@@ -209,7 +209,7 @@ public class ModelBuilder {
                 labelBgColor = 0;
             }
 
-            Line line = new Line(lineName, lineColor, labelColor, labelBgColor);
+            SubwayLine line = new SubwayLine(lineName, lineColor, labelColor, labelBgColor);
             lines.add(line);
             if (ml.coordinates != null) {
 
@@ -220,18 +220,18 @@ public class ModelBuilder {
 
                 int stationIndex = 0;
 
-                Station toStation;
+                SubwayStation toStation;
                 Double toDelay;
 
-                Station fromStation = null;
+                SubwayStation fromStation = null;
                 Double fromDelay = null;
 
-                Station thisStation = line.invalidateStation(
+                SubwayStation thisStation = line.invalidateStation(
                         tStations.next(),
                         getRect(rects, stationIndex),
                         getPoint(points, stationIndex));
 
-                ArrayList<Segment> segments = new ArrayList<Segment>();
+                ArrayList<SubwaySegment> segments = new ArrayList<SubwaySegment>();
                 do {
                     if ("(".equals(tStations.getNextDelimeter())) {
                         int idx = 0;
@@ -245,7 +245,7 @@ public class ModelBuilder {
                             }
 
                             if (bracketedStationName != null && bracketedStationName.length() > 0) {
-                                Station bracketedStation = line.invalidateStation(bracketedStationName);
+                                SubwayStation bracketedStation = line.invalidateStation(bracketedStationName);
                                 if (isForwardDirection) {
                                     addSegment(segments, thisStation, bracketedStation, delays.length <= idx ? null : delays[idx]);
                                 } else {
@@ -287,8 +287,8 @@ public class ModelBuilder {
 
                         if (fromStation != null && line.getSegment(thisStation, fromStation) == null) {
                             if (fromDelay == null) {
-                                Segment opposite = line.getSegment(fromStation, thisStation);
-                                fromDelay = opposite != null ? opposite.getDelay() : null;
+                                SubwaySegment opposite = line.getSegment(fromStation, thisStation);
+                                fromDelay = opposite != null ? opposite.delay : null;
                             }
                             addSegment(segments, thisStation, fromStation, fromDelay);
                         }
@@ -306,81 +306,84 @@ public class ModelBuilder {
                     }
 
                 } while (tStations.hasNext());
-                line.segments = segments.toArray(new Segment[segments.size()]);
+                line.segments = segments.toArray(new SubwaySegment[segments.size()]);
             }
         }
-        model.lines = lines.toArray(new Line[lines.size()]);
+        subwayMap.lines = lines.toArray(new SubwayLine[lines.size()]);
 
         // transfers construction
-        ArrayList<Transfer> transfers = new ArrayList<Transfer>();
+        ArrayList<SubwayStationsTransfer> transfers = new ArrayList<SubwayStationsTransfer>();
         for (TransportTransfer t : trp.getTransfers()) {
-            Station from = model.getStation(t.startLine, t.startStation);
-            Station to = model.getStation(t.endLine, t.endStation);
+            SubwayStation from = subwayMap.getStation(t.startLine, t.startStation);
+            SubwayStation to = subwayMap.getStation(t.endLine, t.endStation);
             int flags = 0;
             if (t.status != null && t.status.contains("invisible")) {
-                flags = Transfer.INVISIBLE;
+                flags = SubwayStationsTransfer.INVISIBLE;
             }
             if (from != null && to != null) {
-                transfers.add(new Transfer(from, to, t.delay, flags));
+                transfers.add(new SubwayStationsTransfer(from, to, t.delay, flags));
             }
         }
-        model.transfers = transfers.toArray(new Transfer[transfers.size()]);
+        subwayMap.transfers = transfers.toArray(new SubwayStationsTransfer[transfers.size()]);
 
 
         for (MapAddiditionalLine al : map.getAddiditionalLines()) {
-            fillAdditionalLines(model, al);
+            fillAdditionalLines(subwayMap, al);
         }
 
-        fixDimensions(model);
+        fixDimensions(subwayMap);
 
         if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO)) {
             Log.i(LOG_TAG_MAIN, String.format("PMZ file '%s' parsing time is %sms", file.getName(), Long.toString((new Date().getTime() - startTimestamp.getTime()))));
         }
-        return model;
+        return subwayMap;
     }
 
-    private static Segment addSegment(ArrayList<Segment> segments, Station from, Station to, Double delay) {
-        Segment sg = new Segment(from, to, delay);
+    private static SubwaySegment addSegment(ArrayList<SubwaySegment> segments, SubwayStation from, SubwayStation to, Double delay) {
+        SubwaySegment sg = new SubwaySegment(from, to, delay);
+        newFrom.addSegment(this, SubwaySegment.SEGMENT_BEGIN);
+        newTo.addSegment(this, SubwaySegment.SEGMENT_END);
+
         segments.add(sg);
-        Segment opposite = getSegment(segments, to, from);
-        if (opposite != null && (opposite.getFlags() & Segment.INVISIBLE) == 0) {
-            if (delay == null && opposite.getDelay() != null) {
-                sg.addFlag(Segment.INVISIBLE);
-            } else if (delay != null && opposite.getDelay() == null) {
-                opposite.addFlag(Segment.INVISIBLE);
-            } else if (delay == null && opposite.getDelay() == null) {
-                sg.addFlag(Segment.INVISIBLE);
+        SubwaySegment opposite = getSegment(segments, to, from);
+        if (opposite != null && (opposite.flags & SubwaySegment.INVISIBLE) == 0) {
+            if (delay == null && opposite.delay != null) {
+                sg.flags = SubwaySegment.INVISIBLE;
+            } else if (delay != null && opposite.delay == null) {
+                opposite.flags |= SubwaySegment.INVISIBLE;
+            } else if (delay == null && opposite.delay == null) {
+                sg.flags |= SubwaySegment.INVISIBLE;
             }
         }
         return sg;
     }
 
-    public static Segment getSegment(ArrayList<Segment> segments, Station from, Station to) {
-        final String fromName = from.getName();
-        final String toName = to.getName();
-        for (Segment seg : segments) {
-            if (seg.getFrom().getName().equals(fromName) && seg.getTo().getName().equals(toName)) {
+    public static SubwaySegment getSegment(ArrayList<SubwaySegment> segments, SubwayStation from, SubwayStation to) {
+        final String fromName = from.name;
+        final String toName = to.name;
+        for (SubwaySegment seg : segments) {
+            if (seg.from.name.equals(fromName) && seg.to.name.equals(toName)) {
                 return seg;
             }
         }
         return null;
     }
 
-    private static void fixDimensions(Model model) {
+    private static void fixDimensions(SubwayMap subwayMap) {
         int xmin = Integer.MAX_VALUE;
         int ymin = Integer.MAX_VALUE;
         int xmax = Integer.MIN_VALUE;
         int ymax = Integer.MIN_VALUE;
 
-        Line[] lines = model.lines;
+        SubwayLine[] lines = subwayMap.lines;
         int linesCount = lines.length;
 
         for (int i = 0; i < linesCount; i++) {
-            Station[] stations = lines[i].stations;
+            SubwayStation[] stations = lines[i].stations;
             int stationsCount = stations.length;
             for (int j = 0; j < stationsCount; j++) {
-                Station station = stations[j];
-                Point p = station.getPoint();
+                SubwayStation station = stations[j];
+                Point p = station.point;
                 if (p != null) {
                     if (xmin > p.x) xmin = p.x;
                     if (ymin > p.y) ymin = p.y;
@@ -388,7 +391,7 @@ public class ModelBuilder {
                     if (xmax < p.x) xmax = p.x;
                     if (ymax < p.y) ymax = p.y;
                 }
-                Rect r = station.getRect();
+                Rect r = station.rect;
                 if (r != null) {
                     if (xmin > r.left) xmin = r.left;
                     if (ymin > r.top) ymin = r.top;
@@ -407,24 +410,24 @@ public class ModelBuilder {
         int dy = 50 - ymin;
 
         for (int i = 0; i < linesCount; i++) {
-            Line line = lines[i];
-            Station[] stations = line.stations;
+            SubwayLine line = lines[i];
+            SubwayStation[] stations = line.stations;
             int stationsCount = stations.length;
             for (int j = 0; j < stationsCount; j++) {
-                Station station = stations[j];
-                Point p = station.getPoint();
+                SubwayStation station = stations[j];
+                Point p = station.point;
                 if (p != null) {
                     p.offset(dx, dy);
                 }
-                Rect r = station.getRect();
+                Rect r = station.rect;
                 if (r != null) {
                     r.offset(dx, dy);
                 }
             }
-            Segment[] segments = line.segments;
+            SubwaySegment[] segments = line.segments;
             int segmentsCount = segments.length;
             for (int j = 0; j < segmentsCount; j++) {
-                Point[] points = segments[j].getAdditionalNodes();
+                Point[] points = segments[j].additionalNodes;
                 if (points != null) {
                     int pointsCount = points.length;
                     for (int k = 0; k < pointsCount; k++) {
@@ -435,36 +438,36 @@ public class ModelBuilder {
             }
         }
 
-        model.width = xmax - xmin + 100;
-        model.height = ymax - ymin + 100;
+        subwayMap.width = xmax - xmin + 100;
+        subwayMap.height = ymax - ymin + 100;
     }
 
-    private static void fillAdditionalLines(Model model, MapAddiditionalLine al) {
+    private static void fillAdditionalLines(SubwayMap subwayMap, MapAddiditionalLine al) {
         if (al.mPoints == null) return;
-        Line line = model.getLine(al.mLineName);
-        Station from = model.getStation(al.mLineName, al.mFromStationName);
-        Station to = model.getStation(al.mLineName, al.mToStationName);
+        SubwayLine line = subwayMap.getLine(al.mLineName);
+        SubwayStation from = subwayMap.getStation(al.mLineName, al.mFromStationName);
+        SubwayStation to = subwayMap.getStation(al.mLineName, al.mToStationName);
         if (from != null && to != null) {
-            Segment segment = line.getSegment(from, to);
+            SubwaySegment segment = line.getSegment(from, to);
             if (segment != null) {
-                if (segment.getAdditionalNodes() == null) {
+                if (segment.additionalNodes == null) {
                     Point[] points = al.mPoints;
-                    segment.setAdditionalNodes(points);
+                    segment.additionalNodes = points;
                     if (al.mIsSpline) {
-                        segment.setFlags(Segment.SPLINE);
+                        segment.flags = SubwaySegment.SPLINE;
                     }
                 }
             } else {
-                Segment opposite = line.getSegment(to, from);
+                SubwaySegment opposite = line.getSegment(to, from);
                 if (opposite != null) {
-                    if (opposite.getAdditionalNodes() == null) {
+                    if (opposite.additionalNodes == null) {
                         Point[] points = new Point[al.mPoints.length];
                         for (int i = 0; i < points.length; i++) {
                             points[i] = al.mPoints[(points.length - 1) - i];
                         }
-                        opposite.setAdditionalNodes(points);
+                        opposite.additionalNodes = points;
                         if (al.mIsSpline) {
-                            opposite.setFlags(Segment.SPLINE);
+                            opposite.flags = SubwaySegment.SPLINE;
                         }
                     }
                 }

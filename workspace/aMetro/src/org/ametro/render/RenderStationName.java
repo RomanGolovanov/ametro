@@ -24,9 +24,9 @@ package org.ametro.render;
 import android.graphics.*;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
-import org.ametro.model.Line;
-import org.ametro.model.Model;
-import org.ametro.model.Station;
+import org.ametro.model.SubwayLine;
+import org.ametro.model.SubwayMap;
+import org.ametro.model.SubwayStation;
 
 
 public class RenderStationName extends RenderElement {
@@ -46,16 +46,16 @@ public class RenderStationName extends RenderElement {
     private Rect mRectSecondLine;
     private Point mPointSecondLine;
 
-    public RenderStationName(Model model, Station station) {
-        final boolean isUpperCase = model.upperCase;
-        final boolean isWordWrap = model.wordWrap;
+    public RenderStationName(SubwayMap subwayMap, SubwayStation station) {
+        final boolean isUpperCase = subwayMap.upperCase;
+        final boolean isWordWrap = subwayMap.wordWrap;
 
-        final String text = isUpperCase ? station.getName().toUpperCase() : station.getName();
+        final String text = isUpperCase ? station.name.toUpperCase() : station.name;
         final int textLength = text.length();
-        final Rect rect = station.getRect();
-        final Point point = station.getPoint();
+        final Rect rect = station.rect;
+        final Point point = station.point;
 
-        final Line line = station.getLine();
+        final SubwayLine line = station.line;
         final int textColor = line.labelColor;
         final int backColor = line.labelBgColor;
 

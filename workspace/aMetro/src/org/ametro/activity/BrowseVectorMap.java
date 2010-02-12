@@ -36,7 +36,7 @@ import android.widget.ZoomControls;
 import org.ametro.MapSettings;
 import org.ametro.MapUri;
 import org.ametro.R;
-import org.ametro.model.Model;
+import org.ametro.model.SubwayMap;
 import org.ametro.model.ModelBuilder;
 import org.ametro.widget.BaseMapView.OnMapEventListener;
 import org.ametro.widget.VectorMapView;
@@ -62,7 +62,7 @@ public class BrowseVectorMap extends Activity {
     private final int ZOOM_CONTROLS_TIMEOUT = 2000;
     private int mZoom = DEFAULT_ZOOM_LEVEL;
 
-    private Model mModel;
+    private SubwayMap mSubwayMap;
     private VectorMapView mMapView;
     private ZoomControls mZoomControls;
     private Runnable mZoomControlRunnable;
@@ -159,7 +159,7 @@ public class BrowseVectorMap extends Activity {
     }
 
     private void onSaveMapState() {
-        if (mModel != null && mMapView != null
+        if (mSubwayMap != null && mMapView != null
                 && MapSettings.getMapName() != null) {
             PointF pos = mMapView.getModelScrollCenter();
             int zoom = mZoom;
@@ -173,7 +173,7 @@ public class BrowseVectorMap extends Activity {
     }
 
     private void onRestoreMapState() {
-        if (mModel != null && mMapView != null
+        if (mSubwayMap != null && mMapView != null
                 && MapSettings.getMapName() != null) {
             Integer zoom = MapSettings.loadZoom(this);
             if (zoom != null) {
@@ -182,8 +182,8 @@ public class BrowseVectorMap extends Activity {
                 setZoom(zoom);
             } else {
                 zoom = MIN_ZOOM_LEVEL;
-                int modelWidth = mModel.width;
-                int modelHeight = mModel.height;
+                int modelWidth = mSubwayMap.width;
+                int modelHeight = mSubwayMap.height;
                 Display display = ((WindowManager) getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
                 int width = display.getWidth();
                 int height = display.getHeight();
@@ -206,8 +206,8 @@ public class BrowseVectorMap extends Activity {
                             + "x" + pos.y);
                 mMapView.setModelScrollCenter(pos);
             } else {
-                int x = mModel.width / 2;
-                int y = mModel.height / 2;
+                int x = mSubwayMap.width / 2;
+                int y = mSubwayMap.height / 2;
                 if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO))
                     Log.i(LOG_TAG_MAIN, "Use default map position at " + x
                             + "x" + y);
@@ -228,21 +228,21 @@ public class BrowseVectorMap extends Activity {
         startActivityForResult(browseLibrary, REQUEST_BROWSE_LIBRARY);
     }
 
-    private void onShowMap(Model model) {
-        mModel = model;
+    private void onShowMap(SubwayMap subwayMap) {
+        mSubwayMap = subwayMap;
         if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO))
-            Log.i(LOG_TAG_MAIN, "Loaded model " + mModel.mapName
-                    + " width size " + mModel.width + "x"
-                    + mModel.height);
+            Log.i(LOG_TAG_MAIN, "Loaded subwayMap " + mSubwayMap.mapName
+                    + " width size " + mSubwayMap.width + "x"
+                    + mSubwayMap.height);
 
         setContentView(R.layout.browse_vector_map_main);
 
         mMapView = (VectorMapView) findViewById(R.id.browse_vector_map_view);
-        mMapView.setModel(mModel);
+        mMapView.setModel(mSubwayMap);
         mZoomControls = (ZoomControls) findViewById(R.id.browse_vector_map_zoom);
         mZoomControls.setVisibility(View.INVISIBLE);
 
-        MapSettings.setMapName(mModel.mapName);
+        MapSettings.setMapName(mSubwayMap.mapName);
         onRestoreMapState();
         onUpdateTitle();
         bindMapEvents();
@@ -295,11 +295,11 @@ public class BrowseVectorMap extends Activity {
     }
 
     private void onUpdateTitle() {
-        if (mModel == null) {
+        if (mSubwayMap == null) {
             setTitle(R.string.app_name);
         } else {
             setTitle(String.format("%s - %s", getString(R.string.app_name),
-                    mModel.cityName));
+                    mSubwayMap.cityName));
         }
     }
 
@@ -338,7 +338,7 @@ public class BrowseVectorMap extends Activity {
         mZoomControls.setVisibility(visibility);
     }
 
-    private class InitTask extends AsyncTask<Uri, Void, Model> {
+    private class InitTask extends AsyncTask<Uri, Void, SubwayMap> {
 
         Throwable mError;
 
@@ -348,7 +348,7 @@ public class BrowseVectorMap extends Activity {
             super.onPreExecute();
         }
 
-        protected Model doInBackground(Uri... params) {
+        protected SubwayMap doInBackground(Uri... params) {
             try {
                 Uri mapUri = params[0];
                 return ModelBuilder.loadModel(MapSettings
@@ -366,7 +366,7 @@ public class BrowseVectorMap extends Activity {
             super.onCancelled();
         }
 
-        protected void onPostExecute(Model result) {
+        protected void onPostExecute(SubwayMap result) {
             if (result != null) {
                 onShowMap(result);
             } else {

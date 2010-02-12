@@ -25,31 +25,31 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class ProgressInfo {
-    public int Progress;
-    public int Maximum;
-    public String Message;
-    public String Title;
+    public int progress;
+    public int maximum;
+    public String message;
+    public String title;
 
-    public ProgressInfo(int progress, int maximum, String message, String title) {
+    public ProgressInfo(int newProgress, int newMaximum, String newMessage, String newTitle) {
         super();
-        this.Progress = progress;
-        this.Maximum = maximum;
-        this.Message = message;
-        this.Title = title;
+        progress = newProgress;
+        maximum = newMaximum;
+        message = newMessage;
+        title = newTitle;
     }
 
     public static void ChangeProgress(ProgressInfo pi, ProgressBar bar, TextView title, TextView msg, TextView counter, String counterTemplate) {
         if (bar == null || pi == null) return;
-        bar.setMax(pi.Maximum);
-        bar.setProgress(pi.Progress);
-        if (pi.Message != null && msg != null) {
-            msg.setText(pi.Message);
+        bar.setMax(pi.maximum);
+        bar.setProgress(pi.progress);
+        if (pi.message != null && msg != null) {
+            msg.setText(pi.message);
         }
-        if (pi.Title != null && title != null) {
-            title.setText(pi.Title);
+        if (pi.title != null && title != null) {
+            title.setText(pi.title);
         }
-        if (counter != null && !(pi.Progress == 0 && pi.Maximum == 0)) {
-            counter.setText(String.format(counterTemplate, pi.Progress, pi.Maximum));
+        if (counter != null && !(pi.progress == 0 && pi.maximum == 0)) {
+            counter.setText(String.format(counterTemplate, pi.progress, pi.maximum));
         }
     }
 }
