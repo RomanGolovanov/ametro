@@ -31,10 +31,8 @@ import org.ametro.model.SubwayStation;
 
 public class RenderStationName extends RenderElement {
 
-    private boolean mIsFilled;
-
     private Paint mTextPaint;
-    private Paint mFillPaint;
+    private Paint mBorderPaint;
 
     private String mTextFirstLine;
     private Path mPathFirstLine;
@@ -59,16 +57,12 @@ public class RenderStationName extends RenderElement {
         final int textColor = line.labelColor;
         final int backColor = line.labelBgColor;
 
-        final Paint textPaint = new Paint();
-        final Paint fillPaint = new Paint();
-
-        initializePaints(textColor, backColor, textPaint, fillPaint);
-        mIsFilled = backColor != 0;
+        initializePaints(textColor, backColor);
 
         if (rect.width() > rect.height()) {
             // horizontal text
             final Rect bounds = new Rect();
-            textPaint.getTextBounds(text, 0, textLength, bounds);
+            mTextPaint.getTextBounds(text, 0, textLength, bounds);
             boolean isNeedSecondLine = bounds.width() > rect.width() && isWordWrap;
             int spacePosition = -1;
             if (isNeedSecondLine) {
@@ -165,20 +159,25 @@ public class RenderStationName extends RenderElement {
         mPointFirstLine = position;
     }
 
-    private void initializePaints(final int textColor, final int backColor,
-                                  final Paint textPaint, final Paint fillPaint) {
-        textPaint.setAntiAlias(true);
-        textPaint.setTypeface(Typeface.DEFAULT);
-        textPaint.setFakeBoldText(true);
-        textPaint.setTextSize(10);
-        textPaint.setTextAlign(Align.LEFT);
-        textPaint.setColor(textColor);
-        mTextPaint = textPaint;
+	private void initializePaints(final int textColor, final int backColor) {
+		final Paint textPaint = new Paint();
 
-        fillPaint.setColor(backColor);
-        fillPaint.setStyle(Style.FILL);
-        mFillPaint = fillPaint;
-    }
+		textPaint.setSubpixelText(false);
+		textPaint.setAntiAlias(true);
+		textPaint.setTypeface(Typeface.DEFAULT);
+		textPaint.setFakeBoldText(true);
+		textPaint.setTextSize(10);
+		textPaint.setTextAlign(Align.LEFT);
+		textPaint.setColor(textColor);
+		textPaint.setStyle(Style.FILL);
+		mTextPaint = textPaint;
+
+		final Paint fillPaint = new Paint(textPaint);
+		fillPaint.setColor(backColor != 0 ? backColor : Color.WHITE);
+		fillPaint.setStyle(Style.STROKE);
+		fillPaint.setStrokeWidth(3);
+		mBorderPaint = fillPaint;
+	}
 
     private void initializeVerticalText(final String text, final int textLength, final Rect rect, final Point point) {
         final Path textPath = new Path();
@@ -205,26 +204,26 @@ public class RenderStationName extends RenderElement {
         mPointFirstLine = null;
     }
 
-    @Override
-    public void draw(Canvas canvas) {
-        final boolean isFilled = mIsFilled;
+	public void draw(Canvas canvas) {
 
-        if (isFilled) canvas.drawRect(mRectFirstLine, mFillPaint);
-        if (mPointFirstLine != null) {
-            canvas.drawText(mTextFirstLine, mPointFirstLine.x, mPointFirstLine.y, mTextPaint);
-        } else {
-            canvas.drawTextOnPath(mTextFirstLine, mPathFirstLine, 0, 0, mTextPaint);
-        }
+		if (mPointFirstLine != null) {
+			canvas.drawText(mTextFirstLine, mPointFirstLine.x, mPointFirstLine.y, mBorderPaint);
+			canvas.drawText(mTextFirstLine, mPointFirstLine.x, mPointFirstLine.y, mTextPaint);
+		} else {
+			canvas.drawTextOnPath(mTextFirstLine, mPathFirstLine, 0, 0, mBorderPaint);
+			canvas.drawTextOnPath(mTextFirstLine, mPathFirstLine, 0, 0, mTextPaint);
+		}
 
-        if (mTextSecondLine != null) {
-            if (isFilled) canvas.drawRect(mRectSecondLine, mFillPaint);
-            if (mPointSecondLine != null) {
-                canvas.drawText(mTextSecondLine, mPointSecondLine.x, mPointSecondLine.y, mTextPaint);
-            } else {
-                canvas.drawTextOnPath(mTextSecondLine, mPathSecondLine, 0, 0, mTextPaint);
-            }
-        }
-    }
+		if (mTextSecondLine != null) {
+			if (mPointSecondLine != null) {
+				canvas.drawText(mTextSecondLine, mPointSecondLine.x, mPointSecondLine.y, mBorderPaint);
+				canvas.drawText(mTextSecondLine, mPointSecondLine.x, mPointSecondLine.y, mTextPaint);
+			} else {
+				canvas.drawTextOnPath(mTextSecondLine, mPathSecondLine, 0, 0, mBorderPaint);
+				canvas.drawTextOnPath(mTextSecondLine, mPathSecondLine, 0, 0, mTextPaint);
+			}
+		}
 
+	}
 
 }
