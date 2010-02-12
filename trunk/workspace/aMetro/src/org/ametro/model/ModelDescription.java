@@ -29,133 +29,62 @@ public class ModelDescription implements Serializable {
 
     private static final long serialVersionUID = 7999055006455680808L;
 
-    private String mMapName;
-    private String mCountryName;
-    private String mCityName;
+    public String mapName;
+    public String countryName;
+    public String cityName;
 
-    private int mWidth;
-    private int mHeight;
+    public int width;
+    public int height;
 
-    private long mTimestamp;
-    private long mCrc;
+    public long timestamp;
+    public long crc;
 
-    private long mRenderVersion;
-    private long mSourceVersion;
+    public long renderVersion;
+    public long sourceVersion;
 
     public ModelDescription() {
         super();
     }
 
-    public ModelDescription(String mapName, String countryName, String cityName, int width, int height, long crc, long timestamp, long sourceVersion, long renderVersion) {
+    public ModelDescription(
+            String newMapName, String newCountryName, String newCityName,
+            int newWidth, int newHeight, long newCrc, long newTimestamp,
+            long newSourceVersion, long newRenderVersion) {
+
         super();
-        this.mMapName = mapName;
-        this.mCountryName = countryName;
-        this.mCityName = cityName;
-        this.mWidth = width;
-        this.mHeight = height;
-        this.mCrc = crc;
-        this.mTimestamp = timestamp;
-        this.mSourceVersion = sourceVersion;
-        this.mRenderVersion = renderVersion;
+        mapName = newMapName;
+        countryName = newCountryName;
+        cityName = newCityName;
+        width = newWidth;
+        height = newHeight;
+        crc = newCrc;
+        timestamp = newTimestamp;
+        sourceVersion = newSourceVersion;
+        renderVersion = newRenderVersion;
     }
 
-    public ModelDescription(Model model) {
+    public ModelDescription(SubwayMap subwayMap) {
         super();
-        mMapName = model.mapName;
-        mCountryName = model.countryName;
-        mCityName = model.cityName;
-        mWidth = model.width;
-        mHeight = model.height;
-        mCrc = model.crc;
-        mTimestamp = model.timestamp;
-        mSourceVersion = model.sourceVersion;
-    }
-
-    public String getMapName() {
-        return mMapName;
-    }
-
-    public void setMapName(String mapName) {
-        this.mMapName = mapName;
-    }
-
-    public String getCountryName() {
-        return mCountryName;
-    }
-
-    public void setCountryName(String countryName) {
-        this.mCountryName = countryName;
-    }
-
-    public String getCityName() {
-        return mCityName;
-    }
-
-    public void setCityName(String cityName) {
-        this.mCityName = cityName;
-    }
-
-    public int getWidth() {
-        return mWidth;
-    }
-
-    public void setWidth(int width) {
-        this.mWidth = width;
-    }
-
-    public int getHeight() {
-        return mHeight;
-    }
-
-    public void setHeight(int height) {
-        this.mHeight = height;
-    }
-
-    public long getTimestamp() {
-        return mTimestamp;
-    }
-
-    public void setTimestamp(long mTimestamp) {
-        this.mTimestamp = mTimestamp;
-    }
-
-    public long getCrc() {
-        return mCrc;
-    }
-
-    public void setCrc(long mCrc) {
-        this.mCrc = mCrc;
-    }
-
-    public long getRenderVersion() {
-        return mRenderVersion;
-    }
-
-    public void setRenderVersion(long mRenderVersion) {
-        this.mRenderVersion = mRenderVersion;
-    }
-
-    public long getSourceVersion() {
-        return mSourceVersion;
-    }
-
-    public void setSourceVersion(long mSourceVersion) {
-        this.mSourceVersion = mSourceVersion;
+        mapName = subwayMap.mapName;
+        countryName = subwayMap.countryName;
+        cityName = subwayMap.cityName;
+        width = subwayMap.width;
+        height = subwayMap.height;
+        crc = subwayMap.crc;
+        timestamp = subwayMap.timestamp;
+        sourceVersion = subwayMap.sourceVersion;
     }
 
     public boolean completeEqual(ModelDescription model) {
         return locationEqual(model)
-                && mCrc == model.getCrc()
-                && mTimestamp == model.getTimestamp()
-                && mSourceVersion == model.getSourceVersion()
-                ;
+                && crc == model.crc
+                && timestamp == model.timestamp
+                && sourceVersion == model.sourceVersion;
     }
 
     public boolean locationEqual(ModelDescription model) {
-        return mCountryName.equals(model.getCountryName())
-                && mCityName.equals(model.getCityName())
-                ;
+        return countryName.equals(model.countryName)
+                && cityName.equals(model.cityName);
     }
-
 
 }

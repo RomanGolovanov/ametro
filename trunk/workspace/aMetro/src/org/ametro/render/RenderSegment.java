@@ -23,57 +23,56 @@ package org.ametro.render;
 
 import android.graphics.*;
 import android.graphics.Paint.Style;
-
 import org.ametro.graphics.ExtendedPath;
-import org.ametro.model.Line;
-import org.ametro.model.Model;
-import org.ametro.model.Segment;
-import org.ametro.model.Station;
+import org.ametro.model.SubwayLine;
+import org.ametro.model.SubwayMap;
+import org.ametro.model.SubwaySegment;
+import org.ametro.model.SubwayStation;
 
 
 public class RenderSegment extends RenderElement {
 
-    public Paint Paint;
-    public ExtendedPath Path;
+    public Paint paint;
+    public ExtendedPath path;
 
-    public RenderSegment(Model model, Segment segment) {
+    public RenderSegment(SubwayMap subwayMap, SubwaySegment segment) {
         super();
-        final Station from = segment.getFrom();
-        final Station to = segment.getTo();
-        final Line line = from.getLine();
+        final SubwayStation from = segment.from;
+        final SubwayStation to = segment.to;
+        final SubwayLine line = from.line;
 
-        final Paint paint = new Paint();
-        final ExtendedPath path = new ExtendedPath();
+        final Paint localPaint = new Paint();
+        final ExtendedPath localPath = new ExtendedPath();
 
-        final Double delay = segment.getDelay();
+        final Double delay = segment.delay;
         final boolean lineWorking = (delay != null && delay > 0);
-        final int lineWidth = model.linesWidth;
+        final int lineWidth = subwayMap.linesWidth;
 
-        paint.setStyle(Style.STROKE);
-        paint.setAntiAlias(true);
+        localPaint.setStyle(Style.STROKE);
+        localPaint.setAntiAlias(true);
 
         if (lineWorking) {
-            paint.setStrokeWidth(lineWidth);
-            paint.setPathEffect(new CornerPathEffect(lineWidth * 0.6f));
+            localPaint.setStrokeWidth(lineWidth);
+            localPaint.setPathEffect(new CornerPathEffect(lineWidth * 0.6f));
         } else {
-            paint.setStrokeWidth(lineWidth * 0.75f);
-            paint.setPathEffect(new ComposePathEffect(
+            localPaint.setStrokeWidth(lineWidth * 0.75f);
+            localPaint.setPathEffect(new ComposePathEffect(
                     new DashPathEffect(new float[]{lineWidth * 0.8f, lineWidth * 0.2f}, 0),
                     new CornerPathEffect(lineWidth * 0.6f)
             ));
         }
-        paint.setColor(segment.getFrom().getLine().color);
+        localPaint.setColor(segment.from.line.color);
 
-        this.Paint = paint;
-        drawSegmentPath(line, segment, from, to, path);
-        this.Path = path;
+        paint = localPaint;
+        drawSegmentPath(line, segment, from, to, localPath);
+        path = localPath;
 
-        final int minx = Math.min(from.getPoint().x, to.getPoint().x) - lineWidth;
-        final int maxx = Math.max(from.getPoint().x, to.getPoint().x) + lineWidth;
-        final int miny = Math.min(from.getPoint().y, to.getPoint().y) - lineWidth;
-        final int maxy = Math.max(from.getPoint().y, to.getPoint().y) + lineWidth;
+        final int minx = Math.min(from.point.x, to.point.x) - lineWidth;
+        final int maxx = Math.max(from.point.x, to.point.x) + lineWidth;
+        final int miny = Math.min(from.point.y, to.point.y) - lineWidth;
+        final int maxy = Math.max(from.point.y, to.point.y) + lineWidth;
         final Rect box = new Rect(minx, miny, maxx, maxy);
-        final Point[] nodes = segment.getAdditionalNodes();
+        final Point[] nodes = segment.additionalNodes;
         if (nodes != null) {
             final int length = nodes.length;
             for (int i = 0; i < length; i++) {
@@ -84,12 +83,12 @@ public class RenderSegment extends RenderElement {
         setProperties(RenderProgram.TYPE_LINE, box);
     }
 
-    private void drawSegmentPath(Line line, Segment segment, Station from, Station to, ExtendedPath path) {
-        final Point pointFrom = from.getPoint();
-        final Point pointTo = to.getPoint();
-        final Point[] additionalPoints = segment.getAdditionalNodes();
+    private void drawSegmentPath(SubwayLine line, SubwaySegment segment, SubwayStation from, SubwayStation to, ExtendedPath path) {
+        final Point pointFrom = from.point;
+        final Point pointTo = to.point;
+        final Point[] additionalPoints = segment.additionalNodes;
         if (additionalPoints != null) {
-            if ((segment.getFlags() & Segment.SPLINE) != 0) {
+            if ((segment.flags & SubwaySegment.SPLINE) != 0) {
                 Point[] points = new Point[additionalPoints.length + 2];
                 points[0] = pointFrom;
                 points[points.length - 1] = pointTo;
@@ -113,7 +112,7 @@ public class RenderSegment extends RenderElement {
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawPath(Path, Paint);
+        canvas.drawPath(path, paint);
     }
 
 }

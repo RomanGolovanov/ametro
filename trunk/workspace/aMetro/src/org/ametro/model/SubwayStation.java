@@ -21,44 +21,45 @@
 
 package org.ametro.model;
 
+import android.graphics.Point;
+import android.graphics.Rect;
+import org.ametro.util.SerializeUtil;
+
+import java.io.IOException;
 import java.io.Serializable;
 
-public class Transfer implements Serializable {
+public class SubwayStation {
 
     public static final int VERSION = 1;
 
-    private static final long serialVersionUID = 5468026097510797847L;
+    public String name;
+    public Rect rect;
+    public Point point;
+    public SubwayLine line;
 
-    public static final int INVISIBLE = 1;
-
-    public Double mDelay;
-    public Station mFrom;
-    public Station mTo;
-    public int mFlags;
-
-    public Transfer(Station from, Station to, Double delay, int flags) {
-        super();
-        this.mDelay = delay;
-        this.mFrom = from;
-        this.mTo = to;
-        this.mFlags = flags;
+    public SubwayStation(String newName, Rect newRect, Point newPoint, SubwayLine newLine) {
+        name = newName;
+        rect = newRect;
+        point = newPoint;
+        line = newLine;
     }
 
-    public Double getDelay() {
-        return mDelay;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SubwayStation)) return false;
+        SubwayStation that = (SubwayStation) o;
+        return name.equals(that.name);
     }
 
-    public Station getFrom() {
-        return mFrom;
+    @Override
+    public int hashCode() {
+        return name.hashCode();
     }
 
-    public Station getTo() {
-        return mTo;
+    @Override
+    public String toString() {
+        return "[NAME:" + name + "]";
     }
-
-    public int getFlags() {
-        return mFlags;
-    }
-
 
 }

@@ -57,12 +57,12 @@ public class Algorithms {
 	    public final float x1;
 	    public final float y1;
 
-	    public QBezierControls(float x0, float y0, float x1, float y1) {
+	    public QBezierControls(float newX0, float newY0, float newX1, float newY1) {
 	        super();
-	        this.x0 = x0;
-	        this.y0 = y0;
-	        this.x1 = x1;
-	        this.y1 = y1;
+	        x0 = newX0;
+	        y0 = newY0;
+	        x1 = newX1;
+	        y1 = newY1;
 	    }
 
 	}	

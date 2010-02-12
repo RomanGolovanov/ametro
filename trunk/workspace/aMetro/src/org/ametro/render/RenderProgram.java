@@ -51,11 +51,11 @@ public class RenderProgram {
         mRenderFilter = renderFilter;
     }
 
-    public RenderProgram(Model model) {
+    public RenderProgram(SubwayMap subwayMap) {
         ArrayList<RenderElement> renderQueue = new ArrayList<RenderElement>();
-        drawLines(model, renderQueue);
-        drawTransfers(model, renderQueue);
-        drawStations(model, renderQueue);
+        drawLines(subwayMap, renderQueue);
+        drawTransfers(subwayMap, renderQueue);
+        drawStations(subwayMap, renderQueue);
         Collections.sort(renderQueue);
         mElements = renderQueue.toArray(new RenderElement[renderQueue.size()]);
         final int count = mElements.length;
@@ -64,8 +64,8 @@ public class RenderProgram {
         mTypes = new int[count];
         for (int i = 0; i < count; i++) {
             mVisibility[i] = false;
-            mBounds[i] = mElements[i].BoundingBox;
-            mTypes[i] = mElements[i].Type;
+            mBounds[i] = mElements[i].boundingBox;
+            mTypes[i] = mElements[i].type;
         }
         mRenderFilter = ALL;
     }
@@ -101,45 +101,45 @@ public class RenderProgram {
         }
     }
 
-    private void drawStations(Model model, ArrayList<RenderElement> renderQueue) {
-        final Line[] lines = model.lines;
+    private void drawStations(SubwayMap subwayMap, ArrayList<RenderElement> renderQueue) {
+        final SubwayLine[] lines = subwayMap.lines;
         for (int i = 0; i < lines.length; i++) {
-            final Line line = lines[i];
-            for (Station station : line.stations) {
-                if (station.getPoint() != null) {
-                    renderQueue.add(new RenderStation(model, station));
-                    if (station.getRect() != null && station.getName() != null) {
-                        renderQueue.add(new RenderStationName(model, station));
+            final SubwayLine line = lines[i];
+            for (SubwayStation station : line.stations) {
+                if (station.point != null) {
+                    renderQueue.add(new RenderStation(subwayMap, station));
+                    if (station.rect != null && station.name != null) {
+                        renderQueue.add(new RenderStationName(subwayMap, station));
                     }
                 }
             }
         }
     }
 
-    private void drawTransfers(Model model, ArrayList<RenderElement> renderQueue) {
-        for (Transfer transfer : model.transfers) {
-            renderQueue.add(new RenderTransferBackground(model, transfer));
-            renderQueue.add(new RenderTransfer(model, transfer));
+    private void drawTransfers(SubwayMap subwayMap, ArrayList<RenderElement> renderQueue) {
+        for (SubwayStationsTransfer transfer : subwayMap.transfers) {
+            renderQueue.add(new RenderTransferBackground(subwayMap, transfer));
+            renderQueue.add(new RenderTransfer(subwayMap, transfer));
         }
     }
 
-    private void drawLines(Model model, ArrayList<RenderElement> renderQueue) {
-        HashSet<Segment> exclusions = new HashSet<Segment>();
-        for (Line line : model.lines) {
-            for (Segment segment : line.segments) {
+    private void drawLines(SubwayMap subwayMap, ArrayList<RenderElement> renderQueue) {
+        HashSet<SubwaySegment> exclusions = new HashSet<SubwaySegment>();
+        for (SubwayLine line : subwayMap.lines) {
+            for (SubwaySegment segment : line.segments) {
                 if (exclusions.contains(segment)) continue;
-                if ((segment.getFlags() & Segment.INVISIBLE) == 0) {
-                    Station from = segment.getFrom();
-                    Station to = segment.getTo();
-                    if (from.getPoint() != null || to.getPoint() != null) {
-                        Segment opposite = line.getSegment(to, from);
-                        Point[] additionalPoints = segment.getAdditionalNodes();
-                        Point[] reversePoints = opposite == null ? null : opposite.getAdditionalNodes();
+                if ((segment.flags & SubwaySegment.INVISIBLE) == 0) {
+                    SubwayStation from = segment.from;
+                    SubwayStation to = segment.to;
+                    if (from.point != null || to.point != null) {
+                        SubwaySegment opposite = line.getSegment(to, from);
+                        Point[] additionalPoints = segment.additionalNodes;
+                        Point[] reversePoints = opposite == null ? null : opposite.additionalNodes;
                         boolean additionalForward = additionalPoints != null;
                         boolean additionalBackward = reversePoints != null;
                         if (!additionalForward && additionalBackward) {
                         } else {
-                            renderQueue.add(new RenderSegment(model, segment));
+                            renderQueue.add(new RenderSegment(subwayMap, segment));
                             if (opposite != null) {
                                 exclusions.add(opposite);
                             }

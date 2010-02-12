@@ -60,7 +60,7 @@ public class VectorResource implements IResource {
     }
 
     public void doneInitialize() {
-        this.commands = parser.getCommands();
+        commands = parser.getCommands();
         parser = null;
     }
 

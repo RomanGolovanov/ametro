@@ -148,8 +148,8 @@ public class MapResource implements IResource {
     }
 
     public void beginInitialize(FilePackage owner) {
-        this.mapLines = new HashMap<String, MapLine>();
-        this.addiditionalLines = new ArrayList<MapAddiditionalLine>();
+        mapLines = new HashMap<String, MapLine>();
+        addiditionalLines = new ArrayList<MapAddiditionalLine>();
         parser = new MapParser();
     }
 

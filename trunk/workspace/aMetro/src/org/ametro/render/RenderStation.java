@@ -26,61 +26,61 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
-import org.ametro.model.Model;
-import org.ametro.model.Station;
+import org.ametro.model.SubwayMap;
+import org.ametro.model.SubwayStation;
 
 
 public class RenderStation extends RenderElement {
 
-    public int X;
-    public int Y;
-    public float RadiusFirst;
-    public float RadiusSecond;
-    public Paint PaintFirst;
-    public Paint PaintSecond;
+    public int x;
+    public int y;
+    public float radiusFirst;
+    public float radiusSecond;
+    public Paint paintFirst;
+    public Paint paintSecond;
 
-    public RenderStation(Model model, Station station) {
+    public RenderStation(SubwayMap subwayMap, SubwayStation station) {
         super();
         final boolean hasConnections = station.hasConnections();
 
-        final int x = station.getPoint().x;
-        final int y = station.getPoint().y;
-        final int radius = model.stationDiameter / 2;
-        final float radiusFirst = (float) radius;
-        final Paint paintFirst = new Paint();
-        final Paint paintSecond = new Paint();
+        final int localX = station.point.x;
+        final int localY = station.point.y;
+        final int radius = subwayMap.stationDiameter / 2;
+        final float localRadiusFirst = (float) radius;
+        final Paint localPaintFirst = new Paint();
+        final Paint localPaintSecond = new Paint();
 
-        paintFirst.setColor(station.getLine().color);
-        paintFirst.setStyle(Style.FILL);
-        paintFirst.setAntiAlias(true);
+        localPaintFirst.setColor(station.line.color);
+        localPaintFirst.setStyle(Style.FILL);
+        localPaintFirst.setAntiAlias(true);
 
-        paintSecond.setColor(Color.WHITE);
-        paintSecond.setAntiAlias(true);
+        localPaintSecond.setColor(Color.WHITE);
+        localPaintSecond.setAntiAlias(true);
 
-        float radiusSecond;
+        float localRadiusSecond;
         if (hasConnections) {
-            radiusSecond = radiusFirst;
-            paintSecond.setStyle(Style.STROKE);
-            paintSecond.setStrokeWidth(0);
+            localRadiusSecond = localRadiusFirst;
+            localPaintSecond.setStyle(Style.STROKE);
+            localPaintSecond.setStrokeWidth(0);
         } else {
-            radiusSecond = radiusFirst * 0.7f;
-            paintSecond.setStyle(Style.FILL);
+            localRadiusSecond = localRadiusFirst * 0.7f;
+            localPaintSecond.setStyle(Style.FILL);
         }
 
-        this.X = x;
-        this.Y = y;
-        this.RadiusFirst = radiusFirst;
-        this.RadiusSecond = radiusSecond;
-        this.PaintFirst = paintFirst;
-        this.PaintSecond = paintSecond;
+        x = localX;
+        y = localY;
+        radiusFirst = localRadiusFirst;
+        radiusSecond = localRadiusSecond;
+        paintFirst = localPaintFirst;
+        paintSecond = localPaintSecond;
 
-        setProperties(RenderProgram.TYPE_STATION, new Rect(x - radius, y - radius, x + radius, y + radius));
+        setProperties(RenderProgram.TYPE_STATION, new Rect(localX - radius, localY - radius, localX + radius, localY + radius));
     }
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawCircle(X, Y, RadiusFirst, PaintFirst);
-        canvas.drawCircle(X, Y, RadiusSecond, PaintSecond);
+        canvas.drawCircle(x, y, radiusFirst, paintFirst);
+        canvas.drawCircle(x, y, radiusSecond, paintSecond);
     }
 
 }

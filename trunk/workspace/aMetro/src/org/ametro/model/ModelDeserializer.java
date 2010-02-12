@@ -37,7 +37,7 @@ import static org.ametro.Constants.LOG_TAG_MAIN;
  */
 public class ModelDeserializer {
 
-    public static Model load(InputStream in) throws IOException {
+    public static SubwayMap load(InputStream in) throws IOException {
         long startTime = System.currentTimeMillis();
         ZipInputStream zipIn = new ZipInputStream(in);
         ZipEntry zipEntry = zipIn.getNextEntry();
@@ -49,7 +49,7 @@ public class ModelDeserializer {
         zipIn = null;
 
         if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO)) {
-            Log.i(LOG_TAG_MAIN, "Model loading time is " + (System.currentTimeMillis() - startTime) + "ms");
+            Log.i(LOG_TAG_MAIN, "SubwayMap loading time is " + (System.currentTimeMillis() - startTime) + "ms");
         }
 
         return null;

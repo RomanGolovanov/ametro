@@ -25,7 +25,7 @@ import android.content.Context;
 import android.graphics.*;
 import android.graphics.Bitmap.Config;
 import android.util.AttributeSet;
-import org.ametro.model.Model;
+import org.ametro.model.SubwayMap;
 import org.ametro.render.RenderProgram;
 
 public class VectorMapView extends BaseMapView {
@@ -42,16 +42,16 @@ public class VectorMapView extends BaseMapView {
         super(context);
     }
 
-    public void setModel(Model model) {
-        if (model != null) {
-            mModel = model;
-            mRenderProgram = new RenderProgram(model);
+    public void setModel(SubwayMap subwayMap) {
+        if (subwayMap != null) {
+            mSubwayMap = subwayMap;
+            mRenderProgram = new RenderProgram(subwayMap);
             calculateDimensions();
             setInitialized(true);
         } else {
             setInitialized(false);
             mRenderProgram = null;
-            mModel = null;
+            mSubwayMap = null;
         }
     }
 
@@ -275,11 +275,11 @@ public class VectorMapView extends BaseMapView {
 
 
     private void calculateDimensions() {
-        mContentWidth = (int) Math.ceil(mModel.width * mScale);
-        mContentHeight = (int) Math.ceil(mModel.height * mScale);
+        mContentWidth = (int) Math.ceil(mSubwayMap.width * mScale);
+        mContentHeight = (int) Math.ceil(mSubwayMap.height * mScale);
     }
 
-    private Model mModel;
+    private SubwayMap mSubwayMap;
     private RenderProgram mRenderProgram;
 
     private int mContentWidth;

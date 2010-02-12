@@ -25,7 +25,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.PointF;
 import android.net.Uri;
-import org.ametro.model.Model;
+import org.ametro.model.SubwayMap;
 import org.ametro.util.FileUtil;
 import org.ametro.util.SerializeUtil;
 
@@ -64,15 +64,15 @@ public class MapSettings {
     public static final String MAP_ENTRY_NAME = "map.dat";
     public static final String DESCRIPTION_ENTRY_NAME = "description.dat";
 
-    private static Model mCurrentModel;
+    private static SubwayMap mCurrentSubwayMap;
     private static String mMapName;
 
-    public static void setModel(Model model) {
-        mCurrentModel = model;
+    public static void setModel(SubwayMap subwayMap) {
+        mCurrentSubwayMap = subwayMap;
     }
 
-    public static Model getModel() {
-        return mCurrentModel;
+    public static SubwayMap getModel() {
+        return mCurrentSubwayMap;
     }
 
     public static String getMapName() {

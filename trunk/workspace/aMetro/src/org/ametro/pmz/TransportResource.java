@@ -122,7 +122,6 @@ public class TransportResource implements IResource {
     }
 
     public void beginInitialize(FilePackage owner) {
-        //this.owner = owner;
         lines = new HashMap<String, TransportLine>();
         transfers = new ArrayList<TransportTransfer>();
         parser = new TransportParser();
@@ -156,8 +155,8 @@ public class TransportResource implements IResource {
         return crc;
     }
 
-    public void setCrc(long crc) {
-        this.crc = crc;
+    public void setCrc(long newCrc) {
+        crc = newCrc;
     }
 
 
