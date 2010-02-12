@@ -102,22 +102,18 @@ public class RenderProgram {
     }
 
     private void drawStations(SubwayMap subwayMap, ArrayList<RenderElement> renderQueue) {
-        final SubwayLine[] lines = subwayMap.lines;
-        for (int i = 0; i < lines.length; i++) {
-            final SubwayLine line = lines[i];
-            for (SubwayStation station : line.stations) {
-                if (station.point != null) {
-                    renderQueue.add(new RenderStation(subwayMap, station));
-                    if (station.rect != null && station.name != null) {
-                        renderQueue.add(new RenderStationName(subwayMap, station));
-                    }
+        for (SubwayStation station : subwayMap.stations) {
+            if (station.point != null) {
+                renderQueue.add(new RenderStation(subwayMap, station));
+                if (station.rect != null && station.name != null) {
+                    renderQueue.add(new RenderStationName(subwayMap, station));
                 }
             }
         }
     }
 
     private void drawTransfers(SubwayMap subwayMap, ArrayList<RenderElement> renderQueue) {
-        for (SubwayStationsTransfer transfer : subwayMap.transfers) {
+        for (SubwaySegment transfer : subwayMap.transfers) {
             renderQueue.add(new RenderTransferBackground(subwayMap, transfer));
             renderQueue.add(new RenderTransfer(subwayMap, transfer));
         }
@@ -125,16 +121,15 @@ public class RenderProgram {
 
     private void drawLines(SubwayMap subwayMap, ArrayList<RenderElement> renderQueue) {
         HashSet<SubwaySegment> exclusions = new HashSet<SubwaySegment>();
-        for (SubwayLine line : subwayMap.lines) {
-            for (SubwaySegment segment : line.segments) {
+            for (SubwaySegment segment : subwayMap.segments) {
                 if (exclusions.contains(segment)) continue;
                 if ((segment.flags & SubwaySegment.INVISIBLE) == 0) {
                     SubwayStation from = segment.from;
                     SubwayStation to = segment.to;
                     if (from.point != null || to.point != null) {
-                        SubwaySegment opposite = line.getSegment(to, from);
-                        Point[] additionalPoints = segment.additionalNodes;
-                        Point[] reversePoints = opposite == null ? null : opposite.additionalNodes;
+                        SubwaySegment opposite = subwayMap.getSegment(to, from);
+                        Point[] additionalPoints = subwayMap.getSegmentsNodes(segment.id);
+                        Point[] reversePoints = opposite == null ? null : subwayMap.getSegmentsNodes(opposite.id);
                         boolean additionalForward = additionalPoints != null;
                         boolean additionalBackward = reversePoints != null;
                         if (!additionalForward && additionalBackward) {
@@ -145,7 +140,6 @@ public class RenderProgram {
                             }
                         }
                     }
-                }
             }
         }
     }

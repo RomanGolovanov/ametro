@@ -29,34 +29,41 @@ public class SubwaySegment {
     public static final int SPLINE = 0x01;
     public static final int INVISIBLE = 0x02;
 
+    public int id;
+
     public Double delay;
     public SubwayStation from;
     public SubwayStation to;
     public int flags;
 
-    public SubwaySegment(SubwayStation newFrom, SubwayStation newTo, Double newDelay) {
+    public SubwaySegment(int newId, SubwayStation newFrom, SubwayStation newTo, Double newDelay) {
+        id = newId;
         delay = newDelay;
         from = newFrom;
         to = newTo;
     }
 
+    public SubwaySegment(int newId, SubwayStation newFrom, SubwayStation newTo, Double newDelay, int newFlags) {
+        id = newId;
+        delay = newDelay;
+        from = newFrom;
+        to = newTo;
+        flags = newFlags;
+    }
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof SubwaySegment)) return false;
-        SubwaySegment segment = (SubwaySegment) o;
-        return flags == segment.flags && from.equals(segment.from) && to.equals(segment.to);
+        return this == o || o != null && getClass() == o.getClass() && id == ((SubwaySegment) o).id;
+
     }
 
     @Override
     public int hashCode() {
-        int result = from.hashCode();
-        result = 31 * result + to.hashCode();
-        result = 31 * result + flags;
-        return result;
+        return id;
     }
 
     @Override
+
     public String toString() {
         return "[FROM:" + from.name + ";TO:" + to.name + "]";
     }

@@ -35,6 +35,7 @@ import org.ametro.util.SerializeUtil;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -54,15 +55,22 @@ public class SubwayMapBuilder {
     private HashMap<String, SubwayLine> linesByName = new HashMap<String, SubwayLine>();
 
     private ArrayList<SubwaySegment> segments = new ArrayList<SubwaySegment>();
-    private HashMap<String, ArrayList<SubwaySegment>> segmentsByLine = new HashMap<String, ArrayList<SubwaySegment>>();
-    private HashMap<String, ArrayList<SubwaySegment>> segmentsByStation = new HashMap<String, ArrayList<SubwaySegment>>();
-    public HashMap<SubwaySegment, ArrayList<Point>> segmentNodes = new HashMap<SubwaySegment, ArrayList<Point>>();
+    private HashMap<Integer, ArrayList<SubwaySegment>> segmentsByLine = new HashMap<Integer, ArrayList<SubwaySegment>>();
+    private HashMap<Integer, ArrayList<SubwaySegment>> segmentsByStationId = new HashMap<Integer, ArrayList<SubwaySegment>>();
+
+    public HashMap<Integer, ArrayList<Point>> pointsBySegmentId = new HashMap<Integer, ArrayList<Point>>();
+
+    private ArrayList<SubwaySegment> transfers = new ArrayList<SubwaySegment>();
 
     private ArrayList<SubwayStation> stations = new ArrayList<SubwayStation>();
     private HashMap<String, SubwayStation> stationsByName = new HashMap<String, SubwayStation>();
-    private HashMap<String, ArrayList<SubwayStation>> stationsByLine = new HashMap<String, ArrayList<SubwayStation>>();
+    private HashMap<Integer, ArrayList<SubwayStation>> stationsByLineId = new HashMap<Integer, ArrayList<SubwayStation>>();
 
-    public ArrayList<SubwayStationsTransfer> transfers = new ArrayList<SubwayStationsTransfer>();
+    int nextMapId;
+    int nextLineId;
+    int nextSegmentId;
+    int nextTransferId;
+    int nextStationId;
 
     public SubwayMap importPmz(String fileName) throws IOException {
         Date startTimestamp = new Date();
@@ -73,7 +81,7 @@ public class SubwayMapBuilder {
         MapResource map = pkg.getMapResource("metro.map");
         TransportResource trp = pkg.getTransportResource(map.getTransportName() != null ? map.getTransportName() : "metro.trp");
 
-        SubwayMap subwayMap = new SubwayMap(file.getName().replace(".pmz", ""));
+        SubwayMap subwayMap = new SubwayMap(nextMapId++, file.getName().replace(".pmz", ""));
 
         String countryName = info.getValue("Options", "Country");
         String cityName = info.getValue("Options", "RusName");
@@ -109,7 +117,7 @@ public class SubwayMapBuilder {
                 labelBgColor = 0;
             }
 
-            SubwayLine line = new SubwayLine(lineName, lineColor, labelColor, labelBgColor);
+            SubwayLine line = new SubwayLine(nextLineId++, lineName, lineColor, labelColor, labelBgColor);
 
             lines.add(line);
             linesByName.put(line.name, line);
@@ -218,16 +226,16 @@ public class SubwayMapBuilder {
             SubwayStation to = stationsByName.get(t.endStation);
             int flags = 0;
             if (t.status != null && t.status.contains("invisible")) {
-                flags = SubwayStationsTransfer.INVISIBLE;
+                flags = SubwaySegment.INVISIBLE;
             }
             if (from != null && to != null) {
-                transfers.add(new SubwayStationsTransfer(from, to, t.delay, flags));
+                transfers.add(new SubwaySegment(nextTransferId++, from, to, t.delay, flags));
             }
         }
 
 
         for (MapResource.MapAddiditionalLine al : map.getAddiditionalLines()) {
-            fillAdditionalLines(subwayMap, al);
+            fillAdditionalLines(al);
         }
 
         fixDimensions(subwayMap);
@@ -235,18 +243,38 @@ public class SubwayMapBuilder {
         if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO)) {
             Log.i(LOG_TAG_MAIN, String.format("PMZ file '%s' parsing time is %sms", file.getName(), Long.toString((new Date().getTime() - startTimestamp.getTime()))));
         }
+
+        subwayMap.lines = lines.toArray(new SubwayLine[lines.size()]);
+        subwayMap.segments = segments.toArray(new SubwaySegment[segments.size()]);
+
+        HashMap<Integer, SubwaySegment[]> localSegmentsByStationId = new HashMap<Integer, SubwaySegment[]>();
+        for (Integer segmentId : segmentsByStationId.keySet()) {
+            ArrayList<SubwaySegment> stationSegments = segmentsByStationId.get(segmentId);
+            localSegmentsByStationId.put(segmentId, stationSegments.toArray(new SubwaySegment[stationSegments.size()]));
+        }
+        subwayMap.segmentsByStationId = localSegmentsByStationId;
+
+        HashMap<Integer, Point[]> localPointsBySegmentId = new HashMap<Integer, Point[]>();
+        for (Integer segmentId : pointsBySegmentId.keySet()) {
+            ArrayList<Point> segmentPoints = pointsBySegmentId.get(segmentId);
+            localPointsBySegmentId.put(segmentId, segmentPoints.toArray(new Point[segmentPoints.size()]));
+        }
+
+        subwayMap.transfers = transfers.toArray(new SubwaySegment[transfers.size()]);
+        subwayMap.stations = stations.toArray(new SubwayStation[stations.size()]);
+
         return subwayMap;
     }
 
     private SubwayStation addStation(SubwayLine line, String stationName, Rect r, Point p) {
-        SubwayStation st = new SubwayStation(stationName, r, p, line);
+        SubwayStation st = new SubwayStation(nextStationId++, stationName, r, p, line);
         stations.add(st);
         stationsByName.put(stationName, st);
-        String lineName = line.name;
-        ArrayList<SubwayStation> lineStations = stationsByLine.get(lineName);
+        int lineId = line.id;
+        ArrayList<SubwayStation> lineStations = stationsByLineId.get(lineId);
         if (lineStations == null) {
             lineStations = new ArrayList<SubwayStation>();
-            stationsByLine.put(lineName, lineStations);
+            stationsByLineId.put(lineId, lineStations);
         }
         lineStations.add(st);
         return st;
@@ -272,7 +300,7 @@ public class SubwayMapBuilder {
     }
 
     public SubwaySegment getSegment(SubwayLine line, SubwayStation from, SubwayStation to) {
-        ArrayList<SubwaySegment> lineSegments = segmentsByLine.get(line.name);
+        ArrayList<SubwaySegment> lineSegments = segmentsByLine.get(line.id);
         if (lineSegments != null) {
             final String fromName = from.name;
             final String toName = to.name;
@@ -285,44 +313,32 @@ public class SubwayMapBuilder {
         return null;
     }
 
-    public boolean hasConnections() {
-        if (segments != null) {
-            for (SubwaySegment segment : segments) {
-                Double delay = segment.delay;
-                if (delay != null && delay != 0) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
     private SubwaySegment addSegment(SubwayLine line, SubwayStation from, SubwayStation to, Double delay) {
-        SubwaySegment sg = new SubwaySegment(from, to, delay);
+        SubwaySegment sg = new SubwaySegment(nextSegmentId++, from, to, delay);
 
-        String fromName = from.name;
-        ArrayList<SubwaySegment> stationSegments = segmentsByStation.get(fromName);
+        int id = from.id;
+        ArrayList<SubwaySegment> stationSegments = segmentsByStationId.get(id);
         if (stationSegments == null) {
             stationSegments = new ArrayList<SubwaySegment>();
-            segmentsByStation.put(fromName, stationSegments);
+            segmentsByStationId.put(id, stationSegments);
         }
         stationSegments.add(sg);
 
-        String toName = to.name;
-        stationSegments = segmentsByStation.get(toName);
+        id = to.id;
+        stationSegments = segmentsByStationId.get(id);
         if (stationSegments == null) {
             stationSegments = new ArrayList<SubwaySegment>();
-            segmentsByStation.put(toName, stationSegments);
+            segmentsByStationId.put(id, stationSegments);
         }
         stationSegments.add(sg);
 
-        String lineName = line.name;
-        ArrayList<SubwaySegment> lineSegments = segmentsByLine.get(lineName);
+        id = line.id;
+        ArrayList<SubwaySegment> lineSegments = segmentsByLine.get(id);
         if (lineSegments == null) {
             lineSegments = new ArrayList<SubwaySegment>();
-            segmentsByLine.put(toName, stationSegments);
+            segmentsByLine.put(id, stationSegments);
         }
-        lineSegments .add(sg);
+        lineSegments.add(sg);
 
         segments.add(sg);
 
@@ -356,14 +372,8 @@ public class SubwayMapBuilder {
         int xmax = Integer.MIN_VALUE;
         int ymax = Integer.MIN_VALUE;
 
-        SubwayLine[] lines = subwayMap.lines;
-        int linesCount = lines.length;
-
-        for (int i = 0; i < linesCount; i++) {
-            ArrayList<SubwayStation> lineStations = stationsByLine.get(lines[i].name);
-            int stationsCount = lineStations.size();
-            for (int j = 0; j < stationsCount; j++) {
-                SubwayStation station = lineStations.get(j);
+        for (SubwayLine line : subwayMap.lines) {
+            for (SubwayStation station : stationsByLineId.get(line.id)) {
                 Point p = station.point;
                 if (p != null) {
                     if (xmin > p.x) xmin = p.x;
@@ -390,12 +400,8 @@ public class SubwayMapBuilder {
         int dx = 50 - xmin;
         int dy = 50 - ymin;
 
-        for (int i = 0; i < linesCount; i++) {
-            SubwayLine line = lines[i];
-            ArrayList<SubwayStation> lineStations = stationsByLine.get(line.name);
-            int stationsCount = lineStations.size();
-            for (int j = 0; j < stationsCount; j++) {
-                SubwayStation station = lineStations.get(j);
+        for (SubwayLine line : subwayMap.lines) {
+            for (SubwayStation station : stationsByLineId.get(line.id)) {
                 Point p = station.point;
                 if (p != null) {
                     p.offset(dx, dy);
@@ -405,15 +411,11 @@ public class SubwayMapBuilder {
                     r.offset(dx, dy);
                 }
             }
-            ArrayList<SubwaySegment> lineSegments = segmentsByLine.get(line.name);
-            int segmentsCount = lineSegments.size();
-            for (int j = 0; j < segmentsCount; j++) {
-                SubwaySegment segment = lineSegments.get(j);
-                ArrayList<Point> points = segmentNodes.get(segment);
+            for (SubwaySegment segment : segmentsByLine.get(line.id)) {
+                ArrayList<Point> points = pointsBySegmentId.get(segment.id);
                 if (points != null) {
-                    int pointsCount = points.size();
-                    for (int k = 0; k < pointsCount; k++) {
-                        points.get(k).offset(dx, dy);
+                    for (Point point : points) {
+                        point.offset(dx, dy);
                     }
                 }
 
@@ -424,7 +426,7 @@ public class SubwayMapBuilder {
         subwayMap.height = ymax - ymin + 100;
     }
 
-    private void fillAdditionalLines(SubwayMap subwayMap, MapResource.MapAddiditionalLine al) {
+    private void fillAdditionalLines(MapResource.MapAddiditionalLine al) {
         if (al.mPoints == null) return;
         SubwayLine line = linesByName.get(al.mLineName);
         SubwayStation from = stationsByName.get(al.mFromStationName);
@@ -432,9 +434,12 @@ public class SubwayMapBuilder {
         if (from != null && to != null) {
             SubwaySegment segment = getSegment(line, from, to);
             if (segment != null) {
-                if (segment.additionalNodes == null) {
-                    Point[] points = al.mPoints;
-                    segment.additionalNodes = points;
+                int segmentId = segment.id;
+                ArrayList<Point> segmentPoints = pointsBySegmentId.get(segmentId);
+                if (segmentPoints == null) {
+                    segmentPoints = new ArrayList<Point>();
+                    pointsBySegmentId.put(segmentId, segmentPoints);
+                    segmentPoints.addAll(Arrays.asList(al.mPoints));
                     if (al.mIsSpline) {
                         segment.flags = SubwaySegment.SPLINE;
                     }
@@ -442,12 +447,16 @@ public class SubwayMapBuilder {
             } else {
                 SubwaySegment opposite = getSegment(line, to, from);
                 if (opposite != null) {
-                    if (opposite.additionalNodes == null) {
-                        Point[] points = new Point[al.mPoints.length];
-                        for (int i = 0; i < points.length; i++) {
-                            points[i] = al.mPoints[(points.length - 1) - i];
+                    int segmentId = opposite.id;
+                    ArrayList<Point> segmentPoints = pointsBySegmentId.get(segmentId);
+                    if (segmentPoints == null) {
+                        segmentPoints = new ArrayList<Point>();
+                        pointsBySegmentId.put(segmentId, segmentPoints);
+                        Point[] points = al.mPoints;
+                        int pointsCount = points.length;
+                        for (int i = 1; i <= pointsCount; i++) {
+                            segmentPoints.add(points[pointsCount - i]);
                         }
-                        opposite.additionalNodes = points;
                         if (al.mIsSpline) {
                             opposite.flags = SubwaySegment.SPLINE;
                         }

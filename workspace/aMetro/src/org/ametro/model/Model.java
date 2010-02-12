@@ -28,5 +28,6 @@ package org.ametro.model;
  */
 public class Model {
 
+    public SubwayMap subwayMap;
 
 }

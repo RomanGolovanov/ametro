@@ -23,12 +23,13 @@ package org.ametro.model;
 
 import android.graphics.Point;
 
-import java.io.Serializable;
-import java.util.*;
+import java.util.HashMap;
 
 public class SubwayMap {
 
     public static final int VERSION = 1;
+
+    public int id;
 
     public long timestamp;
     public long crc;
@@ -49,19 +50,70 @@ public class SubwayMap {
     public long sourceVersion;
 
     public SubwayLine[] lines;
-    public SubwayStationsTransfer[] transfers;
+
     public SubwaySegment[] segments;
+    public HashMap<Integer, SubwaySegment[]> segmentsByStationId;
+
+    public SubwaySegment[] transfers;
     public SubwayStation[] stations;
 
-    public HashMap<String, SubwayStation> stationsByName = new HashMap<String, SubwayStation>();
+    public HashMap<Integer, Point[]> pointsBySegmentId;
 
-    public HashMap<String, SubwayStation[]> stationsByLine = new HashMap<String, SubwayStation[]>();
-    public HashMap<String, SubwaySegment[]> segmentsByLine = new HashMap<String, SubwaySegment[]>();
+    HashMap<Long, SubwaySegment> segmentsIndexed;
 
-    public HashMap<SubwaySegment, Point[]> segmentNodes = new HashMap<SubwaySegment, Point[]>();
-
-    public SubwayMap(String newMapName) {
+    public SubwayMap(int newId, String newMapName) {
+        id = newId;
         mapName = newMapName;
+    }
+
+    public Point[] getSegmentsNodes(int segmentId) {
+        if (pointsBySegmentId != null) {
+            return pointsBySegmentId.get(segmentId);
+        } else {
+            return null;
+        }
+    }
+
+    public boolean hasConnections(SubwayStation station) {
+        if (station != null) {
+            SubwaySegment[] stationSegments = segmentsByStationId.get(station.id);
+            if (stationSegments != null) {
+                for (SubwaySegment segment : stationSegments) {
+                    Double delay = segment.delay;
+                    if (delay != null && delay != 0) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public SubwaySegment getSegment(SubwayStation to, SubwayStation from) {
+        if (to != null && from != null) {
+            if (segmentsIndexed == null) {
+                segmentsIndexed = new HashMap<Long, SubwaySegment>();
+                for (SubwaySegment segment : segments) {
+                    SubwayStation localTo = segment.to;
+                    SubwayStation localFrom = segment.from;
+                    if (localTo != null && localFrom != null) {
+                        segmentsIndexed.put(((long) localTo.id) << 16 + localFrom.id, segment);
+                    }
+                }
+            }
+            return segmentsIndexed.get(((long) to.id) << 16 + from.id);
+        }
+        return null;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return this == o || o != null && getClass() == o.getClass() && id == ((SubwayMap) o).id;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
     }
 
 }

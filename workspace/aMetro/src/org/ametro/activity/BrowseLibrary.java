@@ -39,10 +39,10 @@ import org.ametro.MapSettings;
 import org.ametro.MapUri;
 import org.ametro.R;
 import org.ametro.adapter.MapListAdapter;
-import org.ametro.model.ModelBuilder;
 import org.ametro.model.ModelDescription;
 import org.ametro.other.FileGroupsDictionary;
 import org.ametro.other.ProgressInfo;
+import org.ametro.util.ModelUtil;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -56,7 +56,7 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 
         private void scanModelFileContent(FileGroupsDictionary map, String fileName, String fullFileName) {
             try {
-                ModelDescription modelDescription = ModelBuilder.loadModelDescription(fullFileName);
+                ModelDescription modelDescription = ModelUtil.loadModelDescription(fullFileName);
                 if (modelDescription.sourceVersion == MapSettings.getSourceVersion()) {
                     map.putFile(modelDescription.countryName, modelDescription.cityName, fileName);
                 }
