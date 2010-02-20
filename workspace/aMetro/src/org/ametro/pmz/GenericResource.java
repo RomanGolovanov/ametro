@@ -22,7 +22,6 @@
 package org.ametro.pmz;
 
 import java.util.ArrayList;
-import java.util.Dictionary;
 import java.util.HashMap;
 
 public class GenericResource implements IResource {

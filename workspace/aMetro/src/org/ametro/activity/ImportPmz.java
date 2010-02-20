@@ -39,12 +39,15 @@ import android.widget.AdapterView.OnItemClickListener;
 import org.ametro.MapSettings;
 import org.ametro.R;
 import org.ametro.model.City;
-import org.ametro.model.SubwayMap;
+import org.ametro.model.Deserializer;
+import org.ametro.model.Serializer;
 import org.ametro.other.ProgressInfo;
 import org.ametro.util.FileUtil;
 import org.ametro.util.ModelUtil;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -211,7 +214,7 @@ public class ImportPmz extends Activity {
                 if (mapFile.exists()) {
                     City city;
                     try {
-                        city = ModelUtil.loadModelDescription(mapFileName);
+                        city = Deserializer.deserializeDescription(new FileInputStream(mapFileName));
                     } catch (Exception ex) {
                         city = null;
                     }
@@ -332,7 +335,7 @@ public class ImportPmz extends Activity {
                 publishProgress(pi);
                 try {
                     City city = ModelUtil.importPmz(record.fileName);
-                    ModelUtil.saveModel(city);
+                    Serializer.serialize(city, new FileOutputStream(city.subwayMap.mapName));
                     record.checked = false;
                     record.status = updateStatus;
                     record.statusColor = Color.GREEN;

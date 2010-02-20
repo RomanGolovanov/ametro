@@ -43,7 +43,7 @@ public class SubwaySegment {
         id = newId;
         delay = newDelay;
         fromStationId = newFromStationId;
-        toStationId= newToStationId;
+        toStationId = newToStationId;
     }
 
     public SubwaySegment(int newId, int newFromStationId, int newToStationId, Double newDelay, int newFlags) {

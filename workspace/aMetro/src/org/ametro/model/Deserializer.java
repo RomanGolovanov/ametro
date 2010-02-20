@@ -73,6 +73,8 @@ public class Deserializer {
                 if (CITY_ENTRY_NAME.equals(name)) {
                     city = deserializeCity(csvReader, version);
                     if (descriptionOnly) {
+                        zipIn.closeEntry();
+                        zipIn.close();
                         return city;
                     }
                 } else if (MAP_ENTRY_NAME.equals(name)) {

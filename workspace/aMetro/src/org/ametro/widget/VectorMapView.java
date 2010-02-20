@@ -296,5 +296,5 @@ public class VectorMapView extends BaseMapView {
 
     private Bitmap mTileCache;
     private Bitmap mTileCacheBuffer;
-    
+
 }

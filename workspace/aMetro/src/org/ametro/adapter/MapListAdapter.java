@@ -29,7 +29,6 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
-
 import org.ametro.other.FileGroupsDictionary;
 
 
