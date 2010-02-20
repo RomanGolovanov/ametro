@@ -30,7 +30,7 @@ public class SubwayMap {
     public static final int VERSION = 1;
 
     public int id;
-
+    
     public long timestamp;
     public long crc;
 
@@ -50,16 +50,13 @@ public class SubwayMap {
     public long sourceVersion;
 
     public SubwayLine[] lines;
-
+    public SubwayStation[] stations;
     public SubwaySegment[] segments;
     public HashMap<Integer, SubwaySegment[]> segmentsByStationId;
-
-    public SubwaySegment[] transfers;
-    public SubwayStation[] stations;
-
+    public SubwayTransfer[] transfers;
     public HashMap<Integer, Point[]> pointsBySegmentId;
 
-    HashMap<Long, SubwaySegment> segmentsIndexed;
+    private HashMap<Long, SubwaySegment> segmentsIndexed;
 
     public SubwayMap(int newId, String newMapName) {
         id = newId;

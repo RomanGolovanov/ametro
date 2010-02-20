@@ -39,7 +39,6 @@ import org.ametro.MapSettings;
 import org.ametro.MapUri;
 import org.ametro.R;
 import org.ametro.adapter.MapListAdapter;
-import org.ametro.model.ModelDescription;
 import org.ametro.other.FileGroupsDictionary;
 import org.ametro.other.ProgressInfo;
 import org.ametro.util.ModelUtil;

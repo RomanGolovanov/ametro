@@ -38,9 +38,8 @@ import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
 import org.ametro.MapSettings;
 import org.ametro.R;
-import org.ametro.model.Model;
+import org.ametro.model.City;
 import org.ametro.model.SubwayMap;
-import org.ametro.model.ModelDescription;
 import org.ametro.other.ProgressInfo;
 import org.ametro.util.FileUtil;
 import org.ametro.util.ModelUtil;
@@ -332,7 +331,7 @@ public class ImportPmz extends Activity {
                 pi.message = record.mapName;
                 publishProgress(pi);
                 try {
-                    Model model = ModelUtil.importPmz(record.fileName);
+                    City model = ModelUtil.importPmz(record.fileName);
                     SubwayMap map = model.subwayMap;
                     ModelUtil.saveModel(map);
                     record.checked = false;

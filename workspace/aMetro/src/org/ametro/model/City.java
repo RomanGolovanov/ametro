@@ -21,38 +21,40 @@
 
 package org.ametro.model;
 
-import android.util.Log;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
-
-import static org.ametro.Constants.LOG_TAG_MAIN;
-
 /**
  * @author Vlad Vinichenko (akerigan@gmail.com)
  *         Date: 11.02.2010
- *         Time: 0:06:46
+ *         Time: 22:15:14
  */
-public class ModelDeserializer {
+public class City {
 
-    public static SubwayMap load(InputStream in) throws IOException {
-        long startTime = System.currentTimeMillis();
-        ZipInputStream zipIn = new ZipInputStream(in);
-        ZipEntry zipEntry = zipIn.getNextEntry();
+    public static final int VERSION = 1;
 
-        zipIn.closeEntry();
-        zipIn.close();
+    public int id;
 
-        zipEntry = null;
-        zipIn = null;
+    public String countryName;
+    public String cityName;
 
-        if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO)) {
-            Log.i(LOG_TAG_MAIN, "SubwayMap loading time is " + (System.currentTimeMillis() - startTime) + "ms");
-        }
+    public int width;
+    public int height;
 
-        return null;
+    public long timestamp;
+    public long crc;
+
+    public long renderVersion;
+    public long sourceVersion;
+
+    public SubwayMap subwayMap;
+
+    public boolean completeEqual(City other) {
+        return locationEqual(other)
+                && crc == other.crc
+                && timestamp == other.timestamp
+                && sourceVersion == other.sourceVersion;
     }
 
+    public boolean locationEqual(City other) {
+        return countryName.equals(other.countryName)
+                && cityName.equals(other.cityName);
+    }
 }

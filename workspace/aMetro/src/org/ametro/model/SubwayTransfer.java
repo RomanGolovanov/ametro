@@ -21,33 +21,16 @@
 
 package org.ametro.model;
 
-public class SubwayLine {
+
+public class SubwayTransfer extends SubwaySegment{
 
     public static final int VERSION = 1;
 
-    public int id;
-    public int cityId;
-
-    public String name;
-    public int color;
-    public int labelColor;
-    public int labelBgColor;
-
-    public SubwayLine(int newId, String newName, int newColor, int newLabelColor, int newLabelBgColor) {
-        id = newId;
-        name = newName;
-        color = newColor;
-        labelColor = newLabelColor;
-        labelBgColor = newLabelBgColor;
+    public SubwayTransfer(int newId, SubwayStation newFrom, SubwayStation newTo, Double newDelay) {
+        super(newId, newFrom, newTo, newDelay);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        return this == o || o != null && getClass() == o.getClass() && id == ((SubwayLine) o).id;
-    }
-
-    @Override
-    public int hashCode() {
-        return id;
+    public SubwayTransfer(int newId, SubwayStation newFrom, SubwayStation newTo, Double newDelay, int newFlags) {
+        super(newId, newFrom, newTo, newDelay, newFlags);
     }
 }

@@ -46,7 +46,6 @@ public class SubwayStation {
     @Override
     public boolean equals(Object o) {
         return this == o || o != null && getClass() == o.getClass() && id == ((SubwayStation) o).id;
-
     }
 
     @Override
