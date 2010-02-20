@@ -50,7 +50,7 @@ public class RenderStation extends RenderElement {
         final Paint localPaintFirst = new Paint();
         final Paint localPaintSecond = new Paint();
 
-        localPaintFirst.setColor(station.line.color);
+        localPaintFirst.setColor(subwayMap.lines[station.lineId].color);
         localPaintFirst.setStyle(Style.FILL);
         localPaintFirst.setAntiAlias(true);
 

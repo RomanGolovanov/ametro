@@ -229,7 +229,7 @@ public class SubwayMapBuilder {
                 flags = SubwaySegment.INVISIBLE;
             }
             if (from != null && to != null) {
-                transfers.add(new SubwayTransfer(nextTransferId++, from, to, t.delay, flags));
+                transfers.add(new SubwayTransfer(nextTransferId++, from.id, to.id, t.delay, flags));
             }
         }
 
@@ -259,6 +259,7 @@ public class SubwayMapBuilder {
             ArrayList<Point> segmentPoints = pointsBySegmentId.get(segmentId);
             localPointsBySegmentId.put(segmentId, segmentPoints.toArray(new Point[segmentPoints.size()]));
         }
+        subwayMap.pointsBySegmentId = localPointsBySegmentId;
 
         subwayMap.transfers = transfers.toArray(new SubwayTransfer[transfers.size()]);
         subwayMap.stations = stations.toArray(new SubwayStation[stations.size()]);
@@ -267,7 +268,7 @@ public class SubwayMapBuilder {
     }
 
     private SubwayStation addStation(SubwayLine line, String stationName, Rect r, Point p) {
-        SubwayStation st = new SubwayStation(nextStationId++, stationName, r, p, line);
+        SubwayStation st = new SubwayStation(nextStationId++, stationName, r, p, line.id);
         stations.add(st);
         stationsByName.put(stationName, st);
         int lineId = line.id;
@@ -302,10 +303,8 @@ public class SubwayMapBuilder {
     public SubwaySegment getSegment(SubwayLine line, SubwayStation from, SubwayStation to) {
         ArrayList<SubwaySegment> lineSegments = segmentsByLine.get(line.id);
         if (lineSegments != null) {
-            final String fromName = from.name;
-            final String toName = to.name;
             for (SubwaySegment seg : lineSegments) {
-                if (seg.from.name.equals(fromName) && seg.to.name.equals(toName)) {
+                if (seg.fromStationId == from.id && seg.toStationId == to.id) {
                     return seg;
                 }
             }
@@ -314,7 +313,7 @@ public class SubwayMapBuilder {
     }
 
     private SubwaySegment addSegment(SubwayLine line, SubwayStation from, SubwayStation to, Double delay) {
-        SubwaySegment sg = new SubwaySegment(nextSegmentId++, from, to, delay);
+        SubwaySegment sg = new SubwaySegment(nextSegmentId++, from.id, to.id, delay);
 
         int id = from.id;
         ArrayList<SubwaySegment> stationSegments = segmentsByStationId.get(id);
@@ -356,10 +355,8 @@ public class SubwayMapBuilder {
     }
 
     public SubwaySegment getSegment(SubwayStation from, SubwayStation to) {
-        final String fromName = from.name;
-        final String toName = to.name;
         for (SubwaySegment seg : segments) {
-            if (seg.from.name.equals(fromName) && seg.to.name.equals(toName)) {
+            if (seg.fromStationId == from.id && seg.toStationId == to.id) {
                 return seg;
             }
         }

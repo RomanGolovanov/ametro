@@ -22,7 +22,9 @@
 package org.ametro.render;
 
 import android.graphics.*;
-import org.ametro.model.*;
+import org.ametro.model.SubwayMap;
+import org.ametro.model.SubwaySegment;
+import org.ametro.model.SubwayStation;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -121,25 +123,25 @@ public class RenderProgram {
 
     private void drawLines(SubwayMap subwayMap, ArrayList<RenderElement> renderQueue) {
         HashSet<SubwaySegment> exclusions = new HashSet<SubwaySegment>();
-            for (SubwaySegment segment : subwayMap.segments) {
-                if (exclusions.contains(segment)) continue;
-                if ((segment.flags & SubwaySegment.INVISIBLE) == 0) {
-                    SubwayStation from = segment.from;
-                    SubwayStation to = segment.to;
-                    if (from.point != null || to.point != null) {
-                        SubwaySegment opposite = subwayMap.getSegment(to, from);
-                        Point[] additionalPoints = subwayMap.getSegmentsNodes(segment.id);
-                        Point[] reversePoints = opposite == null ? null : subwayMap.getSegmentsNodes(opposite.id);
-                        boolean additionalForward = additionalPoints != null;
-                        boolean additionalBackward = reversePoints != null;
-                        if (!additionalForward && additionalBackward) {
-                        } else {
-                            renderQueue.add(new RenderSegment(subwayMap, segment));
-                            if (opposite != null) {
-                                exclusions.add(opposite);
-                            }
+        for (SubwaySegment segment : subwayMap.segments) {
+            if (exclusions.contains(segment)) continue;
+            if ((segment.flags & SubwaySegment.INVISIBLE) == 0) {
+                SubwayStation from = subwayMap.stations[segment.fromStationId];
+                SubwayStation to = subwayMap.stations[segment.toStationId];
+                if (from.point != null || to.point != null) {
+                    SubwaySegment opposite = subwayMap.getSegment(to, from);
+                    Point[] additionalPoints = subwayMap.getSegmentsNodes(segment.id);
+                    Point[] reversePoints = opposite == null ? null : subwayMap.getSegmentsNodes(opposite.id);
+                    boolean additionalForward = additionalPoints != null;
+                    boolean additionalBackward = reversePoints != null;
+                    if (!additionalForward && additionalBackward) {
+                    } else {
+                        renderQueue.add(new RenderSegment(subwayMap, segment));
+                        if (opposite != null) {
+                            exclusions.add(opposite);
                         }
                     }
+                }
             }
         }
     }

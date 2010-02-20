@@ -26,11 +26,14 @@ public class SubwayTransfer extends SubwaySegment{
 
     public static final int VERSION = 1;
 
-    public SubwayTransfer(int newId, SubwayStation newFrom, SubwayStation newTo, Double newDelay) {
-        super(newId, newFrom, newTo, newDelay);
+    public SubwayTransfer() {
     }
 
-    public SubwayTransfer(int newId, SubwayStation newFrom, SubwayStation newTo, Double newDelay, int newFlags) {
-        super(newId, newFrom, newTo, newDelay, newFlags);
+    public SubwayTransfer(int newId, int newFromStationId, int newToStationId, Double newDelay) {
+        super(newId, newFromStationId, newToStationId, newDelay);
+    }
+
+    public SubwayTransfer(int newId, int newFromStationId, int newToStationId, Double newDelay, int newFlags) {
+        super(newId, newFromStationId, newToStationId, newDelay, newFlags);
     }
 }

@@ -36,8 +36,8 @@ public class RenderSegment extends RenderElement {
 
     public RenderSegment(SubwayMap subwayMap, SubwaySegment segment) {
         super();
-        final SubwayStation from = segment.from;
-        final SubwayStation to = segment.to;
+        final SubwayStation from = subwayMap.stations[segment.fromStationId];
+        final SubwayStation to = subwayMap.stations[segment.toStationId];
 
         final Paint localPaint = new Paint();
         final ExtendedPath localPath = new ExtendedPath();
@@ -59,7 +59,7 @@ public class RenderSegment extends RenderElement {
                     new CornerPathEffect(lineWidth * 0.6f)
             ));
         }
-        localPaint.setColor(segment.from.line.color);
+        localPaint.setColor(subwayMap.lines[from.lineId].color);
 
         paint = localPaint;
         drawSegmentPath(subwayMap, segment, from, to, localPath);

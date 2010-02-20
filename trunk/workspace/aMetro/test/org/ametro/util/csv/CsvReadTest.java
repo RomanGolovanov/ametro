@@ -40,13 +40,13 @@ public class CsvReadTest {
 
         System.out.println("src = " + src);
 
-        while (csvReader.storeNextRecord()) {
-            System.out.println("csvReader.storeNextRecord() = true");
-            System.out.println("csvReader.getInt() = " + csvReader.getInt());
-            System.out.println("csvReader.getString() = " + csvReader.getString());
-            System.out.println("csvReader.getDouble() = " + csvReader.getDouble());
-            System.out.println("csvReader.getBoolean() = " + csvReader.getBoolean());
-            System.out.println("csvReader.getDate() = " + csvReader.getDate());
+        while (csvReader.next()) {
+            System.out.println("csvReader.next() = true");
+            System.out.println("csvReader.readInt() = " + csvReader.readInt());
+            System.out.println("csvReader.readString() = " + csvReader.readString());
+            System.out.println("csvReader.readDouble() = " + csvReader.readDouble());
+            System.out.println("csvReader.readBoolean() = " + csvReader.readBoolean());
+            System.out.println("csvReader.readDate() = " + csvReader.readDate());
         }
 
     }

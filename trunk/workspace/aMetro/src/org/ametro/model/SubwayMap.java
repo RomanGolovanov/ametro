@@ -30,7 +30,7 @@ public class SubwayMap {
     public static final int VERSION = 1;
 
     public int id;
-    
+
     public long timestamp;
     public long crc;
 
@@ -56,7 +56,10 @@ public class SubwayMap {
     public SubwayTransfer[] transfers;
     public HashMap<Integer, Point[]> pointsBySegmentId;
 
-    private HashMap<Long, SubwaySegment> segmentsIndexed;
+    private HashMap<Integer, SubwaySegment> segmentsIndexed;
+
+    public SubwayMap() {
+    }
 
     public SubwayMap(int newId, String newMapName) {
         id = newId;
@@ -89,16 +92,12 @@ public class SubwayMap {
     public SubwaySegment getSegment(SubwayStation to, SubwayStation from) {
         if (to != null && from != null) {
             if (segmentsIndexed == null) {
-                segmentsIndexed = new HashMap<Long, SubwaySegment>();
+                segmentsIndexed = new HashMap<Integer, SubwaySegment>();
                 for (SubwaySegment segment : segments) {
-                    SubwayStation localTo = segment.to;
-                    SubwayStation localFrom = segment.from;
-                    if (localTo != null && localFrom != null) {
-                        segmentsIndexed.put(((long) localTo.id) << 16 + localFrom.id, segment);
-                    }
+                    segmentsIndexed.put(segment.toStationId << 16 + segment.fromStationId, segment);
                 }
             }
-            return segmentsIndexed.get(((long) to.id) << 16 + from.id);
+            return segmentsIndexed.get(to.id << 16 + from.id);
         }
         return null;
     }
