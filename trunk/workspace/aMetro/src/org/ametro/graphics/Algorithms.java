@@ -32,41 +32,41 @@ public class Algorithms {
     private final static int TOP = 4;
     private final static int BOTTOM = 8;
 
-	public  static class Solve2x2 {
-	    float __determinant = 0;
+    public static class Solve2x2 {
+        float __determinant = 0;
 
-	    public PointF solve(float _a11, float _a12, float _a21, float _a22, float _b1, float _b2, float zeroTolerance, boolean _resolve) {
-	        if (!_resolve) {
-	            __determinant = _a11 * _a22 - _a12 * _a21;
-	        }
+        public PointF solve(float _a11, float _a12, float _a21, float _a22, float _b1, float _b2, float zeroTolerance, boolean _resolve) {
+            if (!_resolve) {
+                __determinant = _a11 * _a22 - _a12 * _a21;
+            }
 
-	        // exercise - dispatch an event if the determinant is near zero
-	        if (__determinant > zeroTolerance) {
-	            float x = (_a22 * _b1 - _a12 * _b2) / __determinant;
-	            float y = (_a11 * _b2 - _a21 * _b1) / __determinant;
-	            return new PointF(x, y);
-	        }
-	        return null;
-	    }
+            // exercise - dispatch an event if the determinant is near zero
+            if (__determinant > zeroTolerance) {
+                float x = (_a22 * _b1 - _a12 * _b2) / __determinant;
+                float y = (_a11 * _b2 - _a21 * _b1) / __determinant;
+                return new PointF(x, y);
+            }
+            return null;
+        }
 
-	}
-	
-	public static class QBezierControls {
-	    public final float x0;
-	    public final float y0;
-	    public final float x1;
-	    public final float y1;
+    }
 
-	    public QBezierControls(float newX0, float newY0, float newX1, float newY1) {
-	        super();
-	        x0 = newX0;
-	        y0 = newY0;
-	        x1 = newX1;
-	        y1 = newY1;
-	    }
+    public static class QBezierControls {
+        public final float x0;
+        public final float y0;
+        public final float x1;
+        public final float y1;
 
-	}	
-	
+        public QBezierControls(float newX0, float newY0, float newX1, float newY1) {
+            super();
+            x0 = newX0;
+            y0 = newY0;
+            x1 = newX1;
+            y1 = newY1;
+        }
+
+    }
+
     public static float calculateDistance(Point p0, Point p1) {
         int dx = p0.x - p1.x;
         int dy = p0.y - p1.y;

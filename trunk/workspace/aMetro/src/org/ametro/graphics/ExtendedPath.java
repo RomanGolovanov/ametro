@@ -21,12 +21,11 @@
 
 package org.ametro.graphics;
 
-import org.ametro.graphics.Algorithms.QBezierControls;
-
 import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
+import org.ametro.graphics.Algorithms.QBezierControls;
 
 public class ExtendedPath extends Path {
 

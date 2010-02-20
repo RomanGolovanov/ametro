@@ -23,11 +23,10 @@ package org.ametro.pmz;
 
 import android.graphics.Point;
 import android.graphics.Rect;
+import org.ametro.util.SerializeUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import org.ametro.util.SerializeUtil;
 
 
 public class MapResource implements IResource {

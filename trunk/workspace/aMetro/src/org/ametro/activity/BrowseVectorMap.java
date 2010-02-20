@@ -36,10 +36,13 @@ import android.widget.ZoomControls;
 import org.ametro.MapSettings;
 import org.ametro.MapUri;
 import org.ametro.R;
+import org.ametro.model.City;
+import org.ametro.model.Deserializer;
 import org.ametro.model.SubwayMap;
-import org.ametro.util.ModelUtil;
 import org.ametro.widget.BaseMapView.OnMapEventListener;
 import org.ametro.widget.VectorMapView;
+
+import java.io.FileInputStream;
 
 import static org.ametro.Constants.LOG_TAG_MAIN;
 
@@ -351,8 +354,12 @@ public class BrowseVectorMap extends Activity {
         protected SubwayMap doInBackground(Uri... params) {
             try {
                 Uri mapUri = params[0];
-                return ModelUtil.loadModel(MapSettings
-                        .getMapFileName(mapUri));
+                City city = Deserializer.deserialize(new FileInputStream(MapSettings.getMapFileName(mapUri)));
+                if (city != null) {
+                    return city.subwayMap;
+                } else {
+                    return null;
+                }
             } catch (Exception e) {
                 mError = e;
                 if (Log.isLoggable(LOG_TAG_MAIN, Log.ERROR))

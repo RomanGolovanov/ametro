@@ -22,7 +22,7 @@
 package org.ametro.model;
 
 
-public class SubwayTransfer extends SubwaySegment{
+public class SubwayTransfer extends SubwaySegment {
 
     public static final int VERSION = 1;
 
