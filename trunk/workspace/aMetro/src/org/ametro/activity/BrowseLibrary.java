@@ -40,11 +40,13 @@ import org.ametro.MapUri;
 import org.ametro.R;
 import org.ametro.adapter.MapListAdapter;
 import org.ametro.model.City;
+import org.ametro.model.Deserializer;
 import org.ametro.other.FileGroupsDictionary;
 import org.ametro.other.ProgressInfo;
 import org.ametro.util.ModelUtil;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FilenameFilter;
 
 
@@ -56,7 +58,7 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 
         private void scanModelFileContent(FileGroupsDictionary map, String fileName, String fullFileName) {
             try {
-                City city = ModelUtil.loadModelDescription(fullFileName);
+                City city = Deserializer.deserialize(new FileInputStream(MapSettings.MAPS_PATH + fileName), true);
                 if (city.sourceVersion == MapSettings.getSourceVersion()) {
                     map.putFile(city.countryName, city.cityName, fileName);
                 }

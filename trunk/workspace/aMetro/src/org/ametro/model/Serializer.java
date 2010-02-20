@@ -192,7 +192,7 @@ public class Serializer {
             for (SubwaySegment segment : segments) {
                 csvWriter.newRecord();
                 csvWriter.writeInt(segment.id);
-                csvWriter.writeDouble(segment.delay);
+                csvWriter.writeNullableDouble(segment.delay);
                 csvWriter.writeInt(segment.fromStationId);
                 csvWriter.writeInt(segment.toStationId);
                 csvWriter.writeInt(segment.flags);

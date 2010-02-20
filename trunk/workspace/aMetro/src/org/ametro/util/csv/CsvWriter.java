@@ -86,6 +86,14 @@ public class CsvWriter {
         writeString(Double.toString(value));
     }
 
+	public void writeNullableDouble(Double value) throws IOException {
+		if (value != null) {
+			writeString(Double.toString(value));
+		} else {
+			writeString("");
+		}
+	}
+    
     public void writeFloat(float value) throws IOException {
         writeString(Float.toString(value));
     }
