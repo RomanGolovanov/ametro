@@ -69,6 +69,18 @@ public class StringUtil {
         }
     }
 
+    public static long parseLong(String value, long defaultValue) {
+        if (value != null) {
+            try {
+                return Long.parseLong(value);
+            } catch (NumberFormatException e) {
+                return defaultValue;
+            }
+        } else {
+            return defaultValue;
+        }
+    }
+
     public static double parseDouble(String value, double defaultValue) {
         if (value != null) {
             try {

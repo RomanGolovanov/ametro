@@ -33,14 +33,17 @@ public class SubwayStation {
     public String name;
     public Rect rect;
     public Point point;
-    public SubwayLine line;
+    public int lineId;
 
-    public SubwayStation(int newId, String newName, Rect newRect, Point newPoint, SubwayLine newLine) {
+    public SubwayStation() {
+    }
+
+    public SubwayStation(int newId, String newName, Rect newRect, Point newPoint, int newLineId) {
         id = newId;
         name = newName;
         rect = newRect;
         point = newPoint;
-        line = newLine;
+        lineId = newLineId;
     }
 
     @Override

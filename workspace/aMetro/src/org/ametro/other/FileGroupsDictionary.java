@@ -88,7 +88,7 @@ public class FileGroupsDictionary implements Serializable {
             strm.writeObject(data);
             strm.flush();
         } catch (Exception ex) {
-            Log.e("aMetro", "Failed write map cache", ex);
+            Log.e("aMetro", "Failed serialize map cache", ex);
         } finally {
             if (strm != null) {
                 try {

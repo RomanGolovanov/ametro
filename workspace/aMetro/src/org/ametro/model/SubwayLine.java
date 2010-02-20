@@ -26,12 +26,14 @@ public class SubwayLine {
     public static final int VERSION = 1;
 
     public int id;
-    public int cityId;
 
     public String name;
     public int color;
     public int labelColor;
     public int labelBgColor;
+
+    public SubwayLine() {
+    }
 
     public SubwayLine(int newId, String newName, int newColor, int newLabelColor, int newLabelBgColor) {
         id = newId;

@@ -32,22 +32,25 @@ public class SubwaySegment {
     public int id;
 
     public Double delay;
-    public SubwayStation from;
-    public SubwayStation to;
+    public int fromStationId;
+    public int toStationId;
     public int flags;
 
-    public SubwaySegment(int newId, SubwayStation newFrom, SubwayStation newTo, Double newDelay) {
-        id = newId;
-        delay = newDelay;
-        from = newFrom;
-        to = newTo;
+    public SubwaySegment() {
     }
 
-    public SubwaySegment(int newId, SubwayStation newFrom, SubwayStation newTo, Double newDelay, int newFlags) {
+    public SubwaySegment(int newId, int newFromStationId, int newToStationId, Double newDelay) {
         id = newId;
         delay = newDelay;
-        from = newFrom;
-        to = newTo;
+        fromStationId = newFromStationId;
+        toStationId= newToStationId;
+    }
+
+    public SubwaySegment(int newId, int newFromStationId, int newToStationId, Double newDelay, int newFlags) {
+        id = newId;
+        delay = newDelay;
+        fromStationId = newFromStationId;
+        toStationId = newToStationId;
         flags = newFlags;
     }
 
@@ -65,7 +68,7 @@ public class SubwaySegment {
     @Override
 
     public String toString() {
-        return "[FROM:" + from.name + ";TO:" + to.name + "]";
+        return "[FROM:" + fromStationId + ";TO:" + toStationId + "]";
     }
 
 }

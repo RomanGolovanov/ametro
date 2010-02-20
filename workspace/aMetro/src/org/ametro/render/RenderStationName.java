@@ -53,7 +53,7 @@ public class RenderStationName extends RenderElement {
         final Rect rect = station.rect;
         final Point point = station.point;
 
-        final SubwayLine line = station.line;
+        final SubwayLine line = subwayMap.lines[station.lineId];
         final int textColor = line.labelColor;
         final int backColor = line.labelBgColor;
 
@@ -159,25 +159,25 @@ public class RenderStationName extends RenderElement {
         mPointFirstLine = position;
     }
 
-	private void initializePaints(final int textColor, final int backColor) {
-		final Paint textPaint = new Paint();
+    private void initializePaints(final int textColor, final int backColor) {
+        final Paint textPaint = new Paint();
 
-		textPaint.setSubpixelText(false);
-		textPaint.setAntiAlias(true);
-		textPaint.setTypeface(Typeface.DEFAULT);
-		textPaint.setFakeBoldText(true);
-		textPaint.setTextSize(10);
-		textPaint.setTextAlign(Align.LEFT);
-		textPaint.setColor(textColor);
-		textPaint.setStyle(Style.FILL);
-		mTextPaint = textPaint;
+        textPaint.setSubpixelText(false);
+        textPaint.setAntiAlias(true);
+        textPaint.setTypeface(Typeface.DEFAULT);
+        textPaint.setFakeBoldText(true);
+        textPaint.setTextSize(10);
+        textPaint.setTextAlign(Align.LEFT);
+        textPaint.setColor(textColor);
+        textPaint.setStyle(Style.FILL);
+        mTextPaint = textPaint;
 
-		final Paint fillPaint = new Paint(textPaint);
-		fillPaint.setColor(backColor != 0 ? backColor : Color.WHITE);
-		fillPaint.setStyle(Style.STROKE);
-		fillPaint.setStrokeWidth(3);
-		mBorderPaint = fillPaint;
-	}
+        final Paint fillPaint = new Paint(textPaint);
+        fillPaint.setColor(backColor != 0 ? backColor : Color.WHITE);
+        fillPaint.setStyle(Style.STROKE);
+        fillPaint.setStrokeWidth(3);
+        mBorderPaint = fillPaint;
+    }
 
     private void initializeVerticalText(final String text, final int textLength, final Rect rect, final Point point) {
         final Path textPath = new Path();
@@ -204,26 +204,26 @@ public class RenderStationName extends RenderElement {
         mPointFirstLine = null;
     }
 
-	public void draw(Canvas canvas) {
+    public void draw(Canvas canvas) {
 
-		if (mPointFirstLine != null) {
-			canvas.drawText(mTextFirstLine, mPointFirstLine.x, mPointFirstLine.y, mBorderPaint);
-			canvas.drawText(mTextFirstLine, mPointFirstLine.x, mPointFirstLine.y, mTextPaint);
-		} else {
-			canvas.drawTextOnPath(mTextFirstLine, mPathFirstLine, 0, 0, mBorderPaint);
-			canvas.drawTextOnPath(mTextFirstLine, mPathFirstLine, 0, 0, mTextPaint);
-		}
+        if (mPointFirstLine != null) {
+            canvas.drawText(mTextFirstLine, mPointFirstLine.x, mPointFirstLine.y, mBorderPaint);
+            canvas.drawText(mTextFirstLine, mPointFirstLine.x, mPointFirstLine.y, mTextPaint);
+        } else {
+            canvas.drawTextOnPath(mTextFirstLine, mPathFirstLine, 0, 0, mBorderPaint);
+            canvas.drawTextOnPath(mTextFirstLine, mPathFirstLine, 0, 0, mTextPaint);
+        }
 
-		if (mTextSecondLine != null) {
-			if (mPointSecondLine != null) {
-				canvas.drawText(mTextSecondLine, mPointSecondLine.x, mPointSecondLine.y, mBorderPaint);
-				canvas.drawText(mTextSecondLine, mPointSecondLine.x, mPointSecondLine.y, mTextPaint);
-			} else {
-				canvas.drawTextOnPath(mTextSecondLine, mPathSecondLine, 0, 0, mBorderPaint);
-				canvas.drawTextOnPath(mTextSecondLine, mPathSecondLine, 0, 0, mTextPaint);
-			}
-		}
+        if (mTextSecondLine != null) {
+            if (mPointSecondLine != null) {
+                canvas.drawText(mTextSecondLine, mPointSecondLine.x, mPointSecondLine.y, mBorderPaint);
+                canvas.drawText(mTextSecondLine, mPointSecondLine.x, mPointSecondLine.y, mTextPaint);
+            } else {
+                canvas.drawTextOnPath(mTextSecondLine, mPathSecondLine, 0, 0, mBorderPaint);
+                canvas.drawTextOnPath(mTextSecondLine, mPathSecondLine, 0, 0, mTextPaint);
+            }
+        }
 
-	}
+    }
 
 }

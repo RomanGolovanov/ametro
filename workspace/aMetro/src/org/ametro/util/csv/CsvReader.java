@@ -58,7 +58,7 @@ public class CsvReader {
      * @return Следующая нетипизированная запись из потока
      * @throws IOException
      */
-    public String[] readNextRecord() throws IOException {
+    private String[] readNextRecord() throws IOException {
         final String line = mReader.readLine();
         if (line != null) {
             return line.split(mSeparator);
@@ -73,7 +73,7 @@ public class CsvReader {
      * @return true - если запись была считана и сохранена, false - иначе
      * @throws IOException
      */
-    public boolean storeNextRecord() throws IOException {
+    public boolean next() throws IOException {
         final String[] record = readNextRecord();
         mCurrentColumn = 0;
         if (record != null) {
@@ -95,23 +95,52 @@ public class CsvReader {
         }
     }
 
-    public String getString() {
+    public String readString() {
         return getValue(mRecord, mCurrentColumn++, mTotalColumns);
     }
 
-    public int getInt() {
+    public String getString(int index) {
+        return getValue(mRecord, index, mTotalColumns);
+    }
+
+    public int readInt() {
         return StringUtil.parseInt(getValue(mRecord, mCurrentColumn++, mTotalColumns), 0);
     }
 
-    public double getDouble() {
+    public int getInt(int index) {
+        return StringUtil.parseInt(getValue(mRecord, index, mTotalColumns), 0);
+    }
+
+    public long readLong() {
+        return StringUtil.parseLong(getValue(mRecord, mCurrentColumn++, mTotalColumns), 0);
+    }
+
+    public long getLong(int index) {
+        return StringUtil.parseLong(getValue(mRecord, index, mTotalColumns), 0);
+    }
+
+    public double readDouble() {
         return StringUtil.parseDouble(getValue(mRecord, mCurrentColumn++, mTotalColumns), 0);
     }
 
-    public boolean getBoolean() {
+    public double getDouble(int index) {
+        return StringUtil.parseDouble(getValue(mRecord, index, mTotalColumns), 0);
+    }
+
+    public boolean readBoolean() {
         return StringUtil.parseBoolean(getValue(mRecord, mCurrentColumn++, mTotalColumns), false);
     }
 
-    public Date getDate() {
+    public boolean getBoolean(int index) {
+        return StringUtil.parseBoolean(getValue(mRecord, index, mTotalColumns), false);
+    }
+
+    public Date readDate() {
         return StringUtil.parseDate(getValue(mRecord, mCurrentColumn++, mTotalColumns), null);
     }
+
+    public Date getDate(int index) {
+        return StringUtil.parseDate(getValue(mRecord, index, mTotalColumns), null);
+    }
+
 }

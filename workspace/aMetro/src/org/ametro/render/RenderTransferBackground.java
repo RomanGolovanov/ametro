@@ -38,12 +38,12 @@ public class RenderTransferBackground extends RenderElement {
 
     public RenderTransferBackground(SubwayMap subwayMap, SubwaySegment transfer) {
         super();
-        final SubwayStation fromStation = transfer.from;
+        final SubwayStation fromStation = subwayMap.stations[transfer.fromStationId];
         final Point from = fromStation.point;
         FromX = from.x;
         FromY = from.y;
 
-        final SubwayStation toStation = transfer.to;
+        final SubwayStation toStation = subwayMap.stations[transfer.toStationId];
         final Point to = toStation.point;
         ToX = to.x;
         ToY = to.y;
