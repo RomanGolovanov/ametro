@@ -60,7 +60,7 @@ public class SubwayMapBuilder {
 
     public HashMap<Integer, ArrayList<Point>> pointsBySegmentId = new HashMap<Integer, ArrayList<Point>>();
 
-    private ArrayList<SubwaySegment> transfers = new ArrayList<SubwaySegment>();
+    private ArrayList<SubwayTransfer> transfers = new ArrayList<SubwayTransfer>();
 
     private ArrayList<SubwayStation> stations = new ArrayList<SubwayStation>();
     private HashMap<String, SubwayStation> stationsByName = new HashMap<String, SubwayStation>();
@@ -229,7 +229,7 @@ public class SubwayMapBuilder {
                 flags = SubwaySegment.INVISIBLE;
             }
             if (from != null && to != null) {
-                transfers.add(new SubwaySegment(nextTransferId++, from, to, t.delay, flags));
+                transfers.add(new SubwayTransfer(nextTransferId++, from, to, t.delay, flags));
             }
         }
 
