@@ -39,6 +39,7 @@ import org.ametro.MapSettings;
 import org.ametro.MapUri;
 import org.ametro.R;
 import org.ametro.adapter.MapListAdapter;
+import org.ametro.model.City;
 import org.ametro.other.FileGroupsDictionary;
 import org.ametro.other.ProgressInfo;
 import org.ametro.util.ModelUtil;
@@ -55,9 +56,9 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 
         private void scanModelFileContent(FileGroupsDictionary map, String fileName, String fullFileName) {
             try {
-                ModelDescription modelDescription = ModelUtil.loadModelDescription(fullFileName);
-                if (modelDescription.sourceVersion == MapSettings.getSourceVersion()) {
-                    map.putFile(modelDescription.countryName, modelDescription.cityName, fileName);
+                City city = ModelUtil.loadModelDescription(fullFileName);
+                if (city.sourceVersion == MapSettings.getSourceVersion()) {
+                    map.putFile(city.countryName, city.cityName, fileName);
                 }
             } catch (Exception e) {
                 Log.d("aMetro", "Map indexing failed for " + fileName, e);

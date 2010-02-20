@@ -46,7 +46,7 @@ public class ModelUtil {
 
     private static final int BUFFER_SIZE = 8192;
 
-    public static ModelDescription loadModelDescription(String fileName) throws IOException, ClassNotFoundException {
+    public static City loadModelDescription(String fileName) throws IOException, ClassNotFoundException {
         long startTime = System.currentTimeMillis();
         ObjectInputStream strm = null;
         ZipFile zip = null;
@@ -54,7 +54,7 @@ public class ModelUtil {
             zip = new ZipFile(fileName);
             ZipEntry entry = zip.getEntry(MapSettings.DESCRIPTION_ENTRY_NAME);
             strm = new ObjectInputStream(new BufferedInputStream(zip.getInputStream(entry), BUFFER_SIZE));
-            ModelDescription modelDescription = (ModelDescription) strm.readObject();
+            City modelDescription = (City) strm.readObject();
             if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO)) {
                 Log.i(LOG_TAG_MAIN, "SubwayMap description '" + fileName
                         + "' loading time is " + (System.currentTimeMillis() - startTime) + "ms");
@@ -105,12 +105,12 @@ public class ModelUtil {
         }
     }
 
-    public static void saveModel(SubwayMap subwayMap) throws IOException {
+    public static void saveModel(City city) throws IOException {
         Date startTimestamp = new Date();
-        String fileName = MapSettings.getMapFileName(subwayMap.mapName);
+        String fileName = MapSettings.getMapFileName(city.subwayMap.mapName);
         ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(fileName), BUFFER_SIZE));
-        saveModelDescriptionEntry(subwayMap, zip);
-        saveModelEntry(subwayMap, zip);
+        saveModelDescriptionEntry(city, zip);
+        saveSubwayMap(city.subwayMap, zip);
         zip.flush();
         zip.close();
         if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO)) {
@@ -118,16 +118,16 @@ public class ModelUtil {
         }
     }
 
-    private static void saveModelDescriptionEntry(SubwayMap subwayMap, ZipOutputStream zip) throws IOException {
+    private static void saveModelDescriptionEntry(City city, ZipOutputStream zip) throws IOException {
         ZipEntry entry = new ZipEntry(MapSettings.DESCRIPTION_ENTRY_NAME);
         zip.putNextEntry(entry);
         ObjectOutputStream strm = new ObjectOutputStream(zip);
-        strm.writeObject(new ModelDescription(subwayMap));
+        strm.writeObject(city);
         strm.flush();
         zip.closeEntry();
     }
 
-    private static void saveModelEntry(SubwayMap subwayMap, ZipOutputStream zip) throws IOException {
+    private static void saveSubwayMap(SubwayMap subwayMap, ZipOutputStream zip) throws IOException {
         ZipEntry entry = new ZipEntry(MapSettings.MAP_ENTRY_NAME);
         zip.putNextEntry(entry);
         ObjectOutputStream strm = new ObjectOutputStream(zip);
@@ -136,9 +136,9 @@ public class ModelUtil {
         zip.closeEntry();
     }
 
-    public static ModelDescription indexPmz(String fileName) throws IOException {
+    public static City indexPmz(String fileName) throws IOException {
         Date startTimestamp = new Date();
-        ModelDescription model = new ModelDescription();
+        City model = new City();
         FilePackage pkg = new FilePackage(fileName);
         GenericResource info = pkg.getCityGenericResource();
         String countryName = info.getValue("Options", "Country");
