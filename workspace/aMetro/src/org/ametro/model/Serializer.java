@@ -43,74 +43,28 @@ import static org.ametro.Constants.LOG_TAG_MAIN;
  */
 public class Serializer {
 
-    private static final int CITY_TYPE = 1;
-    private static final int SUBWAY_MAP_TYPE = 2;
-    private static final int SUBWAY_LINE_TYPE = 3;
-    private static final int SUBWAY_STATION_TYPE = 4;
-    private static final int SUBWAY_TRANSFER_TYPE = 5;
-    private static final int SUBWAY_SEGMENT_TYPE = 6;
-
-    public static void serialize(City[] cities, OutputStream out) throws IOException {
+    public static void serialize(City city, OutputStream out) throws IOException {
         long startTime = System.currentTimeMillis();
         ZipOutputStream zipOut = new ZipOutputStream(out);
         CsvWriter csvWriter = new CsvWriter(new BufferedWriter(new OutputStreamWriter(zipOut)));
 
-        serializeVersion(zipOut, csvWriter);
-
-        for (City city : cities) {
-            serializeCity(city, zipOut, csvWriter);
-        }
+        serializeCity(city, zipOut, csvWriter);
 
         zipOut.close();
 
         if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO)) {
-            Log.i(LOG_TAG_MAIN, "SubwayMap saving time is " + (System.currentTimeMillis() - startTime) + "ms");
+            Log.i(LOG_TAG_MAIN, "City saving time is " + (System.currentTimeMillis() - startTime) + "ms");
         }
-
-    }
-
-    private static void serializeVersion(ZipOutputStream zipOut, CsvWriter csvWriter) throws IOException {
-        ZipEntry zipEntry = new ZipEntry("version.csv");
-        zipOut.putNextEntry(zipEntry);
-
-        csvWriter.newRecord();
-        csvWriter.writeInt(CITY_TYPE);
-        csvWriter.writeString(City.class.getName());
-        csvWriter.writeInt(City.VERSION);
-
-        csvWriter.newRecord();
-        csvWriter.writeInt(SUBWAY_MAP_TYPE);
-        csvWriter.writeString(SubwayMap.class.getName());
-        csvWriter.writeInt(SubwayMap.VERSION);
-
-        csvWriter.newRecord();
-        csvWriter.writeInt(SUBWAY_LINE_TYPE);
-        csvWriter.writeString(SubwayLine.class.getName());
-        csvWriter.writeInt(SubwayLine.VERSION);
-
-        csvWriter.newRecord();
-        csvWriter.writeInt(SUBWAY_STATION_TYPE);
-        csvWriter.writeString(SubwayStation.class.getName());
-        csvWriter.writeInt(SubwayStation.VERSION);
-
-        csvWriter.newRecord();
-        csvWriter.writeInt(SUBWAY_TRANSFER_TYPE);
-        csvWriter.writeString(SubwayTransfer.class.getName());
-        csvWriter.writeInt(SubwayTransfer.VERSION);
-
-        csvWriter.newRecord();
-        csvWriter.writeInt(SUBWAY_SEGMENT_TYPE);
-        csvWriter.writeString(SubwaySegment.class.getName());
-        csvWriter.writeInt(SubwaySegment.VERSION);
-
-        csvWriter.flush();
-        zipOut.closeEntry();
 
     }
 
     private static void serializeCity(City city, ZipOutputStream zipOut, CsvWriter csvWriter) throws IOException {
         ZipEntry zipEntry = new ZipEntry("city.csv");
         zipOut.putNextEntry(zipEntry);
+
+        csvWriter.newRecord();
+        csvWriter.writeString("version");
+        csvWriter.writeInt(City.VERSION);
 
         csvWriter.newRecord();
         csvWriter.writeString(city.countryName);
@@ -134,6 +88,10 @@ public class Serializer {
 
         ZipEntry zipEntry = new ZipEntry("subway_map.csv");
         zipOut.putNextEntry(zipEntry);
+
+        csvWriter.newRecord();
+        csvWriter.writeString("version");
+        csvWriter.writeInt(SubwayMap.VERSION);
 
         csvWriter.newRecord();
         csvWriter.writeInt(subwayMap.id);
@@ -167,6 +125,10 @@ public class Serializer {
             ZipEntry zipEntry = new ZipEntry("subway_lines.csv");
             zipOut.putNextEntry(zipEntry);
 
+            csvWriter.newRecord();
+            csvWriter.writeString("version");
+            csvWriter.writeInt(SubwayLine.VERSION);
+
             for (SubwayLine subwayLine : subwayLines) {
                 csvWriter.newRecord();
                 csvWriter.writeInt(subwayLine.id);
@@ -184,9 +146,13 @@ public class Serializer {
     private static void writeStations(
             SubwayStation[] stations, ZipOutputStream zipOut, CsvWriter csvWriter
     ) throws IOException {
-        if (stations!= null) {
+        if (stations != null) {
             ZipEntry zipEntry = new ZipEntry("subway_stations.csv");
             zipOut.putNextEntry(zipEntry);
+
+            csvWriter.newRecord();
+            csvWriter.writeString("version");
+            csvWriter.writeInt(SubwayStation.VERSION);
 
             for (SubwayStation station : stations) {
                 csvWriter.newRecord();
@@ -212,9 +178,13 @@ public class Serializer {
     private static void writeSegments(
             SubwaySegment[] segments, ZipOutputStream zipOut, CsvWriter csvWriter
     ) throws IOException {
-        if (segments!= null) {
+        if (segments != null) {
             ZipEntry zipEntry = new ZipEntry("subway_segments.csv");
             zipOut.putNextEntry(zipEntry);
+
+            csvWriter.newRecord();
+            csvWriter.writeString("version");
+            csvWriter.writeInt(SubwaySegment.VERSION);
 
             for (SubwaySegment segment : segments) {
                 csvWriter.newRecord();
@@ -222,7 +192,7 @@ public class Serializer {
                 csvWriter.writeDouble(segment.delay);
                 csvWriter.writeInt(segment.from.id);
                 csvWriter.writeInt(segment.to.id);
-                csvWriter.writeInt(segment.flags);                
+                csvWriter.writeInt(segment.flags);
             }
 
             csvWriter.flush();
@@ -233,9 +203,13 @@ public class Serializer {
     private static void writeTransfers(
             SubwayTransfer[] transfers, ZipOutputStream zipOut, CsvWriter csvWriter
     ) throws IOException {
-        if (transfers!= null) {
+        if (transfers != null) {
             ZipEntry zipEntry = new ZipEntry("subway_transfers.csv");
             zipOut.putNextEntry(zipEntry);
+
+            csvWriter.newRecord();
+            csvWriter.writeString("version");
+            csvWriter.writeInt(SubwayTransfer.VERSION);
 
             for (SubwayTransfer transfer : transfers) {
                 csvWriter.newRecord();
@@ -243,7 +217,7 @@ public class Serializer {
                 csvWriter.writeDouble(transfer.delay);
                 csvWriter.writeInt(transfer.from.id);
                 csvWriter.writeInt(transfer.to.id);
-                csvWriter.writeInt(transfer.flags);                
+                csvWriter.writeInt(transfer.flags);
             }
 
             csvWriter.flush();
@@ -254,7 +228,7 @@ public class Serializer {
     private static void writePoints(
             HashMap<Integer, Point[]> pointsBySegmentId, ZipOutputStream zipOut, CsvWriter csvWriter
     ) throws IOException {
-        if (pointsBySegmentId!= null) {
+        if (pointsBySegmentId != null) {
             ZipEntry zipEntry = new ZipEntry("subway_segments_points.csv");
             zipOut.putNextEntry(zipEntry);
 
