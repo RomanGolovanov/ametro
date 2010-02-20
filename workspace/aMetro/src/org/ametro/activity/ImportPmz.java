@@ -335,7 +335,7 @@ public class ImportPmz extends Activity {
                 publishProgress(pi);
                 try {
                     City city = ModelUtil.importPmz(record.fileName);
-                    Serializer.serialize(city, new FileOutputStream(city.subwayMap.mapName));
+                    Serializer.serialize(city, new FileOutputStream(MapSettings.getMapFileName(city.subwayMap.mapName)));
                     record.checked = false;
                     record.status = updateStatus;
                     record.statusColor = Color.GREEN;

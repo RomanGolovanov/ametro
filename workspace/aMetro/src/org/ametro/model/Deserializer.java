@@ -250,7 +250,7 @@ public class Deserializer {
                 while (csvReader.next()) {
                     SubwaySegment segment = new SubwaySegment();
                     segment.id = csvReader.readInt();
-                    segment.delay = csvReader.readDouble();
+                    segment.delay = csvReader.readNullableDouble();
                     segment.fromStationId = csvReader.readInt();
                     segment.toStationId = csvReader.readInt();
                     segment.flags = csvReader.readInt();
