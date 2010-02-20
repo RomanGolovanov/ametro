@@ -202,28 +202,28 @@ public class ImportPmz extends Activity {
             File mapFile = new File(mapFileName);
             String fullFileName = MapSettings.IMPORT_PATH + fileName;
             try {
-                ModelDescription pmz = ModelUtil.indexPmz(fullFileName);
+                City pmz = ModelUtil.indexPmz(fullFileName);
                 String mapName = String.format("%s - %s (%s)", pmz.countryName, pmz.cityName, fileName);
                 int severity = 5;
                 int statusId = R.string.import_status_not_imported;
                 int color = Color.RED;
                 String statusText = ImportPmz.this.getString(statusId);
                 if (mapFile.exists()) {
-                    ModelDescription map;
+                    City city;
                     try {
-                        map = ModelUtil.loadModelDescription(mapFileName);
+                        city = ModelUtil.loadModelDescription(mapFileName);
                     } catch (Exception ex) {
-                        map = null;
+                        city = null;
                     }
-                    if (map != null && map.sourceVersion == MapSettings.getSourceVersion()) {
-                        if (map.locationEqual(pmz)) {
-                            if (map.completeEqual(pmz)) {
+                    if (city != null && city.sourceVersion == MapSettings.getSourceVersion()) {
+                        if (city.locationEqual(pmz)) {
+                            if (city.completeEqual(pmz)) {
                                 statusId = R.string.import_status_uptodate;
                                 statusText = ImportPmz.this.getString(statusId);
                                 color = Color.GREEN;
                                 severity = 1;
                             } else {
-                                if (map.timestamp > pmz.timestamp) {
+                                if (city.timestamp > pmz.timestamp) {
                                     statusId = R.string.import_status_old_version;
                                     statusText = ImportPmz.this.getString(statusId);
                                     color = Color.CYAN;
@@ -237,7 +237,7 @@ public class ImportPmz extends Activity {
                             }
                         } else {
                             statusId = R.string.import_status_override;
-                            statusText = String.format(ImportPmz.this.getString(statusId), map.countryName, map.cityName);
+                            statusText = String.format(ImportPmz.this.getString(statusId), city.countryName, city.cityName);
                             color = Color.GRAY;
                             severity = 2;
                         }
@@ -331,9 +331,8 @@ public class ImportPmz extends Activity {
                 pi.message = record.mapName;
                 publishProgress(pi);
                 try {
-                    City model = ModelUtil.importPmz(record.fileName);
-                    SubwayMap map = model.subwayMap;
-                    ModelUtil.saveModel(map);
+                    City city = ModelUtil.importPmz(record.fileName);
+                    ModelUtil.saveModel(city);
                     record.checked = false;
                     record.status = updateStatus;
                     record.statusColor = Color.GREEN;

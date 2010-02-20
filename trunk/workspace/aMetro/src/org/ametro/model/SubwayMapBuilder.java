@@ -260,7 +260,7 @@ public class SubwayMapBuilder {
             localPointsBySegmentId.put(segmentId, segmentPoints.toArray(new Point[segmentPoints.size()]));
         }
 
-        subwayMap.transfers = transfers.toArray(new SubwaySegment[transfers.size()]);
+        subwayMap.transfers = transfers.toArray(new SubwayTransfer[transfers.size()]);
         subwayMap.stations = stations.toArray(new SubwayStation[stations.size()]);
 
         return subwayMap;
