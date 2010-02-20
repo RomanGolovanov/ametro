@@ -21,13 +21,38 @@
 
 package org.ametro.model;
 
+import android.util.Log;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+
+import static org.ametro.Constants.LOG_TAG_MAIN;
+
 /**
  * @author Vlad Vinichenko (akerigan@gmail.com)
  *         Date: 11.02.2010
- *         Time: 22:15:14
+ *         Time: 0:06:46
  */
-public class Model {
+public class Deserializer {
 
-    public SubwayMap subwayMap;
+    public static City[] load(InputStream in) throws IOException {
+        long startTime = System.currentTimeMillis();
+        ZipInputStream zipIn = new ZipInputStream(in);
+        ZipEntry zipEntry = zipIn.getNextEntry();
+
+        zipIn.closeEntry();
+        zipIn.close();
+
+        zipEntry = null;
+        zipIn = null;
+
+        if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO)) {
+            Log.i(LOG_TAG_MAIN, "SubwayMap loading time is " + (System.currentTimeMillis() - startTime) + "ms");
+        }
+
+        return null;
+    }
 
 }

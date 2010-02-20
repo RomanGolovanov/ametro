@@ -23,8 +23,7 @@ package org.ametro.util;
 
 import android.util.Log;
 import org.ametro.MapSettings;
-import org.ametro.model.Model;
-import org.ametro.model.ModelDescription;
+import org.ametro.model.City;
 import org.ametro.model.SubwayMap;
 import org.ametro.model.SubwayMapBuilder;
 import org.ametro.pmz.FilePackage;
@@ -159,10 +158,10 @@ public class ModelUtil {
     }
 
 
-    public static Model importPmz(String filename) throws IOException {
+    public static City importPmz(String filename) throws IOException {
         SubwayMapBuilder subwayMapBuilder = new SubwayMapBuilder();
         SubwayMap subwayMap = subwayMapBuilder.importPmz(filename);
-        Model model = new Model();
+        City model = new City();
         model.subwayMap = subwayMap;
         return model;
     }
