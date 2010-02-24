@@ -285,7 +285,7 @@ public class ImportPmz extends Activity {
 
         @Override
         protected void onCancelled() {
-            mIsCanceled = true;
+            mIsCanceled = true; 
             super.onCancelled();
         }
 

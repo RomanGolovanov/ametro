@@ -21,20 +21,10 @@
 
 package org.ametro.activity;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.content.res.Configuration;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.AsyncTask.Status;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ExpandableListView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FilenameFilter;
+
 import org.ametro.MapSettings;
 import org.ametro.MapUri;
 import org.ametro.R;
@@ -43,11 +33,21 @@ import org.ametro.model.City;
 import org.ametro.model.Deserializer;
 import org.ametro.other.FileGroupsDictionary;
 import org.ametro.other.ProgressInfo;
-import org.ametro.util.ModelUtil;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FilenameFilter;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.AsyncTask.Status;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ExpandableListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 
 public class BrowseLibrary extends Activity implements ExpandableListView.OnChildClickListener {

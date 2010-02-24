@@ -22,7 +22,6 @@
 package org.ametro.model;
 
 import android.graphics.Point;
-import android.graphics.Rect;
 import android.util.Log;
 import org.ametro.util.csv.CsvReader;
 
@@ -56,8 +55,8 @@ public class Deserializer {
     public static City deserialize(InputStream in, boolean descriptionOnly) throws IOException {
         long startTime = System.currentTimeMillis();
         ZipInputStream zipIn = new ZipInputStream(in);
-        CsvReader csvReader = new CsvReader(new BufferedReader(new InputStreamReader(zipIn)));
 
+        
         City city = null;
         SubwayMap subwayMap = null;
         SubwayLine[] lines = null;
@@ -66,7 +65,10 @@ public class Deserializer {
         SubwayTransfer[] transfers = null;
         HashMap<Integer, Point[]> pointsBySegmentId = null;
 
-        for (ZipEntry zipEntry = zipIn.getNextEntry(); zipEntry != null;) {
+        CsvReader csvReader = new CsvReader(new BufferedReader(new InputStreamReader(zipIn)));
+        
+        ZipEntry zipEntry;
+        while( (zipEntry = zipIn.getNextEntry()) != null) {
             if (csvReader.next()) {
                 int version = csvReader.getInt(1);
                 String name = zipEntry.getName();
@@ -94,7 +96,9 @@ public class Deserializer {
             zipIn.closeEntry();
         }
 
-        if (city != null && subwayMap != null) {
+        zipIn.close();
+        
+		if (city != null && subwayMap != null) {
             city.subwayMap = subwayMap;
             subwayMap.lines = lines;
             subwayMap.stations = stations;
@@ -130,15 +134,14 @@ public class Deserializer {
                 subwayMap.segmentsByStationId = result;
             }
         }
-
-        zipIn.close();
-
+        
         if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO)) {
             Log.i(LOG_TAG_MAIN, "City loading time is " + (System.currentTimeMillis() - startTime) + "ms");
         }
 
         return city;
     }
+
 
     private static City deserializeCity(CsvReader csvReader, int version) throws IOException {
         City city = new City();
@@ -205,7 +208,7 @@ public class Deserializer {
                 throw new IllegalStateException("Cant parse file: unsupported version");
         }
         SubwayLine[] result = new SubwayLine[lines.size()];
-        for (SubwayLine line : result) {
+        for (SubwayLine line : lines) {
             result[line.id] = line;
         }
         return result;
@@ -219,16 +222,8 @@ public class Deserializer {
                     SubwayStation station = new SubwayStation();
                     station.id = csvReader.readInt();
                     station.name = csvReader.readString();
-                    Rect rect = new Rect();
-                    rect.left = csvReader.readInt();
-                    rect.top = csvReader.readInt();
-                    rect.right = csvReader.readInt();
-                    rect.bottom = csvReader.readInt();
-                    station.rect = rect;
-                    Point point = new Point();
-                    point.x = csvReader.readInt();
-                    point.y = csvReader.readInt();
-                    station.point = point;
+                    station.rect = csvReader.readRect();
+                    station.point = csvReader.readPoint();
                     station.lineId = csvReader.readInt();
                     stations.add(station);
                 }
@@ -244,7 +239,7 @@ public class Deserializer {
     }
 
     private static SubwaySegment[] deserializeSegments(CsvReader csvReader, int version) throws IOException {
-        ArrayList<SubwaySegment> stations = new ArrayList<SubwaySegment>();
+        ArrayList<SubwaySegment> segments = new ArrayList<SubwaySegment>();
         switch (version) {
             case 1:
                 while (csvReader.next()) {
@@ -254,14 +249,14 @@ public class Deserializer {
                     segment.fromStationId = csvReader.readInt();
                     segment.toStationId = csvReader.readInt();
                     segment.flags = csvReader.readInt();
-                    stations.add(segment);
+                    segments.add(segment);
                 }
                 break;
             default:
                 throw new IllegalStateException("Cant parse file: unsupported version");
         }
-        SubwaySegment[] result = new SubwaySegment[stations.size()];
-        for (SubwaySegment segment : stations) {
+        SubwaySegment[] result = new SubwaySegment[segments.size()];
+        for (SubwaySegment segment : segments) {
             result[segment.id] = segment;
         }
         return result;
@@ -274,7 +269,7 @@ public class Deserializer {
                 while (csvReader.next()) {
                     SubwayTransfer transfer = new SubwayTransfer();
                     transfer.id = csvReader.readInt();
-                    transfer.delay = csvReader.readDouble();
+                    transfer.delay = csvReader.readNullableDouble();
                     transfer.fromStationId = csvReader.readInt();
                     transfer.toStationId = csvReader.readInt();
                     transfer.flags = csvReader.readInt();
@@ -297,9 +292,7 @@ public class Deserializer {
             case 1:
                 while (csvReader.next()) {
                     int segmentId = csvReader.readInt();
-                    Point point = new Point();
-                    point.x = csvReader.readInt();
-                    point.y = csvReader.readInt();
+                    Point point = csvReader.readPoint();
                     ArrayList<Point> points = pointsBySegmentId.get(segmentId);
                     if (points == null) {
                         points = new ArrayList<Point>();

@@ -115,12 +115,14 @@ public class RenderStationName extends RenderElement {
         final int right = rect.right;
         if (point.x > rect.centerX()) { // align to right
             mTextPaint.setTextAlign(Align.RIGHT);
+            mBorderPaint.setTextAlign(Align.RIGHT);
             mTextPaint.getTextBounds(text, 0, textLength, bounds);
             fill.set(right - bounds.width() - 1, top, right + 2, top + bounds.height() + 1);
             position.set(right, top + bounds.height());
 
         } else { // align to left
             mTextPaint.setTextAlign(Align.LEFT);
+            mBorderPaint.setTextAlign(Align.LEFT);
             mTextPaint.getTextBounds(text, 0, textLength, bounds);
             fill.set(left - 1, top, left + bounds.width() + 2, top + bounds.height() + 1);
             position.set(left, top + bounds.height());
@@ -143,12 +145,14 @@ public class RenderStationName extends RenderElement {
         final int right = rect.right;
         if (point.x > rect.centerX()) { // align to right
             mTextPaint.setTextAlign(Align.RIGHT);
+            mBorderPaint.setTextAlign(Align.RIGHT);
             mTextPaint.getTextBounds(text, 0, textLength, bounds);
             fill.set(right - bounds.width() - 1, top, right + 2, top + bounds.height() + 1);
             position.set(right, top + bounds.height());
 
         } else { // align to left
             mTextPaint.setTextAlign(Align.LEFT);
+            mBorderPaint.setTextAlign(Align.LEFT);
             mTextPaint.getTextBounds(text, 0, textLength, bounds);
             fill.set(left - 1, top, left + bounds.width() + 2, top + bounds.height() + 1);
             position.set(left, top + bounds.height());
