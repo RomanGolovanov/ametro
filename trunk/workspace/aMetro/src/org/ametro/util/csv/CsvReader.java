@@ -25,6 +25,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Date;
 
+import org.ametro.util.SerializeUtil;
 import org.ametro.util.StringUtil;
 
 import android.graphics.Point;
@@ -183,6 +184,15 @@ public class CsvReader {
 		String value = getValue(mRecord, mCurrentColumn++, mTotalColumns);
 		if (!EMPTY_VALUE.equals(value)) {
 			return StringUtil.parsePoint(value);
+		} else {
+			return null;
+		}
+	}
+
+	public Point[] readPointArray() {
+		String value = getValue(mRecord, mCurrentColumn++, mTotalColumns);
+		if (!EMPTY_VALUE.equals(value)) {
+			return SerializeUtil.parsePointArray(value);
 		} else {
 			return null;
 		}
