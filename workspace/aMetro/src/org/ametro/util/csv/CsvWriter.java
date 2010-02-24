@@ -21,12 +21,15 @@
 
 package org.ametro.util.csv;
 
-import org.ametro.util.StringUtil;
-
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import org.ametro.util.StringUtil;
+
+import android.graphics.Point;
+import android.graphics.Rect;
 
 /**
  * @author Vlad Vinichenko (akerigan@gmail.com)
@@ -35,6 +38,7 @@ import java.util.Date;
  */
 public class CsvWriter {
 
+	private static final String EMPTY_VALUE = "null";
     private static final String DEFAULT_SEPARATOR = ";";
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-dd-MM HH:mm:ss z");
 
@@ -90,7 +94,7 @@ public class CsvWriter {
 		if (value != null) {
 			writeString(Double.toString(value));
 		} else {
-			writeString("");
+			writeString(EMPTY_VALUE);
 		}
 	}
     
@@ -112,6 +116,22 @@ public class CsvWriter {
         }
     }
 
+	public void writeRect(Rect rect) throws IOException {
+		if(rect!=null){
+			writeString(StringUtil.formatRect(rect));
+		}else{
+			writeString(EMPTY_VALUE);
+		}
+	}
+
+	public void writePoint(Point point) throws IOException {
+		if(point!=null){
+			writeString(StringUtil.formatPoint(point));
+		}else{
+			writeString(EMPTY_VALUE);
+		}
+	}
+	
     public void flush() throws IOException {
         mWriter.flush();
     }
@@ -119,5 +139,6 @@ public class CsvWriter {
     public void close() throws IOException {
         mWriter.close();
     }
+
 
 }

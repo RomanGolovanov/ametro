@@ -21,17 +21,21 @@
 
 package org.ametro.util.csv;
 
-import org.ametro.util.StringUtil;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Date;
+
+import org.ametro.util.StringUtil;
+
+import android.graphics.Point;
+import android.graphics.Rect;
 
 /**
  * @author Vlad Vinichenko (akerigan@gmail.com) Date: 08.02.2010 Time: 22:10:36
  */
 public class CsvReader {
 
+	private static final String EMPTY_VALUE = "null";
 	private static final String DEFAULT_SEPARATOR = ";";
 
 	private BufferedReader mReader;
@@ -59,7 +63,10 @@ public class CsvReader {
 	 * @throws IOException
 	 */
 	private String[] readNextRecord() throws IOException {
-		final String line = mReader.readLine();
+		String line = mReader.readLine();
+		while(line!=null && line.length() == 0){
+			line = mReader.readLine();
+		}
 		if (line != null) {
 			return line.split(mSeparator);
 		} else {
@@ -131,7 +138,7 @@ public class CsvReader {
 
 	public Double readNullableDouble() {
 		String value = getValue(mRecord, mCurrentColumn++, mTotalColumns);
-		if (value != null && value.length() > 0) {
+		if (!EMPTY_VALUE.equals(value)) {
 			return StringUtil.parseDouble(value, 0);
 		} else {
 			return null;
@@ -161,6 +168,24 @@ public class CsvReader {
 	public Date getDate(int index) {
 		return StringUtil.parseDate(getValue(mRecord, index, mTotalColumns),
 				null);
+	}
+
+	public Rect readRect() {
+		String value = getValue(mRecord, mCurrentColumn++, mTotalColumns);
+		if (!EMPTY_VALUE.equals(value)) {
+			return StringUtil.parseRect(value);
+		} else {
+			return null;
+		}
+	}
+
+	public Point readPoint() {
+		String value = getValue(mRecord, mCurrentColumn++, mTotalColumns);
+		if (!EMPTY_VALUE.equals(value)) {
+			return StringUtil.parsePoint(value);
+		} else {
+			return null;
+		}
 	}
 
 }

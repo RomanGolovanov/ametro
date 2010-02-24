@@ -22,7 +22,6 @@
 package org.ametro.model;
 
 import android.graphics.Point;
-import android.graphics.Rect;
 import android.util.Log;
 import org.ametro.util.csv.CsvWriter;
 
@@ -161,14 +160,8 @@ public class Serializer {
                 csvWriter.newRecord();
                 csvWriter.writeInt(station.id);
                 csvWriter.writeString(station.name);
-                Rect rect = station.rect;
-                csvWriter.writeInt(rect.left);
-                csvWriter.writeInt(rect.top);
-                csvWriter.writeInt(rect.right);
-                csvWriter.writeInt(rect.bottom);
-                Point point = station.point;
-                csvWriter.writeInt(point.x);
-                csvWriter.writeInt(point.y);
+                csvWriter.writeRect(station.rect);
+                csvWriter.writePoint(station.point);
                 csvWriter.writeInt(station.lineId);
             }
 
@@ -217,7 +210,7 @@ public class Serializer {
             for (SubwayTransfer transfer : transfers) {
                 csvWriter.newRecord();
                 csvWriter.writeInt(transfer.id);
-                csvWriter.writeDouble(transfer.delay);
+                csvWriter.writeNullableDouble(transfer.delay);
                 csvWriter.writeInt(transfer.fromStationId);
                 csvWriter.writeInt(transfer.toStationId);
                 csvWriter.writeInt(transfer.flags);
@@ -235,13 +228,16 @@ public class Serializer {
             ZipEntry zipEntry = new ZipEntry(SEGMENTS_POINTS_ENTRY_NAME);
             zipOut.putNextEntry(zipEntry);
 
+            csvWriter.newRecord();
+            csvWriter.writeString("version");
+            csvWriter.writeInt(SubwaySegment.VERSION);
+            
             for (int segmentId : pointsBySegmentId.keySet()) {
                 Point[] points = pointsBySegmentId.get(segmentId);
                 for (Point point : points) {
                     csvWriter.newRecord();
                     csvWriter.writeInt(segmentId);
-                    csvWriter.writeInt(point.x);
-                    csvWriter.writeInt(point.y);
+                    csvWriter.writePoint(point);
                 }
             }
 

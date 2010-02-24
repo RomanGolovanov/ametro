@@ -28,6 +28,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import android.graphics.Point;
+import android.graphics.Rect;
+
 /**
  * @author Vlad Vinichenko (akerigan@gmail.com)
  *         Date: 08.02.2010
@@ -115,6 +118,30 @@ public class StringUtil {
         return null;
     }
 
+    public static Rect parseRect(String value) {
+        String[] parts = value.split(",");
+        int x1 = Integer.parseInt(parts[0].trim());
+        int y1 = Integer.parseInt(parts[1].trim());
+        int x2 = Integer.parseInt(parts[2].trim());
+        int y2 = Integer.parseInt(parts[3].trim());
+        return new Rect(x1, y1, x2, y2);
+    }
+
+    public static Point parsePoint(String value) {
+        String[] parts = value.split(",");
+        int x = Integer.parseInt(parts[0].trim());
+        int y = Integer.parseInt(parts[1].trim());
+        return new Point(x, y);
+    }
+
+	public static String formatRect(Rect rect) {
+		return rect.left + "," + rect.top + "," + rect.right + "," + rect.bottom;
+	}
+
+	public static String formatPoint(Point point) {
+		return point.x + "," + point.y;
+	}
+    
     public static <T> String join(Collection<T> objs, String delimiter) {
         StringBuilder builder = new StringBuilder();
 
