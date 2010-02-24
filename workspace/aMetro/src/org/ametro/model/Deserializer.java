@@ -287,29 +287,19 @@ public class Deserializer {
     }
 
     private static HashMap<Integer, Point[]> deserializeSegmentsPoints(CsvReader csvReader, int version) throws IOException {
-        HashMap<Integer, ArrayList<Point>> pointsBySegmentId = new HashMap<Integer, ArrayList<Point>>();
+        HashMap<Integer, Point[]> pointsBySegmentId = new HashMap<Integer, Point[]>();
         switch (version) {
             case 1:
                 while (csvReader.next()) {
                     int segmentId = csvReader.readInt();
-                    Point point = csvReader.readPoint();
-                    ArrayList<Point> points = pointsBySegmentId.get(segmentId);
-                    if (points == null) {
-                        points = new ArrayList<Point>();
-                        pointsBySegmentId.put(segmentId, points);
-                    }
-                    points.add(point);
+                    Point[] points = csvReader.readPointArray();
+                    pointsBySegmentId.put(segmentId, points);
                 }
                 break;
             default:
                 throw new IllegalStateException("Cant parse file: unsupported version");
         }
-        HashMap<Integer, Point[]> result = new HashMap<Integer, Point[]>();
-        for (Integer segmentId : pointsBySegmentId.keySet()) {
-            ArrayList<Point> points = pointsBySegmentId.get(segmentId);
-            result.put(segmentId, points.toArray(new Point[points.size()]));
-        }
-        return result;
+        return pointsBySegmentId;
     }
 
 }

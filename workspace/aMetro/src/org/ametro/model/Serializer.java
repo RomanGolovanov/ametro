@@ -234,11 +234,9 @@ public class Serializer {
             
             for (int segmentId : pointsBySegmentId.keySet()) {
                 Point[] points = pointsBySegmentId.get(segmentId);
-                for (Point point : points) {
-                    csvWriter.newRecord();
-                    csvWriter.writeInt(segmentId);
-                    csvWriter.writePoint(point);
-                }
+                csvWriter.newRecord();
+                csvWriter.writeInt(segmentId);
+                csvWriter.writePointArray(points);
             }
 
             csvWriter.flush();

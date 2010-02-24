@@ -131,6 +131,18 @@ public class CsvWriter {
 			writeString(EMPTY_VALUE);
 		}
 	}
+
+	public void writePointArray(Point[] points) throws IOException {
+		StringBuffer sb = new StringBuffer(points.length * 3 * 3);
+		for(Point p : points){
+			sb.append(p.x);
+			sb.append(",");
+			sb.append(p.y);
+			sb.append(",");
+		}
+		sb.deleteCharAt(sb.length()-1);
+		writeString(sb.toString());
+	}
 	
     public void flush() throws IOException {
         mWriter.flush();
