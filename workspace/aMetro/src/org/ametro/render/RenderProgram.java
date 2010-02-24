@@ -122,9 +122,9 @@ public class RenderProgram {
     }
 
     private void drawLines(SubwayMap subwayMap, ArrayList<RenderElement> renderQueue) {
-        HashSet<SubwaySegment> exclusions = new HashSet<SubwaySegment>();
+        HashSet<Integer> exclusions = new HashSet<Integer>();
         for (SubwaySegment segment : subwayMap.segments) {
-            if (exclusions.contains(segment)) continue;
+            if (exclusions.contains(segment.id)) continue;
             if ((segment.flags & SubwaySegment.INVISIBLE) == 0) {
                 SubwayStation from = subwayMap.stations[segment.fromStationId];
                 SubwayStation to = subwayMap.stations[segment.toStationId];
@@ -138,7 +138,7 @@ public class RenderProgram {
                     } else {
                         renderQueue.add(new RenderSegment(subwayMap, segment));
                         if (opposite != null) {
-                            exclusions.add(opposite);
+                            exclusions.add(opposite.id);
                         }
                     }
                 }

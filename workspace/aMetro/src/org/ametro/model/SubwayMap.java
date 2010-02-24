@@ -56,7 +56,7 @@ public class SubwayMap {
     public SubwayTransfer[] transfers;
     public HashMap<Integer, Point[]> pointsBySegmentId;
 
-    private HashMap<Integer, SubwaySegment> segmentsIndexed;
+    private HashMap<Long, SubwaySegment> segmentsIndexed;
 
     public SubwayMap() {
     }
@@ -89,15 +89,15 @@ public class SubwayMap {
         return false;
     }
 
-    public SubwaySegment getSegment(SubwayStation to, SubwayStation from) {
+    public SubwaySegment getSegment(SubwayStation from, SubwayStation to) {
         if (to != null && from != null) {
             if (segmentsIndexed == null) {
-                segmentsIndexed = new HashMap<Integer, SubwaySegment>();
+                segmentsIndexed = new HashMap<Long, SubwaySegment>();
                 for (SubwaySegment segment : segments) {
-                    segmentsIndexed.put(segment.toStationId << 16 + segment.fromStationId, segment);
+                    segmentsIndexed.put(((long)segment.toStationId) << 32 + segment.fromStationId, segment);
                 }
             }
-            return segmentsIndexed.get(to.id << 16 + from.id);
+            return segmentsIndexed.get( ((long)to.id) << 32 + from.id);
         }
         return null;
     }
