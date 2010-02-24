@@ -237,8 +237,9 @@ public class SubwayMapBuilder {
 
 		// transfers construction
 		for (TransportResource.TransportTransfer t : trp.getTransfers()) {
-			SubwayStation from = stationsByName.get(t.startStation);
-			SubwayStation to = stationsByName.get(t.endStation);
+			
+			SubwayStation from = stationsByName.get(t.startLine + "_" + t.startStation);
+			SubwayStation to = stationsByName.get(t.endLine + "_" + t.endStation);
 			int flags = 0;
 			if (t.status != null && t.status.contains("invisible")) {
 				flags = SubwaySegment.INVISIBLE;
@@ -296,7 +297,7 @@ public class SubwayMapBuilder {
 		SubwayStation st = new SubwayStation(nextStationId++, stationName, r,
 				p, line.id);
 		stations.add(st);
-		stationsByName.put(stationName, st);
+		stationsByName.put(line.name + "_" + stationName, st);
 		int lineId = line.id;
 		ArrayList<SubwayStation> lineStations = stationsByLineId.get(lineId);
 		if (lineStations == null) {
@@ -308,7 +309,7 @@ public class SubwayMapBuilder {
 	}
 
 	public SubwayStation invalidateStation(SubwayLine line, String stationName) {
-		SubwayStation st = stationsByName.get(stationName);
+		SubwayStation st = stationsByName.get(line.name + "_" + stationName);
 		if (st == null) {
 			st = addStation(line, stationName, null, null);
 		}
@@ -317,7 +318,7 @@ public class SubwayMapBuilder {
 
 	public SubwayStation invalidateStation(SubwayLine line, String stationName,
 			Rect r, Point p) {
-		SubwayStation st = stationsByName.get(stationName);
+		SubwayStation st = stationsByName.get(line.name + "_" + stationName);
 		if (st == null) {
 			st = addStation(line, stationName, r, p);
 		} else {
@@ -465,14 +466,13 @@ public class SubwayMapBuilder {
 		if (al.mPoints == null)
 			return;
 		SubwayLine line = linesByName.get(al.mLineName);
-		SubwayStation from = stationsByName.get(al.mFromStationName);
-		SubwayStation to = stationsByName.get(al.mToStationName);
+		SubwayStation from = stationsByName.get(al.mLineName + "_" + al.mFromStationName);
+		SubwayStation to = stationsByName.get(al.mLineName + "_" + al.mToStationName);
 		if (from != null && to != null) {
 			SubwaySegment segment = getSegment(line, from, to);
 			if (segment != null) {
 				int segmentId = segment.id;
-				ArrayList<Point> segmentPoints = pointsBySegmentId
-						.get(segmentId);
+				ArrayList<Point> segmentPoints = pointsBySegmentId.get(segmentId);
 				if (segmentPoints == null) {
 					segmentPoints = new ArrayList<Point>();
 					pointsBySegmentId.put(segmentId, segmentPoints);
@@ -485,8 +485,7 @@ public class SubwayMapBuilder {
 				SubwaySegment opposite = getSegment(line, to, from);
 				if (opposite != null) {
 					int segmentId = opposite.id;
-					ArrayList<Point> segmentPoints = pointsBySegmentId
-							.get(segmentId);
+					ArrayList<Point> segmentPoints = pointsBySegmentId.get(segmentId);
 					if (segmentPoints == null) {
 						segmentPoints = new ArrayList<Point>();
 						pointsBySegmentId.put(segmentId, segmentPoints);
