@@ -325,7 +325,7 @@ public class BrowseVectorMap extends Activity {
 				SubwayStation station = mSubwayMap.getStation(lineName, stationName);
 				hideSearch();
 				mSearchText.setText("");
-				mMapView.setScrollCenter(station.point);
+				mMapView.scrollModelCenterTo(station.point.x, station.point.y);
 			}
 		});
         
