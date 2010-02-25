@@ -27,89 +27,95 @@ import java.util.HashMap;
 
 public class SubwayMap {
 
-    public static final int VERSION = 1;
+	public static final int VERSION = 1;
 
-    public int id;
+	public int id;
 
-    public long timestamp;
-    public long crc;
+	public long timestamp;
+	public long crc;
 
-    public String mapName;
+	public String mapName;
 
-    public String cityName;
-    public String countryName;
+	public String cityName;
+	public String countryName;
 
-    public int width;
-    public int height;
+	public int width;
+	public int height;
 
-    public int stationDiameter;
-    public int linesWidth;
-    public boolean wordWrap;
-    public boolean upperCase;
+	public int stationDiameter;
+	public int linesWidth;
+	public boolean wordWrap;
+	public boolean upperCase;
 
-    public long sourceVersion;
+	public long sourceVersion;
 
-    public SubwayLine[] lines;
-    public SubwayStation[] stations;
-    public SubwaySegment[] segments;
-    public HashMap<Integer, SubwaySegment[]> segmentsByStationId;
-    public SubwayTransfer[] transfers;
-    public HashMap<Integer, Point[]> pointsBySegmentId;
+	public SubwayLine[] lines;
+	public SubwayStation[] stations;
+	public SubwaySegment[] segments;
+	public HashMap<Integer, SubwaySegment[]> segmentsByStationId;
+	public SubwayTransfer[] transfers;
+	public HashMap<Integer, Point[]> pointsBySegmentId;
 
-    private HashMap<Long, SubwaySegment> segmentsIndexed;
+	private HashMap<Long, SubwaySegment> segmentsIndexed;
 
-    public SubwayMap() {
-    }
+	public SubwayMap() {
+	}
 
-    public SubwayMap(int newId, String newMapName) {
-        id = newId;
-        mapName = newMapName;
-    }
+	public SubwayMap(int newId, String newMapName) {
+		id = newId;
+		mapName = newMapName;
+	}
 
-    public Point[] getSegmentsNodes(int segmentId) {
-        if (pointsBySegmentId != null) {
-            return pointsBySegmentId.get(segmentId);
-        } else {
-            return null;
-        }
-    }
+	public Point[] getSegmentsNodes(int segmentId) {
+		if (pointsBySegmentId != null) {
+			return pointsBySegmentId.get(segmentId);
+		} else {
+			return null;
+		}
+	}
 
-    public boolean hasConnections(SubwayStation station) {
-        if (station != null) {
-            SubwaySegment[] stationSegments = segmentsByStationId.get(station.id);
-            if (stationSegments != null) {
-                for (SubwaySegment segment : stationSegments) {
-                    Double delay = segment.delay;
-                    if (delay != null && delay != 0) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
+	public boolean hasConnections(SubwayStation station) {
+		if (station != null) {
+			SubwaySegment[] stationSegments = segmentsByStationId
+					.get(station.id);
+			if (stationSegments != null) {
+				for (SubwaySegment segment : stationSegments) {
+					Double delay = segment.delay;
+					if (delay != null && delay != 0) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
 
-    public SubwaySegment getSegment(SubwayStation from, SubwayStation to) {
-        if (to != null && from != null) {
-            if (segmentsIndexed == null) {
-                segmentsIndexed = new HashMap<Long, SubwaySegment>();
-                for (SubwaySegment segment : segments) {
-                    segmentsIndexed.put(((long)segment.toStationId) << 32 + segment.fromStationId, segment);
-                }
-            }
-            return segmentsIndexed.get( ((long)to.id) << 32 + from.id);
-        }
-        return null;
-    }
+	public SubwaySegment getSegment(SubwayStation from, SubwayStation to) {
+		if (to != null && from != null) {
+			if (segmentsIndexed == null) {
+				segmentsIndexed = new HashMap<Long, SubwaySegment>();
+				for (SubwaySegment segment : segments) {
+					long segFromId = segment.fromStationId;
+					long segToId = segment.toStationId;
+					segmentsIndexed.put((segFromId << 32) + segToId, segment);
+				}
+			}
+			long fromId = from.id;
+			long toId = to.id;
+			return segmentsIndexed.get( (fromId << 32) + toId );
+		}
+		return null;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        return this == o || o != null && getClass() == o.getClass() && id == ((SubwayMap) o).id;
-    }
+	@Override
+	public boolean equals(Object o) {
+		return this == o || o != null && getClass() == o.getClass()
+				&& id == ((SubwayMap) o).id;
+	}
 
-    @Override
-    public int hashCode() {
-        return id;
-    }
+	@Override
+	public int hashCode() {
+		return id;
+	}
 
 }
