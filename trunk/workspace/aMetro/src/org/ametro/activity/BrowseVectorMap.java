@@ -33,7 +33,6 @@ import org.ametro.model.City;
 import org.ametro.model.Deserializer;
 import org.ametro.model.SubwayMap;
 import org.ametro.model.SubwayStation;
-import org.ametro.util.StringUtil;
 import org.ametro.widget.VectorMapView;
 import org.ametro.widget.BaseMapView.OnMapEventListener;
 
@@ -77,7 +76,6 @@ public class BrowseVectorMap extends Activity {
     private final int MAX_ZOOM_LEVEL = 7;
     private final int DEFAULT_ZOOM_LEVEL = 1;
     private final int ZOOM_CONTROLS_TIMEOUT = 2000;
-    private final int SEARCH_CONTROLS_TIMEOUT = 5000;
     private int mZoom = DEFAULT_ZOOM_LEVEL;
 
     private SubwayMap mSubwayMap;
@@ -87,7 +85,6 @@ public class BrowseVectorMap extends Activity {
     private AutoCompleteTextView mSearchText;
     private ImageButton mSearchButton;
     private Runnable mZoomControlRunnable;
-    private Runnable mSearchControlRunnable;
     private Handler mPrivateHandler = new Handler();
 
     private InitTask mInitTask;
@@ -270,7 +267,7 @@ public class BrowseVectorMap extends Activity {
         
         ArrayList<String> stationList = new ArrayList<String>();
         for(SubwayStation station : mSubwayMap.stations){
-        	stationList.add(station.name + "(" + mSubwayMap.getLine(station.lineId).name + ")");
+        	stationList.add(station.name + " (" + mSubwayMap.getLine(station.lineId).name + ")");
         }
         
         mSearchText = (AutoCompleteTextView) findViewById(R.id.browse_vector_map_search_edit);
@@ -311,6 +308,26 @@ public class BrowseVectorMap extends Activity {
             public void onLongClick(int x, int y) {
             }
         });
+
+        mSearchButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				mSearchText.setText("");
+			}
+		});
+        
+        mSearchText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				String text = parent.getItemAtPosition(position).toString();
+				String stationName = text.substring(0, text.indexOf("(")-1);
+				String lineName = text.substring(text.indexOf("(")+1, text.indexOf(")"));
+				SubwayStation station = mSubwayMap.getStation(lineName, stationName);
+				hideSearch();
+				mSearchText.setText("");
+				mMapView.setScrollCenter(station.point);
+			}
+		});
         
         mZoomControls
                 .setOnZoomInClickListener(new View.OnClickListener() {

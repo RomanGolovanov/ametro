@@ -52,4 +52,5 @@ public class SubwayLine {
     public int hashCode() {
         return id;
     }
+
 }
