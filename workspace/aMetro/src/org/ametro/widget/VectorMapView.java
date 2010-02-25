@@ -73,6 +73,13 @@ public class VectorMapView extends BaseMapView {
         super.setScrollCenter(p0);
     }
 
+	public void scrollModelCenterTo(int x, int y) {
+        Point p0 = new Point();
+        p0.x = (int) (x * mScale);
+        p0.y = (int) (y * mScale);
+        super.scrollCenterTo(p0);
+	}
+    
     public void setModelScrollCenter(PointF p) {
         setModelScrollCenter(p.x, p.y);
     }
@@ -296,5 +303,5 @@ public class VectorMapView extends BaseMapView {
 
     private Bitmap mTileCache;
     private Bitmap mTileCacheBuffer;
-
+    
 }
