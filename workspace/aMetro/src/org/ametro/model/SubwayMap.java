@@ -129,4 +129,27 @@ public class SubwayMap {
 		return linesIndexed.get(lineId);
 	}
 
+	public SubwayLine getLine(String lineName) {
+		for(SubwayLine line : lines){
+			if(line.name.equalsIgnoreCase(lineName)){
+				return line;
+			}
+		}
+		return null;
+	}
+
+	public SubwayStation getStation(String lineName, String stationName) {
+		SubwayLine line = getLine(lineName);
+		if(line!=null){
+			for(SubwayStation station : stations){
+				if(station.lineId == line.id){
+					if(station.name.equalsIgnoreCase(stationName)){
+						return station;
+					}
+				}
+			}
+		}
+		return null;
+	}
+
 }
