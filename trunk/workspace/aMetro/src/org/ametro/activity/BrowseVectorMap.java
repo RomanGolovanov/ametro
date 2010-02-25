@@ -21,6 +21,22 @@
 
 package org.ametro.activity;
 
+import static org.ametro.Constants.LOG_TAG_MAIN;
+
+import java.io.FileInputStream;
+import java.util.ArrayList;
+
+import org.ametro.MapSettings;
+import org.ametro.MapUri;
+import org.ametro.R;
+import org.ametro.model.City;
+import org.ametro.model.Deserializer;
+import org.ametro.model.SubwayMap;
+import org.ametro.model.SubwayStation;
+import org.ametro.util.StringUtil;
+import org.ametro.widget.VectorMapView;
+import org.ametro.widget.BaseMapView.OnMapEventListener;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PointF;
@@ -29,22 +45,20 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.*;
+import android.view.Display;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
+import android.view.animation.TranslateAnimation;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import android.widget.ZoomControls;
-import org.ametro.MapSettings;
-import org.ametro.MapUri;
-import org.ametro.R;
-import org.ametro.model.City;
-import org.ametro.model.Deserializer;
-import org.ametro.model.SubwayMap;
-import org.ametro.widget.BaseMapView.OnMapEventListener;
-import org.ametro.widget.VectorMapView;
-
-import java.io.FileInputStream;
-
-import static org.ametro.Constants.LOG_TAG_MAIN;
 
 public class BrowseVectorMap extends Activity {
 
@@ -63,12 +77,17 @@ public class BrowseVectorMap extends Activity {
     private final int MAX_ZOOM_LEVEL = 7;
     private final int DEFAULT_ZOOM_LEVEL = 1;
     private final int ZOOM_CONTROLS_TIMEOUT = 2000;
+    private final int SEARCH_CONTROLS_TIMEOUT = 5000;
     private int mZoom = DEFAULT_ZOOM_LEVEL;
 
     private SubwayMap mSubwayMap;
     private VectorMapView mMapView;
     private ZoomControls mZoomControls;
+    private View mSearchControls;
+    private AutoCompleteTextView mSearchText;
+    private ImageButton mSearchButton;
     private Runnable mZoomControlRunnable;
+    private Runnable mSearchControlRunnable;
     private Handler mPrivateHandler = new Handler();
 
     private InitTask mInitTask;
@@ -77,6 +96,7 @@ public class BrowseVectorMap extends Activity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         MapSettings.checkPrerequisite(this);
         setContentView(R.layout.global_wait);
 
@@ -141,6 +161,7 @@ public class BrowseVectorMap extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case MAIN_MENU_FIND:
+            	showSearch();
                 return true;
             case MAIN_MENU_LIBRARY:
                 onRequestBrowseLibrary(false);
@@ -245,6 +266,18 @@ public class BrowseVectorMap extends Activity {
         mZoomControls = (ZoomControls) findViewById(R.id.browse_vector_map_zoom);
         mZoomControls.setVisibility(View.INVISIBLE);
 
+        mSearchControls = (View)findViewById(R.id.browse_vector_map_search_panel);
+        
+        ArrayList<String> stationList = new ArrayList<String>();
+        for(SubwayStation station : mSubwayMap.stations){
+        	stationList.add(station.name + "(" + mSubwayMap.getLine(station.lineId).name + ")");
+        }
+        
+        mSearchText = (AutoCompleteTextView) findViewById(R.id.browse_vector_map_search_edit);
+        mSearchText.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, stationList));
+        
+        mSearchButton = (ImageButton)findViewById(R.id.browse_vector_map_search_button);
+        
         MapSettings.setMapName(mSubwayMap.mapName);
         onRestoreMapState();
         onUpdateTitle();
@@ -260,6 +293,9 @@ public class BrowseVectorMap extends Activity {
                     showZoom();
                 }
                 delayZoom();
+                if (mSearchControls.getVisibility() == View.VISIBLE) {
+                    hideSearch();
+                }
             }
 
             public void onMove(int newx, int newy, int oldx, int oldy) {
@@ -267,12 +303,15 @@ public class BrowseVectorMap extends Activity {
                     showZoom();
                 }
                 delayZoom();
+                if (mSearchControls.getVisibility() == View.VISIBLE) {
+                    hideSearch();
+                }
             }
 
             public void onLongClick(int x, int y) {
             }
         });
-
+        
         mZoomControls
                 .setOnZoomInClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
@@ -295,6 +334,7 @@ public class BrowseVectorMap extends Activity {
                 }
             }
         };
+        
     }
 
     private void onUpdateTitle() {
@@ -341,6 +381,21 @@ public class BrowseVectorMap extends Activity {
         mZoomControls.setVisibility(visibility);
     }
 
+    public void showSearch() {
+        fadeSearch(View.VISIBLE, -100.0f, 0.0f);
+    }
+
+    public void hideSearch() {
+        fadeSearch(View.INVISIBLE, 0.0f, -100.0f);
+    }
+
+    private void fadeSearch(int visibility, float startY, float endY) {
+    	TranslateAnimation anim = new TranslateAnimation(0, 0, startY, endY);
+    	anim.setDuration(500);
+    	mSearchControls.startAnimation(anim);
+        mSearchControls.setVisibility(visibility);
+    }
+    
     private class InitTask extends AsyncTask<Uri, Void, SubwayMap> {
 
         Throwable mError;

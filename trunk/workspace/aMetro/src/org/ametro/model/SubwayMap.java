@@ -57,6 +57,7 @@ public class SubwayMap {
 	public HashMap<Integer, Point[]> pointsBySegmentId;
 
 	private HashMap<Long, SubwaySegment> segmentsIndexed;
+	private HashMap<Integer, SubwayLine> linesIndexed;
 
 	public SubwayMap() {
 	}
@@ -116,6 +117,16 @@ public class SubwayMap {
 	@Override
 	public int hashCode() {
 		return id;
+	}
+
+	public SubwayLine getLine(int lineId) {
+		if(linesIndexed == null){
+			linesIndexed = new HashMap<Integer, SubwayLine>();
+			for(SubwayLine line : lines){
+				linesIndexed.put(line.id, line);
+			}
+		}
+		return linesIndexed.get(lineId);
 	}
 
 }
