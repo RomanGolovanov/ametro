@@ -29,6 +29,10 @@ public class MapUri {
         return Uri.parse("ametro://" + mapName);
     }
 
+    public static Uri createSearch(String stationName) {
+        return Uri.parse("ametro://search/" + stationName);
+    }
+    
     public static String getMapName(Uri uri) {
         if ("ametro".equals(uri.getScheme())) {
             return uri.toString().replace("ametro://", "");
@@ -36,5 +40,12 @@ public class MapUri {
         return null;
     }
 
+    public static String getSearch(Uri uri) {
+        if ("ametro".equals(uri.getScheme())) {
+            return uri.toString().replace("ametro://search/", "");
+        }
+        return null;
+    }
+    
 
 }

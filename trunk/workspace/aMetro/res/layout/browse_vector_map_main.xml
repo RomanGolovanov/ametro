@@ -6,33 +6,6 @@
 		android:id="@+id/browse_vector_map_view" android:layout_width="fill_parent"
 		android:layout_height="fill_parent" />
 
-
-	<RelativeLayout android:id="@+id/browse_vector_map_search_panel" 
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:layout_alignParentTop="true"
-		android:layout_centerHorizontal="true" android:background="#ff000000"
-		android:orientation="horizontal">
-		
-		<AutoCompleteTextView android:id="@+id/browse_vector_map_search_edit"
-			android:layout_width="fill_parent" 
-			android:layout_height="wrap_content"
-			android:layout_marginTop="5dip"
-            android:singleLine="true"
-            
-            />
-		
-		<ImageButton android:id="@+id/browse_vector_map_search_button"
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content"
-			android:src="@android:drawable/ic_input_delete"
-			android:layout_marginTop="10dip"
-			android:layout_marginRight="5dip"
-			android:layout_alignParentRight="true"
-			android:background="@null"
-			/>
-					
-	</RelativeLayout>
-
 	<FrameLayout android:layout_width="wrap_content"
 		android:layout_height="wrap_content" android:layout_alignParentRight="true"
 		android:layout_alignParentBottom="true">
