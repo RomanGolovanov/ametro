@@ -22,7 +22,10 @@
 package org.ametro.model;
 
 import android.graphics.Point;
+import android.os.Debug;
 import android.util.Log;
+
+import org.ametro.Constants;
 import org.ametro.util.csv.CsvReader;
 
 import java.io.BufferedReader;
@@ -54,6 +57,7 @@ public class Deserializer {
 
     public static City deserialize(InputStream in, boolean descriptionOnly) throws IOException {
         long startTime = System.currentTimeMillis();
+        //Debug.startMethodTracing("ametro");
         ZipInputStream zipIn = new ZipInputStream(in);
 
         
@@ -65,7 +69,7 @@ public class Deserializer {
         SubwayTransfer[] transfers = null;
         HashMap<Integer, Point[]> pointsBySegmentId = null;
 
-        CsvReader csvReader = new CsvReader(new BufferedReader(new InputStreamReader(zipIn)));
+        CsvReader csvReader = new CsvReader(new BufferedReader(new InputStreamReader(zipIn), Constants.DEFAULT_BUFFER_SIZE));
         
         ZipEntry zipEntry;
         while( (zipEntry = zipIn.getNextEntry()) != null) {
@@ -139,6 +143,7 @@ public class Deserializer {
             Log.i(LOG_TAG_MAIN, "City loading time is " + (System.currentTimeMillis() - startTime) + "ms");
         }
 
+        //Debug.stopMethodTracing();
         return city;
     }
 

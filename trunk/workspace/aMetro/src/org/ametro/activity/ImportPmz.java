@@ -333,9 +333,11 @@ public class ImportPmz extends Activity {
                 pi.progress = i;
                 pi.message = record.mapName;
                 publishProgress(pi);
+                String mapFileName = null;
                 try {
                     City city = ModelUtil.importPmz(record.fileName);
-                    Serializer.serialize(city, new FileOutputStream(MapSettings.getMapFileName(city.subwayMap.mapName)));
+                    mapFileName = MapSettings.getMapFileName(city.subwayMap.mapName);
+                    Serializer.serialize(city, new FileOutputStream(mapFileName));
                     record.checked = false;
                     record.status = updateStatus;
                     record.statusColor = Color.GREEN;
@@ -344,6 +346,9 @@ public class ImportPmz extends Activity {
                 } catch (Throwable e) {
                     Log.e("aMetro", "Import failed", e);
                     result.add(new ImportRecord(-1, record.mapName, record.fileName, "Import failed\n" + e.toString(), Color.RED, false));
+                    if(mapFileName!=null){
+                    	FileUtil.delete(new File(mapFileName));
+                    }
                 }
             }
             Collections.sort(result);

@@ -29,5 +29,7 @@ package org.ametro;
 public class Constants {
 
     public static final String LOG_TAG_MAIN = "aMetro";
+    
+	public static final int DEFAULT_BUFFER_SIZE = 8196;
 
 }
