@@ -32,6 +32,7 @@ import java.util.regex.Pattern;
 public class SerializeUtil {
 
     private static String[] splitCommaSeparaterString(String value) {
+    	if(value == null || value.length() == 0) return new String[0];
         value = value.replaceAll("/\\(.*\\)/", "");
         return value.split(",");
     }
