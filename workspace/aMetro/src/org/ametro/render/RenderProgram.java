@@ -128,7 +128,7 @@ public class RenderProgram {
             if ((segment.flags & SubwaySegment.INVISIBLE) == 0) {
                 SubwayStation from = subwayMap.stations[segment.fromStationId];
                 SubwayStation to = subwayMap.stations[segment.toStationId];
-                if (from.point != null || to.point != null) {
+                if (from.point != null && to.point != null) {
                     SubwaySegment opposite = subwayMap.getSegment(to, from);
                     Point[] additionalPoints = subwayMap.getSegmentsNodes(segment.id);
                     Point[] reversePoints = opposite == null ? null : subwayMap.getSegmentsNodes(opposite.id);
