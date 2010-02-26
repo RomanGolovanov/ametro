@@ -39,7 +39,6 @@ import org.ametro.widget.BaseMapView.OnMapEventListener;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.PointF;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -83,16 +82,22 @@ public class BrowseVectorMap extends Activity {
 	private int mZoom = DEFAULT_ZOOM_LEVEL;
 
 	private SubwayMap mSubwayMap;
+	
 	private VectorMapView mMapView;
-	private ZoomControls mZoomControls;
-	private View mSearchControls;
-	private AutoCompleteTextView mSearchText;
-	private ImageButton mSearchButton;
-	private Runnable mZoomControlRunnable;
-	private Handler mPrivateHandler = new Handler();
 	private InputMethodManager mInputMethodManager;
+	
+	private ZoomControls mZoomControls;
+	private Runnable mZoomControlRunnable;
+	
+	private View mSearchControls;
+	private AutoCompleteTextView mSearchEdit;
+	private ImageButton mSearchButton;
+	private Runnable mSearchControlRunnable;
+	private String mSearchText;
 
 	
+	private Handler mPrivateHandler = new Handler();
+
 	private InitTask mInitTask;
 
 	private final static int REQUEST_BROWSE_LIBRARY = 1;
@@ -130,6 +135,11 @@ public class BrowseVectorMap extends Activity {
 
 	}
 
+	public boolean onSearchRequested() {
+		showSearch();
+		return true;
+	}
+	
 	private void initializeMapView(Uri uri) {
 		mInitTask = new InitTask();
 		mInitTask.execute(uri);
@@ -176,7 +186,7 @@ public class BrowseVectorMap extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case MAIN_MENU_FIND:
-			showSearch();
+			onSearchRequested();
 			return true;
 		case MAIN_MENU_LIBRARY:
 			onRequestBrowseLibrary(false);
@@ -288,8 +298,8 @@ public class BrowseVectorMap extends Activity {
 			stationList.add(station.name + " (" + mSubwayMap.getLine(station.lineId).name + ")");
 		}
 
-		mSearchText = (AutoCompleteTextView) findViewById(R.id.browse_vector_map_search_edit);
-		mSearchText.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, stationList));
+		mSearchEdit = (AutoCompleteTextView) findViewById(R.id.browse_vector_map_search_edit);
+		mSearchEdit.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, stationList));
 
 		mSearchButton = (ImageButton)findViewById(R.id.browse_vector_map_search_button);
 
@@ -329,24 +339,29 @@ public class BrowseVectorMap extends Activity {
 
 		mSearchButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				mSearchText.setText("");
+				mSearchEdit.setText("");
 			}
 		});
 
-		mSearchText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		mSearchEdit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				String text = parent.getItemAtPosition(position).toString();
-				String stationName = text.substring(0, text.indexOf("(")-1);
-				String lineName = text.substring(text.indexOf("(")+1, text.indexOf(")"));
-				SubwayStation station = mSubwayMap.getStation(lineName, stationName);
+				mSearchText = parent.getItemAtPosition(position).toString();
 				hideSearch();
-				mSearchText.setText("");
+				mSearchEdit.setText("");
+				mPrivateHandler.post(mSearchControlRunnable);
+			}
+		});
+
+		mSearchControlRunnable = new Runnable() {
+			public void run() {
+				String stationName = mSearchText.substring(0, mSearchText.indexOf("(")-1);
+				String lineName = mSearchText.substring(mSearchText.indexOf("(")+1, mSearchText.indexOf(")"));
+				SubwayStation station = mSubwayMap.getStation(lineName, stationName);
 				mMapView.scrollModelCenterTo(station.point.x, station.point.y);
 			}
-		});
-
+		};
+		
 		mZoomControls
 		.setOnZoomInClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -417,14 +432,14 @@ public class BrowseVectorMap extends Activity {
 	}
 
 	public void showSearch() {
-		fadeSearch(View.VISIBLE, -100.0f, 0.0f);
-		mSearchText.requestFocus();
-		mInputMethodManager.showSoftInput(mSearchText, InputMethodManager.SHOW_IMPLICIT);
+		fadeSearch(View.VISIBLE, -mSearchControls.getHeight(), 0.0f);
+		mInputMethodManager.showSoftInput(mSearchEdit, InputMethodManager.SHOW_FORCED);
+		mSearchEdit.requestFocus();
 	}
 
 	public void hideSearch() {
-		fadeSearch(View.INVISIBLE, 0.0f, -100.0f);
-		mInputMethodManager.hideSoftInputFromWindow(mSearchText.getWindowToken(), 0);
+		fadeSearch(View.INVISIBLE, 0.0f, -mSearchControls.getHeight());
+		mInputMethodManager.hideSoftInputFromWindow(mSearchEdit.getWindowToken(), 0);
 	}
 
 	private void fadeSearch(int visibility, float startY, float endY) {
