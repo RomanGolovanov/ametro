@@ -333,11 +333,30 @@ public class ImportPmz extends Activity {
                 pi.progress = i;
                 pi.message = record.mapName;
                 publishProgress(pi);
-                String mapFileName = null;
+                File mapFile = null;
+                File mapFileTemp = null;
                 try {
+                	// building model from PMZ file
                     City city = ModelUtil.importPmz(record.fileName);
-                    mapFileName = MapSettings.getMapFileName(city.subwayMap.mapName);
-                    Serializer.serialize(city, new FileOutputStream(mapFileName));
+                    // define file names
+                    String mapName = city.subwayMap.mapName;
+                    String mapFileName = MapSettings.getMapFileName(mapName);
+                    String mapFileNameTemp = MapSettings.getTemporaryMapFile(mapName);
+                    mapFile = new File(mapFileName);
+                    mapFileTemp = new File(mapFileNameTemp);
+                    // remove temporary file is exists 
+                    if(mapFileTemp.exists()){
+                    FileUtil.delete(mapFileTemp);
+                    }
+                    // serialize model into temporary file
+                    Serializer.serialize(city, new FileOutputStream(mapFileTemp));
+                    // remove old map file if exists
+                    if(mapFile.exists()){
+                    	FileUtil.delete(mapFile);
+                    }
+                    // move model from temporary to persistent file name
+                    FileUtil.move(mapFileTemp, mapFile);
+                     
                     record.checked = false;
                     record.status = updateStatus;
                     record.statusColor = Color.GREEN;
@@ -346,8 +365,8 @@ public class ImportPmz extends Activity {
                 } catch (Throwable e) {
                     Log.e("aMetro", "Import failed", e);
                     result.add(new ImportRecord(-1, record.mapName, record.fileName, "Import failed\n" + e.toString(), Color.RED, false));
-                    if(mapFileName!=null){
-                    	FileUtil.delete(new File(mapFileName));
+                    if(mapFileTemp!=null && mapFileTemp.exists()){
+                    	FileUtil.delete(mapFileTemp);
                     }
                 }
             }
