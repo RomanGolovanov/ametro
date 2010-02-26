@@ -139,13 +139,11 @@ public class SubwayMap {
 	}
 
 	public SubwayStation getStation(String lineName, String stationName) {
-		SubwayLine line = getLine(lineName);
-		if(line!=null){
-			for(SubwayStation station : stations){
-				if(station.lineId == line.id){
-					if(station.name.equalsIgnoreCase(stationName)){
-						return station;
-					}
+		SubwayLine line = lineName != null ? getLine(lineName) : null;
+		for(SubwayStation station : stations){
+			if(line==null || station.lineId == line.id){
+				if(station.name.equalsIgnoreCase(stationName)){
+					return station;
 				}
 			}
 		}
