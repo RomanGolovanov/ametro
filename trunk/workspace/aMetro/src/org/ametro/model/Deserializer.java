@@ -21,12 +21,14 @@
 
 package org.ametro.model;
 
-import android.graphics.Point;
-import android.os.Debug;
-import android.util.Log;
-
-import org.ametro.Constants;
-import org.ametro.util.csv.CsvReader;
+import static org.ametro.Constants.LOG_TAG_MAIN;
+import static org.ametro.model.Serializer.CITY_ENTRY_NAME;
+import static org.ametro.model.Serializer.LINES_ENTRY_NAME;
+import static org.ametro.model.Serializer.MAP_ENTRY_NAME;
+import static org.ametro.model.Serializer.SEGMENTS_ENTRY_NAME;
+import static org.ametro.model.Serializer.SEGMENTS_POINTS_ENTRY_NAME;
+import static org.ametro.model.Serializer.STATIONS_ENTRY_NAME;
+import static org.ametro.model.Serializer.TRANSFERS_ENTRY_NAME;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -37,8 +39,11 @@ import java.util.HashMap;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import static org.ametro.Constants.LOG_TAG_MAIN;
-import static org.ametro.model.Serializer.*;
+import org.ametro.Constants;
+import org.ametro.util.csv.CsvReader;
+
+import android.graphics.Point;
+import android.util.Log;
 
 /**
  * @author Vlad Vinichenko (akerigan@gmail.com)

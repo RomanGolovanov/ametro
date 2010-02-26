@@ -139,6 +139,7 @@ public abstract class BaseMapView extends ScrollView {
         int scrollX = p.x - getWidth() / 2;
         int scrollY = p.y - getHeight() / 2;
         mScroller.startScroll(mScrollX, mScrollY, scrollX-mScrollX,  scrollY-mScrollY, 1000);
+        
 	}
     
     
