@@ -39,6 +39,7 @@ import org.ametro.widget.BaseMapView.OnMapEventListener;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.PointF;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -46,6 +47,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.Display;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -95,6 +97,17 @@ public class BrowseVectorMap extends Activity {
 
 	private final static int REQUEST_BROWSE_LIBRARY = 1;
 
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(keyCode == KeyEvent.KEYCODE_BACK){
+			if(mSearchControls.getVisibility() == View.VISIBLE){
+				hideSearch();
+				return true;
+			}
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
