@@ -142,7 +142,6 @@ public abstract class BaseMapView extends ScrollView {
         
 	}
     
-    
     public void setScrollCenter(Point p) {
         mScrollX = p.x - getWidth() / 2;
         mScrollY = p.y - getHeight() / 2;
@@ -504,11 +503,11 @@ public abstract class BaseMapView extends ScrollView {
         }
     }
 
-    private void fireLongClickEvent(int x, int y) {
-        if (mInitialized && mEventListener != null) {
-            mEventListener.onLongClick(x, y);
-        }
-    }
+//    private void fireLongClickEvent(int x, int y) {
+//        if (mInitialized && mEventListener != null) {
+//            mEventListener.onLongClick(x, y);
+//        }
+//    }
 
     private void fireMoveEvent(int newx, int newy, int oldx, int oldy) {
         if (mInitialized && mEventListener != null) {
