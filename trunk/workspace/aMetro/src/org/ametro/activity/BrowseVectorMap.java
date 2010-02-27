@@ -37,8 +37,8 @@ import org.ametro.widget.VectorMapView;
 import org.ametro.widget.BaseMapView.OnMapEventListener;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
+import android.graphics.Point;
 import android.graphics.PointF;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -46,23 +46,18 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.Display;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
-import android.view.animation.TranslateAnimation;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.ImageButton;
 import android.widget.Toast;
 import android.widget.ZoomControls;
 
 public class BrowseVectorMap extends Activity {
+
+	static BrowseVectorMap Instance;
 
 	private final int MAIN_MENU_FIND = 1;
 	private final int MAIN_MENU_LIBRARY = 2;
@@ -82,41 +77,57 @@ public class BrowseVectorMap extends Activity {
 	private int mZoom = DEFAULT_ZOOM_LEVEL;
 
 	private SubwayMap mSubwayMap;
-	
+
 	private VectorMapView mMapView;
-	private InputMethodManager mInputMethodManager;
-	
+
 	private ZoomControls mZoomControls;
 	private Runnable mZoomControlRunnable;
-	
-	private View mSearchControls;
-	private AutoCompleteTextView mSearchEdit;
-	private ImageButton mSearchButton;
-	private Runnable mSearchControlRunnable;
-	private String mSearchText;
 
-	
+
 	private Handler mPrivateHandler = new Handler();
+	private Handler mScrollHandler = new Handler();
 
 	private InitTask mInitTask;
 
 	private final static int REQUEST_BROWSE_LIBRARY = 1;
 
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if(keyCode == KeyEvent.KEYCODE_BACK){
-			if(mSearchControls.getVisibility() == View.VISIBLE){
-				hideSearch();
-				return true;
-			}
+
+	private ArrayList<SubwayStation> mSelectedStations;
+	private SubwayStation mCurrentStation;
+
+	public final Runnable mUpdateUI = new Runnable() {
+		public void run() {
+			final Point point = mCurrentStation.point;
+			final String name = mCurrentStation.name;
+			Toast.makeText(BrowseVectorMap.Instance, name, Toast.LENGTH_SHORT).show();
+			mMapView.scrollModelCenterTo(point.x, point.y);
+			mMapView.postInvalidate();
 		}
-		return super.onKeyDown(keyCode, event);
+	};
+
+	public void setCurrentStation(SubwayStation station){
+		if(mSelectedStations.contains(station)){
+			mCurrentStation = station;
+			mScrollHandler.post(mUpdateUI);
+		}else{
+			mCurrentStation = null;
+		}
 	}
-	
+
+	public void setSelectedStations(ArrayList<SubwayStation> stations){
+		if(stations!=null){
+			mSelectedStations = stations;
+			mCurrentStation = stations.get(0);
+		}
+	}
+
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Instance = this;
+
+		setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL); 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		mInputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+
 		MapSettings.checkPrerequisite(this);
 		setContentView(R.layout.global_wait);
 
@@ -135,11 +146,6 @@ public class BrowseVectorMap extends Activity {
 
 	}
 
-	public boolean onSearchRequested() {
-		showSearch();
-		return true;
-	}
-	
 	private void initializeMapView(Uri uri) {
 		mInitTask = new InitTask();
 		mInitTask.execute(uri);
@@ -291,19 +297,8 @@ public class BrowseVectorMap extends Activity {
 		mZoomControls = (ZoomControls) findViewById(R.id.browse_vector_map_zoom);
 		mZoomControls.setVisibility(View.INVISIBLE);
 
-		mSearchControls = (View)findViewById(R.id.browse_vector_map_search_panel);
-
-		ArrayList<String> stationList = new ArrayList<String>();
-		for(SubwayStation station : mSubwayMap.stations){
-			stationList.add(station.name + " (" + mSubwayMap.getLine(station.lineId).name + ")");
-		}
-
-		mSearchEdit = (AutoCompleteTextView) findViewById(R.id.browse_vector_map_search_edit);
-		mSearchEdit.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, stationList));
-
-		mSearchButton = (ImageButton)findViewById(R.id.browse_vector_map_search_button);
-
 		MapSettings.setMapName(mSubwayMap.mapName);
+		MapSettings.setModel(mSubwayMap);
 		onRestoreMapState();
 		onUpdateTitle();
 		bindMapEvents();
@@ -318,9 +313,6 @@ public class BrowseVectorMap extends Activity {
 					showZoom();
 				}
 				delayZoom();
-				if (mSearchControls.getVisibility() == View.VISIBLE) {
-					hideSearch();
-				}
 			}
 
 			public void onMove(int newx, int newy, int oldx, int oldy) {
@@ -328,40 +320,12 @@ public class BrowseVectorMap extends Activity {
 					showZoom();
 				}
 				delayZoom();
-				if (mSearchControls.getVisibility() == View.VISIBLE) {
-					hideSearch();
-				}
 			}
 
 			public void onLongClick(int x, int y) {
 			}
 		});
 
-		mSearchButton.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				mSearchEdit.setText("");
-			}
-		});
-
-		mSearchEdit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				mSearchText = parent.getItemAtPosition(position).toString();
-				hideSearch();
-				mSearchEdit.setText("");
-				mPrivateHandler.post(mSearchControlRunnable);
-			}
-		});
-
-		mSearchControlRunnable = new Runnable() {
-			public void run() {
-				String stationName = mSearchText.substring(0, mSearchText.indexOf("(")-1);
-				String lineName = mSearchText.substring(mSearchText.indexOf("(")+1, mSearchText.indexOf(")"));
-				SubwayStation station = mSubwayMap.getStation(lineName, stationName);
-				mMapView.scrollModelCenterTo(station.point.x, station.point.y);
-			}
-		};
-		
 		mZoomControls
 		.setOnZoomInClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -429,24 +393,6 @@ public class BrowseVectorMap extends Activity {
 		anim.setDuration(500);
 		mZoomControls.startAnimation(anim);
 		mZoomControls.setVisibility(visibility);
-	}
-
-	public void showSearch() {
-		fadeSearch(View.VISIBLE, -mSearchControls.getHeight(), 0.0f);
-		mInputMethodManager.showSoftInput(mSearchEdit, InputMethodManager.SHOW_FORCED);
-		mSearchEdit.requestFocus();
-	}
-
-	public void hideSearch() {
-		fadeSearch(View.INVISIBLE, 0.0f, -mSearchControls.getHeight());
-		mInputMethodManager.hideSoftInputFromWindow(mSearchEdit.getWindowToken(), 0);
-	}
-
-	private void fadeSearch(int visibility, float startY, float endY) {
-		TranslateAnimation anim = new TranslateAnimation(0, 0, startY, endY);
-		anim.setDuration(500);
-		mSearchControls.startAnimation(anim);
-		mSearchControls.setVisibility(visibility);
 	}
 
 	private class InitTask extends AsyncTask<Uri, Void, SubwayMap> {
