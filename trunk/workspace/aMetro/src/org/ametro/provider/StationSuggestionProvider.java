@@ -21,54 +21,12 @@
 
 package org.ametro.provider;
 
-import android.content.ContentProvider;
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.net.Uri;
+import android.content.SearchRecentSuggestionsProvider;
 
-public class StationSuggestionProvider extends ContentProvider {
-	public static final Uri CONTENT_URI = Uri.parse("content://org.ametro.provider.stationsuggestionprovider");
-
+public class StationSuggestionProvider extends SearchRecentSuggestionsProvider {
 	
-	/**
-	 * @see android.content.ContentProvider#delete(Uri,String,String[])
-	 */
-	public int delete(Uri uri, String selection, String[] selectionArgs) {
-		return 0;
+	public StationSuggestionProvider() {
+		setupSuggestions("org.ametro.provider.stationsuggestionprovider", SearchRecentSuggestionsProvider.DATABASE_MODE_QUERIES);
 	}
-
-	/**
-	 * @see android.content.ContentProvider#getType(Uri)
-	 */
-	public String getType(Uri uri) {
-		return null;
-	}
-
-	/**
-	 * @see android.content.ContentProvider#insert(Uri,ContentValues)
-	 */
-	public Uri insert(Uri uri, ContentValues values) {
-		return null;
-	}
-
-	/**
-	 * @see android.content.ContentProvider#onCreate()
-	 */
-	public boolean onCreate() {
-		return false;
-	}
-
-	/**
-	 * @see android.content.ContentProvider#query(Uri,String[],String,String[],String)
-	 */
-	public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-		return null;
-	}
-
-	/**
-	 * @see android.content.ContentProvider#update(Uri,ContentValues,String,String[])
-	 */
-	public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-		return 0;
-	}
+	
 }
