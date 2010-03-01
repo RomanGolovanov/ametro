@@ -19,7 +19,11 @@
 			android:configChanges="orientation|keyboardHidden" android:name=".activity.ImportPmz" />
 		<activity android:name=".activity.BrowseMapDetails" />
 		<activity android:name=".activity.BrowseRoute" />
-		<activity android:name=".activity.CreateRoute" />
+		<activity android:name=".activity.CreateRoute"
+			android:launchMode="singleTop" android:configChanges="orientation|keyboardHidden"
+			android:windowSoftInputMode="adjustPan"
+			android:theme="@android:style/Theme.Translucent.NoTitleBar" 
+			/>
 		<activity android:name=".activity.About" />
 		<activity android:name=".activity.Settings" />
 		<activity android:label="@string/search_station"
