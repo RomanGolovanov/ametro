@@ -85,7 +85,8 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	private ZoomControls mZoomControls;
 	private Runnable mZoomControlRunnable;
 
-	private View mSearchControls;
+	private View mSearchPanelTop;
+	private View mSearchPanelBottom;
 	private ImageButton mSearchPreviousButton;
 	private ImageButton mSearchNextButton;
 	private ImageButton mSearchClearButton;
@@ -112,6 +113,11 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		}
 	};
 
+	public SubwayStation getCurrentStation()
+	{
+		return mCurrentStation;	
+	}
+	
 	public void setCurrentStation(SubwayStation station){
 		if(mSelectedStations.contains(station)){
 			mCurrentStation = station;
@@ -145,6 +151,11 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 				}
 			}
 		}
+	}
+
+	public ArrayList<SubwayStation> getSelectedStations()
+	{
+		return mSelectedStations;
 	}
 	
 	public void setSelectedStations(ArrayList<SubwayStation> stations){
@@ -340,7 +351,8 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		mZoomControls = (ZoomControls) findViewById(R.id.browse_vector_map_zoom);
 		mZoomControls.setVisibility(View.INVISIBLE);
 
-		mSearchControls = (View)findViewById(R.id.browse_vector_map_selection);
+		mSearchPanelTop = (View)findViewById(R.id.browse_vector_map_selection_panel_top);
+		mSearchPanelBottom = (View)findViewById(R.id.browse_vector_map_selection_panel_bottom);
 		
 		mSearchPreviousButton = (ImageButton)findViewById(R.id.browse_vector_map_button_prev_selection);
 		mSearchNextButton = (ImageButton)findViewById(R.id.browse_vector_map_button_next_selection);
@@ -456,13 +468,13 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	}
 
 	private void hideSearchControls() {
-		mSearchControls.setVisibility(View.INVISIBLE);
-		mSearchListButton.setVisibility(View.INVISIBLE);
+		mSearchPanelBottom.setVisibility(View.INVISIBLE);
+		mSearchPanelTop.setVisibility(View.INVISIBLE);
 	}
 
 	private void showSearchControls() {
-		mSearchControls.setVisibility(View.VISIBLE);
-		mSearchListButton.setVisibility(View.VISIBLE);
+		mSearchPanelBottom.setVisibility(View.VISIBLE);
+		mSearchPanelTop.setVisibility(View.VISIBLE);
 	}
 	
 	private class InitTask extends AsyncTask<Uri, Void, SubwayMap> {
@@ -529,6 +541,9 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		}
 		if(src == mSearchListButton){
 			
+		}
+		if(src == mSearchListButton){
+			startActivity(new Intent(this, SearchStation.class));
 		}
 	}
 
