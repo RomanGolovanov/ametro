@@ -85,8 +85,11 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	private ZoomControls mZoomControls;
 	private Runnable mZoomControlRunnable;
 
-	private ImageButton mSearchPrevious;
-	private ImageButton mSearchNext;
+	private View mSearchControls;
+	private ImageButton mSearchPreviousButton;
+	private ImageButton mSearchNextButton;
+	private ImageButton mSearchClearButton;
+	private ImageButton mSearchListButton;
 
 	private Handler mPrivateHandler = new Handler();
 	private Handler mScrollHandler = new Handler();
@@ -145,10 +148,15 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	}
 	
 	public void setSelectedStations(ArrayList<SubwayStation> stations){
-		boolean refreshNeeded = (stations != mSelectedStations);
+		boolean refreshNeeded = (stations != mSelectedStations) || (stations == null && mSelectedStations!=null);
 		if(stations!=null){
 			mSelectedStations = stations;
 			mCurrentStation = stations.get(0);
+			showSearchControls();
+		}else{
+			hideSearchControls();
+			mSelectedStations = null;
+			mCurrentStation = null;
 		}
 		mMapView.setModelSelection(stations, null);
 		if(refreshNeeded){
@@ -332,12 +340,19 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		mZoomControls = (ZoomControls) findViewById(R.id.browse_vector_map_zoom);
 		mZoomControls.setVisibility(View.INVISIBLE);
 
-		mSearchPrevious = (ImageButton)findViewById(R.id.browse_vector_map_button_prev);
-		mSearchNext = (ImageButton)findViewById(R.id.browse_vector_map_button_next);
+		mSearchControls = (View)findViewById(R.id.browse_vector_map_selection);
 		
-		mSearchPrevious.setOnClickListener(this);
-		mSearchNext.setOnClickListener(this);
+		mSearchPreviousButton = (ImageButton)findViewById(R.id.browse_vector_map_button_prev_selection);
+		mSearchNextButton = (ImageButton)findViewById(R.id.browse_vector_map_button_next_selection);
+		mSearchClearButton = (ImageButton)findViewById(R.id.browse_vector_map_button_clear_selection);
+		mSearchListButton = (ImageButton)findViewById(R.id.browse_vector_map_button_list_selection);
 		
+		mSearchPreviousButton.setOnClickListener(this);
+		mSearchNextButton.setOnClickListener(this);
+		mSearchClearButton.setOnClickListener(this);
+		mSearchListButton.setOnClickListener(this);
+
+		hideSearchControls();
 		
 		MapSettings.setMapName(mSubwayMap.mapName);
 		MapSettings.setModel(mSubwayMap);
@@ -355,7 +370,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 					showZoom();
 				}
 				delayZoom();
-				setSelectedStations(null);
+				//setSelectedStations(null);
 				//Toast.makeText(BrowseVectorMap.this, "click", 200).show();
 			}
 
@@ -440,6 +455,16 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		mZoomControls.setVisibility(visibility);
 	}
 
+	private void hideSearchControls() {
+		mSearchControls.setVisibility(View.INVISIBLE);
+		mSearchListButton.setVisibility(View.INVISIBLE);
+	}
+
+	private void showSearchControls() {
+		mSearchControls.setVisibility(View.VISIBLE);
+		mSearchListButton.setVisibility(View.VISIBLE);
+	}
+	
 	private class InitTask extends AsyncTask<Uri, Void, SubwayMap> {
 
 		Throwable mError;
@@ -493,11 +518,17 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	}
 
 	public void onClick(View src) {
-		if(src == mSearchPrevious){
+		if(src == mSearchPreviousButton){
 			previuosStation();
 		}
-		if(src == mSearchNext){
+		if(src == mSearchNextButton){
 			nextStation();
+		}
+		if(src == mSearchClearButton){
+			setSelectedStations(null);
+		}
+		if(src == mSearchListButton){
+			
 		}
 	}
 

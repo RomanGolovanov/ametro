@@ -1,12 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent" android:layout_height="fill_parent">
+<RelativeLayout 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" 
+	android:layout_height="fill_parent">
 
 	<org.ametro.widget.VectorMapView
 		android:id="@+id/browse_vector_map_view" android:layout_width="fill_parent"
 		android:layout_height="fill_parent" />
 
-
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" 
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentTop="true"
+		android:layout_marginTop="10dip"
+		android:layout_marginLeft="10dip"
+		>
+		
+		<ImageButton android:id="@+id/browse_vector_map_button_list_selection"
+			android:layout_width="40dip" 
+			android:layout_height="40dip"
+			android:src="@drawable/icon_list"
+			/>	
+					
+	</LinearLayout>
+	
 	<RelativeLayout android:id="@+id/browse_vector_map_search_panel" android:visibility="invisible" 
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:layout_alignParentTop="true"
@@ -33,24 +51,32 @@
 					
 	</RelativeLayout>
 
-	<LinearLayout android:layout_width="wrap_content"
+	<LinearLayout
+		android:id="@+id/browse_vector_map_selection" 
+		android:layout_width="wrap_content"
 		android:layout_height="wrap_content" 
 		android:layout_alignParentLeft="true"
 		android:layout_alignParentBottom="true"
 		android:layout_marginBottom="10dip"
 		android:layout_marginLeft="10dip"
 		>
-		
-		<ImageButton android:id="@+id/browse_vector_map_button_prev"
-			android:layout_width="wrap_content" 
+
+		<ImageButton android:id="@+id/browse_vector_map_button_clear_selection"
+			android:layout_width="40dip" 
 			android:layout_height="40dip"
-			android:src="@android:drawable/ic_media_rew"
+			android:src="@android:drawable/ic_delete"
+			/>					
+		
+		<ImageButton android:id="@+id/browse_vector_map_button_prev_selection"
+			android:layout_width="40dip" 
+			android:layout_height="40dip"
+			android:src="@drawable/icon_left"
 			/>
 					
-		<ImageButton android:id="@+id/browse_vector_map_button_next"
-			android:layout_width="wrap_content" 
+		<ImageButton android:id="@+id/browse_vector_map_button_next_selection"
+			android:layout_width="40dip" 
 			android:layout_height="40dip"
-			android:src="@android:drawable/ic_media_ff"
+			android:src="@drawable/icon_right"
 			/>					
 		
 	</LinearLayout>
