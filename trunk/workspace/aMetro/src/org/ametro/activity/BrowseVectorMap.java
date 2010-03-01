@@ -332,8 +332,8 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		mZoomControls = (ZoomControls) findViewById(R.id.browse_vector_map_zoom);
 		mZoomControls.setVisibility(View.INVISIBLE);
 
-		mSearchPrevious = (ImageButton)findViewById(R.id.browse_vector_map_search_prev);
-		mSearchNext = (ImageButton)findViewById(R.id.browse_vector_map_search_next);
+		mSearchPrevious = (ImageButton)findViewById(R.id.browse_vector_map_button_prev);
+		mSearchNext = (ImageButton)findViewById(R.id.browse_vector_map_button_next);
 		
 		mSearchPrevious.setOnClickListener(this);
 		mSearchNext.setOnClickListener(this);
