@@ -106,8 +106,8 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	public final Runnable mUpdateUI = new Runnable() {
 		public void run() {
 			final Point point = mCurrentStation.point;
-			final String name = mCurrentStation.name;
-			Toast.makeText(BrowseVectorMap.Instance, name, Toast.LENGTH_SHORT).show();
+			//final String name = mCurrentStation.name;
+			//Toast.makeText(BrowseVectorMap.Instance, name, Toast.LENGTH_SHORT).show();
 			mMapView.scrollModelCenterTo(point.x, point.y);
 			mMapView.postInvalidate();
 		}
@@ -121,6 +121,10 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	public void setCurrentStation(SubwayStation station){
 		if(mSelectedStations.contains(station)){
 			mCurrentStation = station;
+			int idx = mSelectedStations.indexOf(mCurrentStation);
+			mSearchPreviousButton.setEnabled( idx != 0 );
+			mSearchNextButton.setEnabled( idx != (mSelectedStations.size()-1) );
+			mSearchListButton.setEnabled(mSelectedStations.size()>1);
 			mScrollHandler.post(mUpdateUI);
 		}else{
 			mCurrentStation = null;
