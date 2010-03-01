@@ -54,6 +54,7 @@ public class RenderProgram {
 	HashMap<SubwaySegment, RenderElement> segmentIndex = new HashMap<SubwaySegment, RenderElement>();
 	HashMap<SubwayStation, RenderElement> stationIndex = new HashMap<SubwayStation, RenderElement>();
 	HashMap<SubwayStation, RenderElement> stationNameIndex = new HashMap<SubwayStation, RenderElement>();
+	HashMap<SubwayStation, List<RenderElement>> stationTransferIndex = new HashMap<SubwayStation, List<RenderElement>>();
 
 	public void setRenderFilter(int renderFilter) {
 		mRenderFilter = renderFilter;
@@ -97,24 +98,25 @@ public class RenderProgram {
 		}
 	}
 
+	
 	public void updateSelection(List<SubwayStation> stations, List<SubwaySegment> segments){
 		if(stations!=null || segments!=null){
-			for(SubwayStation station : stationIndex.keySet()){
-				stationIndex.get(station).setMode(true);
+			for(RenderElement elem : mElements){
+				elem.setMode(true);
 			}
-			for(SubwayStation station : stationNameIndex.keySet()){
-				stationNameIndex.get(station).setMode(true);			
-			}
-			for(SubwaySegment segment : segmentIndex.keySet()){
-				segmentIndex.get(segment).setMode(true);
-			}
-			
+		
 			if(stations!=null){
 				for(SubwayStation station : stations){
 					stationIndex.get(station).setMode(false);
 					RenderElement stationName = stationNameIndex.get(station);
 					if(stationName!=null){
 						stationName.setMode(false);
+					}
+					List<RenderElement> stationTransfers = stationTransferIndex.get(station);
+					if(stationTransfers!=null){
+						for(RenderElement transfer : stationTransfers){
+							transfer.setMode(false);
+						}
 					}
 				}
 			}
@@ -125,17 +127,10 @@ public class RenderProgram {
 			}
 			
 		}else{
-			for(SubwayStation station : stationIndex.keySet()){
-				stationIndex.get(station).setMode(false);
-			}
-			for(SubwayStation station : stationNameIndex.keySet()){
-				stationNameIndex.get(station).setMode(false);			
-			}
-			for(SubwaySegment segment : segmentIndex.keySet()){
-				segmentIndex.get(segment).setMode(false);
+			for(RenderElement elem : mElements){
+				elem.setMode(false);
 			}
 		}
-		
 	}
 
 	public void draw(Canvas canvas) {
@@ -169,8 +164,27 @@ public class RenderProgram {
 
 	private void drawTransfers(SubwayMap subwayMap, ArrayList<RenderElement> renderQueue) {
 		for (SubwaySegment transfer : subwayMap.transfers) {
-			renderQueue.add(new RenderTransferBackground(subwayMap, transfer));
-			renderQueue.add(new RenderTransfer(subwayMap, transfer));
+			RenderElement elementBackground = new RenderTransferBackground(subwayMap, transfer);
+			RenderElement elementTransfer = new RenderTransfer(subwayMap, transfer);
+
+			renderQueue.add(elementBackground);
+			renderQueue.add(elementTransfer);
+			
+			List<RenderElement> from = stationTransferIndex.get(subwayMap.stations[transfer.fromStationId]);
+			if(from==null){
+				from = new ArrayList<RenderElement>();
+				stationTransferIndex.put(subwayMap.stations[transfer.fromStationId], from);
+			}
+			from.add(elementTransfer);
+			from.add(elementBackground);
+			
+			List<RenderElement> to = stationTransferIndex.get(subwayMap.stations[transfer.toStationId]);
+			if(to==null){
+				to = new ArrayList<RenderElement>();
+				stationTransferIndex.put(subwayMap.stations[transfer.toStationId], to);
+			}
+			to.add(elementTransfer);
+			to.add(elementBackground);
 		}
 	}
 
