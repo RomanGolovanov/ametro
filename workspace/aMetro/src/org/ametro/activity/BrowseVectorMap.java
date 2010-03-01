@@ -155,6 +155,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			onRequestBrowseLibrary(false);
 			return true;
 		case MAIN_MENU_ROUTES:
+			startActivity(new Intent(this, CreateRoute.class));
 			return true;
 		case MAIN_MENU_SETTINGS:
 			startActivity(new Intent(this, Settings.class));
