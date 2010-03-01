@@ -73,7 +73,7 @@ public class RenderTransfer extends RenderElement {
 
     public void setMode(boolean grayed)
     {
-    	Paint.setAlpha(grayed ? 128 : 255);
+    	//Paint.setAlpha(grayed ? 80 : 255);
     }
 
     public void draw(Canvas canvas) {

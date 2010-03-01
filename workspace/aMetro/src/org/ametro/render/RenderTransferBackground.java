@@ -70,7 +70,7 @@ public class RenderTransferBackground extends RenderElement {
 
     public void setMode(boolean grayed)
     {
-    	// ignore!
+    	Paint.setAlpha(grayed ? 80 : 255);
     }
 
     public void draw(Canvas canvas) {
