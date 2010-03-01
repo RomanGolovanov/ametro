@@ -25,6 +25,8 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -276,7 +278,14 @@ public abstract class BaseMapView extends ScrollView {
                 } else {
                     mTouchMode = TOUCH_INIT_MODE;
                 }
-                mTouchMode = TOUCH_INIT_MODE;
+                
+                // Trigger the link
+                if (mTouchMode == TOUCH_INIT_MODE) {
+                    mPrivateHandler.sendMessageDelayed(mPrivateHandler
+                            .obtainMessage(SWITCH_TO_SHORTPRESS), TAP_TIMEOUT);
+                }
+                // Remember where the motion event started
+                
                 mLastTouchX = x;
                 mLastTouchY = y;
                 mLastTouchTime = eventTime;
@@ -292,6 +301,13 @@ public abstract class BaseMapView extends ScrollView {
 
                 if (mTouchMode != TOUCH_DRAG_MODE) {
 
+                    if (mTouchMode == TOUCH_SHORTPRESS_MODE || mTouchMode == TOUCH_SHORTPRESS_START_MODE) {
+                        mPrivateHandler.removeMessages(SWITCH_TO_LONGPRESS);
+                    } else if (mTouchMode == TOUCH_INIT_MODE) {
+                        mPrivateHandler.removeMessages(SWITCH_TO_SHORTPRESS);
+                    }
+                	
+                	
                     // if it starts nearly horizontal or vertical, enforce it
                     if (SNAP_ENABLED) {
                         int ax = Math.abs(deltaX);
@@ -370,8 +386,12 @@ public abstract class BaseMapView extends ScrollView {
                 break;
             case MotionEvent.ACTION_UP:
                 switch (mTouchMode) {
-                    case TOUCH_INIT_MODE: // tap
-                        mTouchMode = TOUCH_DONE_MODE;
+	                case TOUCH_INIT_MODE: // tap
+	                case TOUCH_SHORTPRESS_START_MODE:
+	                case TOUCH_SHORTPRESS_MODE:
+	                    mPrivateHandler.removeMessages(SWITCH_TO_SHORTPRESS);
+	                    mPrivateHandler.removeMessages(SWITCH_TO_LONGPRESS);
+	                    mTouchMode = TOUCH_DONE_MODE;
                         fireShortClickEvent((int) (mScrollX + event.getX()), (int) (mScrollY + event.getY()));
                         break;
                     case TOUCH_DRAG_MODE:
@@ -517,6 +537,15 @@ public abstract class BaseMapView extends ScrollView {
 
     private boolean mInitialized;
 
+
+    public void destroy() {
+        if (mPrivateHandler != null) {
+            // Remove any pending messages that might not be serviced yet.
+        }
+    }
+    
+    final Handler mPrivateHandler = new PrivateHandler();
+    
     // adjustable parameters
     private static final boolean SNAP_ENABLED = false;
     private static final float MAX_SLOPE_FOR_DIAG = 1.5f;
@@ -553,10 +582,28 @@ public abstract class BaseMapView extends ScrollView {
     private int mMinLockSnapReverseDistance;
 
     private int mTouchMode = TOUCH_DONE_MODE;
+
     private static final int TOUCH_INIT_MODE = 1;
     private static final int TOUCH_DRAG_START_MODE = 2;
     private static final int TOUCH_DRAG_MODE = 3;
+    private static final int TOUCH_SHORTPRESS_START_MODE = 4;
+    private static final int TOUCH_SHORTPRESS_MODE = 5;
+    private static final int TOUCH_DOUBLECLICK_MODE = 6;
     private static final int TOUCH_DONE_MODE = 7;
+    private static final int TOUCH_SELECT_MODE = 8;
+
+    // touch mode values specific to scale+scroll
+    private static final int FIRST_SCROLL_ZOOM = 9;
+    private static final int SCROLL_ZOOM_ANIMATION_IN = 9;
+    private static final int SCROLL_ZOOM_ANIMATION_OUT = 10;
+    private static final int SCROLL_ZOOM_OUT = 11;
+    private static final int LAST_SCROLL_ZOOM = 11;
+    // end of touch mode values specific to scale+scroll
+
+    // This should be ViewConfiguration.getTapTimeout()
+    // But system time out is 100ms, which is too short for the browser.
+    // In the browser, if it switches out of tap too soon, jump tap won't work.
+    private static final int TAP_TIMEOUT = 200;
 
     private int mSnapScrollMode = SNAP_NONE;
     private static final int SNAP_NONE = 1;
@@ -569,4 +616,36 @@ public abstract class BaseMapView extends ScrollView {
     private Scroller mScroller;
     private VelocityTracker mVelocityTracker;
 
+    private static final int SWITCH_TO_SHORTPRESS = 3;
+    private static final int SWITCH_TO_LONGPRESS = 4;
+
+    
+    /**
+     * General handler to receive message coming from webkit thread
+     */
+    class PrivateHandler extends Handler {
+
+    	public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case SWITCH_TO_SHORTPRESS: {
+                    if (mTouchMode == TOUCH_INIT_MODE) {
+                        mTouchMode = TOUCH_SHORTPRESS_START_MODE;
+                        //updateSelection();
+                        performClick();
+                    }
+                    break;
+                }
+                case SWITCH_TO_LONGPRESS: {
+                    mTouchMode = TOUCH_DONE_MODE;
+                    performLongClick();
+                    //updateTextEntry();
+                    break;
+                }
+                default:
+                    super.handleMessage(msg);
+                    break;
+            }
+        }
+    }
+    
 }

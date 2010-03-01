@@ -51,11 +51,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.View.OnClickListener;
 import android.view.animation.AlphaAnimation;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import android.widget.ZoomControls;
 
-public class BrowseVectorMap extends Activity {
+public class BrowseVectorMap extends Activity implements OnClickListener {
 
 	static BrowseVectorMap Instance;
 
@@ -83,6 +85,8 @@ public class BrowseVectorMap extends Activity {
 	private ZoomControls mZoomControls;
 	private Runnable mZoomControlRunnable;
 
+	private ImageButton mSearchPrevious;
+	private ImageButton mSearchNext;
 
 	private Handler mPrivateHandler = new Handler();
 	private Handler mScrollHandler = new Handler();
@@ -114,10 +118,41 @@ public class BrowseVectorMap extends Activity {
 		}
 	}
 
+	public void nextStation(){
+		if(mSelectedStations!=null && mSelectedStations.size()>0){
+			if(mCurrentStation == null){
+				setCurrentStation(mSelectedStations.get(0));
+			}else{
+				int idx = mSelectedStations.indexOf(mCurrentStation) + 1;
+				if(idx < mSelectedStations.size()){
+					setCurrentStation(mSelectedStations.get(idx));
+				}
+			}
+		}
+	}
+	
+	public void previuosStation(){
+		if(mSelectedStations!=null && mSelectedStations.size()>0){
+			if(mCurrentStation == null){
+				setCurrentStation(mSelectedStations.get(mSelectedStations.size()-1));
+			}else{
+				int idx = mSelectedStations.indexOf(mCurrentStation) - 1;
+				if(idx >= 0){
+					setCurrentStation(mSelectedStations.get(idx));
+				}
+			}
+		}
+	}
+	
 	public void setSelectedStations(ArrayList<SubwayStation> stations){
+		boolean refreshNeeded = (stations != mSelectedStations);
 		if(stations!=null){
 			mSelectedStations = stations;
 			mCurrentStation = stations.get(0);
+		}
+		mMapView.setModelSelection(stations, null);
+		if(refreshNeeded){
+			mMapView.postInvalidate();
 		}
 	}
 
@@ -297,6 +332,13 @@ public class BrowseVectorMap extends Activity {
 		mZoomControls = (ZoomControls) findViewById(R.id.browse_vector_map_zoom);
 		mZoomControls.setVisibility(View.INVISIBLE);
 
+		mSearchPrevious = (ImageButton)findViewById(R.id.browse_vector_map_search_prev);
+		mSearchNext = (ImageButton)findViewById(R.id.browse_vector_map_search_next);
+		
+		mSearchPrevious.setOnClickListener(this);
+		mSearchNext.setOnClickListener(this);
+		
+		
 		MapSettings.setMapName(mSubwayMap.mapName);
 		MapSettings.setModel(mSubwayMap);
 		onRestoreMapState();
@@ -313,6 +355,8 @@ public class BrowseVectorMap extends Activity {
 					showZoom();
 				}
 				delayZoom();
+				setSelectedStations(null);
+				//Toast.makeText(BrowseVectorMap.this, "click", 200).show();
 			}
 
 			public void onMove(int newx, int newy, int oldx, int oldy) {
@@ -320,6 +364,7 @@ public class BrowseVectorMap extends Activity {
 					showZoom();
 				}
 				delayZoom();
+				//Toast.makeText(BrowseVectorMap.this, "move " + (newx-oldy) + "x" + (newy-oldy) , 200).show();
 			}
 
 			public void onLongClick(int x, int y) {
@@ -445,6 +490,15 @@ public class BrowseVectorMap extends Activity {
 			super.onPostExecute(result);
 		}
 
+	}
+
+	public void onClick(View src) {
+		if(src == mSearchPrevious){
+			previuosStation();
+		}
+		if(src == mSearchNext){
+			nextStation();
+		}
 	}
 
 }

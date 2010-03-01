@@ -28,13 +28,14 @@ public abstract class RenderElement implements Comparable<RenderElement> {
 
     public int type;
     public Rect boundingBox;
-    public boolean visible;
 
     public void setProperties(int newPriority, Rect newBoundingBox) {
         type = newPriority;
         boundingBox = newBoundingBox;
     }
 
+    public abstract void setMode(boolean grayed);
+    
     public abstract void draw(Canvas canvas);
 
     public int compareTo(RenderElement another) {

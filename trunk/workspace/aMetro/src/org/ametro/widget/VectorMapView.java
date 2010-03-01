@@ -21,11 +21,15 @@
 
 package org.ametro.widget;
 
+import java.util.List;
+
 import android.content.Context;
 import android.graphics.*;
 import android.graphics.Bitmap.Config;
 import android.util.AttributeSet;
 import org.ametro.model.SubwayMap;
+import org.ametro.model.SubwaySegment;
+import org.ametro.model.SubwayStation;
 import org.ametro.render.RenderProgram;
 
 public class VectorMapView extends BaseMapView {
@@ -55,6 +59,11 @@ public class VectorMapView extends BaseMapView {
         }
     }
 
+    public void setModelSelection(List<SubwayStation> stations, List<SubwaySegment> segments){
+    	mRenderProgram.updateSelection(stations, null);
+    	destroyTileCache();
+    }
+    
     public void setScale(float scale, int step) {
         PointF p = getModelScrollCenter();
 

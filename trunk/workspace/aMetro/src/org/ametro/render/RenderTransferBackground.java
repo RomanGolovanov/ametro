@@ -68,7 +68,11 @@ public class RenderTransferBackground extends RenderElement {
         setProperties(RenderProgram.TYPE_TRANSFER_BACKGROUND, new Rect(left, top, right, bottom));
     }
 
-    @Override
+    public void setMode(boolean grayed)
+    {
+    	// ignore!
+    }
+
     public void draw(Canvas canvas) {
         canvas.drawCircle(FromX, FromY, RadiusBig, Paint);
         canvas.drawCircle(ToX, ToY, RadiusBig, Paint);
