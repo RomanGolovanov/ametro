@@ -33,12 +33,39 @@
 					
 	</RelativeLayout>
 
+	<LinearLayout android:layout_width="wrap_content"
+		android:layout_height="wrap_content" 
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentBottom="true"
+		android:layout_marginBottom="10dip"
+		android:layout_marginLeft="10dip"
+		>
+		
+		<ImageButton android:id="@+id/browse_vector_map_button_prev"
+			android:layout_width="wrap_content" 
+			android:layout_height="40dip"
+			android:src="@android:drawable/ic_media_rew"
+			/>
+					
+		<ImageButton android:id="@+id/browse_vector_map_button_next"
+			android:layout_width="wrap_content" 
+			android:layout_height="40dip"
+			android:src="@android:drawable/ic_media_ff"
+			/>					
+		
+	</LinearLayout>
+
 	<FrameLayout android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:layout_alignParentRight="true"
-		android:layout_alignParentBottom="true">
+		android:layout_height="wrap_content" 
+		android:layout_alignParentRight="true"
+		android:layout_alignParentBottom="true"
+		android:layout_marginBottom="5dip"
+		android:layout_marginRight="10dip"
+		>
 		<ZoomControls android:id="@+id/browse_vector_map_zoom"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:layout_marginBottom="10dip" android:layout_marginRight="10dip" />
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content"
+			 />
 	</FrameLayout>
 
 </RelativeLayout>
