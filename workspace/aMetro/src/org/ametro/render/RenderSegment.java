@@ -80,7 +80,7 @@ public class RenderSegment extends RenderElement {
         }
         setProperties(RenderProgram.TYPE_LINE, box);
     }
-
+    
     private void drawSegmentPath(SubwayMap map, SubwaySegment segment, SubwayStation from, SubwayStation to, ExtendedPath path) {
         final Point pointFrom = from.point;
         final Point pointTo = to.point;
@@ -108,7 +108,11 @@ public class RenderSegment extends RenderElement {
         }
     }
 
-    @Override
+    public void setMode(boolean grayed)
+    {
+    	paint.setAlpha(grayed ?  80 : 255);
+    }
+
     public void draw(Canvas canvas) {
         canvas.drawPath(path, paint);
     }

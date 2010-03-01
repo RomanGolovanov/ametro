@@ -21,23 +21,24 @@
 
 package org.ametro.render;
 
+import org.ametro.model.SubwayMap;
+import org.ametro.model.SubwayStation;
+
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Paint.Style;
 import android.graphics.Rect;
-import org.ametro.model.SubwayMap;
-import org.ametro.model.SubwayStation;
+import android.graphics.Paint.Style;
 
 
 public class RenderStation extends RenderElement {
 
     public int x;
     public int y;
-    public float radiusFirst;
-    public float radiusSecond;
-    public Paint paintFirst;
-    public Paint paintSecond;
+    public float radiusInternal;
+    public float radiusExternal;
+    public Paint paintColor;
+    public Paint paintBackGround;
 
     public RenderStation(SubwayMap subwayMap, SubwayStation station) {
         super();
@@ -46,41 +47,42 @@ public class RenderStation extends RenderElement {
         final int localX = station.point.x;
         final int localY = station.point.y;
         final int radius = subwayMap.stationDiameter / 2;
-        final float localRadiusFirst = (float) radius;
-        final Paint localPaintFirst = new Paint();
-        final Paint localPaintSecond = new Paint();
 
-        localPaintFirst.setColor(subwayMap.lines[station.lineId].color);
-        localPaintFirst.setStyle(Style.FILL);
-        localPaintFirst.setAntiAlias(true);
+        final Paint localPaintColor = new Paint();
 
-        localPaintSecond.setColor(Color.WHITE);
-        localPaintSecond.setAntiAlias(true);
+        paintBackGround = new Paint();
+        paintBackGround.setColor(Color.WHITE);
+        paintBackGround.setStyle(Style.FILL_AND_STROKE);
+        paintBackGround.setAntiAlias(true);
+        paintBackGround.setStrokeWidth(1);
+        
+        localPaintColor.setColor(subwayMap.lines[station.lineId].color);
+        localPaintColor.setAntiAlias(true);
+        localPaintColor.setStrokeWidth(radius * 0.15f * 2);
 
-        float localRadiusSecond;
         if (hasConnections) {
-            localRadiusSecond = localRadiusFirst;
-            localPaintSecond.setStyle(Style.STROKE);
-            localPaintSecond.setStrokeWidth(0);
+            localPaintColor.setStyle(Style.FILL_AND_STROKE);
         } else {
-            localRadiusSecond = localRadiusFirst * 0.7f;
-            localPaintSecond.setStyle(Style.FILL);
+        	localPaintColor.setStyle(Style.STROKE);
         }
 
         x = localX;
         y = localY;
-        radiusFirst = localRadiusFirst;
-        radiusSecond = localRadiusSecond;
-        paintFirst = localPaintFirst;
-        paintSecond = localPaintSecond;
+        radiusInternal = radius * 0.80f;
+        radiusExternal = radius * 1.10f;
+        paintColor = localPaintColor;
 
         setProperties(RenderProgram.TYPE_STATION, new Rect(localX - radius, localY - radius, localX + radius, localY + radius));
     }
 
-    @Override
+    public void setMode(boolean grayed)
+    {
+    	paintColor.setAlpha(grayed ?  80 : 255);
+    }
+    
     public void draw(Canvas canvas) {
-        canvas.drawCircle(x, y, radiusFirst, paintFirst);
-        canvas.drawCircle(x, y, radiusSecond, paintSecond);
+        canvas.drawCircle(x, y, radiusExternal, paintBackGround);
+        canvas.drawCircle(x, y, radiusInternal, paintColor);
     }
 
 }
