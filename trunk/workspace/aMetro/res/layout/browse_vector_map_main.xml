@@ -9,7 +9,7 @@
 		android:layout_height="fill_parent" />
 
 	<LinearLayout
-		android:id="@+id/browse_vector_map_selection_panel_top"
+		android:id="@+id/browse_vector_map_panel_top"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content" 
 		android:layout_alignParentLeft="true"
@@ -20,13 +20,13 @@
 		android:orientation="vertical"
 		>
 		
-		<ImageButton android:id="@+id/browse_vector_map_button_list_selection"
+		<ImageButton android:id="@+id/browse_vector_map_button_list"
 			android:layout_width="70dip" 
 			android:layout_height="50dip"
 			android:src="@drawable/icon_list"
 			/>	
 
-		<ImageButton android:id="@+id/browse_vector_map_button_clear_selection"
+		<ImageButton android:id="@+id/browse_vector_map_button_clear"
 			android:layout_width="70dip" 
 			android:layout_height="50dip"
 			android:src="@android:drawable/ic_delete"
@@ -35,7 +35,7 @@
 	</LinearLayout>
 	
 	<LinearLayout
-		android:id="@+id/browse_vector_map_selection_panel_bottom" 
+		android:id="@+id/browse_vector_map_panel_bottom" 
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content" 
 		android:layout_alignParentLeft="true"
@@ -45,13 +45,13 @@
 		android:orientation="horizontal"
 		>
 		
-		<ImageButton android:id="@+id/browse_vector_map_button_prev_selection"
+		<ImageButton android:id="@+id/browse_vector_map_button_prev"
 			android:layout_width="70dip" 
 			android:layout_height="50dip"
 			android:src="@drawable/icon_left"
 			/>
 					
-		<ImageButton android:id="@+id/browse_vector_map_button_next_selection"
+		<ImageButton android:id="@+id/browse_vector_map_button_next"
 			android:layout_width="70dip" 
 			android:layout_height="50dip"
 			android:src="@drawable/icon_right"

@@ -4,49 +4,34 @@
     <application android:debuggable="true"
         android:icon="@drawable/appicon" android:label="@string/app_name">
         <activity android:label="@string/app_name"
-            android:name=".activity.BrowseVectorMap"
             android:launchMode="singleTop"
-            android:configChanges="orientation|keyboardHidden" 
-            android:windowSoftInputMode="adjustPan"
-            >
+            android:name=".activity.BrowseVectorMap" android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
             <meta-data android:name="android.app.default_searchable" android:value=".activity.SearchStation"/>
         </activity>
-        <activity 
-        	android:name=".activity.BrowseLibrary"
-        	android:launchMode="singleTop"
-        	android:configChanges="orientation|keyboardHidden"
-        	 />
-        <activity 
-        	android:name=".activity.ImportPmz"
-        	android:launchMode="singleTop"
-        	android:configChanges="orientation|keyboardHidden"
-        	/>
+        <activity android:launchMode="singleTop" android:name=".activity.BrowseLibrary"/>
+        <activity android:launchMode="singleTop" android:name=".activity.ImportPmz"/>
         <activity android:name=".activity.BrowseMapDetails"/>
         <activity android:name=".activity.BrowseRoute"/>
         <activity android:name=".activity.CreateRoute"/>
         <activity android:name=".activity.About"/>
         <activity android:name=".activity.Settings"/>
-        <activity 
-        	android:name=".activity.SearchStation"
-        	android:label="@string/search_station" 
-        	android:launchMode="singleTop" 
-        	android:configChanges="orientation|keyboardHidden"
-        	>
+        <activity android:label="@string/search_station"
+            android:launchMode="singleTop" android:name=".activity.SearchStation">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
-            <meta-data android:name="android.app.searchable" android:resource="@xml/searchable"
-            />
+            <meta-data android:name="android.app.searchable" android:resource="@xml/searchable"/>
         </activity>
         <!--provider
             android:authorities="org.ametro.provider.stationsuggestionprovider" 
             android:name="org.ametro.provider.StationSuggestionProvider"
             /-->
+        <activity android:name="org.ametro.activity.BrowseStation"/>
     </application>
     <uses-sdk android:minSdkVersion="3"/>
 </manifest>

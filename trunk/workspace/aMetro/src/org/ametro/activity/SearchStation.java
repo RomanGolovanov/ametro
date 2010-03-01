@@ -31,7 +31,7 @@ public class SearchStation extends ListActivity {
 	
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-		BrowseVectorMap.Instance.setSelectedStations(mStationList);
+		BrowseVectorMap.Instance.setNavigationStations(mStationList);
 		BrowseVectorMap.Instance.setCurrentStation(mStationList.get(position));
 		finish();
 	}
@@ -45,7 +45,7 @@ public class SearchStation extends ListActivity {
 			doSearchKeywords(searchKeywords);
 			bindData();
 		}else{
-			mStationList = BrowseVectorMap.Instance.getSelectedStations();
+			mStationList = BrowseVectorMap.Instance.getNavigationStations();
 			bindData();
 			SubwayStation selected = BrowseVectorMap.Instance.getCurrentStation();
 			if(selected!=null){
@@ -64,7 +64,7 @@ public class SearchStation extends ListActivity {
 				}
 				this.setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, stationNamesList));
 			}else{
-				BrowseVectorMap.Instance.setSelectedStations(mStationList);
+				BrowseVectorMap.Instance.setNavigationStations(mStationList);
 				BrowseVectorMap.Instance.setCurrentStation(mStationList.get(0));
 				finish();
 			}
