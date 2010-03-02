@@ -21,16 +21,19 @@
 
 package org.ametro;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.PointF;
-import android.net.Uri;
+import java.io.File;
+import java.io.IOException;
+import java.util.Locale;
+
 import org.ametro.model.SubwayMap;
 import org.ametro.util.FileUtil;
 import org.ametro.util.SerializeUtil;
 
-import java.io.File;
-import java.io.IOException;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.PointF;
+import android.net.Uri;
+import android.preference.PreferenceManager;
 
 public class MapSettings {
 
@@ -211,6 +214,20 @@ public class MapSettings {
     public static void refreshMapList() {
         FileUtil.delete(new File(ROOT_PATH + MAPS_LIST));
     }
+
+	public static void setupLocale(Context context) {
+		final Locale[] locales = Locale.getAvailableLocales();
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
+		final String localeName = settings.getString(context.getString(R.string.pref_locale_key), null);
+		if(localeName!=null){
+		    for(Locale locale : locales){
+		    	if(locale.getLanguage().equals(localeName)){
+		    		Locale.setDefault(locale);
+		    		return;
+		    	}
+		    }
+		}
+	}
 
 
 }

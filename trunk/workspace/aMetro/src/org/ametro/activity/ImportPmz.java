@@ -39,6 +39,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import org.ametro.MapSettings;
 import org.ametro.R;
 import org.ametro.model.City;
+import org.ametro.model.CityAddon;
 import org.ametro.model.Deserializer;
 import org.ametro.model.Serializer;
 import org.ametro.other.ProgressInfo;
@@ -338,6 +339,7 @@ public class ImportPmz extends Activity {
                 try {
                 	// building model from PMZ file
                     City city = ModelUtil.importPmz(record.fileName);
+                    ArrayList<CityAddon> addons = ModelUtil.importPmzAddons(city, record.fileName);
                     // define file names
                     String mapName = city.subwayMap.mapName;
                     String mapFileName = MapSettings.getMapFileName(mapName);
@@ -349,7 +351,7 @@ public class ImportPmz extends Activity {
                     FileUtil.delete(mapFileTemp);
                     }
                     // serialize model into temporary file
-                    Serializer.serialize(city, new FileOutputStream(mapFileTemp));
+                    Serializer.serialize(new FileOutputStream(mapFileTemp), city, addons);
                     // remove old map file if exists
                     if(mapFile.exists()){
                     	FileUtil.delete(mapFile);

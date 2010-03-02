@@ -36,10 +36,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import org.ametro.Constants;
+import org.ametro.util.StringUtil;
 import org.ametro.util.csv.CsvReader;
 
 import android.graphics.Point;
@@ -148,9 +150,32 @@ public class Deserializer {
             Log.i(LOG_TAG_MAIN, "City loading time is " + (System.currentTimeMillis() - startTime) + "ms");
         }
 
+        localize(city);
+        
         //Debug.stopMethodTracing();
         return city;
     }
+
+	private static void localize(City city) {
+		Locale locale = Locale.getDefault();
+        if(locale.equals(Locale.ENGLISH)){
+        	
+        	city.cityName = StringUtil.toTranslit(city.cityName);
+        	city.countryName = StringUtil.toTranslit(city.countryName);
+
+        	SubwayMap map = city.subwayMap;
+        	map.cityName = StringUtil.toTranslit(map.cityName);
+        	map.countryName = StringUtil.toTranslit(map.countryName);
+        	
+        	for(SubwayLine line : map.lines){
+        		line.name = StringUtil.toTranslit(line.name);
+        	}
+        	
+        	for(SubwayStation station : map.stations){
+        		station.name = StringUtil.toTranslit(station.name);
+        	}
+        }
+	}
 
 
     private static City deserializeCity(CsvReader csvReader, int version) throws IOException {

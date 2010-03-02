@@ -24,6 +24,7 @@ package org.ametro.util;
 import android.util.Log;
 import org.ametro.MapSettings;
 import org.ametro.model.City;
+import org.ametro.model.CityAddon;
 import org.ametro.model.SubwayMap;
 import org.ametro.model.SubwayMapBuilder;
 import org.ametro.pmz.FilePackage;
@@ -31,6 +32,7 @@ import org.ametro.pmz.GenericResource;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 
 import static org.ametro.Constants.LOG_TAG_MAIN;
@@ -80,5 +82,11 @@ public class ModelUtil {
         model.width = subwayMap.width;
         return model;
     }
+
+
+	public static ArrayList<CityAddon> importPmzAddons(City city, String fileName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
