@@ -22,10 +22,10 @@
 package org.ametro.pmz;
 
 
-import org.ametro.util.SerializeUtil;
-
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import org.ametro.util.SerializeUtil;
 
 
 public class TransportResource implements IResource {
@@ -100,7 +100,7 @@ public class TransportResource implements IResource {
                 transfer.startStation = parts[1].trim();
                 transfer.endLine = parts[2].trim();
                 transfer.endStation = parts[3].trim();
-                transfer.delay = parts.length > 4 && parts[4].length() > 0 ? Double.parseDouble(parts[4]) : null;
+                transfer.delay = parts.length > 4 && parts[4].length() > 0 ? SerializeUtil.parseNullableDelay(parts[4]) : null;
                 transfer.status = parts.length > 5 ? parts[5] : null;
                 transfers.add(transfer);
             } else { // Lines names
