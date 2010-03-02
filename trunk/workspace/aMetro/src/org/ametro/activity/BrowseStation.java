@@ -20,16 +20,66 @@
  */
 package org.ametro.activity;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import org.ametro.MapSettings;
+import org.ametro.model.Deserializer;
+import org.ametro.model.StationAddon;
+import org.ametro.model.SubwayStation;
+
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
 public class BrowseStation extends Activity {
-	/**
-	 * @see android.app.Activity#onCreate(Bundle)
-	 */
-	@Override
+
+	private StationAddon mStationAddon;
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
+		SubwayStation station = BrowseVectorMap.Instance.getCurrentStation();
+		String mapName = MapSettings.getMapName();
+		String mapFileName = MapSettings.getMapFileName(mapName);
+		
+		try {
+			mStationAddon = Deserializer.tryDeserializeAddon(station, new FileInputStream(mapFileName));
+		} catch (FileNotFoundException e) {
+			Toast.makeText(this, "No addon for station", Toast.LENGTH_SHORT).show();
+			finish();
+			return;
+		} catch (IOException e) {
+			Toast.makeText(this, "Addon corrupted", Toast.LENGTH_SHORT).show();
+			finish();
+			return;
+		}
+		if(mStationAddon==null){
+			Toast.makeText(this, "No addon for station", Toast.LENGTH_SHORT).show();
+			finish();
+			return;
+		}
+		
+		ArrayList<String> text = new ArrayList<String>();
+		for(StationAddon.Entry entry : mStationAddon.entries){
+			String caption = entry.caption;
+			StringBuilder sb = new StringBuilder();
+			sb.append(caption);
+			sb.append("\n");
+			for(String line : entry.text){
+				sb.append(line);
+				sb.append("\n");
+			}
+			text.add(sb.toString());
+		}
+		
+		ListView list = new ListView(this);
+		list.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, text));
+
+		setContentView(list);
 	}
 }

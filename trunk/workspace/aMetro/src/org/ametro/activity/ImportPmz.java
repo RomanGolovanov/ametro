@@ -39,7 +39,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import org.ametro.MapSettings;
 import org.ametro.R;
 import org.ametro.model.City;
-import org.ametro.model.CityAddon;
+import org.ametro.model.StationAddon;
 import org.ametro.model.Deserializer;
 import org.ametro.model.Serializer;
 import org.ametro.other.ProgressInfo;
@@ -321,10 +321,10 @@ public class ImportPmz extends Activity {
     private class ImportTask extends AsyncTask<ImportRecord, ProgressInfo, List<ImportRecord>> {
         private boolean mIsCanceled = false;
 
-        @Override
         protected List<ImportRecord> doInBackground(ImportRecord... imports) {
             ArrayList<ImportRecord> result = new ArrayList<ImportRecord>();
             final int count = imports.length;
+            final boolean isEnableAddons = MapSettings.isEnabledAddonsImport(ImportPmz.this);
             ProgressInfo pi = new ProgressInfo(0, count, null, "Importing PMZ files...");
             publishProgress(pi);
             String updateStatus = getString(R.string.import_status_uptodate);
@@ -339,7 +339,10 @@ public class ImportPmz extends Activity {
                 try {
                 	// building model from PMZ file
                     City city = ModelUtil.importPmz(record.fileName);
-                    ArrayList<CityAddon> addons = ModelUtil.importPmzAddons(city, record.fileName);
+                    ArrayList<StationAddon> addons = null;
+                    if(isEnableAddons){
+                    	addons = ModelUtil.importPmzAddons(city, record.fileName);
+                    }
                     // define file names
                     String mapName = city.subwayMap.mapName;
                     String mapFileName = MapSettings.getMapFileName(mapName);

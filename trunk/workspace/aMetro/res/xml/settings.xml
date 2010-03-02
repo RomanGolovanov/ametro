@@ -15,13 +15,13 @@
                             android:defaultValue="false"/>
 
         <CheckBoxPreference android:title="@string/pref_auto_update_maps"
-                            android:key="pref_auto_update_maps_key"
+                            android:key="@string/pref_auto_update_maps_key"
                             android:summary="@string/pref_auto_update_maps_description"
                             android:dependency="@string/pref_auto_update_map_index_key"
                             android:defaultValue="false"/>
 
         <CheckBoxPreference android:title="@string/pref_auto_locate"
-                            android:key="pref_auto_locate_key"
+                            android:key="@string/pref_auto_locate_key"
                             android:summary="@string/pref_auto_locate_description"
                             android:defaultValue="false"/>
     </PreferenceCategory>
@@ -29,8 +29,13 @@
     <PreferenceCategory android:title="@string/pref_section_debug">
 
         <CheckBoxPreference android:title="@string/pref_debug"
-                            android:key="pref_debug_key"
+                            android:key="@string/pref_debug_key"
                             android:summary="@string/pref_debug_description"
+                            android:defaultValue="false"/>
+
+        <CheckBoxPreference android:title="@string/pref_auto_import_addons"
+                            android:key="@string/pref_auto_import_addons_key"
+                            android:summary="@string/pref_auto_import_addons_description"
                             android:defaultValue="false"/>
 
     </PreferenceCategory>

@@ -20,6 +20,20 @@
  */
 package org.ametro.model;
 
-public class CityAddon {
+public class StationAddon {
 
+    public static final int VERSION = 1;
+	
+	public int stationId;
+	
+	public Entry[] entries;
+	
+	public static class Entry
+	{
+	    public static final int VERSION = 1;
+	
+	    public int id;
+	    public String caption;
+	    public String[] text;
+	}
 }

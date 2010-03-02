@@ -39,7 +39,8 @@ public class FilePackage {
     private HashMap<String, MapResource> mapResources = new HashMap<String, MapResource>();
     private HashMap<String, TransportResource> transportResources = new HashMap<String, TransportResource>();
     private HashMap<String, VectorResource> vectorResources = new HashMap<String, VectorResource>();
-    private HashMap<String, GenericResource> genericResource = new HashMap<String, GenericResource>();
+    private HashMap<String, GenericResource> genericResources = new HashMap<String, GenericResource>();
+    private HashMap<String, TextResource> textResources = new HashMap<String, TextResource>();
 
     private GenericResource cityGenericResource;
 
@@ -53,6 +54,29 @@ public class FilePackage {
         return resource;
     }
 
+    public HashMap<String, TextResource> getTextResources() throws IOException{
+    	String[] files = getNamesByExtension(".txt");
+    	//int cnt = 0;
+    	if(files!=null){
+    		for(String fileName : files){
+    			getTextResource(fileName);
+    			//cnt++;
+    			//if(cnt>10) break;
+    		}
+    	}
+    	return textResources;
+    }
+    
+    public TextResource getTextResource(String name) throws IOException {
+    	TextResource resource = textResources.get(name);
+        if (resource == null) {
+            resource = new TextResource();
+            loadResource(name, resource);
+            textResources.put(name, resource);
+        }
+        return resource;
+    }    
+    
     public TransportResource getTransportResource(String name) throws IOException {
         TransportResource resource = transportResources.get(name);
         if (resource == null) {
@@ -75,11 +99,11 @@ public class FilePackage {
 
 
     public GenericResource getGenericResource(String name) throws IOException {
-        GenericResource resource = genericResource.get(name);
+        GenericResource resource = genericResources.get(name);
         if (resource == null) {
             resource = new GenericResource();
             loadResource(name, resource);
-            genericResource.put(name, resource);
+            genericResources.put(name, resource);
         }
         return resource;
     }
@@ -104,7 +128,7 @@ public class FilePackage {
         mapResources = null;
         transportResources = null;
         vectorResources = null;
-        genericResource = null;
+        genericResources = null;
         cityGenericResource = null;
     }
 
@@ -184,7 +208,6 @@ public class FilePackage {
                 observer.parseLine(line);
             }
             observer.doneInitialize();
-            observer.setCrc(entry.getCrc());
         }
         finally {
             input.close();

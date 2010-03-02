@@ -51,7 +51,9 @@ public class Serializer {
     public static final String TRANSFERS_ENTRY_NAME = "subway_transfers.csv";
     public static final String SEGMENTS_POINTS_ENTRY_NAME = "subway_segments_points.csv";
 
-    public static void serialize(OutputStream out, City city, ArrayList<CityAddon> addons) throws IOException {
+    public static final String ADDONS_DIR_ENTRY_NAME = "addons/";
+    
+    public static void serialize(OutputStream out, City city, ArrayList<StationAddon> addons) throws IOException {
         long startTime = System.currentTimeMillis();
         ZipOutputStream zipOut = new ZipOutputStream(out);
         CsvWriter csvWriter = new CsvWriter(new BufferedWriter(new OutputStreamWriter(zipOut)));
@@ -77,6 +79,9 @@ public class Serializer {
         zipOut.closeEntry();
 
         serializeMap(city.subwayMap, zipOut, csvWriter);
+        if(addons!=null){
+        	serializeAddons(addons, zipOut, csvWriter);
+        }
         zipOut.close();
 
         if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO)) {
@@ -85,7 +90,37 @@ public class Serializer {
 
     }
 
-    private static void serializeMap(
+    private static void serializeAddons(ArrayList<StationAddon> addons, ZipOutputStream zipOut, CsvWriter csvWriter) throws IOException {
+		for(StationAddon addon : addons){
+	        ZipEntry zipEntry = new ZipEntry(ADDONS_DIR_ENTRY_NAME + addon.stationId + ".csv");
+	        zipOut.putNextEntry(zipEntry);
+
+	        csvWriter.newRecord();
+	        csvWriter.writeString("version");
+	        csvWriter.writeInt(StationAddon.VERSION);
+
+	        csvWriter.newRecord();
+	        csvWriter.writeInt(addon.stationId);
+
+	        for(StationAddon.Entry entry : addon.entries){
+		        csvWriter.newRecord();
+		        csvWriter.writeString("entry");
+		        csvWriter.writeInt(entry.id);
+		        csvWriter.writeString(entry.caption);
+		        csvWriter.writeInt(entry.text.length);
+		        
+		        for(String textLine: entry.text){
+			        csvWriter.newRecord();
+			        csvWriter.writeString(textLine);
+		        }
+	        }
+
+	        csvWriter.flush();
+	        zipOut.closeEntry();
+		}
+	}
+
+	private static void serializeMap(
             SubwayMap subwayMap, ZipOutputStream zipOut, CsvWriter csvWriter
     ) throws IOException {
 
