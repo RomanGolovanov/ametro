@@ -25,7 +25,6 @@ import static org.ametro.Constants.LOG_TAG_MAIN;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 
 import org.ametro.MapSettings;
@@ -84,12 +83,14 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		Instance = this;
 
-		setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL); 
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-
 		MapSettings.checkPrerequisite(this);
+		MapSettings.setupLocale(this);
+
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL); 
 		setContentView(R.layout.global_wait);
 
+		
 		Intent intent = getIntent();
 		Uri uri = intent != null ? intent.getData() : null;
 		if (uri != null) {

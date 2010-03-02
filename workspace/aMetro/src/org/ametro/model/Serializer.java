@@ -29,6 +29,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -50,7 +51,7 @@ public class Serializer {
     public static final String TRANSFERS_ENTRY_NAME = "subway_transfers.csv";
     public static final String SEGMENTS_POINTS_ENTRY_NAME = "subway_segments_points.csv";
 
-    public static void serialize(City city, OutputStream out) throws IOException {
+    public static void serialize(OutputStream out, City city, ArrayList<CityAddon> addons) throws IOException {
         long startTime = System.currentTimeMillis();
         ZipOutputStream zipOut = new ZipOutputStream(out);
         CsvWriter csvWriter = new CsvWriter(new BufferedWriter(new OutputStreamWriter(zipOut)));
