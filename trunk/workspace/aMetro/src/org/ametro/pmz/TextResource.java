@@ -49,12 +49,15 @@ public class TextResource implements IResource {
         }
 
         private void handleNaveValuePair(String section, String name, String value) {
-        	ArrayList<String> set = mSections.get(section).get(name);
-        	if(set == null){
-        		set = new ArrayList<String>();
-        		mSections.get(section).put(name, set);
+        	HashMap<String, ArrayList<String>> sec = mSections.get(section);
+	        	if(sec!=null){
+	        	ArrayList<String> set = sec.get(name);
+	        	if(set == null){
+	        		set = new ArrayList<String>();
+	        		mSections.get(section).put(name, set);
+	        	}
+	            set.add(value);
         	}
-            set.add(value);
         }
 
     }
