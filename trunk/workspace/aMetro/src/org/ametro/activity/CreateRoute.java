@@ -27,65 +27,195 @@ import java.util.List;
 import org.ametro.MapSettings;
 import org.ametro.R;
 import org.ametro.model.SubwayMap;
+import org.ametro.model.SubwayRoute;
+import org.ametro.model.SubwaySegment;
 import org.ametro.model.SubwayStation;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
+import android.view.animation.Animation.AnimationListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.Toast;
 
-public class CreateRoute extends Activity implements OnClickListener{
+public class CreateRoute extends Activity implements OnClickListener,
+		AnimationListener {
+
+	private SubwayMap mSubwayMap;
 
 	private AutoCompleteTextView mFromText;
 	private AutoCompleteTextView mToText;
-	
+
 	private Button mSwapButton;
 	private Button mCreateButton;
+
+	private CreateRouteTask mCreateRouteTask;
+
+	private View mPanel;
+	private Animation mPanelAnimation;
+
+	private boolean mExitPending;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.create_route);
 
-		mSwapButton = (Button)findViewById(R.id.create_route_swap_button);
-		mCreateButton = (Button)findViewById(R.id.create_route_create_button);
-		
+		mExitPending = false;
+
+		mPanel = (View) findViewById(R.id.create_route_panel);
+
+		mSwapButton = (Button) findViewById(R.id.create_route_swap_button);
+		mCreateButton = (Button) findViewById(R.id.create_route_create_button);
+
 		mSwapButton.setOnClickListener(this);
 		mCreateButton.setOnClickListener(this);
-		
+
 		mFromText = (AutoCompleteTextView) findViewById(R.id.create_route_from_text);
 		mToText = (AutoCompleteTextView) findViewById(R.id.create_route_to_text);
 
 		List<String> stations = new ArrayList<String>();
-		SubwayMap map = MapSettings.getModel();
-		SubwayStation[] data = map.stations;
-		for(SubwayStation station : data)
-		{
-			stations.add(station.name + " (" + map.getLine(station.lineId).name + ")");
+		mSubwayMap = MapSettings.getModel();
+		SubwayStation[] data = mSubwayMap.stations;
+		for (SubwayStation station : data) {
+			stations.add(station.name + " ("
+					+ mSubwayMap.getLine(station.lineId).name + ")");
 		}
 
-		ArrayAdapter<String> stationNameAdapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_dropdown_item_1line, stations);
-		
+		ArrayAdapter<String> stationNameAdapter = new ArrayAdapter<String>(
+				this, android.R.layout.simple_dropdown_item_1line, stations);
+
 		mFromText.setAdapter(stationNameAdapter);
 		mToText.setAdapter(stationNameAdapter);
 
 	}
 
+	protected void onStop() {
+		if (mCreateRouteTask != null) {
+			mCreateRouteTask.cancel(true);
+			mCreateRouteTask = null;
+		}
+		super.onStop();
+	}
+
 	public void onClick(View v) {
-		if(v == mSwapButton){
+		if (v == mSwapButton) {
 			Editable swap = mFromText.getText();
 			mFromText.setText(mToText.getText());
 			mToText.setText(swap);
 			mSwapButton.requestFocus();
 		}
-		if(v == mCreateButton){
+		if (v == mCreateButton) {
+			SubwayStation from = getStationByName(mFromText.getText()
+					.toString());
+			SubwayStation to = getStationByName(mToText.getText().toString());
+			if (from != null && to != null) {
+				mCreateRouteTask = new CreateRouteTask();
+				mCreateRouteTask.execute(from, to);
+			}
+		}
+
+	}
+
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			finishActivity();
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+
+	public void onAnimationEnd(Animation anim) {
+		if (anim == mPanelAnimation && mExitPending) {
 			finish();
 		}
-		
 	}
-	
+
+	public void onAnimationRepeat(Animation anim) {
+	}
+
+	public void onAnimationStart(Animation anim) {
+	}
+
+	public class CreateRouteTask extends
+			AsyncTask<SubwayStation, Void, ArrayList<SubwaySegment>> {
+
+		private SubwayMap mMap;
+		private ProgressDialog mWaitDialog;
+
+		protected ArrayList<SubwaySegment> doInBackground(
+				SubwayStation... stations) {
+			SubwayStation from = stations[0];
+			SubwayStation to = stations[1];
+			SubwayRoute route = new SubwayRoute(mMap, from.id, to.id);
+			return route.getRoute();
+		}
+
+		protected void onCancelled() {
+			mWaitDialog.dismiss();
+			super.onCancelled();
+		}
+
+		protected void onPreExecute() {
+			mMap = CreateRoute.this.mSubwayMap;
+			closePanel();
+			mWaitDialog = ProgressDialog.show(CreateRoute.this,
+					getString(R.string.create_route_wait_title),
+					getString(R.string.create_route_wait_text), true);
+			super.onPreExecute();
+		}
+
+		protected void onPostExecute(ArrayList<SubwaySegment> result) {
+			super.onPostExecute(result);
+			mWaitDialog.dismiss();
+			if (result != null && result.size() > 0) {
+				BrowseVectorMap.Instance.setNavigationRoute(result);
+			} else {
+				Toast.makeText(BrowseVectorMap.Instance, "Not found",
+						Toast.LENGTH_SHORT).show();
+				BrowseVectorMap.Instance.setNavigationRoute(null);
+			}
+			finishActivity();
+		}
+
+	}
+
+	private SubwayStation getStationByName(String text) {
+		int startBracket = text.indexOf('(');
+		int endBracked = text.indexOf(')');
+		if (startBracket != -1 && endBracked != -1 && startBracket < endBracked) {
+			String stationName = text.substring(0, startBracket - 1);
+			String lineName = text.substring(startBracket + 1, endBracked);
+			SubwayStation station = mSubwayMap
+					.getStation(lineName, stationName);
+			return station;
+		}
+		return null;
+	}
+
+	private void closePanel() {
+		mPanelAnimation = new TranslateAnimation(0, 0, 0, -mPanel.getHeight());
+		mPanelAnimation.setAnimationListener(this);
+		mPanelAnimation.setDuration(350);
+		mPanel.startAnimation(mPanelAnimation);
+		mPanel.setVisibility(View.INVISIBLE);
+	}
+
+	private void finishActivity() {
+		if (mPanel.getVisibility() == View.INVISIBLE) {
+			CreateRoute.this.finish();
+		} else {
+			mExitPending = true;
+			closePanel();
+		}
+	}
+
 }
