@@ -60,7 +60,7 @@ public class VectorMapView extends BaseMapView {
     }
 
     public void setModelSelection(List<SubwayStation> stations, List<SubwaySegment> segments){
-    	mRenderProgram.updateSelection(stations, null);
+    	mRenderProgram.updateSelection(stations, segments);
     	destroyTileCache();
     }
     

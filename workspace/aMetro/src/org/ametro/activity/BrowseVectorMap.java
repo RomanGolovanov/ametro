@@ -25,6 +25,8 @@ import static org.ametro.Constants.LOG_TAG_MAIN;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 
 import org.ametro.MapSettings;
 import org.ametro.MapUri;
@@ -71,13 +73,13 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			setNavigationStations(null);
 		}
 		if(src == mNavigateListButton){
-			
+
 		}
 		if(src == mNavigateListButton){
 			startActivity(new Intent(this, SearchStation.class));
 		}
 	}
-	
+
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Instance = this;
@@ -137,7 +139,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 				android.R.drawable.ic_menu_rotate);
 		menu.add(0, MAIN_MENU_STATION, 4, R.string.menu_station).setIcon(
 				android.R.drawable.ic_menu_info_details);
-		
+
 		return true;
 	}
 
@@ -145,7 +147,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		menu.findItem(MAIN_MENU_STATION).setEnabled(mCurrentStation!=null);
 		return super.onPrepareOptionsMenu(menu);
 	}
-	
+
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case MAIN_MENU_FIND:
@@ -172,12 +174,12 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		return super.onOptionsItemSelected(item);
 	}
 
-	
+
 	/*package*/ SubwayStation getCurrentStation()
 	{
 		return mCurrentStation;	
 	}
-	
+
 	/*package*/ void setCurrentStation(SubwayStation station){
 		if(mNavigationStations.contains(station)){
 			mCurrentStation = station;
@@ -193,7 +195,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 				mNavigatePreviousButton.setVisibility(View.INVISIBLE);
 				mNavigateNextButton.setVisibility(View.INVISIBLE);
 			}
-			
+
 			mScrollHandler.post(mUpdateUI);
 		}else{
 			mCurrentStation = null;
@@ -204,22 +206,22 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	{
 		return mNavigationStations;
 	}
-	
+
 	/*package*/ void setNavigationStations(ArrayList<SubwayStation> stations){
 		boolean refreshNeeded = (stations != mNavigationStations) || (stations == null && mNavigationStations!=null);
-		if(stations!=null){
-			mNavigationStations = stations;
-			mNavigationRoute = null;
-			mCurrentStation = stations.get(0);
-			showNavigationControls();
-		}else{
-			hideNavigationControls();
-			mNavigationStations = null;
-			mNavigationRoute = null;
-			mCurrentStation = null;
-		}
-		mMapView.setModelSelection(stations, null);
 		if(refreshNeeded){
+			if(stations!=null){
+				mNavigationStations = stations;
+				mNavigationRoute = null;
+				mCurrentStation = stations.get(0);
+				showNavigationControls();
+			}else{
+				hideNavigationControls();
+				mNavigationStations = null;
+				mNavigationRoute = null;
+				mCurrentStation = null;
+			}
+			mMapView.setModelSelection(stations, null);
 			mMapView.postInvalidate();
 		}
 	}
@@ -228,22 +230,22 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	{
 		return mNavigationRoute;
 	}
-	
+
 	/*package*/ void setNavigationRoute(ArrayList<SubwaySegment> segments){
 		boolean refreshNeeded = (segments != mNavigationRoute) || (segments == null && mNavigationRoute!=null);
-		if(segments!=null){
-			mNavigationRoute = segments;
-			mNavigationStations = getStationsByRoute(segments);
-			mCurrentStation = mNavigationStations.get(0);
-			showNavigationControls();
-		}else{
-			hideNavigationControls();
-			mNavigationStations = null;
-			mNavigationRoute = null;
-			mCurrentStation = null;
-		}
-		mMapView.setModelSelection(mNavigationStations, mNavigationRoute);
 		if(refreshNeeded){
+			if(segments!=null && segments.size()>0){
+				mNavigationRoute = segments;
+				mNavigationStations = getStationsByRoute(segments);
+				mCurrentStation = mNavigationStations.get(0);
+				showNavigationControls();
+			}else{
+				hideNavigationControls();
+				mNavigationStations = null;
+				mNavigationRoute = null;
+				mCurrentStation = null;
+			}
+			mMapView.setModelSelection(mNavigationStations, mNavigationRoute);
 			mMapView.postInvalidate();
 		}
 	}
@@ -323,7 +325,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		mInitTask.execute(uri);
 	}
 
-	
+
 	private void onShowMap(SubwayMap subwayMap) {
 		mSubwayMap = subwayMap;
 		if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO))
@@ -340,19 +342,19 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 
 		mNavigationPanelTop = (View)findViewById(R.id.browse_vector_map_panel_top);
 		mNavigationPanelBottom = (View)findViewById(R.id.browse_vector_map_panel_bottom);
-		
+
 		mNavigatePreviousButton = (ImageButton)findViewById(R.id.browse_vector_map_button_prev);
 		mNavigateNextButton = (ImageButton)findViewById(R.id.browse_vector_map_button_next);
 		mNavigateClearButton = (ImageButton)findViewById(R.id.browse_vector_map_button_clear);
 		mNavigateListButton = (ImageButton)findViewById(R.id.browse_vector_map_button_list);
-		
+
 		mNavigatePreviousButton.setOnClickListener(this);
 		mNavigateNextButton.setOnClickListener(this);
 		mNavigateClearButton.setOnClickListener(this);
 		mNavigateListButton.setOnClickListener(this);
 
 		hideNavigationControls();
-		
+
 		MapSettings.setMapName(mSubwayMap.mapName);
 		MapSettings.setModel(mSubwayMap);
 		onRestoreMapState();
@@ -463,7 +465,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		mNavigationPanelBottom.setVisibility(View.VISIBLE);
 		mNavigationPanelTop.setVisibility(View.VISIBLE);
 	}
-	
+
 	private void navigateNextStation(){
 		if(mNavigationStations!=null && mNavigationStations.size()>0){
 			if(mCurrentStation == null){
@@ -476,7 +478,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			}
 		}
 	}
-	
+
 	private void navigatePreviuosStation(){
 		if(mNavigationStations!=null && mNavigationStations.size()>0){
 			if(mCurrentStation == null){
@@ -489,7 +491,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			}
 		}
 	}
-	
+
 	private class InitTask extends AsyncTask<Uri, Void, SubwayMap> {
 
 		Throwable mError;
@@ -550,18 +552,22 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		}
 	};
 
-	
+
 	private ArrayList<SubwayStation> getStationsByRoute(ArrayList<SubwaySegment> segments) {
-		ArrayList<SubwayStation> stations = new ArrayList<SubwayStation>();
+		HashSet<SubwayStation> set = new HashSet<SubwayStation>();
 		for(SubwaySegment segment : segments){
-			stations.add(mSubwayMap.stations[segment.fromStationId]);
+			SubwayStation from = mSubwayMap.stations[segment.fromStationId];
+			SubwayStation to = mSubwayMap.stations[segment.toStationId];
+			if(!set.contains(from)){
+				set.add(from);
+			}
+			if(!set.contains(to)){
+				set.add(to);
+			}
 		}
-		if(segments.size()>1){
-			stations.add(mSubwayMap.stations[segments.get(segments.size()-1).toStationId]);
-		}
-		return stations;
+		return new ArrayList<SubwayStation>(set);
 	}
-	
+
 	static BrowseVectorMap Instance;
 
 	private final int MAIN_MENU_FIND = 1;
@@ -605,6 +611,6 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	private ArrayList<SubwayStation> mNavigationStations;
 	private ArrayList<SubwaySegment> mNavigationRoute;
 	private SubwayStation mCurrentStation;
-	
-	
+
+
 }

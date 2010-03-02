@@ -46,10 +46,8 @@ public class SearchStation extends ListActivity {
 		public int compare(SubwayStation first, SubwayStation second) {
 			return first.name.compareTo(second.name);
 		}
-		
 	}
 	
-	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		BrowseVectorMap.Instance.setNavigationStations(mStationList);
 		BrowseVectorMap.Instance.setCurrentStation(mStationList.get(position));
@@ -89,7 +87,8 @@ public class SearchStation extends ListActivity {
 				finish();
 			}
 		}else{
-			Toast.makeText(BrowseVectorMap.Instance, "Not found", Toast.LENGTH_SHORT).show();
+			BrowseVectorMap.Instance.setNavigationStations(null);
+			Toast.makeText(this, "Not found", Toast.LENGTH_SHORT).show();
 			finish();
 		}
 	}
@@ -105,7 +104,4 @@ public class SearchStation extends ListActivity {
 		Collections.sort(mStationList, new StationSortComparator());
 		return map;
 	}
-	
-
-	
 }

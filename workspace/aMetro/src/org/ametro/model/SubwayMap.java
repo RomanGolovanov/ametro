@@ -93,22 +93,26 @@ public class SubwayMap {
 
 	public SubwaySegment getSegment(SubwayStation from, SubwayStation to) {
 		if (to != null && from != null) {
-			if (segmentsIndexed == null) {
-				segmentsIndexed = new HashMap<Long, SubwaySegment>();
-				for (SubwaySegment segment : segments) {
-					long segFromId = segment.fromStationId;
-					long segToId = segment.toStationId;
-					segmentsIndexed.put((segFromId << 32) + segToId, segment);
-				}
-			}
-			long fromId = from.id;
-			long toId = to.id;
-			return segmentsIndexed.get( (fromId << 32) + toId );
+			return getSegment(from.id, to.id);
 		}
 		return null;
 	}
 
-	@Override
+
+	public SubwaySegment getSegment(int from, int to) {
+		if (segmentsIndexed == null) {
+			segmentsIndexed = new HashMap<Long, SubwaySegment>();
+			for (SubwaySegment segment : segments) {
+				long segFromId = segment.fromStationId;
+				long segToId = segment.toStationId;
+				segmentsIndexed.put((segFromId << 32) + segToId, segment);
+			}
+		}
+		long fromId = from;
+		long toId = to;
+		return segmentsIndexed.get( (fromId << 32) + toId );
+	}
+
 	public boolean equals(Object o) {
 		return this == o || o != null && getClass() == o.getClass()
 				&& id == ((SubwayMap) o).id;
@@ -151,5 +155,6 @@ public class SubwayMap {
 		}
 		return null;
 	}
+
 
 }

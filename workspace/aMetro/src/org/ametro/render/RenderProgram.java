@@ -50,6 +50,7 @@ public class RenderProgram {
 	Rect[] mBounds;
 	int[] mTypes;
 	int mRenderFilter;
+	SubwayMap mSubwayMap;
 
 	HashMap<SubwaySegment, RenderElement> segmentIndex = new HashMap<SubwaySegment, RenderElement>();
 	HashMap<SubwayStation, RenderElement> stationIndex = new HashMap<SubwayStation, RenderElement>();
@@ -61,6 +62,7 @@ public class RenderProgram {
 	}
 
 	public RenderProgram(SubwayMap subwayMap) {
+		mSubwayMap = subwayMap;
 		ArrayList<RenderElement> renderQueue = new ArrayList<RenderElement>();
 		drawLines(subwayMap, renderQueue);
 		drawTransfers(subwayMap, renderQueue);
@@ -122,7 +124,18 @@ public class RenderProgram {
 			}
 			if(segments!=null){
 				for(SubwaySegment segment : segments){
-					segmentIndex.get(segment).setMode(false);
+					RenderElement elem = segmentIndex.get(segment);
+					if(elem!=null){
+						elem.setMode(false);
+					}else{
+						SubwaySegment opposite = mSubwayMap.getSegment(segment.toStationId, segment.fromStationId);
+						if(opposite!=null){
+							elem = segmentIndex.get(opposite);
+							if(elem!=null){
+								elem.setMode(false);
+							}
+						}
+					}
 				}
 			}
 			
