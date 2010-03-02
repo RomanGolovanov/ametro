@@ -30,14 +30,11 @@ import org.ametro.util.SerializeUtil;
 
 public class TransportResource implements IResource {
 
-    //private FilePackage owner;
     private TransportParser parser;
-
     private String type;
 
     private HashMap<String, TransportLine> lines;
     private ArrayList<TransportTransfer> transfers;
-    private long crc;
 
     public static class TransportLine {
         public String name;
@@ -150,14 +147,4 @@ public class TransportResource implements IResource {
     public ArrayList<TransportTransfer> getTransfers() {
         return transfers;
     }
-
-    public long getCrc() {
-        return crc;
-    }
-
-    public void setCrc(long newCrc) {
-        crc = newCrc;
-    }
-
-
 }

@@ -18,13 +18,12 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-
 package org.ametro.pmz;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class GenericResource implements IResource {
+public class TextResource implements IResource {
 
     private class Parser {
         private String section = null;
@@ -46,18 +45,23 @@ public class GenericResource implements IResource {
 
         private void handleSection(String section) {
             mKeys.add(section);
-            mSections.put(section, new HashMap<String, String>());
+            mSections.put(section, new HashMap<String, ArrayList<String>>());
         }
 
         private void handleNaveValuePair(String section, String name, String value) {
-            mSections.get(section).put(name, value);
+        	ArrayList<String> set = mSections.get(section).get(name);
+        	if(set == null){
+        		set = new ArrayList<String>();
+        		mSections.get(section).put(name, set);
+        	}
+            set.add(value);
         }
 
     }
 
     public void beginInitialize(FilePackage owner) {
         mKeys = new ArrayList<String>();
-        mSections = new HashMap<String, HashMap<String, String>>();
+        mSections = new HashMap<String, HashMap<String, ArrayList<String>>>();
         mParser = new Parser();
 
     }
@@ -74,17 +78,17 @@ public class GenericResource implements IResource {
         return mKeys.toArray(new String[mKeys.size()]);
     }
 
-    public HashMap<String, String> getSection(String sectionName) {
+    public HashMap<String, ArrayList<String>> getSection(String sectionName) {
         return mSections.get(sectionName);
     }
 
-    public String getValue(String sectionName, String parameter) {
-        HashMap<String, String> section = mSections.get(sectionName);
+    public ArrayList<String> getValue(String sectionName, String parameter) {
+        HashMap<String, ArrayList<String>> section = mSections.get(sectionName);
         return section != null ? section.get(parameter) : null;
     }
 
     private ArrayList<String> mKeys;
-    private HashMap<String, HashMap<String, String>> mSections;
+    private HashMap<String, HashMap<String, ArrayList<String>>> mSections;
     private Parser mParser;
 
 }

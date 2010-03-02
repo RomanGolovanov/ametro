@@ -229,5 +229,8 @@ public class MapSettings {
 		}
 	}
 
-
+	public static boolean isEnabledAddonsImport(Context context) {
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
+		return settings.getBoolean(context.getString(R.string.pref_auto_import_addons_key), false);
+	}
 }

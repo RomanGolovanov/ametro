@@ -229,13 +229,4 @@ public class MapResource implements IResource {
     private String[] transportNames;
     private HashMap<String, MapLine> mapLines;
     private ArrayList<MapAddiditionalLine> addiditionalLines;
-    private long mCrc;
-
-    public long getCrc() {
-        return mCrc;
-    }
-
-    public void setCrc(long crc) {
-        mCrc = crc;
-    }
 }

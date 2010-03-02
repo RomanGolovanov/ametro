@@ -24,16 +24,20 @@ package org.ametro.util;
 import android.util.Log;
 import org.ametro.MapSettings;
 import org.ametro.model.City;
-import org.ametro.model.CityAddon;
+import org.ametro.model.StationAddon;
+import org.ametro.model.SubwayLine;
 import org.ametro.model.SubwayMap;
 import org.ametro.model.SubwayMapBuilder;
+import org.ametro.model.SubwayStation;
 import org.ametro.pmz.FilePackage;
 import org.ametro.pmz.GenericResource;
+import org.ametro.pmz.TextResource;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import static org.ametro.Constants.LOG_TAG_MAIN;
 
@@ -44,49 +48,108 @@ import static org.ametro.Constants.LOG_TAG_MAIN;
  */
 public class ModelUtil {
 
-    public static City indexPmz(String fileName) throws IOException {
-        Date startTimestamp = new Date();
-        City model = new City();
-        FilePackage pkg = new FilePackage(fileName);
-        GenericResource info = pkg.getCityGenericResource();
-        String countryName = info.getValue("Options", "Country");
-        String cityName = info.getValue("Options", "RusName");
-        if (cityName == null) {
-            cityName = info.getValue("Options", "CityName");
-        }
-        model.countryName = countryName;
-        model.cityName = cityName;
-        model.sourceVersion = MapSettings.getSourceVersion();
-        File pmzFile = new File(fileName);
-        model.timestamp = pmzFile.lastModified();
-        if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO)) {
-            Log.i(LOG_TAG_MAIN, String.format("PMZ description '%s' loading time is %sms", fileName, Long.toString((new Date().getTime() - startTimestamp.getTime()))));
-        }
-        return model;
-    }
+	public static City indexPmz(String fileName) throws IOException {
+		Date startTimestamp = new Date();
+		City model = new City();
+		FilePackage pkg = new FilePackage(fileName);
+		GenericResource info = pkg.getCityGenericResource();
+		String countryName = info.getValue("Options", "Country");
+		String cityName = info.getValue("Options", "RusName");
+		if (cityName == null) {
+			cityName = info.getValue("Options", "CityName");
+		}
+		model.countryName = countryName;
+		model.cityName = cityName;
+		model.sourceVersion = MapSettings.getSourceVersion();
+		File pmzFile = new File(fileName);
+		model.timestamp = pmzFile.lastModified();
+		if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO)) {
+			Log.i(LOG_TAG_MAIN, String.format("PMZ description '%s' loading time is %sms", fileName, Long.toString((new Date().getTime() - startTimestamp.getTime()))));
+		}
+		return model;
+	}
 
 
-    public static City importPmz(String filename) throws IOException {
-        SubwayMapBuilder subwayMapBuilder = new SubwayMapBuilder();
-        SubwayMap subwayMap = subwayMapBuilder.importPmz(filename);
-        City model = new City();
-        model.subwayMap = subwayMap;
-        model.cityName = subwayMap.cityName;
-        model.countryName = subwayMap.countryName;
-        model.crc = subwayMap.crc;
-        model.height = subwayMap.height;
-        model.id = subwayMap.id;
-        model.renderVersion = MapSettings.getRenderVersion();
-        model.sourceVersion = MapSettings.getSourceVersion();
-        model.timestamp = subwayMap.timestamp;
-        model.width = subwayMap.width;
-        return model;
-    }
+	public static City importPmz(String filename) throws IOException {
+		SubwayMapBuilder subwayMapBuilder = new SubwayMapBuilder();
+		SubwayMap subwayMap = subwayMapBuilder.importPmz(filename);
+		City model = new City();
+		model.subwayMap = subwayMap;
+		model.cityName = subwayMap.cityName;
+		model.countryName = subwayMap.countryName;
+		model.crc = subwayMap.crc;
+		model.height = subwayMap.height;
+		model.id = subwayMap.id;
+		model.renderVersion = MapSettings.getRenderVersion();
+		model.sourceVersion = MapSettings.getSourceVersion();
+		model.timestamp = subwayMap.timestamp;
+		model.width = subwayMap.width;
+		return model;
+	}
 
 
-	public static ArrayList<CityAddon> importPmzAddons(City city, String fileName) {
-		// TODO Auto-generated method stub
-		return null;
+	public static ArrayList<StationAddon> importPmzAddons(City city, String fileName) throws IOException {
+		final FilePackage pkg = new FilePackage(fileName);
+		final HashMap<String, TextResource> texts = pkg.getTextResources();
+		final ArrayList<StationAddon> addons = new ArrayList<StationAddon>();
+		final SubwayMap map = city.subwayMap;
+		for(SubwayStation station : map.stations){
+			final SubwayLine line = map.lines[station.lineId];
+			final String lineName = line.name;
+			final String stationName = station.name; 
+
+			HashMap<String, ArrayList<String>> entries = new HashMap<String, ArrayList<String>>();
+
+			for(TextResource res : texts.values()){
+				ArrayList<String> opts ;
+				//opts = res.getValue("Options", "MenuName");
+				//if(opts==null || opts.size()==0)
+				{
+					opts = res.getValue("Options", "Caption");
+					String captionText = opts!=null && opts.size()>0 ? opts.get(0) : null;
+					opts = res.getValue("Options", "StringToAdd");
+					String prefix = opts!=null && opts.size()>0 ? opts.get(0) : null;
+					if(captionText!=null && prefix!=null){
+						if(prefix.startsWith("'") && prefix.endsWith("'")){
+							prefix = prefix.substring(1, prefix.length()-1 );
+						}
+						ArrayList<String> data = res.getValue(lineName, stationName);
+						if(data!=null && data.size()>0){
+
+							ArrayList<String> entryText = entries.get(captionText);
+							if(entryText==null){
+								entryText = new ArrayList<String>();
+								entries.put(captionText, entryText);
+							}
+							for(String lineText : data){
+								entryText.add( (prefix + lineText).trim() );
+							}
+						}
+					}
+				}
+			}
+
+
+			StationAddon addon = new StationAddon();
+			addon.stationId = station.id;
+
+			final int entryCount = entries.keySet().size();
+			int entryNumber = 0;
+			addon.entries = new StationAddon.Entry[entryCount];
+			for(String entryCaption : entries.keySet()){
+				StationAddon.Entry entry = new StationAddon.Entry();
+				entry.id = entryNumber;
+				entry.caption = entryCaption;
+				final ArrayList<String> text = entries.get(entryCaption);
+				entry.text = (String[]) text.toArray(new String[text.size()]);
+				addon.entries[entryNumber] = entry;
+				entryNumber++;
+			}
+
+			addons.add(addon);
+
+		}
+		return addons;
 	}
 
 }
