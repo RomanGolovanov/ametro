@@ -34,8 +34,8 @@ public class SubwayRoute {
 		for (SubwaySegment seg : map.segments) {
 			Double delay = seg.delay;
 			if (delay != null) {
-				int d = (int)Math.round(delay);
-				g.addEdge(seg.fromStationId,seg.toStationId, d);
+				double d = (double)delay;
+				g.addEdge(seg.fromStationId,seg.toStationId, (int)d);
 			}
 		}
 		for(SubwayTransfer tr : map.transfers){
