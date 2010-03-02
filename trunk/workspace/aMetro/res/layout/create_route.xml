@@ -5,7 +5,7 @@
 	android:orientation="vertical" android:background="#80808080">
 	<LinearLayout android:layout_width="fill_parent"
 		android:id="@+id/create_route_panel" android:layout_height="wrap_content"
-		android:orientation="vertical" android:background="#ff808080">
+		android:orientation="vertical" android:background="#ff000000">
 		<LinearLayout android:orientation="horizontal"
 			android:layout_width="fill_parent" android:layout_height="wrap_content"
 			android:paddingLeft="5dip" android:paddingTop="5dip"
