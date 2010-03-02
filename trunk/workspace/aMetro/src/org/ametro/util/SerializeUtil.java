@@ -67,6 +67,23 @@ public class SerializeUtil {
         return vals.toArray(new Double[vals.size()]);
     }
 
+    public static Double[] parseDelayArray(String text) {
+        String[] parts = splitCommaSeparaterString(text);
+        ArrayList<Double> vals = new ArrayList<Double>();
+        for (String part : parts) {
+            try {
+                double value = Double.parseDouble(part.trim());
+                int minutes = (int)value;
+                int seconds = (int)((value - minutes) * 100);
+                double delay = (minutes * 60.0) + seconds;
+                vals.add( delay );
+            } catch (Exception ex) {
+                vals.add(null);
+            }
+        }
+        return vals.toArray(new Double[vals.size()]);
+    }
+    
     public static Point[] parsePointArray(String value) {
         String[] parts = splitCommaSeparaterString(value);
         ArrayList<Point> points = new ArrayList<Point>();
@@ -133,6 +150,20 @@ public class SerializeUtil {
             }
         }
         return null;
+    }
+    
+    public static Double parseNullableDelay(String text){
+        if (text != null && !text.equals("")) {
+            try {
+                double value = Double.parseDouble(text);
+                int minutes = (int)value;
+                int seconds = (int)((value - minutes) * 100);
+                return (minutes * 60.0) + seconds;
+            } catch (NumberFormatException ignored) {
+            }
+        }
+        return null;
+    	
     }
 
 }

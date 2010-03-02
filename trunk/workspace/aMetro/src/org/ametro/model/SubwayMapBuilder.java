@@ -549,17 +549,16 @@ public class SubwayMapBuilder {
 		}
 
 		public Double next() {
-			return SerializeUtil.parseNullableDouble(nextBlock());
+			return SerializeUtil.parseNullableDelay(nextBlock());
 		}
 
 		public Double[] nextBracket() {
 			if (mText == null)
 				return null;
 			String block = nextBlock();
-			return SerializeUtil.parseDoubleArray(block.substring(1, block
+			return SerializeUtil.parseDelayArray(block.substring(1, block
 					.length() - 1));
 		}
-
 	}
 
 	private class StationsString {
