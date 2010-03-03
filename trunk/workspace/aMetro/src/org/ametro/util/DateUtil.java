@@ -71,6 +71,11 @@ public class DateUtil {
         return getDate(date, "HH:mm");
     }
 
+    public static String getLongTime(long seconds) {
+		Date date = new Date(seconds * 1000);
+        return getDateUTC(date, "HH:mm:ss");
+	}
+
     public static Date parseDate(String date, String format) throws ParseException {
         if (date == null || date.length() == 0) {
             return null;
@@ -98,4 +103,5 @@ public class DateUtil {
     public static Date parseTimeDate(String date) throws ParseException {
         return parseDate(date, "HH:mm dd.MM.yyyy");
     }
+
 }

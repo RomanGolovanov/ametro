@@ -1,6 +1,8 @@
 package org.ametro.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 
 import org.ametro.algorithm.DijkstraHeap;
 
@@ -10,23 +12,56 @@ public class SubwayRoute {
 	private int mFromId;
 	private int mToId;
 
-	private ArrayList<SubwaySegment> mRoute;
+	private ArrayList<SubwaySegment> mSegments;
+	private ArrayList<SubwayStation> mStations;
+	private HashMap<SubwayStation,Long> mStationDelays;
+	private long mTime;
+	private boolean mHasRoute;
 
+	public long getTime(){
+		return mTime;
+	}
+	
+	public boolean hasRoute(){
+		if(mSegments == null){
+			findRoute();
+		}
+		return mHasRoute;
+	}
+	
 	public SubwayRoute(SubwayMap map, int fromId, int toId) {
 		mSubwayMap = map;
 		mFromId = fromId;
 		mToId = toId;
-		mRoute = null;
+		mSegments = null;
+		mStations = null;
+		mStationDelays = null;
+		mHasRoute = false;
 	}
 
-	public ArrayList<SubwaySegment> getRoute() {
-		if (mRoute == null) {
+	public long getStationDelay(SubwayStation station){
+		Long delay = mStationDelays.get(station);
+		if(delay!=null){
+			return delay;
+		}
+		return -1;
+	}
+	
+	public ArrayList<SubwayStation> getStations() {
+		if (mSegments == null) {
 			findRoute();
 		}
-		return mRoute;
+		return mStations;
+	}
+	
+	public ArrayList<SubwaySegment> getSegments() {
+		if (mSegments == null) {
+			findRoute();
+		}
+		return mSegments;
 	}
 
-	private void findRoute() {
+	public void findRoute() {
 		final SubwayMap map = mSubwayMap;
 		final int count = map.stations.length;
 
@@ -48,20 +83,42 @@ public class SubwayRoute {
 		}
 	    long[] distances = new long[count];
 	    int[] pred = new int[count];
-	    ArrayList<SubwaySegment> route = new ArrayList<SubwaySegment>();
+	    ArrayList<SubwaySegment> segments = new ArrayList<SubwaySegment>();
+	    ArrayList<SubwayStation> stations = new ArrayList<SubwayStation>();
+	    HashMap<SubwayStation, Long> stationDelays = new HashMap<SubwayStation, Long>();
 	    DijkstraHeap.dijkstra(g, mFromId, distances, pred);
 		
 	    int to = mToId;
 	    int from = pred[to];
+	    mTime = distances[to];
+	    SubwayStation st = map.stations[to];
+	    stations.add(st);
+	    stationDelays.put(st, distances[to]);
 	    while( from!=-1 ){
 	    	SubwaySegment seg = map.getSegment(from, to);
 	    	if(seg!=null){
-	    		route.add(seg);
+	    		segments.add(seg);
 	    	}
 	    	to = from;
 	    	from = pred[to];
+	    	
+    		st = map.stations[to];
+		    stations.add(st);
+		    stationDelays.put(st, distances[to]);
+	    	
 	    }
 	    
-		mRoute = route;
+	    if(segments!=null && segments.size()>0){
+	    	mSegments = segments;
+    		Collections.reverse(stations);
+	    	mStations = stations;
+	    	mStationDelays = stationDelays;
+	    	mHasRoute = true;
+	    }else{
+	    	mHasRoute = false;
+	    	mSegments = null;
+	    	mStations = null;
+	    }
 	}
+
 }

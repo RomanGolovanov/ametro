@@ -21,6 +21,24 @@
 
 package org.ametro.activity;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FilenameFilter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import org.ametro.MapSettings;
+import org.ametro.R;
+import org.ametro.model.City;
+import org.ametro.model.Deserializer;
+import org.ametro.model.Serializer;
+import org.ametro.model.StationAddon;
+import org.ametro.other.ProgressInfo;
+import org.ametro.util.FileUtil;
+import org.ametro.util.ModelUtil;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -29,30 +47,22 @@ import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.AsyncTask;
-import android.os.AsyncTask.Status;
 import android.os.Bundle;
+import android.os.AsyncTask.Status;
 import android.util.Log;
-import android.view.*;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.widget.*;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
-import org.ametro.MapSettings;
-import org.ametro.R;
-import org.ametro.model.City;
-import org.ametro.model.StationAddon;
-import org.ametro.model.Deserializer;
-import org.ametro.model.Serializer;
-import org.ametro.other.ProgressInfo;
-import org.ametro.util.FileUtil;
-import org.ametro.util.ModelUtil;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FilenameFilter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 
 public class ImportPmz extends Activity {
