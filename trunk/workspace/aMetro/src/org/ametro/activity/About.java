@@ -21,13 +21,18 @@
 
 package org.ametro.activity;
 
+import org.ametro.R;
+
 import android.app.Activity;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.util.Linkify;
 import android.widget.TextView;
-import org.ametro.R;
 
 public class About extends Activity {
     /**
@@ -37,18 +42,16 @@ public class About extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about);
-
+        TextView view = (TextView)findViewById(R.id.about_text);
         try {
             PackageManager manager = getPackageManager();
             PackageInfo info = manager.getPackageInfo(getPackageName(), 0);
-            String versionName = info.versionName;
-            TextView versionText = (TextView) findViewById(R.id.about_version_text);
-            versionText.setText(
-                    String.format(
-                            "%s %s",
-                            getString(R.string.app_name),
-                            versionName
-                    ));
+            Spanned text = Html.fromHtml(String.format(
+            		getString(R.string.text_about),
+            		info.versionName));
+            SpannableStringBuilder spannable = new SpannableStringBuilder(text);
+            Linkify.addLinks(spannable, Linkify.EMAIL_ADDRESSES | Linkify.WEB_URLS);
+            view.setText( spannable );
         } catch (NameNotFoundException e) {
             finish();
         }

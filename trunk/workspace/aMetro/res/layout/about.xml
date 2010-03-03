@@ -13,20 +13,10 @@
                    android:layout_width="wrap_content" android:layout_height="wrap_content">
         </ImageView>
 
-        <TextView android:id="@+id/about_version_text" android:text="@string/text_about_1"
-                  android:layout_width="fill_parent" android:layout_height="wrap_content"/>
-        <TextView android:text="@string/text_about_2" android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"/>
-        <TextView android:text="@string/text_about_3" android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"/>
-        <TextView android:text="@string/text_about_4" android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"/>
-        <TextView android:text="@string/text_about_5" android:autoLink="web|email" android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"/>
-        <TextView android:text="@string/text_about_6" android:autoLink="web|email" android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"/>
-        <TextView android:text="@string/text_about_7" android:autoLink="web|email" android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"/>
+
+        <TextView android:id="@+id/about_text" 
+        			android:layout_width="fill_parent" android:layout_height="wrap_content"/>
+
     </LinearLayout>
 </ScrollView>
 	
