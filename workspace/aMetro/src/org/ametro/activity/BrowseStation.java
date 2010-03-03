@@ -44,7 +44,7 @@ public class BrowseStation extends Activity {
 		super.onCreate(savedInstanceState);
 		
 		SubwayStation station = BrowseVectorMap.Instance.getCurrentStation();
-		String mapName = MapSettings.getMapName();
+		String mapName = BrowseVectorMap.Instance.getMapName();
 		String mapFileName = MapSettings.getMapFileName(mapName);
 		
 		try {

@@ -28,7 +28,7 @@ package org.ametro.model;
  */
 public class City {
 
-    public static final int VERSION = 1;
+    public static final int VERSION = 2;
 
     public int id;
 
@@ -39,16 +39,12 @@ public class City {
     public int height;
 
     public long timestamp;
-    public long crc;
-
-    public long renderVersion;
     public long sourceVersion;
 
     public SubwayMap subwayMap;
 
     public boolean completeEqual(City other) {
-        return locationEqual(other)
-                && crc == other.crc
+        return locationEqual(other) 
                 && timestamp == other.timestamp
                 && sourceVersion == other.sourceVersion;
     }

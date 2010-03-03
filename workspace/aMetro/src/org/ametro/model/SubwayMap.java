@@ -27,12 +27,9 @@ import java.util.HashMap;
 
 public class SubwayMap {
 
-	public static final int VERSION = 1;
+	public static final int VERSION = 2;
 
 	public int id;
-
-	public long timestamp;
-	public long crc;
 
 	public String mapName;
 
@@ -46,8 +43,6 @@ public class SubwayMap {
 	public int linesWidth;
 	public boolean wordWrap;
 	public boolean upperCase;
-
-	public long sourceVersion;
 
 	public SubwayLine[] lines;
 	public SubwayStation[] stations;
