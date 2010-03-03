@@ -25,7 +25,6 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.util.Log;
-import org.ametro.MapSettings;
 import org.ametro.pmz.FilePackage;
 import org.ametro.pmz.GenericResource;
 import org.ametro.pmz.MapResource;
@@ -95,9 +94,6 @@ public class SubwayMapBuilder {
 		subwayMap.stationDiameter = map.getStationDiameter();
 		subwayMap.wordWrap = map.isWordWrap();
 		subwayMap.upperCase = map.isUpperCase();
-
-		subwayMap.timestamp = file.lastModified();
-		subwayMap.sourceVersion = MapSettings.getSourceVersion();
 
 		HashMap<String, MapResource.MapLine> mapLines = map.getMapLines();
 		HashMap<String, TransportResource.TransportLine> transportLines = trp

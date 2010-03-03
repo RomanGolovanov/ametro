@@ -24,6 +24,7 @@ package org.ametro.util;
 import android.util.Log;
 
 import java.io.File;
+import java.io.IOException;
 
 import static org.ametro.Constants.LOG_TAG_MAIN;
 
@@ -46,4 +47,22 @@ public class FileUtil {
         }
     }
 
+	public static long getLastModified(String filename) {
+		return new File(filename).lastModified();
+	}
+
+
+	public static void createFile(String path) {
+        try {
+            File f = new File(path);
+            f.createNewFile();
+        } catch (IOException e) {
+            // scoop exception
+        }
+    }
+
+	public static void createDirectory(String path) {
+        File f = new File(path);
+        f.mkdirs();
+    }	
 }

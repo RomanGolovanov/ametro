@@ -334,7 +334,7 @@ public class ImportPmz extends Activity {
         protected List<ImportRecord> doInBackground(ImportRecord... imports) {
             ArrayList<ImportRecord> result = new ArrayList<ImportRecord>();
             final int count = imports.length;
-            final boolean isEnableAddons = MapSettings.isEnabledAddonsImport(ImportPmz.this);
+            final boolean isEnableAddons = BrowseVectorMap.Instance.isEnabledAddonsImport();
             ProgressInfo pi = new ProgressInfo(0, count, null, "Importing PMZ files...");
             publishProgress(pi);
             String updateStatus = getString(R.string.import_status_uptodate);
@@ -567,7 +567,7 @@ public class ImportPmz extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MapSettings.checkPrerequisite(this);
+        MapSettings.checkPrerequisite();
         startIndexMode();
     }
 

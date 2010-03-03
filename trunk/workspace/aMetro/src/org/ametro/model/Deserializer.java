@@ -213,7 +213,7 @@ public class Deserializer {
 		StationAddon addon = new StationAddon();
 		if (csvReader.next()) {
 			switch (version) {
-			case 1:
+			case StationAddon.VERSION:
 				addon.stationId =  csvReader.readInt();
 				ArrayList<StationAddon.Entry> entries = new ArrayList<StationAddon.Entry>();
 				while(csvReader.next()){
@@ -243,14 +243,12 @@ public class Deserializer {
 		City city = new City();
 		if (csvReader.next()) {
 			switch (version) {
-			case 1:
+			case City.VERSION:
 				city.countryName = csvReader.readString();
 				city.cityName = csvReader.readString();
 				city.width = csvReader.readInt();
 				city.height = csvReader.readInt();
 				city.timestamp = csvReader.readLong();
-				city.crc = csvReader.readLong();
-				city.renderVersion = csvReader.readLong();
 				city.sourceVersion = csvReader.readLong();
 				break;
 			default:
@@ -264,10 +262,8 @@ public class Deserializer {
 		SubwayMap subwayMap = new SubwayMap();
 		if (csvReader.next()) {
 			switch (version) {
-			case 1:
+			case SubwayMap.VERSION:
 				subwayMap.id = csvReader.readInt();
-				subwayMap.timestamp = csvReader.readLong();
-				subwayMap.crc = csvReader.readLong();
 				subwayMap.mapName = csvReader.readString();
 				subwayMap.cityName = csvReader.readString();
 				subwayMap.countryName = csvReader.readString();
@@ -277,7 +273,6 @@ public class Deserializer {
 				subwayMap.linesWidth = csvReader.readInt();
 				subwayMap.wordWrap = csvReader.readBoolean();
 				subwayMap.upperCase = csvReader.readBoolean();
-				subwayMap.sourceVersion = csvReader.readLong();
 				break;
 			default:
 				throw new IllegalStateException("Cant parse file: unsupported version");
@@ -289,7 +284,7 @@ public class Deserializer {
 	private static SubwayLine[] deserializeLines(CsvReader csvReader, int version) throws IOException {
 		ArrayList<SubwayLine> lines = new ArrayList<SubwayLine>();
 		switch (version) {
-		case 1:
+		case SubwayLine.VERSION:
 			while (csvReader.next()) {
 				SubwayLine line = new SubwayLine();
 				line.id = csvReader.readInt();
@@ -313,7 +308,7 @@ public class Deserializer {
 	private static SubwayStation[] deserializeStations(CsvReader csvReader, int version) throws IOException {
 		ArrayList<SubwayStation> stations = new ArrayList<SubwayStation>();
 		switch (version) {
-		case 1:
+		case SubwayStation.VERSION:
 			while (csvReader.next()) {
 				SubwayStation station = new SubwayStation();
 				station.id = csvReader.readInt();
@@ -337,7 +332,7 @@ public class Deserializer {
 	private static SubwaySegment[] deserializeSegments(CsvReader csvReader, int version) throws IOException {
 		ArrayList<SubwaySegment> segments = new ArrayList<SubwaySegment>();
 		switch (version) {
-		case 1:
+		case SubwaySegment.VERSION:
 			while (csvReader.next()) {
 				SubwaySegment segment = new SubwaySegment();
 				segment.id = csvReader.readInt();
@@ -361,7 +356,7 @@ public class Deserializer {
 	private static SubwayTransfer[] deserializeTransfers(CsvReader csvReader, int version) throws IOException {
 		ArrayList<SubwayTransfer> transfers = new ArrayList<SubwayTransfer>();
 		switch (version) {
-		case 1:
+		case SubwayTransfer.VERSION:
 			while (csvReader.next()) {
 				SubwayTransfer transfer = new SubwayTransfer();
 				transfer.id = csvReader.readInt();
@@ -385,7 +380,7 @@ public class Deserializer {
 	private static HashMap<Integer, Point[]> deserializeSegmentsPoints(CsvReader csvReader, int version) throws IOException {
 		HashMap<Integer, Point[]> pointsBySegmentId = new HashMap<Integer, Point[]>();
 		switch (version) {
-		case 1:
+		case SubwaySegment.VERSION:
 			while (csvReader.next()) {
 				int segmentId = csvReader.readInt();
 				Point[] points = csvReader.readPointArray();

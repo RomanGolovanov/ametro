@@ -74,8 +74,6 @@ public class Serializer {
         csvWriter.writeInt(city.width);
         csvWriter.writeInt(city.height);
         csvWriter.writeLong(city.timestamp);
-        csvWriter.writeLong(city.crc);
-        csvWriter.writeLong(city.renderVersion);
         csvWriter.writeLong(city.sourceVersion);
 
         csvWriter.flush();
@@ -90,7 +88,6 @@ public class Serializer {
         if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO)) {
             Log.i(LOG_TAG_MAIN, "City saving time is " + (System.currentTimeMillis() - startTime) + "ms");
         }
-
     }
 
     private static void serializeAddons(ArrayList<StationAddon> addons, ZipOutputStream zipOut, CsvWriter csvWriter) throws IOException {
@@ -136,8 +133,6 @@ public class Serializer {
 
         csvWriter.newRecord();
         csvWriter.writeInt(subwayMap.id);
-        csvWriter.writeLong(subwayMap.timestamp);
-        csvWriter.writeLong(subwayMap.crc);
         csvWriter.writeString(subwayMap.mapName);
         csvWriter.writeString(subwayMap.cityName);
         csvWriter.writeString(subwayMap.countryName);
@@ -147,7 +142,6 @@ public class Serializer {
         csvWriter.writeInt(subwayMap.linesWidth);
         csvWriter.writeBoolean(subwayMap.wordWrap);
         csvWriter.writeBoolean(subwayMap.upperCase);
-        csvWriter.writeLong(subwayMap.sourceVersion);
 
         csvWriter.flush();
         zipOut.closeEntry();

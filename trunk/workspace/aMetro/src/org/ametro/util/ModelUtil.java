@@ -77,12 +77,10 @@ public class ModelUtil {
 		model.subwayMap = subwayMap;
 		model.cityName = subwayMap.cityName;
 		model.countryName = subwayMap.countryName;
-		model.crc = subwayMap.crc;
 		model.height = subwayMap.height;
 		model.id = subwayMap.id;
-		model.renderVersion = MapSettings.getRenderVersion();
 		model.sourceVersion = MapSettings.getSourceVersion();
-		model.timestamp = subwayMap.timestamp;
+		model.timestamp = FileUtil.getLastModified(filename);
 		model.width = subwayMap.width;
 		return model;
 	}

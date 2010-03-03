@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import org.ametro.MapSettings;
 import org.ametro.model.SubwayMap;
 import org.ametro.model.SubwayStation;
 
@@ -73,7 +72,7 @@ public class SearchStation extends ListActivity {
 	}
 
 	private void bindData() {
-		SubwayMap map = MapSettings.getModel();
+		SubwayMap map = BrowseVectorMap.Instance.getSubwayMap();
 		if(mStationList.size()>0){
 			if(mStationList.size()>1){
 				ArrayList<String> stationNamesList = new ArrayList<String>();
@@ -94,7 +93,7 @@ public class SearchStation extends ListActivity {
 	}
 
 	private SubwayMap doSearchKeywords(String searchKeywords) {
-		SubwayMap map = MapSettings.getModel();
+		SubwayMap map = BrowseVectorMap.Instance.getSubwayMap();
 		mStationList = new ArrayList<SubwayStation>();
 		for(SubwayStation station : map.stations){
 			if(station.name.toLowerCase().indexOf(searchKeywords)!=-1){

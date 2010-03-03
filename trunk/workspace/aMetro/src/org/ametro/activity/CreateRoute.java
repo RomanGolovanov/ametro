@@ -24,7 +24,6 @@ package org.ametro.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ametro.MapSettings;
 import org.ametro.R;
 import org.ametro.model.SubwayMap;
 import org.ametro.model.SubwayRoute;
@@ -83,7 +82,7 @@ public class CreateRoute extends Activity implements OnClickListener,
 		mToText = (AutoCompleteTextView) findViewById(R.id.create_route_to_text);
 
 		List<String> stations = new ArrayList<String>();
-		mSubwayMap = MapSettings.getModel();
+		mSubwayMap = BrowseVectorMap.Instance.getSubwayMap();
 		SubwayStation[] data = mSubwayMap.stations;
 		for (SubwayStation station : data) {
 			stations.add(station.name + " ("

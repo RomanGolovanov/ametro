@@ -253,7 +253,7 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MapSettings.checkPrerequisite(this);
+        MapSettings.checkPrerequisite();
         beginIndexing();
     }
 
