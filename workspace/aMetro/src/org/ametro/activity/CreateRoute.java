@@ -28,8 +28,8 @@ import org.ametro.MapSettings;
 import org.ametro.R;
 import org.ametro.model.SubwayMap;
 import org.ametro.model.SubwayRoute;
-import org.ametro.model.SubwaySegment;
 import org.ametro.model.SubwayStation;
+import org.ametro.util.DateUtil;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -146,17 +146,18 @@ public class CreateRoute extends Activity implements OnClickListener,
 	}
 
 	public class CreateRouteTask extends
-			AsyncTask<SubwayStation, Void, ArrayList<SubwaySegment>> {
+			AsyncTask<SubwayStation, Void, SubwayRoute> {
 
 		private SubwayMap mMap;
 		private ProgressDialog mWaitDialog;
 
-		protected ArrayList<SubwaySegment> doInBackground(
+		protected SubwayRoute doInBackground(
 				SubwayStation... stations) {
 			SubwayStation from = stations[0];
 			SubwayStation to = stations[1];
 			SubwayRoute route = new SubwayRoute(mMap, from.id, to.id);
-			return route.getRoute();
+			route.findRoute();
+			return route;
 		}
 
 		protected void onCancelled() {
@@ -173,11 +174,13 @@ public class CreateRoute extends Activity implements OnClickListener,
 			super.onPreExecute();
 		}
 
-		protected void onPostExecute(ArrayList<SubwaySegment> result) {
+		protected void onPostExecute(SubwayRoute result) {
 			super.onPostExecute(result);
 			mWaitDialog.dismiss();
-			if (result != null && result.size() > 0) {
+			if (result.hasRoute()) {
 				BrowseVectorMap.Instance.setNavigationRoute(result);
+				String msg = "Trip time is " + DateUtil.getLongTime(result.getTime());
+				Toast.makeText(BrowseVectorMap.Instance, msg, Toast.LENGTH_LONG).show();
 			} else {
 				Toast.makeText(BrowseVectorMap.Instance, "Not found",
 						Toast.LENGTH_SHORT).show();

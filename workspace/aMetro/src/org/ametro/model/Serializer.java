@@ -21,9 +21,7 @@
 
 package org.ametro.model;
 
-import android.graphics.Point;
-import android.util.Log;
-import org.ametro.util.csv.CsvWriter;
+import static org.ametro.Constants.LOG_TAG_MAIN;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -34,7 +32,10 @@ import java.util.HashMap;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import static org.ametro.Constants.LOG_TAG_MAIN;
+import org.ametro.util.csv.CsvWriter;
+
+import android.graphics.Point;
+import android.util.Log;
 
 /**
  * @author Vlad Vinichenko (akerigan@gmail.com)
@@ -50,13 +51,15 @@ public class Serializer {
     public static final String SEGMENTS_ENTRY_NAME = "subway_segments.csv";
     public static final String TRANSFERS_ENTRY_NAME = "subway_transfers.csv";
     public static final String SEGMENTS_POINTS_ENTRY_NAME = "subway_segments_points.csv";
+    public static final String ENCODING = "UTF-8";
 
     public static final String ADDONS_DIR_ENTRY_NAME = "addons/";
     
     public static void serialize(OutputStream out, City city, ArrayList<StationAddon> addons) throws IOException {
         long startTime = System.currentTimeMillis();
         ZipOutputStream zipOut = new ZipOutputStream(out);
-        CsvWriter csvWriter = new CsvWriter(new BufferedWriter(new OutputStreamWriter(zipOut)));
+        
+        CsvWriter csvWriter = new CsvWriter(new BufferedWriter(new OutputStreamWriter(zipOut,ENCODING)));
 
         ZipEntry zipEntry = new ZipEntry(CITY_ENTRY_NAME);
         zipOut.putNextEntry(zipEntry);

@@ -24,6 +24,7 @@ package org.ametro.model;
 import static org.ametro.Constants.LOG_TAG_MAIN;
 import static org.ametro.model.Serializer.ADDONS_DIR_ENTRY_NAME;
 import static org.ametro.model.Serializer.CITY_ENTRY_NAME;
+import static org.ametro.model.Serializer.ENCODING;
 import static org.ametro.model.Serializer.LINES_ENTRY_NAME;
 import static org.ametro.model.Serializer.MAP_ENTRY_NAME;
 import static org.ametro.model.Serializer.SEGMENTS_ENTRY_NAME;
@@ -41,7 +42,6 @@ import java.util.Locale;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import org.ametro.Constants;
 import org.ametro.util.StringUtil;
 import org.ametro.util.csv.CsvReader;
 
@@ -77,7 +77,7 @@ public class Deserializer {
 		SubwayTransfer[] transfers = null;
 		HashMap<Integer, Point[]> pointsBySegmentId = null;
 
-		CsvReader csvReader = new CsvReader(new BufferedReader(new InputStreamReader(zipIn), Constants.DEFAULT_BUFFER_SIZE));
+		CsvReader csvReader = new CsvReader(new BufferedReader(new InputStreamReader(zipIn,ENCODING)));
 
 		ZipEntry zipEntry;
 		while( (zipEntry = zipIn.getNextEntry()) != null) {
@@ -169,7 +169,7 @@ public class Deserializer {
 		while( (zipEntry = zipIn.getNextEntry()) != null) {
 			String name = zipEntry.getName();
 			if (addonName.equals(name)) {
-				CsvReader csvReader = new CsvReader(new BufferedReader(new InputStreamReader(zipIn), Constants.DEFAULT_BUFFER_SIZE));
+				CsvReader csvReader = new CsvReader(new BufferedReader(new InputStreamReader(zipIn,ENCODING)));
 				if (csvReader.next()) {
 					int version = csvReader.getInt(1);
 					addon = deserializeStationAddon(csvReader, version);

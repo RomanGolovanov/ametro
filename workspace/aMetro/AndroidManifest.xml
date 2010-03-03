@@ -25,7 +25,7 @@
 			android:theme="@android:style/Theme.Translucent.NoTitleBar" 
 			/>
 		<activity android:name=".activity.About" />
-		<activity android:name=".activity.Settings" />
+		<activity android:name=".activity.Settings"  android:configChanges="orientation|keyboardHidden" />
 		<activity android:label="@string/search_station"
 			android:launchMode="singleTop" android:name=".activity.SearchStation">
 			<intent-filter>

@@ -215,22 +215,27 @@ public class MapSettings {
         FileUtil.delete(new File(ROOT_PATH + MAPS_LIST));
     }
 
-	public static void setupLocale(Context context) {
-		final Locale[] locales = Locale.getAvailableLocales();
+    public static Locale getLocale(Context context){
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
 		final String localeName = settings.getString(context.getString(R.string.pref_locale_key), null);
-		if(localeName!=null){
-		    for(Locale locale : locales){
-		    	if(locale.getLanguage().equals(localeName)){
-		    		Locale.setDefault(locale);
-		    		return;
-		    	}
-		    }
-		}
+		return localeName!=null && localeName.length()>0 ? new Locale(localeName) : Locale.ENGLISH;
+    }
+    
+	public static void setupLocale(Context context) {
+   		Locale.setDefault(getLocale(context));
 	}
 
 	public static boolean isEnabledAddonsImport(Context context) {
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
 		return settings.getBoolean(context.getString(R.string.pref_auto_import_addons_key), false);
+	}
+
+	public static boolean isConfigurationChanged(Context context) {
+		Locale currentLocale = Locale.getDefault();
+		Locale newLocale = getLocale(context);
+		if(!currentLocale.equals(newLocale)){
+			return true;
+		}
+		return false;
 	}
 }
