@@ -32,16 +32,19 @@ import static org.ametro.model.Serializer.SEGMENTS_POINTS_ENTRY_NAME;
 import static org.ametro.model.Serializer.STATIONS_ENTRY_NAME;
 import static org.ametro.model.Serializer.TRANSFERS_ENTRY_NAME;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import org.ametro.Constants;
 import org.ametro.util.StringUtil;
 import org.ametro.util.csv.CsvReader;
 
@@ -55,6 +58,18 @@ import android.util.Log;
  */
 public class Deserializer {
 
+	private static HashSet<String> mMainCityEntries = new HashSet<String>();
+	
+	static {
+		mMainCityEntries.add(CITY_ENTRY_NAME);
+		mMainCityEntries.add(MAP_ENTRY_NAME);
+		mMainCityEntries.add(LINES_ENTRY_NAME);
+		mMainCityEntries.add(STATIONS_ENTRY_NAME);
+		mMainCityEntries.add(SEGMENTS_ENTRY_NAME);
+		mMainCityEntries.add(TRANSFERS_ENTRY_NAME);
+		mMainCityEntries.add(SEGMENTS_POINTS_ENTRY_NAME);		
+	}
+	
 	public static City deserialize(InputStream in) throws IOException {
 		return deserialize(in, false);
 	}
@@ -66,7 +81,7 @@ public class Deserializer {
 	public static City deserialize(InputStream in, boolean descriptionOnly) throws IOException {
 		long startTime = System.currentTimeMillis();
 		//Debug.startMethodTracing("ametro");
-		ZipInputStream zipIn = new ZipInputStream(in);
+		ZipInputStream zipIn = new ZipInputStream(new BufferedInputStream(in, Constants.DEFAULT_BUFFER_SIZE));
 
 
 		City city = null;
@@ -79,10 +94,11 @@ public class Deserializer {
 
 		ZipEntry zipEntry;
 		while( (zipEntry = zipIn.getNextEntry()) != null) {
+			final String name = zipEntry.getName();
+			if(mMainCityEntries.contains(name)){
 			CsvReader csvReader = new CsvReader(new BufferedReader(new InputStreamReader(zipIn,ENCODING)));
 			if (csvReader.next()) {
 				int version = csvReader.getInt(1);
-				String name = zipEntry.getName();
 				if (CITY_ENTRY_NAME.equals(name)) {
 					city = deserializeCity(csvReader, version);
 					if (descriptionOnly) {
@@ -103,6 +119,7 @@ public class Deserializer {
 				} else if (SEGMENTS_POINTS_ENTRY_NAME.equals(name)) {
 					pointsBySegmentId = deserializeSegmentsPoints(csvReader, version);
 				}
+			}
 			}
 			zipIn.closeEntry();
 		}
@@ -159,7 +176,7 @@ public class Deserializer {
 	public static StationAddon tryDeserializeAddon(SubwayStation station, InputStream in) throws IOException {
 
 		long startTime = System.currentTimeMillis();
-		ZipInputStream zipIn = new ZipInputStream(in);
+		ZipInputStream zipIn = new ZipInputStream(new BufferedInputStream(in, Constants.DEFAULT_BUFFER_SIZE));
 
 		StationAddon addon = null;
 		final String addonName = ADDONS_DIR_ENTRY_NAME + station.id + ".csv"; 
