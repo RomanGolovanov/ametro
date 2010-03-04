@@ -30,7 +30,6 @@ import org.ametro.model.SubwayStation;
 import org.ametro.util.DateUtil;
 
 import android.app.Activity;
-import android.database.DataSetObserver;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -110,7 +109,6 @@ public class StationListAdapter extends BaseAdapter implements Filterable {
             } else {
                 notifyDataSetInvalidated();
             }
-			
 		}
 		
 	}
@@ -131,7 +129,6 @@ public class StationListAdapter extends BaseAdapter implements Filterable {
 		}
 	}	
 
-	
 	public StationListAdapter(Activity activity, ArrayList<SubwayStation> stations,SubwayMap map){
 		this(activity, stations,null,map);
 	}
@@ -180,7 +177,6 @@ public class StationListAdapter extends BaseAdapter implements Filterable {
 
 	public static String getStationName(SubwayMap map, SubwayStation station){
 		return station.name + " (" + map.lines[station.lineId].name + ")";
-		
 	}
 	
 	public Object getItem(int position) {
@@ -189,10 +185,6 @@ public class StationListAdapter extends BaseAdapter implements Filterable {
 
 	public long getItemId(int position) {
 		return mFilteredStations[position].id;
-	}
-
-	public int getItemViewType(int position) {
-		return 0;
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -232,32 +224,6 @@ public class StationListAdapter extends BaseAdapter implements Filterable {
 			mLineDrawabled.put(line, dw);
 		}
 		return dw;
-	}
-
-	public int getViewTypeCount() {
-		return 1;
-	}
-
-	public boolean hasStableIds() {
-		return true;
-	}
-
-	public boolean isEmpty() {
-		return mFilteredStations == null || mFilteredStations.length == 0;
-	}
-
-	public void registerDataSetObserver(DataSetObserver arg0) {
-	}
-
-	public void unregisterDataSetObserver(DataSetObserver arg0) {
-	}
-
-	public boolean areAllItemsEnabled() {
-		return true;
-	}
-
-	public boolean isEnabled(int position) {
-		return true;
 	}
 
 	public Filter getFilter() {
