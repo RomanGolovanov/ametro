@@ -77,10 +77,9 @@ public class Deserializer {
 		SubwayTransfer[] transfers = null;
 		HashMap<Integer, Point[]> pointsBySegmentId = null;
 
-		CsvReader csvReader = new CsvReader(new BufferedReader(new InputStreamReader(zipIn,ENCODING)));
-
 		ZipEntry zipEntry;
 		while( (zipEntry = zipIn.getNextEntry()) != null) {
+			CsvReader csvReader = new CsvReader(new BufferedReader(new InputStreamReader(zipIn,ENCODING)));
 			if (csvReader.next()) {
 				int version = csvReader.getInt(1);
 				String name = zipEntry.getName();

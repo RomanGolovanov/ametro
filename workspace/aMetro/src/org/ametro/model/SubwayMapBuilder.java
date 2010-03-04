@@ -29,6 +29,7 @@ import org.ametro.pmz.FilePackage;
 import org.ametro.pmz.GenericResource;
 import org.ametro.pmz.MapResource;
 import org.ametro.pmz.TransportResource;
+import org.ametro.util.ModelUtil;
 import org.ametro.util.SerializeUtil;
 
 import java.io.File;
@@ -391,50 +392,18 @@ public class SubwayMapBuilder {
 	}
 
 	private void fixDimensions(SubwayMap subwayMap) {
-		int xmin = Integer.MAX_VALUE;
-		int ymin = Integer.MAX_VALUE;
-		int xmax = Integer.MIN_VALUE;
-		int ymax = Integer.MIN_VALUE;
 
-		for (SubwayStation station : subwayMap.stations) {
-			Point p = station.point;
-			if (p != null) {
-				if (xmin > p.x)
-					xmin = p.x;
-				if (ymin > p.y)
-					ymin = p.y;
-
-				if (xmax < p.x)
-					xmax = p.x;
-				if (ymax < p.y)
-					ymax = p.y;
-			}
-			Rect r = station.rect;
-			if (r != null) {
-				if (xmin > r.left)
-					xmin = r.left;
-				if (ymin > r.top)
-					ymin = r.top;
-				if (xmin > r.right)
-					xmin = r.right;
-				if (ymin > r.bottom)
-					ymin = r.bottom;
-
-				if (xmax < r.left)
-					xmax = r.left;
-				if (ymax < r.top)
-					ymax = r.top;
-				if (xmax < r.right)
-					xmax = r.right;
-				if (ymax < r.bottom)
-					ymax = r.bottom;
-			}
-		}
-
+		Rect mapRect = ModelUtil.getDimensions(subwayMap.segments, subwayMap.stations);
+		
+		int xmin = mapRect.left;
+		int ymin = mapRect.top;
+		int xmax = mapRect.right;
+		int ymax = mapRect.bottom;
+		
 		int dx = 50 - xmin;
 		int dy = 50 - ymin;
 
-		for (SubwayStation station : subwayMap.stations) {
+		for (SubwayStation station : stations) {
 			Point p = station.point;
 			if (p != null) {
 				p.offset(dx, dy);
@@ -444,7 +413,7 @@ public class SubwayMapBuilder {
 				r.offset(dx, dy);
 			}
 		}
-		for (SubwaySegment segment : subwayMap.segments) {
+		for (SubwaySegment segment : segments) {
 			ArrayList<Point> points = pointsBySegmentId.get(segment.id);
 			if (points != null) {
 				for (Point point : points) {
@@ -457,7 +426,7 @@ public class SubwayMapBuilder {
 		subwayMap.width = xmax - xmin + 100;
 		subwayMap.height = ymax - ymin + 100;
 	}
-
+	
 	private void fillAdditionalLines(MapResource.MapAddiditionalLine al) {
 		if (al.mPoints == null)
 			return;
