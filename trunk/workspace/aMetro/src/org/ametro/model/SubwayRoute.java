@@ -151,4 +151,12 @@ public class SubwayRoute {
 	    }
 	}
 
+	public SubwayStation getStationFrom() {
+		return mSubwayMap.stations[mFromId];
+	}
+
+	public SubwayStation getStationTo() {
+		return mSubwayMap.stations[mToId];
+	}
+
 }

@@ -40,12 +40,81 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
-public class StationListAdapter implements ListAdapter  {
+public class StationListAdapter extends BaseAdapter implements Filterable {
 
+	public class StationFilter extends Filter
+	{
+		private class ResultContainer
+		{
+			public SubwayStation[] Stations; 
+			public Long[] Delays;
+		}
+		
+		protected FilterResults performFiltering(CharSequence constraint) {
+			FilterResults results = new FilterResults();
+
+			ArrayList<SubwayStation> stations = new ArrayList<SubwayStation>();
+			ArrayList<Long> delays = new ArrayList<Long>();
+			
+			final SubwayStation[] allStations = mStations;
+			final Long[] allDelays = mDelays;
+			final int length = allStations.length;
+			SubwayStation station;
+			Long delay = null;
+
+			final String text = constraint!=null ? constraint.toString().toLowerCase() : null; 
+			
+			for(int i = 0; i < length; i++){
+				station = allStations[i];
+				if(allDelays!=null){
+					delay = allDelays[i];
+				}
+				if(text==null || text.length()==0){
+					stations.add(station);
+					if(allDelays!=null){
+						delays.add(delay);
+					}
+				}else{
+					final String name = station.name.toLowerCase();
+					if(name.contains(text)){
+						stations.add(station);
+						if(allDelays!=null){
+							delays.add(delay);
+						}
+					}
+				}
+			}
+
+			ResultContainer container = new ResultContainer();
+			container.Stations = (SubwayStation[]) stations.toArray(new SubwayStation[stations.size()]);
+			if(allDelays!=null){
+				container.Delays = (Long[]) delays.toArray(new Long[delays.size()]);
+			}
+			results.values = container;
+			results.count = stations.size();
+			return results;
+		}
+
+		protected void publishResults(CharSequence constraint, FilterResults results) {
+			ResultContainer container = (ResultContainer)results.values;
+			mFilteredStations = container.Stations;
+			mFilteredDelays = container.Delays;
+            if (results.count > 0) {
+                notifyDataSetChanged();
+            } else {
+                notifyDataSetInvalidated();
+            }
+			
+		}
+		
+	}
+	
 	private static class ListItemWrapper
 	{
 		public final TextView Name;
@@ -61,48 +130,65 @@ public class StationListAdapter implements ListAdapter  {
 			view.setTag(this);
 		}
 	}	
+
 	
 	public StationListAdapter(Activity activity, ArrayList<SubwayStation> stations,SubwayMap map){
-		mLineDrawabled = new HashMap<SubwayLine, Drawable>();
-		mLines = map.lines;
-		mStations = (SubwayStation[]) stations.toArray(new SubwayStation[stations.size()]);
-		mDelays = null;
-		mContextActivity = activity;
-		mPaint = new Paint();
-		mPaint.setStyle(Style.FILL_AND_STROKE);
-		mPaint.setAntiAlias(true);
+		this(activity, stations,null,map);
 	}
 
 	public StationListAdapter(Activity activity, ArrayList<SubwayStation> stations, ArrayList<Long> delays, SubwayMap map){
+		this(activity
+			, (SubwayStation[]) stations.toArray(new SubwayStation[stations.size()])
+			, delays==null ? null : (Long[]) delays.toArray(new Long[delays.size()])
+			, map);
+	}
+
+	public StationListAdapter(Activity activity, SubwayStation[] stations, SubwayMap map){
+		this(activity, stations, null, map);
+	}
+
+	public StationListAdapter(Activity activity, SubwayStation[] stations, Long[] delays, SubwayMap map){
 		mLineDrawabled = new HashMap<SubwayLine, Drawable>();
 		mLines = map.lines;
-		mStations = (SubwayStation[]) stations.toArray(new SubwayStation[stations.size()]);
-		mDelays = (Long[]) delays.toArray(new Long[delays.size()]);
+		mStations = stations;// (SubwayStation[]) stations.toArray(new SubwayStation[stations.size()]);
+		mDelays = delays;// (Long[]) delays.toArray(new Long[delays.size()]);
 		mContextActivity = activity;
 		mPaint = new Paint();
 		mPaint.setStyle(Style.FILL_AND_STROKE);
 		mPaint.setAntiAlias(true);
+		mFilteredStations = mStations;
+		mFilteredDelays = mDelays;
+		mSubwayMap = map;
 	}
-
 	
+	private final SubwayMap mSubwayMap;
 	private final Activity mContextActivity;
-	private final SubwayStation[] mStations;
-	private final Long[] mDelays;
+	private final HashMap<SubwayLine, Drawable> mLineDrawabled;
 	private final SubwayLine[] mLines;
 	private final Paint mPaint;
 	
-	private final HashMap<SubwayLine, Drawable> mLineDrawabled;
+	private final SubwayStation[] mStations;
+	private final Long[] mDelays;
+	
+	private SubwayStation[] mFilteredStations;
+	private Long[] mFilteredDelays;
+	
 
 	public int getCount() {
-		return mStations.length;
+		return mFilteredStations.length;
 	}
 
+	public static String getStationName(SubwayMap map, SubwayStation station){
+		return station.name + " (" + map.lines[station.lineId].name + ")";
+		
+	}
+	
 	public Object getItem(int position) {
-		return mStations[position];
+		return getStationName(mSubwayMap, mFilteredStations[position]);
 	}
 
 	public long getItemId(int position) {
-		return mStations[position].id;
+		return mFilteredStations[position].id;
 	}
 
 	public int getItemViewType(int position) {
@@ -122,12 +208,12 @@ public class StationListAdapter implements ListAdapter  {
 			wrapper = (ListItemWrapper)view.getTag();
 		}
 
-		final SubwayStation station = mStations[position];
+		final SubwayStation station = mFilteredStations[position];
 		final SubwayLine line = mLines[station.lineId]; 
 		wrapper.Name.setText(station.name);
 		wrapper.Line.setText(line.name);
-		if(mDelays!=null){
-			wrapper.Delay.setText(DateUtil.getLongTime(mDelays[position]));
+		if(mFilteredDelays!=null){
+			wrapper.Delay.setText(DateUtil.getLongTime(mFilteredDelays[position]));
 		}else{
 			wrapper.Delay.setText("");
 		}
@@ -138,7 +224,7 @@ public class StationListAdapter implements ListAdapter  {
 	private Drawable getLineIcon(SubwayLine line) {
 		Drawable dw = mLineDrawabled.get(line);
 		if(dw == null){
-			Bitmap bmp = Bitmap.createBitmap(30, 50, Config.RGB_565);
+			Bitmap bmp = Bitmap.createBitmap(30, 50, Config.ARGB_8888);
 			Canvas c = new Canvas(bmp);
 			mPaint.setColor(line.color);
 			c.drawCircle(15, 25, 7, mPaint);
@@ -157,7 +243,7 @@ public class StationListAdapter implements ListAdapter  {
 	}
 
 	public boolean isEmpty() {
-		return mStations == null || mStations.length == 0;
+		return mFilteredStations == null || mFilteredStations.length == 0;
 	}
 
 	public void registerDataSetObserver(DataSetObserver arg0) {
@@ -172,6 +258,10 @@ public class StationListAdapter implements ListAdapter  {
 
 	public boolean isEnabled(int position) {
 		return true;
+	}
+
+	public Filter getFilter() {
+		return new StationFilter();
 	}
 	
 	

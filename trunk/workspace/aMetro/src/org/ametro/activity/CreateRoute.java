@@ -21,10 +21,8 @@
 
 package org.ametro.activity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.ametro.R;
+import org.ametro.adapter.StationListAdapter;
 import org.ametro.model.SubwayMap;
 import org.ametro.model.SubwayRoute;
 import org.ametro.model.SubwayStation;
@@ -41,7 +39,6 @@ import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.view.animation.Animation.AnimationListener;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Toast;
@@ -81,20 +78,22 @@ public class CreateRoute extends Activity implements OnClickListener,
 		mFromText = (AutoCompleteTextView) findViewById(R.id.create_route_from_text);
 		mToText = (AutoCompleteTextView) findViewById(R.id.create_route_to_text);
 
-		List<String> stations = new ArrayList<String>();
 		mSubwayMap = BrowseVectorMap.Instance.getSubwayMap();
-		SubwayStation[] data = mSubwayMap.stations;
-		for (SubwayStation station : data) {
-			stations.add(station.name + " ("
-					+ mSubwayMap.getLine(station.lineId).name + ")");
+		
+		mFromText.setAdapter(new StationListAdapter(this, mSubwayMap.stations, mSubwayMap));
+		mToText.setAdapter(new StationListAdapter(this, mSubwayMap.stations, mSubwayMap));
+		
+
+		final SubwayRoute route = BrowseVectorMap.Instance.getNavigationRoute();
+		if(route!=null){
+			SubwayStation fromStation = route.getStationFrom();
+			SubwayStation toStation = route.getStationTo();
+			mFromText.setText( StationListAdapter.getStationName(mSubwayMap, fromStation) );
+			mToText.setText( StationListAdapter.getStationName(mSubwayMap, toStation) );
+			mFromText.setSelectAllOnFocus(true);
+			mToText.setSelectAllOnFocus(true);
 		}
-
-		ArrayAdapter<String> stationNameAdapter = new ArrayAdapter<String>(
-				this, android.R.layout.simple_dropdown_item_1line, stations);
-
-		mFromText.setAdapter(stationNameAdapter);
-		mToText.setAdapter(stationNameAdapter);
-
+		
 	}
 
 	protected void onStop() {
@@ -113,8 +112,7 @@ public class CreateRoute extends Activity implements OnClickListener,
 			mSwapButton.requestFocus();
 		}
 		if (v == mCreateButton) {
-			SubwayStation from = getStationByName(mFromText.getText()
-					.toString());
+			SubwayStation from = getStationByName(mFromText.getText().toString());
 			SubwayStation to = getStationByName(mToText.getText().toString());
 			if (from != null && to != null) {
 				mCreateRouteTask = new CreateRouteTask();
