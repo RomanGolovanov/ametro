@@ -18,26 +18,17 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
+package org.ametro.adapter;
 
-package org.ametro.activity;
-
-import org.ametro.adapter.RouteListViewAdapter;
 import org.ametro.model.SubwayMap;
 import org.ametro.model.SubwayRoute;
 
-import android.app.ListActivity;
-import android.os.Bundle;
-import android.widget.ListAdapter;
+import android.app.Activity;
 
-public class BrowseRoute extends ListActivity {
+public class RouteListViewAdapter extends StationListAdapter {
 
-	
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        SubwayMap map = BrowseVectorMap.Instance.getSubwayMap();
-        SubwayRoute route = BrowseVectorMap.Instance.getNavigationRoute();
-        ListAdapter adapter = new RouteListViewAdapter(this, route, map);
-        this.setListAdapter(adapter);
-        
-    }
+	public RouteListViewAdapter(Activity activity, SubwayRoute route, SubwayMap map) {
+		super(activity, route.getStations(), route.getDelays(), map);
+	}
+
 }
