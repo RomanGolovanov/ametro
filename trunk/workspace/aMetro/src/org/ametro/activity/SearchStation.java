@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import org.ametro.adapter.StationListAdapter;
 import org.ametro.model.SubwayMap;
 import org.ametro.model.SubwayStation;
 
@@ -32,7 +33,6 @@ import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -79,7 +79,8 @@ public class SearchStation extends ListActivity {
 				for(SubwayStation station : mStationList){
 						stationNamesList.add(station.name + " (" + map.getLine(station.lineId).name + ")");
 				}
-				this.setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, stationNamesList));
+				//this.setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, stationNamesList));
+				this.setListAdapter(new StationListAdapter(this, mStationList, map));
 			}else{
 				BrowseVectorMap.Instance.setNavigationStations(mStationList);
 				BrowseVectorMap.Instance.setCurrentStation(mStationList.get(0));

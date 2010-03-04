@@ -80,10 +80,10 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		if(src == mNavigateClearButton){
 			setNavigationStations(null);
 		}
-		if(src == mNavigateListButton){
-
+		if(src == mNavigateListButton && mRoute!=null){
+			startActivity(new Intent(this, BrowseRoute.class));
 		}
-		if(src == mNavigateListButton){
+		if(src == mNavigateListButton && mRoute == null && mNavigationStations!=null){
 			startActivity(new Intent(this, SearchStation.class));
 		}
 	}
@@ -365,9 +365,9 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		}
 	}
 
-	/*package*/ ArrayList<SubwaySegment> getNavigationRoute()
+	/*package*/ SubwayRoute getNavigationRoute()
 	{
-		return mNavigationSegments;
+		return mRoute;
 	}
 
 	/*package*/ void setNavigationRoute(SubwayRoute route){
@@ -511,8 +511,6 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 					showZoom();
 				}
 				delayZoom();
-				//setSelectedStations(null);
-				//Toast.makeText(BrowseVectorMap.this, "click", 200).show();
 			}
 
 			public void onMove(int newx, int newy, int oldx, int oldy) {
@@ -520,21 +518,18 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 					showZoom();
 				}
 				delayZoom();
-				//Toast.makeText(BrowseVectorMap.this, "move " + (newx-oldy) + "x" + (newy-oldy) , 200).show();
 			}
 
 			public void onLongClick(int x, int y) {
 			}
 		});
 
-		mZoomControls
-		.setOnZoomInClickListener(new View.OnClickListener() {
+		mZoomControls.setOnZoomInClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				BrowseVectorMap.this.onZoomIn();
 			}
 		});
-		mZoomControls
-		.setOnZoomOutClickListener(new View.OnClickListener() {
+		mZoomControls.setOnZoomOutClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				BrowseVectorMap.this.onZoomOut();
 			}

@@ -17,7 +17,9 @@ public class SubwayRoute {
 
 	private ArrayList<SubwaySegment> mSegments;
 	private ArrayList<SubwayStation> mStations;
-	private HashMap<SubwayStation,Long> mStationDelays;
+	private HashMap<SubwayStation,Long> mStationToDelay;
+	private ArrayList<Long> mDelays;
+	
 	private long mTime;
 	private boolean mHasRoute;
 	private Rect mRect;
@@ -46,12 +48,12 @@ public class SubwayRoute {
 		mToId = toId;
 		mSegments = null;
 		mStations = null;
-		mStationDelays = null;
+		mStationToDelay = null;
 		mHasRoute = false;
 	}
 
 	public long getStationDelay(SubwayStation station){
-		Long delay = mStationDelays.get(station);
+		Long delay = mStationToDelay.get(station);
 		if(delay!=null){
 			return delay;
 		}
@@ -64,6 +66,14 @@ public class SubwayRoute {
 		}
 		return mStations;
 	}
+	
+	public ArrayList<Long> getDelays() {
+		if (mSegments == null) {
+			findRoute();
+		}
+		return mDelays;
+	}
+
 	
 	public ArrayList<SubwaySegment> getSegments() {
 		if (mSegments == null) {
@@ -96,7 +106,8 @@ public class SubwayRoute {
 	    int[] pred = new int[count];
 	    ArrayList<SubwaySegment> segments = new ArrayList<SubwaySegment>();
 	    ArrayList<SubwayStation> stations = new ArrayList<SubwayStation>();
-	    HashMap<SubwayStation, Long> stationDelays = new HashMap<SubwayStation, Long>();
+	    ArrayList<Long> delays = new ArrayList<Long>();
+	    HashMap<SubwayStation, Long> stationToDelay = new HashMap<SubwayStation, Long>();
 	    DijkstraHeap.dijkstra(g, mFromId, distances, pred);
 		
 	    int to = mToId;
@@ -104,7 +115,8 @@ public class SubwayRoute {
 	    mTime = distances[to];
 	    SubwayStation st = map.stations[to];
 	    stations.add(st);
-	    stationDelays.put(st, distances[to]);
+	    delays.add(distances[to]);
+	    stationToDelay.put(st, distances[to]);
 	    while( from!=-1 ){
 	    	SubwaySegment seg = map.getSegment(from, to);
 	    	if(seg!=null){
@@ -115,7 +127,8 @@ public class SubwayRoute {
 	    	
     		st = map.stations[to];
 		    stations.add(st);
-		    stationDelays.put(st, distances[to]);
+		    delays.add(distances[to]);
+		    stationToDelay.put(st, distances[to]);
 	    	
 	    }
 	    
@@ -123,7 +136,9 @@ public class SubwayRoute {
 	    	mSegments = segments;
     		Collections.reverse(stations);
 	    	mStations = stations;
-	    	mStationDelays = stationDelays;
+    		Collections.reverse(delays);
+    		mDelays = delays;
+	    	mStationToDelay = stationToDelay;
 	    	mHasRoute = true;
 	    	mRect = ModelUtil.getDimensions(
 	    			(SubwaySegment[]) segments.toArray(new SubwaySegment[segments.size()]), 
