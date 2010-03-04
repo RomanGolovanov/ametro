@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.HashMap;
 
 import org.ametro.algorithm.DijkstraHeap;
+import org.ametro.util.ModelUtil;
+
+import android.graphics.Rect;
 
 public class SubwayRoute {
 
@@ -17,6 +20,7 @@ public class SubwayRoute {
 	private HashMap<SubwayStation,Long> mStationDelays;
 	private long mTime;
 	private boolean mHasRoute;
+	private Rect mRect;
 
 	public long getTime(){
 		return mTime;
@@ -27,6 +31,13 @@ public class SubwayRoute {
 			findRoute();
 		}
 		return mHasRoute;
+	}
+	
+	public Rect getRect(){
+		if(mSegments == null){
+			findRoute();
+		}
+		return mRect;
 	}
 	
 	public SubwayRoute(SubwayMap map, int fromId, int toId) {
@@ -114,10 +125,14 @@ public class SubwayRoute {
 	    	mStations = stations;
 	    	mStationDelays = stationDelays;
 	    	mHasRoute = true;
+	    	mRect = ModelUtil.getDimensions(
+	    			(SubwaySegment[]) segments.toArray(new SubwaySegment[segments.size()]), 
+	    			(SubwayStation[]) stations.toArray(new SubwayStation[stations.size()]));
 	    }else{
 	    	mHasRoute = false;
 	    	mSegments = null;
 	    	mStations = null;
+	    	mRect = null;
 	    }
 	}
 

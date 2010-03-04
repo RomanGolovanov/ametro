@@ -21,6 +21,8 @@
 
 package org.ametro.util;
 
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.util.Log;
 import org.ametro.MapSettings;
 import org.ametro.model.City;
@@ -28,6 +30,7 @@ import org.ametro.model.StationAddon;
 import org.ametro.model.SubwayLine;
 import org.ametro.model.SubwayMap;
 import org.ametro.model.SubwayMapBuilder;
+import org.ametro.model.SubwaySegment;
 import org.ametro.model.SubwayStation;
 import org.ametro.pmz.FilePackage;
 import org.ametro.pmz.GenericResource;
@@ -48,6 +51,49 @@ import static org.ametro.Constants.LOG_TAG_MAIN;
  */
 public class ModelUtil {
 
+	public static Rect getDimensions(SubwaySegment[] segments, SubwayStation stations[]) {
+		int xmin = Integer.MAX_VALUE;
+		int ymin = Integer.MAX_VALUE;
+		int xmax = Integer.MIN_VALUE;
+		int ymax = Integer.MIN_VALUE;
+
+		for (SubwayStation station : stations) {
+			Point p = station.point;
+			if (p != null) {
+				if (xmin > p.x)
+					xmin = p.x;
+				if (ymin > p.y)
+					ymin = p.y;
+
+				if (xmax < p.x)
+					xmax = p.x;
+				if (ymax < p.y)
+					ymax = p.y;
+			}
+			Rect r = station.rect;
+			if (r != null) {
+				if (xmin > r.left)
+					xmin = r.left;
+				if (ymin > r.top)
+					ymin = r.top;
+				if (xmin > r.right)
+					xmin = r.right;
+				if (ymin > r.bottom)
+					ymin = r.bottom;
+
+				if (xmax < r.left)
+					xmax = r.left;
+				if (ymax < r.top)
+					ymax = r.top;
+				if (xmax < r.right)
+					xmax = r.right;
+				if (ymax < r.bottom)
+					ymax = r.bottom;
+			}
+		}
+		return new Rect(xmin, ymin, xmax, ymax);
+	}
+	
 	public static City indexPmz(String fileName) throws IOException {
 		Date startTimestamp = new Date();
 		City model = new City();

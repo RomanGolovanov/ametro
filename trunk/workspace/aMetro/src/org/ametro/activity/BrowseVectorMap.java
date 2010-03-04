@@ -105,6 +105,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		setContentView(R.layout.global_wait);
 
 		if(mSubwayMap!=null){
+			
 			onShowMap(mSubwayMap);
 		}else{
 			Intent intent = getIntent();
