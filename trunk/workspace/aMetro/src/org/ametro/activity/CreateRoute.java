@@ -30,6 +30,7 @@ import org.ametro.util.DateUtil;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -41,6 +42,7 @@ import android.view.animation.TranslateAnimation;
 import android.view.animation.Animation.AnimationListener;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class CreateRoute extends Activity implements OnClickListener,
@@ -54,6 +56,9 @@ public class CreateRoute extends Activity implements OnClickListener,
 	private Button mSwapButton;
 	private Button mCreateButton;
 
+	private ImageButton mFromButton;
+	private ImageButton mToButton;
+	
 	private CreateRouteTask mCreateRouteTask;
 
 	private View mPanel;
@@ -61,6 +66,9 @@ public class CreateRoute extends Activity implements OnClickListener,
 
 	private boolean mExitPending;
 
+	private final static int REQUEST_STATION_FROM = 1; 
+	private final static int REQUEST_STATION_TO = 2; 
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.create_route);
@@ -72,8 +80,13 @@ public class CreateRoute extends Activity implements OnClickListener,
 		mSwapButton = (Button) findViewById(R.id.create_route_swap_button);
 		mCreateButton = (Button) findViewById(R.id.create_route_create_button);
 
+		mFromButton = (ImageButton) findViewById(R.id.create_route_from_button);
+		mToButton = (ImageButton) findViewById(R.id.create_route_to_button);
+		
 		mSwapButton.setOnClickListener(this);
 		mCreateButton.setOnClickListener(this);
+		mFromButton.setOnClickListener(this);
+		mToButton.setOnClickListener(this);
 
 		mFromText = (AutoCompleteTextView) findViewById(R.id.create_route_from_text);
 		mToText = (AutoCompleteTextView) findViewById(R.id.create_route_to_text);
@@ -94,6 +107,7 @@ public class CreateRoute extends Activity implements OnClickListener,
 			mToText.setSelectAllOnFocus(true);
 		}
 		
+		
 	}
 
 	protected void onStop() {
@@ -104,7 +118,47 @@ public class CreateRoute extends Activity implements OnClickListener,
 		super.onStop();
 	}
 
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		switch(requestCode){
+		case REQUEST_STATION_FROM:
+			if(resultCode == RESULT_OK){
+				int id = data.getIntExtra(SelectStation.STATION_ID, -1);
+				if(id!=-1){
+					SubwayStation station = mSubwayMap.stations[id];
+					mFromText.setText( StationListAdapter.getStationName(mSubwayMap, station) );				
+				}
+			}
+			break;
+		case REQUEST_STATION_TO:
+			if(resultCode == RESULT_OK){
+				int id = data.getIntExtra(SelectStation.STATION_ID, -1);
+				if(id!=-1){
+					SubwayStation station = mSubwayMap.stations[id];
+					mToText.setText( StationListAdapter.getStationName(mSubwayMap, station) );				
+				}
+			}
+			break;
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+	
 	public void onClick(View v) {
+		if(v==mFromButton){
+			Intent data = new Intent(this, SelectStation.class);
+			SubwayStation from = getStationByName(mFromText.getText().toString());
+			if(from!=null){
+				data.putExtra(SelectStation.STATION_ID, from.id);
+			}
+			startActivityForResult(data, REQUEST_STATION_FROM);
+		}
+		if(v==mToButton){
+			Intent data = new Intent(this, SelectStation.class);
+			SubwayStation to = getStationByName(mToText.getText().toString());
+			if(to!=null){
+				data.putExtra(SelectStation.STATION_ID, to.id);
+			}
+			startActivityForResult(data, REQUEST_STATION_TO);
+		}
 		if (v == mSwapButton) {
 			Editable swap = mFromText.getText();
 			mFromText.setText(mToText.getText());

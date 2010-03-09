@@ -46,9 +46,17 @@ public class About extends Activity {
         try {
             PackageManager manager = getPackageManager();
             PackageInfo info = manager.getPackageInfo(getPackageName(), 0);
-            Spanned text = Html.fromHtml(String.format(
-            		getString(R.string.text_about),
-            		info.versionName));
+            StringBuilder htmlText = new StringBuilder( String.format(getString(R.string.text_about),info.versionName) );
+            
+            String[] versionChanges = getResources().getStringArray(R.array.version_changelog);
+            htmlText.append("<p>");
+            for(int i = versionChanges.length-1; i >= 0; i--){
+            	String chages = versionChanges[i];
+            	htmlText.append(chages);
+            	htmlText.append("<br/>");
+            }
+        	htmlText.append("</p>");
+            Spanned text = Html.fromHtml(htmlText.toString());
             SpannableStringBuilder spannable = new SpannableStringBuilder(text);
             Linkify.addLinks(spannable, Linkify.EMAIL_ADDRESSES | Linkify.WEB_URLS);
             view.setText( spannable );

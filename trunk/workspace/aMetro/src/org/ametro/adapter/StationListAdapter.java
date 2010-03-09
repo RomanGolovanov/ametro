@@ -183,6 +183,10 @@ public class StationListAdapter extends BaseAdapter implements Filterable {
 		return getStationName(mSubwayMap, mFilteredStations[position]);
 	}
 
+	public SubwayStation getStation(int position){
+		return mFilteredStations[position];
+	}
+	
 	public long getItemId(int position) {
 		return mFilteredStations[position].id;
 	}
