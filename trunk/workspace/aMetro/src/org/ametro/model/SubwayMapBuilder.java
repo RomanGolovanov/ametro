@@ -226,9 +226,22 @@ public class SubwayMapBuilder {
 						toDelay = null;
 
 						thisStation = toStation;
+						toStation = null;
+						
+						if(!tStations.hasNext()){
+							if (fromStation != null && getSegment(line, thisStation, fromStation) == null) {
+								if (fromDelay == null) {
+									SubwaySegment opposite = getSegment(line, fromStation, thisStation);
+									fromDelay = opposite != null ? opposite.delay : null;
+								}
+								addSegment(line, thisStation, fromStation, fromDelay);
+							}							
+						}
 					}
 
 				} while (tStations.hasNext());
+				
+				
 			}
 		}
 
