@@ -32,4 +32,6 @@ public class Constants {
     
 	public static final int DEFAULT_BUFFER_SIZE = 8196;
 
+	public static final String PREFERENCE_NAME = "aMetro";
+
 }

@@ -30,6 +30,7 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import org.ametro.Constants;
 import org.ametro.MapSettings;
 import org.ametro.MapUri;
 import org.ametro.R;
@@ -41,6 +42,7 @@ import org.ametro.model.SubwaySegment;
 import org.ametro.model.SubwayStation;
 import org.ametro.util.DateUtil;
 import org.ametro.util.SerializeUtil;
+import org.ametro.util.StringUtil;
 import org.ametro.widget.VectorMapView;
 import org.ametro.widget.BaseMapView.OnMapEventListener;
 
@@ -231,19 +233,19 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	}
 	
     public void loadDefaultMapName(){
-        SharedPreferences preferences = getSharedPreferences("aMetro", 0);
+        SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
         mMapName = preferences.getString(PREFERENCE_PACKAGE_FILE_NAME, null);
     }
 
     public void saveDefaultMapName() {
-        SharedPreferences preferences = getSharedPreferences("aMetro", 0);
+        SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(PREFERENCE_PACKAGE_FILE_NAME, mMapName);
         editor.commit();
     }
 
     public void clearDefaultMapName() {
-        SharedPreferences preferences = getSharedPreferences("aMetro", 0);
+        SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
         SharedPreferences.Editor editor = preferences.edit();
         editor.remove(PREFERENCE_PACKAGE_FILE_NAME);
         editor.commit();
@@ -251,16 +253,18 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
     }
 
     public void saveScrollPosition(PointF position) {
-        SharedPreferences preferences = getSharedPreferences("aMetro", 0);
+        SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
         SharedPreferences.Editor editor = preferences.edit();
-        String scrollPosition = "" + position.x + "," + position.y;
+        String scrollPosition = StringUtil.formatPointF(position);
         editor.putString(PREFERENCE_SCROLL_POSITION + "_" + mMapName, scrollPosition);
         editor.commit();
-
+		if (Log.isLoggable(LOG_TAG_MAIN, Log.DEBUG)){
+			Log.d(LOG_TAG_MAIN, getString(R.string.log_save_map_position) + scrollPosition);
+		}
     }
 
     public PointF loadScrollPosition() {
-        SharedPreferences preferences = getSharedPreferences("aMetro", 0);
+        SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
         String pref = preferences.getString(PREFERENCE_SCROLL_POSITION + "_" + mMapName, null);
         if (pref != null) {
             return SerializeUtil.parsePointF(pref);
@@ -271,7 +275,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 
     public void clearScrollPosition(String mapName) {
         if (mapName != null) {
-            SharedPreferences preferences = getSharedPreferences("aMetro", 0);
+            SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
             SharedPreferences.Editor editor = preferences.edit();
             editor.remove(PREFERENCE_SCROLL_POSITION + "_" + mapName);
             editor.commit();
@@ -279,15 +283,17 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
     }
 
     public void saveZoom(int zoomLevel) {
-        SharedPreferences preferences = getSharedPreferences("aMetro", 0);
+        SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(PREFERENCE_ZOOM_LEVEL + "_" + mMapName, Integer.toString(zoomLevel));
         editor.commit();
-
+		if (Log.isLoggable(LOG_TAG_MAIN, Log.DEBUG)){
+			Log.d(LOG_TAG_MAIN, getString(R.string.log_save_map_zoom) + zoomLevel);
+		}
     }
 
     public Integer loadZoom() {
-        SharedPreferences preferences = getSharedPreferences("aMetro", 0);
+        SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
         String pref = preferences.getString(PREFERENCE_ZOOM_LEVEL + "_" + mMapName, null);
         if (pref != null) {
             return SerializeUtil.parseNullableInteger(pref);
@@ -298,7 +304,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 
     public void clearZoom(String mapName) {
         if (mapName != null) {
-            SharedPreferences preferences = getSharedPreferences("aMetro", 0);
+            SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
             SharedPreferences.Editor editor = preferences.edit();
             editor.remove(PREFERENCE_ZOOM_LEVEL + "_" + mapName);
             editor.commit();
@@ -394,10 +400,6 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		if (mSubwayMap != null && mMapView != null && mMapName != null) {
 			PointF pos = mMapView.getModelScrollCenter();
 			int zoom = mZoom;
-			if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO))
-				Log.i(LOG_TAG_MAIN, "Saved map zoom " + zoom);
-			if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO))
-				Log.i(LOG_TAG_MAIN, "Save map position at " + pos.x + "x" + pos.y);
 			saveScrollPosition(pos);
 			saveZoom(zoom);
 		}
@@ -409,7 +411,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			Integer zoom = loadZoom();
 			if (zoom != null) {
 				if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO))
-					Log.i(LOG_TAG_MAIN, "Use saved map zoom " + zoom);
+					Log.i(LOG_TAG_MAIN, getString(R.string.log_restore_map_zoom) + zoom);
 				setZoom(zoom);
 			} else {
 				zoom = MIN_ZOOM_LEVEL;
@@ -427,20 +429,20 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 					zoom++;
 				}
 				if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO))
-					Log.i(LOG_TAG_MAIN, "Use minimal map zoom " + zoom);
+					Log.i(LOG_TAG_MAIN, getString(R.string.log_default_map_zoom) + zoom);
 				setZoom(zoom);
 			}
 			PointF pos = loadScrollPosition();
 			if (pos != null) {
 				if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO))
-					Log.i(LOG_TAG_MAIN, "Use saved map position at " + pos.x
+					Log.i(LOG_TAG_MAIN, getString(R.string.log_restore_map_position) + pos.x
 							+ "x" + pos.y);
 				mMapView.setModelScrollCenter(pos);
 			} else {
 				int x = mSubwayMap.width / 2;
 				int y = mSubwayMap.height / 2;
 				if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO))
-					Log.i(LOG_TAG_MAIN, "Use default map position at " + x
+					Log.i(LOG_TAG_MAIN, getString(R.string.log_default_map_position) + x
 							+ "x" + y);
 				mMapView.setModelScrollCenter(new PointF(x, y));
 			}
@@ -468,8 +470,8 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	private void onShowMap(SubwayMap subwayMap) {
 		mSubwayMap = subwayMap;
 		if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO))
-			Log.i(LOG_TAG_MAIN, "Loaded subwayMap " + mSubwayMap.mapName
-					+ " width size " + mSubwayMap.width + "x"
+			Log.i(LOG_TAG_MAIN, getString(R.string.log_loaded_subway_map) + mSubwayMap.mapName
+					+ getString(R.string.log_with_size) + mSubwayMap.width + "x"
 					+ mSubwayMap.height);
 
 		setContentView(R.layout.browse_vector_map_main);
@@ -498,7 +500,6 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 
 		mMapName = mSubwayMap.mapName;
 		onRestoreMapState();
-		onUpdateTitle();
 		bindMapEvents();
 		mMapView.requestFocus();
 		saveDefaultMapName();
@@ -545,15 +546,6 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			}
 		};
 
-	}
-
-	private void onUpdateTitle() {
-		if (mSubwayMap == null) {
-			setTitle(R.string.app_name);
-		} else {
-			setTitle(String.format("%s - %s", getString(R.string.app_name),
-					mSubwayMap.cityName));
-		}
 	}
 
 	private void onZoomIn() {
@@ -658,7 +650,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			} catch (Exception e) {
 				mError = e;
 				if (Log.isLoggable(LOG_TAG_MAIN, Log.ERROR))
-					Log.e(LOG_TAG_MAIN, "Failed model loading", e);
+					Log.e(LOG_TAG_MAIN, getString(R.string.log_failed_map_loading), e);
 				return null;
 			}
 		}
@@ -675,7 +667,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 				clearDefaultMapName();
 				if (mError != null) {
 					Toast.makeText(BrowseVectorMap.this,
-							"Error map loading: " + mError.toString(),
+							getString(R.string.msg_error_map_loading) + mError.toString(),
 							Toast.LENGTH_SHORT).show();
 				}
 

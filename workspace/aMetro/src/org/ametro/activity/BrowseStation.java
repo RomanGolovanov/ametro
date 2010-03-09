@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.ametro.MapSettings;
+import org.ametro.R;
 import org.ametro.model.Deserializer;
 import org.ametro.model.StationAddon;
 import org.ametro.model.SubwayStation;
@@ -50,16 +51,16 @@ public class BrowseStation extends Activity {
 		try {
 			mStationAddon = Deserializer.tryDeserializeAddon(station, new FileInputStream(mapFileName));
 		} catch (FileNotFoundException e) {
-			Toast.makeText(this, "No addon for station", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, getString(R.string.msg_no_addons), Toast.LENGTH_SHORT).show();
 			finish();
 			return;
 		} catch (IOException e) {
-			Toast.makeText(this, "Addon corrupted", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, getString(R.string.msg_addon_corrupted), Toast.LENGTH_SHORT).show();
 			finish();
 			return;
 		}
 		if(mStationAddon==null){
-			Toast.makeText(this, "No addon for station", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, getString(R.string.msg_no_addons), Toast.LENGTH_SHORT).show();
 			finish();
 			return;
 		}

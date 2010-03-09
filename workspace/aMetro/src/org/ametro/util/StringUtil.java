@@ -29,6 +29,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import android.graphics.Point;
+import android.graphics.PointF;
 import android.graphics.Rect;
 
 /**
@@ -201,7 +202,11 @@ public class StringUtil {
 	public static String formatPoint(Point point) {
 		return point.x + "," + point.y;
 	}
-    
+
+	public static String formatPointF(PointF point) {
+		return point.x + "," + point.y;
+	}
+	
     public static <T> String join(Collection<T> objs, String delimiter) {
         StringBuilder builder = new StringBuilder();
 

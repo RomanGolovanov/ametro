@@ -588,17 +588,8 @@ public abstract class BaseMapView extends ScrollView {
     private static final int TOUCH_DRAG_MODE = 3;
     private static final int TOUCH_SHORTPRESS_START_MODE = 4;
     private static final int TOUCH_SHORTPRESS_MODE = 5;
-    private static final int TOUCH_DOUBLECLICK_MODE = 6;
     private static final int TOUCH_DONE_MODE = 7;
-    private static final int TOUCH_SELECT_MODE = 8;
 
-    // touch mode values specific to scale+scroll
-    private static final int FIRST_SCROLL_ZOOM = 9;
-    private static final int SCROLL_ZOOM_ANIMATION_IN = 9;
-    private static final int SCROLL_ZOOM_ANIMATION_OUT = 10;
-    private static final int SCROLL_ZOOM_OUT = 11;
-    private static final int LAST_SCROLL_ZOOM = 11;
-    // end of touch mode values specific to scale+scroll
 
     // This should be ViewConfiguration.getTapTimeout()
     // But system time out is 100ms, which is too short for the browser.

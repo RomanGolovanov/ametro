@@ -230,10 +230,10 @@ public class CreateRoute extends Activity implements OnClickListener,
 			mWaitDialog.dismiss();
 			if (result.hasRoute()) {
 				BrowseVectorMap.Instance.setNavigationRoute(result);
-				String msg = "Trip time is " + DateUtil.getLongTime(result.getTime());
+				String msg = getString(R.string.msg_route_time) + DateUtil.getLongTime(result.getTime());
 				Toast.makeText(BrowseVectorMap.Instance, msg, Toast.LENGTH_LONG).show();
 			} else {
-				Toast.makeText(BrowseVectorMap.Instance, "Not found",
+				Toast.makeText(BrowseVectorMap.Instance, getString(R.string.msg_route_not_found),
 						Toast.LENGTH_SHORT).show();
 				BrowseVectorMap.Instance.setNavigationRoute(null);
 			}
