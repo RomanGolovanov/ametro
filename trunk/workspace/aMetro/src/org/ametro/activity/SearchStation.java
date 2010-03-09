@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import org.ametro.R;
 import org.ametro.adapter.StationListAdapter;
 import org.ametro.model.SubwayMap;
 import org.ametro.model.SubwayStation;
@@ -79,7 +80,6 @@ public class SearchStation extends ListActivity {
 				for(SubwayStation station : mStationList){
 						stationNamesList.add(station.name + " (" + map.getLine(station.lineId).name + ")");
 				}
-				//this.setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, stationNamesList));
 				this.setListAdapter(new StationListAdapter(this, mStationList, map));
 			}else{
 				BrowseVectorMap.Instance.setNavigationStations(mStationList);
@@ -88,7 +88,7 @@ public class SearchStation extends ListActivity {
 			}
 		}else{
 			BrowseVectorMap.Instance.setNavigationStations(null);
-			Toast.makeText(this, "Not found", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, getString(R.string.msg_station_not_found), Toast.LENGTH_SHORT).show();
 			finish();
 		}
 	}

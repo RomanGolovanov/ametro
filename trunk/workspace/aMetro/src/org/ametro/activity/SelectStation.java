@@ -49,8 +49,12 @@ public class SelectStation extends ListActivity {
 	private ArrayList<SubwayStation> mStations;
 	private StationListAdapter mAdapter;
 	
-	private boolean mSortByName;
+	private static boolean mSortByName;
 	private int mSelection;
+	
+	static{
+		mSortByName = true;
+	}
 	
 	private class NameComparator implements Comparator<SubwayStation>
 	{
@@ -62,7 +66,8 @@ public class SelectStation extends ListActivity {
 	private class LineComparator implements Comparator<SubwayStation>
 	{
 		public int compare(SubwayStation left, SubwayStation right) {
-			return mMap.lines[left.lineId].name.compareTo(mMap.lines[right.lineId].name);
+			int lineCompare = mMap.lines[left.lineId].name.compareTo(mMap.lines[right.lineId].name);
+			return (lineCompare!=0) ? lineCompare : left.name.compareTo(right.name); 
 		}
 	}	
 	
@@ -97,7 +102,6 @@ public class SelectStation extends ListActivity {
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
 		mSelection = -1;
 		Intent data = getIntent();
 		if(data!=null){
@@ -106,16 +110,12 @@ public class SelectStation extends ListActivity {
 				mSelection = id;
 			}
 		}
-		
 		mMap = BrowseVectorMap.Instance.getSubwayMap();
 		mStations = new ArrayList<SubwayStation>( mMap.stations.length );
 		for(SubwayStation station : mMap.stations){
 			mStations.add(station);
 		}
-		updateSortOrder(true);
-		
-		
-		
+		updateSortOrder(mSortByName);
 	}
 	
 	protected void onListItemClick(ListView l, View v, int position, long id) {

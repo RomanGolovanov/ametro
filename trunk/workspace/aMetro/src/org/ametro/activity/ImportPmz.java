@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.ametro.Constants;
 import org.ametro.MapSettings;
 import org.ametro.R;
 import org.ametro.model.City;
@@ -217,7 +218,7 @@ public class ImportPmz extends Activity {
             String fullFileName = MapSettings.IMPORT_PATH + fileName;
             try {
                 City pmz = ModelUtil.indexPmz(fullFileName);
-                String mapName = String.format("%s - %s (%s)", pmz.countryName, pmz.cityName, fileName);
+                String mapName = pmz.countryName + " - " + pmz.cityName + "(" + fileName + ")";
                 int severity = 5;
                 int statusId = R.string.import_status_not_imported;
                 int color = Color.RED;
@@ -260,7 +261,9 @@ public class ImportPmz extends Activity {
                 boolean checked = statusId == R.string.import_status_not_imported || statusId == R.string.import_status_deprecated;
                 imports.add(new ImportRecord(severity, mapName, fullFileName, statusText, color, checked));
             } catch (Exception e) {
-                Log.e("aMetro", "PMZ indexing error", e);
+            	if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)){
+            		Log.e(Constants.LOG_TAG_MAIN, getString(R.string.log_pmz_indexing_error), e);
+            	}
                 imports.add(new ImportRecord(0, fileName, fullFileName, ImportPmz.this.getString(R.string.import_status_invalid), Color.RED, false));
             }
         }
@@ -268,7 +271,7 @@ public class ImportPmz extends Activity {
         @Override
         protected List<ImportRecord> doInBackground(Void... params) {
             File dir = new File(MapSettings.IMPORT_PATH);
-            ProgressInfo pi = new ProgressInfo(0, 0, null, "Search PMZ files...");
+            ProgressInfo pi = new ProgressInfo(0, 0, null, getString(R.string.msg_search_pmz_files));
             this.publishProgress(pi);
             String[] files = dir.list(new FilenameFilter() {
                 public boolean accept(File f, String filename) {
@@ -278,7 +281,7 @@ public class ImportPmz extends Activity {
             ArrayList<ImportRecord> imports = new ArrayList<ImportRecord>();
             if (files != null) {
                 int count = files.length;
-                pi.title = "Read PMZ files...";
+                pi.title = getString(R.string.msg_read_pmz_files);
                 pi.maximum = count;
                 pi.progress = 0;
                 this.publishProgress(pi);
@@ -335,7 +338,7 @@ public class ImportPmz extends Activity {
             ArrayList<ImportRecord> result = new ArrayList<ImportRecord>();
             final int count = imports.length;
             final boolean isEnableAddons = BrowseVectorMap.Instance.isEnabledAddonsImport();
-            ProgressInfo pi = new ProgressInfo(0, count, null, "Importing PMZ files...");
+            ProgressInfo pi = new ProgressInfo(0, count, null, getString(R.string.msg_import_pmz_files));
             publishProgress(pi);
             String updateStatus = getString(R.string.import_status_uptodate);
             for (int i = 0; i < count && !mIsCanceled; i++) {
@@ -378,8 +381,15 @@ public class ImportPmz extends Activity {
                     record.severity = 1;
                     MapSettings.refreshMapList();
                 } catch (Throwable e) {
-                    Log.e("aMetro", "Import failed", e);
-                    result.add(new ImportRecord(-1, record.mapName, record.fileName, "Import failed\n" + e.toString(), Color.RED, false));
+                	if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)){
+                		Log.e(Constants.LOG_TAG_MAIN, getString(R.string.log_import_failed), e);
+                	}
+                    result.add(new ImportRecord(-1, 
+                    		record.mapName, 
+                    		record.fileName, 
+                    		getString(R.string.msg_import_failed) + "\n" + e.toString(), 
+                    		Color.RED, 
+                    		false));
                     if(mapFileTemp!=null && mapFileTemp.exists()){
                     	FileUtil.delete(mapFileTemp);
                     }

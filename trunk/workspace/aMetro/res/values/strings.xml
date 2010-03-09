@@ -77,13 +77,12 @@
 
     <string name="pref_auto_import_addons">Import Addons</string>
     <string name="pref_auto_import_addons_description">import text information from PMZ maps</string>
-    <string name="pref_auto_import_addons_key">AUTO_LOCATION</string>
+    <string name="pref_auto_import_addons_key">IMPORT_ADDONS</string>
 
         <string name="text_about"><![CDATA[
 <h4>aMetro v.%s<h4>
 <h5>This is a program of cities underground and Metro.</h6>
-<h6>Displays the metro schemes, allows you to find the shortest path between stations, and also describes what is next to the stations.</h6>
-<h6>Maps are compatible with the project from pMetro. ©2010</h6>
+<h6>Displays the metro schemes, allows you to find the shortest path between stations, and also describes what is next to the stations. Maps are compatible with the project from pMetro. ©2010</h6>
 
 <p>
 Developers: Golovanov Roman, Vinichenko Vlad<br/>
@@ -97,5 +96,36 @@ Design: Dusty Rat<br/>
 	]]></string>
     <string name="menu_sort_by_name">By Name</string>
     <string name="menu_sort_by_line">By Line</string>
+    <string name="msg_loading_maps">Loading maps...</string>
+    
+    <string name="msg_no_addons">Station description not found</string>
+    <string name="msg_addon_corrupted">Station description corrupted</string>
+    <string name="msg_error_map_loading">Error map loading: </string>
+    <string name="msg_route_time">Trip time is  </string>
+    <string name="msg_route_not_found">Trip not found</string>
+    <string name="msg_search_pmz_files">Search PMZ files...</string>
+    <string name="msg_read_pmz_files">Read PMZ files...</string>
+    <string name="msg_import_pmz_files">Importing PMZ files...</string>
+    <string name="msg_import_failed">Import failed</string>
+    <string name="msg_station_not_found">Not Found</string>
+    <string name="msg_"></string>
+    
+   
+    
+    <string name="log_map_indexing_failed">Map indexing failed for </string>
+    <string name="log_save_map_zoom">Save map zoom </string>
+    <string name="log_save_map_position">Save map position </string>
+    <string name="log_restore_map_zoom">Restore map zoom </string>
+    <string name="log_restore_map_position">Restore map position </string>
+    <string name="log_default_map_zoom">Default map zoom </string>
+    <string name="log_default_map_position">Default map position </string>
+    <string name="log_loaded_subway_map">Loaded subwayMap </string>
+    <string name="log_with_size"> width size </string>
+    <string name="log_failed_map_loading">Failed map loading</string>
+    <string name="log_pmz_indexing_error">PMZ indexing error</string>
+    <string name="log_import_failed">Import failed</string>
+    <string name="log_"></string>
+    
+    
 </resources>
 

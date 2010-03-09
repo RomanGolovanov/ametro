@@ -30,7 +30,6 @@ import android.os.Bundle;
 import android.widget.ListAdapter;
 
 public class BrowseRoute extends ListActivity {
-
 	
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +37,5 @@ public class BrowseRoute extends ListActivity {
         SubwayRoute route = BrowseVectorMap.Instance.getNavigationRoute();
         ListAdapter adapter = new RouteListViewAdapter(this, route, map);
         this.setListAdapter(adapter);
-        
     }
 }

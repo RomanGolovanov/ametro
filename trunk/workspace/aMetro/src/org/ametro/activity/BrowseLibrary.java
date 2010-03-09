@@ -25,6 +25,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FilenameFilter;
 
+import org.ametro.Constants;
 import org.ametro.MapSettings;
 import org.ametro.MapUri;
 import org.ametro.R;
@@ -36,7 +37,6 @@ import org.ametro.other.ProgressInfo;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -63,13 +63,15 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
                     map.putFile(city.countryName, city.cityName, fileName);
                 }
             } catch (Exception e) {
-                Log.d("aMetro", "Map indexing failed for " + fileName, e);
+            	if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
+            		Log.d(Constants.LOG_TAG_MAIN, getString(R.string.log_map_indexing_failed) + fileName, e);
+            	}
             }
         }
 
         private FileGroupsDictionary scanMapDirectory(File dir) {
             FileGroupsDictionary map;
-            ProgressInfo pi = new ProgressInfo(0, 0, null, "Search maps...");
+            ProgressInfo pi = new ProgressInfo(0, 0, null, getString(R.string.msg_loading_maps));
             publishProgress(pi);
             map = new FileGroupsDictionary();
             map.timestamp = dir.lastModified();
@@ -81,7 +83,7 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 
             if (files != null) {
                 final int count = files.length;
-                pi.title = "Read maps...";
+                pi.title = getString(R.string.msg_loading_maps);
                 pi.maximum = count;
 
                 for (int i = 0; i < count && !mIsCanceled; i++) {
@@ -96,7 +98,6 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
             return map;
         }
 
-        @Override
         protected FileGroupsDictionary doInBackground(Void... params) {
             final String cacheFileName = MapSettings.ROOT_PATH + MapSettings.MAPS_LIST;
             final File dir = new File(MapSettings.MAPS_PATH);
@@ -198,7 +199,6 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 
     private final static int REQUEST_IMPORT = 1;
 
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         menu.add(0, MAIN_MENU_REFRESH, 0, R.string.menu_refresh).setIcon(android.R.drawable.ic_menu_rotate);
@@ -210,12 +210,6 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
         return true;
     }
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case MAIN_MENU_REFRESH:
@@ -240,7 +234,6 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case REQUEST_IMPORT:
@@ -250,14 +243,12 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MapSettings.checkPrerequisite();
         beginIndexing();
     }
 
-    @Override
     protected void onStop() {
         if (mIndexTask != null && mIndexTask.getStatus() != Status.FINISHED) {
             mIndexTask.cancel(false);
@@ -272,7 +263,7 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 
     public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
         String fileName = mAdapter.getFileName(groupPosition, childPosition);
-        String mapName = fileName.replace(".ametro", "");
+        String mapName = fileName.replace(MapSettings.MAP_FILE_TYPE, "");
         Intent i = new Intent();
         i.setData(MapUri.create(mapName));
         setResult(RESULT_OK, i);
