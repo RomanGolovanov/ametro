@@ -35,6 +35,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
@@ -53,7 +55,6 @@ public class CreateRoute extends Activity implements OnClickListener,
 	private AutoCompleteTextView mFromText;
 	private AutoCompleteTextView mToText;
 
-	private Button mSwapButton;
 	private Button mCreateButton;
 
 	private ImageButton mFromButton;
@@ -67,7 +68,32 @@ public class CreateRoute extends Activity implements OnClickListener,
 	private boolean mExitPending;
 
 	private final static int REQUEST_STATION_FROM = 1; 
-	private final static int REQUEST_STATION_TO = 2; 
+	private final static int REQUEST_STATION_TO = 2;
+	private final static int REQUEST_ROUTE = 3;
+
+    private final int MAIN_MENU_SWAP = 1;
+    private final int MAIN_MENU_FAVORITES = 2;
+	
+	public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(0, MAIN_MENU_SWAP, 0, R.string.menu_swap).setIcon(android.R.drawable.ic_menu_rotate);
+        menu.add(0, MAIN_MENU_FAVORITES, 1, R.string.menu_favorites).setIcon(android.R.drawable.ic_menu_agenda);
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		return super.onPrepareOptionsMenu(menu);
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case MAIN_MENU_SWAP:
+            swapStations();
+            return true;
+        case MAIN_MENU_FAVORITES:
+        	startActivityForResult(new Intent(this,FavoriteRouteList.class), REQUEST_ROUTE);
+        }		
+		return super.onOptionsItemSelected(item);
+	}
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -77,13 +103,11 @@ public class CreateRoute extends Activity implements OnClickListener,
 
 		mPanel = (View) findViewById(R.id.create_route_panel);
 
-		mSwapButton = (Button) findViewById(R.id.create_route_swap_button);
 		mCreateButton = (Button) findViewById(R.id.create_route_create_button);
 
 		mFromButton = (ImageButton) findViewById(R.id.create_route_from_button);
 		mToButton = (ImageButton) findViewById(R.id.create_route_to_button);
 		
-		mSwapButton.setOnClickListener(this);
 		mCreateButton.setOnClickListener(this);
 		mFromButton.setOnClickListener(this);
 		mToButton.setOnClickListener(this);
@@ -159,12 +183,6 @@ public class CreateRoute extends Activity implements OnClickListener,
 			}
 			startActivityForResult(data, REQUEST_STATION_TO);
 		}
-		if (v == mSwapButton) {
-			Editable swap = mFromText.getText();
-			mFromText.setText(mToText.getText());
-			mToText.setText(swap);
-			mSwapButton.requestFocus();
-		}
 		if (v == mCreateButton) {
 			SubwayStation from = getStationByName(mFromText.getText().toString());
 			SubwayStation to = getStationByName(mToText.getText().toString());
@@ -174,6 +192,12 @@ public class CreateRoute extends Activity implements OnClickListener,
 			}
 		}
 
+	}
+
+	private void swapStations() {
+		Editable swap = mFromText.getText();
+		mFromText.setText(mToText.getText());
+		mToText.setText(swap);
 	}
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -230,7 +254,7 @@ public class CreateRoute extends Activity implements OnClickListener,
 			mWaitDialog.dismiss();
 			if (result.hasRoute()) {
 				BrowseVectorMap.Instance.setNavigationRoute(result);
-				String msg = getString(R.string.msg_route_time) + DateUtil.getLongTime(result.getTime());
+				String msg = getString(R.string.msg_route_time) + " " + DateUtil.getLongTime(result.getTime());
 				Toast.makeText(BrowseVectorMap.Instance, msg, Toast.LENGTH_LONG).show();
 			} else {
 				Toast.makeText(BrowseVectorMap.Instance, getString(R.string.msg_route_not_found),
