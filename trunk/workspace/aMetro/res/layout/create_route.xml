@@ -12,8 +12,7 @@
 			android:paddingRight="5dip">
 			<AutoCompleteTextView android:id="@+id/create_route_from_text"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
-				android:hint="@string/create_route_from"
-				android:layout_weight="1" />
+				android:hint="@string/create_route_from" android:layout_weight="1" />
 			<ImageButton android:id="@+id/create_route_from_button"
 				android:src="@android:drawable/ic_input_get" android:layout_width="wrap_content"
 				android:layout_height="wrap_content" android:padding="5dip"
@@ -25,8 +24,7 @@
 			android:paddingRight="5dip">
 			<AutoCompleteTextView android:id="@+id/create_route_to_text"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
-				android:hint="@string/create_route_to"
-				android:layout_weight="1" />
+				android:hint="@string/create_route_to" android:layout_weight="1" />
 			<ImageButton android:id="@+id/create_route_to_button"
 				android:src="@android:drawable/ic_input_get" android:completionHint="to station"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -36,9 +34,14 @@
 			android:layout_width="fill_parent" android:layout_height="wrap_content"
 			android:paddingLeft="5dip" android:paddingBottom="5dip"
 			android:gravity="center" android:paddingRight="5dip">
-			<Button android:id="@+id/create_route_swap_button"
-				android:drawableLeft="@drawable/icon_sync" android:text="@string/create_route_swap_button"
-				android:layout_width="wrap_content" android:layout_height="wrap_content" />
+
+			<!-- ToggleButton android:text="@string/create_route_mode_time_button"
+				id="@+id/create_route_mode_transfer_buttom" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+			<ToggleButton android:text="@string/create_route_mode_transfer_button"
+				id="@+id/create_route_mode_transfer_buttom" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" /-->
+
 			<Button android:id="@+id/create_route_create_button"
 				android:drawableLeft="@android:drawable/ic_menu_view" android:text="@string/create_route_create_button"
 				android:paddingRight="10dip" android:paddingLeft="10dip"

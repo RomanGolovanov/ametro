@@ -1,30 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
     <string name="app_name">aMetro</string>
-    <string name="msg_loading">Загрузка...</string>
-    <string name="msg_caching">Кеширование карты...</string>
-    <string name="msg_no_maps_in_library">Нет карт в каталоге</string>
-    <string name="msg_press_menu_import">нажмите menu и импортируйте новые карты</string>
-    <string name="msg_no_map_loaded">Нет карты</string>
-    <string name="msg_press_menu_maps">нажмите menu и выберите карту</string>
-    <string name="menu_search">Поиск</string>
-    <string name="menu_library">Карты</string>
-    <string name="menu_routes">Маршрут</string>
-    <string name="menu_time">Время</string>
-    <string name="menu_station">Станция</string>
-    <string name="menu_settings">Настройки</string>
-    <string name="menu_about">О программе</string>
     <string name="day">День</string>
     <string name="night">Ночь</string>
     <string name="stress">Час Пик</string>
-    <string name="menu_experimental">Тестовый режим</string>
-    <string name="menu_refresh">Обновить</string>
-    <string name="menu_location">Мое местоположение</string>
-    <string name="menu_import">Импорт</string>
-    <string name="menu_all_maps">Все карты</string>
-    <string name="menu_my_maps">Мои карты</string>
-    <string name="menu_select_all">Выбрать все</string>
-    <string name="menu_select_none">Очистить выбор</string>
+    
     <string name="import_status_not_imported">не импортирована</string>
     <string name="import_status_deprecated">новая версия</string>
     <string name="import_status_uptodate">уже импортирована</string>
@@ -34,25 +14,26 @@
     <string name="import_title_indexing">Импорт</string>
     <string name="import_title_report">Импорт - нажмите назад для возврата</string>
     <string name="import_status_old_version">старая версия</string>
-    <string name="msg_import_pmz_progress">"Импортируется карта %s/%s"</string>
-    <string name="menu_cleanup">Очистка</string>
-    <string name="menu_stop">Остановить</string>
     <string name="import_title_importing">Импорт</string>
-    <string name="msg_no_maps_in_import">Нет PMZ карт для импорта</string>
-    <string name="msg_copy_files_to_import">Скопируйте PMZ файлы на карту памяти в каталог</string>
     <string name="import_title_empty">Импорт</string>
-    <string name="msg_import_path">/sdcard/ametro/import</string>
+    
     <string name="template_progress_count">%s из %s</string>
     <string name="template_progress_percent">%s%%</string>
+    
     <string name="search_label">метка</string>
     <string name="search_hint">поиск станции...</string>
     <string name="search_station">Поиск станции</string>
+    
     <string name="create_route_from">станция отправления</string>
     <string name="create_route_to">станция назначения</string>
     <string name="create_route_swap_button">Обмен</string>
     <string name="create_route_create_button">Искать</string>
     <string name="create_route_wait_title">Поиск маршрутов</string>
     <string name="create_route_wait_text">Пожалуйста подождите...</string>
+    <string name="create_route_mode_transfer_button">Пер.</string>
+    <string name="create_route_mode_time_button">Вр.</string>
+    
+    
 
     <string name="pref_section_general">Основные</string>
     <string name="pref_section_debug">Отладка</string>
@@ -94,14 +75,50 @@
 <p>Сайт проекта: http://sites.google.com/site/ametroproject</p>
 <p>Вопросы и пожелания присылайте на ametroproject@gmail.com</p>
 	]]></string>
+
+    <string name="menu_search">Поиск</string>
+    <string name="menu_library">Карты</string>
+    <string name="menu_routes">Маршрут</string>
+    <string name="menu_time">Время</string>
+    <string name="menu_station">Станция</string>
+    <string name="menu_settings">Настройки</string>
+    <string name="menu_about">О программе</string>
+    <string name="menu_experimental">Тестовый режим</string>
+    <string name="menu_refresh">Обновить</string>
+    <string name="menu_location">Мое местоположение</string>
+    <string name="menu_import">Импорт</string>
+    <string name="menu_all_maps">Все карты</string>
+    <string name="menu_my_maps">Мои карты</string>
+    <string name="menu_select_all">Выбрать все</string>
+    <string name="menu_select_none">Очистить выбор</string>
+    <string name="menu_cleanup">Очистка</string>
+    <string name="menu_stop">Остановить</string>
     <string name="menu_sort_by_name">По имени</string>
     <string name="menu_sort_by_line">По ветке</string>
-    <string name="msg_loading_maps">Загрузка карт...</string>
+    <string name="menu_favorites">Избранное</string>
+    <string name="menu_recent">Последние</string>
+    <string name="menu_add">Добавить</string>
+    <string name="menu_remove">Удалить</string>
+    <string name="menu_ignore">Игнорировать</string>
+    <string name="menu_swap">Обмен</string>
+    <string name="menu_show_on_map">Показать на карте</string>
+    <string name="menu_"></string>
     
+    <string name="msg_loading">Загрузка...</string>
+    <string name="msg_caching">Кеширование карты...</string>
+    <string name="msg_no_maps_in_library">Нет карт в каталоге</string>
+    <string name="msg_press_menu_import">нажмите menu и импортируйте новые карты</string>
+    <string name="msg_no_map_loaded">Нет карты</string>
+    <string name="msg_press_menu_maps">нажмите menu и выберите карту</string>
+    <string name="msg_import_pmz_progress">"Импортируется карта %s/%s"</string>
+    <string name="msg_no_maps_in_import">Нет PMZ карт для импорта</string>
+    <string name="msg_copy_files_to_import">Скопируйте PMZ файлы на карту памяти в каталог</string>
+    <string name="msg_import_path">/sdcard/ametro/import</string>
+    <string name="msg_loading_maps">Загрузка карт...</string>
     <string name="msg_no_addons">Описание станции не найдено</string>
     <string name="msg_addon_corrupted">Описание старнции повреждено</string>
     <string name="msg_error_map_loading">Ошибка загрузки карты: </string>
-    <string name="msg_route_time">Время проезда  </string>
+    <string name="msg_route_time">Время проезда</string>
     <string name="msg_route_not_found">Маршрут не найден</string>
     <string name="msg_search_pmz_files">Поиск PMZ файлов...</string>
     <string name="msg_read_pmz_files">Чтение PMZ файлов...</string>
