@@ -37,8 +37,12 @@ import android.graphics.drawable.Drawable;
 public class RouteListViewAdapter extends StationListAdapter {
 
 	protected final Paint mBackgroundPaint;
-	
-	public RouteListViewAdapter(Activity activity, SubwayRoute route, SubwayMap map) {
+
+	private Drawable mFirstItemDrawable;
+	private Drawable mLastItemDrawable;
+
+	public RouteListViewAdapter(Activity activity, SubwayRoute route,
+			SubwayMap map) {
 		super(activity, route.getStations(), route.getDelays(), map);
 		mBackgroundPaint = new Paint();
 		mBackgroundPaint.setStyle(Style.STROKE);
@@ -47,18 +51,43 @@ public class RouteListViewAdapter extends StationListAdapter {
 		mBackgroundPaint.setStrokeWidth(2);
 	}
 
-	protected Drawable getLineIcon(SubwayLine line) {
-		Drawable dw = mLineDrawabled.get(line);
-		if(dw == null){
-			Bitmap bmp = Bitmap.createBitmap(30, 50, Config.ARGB_8888);
-			Canvas c = new Canvas(bmp);
-			mPaint.setColor(line.color);
-			c.drawRect(10-1,0,20+1,50, mPaint);
-			c.drawCircle(15, 25, 9, mPaint);
-			c.drawCircle(15, 25, 9, mBackgroundPaint);
-			dw = new BitmapDrawable(bmp);
-			mLineDrawabled.put(line, dw);
+	protected Drawable getItemIcon(int position) {
+		final SubwayLine line = mLines[mFilteredStations[position].lineId];
+		final int color = line.color;
+		Drawable dw = null;
+		if (position == 0) {
+			dw = mFirstItemDrawable;
+			if (dw == null) {
+				dw = createItemDrawable(color, ICON_HALF_HEIGHT, ICON_HEIGHT);
+				mFirstItemDrawable = dw;
+			}
+		} else if (position == (mFilteredStations.length - 1)) {
+			dw = mLastItemDrawable;
+			if (dw == null) {
+				dw = createItemDrawable(color, 0, ICON_HALF_HEIGHT);
+				mLastItemDrawable = dw;
+			}
+		} else {
+			dw = mLineDrawabled.get(line);
+			if (dw == null) {
+				dw = createItemDrawable(color, 0, ICON_HEIGHT);
+				mLineDrawabled.put(line, dw);
+			}
 		}
 		return dw;
-	}	
+	}
+
+	private Drawable createItemDrawable(final int color, int ymin, int ymax) {
+		Drawable dw;
+		Bitmap bmp = Bitmap.createBitmap(ICON_WIDTH, ICON_HEIGHT,
+				Config.ARGB_8888);
+		Canvas c = new Canvas(bmp);
+		mPaint.setColor(color);
+		c.drawRect(ICON_HALF_WIDTH - ICON_LINE_WITH, ymin, ICON_HALF_WIDTH + ICON_LINE_WITH, ymax, mPaint);
+		c.drawCircle(ICON_HALF_WIDTH, ICON_HALF_HEIGHT, ICON_DIAMETER, mPaint);
+		c.drawCircle(ICON_HALF_WIDTH, ICON_HALF_HEIGHT, ICON_DIAMETER,
+				mBackgroundPaint);
+		dw = new BitmapDrawable(bmp);
+		return dw;
+	}
 }

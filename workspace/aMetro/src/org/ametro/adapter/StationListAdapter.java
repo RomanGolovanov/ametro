@@ -161,6 +161,15 @@ public class StationListAdapter extends BaseAdapter implements Filterable {
 		mSubwayMap = map;
 	}
 	
+	protected static final int ICON_WIDTH = 30;
+	protected static final int ICON_HEIGHT = 44;
+	protected static final int ICON_DIAMETER = 9;
+	protected static final int ICON_LINE_WITH = 5;
+	protected static final int ICON_HALF_WIDTH = ICON_WIDTH/2;
+	protected static final int ICON_HALF_HEIGHT = ICON_HEIGHT/2;
+	
+	
+	
 	protected final SubwayMap mSubwayMap;
 	protected final Activity mContextActivity;
 	protected final HashMap<SubwayLine, Drawable> mLineDrawabled;
@@ -224,17 +233,18 @@ public class StationListAdapter extends BaseAdapter implements Filterable {
 		}else{
 			wrapper.Delay.setText("");
 		}
-		wrapper.Image.setImageDrawable(getLineIcon(line));
+		wrapper.Image.setImageDrawable(getItemIcon(position));
 		return view;		
 	}
 
-	protected Drawable getLineIcon(SubwayLine line) {
+	protected Drawable getItemIcon(int position) {
+		SubwayLine line = mLines[ mFilteredStations[position].lineId ];
 		Drawable dw = mLineDrawabled.get(line);
 		if(dw == null){
-			Bitmap bmp = Bitmap.createBitmap(30, 50, Config.ARGB_8888);
+			Bitmap bmp = Bitmap.createBitmap(ICON_WIDTH, ICON_HEIGHT, Config.ARGB_8888);
 			Canvas c = new Canvas(bmp);
 			mPaint.setColor(line.color);
-			c.drawCircle(15, 25, 9, mPaint);
+			c.drawCircle(ICON_WIDTH/2, ICON_HEIGHT/2, ICON_DIAMETER, mPaint);
 			
 			dw = new BitmapDrawable(bmp);
 			mLineDrawabled.put(line, dw);

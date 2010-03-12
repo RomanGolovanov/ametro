@@ -54,11 +54,15 @@ public class BrowseRoute extends Activity implements OnClickListener,
 	private SubwayMap mSubwayMap;
 	private SubwayRoute mRoute;
 
+	private int mFromId;
+	private int mToId;
+	
 	private boolean isChecked;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.browse_route);
+		
 		mRouteList = (ListView) findViewById(R.id.browse_route_list_view);
 		mStationList = (ListView) findViewById(R.id.browse_route_stations);
 		mTextTime = (TextView) findViewById(R.id.browse_route_time_text);
@@ -81,12 +85,17 @@ public class BrowseRoute extends Activity implements OnClickListener,
 		mStationList.setAdapter(stationListAdapter);
 		mStationList.setEnabled(false);
 
-		isChecked = false;
+		mFromId = mRoute.getStationFrom().id;
+		mToId = mRoute.getStationTo().id;
+		
+		isChecked = BrowseVectorMap.Instance.isFavoriteRoute(mFromId, mToId);
 		updateFavoritesButton();
 		mFavoritesButton.setOnClickListener(this);
 
 		mTextTime.setText(getString(R.string.msg_route_time) + " "
 				+ DateUtil.getTimeHHMM(mRoute.getTime()));
+		
+		//mRouteList.setDividerHeight(0);
 	}
 
 	private void updateFavoritesButton() {
@@ -102,7 +111,13 @@ public class BrowseRoute extends Activity implements OnClickListener,
 	public void onClick(View v) {
 		if (v == mFavoritesButton) {
 			isChecked = !isChecked;
+			if(isChecked){
+				BrowseVectorMap.Instance.addFavoriteRoute(mFromId,mToId);
+			}else{
+				BrowseVectorMap.Instance.removeFavoriteRoute(mFromId,mToId);
+			}
 			updateFavoritesButton();
+
 			Toast.makeText(this, 
 					isChecked 
 					? getString(R.string.msg_route_added_to_favorites)

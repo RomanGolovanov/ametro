@@ -20,12 +20,47 @@
  */
 package org.ametro.activity;
 
+import static org.ametro.Constants.STATION_FROM_ID;
+import static org.ametro.Constants.STATION_TO_ID;
+
+import java.util.ArrayList;
+
+import org.ametro.model.SubwayMap;
+
 import android.app.ListActivity;
+import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class FavoriteRouteList extends ListActivity {
 
+	private Point[] mRoutes;
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		mRoutes = BrowseVectorMap.Instance.getFavoriteRoutes();
+		
+		final SubwayMap map = BrowseVectorMap.Instance.getSubwayMap();
+		final ArrayList<String> routeNames = new ArrayList<String>();
+		for(Point p : mRoutes){
+			String name = map.stations[p.x].name + " - " + map.stations[p.y].name;
+			routeNames.add(name);
+		}
+		
+		final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, routeNames);
+		setListAdapter(adapter);
+	}
+	
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		Intent data = new Intent();
+		Point r = mRoutes[position];
+		data.putExtra(STATION_FROM_ID, r.x);
+		data.putExtra(STATION_TO_ID, r.y);
+		setResult(RESULT_OK, data);
+		finish();
+		super.onListItemClick(l, v, position, id);
 	}
 }
