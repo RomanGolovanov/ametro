@@ -95,6 +95,7 @@ public class BrowseRoute extends Activity implements OnClickListener,
 		mTextTime.setText(getString(R.string.msg_route_time) + " "
 				+ DateUtil.getTimeHHMM(mRoute.getTime()));
 		
+		mStationList.setDividerHeight(0);
 		//mRouteList.setDividerHeight(0);
 	}
 

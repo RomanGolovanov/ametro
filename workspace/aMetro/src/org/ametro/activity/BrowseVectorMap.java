@@ -141,7 +141,10 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			if (resultCode == RESULT_OK) {
 				Uri uri = data.getData();
 				if (uri != null) {
-					onInitializeMapView(uri);
+					String mapName = MapUri.getMapName(uri);
+					if(!mapName.equalsIgnoreCase(getMapName())){
+						onInitializeMapView(uri);
+					}
 				}
 			}
 			break; 
@@ -443,7 +446,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			if(route!=null){
 				mNavigationSegments = route.getSegments();
 				mNavigationStations = route.getStations();
-				setCurrentStation( mNavigationStations.get(mNavigationStations.size()-1) );
+				setCurrentStation( mNavigationStations.get(0) );
 				showNavigationControls();
 			}else{
 				hideNavigationControls();
