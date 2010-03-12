@@ -21,6 +21,9 @@
 
 package org.ametro.activity;
 
+import java.util.Date;
+
+import org.ametro.Constants;
 import org.ametro.R;
 import org.ametro.adapter.StationListAdapter;
 import org.ametro.model.SubwayMap;
@@ -45,6 +48,7 @@ import android.view.animation.Animation.AnimationListener;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 public class CreateRoute extends Activity implements OnClickListener,
@@ -60,8 +64,10 @@ public class CreateRoute extends Activity implements OnClickListener,
 	private ImageButton mFromButton;
 	private ImageButton mToButton;
 	
-	private CreateRouteTask mCreateRouteTask;
+	private Spinner mTimeSpinner;
 
+	private CreateRouteTask mCreateRouteTask;
+	
 	private View mPanel;
 	private Animation mPanelAnimation;
 
@@ -108,13 +114,15 @@ public class CreateRoute extends Activity implements OnClickListener,
 		mFromButton = (ImageButton) findViewById(R.id.create_route_from_button);
 		mToButton = (ImageButton) findViewById(R.id.create_route_to_button);
 		
+		mTimeSpinner = (Spinner)findViewById(R.id.create_route_time_spinner);
+		
 		mCreateButton.setOnClickListener(this);
 		mFromButton.setOnClickListener(this);
 		mToButton.setOnClickListener(this);
 
 		mFromText = (AutoCompleteTextView) findViewById(R.id.create_route_from_text);
 		mToText = (AutoCompleteTextView) findViewById(R.id.create_route_to_text);
-
+		
 		mSubwayMap = BrowseVectorMap.Instance.getSubwayMap();
 		
 		mFromText.setAdapter(new StationListAdapter(this, mSubwayMap.stations, mSubwayMap));
@@ -131,6 +139,15 @@ public class CreateRoute extends Activity implements OnClickListener,
 			mToText.setSelectAllOnFocus(true);
 		}
 		
+		Date now = new Date();
+		int hour = now.getHours();
+		if(hour < 7 || hour > 19){
+			mTimeSpinner.setSelection(1);
+		}else if(hour  > 9 || hour < 17){
+			mTimeSpinner.setSelection(0);
+		}else{
+			mTimeSpinner.setSelection(2);
+		}
 		
 	}
 
@@ -146,7 +163,7 @@ public class CreateRoute extends Activity implements OnClickListener,
 		switch(requestCode){
 		case REQUEST_STATION_FROM:
 			if(resultCode == RESULT_OK){
-				int id = data.getIntExtra(SelectStation.STATION_ID, -1);
+				int id = data.getIntExtra(Constants.STATION_ID, -1);
 				if(id!=-1){
 					SubwayStation station = mSubwayMap.stations[id];
 					mFromText.setText( StationListAdapter.getStationName(mSubwayMap, station) );				
@@ -155,7 +172,7 @@ public class CreateRoute extends Activity implements OnClickListener,
 			break;
 		case REQUEST_STATION_TO:
 			if(resultCode == RESULT_OK){
-				int id = data.getIntExtra(SelectStation.STATION_ID, -1);
+				int id = data.getIntExtra(Constants.STATION_ID, -1);
 				if(id!=-1){
 					SubwayStation station = mSubwayMap.stations[id];
 					mToText.setText( StationListAdapter.getStationName(mSubwayMap, station) );				
@@ -171,7 +188,7 @@ public class CreateRoute extends Activity implements OnClickListener,
 			Intent data = new Intent(this, SelectStation.class);
 			SubwayStation from = getStationByName(mFromText.getText().toString());
 			if(from!=null){
-				data.putExtra(SelectStation.STATION_ID, from.id);
+				data.putExtra(Constants.STATION_ID, from.id);
 			}
 			startActivityForResult(data, REQUEST_STATION_FROM);
 		}
@@ -179,7 +196,7 @@ public class CreateRoute extends Activity implements OnClickListener,
 			Intent data = new Intent(this, SelectStation.class);
 			SubwayStation to = getStationByName(mToText.getText().toString());
 			if(to!=null){
-				data.putExtra(SelectStation.STATION_ID, to.id);
+				data.putExtra(Constants.STATION_ID, to.id);
 			}
 			startActivityForResult(data, REQUEST_STATION_TO);
 		}
@@ -254,7 +271,7 @@ public class CreateRoute extends Activity implements OnClickListener,
 			mWaitDialog.dismiss();
 			if (result.hasRoute()) {
 				BrowseVectorMap.Instance.setNavigationRoute(result);
-				String msg = getString(R.string.msg_route_time) + " " + DateUtil.getLongTime(result.getTime());
+				String msg = getString(R.string.msg_route_time) + " " + DateUtil.getTimeHHMM(result.getTime());
 				Toast.makeText(BrowseVectorMap.Instance, msg, Toast.LENGTH_LONG).show();
 			} else {
 				Toast.makeText(BrowseVectorMap.Instance, getString(R.string.msg_route_not_found),

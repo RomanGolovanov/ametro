@@ -61,7 +61,6 @@ import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.animation.AlphaAnimation;
@@ -102,7 +101,6 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		MapSettings.checkPrerequisite();
 		setupLocale();
 
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL); 
 		setContentView(R.layout.global_wait);
 
@@ -593,7 +591,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		mNavigationPanelTop.setVisibility(View.VISIBLE);
 		if(mRoute!=null){
 			long time = mRoute.getStationDelay(mNavigationStations.get(mNavigationStations.size()-1));
-			mNavigateTimeText.setText(DateUtil.getLongTime(time));
+			mNavigateTimeText.setText(DateUtil.getTimeHHMM(time));
 			mNavigateTimeText.setVisibility(View.VISIBLE);
 		}else{
 			mNavigateTimeText.setText("");

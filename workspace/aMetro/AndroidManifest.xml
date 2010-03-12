@@ -1,44 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<manifest android:versionCode="1" android:versionName="0.1.168-dev"
-    package="org.ametro" xmlns:android="http://schemas.android.com/apk/res/android">
-    <application android:debuggable="true"
-        android:icon="@drawable/appicon" android:label="@string/app_name">
-        <activity android:label="@string/app_name"
-            android:launchMode="singleTop"
-            android:configChanges="orientation|keyboardHidden"
-            android:name=".activity.BrowseVectorMap" android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-            <meta-data android:name="android.app.default_searchable" android:value=".activity.SearchStation"/>
-        </activity>
-        <activity android:launchMode="singleTop" android:name=".activity.BrowseLibrary" android:configChanges="orientation|keyboardHidden"/>
-        <activity android:launchMode="singleTop" android:name=".activity.ImportPmz" android:configChanges="orientation|keyboardHidden"/>
-        <activity android:name=".activity.BrowseMapDetails" android:configChanges="orientation|keyboardHidden"/>
-        <activity android:name=".activity.BrowseRoute" theme="@android:style/Theme.Light" android:configChanges="orientation|keyboardHidden"/>
-        <activity android:launchMode="singleTop"
-            android:name=".activity.CreateRoute"
-            android:configChanges="orientation|keyboardHidden"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".activity.About" android:configChanges="orientation|keyboardHidden"/>
-        <activity android:name=".activity.Settings" android:configChanges="orientation|keyboardHidden"/>
-        <activity android:label="@string/search_station" android:configChanges="orientation|keyboardHidden"
-            android:launchMode="singleTop" android:name=".activity.SearchStation" >
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-            <meta-data android:name="android.app.searchable" android:resource="@xml/searchable"/>
-        </activity>
-        <!--
+<manifest android:versionCode="1" android:versionName="0.1.169-dev"
+	package="org.ametro" xmlns:android="http://schemas.android.com/apk/res/android">
+	<application android:debuggable="true" android:icon="@drawable/appicon"
+		android:label="@string/app_name">
+		<activity android:label="@string/app_name"
+			android:launchMode="singleTop" android:configChanges="orientation|keyboardHidden"
+			android:name=".activity.BrowseVectorMap" android:windowSoftInputMode="adjustPan"
+			android:theme="@android:style/Theme.NoTitleBar">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+			<meta-data android:name="android.app.default_searchable"
+				android:value=".activity.SearchStation" />
+		</activity>
+		<activity android:launchMode="singleTop" android:name=".activity.BrowseLibrary"
+			android:configChanges="orientation|keyboardHidden" />
+		<activity android:launchMode="singleTop" android:name=".activity.ImportPmz"
+			android:configChanges="orientation|keyboardHidden" />
+		<activity android:name=".activity.BrowseMapDetails"
+			android:configChanges="orientation|keyboardHidden" />
+		<activity android:name=".activity.BrowseRoute" 
+			android:configChanges="orientation|keyboardHidden" />
+		<activity android:launchMode="singleTop" android:name=".activity.CreateRoute"
+			android:configChanges="orientation|keyboardHidden" 
+			android:theme="@android:style/Theme.Translucent.NoTitleBar"
+			android:windowSoftInputMode="adjustPan" />
+		<activity android:name=".activity.About"
+			android:configChanges="orientation|keyboardHidden" />
+		<activity android:name=".activity.Settings"
+			android:configChanges="orientation|keyboardHidden" />
+		<activity android:label="@string/search_station"
+			android:configChanges="orientation|keyboardHidden"
+			android:launchMode="singleTop" android:name=".activity.SearchStation">
+			<intent-filter>
+				<action android:name="android.intent.action.SEARCH" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+			<meta-data android:name="android.app.searchable"
+				android:resource="@xml/searchable" />
+		</activity>
+		<!--
 			provider
 			android:authorities="org.ametro.provider.stationsuggestionprovider"
 			android:name="org.ametro.provider.StationSuggestionProvider" /
 		-->
-        <activity android:name="org.ametro.activity.BrowseStation" android:configChanges="orientation|keyboardHidden"/>
-        <activity android:name="org.ametro.activity.SelectStation" android:configChanges="orientation|keyboardHidden"/>
-        <activity android:name="org.ametro.activity.FavoriteRouteList"/>
-    </application>
-    <uses-sdk android:minSdkVersion="3"/>
+		<activity android:name="org.ametro.activity.BrowseStation"
+			android:configChanges="orientation|keyboardHidden" />
+		<activity android:name="org.ametro.activity.SelectStation"
+			android:configChanges="orientation|keyboardHidden" />
+		<activity android:name="org.ametro.activity.FavoriteRouteList" />
+	</application>
+	<uses-sdk android:minSdkVersion="3" />
 </manifest>
