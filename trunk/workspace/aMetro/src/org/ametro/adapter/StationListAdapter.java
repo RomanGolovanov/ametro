@@ -162,7 +162,7 @@ public class StationListAdapter extends BaseAdapter implements Filterable {
 	}
 	
 	protected static final int ICON_WIDTH = 30;
-	protected static final int ICON_HEIGHT = 44;
+	protected static final int ICON_HEIGHT = 46;
 	protected static final int ICON_DIAMETER = 9;
 	protected static final int ICON_LINE_WITH = 5;
 	protected static final int ICON_HALF_WIDTH = ICON_WIDTH/2;
@@ -217,7 +217,7 @@ public class StationListAdapter extends BaseAdapter implements Filterable {
 			wrapper = new ListItemWrapper(view);
 			if(mTextColor!=null){
 				wrapper.Name.setTextColor(mTextColor);
-				wrapper.Line.setTextColor(mTextColor);
+				//wrapper.Line.setTextColor(mTextColor);
 			}
 		}else{
 			view = convertView;

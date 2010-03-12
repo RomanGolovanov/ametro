@@ -37,6 +37,7 @@ import org.ametro.util.DateUtil;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -86,11 +87,13 @@ public class CreateRoute extends Activity implements OnClickListener,
 	
 	public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(0, MAIN_MENU_SWAP, 0, R.string.menu_swap).setIcon(android.R.drawable.ic_menu_revert);
-        menu.add(0, MAIN_MENU_FAVORITES, 1, R.string.menu_favorites).setIcon(android.R.drawable.ic_menu_agenda);
+        menu.add(0, MAIN_MENU_FAVORITES, 1, R.string.menu_favorites).setIcon(android.R.drawable.btn_star_big_off);
 		return super.onCreateOptionsMenu(menu);
 	}
 	
 	public boolean onPrepareOptionsMenu(Menu menu) {
+    	final Point[] routes = BrowseVectorMap.Instance.getFavoriteRoutes();
+    	menu.findItem(MAIN_MENU_FAVORITES).setEnabled(!(routes== null || routes.length == 0));
 		return super.onPrepareOptionsMenu(menu);
 	}
 	
@@ -100,12 +103,7 @@ public class CreateRoute extends Activity implements OnClickListener,
             swapStations();
             return true;
         case MAIN_MENU_FAVORITES:
-        	final Point[] routes = BrowseVectorMap.Instance.getFavoriteRoutes();
-    		if(routes== null || routes.length == 0){
-    			Toast.makeText(this, R.string.msg_msg_no_favorites, Toast.LENGTH_SHORT).show();
-    		}else{
-    			startActivityForResult(new Intent(this,FavoriteRouteList.class), REQUEST_ROUTE);
-    		}
+   			startActivityForResult(new Intent(this,FavoriteRouteList.class), REQUEST_ROUTE);
         }		
 		return super.onOptionsItemSelected(item);
 	}
@@ -134,8 +132,14 @@ public class CreateRoute extends Activity implements OnClickListener,
 		
 		mSubwayMap = BrowseVectorMap.Instance.getSubwayMap();
 		
-		mFromText.setAdapter(new StationListAdapter(this, mSubwayMap.stations, mSubwayMap));
-		mToText.setAdapter(new StationListAdapter(this, mSubwayMap.stations, mSubwayMap));
+		StationListAdapter fromAdapter = new StationListAdapter(this, mSubwayMap.stations, mSubwayMap); 
+		StationListAdapter toAdapter = new StationListAdapter(this, mSubwayMap.stations, mSubwayMap); 
+		
+		fromAdapter.setTextColor(Color.BLACK);
+		toAdapter.setTextColor(Color.BLACK);
+		
+		mFromText.setAdapter(fromAdapter);
+		mToText.setAdapter(toAdapter);
 		
 
 		final SubwayRoute route = BrowseVectorMap.Instance.getNavigationRoute();
