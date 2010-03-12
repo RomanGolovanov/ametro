@@ -22,12 +22,14 @@
 package org.ametro.activity;
 
 import static org.ametro.Constants.LOG_TAG_MAIN;
+import static org.ametro.MapSettings.PREFERENCE_FAVORITE_ROUTES;
 import static org.ametro.MapSettings.PREFERENCE_PACKAGE_FILE_NAME;
 import static org.ametro.MapSettings.PREFERENCE_SCROLL_POSITION;
 import static org.ametro.MapSettings.PREFERENCE_ZOOM_LEVEL;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Locale;
 
 import org.ametro.Constants;
@@ -250,6 +252,66 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
         mMapName = null;
     }
 
+    public void addFavoriteRoute(int fromId, int toId)
+    {
+    	ArrayList<Point> routes = new ArrayList<Point>( Arrays.asList(getFavoriteRoutes()) );
+    	Point r = new Point(fromId, toId);
+    	if(!routes.contains(r)){
+    		routes.add(r);
+    		setFavoriteRoutes((Point[]) routes.toArray(new Point[routes.size()]));
+    	}
+    }
+
+    public void removeFavoriteRoute(int fromId, int toId)
+    {
+    	ArrayList<Point> routes = new ArrayList<Point>( Arrays.asList(getFavoriteRoutes()) );
+    	Point r = new Point(fromId, toId);
+    	if(routes.contains(r)){
+    		routes.remove(r);
+    		setFavoriteRoutes((Point[]) routes.toArray(new Point[routes.size()]));
+    	}
+    }
+
+    public boolean isFavoriteRoute(int fromId, int toId)
+    {
+    	ArrayList<Point> routes = new ArrayList<Point>( Arrays.asList(getFavoriteRoutes()) );
+    	Point r = new Point(fromId, toId);
+    	return routes.contains(r);
+    }
+    
+    public void clearFavoriteRoutes()
+    {
+        SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(PREFERENCE_FAVORITE_ROUTES + "_" + mMapName, "");
+        editor.commit();
+    }
+
+    public void setFavoriteRoutes(Point[] routes)
+    {
+        SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
+        StringBuilder sb = new StringBuilder();
+        int idx = 0;
+        for(Point p : routes){
+        	sb.append(StringUtil.formatPoint(p));
+        	idx++;
+        	if(idx<routes.length){
+        		sb.append(",");
+        	}
+        }
+        String routesBudle = sb.toString();
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(PREFERENCE_FAVORITE_ROUTES + "_" + mMapName, routesBudle);
+        editor.commit();
+    }
+    
+    public Point[] getFavoriteRoutes()
+    {
+        SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
+        String routes = preferences.getString(PREFERENCE_FAVORITE_ROUTES + "_" + mMapName, "");
+        return SerializeUtil.parsePointArray(routes);
+    }
+    
     public void saveScrollPosition(PointF position) {
         SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
         SharedPreferences.Editor editor = preferences.edit();

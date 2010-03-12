@@ -30,17 +30,6 @@
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
 				android:padding="5dip" android:layout_weight="0" />
 		</LinearLayout>
-		
-		<!-- <RadioGroup android:id="@+id/create_route_mode_group" android:orientation="horizontal"
-			android:gravity="center"
-			android:layout_width="fill_parent" android:layout_height="wrap_content">
-			<RadioButton android:id="@+id/create_route_mode_time"
-				android:text="@string/create_route_mode_time_button"
-				/>
-			<RadioButton android:id="@+id/create_route_mode_transfer"
-				android:text="@string/create_route_mode_transfer_button"/>
-		</RadioGroup>  -->
-		
 		<LinearLayout android:orientation="horizontal"
 			android:layout_width="fill_parent" android:layout_height="wrap_content"
 			android:paddingLeft="5dip" android:paddingBottom="5dip"

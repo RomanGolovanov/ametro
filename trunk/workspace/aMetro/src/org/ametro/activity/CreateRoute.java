@@ -21,6 +21,9 @@
 
 package org.ametro.activity;
 
+import static org.ametro.Constants.STATION_FROM_ID;
+import static org.ametro.Constants.STATION_TO_ID;
+
 import java.util.Date;
 
 import org.ametro.Constants;
@@ -34,6 +37,7 @@ import org.ametro.util.DateUtil;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -81,7 +85,7 @@ public class CreateRoute extends Activity implements OnClickListener,
     private final int MAIN_MENU_FAVORITES = 2;
 	
 	public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, MAIN_MENU_SWAP, 0, R.string.menu_swap).setIcon(android.R.drawable.ic_menu_rotate);
+        menu.add(0, MAIN_MENU_SWAP, 0, R.string.menu_swap).setIcon(android.R.drawable.ic_menu_revert);
         menu.add(0, MAIN_MENU_FAVORITES, 1, R.string.menu_favorites).setIcon(android.R.drawable.ic_menu_agenda);
 		return super.onCreateOptionsMenu(menu);
 	}
@@ -96,7 +100,12 @@ public class CreateRoute extends Activity implements OnClickListener,
             swapStations();
             return true;
         case MAIN_MENU_FAVORITES:
-        	startActivityForResult(new Intent(this,FavoriteRouteList.class), REQUEST_ROUTE);
+        	final Point[] routes = BrowseVectorMap.Instance.getFavoriteRoutes();
+    		if(routes== null || routes.length == 0){
+    			Toast.makeText(this, R.string.msg_msg_no_favorites, Toast.LENGTH_SHORT).show();
+    		}else{
+    			startActivityForResult(new Intent(this,FavoriteRouteList.class), REQUEST_ROUTE);
+    		}
         }		
 		return super.onOptionsItemSelected(item);
 	}
@@ -179,6 +188,17 @@ public class CreateRoute extends Activity implements OnClickListener,
 				}
 			}
 			break;
+		case REQUEST_ROUTE:
+			if(resultCode == RESULT_OK){
+				int fromId = data.getIntExtra(STATION_FROM_ID, -1);
+				int toId = data.getIntExtra(STATION_TO_ID, -1);
+				if(fromId!=-1 && toId!=-1){
+					SubwayStation from = mSubwayMap.stations[fromId];
+					mFromText.setText( StationListAdapter.getStationName(mSubwayMap, from) );				
+					SubwayStation to = mSubwayMap.stations[toId];
+					mToText.setText( StationListAdapter.getStationName(mSubwayMap, to) );				
+				}
+			}
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
