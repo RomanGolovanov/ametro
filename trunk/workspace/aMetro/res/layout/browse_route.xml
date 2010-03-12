@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:orientation="vertical">
+
+	<RelativeLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:background="@drawable/grey_gradient"
+		>
+		<ListView 
+			android:id="@+id/browse_route_stations"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			/>
+		<ImageButton android:id="@+id/browse_route_favorites"
+			android:layout_toRightOf="@id/browse_route_stations"
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content"
+			android:padding="2px"
+			android:layout_marginTop="30dip"
+			android:background="#00000000"
+			 />
+			
+		<LinearLayout
+			android:layout_below="@id/browse_route_stations"
+			android:background="@drawable/white_gradient" 
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			android:gravity="center"
+			>
+			<TextView 
+				android:textColor="#ff000000"
+				android:id="@+id/browse_route_time_text"
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content" />
+		</LinearLayout>
+	</RelativeLayout>
+
+	<ListView android:id="@+id/browse_route_list_view"
+		android:layout_width="fill_parent" android:layout_height="wrap_content" />
+
+</LinearLayout>

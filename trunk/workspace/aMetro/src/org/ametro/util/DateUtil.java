@@ -71,9 +71,9 @@ public class DateUtil {
         return getDate(date, "HH:mm");
     }
 
-    public static String getLongTime(long seconds) {
+    public static String getTimeHHMM(long seconds) {
 		Date date = new Date(seconds * 1000);
-        return getDateUTC(date, "HH:mm:ss");
+        return getDateUTC(date, "HH:mm");
 	}
 
     public static Date parseDate(String date, String format) throws ParseException {

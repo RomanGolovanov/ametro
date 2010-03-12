@@ -4,7 +4,6 @@
     <string name="day">Day</string>
     <string name="night">Night</string>
     <string name="stress">Stress</string>
-    
     <string name="import_status_not_imported">not imported</string>
     <string name="import_status_deprecated">new version</string>
     <string name="import_status_uptodate">already imported</string>
@@ -16,14 +15,11 @@
     <string name="import_status_old_version">old version</string>
     <string name="import_title_importing">Import</string>
     <string name="import_title_empty">Import - empty</string>
-    
     <string name="template_progress_count">%s of %s</string>
     <string name="template_progress_percent">%s%%</string>
-    
     <string name="search_label">label</string>
     <string name="search_hint">search stations...</string>
     <string name="search_station">Station Search</string>
-    
     <string name="create_route_from">source station</string>
     <string name="create_route_to">destination station</string>
     <string name="create_route_swap_button">Swap</string>
@@ -31,11 +27,9 @@
     <string name="create_route_wait_title">Find routes</string>
     <string name="create_route_wait_text">Please wait...</string>
     <string name="create_route_mode_transfer_button">Time</string>
-    <string name="create_route_mode_time_button">Tranf</string>
-
+    <string name="create_route_mode_time_button">Transfers</string>
     <string name="pref_section_general">General</string>
     <string name="pref_section_debug">Debug</string>
-
     <string name="pref_locale_key">LOCALE</string>
     <string name="pref_locale">Language</string>
     <string name="pref_auto_update_map_index">Auto update map index</string>
@@ -44,36 +38,31 @@
     <string name="pref_auto_update_maps_key">AUTO_UPDATE_MAPS</string>
     <string name="pref_auto_locate">Auto check Your location</string>
     <string name="pref_auto_locate_key">AUTO_LOCATION</string>
-
     <string name="pref_locale_description">Language with used to display UI and data</string>
     <string name="pref_auto_update_map_index_description">Update map list when Internet available</string>
     <string name="pref_auto_update_maps_description">Update maps when Internet available</string>
     <string name="pref_auto_locate_description">Use GPS/GSM location to locate Your position</string>
-
     <string name="pref_debug">Debug enabled</string>
     <string name="pref_debug_key">DEBUG</string>
     <string name="pref_debug_description">Check for display debug messages</string>
-
     <string name="pref_auto_import_addons">Import Addons</string>
     <string name="pref_auto_import_addons_description">import text information from PMZ maps</string>
     <string name="pref_auto_import_addons_key">IMPORT_ADDONS</string>
+    <string name="text_about">
+&lt;h4&gt;aMetro v.%s&lt;h4&gt;
+&lt;h5&gt;This is a program of cities underground and Metro.&lt;/h6&gt;
+&lt;h6&gt;Displays the metro schemes, allows you to find the shortest path between stations, and also describes what is next to the stations. Maps are compatible with the project from pMetro. ©2010&lt;/h6&gt;
 
-        <string name="text_about"><![CDATA[
-<h4>aMetro v.%s<h4>
-<h5>This is a program of cities underground and Metro.</h6>
-<h6>Displays the metro schemes, allows you to find the shortest path between stations, and also describes what is next to the stations. Maps are compatible with the project from pMetro. ©2010</h6>
+&lt;p&gt;
+Developers: Golovanov Roman, Vinichenko Vlad&lt;br/&gt;
+Testers: Kuzmin Alexander, Nikitin Alexey&lt;br/&gt;
+Design: Dusty Rat&lt;br/&gt;
+&lt;/p&gt;
 
-<p>
-Developers: Golovanov Roman, Vinichenko Vlad<br/>
-Testers: Kuzmin Alexander, Nikitin Alexey<br/>
-Design: Dusty Rat<br/>
-</p>
-
-<p>Thanks to Boris Muradov (pMetro’s author, www.pmetro.su) for providing info and materials.</p>
-<p>Developers’s site: http://sites.google.com/site/ametroproject</p>
-<p>Your questions and suggestions send to ametroproject@gmail.com</p>
-	]]></string>
-	
+&lt;p&gt;Thanks to Boris Muradov (pMetro’s author, www.pmetro.su) for providing info and materials.&lt;/p&gt;
+&lt;p&gt;Developers’s site: http://sites.google.com/site/ametroproject&lt;/p&gt;
+&lt;p&gt;Your questions and suggestions send to ametroproject@gmail.com&lt;/p&gt;
+	</string>
     <string name="menu_search">Search</string>
     <string name="menu_library">Maps</string>
     <string name="menu_routes">Routes</string>
@@ -100,8 +89,7 @@ Design: Dusty Rat<br/>
     <string name="menu_ignore">Ignore</string>
     <string name="menu_swap">Swap</string>
     <string name="menu_show_on_map">Show On Map</string>
-    <string name="menu_"></string>
-    
+    <string name="menu_"/>
     <string name="msg_loading">Loading...</string>
     <string name="msg_caching">Caching map...</string>
     <string name="msg_no_maps_in_library">No maps in library</string>
@@ -123,10 +111,9 @@ Design: Dusty Rat<br/>
     <string name="msg_import_pmz_files">Importing PMZ files...</string>
     <string name="msg_import_failed">Import failed</string>
     <string name="msg_station_not_found">Not Found</string>
-    <string name="msg_"></string>
-    
-   
-    
+    <string name="msg_route_added_to_favorites">Added to Favorites</string>
+    <string name="msg_route_removed_from_favorites">Removed from Favorites</string>
+    <string name="msg_"/>
     <string name="log_map_indexing_failed">Map indexing failed for </string>
     <string name="log_save_map_zoom">Save map zoom </string>
     <string name="log_save_map_position">Save map position </string>
@@ -139,8 +126,5 @@ Design: Dusty Rat<br/>
     <string name="log_failed_map_loading">Failed map loading</string>
     <string name="log_pmz_indexing_error">PMZ indexing error</string>
     <string name="log_import_failed">Import failed</string>
-    <string name="log_"></string>
-    
-    
+    <string name="log_"/>
 </resources>
-

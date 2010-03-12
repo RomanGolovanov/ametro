@@ -20,15 +20,45 @@
  */
 package org.ametro.adapter;
 
+import org.ametro.model.SubwayLine;
 import org.ametro.model.SubwayMap;
 import org.ametro.model.SubwayRoute;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Bitmap.Config;
+import android.graphics.Paint.Style;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 
 public class RouteListViewAdapter extends StationListAdapter {
 
+	protected final Paint mBackgroundPaint;
+	
 	public RouteListViewAdapter(Activity activity, SubwayRoute route, SubwayMap map) {
 		super(activity, route.getStations(), route.getDelays(), map);
+		mBackgroundPaint = new Paint();
+		mBackgroundPaint.setStyle(Style.STROKE);
+		mBackgroundPaint.setAntiAlias(true);
+		mBackgroundPaint.setColor(Color.BLACK);
+		mBackgroundPaint.setStrokeWidth(2);
 	}
 
+	protected Drawable getLineIcon(SubwayLine line) {
+		Drawable dw = mLineDrawabled.get(line);
+		if(dw == null){
+			Bitmap bmp = Bitmap.createBitmap(30, 50, Config.ARGB_8888);
+			Canvas c = new Canvas(bmp);
+			mPaint.setColor(line.color);
+			c.drawRect(10-1,0,20+1,50, mPaint);
+			c.drawCircle(15, 25, 9, mPaint);
+			c.drawCircle(15, 25, 9, mBackgroundPaint);
+			dw = new BitmapDrawable(bmp);
+			mLineDrawabled.put(line, dw);
+		}
+		return dw;
+	}	
 }

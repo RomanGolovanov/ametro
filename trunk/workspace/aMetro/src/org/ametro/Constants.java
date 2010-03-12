@@ -34,4 +34,7 @@ public class Constants {
 
 	public static final String PREFERENCE_NAME = "aMetro";
 
+	public final static String STATION_ID = "STATION_ID";
+
+	
 }

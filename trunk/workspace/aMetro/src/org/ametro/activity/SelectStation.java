@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import org.ametro.Constants;
 import org.ametro.R;
 import org.ametro.adapter.StationListAdapter;
 import org.ametro.model.SubwayMap;
@@ -39,8 +40,6 @@ import android.view.View;
 import android.widget.ListView;
 
 public class SelectStation extends ListActivity {
-
-	public final static String STATION_ID = "STATION_ID";
 
 	private final int MAIN_MENU_BY_NAME = 1;
 	private final int MAIN_MENU_BY_LINE = 2;
@@ -105,7 +104,7 @@ public class SelectStation extends ListActivity {
 		mSelection = -1;
 		Intent data = getIntent();
 		if(data!=null){
-			int id = data.getIntExtra(STATION_ID, -1);
+			int id = data.getIntExtra(Constants.STATION_ID, -1);
 			if(id!=-1){
 				mSelection = id;
 			}
@@ -121,7 +120,7 @@ public class SelectStation extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		SubwayStation station = mAdapter.getStation(position);
 		Intent data = new Intent();
-		data.putExtra(STATION_ID, station.id);
+		data.putExtra(Constants.STATION_ID, station.id);
 		setResult(RESULT_OK, data);
 		finish();
 		super.onListItemClick(l, v, position, id);

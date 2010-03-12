@@ -21,21 +21,99 @@
 
 package org.ametro.activity;
 
+import java.util.ArrayList;
+
+import org.ametro.R;
 import org.ametro.adapter.RouteListViewAdapter;
+import org.ametro.adapter.StationListAdapter;
 import org.ametro.model.SubwayMap;
 import org.ametro.model.SubwayRoute;
+import org.ametro.model.SubwayStation;
+import org.ametro.util.DateUtil;
 
-import android.app.ListActivity;
+import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.widget.ListAdapter;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
-public class BrowseRoute extends ListActivity {
-	
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        SubwayMap map = BrowseVectorMap.Instance.getSubwayMap();
-        SubwayRoute route = BrowseVectorMap.Instance.getNavigationRoute();
-        ListAdapter adapter = new RouteListViewAdapter(this, route, map);
-        this.setListAdapter(adapter);
-    }
+public class BrowseRoute extends Activity implements OnClickListener,
+		OnItemClickListener {
+
+	private ListView mRouteList;
+	private ImageButton mFavoritesButton;
+	private ListView mStationList;
+	private TextView mTextTime;
+
+	private SubwayMap mSubwayMap;
+	private SubwayRoute mRoute;
+
+	private boolean isChecked;
+
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.browse_route);
+		mRouteList = (ListView) findViewById(R.id.browse_route_list_view);
+		mStationList = (ListView) findViewById(R.id.browse_route_stations);
+		mTextTime = (TextView) findViewById(R.id.browse_route_time_text);
+		mFavoritesButton = (ImageButton) findViewById(R.id.browse_route_favorites);
+
+		mSubwayMap = BrowseVectorMap.Instance.getSubwayMap();
+		mRoute = BrowseVectorMap.Instance.getNavigationRoute();
+		RouteListViewAdapter adapter = new RouteListViewAdapter(this, mRoute,
+				mSubwayMap);
+		adapter.setTextColor(Color.WHITE);
+		mRouteList.setAdapter(adapter);
+		mRouteList.setOnItemClickListener(this);
+
+		ArrayList<SubwayStation> stations = new ArrayList<SubwayStation>();
+		stations.add(mRoute.getStationFrom());
+		stations.add(mRoute.getStationTo());
+		StationListAdapter stationListAdapter = new StationListAdapter(this,
+				stations, mSubwayMap);
+		stationListAdapter.setTextColor(Color.WHITE);
+		mStationList.setAdapter(stationListAdapter);
+		mStationList.setEnabled(false);
+
+		isChecked = false;
+		updateFavoritesButton();
+		mFavoritesButton.setOnClickListener(this);
+
+		mTextTime.setText(getString(R.string.msg_route_time) + " "
+				+ DateUtil.getTimeHHMM(mRoute.getTime()));
+	}
+
+	private void updateFavoritesButton() {
+		if (isChecked) {
+			mFavoritesButton
+					.setImageResource(android.R.drawable.btn_star_big_on);
+		} else {
+			mFavoritesButton
+					.setImageResource(android.R.drawable.btn_star_big_off);
+		}
+	}
+
+	public void onClick(View v) {
+		if (v == mFavoritesButton) {
+			isChecked = !isChecked;
+			updateFavoritesButton();
+			Toast.makeText(this, 
+					isChecked 
+					? getString(R.string.msg_route_added_to_favorites)
+					: getString(R.string.msg_route_removed_from_favorites),
+							Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	public void onItemClick(AdapterView<?> av, View v, int position, long id) {
+		SubwayStation station = mSubwayMap.stations[(int) id];
+		BrowseVectorMap.Instance.setCurrentStation(station);
+		finish();
+	}
 }
