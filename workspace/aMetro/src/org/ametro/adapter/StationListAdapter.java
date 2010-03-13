@@ -163,7 +163,7 @@ public class StationListAdapter extends BaseAdapter implements Filterable {
 	
 	protected static final int ICON_WIDTH = 30;
 	protected static final int ICON_HEIGHT = 46;
-	protected static final int ICON_DIAMETER = 9;
+	protected static final int ICON_DIAMETER = 7;
 	protected static final int ICON_LINE_WITH = 5;
 	protected static final int ICON_HALF_WIDTH = ICON_WIDTH/2;
 	protected static final int ICON_HALF_HEIGHT = ICON_HEIGHT/2;

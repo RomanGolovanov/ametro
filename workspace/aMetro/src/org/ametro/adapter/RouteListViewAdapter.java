@@ -38,6 +38,8 @@ public class RouteListViewAdapter extends StationListAdapter {
 
 	protected final Paint mBackgroundPaint;
 
+	protected static final int ICON_DIAMETER = 9;
+	
 	private Drawable mFirstItemDrawable;
 	private Drawable mLastItemDrawable;
 
