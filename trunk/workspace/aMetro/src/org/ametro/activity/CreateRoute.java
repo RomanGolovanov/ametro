@@ -24,8 +24,6 @@ package org.ametro.activity;
 import static org.ametro.Constants.STATION_FROM_ID;
 import static org.ametro.Constants.STATION_TO_ID;
 
-import java.util.Date;
-
 import org.ametro.Constants;
 import org.ametro.R;
 import org.ametro.adapter.StationListAdapter;
@@ -53,7 +51,6 @@ import android.view.animation.Animation.AnimationListener;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 public class CreateRoute extends Activity implements OnClickListener,
@@ -65,12 +62,11 @@ public class CreateRoute extends Activity implements OnClickListener,
 	private AutoCompleteTextView mToText;
 
 	private Button mCreateButton;
+	private Button mFavoritesButton;
 
 	private ImageButton mFromButton;
 	private ImageButton mToButton;
 	
-	private Spinner mTimeSpinner;
-
 	private CreateRouteTask mCreateRouteTask;
 	
 	private View mPanel;
@@ -117,13 +113,13 @@ public class CreateRoute extends Activity implements OnClickListener,
 		mPanel = (View) findViewById(R.id.create_route_panel);
 
 		mCreateButton = (Button) findViewById(R.id.create_route_create_button);
-
+		mFavoritesButton = (Button) findViewById(R.id.create_route_favorites_button);
 		mFromButton = (ImageButton) findViewById(R.id.create_route_from_button);
 		mToButton = (ImageButton) findViewById(R.id.create_route_to_button);
 		
-		mTimeSpinner = (Spinner)findViewById(R.id.create_route_time_spinner);
 		
 		mCreateButton.setOnClickListener(this);
+		mFavoritesButton.setOnClickListener(this);
 		mFromButton.setOnClickListener(this);
 		mToButton.setOnClickListener(this);
 
@@ -156,16 +152,6 @@ public class CreateRoute extends Activity implements OnClickListener,
 				mFromText.setText( StationListAdapter.getStationName(mSubwayMap, station) );
 				mFromText.setSelectAllOnFocus(true);
 			}
-		}
-		
-		Date now = new Date();
-		int hour = now.getHours();
-		if(hour < 7 || hour > 19){
-			mTimeSpinner.setSelection(1);
-		}else if(hour  > 9 || hour < 17){
-			mTimeSpinner.setSelection(0);
-		}else{
-			mTimeSpinner.setSelection(2);
 		}
 		
 	}
@@ -238,7 +224,9 @@ public class CreateRoute extends Activity implements OnClickListener,
 				mCreateRouteTask.execute(from, to);
 			}
 		}
-
+		if (v == mFavoritesButton){
+   			startActivityForResult(new Intent(this,FavoriteRouteList.class), REQUEST_ROUTE);
+		}
 	}
 
 	private void swapStations() {
@@ -310,7 +298,6 @@ public class CreateRoute extends Activity implements OnClickListener,
 			}
 			finishActivity();
 		}
-
 	}
 
 	private SubwayStation getStationByName(String text) {

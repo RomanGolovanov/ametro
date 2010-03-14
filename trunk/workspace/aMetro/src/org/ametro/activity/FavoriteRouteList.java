@@ -106,6 +106,11 @@ public class FavoriteRouteList extends Activity implements OnClickListener, OnIt
 		return super.onOptionsItemSelected(item);
 	}
 	
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		menu.findItem(MENU_REMOVE).setVisible(!mDeletePanelVisible);
+		return super.onPrepareOptionsMenu(menu);
+	}
+	
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
 		menu.add(ContextMenu.NONE, CONTEXT_MENU_SELECT, CONTEXT_MENU_SELECT, R.string.menu_select);
 		menu.add(ContextMenu.NONE, CONTEXT_MENU_REMOVE, CONTEXT_MENU_REMOVE, R.string.menu_remove);

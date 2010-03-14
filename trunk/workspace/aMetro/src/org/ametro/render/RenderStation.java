@@ -75,7 +75,7 @@ public class RenderStation extends RenderElement {
         setProperties(RenderProgram.TYPE_STATION, new Rect(localX - radius, localY - radius, localX + radius, localY + radius));
     }
 
-    public void setMode(boolean grayed)
+    protected void setMode(boolean grayed)
     {
     	paintColor.setAlpha(grayed ?  80 : 255);
     }

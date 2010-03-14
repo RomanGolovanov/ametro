@@ -30,6 +30,7 @@ import android.util.AttributeSet;
 import org.ametro.model.SubwayMap;
 import org.ametro.model.SubwaySegment;
 import org.ametro.model.SubwayStation;
+import org.ametro.model.SubwayTransfer;
 import org.ametro.render.RenderProgram;
 
 public class VectorMapView extends BaseMapView {
@@ -59,8 +60,8 @@ public class VectorMapView extends BaseMapView {
         }
     }
 
-    public void setModelSelection(List<SubwayStation> stations, List<SubwaySegment> segments){
-    	mRenderProgram.updateSelection(stations, segments);
+    public void setModelSelection(List<SubwayStation> stations, List<SubwaySegment> segments, List<SubwayTransfer> transfers){
+    	mRenderProgram.updateSelection(stations, segments, transfers);
     	destroyTileCache();
     }
     

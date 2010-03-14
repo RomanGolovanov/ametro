@@ -28,18 +28,26 @@ public abstract class RenderElement implements Comparable<RenderElement> {
 
     public int type;
     public Rect boundingBox;
+    public int selected;
 
     public void setProperties(int newPriority, Rect newBoundingBox) {
         type = newPriority;
         boundingBox = newBoundingBox;
+        selected = 0;
     }
 
-    public abstract void setMode(boolean grayed);
+    public void setSelection(boolean selected){
+    	this.selected = selected ? 1 : 0;
+    	setMode(!selected);
+    }
+    
+    protected abstract void setMode(boolean grayed);
     
     public abstract void draw(Canvas canvas);
 
     public int compareTo(RenderElement another) {
-        return type - another.type;
+    	int base = this.selected - another.selected;
+        return base != 0 ? base : type - another.type;
     }
 
 }

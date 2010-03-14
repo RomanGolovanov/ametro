@@ -25,6 +25,7 @@ import android.graphics.*;
 import org.ametro.model.SubwayMap;
 import org.ametro.model.SubwaySegment;
 import org.ametro.model.SubwayStation;
+import org.ametro.model.SubwayTransfer;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -51,11 +52,14 @@ public class RenderProgram {
 	int[] mTypes;
 	int mRenderFilter;
 	SubwayMap mSubwayMap;
+	ArrayList<RenderElement> mRenderQueue;
 
 	HashMap<SubwaySegment, RenderElement> segmentIndex = new HashMap<SubwaySegment, RenderElement>();
 	HashMap<SubwayStation, RenderElement> stationIndex = new HashMap<SubwayStation, RenderElement>();
 	HashMap<SubwayStation, RenderElement> stationNameIndex = new HashMap<SubwayStation, RenderElement>();
-	HashMap<SubwayStation, List<RenderElement>> stationTransferIndex = new HashMap<SubwayStation, List<RenderElement>>();
+	HashMap<SubwayTransfer, RenderElement> transferBackgroundIndex = new HashMap<SubwayTransfer, RenderElement>();
+	HashMap<SubwayTransfer, RenderElement> transferIndex = new HashMap<SubwayTransfer, RenderElement>();
+	
 
 	public void setRenderFilter(int renderFilter) {
 		mRenderFilter = renderFilter;
@@ -63,12 +67,17 @@ public class RenderProgram {
 
 	public RenderProgram(SubwayMap subwayMap) {
 		mSubwayMap = subwayMap;
-		ArrayList<RenderElement> renderQueue = new ArrayList<RenderElement>();
-		drawLines(subwayMap, renderQueue);
-		drawTransfers(subwayMap, renderQueue);
-		drawStations(subwayMap, renderQueue);
-		Collections.sort(renderQueue);
-		mElements = renderQueue.toArray(new RenderElement[renderQueue.size()]);
+		mRenderQueue = new ArrayList<RenderElement>();
+		drawLines(subwayMap, mRenderQueue);
+		drawTransfers(subwayMap, mRenderQueue);
+		drawStations(subwayMap, mRenderQueue);
+		updateRenderQueue();
+		mRenderFilter = ALL;
+	}
+
+	private void updateRenderQueue() {
+		Collections.sort(mRenderQueue);
+		mElements = mRenderQueue.toArray(new RenderElement[mRenderQueue.size()]);
 		final int count = mElements.length;
 		mVisibility = new boolean[count];
 		mBounds = new Rect[count];
@@ -78,7 +87,6 @@ public class RenderProgram {
 			mBounds[i] = mElements[i].boundingBox;
 			mTypes[i] = mElements[i].type;
 		}
-		mRenderFilter = ALL;
 	}
 
 	public void invalidateVisible(RectF viewport) {
@@ -95,30 +103,38 @@ public class RenderProgram {
 		final int count = bounds.length;
 		for (int i = 0; i < count; i++) {
 			final Rect box = new Rect(bounds[i]);
-
 			visibility[i] = ((filters[i] & filter) > 0) && Rect.intersects(v, box);
 		}
 	}
 
 	
-	public void updateSelection(List<SubwayStation> stations, List<SubwaySegment> segments){
+	public void updateSelection(List<SubwayStation> stations, List<SubwaySegment> segments, List<SubwayTransfer> transfers){
 		if(stations!=null || segments!=null){
 			for(RenderElement elem : mElements){
-				elem.setMode(true);
+				elem.setSelection(false);
 			}
 		
 			if(stations!=null){
 				for(SubwayStation station : stations){
-					stationIndex.get(station).setMode(false);
+					
+					stationIndex.get(station).setSelection(true);
+					
 					RenderElement stationName = stationNameIndex.get(station);
 					if(stationName!=null){
-						stationName.setMode(false);
+						stationName.setSelection(true);
 					}
-					List<RenderElement> stationTransfers = stationTransferIndex.get(station);
-					if(stationTransfers!=null){
-						for(RenderElement transfer : stationTransfers){
-							transfer.setMode(false);
-						}
+				}
+			}
+			if(transfers!=null){
+				for(SubwayTransfer transfer : transfers){
+					RenderElement elem;
+					elem = transferBackgroundIndex.get(transfer);
+					if(elem!=null){
+						elem.setSelection(true);
+					}
+					elem = transferIndex.get(transfer);
+					if(elem!=null){
+						elem.setSelection(true);
 					}
 				}
 			}
@@ -126,13 +142,13 @@ public class RenderProgram {
 				for(SubwaySegment segment : segments){
 					RenderElement elem = segmentIndex.get(segment);
 					if(elem!=null){
-						elem.setMode(false);
+						elem.setSelection(true);
 					}else{
 						SubwaySegment opposite = mSubwayMap.getSegment(segment.toStationId, segment.fromStationId);
 						if(opposite!=null){
 							elem = segmentIndex.get(opposite);
 							if(elem!=null){
-								elem.setMode(false);
+								elem.setSelection(true);
 							}
 						}
 					}
@@ -141,9 +157,10 @@ public class RenderProgram {
 			
 		}else{
 			for(RenderElement elem : mElements){
-				elem.setMode(false);
+				elem.setSelection(true);
 			}
 		}
+		updateRenderQueue();
 	}
 
 	public void draw(Canvas canvas) {
@@ -176,28 +193,16 @@ public class RenderProgram {
 	}
 
 	private void drawTransfers(SubwayMap subwayMap, ArrayList<RenderElement> renderQueue) {
-		for (SubwaySegment transfer : subwayMap.transfers) {
+		for (SubwayTransfer transfer : subwayMap.transfers) {
 			RenderElement elementBackground = new RenderTransferBackground(subwayMap, transfer);
 			RenderElement elementTransfer = new RenderTransfer(subwayMap, transfer);
 
 			renderQueue.add(elementBackground);
 			renderQueue.add(elementTransfer);
 			
-			List<RenderElement> from = stationTransferIndex.get(subwayMap.stations[transfer.fromStationId]);
-			if(from==null){
-				from = new ArrayList<RenderElement>();
-				stationTransferIndex.put(subwayMap.stations[transfer.fromStationId], from);
-			}
-			from.add(elementTransfer);
-			from.add(elementBackground);
-			
-			List<RenderElement> to = stationTransferIndex.get(subwayMap.stations[transfer.toStationId]);
-			if(to==null){
-				to = new ArrayList<RenderElement>();
-				stationTransferIndex.put(subwayMap.stations[transfer.toStationId], to);
-			}
-			to.add(elementTransfer);
-			to.add(elementBackground);
+			transferIndex.put(transfer, elementTransfer);
+			transferBackgroundIndex.put(transfer, elementBackground);
+
 		}
 	}
 

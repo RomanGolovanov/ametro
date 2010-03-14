@@ -17,6 +17,7 @@ public class SubwayRoute {
 
 	private ArrayList<SubwaySegment> mSegments;
 	private ArrayList<SubwayStation> mStations;
+	private ArrayList<SubwayTransfer> mTransfers;
 	private HashMap<SubwayStation,Long> mStationToDelay;
 	private ArrayList<Long> mDelays;
 	
@@ -82,6 +83,14 @@ public class SubwayRoute {
 		return mSegments;
 	}
 
+	public ArrayList<SubwayTransfer> getTransfers() {
+		if (mSegments == null){
+			findRoute();
+		}
+		return mTransfers;
+	}
+	
+
 	public void findRoute() {
 		final SubwayMap map = mSubwayMap;
 		final int count = map.stations.length;
@@ -106,6 +115,7 @@ public class SubwayRoute {
 	    int[] pred = new int[count];
 	    ArrayList<SubwaySegment> segments = new ArrayList<SubwaySegment>();
 	    ArrayList<SubwayStation> stations = new ArrayList<SubwayStation>();
+	    ArrayList<SubwayTransfer> transfers = new ArrayList<SubwayTransfer>();
 	    ArrayList<Long> delays = new ArrayList<Long>();
 	    HashMap<SubwayStation, Long> stationToDelay = new HashMap<SubwayStation, Long>();
 	    DijkstraHeap.dijkstra(g, mFromId, distances, pred);
@@ -121,6 +131,16 @@ public class SubwayRoute {
 	    	SubwaySegment seg = map.getSegment(from, to);
 	    	if(seg!=null){
 	    		segments.add(seg);
+	    	}else{
+	    		SubwayTransfer transfer = map.getTransfer(from, to);
+	    		if(transfer!=null){
+	    			transfers.add(transfer);
+	    		}else{
+	    			transfer = map.getTransfer(to, from);
+	    			if(transfer!=null){
+		    			transfers.add(transfer);
+		    		}
+	    		}
 	    	}
 	    	to = from;
 	    	from = pred[to];
@@ -133,6 +153,7 @@ public class SubwayRoute {
 	    }
 	    
 	    if(segments!=null && segments.size()>0){
+	    	mTransfers = transfers;
 	    	mSegments = segments;
     		Collections.reverse(stations);
 	    	mStations = stations;
