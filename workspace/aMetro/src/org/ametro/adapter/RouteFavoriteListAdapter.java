@@ -106,6 +106,10 @@ public class RouteFavoriteListAdapter extends BaseAdapter implements OnClickList
 		return mIsCheckboxesVisible;
 	}
 	
+	public boolean[] getChecked(){
+		return mChecked;
+	}
+	
 	public int getCount() {
 		return mRoutes.length;
 	}
@@ -138,7 +142,7 @@ public class RouteFavoriteListAdapter extends BaseAdapter implements OnClickList
 		ListItemWrapper wrapper = null;
 		
 		if(convertView==null){
-			view = mContextActivity.getLayoutInflater().inflate(R.layout.route_favorite_list_item, null);
+			view = mContextActivity.getLayoutInflater().inflate(R.layout.favorite_route_list_item, null);
 			wrapper = new ListItemWrapper(view);
 			if(mTextColor!=null){
 				wrapper.NameFrom.setTextColor(mTextColor);

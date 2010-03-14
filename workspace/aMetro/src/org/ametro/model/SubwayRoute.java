@@ -96,7 +96,7 @@ public class SubwayRoute {
 		}
 		for(SubwayTransfer tr : map.transfers){
 			Double delay = tr.delay;
-			if (delay != null) {
+			if (delay != null && delay != 0) {
 				int d = (int)Math.round(delay);
 				g.addEdge(tr.fromStationId,tr.toStationId, d);
 				g.addEdge(tr.toStationId, tr.fromStationId, d);

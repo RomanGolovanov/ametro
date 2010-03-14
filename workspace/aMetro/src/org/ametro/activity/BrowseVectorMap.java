@@ -162,26 +162,20 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		menu.add(0, MAIN_MENU_FIND, 0, R.string.menu_search).setIcon(
-				android.R.drawable.ic_menu_search);
-		menu.add(0, MAIN_MENU_LIBRARY, 1, R.string.menu_library).setIcon(
-				android.R.drawable.ic_menu_mapmode);
-		menu.add(0, MAIN_MENU_ROUTES, 2, R.string.menu_routes).setIcon(
-				android.R.drawable.ic_menu_directions);
-		menu.add(0, MAIN_MENU_SETTINGS, 5, R.string.menu_settings).setIcon(
-				android.R.drawable.ic_menu_preferences);
-		menu.add(0, MAIN_MENU_ABOUT, 6, R.string.menu_about);
-
-		menu.add(0, MAIN_MENU_TIME, 3, R.string.menu_time).setIcon(
-				android.R.drawable.ic_menu_rotate);
-		menu.add(0, MAIN_MENU_STATION, 4, R.string.menu_station).setIcon(
-				android.R.drawable.ic_menu_info_details);
+		menu.add(0, MAIN_MENU_FIND, 0, R.string.menu_search).setIcon(android.R.drawable.ic_menu_search);
+		menu.add(0, MAIN_MENU_INFO, 1, R.string.menu_info).setIcon(android.R.drawable.ic_menu_info_details);
+		menu.add(0, MAIN_MENU_ROUTES, 2, R.string.menu_routes).setIcon(android.R.drawable.ic_menu_directions);
+		menu.add(0, MAIN_MENU_LAYERS, 3, R.string.menu_layers).setIcon(android.R.drawable.ic_menu_agenda);
+		menu.add(0, MAIN_MENU_SCHEMES, 4, R.string.menu_schemes).setIcon(android.R.drawable.ic_menu_sort_by_size);
+		menu.add(0, MAIN_MENU_LIBRARY, 5, R.string.menu_library).setIcon(android.R.drawable.ic_menu_mapmode);
+		menu.add(0, MAIN_MENU_SETTINGS, 6, R.string.menu_settings).setIcon(android.R.drawable.ic_menu_preferences);
+		menu.add(0, MAIN_MENU_ABOUT, 7, R.string.menu_about);
 
 		return true;
 	}
 
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		menu.findItem(MAIN_MENU_STATION).setEnabled(mCurrentStation!=null);
+		menu.findItem(MAIN_MENU_INFO).setEnabled(mCurrentStation!=null);
 		return super.onPrepareOptionsMenu(menu);
 	}
 
@@ -202,9 +196,11 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		case MAIN_MENU_ABOUT:
 			startActivity(new Intent(this, About.class));
 			return true;
-		case MAIN_MENU_TIME:
+		case MAIN_MENU_LAYERS:
 			return true;
-		case MAIN_MENU_STATION:
+		case MAIN_MENU_SCHEMES:
+			return true;
+		case MAIN_MENU_INFO:
 			startActivity(new Intent(this, BrowseStation.class));
 			return true;
 		}
@@ -756,10 +752,11 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	private final int MAIN_MENU_FIND = 1;
 	private final int MAIN_MENU_LIBRARY = 2;
 	private final int MAIN_MENU_ROUTES = 3;
-	private final int MAIN_MENU_TIME = 4;
-	private final int MAIN_MENU_STATION = 5;
-	private final int MAIN_MENU_SETTINGS = 6;
-	private final int MAIN_MENU_ABOUT = 7;
+	private final int MAIN_MENU_LAYERS = 4;
+	private final int MAIN_MENU_SCHEMES = 5;
+	private final int MAIN_MENU_INFO = 6;
+	private final int MAIN_MENU_SETTINGS = 7;
+	private final int MAIN_MENU_ABOUT = 8;
 
 	private final float[] ZOOMS = new float[]{1.5f, 1.0f, 0.8f, 0.6f, 0.4f, 0.3f, 0.2f, 0.1f};
 	private final int[] STEPS = new int[]{15, 10, 8, 6, 4, 3, 2, 1};
