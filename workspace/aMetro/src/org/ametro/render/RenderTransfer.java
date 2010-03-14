@@ -71,7 +71,7 @@ public class RenderTransfer extends RenderElement {
         setProperties(RenderProgram.TYPE_TRANSFER, new Rect(left, top, right, bottom));
     }
 
-    public void setMode(boolean grayed)
+    protected void setMode(boolean grayed)
     {
     	//Paint.setAlpha(grayed ? 80 : 255);
     }

@@ -108,7 +108,7 @@ public class RenderSegment extends RenderElement {
         }
     }
 
-    public void setMode(boolean grayed)
+    protected void setMode(boolean grayed)
     {
     	paint.setAlpha(grayed ?  80 : 255);
     }

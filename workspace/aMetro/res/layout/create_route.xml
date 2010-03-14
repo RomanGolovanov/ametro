@@ -4,12 +4,14 @@
 	android:layoutAnimation="@anim/layout_top_to_bottom"
 	android:orientation="vertical" android:background="#80808080">
 	<LinearLayout android:layout_width="fill_parent"
-		android:id="@+id/create_route_panel" android:layout_height="wrap_content"
-		android:orientation="vertical" android:background="@drawable/grey_gradient">
+		android:id="@+id/create_route_panel" 
+		android:layout_height="wrap_content"
+		android:orientation="vertical" 
+		android:background="@drawable/dark_gradient">
 		<LinearLayout android:orientation="horizontal"
 			android:layout_width="fill_parent" android:layout_height="wrap_content"
 			android:paddingLeft="5dip" android:paddingTop="5dip"
-			android:paddingRight="5dip">
+			android:paddingRight="5dip" android:background="#00000000">
 			<AutoCompleteTextView android:id="@+id/create_route_from_text"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
 				android:hint="@string/create_route_from" android:layout_weight="1" />
@@ -21,7 +23,7 @@
 		<LinearLayout android:orientation="horizontal"
 			android:layout_width="fill_parent" android:layout_height="wrap_content"
 			android:paddingLeft="5dip" android:paddingBottom="5dip"
-			android:paddingRight="5dip">
+			android:paddingRight="5dip"  android:background="#00000000">
 			<AutoCompleteTextView android:id="@+id/create_route_to_text"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
 				android:hint="@string/create_route_to" android:layout_weight="1" />
@@ -33,18 +35,29 @@
 		<LinearLayout android:orientation="horizontal"
 			android:layout_width="fill_parent" android:layout_height="wrap_content"
 			android:paddingLeft="5dip" android:paddingBottom="5dip"
-			android:gravity="center" android:paddingRight="5dip">
+			android:gravity="center" android:paddingRight="5dip"
+			 android:background="#00000000">
 
-			<Spinner android:id="@+id/create_route_time_spinner"
-				android:layout_width="wrap_content" android:layout_height="wrap_content" 
-				android:entries="@array/create_route_times"
-				/> 
+			<Button android:id="@+id/create_route_favorites_button"
+				android:drawableLeft="@android:drawable/star_big_on" android:text="@string/create_route_favorites_button"
+				android:paddingRight="10dip" 
+				android:paddingLeft="10dip"
+				android:paddingTop="0dip" 
+				android:paddingBottom="0dip"
+				android:layout_weight="1"
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content" />
 				
 			<Button android:id="@+id/create_route_create_button"
-				android:drawableLeft="@android:drawable/ic_menu_view" android:text="@string/create_route_create_button"
-				android:paddingRight="10dip" android:paddingLeft="10dip"
-				android:paddingTop="0dip" android:paddingBottom="0dip"
-				android:layout_width="wrap_content" android:layout_height="wrap_content" />
+				android:drawableLeft="@android:drawable/ic_menu_view" 
+				android:text="@string/create_route_create_button"
+				android:paddingRight="10dip" 
+				android:paddingLeft="10dip"
+				android:paddingTop="0dip" 
+				android:paddingBottom="0dip"
+				android:layout_weight="1"
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content" />
 		</LinearLayout>
 	</LinearLayout>
 </LinearLayout>

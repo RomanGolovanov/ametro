@@ -56,7 +56,7 @@ public class RenderTransferBackground extends RenderElement {
         final Paint paint = new Paint();
         paint.setColor(Color.BLACK);
         paint.setStyle(Style.FILL);
-        paint.setStrokeWidth(lineWidth + 3.5f);
+        paint.setStrokeWidth(lineWidth + 4.5f);
         paint.setAntiAlias(true);
         Paint = paint;
 
@@ -68,9 +68,9 @@ public class RenderTransferBackground extends RenderElement {
         setProperties(RenderProgram.TYPE_TRANSFER_BACKGROUND, new Rect(left, top, right, bottom));
     }
 
-    public void setMode(boolean grayed)
+    protected void setMode(boolean grayed)
     {
-    	Paint.setAlpha(grayed ? 80 : 255);
+    	Paint.setAlpha(grayed ? 40 : 255);
     }
 
     public void draw(Canvas canvas) {

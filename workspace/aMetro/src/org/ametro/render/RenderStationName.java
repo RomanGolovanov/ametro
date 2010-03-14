@@ -208,7 +208,7 @@ public class RenderStationName extends RenderElement {
         mPointFirstLine = null;
     }
 
-    public void setMode(boolean grayed)
+    protected void setMode(boolean grayed)
     {
     	mTextPaint.setAlpha(grayed ?  80 : 255);
     }

@@ -52,6 +52,7 @@ public class SubwayMap {
 	public HashMap<Integer, Point[]> pointsBySegmentId;
 
 	private HashMap<Long, SubwaySegment> segmentsIndexed;
+	private HashMap<Long, SubwayTransfer> transfersIndexed;
 	private HashMap<Integer, SubwayLine> linesIndexed;
 
 	public SubwayMap() {
@@ -94,6 +95,20 @@ public class SubwayMap {
 	}
 
 
+	public SubwayTransfer getTransfer(int from, int to) {
+		if (transfersIndexed == null) {
+			transfersIndexed = new HashMap<Long, SubwayTransfer>();
+			for (SubwayTransfer transfer : transfers) {
+				long fromId = transfer.fromStationId;
+				long toId = transfer.toStationId;
+				transfersIndexed.put((fromId << 32) + toId, transfer);
+			}
+		}
+		long fromId = from;
+		long toId = to;
+		return transfersIndexed.get( (fromId << 32) + toId );
+	}
+	
 	public SubwaySegment getSegment(int from, int to) {
 		if (segmentsIndexed == null) {
 			segmentsIndexed = new HashMap<Long, SubwaySegment>();
@@ -150,6 +165,7 @@ public class SubwayMap {
 		}
 		return null;
 	}
+
 
 
 }

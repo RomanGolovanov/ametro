@@ -42,6 +42,7 @@ import org.ametro.model.SubwayMap;
 import org.ametro.model.SubwayRoute;
 import org.ametro.model.SubwaySegment;
 import org.ametro.model.SubwayStation;
+import org.ametro.model.SubwayTransfer;
 import org.ametro.util.DateUtil;
 import org.ametro.util.SerializeUtil;
 import org.ametro.util.StringUtil;
@@ -169,13 +170,20 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		menu.add(0, MAIN_MENU_SCHEMES, 4, R.string.menu_schemes).setIcon(android.R.drawable.ic_menu_sort_by_size);
 		menu.add(0, MAIN_MENU_LIBRARY, 5, R.string.menu_library).setIcon(android.R.drawable.ic_menu_mapmode);
 		menu.add(0, MAIN_MENU_SETTINGS, 6, R.string.menu_settings).setIcon(android.R.drawable.ic_menu_preferences);
-		menu.add(0, MAIN_MENU_ABOUT, 7, R.string.menu_about);
+		menu.add(0, MAIN_MENU_ABOUT, 7, R.string.menu_about).setIcon(android.R.drawable.ic_menu_help);
 
 		return true;
 	}
 
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		menu.findItem(MAIN_MENU_INFO).setEnabled(mCurrentStation!=null);
+		
+		menu.findItem(MAIN_MENU_FIND).setEnabled(mSubwayMap!=null);
+		menu.findItem(MAIN_MENU_INFO).setEnabled(mSubwayMap!=null);
+		menu.findItem(MAIN_MENU_ROUTES).setEnabled(mSubwayMap!=null);
+		menu.findItem(MAIN_MENU_LAYERS).setEnabled(mSubwayMap!=null);
+		menu.findItem(MAIN_MENU_SCHEMES).setEnabled(mSubwayMap!=null);
+		menu.findItem(MAIN_MENU_LIBRARY).setEnabled(mSubwayMap!=null);
 		return super.onPrepareOptionsMenu(menu);
 	}
 
@@ -184,7 +192,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		case MAIN_MENU_FIND:
 			onSearchRequested();
 			return true;
-		case MAIN_MENU_LIBRARY:
+		case MAIN_MENU_LIBRARY: 
 			onRequestBrowseLibrary(false);
 			return true;
 		case MAIN_MENU_ROUTES:
@@ -415,6 +423,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			if(stations!=null){
 				mRoute = null;
 				mNavigationSegments = null;
+				mNavigationTransfers = null;
 				mNavigationStations = stations;
 				mCurrentStation = stations.get(0);
 				showNavigationControls();
@@ -423,9 +432,10 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 				mRoute = null;
 				mNavigationStations = null;
 				mNavigationSegments = null;
+				mNavigationTransfers = null;
 				mCurrentStation = null;
 			}
-			mMapView.setModelSelection(stations, null);
+			mMapView.setModelSelection(stations, null, null);
 			mMapView.postInvalidate();
 		}
 	}
@@ -442,15 +452,17 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			if(route!=null){
 				mNavigationSegments = route.getSegments();
 				mNavigationStations = route.getStations();
+				mNavigationTransfers = route.getTransfers();
 				setCurrentStation( mNavigationStations.get(0) );
 				showNavigationControls();
 			}else{
 				hideNavigationControls();
 				mNavigationStations = null;
 				mNavigationSegments = null;
+				mNavigationTransfers = null;
 				setCurrentStation(null);
 			}
-			mMapView.setModelSelection(mNavigationStations, mNavigationSegments);
+			mMapView.setModelSelection(mNavigationStations, mNavigationSegments,mNavigationTransfers);
 			mMapView.postInvalidate();
 		}
 	}
@@ -795,6 +807,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 
 	private ArrayList<SubwayStation> mNavigationStations;
 	private ArrayList<SubwaySegment> mNavigationSegments;
+	private ArrayList<SubwayTransfer> mNavigationTransfers;
 	private SubwayStation mCurrentStation;
 
 	private Locale mDefaultLocale;
