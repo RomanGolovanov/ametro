@@ -30,6 +30,7 @@ import static org.ametro.MapSettings.PREFERENCE_ZOOM_LEVEL;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Locale;
 
 import org.ametro.Constants;
@@ -264,7 +265,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
     	ArrayList<Point> routes = new ArrayList<Point>( Arrays.asList(getFavoriteRoutes()) );
     	Point r = new Point(fromId, toId);
     	if(!routes.contains(r)){
-    		routes.add(r);
+    		routes.add(0, r);
     		setFavoriteRoutes((Point[]) routes.toArray(new Point[routes.size()]));
     	}
     }
@@ -317,6 +318,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
         SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
         String routes = preferences.getString(PREFERENCE_FAVORITE_ROUTES + "_" + mMapName, "");
         return SerializeUtil.parsePointArray(routes);
+       
     }
     
     public void saveScrollPosition(PointF position) {

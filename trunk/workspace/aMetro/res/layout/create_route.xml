@@ -7,10 +7,10 @@
 		android:id="@+id/create_route_panel" 
 		android:layout_height="wrap_content"
 		android:orientation="vertical" 
-		android:background="@drawable/dark_gradient">
+		android:background="#ff303030">
 		<LinearLayout android:orientation="horizontal"
 			android:layout_width="fill_parent" android:layout_height="wrap_content"
-			android:paddingLeft="5dip" android:paddingTop="5dip"
+			android:paddingLeft="5dip" android:paddingTop="5dip" android:gravity="center"
 			android:paddingRight="5dip" android:background="#00000000">
 			<AutoCompleteTextView android:id="@+id/create_route_from_text"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
 		</LinearLayout>
 		<LinearLayout android:orientation="horizontal"
 			android:layout_width="fill_parent" android:layout_height="wrap_content"
-			android:paddingLeft="5dip" android:paddingBottom="5dip"
+			android:paddingLeft="5dip" android:paddingBottom="5dip" android:gravity="center"
 			android:paddingRight="5dip"  android:background="#00000000">
 			<AutoCompleteTextView android:id="@+id/create_route_to_text"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"

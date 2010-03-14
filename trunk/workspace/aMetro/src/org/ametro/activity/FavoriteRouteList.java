@@ -38,6 +38,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
+import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
@@ -61,6 +62,8 @@ public class FavoriteRouteList extends Activity implements OnClickListener, OnIt
 	private static final int CONTEXT_MENU_REMOVE = 1;
 	
 	private static final int MENU_REMOVE = 0;
+	
+	private TranslateAnimation mPanelAnimation;
 	
 	private boolean mDeletePanelVisible;
 	
@@ -165,6 +168,10 @@ public class FavoriteRouteList extends Activity implements OnClickListener, OnIt
 	}
 
 	private void showDeletePanel(){
+		mPanelAnimation = new TranslateAnimation(0, 0, mDeletePanel.getHeight(),0);
+		mPanelAnimation.setDuration(350);
+		mDeletePanel.startAnimation(mPanelAnimation);
+		
 		mDeletePanel.setVisibility(View.VISIBLE);
 		mAdapter.setCheckboxesVisible(true);
 		mDeletePanelVisible = true;
@@ -172,6 +179,10 @@ public class FavoriteRouteList extends Activity implements OnClickListener, OnIt
 	}
 	
 	private void hideDeletePanel(){
+		mPanelAnimation = new TranslateAnimation(0, 0, 0, mDeletePanel.getHeight());
+		mPanelAnimation.setDuration(350);
+		mDeletePanel.startAnimation(mPanelAnimation);
+
 		mDeletePanel.setVisibility(View.GONE);
 		mAdapter.setCheckboxesVisible(false);
 		mDeletePanelVisible = false;
