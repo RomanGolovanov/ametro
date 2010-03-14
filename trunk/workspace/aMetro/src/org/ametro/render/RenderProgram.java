@@ -250,7 +250,6 @@ public class RenderProgram {
 		final int count = bounds.length;
 		for (int i = 0; i < count; i++) {
 			final Rect box = new Rect(bounds[i]);
-
 			visibility[i] |= ((filters[i] & filter) > 0) && Rect.intersects(v, box);
 		}
 	}

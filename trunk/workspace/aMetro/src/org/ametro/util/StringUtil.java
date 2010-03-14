@@ -221,6 +221,18 @@ public class StringUtil {
         return builder.toString();
     }
 
+    public static String join(String[] objs, String delimiter) {
+        StringBuilder builder = new StringBuilder();
+        final int len = objs.length;
+        for (int i = 0; i < len; i++) {
+            if(i>0){
+            	builder.append(delimiter);
+            }
+            builder.append(objs[i]);
+        }
+        return builder.toString();
+    }    
+    
     public static String capitalize(String src) {
         return src.substring(0, 1).toUpperCase() + src.substring(1);
     }

@@ -23,17 +23,16 @@ package org.ametro.activity;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import org.ametro.MapSettings;
 import org.ametro.R;
+import org.ametro.adapter.AddonEntriyListAdapter;
 import org.ametro.model.Deserializer;
 import org.ametro.model.StationAddon;
 import org.ametro.model.SubwayStation;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -65,21 +64,11 @@ public class BrowseStation extends Activity {
 			return;
 		}
 		
-		ArrayList<String> text = new ArrayList<String>();
-		for(StationAddon.Entry entry : mStationAddon.entries){
-			String caption = entry.caption;
-			StringBuilder sb = new StringBuilder();
-			sb.append(caption);
-			sb.append("\n");
-			for(String line : entry.text){
-				sb.append(line);
-				sb.append("\n");
-			}
-			text.add(sb.toString());
-		}
-		
+
 		ListView list = new ListView(this);
-		list.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, text));
+		
+		AddonEntriyListAdapter adapter = new AddonEntriyListAdapter(this, mStationAddon);
+		list.setAdapter(adapter);
 
 		setContentView(list);
 	}
