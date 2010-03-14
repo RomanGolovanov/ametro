@@ -38,11 +38,12 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class RouteFavoriteListAdapter extends BaseAdapter {
+public class RouteFavoriteListAdapter extends BaseAdapter implements OnClickListener {
 
 	private static class ListItemWrapper
 	{
@@ -50,12 +51,14 @@ public class RouteFavoriteListAdapter extends BaseAdapter {
 		public final ImageView ImageFrom;
 		public final TextView NameTo;
 		public final ImageView ImageTo;
+		public final ImageView Delete;
 		
 		public ListItemWrapper(View view) {
 			NameFrom = (TextView)view.findViewById(R.id.route_favorite_list_item_name_from);
 			ImageFrom = (ImageView)view.findViewById(R.id.route_favorite_list_item_image_from);
 			NameTo = (TextView)view.findViewById(R.id.route_favorite_list_item_name_to);
 			ImageTo = (ImageView)view.findViewById(R.id.route_favorite_list_item_image_to);
+			Delete = (ImageView)view.findViewById(R.id.route_favorite_list_item_delete);
 			view.setTag(this);
 		}
 	}	
@@ -65,6 +68,7 @@ public class RouteFavoriteListAdapter extends BaseAdapter {
 		mLines = map.lines;
 		mStations = map.stations;
 		mRoutes = routes;
+		mChecked = new boolean[routes.length];
 		mContextActivity = activity;
 		
 		mPaint = new Paint();
@@ -73,6 +77,8 @@ public class RouteFavoriteListAdapter extends BaseAdapter {
 		mPaint.setStrokeWidth(0);
 		
 		mSubwayMap = map;
+		
+		mIsCheckboxesVisible = false;
 	}
 	
 	protected static final int ICON_WIDTH = 20;
@@ -88,7 +94,18 @@ public class RouteFavoriteListAdapter extends BaseAdapter {
 	protected Integer mTextColor;
 	
 	protected final Point[] mRoutes;
+	protected final boolean[] mChecked;
+	protected boolean mIsCheckboxesVisible;
 
+	public void setCheckboxesVisible(boolean show){
+		mIsCheckboxesVisible = show;
+		notifyDataSetInvalidated();
+	}
+	
+	public boolean isCheckboxesVisible(){
+		return mIsCheckboxesVisible;
+	}
+	
 	public int getCount() {
 		return mRoutes.length;
 	}
@@ -127,6 +144,7 @@ public class RouteFavoriteListAdapter extends BaseAdapter {
 				wrapper.NameFrom.setTextColor(mTextColor);
 				wrapper.NameTo.setTextColor(mTextColor);
 			}
+			wrapper.Delete.setOnClickListener(this);
 		}else{
 			view = convertView;
 			wrapper = (ListItemWrapper)view.getTag();
@@ -141,6 +159,11 @@ public class RouteFavoriteListAdapter extends BaseAdapter {
 		wrapper.NameTo.setText(stationTo.name);
 		wrapper.ImageFrom.setImageDrawable(getItemIcon(lineFrom));
 		wrapper.ImageTo.setImageDrawable(getItemIcon(lineTo));
+		wrapper.Delete.setVisibility(mIsCheckboxesVisible ? View.VISIBLE : View.GONE);
+		if(mIsCheckboxesVisible){
+			wrapper.Delete.setBackgroundResource( mChecked[position] ? R.drawable.ic_delete : R.drawable.ic_delete_disabled );
+			wrapper.Delete.setTag(position);
+		}
 		return view;		
 	}
 
@@ -157,6 +180,15 @@ public class RouteFavoriteListAdapter extends BaseAdapter {
 		}
 		return dw;
 	}
-	
+
+	public void onClick(View v) {
+		int position = (Integer)v.getTag();
+		toggleCheckbox(position);
+	}
+
+	public void toggleCheckbox(int position) {
+		mChecked[position] = !mChecked[position];
+		notifyDataSetChanged();
+	}
 	
 }

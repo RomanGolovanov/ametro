@@ -87,7 +87,7 @@ public class CreateRoute extends Activity implements OnClickListener,
 	
 	public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(0, MAIN_MENU_SWAP, 0, R.string.menu_swap).setIcon(android.R.drawable.ic_menu_revert);
-        menu.add(0, MAIN_MENU_FAVORITES, 1, R.string.menu_favorites).setIcon(android.R.drawable.btn_star_big_off);
+        menu.add(0, MAIN_MENU_FAVORITES, 1, R.string.menu_favorites).setIcon(R.drawable.star_48);
 		return super.onCreateOptionsMenu(menu);
 	}
 	
