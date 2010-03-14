@@ -23,6 +23,7 @@ package org.ametro.util.csv;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.ametro.util.SerializeUtil;
@@ -37,15 +38,15 @@ import android.graphics.Rect;
 public class CsvReader {
 
 	private static final String EMPTY_VALUE = "null";
-	private static final String DEFAULT_SEPARATOR = ";";
+	private static final char DEFAULT_SEPARATOR = ';';
 
 	private BufferedReader mReader;
-	private String mSeparator;
+	private char mSeparator;
 	private String[] mRecord;
 	private int mCurrentColumn;
 	private int mTotalColumns;
 
-	public CsvReader(BufferedReader reader, String separator) {
+	public CsvReader(BufferedReader reader, char separator) {
 		mReader = reader;
 		mSeparator = separator;
 	}
@@ -63,18 +64,78 @@ public class CsvReader {
 	 *         из потока
 	 * @throws IOException
 	 */
-	private String[] readNextRecord() throws IOException {
+
+	ArrayList<String> mLineParts = new ArrayList<String>();
+	StringBuilder mLineBuilder = new StringBuilder();
+	
+	protected String[] readNextRecordStreamed() throws IOException {
+		mLineParts.clear();
+		mLineBuilder.setLength(0);
+		char ch;
+		int code;
+		while( (code = mReader.read())!=-1 ){
+			ch = (char)code;
+			if(ch == '\n'){
+				if(mLineBuilder.length() == 0 && mLineParts.size() == 0){
+					continue;
+				}else{
+					mLineParts.add(mLineBuilder.toString());
+					mLineBuilder.setLength(0);
+					break;
+				}
+			}else if(ch == mSeparator){
+				mLineParts.add(mLineBuilder.toString());
+				mLineBuilder.setLength(0);
+			}else{
+				mLineBuilder.append(ch);
+			}
+			
+		}
+		return (code==-1 &&  mLineParts.size()==0) ? null : (String[]) mLineParts.toArray(new String[mLineParts.size()]);
+	}
+	
+	protected String[] readNextRecord() throws IOException {
 		String line = mReader.readLine();
 		while(line!=null && line.length() == 0){
 			line = mReader.readLine();
 		}
 		if (line != null) {
-			return line.split(mSeparator);
+			return line.split(""+mSeparator);
 		} else {
 			return null;
 		}
 	}
-
+	
+	protected String[] readNextRecordNoSplit() throws IOException {
+		String line = mReader.readLine();
+		while(line!=null && line.length() == 0){
+			line = mReader.readLine();
+		}
+		if (line != null) {
+			final ArrayList<String> parts = mLineParts;
+			final StringBuilder sb = mLineBuilder;
+			final int length = line.length(); 
+			int position = 0;
+			char ch;
+			parts.clear();
+			sb.setLength(0);
+			while( position < length ){
+				ch = (char)line.charAt(position);
+				if(ch == mSeparator){
+					parts.add(sb.toString()); 
+					sb.setLength(0);
+				}else{
+					sb.append(ch);
+				}
+				position++;
+			}
+			parts.add(sb.toString());
+			return (String[]) parts.toArray(new String[parts.size()]);
+		} else {
+			return null;
+		}
+	}
+	
 	/**
 	 * Сохранить следующую нетипизированную
 	 * запись из потока
@@ -84,7 +145,7 @@ public class CsvReader {
 	 * @throws IOException
 	 */
 	public boolean next() throws IOException {
-		final String[] record = readNextRecord();
+		final String[] record = readNextRecordNoSplit();
 		mCurrentColumn = 0;
 		if (record != null) {
 			mRecord = record;
