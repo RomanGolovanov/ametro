@@ -488,11 +488,11 @@ public class ImportPmz extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        mMainMenuRefresh = menu.add(0, MAIN_MENU_REFRESH, 0, R.string.menu_refresh).setIcon(android.R.drawable.ic_menu_rotate);
-        mMainMenuImport = menu.add(0, MAIN_MENU_IMPORT, 1, R.string.menu_import).setIcon(android.R.drawable.ic_menu_add);
-        mMainMenuCleanup = menu.add(0, MAIN_MENU_CLEANUP, 2, R.string.menu_cleanup).setIcon(android.R.drawable.ic_menu_delete);
-        mMainMenuSelectAll = menu.add(0, MAIN_MENU_SELECT_ALL, 3, R.string.menu_select_all).setIcon(android.R.drawable.ic_menu_agenda);
-        mMainMenuSelectNone = menu.add(0, MAIN_MENU_SELECT_NONE, 4, R.string.menu_select_none).setIcon(android.R.drawable.ic_menu_close_clear_cancel);
+        mMainMenuImport = menu.add(0, MAIN_MENU_IMPORT, 0, R.string.menu_import).setIcon(android.R.drawable.ic_menu_add);
+        mMainMenuSelectAll = menu.add(0, MAIN_MENU_SELECT_ALL, 1, R.string.menu_select_all).setIcon(android.R.drawable.ic_menu_agenda);
+        mMainMenuSelectNone = menu.add(0, MAIN_MENU_SELECT_NONE, 2, R.string.menu_select_none).setIcon(android.R.drawable.ic_menu_close_clear_cancel);
+        mMainMenuCleanup = menu.add(0, MAIN_MENU_CLEANUP, 3, R.string.menu_cleanup).setIcon(android.R.drawable.ic_menu_delete);
+        mMainMenuRefresh = menu.add(0, MAIN_MENU_REFRESH, 4, R.string.menu_refresh).setIcon(android.R.drawable.ic_menu_rotate);
         mMainMenuStop = menu.add(0, MAIN_MENU_STOP, 5, R.string.menu_stop).setIcon(android.R.drawable.ic_menu_close_clear_cancel);
         mMainMenuCreated = true;
         updateMenuStatus(null);

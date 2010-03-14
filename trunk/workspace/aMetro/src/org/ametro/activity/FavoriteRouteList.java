@@ -179,7 +179,14 @@ public class FavoriteRouteList extends Activity implements OnClickListener, OnIt
 		}
 		if(v == mDelete){
 			hideDeletePanel();
-			// TODO: remove selected items!
+			final boolean[] checked = mAdapter.getChecked();
+			final int len = mRoutes.length;
+			for(int i = 0; i < len; i++){
+				if(checked[i]){
+					final Point r = mRoutes[i];
+					BrowseVectorMap.Instance.removeFavoriteRoute(r.x, r.y);
+				}
+			}
 			onBindData();
 		}
 	}

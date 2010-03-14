@@ -150,6 +150,12 @@ public class CreateRoute extends Activity implements OnClickListener,
 			mToText.setText( StationListAdapter.getStationName(mSubwayMap, toStation) );
 			mFromText.setSelectAllOnFocus(true);
 			mToText.setSelectAllOnFocus(true);
+		}else{
+			final SubwayStation station = BrowseVectorMap.Instance.getCurrentStation();
+			if(station!=null){
+				mFromText.setText( StationListAdapter.getStationName(mSubwayMap, station) );
+				mFromText.setSelectAllOnFocus(true);
+			}
 		}
 		
 		Date now = new Date();
