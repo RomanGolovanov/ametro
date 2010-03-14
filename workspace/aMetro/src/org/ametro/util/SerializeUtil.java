@@ -85,6 +85,11 @@ public class SerializeUtil {
     }
     
     public static Point[] parsePointArray(String value) {
+        ArrayList<Point> points = parsePointList(value);
+        return points.toArray(new Point[points.size()]);
+    }
+
+    public static ArrayList<Point> parsePointList(String value) {
         String[] parts = splitCommaSeparaterString(value);
         ArrayList<Point> points = new ArrayList<Point>();
         for (int i = 0; i < parts.length / 2; i++) {
@@ -93,9 +98,9 @@ public class SerializeUtil {
             point.y = Integer.parseInt(parts[i * 2 + 1].trim());
             points.add(point);
         }
-        return points.toArray(new Point[points.size()]);
+        return points;
     }
-
+    
     public static Rect[] parseRectangleArray(String value) {
         String[] parts = splitCommaSeparaterString(value);
         ArrayList<Rect> rectangles = new ArrayList<Rect>();

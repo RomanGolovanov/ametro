@@ -19,9 +19,10 @@
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:gravity="center"
-		android:background="@drawable/dark_gradient"
-		android:paddingTop="5dip"
+		android:background="@drawable/dark_3point_gradient"
+		android:paddingTop="8dip"
 		android:paddingBottom="5dip"
+		android:visibility="gone"
 		>
 		
 		<Button
