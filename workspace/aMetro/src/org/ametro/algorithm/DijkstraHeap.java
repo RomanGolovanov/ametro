@@ -22,7 +22,6 @@ package org.ametro.algorithm;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -60,7 +59,7 @@ public class DijkstraHeap {
 	
 	public static class Graph {
 		public final int n;
-		public List<Edge>[] edges;
+		public EdgeList[] edges;
 
 		public Graph(int n) {
 			this.n = n;
