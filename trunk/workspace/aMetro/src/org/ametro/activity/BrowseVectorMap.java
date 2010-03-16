@@ -30,7 +30,6 @@ import static org.ametro.MapSettings.PREFERENCE_ZOOM_LEVEL;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Locale;
 
 import org.ametro.Constants;
@@ -210,7 +209,9 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		case MAIN_MENU_SCHEMES:
 			return true;
 		case MAIN_MENU_INFO:
-			startActivity(new Intent(this, BrowseStation.class));
+			if(mCurrentStation!=null){
+				startActivity(new Intent(this, BrowseStation.class));
+			}
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
