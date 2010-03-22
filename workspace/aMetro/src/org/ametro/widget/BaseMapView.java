@@ -21,8 +21,10 @@
 
 package org.ametro.widget;
 
+import static org.ametro.Constants.LOG_TAG_MAIN;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Handler;
@@ -34,8 +36,6 @@ import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.widget.ScrollView;
 import android.widget.Scroller;
-
-import static org.ametro.Constants.LOG_TAG_MAIN;
 
 public abstract class BaseMapView extends ScrollView {
 
@@ -127,6 +127,7 @@ public abstract class BaseMapView extends ScrollView {
                 canvas.translate(dx / 2, dy / 2);
             }
             canvas.save();
+            canvas.drawColor(Color.WHITE);
             onDrawRect(canvas, viewport);
             canvas.restore();
         }

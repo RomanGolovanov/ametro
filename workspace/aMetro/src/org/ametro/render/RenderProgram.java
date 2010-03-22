@@ -194,6 +194,10 @@ public class RenderProgram {
 
 	private void drawTransfers(SubwayMap subwayMap, ArrayList<RenderElement> renderQueue) {
 		for (SubwayTransfer transfer : subwayMap.transfers) {
+			if( (transfer.flags & SubwayTransfer.INVISIBLE) != 0){
+				continue;
+			}
+			
 			RenderElement elementBackground = new RenderTransferBackground(subwayMap, transfer);
 			RenderElement elementTransfer = new RenderTransfer(subwayMap, transfer);
 
@@ -202,7 +206,6 @@ public class RenderProgram {
 			
 			transferIndex.put(transfer, elementTransfer);
 			transferBackgroundIndex.put(transfer, elementBackground);
-
 		}
 	}
 
@@ -250,11 +253,9 @@ public class RenderProgram {
 				(int) (viewport.bottom + offset));
 		final Rect[] bounds = mBounds;
 		final boolean[] visibility = mVisibility;
-		final int[] filters = mTypes;
-		final int filter = mRenderFilter;
 		final int count = bounds.length;
 		for (int i = 0; i < count; i++) {
-			visibility[i] |= ((filters[i] & filter) > 0) && Rect.intersects(v, bounds[i]);
+			visibility[i] |= Rect.intersects(v, bounds[i]);
 		}
 	}
 	
@@ -272,12 +273,10 @@ public class RenderProgram {
 				(int) (viewport2.bottom + offset));
 		final Rect[] bounds = mBounds;
 		final boolean[] visibility = mVisibility;
-		final int[] filters = mTypes;
-		final int filter = mRenderFilter;
 		final int count = bounds.length;
 		for (int i = 0; i < count; i++) {
 			final Rect box = bounds[i];
-			visibility[i] |= ((filters[i] & filter) > 0) && ( Rect.intersects(v1, box) || Rect.intersects(v2, box) );
+			visibility[i] |= ( Rect.intersects(v1, box) || Rect.intersects(v2, box) );
 		}
 	}	
 }
