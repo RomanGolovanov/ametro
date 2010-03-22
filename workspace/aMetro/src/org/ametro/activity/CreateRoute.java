@@ -192,7 +192,9 @@ public class CreateRoute extends Activity implements OnClickListener,
 					SubwayStation from = mSubwayMap.stations[fromId];
 					mFromText.setText( StationListAdapter.getStationName(mSubwayMap, from) );				
 					SubwayStation to = mSubwayMap.stations[toId];
-					mToText.setText( StationListAdapter.getStationName(mSubwayMap, to) );				
+					mToText.setText( StationListAdapter.getStationName(mSubwayMap, to) );
+					
+					createRoute(from, to);
 				}
 			}
 		}
@@ -219,13 +221,17 @@ public class CreateRoute extends Activity implements OnClickListener,
 		if (v == mCreateButton) {
 			SubwayStation from = getStationByName(mFromText.getText().toString());
 			SubwayStation to = getStationByName(mToText.getText().toString());
-			if (from != null && to != null) {
-				mCreateRouteTask = new CreateRouteTask();
-				mCreateRouteTask.execute(from, to);
-			}
+			createRoute(from, to);
 		}
 		if (v == mFavoritesButton){
    			startActivityForResult(new Intent(this,FavoriteRouteList.class), REQUEST_ROUTE);
+		}
+	}
+
+	private void createRoute(SubwayStation from, SubwayStation to) {
+		if (from != null && to != null) {
+			mCreateRouteTask = new CreateRouteTask();
+			mCreateRouteTask.execute(from, to);
 		}
 	}
 

@@ -32,6 +32,7 @@ import org.ametro.model.SubwayMap;
 import org.ametro.model.SubwayMapBuilder;
 import org.ametro.model.SubwaySegment;
 import org.ametro.model.SubwayStation;
+import org.ametro.model.SubwayTransfer;
 import org.ametro.pmz.FilePackage;
 import org.ametro.pmz.GenericResource;
 import org.ametro.pmz.TextResource;
@@ -194,6 +195,36 @@ public class ModelUtil {
 
 		}
 		return addons;
+	}
+	
+	public static ArrayList<SubwaySegment> copySegments(SubwayMap map, ArrayList<SubwaySegment> segments)
+	{
+		if(segments==null) return null;
+		ArrayList<SubwaySegment> res = new ArrayList<SubwaySegment>(segments.size());
+		for(SubwaySegment seg : segments){
+			res.add(map.segments[seg.id]);
+		}
+		return res;
+	}
+	
+	public static ArrayList<SubwayStation> copyStations(SubwayMap map, ArrayList<SubwayStation> stations)
+	{
+		if(stations==null) return null;
+		ArrayList<SubwayStation> res = new ArrayList<SubwayStation>(stations.size());
+		for(SubwayStation st : stations){
+			res.add(map.stations[st.id]);
+		}
+		return res;
+	}
+	
+	public static ArrayList<SubwayTransfer> copyTransfer(SubwayMap map, ArrayList<SubwayTransfer> transfers)
+	{
+		if(transfers==null) return null;
+		ArrayList<SubwayTransfer> res = new ArrayList<SubwayTransfer>(transfers.size());
+		for(SubwaySegment tr : transfers){
+			res.add(map.transfers[tr.id]);
+		}
+		return res;
 	}
 
 }

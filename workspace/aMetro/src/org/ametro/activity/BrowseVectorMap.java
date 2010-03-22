@@ -44,6 +44,7 @@ import org.ametro.model.SubwaySegment;
 import org.ametro.model.SubwayStation;
 import org.ametro.model.SubwayTransfer;
 import org.ametro.util.DateUtil;
+import org.ametro.util.ModelUtil;
 import org.ametro.util.SerializeUtil;
 import org.ametro.util.StringUtil;
 import org.ametro.widget.VectorMapView;
@@ -77,7 +78,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	public void onClick(View src) {
 		if(src == mNavigatePreviousButton){
 			navigatePreviuosStation();
-		}
+		} 
 		if(src == mNavigateNextButton){
 			navigateNextStation();
 		}
@@ -96,7 +97,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		if(Instance != null){
 			mSubwayMap = Instance.mSubwayMap;
-			mMapName = Instance.mMapName;
+			mMapName = Instance.mMapName; 
 		}
 		Instance = this;
 		Instance.mDefaultLocale = Locale.getDefault();
@@ -146,7 +147,16 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 					if(!mapName.equalsIgnoreCase(getMapName())){
 						onInitializeMapView(uri);
 					}
-				}
+				} 
+			}
+			if( resultCode == RESULT_CANCELED && mMapName == null){
+				finish();
+			}
+			if(isConfigurationChanged()){
+				setupLocale();
+				if (mMapName != null) {
+					onInitializeMapView(MapUri.create(mMapName));
+				}			
 			}
 			break; 
 		case REQUEST_SETTINGS:
@@ -542,7 +552,25 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 
 
 	private void onShowMap(SubwayMap subwayMap) {
+		
+		SubwayMap previousMap = mSubwayMap;
+		
 		mSubwayMap = subwayMap;
+		
+		if(previousMap!= null && previousMap.mapName.equals(subwayMap.mapName)){
+			mNavigationSegments = ModelUtil.copySegments(mSubwayMap, mNavigationSegments);
+			mNavigationStations = ModelUtil.copyStations(mSubwayMap, mNavigationStations);
+			mNavigationTransfers = ModelUtil.copyTransfer(mSubwayMap, mNavigationTransfers);
+			mCurrentStation = mCurrentStation!=null ? mSubwayMap.stations[mCurrentStation.id] : null;
+			mRoute = mRoute!=null ? new SubwayRoute(mSubwayMap, mRoute) : null;
+		}else{
+			mNavigationSegments = null;
+			mNavigationStations = null;
+			mNavigationTransfers = null;
+			mCurrentStation = null;
+			mRoute = null;
+		}
+		
 		if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO))
 			Log.i(LOG_TAG_MAIN, getString(R.string.log_loaded_subway_map) + mSubwayMap.mapName
 					+ getString(R.string.log_with_size) + mSubwayMap.width + "x"
@@ -552,6 +580,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 
 		mMapView = (VectorMapView) findViewById(R.id.browse_vector_map_view);
 		mMapView.setModel(mSubwayMap);
+		mMapView.setModelSelection(mNavigationStations, mNavigationSegments, mNavigationTransfers);
 		mZoomControls = (ZoomControls) findViewById(R.id.browse_vector_map_zoom);
 		mZoomControls.setVisibility(View.INVISIBLE);
 
@@ -570,7 +599,9 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		mNavigateClearButton.setOnClickListener(this);
 		mNavigateListButton.setOnClickListener(this);
 
-		hideNavigationControls();
+		if(mRoute==null && mCurrentStation == null){
+			hideNavigationControls();
+		}
 
 		mMapName = mSubwayMap.mapName;
 		onRestoreMapState();
