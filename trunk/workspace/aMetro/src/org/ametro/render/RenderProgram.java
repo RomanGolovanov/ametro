@@ -254,8 +254,30 @@ public class RenderProgram {
 		final int filter = mRenderFilter;
 		final int count = bounds.length;
 		for (int i = 0; i < count; i++) {
-			final Rect box = new Rect(bounds[i]);
-			visibility[i] |= ((filters[i] & filter) > 0) && Rect.intersects(v, box);
+			visibility[i] |= ((filters[i] & filter) > 0) && Rect.intersects(v, bounds[i]);
 		}
 	}
+	
+	public void addVisibility2(RectF viewport1, RectF viewport2) {
+		final int offset = 10;
+		final Rect v1 = new Rect(
+				(int) (viewport1.left - offset),
+				(int) (viewport1.top - offset),
+				(int) (viewport1.right + offset),
+				(int) (viewport1.bottom + offset));
+		final Rect v2 = new Rect(
+				(int) (viewport2.left - offset),
+				(int) (viewport2.top - offset),
+				(int) (viewport2.right + offset),
+				(int) (viewport2.bottom + offset));
+		final Rect[] bounds = mBounds;
+		final boolean[] visibility = mVisibility;
+		final int[] filters = mTypes;
+		final int filter = mRenderFilter;
+		final int count = bounds.length;
+		for (int i = 0; i < count; i++) {
+			final Rect box = bounds[i];
+			visibility[i] |= ((filters[i] & filter) > 0) && ( Rect.intersects(v1, box) || Rect.intersects(v2, box) );
+		}
+	}	
 }
