@@ -191,6 +191,8 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
     private final int MAIN_MENU_MY_MAPS = 3;
     private final int MAIN_MENU_LOCATION = 4;
     private final int MAIN_MENU_IMPORT = 5;
+	private final int MAIN_MENU_SETTINGS = 6;
+	private final int MAIN_MENU_ABOUT = 7;
 
     private MenuItem mMainMenuAllMaps;
     private MenuItem mMainMenuMyMaps;
@@ -198,12 +200,15 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
     private IndexTask mIndexTask;
 
     private final static int REQUEST_IMPORT = 1;
+	private final static int REQUEST_SETTINGS = 2;
 
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         menu.add(0, MAIN_MENU_REFRESH, 0, R.string.menu_refresh).setIcon(android.R.drawable.ic_menu_rotate);
         menu.add(0, MAIN_MENU_LOCATION, 3, R.string.menu_location).setIcon(android.R.drawable.ic_menu_mylocation);
         menu.add(0, MAIN_MENU_IMPORT, 4, R.string.menu_import).setIcon(android.R.drawable.ic_menu_add);
+		menu.add(0, MAIN_MENU_SETTINGS, 5, R.string.menu_settings).setIcon(android.R.drawable.ic_menu_preferences);
+		menu.add(0, MAIN_MENU_ABOUT, 6, R.string.menu_about).setIcon(android.R.drawable.ic_menu_help);
 
         mMainMenuAllMaps = menu.add(0, MAIN_MENU_ALL_MAPS, 1, R.string.menu_all_maps).setIcon(android.R.drawable.ic_menu_mapmode).setVisible(false);
         mMainMenuMyMaps = menu.add(0, MAIN_MENU_MY_MAPS, 2, R.string.menu_my_maps).setIcon(android.R.drawable.ic_menu_myplaces);
@@ -229,10 +234,16 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
             case MAIN_MENU_IMPORT:
                 startActivityForResult(new Intent(this, ImportPmz.class), REQUEST_IMPORT);
                 return true;
+    		case MAIN_MENU_SETTINGS:
+    			startActivityForResult(new Intent(this, Settings.class), REQUEST_SETTINGS);
+    			return true;
+    		case MAIN_MENU_ABOUT:
+    			startActivity(new Intent(this, About.class));
+    			return true;
 
         }
         return super.onOptionsItemSelected(item);
-    }
+    } 
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {

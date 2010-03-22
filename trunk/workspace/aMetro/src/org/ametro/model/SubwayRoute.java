@@ -52,6 +52,34 @@ public class SubwayRoute {
 		mStationToDelay = null;
 		mHasRoute = false;
 	}
+	
+	public SubwayRoute(SubwayMap map, SubwayRoute src){
+		mSubwayMap = map;
+		mFromId = src.mFromId;
+		mToId = src.mToId;
+		mTime = src.mTime;
+		mHasRoute = src.mHasRoute;
+		mRect = src.mRect;
+		if(src.mSegments!=null){
+			mSegments = ModelUtil.copySegments(map, src.mSegments);
+			mStations = ModelUtil.copyStations(map, src.mStations);
+			mTransfers = ModelUtil.copyTransfer(map, src.mTransfers);
+			mStationToDelay = new HashMap<SubwayStation, Long>();
+			for(SubwayStation st : src.mStationToDelay.keySet()){
+				Long delay = src.mStationToDelay.get(st);
+				mStationToDelay.put(map.stations[st.id],delay);
+				
+			}
+			mHasRoute = false;
+			
+		}else{
+			mSegments = null;
+			mStations = null;
+			mTransfers = null;
+			mStationToDelay = null;
+			mHasRoute = false;
+		}
+	}
 
 	public long getStationDelay(SubwayStation station){
 		Long delay = mStationToDelay.get(station);
