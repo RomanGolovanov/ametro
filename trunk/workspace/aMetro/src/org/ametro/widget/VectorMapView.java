@@ -55,6 +55,10 @@ public class VectorMapView extends BaseMapView {
 		super(context);
 	}
 
+	public void setRenderFilter(int renderFilter) {
+		 mRenderProgram.setRenderFilter(renderFilter);
+	}    
+	
 	public void setModel(SubwayMap subwayMap) {
 		if (subwayMap != null) {
 			mSubwayMap = subwayMap;
@@ -202,10 +206,7 @@ public class VectorMapView extends BaseMapView {
 		canvas.translate(-modelOuter.left, -modelOuter.top);
 		if(screenCoords != mUpdateTileCacheRect) return;
 		
-		mRenderProgram.clearVisibility();
-		if(screenCoords != mUpdateTileCacheRect) return;
-
-		mRenderProgram.addVisibility2(horizontalSpanInModel, verticalSpanInModel);
+		mRenderProgram.setVisibilityTwice(horizontalSpanInModel, verticalSpanInModel);
 		if(screenCoords != mUpdateTileCacheRect) return;
 		
 		mRenderProgram.draw(canvas);
@@ -251,7 +252,7 @@ public class VectorMapView extends BaseMapView {
 
 			canvas.scale(mScale, mScale);
 			canvas.translate(-modelOuter.left, -modelOuter.top);
-			mRenderProgram.invalidateVisible(modelOuter);
+			mRenderProgram.setVisibility(modelOuter);
 			mRenderProgram.draw(canvas);
 
 			synchronized(sync){

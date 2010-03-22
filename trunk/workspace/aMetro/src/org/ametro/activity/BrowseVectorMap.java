@@ -43,6 +43,7 @@ import org.ametro.model.SubwayRoute;
 import org.ametro.model.SubwaySegment;
 import org.ametro.model.SubwayStation;
 import org.ametro.model.SubwayTransfer;
+import org.ametro.render.RenderProgram;
 import org.ametro.util.DateUtil;
 import org.ametro.util.ModelUtil;
 import org.ametro.util.SerializeUtil;
@@ -323,7 +324,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
         editor.putString(PREFERENCE_FAVORITE_ROUTES + "_" + mMapName, routesBudle);
         editor.commit();
     }
-    
+
     public Point[] getFavoriteRoutes()
     {
         SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
@@ -665,6 +666,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		mZoom = Math.min(Math.max(zoom, MIN_ZOOM_LEVEL), MAX_ZOOM_LEVEL);
 		mZoomControls.setIsZoomInEnabled(mZoom > MIN_ZOOM_LEVEL);
 		mZoomControls.setIsZoomOutEnabled(mZoom < MAX_ZOOM_LEVEL);
+		mMapView.setRenderFilter(FILTERS[mZoom]);
 		mMapView.setScale(ZOOMS[mZoom], STEPS[mZoom]);
 	}
 
@@ -806,6 +808,16 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 
 	private final float[] ZOOMS = new float[]{1.5f, 1.0f, 0.8f, 0.6f, 0.4f, 0.3f, 0.2f, 0.1f};
 	private final int[] STEPS = new int[]{15, 10, 8, 6, 4, 3, 2, 1};
+	private final int[] FILTERS = new int[]{
+			RenderProgram.ALL,
+			RenderProgram.ALL,
+			RenderProgram.ALL,
+			RenderProgram.ALL,
+			RenderProgram.ONLY_TRANSPORT,
+			RenderProgram.ONLY_TRANSPORT,
+			RenderProgram.ONLY_TRANSPORT,
+			RenderProgram.ONLY_TRANSPORT,
+	};
 
 	private final int MIN_ZOOM_LEVEL = 0;
 	private final int MAX_ZOOM_LEVEL = 7;

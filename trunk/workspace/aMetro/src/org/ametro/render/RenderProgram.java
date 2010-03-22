@@ -21,17 +21,22 @@
 
 package org.ametro.render;
 
-import android.graphics.*;
-import org.ametro.model.SubwayMap;
-import org.ametro.model.SubwaySegment;
-import org.ametro.model.SubwayStation;
-import org.ametro.model.SubwayTransfer;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+
+import org.ametro.model.SubwayMap;
+import org.ametro.model.SubwaySegment;
+import org.ametro.model.SubwayStation;
+import org.ametro.model.SubwayTransfer;
+
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Point;
+import android.graphics.Rect;
+import android.graphics.RectF;
 
 
 public class RenderProgram {
@@ -47,7 +52,8 @@ public class RenderProgram {
 	public static final int ALL = ONLY_TRANSPORT | TYPE_STATION_NAME;
 
 	RenderElement[] mElements;
-	boolean[] mVisibility;
+	RenderElement[] mElementsToRender;
+	ArrayList<RenderElement> mClipping;
 	Rect[] mBounds;
 	int[] mTypes;
 	int mRenderFilter;
@@ -68,6 +74,7 @@ public class RenderProgram {
 	public RenderProgram(SubwayMap subwayMap) {
 		mSubwayMap = subwayMap;
 		mRenderQueue = new ArrayList<RenderElement>();
+		mClipping = new ArrayList<RenderElement>();
 		drawLines(subwayMap, mRenderQueue);
 		drawTransfers(subwayMap, mRenderQueue);
 		drawStations(subwayMap, mRenderQueue);
@@ -78,35 +85,15 @@ public class RenderProgram {
 	private void updateRenderQueue() {
 		Collections.sort(mRenderQueue);
 		mElements = mRenderQueue.toArray(new RenderElement[mRenderQueue.size()]);
+		mElementsToRender = new RenderElement[0];
 		final int count = mElements.length;
-		mVisibility = new boolean[count];
 		mBounds = new Rect[count];
 		mTypes = new int[count];
 		for (int i = 0; i < count; i++) {
-			mVisibility[i] = false;
 			mBounds[i] = mElements[i].boundingBox;
 			mTypes[i] = mElements[i].type;
 		}
 	}
-
-	public void invalidateVisible(RectF viewport) {
-		final int offset = 10;
-		final Rect v = new Rect(
-				(int) (viewport.left - offset),
-				(int) (viewport.top - offset),
-				(int) (viewport.right + offset),
-				(int) (viewport.bottom + offset));
-		final Rect[] bounds = mBounds;
-		final boolean[] visibility = mVisibility;
-		final int[] filters = mTypes;
-		final int filter = mRenderFilter;
-		final int count = bounds.length;
-		for (int i = 0; i < count; i++) {
-			final Rect box = new Rect(bounds[i]);
-			visibility[i] = ((filters[i] & filter) > 0) && Rect.intersects(v, box);
-		}
-	}
-
 	
 	public void updateSelection(List<SubwayStation> stations, List<SubwaySegment> segments, List<SubwayTransfer> transfers){
 		if(stations!=null || segments!=null){
@@ -161,20 +148,6 @@ public class RenderProgram {
 			}
 		}
 		updateRenderQueue();
-	}
-
-	public void draw(Canvas canvas) {
-		canvas.save();
-		final RenderElement[] elements = mElements;
-		final boolean[] visibility = mVisibility;
-		final int count = elements.length;
-		canvas.drawColor(Color.WHITE);
-		for (int i = 0; i < count; i++) {
-			if (visibility[i]) {
-				elements[i].draw(canvas);
-			}
-		}
-		canvas.restore();
 	}
 
 	private void drawStations(SubwayMap subwayMap, ArrayList<RenderElement> renderQueue) {
@@ -236,15 +209,7 @@ public class RenderProgram {
 		}
 	}
 
-	public void clearVisibility() {
-		final boolean[] visibility = mVisibility;
-		final int count = visibility.length;
-		for (int i = 0; i < count; i++) {
-			visibility[i] = false;
-		}
-	}
-
-	public void addVisibility(RectF viewport) {
+	public void setVisibility(RectF viewport) {
 		final int offset = 10;
 		final Rect v = new Rect(
 				(int) (viewport.left - offset),
@@ -252,14 +217,21 @@ public class RenderProgram {
 				(int) (viewport.right + offset),
 				(int) (viewport.bottom + offset));
 		final Rect[] bounds = mBounds;
-		final boolean[] visibility = mVisibility;
+		final RenderElement[] elements = mElements;
 		final int count = bounds.length;
+		final int[] types = mTypes;
+		final ArrayList<RenderElement> elems = mClipping;
+		elems.clear();
 		for (int i = 0; i < count; i++) {
-			visibility[i] |= Rect.intersects(v, bounds[i]);
+			if(  (types[i] & mRenderFilter)>0 &&  Rect.intersects(v, bounds[i])){
+				elems.add(elements[i]);
+			}
 		}
+		mElementsToRender = (RenderElement[]) elems.toArray(new RenderElement[elems.size()]);
 	}
 	
-	public void addVisibility2(RectF viewport1, RectF viewport2) {
+	public void setVisibilityTwice(RectF viewport1, RectF viewport2) {
+		//final long startTime = System.currentTimeMillis();
 		final int offset = 10;
 		final Rect v1 = new Rect(
 				(int) (viewport1.left - offset),
@@ -271,12 +243,35 @@ public class RenderProgram {
 				(int) (viewport2.top - offset),
 				(int) (viewport2.right + offset),
 				(int) (viewport2.bottom + offset));
+		final ArrayList<RenderElement> elems = mClipping;
+		elems.clear();
 		final Rect[] bounds = mBounds;
-		final boolean[] visibility = mVisibility;
+		final RenderElement[] elements = mElements;
+		final int[] types = mTypes;
 		final int count = bounds.length;
 		for (int i = 0; i < count; i++) {
 			final Rect box = bounds[i];
-			visibility[i] |= ( Rect.intersects(v1, box) || Rect.intersects(v2, box) );
+			if( (types[i] & mRenderFilter)>0 && ( Rect.intersects(v1, box) || Rect.intersects(v2, box) )){
+				elems.add(elements[i]);
+			}
 		}
-	}	
+		mElementsToRender = (RenderElement[]) elems.toArray(new RenderElement[elems.size()]);
+		//final long endTime = System.currentTimeMillis();
+		//Log.d("aMetro", "clipping time is " + (endTime-startTime) );
+	}
+
+	public void draw(Canvas canvas) {
+		//final long startTime = System.currentTimeMillis();
+		canvas.save();
+		final RenderElement[] elements = mElementsToRender;
+		final int count = elements.length;
+		canvas.drawColor(Color.WHITE);
+		for (int i = 0; i < count; i++) {
+			elements[i].draw(canvas);
+		}
+		canvas.restore();
+		//final long endTime = System.currentTimeMillis();
+		//Log.d("aMetro", "drawing time is " + (endTime-startTime) );
+	}
+	
 }
