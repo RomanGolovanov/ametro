@@ -26,6 +26,7 @@ import java.util.List;
 import android.content.Context;
 import android.graphics.*;
 import android.graphics.Bitmap.Config;
+import android.os.Handler;
 import android.util.AttributeSet;
 import org.ametro.model.SubwayMap;
 import org.ametro.model.SubwaySegment;
@@ -101,58 +102,54 @@ public class VectorMapView extends BaseMapView {
         return new PointF(x, y);
     }
 
-    @Override
     protected int getContentHeight() {
         return mContentHeight;
     }
 
-    @Override
     protected int getContentWidth() {
         return mContentWidth;
     }
 
     protected void onDrawRect(Canvas canvas, Rect viewport) {
-//		long time = System.currentTimeMillis();
-
         invalidateTileCache(viewport, false);
-        Rect tileOuter = screenToOuterTileRect(viewport);
+        final Rect tileOuter = screenToOuterTileRect(viewport);
         Rect cache = mTileCacheRect;
 
-        if (!Rect.intersects(tileOuter, cache)) {
-            // redraw entire page
-            invalidateTileCache(viewport, true);
-        } else if (!cache.contains(tileOuter)) {
-            // redraw part of page
-            updateTileCache(viewport);
+        synchronized(sync){
+	        if (!Rect.intersects(tileOuter, cache)) {
+	            // redraw entire page
+	            invalidateTileCache(viewport, true);
+	        } else if (!cache.contains(tileOuter)) {
+	            // redraw part of page
+	        	mUpdateTileCacheRect = new Rect(viewport);
+	        	mPrivateHandler.removeCallbacks(mUpdateTileCacheRunnable);
+	        	mPrivateHandler.post(mUpdateTileCacheRunnable);
+	        }
+	        cache = mTileCacheRect;
+	        int dx = cache.left * mTileSize - viewport.left;
+	        int dy = cache.top * mTileSize - viewport.top;
+	        canvas.drawColor(Color.WHITE);
+	        canvas.drawBitmap(mTileCache, dx, dy, null);
         }
-        cache = mTileCacheRect;
-        int dx = cache.left * mTileSize - viewport.left;
-        int dy = cache.top * mTileSize - viewport.top;
-        canvas.drawColor(Color.WHITE);
-        canvas.drawBitmap(mTileCache, dx, dy, null);
-
-//		if(Log.isLoggable(LOG_TAG_MAIN, Log.INFO)){
-//			Log.i(LOG_TAG_MAIN, "draw time: " + (System.currentTimeMillis() - time) + "ms");
-//		}
     }
 
     private void updateTileCache(Rect screenCoords) {
-        Rect tileOuter = screenToOuterTileRect(screenCoords);
+    	final Rect tileOuter = screenToOuterTileRect(screenCoords);
         RectF modelOuter = tileToModelRect(tileOuter);
-        Rect entireCache = mTileCacheRect;
-        Rect cache = new Rect(entireCache);
+        final Rect entireCache = mTileCacheRect;
+        final Rect cache = new Rect(entireCache);
         cache.intersect(tileOuter);
 
-        Rect dst = new Rect(cache); // control canvas position
+        final Rect dst = new Rect(cache); // control canvas position
         dst.offsetTo(cache.left - tileOuter.left, cache.top - tileOuter.top);
-        Rect dstOnScreen = tileToScreenRect(dst);
+        final Rect dstOnScreen = tileToScreenRect(dst);
 
-        Rect src = new Rect(cache); // cache canvas position
+        final Rect src = new Rect(cache); // cache canvas position
         src.offsetTo(cache.left - entireCache.left, cache.top - entireCache.top);
-        Rect srcOnScreen = tileToScreenRect(src);
+        final Rect srcOnScreen = tileToScreenRect(src);
 
-        Rect verticalSpan = new Rect(tileOuter);
-        Rect horizontalSpan = new Rect(tileOuter);
+        final Rect verticalSpan = new Rect(tileOuter);
+        final Rect horizontalSpan = new Rect(tileOuter);
 
         if (tileOuter.right == cache.right && tileOuter.bottom == cache.bottom) {
             horizontalSpan.bottom = cache.top;
@@ -170,10 +167,10 @@ public class VectorMapView extends BaseMapView {
             throw new RuntimeException("Invalid viewport splitting algorithm");
         }
 
-        RectF horizontalSpanInModel = tileToModelRect(horizontalSpan);
-        RectF verticalSpanInModel = tileToModelRect(verticalSpan);
+        final RectF horizontalSpanInModel = tileToModelRect(horizontalSpan);
+        final RectF verticalSpanInModel = tileToModelRect(verticalSpan);
 
-        Canvas canvas = new Canvas(mTileCacheBuffer);
+        final Canvas canvas = new Canvas(mTileCacheBuffer);
         canvas.drawColor(Color.MAGENTA);
 
         canvas.save();
@@ -181,8 +178,7 @@ public class VectorMapView extends BaseMapView {
         canvas.translate(-modelOuter.left, -modelOuter.top);
 
         mRenderProgram.clearVisibility();
-        mRenderProgram.addVisibility(horizontalSpanInModel);
-        mRenderProgram.addVisibility(verticalSpanInModel);
+        mRenderProgram.addVisibility2(horizontalSpanInModel, verticalSpanInModel);
         mRenderProgram.draw(canvas);
 
         canvas.restore();
@@ -193,17 +189,17 @@ public class VectorMapView extends BaseMapView {
         canvas.drawBitmap(mTileCache, srcOnScreen, dstOnScreen, null);
         canvas.restore();
 
-
-        mTileCacheRect = tileOuter;
-        Bitmap swap = mTileCache;
-        mTileCache = mTileCacheBuffer;
-        mTileCacheBuffer = swap;
-
+        synchronized (sync) {
+            mTileCacheRect = tileOuter;
+            Bitmap swap = mTileCache;
+            mTileCache = mTileCacheBuffer;
+            mTileCacheBuffer = swap;
+		}
     }
 
 
     private void invalidateTileCache(Rect screenCoords, boolean force) {
-        Rect tileOuter = screenToOuterTileRect(screenCoords);
+    	final Rect tileOuter = screenToOuterTileRect(screenCoords);
         final int width = getWidth() + mTileSize * 2;
         final int height = getHeight() + mTileSize * 2;
         final boolean isViewportChanged = mTileCacheScale != mScale || mTileCacheWidth != width || mTileCacheHeight != height;
@@ -216,9 +212,9 @@ public class VectorMapView extends BaseMapView {
                 mTileCacheBuffer = Bitmap.createBitmap(width, height, Config.RGB_565);
             }
 
-            RectF modelOuter = tileToModelRect(tileOuter);
+            final RectF modelOuter = tileToModelRect(tileOuter);
 
-            Canvas canvas = new Canvas(mTileCache);
+            final Canvas canvas = new Canvas(mTileCache);
             canvas.drawColor(Color.MAGENTA);
             canvas.clipRect(0, 0, tileOuter.width() * mTileSize, tileOuter.height() * mTileSize);
 
@@ -299,6 +295,24 @@ public class VectorMapView extends BaseMapView {
     private SubwayMap mSubwayMap;
     private RenderProgram mRenderProgram;
 
+    private Object sync = new Object();
+    private Handler mPrivateHandler = new Handler();
+    
+    private Runnable mInvalidateRunnable = new Runnable() {
+		public void run() {
+			VectorMapView.this.postInvalidate();
+		}
+	};
+
+    private Rect mUpdateTileCacheRect;
+	private Runnable mUpdateTileCacheRunnable = new Runnable() {
+		public void run() {
+            updateTileCache(mUpdateTileCacheRect);
+            mPrivateHandler.post(mInvalidateRunnable);
+		}
+	};
+    
+    
     private int mContentWidth;
     private int mContentHeight;
 
