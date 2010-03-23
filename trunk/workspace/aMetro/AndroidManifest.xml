@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<manifest android:versionCode="1" android:versionName="0.1.184-dev"
+<manifest android:versionCode="1" android:versionName="0.1.185-dev"
 	package="org.ametro" xmlns:android="http://schemas.android.com/apk/res/android">
 	<application android:debuggable="true" android:icon="@drawable/appicon"
-		android:label="@string/app_name">
+		android:label="@string/app_name" 
+		>
 		<activity android:label="@string/app_name"
 			android:launchMode="singleTop" android:configChanges="orientation|keyboardHidden"
 			android:name=".activity.BrowseVectorMap" android:windowSoftInputMode="adjustPan"
@@ -52,4 +53,9 @@
 		<activity android:name="org.ametro.activity.FavoriteRouteList" />
 	</application>
 	<uses-sdk android:minSdkVersion="3" />
+	<uses-permission android:name="android.permission.ACCESS_GPS" />
+	<uses-permission android:name="android.permission.ACCESS_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+	<uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

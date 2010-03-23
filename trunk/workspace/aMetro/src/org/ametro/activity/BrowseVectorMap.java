@@ -110,7 +110,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		setContentView(R.layout.global_wait);
 
 		if(mSubwayMap!=null){
-			
+
 			onShowMap(mSubwayMap);
 		}else{
 			Intent intent = getIntent();
@@ -132,7 +132,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		onSaveMapState();
 		super.onPause();
 	}
-	
+
 	protected void onDestroy() {
 		//Instance = null;
 		super.onDestroy();
@@ -189,7 +189,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		menu.findItem(MAIN_MENU_INFO).setEnabled(mCurrentStation!=null);
-		
+
 		menu.findItem(MAIN_MENU_FIND).setEnabled(mSubwayMap!=null);
 		menu.findItem(MAIN_MENU_INFO).setEnabled(mSubwayMap!=null);
 		menu.findItem(MAIN_MENU_ROUTES).setEnabled(mSubwayMap!=null);
@@ -228,7 +228,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		}
 		return super.onOptionsItemSelected(item);
 	}
- 
+
 	public void updateAntiAliasingState(){
 		if(mMapView!=null){
 			mMapView.setAntiAliasingDisableOnScroll(isAntiAliasingDisableOnScroll());
@@ -236,27 +236,27 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			mMapView.postInvalidate();
 		}
 	}
-	
-    public Locale getLocale(){
+
+	public Locale getLocale(){
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
 		final String localeName = settings.getString(getString(R.string.pref_locale_key), null);
 		return localeName!=null && localeName.length()>0 ? new Locale(localeName) : mDefaultLocale;
-    }
-    
-	public void setupLocale() {
-   		Locale.setDefault(getLocale());
 	}
 
-    public boolean isAntiAliasingEnabled(){
+	public void setupLocale() {
+		Locale.setDefault(getLocale());
+	}
+
+	public boolean isAntiAliasingEnabled(){
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
 		return settings.getBoolean(getString(R.string.pref_anti_alias_key), true);
-    }
-    
-    public boolean isAntiAliasingDisableOnScroll(){
+	}
+
+	public boolean isAntiAliasingDisableOnScroll(){
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
 		return settings.getBoolean(getString(R.string.pref_anti_alias_disable_on_scroll_key), true);
-    }
-    
+	}
+
 	public boolean isEnabledAddonsImport() {
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
 		return settings.getBoolean(getString(R.string.pref_auto_import_addons_key), false);
@@ -270,146 +270,146 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		}
 		return false;
 	}
-	
-    public void loadDefaultMapName(){
-        SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
-        mMapName = preferences.getString(PREFERENCE_PACKAGE_FILE_NAME, null);
-    }
 
-    public void saveDefaultMapName() {
-        SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(PREFERENCE_PACKAGE_FILE_NAME, mMapName);
-        editor.commit();
-    }
+	public void loadDefaultMapName(){
+		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
+		mMapName = preferences.getString(PREFERENCE_PACKAGE_FILE_NAME, null);
+	}
 
-    public void clearDefaultMapName() {
-        SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.remove(PREFERENCE_PACKAGE_FILE_NAME);
-        editor.commit();
-        mMapName = null;
-    }
+	public void saveDefaultMapName() {
+		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
+		SharedPreferences.Editor editor = preferences.edit();
+		editor.putString(PREFERENCE_PACKAGE_FILE_NAME, mMapName);
+		editor.commit();
+	}
 
-    public void addFavoriteRoute(int fromId, int toId)
-    {
-    	ArrayList<Point> routes = new ArrayList<Point>( Arrays.asList(getFavoriteRoutes()) );
-    	Point r = new Point(fromId, toId);
-    	if(!routes.contains(r)){
-    		routes.add(0, r);
-    		setFavoriteRoutes((Point[]) routes.toArray(new Point[routes.size()]));
-    	}
-    }
+	public void clearDefaultMapName() {
+		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
+		SharedPreferences.Editor editor = preferences.edit();
+		editor.remove(PREFERENCE_PACKAGE_FILE_NAME);
+		editor.commit();
+		mMapName = null;
+	}
 
-    public void removeFavoriteRoute(int fromId, int toId)
-    {
-    	ArrayList<Point> routes = new ArrayList<Point>( Arrays.asList(getFavoriteRoutes()) );
-    	Point r = new Point(fromId, toId);
-    	if(routes.contains(r)){
-    		routes.remove(r);
-    		setFavoriteRoutes((Point[]) routes.toArray(new Point[routes.size()]));
-    	}
-    }
+	public void addFavoriteRoute(int fromId, int toId)
+	{
+		ArrayList<Point> routes = new ArrayList<Point>( Arrays.asList(getFavoriteRoutes()) );
+		Point r = new Point(fromId, toId);
+		if(!routes.contains(r)){
+			routes.add(0, r);
+			setFavoriteRoutes((Point[]) routes.toArray(new Point[routes.size()]));
+		}
+	}
 
-    public boolean isFavoriteRoute(int fromId, int toId)
-    {
-    	ArrayList<Point> routes = new ArrayList<Point>( Arrays.asList(getFavoriteRoutes()) );
-    	Point r = new Point(fromId, toId);
-    	return routes.contains(r);
-    }
-    
-    public void clearFavoriteRoutes()
-    {
-        SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(PREFERENCE_FAVORITE_ROUTES + "_" + mMapName, "");
-        editor.commit();
-    }
+	public void removeFavoriteRoute(int fromId, int toId)
+	{
+		ArrayList<Point> routes = new ArrayList<Point>( Arrays.asList(getFavoriteRoutes()) );
+		Point r = new Point(fromId, toId);
+		if(routes.contains(r)){
+			routes.remove(r);
+			setFavoriteRoutes((Point[]) routes.toArray(new Point[routes.size()]));
+		}
+	}
 
-    public void setFavoriteRoutes(Point[] routes)
-    {
-        SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
-        StringBuilder sb = new StringBuilder();
-        int idx = 0;
-        for(Point p : routes){
-        	sb.append(StringUtil.formatPoint(p));
-        	idx++;
-        	if(idx<routes.length){
-        		sb.append(",");
-        	}
-        }
-        String routesBudle = sb.toString();
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(PREFERENCE_FAVORITE_ROUTES + "_" + mMapName, routesBudle);
-        editor.commit();
-    }
+	public boolean isFavoriteRoute(int fromId, int toId)
+	{
+		ArrayList<Point> routes = new ArrayList<Point>( Arrays.asList(getFavoriteRoutes()) );
+		Point r = new Point(fromId, toId);
+		return routes.contains(r);
+	}
 
-    public Point[] getFavoriteRoutes()
-    {
-        SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
-        String routes = preferences.getString(PREFERENCE_FAVORITE_ROUTES + "_" + mMapName, "");
-        return SerializeUtil.parsePointArray(routes);
-       
-    }
-    
-    public void saveScrollPosition(PointF position) {
-        SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
-        SharedPreferences.Editor editor = preferences.edit();
-        String scrollPosition = StringUtil.formatPointF(position);
-        editor.putString(PREFERENCE_SCROLL_POSITION + "_" + mMapName, scrollPosition);
-        editor.commit();
+	public void clearFavoriteRoutes()
+	{
+		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
+		SharedPreferences.Editor editor = preferences.edit();
+		editor.putString(PREFERENCE_FAVORITE_ROUTES + "_" + mMapName, "");
+		editor.commit();
+	}
+
+	public void setFavoriteRoutes(Point[] routes)
+	{
+		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
+		StringBuilder sb = new StringBuilder();
+		int idx = 0;
+		for(Point p : routes){
+			sb.append(StringUtil.formatPoint(p));
+			idx++;
+			if(idx<routes.length){
+				sb.append(",");
+			}
+		}
+		String routesBudle = sb.toString();
+		SharedPreferences.Editor editor = preferences.edit();
+		editor.putString(PREFERENCE_FAVORITE_ROUTES + "_" + mMapName, routesBudle);
+		editor.commit();
+	}
+
+	public Point[] getFavoriteRoutes()
+	{
+		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
+		String routes = preferences.getString(PREFERENCE_FAVORITE_ROUTES + "_" + mMapName, "");
+		return SerializeUtil.parsePointArray(routes);
+
+	}
+
+	public void saveScrollPosition(PointF position) {
+		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
+		SharedPreferences.Editor editor = preferences.edit();
+		String scrollPosition = StringUtil.formatPointF(position);
+		editor.putString(PREFERENCE_SCROLL_POSITION + "_" + mMapName, scrollPosition);
+		editor.commit();
 		if (Log.isLoggable(LOG_TAG_MAIN, Log.DEBUG)){
 			Log.d(LOG_TAG_MAIN, getString(R.string.log_save_map_position) + scrollPosition);
 		}
-    }
+	}
 
-    public PointF loadScrollPosition() {
-        SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
-        String pref = preferences.getString(PREFERENCE_SCROLL_POSITION + "_" + mMapName, null);
-        if (pref != null) {
-            return SerializeUtil.parsePointF(pref);
-        } else {
-            return null;
-        }
-    }
+	public PointF loadScrollPosition() {
+		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
+		String pref = preferences.getString(PREFERENCE_SCROLL_POSITION + "_" + mMapName, null);
+		if (pref != null) {
+			return SerializeUtil.parsePointF(pref);
+		} else {
+			return null;
+		}
+	}
 
-    public void clearScrollPosition(String mapName) {
-        if (mapName != null) {
-            SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.remove(PREFERENCE_SCROLL_POSITION + "_" + mapName);
-            editor.commit();
-        }
-    }
+	public void clearScrollPosition(String mapName) {
+		if (mapName != null) {
+			SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
+			SharedPreferences.Editor editor = preferences.edit();
+			editor.remove(PREFERENCE_SCROLL_POSITION + "_" + mapName);
+			editor.commit();
+		}
+	}
 
-    public void saveZoom(int zoomLevel) {
-        SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(PREFERENCE_ZOOM_LEVEL + "_" + mMapName, Integer.toString(zoomLevel));
-        editor.commit();
+	public void saveZoom(int zoomLevel) {
+		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
+		SharedPreferences.Editor editor = preferences.edit();
+		editor.putString(PREFERENCE_ZOOM_LEVEL + "_" + mMapName, Integer.toString(zoomLevel));
+		editor.commit();
 		if (Log.isLoggable(LOG_TAG_MAIN, Log.DEBUG)){
 			Log.d(LOG_TAG_MAIN, getString(R.string.log_save_map_zoom) + zoomLevel);
 		}
-    }
+	}
 
-    public Integer loadZoom() {
-        SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
-        String pref = preferences.getString(PREFERENCE_ZOOM_LEVEL + "_" + mMapName, null);
-        if (pref != null) {
-            return SerializeUtil.parseNullableInteger(pref);
-        } else {
-            return null;
-        }
-    }
+	public Integer loadZoom() {
+		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
+		String pref = preferences.getString(PREFERENCE_ZOOM_LEVEL + "_" + mMapName, null);
+		if (pref != null) {
+			return SerializeUtil.parseNullableInteger(pref);
+		} else {
+			return null;
+		}
+	}
 
-    public void clearZoom(String mapName) {
-        if (mapName != null) {
-            SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.remove(PREFERENCE_ZOOM_LEVEL + "_" + mapName);
-            editor.commit();
-        }
-    }
+	public void clearZoom(String mapName) {
+		if (mapName != null) {
+			SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
+			SharedPreferences.Editor editor = preferences.edit();
+			editor.remove(PREFERENCE_ZOOM_LEVEL + "_" + mapName);
+			editor.commit();
+		}
+	}
 
 	public SubwayMap getSubwayMap() {
 		return mSubwayMap;
@@ -572,11 +572,11 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 
 
 	private void onShowMap(SubwayMap subwayMap) {
-		
+
 		SubwayMap previousMap = mSubwayMap;
-		
+
 		mSubwayMap = subwayMap;
-		
+
 		if(previousMap!= null && previousMap.mapName.equals(subwayMap.mapName)){
 			mNavigationSegments = ModelUtil.copySegments(mSubwayMap, mNavigationSegments);
 			mNavigationStations = ModelUtil.copyStations(mSubwayMap, mNavigationStations);
@@ -590,7 +590,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			mCurrentStation = null;
 			mRoute = null;
 		}
-		
+
 		if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO))
 			Log.i(LOG_TAG_MAIN, getString(R.string.log_loaded_subway_map) + mSubwayMap.mapName
 					+ getString(R.string.log_with_size) + mSubwayMap.width + "x"
@@ -600,7 +600,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 
 		mMapView = (VectorMapView) findViewById(R.id.browse_vector_map_view);
 		updateAntiAliasingState();
-		
+
 		mMapView.setModel(mSubwayMap);
 		mMapView.setModelSelection(mNavigationStations, mNavigationSegments, mNavigationTransfers);
 		mZoomControls = (ZoomControls) findViewById(R.id.browse_vector_map_zoom);
