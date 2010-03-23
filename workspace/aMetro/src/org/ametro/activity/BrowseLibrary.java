@@ -45,6 +45,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -52,6 +53,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.AsyncTask.Status;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -61,22 +63,36 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-public class BrowseLibrary extends Activity implements ExpandableListView.OnChildClickListener, LocationListener {
+public class BrowseLibrary extends Activity implements
+		ExpandableListView.OnChildClickListener, LocationListener {
 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		menu.add(0, MAIN_MENU_REFRESH, 0, R.string.menu_refresh).setIcon(android.R.drawable.ic_menu_rotate);
-		menu.add(0, MAIN_MENU_LOCATION, 3, R.string.menu_location).setIcon(android.R.drawable.ic_menu_mylocation);
-		menu.add(0, MAIN_MENU_IMPORT, 4, R.string.menu_import).setIcon(android.R.drawable.ic_menu_add);
-		menu.add(0, MAIN_MENU_SETTINGS, 5, R.string.menu_settings).setIcon(android.R.drawable.ic_menu_preferences);
-		menu.add(0, MAIN_MENU_ABOUT, 6, R.string.menu_about).setIcon(android.R.drawable.ic_menu_help);
+		menu.add(0, MAIN_MENU_REFRESH, 0, R.string.menu_refresh).setIcon(
+				android.R.drawable.ic_menu_rotate);
+		menu.add(0, MAIN_MENU_ALL_MAPS, 1, R.string.menu_all_maps).setIcon(
+				android.R.drawable.ic_menu_mapmode).setVisible(false);
+		menu.add(0, MAIN_MENU_MY_MAPS, 2, R.string.menu_my_maps).setIcon(
+				android.R.drawable.ic_menu_myplaces);
+		menu.add(0, MAIN_MENU_LOCATION, 3, R.string.menu_location).setIcon(
+				android.R.drawable.ic_menu_mylocation);
+		menu.add(0, MAIN_MENU_IMPORT, 4, R.string.menu_import).setIcon(
+				android.R.drawable.ic_menu_add);
+		menu.add(0, MAIN_MENU_SETTINGS, 5, R.string.menu_settings).setIcon(
+				android.R.drawable.ic_menu_preferences);
+		menu.add(0, MAIN_MENU_ABOUT, 6, R.string.menu_about).setIcon(
+				android.R.drawable.ic_menu_help);
 
-		mMainMenuAllMaps = menu.add(0, MAIN_MENU_ALL_MAPS, 1, R.string.menu_all_maps).setIcon(android.R.drawable.ic_menu_mapmode).setVisible(false);
-		mMainMenuMyMaps = menu.add(0, MAIN_MENU_MY_MAPS, 2, R.string.menu_my_maps).setIcon(android.R.drawable.ic_menu_myplaces);
 		return true;
 	}
 
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		menu.findItem(MAIN_MENU_ALL_MAPS).setVisible(mMode == MODE_ALL_MAPS);
+		menu.findItem(MAIN_MENU_MY_MAPS).setVisible(mMode == MODE_MY_MAPS);
+		menu.findItem(MAIN_MENU_LOCATION).setVisible(mLocationDetectionEnabled);
+		return super.onPrepareOptionsMenu(menu);
+	}
+	
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case MAIN_MENU_REFRESH:
@@ -84,21 +100,21 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 			beginIndexing();
 			return true;
 		case MAIN_MENU_ALL_MAPS:
-			mMainMenuAllMaps.setVisible(false);
-			mMainMenuMyMaps.setVisible(true);
+			mMode = MODE_MY_MAPS;
 			return true;
 		case MAIN_MENU_MY_MAPS:
-			mMainMenuAllMaps.setVisible(true);
-			mMainMenuMyMaps.setVisible(false);
+			mMode = MODE_ALL_MAPS;
 			return true;
 		case MAIN_MENU_LOCATION:
 			requestMyLocation();
 			return true;
 		case MAIN_MENU_IMPORT:
-			startActivityForResult(new Intent(this, ImportPmz.class), REQUEST_IMPORT);
+			startActivityForResult(new Intent(this, ImportPmz.class),
+					REQUEST_IMPORT);
 			return true;
 		case MAIN_MENU_SETTINGS:
-			startActivityForResult(new Intent(this, Settings.class), REQUEST_SETTINGS);
+			startActivityForResult(new Intent(this, Settings.class),
+					REQUEST_SETTINGS);
 			return true;
 		case MAIN_MENU_ABOUT:
 			startActivity(new Intent(this, About.class));
@@ -106,47 +122,22 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 
 		}
 		return super.onOptionsItemSelected(item);
-	} 
+	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
 		case REQUEST_IMPORT:
 			beginIndexing();
 			break;
+		case REQUEST_SETTINGS:
+			updateLocationState();
+			break;
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		MapSettings.checkPrerequisite();
-		beginIndexing();
-		mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-	}
-
-	protected void onResume() {
-		mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
-		super.onResume();
-	}
-
-	protected void onPause() {
-		mLocationManager.removeUpdates(this);
-		super.onPause();
-	}
-
-	protected void onStop() {
-		if (mIndexTask != null && mIndexTask.getStatus() != Status.FINISHED) {
-			mIndexTask.cancel(false);
-		}
-		super.onStop();
-	} 
-
-	private void beginIndexing() {
-		mIndexTask = new IndexTask();
-		mIndexTask.execute();
-	}
-
-	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+	public boolean onChildClick(ExpandableListView parent, View v,
+			int groupPosition, int childPosition, long id) {
 		String fileName = mAdapter.getFileName(groupPosition, childPosition);
 		String mapName = fileName.replace(MapSettings.MAP_FILE_TYPE, "");
 		Intent i = new Intent();
@@ -156,14 +147,74 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 		return true;
 	}
 
+	public void onLocationChanged(Location location) {
+		if (location != null) {
+			Location l = new Location(LocationManager.GPS_PROVIDER);
+			l.setLatitude(location.getLatitude());
+			l.setLongitude(location.getLongitude());
+			mLocation = l;
+			mLocationManager.removeUpdates(this);
+			mLocationManager = null;
+			mLocationDetected = true;
+		}
+	}
 
-	private void requestMyLocation(){
+	public void onProviderDisabled(String provider) {
+	}
+
+	public void onProviderEnabled(String provider) {
+	}
+
+	public void onStatusChanged(String provider, int status, Bundle bundle) {
+	}
+	
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		mMode = MODE_MY_MAPS;
+		mLocationDetected = false;
+		MapSettings.checkPrerequisite();
+		beginIndexing();
+		updateLocationState();
+	}
+
+	protected void onStop() {
+		if (!mLocationDetected && mLocationManager != null) {
+			mLocationManager.removeUpdates(this);
+			mLocationManager = null;
+		}
+		if(mLocateTask !=null && mLocateTask.getStatus()!=Status.FINISHED){
+			mLocateTask.cancel(false);
+		}
+		if (mIndexTask != null && mIndexTask.getStatus() != Status.FINISHED) {
+			mIndexTask.cancel(false);
+		}
+		super.onStop();
+	}
+
+	private void updateLocationState() {
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+		mLocationDetectionEnabled = settings.getBoolean(getString(R.string.pref_auto_locate_key), false);
+		if(mLocationDetectionEnabled && !mLocationDetected){
+			mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+			mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+		}
+	}
+
+	
+	private void beginIndexing() {
+		mIndexTask = new IndexTask();
+		mIndexTask.execute();
+	}
+
+	private void requestMyLocation() {
 		mLocateTask = new LocateTask();
 		mLocateTask.execute();
 	}
 
 	private LocationManager mLocationManager;
 	private Location mLocation;
+	private boolean mLocationDetected;
+	private boolean mLocationDetectionEnabled;
 
 	private MapListAdapter mAdapter;
 	private ExpandableListView mListView;
@@ -182,8 +233,10 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 	private final int MAIN_MENU_SETTINGS = 6;
 	private final int MAIN_MENU_ABOUT = 7;
 
-	private MenuItem mMainMenuAllMaps;
-	private MenuItem mMainMenuMyMaps;
+	private final static int MODE_ALL_MAPS = 0;
+	private final static int MODE_MY_MAPS = 1;
+	
+	private int mMode;
 
 	private IndexTask mIndexTask;
 	private LocateTask mLocateTask;
@@ -191,9 +244,7 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 	private final static int REQUEST_IMPORT = 1;
 	private final static int REQUEST_SETTINGS = 2;
 
-
-	private static class LocationInfo
-	{
+	private static class LocationInfo {
 		String FileName;
 		String CityName;
 		String CountryName;
@@ -203,28 +254,19 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 		double NS;
 	}
 
-	private class LocateTask extends AsyncTask<Void, ProgressInfo, LocationInfo>
-	{
+	private class LocateTask extends
+			AsyncTask<Void, ProgressInfo, LocationInfo> {
 		private ProgressDialog dialog;
 
 		protected LocationInfo doInBackground(Void... args) {
 			// step 0: prepare!
 			double latitude = 0, longitude = 0;
 
-			if(mLocation!=null){
+			if (mLocation != null) {
 				latitude = mLocation.getLatitude();
 				longitude = mLocation.getLongitude();
-			}else{
-				Location myLocation = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-				if(myLocation == null ){
-					myLocation = mLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-				}
-				if(myLocation != null){
-					latitude = myLocation.getLatitude();
-					longitude = myLocation.getLongitude();
-				}else{
-					return null;
-				}
+			} else {
+				return null;
 			}
 
 			ArrayList<LocationInfo> locations = new ArrayList<LocationInfo>();
@@ -239,15 +281,17 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 			final int NSColumn = 8;
 
 			// step 1: load city data
-			try{
-				CsvReader reader = new CsvReader(new BufferedReader( new InputStreamReader( getAssets().open("cities.csv"), org.ametro.model.Serializer.ENCODING  )) );
+			try {
+				CsvReader reader = new CsvReader(new BufferedReader(
+						new InputStreamReader(getAssets().open("cities.csv"),
+								org.ametro.model.Serializer.ENCODING)));
 				int idx = 0;
-				while(reader.next()){
+				while (reader.next()) {
 					idx++;
-					if(idx == 1) { 
+					if (idx == 1) {
 						continue; // skip header row
 					}
-					if(reader.getCount() < 7) { 
+					if (reader.getCount() < 7) {
 						continue; // skip empty or invalid rows
 					}
 					LocationInfo info = new LocationInfo();
@@ -256,42 +300,43 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 					info.CountryName = reader.getString(CountryColumn);
 					info.Latitude = reader.getDouble(LatitudeColumn);
 					info.Longitude = reader.getDouble(LongitudeColumn);
-					info.EW = reader.getNullableDouble(EWColumn, 50);
-					info.NS = reader.getNullableDouble(NSColumn, 50);
+					info.EW = reader.getNullableDouble(EWColumn, 50) * 1000;
+					info.NS = reader.getNullableDouble(NSColumn, 50) * 1000;
 					locations.add(info);
 				}
 
-			}catch(IOException ex){
-				if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
-					Log.d(Constants.LOG_TAG_MAIN,"Cannot read cities.csv cities.csv" , ex);
-				}				
+			} catch (IOException ex) {
+				if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)) {
+					Log.d(Constants.LOG_TAG_MAIN,
+							"Cannot read cities.csv cities.csv", ex);
+				}
 				return null;
 			}
 
 			// step 2: search coordinates
-			Location infoLocation = new Location("gps");
+			Location infoLocation = new Location(LocationManager.GPS_PROVIDER);
 			float[] distances = new float[3];
-			for(LocationInfo info : locations){
-				if(isCancelled()) {
+			for (LocationInfo info : locations) {
+				if (isCancelled()) {
 					return null;
 				}
 				infoLocation.setLatitude(info.Latitude);
 				infoLocation.setLongitude(info.Longitude);
-				Location.distanceBetween(info.Latitude, info.Longitude, latitude, longitude, distances);
-				if( distances[0] < info.EW || distances[0] < info.NS ){
+				Location.distanceBetween(info.Latitude, info.Longitude,
+						latitude, longitude, distances);
+				float distance = distances[0];
+				if (distance < info.EW || distance < info.NS) {
 					return info;
 				}
-
 			}
-			LocationInfo emptyLocation = new LocationInfo();
-			emptyLocation.Latitude = latitude;
-			emptyLocation.Longitude = longitude;
-			return emptyLocation;
+			return null;
 		}
 
 		protected void onPreExecute() {
 			super.onPreExecute();
-			dialog = ProgressDialog.show(BrowseLibrary.this, "Locate position", "Please wait...", true);
+			dialog = ProgressDialog.show(BrowseLibrary.this,
+					getString(R.string.locate_wait_title),
+					getString(R.string.locate_wait_text), true);
 		}
 
 		protected void onCancelled() {
@@ -301,39 +346,58 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 
 		protected void onPostExecute(LocationInfo result) {
 			dialog.hide();
-			if(result!=null){
-				if(result.FileName!=null){
-					Toast.makeText(BrowseLibrary.this, "You are in " + result.CityName + " within " + result.CountryName, Toast.LENGTH_SHORT).show();
-				}else{
-					Toast.makeText(BrowseLibrary.this, "You are at " + result.Latitude + "," + result.Longitude, Toast.LENGTH_SHORT).show();
+			if (result != null) {
+				String packageFileName = (result.FileName + MapSettings.MAP_FILE_TYPE);
+				mAdapter.setSelectedFile(packageFileName);
+				int groupPosition = mAdapter.getSelectedGroupPosition();
+				int childPosition = mAdapter.getSelectChildPosition();
+				if (groupPosition != -1) {
+					mListView.expandGroup(groupPosition);
+					if (childPosition != -1) {
+						mListView.setSelectedChild(groupPosition, childPosition, true);
+					}
 				}
-			}else{
-				Toast.makeText(BrowseLibrary.this, "Unknown location", Toast.LENGTH_SHORT).show();
+				mListView.postInvalidate();
+				Toast.makeText(
+						BrowseLibrary.this,
+						String.format(getString(R.string.msg_location_found),
+								result.CityName, result.CountryName),
+						Toast.LENGTH_SHORT).show();
+			} else {
+				Toast.makeText(BrowseLibrary.this,
+						R.string.msg_location_unknown, Toast.LENGTH_SHORT)
+						.show();
 			}
 			super.onPostExecute(result);
 		}
 	}
 
-	private class IndexTask extends AsyncTask<Void, ProgressInfo, FileGroupsDictionary> {
+	private class IndexTask extends
+			AsyncTask<Void, ProgressInfo, FileGroupsDictionary> {
 		private boolean mIsCanceled = false;
 		private boolean mIsProgressVisible = false;
 
-		private void scanModelFileContent(FileGroupsDictionary map, String fileName, String fullFileName) {
+		private void scanModelFileContent(FileGroupsDictionary map,
+				String fileName, String fullFileName) {
 			try {
-				City city = Deserializer.deserialize(new FileInputStream(MapSettings.MAPS_PATH + fileName), true);
+				City city = Deserializer.deserialize(new FileInputStream(
+						MapSettings.MAPS_PATH + fileName), true);
 				if (city.sourceVersion == MapSettings.getSourceVersion()) {
 					map.putFile(city.countryName, city.cityName, fileName);
 				}
 			} catch (Exception e) {
-				if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
-					Log.d(Constants.LOG_TAG_MAIN, getString(R.string.log_map_indexing_failed) + fileName, e);
+				if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)) {
+					Log.d(Constants.LOG_TAG_MAIN,
+							getString(R.string.log_map_indexing_failed)
+									+ fileName, e);
 				}
 			}
 		}
 
 		private FileGroupsDictionary scanMapDirectory(File dir) {
 			FileGroupsDictionary map;
-			ProgressInfo pi = new ProgressInfo(0, 0, null, getString(R.string.msg_loading_maps));
+			ProgressInfo pi = new ProgressInfo(0, 0, null,
+					getString(R.string.msg_loading_maps));
 			publishProgress(pi);
 			map = new FileGroupsDictionary();
 			map.timestamp = dir.lastModified();
@@ -353,7 +417,8 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 					pi.progress = i;
 					pi.message = fileName;
 					publishProgress(pi);
-					String fullFileName = dir.getAbsolutePath() + '/' + files[i];
+					String fullFileName = dir.getAbsolutePath() + '/'
+							+ files[i];
 					scanModelFileContent(map, fileName, fullFileName);
 				}
 			}
@@ -361,7 +426,8 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 		}
 
 		protected FileGroupsDictionary doInBackground(Void... params) {
-			final String cacheFileName = MapSettings.ROOT_PATH + MapSettings.MAPS_LIST;
+			final String cacheFileName = MapSettings.ROOT_PATH
+					+ MapSettings.MAPS_LIST;
 			final File dir = new File(MapSettings.MAPS_PATH);
 			FileGroupsDictionary map = FileGroupsDictionary.read(cacheFileName);
 			if (map == null || map.timestamp < dir.lastModified()) {
@@ -381,14 +447,9 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 				mProgressText = (TextView) findViewById(R.id.import_pmz_progress_text);
 				mProgressCounter = (TextView) findViewById(R.id.import_pmz_progress_counter);
 			}
-			ProgressInfo.ChangeProgress(
-					values[0],
-					mProgressBar,
-					mProgressTitle,
-					mProgressText,
-					mProgressCounter,
-					getString(R.string.template_progress_count)
-			);
+			ProgressInfo.ChangeProgress(values[0], mProgressBar,
+					mProgressTitle, mProgressText, mProgressCounter,
+					getString(R.string.template_progress_count));
 			super.onProgressUpdate(values);
 		}
 
@@ -402,7 +463,8 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 			Intent intent = getIntent();
 			Uri uri = intent != null ? intent.getData() : null;
 			if (uri != null) {
-				mDefaultPackageFileName = MapUri.getMapName(uri) + MapSettings.MAP_FILE_TYPE;
+				mDefaultPackageFileName = MapUri.getMapName(uri)
+						+ MapSettings.MAP_FILE_TYPE;
 			}
 			setContentView(R.layout.global_wait);
 			super.onPreExecute();
@@ -422,7 +484,8 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 					if (groupPosition != -1) {
 						mListView.expandGroup(groupPosition);
 						if (childPosition != -1) {
-							mListView.setSelectedChild(groupPosition, childPosition, true);
+							mListView.setSelectedChild(groupPosition,
+									childPosition, true);
 						}
 					}
 				}
@@ -432,23 +495,5 @@ public class BrowseLibrary extends Activity implements ExpandableListView.OnChil
 			super.onPostExecute(result);
 		}
 	}
-
-	public void onLocationChanged(Location location) {
-		if(location!=null){
-			mLocation = new Location(LocationManager.GPS_PROVIDER);
-			mLocation.setLatitude(location.getLatitude());
-			mLocation.setLongitude(location.getLongitude());
-		}
-	}
-
-	public void onProviderDisabled(String provider) {
-	}
-
-	public void onProviderEnabled(String provider) {
-	}
-
-	public void onStatusChanged(String provider, int status, Bundle bundle) {
-	}
-
 
 }
