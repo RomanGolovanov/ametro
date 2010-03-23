@@ -51,6 +51,13 @@
     <string name="pref_auto_import_addons">Import Addons</string>
     <string name="pref_auto_import_addons_description">import text information from PMZ maps</string>
     <string name="pref_auto_import_addons_key">IMPORT_ADDONS</string>
+    <string name="pref_anti_alias">Enable Anti-aliasing</string>
+    <string name="pref_anti_alias_key">ANTI_ALIAS</string>
+    <string name="pref_anti_alias_description">Anti-aliase map graphics</string>
+    <string name="pref_anti_alias_disable_on_scroll">Disable Anti-aliasing on scrolling</string>
+    <string name="pref_anti_alias_disable_on_scroll_key">ANTI_ALIAS_DISABLE_ON_SCROLL</string>
+    <string name="pref_anti_alias_disable_on_scroll_description">Disable Anti-aliasing while map scrolling on slow devices</string>
+    
     <string name="text_about">
 &lt;h4&gt;aMetro v.%s&lt;h4&gt;
 &lt;h5&gt;This is a program of cities underground and Metro.&lt;/h6&gt;

@@ -51,6 +51,12 @@
     <string name="pref_auto_import_addons">Импорт доп.информации</string>
     <string name="pref_auto_import_addons_description">Импортировать дополнительные тексты из PMZ карт</string>
     <string name="pref_auto_import_addons_key">IMPORT_ADDONS</string>
+    <string name="pref_anti_alias">Включить сглаживание</string>
+    <string name="pref_anti_alias_key">ANTI_ALIAS</string>
+    <string name="pref_anti_alias_description">Сглаживать изображение карты</string>
+    <string name="pref_anti_alias_disable_on_scroll">Без сглаживания при прокрутке</string>
+    <string name="pref_anti_alias_disable_on_scroll_key">ANTI_ALIAS_DISABLE_ON_SCROLL</string>
+    <string name="pref_anti_alias_disable_on_scroll_description">Увеличит скорость работы на медленных устройствах</string>
     <string name="text_about">
 &lt;h4&gt;aMetro v.%s&lt;h4&gt;
 &lt;h5&gt;Навигация по картам метро  городов мира.&lt;/h6&gt;

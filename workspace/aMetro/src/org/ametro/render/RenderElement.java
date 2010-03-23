@@ -42,6 +42,7 @@ public abstract class RenderElement implements Comparable<RenderElement> {
     }
     
     protected abstract void setMode(boolean grayed);
+    public abstract void setAntiAlias(boolean enabled);
     
     public abstract void draw(Canvas canvas);
 

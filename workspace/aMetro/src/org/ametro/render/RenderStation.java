@@ -39,7 +39,7 @@ public class RenderStation extends RenderElement {
     public float radiusExternal;
     public Paint paintColor;
     public Paint paintBackGround;
-
+    
     public RenderStation(SubwayMap subwayMap, SubwayStation station) {
         super();
         final boolean hasConnections = subwayMap.hasConnections(station);
@@ -73,6 +73,12 @@ public class RenderStation extends RenderElement {
         paintColor = localPaintColor;
 
         setProperties(RenderProgram.TYPE_STATION, new Rect(localX - radius, localY - radius, localX + radius, localY + radius));
+    }
+
+    public void setAntiAlias(boolean enabled)
+    {
+    	paintColor.setAntiAlias(enabled);
+    	paintBackGround.setAntiAlias(enabled);
     }
 
     protected void setMode(boolean grayed)

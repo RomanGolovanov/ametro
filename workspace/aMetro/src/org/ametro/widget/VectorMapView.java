@@ -56,9 +56,9 @@ public class VectorMapView extends BaseMapView {
 	}
 
 	public void setRenderFilter(int renderFilter) {
-		 mRenderProgram.setRenderFilter(renderFilter);
+		mRenderProgram.setRenderFilter(renderFilter);
 	}    
-	
+
 	public void setModel(SubwayMap subwayMap) {
 		if (subwayMap != null) {
 			mSubwayMap = subwayMap;
@@ -126,7 +126,8 @@ public class VectorMapView extends BaseMapView {
 		final Rect tileOuter = screenToOuterTileRect(viewport);
 		Rect cache = mTileCacheRect;
 
-		if (!Rect.intersects(tileOuter, cache)) {
+		if (!Rect.intersects(tileOuter, cache) || mForceCacheInvalidate) {
+			mForceCacheInvalidate = false;
 			// redraw entire page
 			synchronized(sync){			
 				mCreateTileCacheRect = new Rect(viewport);
@@ -157,14 +158,14 @@ public class VectorMapView extends BaseMapView {
 	private void updateTileCache(Rect screenCoords) {
 		final Rect tileOuter = screenToOuterTileRect(screenCoords);
 		RectF modelOuter = tileToModelRect(tileOuter);
-		
+
 		Rect entireCache;
 		Bitmap cacheImage;
 		synchronized(sync){
 			entireCache = mTileCacheRect;
 			cacheImage = mTileCache;
 		}
-		
+
 		final Rect cache = new Rect(entireCache);
 		cache.intersect(tileOuter);
 
@@ -205,10 +206,10 @@ public class VectorMapView extends BaseMapView {
 		canvas.scale(mScale, mScale);
 		canvas.translate(-modelOuter.left, -modelOuter.top);
 		if(screenCoords != mUpdateTileCacheRect) return;
-		
+
 		mRenderProgram.setVisibilityTwice(horizontalSpanInModel, verticalSpanInModel);
 		if(screenCoords != mUpdateTileCacheRect) return;
-		
+
 		mRenderProgram.draw(canvas);
 		if(screenCoords != mUpdateTileCacheRect) return;
 
@@ -242,6 +243,11 @@ public class VectorMapView extends BaseMapView {
 			if (mTileCache == null) {
 				mTileCache = Bitmap.createBitmap(width, height, Config.RGB_565);
 				mTileCacheBuffer = Bitmap.createBitmap(width, height, Config.RGB_565);
+			}
+
+			if(mAntiAlias!=mUpdatedAntiAlias){
+				mAntiAlias = mUpdatedAntiAlias;
+				mRenderProgram.setAntiAlias(mAntiAlias);
 			}
 
 			final RectF modelOuter = tileToModelRect(tileOuter);
@@ -336,6 +342,10 @@ public class VectorMapView extends BaseMapView {
 	private Rect mUpdateTileCacheRect;
 	private Runnable mUpdateTileCacheRunnable = new Runnable() {
 		public void run() {
+			if(mAntiAlias!=mUpdatedAntiAlias){
+				mAntiAlias = mUpdatedAntiAlias;
+				mRenderProgram.setAntiAlias(mAntiAlias);
+			}
 			final Rect rect = mUpdateTileCacheRect;
 			updateTileCache(mUpdateTileCacheRect);
 			if(rect == mUpdateTileCacheRect){
@@ -347,6 +357,10 @@ public class VectorMapView extends BaseMapView {
 	private Rect mCreateTileCacheRect;
 	private Runnable mCreateTileCacheRunnable = new Runnable() {
 		public void run() {
+			if(mAntiAlias!=mUpdatedAntiAlias){
+				mAntiAlias = mUpdatedAntiAlias;
+				mRenderProgram.setAntiAlias(mAntiAlias);
+			}
 			final Rect rect = mCreateTileCacheRect;
 			invalidateTileCache(mCreateTileCacheRect, true);
 			if(rect == mCreateTileCacheRect){
@@ -369,5 +383,39 @@ public class VectorMapView extends BaseMapView {
 
 	private Bitmap mTileCache;
 	private Bitmap mTileCacheBuffer;
+
+	private boolean mForceCacheInvalidate;
+	private boolean mAntiAlias = true;
+	private boolean mUpdatedAntiAlias = true;
+
+	private boolean mAntiAliasEnabled = true;
+	private boolean mAntiAliasDisabledOnScroll = true;
+
+	public void setAntiAliasingEnabled(boolean enabled){
+		mUpdatedAntiAlias = enabled;
+		mAntiAliasEnabled = enabled;
+		mForceCacheInvalidate = true;
+	}
+
+	public void setAntiAliasingDisableOnScroll(boolean enabled){
+		mAntiAliasDisabledOnScroll = enabled;
+	}
+
+	public void onScrollBegin() {
+		if(mAntiAliasEnabled){
+			if(mAntiAliasDisabledOnScroll){
+				mUpdatedAntiAlias = false;
+			}
+		}
+	}
+
+	public void onScrollDone() {
+		if(mAntiAliasEnabled){
+			if(mAntiAliasDisabledOnScroll){
+				mUpdatedAntiAlias = true;
+				mForceCacheInvalidate = true;
+			}		
+		}
+	}
 
 }

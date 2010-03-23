@@ -208,6 +208,12 @@ public class RenderStationName extends RenderElement {
         mPointFirstLine = null;
     }
 
+    public void setAntiAlias(boolean enabled)
+    {
+    	mTextPaint.setAntiAlias(enabled);
+    	mBorderPaint.setAntiAlias(enabled);
+    }
+    
     protected void setMode(boolean grayed)
     {
     	mTextPaint.setAlpha(grayed ?  80 : 255);

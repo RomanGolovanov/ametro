@@ -185,8 +185,14 @@ public abstract class BaseMapView extends ScrollView {
         return mInitialized ? getContentWidth() : 0;
     }
 
+    public abstract void onScrollBegin();
+    public abstract void onScrollDone();
+    
     public void computeScroll() {
         if (mScroller.computeScrollOffset()) {
+        	if(mScroller.isFinished()){
+        		onScrollDone();
+        	}
             mScrollX = mScroller.getCurrX();
             mScrollY = mScroller.getCurrY();
             invalidateScroll();
@@ -448,6 +454,7 @@ public abstract class BaseMapView extends ScrollView {
         vx = vx / 2;
         vy = vy / 2;
 
+        onScrollBegin();
         // mRenderProgram.setRenderFilter(RenderProgram.ONLY_TRANSPORT);
         mScroller.fling(mScrollX, mScrollY, -vx, -vy, 0, maxX, 0, maxY);
         postInvalidate();
