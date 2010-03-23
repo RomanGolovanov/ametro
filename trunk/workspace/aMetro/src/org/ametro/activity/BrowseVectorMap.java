@@ -161,6 +161,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			}
 			break; 
 		case REQUEST_SETTINGS:
+			updateAntiAliasingState();
 			if(isConfigurationChanged()){
 				setupLocale();
 				if (mMapName != null) {
@@ -227,7 +228,15 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
+ 
+	public void updateAntiAliasingState(){
+		if(mMapView!=null){
+			mMapView.setAntiAliasingDisableOnScroll(isAntiAliasingDisableOnScroll());
+			mMapView.setAntiAliasingEnabled(isAntiAliasingEnabled());
+			mMapView.postInvalidate();
+		}
+	}
+	
     public Locale getLocale(){
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
 		final String localeName = settings.getString(getString(R.string.pref_locale_key), null);
@@ -238,6 +247,16 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
    		Locale.setDefault(getLocale());
 	}
 
+    public boolean isAntiAliasingEnabled(){
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+		return settings.getBoolean(getString(R.string.pref_anti_alias_key), true);
+    }
+    
+    public boolean isAntiAliasingDisableOnScroll(){
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+		return settings.getBoolean(getString(R.string.pref_anti_alias_disable_on_scroll_key), true);
+    }
+    
 	public boolean isEnabledAddonsImport() {
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
 		return settings.getBoolean(getString(R.string.pref_auto_import_addons_key), false);
@@ -580,6 +599,8 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		setContentView(R.layout.browse_vector_map_main);
 
 		mMapView = (VectorMapView) findViewById(R.id.browse_vector_map_view);
+		updateAntiAliasingState();
+		
 		mMapView.setModel(mSubwayMap);
 		mMapView.setModelSelection(mNavigationStations, mNavigationSegments, mNavigationTransfers);
 		mZoomControls = (ZoomControls) findViewById(R.id.browse_vector_map_zoom);

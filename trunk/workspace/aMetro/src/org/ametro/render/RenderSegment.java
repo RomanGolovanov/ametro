@@ -108,6 +108,11 @@ public class RenderSegment extends RenderElement {
         }
     }
 
+    public void setAntiAlias(boolean enabled)
+    {
+    	paint.setAntiAlias(enabled);
+    }
+    
     protected void setMode(boolean grayed)
     {
     	paint.setAlpha(grayed ?  80 : 255);

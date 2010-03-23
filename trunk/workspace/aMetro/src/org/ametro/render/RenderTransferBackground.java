@@ -68,6 +68,11 @@ public class RenderTransferBackground extends RenderElement {
         setProperties(RenderProgram.TYPE_TRANSFER_BACKGROUND, new Rect(left, top, right, bottom));
     }
 
+    public void setAntiAlias(boolean enabled)
+    {
+    	Paint.setAntiAlias(enabled);
+    }
+    
     protected void setMode(boolean grayed)
     {
     	Paint.setAlpha(grayed ? 40 : 255);

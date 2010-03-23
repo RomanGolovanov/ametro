@@ -71,6 +71,12 @@ public class RenderProgram {
 		mRenderFilter = renderFilter;
 	}
 
+	public void setAntiAlias(boolean enabled){
+		for(RenderElement element : mElements){
+			element.setAntiAlias(enabled);
+		}
+	}
+	
 	public RenderProgram(SubwayMap subwayMap) {
 		mSubwayMap = subwayMap;
 		mRenderQueue = new ArrayList<RenderElement>();
@@ -257,7 +263,7 @@ public class RenderProgram {
 		}
 		mElementsToRender = (RenderElement[]) elems.toArray(new RenderElement[elems.size()]);
 		//final long endTime = System.currentTimeMillis();
-		//Log.d("aMetro", "clipping time is " + (endTime-startTime) );
+		//Log.d("aMetro", "clipping time is " + (endTime-startTime) +", clipped " + mElementsToRender.length + "/" + mElements.length );
 	}
 
 	public void draw(Canvas canvas) {

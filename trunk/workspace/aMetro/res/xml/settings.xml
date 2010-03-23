@@ -30,6 +30,18 @@
                             android:summary="@string/pref_auto_import_addons_description"
                             android:defaultValue="false"/>
 
+        <CheckBoxPreference android:title="@string/pref_anti_alias"
+                            android:key="@string/pref_anti_alias_key"
+                            android:summary="@string/pref_anti_alias_description"
+                            android:defaultValue="true"/>
+
+        <CheckBoxPreference android:title="@string/pref_anti_alias_disable_on_scroll"
+                            android:key="@string/pref_anti_alias_disable_on_scroll_key"
+                            android:summary="@string/pref_anti_alias_disable_on_scroll_description"
+                            android:dependency="@string/pref_anti_alias_key"
+                            android:defaultValue="true"/>
+
+
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_section_debug">
