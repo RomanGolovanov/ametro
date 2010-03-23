@@ -208,10 +208,27 @@ public class CsvReader {
 	}
 
 	public double getDouble(int index) {
-		return StringUtil.parseDouble(getValue(mRecord, index, mTotalColumns),
-				0);
+		return StringUtil.parseDouble(getValue(mRecord, index, mTotalColumns), 0);
 	}
 
+	public Double getNullableDouble(int index) {
+		String value = getValue(mRecord, index, mTotalColumns);
+		if (!EMPTY_VALUE.equals(value)) {
+			return StringUtil.parseDouble(value, 0);
+		} else {
+			return null;
+		}
+	}
+	
+	public Double getNullableDouble(int index, double defaultValue) {
+		String value = getValue(mRecord, index, mTotalColumns);
+		if (!EMPTY_VALUE.equals(value)) {
+			return StringUtil.parseDouble(value, defaultValue);
+		} else {
+			return defaultValue;
+		}
+	}
+	
 	public boolean readBoolean() {
 		return StringUtil.parseBoolean(getValue(mRecord, mCurrentColumn++,
 				mTotalColumns), false);
@@ -257,6 +274,10 @@ public class CsvReader {
 		} else {
 			return null;
 		}
+	}
+
+	public int getCount() {
+		return mTotalColumns;
 	}
 
 }
