@@ -96,10 +96,10 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if(Instance != null){
-			mSubwayMap = Instance.mSubwayMap;
-			mMapName = Instance.mMapName; 
-		}
+//		if(Instance != null){
+//			mSubwayMap = Instance.mSubwayMap;
+//			mMapName = Instance.mMapName; 
+//		}
 		Instance = this;
 		Instance.mDefaultLocale = Locale.getDefault();
 

@@ -23,6 +23,7 @@ package org.ametro;
 
 import java.io.File;
 
+import org.ametro.jni.Natives;
 import org.ametro.util.FileUtil;
 
 import android.net.Uri;
@@ -56,6 +57,7 @@ public class MapSettings {
     public static final String DESCRIPTION_ENTRY_NAME = "description.dat";
     
     public static void checkPrerequisite() {
+    	Natives.Initialize();
         File root = new File(ROOT_PATH);
         File maps = new File(MAPS_PATH);
         File cache = new File(CACHE_PATH);
