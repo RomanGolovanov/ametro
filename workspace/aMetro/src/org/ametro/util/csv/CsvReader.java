@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.ametro.jni.Natives;
 import org.ametro.util.SerializeUtil;
 import org.ametro.util.StringUtil;
 
@@ -55,6 +56,9 @@ public class CsvReader {
 		this(reader, DEFAULT_SEPARATOR);
 	}
 
+	ArrayList<String> mLineParts = new ArrayList<String>();
+	StringBuilder mLineBuilder = new StringBuilder();
+
 	/**
 	 * Получить следующую нетипизированную
 	 * запись из потока без сохранения
@@ -64,77 +68,43 @@ public class CsvReader {
 	 *         из потока
 	 * @throws IOException
 	 */
-
-	ArrayList<String> mLineParts = new ArrayList<String>();
-	StringBuilder mLineBuilder = new StringBuilder();
-	
-	protected String[] readNextRecordStreamed() throws IOException {
-		mLineParts.clear();
-		mLineBuilder.setLength(0);
-		char ch;
-		int code;
-		while( (code = mReader.read())!=-1 ){
-			ch = (char)code;
-			if(ch == '\n'){
-				if(mLineBuilder.length() == 0 && mLineParts.size() == 0){
-					continue;
-				}else{
-					mLineParts.add(mLineBuilder.toString());
-					mLineBuilder.setLength(0);
-					break;
-				}
-			}else if(ch == mSeparator){
-				mLineParts.add(mLineBuilder.toString());
-				mLineBuilder.setLength(0);
-			}else{
-				mLineBuilder.append(ch);
-			}
-			
-		}
-		return (code==-1 &&  mLineParts.size()==0) ? null : (String[]) mLineParts.toArray(new String[mLineParts.size()]);
-	}
-	
 	protected String[] readNextRecord() throws IOException {
 		String line = mReader.readLine();
 		while(line!=null && line.length() == 0){
 			line = mReader.readLine();
 		}
 		if (line != null) {
-			return line.split(""+mSeparator);
-		} else {
-			return null;
-		}
-	}
-	
-	protected String[] readNextRecordNoSplit() throws IOException {
-		String line = mReader.readLine();
-		while(line!=null && line.length() == 0){
-			line = mReader.readLine();
-		}
-		if (line != null) {
-			final ArrayList<String> parts = mLineParts;
-			final StringBuilder sb = mLineBuilder;
-			final int length = line.length(); 
-			int position = 0;
-			char ch;
-			parts.clear();
-			sb.setLength(0);
-			while( position < length ){
-				ch = (char)line.charAt(position);
-				if(ch == mSeparator){
-					parts.add(sb.toString()); 
-					sb.setLength(0);
-				}else{
-					sb.append(ch);
+			if(Natives.INITIALIZED){ 
+				return Natives.SplitCsvString(line, mSeparator);
+			}else
+			{
+				final ArrayList<String> parts = mLineParts;
+				final StringBuilder sb = mLineBuilder;
+				final int length = line.length(); 
+				int position = 0;
+				char ch;
+				parts.clear();
+				sb.setLength(0);
+				while( position < length ){
+					ch = (char)line.charAt(position);
+					if(ch == mSeparator){
+						parts.add(sb.toString()); 
+						sb.setLength(0);
+					}else{
+						sb.append(ch);
+					}
+					position++;
 				}
-				position++;
+				parts.add(sb.toString());
+				return (String[]) parts.toArray(new String[parts.size()]);
+				//return line.split(""+mSeparator);
 			}
-			parts.add(sb.toString());
-			return (String[]) parts.toArray(new String[parts.size()]);
+					
 		} else {
 			return null;
 		}
 	}
+
 	
 	/**
 	 * Сохранить следующую нетипизированную
@@ -145,7 +115,7 @@ public class CsvReader {
 	 * @throws IOException
 	 */
 	public boolean next() throws IOException {
-		final String[] record = readNextRecordNoSplit();
+		final String[] record = readNextRecord();
 		mCurrentColumn = 0;
 		if (record != null) {
 			mRecord = record;
