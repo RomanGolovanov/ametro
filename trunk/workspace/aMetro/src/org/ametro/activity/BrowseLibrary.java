@@ -43,11 +43,9 @@ import org.ametro.util.csv.CsvReader;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -64,7 +62,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class BrowseLibrary extends Activity implements
-		ExpandableListView.OnChildClickListener, LocationListener {
+		ExpandableListView.OnChildClickListener {
 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
@@ -106,15 +104,13 @@ public class BrowseLibrary extends Activity implements
 			mMode = MODE_ALL_MAPS;
 			return true;
 		case MAIN_MENU_LOCATION:
-			requestMyLocation();
+			startActivityForResult(new Intent(this, SearchLocation.class), REQUEST_LOCATION);
 			return true;
 		case MAIN_MENU_IMPORT:
-			startActivityForResult(new Intent(this, ImportPmz.class),
-					REQUEST_IMPORT);
+			startActivityForResult(new Intent(this, ImportPmz.class), REQUEST_IMPORT);
 			return true;
 		case MAIN_MENU_SETTINGS:
-			startActivityForResult(new Intent(this, Settings.class),
-					REQUEST_SETTINGS);
+			startActivityForResult(new Intent(this, Settings.class), REQUEST_SETTINGS);
 			return true;
 		case MAIN_MENU_ABOUT:
 			startActivity(new Intent(this, About.class));
@@ -132,12 +128,20 @@ public class BrowseLibrary extends Activity implements
 		case REQUEST_SETTINGS:
 			updateLocationState();
 			break;
+		case REQUEST_LOCATION:
+			if(resultCode == RESULT_OK){
+				Location location = data.getParcelableExtra(SearchLocation.LOCATION);
+				mLocationSearchTask = new LocationSearchTask();
+				mLocationSearchTask.execute(location);
+			}
+			if(resultCode == RESULT_CANCELED){
+				Toast.makeText(BrowseLibrary.this,R.string.msg_location_unknown, Toast.LENGTH_SHORT).show();			}
+			
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
-	public boolean onChildClick(ExpandableListView parent, View v,
-			int groupPosition, int childPosition, long id) {
+	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 		String fileName = mAdapter.getFileName(groupPosition, childPosition);
 		String mapName = fileName.replace(MapSettings.MAP_FILE_TYPE, "");
 		Intent i = new Intent();
@@ -147,43 +151,17 @@ public class BrowseLibrary extends Activity implements
 		return true;
 	}
 
-	public void onLocationChanged(Location location) {
-		if (location != null) {
-			Location l = new Location(LocationManager.GPS_PROVIDER);
-			l.setLatitude(location.getLatitude());
-			l.setLongitude(location.getLongitude());
-			mLocation = l;
-			mLocationManager.removeUpdates(this);
-			mLocationManager = null;
-			mLocationDetected = true;
-		}
-	}
-
-	public void onProviderDisabled(String provider) {
-	}
-
-	public void onProviderEnabled(String provider) {
-	}
-
-	public void onStatusChanged(String provider, int status, Bundle bundle) {
-	}
-	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mMode = MODE_MY_MAPS;
-		mLocationDetected = false;
 		MapSettings.checkPrerequisite();
 		beginIndexing();
 		updateLocationState();
 	}
 
 	protected void onStop() {
-		if (!mLocationDetected && mLocationManager != null) {
-			mLocationManager.removeUpdates(this);
-			mLocationManager = null;
-		}
-		if(mLocateTask !=null && mLocateTask.getStatus()!=Status.FINISHED){
-			mLocateTask.cancel(false);
+		if(mLocationSearchTask !=null && mLocationSearchTask.getStatus()!=Status.FINISHED){
+			mLocationSearchTask.cancel(false);
 		}
 		if (mIndexTask != null && mIndexTask.getStatus() != Status.FINISHED) {
 			mIndexTask.cancel(false);
@@ -194,10 +172,6 @@ public class BrowseLibrary extends Activity implements
 	private void updateLocationState() {
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
 		mLocationDetectionEnabled = settings.getBoolean(getString(R.string.pref_auto_locate_key), false);
-		if(mLocationDetectionEnabled && !mLocationDetected){
-			mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-			mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
-		}
 	}
 
 	
@@ -206,14 +180,6 @@ public class BrowseLibrary extends Activity implements
 		mIndexTask.execute();
 	}
 
-	private void requestMyLocation() {
-		mLocateTask = new LocateTask();
-		mLocateTask.execute();
-	}
-
-	private LocationManager mLocationManager;
-	private Location mLocation;
-	private boolean mLocationDetected;
 	private boolean mLocationDetectionEnabled;
 
 	private MapListAdapter mAdapter;
@@ -239,10 +205,11 @@ public class BrowseLibrary extends Activity implements
 	private int mMode;
 
 	private IndexTask mIndexTask;
-	private LocateTask mLocateTask;
+	private LocationSearchTask mLocationSearchTask;
 
 	private final static int REQUEST_IMPORT = 1;
 	private final static int REQUEST_SETTINGS = 2;
+	private final static int REQUEST_LOCATION = 3;
 
 	private static class LocationInfo {
 		String FileName;
@@ -254,20 +221,15 @@ public class BrowseLibrary extends Activity implements
 		double NS;
 	}
 
-	private class LocateTask extends
-			AsyncTask<Void, ProgressInfo, LocationInfo> {
+	private class LocationSearchTask extends AsyncTask<Location, ProgressInfo, LocationInfo> {
 		private ProgressDialog dialog;
 
-		protected LocationInfo doInBackground(Void... args) {
+		protected LocationInfo doInBackground(Location... args) {
 			// step 0: prepare!
+			Location location = args[0];
 			double latitude = 0, longitude = 0;
-
-			if (mLocation != null) {
-				latitude = mLocation.getLatitude();
-				longitude = mLocation.getLongitude();
-			} else {
-				return null;
-			}
+			latitude = location.getLatitude();
+			longitude = location.getLongitude();
 
 			ArrayList<LocationInfo> locations = new ArrayList<LocationInfo>();
 			Locale locale = Locale.getDefault();

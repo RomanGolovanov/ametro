@@ -31,7 +31,7 @@
     <string name="create_route_favorites_button">Избранное</string>
     <string name="favorite_route_delete">Удалить</string>
     <string name="favorite_route_cancel">Отмена</string>
-    <string name="locate_wait_title">Определение координат</string>
+    <string name="locate_wait_title">Поиск города</string>
     <string name="locate_wait_text">Пожалуйста подождите...</string>
     
     <string name="pref_section_general">Основные</string>
@@ -67,7 +67,7 @@
 картами проекта pMetro. ©2010&lt;/h6&gt;
 &lt;p&gt;
 Разработчики: Голованов Роман, Виниченко Влад&lt;br/&gt;
-Тестеры: Кузьмин Александр, Никитин Александр&lt;br/&gt;
+Тестеры: Кузьмин Александр, Никитин Алексей&lt;br/&gt;
 Дизайн: Dusty Rat&lt;br/&gt;
 &lt;/p&gt;
 
@@ -131,6 +131,7 @@
     <string name="msg_no_favorites">Избранное пусто</string>
     <string name="msg_location_found">Вы находитесь в городе %s, %s</string>
     <string name="msg_location_unknown">Ваше местоположение неизвестно</string>
+    <string name="msg_detect_location">Определение координат</string>
     <string name="msg_"/>
     <string name="log_map_indexing_failed">Map indexing failed for </string>
     <string name="log_save_map_zoom">Save map zoom </string>
