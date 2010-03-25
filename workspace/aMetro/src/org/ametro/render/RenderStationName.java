@@ -31,7 +31,7 @@ import org.ametro.model.SubwayStation;
 public class RenderStationName extends RenderElement {
 
 	private boolean mVertical;
-
+	
 	private Paint mTextPaint;
 	private Paint mBorderPaint;
 
@@ -63,20 +63,26 @@ public class RenderStationName extends RenderElement {
 		textPaint.setColor(textColor);
 		textPaint.setStyle(Style.FILL);
 
-		final Paint fillPaint = new Paint(textPaint);
-		fillPaint.setColor(backColor != 0 ? backColor : Color.WHITE);
-		fillPaint.setStyle(Style.STROKE);
-		fillPaint.setStrokeWidth(3);
+		final Paint borderPaint = new Paint(textPaint);
+		borderPaint.setColor(Color.WHITE);
+		borderPaint.setStyle(Style.STROKE);
+		borderPaint.setStrokeWidth(3);
 		
 		final boolean vertical = textRect.width() < textRect.height();
 
-		final Rect rect = vertical 
-			? new Rect(textRect.left, textRect.bottom, textRect.left + textRect.height(), textRect.bottom + textRect.width()) 
-			: new Rect(textRect);
 		final Align align = vertical 
 			? ((point.y > textRect.centerY()) ? Align.LEFT : Align.RIGHT)
 			: ((point.x > textRect.centerX() ? Align.RIGHT : Align.LEFT));
-		
+		Rect rect;
+		if(vertical){
+			if(align == Align.LEFT){
+				rect = new Rect(textRect.left, textRect.bottom, textRect.left + textRect.height(), textRect.bottom + textRect.width());
+			}else{
+				rect = new Rect(textRect.left - textRect.height(), textRect.top, textRect.left , textRect.top + textRect.width());
+			}
+		}else{
+			rect = new Rect(textRect);
+		}
 
 		final Rect bounds = new Rect();
 		textPaint.getTextBounds(text, 0, textLength, bounds);
@@ -86,7 +92,7 @@ public class RenderStationName extends RenderElement {
 			spacePosition = text.indexOf(' ');
 			isNeedSecondLine = spacePosition != -1;
 		}
-		
+
 		if (isNeedSecondLine) {
 			final String firstText = text.substring(0, spacePosition);
 
@@ -110,7 +116,7 @@ public class RenderStationName extends RenderElement {
 		}
 
 		mTextPaint = textPaint;
-		mBorderPaint = fillPaint;
+		mBorderPaint = borderPaint;
 		
 		mVertical = vertical;
 		mTextPaint.setTextAlign(align);
@@ -138,7 +144,7 @@ public class RenderStationName extends RenderElement {
 		mBorderPaint.setAntiAlias(enabled);
 	}
 
-	protected void setMode(boolean grayed) {
+	protected void setMode(boolean grayed) { 
 		mTextPaint.setAlpha(grayed ? 80 : 255);
 	}
 
@@ -158,4 +164,5 @@ public class RenderStationName extends RenderElement {
 		canvas.restore();
 	}
 
+	
 }
