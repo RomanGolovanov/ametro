@@ -28,217 +28,134 @@ import org.ametro.model.SubwayLine;
 import org.ametro.model.SubwayMap;
 import org.ametro.model.SubwayStation;
 
-
 public class RenderStationName extends RenderElement {
 
-    private Paint mTextPaint;
-    private Paint mBorderPaint;
+	private boolean mVertical;
 
-    private String mTextFirstLine;
-    private Path mPathFirstLine;
-    private Rect mRectFirstLine;
-    private Point mPointFirstLine;
+	private Paint mTextPaint;
+	private Paint mBorderPaint;
 
-    private String mTextSecondLine;
-    private Path mPathSecondLine;
-    private Rect mRectSecondLine;
-    private Point mPointSecondLine;
+	private String mTextFirstLine;
+	private Point mPointFirstLine;
 
-    public RenderStationName(SubwayMap subwayMap, SubwayStation station) {
-        final boolean isUpperCase = subwayMap.upperCase;
-        final boolean isWordWrap = subwayMap.wordWrap;
+	private String mTextSecondLine;
+	private Point mPointSecondLine;
 
-        final String text = isUpperCase ? station.name.toUpperCase() : station.name;
-        final int textLength = text.length();
-        final Rect rect = station.rect;
-        final Point point = station.point;
+	public RenderStationName(SubwayMap subwayMap, SubwayStation station) {
+		final boolean isUpperCase = subwayMap.upperCase;
+		final boolean isWordWrap = subwayMap.wordWrap;
 
-        final SubwayLine line = subwayMap.lines[station.lineId];
-        final int textColor = line.labelColor;
-        final int backColor = line.labelBgColor;
+		final String text = isUpperCase ? station.name.toUpperCase() : station.name;
+		final int textLength = text.length();
+		final Rect textRect = station.rect;
+		final Point point = station.point;
 
-        initializePaints(textColor, backColor);
+		final SubwayLine line = subwayMap.lines[station.lineId];
+		final int textColor = line.labelColor;
+		final int backColor = line.labelBgColor;
 
-        if (rect.width() > rect.height()) {
-            // horizontal text
-            final Rect bounds = new Rect();
-            mTextPaint.getTextBounds(text, 0, textLength, bounds);
-            boolean isNeedSecondLine = bounds.width() > rect.width() && isWordWrap;
-            int spacePosition = -1;
-            if (isNeedSecondLine) {
-                spacePosition = text.indexOf(' ');
-                isNeedSecondLine = spacePosition != -1;
-            }
-            if (isNeedSecondLine) {
-                final String firstText = text.substring(0, spacePosition);
-                final int firstLength = firstText.length();
+		final Paint textPaint = new Paint();
+		textPaint.setAntiAlias(true);
+		textPaint.setTypeface(Typeface.DEFAULT);
+		textPaint.setFakeBoldText(true);
+		textPaint.setTextSize(10);
+		textPaint.setTextAlign(Align.LEFT);
+		textPaint.setColor(textColor);
+		textPaint.setStyle(Style.FILL);
 
-                final String secondText = text.substring(spacePosition + 1);
-                final int secondLength = secondText.length();
+		final Paint fillPaint = new Paint(textPaint);
+		fillPaint.setColor(backColor != 0 ? backColor : Color.WHITE);
+		fillPaint.setStyle(Style.STROKE);
+		fillPaint.setStrokeWidth(3);
+		
+		final boolean vertical = textRect.width() < textRect.height();
 
-                final Rect secondRect = new Rect(
-                        rect.left,
-                        rect.top + bounds.height() + 2,
-                        rect.right,
-                        rect.bottom + bounds.height() + 2);
+		final Rect rect = vertical 
+			? new Rect(textRect.left, textRect.bottom, textRect.left + textRect.height(), textRect.bottom + textRect.width()) 
+			: new Rect(textRect);
+		final Align align = vertical 
+			? ((point.y > textRect.centerY()) ? Align.LEFT : Align.RIGHT)
+			: ((point.x > textRect.centerX() ? Align.RIGHT : Align.LEFT));
+		
 
-                initializeFirstHorizontalLine(firstText, firstLength, rect, point);
-                initializeSecondHorizontalLine(secondText, secondLength, secondRect, point);
+		final Rect bounds = new Rect();
+		textPaint.getTextBounds(text, 0, textLength, bounds);
+		boolean isNeedSecondLine = bounds.width() > rect.width() && isWordWrap;
+		int spacePosition = -1;
+		if (isNeedSecondLine) {
+			spacePosition = text.indexOf(' ');
+			isNeedSecondLine = spacePosition != -1;
+		}
+		
+		if (isNeedSecondLine) {
+			final String firstText = text.substring(0, spacePosition);
+
+			final String secondText = text.substring(spacePosition + 1);
+
+			final Rect secondRect = new Rect(rect.left, rect.top
+					+ bounds.height() + 2, rect.right, rect.bottom
+					+ bounds.height() + 2);
+
+			mTextFirstLine = firstText;
+			mPointFirstLine = initializeLine(firstText, vertical, rect, textPaint, align);
+			
+			mTextSecondLine = secondText;
+			mPointSecondLine = initializeLine(secondText, vertical,  secondRect, textPaint, align);
+			mPointSecondLine.offset(-mPointFirstLine.x, -mPointFirstLine.y);
+			
+
+		} else {
+			mTextFirstLine = text;
+			mPointFirstLine = initializeLine(text, vertical,  rect, textPaint, align);
+		}
+
+		mTextPaint = textPaint;
+		mBorderPaint = fillPaint;
+		
+		mVertical = vertical;
+		mTextPaint.setTextAlign(align);
+		mBorderPaint.setTextAlign(align);
+
+		Rect box = new Rect(textRect);
+		setProperties(RenderProgram.TYPE_STATION_NAME, box);
+	}
+
+	private static Point initializeLine(final String text, boolean vertical, final Rect rect, final Paint paint, final Align align) {
+		Point position = new Point();
+		final Rect bounds = new Rect();
+		paint.getTextBounds(text, 0, text.length(), bounds);
+		if (align == Align.RIGHT) { // align to right
+			position.set(rect.right + (vertical ? bounds.height() : 0 ) , rect.top + (vertical ? 0 : bounds.height()));
+		} else { // align to left
+			position.set(rect.left + (vertical ? bounds.height() : 0 ), rect.top +  (vertical ? 0 : bounds.height()));
+		}
+		return position;
+	}
 
 
-            } else {
-                initializeFirstHorizontalLine(text, textLength, rect, point);
-            }
+	public void setAntiAlias(boolean enabled) {
+		mTextPaint.setAntiAlias(enabled);
+		mBorderPaint.setAntiAlias(enabled);
+	}
 
+	protected void setMode(boolean grayed) {
+		mTextPaint.setAlpha(grayed ? 80 : 255);
+	}
 
-        } else {
-            // vertical text
-            initializeVerticalText(text, textLength, rect, point);
-        }
-
-        Rect box = new Rect(mRectFirstLine);
-        if (mRectSecondLine != null) {
-            box.union(mRectSecondLine);
-        }
-        setProperties(RenderProgram.TYPE_STATION_NAME, box);
-    }
-
-    private void initializeSecondHorizontalLine(final String text,
-                                                final int textLength, final Rect rect, final Point point) {
-        final Rect fill = new Rect();
-        final Point position = new Point();
-        final Rect bounds = new Rect();
-        mTextPaint.getTextBounds(text, 0, textLength, bounds);
-
-        final int top = rect.top;
-        final int left = rect.left;
-        final int right = rect.right;
-        if (point.x > rect.centerX()) { // align to right
-            mTextPaint.setTextAlign(Align.RIGHT);
-            mBorderPaint.setTextAlign(Align.RIGHT);
-            mTextPaint.getTextBounds(text, 0, textLength, bounds);
-            fill.set(right - bounds.width() - 1, top, right + 2, top + bounds.height() + 1);
-            position.set(right, top + bounds.height());
-
-        } else { // align to left
-            mTextPaint.setTextAlign(Align.LEFT);
-            mBorderPaint.setTextAlign(Align.LEFT);
-            mTextPaint.getTextBounds(text, 0, textLength, bounds);
-            fill.set(left - 1, top, left + bounds.width() + 2, top + bounds.height() + 1);
-            position.set(left, top + bounds.height());
-        }
-        mTextSecondLine = text;
-        mRectSecondLine = fill;
-        mPathSecondLine = null;
-        mPointSecondLine = position;
-    }
-
-    private void initializeFirstHorizontalLine(final String text,
-                                               final int textLength, final Rect rect, final Point point) {
-        Rect fill = new Rect();
-        Point position = new Point();
-        final Rect bounds = new Rect();
-        mTextPaint.getTextBounds(text, 0, textLength, bounds);
-
-        final int top = rect.top;
-        final int left = rect.left;
-        final int right = rect.right;
-        if (point.x > rect.centerX()) { // align to right
-            mTextPaint.setTextAlign(Align.RIGHT);
-            mBorderPaint.setTextAlign(Align.RIGHT);
-            mTextPaint.getTextBounds(text, 0, textLength, bounds);
-            fill.set(right - bounds.width() - 1, top, right + 2, top + bounds.height() + 1);
-            position.set(right, top + bounds.height());
-
-        } else { // align to left
-            mTextPaint.setTextAlign(Align.LEFT);
-            mBorderPaint.setTextAlign(Align.LEFT);
-            mTextPaint.getTextBounds(text, 0, textLength, bounds);
-            fill.set(left - 1, top, left + bounds.width() + 2, top + bounds.height() + 1);
-            position.set(left, top + bounds.height());
-        }
-        mTextFirstLine = text;
-        mRectFirstLine = fill;
-        mPathFirstLine = null;
-        mPointFirstLine = position;
-    }
-
-    private void initializePaints(final int textColor, final int backColor) {
-        final Paint textPaint = new Paint();
-
-        textPaint.setSubpixelText(false);
-        textPaint.setAntiAlias(true);
-        textPaint.setTypeface(Typeface.DEFAULT);
-        textPaint.setFakeBoldText(true);
-        textPaint.setTextSize(10);
-        textPaint.setTextAlign(Align.LEFT);
-        textPaint.setColor(textColor);
-        textPaint.setStyle(Style.FILL);
-        mTextPaint = textPaint;
-
-        final Paint fillPaint = new Paint(textPaint);
-        fillPaint.setColor(backColor != 0 ? backColor : Color.WHITE);
-        fillPaint.setStyle(Style.STROKE);
-        fillPaint.setStrokeWidth(3);
-        mBorderPaint = fillPaint;
-    }
-
-    private void initializeVerticalText(final String text, final int textLength, final Rect rect, final Point point) {
-        final Path textPath = new Path();
-        final Rect bounds = new Rect();
-        mTextPaint.getTextBounds(text, 0, textLength, bounds);
-        final int right = rect.right;
-        final int bottom = rect.bottom;
-        final int top = rect.top;
-        final int textHeight = bounds.height();
-        final int textWidth = bounds.width();
-        Rect textRect;
-        if (point.y > rect.centerY()) {
-            textRect = new Rect(right - textHeight, bottom - textWidth - 20, right, bottom - 5);
-
-        } else {
-            textRect = new Rect(right - textHeight, top + 5, right, top + textWidth + 20);
-        }
-        textPath.moveTo(textRect.right, textRect.bottom);
-        textPath.lineTo(textRect.right, textRect.top);
-
-        mTextFirstLine = text;
-        mRectFirstLine = textRect;
-        mPathFirstLine = textPath;
-        mPointFirstLine = null;
-    }
-
-    public void setAntiAlias(boolean enabled)
-    {
-    	mTextPaint.setAntiAlias(enabled);
-    	mBorderPaint.setAntiAlias(enabled);
-    }
-    
-    protected void setMode(boolean grayed)
-    {
-    	mTextPaint.setAlpha(grayed ?  80 : 255);
-    }
-    
-    public void draw(Canvas canvas) {
-
-        if (mPointFirstLine != null) {
-            canvas.drawText(mTextFirstLine, mPointFirstLine.x, mPointFirstLine.y, mBorderPaint);
-            canvas.drawText(mTextFirstLine, mPointFirstLine.x, mPointFirstLine.y, mTextPaint);
-        } else {
-            canvas.drawTextOnPath(mTextFirstLine, mPathFirstLine, 0, 0, mBorderPaint);
-            canvas.drawTextOnPath(mTextFirstLine, mPathFirstLine, 0, 0, mTextPaint);
-        }
-
-        if (mTextSecondLine != null) {
-            if (mPointSecondLine != null) {
-                canvas.drawText(mTextSecondLine, mPointSecondLine.x, mPointSecondLine.y, mBorderPaint);
-                canvas.drawText(mTextSecondLine, mPointSecondLine.x, mPointSecondLine.y, mTextPaint);
-            } else {
-                canvas.drawTextOnPath(mTextSecondLine, mPathSecondLine, 0, 0, mBorderPaint);
-                canvas.drawTextOnPath(mTextSecondLine, mPathSecondLine, 0, 0, mTextPaint);
-            }
-        }
-
-    }
+	public void draw(Canvas canvas) {
+		canvas.save();
+		canvas.translate(mPointFirstLine.x, mPointFirstLine.y);
+		if(mVertical){
+			canvas.rotate(-90);
+		}
+		canvas.drawText(mTextFirstLine, 0, 0, mBorderPaint);
+		canvas.drawText(mTextFirstLine, 0, 0, mTextPaint);
+		if (mTextSecondLine != null) {
+			canvas.translate(mPointSecondLine.x, mPointSecondLine.y);
+			canvas.drawText(mTextSecondLine, 0, 0, mBorderPaint);
+			canvas.drawText(mTextSecondLine, 0, 0, mTextPaint);
+		}
+		canvas.restore();
+	}
 
 }
