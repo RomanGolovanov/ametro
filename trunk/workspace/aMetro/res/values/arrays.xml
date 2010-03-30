@@ -18,32 +18,33 @@
     </string-array>
 
     <string-array name="version_changelog">
-        <item>0.1.163-dev: changed stations/route lists appearance</item>
-        <item>0.1.164-dev: removed obsolete code</item>
-        <item>0.1.165-dev: added station selection activity, change log in about</item>
-        <item>0.1.166-dev: fixed import error on line end</item>
-        <item>0.1.167-dev: RU localization, station selection changed</item>
-        <item>0.1.168-dev: swap button moved to menu in create route, some resource improvements</item>
-        <item>0.1.169-dev: new browse route activity design</item>
-        <item>0.1.170-dev: favorites draft</item>
-        <item>0.1.171-dev: fixed UI for routes</item>
-        <item>0.1.172-dev: rewrited UI for favorite routes</item>
-        <item>0.1.173-dev: added context menu for favorite routes list</item>
-        <item>0.1.174-dev: optimized map loading time, pre-styled station info page</item>
-        <item>0.1.175-dev: added 'Delete' mode in favorite routes list, changed some icons</item>
-        <item>0.1.176-dev: finally favorite routes list, rewrited map and import menus, fixed routing errors</item>
-        <item>0.1.177-dev: a lot of minor fixes</item>
-        <item>0.1.178-dev: background design changes, reversed favorite routes list</item>
-        <item>0.1.179-dev: bug fixed: open station info failed when no station selected or file not exists</item>
-        <item>0.1.180-dev: fix route drop after map locale changing</item>
-        <item>0.1.181-dev: experimental backgound-thread rendering</item>
-        <item>0.1.182-dev: experimental rendering optimizations</item>
-        <item>0.1.184-dev: added settings for disable anti-aliasing</item>
-        <item>0.1.185-dev: experimental GPS/GSM location search</item>
-        <item>0.1.186-dev: GPS/GSM location search worked</item>
-        <item>0.1.187-dev: added native library</item>
-        <item>0.1.188-dev: added search coordinates activity</item>
-        <item>0.1.190-dev: rewrited drawing of stations names</item>
+        <item>0.1.0.r163: changed stations/route lists appearance</item>
+        <item>0.1.1.r164: removed obsolete code</item>
+        <item>0.1.2.r165: added station selection activity, change log in about</item>
+        <item>0.1.3.r166: fixed import error on line end</item>
+        <item>0.1.4.r167: RU localization, station selection changed</item>
+        <item>0.1.5.r168: swap button moved to menu in create route, some resource improvements</item>
+        <item>0.1.6.r169: new browse route activity design</item>
+        <item>0.1.7.r170: favorites draft</item>
+        <item>0.1.8.r171: fixed UI for routes</item>
+        <item>0.1.9.r172: rewrited UI for favorite routes</item>
+        <item>0.1.10.r173: added context menu for favorite routes list</item>
+        <item>0.1.11.r174: optimized map loading time, pre-styled station info page</item>
+        <item>0.1.12.r175: added 'Delete' mode in favorite routes list, changed some icons</item>
+        <item>0.1.13.r176: finally favorite routes list, rewrited map and import menus, fixed routing errors</item>
+        <item>0.1.14.r177: a lot of minor fixes</item>
+        <item>0.1.15.r178: background design changes, reversed favorite routes list</item>
+        <item>0.1.16.r179: bug fixed: open station info failed when no station selected or file not exists</item>
+        <item>0.1.17.r180: fix route drop after map locale changing</item>
+        <item>0.1.18.r181: experimental backgound-thread rendering</item>
+        <item>0.1.19.r182: experimental rendering optimizations</item>
+        <item>0.1.20.r184: added settings for disable anti-aliasing</item>
+        <item>0.1.21.r185: experimental GPS/GSM location search</item>
+        <item>0.1.22.r186: GPS/GSM location search worked</item>
+        <item>0.1.23.r187: added native library</item>
+        <item>0.1.24.r188: added search coordinates activity</item>
+        <item>0.1.25.r190: rewrited drawing of stations names</item>
+    	<item>0.2.0.r192-preview: global model refactoring: multiple maps support, languages, GPS coordinates,layers. </item>        
     </string-array>
 
     <string-array name="create_route_modes">
