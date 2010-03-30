@@ -23,9 +23,11 @@ package org.ametro.render;
 
 import android.graphics.*;
 import android.graphics.Paint.Style;
-import org.ametro.model.SubwayMap;
-import org.ametro.model.SubwaySegment;
-import org.ametro.model.SubwayStation;
+import org.ametro.model.MapView;
+import org.ametro.model.StationView;
+import org.ametro.model.TransferView;
+import org.ametro.model.TransportTransfer;
+import org.ametro.model.ext.ModelPoint;
 
 public class RenderTransferBackground extends RenderElement {
 
@@ -36,20 +38,20 @@ public class RenderTransferBackground extends RenderElement {
     private float RadiusBig;
     private Paint Paint;
 
-    public RenderTransferBackground(SubwayMap subwayMap, SubwaySegment transfer) {
+    public RenderTransferBackground(MapView map, TransferView view, TransportTransfer transfer) {
         super();
-        final SubwayStation fromStation = subwayMap.stations[transfer.fromStationId];
-        final Point from = fromStation.point;
+        final StationView fromStation = map.stations[view.stationViewFromId];
+        final ModelPoint from = fromStation.stationPoint;
         FromX = from.x;
         FromY = from.y;
 
-        final SubwayStation toStation = subwayMap.stations[transfer.toStationId];
-        final Point to = toStation.point;
+        final StationView toStation = map.stations[view.stationViewToId];
+        final ModelPoint to = toStation.stationPoint;
         ToX = to.x;
         ToY = to.y;
 
-        final int lineWidth = subwayMap.linesWidth;
-        final int radius = subwayMap.stationDiameter / 2;
+        final int lineWidth = map.lineWidth;
+        final int radius = map.stationDiameter / 2;
 
         RadiusBig = (float) radius + 3.5f;
 

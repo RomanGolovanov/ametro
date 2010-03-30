@@ -27,9 +27,9 @@ import static org.ametro.Constants.STATION_TO_ID;
 import org.ametro.Constants;
 import org.ametro.R;
 import org.ametro.adapter.StationListAdapter;
-import org.ametro.model.SubwayMap;
-import org.ametro.model.SubwayRoute;
-import org.ametro.model.SubwayStation;
+import org.ametro.model.MapView;
+import org.ametro.model.Route;
+import org.ametro.model.StationView;
 import org.ametro.util.DateUtil;
 
 import android.app.Activity;
@@ -56,7 +56,7 @@ import android.widget.Toast;
 public class CreateRoute extends Activity implements OnClickListener,
 		AnimationListener {
 
-	private SubwayMap mSubwayMap;
+	private MapView mMapView;
 
 	private AutoCompleteTextView mFromText;
 	private AutoCompleteTextView mToText;
@@ -126,10 +126,10 @@ public class CreateRoute extends Activity implements OnClickListener,
 		mFromText = (AutoCompleteTextView) findViewById(R.id.create_route_from_text);
 		mToText = (AutoCompleteTextView) findViewById(R.id.create_route_to_text);
 		
-		mSubwayMap = BrowseVectorMap.Instance.getSubwayMap();
+		mMapView = BrowseVectorMap.Instance.getMapView();
 		
-		StationListAdapter fromAdapter = new StationListAdapter(this, mSubwayMap.stations, mSubwayMap); 
-		StationListAdapter toAdapter = new StationListAdapter(this, mSubwayMap.stations, mSubwayMap); 
+		StationListAdapter fromAdapter = new StationListAdapter(this, mMapView.stations, mMapView); 
+		StationListAdapter toAdapter = new StationListAdapter(this, mMapView.stations, mMapView); 
 		
 		fromAdapter.setTextColor(Color.BLACK);
 		toAdapter.setTextColor(Color.BLACK);
@@ -138,18 +138,18 @@ public class CreateRoute extends Activity implements OnClickListener,
 		mToText.setAdapter(toAdapter);
 		
 
-		final SubwayRoute route = BrowseVectorMap.Instance.getNavigationRoute();
+		final Route route = BrowseVectorMap.Instance.getNavigationRoute();
 		if(route!=null){
-			SubwayStation fromStation = route.getStationFrom();
-			SubwayStation toStation = route.getStationTo();
-			mFromText.setText( StationListAdapter.getStationName(mSubwayMap, fromStation) );
-			mToText.setText( StationListAdapter.getStationName(mSubwayMap, toStation) );
+			StationView fromStation = route.getStationFrom();
+			StationView toStation = route.getStationTo();
+			mFromText.setText( StationListAdapter.getStationName(mMapView, fromStation) );
+			mToText.setText( StationListAdapter.getStationName(mMapView, toStation) );
 			mFromText.setSelectAllOnFocus(true);
 			mToText.setSelectAllOnFocus(true);
 		}else{
-			final SubwayStation station = BrowseVectorMap.Instance.getCurrentStation();
+			final StationView station = BrowseVectorMap.Instance.getCurrentStation();
 			if(station!=null){
-				mFromText.setText( StationListAdapter.getStationName(mSubwayMap, station) );
+				mFromText.setText( StationListAdapter.getStationName(mMapView, station) );
 				mFromText.setSelectAllOnFocus(true);
 			}
 		}
@@ -170,8 +170,8 @@ public class CreateRoute extends Activity implements OnClickListener,
 			if(resultCode == RESULT_OK){
 				int id = data.getIntExtra(Constants.STATION_ID, -1);
 				if(id!=-1){
-					SubwayStation station = mSubwayMap.stations[id];
-					mFromText.setText( StationListAdapter.getStationName(mSubwayMap, station) );				
+					StationView station = mMapView.stations[id];
+					mFromText.setText( StationListAdapter.getStationName(mMapView, station) );				
 				}
 			}
 			break;
@@ -179,8 +179,8 @@ public class CreateRoute extends Activity implements OnClickListener,
 			if(resultCode == RESULT_OK){
 				int id = data.getIntExtra(Constants.STATION_ID, -1);
 				if(id!=-1){
-					SubwayStation station = mSubwayMap.stations[id];
-					mToText.setText( StationListAdapter.getStationName(mSubwayMap, station) );				
+					StationView station = mMapView.stations[id];
+					mToText.setText( StationListAdapter.getStationName(mMapView, station) );				
 				}
 			}
 			break;
@@ -189,10 +189,10 @@ public class CreateRoute extends Activity implements OnClickListener,
 				int fromId = data.getIntExtra(STATION_FROM_ID, -1);
 				int toId = data.getIntExtra(STATION_TO_ID, -1);
 				if(fromId!=-1 && toId!=-1){
-					SubwayStation from = mSubwayMap.stations[fromId];
-					mFromText.setText( StationListAdapter.getStationName(mSubwayMap, from) );				
-					SubwayStation to = mSubwayMap.stations[toId];
-					mToText.setText( StationListAdapter.getStationName(mSubwayMap, to) );
+					StationView from = mMapView.stations[fromId];
+					mFromText.setText( StationListAdapter.getStationName(mMapView, from) );				
+					StationView to = mMapView.stations[toId];
+					mToText.setText( StationListAdapter.getStationName(mMapView, to) );
 					
 					createRoute(from, to);
 				}
@@ -204,7 +204,7 @@ public class CreateRoute extends Activity implements OnClickListener,
 	public void onClick(View v) {
 		if(v==mFromButton){
 			Intent data = new Intent(this, SelectStation.class);
-			SubwayStation from = getStationByName(mFromText.getText().toString());
+			StationView from = getStationByName(mFromText.getText().toString());
 			if(from!=null){
 				data.putExtra(Constants.STATION_ID, from.id);
 			}
@@ -212,15 +212,15 @@ public class CreateRoute extends Activity implements OnClickListener,
 		}
 		if(v==mToButton){
 			Intent data = new Intent(this, SelectStation.class);
-			SubwayStation to = getStationByName(mToText.getText().toString());
+			StationView to = getStationByName(mToText.getText().toString());
 			if(to!=null){
 				data.putExtra(Constants.STATION_ID, to.id);
 			}
 			startActivityForResult(data, REQUEST_STATION_TO);
 		}
 		if (v == mCreateButton) {
-			SubwayStation from = getStationByName(mFromText.getText().toString());
-			SubwayStation to = getStationByName(mToText.getText().toString());
+			StationView from = getStationByName(mFromText.getText().toString());
+			StationView to = getStationByName(mToText.getText().toString());
 			createRoute(from, to);
 		}
 		if (v == mFavoritesButton){
@@ -228,7 +228,7 @@ public class CreateRoute extends Activity implements OnClickListener,
 		}
 	}
 
-	private void createRoute(SubwayStation from, SubwayStation to) {
+	private void createRoute(StationView from, StationView to) {
 		if (from != null && to != null) {
 			mCreateRouteTask = new CreateRouteTask();
 			mCreateRouteTask.execute(from, to);
@@ -262,16 +262,16 @@ public class CreateRoute extends Activity implements OnClickListener,
 	}
 
 	public class CreateRouteTask extends
-			AsyncTask<SubwayStation, Void, SubwayRoute> {
+			AsyncTask<StationView, Void, Route> {
 
-		private SubwayMap mMap;
+		private MapView mMap;
 		private ProgressDialog mWaitDialog;
 
-		protected SubwayRoute doInBackground(
-				SubwayStation... stations) {
-			SubwayStation from = stations[0];
-			SubwayStation to = stations[1];
-			SubwayRoute route = new SubwayRoute(mMap, from.id, to.id);
+		protected Route doInBackground(
+				StationView... stations) {
+			StationView from = stations[0];
+			StationView to = stations[1];
+			Route route = new Route(mMap, from.id, to.id);
 			route.findRoute();
 			return route;
 		}
@@ -282,7 +282,7 @@ public class CreateRoute extends Activity implements OnClickListener,
 		}
 
 		protected void onPreExecute() {
-			mMap = CreateRoute.this.mSubwayMap;
+			mMap = CreateRoute.this.mMapView;
 			closePanel();
 			mWaitDialog = ProgressDialog.show(CreateRoute.this,
 					getString(R.string.create_route_wait_title),
@@ -290,7 +290,7 @@ public class CreateRoute extends Activity implements OnClickListener,
 			super.onPreExecute();
 		}
 
-		protected void onPostExecute(SubwayRoute result) {
+		protected void onPostExecute(Route result) {
 			super.onPostExecute(result);
 			mWaitDialog.dismiss();
 			if (result.hasRoute()) {
@@ -306,14 +306,13 @@ public class CreateRoute extends Activity implements OnClickListener,
 		}
 	}
 
-	private SubwayStation getStationByName(String text) {
+	private StationView getStationByName(String text) {
 		int startBracket = text.indexOf('(');
 		int endBracked = text.indexOf(')');
 		if (startBracket != -1 && endBracked != -1 && startBracket < endBracked) {
 			String stationName = text.substring(0, startBracket - 1);
 			String lineName = text.substring(startBracket + 1, endBracked);
-			SubwayStation station = mSubwayMap
-					.getStation(lineName, stationName);
+			StationView station = mMapView.getStationView(lineName, stationName);
 			return station;
 		}
 		return null;

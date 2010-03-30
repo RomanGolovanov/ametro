@@ -25,6 +25,8 @@ import android.util.Log;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import static org.ametro.Constants.LOG_TAG_MAIN;
 
@@ -35,17 +37,17 @@ import static org.ametro.Constants.LOG_TAG_MAIN;
  */
 public class FileUtil {
 
-    public static void delete(File file) {
-        if (file != null && file.exists() && !file.delete() && Log.isLoggable(LOG_TAG_MAIN, Log.WARN)) {
-            Log.w(LOG_TAG_MAIN, "Can't delete file: '" + file.toString() + "'");
-        }
-    }
+	public static void delete(File file) {
+		if (file != null && file.exists() && !file.delete() && Log.isLoggable(LOG_TAG_MAIN, Log.WARN)) {
+			Log.w(LOG_TAG_MAIN, "Can't delete file: '" + file.toString() + "'");
+		}
+	}
 
-    public static void move(File src, File dest) {
-        if (src != null && src.exists() && !src.renameTo(dest) && Log.isLoggable(LOG_TAG_MAIN, Log.WARN)) {
-            Log.w(LOG_TAG_MAIN, "Can't move file '" + src.toString() + "' to '" + dest.toString() + "'");
-        }
-    }
+	public static void move(File src, File dest) {
+		if (src != null && src.exists() && !src.renameTo(dest) && Log.isLoggable(LOG_TAG_MAIN, Log.WARN)) {
+			Log.w(LOG_TAG_MAIN, "Can't move file '" + src.toString() + "' to '" + dest.toString() + "'");
+		}
+	}
 
 	public static long getLastModified(String filename) {
 		return new File(filename).lastModified();
@@ -53,16 +55,26 @@ public class FileUtil {
 
 
 	public static void createFile(String path) {
-        try {
-            File f = new File(path);
-            f.createNewFile();
-        } catch (IOException e) {
-            // scoop exception
-        }
-    }
+		try {
+			File f = new File(path);
+			f.createNewFile();
+		} catch (IOException e) {
+			// scoop exception
+		}
+	}
 
 	public static void createDirectory(String path) {
-        File f = new File(path);
-        f.mkdirs();
-    }	
+		File f = new File(path);
+		f.mkdirs();
+	}
+
+	public static void writeToStream(InputStream in , OutputStream out) throws IOException 
+	{
+		byte[] bytes = new byte[2048];
+		for (int c = in.read(bytes); c != -1; c = in.read(bytes)) {
+			out.write(bytes,0, c);
+		}
+		in.close();
+		out.close();    		
+	}	
 }

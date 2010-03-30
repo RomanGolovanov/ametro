@@ -20,9 +20,9 @@
  */
 package org.ametro.adapter;
 
-import org.ametro.model.SubwayLine;
-import org.ametro.model.SubwayMap;
-import org.ametro.model.SubwayRoute;
+import org.ametro.model.LineView;
+import org.ametro.model.MapView;
+import org.ametro.model.Route;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -43,8 +43,8 @@ public class RouteListViewAdapter extends StationListAdapter {
 	private Drawable mFirstItemDrawable;
 	private Drawable mLastItemDrawable;
 
-	public RouteListViewAdapter(Activity activity, SubwayRoute route,
-			SubwayMap map) {
+	public RouteListViewAdapter(Activity activity, Route route,
+			MapView map) {
 		super(activity, route.getStations(), route.getDelays(), map);
 		mBackgroundPaint = new Paint();
 		mBackgroundPaint.setStyle(Style.STROKE);
@@ -54,8 +54,8 @@ public class RouteListViewAdapter extends StationListAdapter {
 	}
 
 	protected Drawable getItemIcon(int position) {
-		final SubwayLine line = mLines[mFilteredStations[position].lineId];
-		final int color = line.color;
+		final LineView line = mLines[mFilteredStations[position].lineViewId];
+		final int color = line.lineColor;
 		Drawable dw = null;
 		if (position == 0) {
 			dw = mFirstItemDrawable;

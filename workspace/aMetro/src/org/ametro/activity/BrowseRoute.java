@@ -26,9 +26,9 @@ import java.util.ArrayList;
 import org.ametro.R;
 import org.ametro.adapter.RouteListViewAdapter;
 import org.ametro.adapter.StationListAdapter;
-import org.ametro.model.SubwayMap;
-import org.ametro.model.SubwayRoute;
-import org.ametro.model.SubwayStation;
+import org.ametro.model.MapView;
+import org.ametro.model.Route;
+import org.ametro.model.StationView;
 import org.ametro.util.DateUtil;
 
 import android.app.Activity;
@@ -51,8 +51,8 @@ public class BrowseRoute extends Activity implements OnClickListener,
 	private ListView mStationList;
 	private TextView mTextTime;
 
-	private SubwayMap mSubwayMap;
-	private SubwayRoute mRoute;
+	private MapView mMapView;
+	private Route mRoute;
 
 	private int mFromId;
 	private int mToId;
@@ -68,19 +68,19 @@ public class BrowseRoute extends Activity implements OnClickListener,
 		mTextTime = (TextView) findViewById(R.id.browse_route_time_text);
 		mFavoritesButton = (ImageButton) findViewById(R.id.browse_route_favorites);
 
-		mSubwayMap = BrowseVectorMap.Instance.getSubwayMap();
+		mMapView = BrowseVectorMap.Instance.getMapView();
 		mRoute = BrowseVectorMap.Instance.getNavigationRoute();
 		RouteListViewAdapter adapter = new RouteListViewAdapter(this, mRoute,
-				mSubwayMap);
+				mMapView);
 		adapter.setTextColor(Color.WHITE);
 		mRouteList.setAdapter(adapter);
 		mRouteList.setOnItemClickListener(this);
 
-		ArrayList<SubwayStation> stations = new ArrayList<SubwayStation>();
+		ArrayList<StationView> stations = new ArrayList<StationView>();
 		stations.add(mRoute.getStationFrom());
 		stations.add(mRoute.getStationTo());
 		StationListAdapter stationListAdapter = new StationListAdapter(this,
-				stations, mSubwayMap);
+				stations, mMapView);
 		stationListAdapter.setTextColor(Color.WHITE);
 		mStationList.setAdapter(stationListAdapter);
 		mStationList.setEnabled(false);
@@ -128,7 +128,7 @@ public class BrowseRoute extends Activity implements OnClickListener,
 	}
 
 	public void onItemClick(AdapterView<?> av, View v, int position, long id) {
-		SubwayStation station = mSubwayMap.stations[(int) id];
+		StationView station = mMapView.stations[(int) id];
 		BrowseVectorMap.Instance.setCurrentStation(station);
 		finish();
 	}

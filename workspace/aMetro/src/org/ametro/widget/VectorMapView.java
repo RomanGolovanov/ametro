@@ -23,10 +23,10 @@ package org.ametro.widget;
 
 import java.util.List;
 
-import org.ametro.model.SubwayMap;
-import org.ametro.model.SubwaySegment;
-import org.ametro.model.SubwayStation;
-import org.ametro.model.SubwayTransfer;
+import org.ametro.model.MapView;
+import org.ametro.model.SegmentView;
+import org.ametro.model.StationView;
+import org.ametro.model.TransferView;
 import org.ametro.render.RenderProgram;
 
 import android.content.Context;
@@ -59,20 +59,20 @@ public class VectorMapView extends BaseMapView {
 		mRenderProgram.setRenderFilter(renderFilter);
 	}    
 
-	public void setModel(SubwayMap subwayMap) {
-		if (subwayMap != null) {
-			mSubwayMap = subwayMap;
-			mRenderProgram = new RenderProgram(subwayMap);
+	public void setModel(MapView map) {
+		if (map != null) {
+			mMapView = map;
+			mRenderProgram = new RenderProgram(map);
 			calculateDimensions();
 			setInitialized(true);
 		} else {
 			setInitialized(false);
 			mRenderProgram = null;
-			mSubwayMap = null;
+			mMapView = null;
 		}
 	}
 
-	public void setModelSelection(List<SubwayStation> stations, List<SubwaySegment> segments, List<SubwayTransfer> transfers){
+	public void setModelSelection(List<StationView> stations, List<SegmentView> segments, List<TransferView> transfers){
 		mRenderProgram.updateSelection(stations, segments, transfers);
 		destroyTileCache();
 	}
@@ -328,11 +328,11 @@ public class VectorMapView extends BaseMapView {
 
 
 	private void calculateDimensions() {
-		mContentWidth = (int) Math.ceil(mSubwayMap.width * mScale);
-		mContentHeight = (int) Math.ceil(mSubwayMap.height * mScale);
+		mContentWidth = (int) Math.ceil(mMapView.width * mScale);
+		mContentHeight = (int) Math.ceil(mMapView.height * mScale);
 	}
 
-	private SubwayMap mSubwayMap;
+	private MapView mMapView;
 	private RenderProgram mRenderProgram;
 
 	private Object sync = new Object();

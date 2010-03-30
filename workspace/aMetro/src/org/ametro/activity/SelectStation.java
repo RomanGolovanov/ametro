@@ -28,8 +28,8 @@ import java.util.Comparator;
 import org.ametro.Constants;
 import org.ametro.R;
 import org.ametro.adapter.StationListAdapter;
-import org.ametro.model.SubwayMap;
-import org.ametro.model.SubwayStation;
+import org.ametro.model.MapView;
+import org.ametro.model.StationView;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -44,8 +44,8 @@ public class SelectStation extends ListActivity {
 	private final int MAIN_MENU_BY_NAME = 1;
 	private final int MAIN_MENU_BY_LINE = 2;
 	
-	private SubwayMap mMap;
-	private ArrayList<SubwayStation> mStations;
+	private MapView mMap;
+	private ArrayList<StationView> mStations;
 	private StationListAdapter mAdapter;
 	
 	private static boolean mSortByName;
@@ -55,18 +55,18 @@ public class SelectStation extends ListActivity {
 		mSortByName = true;
 	}
 	
-	private class NameComparator implements Comparator<SubwayStation>
+	private class NameComparator implements Comparator<StationView>
 	{
-		public int compare(SubwayStation left, SubwayStation right) {
-			return left.name.compareTo(right.name);
+		public int compare(StationView left, StationView right) {
+			return left.getName().compareTo(right.getName());
 		}
 	}
 	
-	private class LineComparator implements Comparator<SubwayStation>
+	private class LineComparator implements Comparator<StationView>
 	{
-		public int compare(SubwayStation left, SubwayStation right) {
-			int lineCompare = mMap.lines[left.lineId].name.compareTo(mMap.lines[right.lineId].name);
-			return (lineCompare!=0) ? lineCompare : left.name.compareTo(right.name); 
+		public int compare(StationView left, StationView right) {
+			int lineCompare = mMap.lines[left.lineViewId].getName().compareTo(mMap.lines[right.lineViewId].getName());
+			return (lineCompare!=0) ? lineCompare : left.getName().compareTo(right.getName()); 
 		}
 	}	
 	
@@ -109,16 +109,16 @@ public class SelectStation extends ListActivity {
 				mSelection = id;
 			}
 		}
-		mMap = BrowseVectorMap.Instance.getSubwayMap();
-		mStations = new ArrayList<SubwayStation>( mMap.stations.length );
-		for(SubwayStation station : mMap.stations){
+		mMap = BrowseVectorMap.Instance.getMapView();
+		mStations = new ArrayList<StationView>( mMap.stations.length );
+		for(StationView station : mMap.stations){
 			mStations.add(station);
 		}
 		updateSortOrder(mSortByName);
 	}
 	
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-		SubwayStation station = mAdapter.getStation(position);
+		StationView station = mAdapter.getStation(position);
 		Intent data = new Intent();
 		data.putExtra(Constants.STATION_ID, station.id);
 		setResult(RESULT_OK, data);

@@ -24,9 +24,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.ametro.R;
-import org.ametro.model.SubwayLine;
-import org.ametro.model.SubwayMap;
-import org.ametro.model.SubwayStation;
+import org.ametro.model.LineView;
+import org.ametro.model.MapView;
+import org.ametro.model.StationView;
 import org.ametro.util.DateUtil;
 
 import android.app.Activity;
@@ -51,20 +51,20 @@ public class StationListAdapter extends BaseAdapter implements Filterable {
 	{
 		private class ResultContainer
 		{
-			public SubwayStation[] Stations; 
+			public StationView[] Stations; 
 			public Long[] Delays;
 		}
 		
 		protected FilterResults performFiltering(CharSequence constraint) {
 			FilterResults results = new FilterResults();
 
-			ArrayList<SubwayStation> stations = new ArrayList<SubwayStation>();
+			ArrayList<StationView> stations = new ArrayList<StationView>();
 			ArrayList<Long> delays = new ArrayList<Long>();
 			
-			final SubwayStation[] allStations = mStations;
+			final StationView[] allStations = mStations;
 			final Long[] allDelays = mDelays;
 			final int length = allStations.length;
-			SubwayStation station;
+			StationView station;
 			Long delay = null;
 
 			final String text = constraint!=null ? constraint.toString().toLowerCase() : null; 
@@ -80,7 +80,7 @@ public class StationListAdapter extends BaseAdapter implements Filterable {
 						delays.add(delay);
 					}
 				}else{
-					final String name = station.name.toLowerCase();
+					final String name = station.getName().toLowerCase();
 					if(name.contains(text)){
 						stations.add(station);
 						if(allDelays!=null){
@@ -91,7 +91,7 @@ public class StationListAdapter extends BaseAdapter implements Filterable {
 			}
 
 			ResultContainer container = new ResultContainer();
-			container.Stations = (SubwayStation[]) stations.toArray(new SubwayStation[stations.size()]);
+			container.Stations = (StationView[]) stations.toArray(new StationView[stations.size()]);
 			if(allDelays!=null){
 				container.Delays = (Long[]) delays.toArray(new Long[delays.size()]);
 			}
@@ -129,25 +129,25 @@ public class StationListAdapter extends BaseAdapter implements Filterable {
 		}
 	}	
 
-	public StationListAdapter(Activity activity, ArrayList<SubwayStation> stations,SubwayMap map){
+	public StationListAdapter(Activity activity, ArrayList<StationView> stations,MapView map){
 		this(activity, stations,null,map);
 	}
 
-	public StationListAdapter(Activity activity, ArrayList<SubwayStation> stations, ArrayList<Long> delays, SubwayMap map){
+	public StationListAdapter(Activity activity, ArrayList<StationView> stations, ArrayList<Long> delays, MapView map){
 		this(activity
-			, (SubwayStation[]) stations.toArray(new SubwayStation[stations.size()])
+			, (StationView[]) stations.toArray(new StationView[stations.size()])
 			, delays==null ? null : (Long[]) delays.toArray(new Long[delays.size()])
 			, map);
 	}
 
-	public StationListAdapter(Activity activity, SubwayStation[] stations, SubwayMap map){
+	public StationListAdapter(Activity activity, StationView[] stations, MapView map){
 		this(activity, stations, null, map);
 	}
 
-	public StationListAdapter(Activity activity, SubwayStation[] stations, Long[] delays, SubwayMap map){
-		mLineDrawabled = new HashMap<SubwayLine, Drawable>();
+	public StationListAdapter(Activity activity, StationView[] stations, Long[] delays, MapView map){
+		mLineDrawabled = new HashMap<LineView, Drawable>();
 		mLines = map.lines;
-		mStations = stations;// (SubwayStation[]) stations.toArray(new SubwayStation[stations.size()]);
+		mStations = stations;// (StationView[]) stations.toArray(new StationView[stations.size()]);
 		mDelays = delays;// (Long[]) delays.toArray(new Long[delays.size()]);
 		mContextActivity = activity;
 		
@@ -158,7 +158,7 @@ public class StationListAdapter extends BaseAdapter implements Filterable {
 		
 		mFilteredStations = mStations;
 		mFilteredDelays = mDelays;
-		mSubwayMap = map;
+		mMapView = map;
 	}
 	
 	protected static final int ICON_WIDTH = 30;
@@ -170,17 +170,17 @@ public class StationListAdapter extends BaseAdapter implements Filterable {
 	
 	
 	
-	protected final SubwayMap mSubwayMap;
+	protected final MapView mMapView;
 	protected final Activity mContextActivity;
-	protected final HashMap<SubwayLine, Drawable> mLineDrawabled;
-	protected final SubwayLine[] mLines;
+	protected final HashMap<LineView, Drawable> mLineDrawabled;
+	protected final LineView[] mLines;
 	protected final Paint mPaint;
 	protected Integer mTextColor;
 	
-	protected final SubwayStation[] mStations;
+	protected final StationView[] mStations;
 	protected final Long[] mDelays;
 	
-	protected SubwayStation[] mFilteredStations;
+	protected StationView[] mFilteredStations;
 	protected Long[] mFilteredDelays;
 	
 
@@ -192,15 +192,15 @@ public class StationListAdapter extends BaseAdapter implements Filterable {
 		mTextColor = color;
 	}
 	
-	public static String getStationName(SubwayMap map, SubwayStation station){
-		return station.name + " (" + map.lines[station.lineId].name + ")";
+	public static String getStationName(MapView map, StationView station){
+		return station.getName() + " (" + map.lines[station.lineViewId].getName() + ")";
 	}
 	
 	public Object getItem(int position) {
-		return getStationName(mSubwayMap, mFilteredStations[position]);
+		return getStationName(mMapView, mFilteredStations[position]);
 	}
 
-	public SubwayStation getStation(int position){
+	public StationView getStation(int position){
 		return mFilteredStations[position];
 	}
 	
@@ -224,10 +224,10 @@ public class StationListAdapter extends BaseAdapter implements Filterable {
 			wrapper = (ListItemWrapper)view.getTag();
 		}
 
-		final SubwayStation station = mFilteredStations[position];
-		final SubwayLine line = mLines[station.lineId]; 
-		wrapper.Name.setText(station.name);
-		wrapper.Line.setText(line.name);
+		final StationView station = mFilteredStations[position];
+		final LineView line = mLines[station.lineViewId]; 
+		wrapper.Name.setText(station.getName());
+		wrapper.Line.setText(line.getName());
 		if(mFilteredDelays!=null){
 			wrapper.Delay.setText(DateUtil.getTimeHHMM(mFilteredDelays[position]));
 		}else{
@@ -238,12 +238,12 @@ public class StationListAdapter extends BaseAdapter implements Filterable {
 	}
 
 	protected Drawable getItemIcon(int position) {
-		SubwayLine line = mLines[ mFilteredStations[position].lineId ];
+		LineView line = mLines[ mFilteredStations[position].lineViewId ];
 		Drawable dw = mLineDrawabled.get(line);
 		if(dw == null){
 			Bitmap bmp = Bitmap.createBitmap(ICON_WIDTH, ICON_HEIGHT, Config.ARGB_8888);
 			Canvas c = new Canvas(bmp);
-			mPaint.setColor(line.color);
+			mPaint.setColor(line.lineColor);
 			c.drawCircle(ICON_WIDTH/2, ICON_HEIGHT/2, ICON_DIAMETER, mPaint);
 			
 			dw = new BitmapDrawable(bmp);

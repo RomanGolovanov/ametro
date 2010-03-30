@@ -22,8 +22,6 @@
 package org.ametro.activity;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,13 +30,10 @@ import java.util.List;
 import org.ametro.Constants;
 import org.ametro.MapSettings;
 import org.ametro.R;
-import org.ametro.model.City;
-import org.ametro.model.Deserializer;
-import org.ametro.model.Serializer;
-import org.ametro.model.StationAddon;
+import org.ametro.model.Model;
+import org.ametro.model.storage.ModelBuilder;
 import org.ametro.other.ProgressInfo;
 import org.ametro.util.FileUtil;
-import org.ametro.util.ModelUtil;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -217,28 +212,28 @@ public class ImportPmz extends Activity {
             File mapFile = new File(mapFileName);
             String fullFileName = MapSettings.IMPORT_PATH + fileName;
             try {
-                City pmz = ModelUtil.indexPmz(fullFileName);
-                String mapName = pmz.countryName + " - " + pmz.cityName + "(" + fileName + ")";
+                Model pmz = ModelBuilder.loadModelDescription(fullFileName);
+                String mapName = pmz.description.getCountryName() + " - " + pmz.description.getCityName() + "(" + fileName + ")";
                 int severity = 5;
                 int statusId = R.string.import_status_not_imported;
                 int color = Color.RED;
                 String statusText = ImportPmz.this.getString(statusId);
                 if (mapFile.exists()) {
-                    City city;
+                    Model map;
                     try {
-                        city = Deserializer.deserializeDescription(new FileInputStream(mapFileName));
+                        map = ModelBuilder.loadModelDescription(mapFileName);
                     } catch (Exception ex) {
-                        city = null;
+                        map = null;
                     }
-                    if (city != null && city.sourceVersion == MapSettings.getSourceVersion()) {
-                        if (city.locationEqual(pmz)) {
-                            if (city.completeEqual(pmz)) {
+                    if (map != null) {
+                        if (map.locationEqual(pmz)) {
+                            if (map.completeEqual(pmz)) {
                                 statusId = R.string.import_status_uptodate;
                                 statusText = ImportPmz.this.getString(statusId);
                                 color = Color.GREEN;
                                 severity = 1;
                             } else {
-                                if (city.timestamp > pmz.timestamp) {
+                                if (map.timestamp > pmz.timestamp) {
                                     statusId = R.string.import_status_old_version;
                                     statusText = ImportPmz.this.getString(statusId);
                                     color = Color.CYAN;
@@ -252,7 +247,7 @@ public class ImportPmz extends Activity {
                             }
                         } else {
                             statusId = R.string.import_status_override;
-                            statusText = String.format(ImportPmz.this.getString(statusId), city.countryName, city.cityName);
+                            statusText = String.format(ImportPmz.this.getString(statusId), map.getCountryName(), map.getCityName());
                             color = Color.GRAY;
                             severity = 2;
                         }
@@ -337,7 +332,7 @@ public class ImportPmz extends Activity {
         protected List<ImportRecord> doInBackground(ImportRecord... imports) {
             ArrayList<ImportRecord> result = new ArrayList<ImportRecord>();
             final int count = imports.length;
-            final boolean isEnableAddons = BrowseVectorMap.Instance.isEnabledAddonsImport();
+            //final boolean isEnableAddons = BrowseVectorMap.Instance.isEnabledAddonsImport();
             ProgressInfo pi = new ProgressInfo(0, count, null, getString(R.string.msg_import_pmz_files));
             publishProgress(pi);
             String updateStatus = getString(R.string.import_status_uptodate);
@@ -351,13 +346,9 @@ public class ImportPmz extends Activity {
                 File mapFileTemp = null;
                 try {
                 	// building model from PMZ file
-                    City city = ModelUtil.importPmz(record.fileName);
-                    ArrayList<StationAddon> addons = null;
-                    if(isEnableAddons){
-                    	addons = ModelUtil.importPmzAddons(city, record.fileName);
-                    }
+                    Model city = ModelBuilder.loadModel(record.fileName);
                     // define file names
-                    String mapName = city.subwayMap.mapName;
+                    String mapName = city.systemName;
                     String mapFileName = MapSettings.getMapFileName(mapName);
                     String mapFileNameTemp = MapSettings.getTemporaryMapFile(mapName);
                     mapFile = new File(mapFileName);
@@ -367,7 +358,7 @@ public class ImportPmz extends Activity {
                     FileUtil.delete(mapFileTemp);
                     }
                     // serialize model into temporary file
-                    Serializer.serialize(new FileOutputStream(mapFileTemp), city, addons);
+                    ModelBuilder.saveModel(mapFileTemp.getAbsolutePath(), city);
                     // remove old map file if exists
                     if(mapFile.exists()){
                     	FileUtil.delete(mapFile);
@@ -577,7 +568,7 @@ public class ImportPmz extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MapSettings.checkPrerequisite();
+        MapSettings.checkPrerequisite(this);
         startIndexMode();
     }
 

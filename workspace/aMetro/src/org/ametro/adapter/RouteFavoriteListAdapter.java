@@ -23,9 +23,9 @@ package org.ametro.adapter;
 import java.util.HashMap;
 
 import org.ametro.R;
-import org.ametro.model.SubwayLine;
-import org.ametro.model.SubwayMap;
-import org.ametro.model.SubwayStation;
+import org.ametro.model.LineView;
+import org.ametro.model.MapView;
+import org.ametro.model.StationView;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -63,8 +63,8 @@ public class RouteFavoriteListAdapter extends BaseAdapter implements OnClickList
 		}
 	}	
 
-	public RouteFavoriteListAdapter(Activity activity, Point[] routes, SubwayMap map){
-		mLineDrawabled = new HashMap<SubwayLine, Drawable>();
+	public RouteFavoriteListAdapter(Activity activity, Point[] routes, MapView map){
+		mLineDrawabled = new HashMap<LineView, Drawable>();
 		mLines = map.lines;
 		mStations = map.stations;
 		mRoutes = routes;
@@ -76,7 +76,7 @@ public class RouteFavoriteListAdapter extends BaseAdapter implements OnClickList
 		mPaint.setAntiAlias(true);
 		mPaint.setStrokeWidth(0);
 		
-		mSubwayMap = map;
+		mMapView = map;
 		
 		mIsCheckboxesVisible = false;
 	}
@@ -85,11 +85,11 @@ public class RouteFavoriteListAdapter extends BaseAdapter implements OnClickList
 	protected static final int ICON_HEIGHT = 20;
 	protected static final int ICON_DIAMETER = 7;
 	
-	protected final SubwayMap mSubwayMap;
+	protected final MapView mMapView;
 	protected final Activity mContextActivity;
-	protected final HashMap<SubwayLine, Drawable> mLineDrawabled;
-	protected final SubwayLine[] mLines;
-	protected final SubwayStation[] mStations;
+	protected final HashMap<LineView, Drawable> mLineDrawabled;
+	protected final LineView[] mLines;
+	protected final StationView[] mStations;
 	protected final Paint mPaint;
 	protected Integer mTextColor;
 	
@@ -118,15 +118,15 @@ public class RouteFavoriteListAdapter extends BaseAdapter implements OnClickList
 		mTextColor = color;
 	}
 	
-	public static String getStationName(SubwayMap map, SubwayStation station){
-		return station.name + " (" + map.lines[station.lineId].name + ")";
+	public static String getStationName(MapView map, StationView station){
+		return station.getName() + " (" + map.lines[station.lineViewId].getName() + ")";
 	}
 	
 	public Object getItem(int position) {
 		return 
-			getStationName(mSubwayMap, mStations[ mRoutes[position].x ] ) 
+			getStationName(mMapView, mStations[ mRoutes[position].x ] ) 
 			+ " - "
-			+ getStationName(mSubwayMap, mStations[ mRoutes[position].x ] );
+			+ getStationName(mMapView, mStations[ mRoutes[position].x ] );
 	}
 
 	public Point getRoute(int position){
@@ -155,12 +155,12 @@ public class RouteFavoriteListAdapter extends BaseAdapter implements OnClickList
 		}
 
 		final Point route = mRoutes[position];
-		final SubwayStation stationFrom = mStations[route.x];
-		final SubwayStation stationTo = mStations[route.y];
-		final SubwayLine lineFrom = mLines[stationFrom.lineId]; 
-		final SubwayLine lineTo = mLines[stationTo.lineId]; 
-		wrapper.NameFrom.setText(stationFrom.name);
-		wrapper.NameTo.setText(stationTo.name);
+		final StationView stationFrom = mStations[route.x];
+		final StationView stationTo = mStations[route.y];
+		final LineView lineFrom = mLines[stationFrom.lineViewId]; 
+		final LineView lineTo = mLines[stationTo.lineViewId]; 
+		wrapper.NameFrom.setText(stationFrom.getName());
+		wrapper.NameTo.setText(stationTo.getName());
 		wrapper.ImageFrom.setImageDrawable(getItemIcon(lineFrom));
 		wrapper.ImageTo.setImageDrawable(getItemIcon(lineTo));
 		wrapper.Delete.setVisibility(mIsCheckboxesVisible ? View.VISIBLE : View.GONE);
@@ -171,12 +171,12 @@ public class RouteFavoriteListAdapter extends BaseAdapter implements OnClickList
 		return view;		
 	}
 
-	protected Drawable getItemIcon(SubwayLine line) {
+	protected Drawable getItemIcon(LineView line) {
 		Drawable dw = mLineDrawabled.get(line);
 		if(dw == null){
 			Bitmap bmp = Bitmap.createBitmap(ICON_WIDTH, ICON_HEIGHT, Config.ARGB_8888);
 			Canvas c = new Canvas(bmp);
-			mPaint.setColor(line.color);
+			mPaint.setColor(line.lineColor);
 			c.drawCircle(ICON_WIDTH/2, ICON_HEIGHT/2, ICON_DIAMETER, mPaint);
 			
 			dw = new BitmapDrawable(bmp);
