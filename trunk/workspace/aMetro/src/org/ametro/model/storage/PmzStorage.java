@@ -558,6 +558,9 @@ public class PmzStorage implements IModelStorage {
 				// localize description fields
 				localeList.add(originalLocale);
 				textList.add(makeTransliteText(info,originalTexts, false));
+				localeList.add(Model.LOCALE_RU);
+				textList.add(originalTexts);
+				
 			}
 
 			
