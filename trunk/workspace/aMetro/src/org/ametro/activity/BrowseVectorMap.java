@@ -27,7 +27,6 @@ import static org.ametro.MapSettings.PREFERENCE_PACKAGE_FILE_NAME;
 import static org.ametro.MapSettings.PREFERENCE_SCROLL_POSITION;
 import static org.ametro.MapSettings.PREFERENCE_ZOOM_LEVEL;
 
-import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
@@ -36,17 +35,15 @@ import org.ametro.Constants;
 import org.ametro.MapSettings;
 import org.ametro.MapUri;
 import org.ametro.R;
-import org.ametro.model.City;
-import org.ametro.model.Deserializer;
-import org.ametro.model.SubwayMap;
-import org.ametro.model.SubwayRoute;
-import org.ametro.model.SubwaySegment;
-import org.ametro.model.SubwayStation;
-import org.ametro.model.SubwayTransfer;
+import org.ametro.model.MapView;
+import org.ametro.model.Route;
+import org.ametro.model.SegmentView;
+import org.ametro.model.StationView;
+import org.ametro.model.TransferView;
+import org.ametro.model.storage.ModelBuilder;
+import org.ametro.model.util.ModelUtil;
 import org.ametro.render.RenderProgram;
 import org.ametro.util.DateUtil;
-import org.ametro.util.ModelUtil;
-import org.ametro.util.SerializeUtil;
 import org.ametro.util.StringUtil;
 import org.ametro.widget.VectorMapView;
 import org.ametro.widget.BaseMapView.OnMapEventListener;
@@ -97,21 +94,21 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if(Instance != null){
-			mSubwayMap = Instance.mSubwayMap;
+			mMapView = Instance.mMapView;
 			mMapName = Instance.mMapName; 
 		}
 		Instance = this;
 		Instance.mDefaultLocale = Locale.getDefault();
 
-		MapSettings.checkPrerequisite();
+		MapSettings.checkPrerequisite(this);
 		setupLocale();
 
 		setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL); 
 		setContentView(R.layout.global_wait);
 
-		if(mSubwayMap!=null){
+		if(mMapView!=null){
 
-			onShowMap(mSubwayMap);
+			onShowMap(mMapView);
 		}else{
 			Intent intent = getIntent();
 			Uri uri = intent != null ? intent.getData() : null;
@@ -190,12 +187,12 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		menu.findItem(MAIN_MENU_INFO).setEnabled(mCurrentStation!=null);
 
-		menu.findItem(MAIN_MENU_FIND).setEnabled(mSubwayMap!=null);
-		menu.findItem(MAIN_MENU_INFO).setEnabled(mSubwayMap!=null);
-		menu.findItem(MAIN_MENU_ROUTES).setEnabled(mSubwayMap!=null);
-		menu.findItem(MAIN_MENU_LAYERS).setEnabled(mSubwayMap!=null);
-		menu.findItem(MAIN_MENU_SCHEMES).setEnabled(mSubwayMap!=null);
-		menu.findItem(MAIN_MENU_LIBRARY).setEnabled(mSubwayMap!=null);
+		menu.findItem(MAIN_MENU_FIND).setEnabled(mMapView!=null);
+		menu.findItem(MAIN_MENU_INFO).setEnabled(mMapView!=null);
+		menu.findItem(MAIN_MENU_ROUTES).setEnabled(mMapView!=null);
+		menu.findItem(MAIN_MENU_LAYERS).setEnabled(mMapView!=null);
+		menu.findItem(MAIN_MENU_SCHEMES).setEnabled(mMapView!=null);
+		menu.findItem(MAIN_MENU_LIBRARY).setEnabled(mMapView!=null);
 		return super.onPrepareOptionsMenu(menu);
 	}
 
@@ -230,10 +227,10 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	}
 
 	public void updateAntiAliasingState(){
-		if(mMapView!=null){
-			mMapView.setAntiAliasingDisableOnScroll(isAntiAliasingDisableOnScroll());
-			mMapView.setAntiAliasingEnabled(isAntiAliasingEnabled());
-			mMapView.postInvalidate();
+		if(mVectorMapView!=null){
+			mVectorMapView.setAntiAliasingDisableOnScroll(isAntiAliasingDisableOnScroll());
+			mVectorMapView.setAntiAliasingEnabled(isAntiAliasingEnabled());
+			mVectorMapView.postInvalidate();
 		}
 	}
 
@@ -348,7 +345,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	{
 		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
 		String routes = preferences.getString(PREFERENCE_FAVORITE_ROUTES + "_" + mMapName, "");
-		return SerializeUtil.parsePointArray(routes);
+		return StringUtil.parsePointArray(routes);
 
 	}
 
@@ -367,7 +364,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
 		String pref = preferences.getString(PREFERENCE_SCROLL_POSITION + "_" + mMapName, null);
 		if (pref != null) {
-			return SerializeUtil.parsePointF(pref);
+			return StringUtil.parsePointF(pref);
 		} else {
 			return null;
 		}
@@ -396,7 +393,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
 		String pref = preferences.getString(PREFERENCE_ZOOM_LEVEL + "_" + mMapName, null);
 		if (pref != null) {
-			return SerializeUtil.parseNullableInteger(pref);
+			return StringUtil.parseNullableInteger(pref);
 		} else {
 			return null;
 		}
@@ -411,20 +408,20 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		}
 	}
 
-	public SubwayMap getSubwayMap() {
-		return mSubwayMap;
+	public MapView getMapView() {
+		return mMapView;
 	}
 
 	public String getMapName() {
 		return mMapName;
 	}
 
-	/*package*/ SubwayStation getCurrentStation()
+	/*package*/ StationView getCurrentStation()
 	{
 		return mCurrentStation;	
 	}
 
-	/*package*/ void setCurrentStation(SubwayStation station){
+	/*package*/ void setCurrentStation(StationView station){
 		if(station!=null && mNavigationStations.contains(station)){
 			mCurrentStation = station;
 			int idx = mNavigationStations.indexOf(mCurrentStation);
@@ -445,12 +442,12 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		}
 	}
 
-	/*package*/ ArrayList<SubwayStation> getNavigationStations()
+	/*package*/ ArrayList<StationView> getNavigationStations()
 	{
 		return mNavigationStations;
 	}
 
-	/*package*/ void setNavigationStations(ArrayList<SubwayStation> stations){
+	/*package*/ void setNavigationStations(ArrayList<StationView> stations){
 		boolean refreshNeeded = (stations != mNavigationStations) || (stations == null && mNavigationStations!=null);
 		if(refreshNeeded){
 			if(stations!=null){
@@ -468,17 +465,17 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 				mNavigationTransfers = null;
 				mCurrentStation = null;
 			}
-			mMapView.setModelSelection(stations, null, null);
-			mMapView.postInvalidate();
+			mVectorMapView.setModelSelection(stations, null, null);
+			mVectorMapView.postInvalidate();
 		}
 	}
 
-	/*package*/ SubwayRoute getNavigationRoute()
+	/*package*/ Route getNavigationRoute()
 	{
 		return mRoute;
 	}
 
-	/*package*/ void setNavigationRoute(SubwayRoute route){
+	/*package*/ void setNavigationRoute(Route route){
 		boolean refreshNeeded = (route != mRoute) || (route == null && mRoute!=null) || (route!=null && mRoute == null);
 		if(refreshNeeded){
 			mRoute = route;
@@ -495,14 +492,14 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 				mNavigationTransfers = null;
 				setCurrentStation(null);
 			}
-			mMapView.setModelSelection(mNavigationStations, mNavigationSegments,mNavigationTransfers);
-			mMapView.postInvalidate();
+			mVectorMapView.setModelSelection(mNavigationStations, mNavigationSegments,mNavigationTransfers);
+			mVectorMapView.postInvalidate();
 		}
 	}
 
 	private void onSaveMapState() {
-		if (mSubwayMap != null && mMapView != null && mMapName != null) {
-			PointF pos = mMapView.getModelScrollCenter();
+		if (mMapView != null && mVectorMapView != null && mMapName != null) {
+			PointF pos = mVectorMapView.getModelScrollCenter();
 			int zoom = mZoom;
 			saveScrollPosition(pos);
 			saveZoom(zoom);
@@ -510,7 +507,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	}
 
 	private void onRestoreMapState() {
-		if (mSubwayMap != null && mMapView != null
+		if (mMapView != null && mVectorMapView != null
 				&& mMapName != null) {
 			Integer zoom = loadZoom();
 			if (zoom != null) {
@@ -519,8 +516,8 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 				setZoom(zoom);
 			} else {
 				zoom = MIN_ZOOM_LEVEL;
-				int modelWidth = mSubwayMap.width;
-				int modelHeight = mSubwayMap.height;
+				int modelWidth = mMapView.width;
+				int modelHeight = mMapView.height;
 				Display display = ((WindowManager) getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
 				int width = display.getWidth();
 				int height = display.getHeight();
@@ -541,14 +538,14 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 				if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO))
 					Log.i(LOG_TAG_MAIN, getString(R.string.log_restore_map_position) + pos.x
 							+ "x" + pos.y);
-				mMapView.setModelScrollCenter(pos);
+				mVectorMapView.setModelScrollCenter(pos);
 			} else {
-				int x = mSubwayMap.width / 2;
-				int y = mSubwayMap.height / 2;
+				int x = mMapView.width / 2;
+				int y = mMapView.height / 2;
 				if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO))
 					Log.i(LOG_TAG_MAIN, getString(R.string.log_default_map_position) + x
 							+ "x" + y);
-				mMapView.setModelScrollCenter(new PointF(x, y));
+				mVectorMapView.setModelScrollCenter(new PointF(x, y));
 			}
 
 		}
@@ -571,38 +568,38 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	}
 
 
-	private void onShowMap(SubwayMap subwayMap) {
+	private void onShowMap(MapView subwayMap) {
 
-		SubwayMap previousMap = mSubwayMap;
+		//MapView previousMap = mMapView;
 
-		mSubwayMap = subwayMap;
+		mMapView = subwayMap;
 
-		if(previousMap!= null && previousMap.mapName.equals(subwayMap.mapName)){
-			mNavigationSegments = ModelUtil.copySegments(mSubwayMap, mNavigationSegments);
-			mNavigationStations = ModelUtil.copyStations(mSubwayMap, mNavigationStations);
-			mNavigationTransfers = ModelUtil.copyTransfer(mSubwayMap, mNavigationTransfers);
-			mCurrentStation = mCurrentStation!=null ? mSubwayMap.stations[mCurrentStation.id] : null;
-			mRoute = mRoute!=null ? new SubwayRoute(mSubwayMap, mRoute) : null;
-		}else{
-			mNavigationSegments = null;
-			mNavigationStations = null;
-			mNavigationTransfers = null;
-			mCurrentStation = null;
-			mRoute = null;
-		}
+//		if(previousMap!= null && previousMap.mapName.equals(subwayMap.mapName)){
+//			mNavigationSegments = ModelUtil.copySegments(mMapView, mNavigationSegments);
+//			mNavigationStations = ModelUtil.copyStations(mMapView, mNavigationStations);
+//			mNavigationTransfers = ModelUtil.copyTransfer(mMapView, mNavigationTransfers);
+//			mCurrentStation = mCurrentStation!=null ? mMapView.stations[mCurrentStation.id] : null;
+//			mRoute = mRoute!=null ? new Route(mMapView, mRoute) : null;
+//		}else{
+//			mNavigationSegments = null;
+//			mNavigationStations = null;
+//			mNavigationTransfers = null;
+//			mCurrentStation = null;
+//			mRoute = null;
+//		}
 
 		if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO))
-			Log.i(LOG_TAG_MAIN, getString(R.string.log_loaded_subway_map) + mSubwayMap.mapName
-					+ getString(R.string.log_with_size) + mSubwayMap.width + "x"
-					+ mSubwayMap.height);
+			Log.i(LOG_TAG_MAIN, getString(R.string.log_loaded_subway_map) + mMapView.systemName
+					+ getString(R.string.log_with_size) + mMapView.width + "x"
+					+ mMapView.height);
 
 		setContentView(R.layout.browse_vector_map_main);
 
-		mMapView = (VectorMapView) findViewById(R.id.browse_vector_map_view);
+		mVectorMapView = (VectorMapView) findViewById(R.id.browse_vector_map_view);
 		updateAntiAliasingState();
 
-		mMapView.setModel(mSubwayMap);
-		mMapView.setModelSelection(mNavigationStations, mNavigationSegments, mNavigationTransfers);
+		mVectorMapView.setModel(mMapView);
+		mVectorMapView.setModelSelection(mNavigationStations, mNavigationSegments, mNavigationTransfers);
 		mZoomControls = (ZoomControls) findViewById(R.id.browse_vector_map_zoom);
 		mZoomControls.setVisibility(View.INVISIBLE);
 
@@ -625,15 +622,15 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			hideNavigationControls();
 		}
 
-		mMapName = mSubwayMap.mapName;
+		mMapName = mMapView.systemName;
 		onRestoreMapState();
 		bindMapEvents();
-		mMapView.requestFocus();
+		mVectorMapView.requestFocus();
 		saveDefaultMapName();
 	}
 
 	private void bindMapEvents() {
-		mMapView.setOnMapEventListener(new OnMapEventListener() {
+		mVectorMapView.setOnMapEventListener(new OnMapEventListener() {
 			public void onShortClick(int x, int y) {
 				if (mZoomControls.getVisibility() != View.VISIBLE) {
 					showZoom();
@@ -687,8 +684,8 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		mZoom = Math.min(Math.max(zoom, MIN_ZOOM_LEVEL), MAX_ZOOM_LEVEL);
 		mZoomControls.setIsZoomInEnabled(mZoom > MIN_ZOOM_LEVEL);
 		mZoomControls.setIsZoomOutEnabled(mZoom < MAX_ZOOM_LEVEL);
-		mMapView.setRenderFilter(FILTERS[mZoom]);
-		mMapView.setScale(ZOOMS[mZoom], STEPS[mZoom]);
+		mVectorMapView.setRenderFilter(FILTERS[mZoom]);
+		mVectorMapView.setScale(ZOOMS[mZoom], STEPS[mZoom]);
 	}
 
 	private void delayZoom() {
@@ -756,7 +753,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		}
 	}
 
-	private class InitTask extends AsyncTask<Uri, Void, SubwayMap> {
+	private class InitTask extends AsyncTask<Uri, Void, MapView> {
 
 		Throwable mError;
 
@@ -766,15 +763,16 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			super.onPreExecute();
 		}
 
-		protected SubwayMap doInBackground(Uri... params) {
+		protected MapView doInBackground(Uri... params) {
 			try {
 				Uri mapUri = params[0];
-				City city = Deserializer.deserialize(new FileInputStream(MapSettings.getMapFileName(mapUri)));
-				if (city != null) {
-					return city.subwayMap;
-				} else {
-					return null;
-				}
+				return ModelBuilder.loadModel(MapSettings.getMapFileName(mapUri)).views[0];
+//				City city = Deserializer.deserialize(new FileInputStream(MapSettings.getMapFileName(mapUri)));
+//				if (city != null) {
+//					return city.subwayMap;
+//				} else {
+//					return null;
+//				}
 			} catch (Exception e) {
 				mError = e;
 				if (Log.isLoggable(LOG_TAG_MAIN, Log.ERROR))
@@ -788,7 +786,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			super.onCancelled();
 		}
 
-		protected void onPostExecute(SubwayMap result) {
+		protected void onPostExecute(MapView result) {
 			if (result != null) {
 				onShowMap(result);
 			} else {
@@ -809,9 +807,9 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 
 	private final Runnable mUpdateUI = new Runnable() {
 		public void run() {
-			final Point point = mCurrentStation.point;
-			mMapView.scrollModelCenterTo(point.x, point.y);
-			mMapView.postInvalidate();
+			final Point point = ModelUtil.toPoint( mCurrentStation.stationPoint );
+			mVectorMapView.scrollModelCenterTo(point.x, point.y);
+			mVectorMapView.postInvalidate();
 		}
 	};
 
@@ -847,9 +845,9 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	private int mZoom = DEFAULT_ZOOM_LEVEL;
 
 	private String mMapName;
-	private SubwayMap mSubwayMap;
+	private MapView mMapView;
 
-	private VectorMapView mMapView;
+	private VectorMapView mVectorMapView;
 
 	private ZoomControls mZoomControls;
 	private Runnable mZoomControlRunnable;
@@ -862,7 +860,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	private ImageButton mNavigateListButton;
 	private TextView mNavigateTimeText;
 
-	private SubwayRoute mRoute;
+	private Route mRoute;
 
 	private Handler mPrivateHandler = new Handler();
 	private Handler mScrollHandler = new Handler();
@@ -872,10 +870,10 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	private final static int REQUEST_BROWSE_LIBRARY = 1;
 	private final static int REQUEST_SETTINGS = 2;
 
-	private ArrayList<SubwayStation> mNavigationStations;
-	private ArrayList<SubwaySegment> mNavigationSegments;
-	private ArrayList<SubwayTransfer> mNavigationTransfers;
-	private SubwayStation mCurrentStation;
+	private ArrayList<StationView> mNavigationStations;
+	private ArrayList<SegmentView> mNavigationSegments;
+	private ArrayList<TransferView> mNavigationTransfers;
+	private StationView mCurrentStation;
 
 	private Locale mDefaultLocale;
 

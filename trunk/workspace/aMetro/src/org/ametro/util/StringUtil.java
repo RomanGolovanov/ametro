@@ -23,10 +23,16 @@ package org.ametro.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.ametro.model.ext.ModelPoint;
+import org.ametro.model.ext.ModelRect;
 
 import android.graphics.Point;
 import android.graphics.PointF;
@@ -40,8 +46,17 @@ import android.graphics.Rect;
 public class StringUtil {
 
     static final SimpleDateFormat DEFAULT_DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
+
+    private static final Pattern csvPattern = Pattern.compile("(?:^|,)(\"(?:[^\"]|\"\")*\"|[^,]*)");
+
+	public static String[] splitCommaSeparatedString(String value) {
+		if(value == null || value.length() == 0) return new String[0];
+		value = value.replaceAll("/\\(.*\\)/", "");
+		return value.split(",");
+	}
+    
     static final HashMap<String, String> patternsMap = new HashMap<String, String>();
-    private static final String[] charTable = new String[81];
+	private static final String[] charTable = new String[81];
     private static final char START_CHAR = 'Ё';
     
     static {
@@ -262,4 +277,233 @@ public class StringUtil {
     }
 
 
+	public static float parseFloat(String value, float defaultValue) {
+        if (value != null) {
+            try {
+                return Float.parseFloat(value);
+            } catch (NumberFormatException e) {
+                return defaultValue;
+            }
+        } else {
+            return defaultValue;
+        }
+       }
+
+	public static int[] parseIntArray(String text) {
+		final String[] parts = text.split(",");
+		final int len = parts.length;
+		final int[] r = new int[len];
+		for (int i = 0; i < len; i++) {
+			try {
+				r[i] = Integer.parseInt(parts[i]);
+			} catch (NumberFormatException e) {
+				r[i] = -1;
+			}
+		}
+		return r;
+	}
+
+	public static Integer[] parseIntegerArray(String text) {
+		final String[] parts = text.split(",");
+		final int len = parts.length;
+		final Integer[] r = new Integer[len];
+		for (int i = 0; i < len; i++) {
+			try {
+				r[i] = Integer.parseInt(parts[i]);
+			} catch (NumberFormatException e) {
+				r[i] = null;
+			}
+		}
+		return r;
+	}	
+	public static Integer[] parseDelayArray(String text) {
+		String[] parts = splitCommaSeparatedString(text);
+		ArrayList<Integer> vals = new ArrayList<Integer>();
+		for (String part : parts) {
+			try {
+				double value = Double.parseDouble(part.trim());
+				int minutes = (int)value;
+				int seconds = (int)((value - minutes) * 100);
+				int delay = (minutes * 60) + seconds;
+				vals.add( delay );
+			} catch (Exception ex) {
+				vals.add(null);
+			}
+		}
+		return vals.toArray(new Integer[vals.size()]);
+	}
+
+
+	public static Integer parseNullableDelay(String text){
+		if (text != null && !text.equals("")) {
+			try {
+				int value = Integer.parseInt(text);
+				int minutes = (int)value;
+				int seconds = (int)((value - minutes) * 100);
+				return (minutes * 60) + seconds;
+			} catch (NumberFormatException ignored) {
+			}
+		}
+		return null;
+	}
+
+    public static ModelPoint[] parseModelPointArray(String value) {
+    	if(StringUtil.isEmpty(value)) return new ModelPoint[0];
+        ArrayList<ModelPoint> points = parseModelPointList(value);
+        return points.toArray(new ModelPoint[points.size()]);
+    }
+
+    public static ArrayList<ModelPoint> parseModelPointList(String value) {
+    	if(StringUtil.isEmpty(value)) return new ArrayList<ModelPoint>();
+        String[] parts = StringUtil.splitCommaSeparatedString(value);
+        ArrayList<ModelPoint> points = new ArrayList<ModelPoint>();
+        for (int i = 0; i < parts.length / 2; i++) {
+        	ModelPoint point = new ModelPoint();
+            point.x = Integer.parseInt(parts[i * 2].trim());
+            point.y = Integer.parseInt(parts[i * 2 + 1].trim());
+            points.add(point);
+        }
+        return points;
+    }
+    
+    public static ModelRect[] parseModelRectArray(String value) {
+    	if(StringUtil.isEmpty(value)) return new ModelRect[0];
+        String[] parts = StringUtil.splitCommaSeparatedString(value);
+        ArrayList<ModelRect> rects = new ArrayList<ModelRect>();
+        for (int i = 0; i < parts.length / 4; i++) {
+            int x1 = Integer.parseInt(parts[i * 4].trim());
+            int y1 = Integer.parseInt(parts[i * 4 + 1].trim());
+            int x2 = x1 + Integer.parseInt(parts[i * 4 + 2].trim());
+            int y2 = y1 + Integer.parseInt(parts[i * 4 + 3].trim());
+            rects.add(new ModelRect(x1, y1, x2, y2));
+        }
+        return rects.toArray(new ModelRect[rects.size()]);
+    }
+  
+
+    public static ModelPoint parseModelPoint(String value) {
+    	if(StringUtil.isEmpty(value)) return null;
+        String[] parts = StringUtil.splitCommaSeparatedString(value);
+        int x = Integer.parseInt(parts[0].trim());
+        int y = Integer.parseInt(parts[1].trim());
+        return new ModelPoint(x, y);
+    }
+	
+	public static ModelRect parseModelRect(String value) {
+		if(StringUtil.isEmpty(value)) return null;
+        String[] parts = StringUtil.splitCommaSeparatedString(value);
+        int x1 = Integer.parseInt(parts[0].trim());
+        int y1 = Integer.parseInt(parts[1].trim());
+        int x2 = x1 + Integer.parseInt(parts[2].trim());
+        int y2 = y1 + Integer.parseInt(parts[3].trim());
+        return new ModelRect(x1, y1, x2, y2);
+	}
+
+	public static int parseColor(String value) {
+		if(StringUtil.isEmpty(value)) return 0;
+		return Integer.parseInt(value, 16);
+	}
+
+    public static String[] parseStringArray(String line) {
+        ArrayList<String> elements = new ArrayList<String>();
+        Matcher m = csvPattern.matcher(line);
+        while (m.find()) {
+            elements.add(m.group()
+                    .replaceAll("^,", "") // remove first comma if any
+                            //.replaceAll( "^?\"(.*)\"$", "$1" ) // remove outer quotations if any
+                    .replaceAll("^\"(.*)\"$", "$1") // remove outer quotations if any
+                    .replaceAll("\"\"", "\"")); // replace double inner quotations if any
+        }
+        return elements.toArray(new String[elements.size()]);
+    }
+
+    public static Double[] parseDoubleArray(String value) {
+        String[] parts = splitCommaSeparatedString(value);
+        ArrayList<Double> vals = new ArrayList<Double>();
+        for (String part : parts) {
+            try {
+                Double val = Double.parseDouble(part.trim());
+                vals.add(val);
+            } catch (Exception ex) {
+                vals.add(null);
+            }
+        }
+        return vals.toArray(new Double[vals.size()]);
+    }
+    
+    public static Point[] parsePointArray(String value) {
+        ArrayList<Point> points = parsePointList(value);
+        return points.toArray(new Point[points.size()]);
+    }
+
+    public static ArrayList<Point> parsePointList(String value) {
+        String[] parts = splitCommaSeparatedString(value);
+        ArrayList<Point> points = new ArrayList<Point>();
+        for (int i = 0; i < parts.length / 2; i++) {
+            Point point = new Point();
+            point.x = Integer.parseInt(parts[i * 2].trim());
+            point.y = Integer.parseInt(parts[i * 2 + 1].trim());
+            points.add(point);
+        }
+        return points;
+    }
+    
+    public static Rect[] parseRectangleArray(String value) {
+        String[] parts = splitCommaSeparatedString(value);
+        ArrayList<Rect> rectangles = new ArrayList<Rect>();
+        for (int i = 0; i < parts.length / 4; i++) {
+            int x1 = Integer.parseInt(parts[i * 4].trim());
+            int y1 = Integer.parseInt(parts[i * 4 + 1].trim());
+            int x2 = x1 + Integer.parseInt(parts[i * 4 + 2].trim());
+            int y2 = y1 + Integer.parseInt(parts[i * 4 + 3].trim());
+            rectangles.add(new Rect(x1, y1, x2, y2));
+        }
+        return rectangles.toArray(new Rect[rectangles.size()]);
+    }
+
+    public static Rect parseRectangle(String value) {
+        String[] parts = splitCommaSeparatedString(value);
+        int x1 = Integer.parseInt(parts[0].trim());
+        int y1 = Integer.parseInt(parts[1].trim());
+        int x2 = x1 + Integer.parseInt(parts[2].trim());
+        int y2 = y1 + Integer.parseInt(parts[3].trim());
+        return new Rect(x1, y1, x2, y2);
+    }
+
+    public static PointF parsePointF(String value) {
+        String[] parts = splitCommaSeparatedString(value);
+        float x = Float.parseFloat(parts[0].trim());
+        float y = Float.parseFloat(parts[1].trim());
+        return new PointF(x, y);
+    }
+
+    public static Integer parseNullableInteger(String text) {
+        if (text != null && !text.equals("")) {
+            try {
+                return Integer.parseInt(text);
+            } catch (NumberFormatException ignored) {
+            }
+        }
+        return null;
+    }
+
+    public static Double parseNullableDouble(String text) {
+        if (text != null && !text.equals("")) {
+            try {
+                return Double.parseDouble(text);
+            } catch (NumberFormatException ignored) {
+            }
+        }
+        return null;
+    }
+
+	public static String formatModelRect(ModelRect rect) {
+		return rect.left + "," + rect.top + "," + rect.right + "," + rect.bottom;
+	}
+
+	public static String formatModelPoint(ModelPoint point) {
+		return point.x + "," + point.y;
+	}
+
+    
 }

@@ -26,6 +26,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.ametro.model.ext.ModelPoint;
+import org.ametro.model.ext.ModelRect;
 import org.ametro.util.StringUtil;
 
 import android.graphics.Point;
@@ -145,6 +147,36 @@ public class CsvWriter {
 		}
 		writeString(sb.toString());
 	}
+	
+	public void writeModelRect(ModelRect rect) throws IOException {
+		if(rect!=null){
+			writeString(StringUtil.formatModelRect(rect));
+		}else{
+			writeString(EMPTY_VALUE);
+		}
+	}
+
+	public void writeModelPoint(ModelPoint point) throws IOException {
+		if(point!=null){
+			writeString(StringUtil.formatModelPoint(point));
+		}else{
+			writeString(EMPTY_VALUE);
+		}
+	}
+
+	public void writeModelPointArray(ModelPoint[] points) throws IOException {
+		StringBuffer sb = new StringBuffer(points.length * 3 * 3);
+		for(ModelPoint p : points){
+			sb.append(p.x);
+			sb.append(",");
+			sb.append(p.y);
+			sb.append(",");
+		}
+		if(sb.length()>0){
+			sb.deleteCharAt(sb.length()-1);
+		}
+		writeString(sb.toString());
+	}	
 	
     public void flush() throws IOException {
         mWriter.flush();

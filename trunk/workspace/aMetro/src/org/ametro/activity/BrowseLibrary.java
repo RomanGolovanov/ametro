@@ -23,7 +23,6 @@ package org.ametro.activity;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -35,8 +34,8 @@ import org.ametro.MapSettings;
 import org.ametro.MapUri;
 import org.ametro.R;
 import org.ametro.adapter.MapListAdapter;
-import org.ametro.model.City;
-import org.ametro.model.Deserializer;
+import org.ametro.model.Model;
+import org.ametro.model.storage.ModelBuilder;
 import org.ametro.other.FileGroupsDictionary;
 import org.ametro.other.ProgressInfo;
 import org.ametro.util.csv.CsvReader;
@@ -154,7 +153,7 @@ public class BrowseLibrary extends Activity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mMode = MODE_MY_MAPS;
-		MapSettings.checkPrerequisite();
+		MapSettings.checkPrerequisite(this);
 		beginIndexing();
 		updateLocationState();
 	}
@@ -245,8 +244,7 @@ public class BrowseLibrary extends Activity implements
 			// step 1: load city data
 			try {
 				CsvReader reader = new CsvReader(new BufferedReader(
-						new InputStreamReader(getAssets().open("cities.csv"),
-								org.ametro.model.Serializer.ENCODING)));
+						new InputStreamReader(getAssets().open("cities.csv"), "windows-1251")));
 				int idx = 0;
 				while (reader.next()) {
 					idx++;
@@ -334,19 +332,15 @@ public class BrowseLibrary extends Activity implements
 		}
 	}
 
-	private class IndexTask extends
-			AsyncTask<Void, ProgressInfo, FileGroupsDictionary> {
+	private class IndexTask extends AsyncTask<Void, ProgressInfo, FileGroupsDictionary> {
 		private boolean mIsCanceled = false;
 		private boolean mIsProgressVisible = false;
 
 		private void scanModelFileContent(FileGroupsDictionary map,
 				String fileName, String fullFileName) {
 			try {
-				City city = Deserializer.deserialize(new FileInputStream(
-						MapSettings.MAPS_PATH + fileName), true);
-				if (city.sourceVersion == MapSettings.getSourceVersion()) {
-					map.putFile(city.countryName, city.cityName, fileName);
-				}
+				Model model = ModelBuilder.loadModelDescription(MapSettings.MAPS_PATH + fileName);
+				map.putFile(model.description.getCountryName(), model.description.getCityName(), fileName);
 			} catch (Exception e) {
 				if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)) {
 					Log.d(Constants.LOG_TAG_MAIN,

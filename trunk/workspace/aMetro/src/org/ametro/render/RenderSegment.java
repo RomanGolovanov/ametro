@@ -21,12 +21,21 @@
 
 package org.ametro.render;
 
-import android.graphics.*;
-import android.graphics.Paint.Style;
 import org.ametro.graphics.ExtendedPath;
-import org.ametro.model.SubwayMap;
-import org.ametro.model.SubwaySegment;
-import org.ametro.model.SubwayStation;
+import org.ametro.model.MapView;
+import org.ametro.model.SegmentView;
+import org.ametro.model.StationView;
+import org.ametro.model.TransportSegment;
+import org.ametro.model.ext.ModelPoint;
+
+import android.graphics.Canvas;
+import android.graphics.ComposePathEffect;
+import android.graphics.CornerPathEffect;
+import android.graphics.DashPathEffect;
+import android.graphics.Paint;
+import android.graphics.Point;
+import android.graphics.Rect;
+import android.graphics.Paint.Style;
 
 
 public class RenderSegment extends RenderElement {
@@ -34,17 +43,17 @@ public class RenderSegment extends RenderElement {
     public Paint paint;
     public ExtendedPath path;
 
-    public RenderSegment(SubwayMap subwayMap, SubwaySegment segment) {
+    public RenderSegment(MapView map, SegmentView view, TransportSegment segment) {
         super();
-        final SubwayStation from = subwayMap.stations[segment.fromStationId];
-        final SubwayStation to = subwayMap.stations[segment.toStationId];
+        final StationView from = map.stations[view.stationViewFromId];
+        final StationView to = map.stations[view.stationViewToId];
 
         final Paint localPaint = new Paint();
         final ExtendedPath localPath = new ExtendedPath();
 
-        final Double delay = segment.delay;
+        final Integer delay = segment.delay;
         final boolean lineWorking = (delay != null && delay > 0);
-        final int lineWidth = subwayMap.linesWidth;
+        final int lineWidth = map.lineWidth;
 
         localPaint.setStyle(Style.STROKE);
         localPaint.setAntiAlias(true);
@@ -59,46 +68,46 @@ public class RenderSegment extends RenderElement {
                     new CornerPathEffect(lineWidth * 0.6f)
             ));
         }
-        localPaint.setColor(subwayMap.lines[from.lineId].color);
+        localPaint.setColor(map.lines[from.lineViewId].lineColor);
 
         paint = localPaint;
-        drawSegmentPath(subwayMap, segment, from, to, localPath);
+        drawSegmentPath(map, view, segment, from, to, localPath);
         path = localPath;
 
-        final int minx = Math.min(from.point.x, to.point.x) - lineWidth;
-        final int maxx = Math.max(from.point.x, to.point.x) + lineWidth;
-        final int miny = Math.min(from.point.y, to.point.y) - lineWidth;
-        final int maxy = Math.max(from.point.y, to.point.y) + lineWidth;
+        final int minx = Math.min(from.stationPoint.x, to.stationPoint.x) - lineWidth;
+        final int maxx = Math.max(from.stationPoint.x, to.stationPoint.x) + lineWidth;
+        final int miny = Math.min(from.stationPoint.y, to.stationPoint.y) - lineWidth;
+        final int maxy = Math.max(from.stationPoint.y, to.stationPoint.y) + lineWidth;
         final Rect box = new Rect(minx, miny, maxx, maxy);
-        final Point[] nodes = subwayMap.getSegmentsNodes(segment.id);
-        if (nodes != null) {
-            final int length = nodes.length;
+        final ModelPoint[] points = view.spline!=null ? view.spline.points : null;
+        if (points != null) {
+            final int length = points.length;
             for (int i = 0; i < length; i++) {
-                final Point node = nodes[i];
+                final ModelPoint node = points[i];
                 box.union(node.x, node.y);
             }
         }
         setProperties(RenderProgram.TYPE_LINE, box);
     }
     
-    private void drawSegmentPath(SubwayMap map, SubwaySegment segment, SubwayStation from, SubwayStation to, ExtendedPath path) {
-        final Point pointFrom = from.point;
-        final Point pointTo = to.point;
-        final Point[] additionalPoints = map.getSegmentsNodes(segment.id);
-        if (additionalPoints != null) {
-            if ((segment.flags & SubwaySegment.SPLINE) != 0) {
-                Point[] points = new Point[additionalPoints.length + 2];
-                points[0] = pointFrom;
-                points[points.length - 1] = pointTo;
-                for (int i = 0; i < additionalPoints.length; i++) {
-                    Point point = additionalPoints[i];
-                    points[i + 1] = point;
+    private void drawSegmentPath(MapView map, SegmentView view, TransportSegment segment, StationView from, StationView to, ExtendedPath path) {
+        final ModelPoint pointFrom = from.stationPoint;
+        final ModelPoint pointTo = to.stationPoint;
+        final ModelPoint[] modelPoints = view.spline!=null ? view.spline.points : null;
+        if (modelPoints != null) {
+            if ( view.spline.isSpline ) {
+                Point[] points = new Point[modelPoints.length + 2];
+                points[0] = new Point(pointFrom.x, pointFrom.y);
+                points[points.length - 1] = new Point(pointTo.x, pointTo.y);
+                for (int i = 0; i < modelPoints.length; i++) {
+                	final ModelPoint p = modelPoints[i];
+                    points[i + 1] = new Point(p.x,p.y);
                 }
                 path.drawSpline(points, 0, points.length);
             } else {
                 path.moveTo(pointFrom.x, pointFrom.y);
-                for (Point additionalPoint : additionalPoints) {
-                    path.lineTo(additionalPoint.x, additionalPoint.y);
+                for (ModelPoint p : modelPoints) {
+                    path.lineTo(p.x, p.y);
                 }
                 path.lineTo(pointTo.x, pointTo.y);
             }

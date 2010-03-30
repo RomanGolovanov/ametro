@@ -24,8 +24,10 @@ package org.ametro;
 import java.io.File;
 
 import org.ametro.jni.Natives;
+import org.ametro.model.util.CountryLibrary;
 import org.ametro.util.FileUtil;
 
+import android.content.Context;
 import android.net.Uri;
 
 public class MapSettings {
@@ -43,7 +45,7 @@ public class MapSettings {
     public static final String MAPS_PATH = ROOT_PATH + "maps/";
     public static final String CACHE_PATH = ROOT_PATH + "cache/";
     public static final String IMPORT_PATH = ROOT_PATH + "import/";
-
+    
     public static final String DEFAULT_MAP = "metro";
 
     public static final String MAPS_LIST = "maps.dat";
@@ -56,7 +58,7 @@ public class MapSettings {
     public static final String MAP_ENTRY_NAME = "map.dat";
     public static final String DESCRIPTION_ENTRY_NAME = "description.dat";
     
-    public static void checkPrerequisite() {
+    public static void checkPrerequisite( Context context ) {
     	Natives.Initialize();
         File root = new File(ROOT_PATH);
         File maps = new File(MAPS_PATH);
@@ -67,6 +69,8 @@ public class MapSettings {
         	FileUtil.createDirectory(CACHE_PATH);
         	FileUtil.createFile(ROOT_PATH + NO_MEDIA_TAG);
         }
+        CountryLibrary.setContext(context);
+
     }
 
     public static String getMapFileName(String mapName) {

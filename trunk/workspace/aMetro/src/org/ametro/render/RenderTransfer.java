@@ -21,11 +21,17 @@
 
 package org.ametro.render;
 
-import android.graphics.*;
+import org.ametro.model.MapView;
+import org.ametro.model.StationView;
+import org.ametro.model.TransferView;
+import org.ametro.model.TransportTransfer;
+import org.ametro.model.ext.ModelPoint;
+
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.Paint.Style;
-import org.ametro.model.SubwayMap;
-import org.ametro.model.SubwaySegment;
-import org.ametro.model.SubwayStation;
 
 public class RenderTransfer extends RenderElement {
 
@@ -39,21 +45,21 @@ public class RenderTransfer extends RenderElement {
     private Paint Paint;
 
 
-    public RenderTransfer(SubwayMap subwayMap, SubwaySegment transfer) {
+    public RenderTransfer(MapView map, TransferView view, TransportTransfer transfer) {
         super();
-        final SubwayStation fromStation = subwayMap.stations[transfer.fromStationId];
-        final Point from = fromStation.point;
+        final StationView fromStation = map.stations[view.stationViewFromId];
+        final ModelPoint from = fromStation.stationPoint;
         FromX = from.x;
         FromY = from.y;
 
-        final SubwayStation toStation = subwayMap.stations[transfer.toStationId];
-        final Point to = toStation.point;
+        final StationView toStation = map.stations[view.stationViewToId];
+        final ModelPoint to = toStation.stationPoint;
         ToX = to.x;
         ToY = to.y;
 
-        final int radius = subwayMap.stationDiameter / 2;
+        final int radius = map.stationDiameter / 2;
 
-        final int lineWidth = subwayMap.linesWidth;
+        final int lineWidth = map.lineWidth;
         final Paint paint = new Paint();
         paint.setColor(Color.WHITE);
         paint.setStyle(Style.FILL);

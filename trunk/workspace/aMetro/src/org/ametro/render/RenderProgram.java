@@ -27,14 +27,17 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-import org.ametro.model.SubwayMap;
-import org.ametro.model.SubwaySegment;
-import org.ametro.model.SubwayStation;
-import org.ametro.model.SubwayTransfer;
+import org.ametro.model.MapView;
+import org.ametro.model.SegmentView;
+import org.ametro.model.StationView;
+import org.ametro.model.TransferView;
+import org.ametro.model.TransportSegment;
+import org.ametro.model.TransportStation;
+import org.ametro.model.TransportTransfer;
+import org.ametro.model.ext.ModelSpline;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.RectF;
 
@@ -57,14 +60,16 @@ public class RenderProgram {
 	Rect[] mBounds;
 	int[] mTypes;
 	int mRenderFilter;
-	SubwayMap mSubwayMap;
+	
+	MapView mMapView;
+	
 	ArrayList<RenderElement> mRenderQueue;
 
-	HashMap<SubwaySegment, RenderElement> segmentIndex = new HashMap<SubwaySegment, RenderElement>();
-	HashMap<SubwayStation, RenderElement> stationIndex = new HashMap<SubwayStation, RenderElement>();
-	HashMap<SubwayStation, RenderElement> stationNameIndex = new HashMap<SubwayStation, RenderElement>();
-	HashMap<SubwayTransfer, RenderElement> transferBackgroundIndex = new HashMap<SubwayTransfer, RenderElement>();
-	HashMap<SubwayTransfer, RenderElement> transferIndex = new HashMap<SubwayTransfer, RenderElement>();
+	HashMap<SegmentView, RenderElement> segmentIndex = new HashMap<SegmentView, RenderElement>();
+	HashMap<StationView, RenderElement> stationIndex = new HashMap<StationView, RenderElement>();
+	HashMap<StationView, RenderElement> stationNameIndex = new HashMap<StationView, RenderElement>();
+	HashMap<TransferView, RenderElement> transferBackgroundIndex = new HashMap<TransferView, RenderElement>();
+	HashMap<TransferView, RenderElement> transferIndex = new HashMap<TransferView, RenderElement>();
 	
 
 	public void setRenderFilter(int renderFilter) {
@@ -77,13 +82,13 @@ public class RenderProgram {
 		}
 	}
 	
-	public RenderProgram(SubwayMap subwayMap) {
-		mSubwayMap = subwayMap;
+	public RenderProgram(MapView map) {
+		mMapView = map;
 		mRenderQueue = new ArrayList<RenderElement>();
 		mClipping = new ArrayList<RenderElement>();
-		drawLines(subwayMap, mRenderQueue);
-		drawTransfers(subwayMap, mRenderQueue);
-		drawStations(subwayMap, mRenderQueue);
+		drawLines(map, mRenderQueue);
+		drawTransfers(map, mRenderQueue);
+		drawStations(map, mRenderQueue);
 		updateRenderQueue();
 		mRenderFilter = ALL;
 	}
@@ -101,17 +106,15 @@ public class RenderProgram {
 		}
 	}
 	
-	public void updateSelection(List<SubwayStation> stations, List<SubwaySegment> segments, List<SubwayTransfer> transfers){
+	public void updateSelection(List<StationView> stations, List<SegmentView> segments, List<TransferView> transfers){
 		if(stations!=null || segments!=null){
 			for(RenderElement elem : mElements){
 				elem.setSelection(false);
 			}
-		
+			//final Model owner = mMapView.owner;
 			if(stations!=null){
-				for(SubwayStation station : stations){
-					
+				for(StationView station : stations){
 					stationIndex.get(station).setSelection(true);
-					
 					RenderElement stationName = stationNameIndex.get(station);
 					if(stationName!=null){
 						stationName.setSelection(true);
@@ -119,7 +122,7 @@ public class RenderProgram {
 				}
 			}
 			if(transfers!=null){
-				for(SubwayTransfer transfer : transfers){
+				for(TransferView transfer : transfers){
 					RenderElement elem;
 					elem = transferBackgroundIndex.get(transfer);
 					if(elem!=null){
@@ -132,12 +135,12 @@ public class RenderProgram {
 				}
 			}
 			if(segments!=null){
-				for(SubwaySegment segment : segments){
+				for(SegmentView segment : segments){
 					RenderElement elem = segmentIndex.get(segment);
 					if(elem!=null){
 						elem.setSelection(true);
 					}else{
-						SubwaySegment opposite = mSubwayMap.getSegment(segment.toStationId, segment.fromStationId);
+						SegmentView opposite = mMapView.getSegmentView(segment.stationViewToId, segment.stationViewFromId);
 						if(opposite!=null){
 							elem = segmentIndex.get(opposite);
 							if(elem!=null){
@@ -156,14 +159,16 @@ public class RenderProgram {
 		updateRenderQueue();
 	}
 
-	private void drawStations(SubwayMap subwayMap, ArrayList<RenderElement> renderQueue) {
-		for (SubwayStation station : subwayMap.stations) {
-			if (station.point != null) {
-				RenderElement stationElement = new RenderStation(subwayMap, station);
+	private void drawStations(MapView map, ArrayList<RenderElement> renderQueue) {
+		final TransportStation[] stations = map.owner.stations; 
+		for (StationView station : map.stations) {
+			TransportStation s = stations[station.stationId];
+			if (station.stationPoint != null) {
+				RenderElement stationElement = new RenderStation(map, station, s);
 				renderQueue.add(stationElement);
 				stationIndex.put(station, stationElement);
-				if (station.rect != null && station.name != null) {
-					RenderElement stationNameElement = new RenderStationName(subwayMap, station);
+				if (station.stationNameRect != null && station.stationNameRect != null) {
+					RenderElement stationNameElement = new RenderStationName(map, station, s);
 					renderQueue.add(stationNameElement);
 					stationNameIndex.put(station, stationNameElement);
 				}
@@ -171,14 +176,16 @@ public class RenderProgram {
 		}
 	}
 
-	private void drawTransfers(SubwayMap subwayMap, ArrayList<RenderElement> renderQueue) {
-		for (SubwayTransfer transfer : subwayMap.transfers) {
-			if( (transfer.flags & SubwayTransfer.INVISIBLE) != 0){
+	private void drawTransfers(MapView map, ArrayList<RenderElement> renderQueue) {
+		final TransportTransfer[] transfers = map.owner.transfers; 
+		for (TransferView transfer : map.transfers) {
+			final TransportTransfer t = transfers[transfer.transferId];
+			if( (t.flags & TransportTransfer.TYPE_INVISIBLE) != 0){
 				continue;
 			}
 			
-			RenderElement elementBackground = new RenderTransferBackground(subwayMap, transfer);
-			RenderElement elementTransfer = new RenderTransfer(subwayMap, transfer);
+			RenderElement elementBackground = new RenderTransferBackground(map, transfer, t);
+			RenderElement elementTransfer = new RenderTransfer(map, transfer, t);
 
 			renderQueue.add(elementBackground);
 			renderQueue.add(elementTransfer);
@@ -188,22 +195,24 @@ public class RenderProgram {
 		}
 	}
 
-	private void drawLines(SubwayMap subwayMap, ArrayList<RenderElement> renderQueue) {
+	private void drawLines(MapView map, ArrayList<RenderElement> renderQueue) {
+		final TransportSegment[] segments = map.owner.segments; 
 		HashSet<Integer> exclusions = new HashSet<Integer>();
-		for (SubwaySegment segment : subwayMap.segments) {
+		for (SegmentView segment : map.segments) {
+			final TransportSegment s = segments[segment.segmentId];
 			if (exclusions.contains(segment.id)) continue;
-			if ((segment.flags & SubwaySegment.INVISIBLE) == 0) {
-				SubwayStation from = subwayMap.stations[segment.fromStationId];
-				SubwayStation to = subwayMap.stations[segment.toStationId];
-				if (from.point != null && to.point != null) {
-					SubwaySegment opposite = subwayMap.getSegment(to, from);
-					Point[] additionalPoints = subwayMap.getSegmentsNodes(segment.id);
-					Point[] reversePoints = opposite == null ? null : subwayMap.getSegmentsNodes(opposite.id);
+			if ((s.flags & TransportSegment.TYPE_INVISIBLE) == 0) {
+				StationView from = map.stations[segment.stationViewFromId];
+				StationView to = map.stations[segment.stationViewToId];
+				if (from.stationPoint != null && to.stationPoint != null) {
+					SegmentView opposite = map.getSegmentView(to, from);
+					ModelSpline additionalPoints = segment.spline;
+					ModelSpline reversePoints = (opposite == null) ? null : opposite.spline;
 					boolean additionalForward = additionalPoints != null;
 					boolean additionalBackward = reversePoints != null;
 					if (!additionalForward && additionalBackward) {
 					} else {
-						RenderElement element = new RenderSegment(subwayMap, segment);
+						RenderElement element = new RenderSegment(map, segment, s);
 						renderQueue.add(element);
 						segmentIndex.put(segment, element);
 						if (opposite != null) {

@@ -26,8 +26,8 @@ import java.util.Comparator;
 
 import org.ametro.R;
 import org.ametro.adapter.StationListAdapter;
-import org.ametro.model.SubwayMap;
-import org.ametro.model.SubwayStation;
+import org.ametro.model.MapView;
+import org.ametro.model.StationView;
 
 import android.app.ListActivity;
 import android.app.SearchManager;
@@ -39,12 +39,12 @@ import android.widget.Toast;
 
 public class SearchStation extends ListActivity {
 
-	private ArrayList<SubwayStation> mStationList;
+	private ArrayList<StationView> mStationList;
 	
-	private static class StationSortComparator implements Comparator<SubwayStation>
+	private static class StationSortComparator implements Comparator<StationView>
 	{
-		public int compare(SubwayStation first, SubwayStation second) {
-			return first.name.compareTo(second.name);
+		public int compare(StationView first, StationView second) {
+			return first.getName().compareTo(second.getName());
 		}
 	}
 	
@@ -65,7 +65,7 @@ public class SearchStation extends ListActivity {
 		}else{
 			mStationList = BrowseVectorMap.Instance.getNavigationStations();
 			bindData();
-			SubwayStation selected = BrowseVectorMap.Instance.getCurrentStation();
+			StationView selected = BrowseVectorMap.Instance.getCurrentStation();
 			if(selected!=null){
 				this.setSelection(mStationList.indexOf(selected));
 			}
@@ -73,12 +73,12 @@ public class SearchStation extends ListActivity {
 	}
 
 	private void bindData() {
-		SubwayMap map = BrowseVectorMap.Instance.getSubwayMap();
+		MapView map = BrowseVectorMap.Instance.getMapView();
 		if(mStationList.size()>0){
 			if(mStationList.size()>1){
 				ArrayList<String> stationNamesList = new ArrayList<String>();
-				for(SubwayStation station : mStationList){
-						stationNamesList.add(station.name + " (" + map.getLine(station.lineId).name + ")");
+				for(StationView station : mStationList){
+						stationNamesList.add(station.getName() + " (" + map.lines[station.lineViewId].getName() + ")");
 				}
 				this.setListAdapter(new StationListAdapter(this, mStationList, map));
 			}else{
@@ -93,11 +93,11 @@ public class SearchStation extends ListActivity {
 		}
 	}
 
-	private SubwayMap doSearchKeywords(String searchKeywords) {
-		SubwayMap map = BrowseVectorMap.Instance.getSubwayMap();
-		mStationList = new ArrayList<SubwayStation>();
-		for(SubwayStation station : map.stations){
-			if(station.name.toLowerCase().indexOf(searchKeywords)!=-1){
+	private MapView doSearchKeywords(String searchKeywords) {
+		MapView map = BrowseVectorMap.Instance.getMapView();
+		mStationList = new ArrayList<StationView>();
+		for(StationView station : map.stations){
+			if(station.getName().toLowerCase().indexOf(searchKeywords)!=-1){
 				mStationList.add(station);
 			}
 		}

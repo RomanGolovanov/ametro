@@ -20,16 +20,9 @@
  */
 package org.ametro.activity;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
-import org.ametro.MapSettings;
 import org.ametro.R;
-import org.ametro.adapter.AddonEntriyListAdapter;
-import org.ametro.model.Deserializer;
+import org.ametro.adapter.AddonEntryListAdapter;
 import org.ametro.model.StationAddon;
-import org.ametro.model.SubwayStation;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -43,21 +36,21 @@ public class BrowseStation extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		SubwayStation station = BrowseVectorMap.Instance.getCurrentStation();
-		String mapName = BrowseVectorMap.Instance.getMapName();
-		String mapFileName = MapSettings.getMapFileName(mapName);
+		//StationView station = BrowseVectorMap.Instance.getCurrentStation();
+		//String mapName = BrowseVectorMap.Instance.getMapName();
+		//String mapFileName = MapSettings.getMapFileName(mapName);
 		
-		try {
-			mStationAddon = Deserializer.tryDeserializeAddon(station, new FileInputStream(mapFileName));
-		} catch (FileNotFoundException e) {
-			Toast.makeText(this, getString(R.string.msg_no_addons), Toast.LENGTH_SHORT).show();
-			finish();
-			return;
-		} catch (IOException e) {
-			Toast.makeText(this, getString(R.string.msg_addon_corrupted), Toast.LENGTH_SHORT).show();
-			finish();
-			return;
-		}
+//		try {
+//			mStationAddon = Deserializer.tryDeserializeAddon(station, new FileInputStream(mapFileName));
+//		} catch (FileNotFoundException e) {
+//			Toast.makeText(this, getString(R.string.msg_no_addons), Toast.LENGTH_SHORT).show();
+//			finish();
+//			return;
+//		} catch (IOException e) {
+//			Toast.makeText(this, getString(R.string.msg_addon_corrupted), Toast.LENGTH_SHORT).show();
+//			finish();
+//			return;
+//		}
 		if(mStationAddon==null){
 			Toast.makeText(this, getString(R.string.msg_no_addons), Toast.LENGTH_SHORT).show();
 			finish();
@@ -67,7 +60,7 @@ public class BrowseStation extends Activity {
 
 		ListView list = new ListView(this);
 		
-		AddonEntriyListAdapter adapter = new AddonEntriyListAdapter(this, mStationAddon);
+		AddonEntryListAdapter adapter = new AddonEntryListAdapter(this, mStationAddon);
 		list.setAdapter(adapter);
 
 		setContentView(list);

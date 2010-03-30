@@ -21,8 +21,9 @@
 
 package org.ametro.render;
 
-import org.ametro.model.SubwayMap;
-import org.ametro.model.SubwayStation;
+import org.ametro.model.MapView;
+import org.ametro.model.StationView;
+import org.ametro.model.TransportStation;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -40,13 +41,13 @@ public class RenderStation extends RenderElement {
     public Paint paintColor;
     public Paint paintBackGround;
     
-    public RenderStation(SubwayMap subwayMap, SubwayStation station) {
+    public RenderStation(MapView map, StationView view, TransportStation station) {
         super();
-        final boolean hasConnections = subwayMap.hasConnections(station);
+        final boolean hasConnections = map.hasConnections(view);
 
-        final int localX = station.point.x;
-        final int localY = station.point.y;
-        final int radius = subwayMap.stationDiameter / 2;
+        final int localX = view.stationPoint.x;
+        final int localY = view.stationPoint.y;
+        final int radius = map.stationDiameter / 2;
 
         final Paint localPaintColor = new Paint();
 
@@ -56,7 +57,7 @@ public class RenderStation extends RenderElement {
         paintBackGround.setAntiAlias(true);
         paintBackGround.setStrokeWidth(1);
         
-        localPaintColor.setColor(subwayMap.lines[station.lineId].color);
+        localPaintColor.setColor(map.lines[view.lineViewId].lineColor);
         localPaintColor.setAntiAlias(true);
         localPaintColor.setStrokeWidth(radius * 0.15f * 2);
 

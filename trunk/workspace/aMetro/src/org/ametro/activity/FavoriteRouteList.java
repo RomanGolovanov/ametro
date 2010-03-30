@@ -25,7 +25,7 @@ import static org.ametro.Constants.STATION_TO_ID;
 
 import org.ametro.R;
 import org.ametro.adapter.RouteFavoriteListAdapter;
-import org.ametro.model.SubwayMap;
+import org.ametro.model.MapView;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -48,7 +48,7 @@ import android.widget.AdapterView.OnItemClickListener;
 public class FavoriteRouteList extends Activity implements OnClickListener, OnItemClickListener {
 
 	private Point[] mRoutes;
-	private SubwayMap mSubwayMap;
+	private MapView mMapView;
 	
 	private ListView mList;
 	private View mDeletePanel;
@@ -153,8 +153,8 @@ public class FavoriteRouteList extends Activity implements OnClickListener, OnIt
 			Toast.makeText(this, R.string.msg_no_favorites, Toast.LENGTH_SHORT).show();
 			finish();
 		}
-		mSubwayMap = BrowseVectorMap.Instance.getSubwayMap();
-		mAdapter = new RouteFavoriteListAdapter(this, mRoutes, mSubwayMap);
+		mMapView = BrowseVectorMap.Instance.getMapView();
+		mAdapter = new RouteFavoriteListAdapter(this, mRoutes, mMapView);
 		mList.setAdapter(mAdapter);
 	}
 

@@ -27,7 +27,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.ametro.jni.Natives;
-import org.ametro.util.SerializeUtil;
+import org.ametro.model.ext.ModelPoint;
+import org.ametro.model.ext.ModelRect;
 import org.ametro.util.StringUtil;
 
 import android.graphics.Point;
@@ -240,14 +241,45 @@ public class CsvReader {
 	public Point[] readPointArray() {
 		String value = getValue(mRecord, mCurrentColumn++, mTotalColumns);
 		if (!EMPTY_VALUE.equals(value)) {
-			return SerializeUtil.parsePointArray(value);
+			return StringUtil.parsePointArray(value);
 		} else {
 			return null;
 		}
 	}
 
+
+	public ModelPoint readModelPoint() {
+		String value = getValue(mRecord, mCurrentColumn++, mTotalColumns);
+		if (!EMPTY_VALUE.equals(value)) {
+			return StringUtil.parseModelPoint(value);
+		} else {
+			return null;
+		}
+	}
+
+	public ModelPoint[] readModelPointArray() {
+		String value = getValue(mRecord, mCurrentColumn++, mTotalColumns);
+		if (!EMPTY_VALUE.equals(value)) {
+			return StringUtil.parseModelPointArray(value);
+		} else {
+			return null;
+		}
+	}
+	
+	public ModelRect readModelRect() {
+		String value = getValue(mRecord, mCurrentColumn++, mTotalColumns);
+		if (!EMPTY_VALUE.equals(value)) {
+			return StringUtil.parseModelRect(value);
+		} else {
+			return null;
+		}
+	}	
 	public int getCount() {
 		return mTotalColumns;
+	}
+
+	public float getFloat(int index) {
+		return StringUtil.parseFloat(getValue(mRecord, index, mTotalColumns), 0);
 	}
 
 }
