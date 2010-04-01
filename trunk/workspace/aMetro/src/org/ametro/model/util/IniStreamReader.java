@@ -22,12 +22,11 @@ package org.ametro.model.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class IniStreamReader {
 
-	private static final String PMZ_CHARSET = "windows-1251";
+	private static final int BUFFER = 8196;
 	
 	private final BufferedReader mStream;
 	
@@ -37,8 +36,8 @@ public class IniStreamReader {
 	
 	private boolean mSectionChanged;
 	
-	public IniStreamReader(InputStream stream) throws IOException{
-		mStream = new BufferedReader(new InputStreamReader(stream, PMZ_CHARSET));
+	public IniStreamReader(InputStreamReader stream) throws IOException{
+		mStream = new BufferedReader(stream, BUFFER);
 		mSection = null;
 		mValue = null;
 		mSectionChanged = false;

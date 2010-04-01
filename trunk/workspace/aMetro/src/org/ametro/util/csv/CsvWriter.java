@@ -26,8 +26,10 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.ametro.model.ext.ModelLocation;
 import org.ametro.model.ext.ModelPoint;
 import org.ametro.model.ext.ModelRect;
+import org.ametro.model.ext.ModelSpline;
 import org.ametro.util.StringUtil;
 
 import android.graphics.Point;
@@ -41,56 +43,56 @@ import android.graphics.Rect;
 public class CsvWriter {
 
 	private static final String EMPTY_VALUE = "null";
-    private static final String DEFAULT_SEPARATOR = ";";
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-dd-MM HH:mm:ss z");
+	private static final String DEFAULT_SEPARATOR = ";";
+	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-dd-MM HH:mm:ss z");
 
-    private BufferedWriter mWriter;
-    private String mSeparator;
-    private int mRow = -1;
-    private int mColumn;
+	private BufferedWriter mWriter;
+	private String mSeparator;
+	private int mRow = -1;
+	private int mColumn;
 
-    public SimpleDateFormat dateFormat = DATE_FORMAT;
+	public SimpleDateFormat dateFormat = DATE_FORMAT;
 
-    public CsvWriter(BufferedWriter writer, String separator) {
-        mWriter = writer;
-        mSeparator = separator;
-    }
+	public CsvWriter(BufferedWriter writer, String separator) {
+		mWriter = writer;
+		mSeparator = separator;
+	}
 
-    public CsvWriter(BufferedWriter writer) {
-        this(writer, DEFAULT_SEPARATOR);
-    }
+	public CsvWriter(BufferedWriter writer) {
+		this(writer, DEFAULT_SEPARATOR);
+	}
 
-    public void newRecord() throws IOException {
-        if (mRow < 0) {
-            mRow = 0;
-        } else {
-            mRow++;
-            mColumn = 0;
-            mWriter.newLine();
-        }
-    }
+	public void newRecord() throws IOException {
+		if (mRow < 0) {
+			mRow = 0;
+		} else {
+			mRow++;
+			mColumn = 0;
+			mWriter.newLine();
+		}
+	}
 
-    public void writeString(String value) throws IOException {
-        if (mColumn > 0) {
-            mWriter.write(mSeparator);
-        }
-        if (!StringUtil.isEmpty(value)) {
-            mWriter.write(value);
-        }
-        mColumn++;
-    }
+	public void writeString(String value) throws IOException {
+		if (mColumn > 0) {
+			mWriter.write(mSeparator);
+		}
+		if (!StringUtil.isEmpty(value)) {
+			mWriter.write(value);
+		}
+		mColumn++;
+	}
 
-    public void writeInt(int value) throws IOException {
-        writeString(Integer.toString(value));
-    }
+	public void writeInt(int value) throws IOException {
+		writeString(Integer.toString(value));
+	}
 
-    public void writeLong(long value) throws IOException {
-        writeString(Long.toString(value));
-    }
+	public void writeLong(long value) throws IOException {
+		writeString(Long.toString(value));
+	}
 
-    public void writeDouble(double value) throws IOException {
-        writeString(Double.toString(value));
-    }
+	public void writeDouble(double value) throws IOException {
+		writeString(Double.toString(value));
+	}
 
 	public void writeNullableDouble(Double value) throws IOException {
 		if (value != null) {
@@ -99,24 +101,24 @@ public class CsvWriter {
 			writeString(EMPTY_VALUE);
 		}
 	}
-    
-    public void writeFloat(float value) throws IOException {
-        writeString(Float.toString(value));
-    }
 
-    public void writeBoolean(boolean value) throws IOException {
-        if (value) {
-            writeString("1");
-        } else {
-            writeString("0");
-        }
-    }
+	public void writeFloat(float value) throws IOException {
+		writeString(Float.toString(value));
+	}
 
-    public void writeDate(Date value) throws IOException {
-        if (value != null) {
-            writeString(dateFormat.format(value));
-        }
-    }
+	public void writeBoolean(boolean value) throws IOException {
+		if (value) {
+			writeString("1");
+		} else {
+			writeString("0");
+		}
+	}
+
+	public void writeDate(Date value) throws IOException {
+		if (value != null) {
+			writeString(dateFormat.format(value));
+		}
+	}
 
 	public void writeRect(Rect rect) throws IOException {
 		if(rect!=null){
@@ -147,7 +149,7 @@ public class CsvWriter {
 		}
 		writeString(sb.toString());
 	}
-	
+
 	public void writeModelRect(ModelRect rect) throws IOException {
 		if(rect!=null){
 			writeString(StringUtil.formatModelRect(rect));
@@ -177,14 +179,61 @@ public class CsvWriter {
 		}
 		writeString(sb.toString());
 	}	
-	
-    public void flush() throws IOException {
-        mWriter.flush();
-    }
 
-    public void close() throws IOException {
-        mWriter.close();
-    }
+	public void flush() throws IOException {
+		mWriter.flush();
+	}
+
+	public void close() throws IOException {
+		mWriter.close();
+	}
+
+	public void writeIntArray(int[] value) throws IOException {
+		if(value != null){
+			writeString(StringUtil.formatIntArray(value));	
+		}else{
+			writeString(EMPTY_VALUE);
+		}
+	}
+	
+	public void writeIntegerArray(Integer[] value) throws IOException {
+		if(value != null){
+			writeString(StringUtil.formatIntegerArray(value));	
+		}else{
+			writeString(EMPTY_VALUE);
+		}
+	}
+
+	public void writeModelLocation(ModelLocation value) throws IOException {
+		if (value != null) {
+			writeString(StringUtil.formatModelLocation(value));
+		} else {
+			writeString(EMPTY_VALUE);
+		}	
+	}
+
+	public void writeStringArray(String[] value) throws IOException {
+		if (value != null) {
+			writeString(StringUtil.formatStringArray(value));
+		} else {
+			writeString(EMPTY_VALUE);
+		}		
+	}
+
+	public void writeInteger(Integer value) throws IOException {
+		if (value != null) {
+			writeString(Integer.toString(value));
+		} else {
+			writeString(EMPTY_VALUE);
+		}
+	}
+
+	public void writeModelSpline(ModelSpline value) throws IOException {
+		if (value != null) {
+			writeString(StringUtil.formatModelSpline(value));
+		} else {
+			writeString(EMPTY_VALUE);
+		}	}
 
 
 }

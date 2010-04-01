@@ -32,5 +32,14 @@ public class ModelPoint {
 		this.x = x;
 		this.y = y;
 	}
+
+	public void offset(int dx, int dy) {
+		x += dx;
+		y += dy;
+	}
+
+	public boolean isZero() {
+		return x==0 && y==0;
+	}
 	
 }

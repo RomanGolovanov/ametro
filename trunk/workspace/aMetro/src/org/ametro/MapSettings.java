@@ -53,7 +53,7 @@ public class MapSettings {
 
     public static final String MAP_FILE_TYPE = ".ametro";
     public static final String PMZ_FILE_TYPE = ".pmz";
-    public static final String TEMP_FILE_TYPE = ".tmp";
+    public static final String TEMP_FILE_TYPE = ".tmp.ametro";
     public static final String CACHE_FILE_TYPE = ".zip";
     public static final String MAP_ENTRY_NAME = "map.dat";
     public static final String DESCRIPTION_ENTRY_NAME = "description.dat";

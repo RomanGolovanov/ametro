@@ -68,7 +68,7 @@ public class RenderSegment extends RenderElement {
                     new CornerPathEffect(lineWidth * 0.6f)
             ));
         }
-        localPaint.setColor(map.lines[from.lineViewId].lineColor);
+        localPaint.setColor(map.lines[view.lineViewId].lineColor);
 
         paint = localPaint;
         drawSegmentPath(map, view, segment, from, to, localPath);
