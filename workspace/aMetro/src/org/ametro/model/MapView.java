@@ -50,13 +50,12 @@ public class MapView {
 
 	public Model owner;
 
-	/************************ VOLATILE FIELDS **************************/
-	private HashMap<Integer, SegmentView[]> segmentsByStationId;
+	//************************ VOLATILE FIELDS **************************//
 	private HashMap<Long, SegmentView> segmentsIndexed;
 	private HashMap<Long, TransferView> transfersIndexed;
-	//private HashMap<Integer, LineView> linesIndexed;
+	//************************** METHODS ********************************//
 
-	/************************** METHODS ********************************/
+
 
 	public String toString() {
 		return "[NAME:" + systemName + ";VECTOR:" + isVector + ";W:" + width + ";H:" + height + "]";
@@ -72,15 +71,16 @@ public class MapView {
 
 	public boolean hasConnections(StationView station) {
 		if (station != null) {
-			SegmentView[] stationSegments = segmentsByStationId.get(station.id);
-			if (stationSegments != null) {
-				for (SegmentView segment : stationSegments) {
-					Integer delay = owner.segments[segment.id].delay;
-					if (delay != null && delay != 0) {
-						return true;
-					}
-				}
-			}
+			return true;
+//			final int id = station.id;
+//			for (SegmentView segment : segments) {
+//				if(segment.stationViewFromId == id || segment.stationViewToId == id){
+//					Integer delay = owner.segments[segment.id].delay;
+//					if (delay != null && delay != 0) {
+//						return true;
+//					}
+//				}			
+//			}
 		}
 		return false;
 	}
@@ -143,16 +143,16 @@ public class MapView {
 		}
 		return null;
 	}
-	
-//		public LineView getLineView(int lineId) {
-//			if(linesIndexed == null){
-//				linesIndexed = new HashMap<Integer, LineView>();
-//				for(LineView line : lines){
-//					linesIndexed.put(line.id, line);
-//				}
-//			}
-//			return linesIndexed.get(lineId);
-//		}
+
+	//		public LineView getLineView(int lineId) {
+	//			if(linesIndexed == null){
+	//				linesIndexed = new HashMap<Integer, LineView>();
+	//				for(LineView line : lines){
+	//					linesIndexed.put(line.id, line);
+	//				}
+	//			}
+	//			return linesIndexed.get(lineId);
+	//		}
 
 
 

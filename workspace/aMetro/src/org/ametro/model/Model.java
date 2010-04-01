@@ -23,6 +23,7 @@ package org.ametro.model;
 import java.io.IOException;
 import java.util.Locale;
 
+import org.ametro.model.ext.ModelLocation;
 import org.ametro.model.storage.ModelBuilder;
 import org.ametro.util.StringUtil;
 
@@ -32,6 +33,16 @@ public class Model {
 	public final static String LOCALE_RU = "ru";
 	public final static String LOCALE_EN = "en";
 
+	public static final int VERSION = 1;
+	
+	public int countryName;
+	public int cityName;
+	public int[] authors;
+	public int[] delays;
+	public int[] comments;
+	
+	public ModelLocation location;
+	
 	public String systemName;
 	public long timestamp;
 
@@ -42,7 +53,7 @@ public class Model {
 	public String[] texts; // strings for current locales
 	public int textLength; // string table size
 
-	public ModelDescription description; // model description, description.csv
+	//public ModelDescription description; // model description, description.csv
 
 	public TransportMap[] maps;
 	public TransportLine[] lines;
@@ -57,11 +68,33 @@ public class Model {
 	/****************** VOLATILE FIELDS ********************/
 	public String fileSystemName;
 	/********************** GETTERS ************************/
-
-	public ModelDescription getDescription() {
-		return description;
+	
+	public String getCountryName(){
+		return Model.getLocalizedString(this,countryName);
+	}
+	
+	public String getCityName(){
+		return Model.getLocalizedString(this,cityName);
+	}
+	
+	public String[] getAuthors(){
+		return Model.getLocalizedStrings(this,authors);
+	}
+	
+	public String[] getComments(){
+		return Model.getLocalizedStrings(this,comments);
+	}
+	
+	public String[] getDelays(){
+		return Model.getLocalizedStrings(this,delays);
+	}
+	
+	public String toString() {
+		return "[NAME:" + systemName + ";COUNTRY:" + getCountryName() + ";CITY:" + getCityName() + ";LOCALES=" + "{" + StringUtil.join(locales,",")  + "}]";
 	}
 
+    
+	
 	/****************** LOCALIZATION **********************/
 
 	private int getLocaleId(Locale locale){
@@ -131,10 +164,6 @@ public class Model {
 
 	/*********************** OBJECT METHODS ***********************/
 
-	public String toString() {
-		return "[NAME:" + systemName + ";COUNTRY:" + description.getCountryName() + ";CITY:" + description.getCityName() + ";LOCALES=" + "{" + StringUtil.join(locales,",")  + "}]";
-	}
-
 	public boolean completeEqual(Model other) {
 		return locationEqual(other) 
 		&& timestamp == other.timestamp;
@@ -144,12 +173,4 @@ public class Model {
 		return getCountryName().equals(other.getCountryName())
 		&& getCityName().equals(other.getCityName());
 	}
-
-	public String getCountryName() {
-		return texts[description.countryName];
-	}
-
-	public Object getCityName() {
-		return texts[description.cityName];
-	}	
 }

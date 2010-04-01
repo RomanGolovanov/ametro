@@ -28,7 +28,7 @@ public abstract interface IModelStorage {
 	
 	Model loadModel(String fileName, Locale locale);
 	Model loadModelDescription(String fileName, Locale locale);
-	void saveModel(String fileName, Model model);
+	boolean saveModel(String fileName, Model model);
 	void loadModelLocale(String fileName, Model model, Locale locale);
 	
 }

@@ -340,7 +340,7 @@ public class BrowseLibrary extends Activity implements
 				String fileName, String fullFileName) {
 			try {
 				Model model = ModelBuilder.loadModelDescription(MapSettings.MAPS_PATH + fileName);
-				map.putFile(model.description.getCountryName(), model.description.getCityName(), fileName);
+				map.putFile(model.getCountryName(), model.getCityName(), fileName);
 			} catch (Exception e) {
 				if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)) {
 					Log.d(Constants.LOG_TAG_MAIN,

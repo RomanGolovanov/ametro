@@ -107,7 +107,6 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		setContentView(R.layout.global_wait);
 
 		if(mMapView!=null){
-
 			onShowMap(mMapView);
 		}else{
 			Intent intent = getIntent();
@@ -116,6 +115,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 				onInitializeMapView(uri);
 			} else {
 				loadDefaultMapName();
+				mMapName = "!!TEST!!";
 				if (mMapName == null) {
 					onRequestBrowseLibrary(true);
 				} else {
@@ -765,14 +765,10 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 
 		protected MapView doInBackground(Uri... params) {
 			try {
-				Uri mapUri = params[0];
-				return ModelBuilder.loadModel(MapSettings.getMapFileName(mapUri)).views[0];
-//				City city = Deserializer.deserialize(new FileInputStream(MapSettings.getMapFileName(mapUri)));
-//				if (city != null) {
-//					return city.subwayMap;
-//				} else {
-//					return null;
-//				}
+//				Uri mapUri = params[0];
+//				return ModelBuilder.loadModel(MapSettings.getMapFileName(mapUri)).views[0];
+				return ModelBuilder.loadModel("/sdcard/ametro/import/Moscow.pmz").views[0];
+				
 			} catch (Exception e) {
 				mError = e;
 				if (Log.isLoggable(LOG_TAG_MAIN, Log.ERROR))

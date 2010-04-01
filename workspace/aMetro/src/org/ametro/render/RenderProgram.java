@@ -91,7 +91,7 @@ public class RenderProgram {
 		drawStations(map, mRenderQueue);
 		updateRenderQueue();
 		mRenderFilter = ALL;
-	}
+	} 
 
 	private void updateRenderQueue() {
 		Collections.sort(mRenderQueue);

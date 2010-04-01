@@ -24,7 +24,7 @@ import org.ametro.model.ext.ModelSpline;
 public class SegmentView {
 
 	public int id;
-	public int lineId;
+	public int lineViewId;
 	public int segmentId;
 
 	public int stationViewFromId;
