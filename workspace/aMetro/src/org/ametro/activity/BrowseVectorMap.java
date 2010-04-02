@@ -222,16 +222,23 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		case MAIN_MENU_SCHEMES:
 
 			ArrayList<String> maps = new ArrayList<String>();
+			int checked = 0;
+			int idx = 0;
 			for(MapView v : mModel.views){
 				maps.add(v.systemName);
+				if(v == mMapView){
+					checked = idx;
+				}
+				idx++;
 			}
 			String[] items = (String[]) maps.toArray(new String[maps.size()]);
-			
+
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setTitle("Select layer");
-			builder.setItems(items, new DialogInterface.OnClickListener() {
+			builder.setSingleChoiceItems(items, checked, new DialogInterface.OnClickListener() {
 			    public void onClick(DialogInterface dialog, int item) {
 			        onShowMap(mModel.views[item]);
+			        dialog.dismiss();
 			    }
 			});			
 			AlertDialog alertDialog = builder.create();
