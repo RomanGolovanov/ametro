@@ -97,6 +97,14 @@ public class CsvStorage implements IModelStorage {
 		writer.newRecord();
 		writer.writeIntArray(model.delays);
 		writer.newRecord();
+		writer.writeInt(model.views.length);
+		writer.newRecord();
+		for(MapView v : model.views){
+			writer.writeInt(v.id);
+			writer.writeString(v.systemName);
+		}
+		writer.newRecord();
+		
 		writer.flush();
 		zip.closeEntry();
 		
