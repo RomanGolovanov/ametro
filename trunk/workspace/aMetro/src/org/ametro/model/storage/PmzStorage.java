@@ -107,16 +107,16 @@ public class PmzStorage implements IModelStorage {
 
 		private ArrayList<MapView> mMapViews = new ArrayList<MapView>();
 
-		private HashMap<String,TransportStation> stationIndex = new HashMap<String,TransportStation>();
-		private HashMap<String,TransportLine> lineIndex = new HashMap<String, TransportLine>();
-		private HashMap<String,TransportMap> mapIndex = new HashMap<String, TransportMap>();
+		private HashMap<String,TransportStation> mTransportStationIndex = new HashMap<String,TransportStation>();
+		private HashMap<String,TransportLine> mTransportLineIndex = new HashMap<String, TransportLine>();
+		private HashMap<String,TransportMap> mTransportMapIndex = new HashMap<String, TransportMap>();
 
 		private ArrayList<String> mTexts = new ArrayList<String>();
 
 		private int[] getMapsNumbers(String[] maps) {
 			ArrayList<Integer> res = new ArrayList<Integer>();
 			for(String mapSystemName : maps){
-				TransportMap map = mapIndex.get(mapSystemName);
+				TransportMap map = mTransportMapIndex.get(mapSystemName);
 				if(map!=null){
 					res.add(map.id);
 				}
@@ -127,7 +127,7 @@ public class PmzStorage implements IModelStorage {
 		private TransportStation getStation(String lineSystemName, String stationSystemName)
 		{
 			String key = lineSystemName + "\\" + stationSystemName;
-			return stationIndex.get(key);
+			return mTransportStationIndex.get(key);
 		}
 
 		private void updateStationIndex(TransportLine line){
@@ -135,7 +135,7 @@ public class PmzStorage implements IModelStorage {
 			for(int id : line.stations){
 				TransportStation station = mTransportStations.get(id); 
 				String key = lineSystemName + "\\" + station.systemName;
-				stationIndex.put(key, station);
+				mTransportStationIndex.put(key, station);
 			}
 		}
 
@@ -195,7 +195,9 @@ public class PmzStorage implements IModelStorage {
 			final ArrayList<StationView> stations = new ArrayList<StationView>();
 			final HashMap<Long, ModelSpline> additionalNodes = new HashMap<Long, ModelSpline>();
 			final HashMap<Integer,Integer> stationViews = new HashMap<Integer, Integer>();
-			final HashMap<Integer,Integer> lineViewIndex = new HashMap<Integer, Integer>(); 
+			final HashMap<Integer,Integer> lineViewIndex = new HashMap<Integer, Integer>();
+
+			final HashMap<String, LineView> viewsDefaults = new HashMap<String, LineView>();
 
 			for(String fileName : mMapFiles){ // for each .map file in catalog
 				InputStream stream = mZipFile.getInputStream(mZipFile.getEntry(fileName));
@@ -259,43 +261,27 @@ public class PmzStorage implements IModelStorage {
 							view.transportsChecked = getMapsNumbers(StringUtil.parseStringArray(value));
 						}			
 					}else if(section.equalsIgnoreCase("AdditionalNodes")){
-						String[] parts = StringUtil.parseStringArray(value);
-						String lineSystemName = parts[0];
-						TransportStation from = getStation(lineSystemName, parts[1]);
-						TransportStation to = getStation(lineSystemName, parts[2]);
-						if(from!=null && to!=null){
-							boolean isSpline = false;
-							int pos = 3;
-							final ArrayList<ModelPoint> points = new ArrayList<ModelPoint>();
-							while (pos < parts.length) {
-								if (parts[pos].contains("spline")) {
-									isSpline = true;
-									break;
-								} else {
-									ModelPoint p = new ModelPoint(StringUtil.parseInt(parts[pos],0), StringUtil.parseInt(parts[pos + 1],0) );
-									points.add(p);
-									pos += 2;
-								}
-							}
-							final ModelSpline spline = new ModelSpline();
-							spline.isSpline = isSpline;
-							spline.points = (ModelPoint[]) points.toArray(new ModelPoint[points.size()]);
-							long nodeKey = Model.getSegmentKey(from.id, to.id);
-							additionalNodes.put(nodeKey, spline);
-
-						}
-
+						makeAdditionalNodes(additionalNodes, stationViews, value);
 					}else{
 						if(isSectionChanged){
-							line = lineIndex.get(section);
+							line = mTransportLineIndex.get(section);
 							if(line!=null){
-								//lineNumbers.add(line.id);
 								lineView = new LineView();
+
+								LineView def = viewsDefaults.get(section);
+								if(def == null){
+									viewsDefaults.put(section, lineView);
+								}else{
+									lineView.labelColor = def.labelColor;
+									lineView.lineColor = def.lineColor;
+								}
 								lineView.id = lines.size();
 								lineView.lineId = line.id;
 								lineView.owner = model;
 								lines.add(lineView);
 								lineViewIndex.put(line.id, lineView.id);
+
+
 							}
 						}
 						if(lineView!=null){					
@@ -326,8 +312,76 @@ public class PmzStorage implements IModelStorage {
 				view.segments = makeSegmentViews(view, lineViewIndex, stationViews, additionalNodes);
 				view.transfers = makeTransferViews(view, stationViews);
 
+
+
+
 				fixViewDimensions(view);
 			}
+		}
+
+		private void makeAdditionalNodes(
+				final HashMap<Long, ModelSpline> additionalNodes,
+				final HashMap<Integer, Integer> stationViews, final String value) {
+			String[] parts = StringUtil.parseStringArray(value);
+			String lineSystemName = parts[0];
+			TransportStation from = getStation(lineSystemName, parts[1]);
+			TransportStation to = getStation(lineSystemName, parts[2]);
+			if(from!=null && to!=null){
+				boolean isSpline = false;
+				int pos = 3;
+				final ArrayList<ModelPoint> points = new ArrayList<ModelPoint>();
+				while (pos < parts.length) {
+					if (parts[pos].contains("spline")) {
+						isSpline = true;
+						break;
+					} else {
+						ModelPoint p = new ModelPoint(StringUtil.parseInt(parts[pos].trim(),0), StringUtil.parseInt(parts[pos + 1].trim(),0) );
+						points.add(p);
+						pos += 2;
+					}
+				}
+				final ModelSpline spline = new ModelSpline();
+				spline.isSpline = isSpline;
+				spline.points = (ModelPoint[]) points.toArray(new ModelPoint[points.size()]);
+				additionalNodes.put(Model.getSegmentKey(from.id, to.id), spline);
+			}
+		}
+
+
+		private SegmentView[] makeSegmentViews(MapView view, HashMap<Integer,Integer> lineViewIndex, HashMap<Integer,Integer> stationViewIndex, HashMap<Long,ModelSpline> additionalNodes) {
+			final Model model = mModel;
+			final ArrayList<SegmentView> segments = new ArrayList<SegmentView>();
+			int base = 0;
+			for(TransportSegment segment: mTransportSegments){
+				Integer fromId = stationViewIndex.get(segment.stationFromId);
+				Integer toId = stationViewIndex.get(segment.stationToId);
+				boolean visibleStations = fromId!=null && toId!=null;
+				if(!visibleStations || ((segment.flags & TransportSegment.TYPE_INVISIBLE) != 0)){
+					continue;
+				}
+				final ModelSpline spline = additionalNodes.get( Model.getSegmentKey(segment.stationFromId, segment.stationToId) );
+				if(spline!=null && spline.points!=null && ModelPoint.isNullOrZero(spline.points[0])){
+					continue;
+				}
+				
+				final SegmentView segmentView = new SegmentView();
+				segmentView.id = base++;
+				segmentView.lineViewId = lineViewIndex.get(segment.lineId);
+				segmentView.segmentId = segment.id;
+				segmentView.stationViewFromId = fromId;
+				segmentView.stationViewToId = toId;
+
+				segmentView.owner = model;
+
+
+				if(spline!=null){
+					segmentView.spline = spline;
+				}else{
+					segmentView.spline = null;
+				}
+				segments.add(segmentView);
+			}
+			return (SegmentView[]) segments.toArray(new SegmentView[segments.size()]);
 		}
 
 		private void fixViewDimensions(MapView view) {
@@ -338,8 +392,8 @@ public class PmzStorage implements IModelStorage {
 			int xmax = mapRect.right;
 			int ymax = mapRect.bottom;
 
-			int dx = 50 - xmin;
-			int dy = 50 - ymin;
+			int dx = 80 - xmin;
+			int dy = 80 - ymin;
 
 			for (StationView station : view.stations) {
 				ModelPoint p = station.stationPoint;
@@ -361,8 +415,8 @@ public class PmzStorage implements IModelStorage {
 				}
 
 			}
-			view.width = xmax - xmin + 100;
-			view.height = ymax - ymin + 100;
+			view.width = xmax - xmin + 160;
+			view.height = ymax - ymin + 160;
 		}
 
 		private TransferView[] makeTransferViews(MapView view, HashMap<Integer,Integer> stationViewIndex) {
@@ -385,41 +439,6 @@ public class PmzStorage implements IModelStorage {
 			return (TransferView[]) transfers.toArray(new TransferView[transfers.size()]);	
 		}
 
-		private SegmentView[] makeSegmentViews(MapView view, HashMap<Integer,Integer> lineViewIndex, HashMap<Integer,Integer> stationViewIndex, HashMap<Long,ModelSpline> additionalNodes) {
-			final Model model = mModel;
-			final ArrayList<SegmentView> segments = new ArrayList<SegmentView>();
-			int base = 0;
-			for(TransportSegment segment: mTransportSegments){
-				Integer fromId = stationViewIndex.get(segment.stationFromId);
-				Integer toId = stationViewIndex.get(segment.stationToId);
-				boolean visibleStations = fromId!=null && toId!=null;
-
-				if(visibleStations && ( (segment.flags & TransportSegment.TYPE_INVISIBLE) == 0)){
-					final SegmentView segmentView = new SegmentView();
-					segmentView.id = base++;
-					segmentView.lineViewId = lineViewIndex.get(segment.lineId);
-					segmentView.segmentId = segment.id;
-					segmentView.stationViewFromId = fromId;
-					segmentView.stationViewToId = toId;
-
-					segmentView.owner = model;
-
-					long nodeKey = Model.getSegmentKey(segment.stationFromId, segment.stationToId);
-					ModelSpline spline = additionalNodes.get(nodeKey);
-
-					if(spline!=null){
-						segmentView.spline = spline;
-					}else{
-
-					}
-					segmentView.spline = null;
-					segments.add(segmentView);
-				}
-			}
-			return (SegmentView[]) segments.toArray(new SegmentView[segments.size()]);
-		}
-
-
 		private void makeStationViews(TransportLine line, LineView lineView, HashMap<Integer,Integer> stationViewIndex, ArrayList<StationView> stationViews, ModelPoint[] coords, ModelRect[] rects, Integer[] heights) {
 			final int stationsCount = line.stations.length;
 			final int pointsCount = coords!=null ? coords.length : 0;
@@ -429,6 +448,9 @@ public class PmzStorage implements IModelStorage {
 			int base = stationViews.size();
 
 			for(int i = 0; i < stationsCount && i < pointsCount; i++){
+				if(ModelPoint.isNullOrZero( coords[i] )) { 
+					continue; // skip station with ZERO coordinates!
+				}
 				final StationView v = new StationView();
 				v.id = base++;
 				v.owner = mModel;
@@ -454,7 +476,7 @@ public class PmzStorage implements IModelStorage {
 				map.owner = mModel;
 				mTransportMaps.add(map);
 				map.systemName = fileName; // setup transport map internal name
-				mapIndex.put(map.systemName, map);
+				mTransportMapIndex.put(map.systemName, map);
 
 				TransportLine line = null; // create loop variables
 				String stationList = null; // storing driving data
@@ -700,7 +722,7 @@ public class PmzStorage implements IModelStorage {
 			}
 
 			updateStationIndex(line);
-			lineIndex.put(line.systemName, line);
+			mTransportLineIndex.put(line.systemName, line);
 		}
 
 		private HashMap<String, String> makeAliasDictionary(String aliasesList) {

@@ -27,6 +27,7 @@ import org.ametro.model.SegmentView;
 import org.ametro.model.StationView;
 import org.ametro.model.TransportSegment;
 import org.ametro.model.ext.ModelPoint;
+import org.ametro.model.util.ModelUtil;
 
 import android.graphics.Canvas;
 import android.graphics.ComposePathEffect;
@@ -97,12 +98,11 @@ public class RenderSegment extends RenderElement {
         if (modelPoints != null) {
             if ( view.spline.isSpline ) {
                 Point[] points = new Point[modelPoints.length + 2];
-                points[0] = new Point(pointFrom.x, pointFrom.y);
-                points[points.length - 1] = new Point(pointTo.x, pointTo.y);
+                points[0] = ModelUtil.toPoint(pointFrom);
                 for (int i = 0; i < modelPoints.length; i++) {
-                	final ModelPoint p = modelPoints[i];
-                    points[i + 1] = new Point(p.x,p.y);
+                    points[i + 1] = ModelUtil.toPoint(modelPoints[i]);
                 }
+                points[points.length - 1] = ModelUtil.toPoint(pointTo);
                 path.drawSpline(points, 0, points.length);
             } else {
                 path.moveTo(pointFrom.x, pointFrom.y);

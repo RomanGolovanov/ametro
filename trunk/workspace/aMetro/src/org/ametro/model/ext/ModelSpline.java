@@ -21,8 +21,6 @@
 package org.ametro.model.ext;
 
 public class ModelSpline {
-
 	public boolean isSpline;
 	public ModelPoint[] points;
-	
 }
