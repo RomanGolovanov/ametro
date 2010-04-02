@@ -339,7 +339,7 @@ public class StringUtil {
 	public static Integer parseNullableDelay(String text){
 		if (text != null && !text.equals("")) {
 			try {
-				int value = Integer.parseInt(text);
+				double value = Double.parseDouble(text);
 				int minutes = (int)value;
 				int seconds = (int)((value - minutes) * 100);
 				return (minutes * 60) + seconds;

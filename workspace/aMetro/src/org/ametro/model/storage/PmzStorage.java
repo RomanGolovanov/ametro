@@ -235,6 +235,9 @@ public class PmzStorage implements IModelStorage {
 						makeStationViews(line, lineView, stationViews, stations, coords, rects, heights);
 						lineView = null;
 						line = null;
+						coords = null;
+						rects = null;
+						heights = null;						
 					}
 
 					if(section.startsWith("Options")){ // for line sections
@@ -793,7 +796,7 @@ public class PmzStorage implements IModelStorage {
 									this2from.delay = si.delay;
 								}
 							}
-						}
+						} 
 						segments.add(this2from);
 					}
 
