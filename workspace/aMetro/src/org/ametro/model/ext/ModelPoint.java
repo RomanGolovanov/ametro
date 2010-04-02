@@ -42,4 +42,8 @@ public class ModelPoint {
 		return x==0 && y==0;
 	}
 	
+	public static boolean  isNullOrZero(ModelPoint p){
+		return p==null || (p.x==0 && p.y==0);
+	}
+	
 }

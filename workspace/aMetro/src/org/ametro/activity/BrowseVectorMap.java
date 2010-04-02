@@ -36,6 +36,7 @@ import org.ametro.MapSettings;
 import org.ametro.MapUri;
 import org.ametro.R;
 import org.ametro.model.MapView;
+import org.ametro.model.Model;
 import org.ametro.model.Route;
 import org.ametro.model.SegmentView;
 import org.ametro.model.StationView;
@@ -49,6 +50,8 @@ import org.ametro.widget.VectorMapView;
 import org.ametro.widget.BaseMapView.OnMapEventListener;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Point;
@@ -94,6 +97,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if(Instance != null){
+			mModel = Instance.mModel;
 			mMapView = Instance.mMapView;
 			mMapName = Instance.mMapName; 
 		}
@@ -106,8 +110,8 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL); 
 		setContentView(R.layout.global_wait);
 
-		if(mMapView!=null){
-			onShowMap(mMapView);
+		if(mModel!=null){
+			onShowMap(mModel.views[0]);
 		}else{
 			Intent intent = getIntent();
 			Uri uri = intent != null ? intent.getData() : null;
@@ -115,7 +119,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 				onInitializeMapView(uri);
 			} else {
 				loadDefaultMapName();
-				mMapName = "!!TEST!!";
+				mMapName = "/sdcard/ametro/import/Moscow.pmz";
 				if (mMapName == null) {
 					onRequestBrowseLibrary(true);
 				} else {
@@ -187,12 +191,12 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		menu.findItem(MAIN_MENU_INFO).setEnabled(mCurrentStation!=null);
 
-		menu.findItem(MAIN_MENU_FIND).setEnabled(mMapView!=null);
-		menu.findItem(MAIN_MENU_INFO).setEnabled(mMapView!=null);
-		menu.findItem(MAIN_MENU_ROUTES).setEnabled(mMapView!=null);
-		menu.findItem(MAIN_MENU_LAYERS).setEnabled(mMapView!=null);
-		menu.findItem(MAIN_MENU_SCHEMES).setEnabled(mMapView!=null);
-		menu.findItem(MAIN_MENU_LIBRARY).setEnabled(mMapView!=null);
+		menu.findItem(MAIN_MENU_FIND).setEnabled(mModel!=null);
+		menu.findItem(MAIN_MENU_INFO).setEnabled(mModel!=null);
+		menu.findItem(MAIN_MENU_ROUTES).setEnabled(mModel!=null);
+		menu.findItem(MAIN_MENU_LAYERS).setEnabled(mModel!=null);
+		menu.findItem(MAIN_MENU_SCHEMES).setEnabled(mModel!=null);
+		menu.findItem(MAIN_MENU_LIBRARY).setEnabled(mModel!=null);
 		return super.onPrepareOptionsMenu(menu);
 	}
 
@@ -216,6 +220,23 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		case MAIN_MENU_LAYERS:
 			return true;
 		case MAIN_MENU_SCHEMES:
+
+			ArrayList<String> maps = new ArrayList<String>();
+			for(MapView v : mModel.views){
+				maps.add(v.systemName);
+			}
+			String[] items = (String[]) maps.toArray(new String[maps.size()]);
+			
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setTitle("Select layer");
+			builder.setItems(items, new DialogInterface.OnClickListener() {
+			    public void onClick(DialogInterface dialog, int item) {
+			        onShowMap(mModel.views[item]);
+			    }
+			});			
+			AlertDialog alertDialog = builder.create();
+			alertDialog.show();
+
 			return true;
 		case MAIN_MENU_INFO:
 			if(mCurrentStation!=null){
@@ -574,19 +595,19 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 
 		mMapView = subwayMap;
 
-//		if(previousMap!= null && previousMap.mapName.equals(subwayMap.mapName)){
-//			mNavigationSegments = ModelUtil.copySegments(mMapView, mNavigationSegments);
-//			mNavigationStations = ModelUtil.copyStations(mMapView, mNavigationStations);
-//			mNavigationTransfers = ModelUtil.copyTransfer(mMapView, mNavigationTransfers);
-//			mCurrentStation = mCurrentStation!=null ? mMapView.stations[mCurrentStation.id] : null;
-//			mRoute = mRoute!=null ? new Route(mMapView, mRoute) : null;
-//		}else{
-//			mNavigationSegments = null;
-//			mNavigationStations = null;
-//			mNavigationTransfers = null;
-//			mCurrentStation = null;
-//			mRoute = null;
-//		}
+		//		if(previousMap!= null && previousMap.mapName.equals(subwayMap.mapName)){
+		//			mNavigationSegments = ModelUtil.copySegments(mMapView, mNavigationSegments);
+		//			mNavigationStations = ModelUtil.copyStations(mMapView, mNavigationStations);
+		//			mNavigationTransfers = ModelUtil.copyTransfer(mMapView, mNavigationTransfers);
+		//			mCurrentStation = mCurrentStation!=null ? mMapView.stations[mCurrentStation.id] : null;
+		//			mRoute = mRoute!=null ? new Route(mMapView, mRoute) : null;
+		//		}else{
+		//			mNavigationSegments = null;
+		//			mNavigationStations = null;
+		//			mNavigationTransfers = null;
+		//			mCurrentStation = null;
+		//			mRoute = null;
+		//		}
 
 		if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO))
 			Log.i(LOG_TAG_MAIN, getString(R.string.log_loaded_subway_map) + mMapView.systemName
@@ -753,7 +774,8 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		}
 	}
 
-	private class InitTask extends AsyncTask<Uri, Void, MapView> {
+
+	private class InitTask extends AsyncTask<Uri, Void, Model> {
 
 		Throwable mError;
 
@@ -763,12 +785,12 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			super.onPreExecute();
 		}
 
-		protected MapView doInBackground(Uri... params) {
+		protected Model doInBackground(Uri... params) {
 			try {
-//				Uri mapUri = params[0];
-//				return ModelBuilder.loadModel(MapSettings.getMapFileName(mapUri)).views[0];
-				return ModelBuilder.loadModel("/sdcard/ametro/import/Moscow.pmz").views[0];
-				
+				Uri mapUri = params[0];
+				String path = MapUri.getMapName(mapUri);
+				return ModelBuilder.loadModel(path);
+
 			} catch (Exception e) {
 				mError = e;
 				if (Log.isLoggable(LOG_TAG_MAIN, Log.ERROR))
@@ -782,14 +804,15 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			super.onCancelled();
 		}
 
-		protected void onPostExecute(MapView result) {
+		protected void onPostExecute(Model result) {
 			if (result != null) {
-				onShowMap(result);
+				mModel = result;
+				onShowMap(mModel.views[0]);
 			} else {
 				clearDefaultMapName();
 				if (mError != null) {
 					Toast.makeText(BrowseVectorMap.this,
-							getString(R.string.msg_error_map_loading) + mError.toString(),
+							getString(R.string.msg_error_map_loading),
 							Toast.LENGTH_SHORT).show();
 				}
 
@@ -842,6 +865,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 
 	private String mMapName;
 	private MapView mMapView;
+	private Model mModel;
 
 	private VectorMapView mVectorMapView;
 
