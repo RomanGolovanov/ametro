@@ -23,4 +23,8 @@ package org.ametro.model.ext;
 public class ModelSpline {
 	public boolean isSpline;
 	public ModelPoint[] points;
+	
+	public boolean isZero() {
+		return points==null || ModelPoint.isNullOrZero(points[0]);
+	}
 }

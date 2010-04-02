@@ -360,8 +360,13 @@ public class PmzStorage implements IModelStorage {
 					continue;
 				}
 				final ModelSpline spline = additionalNodes.get( Model.getSegmentKey(segment.stationFromId, segment.stationToId) );
-				if(spline!=null && spline.points!=null && ModelPoint.isNullOrZero(spline.points[0])){
+				if(spline!=null && spline.isZero()){
 					continue;
+				}else{
+					final ModelSpline opposite = additionalNodes.get( Model.getSegmentKey(segment.stationToId, segment.stationFromId) );
+					if(opposite!=null && opposite.isZero()){
+						continue;
+					}
 				}
 				
 				final SegmentView segmentView = new SegmentView();
