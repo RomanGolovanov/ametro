@@ -33,6 +33,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import org.ametro.model.LineView;
+import org.ametro.model.MapLayer;
 import org.ametro.model.MapView;
 import org.ametro.model.Model;
 import org.ametro.model.SegmentView;
@@ -106,6 +107,10 @@ public class PmzStorage implements IModelStorage {
 		private ArrayList<TransportTransfer> mTransportTransfers = new ArrayList<TransportTransfer>();
 
 		private ArrayList<MapView> mMapViews = new ArrayList<MapView>();
+		private ArrayList<String> mMapViewNames = new ArrayList<String>();
+
+		private ArrayList<MapLayer> mMapLayers = new ArrayList<MapLayer>();
+		private ArrayList<String> mMapLayerNames = new ArrayList<String>();
 
 		private HashMap<String,TransportStation> mTransportStationIndex = new HashMap<String,TransportStation>();
 		private HashMap<String,TransportLine> mTransportLineIndex = new HashMap<String, TransportLine>();
@@ -213,6 +218,7 @@ public class PmzStorage implements IModelStorage {
 				view.isVector = true;
 				view.owner = model;
 				mMapViews.add(view);
+				mMapViewNames.add(view.systemName);
 
 				TransportLine line = null;
 				LineView lineView = null;
@@ -292,7 +298,7 @@ public class PmzStorage implements IModelStorage {
 							}else if(key.equalsIgnoreCase("Coordinates")){
 								coords = StringUtil.parseModelPointArray(value);
 							}else if(key.equalsIgnoreCase("Rects")){
-								rects = StringUtil.parseModelRectArray(value);
+								rects = StringUtil.parsePmzModelRectArray(value);
 							}else if(key.equalsIgnoreCase("Heights")){
 								heights = StringUtil.parseIntegerArray(value);
 							}else if(key.equalsIgnoreCase("Rect")){
@@ -312,11 +318,9 @@ public class PmzStorage implements IModelStorage {
 				view.segments = makeSegmentViews(view, lineViewIndex, stationViews, additionalNodes);
 				view.transfers = makeTransferViews(view, stationViews);
 
-
-
-
 				fixViewDimensions(view);
 			}
+			
 		}
 
 		private void makeAdditionalNodes(
@@ -578,6 +582,7 @@ public class PmzStorage implements IModelStorage {
 			m.authors = appendTextArray((String[]) authors.toArray(new String[authors.size()]));
 			m.comments = appendTextArray((String[]) comments.toArray(new String[comments.size()]));
 			m.delays = appendTextArray(delays);
+			m.textLengthDescription = mTexts.size();
 		}
 
 
@@ -589,7 +594,12 @@ public class PmzStorage implements IModelStorage {
 			model.stations = (TransportStation[]) mTransportStations.toArray(new TransportStation[mTransportStations.size()]);
 			model.segments = (TransportSegment[]) mTransportSegments.toArray(new TransportSegment[mTransportSegments.size()]);
 			model.transfers = (TransportTransfer[]) mTransportTransfers.toArray(new TransportTransfer[mTransportTransfers.size()]);
+			
 			model.views = (MapView[]) mMapViews.toArray(new MapView[mMapViews.size()]);
+			model.viewNames = (String[]) mMapViewNames.toArray(new String[mMapViewNames.size()]);
+			
+			model.layers = (MapLayer[]) mMapLayers.toArray(new MapLayer[mMapLayers.size()]);
+			model.layerNames = (String[]) mMapLayerNames.toArray(new String[mMapLayerNames.size()]);
 
 			model.systemName = mFile.getName();
 

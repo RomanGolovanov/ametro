@@ -27,12 +27,13 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.ametro.jni.Natives;
+import org.ametro.model.ext.ModelLocation;
 import org.ametro.model.ext.ModelPoint;
 import org.ametro.model.ext.ModelRect;
+import org.ametro.model.ext.ModelSpline;
 import org.ametro.util.StringUtil;
 
 import android.graphics.Point;
-import android.graphics.Rect;
 
 /**
  * @author Vlad Vinichenko (akerigan@gmail.com) Date: 08.02.2010 Time: 22:10:36
@@ -73,7 +74,7 @@ public class CsvReader {
 		String line = mReader.readLine();
 		while(line!=null && line.length() == 0){
 			line = mReader.readLine();
-		}
+		} 
 		if (line != null) {
 			if(Natives.INITIALIZED){ 
 				return Natives.SplitCsvString(line, mSeparator);
@@ -84,7 +85,7 @@ public class CsvReader {
 				final int length = line.length(); 
 				int position = 0;
 				char ch;
-				parts.clear();
+				parts.clear(); 
 				sb.setLength(0);
 				while( position < length ){
 					ch = (char)line.charAt(position);
@@ -106,7 +107,7 @@ public class CsvReader {
 		}
 	}
 
-	
+
 	/**
 	 * Сохранить следующую нетипизированную
 	 * запись из потока
@@ -190,7 +191,7 @@ public class CsvReader {
 			return null;
 		}
 	}
-	
+
 	public Double getNullableDouble(int index, double defaultValue) {
 		String value = getValue(mRecord, index, mTotalColumns);
 		if (!EMPTY_VALUE.equals(value)) {
@@ -199,7 +200,7 @@ public class CsvReader {
 			return defaultValue;
 		}
 	}
-	
+
 	public boolean readBoolean() {
 		return StringUtil.parseBoolean(getValue(mRecord, mCurrentColumn++,
 				mTotalColumns), false);
@@ -220,23 +221,6 @@ public class CsvReader {
 				null);
 	}
 
-	public Rect readRect() {
-		String value = getValue(mRecord, mCurrentColumn++, mTotalColumns);
-		if (!EMPTY_VALUE.equals(value)) {
-			return StringUtil.parseRect(value);
-		} else {
-			return null;
-		}
-	}
-
-	public Point readPoint() {
-		String value = getValue(mRecord, mCurrentColumn++, mTotalColumns);
-		if (!EMPTY_VALUE.equals(value)) {
-			return StringUtil.parsePoint(value);
-		} else {
-			return null;
-		}
-	}
 
 	public Point[] readPointArray() {
 		String value = getValue(mRecord, mCurrentColumn++, mTotalColumns);
@@ -265,7 +249,7 @@ public class CsvReader {
 			return null;
 		}
 	}
-	
+
 	public ModelRect readModelRect() {
 		String value = getValue(mRecord, mCurrentColumn++, mTotalColumns);
 		if (!EMPTY_VALUE.equals(value)) {
@@ -280,6 +264,69 @@ public class CsvReader {
 
 	public float getFloat(int index) {
 		return StringUtil.parseFloat(getValue(mRecord, index, mTotalColumns), 0);
+	}
+
+	public ModelLocation readModelLocation() {
+		String value = getValue(mRecord, mCurrentColumn++, mTotalColumns);
+		if (!EMPTY_VALUE.equals(value)) {
+			return StringUtil.parseModelLocation(value);
+		} else {
+			return null;
+		}
+	}
+
+	public String[] readStringArray() {
+		String value = getValue(mRecord, mCurrentColumn++, mTotalColumns);
+		if (!EMPTY_VALUE.equals(value)) {
+			if(value == null){
+				return new String[0];
+			}
+			return StringUtil.parseStringArray(value);
+		} else {
+			return null;
+		}
+	}
+
+	public int[] readIntArray() {
+		String value = getValue(mRecord, mCurrentColumn++, mTotalColumns);
+		if (!EMPTY_VALUE.equals(value)) {
+			if(value == null){
+				return new int[0];
+			}
+			return StringUtil.parseIntArray(value);
+		} else {
+			return null;
+		}
+	}
+
+	public Integer[] readIntegerArray() {
+		String value = getValue(mRecord, mCurrentColumn++, mTotalColumns);
+		if (!EMPTY_VALUE.equals(value)) {
+			if(value == null){
+				return new Integer[0];
+			}
+			return StringUtil.parseIntegerArray(value);
+		} else {
+			return null;
+		}
+	}
+
+	public Integer readInteger() {
+		String value = getValue(mRecord, mCurrentColumn++, mTotalColumns);
+		if (!EMPTY_VALUE.equals(value)) {
+			return Integer.parseInt(value);
+		} else {
+			return null;
+		}
+	}
+
+	public ModelSpline readModelSpline() {
+		String value = getValue(mRecord, mCurrentColumn++, mTotalColumns);
+		if (!EMPTY_VALUE.equals(value)) {
+			return StringUtil.parseModelSpline(value);
+		} else {
+			return null;
+		}
 	}
 
 }
