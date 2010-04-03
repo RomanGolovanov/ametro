@@ -86,6 +86,10 @@ public class PmzStorage implements IModelStorage {
 		throw new NotImplementedException();
 	}
 
+	public MapView loadModelView(String fileName, Model model, String name) {
+		throw new NotImplementedException();
+	}
+
 	private static class PmzImporter {
 
 		private File mFile;
@@ -964,7 +968,6 @@ public class PmzStorage implements IModelStorage {
 		}
 
 	}
-
 
 }
 

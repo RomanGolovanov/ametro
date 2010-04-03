@@ -22,6 +22,7 @@ package org.ametro.model.storage;
 
 import java.util.Locale;
 
+import org.ametro.model.MapView;
 import org.ametro.model.Model;
 
 public abstract interface IModelStorage {
@@ -30,5 +31,6 @@ public abstract interface IModelStorage {
 	Model loadModelDescription(String fileName, Locale locale);
 	boolean saveModel(String fileName, Model model);
 //	void loadModelLocale(String fileName, Model model, Locale locale);
+	MapView loadModelView(String fileName, Model model, String name);
 	
 }

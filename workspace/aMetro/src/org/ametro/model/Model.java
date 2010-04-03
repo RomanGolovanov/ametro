@@ -23,6 +23,7 @@ package org.ametro.model;
 import java.util.Locale;
 
 import org.ametro.model.ext.ModelLocation;
+import org.ametro.model.storage.ModelBuilder;
 import org.ametro.util.StringUtil;
 
 
@@ -192,4 +193,40 @@ public class Model {
 			|| model.locales == null;
 		
 	}
+
+	public MapView getView(String name) {
+		final Integer id = getViewId(name);
+		if(id!=null){
+			return views[id];
+		}
+		return null;
+	}
+	
+	public MapView loadView(String name) {
+		final Integer id = getViewId(name);
+		if(id!=null){
+			MapView v = views[id];
+			if(v==null){
+				v = ModelBuilder.loadModelView(fileSystemName, this, name);
+			}
+			return v;
+		}
+		return null;
+	}
+
+	public Integer getViewId(String viewName) {
+		final int len = views.length;
+		for(int i=0;i<len;i++){
+			if(viewNames[i].equals(viewName)){
+				return i;
+			}
+		}
+		return null;
+	}
+
+	public MapView getDefaultView() {
+		return views[0];
+	}
+	
+	
 }
