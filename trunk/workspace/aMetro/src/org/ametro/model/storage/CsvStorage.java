@@ -38,6 +38,37 @@ import android.util.Log;
 
 public class CsvStorage implements IModelStorage {
 
+	public MapView loadModelView(String fileName, Model model, String viewName) {
+		try {
+			long startTime = System.currentTimeMillis();
+			final ZipInputStream zip = new ZipInputStream(new BufferedInputStream(new FileInputStream(fileName), BUFFER_SIZE));
+			final String viewEntryName = String.format(MAP_ENTRY_NAME, viewName);
+			final int id = model.getViewId(viewName);
+			ZipEntry zipEntry;
+			while( (zipEntry = zip.getNextEntry()) != null) { 
+				final String name = zipEntry.getName();
+				if(viewEntryName.equals(name)){
+					MapView view = deserializeMapView(zip, model);
+					model.views[id] = view;
+					if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)) {
+						Log.i(Constants.LOG_TAG_MAIN, "Model view loading time is "
+								+ (System.currentTimeMillis() - startTime) + "ms");
+					}
+					return view;
+				}
+				
+			}
+		} catch (IOException e) {
+			if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)) {
+				Log.e(Constants.LOG_TAG_MAIN, "Model view loading error", e);
+			}
+		}
+		if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)) {
+			Log.i(Constants.LOG_TAG_MAIN, "Model view not found");
+		}
+		return null;
+	}
+	
 	public Model loadModel(String fileName, Locale locale) {
 		return loadModel(fileName, locale, false);
 	}
@@ -60,6 +91,7 @@ public class CsvStorage implements IModelStorage {
 			HashMap<String,String[]> locales = new HashMap<String, String[]>();
 			HashMap<String,MapLayer> layers = new HashMap<String, MapLayer>();
 
+			boolean defaultViewLoaded = false;
 
 			ZipEntry zipEntry;
 			while( (zipEntry = zip.getNextEntry()) != null) { 
@@ -84,8 +116,13 @@ public class CsvStorage implements IModelStorage {
 					}
 				}else if(!descriptionOnly && name.startsWith("maps\\")){
 					String viewName = FileUtil.getFileName(name);
-					MapView view = deserializeMapView(zip,model);
-					views.put(viewName, view);
+					if(!defaultViewLoaded){
+						MapView view = deserializeMapView(zip,model);
+						views.put(viewName, view);
+						defaultViewLoaded = true;
+					}else{
+						views.put(viewName, null);
+					}
 				}else if(name.startsWith("locales\\")){
 					String localeName = FileUtil.getFileName(name);
 					String localeTable[] = deserializeLocaleTable(zip, model, descriptionOnly );
@@ -591,10 +628,5 @@ public class CsvStorage implements IModelStorage {
 	}
 
 
+
 }
-
-
-
-
-
-

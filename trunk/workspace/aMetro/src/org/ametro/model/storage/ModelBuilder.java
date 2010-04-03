@@ -23,6 +23,7 @@ package org.ametro.model.storage;
 import java.io.IOException;
 import java.util.Locale;
 
+import org.ametro.model.MapView;
 import org.ametro.model.Model;
 import org.ametro.util.StringUtil;
 
@@ -68,6 +69,14 @@ public class ModelBuilder {
 		if(storage!=null){
 			storage.saveModel(fileName, model);
 		}
+	}
+
+	public static MapView loadModelView(String fileName, Model model, String name) {
+		IModelStorage storage = getStorage(fileName);
+		if(storage!=null){
+			return storage.loadModelView(fileName, model, name);
+		}
+		return null;
 	}
 	
 //	public static void loadModelLocale(String fileName, Model model, Locale locale) throws IOException{
