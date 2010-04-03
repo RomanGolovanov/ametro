@@ -20,11 +20,9 @@
  */
 package org.ametro.model;
 
-import java.io.IOException;
 import java.util.Locale;
 
 import org.ametro.model.ext.ModelLocation;
-import org.ametro.model.storage.ModelBuilder;
 import org.ametro.util.StringUtil;
 
 
@@ -52,6 +50,7 @@ public class Model {
 	public String localeCurrent; // current locale
 	public String[] texts; // strings for current locales
 	public int textLength; // string table size
+	public int textLengthDescription; // string table for descirption size
 
 	//public ModelDescription description; // model description, description.csv
 
@@ -61,7 +60,11 @@ public class Model {
 	public TransportTransfer[] transfers;
 	public TransportStation[] stations;
 
+	public String[] viewNames;
 	public MapView[] views;
+
+	public String[] layerNames;
+	public MapLayer[] layers;
 
 	public AbstractImage[] backgrounds;
 
@@ -121,15 +124,15 @@ public class Model {
 		int id = getLocaleId(locale);
 		String newLocale = locales[id];
 		String[] newTexts = localeTexts[id];
-		if(newTexts==null){
-			try {
-				ModelBuilder.loadModelLocale(fileSystemName, this, new Locale(newLocale));
-				newTexts = localeTexts[id];
-			} catch (IOException e) {
-				newLocale = locales[0];
-				newTexts = localeTexts[0];
-			}
-		}
+//		if(newTexts==null){
+//			try {
+//				ModelBuilder.loadModelLocale(fileSystemName, this, new Locale(newLocale));
+//				newTexts = localeTexts[id];
+//			} catch (IOException e) {
+//				newLocale = locales[0];
+//				newTexts = localeTexts[0];
+//			}
+//		}
 		localeCurrent = newLocale;
 		texts = newTexts;
 	}
@@ -172,5 +175,21 @@ public class Model {
 	public boolean locationEqual(Model other) {
 		return getCountryName().equals(other.getCountryName())
 		&& getCityName().equals(other.getCityName());
+	}
+
+	public static boolean isNullOrEmpty(Model model) {
+		return model == null
+			|| model.systemName == null
+			|| model.timestamp == 0
+			|| model.textLength == 0
+			|| model.maps == null 
+			|| model.stations == null 
+			|| model.segments == null 
+			|| model.lines == null 
+			|| model.transfers == null 
+			|| model.views == null
+			|| model.layers == null
+			|| model.locales == null;
+		
 	}
 }

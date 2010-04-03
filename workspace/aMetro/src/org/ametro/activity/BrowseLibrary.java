@@ -142,9 +142,8 @@ public class BrowseLibrary extends Activity implements
 
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 		String fileName = mAdapter.getFileName(groupPosition, childPosition);
-		String mapName = fileName.replace(MapSettings.MAP_FILE_TYPE, "");
 		Intent i = new Intent();
-		i.setData(MapUri.create(mapName));
+		i.setData(MapUri.create(fileName));
 		setResult(RESULT_OK, i);
 		finish();
 		return true;
@@ -340,7 +339,7 @@ public class BrowseLibrary extends Activity implements
 				String fileName, String fullFileName) {
 			try {
 				Model model = ModelBuilder.loadModelDescription(MapSettings.MAPS_PATH + fileName);
-				map.putFile(model.getCountryName(), model.getCityName(), fileName);
+				map.putFile(model.getCountryName(), model.getCityName(), MapSettings.MAPS_PATH + fileName);
 			} catch (Exception e) {
 				if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)) {
 					Log.d(Constants.LOG_TAG_MAIN,

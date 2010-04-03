@@ -68,6 +68,13 @@ public class FileUtil {
 		f.mkdirs();
 	}
 
+	public static String getFileName(String path){
+		File f = new File(path);
+		String fullFileName = f.getName();
+		String fileName = fullFileName.substring(0, fullFileName.lastIndexOf('.'));
+		return fileName;
+	}
+	
 	public static void writeToStream(InputStream in , OutputStream out) throws IOException 
 	{
 		byte[] bytes = new byte[2048];

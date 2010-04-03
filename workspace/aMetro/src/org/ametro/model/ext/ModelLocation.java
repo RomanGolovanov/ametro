@@ -27,12 +27,19 @@ public class ModelLocation {
 		this.longtitude = longtitude;
 		height = 0;
 		radius = 0;
-		
+
 	}
-	
+
+	public ModelLocation(float latitude, float longtitude, float height, float radius) {
+		this.latitude = latitude;
+		this.longtitude = longtitude;
+		this.height = height;
+		this.radius = radius;	
+	}
+
 	public float latitude; 	// degrees
 	public float longtitude; 	// degrees
 	public float height; 		// height above sea level, meters
 	public float radius; 		// horizontal size, meters
-	
+
 }

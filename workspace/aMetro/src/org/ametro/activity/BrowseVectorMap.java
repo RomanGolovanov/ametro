@@ -119,7 +119,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 				onInitializeMapView(uri);
 			} else {
 				loadDefaultMapName();
-				mMapName = "/sdcard/ametro/import/Moscow.pmz";
+				//mMapName = "/sdcard/ametro/import/Moscow.pmz";
 				if (mMapName == null) {
 					onRequestBrowseLibrary(true);
 				} else {

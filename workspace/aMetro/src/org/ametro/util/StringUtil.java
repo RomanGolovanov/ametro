@@ -50,12 +50,75 @@ public class StringUtil {
 	static final SimpleDateFormat DEFAULT_DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
 
 	private static final Pattern csvPattern = Pattern.compile("(?:^|,)(\"(?:[^\"]|\"\")*\"|[^,]*)");
+	//
+	//	public static String[] splitCommaSeparatedString(String value) {
+	//		if(value == null || value.length() == 0) return new String[0];
+	//		value = value.replaceAll("/\\(.*\\)/", "");
+	//		return value.s0plit(",");
+	//	}
 
-	public static String[] splitCommaSeparatedString(String value) {
-		if(value == null || value.length() == 0) return new String[0];
-		value = value.replaceAll("/\\(.*\\)/", "");
-		return value.split(",");
+	public static String formatStringArray(String[] value) {
+		return join(value,",");
 	}
+
+	public static String[] parseStringArray(String line) {
+		ArrayList<String> elements = new ArrayList<String>();
+		Matcher m = csvPattern.matcher(line);
+		while (m.find()) {
+			elements.add(m.group()
+					.replaceAll("^,", "") // remove first comma if any
+					//.replaceAll( "^?\"(.*)\"$", "$1" ) // remove outer quotations if any
+					.replaceAll("^\"(.*)\"$", "$1") // remove outer quotations if any
+					.replaceAll("\"\"", "\"")); // replace double inner quotations if any
+		}
+		return elements.toArray(new String[elements.size()]);
+	}
+
+	public static String[] fastSplit(final String line, final char delimeter) {
+
+		final ArrayList<String> parts = new ArrayList<String>();
+		final StringBuilder sb = new StringBuilder();
+		final int length = line.length(); 
+		int position = 0;
+		char ch;
+		parts.clear();
+		sb.setLength(0);
+		while( position < length ){
+			ch = (char)line.charAt(position);
+			if(ch == delimeter){
+				parts.add(sb.toString()); 
+				sb.setLength(0);
+			}else{
+				sb.append(ch);
+			}
+			position++;
+		}
+		parts.add(sb.toString());
+		return (String[]) parts.toArray(new String[parts.size()]);
+	}
+
+	public static String[] fastSplit(final String line) {
+		final ArrayList<String> parts = new ArrayList<String>();
+		final StringBuilder sb = new StringBuilder();
+		final int length = line.length(); 
+		int position = 0;
+		char ch;
+		parts.clear();
+		sb.setLength(0);
+		while( position < length ){
+			ch = (char)line.charAt(position);
+			if(ch == ','){
+				parts.add(sb.toString()); 
+				sb.setLength(0);
+			}else{
+				sb.append(ch);
+			}
+			position++;
+		}
+		parts.add(sb.toString());
+		return (String[]) parts.toArray(new String[parts.size()]);
+	}
+
 
 	static final HashMap<String, String> patternsMap = new HashMap<String, String>();
 	private static final String[] charTable = new String[81];
@@ -196,22 +259,6 @@ public class StringUtil {
 		return null;
 	}
 
-	public static Rect parseRect(String value) {
-		String[] parts = value.split(",");
-		int x1 = Integer.parseInt(parts[0].trim());
-		int y1 = Integer.parseInt(parts[1].trim());
-		int x2 = Integer.parseInt(parts[2].trim());
-		int y2 = Integer.parseInt(parts[3].trim());
-		return new Rect(x1, y1, x2, y2);
-	}
-
-	public static Point parsePoint(String value) {
-		String[] parts = value.split(",");
-		int x = Integer.parseInt(parts[0].trim());
-		int y = Integer.parseInt(parts[1].trim());
-		return new Point(x, y);
-	}
-
 	public static String formatRect(Rect rect) {
 		return rect.left + "," + rect.top + "," + rect.right + "," + rect.bottom;
 	}
@@ -292,7 +339,10 @@ public class StringUtil {
 	}
 
 	public static int[] parseIntArray(String text) {
-		final String[] parts = text.split(",");
+		final String[] parts = fastSplit(text);
+		if(parts==null){
+			return new int[0];
+		}		
 		final int len = parts.length;
 		final int[] r = new int[len];
 		for (int i = 0; i < len; i++) {
@@ -306,7 +356,10 @@ public class StringUtil {
 	}
 
 	public static Integer[] parseIntegerArray(String text) {
-		final String[] parts = text.split(",");
+		final String[] parts = fastSplit(text);
+		if(parts==null){
+			return new Integer[0];
+		}		
 		final int len = parts.length;
 		final Integer[] r = new Integer[len];
 		for (int i = 0; i < len; i++) {
@@ -319,7 +372,10 @@ public class StringUtil {
 		return r;
 	}	
 	public static Integer[] parseDelayArray(String text) {
-		String[] parts = splitCommaSeparatedString(text);
+		String[] parts = fastSplit(text);
+		if(parts==null){
+			return new Integer[0];
+		}
 		ArrayList<Integer> vals = new ArrayList<Integer>();
 		for (String part : parts) {
 			try {
@@ -357,7 +413,7 @@ public class StringUtil {
 
 	public static ArrayList<ModelPoint> parseModelPointList(String value) {
 		if(StringUtil.isEmpty(value)) return new ArrayList<ModelPoint>();
-		String[] parts = StringUtil.splitCommaSeparatedString(value);
+		String[] parts = StringUtil.fastSplit(value);
 		ArrayList<ModelPoint> points = new ArrayList<ModelPoint>();
 		for (int i = 0; i < parts.length / 2; i++) {
 			ModelPoint point = new ModelPoint();
@@ -368,15 +424,43 @@ public class StringUtil {
 		return points;
 	}
 
+	public static String formatModelRect(ModelRect rect) {
+		return rect.left + "," + rect.top + "," + rect.right + "," + rect.bottom;
+	}
+
+	public static ModelRect parseModelRect(String value) {
+		if(StringUtil.isEmpty(value)) return null;
+		String[] parts = StringUtil.fastSplit(value);
+		int x1 = Integer.parseInt(parts[0].trim());
+		int y1 = Integer.parseInt(parts[1].trim());
+		int x2 = Integer.parseInt(parts[2].trim());
+		int y2 = Integer.parseInt(parts[3].trim());
+		return new ModelRect(x1, y1, x2, y2);
+	}
+
 	public static ModelRect[] parseModelRectArray(String value) {
 		if(StringUtil.isEmpty(value)) return new ModelRect[0];
-		String[] parts = StringUtil.splitCommaSeparatedString(value);
+		String[] parts = StringUtil.fastSplit(value);
 		ArrayList<ModelRect> rects = new ArrayList<ModelRect>();
 		for (int i = 0; i < parts.length / 4; i++) {
 			int x1 = Integer.parseInt(parts[i * 4].trim());
 			int y1 = Integer.parseInt(parts[i * 4 + 1].trim());
-			int x2 = x1 + Integer.parseInt(parts[i * 4 + 2].trim());
-			int y2 = y1 + Integer.parseInt(parts[i * 4 + 3].trim());
+			int x2 = Integer.parseInt(parts[i * 4 + 2].trim());
+			int y2 = Integer.parseInt(parts[i * 4 + 3].trim());
+			rects.add(new ModelRect(x1, y1, x2, y2));
+		}
+		return rects.toArray(new ModelRect[rects.size()]);
+	}
+
+	public static ModelRect[] parsePmzModelRectArray(String value) {
+		if(StringUtil.isEmpty(value)) return new ModelRect[0];
+		String[] parts = StringUtil.fastSplit(value);
+		ArrayList<ModelRect> rects = new ArrayList<ModelRect>();
+		for (int i = 0; i < parts.length / 4; i++) {
+			int x1 = Integer.parseInt(parts[i * 4].trim());
+			int y1 = Integer.parseInt(parts[i * 4 + 1].trim());
+			int x2 = x1+Integer.parseInt(parts[i * 4 + 2].trim());
+			int y2 = y1+Integer.parseInt(parts[i * 4 + 3].trim());
 			rects.add(new ModelRect(x1, y1, x2, y2));
 		}
 		return rects.toArray(new ModelRect[rects.size()]);
@@ -385,20 +469,10 @@ public class StringUtil {
 
 	public static ModelPoint parseModelPoint(String value) {
 		if(StringUtil.isEmpty(value)) return null;
-		String[] parts = StringUtil.splitCommaSeparatedString(value);
+		String[] parts = StringUtil.fastSplit(value);
 		int x = Integer.parseInt(parts[0].trim());
 		int y = Integer.parseInt(parts[1].trim());
 		return new ModelPoint(x, y);
-	}
-
-	public static ModelRect parseModelRect(String value) {
-		if(StringUtil.isEmpty(value)) return null;
-		String[] parts = StringUtil.splitCommaSeparatedString(value);
-		int x1 = Integer.parseInt(parts[0].trim());
-		int y1 = Integer.parseInt(parts[1].trim());
-		int x2 = x1 + Integer.parseInt(parts[2].trim());
-		int y2 = y1 + Integer.parseInt(parts[3].trim());
-		return new ModelRect(x1, y1, x2, y2);
 	}
 
 	public static int parseColor(String value) {
@@ -406,21 +480,8 @@ public class StringUtil {
 		return Integer.parseInt(value, 16);
 	}
 
-	public static String[] parseStringArray(String line) {
-		ArrayList<String> elements = new ArrayList<String>();
-		Matcher m = csvPattern.matcher(line);
-		while (m.find()) {
-			elements.add(m.group()
-					.replaceAll("^,", "") // remove first comma if any
-					//.replaceAll( "^?\"(.*)\"$", "$1" ) // remove outer quotations if any
-					.replaceAll("^\"(.*)\"$", "$1") // remove outer quotations if any
-					.replaceAll("\"\"", "\"")); // replace double inner quotations if any
-		}
-		return elements.toArray(new String[elements.size()]);
-	}
-
 	public static Double[] parseDoubleArray(String value) {
-		String[] parts = splitCommaSeparatedString(value);
+		String[] parts = fastSplit(value);
 		ArrayList<Double> vals = new ArrayList<Double>();
 		for (String part : parts) {
 			try {
@@ -439,7 +500,7 @@ public class StringUtil {
 	}
 
 	public static ArrayList<Point> parsePointList(String value) {
-		String[] parts = splitCommaSeparatedString(value);
+		String[] parts = fastSplit(value);
 		ArrayList<Point> points = new ArrayList<Point>();
 		for (int i = 0; i < parts.length / 2; i++) {
 			Point point = new Point();
@@ -450,30 +511,8 @@ public class StringUtil {
 		return points;
 	}
 
-	public static Rect[] parseRectangleArray(String value) {
-		String[] parts = splitCommaSeparatedString(value);
-		ArrayList<Rect> rectangles = new ArrayList<Rect>();
-		for (int i = 0; i < parts.length / 4; i++) {
-			int x1 = Integer.parseInt(parts[i * 4].trim());
-			int y1 = Integer.parseInt(parts[i * 4 + 1].trim());
-			int x2 = x1 + Integer.parseInt(parts[i * 4 + 2].trim());
-			int y2 = y1 + Integer.parseInt(parts[i * 4 + 3].trim());
-			rectangles.add(new Rect(x1, y1, x2, y2));
-		}
-		return rectangles.toArray(new Rect[rectangles.size()]);
-	}
-
-	public static Rect parseRectangle(String value) {
-		String[] parts = splitCommaSeparatedString(value);
-		int x1 = Integer.parseInt(parts[0].trim());
-		int y1 = Integer.parseInt(parts[1].trim());
-		int x2 = x1 + Integer.parseInt(parts[2].trim());
-		int y2 = y1 + Integer.parseInt(parts[3].trim());
-		return new Rect(x1, y1, x2, y2);
-	}
-
 	public static PointF parsePointF(String value) {
-		String[] parts = splitCommaSeparatedString(value);
+		String[] parts = fastSplit(value);
 		float x = Float.parseFloat(parts[0].trim());
 		float y = Float.parseFloat(parts[1].trim());
 		return new PointF(x, y);
@@ -497,10 +536,6 @@ public class StringUtil {
 			}
 		}
 		return null;
-	}
-
-	public static String formatModelRect(ModelRect rect) {
-		return rect.left + "," + rect.top + "," + rect.right + "," + rect.bottom;
 	}
 
 	public static String formatModelPoint(ModelPoint point) {
@@ -533,36 +568,45 @@ public class StringUtil {
 		return sb.toString();	
 	}
 
+
 	public static String formatModelLocation(ModelLocation value) {
 		return value.latitude + "," + value.longtitude + "," + value.height + "," + value.radius;
 	}
 
-
-	public static String formatStringArray(String[] value) {
-		return join(value,",");
+	public static ModelLocation parseModelLocation(String value) {
+		String[] parts = fastSplit(value);
+		float latitude = Float.parseFloat(parts[0]);
+		float longtitude = Float.parseFloat(parts[1]);
+		float height = Float.parseFloat(parts[2]);
+		float radius = Float.parseFloat(parts[3]);
+		return new ModelLocation(latitude, longtitude, height, radius);
 	}
-
 
 	public static String formatModelSpline(ModelSpline value) {
 		StringBuffer sb = new StringBuffer();
 		sb.append(Boolean.toString(value.isSpline));
 		sb.append(",");
-		final ModelPoint[] points = value.points;
-		if(points!=null){
-			sb.append(Integer.toString(value.points.length));
-			for(ModelPoint i : points){
-				if(i != null){
-					sb.append(i.x);
-					sb.append(",");
-					sb.append(i.y);
-				}
+		final int len = value.points.length;
+		
+		for(int i = 0; i < len; i++){
+			ModelPoint p = value.points[i];
+			sb.append(formatModelPoint(p));		
+			if( (i+1)<len ){
 				sb.append(",");
-			}
-			if(points.length>0){
-				sb.deleteCharAt(sb.length()-1);
 			}
 		}
 		return sb.toString();			
+	}
+
+	public static ModelSpline parseModelSpline(String value) {
+		if(StringUtil.isEmpty(value)){
+			return null;
+		}
+		final int firstCommaPosition = value.indexOf(',');
+		ModelSpline spline = new ModelSpline();
+		spline.isSpline = Boolean.parseBoolean(value.substring(0, firstCommaPosition));
+		spline.points = parseModelPointArray(value.substring(firstCommaPosition+1));
+		return spline;
 	}
 
 

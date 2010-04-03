@@ -45,7 +45,6 @@ public class ModelBuilder {
 		IModelStorage storage = getStorage(fileName);
 		if(storage!=null){
 			Model model = storage.loadModel(fileName, locale);
-			model.setLocale(locale);
 			return model;
 		}
 		
@@ -71,12 +70,12 @@ public class ModelBuilder {
 		}
 	}
 	
-	public static void loadModelLocale(String fileName, Model model, Locale locale) throws IOException{
-		IModelStorage storage = getStorage(fileName);
-		if(storage!=null){
-			storage.loadModelLocale(fileName, model, locale);
-		}	
-	}
+//	public static void loadModelLocale(String fileName, Model model, Locale locale) throws IOException{
+//		IModelStorage storage = getStorage(fileName);
+//		if(storage!=null){
+//			storage.loadModelLocale(fileName, model, locale);
+//		}	
+//	}
 
 	
 }
