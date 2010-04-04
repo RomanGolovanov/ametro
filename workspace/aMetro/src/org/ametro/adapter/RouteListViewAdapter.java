@@ -55,7 +55,7 @@ public class RouteListViewAdapter extends StationListAdapter {
 
 	protected Drawable getItemIcon(int position) {
 		final LineView line = mLines[mFilteredStations[position].lineViewId];
-		final int color = line.lineColor;
+		final int color = 0xFF000000 | line.lineColor;
 		Drawable dw = null;
 		if (position == 0) {
 			dw = mFirstItemDrawable;

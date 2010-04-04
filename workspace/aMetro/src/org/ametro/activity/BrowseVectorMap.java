@@ -51,6 +51,7 @@ import org.ametro.widget.BaseMapView.OnMapEventListener;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -76,6 +77,7 @@ import android.widget.ZoomControls;
 
 public class BrowseVectorMap extends Activity implements OnClickListener {
 
+
 	public void onClick(View src) {
 		if(src == mNavigatePreviousButton){
 			navigatePreviuosStation();
@@ -99,8 +101,8 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		if(Instance != null){
 			mModel = Instance.mModel;
 			mMapView = Instance.mMapView;
-			mMapName = Instance.mMapName;
-			mSchemeName = Instance.mSchemeName;
+			mModelName = Instance.mModelName;
+			mMapViewName = Instance.mMapViewName;
 		}
 		Instance = this;
 		Instance.mDefaultLocale = Locale.getDefault();
@@ -112,19 +114,19 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		setContentView(R.layout.global_wait);
 
 		if(mModel!=null){
-			onShowMap(mModel.getView(mSchemeName));
+			onShowMap(mModel, mMapView);
 		}else{
 			Intent intent = getIntent();
 			Uri uri = intent != null ? intent.getData() : null;
 			if (uri != null) {
-				String path = MapUri.getMapName(uri);
-				onInitializeMapView(path);
+				String mapName = MapUri.getMapName(uri);
+				onInitializeMapView(mapName, null);
 			} else {
 				loadDefaultMapName();
-				if (mMapName == null) {
+				if (mModelName == null) {
 					onRequestBrowseLibrary(true);
 				} else {
-					onInitializeMapView(mMapName);
+					onInitializeMapView(mModelName, mMapViewName);
 				}
 			}
 		}
@@ -148,18 +150,17 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 				if (uri != null) {
 					String mapName = MapUri.getMapName(uri);
 					if(!mapName.equalsIgnoreCase(getMapName())){
-						String path = MapUri.getMapName(uri);
-						onInitializeMapView(path);
+						onInitializeMapView(mapName,null);
 					}
 				} 
 			}
-			if( resultCode == RESULT_CANCELED && mMapName == null){
+			if( resultCode == RESULT_CANCELED && mModelName == null){
 				finish();
 			}
 			if(isConfigurationChanged()){
 				setupLocale();
-				if (mMapName != null) {
-					onInitializeMapView(mMapName);
+				if (mModelName != null) {
+					onInitializeMapView(mModelName, mMapViewName);
 				}			
 			}
 			break; 
@@ -167,8 +168,8 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			updateAntiAliasingState();
 			if(isConfigurationChanged()){
 				setupLocale();
-				if (mMapName != null) {
-					onInitializeMapView(mMapName);
+				if (mModelName != null) {
+					onInitializeMapView(mModelName, mMapViewName);
 				}			
 			}
 		}
@@ -194,9 +195,9 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		menu.findItem(MAIN_MENU_INFO).setEnabled(mCurrentStation!=null);
 
 		menu.findItem(MAIN_MENU_FIND).setEnabled(mModel!=null);
-		menu.findItem(MAIN_MENU_INFO).setEnabled(mModel!=null);
+		menu.findItem(MAIN_MENU_INFO).setEnabled(false);//mModel!=null);
 		menu.findItem(MAIN_MENU_ROUTES).setEnabled(mModel!=null);
-		menu.findItem(MAIN_MENU_LAYERS).setEnabled(mModel!=null);
+		menu.findItem(MAIN_MENU_LAYERS).setEnabled(false);//mModel!=null);
 		menu.findItem(MAIN_MENU_SCHEMES).setEnabled(mModel!=null);
 		menu.findItem(MAIN_MENU_LIBRARY).setEnabled(mModel!=null);
 		return super.onPrepareOptionsMenu(menu);
@@ -234,15 +235,17 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setTitle("Select layer");
 			builder.setSingleChoiceItems(mModel.viewNames, checked, new DialogInterface.OnClickListener() {
-			    public void onClick(DialogInterface dialog, int item) {
-			    	MapView v = mModel.loadView(mModel.viewNames[item]);
-			    	if(v!=null){
-			    		onShowMap(v);
-			    		dialog.dismiss();
-			    	}else{
-			    		Toast.makeText(BrowseVectorMap.this, "Scheme loading error", Toast.LENGTH_SHORT).show();
-			    	}
-			    }
+				public void onClick(DialogInterface dialog, int item) {
+					onInitializeMapView(mModelName, mModel.viewNames[item]);
+					dialog.dismiss();
+					//			    	MapView v = mModel.loadView(mModel.viewNames[item]);
+					//			    	if(v!=null){
+					//			    		onShowMap(v);
+					//			    		dialog.dismiss();
+					//			    	}else{
+					//			    		Toast.makeText(BrowseVectorMap.this, "Scheme loading error", Toast.LENGTH_SHORT).show();
+					//			    	}
+				}
 			});			
 			AlertDialog alertDialog = builder.create();
 			alertDialog.show();
@@ -298,16 +301,33 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		}
 		return false;
 	}
-
+ 
 	public void loadDefaultMapName(){
 		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
-		mMapName = preferences.getString(PREFERENCE_PACKAGE_FILE_NAME, null);
+		String mapPath = preferences.getString(PREFERENCE_PACKAGE_FILE_NAME, null);
+		if(mapPath!=null){
+			try{
+				String[] parts = StringUtil.parseStringArray(mapPath);
+				mModelName = parts[0];
+				mMapViewName = parts[1];
+			}catch(Throwable e){
+				mModelName = null;
+				mMapViewName = null;		
+			}
+		}else{
+			mModelName = null;
+			mMapViewName = null;		
+		}
 	}
 
 	public void saveDefaultMapName() {
 		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
 		SharedPreferences.Editor editor = preferences.edit();
-		editor.putString(PREFERENCE_PACKAGE_FILE_NAME, mMapName);
+		String mapPath = null;
+		if(mModelName!=null && mMapViewName!=null){
+			mapPath = mModelName + "," + mMapViewName;		
+		}
+		editor.putString(PREFERENCE_PACKAGE_FILE_NAME, mapPath);
 		editor.commit();
 	}
 
@@ -316,7 +336,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		SharedPreferences.Editor editor = preferences.edit();
 		editor.remove(PREFERENCE_PACKAGE_FILE_NAME);
 		editor.commit();
-		mMapName = null;
+		mModelName = null;
 	}
 
 	public void addFavoriteRoute(int fromId, int toId)
@@ -350,7 +370,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	{
 		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
 		SharedPreferences.Editor editor = preferences.edit();
-		editor.putString(PREFERENCE_FAVORITE_ROUTES + "_" + mMapName, "");
+		editor.putString(PREFERENCE_FAVORITE_ROUTES + "_" + mModelName, "");
 		editor.commit();
 	}
 
@@ -368,14 +388,14 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		}
 		String routesBudle = sb.toString();
 		SharedPreferences.Editor editor = preferences.edit();
-		editor.putString(PREFERENCE_FAVORITE_ROUTES + "_" + mMapName, routesBudle);
+		editor.putString(PREFERENCE_FAVORITE_ROUTES + "_" + mModelName, routesBudle);
 		editor.commit();
 	}
 
 	public Point[] getFavoriteRoutes()
 	{
 		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
-		String routes = preferences.getString(PREFERENCE_FAVORITE_ROUTES + "_" + mMapName, "");
+		String routes = preferences.getString(PREFERENCE_FAVORITE_ROUTES + "_" + mModelName, "");
 		return StringUtil.parsePointArray(routes);
 
 	}
@@ -384,7 +404,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
 		SharedPreferences.Editor editor = preferences.edit();
 		String scrollPosition = StringUtil.formatPointF(position);
-		editor.putString(PREFERENCE_SCROLL_POSITION + "_" + mMapName, scrollPosition);
+		editor.putString(PREFERENCE_SCROLL_POSITION + "_" + mModelName + "_" + mMapViewName, scrollPosition);
 		editor.commit();
 		if (Log.isLoggable(LOG_TAG_MAIN, Log.DEBUG)){
 			Log.d(LOG_TAG_MAIN, getString(R.string.log_save_map_position) + scrollPosition);
@@ -393,7 +413,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 
 	public PointF loadScrollPosition() {
 		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
-		String pref = preferences.getString(PREFERENCE_SCROLL_POSITION + "_" + mMapName, null);
+		String pref = preferences.getString(PREFERENCE_SCROLL_POSITION + "_" + mModelName + "_" + mMapViewName, null);
 		if (pref != null) {
 			return StringUtil.parsePointF(pref);
 		} else {
@@ -413,7 +433,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	public void saveZoom(int zoomLevel) {
 		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
 		SharedPreferences.Editor editor = preferences.edit();
-		editor.putString(PREFERENCE_ZOOM_LEVEL + "_" + mMapName, Integer.toString(zoomLevel));
+		editor.putString(PREFERENCE_ZOOM_LEVEL + "_" + mModelName + "_" + mMapViewName, Integer.toString(zoomLevel));
 		editor.commit();
 		if (Log.isLoggable(LOG_TAG_MAIN, Log.DEBUG)){
 			Log.d(LOG_TAG_MAIN, getString(R.string.log_save_map_zoom) + zoomLevel);
@@ -422,7 +442,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 
 	public Integer loadZoom() {
 		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
-		String pref = preferences.getString(PREFERENCE_ZOOM_LEVEL + "_" + mMapName, null);
+		String pref = preferences.getString(PREFERENCE_ZOOM_LEVEL + "_" + mModelName + "_" + mMapViewName, null);
 		if (pref != null) {
 			return StringUtil.parseNullableInteger(pref);
 		} else {
@@ -444,7 +464,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	}
 
 	public String getMapName() {
-		return mMapName;
+		return mModelName;
 	}
 
 	/*package*/ StationView getCurrentStation()
@@ -527,9 +547,20 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			mVectorMapView.postInvalidate();
 		}
 	}
+	
+	/*package*/ void clearNavigation(){
+		hideNavigationControls();
+		mRoute = null;
+		mNavigationStations = null;
+		mNavigationSegments = null;
+		mNavigationTransfers = null;
+		setCurrentStation(null);
+		mVectorMapView.setModelSelection(mNavigationStations, mNavigationSegments,mNavigationTransfers);
+		mVectorMapView.postInvalidate();
+	}
 
 	private void onSaveMapState() {
-		if (mMapView != null && mVectorMapView != null && mMapName != null) {
+		if (mMapView != null && mVectorMapView != null && mModelName != null) {
 			PointF pos = mVectorMapView.getModelScrollCenter();
 			int zoom = mZoom;
 			saveScrollPosition(pos);
@@ -539,7 +570,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 
 	private void onRestoreMapState() {
 		if (mMapView != null && mVectorMapView != null
-				&& mMapName != null) {
+				&& mModelName != null) {
 			Integer zoom = loadZoom();
 			if (zoom != null) {
 				if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO))
@@ -587,24 +618,56 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			setContentView(R.layout.browse_map_empty);
 		}
 		Intent browseLibrary = new Intent(this, BrowseLibrary.class);
-		if (mMapName != null) {
-			browseLibrary.setData(MapUri.create(mMapName));
+		if (mModelName != null) {
+			browseLibrary.setData(MapUri.create(mModelName));
 		}
 		startActivityForResult(browseLibrary, REQUEST_BROWSE_LIBRARY);
 	}
 
-	private void onInitializeMapView(String path) {
-		mInitTask = new InitTask();
-		mInitTask.execute(path);
+	private void onInitializeMapView(String mapName, String viewName) {
+		if(mModel!=null && mMapViewName!=null){
+			String mapNameLoaded = mModel.fileSystemName;
+			String schemeNameLoaded = mMapView.systemName;
+			if( mapNameLoaded.equals(mapName) ){
+				if(schemeNameLoaded.equals(viewName)){
+					// map and view is similar
+					// so only need to check locales
+					Locale locale = getLocale();
+					mLoadLocaleTask = new LoadLocaleTask();
+					mLoadLocaleTask.execute(locale);
+				}else{
+					// load new view
+					clearNavigation();
+					MapView v = mModel.loadView(viewName);
+					if(v!=null){
+						onShowMap(mModel, v);
+					}else{
+						Toast.makeText(BrowseVectorMap.this, "Scheme loading error", Toast.LENGTH_SHORT).show();
+					}
+
+				}
+			}else{
+				mInitTask = new InitTask();
+				mInitTask.execute(mapName, viewName);
+			}
+		}else{
+			mInitTask = new InitTask();
+			mInitTask.execute(mapName, viewName);
+		}
 	}
 
 
-	private void onShowMap(MapView map) {
+	private void onShowMap(Model model, MapView view) {
 
 		//MapView previousMap = mMapView;
 
-		mMapView = map;
-		mSchemeName = map.systemName;
+		if(mModel!=null && mMapView!=null){
+			onSaveMapState();
+		}
+		
+		mModel = model;
+		mMapView = view;
+		
 
 		//		if(previousMap!= null && previousMap.mapName.equals(subwayMap.mapName)){
 		//			mNavigationSegments = ModelUtil.copySegments(mMapView, mNavigationSegments);
@@ -619,6 +682,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		//			mCurrentStation = null;
 		//			mRoute = null;
 		//		}
+		
 
 		if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO))
 			Log.i(LOG_TAG_MAIN, getString(R.string.log_loaded_subway_map) + mMapView.systemName
@@ -652,12 +716,17 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 
 		if(mRoute==null && mCurrentStation == null){
 			hideNavigationControls();
-		}
+		} 
 
-		mMapName = mMapView.systemName;
+		mModelName = mMapView.owner.fileSystemName;
+		mMapViewName = view.systemName;
+		
 		onRestoreMapState();
+		
 		bindMapEvents();
+		
 		mVectorMapView.requestFocus();
+		
 		saveDefaultMapName();
 	}
 
@@ -785,10 +854,34 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		}
 	}
 
+	private class LoadLocaleTask extends AsyncTask<Locale, Void, Void>
+	{
+		ProgressDialog mProgressDialog;
+
+		protected void onPreExecute() {
+			mProgressDialog = ProgressDialog.show(BrowseVectorMap.this, null, "Locale loading...", true);
+			super.onPreExecute();
+		}
+		
+		protected Void doInBackground(Locale... params) {
+			mModel.setLocale(params[0]);
+			mVectorMapView.updateModel();
+			return null;
+		}
+		
+		protected void onPostExecute(Void result) {
+			mProgressDialog.dismiss();
+			mVectorMapView.setModelSelection(mNavigationStations, mNavigationSegments, mNavigationTransfers);
+			mVectorMapView.postInvalidate();
+			super.onPostExecute(result);
+		}
+	}
 
 	private class InitTask extends AsyncTask<String, Void, Model> {
 
 		Throwable mError;
+		String mMapName;
+		String mViewName;
 
 		protected void onPreExecute() {
 			mError = null;
@@ -798,8 +891,16 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 
 		protected Model doInBackground(String... params) {
 			try {
-				String path = params[0];
-				Model m = ModelBuilder.loadModel(path);
+				mMapName = params[0];
+				mViewName = params[1];
+				Model m = ModelBuilder.loadModel(mMapName);
+				if(m!=null){
+					if(mViewName!=null){
+						m.loadView(mViewName);
+					}else{
+						mViewName = m.viewNames[0];
+					}
+				}
 				return m;
 
 			} catch (Exception e) {
@@ -817,8 +918,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 
 		protected void onPostExecute(Model result) {
 			if (result != null) {
-				mModel = result;
-				onShowMap(mModel.getDefaultView());
+				onShowMap(result, result.getView(mViewName));
 			} else {
 				clearDefaultMapName();
 				if (mError != null) {
@@ -873,8 +973,8 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	private final int ZOOM_CONTROLS_TIMEOUT = 2000;
 	private int mZoom = DEFAULT_ZOOM_LEVEL;
 
-	private String mMapName;
-	private String mSchemeName;
+	private String mModelName;
+	private String mMapViewName;
 	private MapView mMapView;
 	private Model mModel;
 
@@ -897,6 +997,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	private Handler mScrollHandler = new Handler();
 
 	private InitTask mInitTask;
+	private LoadLocaleTask mLoadLocaleTask;
 
 	private final static int REQUEST_BROWSE_LIBRARY = 1;
 	private final static int REQUEST_SETTINGS = 2;

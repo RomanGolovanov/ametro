@@ -42,7 +42,7 @@ import android.graphics.Rect;
  */
 public class CsvWriter {
 
-	private static final String EMPTY_VALUE = "null";
+	public static final String EMPTY_VALUE = "null";
 	private static final String DEFAULT_SEPARATOR = ";";
 	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-dd-MM HH:mm:ss z");
 

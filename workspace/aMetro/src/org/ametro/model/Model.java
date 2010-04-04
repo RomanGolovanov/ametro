@@ -60,12 +60,13 @@ public class Model {
 	public TransportSegment[] segments;
 	public TransportTransfer[] transfers;
 	public TransportStation[] stations;
+	public TransportStationInfo[] stationInfos;
 
 	public String[] viewNames;
 	public MapView[] views;
 
 	public String[] layerNames;
-	public MapLayer[] layers;
+	public MapLayerContainer[] layers;
 
 	public AbstractImage[] images;
 
@@ -131,6 +132,12 @@ public class Model {
 		return res;
 	}	
 
+	public boolean isLocaleLoaded(Locale locale) {
+		int id = getLocaleId(locale);
+		return localeTexts[id]!=null;
+	}
+
+	
 	public void setLocale(Locale locale){
 		int id = getLocaleId(locale);
 		String newLocale = locales[id];

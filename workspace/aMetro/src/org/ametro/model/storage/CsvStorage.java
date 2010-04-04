@@ -18,7 +18,7 @@ import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
 import org.ametro.model.LineView;
-import org.ametro.model.MapLayer;
+import org.ametro.model.MapLayerContainer;
 import org.ametro.model.MapView;
 import org.ametro.model.Model;
 import org.ametro.model.SegmentView;
@@ -28,6 +28,7 @@ import org.ametro.model.TransportLine;
 import org.ametro.model.TransportMap;
 import org.ametro.model.TransportSegment;
 import org.ametro.model.TransportStation;
+import org.ametro.model.TransportStationInfo;
 import org.ametro.model.TransportTransfer;
 import org.ametro.util.FileUtil;
 import org.ametro.util.csv.CsvReader;
@@ -43,6 +44,7 @@ public class CsvStorage implements IModelStorage {
 			final String name = zipEntry.getName();
 			if(localeEntryName.equals(name)){
 				String[] texts  = deserializeLocaleTable(zip, model, false);
+				model.localeTexts[localeId] = texts;
 				return texts;
 			}
 		}
@@ -83,7 +85,7 @@ public class CsvStorage implements IModelStorage {
 
 		HashMap<String,MapView> views = new HashMap<String, MapView>();
 		HashMap<String,String[]> locales = new HashMap<String, String[]>();
-		HashMap<String,MapLayer> layers = new HashMap<String, MapLayer>();
+		HashMap<String,MapLayerContainer> layers = new HashMap<String, MapLayerContainer>();
 
 		boolean defaultViewLoaded = false;
 		String defaultLocaleName = null;
@@ -157,7 +159,7 @@ public class CsvStorage implements IModelStorage {
 			}
 
 			len = layers.size();
-			model.layers = new MapLayer[len];
+			model.layers = new MapLayerContainer[len];
 			for(int i = 0; i < len; i++){
 				String layerName = model.layerNames[i];
 				model.layers[i] = layers.get(layerName);
@@ -300,6 +302,7 @@ public class CsvStorage implements IModelStorage {
 	private void deserializeStations(ZipInputStream zip, final Model model) throws IOException {
 		final CsvReader reader = new CsvReader(new BufferedReader( new InputStreamReader(zip, ENCODING), BUFFER_SIZE )); 
 		ArrayList<TransportStation> lst = new ArrayList<TransportStation>();
+		ArrayList<TransportStationInfo> infos = new ArrayList<TransportStationInfo>();
 		while(reader.next()){
 			TransportStation obj = new TransportStation();
 			obj.id = reader.readInt();
@@ -307,10 +310,25 @@ public class CsvStorage implements IModelStorage {
 			obj.name = reader.readInt();
 			obj.systemName = reader.readString();
 			obj.location = reader.readModelLocation();
+
+//			int[] captions = reader.readIntArray();
+//			if(captions!=null){
+//				final int len = captions.length;
+//				TransportStationInfo inf = new TransportStationInfo();
+//				inf.id = obj.id;
+//				inf.captions = captions;
+//				inf.owner = model;
+//				inf.lines = new int[len][];
+//				for(int i = 0; i < len; i++){
+//					inf.lines[i] = reader.readIntArray();
+//				}
+//			}
+			
 			obj.owner = model;
 			lst.add(obj);
 		}
-		model.stations = (TransportStation[]) lst.toArray(new TransportStation[lst.size()]);	
+		model.stations = (TransportStation[]) lst.toArray(new TransportStation[lst.size()]);
+		model.stationInfos = (TransportStationInfo[]) infos.toArray(new TransportStationInfo[infos.size()]);
 	}
 
 	private void deserializeLines(ZipInputStream zip, final Model model) throws IOException {
@@ -403,16 +421,16 @@ public class CsvStorage implements IModelStorage {
 
 		serializeMaps(model, zip, writer);
 		serializeLayers(model, zip, writer);
-		serializeTexts(model, zip);
+		serializeLocaleTable(model, zip);
 
 	}
 
 	private void serializeLayers(Model model, ZipOutputStream zip, CsvWriter writer) throws IOException {
-		for(MapLayer obj : model.layers){
+		for(MapLayerContainer obj : model.layers){
 			String entryName = String.format(LAYER_ENTRY_NAME, obj.id);
 			ZipEntry zipEntry = new ZipEntry(entryName);
 			zip.putNextEntry(zipEntry);
-			writer.writeInt(obj.id);
+			//writer.writeInt(obj.id);
 			writer.flush();
 			zip.closeEntry();			
 		}
@@ -520,6 +538,17 @@ public class CsvStorage implements IModelStorage {
 			writer.writeInt(obj.name);
 			writer.writeString(obj.systemName);
 			writer.writeModelLocation(obj.location);
+			
+//			TransportStationInfo inf = model.stationInfos[obj.id];
+//			if(inf!=null){
+//				writer.writeIntArray(inf.captions);
+//				for(int[] section : inf.lines){
+//					writer.writeIntArray(section);
+//				}
+//			}else{
+//				writer.writeIntArray(null);
+//			}
+			
 			writer.newRecord();
 		}
 		writer.flush();
@@ -559,14 +588,14 @@ public class CsvStorage implements IModelStorage {
 		zip.closeEntry();
 	}		
 
-	private void serializeTexts(final Model model, final ZipOutputStream zip) throws IOException {
+	private void serializeLocaleTable(final Model model, final ZipOutputStream zip) throws IOException {
 		final int len = model.locales.length;
 		final int textsLen = model.textLength;
 		for(int i = 0; i < len; i++){
 			String entryName = String.format(LOCALE_ENTRY_NAME, model.locales[i]);
 			ZipEntry zipEntry = new ZipEntry(entryName);
 			zip.putNextEntry(zipEntry);
-			BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(zip, ENCODING));
+			BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(zip, ENCODING), BUFFER_SIZE);
 
 			final String[] texts = model.localeTexts[i]; 
 			for(int j = 0; j < textsLen; j++){

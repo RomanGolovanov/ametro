@@ -40,7 +40,7 @@ import android.graphics.Point;
  */
 public class CsvReader {
 
-	private static final String EMPTY_VALUE = "null";
+	public static final String EMPTY_VALUE = "null";
 	private static final char DEFAULT_SEPARATOR = ';';
 
 	private BufferedReader mReader;
