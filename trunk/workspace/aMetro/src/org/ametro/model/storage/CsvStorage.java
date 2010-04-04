@@ -17,7 +17,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
-import org.ametro.Constants;
 import org.ametro.model.LineView;
 import org.ametro.model.MapLayer;
 import org.ametro.model.MapView;
@@ -34,177 +33,146 @@ import org.ametro.util.FileUtil;
 import org.ametro.util.csv.CsvReader;
 import org.ametro.util.csv.CsvWriter;
 
-import android.util.Log;
-
 public class CsvStorage implements IModelStorage {
 
-	public MapView loadModelView(String fileName, Model model, String viewName) {
-		try {
-			long startTime = System.currentTimeMillis();
-			final ZipInputStream zip = new ZipInputStream(new BufferedInputStream(new FileInputStream(fileName), BUFFER_SIZE));
-			final String viewEntryName = String.format(MAP_ENTRY_NAME, viewName);
-			final int id = model.getViewId(viewName);
-			ZipEntry zipEntry;
-			while( (zipEntry = zip.getNextEntry()) != null) { 
-				final String name = zipEntry.getName();
-				if(viewEntryName.equals(name)){
-					MapView view = deserializeMapView(zip, model);
-					model.views[id] = view;
-					if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)) {
-						Log.i(Constants.LOG_TAG_MAIN, "Model view loading time is "
-								+ (System.currentTimeMillis() - startTime) + "ms");
-					}
-					return view;
-				}
-				
+	public String[] loadModelLocale(String fileName, Model model, int localeId) throws IOException {
+		final ZipInputStream zip = new ZipInputStream(new BufferedInputStream(new FileInputStream(fileName), BUFFER_SIZE));
+		final String localeEntryName = String.format(LOCALE_ENTRY_NAME, model.locales[localeId]);
+		ZipEntry zipEntry;
+		while( (zipEntry = zip.getNextEntry()) != null) { 
+			final String name = zipEntry.getName();
+			if(localeEntryName.equals(name)){
+				String[] texts  = deserializeLocaleTable(zip, model, false);
+				return texts;
 			}
-		} catch (IOException e) {
-			if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)) {
-				Log.e(Constants.LOG_TAG_MAIN, "Model view loading error", e);
-			}
-		}
-		if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)) {
-			Log.i(Constants.LOG_TAG_MAIN, "Model view not found");
 		}
 		return null;
 	}
-	
-	public Model loadModel(String fileName, Locale locale) {
+
+	public MapView loadModelView(String fileName, Model model, String viewName) throws IOException {
+		final ZipInputStream zip = new ZipInputStream(new BufferedInputStream(new FileInputStream(fileName), BUFFER_SIZE));
+		final String viewEntryName = String.format(MAP_ENTRY_NAME, viewName);
+		final int id = model.getViewId(viewName);
+		ZipEntry zipEntry;
+		while( (zipEntry = zip.getNextEntry()) != null) { 
+			final String name = zipEntry.getName();
+			if(viewEntryName.equals(name)){
+				MapView view = deserializeMapView(zip, model);
+				model.views[id] = view;
+				return view;
+			}
+
+		}
+		return null;
+	}
+
+	public Model loadModel(String fileName, Locale locale) throws IOException{
 		return loadModel(fileName, locale, false);
 	}
 
-	public Model loadModelDescription(String fileName, Locale locale) {
+	public Model loadModelDescription(String fileName, Locale locale) throws IOException{
 		return loadModel(fileName, locale, true);
 	}
 
-	private Model loadModel(String fileName, Locale locale, boolean descriptionOnly)
+	private Model loadModel(String fileName, Locale locale, boolean descriptionOnly) throws IOException
 	{
-		try {
-			//Debug.startMethodTracing("ametro-load-csv");
-			long startTime = System.currentTimeMillis();
-			final ZipInputStream zip = new ZipInputStream(new BufferedInputStream(new FileInputStream(fileName), BUFFER_SIZE));
+		final ZipInputStream zip = new ZipInputStream(new BufferedInputStream(new FileInputStream(fileName), BUFFER_SIZE));
 
-			boolean isIndexLoaded = false;
-			final Model model = new Model();
+		boolean isIndexLoaded = false;
+		final Model model = new Model();
 
-			HashMap<String,MapView> views = new HashMap<String, MapView>();
-			HashMap<String,String[]> locales = new HashMap<String, String[]>();
-			HashMap<String,MapLayer> layers = new HashMap<String, MapLayer>();
+		HashMap<String,MapView> views = new HashMap<String, MapView>();
+		HashMap<String,String[]> locales = new HashMap<String, String[]>();
+		HashMap<String,MapLayer> layers = new HashMap<String, MapLayer>();
 
-			boolean defaultViewLoaded = false;
+		boolean defaultViewLoaded = false;
+		String defaultLocaleName = null;
 
-			ZipEntry zipEntry;
-			while( (zipEntry = zip.getNextEntry()) != null) { 
-				final String name = zipEntry.getName();
-				if(mMainEntries.contains(name)){
-					if (MAIN_ENTRY_NAME.equals(name)) {
-						deserializeModel(zip, model);
-						model.fileSystemName = fileName;
-						isIndexLoaded = true;
-					} else if (!descriptionOnly) {
-						if ( TRANSPORT_MAPS_ENTRY_NAME.equals(name)) {
-							deserializeMap(zip, model);
-						} else if ( TRANSPORT_LINES_ENTRY_NAME.equals(name)) {
-							deserializeLines(zip, model);
-						} else if ( TRANSPORT_STATIONS_ENTRY_NAME.equals(name)) {
-							deserializeStations(zip, model);
-						} else if ( TRANSPORT_SEGMENTS_ENTRY_NAME.equals(name)) {
-							deserializeSegments(zip, model);
-						} else if ( TRANSPORT_TRANSFERS_ENTRY_NAME.equals(name)) {
-							deserializeTransfers(zip, model);
-						}
+		ZipEntry zipEntry;
+		while( (zipEntry = zip.getNextEntry()) != null) { 
+			final String name = zipEntry.getName();
+			if(mMainEntries.contains(name)){
+				if (MAIN_ENTRY_NAME.equals(name)) {
+					deserializeModel(zip, model);
+					model.fileSystemName = fileName;
+					defaultLocaleName = model.getLocaleName(locale);
+					isIndexLoaded = true;
+				} else if (!descriptionOnly) {
+					if ( TRANSPORT_MAPS_ENTRY_NAME.equals(name)) {
+						deserializeMap(zip, model);
+					} else if ( TRANSPORT_LINES_ENTRY_NAME.equals(name)) {
+						deserializeLines(zip, model);
+					} else if ( TRANSPORT_STATIONS_ENTRY_NAME.equals(name)) {
+						deserializeStations(zip, model);
+					} else if ( TRANSPORT_SEGMENTS_ENTRY_NAME.equals(name)) {
+						deserializeSegments(zip, model);
+					} else if ( TRANSPORT_TRANSFERS_ENTRY_NAME.equals(name)) {
+						deserializeTransfers(zip, model);
 					}
-				}else if(!descriptionOnly && name.startsWith("maps\\")){
-					String viewName = FileUtil.getFileName(name);
-					if(!defaultViewLoaded){
-						MapView view = deserializeMapView(zip,model);
-						views.put(viewName, view);
-						defaultViewLoaded = true;
-					}else{
-						views.put(viewName, null);
-					}
-				}else if(name.startsWith("locales\\")){
-					String localeName = FileUtil.getFileName(name);
+				}
+			}else if(!descriptionOnly && name.startsWith("maps\\")){
+				String viewName = FileUtil.getFileName(name);
+				if(!defaultViewLoaded){
+					MapView view = deserializeMapView(zip,model);
+					views.put(viewName, view);
+					defaultViewLoaded = true;
+				}else{
+					views.put(viewName, null);
+				}
+			}else if(name.startsWith("locales\\")){
+				String localeName = FileUtil.getFileName(name);
+				if(descriptionOnly || localeName.equals(defaultLocaleName)){
 					String localeTable[] = deserializeLocaleTable(zip, model, descriptionOnly );
 					locales.put(localeName, localeTable);
-				}else if(!descriptionOnly && name.startsWith("layers\\")){
+				}else{
+					locales.put(localeName, null);
 				}
-				zip.closeEntry();
+			}else if(!descriptionOnly && name.startsWith("layers\\")){
 			}
-			zip.close();
-
-			if(isIndexLoaded){
-
-				int len = model.locales.length;
-				model.localeTexts = new String[len][];
-				for(int i = 0; i < len; i++){
-					String localeName = model.locales[i];
-					model.localeTexts[i] = locales.get(localeName);
-
-					if(locale!=null && localeName.equals(locale.getLanguage())){
-						model.texts = model.localeTexts[i];
-						model.localeCurrent = localeName;
-					}else if(localeName.equals(model.localeCurrent)){
-						model.texts = model.localeTexts[i];
-					}
-				}
-
-				len = model.viewNames.length;
-				model.views = new MapView[len];
-				for(int i = 0; i < len; i++){
-					String viewName = model.viewNames[i];
-					model.views[i] = views.get(viewName);
-				}
-
-				len = layers.size();
-				model.layers = new MapLayer[len];
-				for(int i = 0; i < len; i++){
-					String layerName = model.layerNames[i];
-					model.layers[i] = layers.get(layerName);
-				}
-
-			}
-			if( (descriptionOnly && isIndexLoaded) || !Model.isNullOrEmpty(model) ){
-				if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)) {
-					Log.i(Constants.LOG_TAG_MAIN, "Model loading time is "
-							+ (System.currentTimeMillis() - startTime) + "ms");
-				}
-			}else{
-				if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)) {
-					Log.e(Constants.LOG_TAG_MAIN, "Model loading error - incorrect file");
-				}
-			}
-			//Debug.stopMethodTracing();
-			return model;
-
-		} catch (Throwable e) {
-			if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)) {
-				Log.e(Constants.LOG_TAG_MAIN, "Model loading error", e);
-			}
-			return null;
+			zip.closeEntry();
 		}
+		zip.close();
+
+		if(isIndexLoaded){
+
+			int len = model.locales.length;
+			model.localeTexts = new String[len][];
+			for(int i = 0; i < len; i++){
+				String localeName = model.locales[i];
+				model.localeTexts[i] = locales.get(localeName);
+
+				if(locale!=null && localeName.equals(locale.getLanguage())){
+					model.texts = model.localeTexts[i];
+					model.localeCurrent = localeName;
+				}else if(localeName.equals(model.localeCurrent)){
+					model.texts = model.localeTexts[i];
+				}
+			}
+
+			len = model.viewNames.length;
+			model.views = new MapView[len];
+			for(int i = 0; i < len; i++){
+				String viewName = model.viewNames[i];
+				model.views[i] = views.get(viewName);
+			}
+
+			len = layers.size();
+			model.layers = new MapLayer[len];
+			for(int i = 0; i < len; i++){
+				String layerName = model.layerNames[i];
+				model.layers[i] = layers.get(layerName);
+			}
+
+		}
+		//Debug.stopMethodTracing();
+		return model;
 	}
 
-	public boolean saveModel(String fileName, Model model) {
-		try {
-			long startTime = System.currentTimeMillis();
-			final ZipOutputStream zipOut = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(fileName),8196));
-			final CsvWriter csvWriter = new CsvWriter(new BufferedWriter( new OutputStreamWriter(zipOut, ENCODING)));
-			serializeModel(model, zipOut, csvWriter);
-			zipOut.close();
-			if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)) {
-				Log.i(Constants.LOG_TAG_MAIN, "Model saving time is "
-						+ (System.currentTimeMillis() - startTime) + "ms");
-			}
-
-		} catch (Throwable e) {
-			if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)) {
-				Log.e(Constants.LOG_TAG_MAIN, "Model saving error", e);
-			}
-			return false;
-
-		}
-		return true;
+	public void saveModel(String fileName, Model model) throws IOException {
+		final ZipOutputStream zipOut = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(fileName),8196));
+		final CsvWriter csvWriter = new CsvWriter(new BufferedWriter( new OutputStreamWriter(zipOut, ENCODING)));
+		serializeModel(model, zipOut, csvWriter);
+		zipOut.close();
 	}
 
 	private MapView deserializeMapView(ZipInputStream zip, Model model) throws IOException {
@@ -229,12 +197,12 @@ public class CsvStorage implements IModelStorage {
 		int stationsLength = reader.readInt();
 		int segmentsLength = reader.readInt();
 		int transfersLength = reader.readInt();
-		
+
 		view.lines = new LineView[linesLength];
 		view.stations = new StationView[stationsLength];
 		view.segments = new SegmentView[segmentsLength];
 		view.transfers = new TransferView[transfersLength];
-		
+
 		for(int i = 0; i < linesLength; i++){
 			reader.next();
 			LineView obj = new LineView();
@@ -280,7 +248,7 @@ public class CsvStorage implements IModelStorage {
 			obj.owner = model;
 			view.transfers[i] = obj;
 		}
-		
+
 		return view;
 	}
 
@@ -293,7 +261,7 @@ public class CsvStorage implements IModelStorage {
 		}
 		return table;
 	}
-	
+
 	private void deserializeTransfers(ZipInputStream zip, final Model model) throws IOException {
 		final CsvReader reader = new CsvReader(new BufferedReader( new InputStreamReader(zip, ENCODING), BUFFER_SIZE )); 
 		ArrayList<TransportTransfer> lst = new ArrayList<TransportTransfer>();
@@ -434,9 +402,20 @@ public class CsvStorage implements IModelStorage {
 		serializeTransportTransfers(model, zip, writer);
 
 		serializeMaps(model, zip, writer);
-
+		serializeLayers(model, zip, writer);
 		serializeTexts(model, zip);
 
+	}
+
+	private void serializeLayers(Model model, ZipOutputStream zip, CsvWriter writer) throws IOException {
+		for(MapLayer obj : model.layers){
+			String entryName = String.format(LAYER_ENTRY_NAME, obj.id);
+			ZipEntry zipEntry = new ZipEntry(entryName);
+			zip.putNextEntry(zipEntry);
+			writer.writeInt(obj.id);
+			writer.flush();
+			zip.closeEntry();			
+		}
 	}
 
 	private void serializeMaps(Model model, ZipOutputStream zip, CsvWriter writer) throws IOException {

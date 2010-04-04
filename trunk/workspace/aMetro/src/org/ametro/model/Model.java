@@ -67,7 +67,7 @@ public class Model {
 	public String[] layerNames;
 	public MapLayer[] layers;
 
-	public AbstractImage[] backgrounds;
+	public AbstractImage[] images;
 
 	/****************** VOLATILE FIELDS ********************/
 	public String fileSystemName;
@@ -100,8 +100,18 @@ public class Model {
     
 	
 	/****************** LOCALIZATION **********************/
+	public String getLocaleName(Locale locale){
+		final int len = locales.length;
+		for(int i = 0; i < len; i++){
+			Locale l = new Locale(locales[i]);
+			if( l.equals(locale) ){
+				return locales[i];
+			}
+		}
+		return locales[0];
+	}
 
-	private int getLocaleId(Locale locale){
+	public int getLocaleId(Locale locale){
 		final int len = locales.length;
 		for(int i = 0; i < len; i++){
 			Locale l = new Locale(locales[i]);
@@ -125,15 +135,15 @@ public class Model {
 		int id = getLocaleId(locale);
 		String newLocale = locales[id];
 		String[] newTexts = localeTexts[id];
-//		if(newTexts==null){
-//			try {
-//				ModelBuilder.loadModelLocale(fileSystemName, this, new Locale(newLocale));
-//				newTexts = localeTexts[id];
-//			} catch (IOException e) {
-//				newLocale = locales[0];
-//				newTexts = localeTexts[0];
-//			}
-//		}
+		if(newTexts==null){
+			String[] texts = ModelBuilder.loadModelLocale(fileSystemName, this, id);
+			if(texts!=null){
+				newTexts = localeTexts[id];
+			}else{
+				newLocale = locales[0];
+				newTexts = localeTexts[0];
+			}
+		}
 		localeCurrent = newLocale;
 		texts = newTexts;
 	}
@@ -190,10 +200,15 @@ public class Model {
 			|| model.transfers == null 
 			|| model.views == null
 			|| model.layers == null
-			|| model.locales == null;
-		
+			|| model.locales == null
+			|| model.localeTexts == null;
 	}
 
+	public static boolean isDescriptionLoaded(Model model) {
+		return model != null;
+	}
+	
+	
 	public MapView getView(String name) {
 		final Integer id = getViewId(name);
 		if(id!=null){
@@ -227,6 +242,6 @@ public class Model {
 	public MapView getDefaultView() {
 		return views[0];
 	}
-	
+
 	
 }

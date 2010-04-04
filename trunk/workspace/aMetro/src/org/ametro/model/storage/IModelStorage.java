@@ -20,6 +20,7 @@
  */
 package org.ametro.model.storage;
 
+import java.io.IOException;
 import java.util.Locale;
 
 import org.ametro.model.MapView;
@@ -27,10 +28,11 @@ import org.ametro.model.Model;
 
 public abstract interface IModelStorage {
 	
-	Model loadModel(String fileName, Locale locale);
-	Model loadModelDescription(String fileName, Locale locale);
-	boolean saveModel(String fileName, Model model);
-//	void loadModelLocale(String fileName, Model model, Locale locale);
-	MapView loadModelView(String fileName, Model model, String name);
+	Model loadModel(String fileName, Locale locale) throws IOException;
+	Model loadModelDescription(String fileName, Locale locale) throws IOException;
+	void saveModel(String fileName, Model model) throws IOException;
+	
+	String[] loadModelLocale(String fileName, Model model, int localeId) throws IOException;
+	MapView loadModelView(String fileName, Model model, String name) throws IOException;
 	
 }
