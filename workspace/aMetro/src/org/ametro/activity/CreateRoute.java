@@ -28,8 +28,8 @@ import org.ametro.Constants;
 import org.ametro.R;
 import org.ametro.adapter.StationListAdapter;
 import org.ametro.model.MapView;
-import org.ametro.model.Route;
 import org.ametro.model.StationView;
+import org.ametro.model.route.RouteView;
 import org.ametro.util.DateUtil;
 
 import android.app.Activity;
@@ -138,7 +138,7 @@ public class CreateRoute extends Activity implements OnClickListener,
 		mToText.setAdapter(toAdapter);
 		
 
-		final Route route = BrowseVectorMap.Instance.getNavigationRoute();
+		final RouteView route = BrowseVectorMap.Instance.getNavigationRoute();
 		if(route!=null){
 			StationView fromStation = route.getStationFrom();
 			StationView toStation = route.getStationTo();
@@ -262,16 +262,16 @@ public class CreateRoute extends Activity implements OnClickListener,
 	}
 
 	public class CreateRouteTask extends
-			AsyncTask<StationView, Void, Route> {
+			AsyncTask<StationView, Void, RouteView> {
 
 		private MapView mMap;
 		private ProgressDialog mWaitDialog;
 
-		protected Route doInBackground(
+		protected RouteView doInBackground(
 				StationView... stations) {
 			StationView from = stations[0];
 			StationView to = stations[1];
-			Route route = new Route(mMap, from.id, to.id);
+			RouteView route = new RouteView(mMap, from.id, to.id);
 			route.findRoute();
 			return route;
 		}
@@ -290,7 +290,7 @@ public class CreateRoute extends Activity implements OnClickListener,
 			super.onPreExecute();
 		}
 
-		protected void onPostExecute(Route result) {
+		protected void onPostExecute(RouteView result) {
 			super.onPostExecute(result);
 			mWaitDialog.dismiss();
 			if (result.hasRoute()) {

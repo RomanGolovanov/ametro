@@ -37,10 +37,10 @@ import org.ametro.MapUri;
 import org.ametro.R;
 import org.ametro.model.MapView;
 import org.ametro.model.Model;
-import org.ametro.model.Route;
 import org.ametro.model.SegmentView;
 import org.ametro.model.StationView;
 import org.ametro.model.TransferView;
+import org.ametro.model.route.RouteView;
 import org.ametro.model.storage.ModelBuilder;
 import org.ametro.model.util.ModelUtil;
 import org.ametro.render.RenderProgram;
@@ -521,12 +521,12 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		}
 	}
 
-	/*package*/ Route getNavigationRoute()
+	/*package*/ RouteView getNavigationRoute()
 	{
 		return mRoute;
 	}
 
-	/*package*/ void setNavigationRoute(Route route){
+	/*package*/ void setNavigationRoute(RouteView route){
 		boolean refreshNeeded = (route != mRoute) || (route == null && mRoute!=null) || (route!=null && mRoute == null);
 		if(refreshNeeded){
 			mRoute = route;
@@ -991,7 +991,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	private ImageButton mNavigateListButton;
 	private TextView mNavigateTimeText;
 
-	private Route mRoute;
+	private RouteView mRoute;
 
 	private Handler mPrivateHandler = new Handler();
 	private Handler mScrollHandler = new Handler();

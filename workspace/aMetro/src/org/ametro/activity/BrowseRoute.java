@@ -27,8 +27,8 @@ import org.ametro.R;
 import org.ametro.adapter.RouteListViewAdapter;
 import org.ametro.adapter.StationListAdapter;
 import org.ametro.model.MapView;
-import org.ametro.model.Route;
 import org.ametro.model.StationView;
+import org.ametro.model.route.RouteView;
 import org.ametro.util.DateUtil;
 
 import android.app.Activity;
@@ -52,7 +52,7 @@ public class BrowseRoute extends Activity implements OnClickListener,
 	private TextView mTextTime;
 
 	private MapView mMapView;
-	private Route mRoute;
+	private RouteView mRoute;
 
 	private int mFromId;
 	private int mToId;
