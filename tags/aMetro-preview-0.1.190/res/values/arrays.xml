@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="pref_locale_texts">
+        <item>Auto</item>
+        <item>Russian</item>
+        <item>English</item>
+    </string-array>
+    <string-array name="pref_locale_values">
+        <item></item>
+        <item>ru</item>
+        <item>en</item>
+    </string-array>
+    <string-array name="import_pmz_cleanup_items">
+        <item>Selected</item>
+        <item>Obsolete</item>
+        <item>Invalid</item>
+        <item>All</item>
+    </string-array>
+
+    <string-array name="version_changelog">
+        <item>0.1.163-dev: changed stations/route lists appearance</item>
+        <item>0.1.164-dev: removed obsolete code</item>
+        <item>0.1.165-dev: added station selection activity, change log in about</item>
+        <item>0.1.166-dev: fixed import error on line end</item>
+        <item>0.1.167-dev: RU localization, station selection changed</item>
+        <item>0.1.168-dev: swap button moved to menu in create route, some resource improvements</item>
+        <item>0.1.169-dev: new browse route activity design</item>
+        <item>0.1.170-dev: favorites draft</item>
+        <item>0.1.171-dev: fixed UI for routes</item>
+        <item>0.1.172-dev: rewrited UI for favorite routes</item>
+        <item>0.1.173-dev: added context menu for favorite routes list</item>
+        <item>0.1.174-dev: optimized map loading time, pre-styled station info page</item>
+        <item>0.1.175-dev: added 'Delete' mode in favorite routes list, changed some icons</item>
+        <item>0.1.176-dev: finally favorite routes list, rewrited map and import menus, fixed routing errors</item>
+        <item>0.1.177-dev: a lot of minor fixes</item>
+        <item>0.1.178-dev: background design changes, reversed favorite routes list</item>
+        <item>0.1.179-dev: bug fixed: open station info failed when no station selected or file not exists</item>
+        <item>0.1.180-dev: fix route drop after map locale changing</item>
+        <item>0.1.181-dev: experimental backgound-thread rendering</item>
+        <item>0.1.182-dev: experimental rendering optimizations</item>
+        <item>0.1.184-dev: added settings for disable anti-aliasing</item>
+        <item>0.1.185-dev: experimental GPS/GSM location search</item>
+        <item>0.1.186-dev: GPS/GSM location search worked</item>
+        <item>0.1.187-dev: added native library</item>
+        <item>0.1.188-dev: added search coordinates activity</item>
+        <item>0.1.190-dev: rewrited drawing of stations names</item>
+    </string-array>
+
+    <string-array name="create_route_modes">
+        <item>Minimal Time</item>
+        <item>Minimal Transfers</item>
+    </string-array>
+    <string-array name="create_route_times">
+        <item>Day</item>
+        <item>Night</item>
+        <item>Rush</item>
+    </string-array>
+
+</resources>

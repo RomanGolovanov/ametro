@@ -1,0 +1,158 @@
+/*
+ * http://code.google.com/p/ametro/
+ * Transport map viewer for Android platform
+ * Copyright (C) 2009-2010 Roman.Golovanov@gmail.com and other
+ * respective project committers (see project home page)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ */
+
+package org.ametro.util.csv;
+
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.ametro.util.StringUtil;
+
+import android.graphics.Point;
+import android.graphics.Rect;
+
+/**
+ * @author Vlad Vinichenko (akerigan@gmail.com)
+ *         Date: 08.02.2010
+ *         Time: 23:14:49
+ */
+public class CsvWriter {
+
+	private static final String EMPTY_VALUE = "null";
+    private static final String DEFAULT_SEPARATOR = ";";
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-dd-MM HH:mm:ss z");
+
+    private BufferedWriter mWriter;
+    private String mSeparator;
+    private int mRow = -1;
+    private int mColumn;
+
+    public SimpleDateFormat dateFormat = DATE_FORMAT;
+
+    public CsvWriter(BufferedWriter writer, String separator) {
+        mWriter = writer;
+        mSeparator = separator;
+    }
+
+    public CsvWriter(BufferedWriter writer) {
+        this(writer, DEFAULT_SEPARATOR);
+    }
+
+    public void newRecord() throws IOException {
+        if (mRow < 0) {
+            mRow = 0;
+        } else {
+            mRow++;
+            mColumn = 0;
+            mWriter.newLine();
+        }
+    }
+
+    public void writeString(String value) throws IOException {
+        if (mColumn > 0) {
+            mWriter.write(mSeparator);
+        }
+        if (!StringUtil.isEmpty(value)) {
+            mWriter.write(value);
+        }
+        mColumn++;
+    }
+
+    public void writeInt(int value) throws IOException {
+        writeString(Integer.toString(value));
+    }
+
+    public void writeLong(long value) throws IOException {
+        writeString(Long.toString(value));
+    }
+
+    public void writeDouble(double value) throws IOException {
+        writeString(Double.toString(value));
+    }
+
+	public void writeNullableDouble(Double value) throws IOException {
+		if (value != null) {
+			writeString(Double.toString(value));
+		} else {
+			writeString(EMPTY_VALUE);
+		}
+	}
+    
+    public void writeFloat(float value) throws IOException {
+        writeString(Float.toString(value));
+    }
+
+    public void writeBoolean(boolean value) throws IOException {
+        if (value) {
+            writeString("1");
+        } else {
+            writeString("0");
+        }
+    }
+
+    public void writeDate(Date value) throws IOException {
+        if (value != null) {
+            writeString(dateFormat.format(value));
+        }
+    }
+
+	public void writeRect(Rect rect) throws IOException {
+		if(rect!=null){
+			writeString(StringUtil.formatRect(rect));
+		}else{
+			writeString(EMPTY_VALUE);
+		}
+	}
+
+	public void writePoint(Point point) throws IOException {
+		if(point!=null){
+			writeString(StringUtil.formatPoint(point));
+		}else{
+			writeString(EMPTY_VALUE);
+		}
+	}
+
+	public void writePointArray(Point[] points) throws IOException {
+		StringBuffer sb = new StringBuffer(points.length * 3 * 3);
+		for(Point p : points){
+			sb.append(p.x);
+			sb.append(",");
+			sb.append(p.y);
+			sb.append(",");
+		}
+		if(sb.length()>0){
+			sb.deleteCharAt(sb.length()-1);
+		}
+		writeString(sb.toString());
+	}
+	
+    public void flush() throws IOException {
+        mWriter.flush();
+    }
+
+    public void close() throws IOException {
+        mWriter.close();
+    }
+
+
+}

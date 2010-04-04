@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+    <string name="app_name">aMetro</string>
+    <string name="day">День</string>
+    <string name="night">Ночь</string>
+    <string name="stress">Час Пик</string>
+    <string name="import_status_not_imported">не импортирована</string>
+    <string name="import_status_deprecated">новая версия</string>
+    <string name="import_status_uptodate">уже импортирована</string>
+    <string name="import_status_override">имя карты конфликтует с %s - %s</string>
+    <string name="import_status_invalid">ошибка в .pmz файле</string>
+    <string name="import_title_confirm">Импорт</string>
+    <string name="import_title_indexing">Импорт</string>
+    <string name="import_title_report">Импорт - нажмите назад для возврата</string>
+    <string name="import_status_old_version">старая версия</string>
+    <string name="import_title_importing">Импорт</string>
+    <string name="import_title_empty">Импорт</string>
+    <string name="template_progress_count">%s из %s</string>
+    <string name="template_progress_percent">%s%%</string>
+    <string name="search_label">метка</string>
+    <string name="search_hint">поиск станции...</string>
+    <string name="search_station">Поиск станции</string>
+    <string name="create_route_from">станция отправления</string>
+    <string name="create_route_to">станция назначения</string>
+    <string name="create_route_swap_button">Обмен</string>
+    <string name="create_route_create_button">Искать</string>
+    <string name="create_route_wait_title">Поиск маршрутов</string>
+    <string name="create_route_wait_text">Пожалуйста подождите...</string>
+    <string name="create_route_mode_transfer_button">Время</string>
+    <string name="create_route_mode_time_button">Переходы</string>
+    <string name="create_route_favorites_button">Избранное</string>
+    <string name="favorite_route_delete">Удалить</string>
+    <string name="favorite_route_cancel">Отмена</string>
+    <string name="locate_wait_title">Поиск города</string>
+    <string name="locate_wait_text">Пожалуйста подождите...</string>
+    
+    <string name="pref_section_general">Основные</string>
+    <string name="pref_section_debug">Отладка</string>
+    <string name="pref_locale_key">LOCALE</string>
+    <string name="pref_locale">Язык</string>
+    <string name="pref_auto_update_map_index">Авто-обновление списка карт</string>
+    <string name="pref_auto_update_map_index_key">AUTO_UPDATE_INDEX</string>
+    <string name="pref_auto_update_maps">Авто-обновление карт</string>
+    <string name="pref_auto_update_maps_key">AUTO_UPDATE_MAPS</string>
+    <string name="pref_auto_locate">Определение положения</string>
+    <string name="pref_auto_locate_key">AUTO_LOCATION</string>
+    <string name="pref_locale_description">Язык используемый при отображении карт</string>
+    <string name="pref_auto_update_map_index_description">Обновлять список карт с сервера при наличии сети</string>
+    <string name="pref_auto_update_maps_description">Обновлять карты с сервера при наличии сети</string>
+    <string name="pref_auto_locate_description">Использовать GPS/GSM для определения местоположения</string>
+    <string name="pref_debug">Режим отладки</string>
+    <string name="pref_debug_key">DEBUG</string>
+    <string name="pref_debug_description">Выводятся дополнительные сообщения</string>
+    <string name="pref_auto_import_addons">Импорт доп.информации</string>
+    <string name="pref_auto_import_addons_description">Импортировать дополнительные тексты из PMZ карт</string>
+    <string name="pref_auto_import_addons_key">IMPORT_ADDONS</string>
+    <string name="pref_anti_alias">Включить сглаживание</string>
+    <string name="pref_anti_alias_key">ANTI_ALIAS</string>
+    <string name="pref_anti_alias_description">Сглаживать изображение карты</string>
+    <string name="pref_anti_alias_disable_on_scroll">Без сглаживания при прокрутке</string>
+    <string name="pref_anti_alias_disable_on_scroll_key">ANTI_ALIAS_DISABLE_ON_SCROLL</string>
+    <string name="pref_anti_alias_disable_on_scroll_description">Увеличит скорость работы на медленных устройствах</string>
+    <string name="text_about">
+&lt;h4&gt;aMetro v.%s&lt;h4&gt;
+&lt;h5&gt;Навигация по картам метро  городов мира.&lt;/h6&gt;
+&lt;h6&gt;Отображает схемы метро (и других транспортных сетей), позволяет Вам находить кратчайший путь между двумя точками. Карты совместимы с 
+картами проекта pMetro. ©2010&lt;/h6&gt;
+&lt;p&gt;
+Разработчики: Голованов Роман, Виниченко Влад&lt;br/&gt;
+Тестеры: Кузьмин Александр, Никитин Алексей&lt;br/&gt;
+Дизайн: Dusty Rat&lt;br/&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Схемы и время проезда взяты из проекта pMetro Мурадова Бориса с согласия автора (www.pmetro.su).&lt;/p&gt;
+&lt;p&gt;Сайт проекта: http://sites.google.com/site/ametroproject&lt;/p&gt;
+&lt;p&gt;Вопросы и пожелания присылайте на ametroproject@gmail.com&lt;/p&gt;
+	</string>
+    <string name="menu_search">Поиск</string>
+    <string name="menu_library">Карты</string>
+    <string name="menu_routes">Маршрут</string>
+    <string name="menu_time">Время</string>
+    <string name="menu_station">Станция</string>
+    <string name="menu_settings">Настройки</string>
+    <string name="menu_about">О программе</string>
+    <string name="menu_experimental">Тестовый режим</string>
+    <string name="menu_refresh">Обновить</string>
+    <string name="menu_location">Где я?</string>
+    <string name="menu_import">Импорт</string>
+    <string name="menu_all_maps">Все карты</string>
+    <string name="menu_my_maps">Мои карты</string>
+    <string name="menu_select_all">Выбрать все</string>
+    <string name="menu_select_none">Очистить выбор</string>
+    <string name="menu_cleanup">Очистка</string>
+    <string name="menu_stop">Остановить</string>
+    <string name="menu_sort_by_name">По имени</string>
+    <string name="menu_sort_by_line">По ветке</string>
+    <string name="menu_favorites">Избранное</string>
+    <string name="menu_recent">Последние</string>
+    <string name="menu_add">Добавить</string>
+    <string name="menu_remove">Удалить</string>
+    <string name="menu_ignore">Игнорировать</string>
+    <string name="menu_swap">Обмен</string>
+    <string name="menu_show_on_map">Показать на карте</string>
+    <string name="menu_info">Информация</string>
+    <string name="menu_layers">Слои</string>
+    <string name="menu_schemes">Схемы</string>
+    <string name="menu_"/>
+    <string name="msg_loading">Загрузка...</string>
+    <string name="msg_caching">Кеширование карты...</string>
+    <string name="msg_no_maps_in_library">Нет карт в каталоге</string>
+    <string name="msg_press_menu_import">нажмите menu и импортируйте новые карты</string>
+    <string name="msg_no_map_loaded">Нет карты</string>
+    <string name="msg_press_menu_maps">нажмите menu и выберите карту</string>
+    <string name="msg_import_pmz_progress">"Импортируется карта %s/%s"</string>
+    <string name="msg_no_maps_in_import">Нет PMZ карт для импорта</string>
+    <string name="msg_copy_files_to_import">Скопируйте PMZ файлы на карту памяти в каталог</string>
+    <string name="msg_import_path">/sdcard/ametro/import</string>
+    <string name="msg_loading_maps">Загрузка карт...</string>
+    <string name="msg_no_addons">Описание станции не найдено</string>
+    <string name="msg_addon_corrupted">Описание старнции повреждено</string>
+    <string name="msg_error_map_loading">Ошибка загрузки карты: </string>
+    <string name="msg_route_time">Время проезда</string>
+    <string name="msg_route_not_found">Маршрут не найден</string>
+    <string name="msg_search_pmz_files">Поиск PMZ файлов...</string>
+    <string name="msg_read_pmz_files">Чтение PMZ файлов...</string>
+    <string name="msg_import_pmz_files">Импорт PMZ файлов...</string>
+    <string name="msg_import_failed">Ошибка импорта</string>
+    <string name="msg_station_not_found">Станция не найдена</string>
+    <string name="msg_route_added_to_favorites">Добавлен в Избранное</string>
+    <string name="msg_route_removed_from_favorites">Удален из Избранного</string>
+    <string name="msg_no_favorites">Избранное пусто</string>
+    <string name="msg_location_found">Вы находитесь в городе %s, %s</string>
+    <string name="msg_location_unknown">Ваше местоположение неизвестно</string>
+    <string name="msg_detect_location">Определение координат</string>
+    <string name="msg_"/>
+    <string name="log_map_indexing_failed">Map indexing failed for </string>
+    <string name="log_save_map_zoom">Save map zoom </string>
+    <string name="log_save_map_position">Save map position </string>
+    <string name="log_restore_map_zoom">Restore map zoom </string>
+    <string name="log_restore_map_position">Restore map position </string>
+    <string name="log_default_map_zoom">Default map zoom </string>
+    <string name="log_default_map_position">Default map position </string>
+    <string name="log_loaded_subway_map">Loaded subwayMap </string>
+    <string name="log_with_size"> width size </string>
+    <string name="log_failed_map_loading">Failed map loading</string>
+    <string name="log_pmz_indexing_error">PMZ indexing error</string>
+    <string name="log_import_failed">Import failed</string>
+    <string name="log_"/>
+    <string name="menu_select">Выбрать</string>
+</resources>
