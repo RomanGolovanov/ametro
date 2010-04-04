@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -56,7 +57,7 @@ public class PmzStorage implements IModelStorage {
 
 	private static final String ENCODING = "windows-1251";
 
-	public Model loadModel(String fileName, Locale locale) {
+	public Model loadModel(String fileName, Locale locale) throws IOException {
 		PmzImporter importer = new PmzImporter(fileName,false);
 		try {
 			Model model = importer.getModel();
@@ -67,7 +68,7 @@ public class PmzStorage implements IModelStorage {
 		}	
 	}
 
-	public Model loadModelDescription(String fileName, Locale locale) {
+	public Model loadModelDescription(String fileName, Locale locale) throws IOException {
 		PmzImporter importer = new PmzImporter(fileName,true);
 		try {
 			Model model = importer.getModel();
@@ -78,15 +79,15 @@ public class PmzStorage implements IModelStorage {
 		}	
 	}
 
-	public boolean saveModel(String fileName, Model model) {
+	public void saveModel(String fileName, Model model) throws IOException {
 		throw new NotImplementedException();
 	}
 
-	public void loadModelLocale(String fileName, Model model, Locale locale) {
+	public String[] loadModelLocale(String fileName, Model model, int localeId) throws IOException {
 		throw new NotImplementedException();
 	}
 
-	public MapView loadModelView(String fileName, Model model, String name) {
+	public MapView loadModelView(String fileName, Model model, String name) throws IOException {
 		throw new NotImplementedException();
 	}
 
@@ -193,6 +194,8 @@ public class PmzStorage implements IModelStorage {
 		}
 
 		private void importTxtFiles() {
+			Collections.sort(mTxtFiles);
+			
 			// TODO Auto-generated method stub
 
 		}

@@ -20,17 +20,19 @@
  */
 package org.ametro.model.storage;
 
-import java.io.IOException;
 import java.util.Locale;
 
+import org.ametro.Constants;
 import org.ametro.model.MapView;
 import org.ametro.model.Model;
 import org.ametro.util.StringUtil;
 
+import android.util.Log;
+
 public class ModelBuilder {
 
 	//private static final int BUFFER_SIZE = 8196;
-	
+
 	private static IModelStorage getStorage(String fileName){
 		if(StringUtil.isEmpty(fileName)) return null;
 		if(fileName.toLowerCase().endsWith(".pmz")) return new PmzStorage();
@@ -38,53 +40,142 @@ public class ModelBuilder {
 		return null;
 	}
 
-	public static Model loadModel(String fileName) throws IOException{
+	public static Model loadModel(String fileName){
 		return loadModel(fileName,Locale.getDefault());
 	}
-	
-	public static Model loadModel(String fileName, Locale locale) throws IOException{
+
+	public static Model loadModel(String fileName, Locale locale){
 		IModelStorage storage = getStorage(fileName);
 		if(storage!=null){
-			Model model = storage.loadModel(fileName, locale);
-			return model;
+			try{
+				long startTime = System.currentTimeMillis();
+				Model model = storage.loadModel(fileName, locale);
+				if(!Model.isNullOrEmpty(model) ){
+					if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)) {
+						Log.i(Constants.LOG_TAG_MAIN, "Model loading time is "
+								+ (System.currentTimeMillis() - startTime) + "ms, Provider " + storage.getClass().getSimpleName());
+					}
+				}else{
+					if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)) {
+						Log.e(Constants.LOG_TAG_MAIN, "Model loading error - incorrect file, Provider " + storage.getClass().getSimpleName());
+					}
+				}			
+				return model;
+			}catch(Throwable e)
+			{
+				if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)) {
+					Log.e(Constants.LOG_TAG_MAIN, "Model loading error, Provider " + storage.getClass().getSimpleName(), e);
+				}
+			}
 		}
-		
 		return null;
 	}
 
-	public static Model loadModelDescription(String fileName) throws IOException{
+	public static Model loadModelDescription(String fileName){
 		return loadModelDescription(fileName, Locale.getDefault());
 	}
-	
-	public static Model loadModelDescription(String fileName, Locale locale) throws IOException{
+
+	public static Model loadModelDescription(String fileName, Locale locale) {
 		IModelStorage storage = getStorage(fileName);
 		if(storage!=null){
-			return storage.loadModelDescription(fileName, locale);
+			try{
+				long startTime = System.currentTimeMillis();
+				Model model = storage.loadModelDescription(fileName, locale);
+				if(Model.isDescriptionLoaded(model) ){
+					if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)) {
+						Log.i(Constants.LOG_TAG_MAIN, "Model description loading time is "
+								+ (System.currentTimeMillis() - startTime) + "ms, Provider " + storage.getClass().getSimpleName());
+					}
+				}else{
+					if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)) {
+						Log.e(Constants.LOG_TAG_MAIN, "Model description loading error - incorrect file, Provider " + storage.getClass().getSimpleName());
+					}
+				}			
+				return model;
+			}catch(Throwable e)
+			{
+				if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)) {
+					Log.e(Constants.LOG_TAG_MAIN, "Model description loading error, Provider " + storage.getClass().getSimpleName(), e);
+				}
+			}
 		}
 		return null;
 	}
-	
-	public static void saveModel(String fileName, Model model) throws IOException{
+
+	public static void saveModel(String fileName, Model model) {
 		IModelStorage storage = getStorage(fileName);
 		if(storage!=null){
-			storage.saveModel(fileName, model);
+			try{
+				long startTime = System.currentTimeMillis();
+				storage.saveModel(fileName, model);
+				if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)) {
+					Log.i(Constants.LOG_TAG_MAIN, "Model saving time is "
+							+ (System.currentTimeMillis() - startTime) + "ms, Provider " + storage.getClass().getSimpleName() );
+				}
+			}catch(Throwable e)
+			{
+				if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)) {
+					Log.e(Constants.LOG_TAG_MAIN, "Model saving error, Provider " + storage.getClass().getSimpleName(), e);
+				}
+			}
 		}
 	}
 
 	public static MapView loadModelView(String fileName, Model model, String name) {
 		IModelStorage storage = getStorage(fileName);
 		if(storage!=null){
-			return storage.loadModelView(fileName, model, name);
+			try{
+				long startTime = System.currentTimeMillis();
+				MapView view = storage.loadModelView(fileName, model, name);
+				if(view!=null){
+					if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)) {
+						Log.i(Constants.LOG_TAG_MAIN, "Model view " + name + " loading time is "
+								+ (System.currentTimeMillis() - startTime) + "ms, Provider " + storage.getClass().getSimpleName() );
+					}
+				}else{
+					if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)) {
+						Log.i(Constants.LOG_TAG_MAIN, "Model view " + name + " not found, Provider " + storage.getClass().getSimpleName() );
+					}
+
+				}
+				return view;
+			}catch(Throwable e)
+			{
+				if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)) {
+					Log.e(Constants.LOG_TAG_MAIN, "Model view " + name + " loading error, Provider " + storage.getClass().getSimpleName(), e);
+				}
+			}			
 		}
 		return null;
 	}
-	
-//	public static void loadModelLocale(String fileName, Model model, Locale locale) throws IOException{
-//		IModelStorage storage = getStorage(fileName);
-//		if(storage!=null){
-//			storage.loadModelLocale(fileName, model, locale);
-//		}	
-//	}
 
-	
+	public static String[] loadModelLocale(String fileName, Model model, int localeId) {
+		IModelStorage storage = getStorage(fileName);
+		if(storage!=null){
+			try{
+				long startTime = System.currentTimeMillis();
+				String localeName = model.locales[localeId];
+				String[] texts = storage.loadModelLocale(fileName, model, localeId);
+				if(texts!=null){
+					if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)) {
+						Log.i(Constants.LOG_TAG_MAIN, "Model locale " + localeName + " loading time is "
+								+ (System.currentTimeMillis() - startTime) + "ms, Provider " + storage.getClass().getSimpleName() );
+					}
+				}else{
+					if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)) {
+						Log.i(Constants.LOG_TAG_MAIN, "Model locale " + localeName + " not found, Provider " + storage.getClass().getSimpleName() );
+					}
+
+				}
+				return texts;
+			}catch(Throwable e)
+			{
+				if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)) {
+					Log.e(Constants.LOG_TAG_MAIN, "Model locale #" + localeId + " loading error, Provider " + storage.getClass().getSimpleName(), e);
+				}
+			}			
+		}
+		return null;
+	}
+
 }
