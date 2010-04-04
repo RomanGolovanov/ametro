@@ -22,7 +22,7 @@ package org.ametro.adapter;
 
 import org.ametro.model.LineView;
 import org.ametro.model.MapView;
-import org.ametro.model.Route;
+import org.ametro.model.route.RouteView;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -43,7 +43,7 @@ public class RouteListViewAdapter extends StationListAdapter {
 	private Drawable mFirstItemDrawable;
 	private Drawable mLastItemDrawable;
 
-	public RouteListViewAdapter(Activity activity, Route route,
+	public RouteListViewAdapter(Activity activity, RouteView route,
 			MapView map) {
 		super(activity, route.getStations(), route.getDelays(), map);
 		mBackgroundPaint = new Paint();
