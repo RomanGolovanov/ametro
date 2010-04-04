@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
+import org.ametro.algorithm.DijkstraHeap;
+
 import android.graphics.Rect;
 
 public class Route {
@@ -117,33 +119,41 @@ public class Route {
 	
 
 	public void findRoute() {
-//		final MapView map = mMapView;
-//		final int count = map.stations.length;
-
-//		DijkstraHeap.Graph g = new DijkstraHeap.Graph(count);
-//		for (SegmentView seg : map.segments) {
-//			Double delay = seg.delay;
-//			if (delay != null) {
-//				double d = (double)delay;
-//				g.addEdge(seg.fromStationId,seg.toStationId, (int)d);
-//			}
-//		}
-//		for(TransferView tr : map.transfers){
-//			Double delay = tr.delay;
-//			if (delay != null && delay != 0) {
-//				int d = (int)Math.round(delay);
-//				g.addEdge(tr.fromStationId,tr.toStationId, d);
-//				g.addEdge(tr.toStationId, tr.fromStationId, d);
-//			}
-//		}
-//	    long[] distances = new long[count];
-//	    int[] pred = new int[count];
+		
+		final Model model = mMapView.owner;
+		final MapView map = mMapView;
+		
+		final int count = model.stations.length;
+		
+		DijkstraHeap.Graph g = new DijkstraHeap.Graph(count);
+		
+		for (SegmentView seg : map.segments) {
+			TransportSegment tseg = model.segments[seg.segmentId];
+			Integer delay = tseg.delay;
+			if (delay != null) {
+				g.addEdge(tseg.stationFromId,tseg.stationToId, (int)delay);
+			}
+		}
+		
+		for(TransferView tr : map.transfers){
+			TransportTransfer ttr = model.transfers[tr.transferId];
+			Integer delay = ttr.delay;
+			if (delay != null && delay != 0) {
+				g.addEdge(ttr.stationFromId,ttr.stationToId, delay);
+				g.addEdge(ttr.stationToId, ttr.stationFromId, delay);
+			}
+		}
+		
+	    long[] distances = new long[count];
+	    int[] pred = new int[count];
+	    DijkstraHeap.dijkstra(g, map.stations[mFromId].stationId, distances, pred);
+		
 	    ArrayList<SegmentView> segments = new ArrayList<SegmentView>();
 	    ArrayList<StationView> stations = new ArrayList<StationView>();
 	    ArrayList<TransferView> transfers = new ArrayList<TransferView>();
 	    ArrayList<Long> delays = new ArrayList<Long>();
 	    HashMap<StationView, Long> stationToDelay = new HashMap<StationView, Long>();
-//	    DijkstraHeap.dijkstra(g, mFromId, distances, pred);
+	    
 //		
 //	    int to = mToId;
 //	    int from = pred[to];

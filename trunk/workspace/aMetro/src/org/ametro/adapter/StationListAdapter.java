@@ -243,7 +243,7 @@ public class StationListAdapter extends BaseAdapter implements Filterable {
 		if(dw == null){
 			Bitmap bmp = Bitmap.createBitmap(ICON_WIDTH, ICON_HEIGHT, Config.ARGB_8888);
 			Canvas c = new Canvas(bmp);
-			mPaint.setColor(line.lineColor);
+			mPaint.setColor(0xFF000000 | line.lineColor);
 			c.drawCircle(ICON_WIDTH/2, ICON_HEIGHT/2, ICON_DIAMETER, mPaint);
 			
 			dw = new BitmapDrawable(bmp);

@@ -34,10 +34,11 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import org.ametro.model.LineView;
-import org.ametro.model.MapLayer;
+import org.ametro.model.MapLayerContainer;
 import org.ametro.model.MapView;
 import org.ametro.model.Model;
 import org.ametro.model.SegmentView;
+import org.ametro.model.TransportStationInfo;
 import org.ametro.model.StationView;
 import org.ametro.model.TransferView;
 import org.ametro.model.TransportLine;
@@ -107,14 +108,16 @@ public class PmzStorage implements IModelStorage {
 		private ArrayList<TransportMap> mTransportMaps = new ArrayList<TransportMap>();
 
 		private ArrayList<TransportLine> mTransportLines = new ArrayList<TransportLine>();
+
 		private ArrayList<TransportStation> mTransportStations = new ArrayList<TransportStation>();
+
 		private ArrayList<TransportSegment> mTransportSegments = new ArrayList<TransportSegment>();
 		private ArrayList<TransportTransfer> mTransportTransfers = new ArrayList<TransportTransfer>();
 
 		private ArrayList<MapView> mMapViews = new ArrayList<MapView>();
 		private ArrayList<String> mMapViewNames = new ArrayList<String>();
 
-		private ArrayList<MapLayer> mMapLayers = new ArrayList<MapLayer>();
+		private ArrayList<MapLayerContainer> mMapLayers = new ArrayList<MapLayerContainer>();
 		private ArrayList<String> mMapLayerNames = new ArrayList<String>();
 
 		private HashMap<String,TransportStation> mTransportStationIndex = new HashMap<String,TransportStation>();
@@ -123,6 +126,8 @@ public class PmzStorage implements IModelStorage {
 
 		private ArrayList<String> mTexts = new ArrayList<String>();
 
+		private HashMap<Integer, StationInfo> mStationInfo = new HashMap<Integer, StationInfo>();
+		
 		private int[] getMapsNumbers(String[] maps) {
 			ArrayList<Integer> res = new ArrayList<Integer>();
 			for(String mapSystemName : maps){
@@ -183,7 +188,7 @@ public class PmzStorage implements IModelStorage {
 				if(!mDescriptionOnly) { 
 					importTrpFiles(); // load data from .trp files 
 					importMapFiles(); // load data from .map files
-					importTxtFiles(); // load data from .txt files
+					//importTxtFiles(); // load data from .txt files
 				}
 				makeModel(); // make model from imported data
 			}finally{
@@ -193,11 +198,103 @@ public class PmzStorage implements IModelStorage {
 			}
 		}
 
-		private void importTxtFiles() {
+		@SuppressWarnings("unused")
+		private void importTxtFiles() throws IOException {
 			Collections.sort(mTxtFiles);
-			
-			// TODO Auto-generated method stub
 
+			final Model model = mModel;
+
+			for(String fileName : mTxtFiles){
+				InputStream stream = mZipFile.getInputStream(mZipFile.getEntry(fileName));
+				IniStreamReader ini = new IniStreamReader(new InputStreamReader(stream, ENCODING)); // access as INI file
+
+				boolean addToStationInfo = false;
+				String caption = null;
+				String prefix = null;
+				//String menuName = null;
+
+				while(ini.readNext()){ 
+					final String key = ini.getKey(); 
+					final String value = ini.getValue();
+					final String section = ini.getSection();
+
+					if(section!=null){
+						if(section.startsWith("Options")){ 
+							if(key.equalsIgnoreCase("AddToInfo")){ 
+								addToStationInfo = value.equalsIgnoreCase("1");
+							}else if(key.equalsIgnoreCase("CityName")){
+								// skip
+							}else if(key.equalsIgnoreCase("MenuName")){
+								//menuName = (value);
+							}else if(key.equalsIgnoreCase("MenuImage")){
+	
+							}else if(key.equalsIgnoreCase("Caption")){
+								caption = (value);
+							}else if(key.equalsIgnoreCase("StringToAdd")){
+								String txt = value.trim();
+								if(txt.length() > 0){
+									if(txt.startsWith("'") && txt.endsWith("'")){
+										txt = txt.substring(1, txt.length()-1 ).trim();
+									}
+									prefix = (txt);
+								}
+							}			
+						}else{
+							if(addToStationInfo){
+								makeStationInfo(caption, prefix, key, value, section);
+							}
+						}
+					}
+				}
+			}
+			
+			TransportStationInfo[] lst = new TransportStationInfo[mTransportStations.size()];
+			for(TransportStation station : mTransportStations){
+				StationInfo src = mStationInfo.get(station.id);
+				if(src!=null){
+					TransportStationInfo info = new TransportStationInfo();
+					String[] captions = (String[]) src.captions.toArray(new String[src.captions.size()]);
+					info.captions = appendTextArray(captions);
+					int len = captions.length;
+					int[][] lines = new int[len][];
+					for(int i = 0; i<len; i++){
+						String caption = captions[i];
+						ArrayList<String> textLines = src.data.get(caption);
+						if(textLines!=null){
+							String[] textLinesArray = (String[]) textLines.toArray(new String[textLines.size()]);
+							lines[i] = appendTextArray(textLinesArray);
+						}else{
+							lines[i] = null;
+						}
+					}
+					info.lines = lines;
+					lst[station.id] = info;
+				}
+			}
+			model.stationInfos = lst;
+
+		}
+
+		private void makeStationInfo(String caption, String prefix,
+				final String key, final String value, final String section) {
+			TransportStation station = getStation(section, key);
+			if(station!=null){
+				StationInfo info = mStationInfo.get(station.id);
+				if(info==null){
+					info = new StationInfo();
+					mStationInfo.put(station.id, info);
+				}
+				ArrayList<String> lines = info.data.get(caption);
+				if(lines == null){
+					lines = new ArrayList<String>();
+					info.captions.add(caption);
+					info.data.put(caption, lines);
+				}
+				String[] textLines = StringUtil.fastSplit( value.replace("\\n",";"), ';' );
+				for(String textLine : textLines){
+					lines.add(prefix + textLine);
+				}
+			}
 		}
 
 		private void importMapFiles() throws IOException {
@@ -327,7 +424,7 @@ public class PmzStorage implements IModelStorage {
 
 				fixViewDimensions(view);
 			}
-			
+
 		}
 
 		private void makeAdditionalNodes(
@@ -379,7 +476,7 @@ public class PmzStorage implements IModelStorage {
 						continue;
 					}
 				}
-				
+
 				final SegmentView segmentView = new SegmentView();
 				segmentView.id = base++;
 				segmentView.lineViewId = lineViewIndex.get(segment.lineId);
@@ -601,11 +698,11 @@ public class PmzStorage implements IModelStorage {
 			model.stations = (TransportStation[]) mTransportStations.toArray(new TransportStation[mTransportStations.size()]);
 			model.segments = (TransportSegment[]) mTransportSegments.toArray(new TransportSegment[mTransportSegments.size()]);
 			model.transfers = (TransportTransfer[]) mTransportTransfers.toArray(new TransportTransfer[mTransportTransfers.size()]);
-			
+
 			model.views = (MapView[]) mMapViews.toArray(new MapView[mMapViews.size()]);
 			model.viewNames = (String[]) mMapViewNames.toArray(new String[mMapViewNames.size()]);
-			
-			model.layers = (MapLayer[]) mMapLayers.toArray(new MapLayer[mMapLayers.size()]);
+
+			model.layers = (MapLayerContainer[]) mMapLayers.toArray(new MapLayerContainer[mMapLayers.size()]);
 			model.layerNames = (String[]) mMapLayerNames.toArray(new String[mMapLayerNames.size()]);
 
 			model.systemName = mFile.getName();
@@ -943,6 +1040,12 @@ public class PmzStorage implements IModelStorage {
 			return mModel;
 		}
 
+	}
+
+	private static class StationInfo
+	{
+		public ArrayList<String> captions = new ArrayList<String>();
+		public HashMap<String, ArrayList<String>> data = new HashMap<String, ArrayList<String>>();
 	}
 
 	private static class SegmentInfo

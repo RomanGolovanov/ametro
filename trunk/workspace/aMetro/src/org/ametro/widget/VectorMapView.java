@@ -71,7 +71,11 @@ public class VectorMapView extends BaseMapView {
 			mMapView = null;
 		}
 	}
-
+	
+	public void updateModel(){
+		mRenderProgram = new RenderProgram(mMapView);
+	}
+	
 	public void setModelSelection(List<StationView> stations, List<SegmentView> segments, List<TransferView> transfers){
 		mRenderProgram.updateSelection(stations, segments, transfers);
 		destroyTileCache();

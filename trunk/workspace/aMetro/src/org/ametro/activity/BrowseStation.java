@@ -20,49 +20,14 @@
  */
 package org.ametro.activity;
 
-import org.ametro.R;
-import org.ametro.adapter.AddonEntryListAdapter;
-import org.ametro.model.StationAddon;
-
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.ListView;
-import android.widget.Toast;
 
 public class BrowseStation extends Activity {
 
-	private StationAddon mStationAddon;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		//StationView station = BrowseVectorMap.Instance.getCurrentStation();
-		//String mapName = BrowseVectorMap.Instance.getMapName();
-		//String mapFileName = MapSettings.getMapFileName(mapName);
-		
-//		try {
-//			mStationAddon = Deserializer.tryDeserializeAddon(station, new FileInputStream(mapFileName));
-//		} catch (FileNotFoundException e) {
-//			Toast.makeText(this, getString(R.string.msg_no_addons), Toast.LENGTH_SHORT).show();
-//			finish();
-//			return;
-//		} catch (IOException e) {
-//			Toast.makeText(this, getString(R.string.msg_addon_corrupted), Toast.LENGTH_SHORT).show();
-//			finish();
-//			return;
-//		}
-		if(mStationAddon==null){
-			Toast.makeText(this, getString(R.string.msg_no_addons), Toast.LENGTH_SHORT).show();
-			finish();
-			return;
-		}
-		
 
-		ListView list = new ListView(this);
-		
-		AddonEntryListAdapter adapter = new AddonEntryListAdapter(this, mStationAddon);
-		list.setAdapter(adapter);
-
-		setContentView(list);
 	}
 }
