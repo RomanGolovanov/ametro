@@ -258,6 +258,11 @@ public class VectorMapView extends BaseMapView {
 					canvas.clipRect(0, 0, width, height);
 					canvas.scale(mScale, mScale);
 					//canvas.translate(-modelOuter.left, -modelOuter.top);
+					if(mAntiAliasEnabled && !mAntiAlias){
+						mAntiAlias = true;
+						mUpdatedAntiAlias = true;
+						mRenderProgram.setAntiAlias(mAntiAlias);
+					}
 					mRenderProgram.setVisibilityAll();
 					mRenderProgram.draw(canvas);
 

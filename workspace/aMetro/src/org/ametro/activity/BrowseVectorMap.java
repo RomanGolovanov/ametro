@@ -961,10 +961,10 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			RenderProgram.ALL,
 			RenderProgram.ALL,
 			RenderProgram.ALL,
-			RenderProgram.ONLY_TRANSPORT,
-			RenderProgram.ONLY_TRANSPORT,
-			RenderProgram.ONLY_TRANSPORT,
-			RenderProgram.ONLY_TRANSPORT,
+			RenderProgram.ALL,
+			RenderProgram.ALL,
+			RenderProgram.ALL,
+			RenderProgram.ALL,
 	};
 
 	private final int MIN_ZOOM_LEVEL = 0;
