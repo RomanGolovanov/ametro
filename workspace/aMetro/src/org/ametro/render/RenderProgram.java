@@ -288,5 +288,16 @@ public class RenderProgram {
 		//final long endTime = System.currentTimeMillis();
 		//Log.d("aMetro", "drawing time is " + (endTime-startTime) );
 	}
+
+	public static int getGrayedColor(int color) {
+		if(color == Color.BLACK){
+			return 0xFFd0d0d0;
+		}
+		float[] hsv = new float[3]; 
+		Color.colorToHSV(color, hsv);
+		hsv[1] = 0.1f;
+		hsv[2] = 0.9f;
+		return Color.HSVToColor(0xFF, hsv);
+	}
 	
 }
