@@ -2,11 +2,13 @@ package org.ametro.model.route;
 
 public class TransportRoute {
 
-	public int stationFromId;
-	public int stationToId;
+	/*package*/ int stationFromId;
+	/*package*/ int stationToId;
 
-	public int[] stations;
-	public Integer[] segments;
-	public Integer[] transfers;
+	/*package*/ int[] stations;
+	/*package*/ Integer[] segments;
+	/*package*/ Integer[] transfers;
+	
+	/*package*/ int length;
 	
 }

@@ -72,15 +72,15 @@ public class MapView {
 	public boolean hasConnections(StationView station) {
 		if (station != null) {
 			return true;
-//			final int id = station.id;
-//			for (SegmentView segment : segments) {
-//				if(segment.stationViewFromId == id || segment.stationViewToId == id){
-//					Integer delay = owner.segments[segment.id].delay;
-//					if (delay != null && delay != 0) {
-//						return true;
-//					}
-//				}			
-//			}
+			//			final int id = station.id;
+			//			for (SegmentView segment : segments) {
+			//				if(segment.stationViewFromId == id || segment.stationViewToId == id){
+			//					Integer delay = owner.segments[segment.id].delay;
+			//					if (delay != null && delay != 0) {
+			//						return true;
+			//					}
+			//				}			
+			//			}
 		}
 		return false;
 	}
@@ -125,7 +125,7 @@ public class MapView {
 		if(lineView!=null){
 			for(StationView station : stations){
 				if(station.lineViewId == lineView.id){
-					if(station.getName().equalsIgnoreCase(stationName)){
+					if(station.getSystemName().equalsIgnoreCase(stationName)){
 						return station;
 					}
 				}
@@ -144,17 +144,28 @@ public class MapView {
 		return null;
 	}
 
-	//		public LineView getLineView(int lineId) {
-	//			if(linesIndexed == null){
-	//				linesIndexed = new HashMap<Integer, LineView>();
-	//				for(LineView line : lines){
-	//					linesIndexed.put(line.id, line);
-	//				}
-	//			}
-	//			return linesIndexed.get(lineId);
-	//		}
+	public StationView getStationViewByDisplayName(String lineName, String stationName) {
+		LineView lineView = getLineViewByDisplayName(lineName);
+		if(lineView!=null){
+			for(StationView station : stations){
+				if(station.lineViewId == lineView.id){
+					if(station.getName().equalsIgnoreCase(stationName)){
+						return station;
+					}
+				}
+			}
+		}
+		return null;
+	}
 
-
-
+	public LineView getLineViewByDisplayName(String lineName) {
+		for(LineView line : lines){
+			final TransportLine l = owner.lines[line.id];
+			if(l.getName().equalsIgnoreCase(lineName)){
+				return line;
+			}
+		}
+		return null;
+	}
 
 }

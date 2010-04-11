@@ -9,9 +9,15 @@ public class RouteBuilder {
 	public final static int ROUTE_OPTION_SIMPLEST = 2;
 	public final static int ROUTE_OPTION_ALL = ROUTE_OPTION_SHORTEST | ROUTE_OPTION_SIMPLEST;
 	
-	public static RouteContainer createRoutes(Model model, int stationFromId, int stationToId, int options)
+	public static RouteContainer createRoutes(Model model, int[] stations, int options)
 	{
 		RouteContainer set = new RouteContainer();
+		set.stations = stations;
+		set.exclude = null;
+		set.flags = options;
+		set.routes = new TransportRoute[0];
+		
+		//TODO: find routes there
 		
 		return set;
 	}
