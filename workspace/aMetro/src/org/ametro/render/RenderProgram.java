@@ -224,6 +224,20 @@ public class RenderProgram {
 		}
 	}
 
+	public void setVisibilityAll() {
+		final RenderElement[] elements = mElements;
+		final int count = elements.length;
+		final int[] types = mTypes;
+		final ArrayList<RenderElement> elems = mClipping;
+		elems.clear();
+		for (int i = 0; i < count; i++) {
+			if(  (types[i] & mRenderFilter)>0){
+				elems.add(elements[i]);
+			}
+		}
+		mElementsToRender = (RenderElement[]) elems.toArray(new RenderElement[elems.size()]);
+	}
+	
 	public void setVisibility(RectF viewport) {
 		final int offset = 10;
 		final Rect v = new Rect(

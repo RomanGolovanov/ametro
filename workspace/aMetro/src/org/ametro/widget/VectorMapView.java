@@ -23,6 +23,7 @@ package org.ametro.widget;
 
 import java.util.List;
 
+import org.ametro.Constants;
 import org.ametro.model.MapView;
 import org.ametro.model.SegmentView;
 import org.ametro.model.StationView;
@@ -40,6 +41,7 @@ import android.graphics.RectF;
 import android.graphics.Bitmap.Config;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.Log;
 
 public class VectorMapView extends BaseMapView {
 
@@ -71,11 +73,11 @@ public class VectorMapView extends BaseMapView {
 			mMapView = null;
 		}
 	}
-	
+
 	public void updateModel(){
 		mRenderProgram = new RenderProgram(mMapView);
 	}
-	
+
 	public void setModelSelection(List<StationView> stations, List<SegmentView> segments, List<TransferView> transfers){
 		mRenderProgram.updateSelection(stations, segments, transfers);
 		destroyTileCache();
@@ -234,8 +236,47 @@ public class VectorMapView extends BaseMapView {
 		}
 	}
 
+	private boolean isCacheEntireImage(){
+		int imageSize = getContentWidth() * getContentHeight() * 2;
+		return imageSize < mEntireCacheLimits && !mDisableEntireImageCaching;
+	}
 
 	private void invalidateTileCache(Rect screenCoords, boolean force) {
+		try{
+			if(isCacheEntireImage()){
+				int width = getContentWidth();
+				int height = getContentHeight();
+				final boolean isViewportChanged = mTileCacheScale != mScale || mTileCacheWidth != width || mTileCacheHeight != height;
+				if(mTileCache == null || isViewportChanged || force){
+					destroyTileCache();
+
+					mTileCache = Bitmap.createBitmap(width, height, Config.RGB_565);
+					mTileCacheBuffer = null;
+
+					final Canvas canvas = new Canvas(mTileCache);
+					canvas.drawColor(Color.WHITE);
+					canvas.clipRect(0, 0, width, height);
+					canvas.scale(mScale, mScale);
+					//canvas.translate(-modelOuter.left, -modelOuter.top);
+					mRenderProgram.setVisibilityAll();
+					mRenderProgram.draw(canvas);
+
+					synchronized(sync){
+						mTileCacheRect = new Rect(0,0,width, height);
+						mTileCacheScale = mScale;
+						mTileCacheWidth = mTileCacheRect.width();
+						mTileCacheHeight = mTileCacheRect.height();
+					}		
+				}
+				return;
+			}
+		}catch(OutOfMemoryError e){
+			//mEntireCacheLimits = mEntireCacheLimits * 80 / 100;
+			mDisableEntireImageCaching = true;
+			if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)){
+				Log.e(Constants.LOG_TAG_MAIN, "Disable entire map caching limits due out of memory");
+			}
+		}
 		final Rect tileOuter = screenToOuterTileRect(screenCoords);
 		final int width = getWidth() + mTileSize * 2;
 		final int height = getHeight() + mTileSize * 2;
@@ -278,6 +319,8 @@ public class VectorMapView extends BaseMapView {
 		if (mTileCache != null) {
 			mTileCache.recycle();
 			mTileCache = null;
+		}
+		if(mTileCacheBuffer!=null){
 			mTileCacheBuffer.recycle();
 			mTileCacheBuffer = null;
 		}
@@ -395,6 +438,9 @@ public class VectorMapView extends BaseMapView {
 	private boolean mAntiAliasEnabled = true;
 	private boolean mAntiAliasDisabledOnScroll = true;
 
+	private boolean mDisableEntireImageCaching = false;
+	private int mEntireCacheLimits = 4 * 1024 * 1024;
+
 	public void setAntiAliasingEnabled(boolean enabled){
 		mUpdatedAntiAlias = enabled;
 		mAntiAliasEnabled = enabled;
@@ -406,7 +452,7 @@ public class VectorMapView extends BaseMapView {
 	}
 
 	public void onScrollBegin() {
-		if(mAntiAliasEnabled){
+		if(mAntiAliasEnabled && !isCacheEntireImage()){
 			if(mAntiAliasDisabledOnScroll){
 				mUpdatedAntiAlias = false;
 			}
@@ -414,7 +460,7 @@ public class VectorMapView extends BaseMapView {
 	}
 
 	public void onScrollDone() {
-		if(mAntiAliasEnabled){
+		if(mAntiAliasEnabled && !isCacheEntireImage()){
 			if(mAntiAliasDisabledOnScroll){
 				mUpdatedAntiAlias = true;
 				mForceCacheInvalidate = true;
