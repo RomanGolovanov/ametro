@@ -30,6 +30,7 @@ import static org.ametro.MapSettings.PREFERENCE_ZOOM_LEVEL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
+import java.util.TreeMap;
 
 import org.ametro.Constants;
 import org.ametro.MapSettings;
@@ -40,9 +41,12 @@ import org.ametro.model.Model;
 import org.ametro.model.SegmentView;
 import org.ametro.model.StationView;
 import org.ametro.model.TransferView;
+import org.ametro.model.TransportStation;
+import org.ametro.model.ext.ModelLocation;
 import org.ametro.model.route.RouteView;
 import org.ametro.model.storage.ModelBuilder;
 import org.ametro.model.util.ModelUtil;
+import org.ametro.other.ProgressInfo;
 import org.ametro.render.RenderProgram;
 import org.ametro.util.DateUtil;
 import org.ametro.util.StringUtil;
@@ -57,6 +61,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.graphics.PointF;
+import android.location.Location;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -76,7 +81,6 @@ import android.widget.Toast;
 import android.widget.ZoomControls;
 
 public class BrowseVectorMap extends Activity implements OnClickListener {
-
 
 	public void onClick(View src) {
 		if(src == mNavigatePreviousButton){
@@ -172,6 +176,17 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 					onInitializeMapView(mModelName, mMapViewName);
 				}			
 			}
+			break;
+		case REQUEST_LOCATION:
+			if(resultCode == RESULT_OK){
+				Location location = data.getParcelableExtra(SearchLocation.LOCATION);
+				mLocationSearchTask = new LocationSearchTask();
+				mLocationSearchTask.execute(location);
+			}
+			if(resultCode == RESULT_CANCELED){
+				Toast.makeText(BrowseVectorMap.this,R.string.msg_location_unknown, Toast.LENGTH_SHORT).show();			
+			}
+			break;
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
@@ -187,6 +202,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		menu.add(0, MAIN_MENU_LIBRARY, 5, R.string.menu_library).setIcon(android.R.drawable.ic_menu_mapmode);
 		menu.add(0, MAIN_MENU_SETTINGS, 6, R.string.menu_settings).setIcon(android.R.drawable.ic_menu_preferences);
 		menu.add(0, MAIN_MENU_ABOUT, 7, R.string.menu_about).setIcon(android.R.drawable.ic_menu_help);
+		menu.add(0, MAIN_MENU_LOCATION, 8, R.string.menu_location).setIcon(android.R.drawable.ic_menu_mylocation);
 
 		return true;
 	}
@@ -200,6 +216,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		menu.findItem(MAIN_MENU_LAYERS).setEnabled(false);//mModel!=null);
 		menu.findItem(MAIN_MENU_SCHEMES).setEnabled(mModel!=null);
 		menu.findItem(MAIN_MENU_LIBRARY).setEnabled(mModel!=null);
+		menu.findItem(MAIN_MENU_LOCATION).setEnabled(mModel!=null);
 		return super.onPrepareOptionsMenu(menu);
 	}
 
@@ -256,6 +273,9 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 				startActivity(new Intent(this, BrowseStation.class));
 			}
 			return true;
+		case MAIN_MENU_LOCATION:
+			startActivityForResult(new Intent(this, SearchLocation.class), REQUEST_LOCATION);
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -301,7 +321,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		}
 		return false;
 	}
- 
+
 	public void loadDefaultMapName(){
 		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
 		String mapPath = preferences.getString(PREFERENCE_PACKAGE_FILE_NAME, null);
@@ -547,7 +567,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			mVectorMapView.postInvalidate();
 		}
 	}
-	
+
 	/*package*/ void clearNavigation(){
 		hideNavigationControls();
 		mRoute = null;
@@ -664,10 +684,10 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		if(mModel!=null && mMapView!=null){
 			onSaveMapState();
 		}
-		
+
 		mModel = model;
 		mMapView = view;
-		
+
 
 		//		if(previousMap!= null && previousMap.mapName.equals(subwayMap.mapName)){
 		//			mNavigationSegments = ModelUtil.copySegments(mMapView, mNavigationSegments);
@@ -682,7 +702,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		//			mCurrentStation = null;
 		//			mRoute = null;
 		//		}
-		
+
 
 		if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO))
 			Log.i(LOG_TAG_MAIN, getString(R.string.log_loaded_subway_map) + mMapView.systemName
@@ -720,13 +740,13 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 
 		mModelName = mMapView.owner.fileSystemName;
 		mMapViewName = view.systemName;
-		
+
 		onRestoreMapState();
-		
+
 		bindMapEvents();
-		
+
 		mVectorMapView.requestFocus();
-		
+
 		saveDefaultMapName();
 	}
 
@@ -862,13 +882,13 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			mProgressDialog = ProgressDialog.show(BrowseVectorMap.this, null, "Locale loading...", true);
 			super.onPreExecute();
 		}
-		
+
 		protected Void doInBackground(Locale... params) {
 			mModel.setLocale(params[0]);
 			mVectorMapView.updateModel();
 			return null;
 		}
-		
+
 		protected void onPostExecute(Void result) {
 			mProgressDialog.dismiss();
 			mVectorMapView.setModelSelection(mNavigationStations, mNavigationSegments, mNavigationTransfers);
@@ -943,16 +963,80 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	};
 
 
+	private class LocationSearchTask extends AsyncTask<Location, ProgressInfo, StationView> {
+		private ProgressDialog dialog;
+
+		protected StationView doInBackground(Location... args) {
+			Location location = args[0];
+			double latitude = 0, longitude = 0;
+			latitude = location.getLatitude();
+			longitude = location.getLongitude();
+
+			final Model model = mModel; 
+			final float[] distances = new float[3];
+			final TreeMap<Integer,StationView> map = new TreeMap<Integer, StationView>();
+			for (StationView view : mMapView.stations) {
+				if (isCancelled()) {
+					return null;
+				}
+				TransportStation transportStation = model.stations[view.stationId];
+				ModelLocation loc = transportStation.location;
+				if(loc!=null){
+					Location.distanceBetween(loc.latitude, loc.longtitude,latitude, longitude, distances);
+					int distance = (int)distances[0];
+					if(distance < 50000){
+						map.put(distance, view);
+					}
+				}
+			}
+			return map.size()>0 ? map.get(map.firstKey()) : null;
+		}
+
+		protected void onPreExecute() {
+			super.onPreExecute();
+			dialog = ProgressDialog.show(BrowseVectorMap.this,
+					getString(R.string.locate_wait_title),
+					getString(R.string.locate_wait_text), true);
+		}
+
+		protected void onCancelled() {
+			super.onCancelled();
+			dialog.hide();
+		}
+
+		protected void onPostExecute(StationView view) {
+			dialog.hide();
+			if (view != null) {
+				Toast.makeText(
+						BrowseVectorMap.this,
+						String.format(getString(R.string.msg_location_station_found),
+								view.getName(),
+								view.getLineName()),
+								Toast.LENGTH_SHORT).show();
+				final Point point = ModelUtil.toPoint( view.stationPoint );
+				mVectorMapView.scrollModelCenterTo(point.x, point.y);
+				mVectorMapView.postInvalidate();
+			} else {
+				Toast.makeText(BrowseVectorMap.this,
+						R.string.msg_location_unknown, Toast.LENGTH_SHORT)
+						.show();
+			}
+			super.onPostExecute(view);
+		}
+	}
+	
+
 	static BrowseVectorMap Instance;
 
-	private final int MAIN_MENU_FIND = 1;
-	private final int MAIN_MENU_LIBRARY = 2;
-	private final int MAIN_MENU_ROUTES = 3;
-	private final int MAIN_MENU_LAYERS = 4;
-	private final int MAIN_MENU_SCHEMES = 5;
-	private final int MAIN_MENU_INFO = 6;
-	private final int MAIN_MENU_SETTINGS = 7;
-	private final int MAIN_MENU_ABOUT = 8;
+	private static final int MAIN_MENU_FIND = 1;
+	private static final int MAIN_MENU_LIBRARY = 2;
+	private static final int MAIN_MENU_ROUTES = 3;
+	private static final int MAIN_MENU_LAYERS = 4;
+	private static final int MAIN_MENU_SCHEMES = 5;
+	private static final int MAIN_MENU_INFO = 6;
+	private static final int MAIN_MENU_SETTINGS = 7;
+	private static final int MAIN_MENU_ABOUT = 8;
+	private static final int MAIN_MENU_LOCATION = 9;
 
 	private final float[] ZOOMS = new float[]{1.5f, 1.0f, 0.8f, 0.6f, 0.4f, 0.3f, 0.2f, 0.1f};
 	private final int[] STEPS = new int[]{15, 10, 8, 6, 4, 3, 2, 1};
@@ -998,9 +1082,12 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 
 	private InitTask mInitTask;
 	private LoadLocaleTask mLoadLocaleTask;
+	private LocationSearchTask mLocationSearchTask;
 
-	private final static int REQUEST_BROWSE_LIBRARY = 1;
-	private final static int REQUEST_SETTINGS = 2;
+	private static final int REQUEST_BROWSE_LIBRARY = 1;
+	private static final int REQUEST_SETTINGS = 2;
+	private static final int REQUEST_LOCATION = 3;
+	
 
 	private ArrayList<StationView> mNavigationStations;
 	private ArrayList<SegmentView> mNavigationSegments;
