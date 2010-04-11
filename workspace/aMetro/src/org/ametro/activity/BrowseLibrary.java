@@ -61,7 +61,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class BrowseLibrary extends Activity implements
-		ExpandableListView.OnChildClickListener {
+ExpandableListView.OnChildClickListener {
 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
@@ -89,7 +89,7 @@ public class BrowseLibrary extends Activity implements
 		menu.findItem(MAIN_MENU_LOCATION).setVisible(mLocationDetectionEnabled);
 		return super.onPrepareOptionsMenu(menu);
 	}
-	
+
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case MAIN_MENU_REFRESH:
@@ -134,8 +134,9 @@ public class BrowseLibrary extends Activity implements
 				mLocationSearchTask.execute(location);
 			}
 			if(resultCode == RESULT_CANCELED){
-				Toast.makeText(BrowseLibrary.this,R.string.msg_location_unknown, Toast.LENGTH_SHORT).show();			}
-			
+				Toast.makeText(BrowseLibrary.this,R.string.msg_location_unknown, Toast.LENGTH_SHORT).show();			
+			}
+			break;
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
@@ -172,7 +173,7 @@ public class BrowseLibrary extends Activity implements
 		mLocationDetectionEnabled = settings.getBoolean(getString(R.string.pref_auto_locate_key), false);
 	}
 
-	
+
 	private void beginIndexing() {
 		mIndexTask = new IndexTask();
 		mIndexTask.execute();
@@ -199,7 +200,7 @@ public class BrowseLibrary extends Activity implements
 
 	private final static int MODE_ALL_MAPS = 0;
 	private final static int MODE_MY_MAPS = 1;
-	
+
 	private int mMode;
 
 	private IndexTask mIndexTask;
@@ -243,7 +244,7 @@ public class BrowseLibrary extends Activity implements
 			// step 1: load city data
 			try {
 				CsvReader reader = new CsvReader(new BufferedReader(
-						new InputStreamReader(getAssets().open("cities.csv"), "windows-1251")));
+						new InputStreamReader(getAssets().open("cities.csv"), "UTF-8")));
 				int idx = 0;
 				while (reader.next()) {
 					idx++;
@@ -306,7 +307,7 @@ public class BrowseLibrary extends Activity implements
 		protected void onPostExecute(LocationInfo result) {
 			dialog.hide();
 			if (result != null) {
-				String packageFileName = (result.FileName + MapSettings.MAP_FILE_TYPE);
+				String packageFileName = (result.FileName + MapSettings.PMZ_FILE_TYPE + MapSettings.MAP_FILE_TYPE);
 				mAdapter.setSelectedFile(packageFileName);
 				int groupPosition = mAdapter.getSelectedGroupPosition();
 				int childPosition = mAdapter.getSelectChildPosition();
@@ -321,7 +322,7 @@ public class BrowseLibrary extends Activity implements
 						BrowseLibrary.this,
 						String.format(getString(R.string.msg_location_found),
 								result.CityName, result.CountryName),
-						Toast.LENGTH_SHORT).show();
+								Toast.LENGTH_SHORT).show();
 			} else {
 				Toast.makeText(BrowseLibrary.this,
 						R.string.msg_location_unknown, Toast.LENGTH_SHORT)
@@ -344,7 +345,7 @@ public class BrowseLibrary extends Activity implements
 				if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)) {
 					Log.d(Constants.LOG_TAG_MAIN,
 							getString(R.string.log_map_indexing_failed)
-									+ fileName, e);
+							+ fileName, e);
 				}
 			}
 		}
@@ -373,7 +374,7 @@ public class BrowseLibrary extends Activity implements
 					pi.message = fileName;
 					publishProgress(pi);
 					String fullFileName = dir.getAbsolutePath() + '/'
-							+ files[i];
+					+ files[i];
 					scanModelFileContent(map, fileName, fullFileName);
 				}
 			}
@@ -382,7 +383,7 @@ public class BrowseLibrary extends Activity implements
 
 		protected FileGroupsDictionary doInBackground(Void... params) {
 			final String cacheFileName = MapSettings.ROOT_PATH
-					+ MapSettings.MAPS_LIST;
+			+ MapSettings.MAPS_LIST;
 			final File dir = new File(MapSettings.MAPS_PATH);
 			FileGroupsDictionary map = FileGroupsDictionary.read(cacheFileName);
 			if (map == null || map.timestamp < dir.lastModified()) {
@@ -419,7 +420,7 @@ public class BrowseLibrary extends Activity implements
 			Uri uri = intent != null ? intent.getData() : null;
 			if (uri != null) {
 				mDefaultPackageFileName = MapUri.getMapName(uri)
-						+ MapSettings.MAP_FILE_TYPE;
+				+ MapSettings.MAP_FILE_TYPE;
 			}
 			setContentView(R.layout.global_wait);
 			super.onPreExecute();
