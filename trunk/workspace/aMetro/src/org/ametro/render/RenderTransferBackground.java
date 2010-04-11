@@ -38,6 +38,9 @@ public class RenderTransferBackground extends RenderElement {
     private float RadiusBig;
     private Paint Paint;
 
+    private int colorNormal;
+    private int colorGrayed;
+    
     public RenderTransferBackground(MapView map, TransferView view, TransportTransfer transfer) {
         super();
         final StationView fromStation = map.stations[view.stationViewFromId];
@@ -55,12 +58,16 @@ public class RenderTransferBackground extends RenderElement {
 
         RadiusBig = (float) radius + 3.5f;
 
+        colorNormal = Color.BLACK;
+        colorGrayed = RenderProgram.getGrayedColor(colorNormal);
+        
         final Paint paint = new Paint();
-        paint.setColor(Color.BLACK);
+        paint.setColor(colorNormal);
         paint.setStyle(Style.FILL);
         paint.setStrokeWidth(lineWidth + 4.5f);
         paint.setAntiAlias(true);
         Paint = paint;
+        
 
         final int left = Math.min(FromX, ToX) - radius;
         final int right = Math.max(FromX, ToX) + radius;
@@ -77,7 +84,8 @@ public class RenderTransferBackground extends RenderElement {
     
     protected void setMode(boolean grayed)
     {
-    	Paint.setAlpha(grayed ? 40 : 255);
+    	Paint.setColor(grayed ? colorGrayed : colorNormal);
+    	Paint.setAlpha(255);
     }
 
     public void draw(Canvas canvas) {

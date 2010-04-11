@@ -41,6 +41,9 @@ public class RenderStation extends RenderElement {
     public Paint paintColor;
     public Paint paintBackGround;
     
+    private int colorNormal;
+    private int colorGrayed;
+    
     public RenderStation(MapView map, StationView view, TransportStation station) {
         super();
         final boolean hasConnections = map.hasConnections(view);
@@ -49,6 +52,9 @@ public class RenderStation extends RenderElement {
         final int localY = view.stationPoint.y;
         final int radius = map.stationDiameter / 2;
 
+        colorNormal = map.lines[view.lineViewId].lineColor;
+        colorGrayed = RenderProgram.getGrayedColor(colorNormal);
+        
         final Paint localPaintColor = new Paint();
 
         paintBackGround = new Paint();
@@ -57,7 +63,7 @@ public class RenderStation extends RenderElement {
         paintBackGround.setAntiAlias(true);
         paintBackGround.setStrokeWidth(1);
         
-        localPaintColor.setColor(map.lines[view.lineViewId].lineColor);
+        localPaintColor.setColor(colorNormal);
         localPaintColor.setAntiAlias(true);
         localPaintColor.setStrokeWidth(radius * 0.15f * 2);
 
@@ -84,7 +90,8 @@ public class RenderStation extends RenderElement {
 
     protected void setMode(boolean grayed)
     {
-    	paintColor.setAlpha(grayed ?  80 : 255);
+    	paintColor.setColor(grayed ? colorGrayed : colorNormal);
+    	paintColor.setAlpha(255);
     }
     
     public void draw(Canvas canvas) {

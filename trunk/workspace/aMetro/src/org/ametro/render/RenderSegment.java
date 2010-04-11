@@ -41,6 +41,9 @@ import android.graphics.Paint.Style;
 
 public class RenderSegment extends RenderElement {
 
+	private int colorNormal;
+	private int colorGrayed;
+	
     public Paint paint;
     public ExtendedPath path;
 
@@ -69,7 +72,9 @@ public class RenderSegment extends RenderElement {
                     new CornerPathEffect(lineWidth * 0.6f)
             ));
         }
-        localPaint.setColor(map.lines[view.lineViewId].lineColor);
+        colorNormal = map.lines[view.lineViewId].lineColor;
+        colorGrayed = RenderProgram.getGrayedColor(colorNormal);
+        localPaint.setColor(colorNormal);
 
         paint = localPaint;
         drawSegmentPath(map, view, segment, from, to, localPath);
@@ -124,7 +129,9 @@ public class RenderSegment extends RenderElement {
     
     protected void setMode(boolean grayed)
     {
-    	paint.setAlpha(grayed ?  80 : 255);
+    	//paint.setAlpha(grayed ?  80 : 255);
+   		paint.setColor(grayed ? colorGrayed : colorNormal);
+   		paint.setAlpha(255);
     }
 
     public void draw(Canvas canvas) {

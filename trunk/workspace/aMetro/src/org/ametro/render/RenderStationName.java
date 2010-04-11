@@ -21,14 +21,19 @@
 
 package org.ametro.render;
 
-import android.graphics.*;
-import android.graphics.Paint.Align;
-import android.graphics.Paint.Style;
-import org.ametro.model.LineView;
 import org.ametro.model.MapView;
 import org.ametro.model.StationView;
 import org.ametro.model.TransportStation;
 import org.ametro.model.util.ModelUtil;
+
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Point;
+import android.graphics.Rect;
+import android.graphics.Typeface;
+import android.graphics.Paint.Align;
+import android.graphics.Paint.Style;
 
 public class RenderStationName extends RenderElement {
 
@@ -43,6 +48,9 @@ public class RenderStationName extends RenderElement {
 	private String mTextSecondLine;
 	private Point mPointSecondLine;
 
+    private int colorNormal;
+    private int colorGrayed;
+	
 	public RenderStationName(MapView map, StationView view, TransportStation station) {
 		final boolean isUpperCase = map.isUpperCase;
 		final boolean isWordWrap = map.isWordWrap;
@@ -52,8 +60,8 @@ public class RenderStationName extends RenderElement {
 		final Rect textRect = ModelUtil.toRect( view.stationNameRect );
 		final Point point = ModelUtil.toPoint( view.stationPoint );
 
-		final LineView line = map.lines[view.lineViewId];
-		final int textColor = line.labelColor;
+        colorNormal = map.lines[view.lineViewId].labelColor;
+        colorGrayed = RenderProgram.getGrayedColor(colorNormal);
 
 		final Paint textPaint = new Paint();
 		textPaint.setAntiAlias(true);
@@ -61,7 +69,7 @@ public class RenderStationName extends RenderElement {
 		textPaint.setFakeBoldText(true);
 		textPaint.setTextSize(10);
 		textPaint.setTextAlign(Align.LEFT);
-		textPaint.setColor(textColor);
+		textPaint.setColor(colorNormal);
 		textPaint.setStyle(Style.FILL);
 
 		final Paint borderPaint = new Paint(textPaint);
@@ -146,7 +154,8 @@ public class RenderStationName extends RenderElement {
 	}
 
 	protected void setMode(boolean grayed) { 
-		mTextPaint.setAlpha(grayed ? 80 : 255);
+		mTextPaint.setColor(grayed ? colorGrayed : colorNormal);
+		mTextPaint.setAlpha(255);
 	}
 
 	public void draw(Canvas canvas) {
