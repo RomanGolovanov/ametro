@@ -2,11 +2,15 @@ package org.ametro.model.route;
 
 public class RouteContainer {
 
-	public int stationFromId;
-	public int stationToId;
+	/*package*/ int[] stations;
+	/*package*/ int[] exclude;
 
-	public int flags;
+	/*package*/ int flags;
 	
-	public TransportRoute[] routes;
+	/*package*/ TransportRoute[] routes;
+
+	public boolean hasRoutes() {
+		return routes!=null && routes.length>0;
+	}
 	
 }

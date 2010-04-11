@@ -39,4 +39,8 @@ public class StationView {
 		return owner.stations[stationId].getName();
 	}
 
+	public String getSystemName() {
+		return owner.stations[stationId].systemName;
+	}
+	
 }

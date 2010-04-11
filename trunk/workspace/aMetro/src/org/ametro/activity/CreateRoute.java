@@ -29,8 +29,9 @@ import org.ametro.R;
 import org.ametro.adapter.StationListAdapter;
 import org.ametro.model.MapView;
 import org.ametro.model.StationView;
+import org.ametro.model.route.RouteBuilder;
+import org.ametro.model.route.RouteContainer;
 import org.ametro.model.route.RouteView;
-import org.ametro.util.DateUtil;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -261,19 +262,16 @@ public class CreateRoute extends Activity implements OnClickListener,
 	public void onAnimationStart(Animation anim) {
 	}
 
-	public class CreateRouteTask extends
-			AsyncTask<StationView, Void, RouteView> {
+	public class CreateRouteTask extends AsyncTask<StationView, Void, RouteContainer> {
 
-		private MapView mMap;
 		private ProgressDialog mWaitDialog;
 
-		protected RouteView doInBackground(
-				StationView... stations) {
-			StationView from = stations[0];
-			StationView to = stations[1];
-			RouteView route = new RouteView(mMap, from.id, to.id);
-			route.findRoute();
-			return route;
+		protected RouteContainer doInBackground(StationView... stations) {
+			int[] ids = new int[stations.length];
+			for(int i = 0;i<stations.length;i++){
+				ids[i] = stations[i].stationId;
+			}
+			return RouteBuilder.createRoutes(mMapView.owner, ids, RouteBuilder.ROUTE_OPTION_ALL);
 		}
 
 		protected void onCancelled() {
@@ -282,7 +280,6 @@ public class CreateRoute extends Activity implements OnClickListener,
 		}
 
 		protected void onPreExecute() {
-			mMap = CreateRoute.this.mMapView;
 			closePanel();
 			mWaitDialog = ProgressDialog.show(CreateRoute.this,
 					getString(R.string.create_route_wait_title),
@@ -290,16 +287,15 @@ public class CreateRoute extends Activity implements OnClickListener,
 			super.onPreExecute();
 		}
 
-		protected void onPostExecute(RouteView result) {
+		protected void onPostExecute(RouteContainer result) {
 			super.onPostExecute(result);
 			mWaitDialog.dismiss();
-			if (result.hasRoute()) {
-				BrowseVectorMap.Instance.setNavigationRoute(result);
-				String msg = getString(R.string.msg_route_time) + " " + DateUtil.getTimeHHMM(result.getTime());
-				Toast.makeText(BrowseVectorMap.Instance, msg, Toast.LENGTH_LONG).show();
+			if (result.hasRoutes()) {
+//				BrowseVectorMap.Instance.setNavigationRoute(result);
+//				String msg = getString(R.string.msg_route_time) + " " + DateUtil.getTimeHHMM(result.getTime());
+//				Toast.makeText(BrowseVectorMap.Instance, msg, Toast.LENGTH_LONG).show();
 			} else {
-				Toast.makeText(BrowseVectorMap.Instance, getString(R.string.msg_route_not_found),
-						Toast.LENGTH_SHORT).show();
+				Toast.makeText(BrowseVectorMap.Instance, getString(R.string.msg_route_not_found), Toast.LENGTH_SHORT).show();
 				BrowseVectorMap.Instance.setNavigationRoute(null);
 			}
 			finishActivity();
@@ -312,7 +308,7 @@ public class CreateRoute extends Activity implements OnClickListener,
 		if (startBracket != -1 && endBracked != -1 && startBracket < endBracked) {
 			String stationName = text.substring(0, startBracket - 1);
 			String lineName = text.substring(startBracket + 1, endBracked);
-			StationView station = mMapView.getStationView(lineName, stationName);
+			StationView station = mMapView.getStationViewByDisplayName(lineName, stationName);
 			return station;
 		}
 		return null;
