@@ -46,15 +46,15 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.AsyncTask.Status;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
+import android.widget.CheckedTextView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -70,19 +70,16 @@ public class ImportPmz extends Activity {
         private String fileName;
         private String status;
         private int statusColor;
-        private boolean checked;
-
 
         public ImportRecord(
                 int newSeverity, String newMapName, String newFileName,
-                String newStatus, int newStatusColor, boolean newChecked) {
+                String newStatus, int newStatusColor) {
             super();
             severity = newSeverity;
             mapName = newMapName;
             fileName = newFileName;
             status = newStatus;
             statusColor = newStatusColor;
-            checked = newChecked;
         }
 
         public int compareTo(ImportRecord another) {
@@ -96,7 +93,7 @@ public class ImportPmz extends Activity {
 
     }
 
-    private class ImportListAdapter extends ArrayAdapter<ImportRecord> implements OnClickListener {
+    private class ImportListAdapter extends ArrayAdapter<ImportRecord> {
 
         private LayoutInflater mInflater;
         private List<ImportRecord> mData;
@@ -108,99 +105,33 @@ public class ImportPmz extends Activity {
         }
 
         public class ViewHolder {
-            TextView mText;
+        	CheckedTextView mText;
             TextView mStatus;
-            CheckBox mCheckbox;
         }
 
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder holder;
             if (convertView == null) {
                 convertView = mInflater.inflate(R.layout.import_pmz_row, null);
-                convertView.setClickable(true);
-                convertView.setOnClickListener(this);
-                convertView.setFocusable(true);
-
                 holder = new ViewHolder();
-                holder.mText = (TextView) convertView.findViewById(R.id.import_row_text);
+                holder.mText = (CheckedTextView) convertView.findViewById(android.R.id.text1);
                 holder.mStatus = (TextView) convertView.findViewById(R.id.import_row_status);
-                holder.mCheckbox = (CheckBox) convertView.findViewById(R.id.import_row_checkbox);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
             final ImportRecord data = mData.get(position);
             holder.mText.setText(data.mapName);
+            if(data.isCheckable()){
+            	holder.mText.setChecked( mListView.isItemChecked(position) );
+            	holder.mText.setEnabled(true);
+            }else{
+            	holder.mText.setEnabled(false);
+            }
             holder.mStatus.setText(data.status);
             holder.mStatus.setTextColor(data.statusColor);
-            holder.mCheckbox.setTag(data);
-            holder.mCheckbox.setChecked(data.checked);
-            holder.mCheckbox.setClickable(false);
-            holder.mCheckbox.setVisibility(data.isCheckable() ? View.VISIBLE : View.INVISIBLE);
             return convertView;
         }
-
-        public void onClick(View v) {
-            final ViewHolder holder = (ViewHolder) v.getTag();
-            final CheckBox checkbox = holder.mCheckbox;
-            ImportRecord data = (ImportRecord) checkbox.getTag();
-            if (data.severity > 0) {
-                data.checked = !data.checked;
-                checkbox.setChecked(data.checked);
-                ImportPmz.this.updateMenuStatus(null);
-            }
-        }
-
-        public List<ImportRecord> getData() {
-            return mData;
-        }
-
-        public List<ImportRecord> getCheckedData() {
-            ArrayList<ImportRecord> lst = new ArrayList<ImportRecord>();
-            for (ImportRecord record : mAdapter.getData()) {
-                if (record.checked) {
-                    lst.add(record);
-                }
-            }
-            return lst;
-        }
-
-        public List<ImportRecord> getInvalidData() {
-            ArrayList<ImportRecord> lst = new ArrayList<ImportRecord>();
-            for (ImportRecord record : mAdapter.getData()) {
-                final int severity = record.severity;
-                if (severity == 2 || severity == 0) {
-                    lst.add(record);
-                }
-            }
-            return lst;
-        }
-
-        public List<ImportRecord> getObsoleteData() {
-            ArrayList<ImportRecord> lst = new ArrayList<ImportRecord>();
-            for (ImportRecord record : mAdapter.getData()) {
-                final int severity = record.severity;
-                if (severity == 3 || severity == 1) {
-                    lst.add(record);
-                }
-            }
-            return lst;
-        }
-
-        public void setCheckAll() {
-            for (ImportRecord record : mData) {
-                if (record.isCheckable()) {
-                    record.checked = true;
-                }
-            }
-        }
-
-        public void setCheckNone() {
-            for (ImportRecord record : mData) {
-                record.checked = false;
-            }
-        }
-
 
     }
 
@@ -208,7 +139,7 @@ public class ImportPmz extends Activity {
         private boolean mIsCanceled = false;
 
         private void indexPmzFile(ArrayList<ImportRecord> imports, String fileName) {
-            String mapFileName = MapSettings.getMapFileName(fileName.replace(MapSettings.PMZ_FILE_TYPE, ""));
+            String mapFileName = MapSettings.getMapFileName(fileName);
             File mapFile = new File(mapFileName);
             String fullFileName = MapSettings.IMPORT_PATH + fileName;
             try {
@@ -253,17 +184,17 @@ public class ImportPmz extends Activity {
                         }
                     }
                 }
-                boolean checked = statusId == R.string.import_status_not_imported || statusId == R.string.import_status_deprecated;
-                imports.add(new ImportRecord(severity, mapName, fullFileName, statusText, color, checked));
+                //boolean checked = statusId == R.string.import_status_not_imported || statusId == R.string.import_status_deprecated;
+                imports.add(new ImportRecord(severity, mapName, fullFileName, statusText, color));
             } catch (Exception e) {
             	if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)){
             		Log.e(Constants.LOG_TAG_MAIN, getString(R.string.log_pmz_indexing_error), e);
             	}
-                imports.add(new ImportRecord(0, fileName, fullFileName, ImportPmz.this.getString(R.string.import_status_invalid), Color.RED, false));
+                imports.add(new ImportRecord(0, fileName, fullFileName, ImportPmz.this.getString(R.string.import_status_invalid), Color.RED));
             }
         }
 
-        @Override
+        
         protected List<ImportRecord> doInBackground(Void... params) {
             File dir = new File(MapSettings.IMPORT_PATH);
             ProgressInfo pi = new ProgressInfo(0, 0, null, getString(R.string.msg_search_pmz_files));
@@ -292,13 +223,13 @@ public class ImportPmz extends Activity {
             return imports;
         }
 
-        @Override
+        
         protected void onCancelled() {
             mIsCanceled = true; 
             super.onCancelled();
         }
 
-        @Override
+        
         protected void onProgressUpdate(ProgressInfo... values) {
             ProgressInfo.ChangeProgress(
                     values[0],
@@ -311,13 +242,13 @@ public class ImportPmz extends Activity {
             super.onProgressUpdate(values);
         }
 
-        @Override
+        
         protected void onPreExecute() {
             setupIndexMode();
             super.onPreExecute();
         }
 
-        @Override
+        
         protected void onPostExecute(List<ImportRecord> result) {
             mFiles = result;
             setupSelectMode(result);
@@ -366,7 +297,7 @@ public class ImportPmz extends Activity {
                     // move model from temporary to persistent file name
                     FileUtil.move(mapFileTemp, mapFile);
                      
-                    record.checked = false;
+                   // record.checked = false;
                     record.status = updateStatus;
                     record.statusColor = Color.GREEN;
                     record.severity = 1;
@@ -379,8 +310,8 @@ public class ImportPmz extends Activity {
                     		record.mapName, 
                     		record.fileName, 
                     		getString(R.string.msg_import_failed) + "\n" + e.toString(), 
-                    		Color.RED, 
-                    		false));
+                    		Color.RED
+                    		));
                     if(mapFileTemp!=null && mapFileTemp.exists()){
                     	FileUtil.delete(mapFileTemp);
                     }
@@ -390,13 +321,13 @@ public class ImportPmz extends Activity {
             return result;
         }
 
-        @Override
+        
         protected void onCancelled() {
             mIsCanceled = true;
             super.onCancelled();
         }
 
-        @Override
+        
         protected void onProgressUpdate(ProgressInfo... values) {
             ProgressInfo.ChangeProgress(
                     values[0],
@@ -409,14 +340,14 @@ public class ImportPmz extends Activity {
             super.onProgressUpdate(values);
         }
 
-        @Override
+        
         protected void onPreExecute() {
             setupImportMode();
             super.onPreExecute();
         }
 
 
-        @Override
+        
         protected void onPostExecute(List<ImportRecord> result) {
             if (result.size() == 0) {
                 setResult(RESULT_OK);
@@ -476,7 +407,7 @@ public class ImportPmz extends Activity {
 
     private boolean mMainMenuCreated = false;
 
-    @Override
+    
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         mMainMenuImport = menu.add(0, MAIN_MENU_IMPORT, 0, R.string.menu_import).setIcon(android.R.drawable.ic_menu_add);
@@ -490,6 +421,11 @@ public class ImportPmz extends Activity {
         return true;
     }
 
+    public boolean onPrepareOptionsMenu(Menu menu) {
+    	updateMenuStatus(null);
+    	return super.onPrepareOptionsMenu(menu);
+    }
+    
     private void updateMenuStatus(Mode mode) {
         if (mode != null) {
             mMode = mode;
@@ -505,8 +441,8 @@ public class ImportPmz extends Activity {
         mMainMenuStop.setVisible(mMode == Mode.Index || mMode == Mode.Import);
 
         if (mMode == Mode.Select) {
-            final List<ImportRecord> dataChecked = mAdapter.getCheckedData();
-            final List<ImportRecord> data = mAdapter.getData();
+            final List<ImportRecord> dataChecked = getCheckedData();
+            final List<ImportRecord> data = getData();
             mMainMenuImport.setEnabled(dataChecked.size() > 0);
             mMainMenuSelectAll.setEnabled(dataChecked.size() < data.size());
             mMainMenuSelectNone.setEnabled(dataChecked.size() > 0);
@@ -520,24 +456,24 @@ public class ImportPmz extends Activity {
         mMainMenuStop.setEnabled(mMode == Mode.Index || mMode == Mode.Import);
     }
 
-    @Override
+    
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case MAIN_MENU_REFRESH:
                 startIndexMode();
                 return true;
             case MAIN_MENU_IMPORT:
-                List<ImportRecord> checkedImports = mAdapter.getCheckedData();
+                List<ImportRecord> checkedImports = getCheckedData();
                 mImportTask = new ImportTask();
                 mImportTask.execute((ImportRecord[]) checkedImports.toArray(new ImportRecord[checkedImports.size()]));
                 return true;
             case MAIN_MENU_SELECT_ALL:
-                mAdapter.setCheckAll();
+                setCheckAll();
                 mListView.invalidateViews();
                 updateMenuStatus(null);
                 return true;
             case MAIN_MENU_SELECT_NONE:
-                mAdapter.setCheckNone();
+                setCheckNone();
                 mListView.invalidateViews();
                 updateMenuStatus(null);
                 return true;
@@ -560,19 +496,19 @@ public class ImportPmz extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
+    
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
     }
 
-    @Override
+    
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MapSettings.checkPrerequisite(this);
         startIndexMode();
     }
 
-    @Override
+    
     protected void onStop() {
         if (mImportTask != null && mImportTask.getStatus() != Status.FINISHED) {
             mImportTask.cancel(false);
@@ -613,16 +549,16 @@ public class ImportPmz extends Activity {
         List<ImportRecord> list = null;
         switch (mCleanupMode) {
             case All:
-                list = mAdapter.getData();
+                list = getData();
                 break;
             case Invalid:
-                list = mAdapter.getInvalidData();
+                list = getInvalidData();
                 break;
             case Selected:
-                list = mAdapter.getCheckedData();
+                list = getCheckedData();
                 break;
             case Obsolete:
-                list = mAdapter.getObsoleteData();
+                list = getObsoleteData();
                 break;
         }
         if (list != null) {
@@ -652,7 +588,10 @@ public class ImportPmz extends Activity {
             setTitle(R.string.import_title_confirm);
             mAdapter = new ImportListAdapter(ImportPmz.this, 0, result);
             mListView = (ListView) findViewById(R.id.import_pmz_list);
+            mListView.setItemsCanFocus(false);
+            mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
             mListView.setAdapter(mAdapter);
+            setCheckBySeverity(4);
             updateMenuStatus(Mode.Select);
         } else {
             setContentView(R.layout.import_pmz_empty);
@@ -697,5 +636,68 @@ public class ImportPmz extends Activity {
         updateMenuStatus(Mode.Report);
     }
 
+    public List<ImportRecord> getData() {
+        return mAdapter.mData;
+    }
+
+    public List<ImportRecord> getCheckedData() {
+    	SparseBooleanArray checks = mListView.getCheckedItemPositions();
+        ArrayList<ImportRecord> lst = new ArrayList<ImportRecord>();
+        int idx = 0;
+        for (ImportRecord record : getData()) {
+            if (checks.get(idx)) {
+                lst.add(record);
+            }
+            idx++;
+        }
+        return lst;
+    }
+
+    public List<ImportRecord> getInvalidData() {
+        ArrayList<ImportRecord> lst = new ArrayList<ImportRecord>();
+        for (ImportRecord record : getData()) {
+            final int severity = record.severity;
+            if (severity == 2 || severity == 0) {
+                lst.add(record);
+            }
+        }
+        return lst;
+    }
+
+    public List<ImportRecord> getObsoleteData() {
+        ArrayList<ImportRecord> lst = new ArrayList<ImportRecord>();
+        for (ImportRecord record : getData()) {
+            final int severity = record.severity;
+            if (severity == 3 || severity == 1) {
+                lst.add(record);
+            }
+        }
+        return lst;
+    }
+
+    public void setCheckAll() {
+    	int len = getData().size();
+    	for(int i=0;i<len;i++){
+    		mListView.setItemChecked(i, true);
+    	}
+    }
+
+    public void setCheckNone() {
+    	int len = getData().size();
+    	for(int i=0;i<len;i++){
+    		mListView.setItemChecked(i, false);
+    	}
+    }
+
+    public void setCheckBySeverity(int minimumSeverity){
+    	final List<ImportRecord> data = getData();
+    	final int len = getData().size();
+    	for(int i=0;i<len;i++){
+    		ImportRecord record = data.get(i);
+    		mListView.setItemChecked(i, record.severity >= minimumSeverity );
+    	}
+    }
+
+    
 
 }

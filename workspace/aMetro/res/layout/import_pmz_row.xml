@@ -1,33 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="horizontal" android:layout_width="fill_parent"
-              android:layout_height="wrap_content" android:paddingLeft="2px"
-              android:paddingRight="2px" android:paddingBottom="2px"
-              android:paddingTop="2px">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
+	android:paddingLeft="2px" android:paddingRight="2px"
+	android:paddingBottom="2px" android:paddingTop="2px" 
+	android:gravity="left"
+	android:orientation="vertical" 
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content" 
+	>
 
-    <LinearLayout android:gravity="left" android:orientation="vertical"
-                  android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:layout_weight="1" android:paddingLeft="10px" android:paddingTop="5px">
+	<CheckedTextView android:id="@android:id/text1"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+		android:ellipsize="marquee" 
+		android:scrollHorizontally="true"
+		android:lines="1"
+		android:paddingLeft="0px" android:textSize="14sp" />
 
-        <TextView android:id="@+id/import_row_text"
-                  android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:paddingLeft="0px"
-                  android:textSize="14sp"
-                  android:textColor="#FFFFFF"
-                />
+	<TextView android:id="@+id/import_row_status"
+		android:layout_alignBottom="@android:id/text1"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:paddingLeft="0px" android:text="not imported"
+		android:textSize="12sp" />
 
-        <TextView android:id="@+id/import_row_status"
-                  android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:paddingLeft="0px"
-                  android:text="not imported"
-                  android:textSize="12sp"
-                />
-
-    </LinearLayout>
-    <CheckBox android:id="@+id/import_row_checkbox"
-              android:gravity="right" android:layout_width="wrap_content"
-              android:layout_height="wrap_content" android:paddingRight="10px"/>
-
-</LinearLayout>
+</RelativeLayout>
