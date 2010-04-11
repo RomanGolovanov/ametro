@@ -25,6 +25,7 @@ import java.io.File;
 
 import org.ametro.jni.Natives;
 import org.ametro.model.util.CountryLibrary;
+import org.ametro.model.util.StationLibrary;
 import org.ametro.util.FileUtil;
 
 import android.content.Context;
@@ -70,6 +71,7 @@ public class MapSettings {
         	FileUtil.createFile(ROOT_PATH + NO_MEDIA_TAG);
         }
         CountryLibrary.setContext(context);
+        StationLibrary.setContext(context);
 
     }
 

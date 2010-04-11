@@ -46,12 +46,14 @@ import org.ametro.model.TransportMap;
 import org.ametro.model.TransportSegment;
 import org.ametro.model.TransportStation;
 import org.ametro.model.TransportTransfer;
+import org.ametro.model.ext.ModelLocation;
 import org.ametro.model.ext.ModelPoint;
 import org.ametro.model.ext.ModelRect;
 import org.ametro.model.ext.ModelSpline;
 import org.ametro.model.util.CountryLibrary;
 import org.ametro.model.util.IniStreamReader;
 import org.ametro.model.util.ModelUtil;
+import org.ametro.model.util.StationLibrary;
 import org.ametro.util.StringUtil;
 
 public class PmzStorage implements IModelStorage {
@@ -127,7 +129,7 @@ public class PmzStorage implements IModelStorage {
 		private ArrayList<String> mTexts = new ArrayList<String>();
 
 		private HashMap<Integer, StationInfo> mStationInfo = new HashMap<Integer, StationInfo>();
-		
+
 		private int[] getMapsNumbers(String[] maps) {
 			ArrayList<Integer> res = new ArrayList<Integer>();
 			for(String mapSystemName : maps){
@@ -190,7 +192,7 @@ public class PmzStorage implements IModelStorage {
 					importMapFiles(); // load data from .map files
 					//importTxtFiles(); // load data from .txt files
 				}
-				makeModel(); // make model from imported data
+				postProcessModel(); // make model from imported data
 			}finally{
 				if(mZipFile!=null){
 					mZipFile.close();
@@ -227,7 +229,7 @@ public class PmzStorage implements IModelStorage {
 							}else if(key.equalsIgnoreCase("MenuName")){
 								//menuName = (value);
 							}else if(key.equalsIgnoreCase("MenuImage")){
-	
+
 							}else if(key.equalsIgnoreCase("Caption")){
 								caption = (value);
 							}else if(key.equalsIgnoreCase("StringToAdd")){
@@ -247,7 +249,7 @@ public class PmzStorage implements IModelStorage {
 					}
 				}
 			}
-			
+
 			TransportStationInfo[] lst = new TransportStationInfo[mTransportStations.size()];
 			for(TransportStation station : mTransportStations){
 				StationInfo src = mStationInfo.get(station.id);
@@ -690,7 +692,7 @@ public class PmzStorage implements IModelStorage {
 		}
 
 
-		private void makeModel() {
+		private void postProcessModel() {
 			final Model model = mModel;
 			// fill model fields
 			model.maps = (TransportMap[]) mTransportMaps.toArray(new TransportMap[mTransportMaps.size()]);
@@ -711,6 +713,20 @@ public class PmzStorage implements IModelStorage {
 			model.timestamp = mFile.lastModified();
 
 			makeGlobalization();
+
+			if(!mDescriptionOnly){
+				StationLibrary lib = StationLibrary.load(mFile);
+				if(lib!=null){
+					for(TransportStation station : model.stations){
+						String lineSystemName = model.lines[station.lineId].systemName;
+						String stationSystemName = station.systemName;
+						ModelLocation l = lib.getStationLocation(lineSystemName, stationSystemName);
+						if(l!=null){
+							station.location = l;
+						}
+					}
+				}
+			}
 		}
 
 		private void makeGlobalization() {
