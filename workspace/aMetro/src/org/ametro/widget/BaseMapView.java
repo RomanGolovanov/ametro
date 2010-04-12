@@ -296,7 +296,6 @@ public abstract class BaseMapView extends ScrollView {
                 mLastTouchX = x;
                 mLastTouchY = y;
                 mLastTouchTime = eventTime;
-                mSnapScrollMode = SNAP_NONE;
                 mVelocityTracker = VelocityTracker.obtain();
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -308,25 +307,16 @@ public abstract class BaseMapView extends ScrollView {
 
                 if (mTouchMode != TOUCH_DRAG_MODE) {
 
+                    if ((deltaX * deltaX + deltaY * deltaY) < mTouchSlopSquare) {
+                        break;
+                    }
+                	
                     if (mTouchMode == TOUCH_SHORTPRESS_MODE || mTouchMode == TOUCH_SHORTPRESS_START_MODE) {
                         mPrivateHandler.removeMessages(SWITCH_TO_LONGPRESS);
                     } else if (mTouchMode == TOUCH_INIT_MODE) {
                         mPrivateHandler.removeMessages(SWITCH_TO_SHORTPRESS);
                     }
                 	
-                	
-                    // if it starts nearly horizontal or vertical, enforce it
-                    if (SNAP_ENABLED) {
-                        int ax = Math.abs(deltaX);
-                        int ay = Math.abs(deltaY);
-                        if (ax > MAX_SLOPE_FOR_DIAG * ay) {
-                            mSnapScrollMode = SNAP_X;
-                            mSnapPositive = deltaX > 0;
-                        } else if (ay > MAX_SLOPE_FOR_DIAG * ax) {
-                            mSnapScrollMode = SNAP_Y;
-                            mSnapPositive = deltaY > 0;
-                        }
-                    }
                     mTouchMode = TOUCH_DRAG_MODE;
 
                 }
@@ -340,49 +330,9 @@ public abstract class BaseMapView extends ScrollView {
                 if (deltaX == 0 && deltaY == 0) {
                     done = true;
                 } else {
-                    if (mSnapScrollMode == SNAP_X || mSnapScrollMode == SNAP_Y) {
-                        int ax = Math.abs(deltaX);
-                        int ay = Math.abs(deltaY);
-                        if (mSnapScrollMode == SNAP_X) {
-                            // radical change means getting out of snap mode
-                            if (ay > MAX_SLOPE_FOR_DIAG * ax
-                                    && ay > MIN_BREAK_SNAP_CROSS_DISTANCE) {
-                                mSnapScrollMode = SNAP_NONE;
-                            }
-                            // reverse direction means lock in the snap mode
-                            if ((ax > MAX_SLOPE_FOR_DIAG * ay)
-                                    && ((mSnapPositive && deltaX < -mMinLockSnapReverseDistance) || (!mSnapPositive && deltaX > mMinLockSnapReverseDistance))) {
-                                mSnapScrollMode = SNAP_X_LOCK;
-                            }
-                        } else {
-                            // radical change means getting out of snap mode
-                            if ((ax > MAX_SLOPE_FOR_DIAG * ay)
-                                    && ax > MIN_BREAK_SNAP_CROSS_DISTANCE) {
-                                mSnapScrollMode = SNAP_NONE;
-                            }
-                            // reverse direction means lock in the snap mode
-                            if ((ay > MAX_SLOPE_FOR_DIAG * ax)
-                                    && ((mSnapPositive && deltaY < -mMinLockSnapReverseDistance) || (!mSnapPositive && deltaY > mMinLockSnapReverseDistance))) {
-                                mSnapScrollMode = SNAP_Y_LOCK;
-                            }
-                        }
-                    }
-
-                    if (mSnapScrollMode == SNAP_X || mSnapScrollMode == SNAP_X_LOCK) {
-                        // scrollBy(deltaX, 0);
-                        internalScroll(deltaX, 0);
-                        mLastTouchX = x;
-                    } else if (mSnapScrollMode == SNAP_Y
-                            || mSnapScrollMode == SNAP_Y_LOCK) {
-                        // scrollBy(0, deltaY);
-                        internalScroll(0, deltaY);
-                        mLastTouchY = y;
-                    } else {
-                        // scrollBy(deltaX, deltaY);
-                        internalScroll(deltaX, deltaY);
-                        mLastTouchX = x;
-                        mLastTouchY = y;
-                    }
+                    internalScroll(deltaX, deltaY);
+                    mLastTouchX = x;
+                    mLastTouchY = y;
                     mLastTouchTime = eventTime;
                 }
                 if (done) {
@@ -442,15 +392,6 @@ public abstract class BaseMapView extends ScrollView {
         int vx = (int) mVelocityTracker.getXVelocity();
         int vy = (int) mVelocityTracker.getYVelocity();
 
-        if (SNAP_ENABLED) {
-            if (mSnapScrollMode != SNAP_NONE) {
-                if (mSnapScrollMode == SNAP_X || mSnapScrollMode == SNAP_X_LOCK) {
-                    vy = 0;
-                } else {
-                    vx = 0;
-                }
-            }
-        }
         vx = vx / 2;
         vy = vy / 2;
 
@@ -555,10 +496,9 @@ public abstract class BaseMapView extends ScrollView {
     final Handler mPrivateHandler = new PrivateHandler();
     
     // adjustable parameters
-    private static final boolean SNAP_ENABLED = false;
-    private static final float MAX_SLOPE_FOR_DIAG = 1.5f;
-    private static final int MIN_BREAK_SNAP_CROSS_DISTANCE = 20; // 20
     private static final int MIN_FLING_TIME = 250; // 250
+    
+    private float mTouchSlopSquare = 10; 
 
     private int mScrollX;
     private int mScrollY;
@@ -587,7 +527,6 @@ public abstract class BaseMapView extends ScrollView {
     private float mLastTouchX;
     private float mLastTouchY;
     private long mLastTouchTime;
-    private int mMinLockSnapReverseDistance;
 
     private int mTouchMode = TOUCH_DONE_MODE;
 
@@ -603,14 +542,6 @@ public abstract class BaseMapView extends ScrollView {
     // But system time out is 100ms, which is too short for the browser.
     // In the browser, if it switches out of tap too soon, jump tap won't work.
     private static final int TAP_TIMEOUT = 200;
-
-    private int mSnapScrollMode = SNAP_NONE;
-    private static final int SNAP_NONE = 1;
-    private static final int SNAP_X = 2;
-    private static final int SNAP_Y = 3;
-    private static final int SNAP_X_LOCK = 4;
-    private static final int SNAP_Y_LOCK = 5;
-    private boolean mSnapPositive;
 
     private Scroller mScroller;
     private VelocityTracker mVelocityTracker;
