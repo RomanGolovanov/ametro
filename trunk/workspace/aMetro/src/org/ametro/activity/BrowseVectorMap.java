@@ -757,6 +757,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 					showZoom();
 				}
 				delayZoom();
+				//Toast.makeText(BrowseVectorMap.this, "clicked!", 100).show();
 			}
 
 			public void onMove(int newx, int newy, int oldx, int oldy) {

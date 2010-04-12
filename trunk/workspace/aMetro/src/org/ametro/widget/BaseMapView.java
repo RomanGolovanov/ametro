@@ -34,6 +34,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
+import android.view.ViewConfiguration;
 import android.widget.ScrollView;
 import android.widget.Scroller;
 
@@ -406,6 +407,9 @@ public abstract class BaseMapView extends ScrollView {
         setVerticalScrollBarEnabled(true);
         setHorizontalScrollBarEnabled(true);
         mScroller = new Scroller(mContext);
+        
+        final int slop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
+        mTouchSlopSquare = slop * slop;
     }
 
     private void internalScroll(int dx, int dy) {
@@ -498,7 +502,7 @@ public abstract class BaseMapView extends ScrollView {
     // adjustable parameters
     private static final int MIN_FLING_TIME = 250; // 250
     
-    private float mTouchSlopSquare = 10; 
+    private float mTouchSlopSquare; 
 
     private int mScrollX;
     private int mScrollY;
