@@ -40,9 +40,26 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.util.Log;
 
 
 public class RenderProgram {
+
+	private static class ClippingTreeNode
+	{
+		public Rect Clip;
+		public ArrayList<RenderElement> Elements;
+		public ClippingTreeNode Left;
+		public ClippingTreeNode Right;
+
+		public ClippingTreeNode(Rect clip){
+			this.Clip = clip;
+			this.Elements= new ArrayList<RenderElement>();
+			this.Left = null;
+			this.Right = null;
+		}
+
+	}
 
 	public static final int TYPE_LINE = 1;
 	public static final int TYPE_TRANSFER_BACKGROUND = 2;
@@ -54,23 +71,25 @@ public class RenderProgram {
 	public static final int ONLY_TRANSPORT = TYPE_LINE | TYPE_TRANSFER_BACKGROUND | TYPE_TRANSFER | TYPE_STATION;
 	public static final int ALL = ONLY_TRANSPORT | TYPE_STATION_NAME;
 
-	RenderElement[] mElements;
-	RenderElement[] mElementsToRender;
-	ArrayList<RenderElement> mClipping;
-	Rect[] mBounds;
-	int[] mTypes;
-	int mRenderFilter;
-	
-	MapView mMapView;
-	
-	ArrayList<RenderElement> mRenderQueue;
+	private RenderElement[] mElements;
+	private RenderElement[] mElementsToRender;
+	private ArrayList<RenderElement> mClipping;
+	private Rect[] mBounds;
+	private int[] mTypes;
+	private int mRenderFilter;
+
+	private MapView mMapView;
+	private ArrayList<RenderElement> mRenderQueue;
+
+	private ClippingTreeNode mClippingRoot;
+	private final static int CLIPPING_GRANULARITY = 50;
 
 	HashMap<SegmentView, RenderElement> segmentIndex = new HashMap<SegmentView, RenderElement>();
 	HashMap<StationView, RenderElement> stationIndex = new HashMap<StationView, RenderElement>();
 	HashMap<StationView, RenderElement> stationNameIndex = new HashMap<StationView, RenderElement>();
 	HashMap<TransferView, RenderElement> transferBackgroundIndex = new HashMap<TransferView, RenderElement>();
 	HashMap<TransferView, RenderElement> transferIndex = new HashMap<TransferView, RenderElement>();
-	
+
 
 	public void setRenderFilter(int renderFilter) {
 		mRenderFilter = renderFilter;
@@ -81,7 +100,7 @@ public class RenderProgram {
 			element.setAntiAlias(enabled);
 		}
 	}
-	
+
 	public RenderProgram(MapView map) {
 		mMapView = map;
 		mRenderQueue = new ArrayList<RenderElement>();
@@ -104,8 +123,106 @@ public class RenderProgram {
 			mBounds[i] = mElements[i].boundingBox;
 			mTypes[i] = mElements[i].type;
 		}
+		final long startTime = System.currentTimeMillis();
+		makeClippingTree();
+		fillClippingTree();
+		final long endTime = System.currentTimeMillis();
+		Log.d("aMetro", "make clipping tree time is " + (endTime-startTime) );
 	}
-	
+
+	private void fillClippingTree() {
+		final int count = mElements.length;
+		final Rect[] bounds = mBounds;
+		final RenderElement[] elems = mElements;
+		for (int i = 0; i < count; i++) {
+			addClippingTreeElement(bounds[i], elems[i], mClippingRoot);
+		}
+	}
+
+	public void appendClipping(Rect v1, ArrayList<RenderElement> renderElements, ClippingTreeNode node){
+		Rect clip = node.Clip;
+		if(Rect.intersects(clip, v1)){
+			for (RenderElement elem : node.Elements) {
+				final Rect box = elem.boundingBox;
+				final int type = elem.type;
+				if( (type & mRenderFilter)>0 && Rect.intersects(v1, box) ){
+					renderElements.add(elem);
+				}
+			}			
+			if(node.Left!=null){
+				appendClipping(v1, renderElements, node.Left);
+				appendClipping(v1, renderElements, node.Right);
+			}
+		}
+	}
+
+	public void appendDoubleClipping(Rect v1, Rect v2, ArrayList<RenderElement> renderElements, ClippingTreeNode node){
+		Rect clip = node.Clip;
+		if(Rect.intersects(clip, v1) || Rect.intersects(clip, v2)){
+			for (RenderElement elem : node.Elements) {
+				final Rect box = elem.boundingBox;
+				final int type = elem.type;
+				if( (type & mRenderFilter)>0 && ( Rect.intersects(v1, box) || Rect.intersects(v2, box) )){
+					renderElements.add(elem);
+				}
+			}			
+			if(node.Left!=null){
+				appendDoubleClipping(v1,v2, renderElements, node.Left);
+				appendDoubleClipping(v1,v2, renderElements, node.Right);
+			}
+		}
+	}
+
+	private void addClippingTreeElement(Rect rect, RenderElement renderElement, ClippingTreeNode node) {
+		if(node.Left==null || node.Right == null){
+			node.Elements.add(renderElement);
+		}else{
+			final Rect left = node.Left.Clip;
+			final Rect right = node.Right.Clip;
+
+			if(left.contains(rect)){
+				addClippingTreeElement(rect, renderElement, node.Left);
+			}else if(right.contains(rect)){
+				addClippingTreeElement(rect, renderElement, node.Right);
+			}else{
+				node.Elements.add(renderElement);
+			}
+		}
+	}
+
+	private void makeClippingTree() {
+		int width = mMapView.width;
+		int height = mMapView.height;
+		ClippingTreeNode root = new ClippingTreeNode(new Rect(0,0,width,height));
+		makeClippingTreeNodes(root);
+		mClippingRoot = root;
+	}
+
+	private static void makeClippingTreeNodes(ClippingTreeNode root) {
+		final Rect clip = root.Clip;
+		final int width = clip.width();
+		final int height = clip.height();
+		if(width<CLIPPING_GRANULARITY && height <CLIPPING_GRANULARITY)
+			return;
+		final int x = clip.left;
+		final int y = clip.top;
+		final Rect left = new Rect(clip);
+		final Rect right = new Rect(clip);
+		if(width>height){
+			int half = x + width/2;
+			left.right = half;
+			right.left = half;
+		}else{
+			int half = y + height/2;
+			left.bottom = half;
+			right.top = half;
+		}
+		root.Left = new ClippingTreeNode(left);
+		makeClippingTreeNodes(root.Left);
+		root.Right = new ClippingTreeNode(right);
+		makeClippingTreeNodes(root.Right);
+	}
+
 	public void updateSelection(List<StationView> stations, List<SegmentView> segments, List<TransferView> transfers){
 		if(stations!=null || segments!=null){
 			for(RenderElement elem : mElements){
@@ -150,7 +267,7 @@ public class RenderProgram {
 					}
 				}
 			}
-			
+
 		}else{
 			for(RenderElement elem : mElements){
 				elem.setSelection(true);
@@ -183,13 +300,13 @@ public class RenderProgram {
 			if( (t.flags & TransportTransfer.TYPE_INVISIBLE) != 0){
 				continue;
 			}
-			
+
 			RenderElement elementBackground = new RenderTransferBackground(map, transfer, t);
 			RenderElement elementTransfer = new RenderTransfer(map, transfer, t);
 
 			renderQueue.add(elementBackground);
 			renderQueue.add(elementTransfer);
-			
+
 			transferIndex.put(transfer, elementTransfer);
 			transferBackgroundIndex.put(transfer, elementBackground);
 		}
@@ -237,7 +354,7 @@ public class RenderProgram {
 		}
 		mElementsToRender = (RenderElement[]) elems.toArray(new RenderElement[elems.size()]);
 	}
-	
+
 	public void setVisibility(RectF viewport) {
 		final int offset = 10;
 		final Rect v = new Rect(
@@ -245,22 +362,14 @@ public class RenderProgram {
 				(int) (viewport.top - offset),
 				(int) (viewport.right + offset),
 				(int) (viewport.bottom + offset));
-		final Rect[] bounds = mBounds;
-		final RenderElement[] elements = mElements;
-		final int count = bounds.length;
-		final int[] types = mTypes;
-		final ArrayList<RenderElement> elems = mClipping;
-		elems.clear();
-		for (int i = 0; i < count; i++) {
-			if(  (types[i] & mRenderFilter)>0 &&  Rect.intersects(v, bounds[i])){
-				elems.add(elements[i]);
-			}
-		}
-		mElementsToRender = (RenderElement[]) elems.toArray(new RenderElement[elems.size()]);
+		ArrayList<RenderElement> preClipped = new ArrayList<RenderElement>(100);
+		appendClipping(v,preClipped, mClippingRoot);
+		mElementsToRender = (RenderElement[]) preClipped.toArray(new RenderElement[preClipped.size()]);
 	}
-	
+
 	public void setVisibilityTwice(RectF viewport1, RectF viewport2) {
-		//final long startTime = System.currentTimeMillis();
+//		final long startTime = System.currentTimeMillis();
+
 		final int offset = 10;
 		final Rect v1 = new Rect(
 				(int) (viewport1.left - offset),
@@ -272,25 +381,17 @@ public class RenderProgram {
 				(int) (viewport2.top - offset),
 				(int) (viewport2.right + offset),
 				(int) (viewport2.bottom + offset));
-		final ArrayList<RenderElement> elems = mClipping;
-		elems.clear();
-		final Rect[] bounds = mBounds;
-		final RenderElement[] elements = mElements;
-		final int[] types = mTypes;
-		final int count = bounds.length;
-		for (int i = 0; i < count; i++) {
-			final Rect box = bounds[i];
-			if( (types[i] & mRenderFilter)>0 && ( Rect.intersects(v1, box) || Rect.intersects(v2, box) )){
-				elems.add(elements[i]);
-			}
-		}
-		mElementsToRender = (RenderElement[]) elems.toArray(new RenderElement[elems.size()]);
-		//final long endTime = System.currentTimeMillis();
-		//Log.d("aMetro", "clipping time is " + (endTime-startTime) +", clipped " + mElementsToRender.length + "/" + mElements.length );
+
+		ArrayList<RenderElement> preClipped = new ArrayList<RenderElement>(100);
+		appendDoubleClipping(v1, v2, preClipped, mClippingRoot);
+		mElementsToRender = (RenderElement[]) preClipped.toArray(new RenderElement[preClipped.size()]);
+
+//		final long endTime = System.currentTimeMillis();
+//		Log.d("aMetro", "clipping time is " + (endTime-startTime) +", clipped " + mElementsToRender.length + "/" + mElements.length );
 	}
 
 	public void draw(Canvas canvas) {
-		//final long startTime = System.currentTimeMillis();
+//		final long startTime = System.currentTimeMillis();
 		canvas.save();
 		final RenderElement[] elements = mElementsToRender;
 		final int count = elements.length;
@@ -299,8 +400,8 @@ public class RenderProgram {
 			elements[i].draw(canvas);
 		}
 		canvas.restore();
-		//final long endTime = System.currentTimeMillis();
-		//Log.d("aMetro", "drawing time is " + (endTime-startTime) );
+//		final long endTime = System.currentTimeMillis();
+//		Log.d("aMetro", "drawing time is " + (endTime-startTime) );
 	}
 
 	public static int getGrayedColor(int color) {
@@ -311,13 +412,13 @@ public class RenderProgram {
 		float r = (float)Color.red(color) / 255;
 		float g = (float)Color.green(color) / 255;
 		float b = (float)Color.blue(color) / 255;
-		
+
 		float t = 0.8f;
 		r = r*(1-t) + 1.0f * t;
 		g = g*(1-t) + 1.0f * t;
 		b = b*(1-t) + 1.0f * t;
-		 
+
 		return Color.argb(0xFF, (int)Math.min(r * 255,255), (int)Math.min(g * 255,255), (int)Math.min(b * 255,255));
 	}
-	
+
 }
