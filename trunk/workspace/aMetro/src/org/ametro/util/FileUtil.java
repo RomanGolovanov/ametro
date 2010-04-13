@@ -69,9 +69,9 @@ public class FileUtil {
 	}
 
 	public static String getFileName(String path){
-		File f = new File(path);
-		String fullFileName = f.getName();
-		String fileName = fullFileName.substring(0, fullFileName.lastIndexOf('.'));
+		int lastSlashIndex = path.lastIndexOf(File.separatorChar);
+		int lastBackslashIndex = path.lastIndexOf('\\');
+		String fileName = path.substring( lastSlashIndex!=-1 ? (lastSlashIndex+1) : (lastBackslashIndex!=-1 ? (lastBackslashIndex+1) : 0) , path.lastIndexOf('.'));
 		return fileName;
 	}
 	
