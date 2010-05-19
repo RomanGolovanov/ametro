@@ -555,7 +555,8 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	/*package*/ void setNavigationRoute(RouteContainer result){
 		boolean refreshNeeded = (result != mRouteContainer) || (result == null && mRouteContainer!=null) || (result!=null && mRouteContainer == null);
 		if(refreshNeeded){
-			mCurrentRoute = new RouteView(mMapView, result.getDefaultRoute());
+			mRouteContainer = result;
+			mCurrentRoute = new RouteView(mMapView, mRouteContainer.getDefaultRoute());
 			if(result!=null){
 				mNavigationSegments = mCurrentRoute.getSegments();
 				mNavigationStations = mCurrentRoute.getStations();
