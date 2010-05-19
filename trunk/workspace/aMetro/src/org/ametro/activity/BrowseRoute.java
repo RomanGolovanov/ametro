@@ -69,7 +69,7 @@ public class BrowseRoute extends Activity implements OnClickListener,
 		mFavoritesButton = (ImageButton) findViewById(R.id.browse_route_favorites);
 
 		mMapView = BrowseVectorMap.Instance.getMapView();
-		mRoute = BrowseVectorMap.Instance.getNavigationRoute();
+		mRoute = BrowseVectorMap.Instance.getCurrentRoute();
 		RouteListViewAdapter adapter = new RouteListViewAdapter(this, mRoute,
 				mMapView);
 		adapter.setTextColor(Color.WHITE);
