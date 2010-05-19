@@ -138,6 +138,8 @@ public class CreateRoute extends Activity implements OnClickListener,
 		mFromText.setAdapter(fromAdapter);
 		mToText.setAdapter(toAdapter);
 		
+		mFromText.setSelectAllOnFocus(true);
+		mToText.setSelectAllOnFocus(true);
 
 		final RouteContainer routes = BrowseVectorMap.Instance.getNavigationRoute();
 		if(routes!=null){
@@ -145,13 +147,10 @@ public class CreateRoute extends Activity implements OnClickListener,
 			StationView toStation = mMapView.findViewByStationId( routes.getStationToId() );
 			mFromText.setText( StationListAdapter.getStationName(mMapView, fromStation) );
 			mToText.setText( StationListAdapter.getStationName(mMapView, toStation) );
-			mFromText.setSelectAllOnFocus(true);
-			mToText.setSelectAllOnFocus(true);
 		}else{
 			final StationView station = BrowseVectorMap.Instance.getCurrentStation();
 			if(station!=null){
 				mFromText.setText( StationListAdapter.getStationName(mMapView, station) );
-				mFromText.setSelectAllOnFocus(true);
 			}
 		}
 		
