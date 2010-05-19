@@ -250,5 +250,23 @@ public class Model {
 		return views[0];
 	}
 
+	public TransportSegment getTransportSegment(int from, int to) {
+		for(TransportSegment obj : segments){
+			if(obj.stationFromId == from && obj.stationToId == to){
+				return obj;
+			}
+		}
+		return null;
+	}
+
+	public TransportTransfer getTransportTransfer(int to, int from) {
+		for(TransportTransfer obj : transfers){
+			if(obj.stationFromId == from && obj.stationToId == to){
+				return obj;
+			}
+		}
+		return null;
+	}
+
 	
 }

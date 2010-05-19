@@ -2,13 +2,24 @@ package org.ametro.model.route;
 
 public class TransportRoute {
 
-	/*package*/ int stationFromId;
-	/*package*/ int stationToId;
+	/*package*/ int from;
+	/*package*/ int to;
 
 	/*package*/ int[] stations;
-	/*package*/ Integer[] segments;
-	/*package*/ Integer[] transfers;
+	/*package*/ long[] delays;
 	
-	/*package*/ int length;
+	/*package*/ int[] segments;
+	/*package*/ int[] transfers;
+	
+	/*package*/ long length;
+
+	public long getLength() {
+		return length;
+	}
+
+	public Long getDelay(int index) {
+		return delays[index];
+	}
+	
 	
 }

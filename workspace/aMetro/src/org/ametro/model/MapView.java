@@ -168,4 +168,30 @@ public class MapView {
 		return null;
 	}
 
+	public StationView findViewByStationId(int stationId) {
+		for(StationView view : stations){
+			if(view.stationId == stationId){
+				return view;
+			}
+		}
+		return null;
+	}
+
+	public SegmentView findViewBySegmentId(int segmentId) {
+		for(SegmentView view : segments){
+			if(view.segmentId == segmentId){
+				return view;
+			}
+		}		
+		return null;
+	}
+
+	public TransferView findViewByTransferId(int transferId) {
+		for(TransferView view : transfers){
+			if(view.transferId == transferId){
+				return view;
+			}
+		}		
+		return null;
+	}	
 }

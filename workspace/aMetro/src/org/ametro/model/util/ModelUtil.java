@@ -1,5 +1,6 @@
 package org.ametro.model.util;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.ametro.model.StationView;
@@ -139,6 +140,14 @@ public class ModelUtil {
 		return res;
 	}
 
+	public static long[] toLongArray(ArrayList<Long> src) {
+		long[] res = new long[src.size()];
+		for (int i = 0; i < src.size(); i++) {
+			res[i] = src.get(i);
+		}
+		return res;
+	}
+	
 	public static ModelRect getDimensions(StationView stations[]) {
 		int xmin = Integer.MAX_VALUE;
 		int ymin = Integer.MAX_VALUE;
@@ -189,5 +198,5 @@ public class ModelUtil {
 	public static Point toPoint(ModelPoint p) {
 		return new Point(p.x,p.y);
 	}
-	
+
 }
