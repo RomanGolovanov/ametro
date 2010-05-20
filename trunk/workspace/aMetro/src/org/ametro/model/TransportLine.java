@@ -24,6 +24,8 @@ package org.ametro.model;
 public class TransportLine {
 
 	public int id; // id
+	public int mapId;
+
 	public int name; // human readable name
 	
 	public String systemName; // system name

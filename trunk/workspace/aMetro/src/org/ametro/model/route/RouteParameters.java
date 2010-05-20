@@ -54,5 +54,14 @@ public class RouteParameters implements Parcelable {
 		in.readIntArray(transports);
 	}
 		
+	public RouteParameters(int from, int to, int[] include, int[] exclude, int flags, int[] transports)
+	{
+		this.from = from;
+		this.to = to;
+		this.include = include;
+		this.exclude = exclude;
+		this.flags = flags;
+		this.transports = transports;
+	}
 	
 }

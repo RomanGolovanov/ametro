@@ -1,6 +1,7 @@
 package org.ametro.model.util;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.ametro.model.StationView;
@@ -197,6 +198,15 @@ public class ModelUtil {
 
 	public static Point toPoint(ModelPoint p) {
 		return new Point(p.x,p.y);
+	}
+
+	public static HashSet<Integer> toIntHashSet(int[] transportsChecked) {
+		final int len = transportsChecked.length;
+		final HashSet<Integer> res = new HashSet<Integer>(len);
+		for(int i=0; i<len; i++){
+			res.add(transportsChecked[i]);
+		}
+		return res;
 	}
 
 }

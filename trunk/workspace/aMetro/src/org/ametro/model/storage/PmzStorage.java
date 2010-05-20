@@ -618,6 +618,7 @@ public class PmzStorage implements IModelStorage {
 						if(isSectionChanged){
 							line = new TransportLine(); // at start - create new line object
 							line.id = mTransportLines.size();
+							line.mapId = map.id;
 							line.owner = mModel;
 							mTransportLines.add(line);
 						}
@@ -805,6 +806,8 @@ public class PmzStorage implements IModelStorage {
 
 		private void makeLineObjects(TransportLine line, String stationList, String drivingList, String aliasesList) {
 
+			final int mapId = line.mapId;
+			
 			ArrayList<String> stations = new ArrayList<String>();
 			HashSet<SegmentInfo> segments = new HashSet<SegmentInfo>();
 			makeDrivingGraph(stationList, drivingList, stations, segments);
@@ -822,6 +825,7 @@ public class PmzStorage implements IModelStorage {
 				final int id = index++;
 				station.id = id;
 				station.lineId = line.id;
+				station.mapId = mapId;
 				station.systemName = stationSystemName;
 				station.name = appendLocalizedText( alias!=null ? alias : stationSystemName );
 
@@ -843,6 +847,7 @@ public class PmzStorage implements IModelStorage {
 				if(fromId != null && toId != null){
 					final TransportSegment segment = new TransportSegment();
 					segment.id = index++;
+					segment.mapId = mapId;
 					segment.stationFromId = fromId;
 					segment.stationToId = toId;
 					segment.delay = delay;
@@ -1002,8 +1007,10 @@ public class PmzStorage implements IModelStorage {
 
 			if(from!=null && to!=null){
 				TransportTransfer transfer = new TransportTransfer();
+				transfer.mapFromId = from.mapId;
 				transfer.lineFromId = from.lineId;
 				transfer.stationFromId = from.id;
+				transfer.mapToId = to.mapId;
 				transfer.lineToId = to.lineId;
 				transfer.stationToId = to.id; 
 				transfer.delay = parts.length > 4 && parts[4].length() > 0 ? StringUtil.parseNullableDelay(parts[4]) : null;

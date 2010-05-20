@@ -32,12 +32,13 @@ public class TransportTransfer {
 	public static final String PARALLEL = "parallel";
 	public static final String INDIFFERENT = "indifferent";
 	
-	
-	
 	public int id;
+
+	public int mapFromId;
 	public int lineFromId;
 	public int stationFromId;
 
+	public int mapToId;
 	public int lineToId;
 	public int stationToId;
 

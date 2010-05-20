@@ -29,4 +29,8 @@ public class TransportMap {
 	
 	public Model owner;
 
+	public String getTypeName() {
+		return Model.getLocalizedString(owner, typeName);
+	}
+
 }

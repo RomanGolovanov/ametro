@@ -20,7 +20,11 @@
  */
 package org.ametro.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+
+import org.ametro.model.util.ModelUtil;
 
 
 public class MapView {
@@ -193,5 +197,67 @@ public class MapView {
 			}
 		}		
 		return null;
+	}
+
+	public TransportCollection getTransports() {
+		return new TransportCollection(this);
 	}	
+	
+
+	public static class TransportCollection 
+	{
+		private TransportMap[] maps;
+		private String[] names;
+		private boolean[] checks;
+
+		public String[] getNames(){
+			return names;
+		}
+		
+		public boolean[] getStates(){
+			return checks;
+		}
+		
+		public void setState(int index, boolean isChecked){
+			checks[index] = isChecked;
+		}
+		
+		public int[] getCheckedTransports(){
+			ArrayList<Integer> lst = new ArrayList<Integer>();
+			final int len = maps.length; 
+			for(int i=0; i<len; i++){
+				if(checks[i]){
+					lst.add(maps[i].id);
+				}
+			}
+			return ModelUtil.toIntArray(lst);
+		}
+		
+		public TransportCollection(TransportCollection src){
+			maps = src.maps.clone();
+			names = src.names.clone();
+			checks = src.checks.clone();
+		}
+		
+		public TransportCollection(MapView view) {
+			final HashSet<Integer> checkedSet = ModelUtil.toIntHashSet(view.transportsChecked);
+			final int[] transports = view.transports;
+			final int len = transports.length;
+			
+			maps = new TransportMap[len];
+			names = new String[len];
+			checks = new boolean[len];
+
+			final TransportMap[] allMaps = view.owner.maps;
+			for(int i=0; i<len; i++){
+				final int id = transports[i];
+				final TransportMap map = allMaps[id];
+				maps[i] = map;
+				names[i] = map.getTypeName();
+				checks[i] = checkedSet.contains(id);
+			}
+		}	
+		
+	}
+
 }

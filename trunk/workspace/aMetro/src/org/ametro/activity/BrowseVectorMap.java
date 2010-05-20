@@ -252,7 +252,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 				idx++;
 			}
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setTitle("Select layer");
+			builder.setTitle(R.string.msg_select_scheme);
 			builder.setSingleChoiceItems(mModel.viewNames, checked, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int item) {
 					onInitializeMapView(mModelName, mModel.viewNames[item]);

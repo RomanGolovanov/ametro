@@ -26,6 +26,7 @@ public class TransportStation {
 
 	public int id; // id
 	public int lineId; // line id
+	public int mapId;
 	public int name; // human readable name
 	public String systemName; // system name
 	public ModelLocation location; // GPS location
