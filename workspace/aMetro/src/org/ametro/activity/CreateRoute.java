@@ -29,12 +29,16 @@ import org.ametro.R;
 import org.ametro.adapter.StationListAdapter;
 import org.ametro.model.MapView;
 import org.ametro.model.StationView;
+import org.ametro.model.MapView.TransportCollection;
 import org.ametro.model.route.RouteBuilder;
 import org.ametro.model.route.RouteContainer;
+import org.ametro.model.route.RouteParameters;
 import org.ametro.util.DateUtil;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -59,6 +63,8 @@ public class CreateRoute extends Activity implements OnClickListener,
 
 	private MapView mMapView;
 
+	private TransportCollection mTransports;
+	
 	private AutoCompleteTextView mFromText;
 	private AutoCompleteTextView mToText;
 
@@ -81,10 +87,12 @@ public class CreateRoute extends Activity implements OnClickListener,
 
     private final int MAIN_MENU_SWAP = 1;
     private final int MAIN_MENU_FAVORITES = 2;
+    private final int MAIN_MENU_TRANSPORTS = 3;
 	
 	public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(0, MAIN_MENU_SWAP, 0, R.string.menu_swap).setIcon(android.R.drawable.ic_menu_revert);
         menu.add(0, MAIN_MENU_FAVORITES, 1, R.string.menu_favorites).setIcon(R.drawable.star_48);
+        menu.add(0, MAIN_MENU_TRANSPORTS, 2, R.string.menu_transports).setIcon(android.R.drawable.ic_menu_agenda);
 		return super.onCreateOptionsMenu(menu);
 	}
 	
@@ -101,10 +109,12 @@ public class CreateRoute extends Activity implements OnClickListener,
             return true;
         case MAIN_MENU_FAVORITES:
    			startActivityForResult(new Intent(this,FavoriteRouteList.class), REQUEST_ROUTE);
+        case MAIN_MENU_TRANSPORTS:
+			showSelectTransportDialog();
         }		
 		return super.onOptionsItemSelected(item);
 	}
-	
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.create_route);
@@ -128,6 +138,8 @@ public class CreateRoute extends Activity implements OnClickListener,
 		mToText = (AutoCompleteTextView) findViewById(R.id.create_route_to_text);
 		
 		mMapView = BrowseVectorMap.Instance.getMapView();
+
+		mTransports = mMapView.getTransports();
 		
 		StationListAdapter fromAdapter = new StationListAdapter(this, mMapView.stations, mMapView); 
 		StationListAdapter toAdapter = new StationListAdapter(this, mMapView.stations, mMapView); 
@@ -228,6 +240,25 @@ public class CreateRoute extends Activity implements OnClickListener,
 		}
 	}
 
+	private void showSelectTransportDialog() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.msg_select_transports);
+		final TransportCollection coll = new TransportCollection(mTransports);
+		builder.setMultiChoiceItems(coll.getNames(), coll.getStates(), new DialogInterface.OnMultiChoiceClickListener() {
+			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+				coll.setState(which, isChecked);
+			}
+		});
+		builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				mTransports = coll;
+			}
+		});
+		builder.setNegativeButton(android.R.string.cancel,null);
+		AlertDialog alertDialog = builder.create();
+		alertDialog.show();
+	}
+	
 	private void createRoute(StationView from, StationView to) {
 		if (from != null && to != null) {
 			mCreateRouteTask = new CreateRouteTask();
@@ -267,11 +298,16 @@ public class CreateRoute extends Activity implements OnClickListener,
 
 		protected RouteContainer doInBackground(Integer... stations) {
 			int len = stations.length;
-			int[] ids = new int[len-2];
+			int from = stations[0];
+			int to = stations[len-1];
+			int[] include = new int[len-2];
 			for(int i = 1;i<len-1;i++){
-				ids[i] = stations[i];
+				include[i] = stations[i];
 			}
-			return RouteBuilder.createRoutes(mMapView.owner, stations[0], stations[len-1], ids, new int[0], RouteBuilder.ROUTE_OPTION_ALL);
+			int[] exclude = new int[0];
+			int[] transports = mTransports.getCheckedTransports();
+			RouteParameters routeParameters = new RouteParameters(from, to, include, exclude, RouteBuilder.ROUTE_OPTION_ALL, transports);
+			return RouteBuilder.createRoutes(mMapView.owner, routeParameters);
 		}
 
 		protected void onCancelled() {

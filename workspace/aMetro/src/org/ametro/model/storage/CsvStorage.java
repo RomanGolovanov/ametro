@@ -270,8 +270,10 @@ public class CsvStorage implements IModelStorage {
 		while(reader.next()){
 			TransportTransfer obj = new TransportTransfer();
 			obj.id = reader.readInt();
+			obj.mapFromId = reader.readInt();
 			obj.lineFromId = reader.readInt();
 			obj.stationFromId = reader.readInt();
+			obj.mapToId = reader.readInt();
 			obj.lineToId = reader.readInt();
 			obj.stationToId = reader.readInt();
 			obj.delay = reader.readInteger();
@@ -288,6 +290,7 @@ public class CsvStorage implements IModelStorage {
 		while(reader.next()){
 			TransportSegment obj = new TransportSegment();
 			obj.id = reader.readInt();
+			obj.mapId = reader.readInt();
 			obj.lineId = reader.readInt();
 			obj.stationFromId = reader.readInt();
 			obj.stationToId = reader.readInt();
@@ -306,6 +309,7 @@ public class CsvStorage implements IModelStorage {
 		while(reader.next()){
 			TransportStation obj = new TransportStation();
 			obj.id = reader.readInt();
+			obj.mapId = reader.readInt();
 			obj.lineId = reader.readInt();
 			obj.name = reader.readInt();
 			obj.systemName = reader.readString();
@@ -337,6 +341,7 @@ public class CsvStorage implements IModelStorage {
 		while(reader.next()){
 			TransportLine obj = new TransportLine();
 			obj.id = reader.readInt();
+			obj.mapId = reader.readInt();
 			obj.name = reader.readInt();
 			obj.systemName = reader.readString();
 			obj.lineMapName = reader.readString();
@@ -518,6 +523,7 @@ public class CsvStorage implements IModelStorage {
 		zip.putNextEntry(zipEntry);
 		for(TransportLine obj : model.lines){
 			writer.writeInt(obj.id);
+			writer.writeInt(obj.mapId);
 			writer.writeInt(obj.name);
 			writer.writeString(obj.systemName);
 			writer.writeString(obj.lineMapName);
@@ -534,6 +540,7 @@ public class CsvStorage implements IModelStorage {
 		zip.putNextEntry(zipEntry);
 		for(TransportStation obj : model.stations){
 			writer.writeInt(obj.id);
+			writer.writeInt(obj.mapId);
 			writer.writeInt(obj.lineId);
 			writer.writeInt(obj.name);
 			writer.writeString(obj.systemName);
@@ -560,6 +567,7 @@ public class CsvStorage implements IModelStorage {
 		zip.putNextEntry(zipEntry);
 		for(TransportSegment obj : model.segments){
 			writer.writeInt(obj.id);
+			writer.writeInt(obj.mapId);
 			writer.writeInt(obj.lineId);
 			writer.writeInt(obj.stationFromId);
 			writer.writeInt(obj.stationToId);
@@ -576,8 +584,10 @@ public class CsvStorage implements IModelStorage {
 		zip.putNextEntry(zipEntry);
 		for(TransportTransfer obj : model.transfers){
 			writer.writeInt(obj.id);
+			writer.writeInt(obj.mapFromId);
 			writer.writeInt(obj.lineFromId);
 			writer.writeInt(obj.stationFromId);
+			writer.writeInt(obj.mapToId);
 			writer.writeInt(obj.lineToId);
 			writer.writeInt(obj.stationToId);
 			writer.writeInteger(obj.delay);

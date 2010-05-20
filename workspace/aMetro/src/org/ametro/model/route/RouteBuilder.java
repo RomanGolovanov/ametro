@@ -2,6 +2,7 @@ package org.ametro.model.route;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 
 import org.ametro.algorithm.DijkstraHeap;
 import org.ametro.model.MapView;
@@ -16,10 +17,10 @@ public class RouteBuilder {
 	public final static int ROUTE_OPTION_SIMPLEST = 2;
 	public final static int ROUTE_OPTION_ALL = ROUTE_OPTION_SHORTEST | ROUTE_OPTION_SIMPLEST;
 	
-	public static RouteContainer createRoutes(Model model, int from, int to, int[] include, int[] exclude, int flags)
+	public static RouteContainer createRoutes(Model model, RouteParameters parameters)
 	{
-		TransportRoute[] routes = findRoutes(model, from, to, include, exclude, flags);// new TransportRoute[0];
-		RouteContainer set = new RouteContainer(from, to, include, exclude, flags, routes);
+		TransportRoute[] routes = findRoutes(model, parameters);// new TransportRoute[0];
+		RouteContainer set = new RouteContainer(parameters, routes);
 		return set;
 	}
 	
@@ -28,8 +29,8 @@ public class RouteBuilder {
 		return new RouteView(view, route);
 	}
 
-	private static TransportRoute[] findRoutes(Model model, int from, int to, int[] include, int[] exclude, int flags) {
-		TransportRoute route = findRoute(model, from, to, include, exclude, flags);
+	private static TransportRoute[] findRoutes(Model model, RouteParameters parameters) {
+		TransportRoute route = findRoute(model, parameters);
 		if(route!=null){
 			TransportRoute[] routes = new TransportRoute[1];
 			routes[0] = route;
@@ -38,24 +39,38 @@ public class RouteBuilder {
 		return null;
 	}
 
-	public static TransportRoute findRoute(Model model, int from, int to, int[] include, int[] exclude, int flags) {
+	public static TransportRoute findRoute(Model model, RouteParameters parameters) {
 		
+		final int from = parameters.from;
+		final int to = parameters.to;
+//		final int[] include = parameters.include;
+//		final int[] exclude = parameters.exclude;
+//		final int flags = parameters.flags;
 		final int count = model.stations.length;
+		
+		final HashSet<Integer> checkedTransports = new HashSet<Integer>();
+		for(int transportId : parameters.transports){
+			checkedTransports.add(transportId);
+		}
 		
 		DijkstraHeap.Graph g = new DijkstraHeap.Graph(count);
 		
 		for (TransportSegment seg : model.segments) {
-			Integer delay = seg.delay;
-			if (delay != null) {
-				g.addEdge(seg.stationFromId,seg.stationToId, (int)delay);
+			if(checkedTransports.contains(seg.mapId)){
+				Integer delay = seg.delay;
+				if (delay != null) {
+					g.addEdge(seg.stationFromId,seg.stationToId, (int)delay);
+				}
 			}
 		}
 		
 		for(TransportTransfer tr : model.transfers){
-			Integer delay = tr.delay;
-			if (delay != null && delay != 0) {
-				g.addEdge(tr.stationFromId,tr.stationToId, delay);
-				g.addEdge(tr.stationToId, tr.stationFromId, delay);
+			if(checkedTransports.contains(tr.mapFromId) && checkedTransports.contains(tr.mapToId)){
+				Integer delay = tr.delay;
+				if (delay != null && delay != 0) {
+					g.addEdge(tr.stationFromId,tr.stationToId, delay);
+					g.addEdge(tr.stationToId, tr.stationFromId, delay);
+				}
 			}
 		}
 		

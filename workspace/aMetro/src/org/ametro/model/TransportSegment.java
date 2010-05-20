@@ -28,6 +28,7 @@ public class TransportSegment {
 	
 	public int id;
 	public int lineId;
+	public int mapId;
 	
 	public int stationFromId;
 	public int stationToId;
