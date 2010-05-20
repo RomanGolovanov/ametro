@@ -58,6 +58,8 @@ import org.ametro.util.StringUtil;
 
 public class PmzStorage implements IModelStorage {
 
+	private static final String MAP_TYPE_METRO = "Метро";
+	
 	private static final String ENCODING = "windows-1251";
 
 	public Model loadModel(String fileName, Locale locale) throws IOException {
@@ -651,6 +653,11 @@ public class PmzStorage implements IModelStorage {
 						}
 					}
 				}
+				
+				if(map.typeName == 0){
+					map.typeName = appendLocalizedText(MAP_TYPE_METRO);
+				}
+				
 				if(line!=null){ // if end of line 
 					makeLineObjects(line, stationList, drivingList, aliasesList); // make station and segments
 				}

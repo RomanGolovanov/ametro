@@ -139,7 +139,7 @@ public class CreateRoute extends Activity implements OnClickListener,
 		
 		mMapView = BrowseVectorMap.Instance.getMapView();
 
-		mTransports = mMapView.getTransports();
+		mTransports = mMapView.getTransportCollection();
 		
 		StationListAdapter fromAdapter = new StationListAdapter(this, mMapView.stations, mMapView); 
 		StationListAdapter toAdapter = new StationListAdapter(this, mMapView.stations, mMapView); 
