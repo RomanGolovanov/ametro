@@ -199,7 +199,7 @@ public class MapView {
 		return null;
 	}
 
-	public TransportCollection getTransports() {
+	public TransportCollection getTransportCollection() {
 		return new TransportCollection(this);
 	}	
 	
@@ -240,8 +240,8 @@ public class MapView {
 		}
 		
 		public TransportCollection(MapView view) {
-			final HashSet<Integer> checkedSet = ModelUtil.toIntHashSet(view.transportsChecked);
-			final int[] transports = view.transports;
+			final HashSet<Integer> checkedSet = ModelUtil.toIntHashSet(view.getCheckedTransports());
+			final int[] transports = view.getTransports();
 			final int len = transports.length;
 			
 			maps = new TransportMap[len];
@@ -258,6 +258,15 @@ public class MapView {
 			}
 		}	
 		
+	}
+
+
+	public int[] getTransports() {
+		return (this.transports!=null && this.transports.length>0) ? this.transports : new int[]{0};
+	}
+
+	public int[] getCheckedTransports() {
+		return (this.transportsChecked!=null && this.transportsChecked.length>0) ? this.transportsChecked : new int[]{0};
 	}
 
 }
