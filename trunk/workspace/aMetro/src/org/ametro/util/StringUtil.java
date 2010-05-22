@@ -36,6 +36,8 @@ import org.ametro.model.ext.ModelPoint;
 import org.ametro.model.ext.ModelRect;
 import org.ametro.model.ext.ModelSpline;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
@@ -607,6 +609,16 @@ public class StringUtil {
 		spline.isSpline = Boolean.parseBoolean(value.substring(0, firstCommaPosition));
 		spline.points = parseModelPointArray(value.substring(firstCommaPosition+1));
 		return spline;
+	}
+
+	public static String[] getResourceStringArray(Context context, int[] names) {
+		Resources r = context.getResources();
+		final int len = names.length;
+		String[] res = new String[len];
+		for(int i =0;i<len;i++){
+			res[i] = r.getString(names[i]);
+		}
+		return res;
 	}
 
 

@@ -33,6 +33,7 @@ import java.util.Locale;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import org.ametro.R;
 import org.ametro.model.LineView;
 import org.ametro.model.MapLayerContainer;
 import org.ametro.model.MapView;
@@ -56,9 +57,14 @@ import org.ametro.model.util.ModelUtil;
 import org.ametro.model.util.StationLibrary;
 import org.ametro.util.StringUtil;
 
+
 public class PmzStorage implements IModelStorage {
 
-	private static final String MAP_TYPE_METRO = "Метро";
+	private static final String TRANSPORT_TYPE_METRO = "Метро";
+	private static final String TRANSPORT_TYPE_TRAIN = "Электричка";
+	private static final String TRANSPORT_TYPE_TRAM = "Трамвай";
+	private static final String TRANSPORT_TYPE_BUS = "Автобус";
+	private static final String TRANSPORT_TYPE_WATER_BUS = "Речной трамвай";
 	
 	private static final String ENCODING = "windows-1251";
 
@@ -649,13 +655,25 @@ public class PmzStorage implements IModelStorage {
 						// do nothing at this time
 					}else if (section.equalsIgnoreCase("Options")){
 						if(key.equalsIgnoreCase("Type")){
-							map.typeName = appendLocalizedText(value);
+							if(TRANSPORT_TYPE_METRO.equalsIgnoreCase(value)){
+								map.typeName = R.string.transport_type_metro;
+							}else if(TRANSPORT_TYPE_TRAM.equalsIgnoreCase(value)){
+								map.typeName = R.string.transport_type_tram;
+							}else if(TRANSPORT_TYPE_BUS.equalsIgnoreCase(value)){
+								map.typeName = R.string.transport_type_bus;
+							}else if(TRANSPORT_TYPE_TRAIN.equalsIgnoreCase(value)){
+								map.typeName = R.string.transport_type_train;
+							}else if(TRANSPORT_TYPE_WATER_BUS.equalsIgnoreCase(value)){
+								map.typeName = R.string.transport_type_water_bus;
+							}else{
+								map.typeName = R.string.transport_type_default;
+							}
 						}
 					}
 				}
 				
 				if(map.typeName == 0){
-					map.typeName = appendLocalizedText(MAP_TYPE_METRO);
+					map.typeName = R.string.transport_type_default;
 				}
 				
 				if(line!=null){ // if end of line 
@@ -766,7 +784,6 @@ public class PmzStorage implements IModelStorage {
 
 			}
 
-
 			// setup model
 			final Model model = mModel;
 			model.locales = (String[]) localeList.toArray(new String[localeList.size()]);
@@ -774,8 +791,6 @@ public class PmzStorage implements IModelStorage {
 			model.localeCurrent = model.locales[0];
 			model.texts = model.localeTexts[0];
 			model.textLength = model.localeTexts[0].length;
-
-
 		}
 
 		private String[] makeTransliteText(CountryLibrary.CountryLibraryRecord info, final String[] originalTexts, boolean transliterate) { 
