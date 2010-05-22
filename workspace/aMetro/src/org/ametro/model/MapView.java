@@ -26,7 +26,6 @@ import java.util.HashSet;
 
 import org.ametro.model.util.ModelUtil;
 
-
 public class MapView {
 
 	public int id;
@@ -207,10 +206,10 @@ public class MapView {
 	public static class TransportCollection 
 	{
 		private TransportMap[] maps;
-		private String[] names;
+		private int[] names;
 		private boolean[] checks;
 
-		public String[] getNames(){
+		public int[] getNames(){
 			return names;
 		}
 		
@@ -245,7 +244,7 @@ public class MapView {
 			final int len = transports.length;
 			
 			maps = new TransportMap[len];
-			names = new String[len];
+			names = new int[len];
 			checks = new boolean[len];
 
 			final TransportMap[] allMaps = view.owner.maps;
@@ -253,7 +252,7 @@ public class MapView {
 				final int id = transports[i];
 				final TransportMap map = allMaps[id];
 				maps[i] = map;
-				names[i] = map.getTypeName();
+				names[i] =  map.typeName;
 				checks[i] = checkedSet.contains(id);
 			}
 		}	

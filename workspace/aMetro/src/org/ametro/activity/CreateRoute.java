@@ -34,6 +34,7 @@ import org.ametro.model.route.RouteBuilder;
 import org.ametro.model.route.RouteContainer;
 import org.ametro.model.route.RouteParameters;
 import org.ametro.util.DateUtil;
+import org.ametro.util.StringUtil;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -244,7 +245,8 @@ public class CreateRoute extends Activity implements OnClickListener,
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.msg_select_transports);
 		final TransportCollection coll = new TransportCollection(mTransports);
-		builder.setMultiChoiceItems(coll.getNames(), coll.getStates(), new DialogInterface.OnMultiChoiceClickListener() {
+		
+		builder.setMultiChoiceItems(StringUtil.getResourceStringArray(this,coll.getNames()) , coll.getStates(), new DialogInterface.OnMultiChoiceClickListener() {
 			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
 				coll.setState(which, isChecked);
 			}
