@@ -24,7 +24,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import org.ametro.R;
 import org.ametro.model.util.ModelUtil;
+
+import android.content.Context;
 
 public class MapView {
 
@@ -198,18 +201,18 @@ public class MapView {
 		return null;
 	}
 
-	public TransportCollection getTransportCollection() {
-		return new TransportCollection(this);
+	public TransportCollection getTransportCollection(Context context) {
+		return new TransportCollection(this,context);
 	}	
 	
 
 	public static class TransportCollection 
 	{
 		private TransportMap[] maps;
-		private int[] names;
+		private String[] names;
 		private boolean[] checks;
 
-		public int[] getNames(){
+		public String[] getNames(){
 			return names;
 		}
 		
@@ -238,13 +241,14 @@ public class MapView {
 			checks = src.checks.clone();
 		}
 		
-		public TransportCollection(MapView view) {
+		public TransportCollection(MapView view, Context context) {
 			final HashSet<Integer> checkedSet = ModelUtil.toIntHashSet(view.getCheckedTransports());
+			final String[] transportNames = context.getResources().getStringArray(R.array.transport_types);
 			final int[] transports = view.getTransports();
 			final int len = transports.length;
 			
 			maps = new TransportMap[len];
-			names = new int[len];
+			names = new String[len];
 			checks = new boolean[len];
 
 			final TransportMap[] allMaps = view.owner.maps;
@@ -252,7 +256,7 @@ public class MapView {
 				final int id = transports[i];
 				final TransportMap map = allMaps[id];
 				maps[i] = map;
-				names[i] =  map.typeName;
+				names[i] =  transportNames[map.typeName];
 				checks[i] = checkedSet.contains(id);
 			}
 		}	

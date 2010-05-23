@@ -92,12 +92,12 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			navigateNextStation();
 		}
 		if(src == mNavigateClearButton){
-			setNavigationStations(null);
+			clearNavigation(true);
 		}
-		if(src == mNavigateListButton && mCurrentRoute!=null){
+		if(src == mNavigateListButton && mCurrentRouteView!=null){
 			startActivity(new Intent(this, BrowseRoute.class));
 		}
-		if(src == mNavigateListButton && mCurrentRoute == null && mNavigationStations!=null){
+		if(src == mNavigateListButton && mCurrentRouteView == null && mNavigationStations!=null){
 			startActivity(new Intent(this, SearchStation.class));
 		}
 	}
@@ -107,6 +107,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		if(Instance != null){
 			mModel = Instance.mModel;
 			mMapView = Instance.mMapView;
+			mRouteContainer = Instance.mRouteContainer;
 			mModelName = Instance.mModelName;
 			mMapViewName = Instance.mMapViewName;
 		}
@@ -524,7 +525,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		boolean refreshNeeded = (stations != mNavigationStations) || (stations == null && mNavigationStations!=null);
 		if(refreshNeeded){
 			if(stations!=null){
-				mCurrentRoute = null;
+				mCurrentRouteView = null;
 				mNavigationSegments = null;
 				mNavigationTransfers = null;
 				mNavigationStations = stations;
@@ -532,7 +533,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 				showNavigationControls();
 			}else{
 				hideNavigationControls();
-				mCurrentRoute = null;
+				mCurrentRouteView = null;
 				mNavigationStations = null;
 				mNavigationSegments = null;
 				mNavigationTransfers = null;
@@ -543,8 +544,8 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		}
 	}
 
-	/*package*/ RouteView getCurrentRoute() {
-		return mCurrentRoute;
+	/*package*/ RouteView getCurrentRouteView() {
+		return mCurrentRouteView;
 	}
 
 	/*package*/ RouteContainer getNavigationRoute()
@@ -556,11 +557,11 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		boolean refreshNeeded = (result != mRouteContainer) || (result == null && mRouteContainer!=null) || (result!=null && mRouteContainer == null);
 		if(refreshNeeded){
 			mRouteContainer = result;
-			mCurrentRoute = new RouteView(mMapView, mRouteContainer.getDefaultRoute());
+			mCurrentRouteView = new RouteView(mMapView, mRouteContainer.getDefaultRoute());
 			if(result!=null){
-				mNavigationSegments = mCurrentRoute.getSegments();
-				mNavigationStations = mCurrentRoute.getStations();
-				mNavigationTransfers = mCurrentRoute.getTransfers();
+				mNavigationSegments = mCurrentRouteView.getSegments();
+				mNavigationStations = mCurrentRouteView.getStations();
+				mNavigationTransfers = mCurrentRouteView.getTransfers();
 				setCurrentStation( mNavigationStations.get(0) );
 				showNavigationControls();
 			}else{
@@ -575,15 +576,20 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		}
 	}
 
-	/*package*/ void clearNavigation(){
-		hideNavigationControls();
-		mCurrentRoute = null;
+	/*package*/ void clearNavigation(boolean changeUI){
+		if(changeUI){
+			hideNavigationControls();
+		}
+		mRouteContainer = null;
+		mCurrentRouteView = null;
 		mNavigationStations = null;
 		mNavigationSegments = null;
 		mNavigationTransfers = null;
-		setCurrentStation(null);
-		mVectorMapView.setModelSelection(mNavigationStations, mNavigationSegments,mNavigationTransfers);
-		mVectorMapView.postInvalidate();
+		if(changeUI){
+			setCurrentStation(null);
+			mVectorMapView.setModelSelection(mNavigationStations, mNavigationSegments,mNavigationTransfers);
+			mVectorMapView.postInvalidate();
+		}
 	}
 
 	private void onSaveMapState() {
@@ -664,7 +670,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 					mLoadLocaleTask.execute(locale);
 				}else{
 					// load new view
-					clearNavigation();
+					//clearNavigation(true);
 					MapView v = mModel.loadView(viewName);
 					if(v!=null){
 						onShowMap(mModel, v);
@@ -686,7 +692,8 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 
 	private void onShowMap(Model model, MapView view) {
 
-		//MapView previousMap = mMapView;
+		Model previousModel = mModel;
+		MapView previousMap = mMapView;
 
 		if(mModel!=null && mMapView!=null){
 			onSaveMapState();
@@ -695,20 +702,39 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		mModel = model;
 		mMapView = view;
 
+		if(previousModel==model){
+			// we only change view, model didn't change
+			if( previousMap!=null && previousMap.systemName.equals(view.systemName)){
+				if(mRouteContainer!=null){
+					mCurrentRouteView = new RouteView(view, mRouteContainer.getDefaultRoute());
+					mNavigationSegments = mCurrentRouteView.getSegments();
+					mNavigationStations = mCurrentRouteView.getStations();
+					mNavigationTransfers = mCurrentRouteView.getTransfers();
+					mCurrentStation = mNavigationStations.get(0);
+				}else if (mNavigationStations!=null){
+					clearNavigation(false);
+				}else{
+					clearNavigation(false);
+				}
+			}else{
+				
+				if(mRouteContainer!=null){
+					mCurrentRouteView = new RouteView(view, mRouteContainer.getDefaultRoute());
+					mNavigationSegments = mCurrentRouteView.getSegments();
+					mNavigationStations = mCurrentRouteView.getStations();
+					mNavigationTransfers = mCurrentRouteView.getTransfers();
+					mCurrentStation = mNavigationStations.get(0);
+				}else {				
+					clearNavigation(false);
+				}
+			}
+			
+		}else{
+			// we change model, so need to drop any route/selection
+			clearNavigation(false);
+			
+		}
 
-		//		if(previousMap!= null && previousMap.mapName.equals(subwayMap.mapName)){
-		//			mNavigationSegments = ModelUtil.copySegments(mMapView, mNavigationSegments);
-		//			mNavigationStations = ModelUtil.copyStations(mMapView, mNavigationStations);
-		//			mNavigationTransfers = ModelUtil.copyTransfer(mMapView, mNavigationTransfers);
-		//			mCurrentStation = mCurrentStation!=null ? mMapView.stations[mCurrentStation.id] : null;
-		//			mRoute = mRoute!=null ? new Route(mMapView, mRoute) : null;
-		//		}else{
-		//			mNavigationSegments = null;
-		//			mNavigationStations = null;
-		//			mNavigationTransfers = null;
-		//			mCurrentStation = null;
-		//			mRoute = null;
-		//		}
 
 
 		if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO))
@@ -741,7 +767,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		mNavigateClearButton.setOnClickListener(this);
 		mNavigateListButton.setOnClickListener(this);
 
-		if(mCurrentRoute==null && mCurrentStation == null){
+		if(mCurrentRouteView==null && mCurrentStation == null){
 			hideNavigationControls();
 		} 
 
@@ -845,8 +871,8 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	private void showNavigationControls() {
 		mNavigationPanelBottom.setVisibility(View.VISIBLE);
 		mNavigationPanelTop.setVisibility(View.VISIBLE);
-		if(mCurrentRoute!=null){
-			long time = mCurrentRoute.getStationDelay(mNavigationStations.get(mNavigationStations.size()-1));
+		if(mCurrentRouteView!=null){
+			long time = mCurrentRouteView.getStationDelay(mNavigationStations.get(mNavigationStations.size()-1));
 			mNavigateTimeText.setText(DateUtil.getTimeHHMM(time));
 			mNavigateTimeText.setVisibility(View.VISIBLE);
 		}else{
@@ -1083,7 +1109,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	private ImageButton mNavigateListButton;
 	private TextView mNavigateTimeText;
 
-	private RouteView mCurrentRoute;
+	private RouteView mCurrentRouteView;
 	private RouteContainer mRouteContainer;
 
 	private Handler mPrivateHandler = new Handler();

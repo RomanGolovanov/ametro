@@ -16,7 +16,15 @@
         <item>Invalid</item>
         <item>All</item>
     </string-array>
-
+    <string-array name="transport_types">
+	    <item>Unknown</item>
+		<item>Metro</item>
+	    <item>Tram</item>
+	    <item>Bus</item>
+	    <item>Train</item>
+	    <item>Water Bus</item>
+    </string-array>
+    
     <string-array name="version_changelog">
         <item>0.1.0.r163: changed stations/route lists appearance</item>
         <item>0.1.1.r164: removed obsolete code</item>
@@ -62,6 +70,7 @@
     	<item>0.2.2.r220: transport selection for route, maps became incompatible with previous version</item>
     	<item>0.2.2.r221: fixed bug with single transport maps</item>
     	<item>0.2.2.r222: fixed transport types localizations</item>
+    	<item>0.2.2.r223: fixed scheme changing force-close while route is selected, maps became incompatible with previous version</item>
     </string-array>
 
     <string-array name="create_route_modes">

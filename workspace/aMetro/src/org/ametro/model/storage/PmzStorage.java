@@ -33,20 +33,20 @@ import java.util.Locale;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import org.ametro.R;
 import org.ametro.model.LineView;
 import org.ametro.model.MapLayerContainer;
 import org.ametro.model.MapView;
 import org.ametro.model.Model;
 import org.ametro.model.SegmentView;
-import org.ametro.model.TransportStationInfo;
 import org.ametro.model.StationView;
 import org.ametro.model.TransferView;
 import org.ametro.model.TransportLine;
 import org.ametro.model.TransportMap;
 import org.ametro.model.TransportSegment;
 import org.ametro.model.TransportStation;
+import org.ametro.model.TransportStationInfo;
 import org.ametro.model.TransportTransfer;
+import org.ametro.model.TransportType;
 import org.ametro.model.ext.ModelLocation;
 import org.ametro.model.ext.ModelPoint;
 import org.ametro.model.ext.ModelRect;
@@ -656,24 +656,24 @@ public class PmzStorage implements IModelStorage {
 					}else if (section.equalsIgnoreCase("Options")){
 						if(key.equalsIgnoreCase("Type")){
 							if(TRANSPORT_TYPE_METRO.equalsIgnoreCase(value)){
-								map.typeName = R.string.transport_type_metro;
+								map.typeName = TransportType.METRO;
 							}else if(TRANSPORT_TYPE_TRAM.equalsIgnoreCase(value)){
-								map.typeName = R.string.transport_type_tram;
+								map.typeName = TransportType.TRAM;
 							}else if(TRANSPORT_TYPE_BUS.equalsIgnoreCase(value)){
-								map.typeName = R.string.transport_type_bus;
+								map.typeName = TransportType.BUS;
 							}else if(TRANSPORT_TYPE_TRAIN.equalsIgnoreCase(value)){
-								map.typeName = R.string.transport_type_train;
+								map.typeName = TransportType.TRAIN;
 							}else if(TRANSPORT_TYPE_WATER_BUS.equalsIgnoreCase(value)){
-								map.typeName = R.string.transport_type_water_bus;
+								map.typeName = TransportType.WATER_BUS;
 							}else{
-								map.typeName = R.string.transport_type_default;
+								map.typeName = TransportType.UNKNOWN;
 							}
 						}
 					}
 				}
 				
 				if(map.typeName == 0){
-					map.typeName = R.string.transport_type_default;
+					map.typeName = TransportType.UNKNOWN;
 				}
 				
 				if(line!=null){ // if end of line 
