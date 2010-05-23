@@ -102,22 +102,26 @@ public class Model {
 	
 	/****************** LOCALIZATION **********************/
 	public String getLocaleName(Locale locale){
-		final int len = locales.length;
-		for(int i = 0; i < len; i++){
-			Locale l = new Locale(locales[i]);
-			if( l.equals(locale) ){
-				return locales[i];
+		if(locale!=null){
+			final int len = locales.length;
+			final String languageCode = locale.getLanguage();
+			for(int i = 0; i < len; i++){
+				if( languageCode.equals(locales[i]) ){
+					return locales[i];
+				}
 			}
 		}
 		return locales[0];
 	}
 
 	public int getLocaleId(Locale locale){
-		final int len = locales.length;
-		for(int i = 0; i < len; i++){
-			Locale l = new Locale(locales[i]);
-			if( l.equals(locale) ){
-				return i;
+		if(locale!=null){
+			final int len = locales.length;
+			final String languageCode = locale.getLanguage();
+			for(int i = 0; i < len; i++){
+				if( languageCode.equals(locales[i]) ){
+					return i;
+				}
 			}
 		}
 		return 0;
