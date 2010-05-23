@@ -16,6 +16,14 @@
         <item>С ошибками</item>
         <item>Все</item>
     </string-array>
+    <string-array name="transport_types">
+	    <item>Неизвестный</item>
+		<item>Метро</item>
+	    <item>Трамвай</item>
+	    <item>Автобус</item>
+	    <item>Электричка</item>
+	    <item>Речной трамвай</item>
+    </string-array>       
     <string-array name="create_route_modes">
         <item>Минимальное время</item>
         <item>Минимум переходов</item>
@@ -25,5 +33,4 @@
         <item>Ночь</item>
         <item>Час пик</item>
     </string-array>
-    
 </resources>
