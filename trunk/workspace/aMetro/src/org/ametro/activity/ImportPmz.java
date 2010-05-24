@@ -375,6 +375,13 @@ public class ImportPmz extends Activity {
 		Invalid,
 		All
 	}
+	
+	private static String[] CLEANUP_MODE_NAMES = {
+		"Selected",
+		"Obsolete",
+		"Invalid",
+		"All"
+	};
 
 	private Mode mMode;
 	private CleanupMode mCleanupMode = CleanupMode.Obsolete;
@@ -530,8 +537,7 @@ public class ImportPmz extends Activity {
 		builder.setTitle(R.string.menu_cleanup);
 		builder.setSingleChoiceItems(R.array.import_pmz_cleanup_items, mCleanupMode.ordinal(), new Dialog.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
-				String itemName = getResources().getStringArray(R.array.import_pmz_cleanup_items)[which];
-				mCleanupMode = CleanupMode.valueOf(itemName);
+				mCleanupMode = CleanupMode.valueOf(CLEANUP_MODE_NAMES[which]);
 			}
 		});
 		builder.setPositiveButton(android.R.string.ok, new Dialog.OnClickListener() {
