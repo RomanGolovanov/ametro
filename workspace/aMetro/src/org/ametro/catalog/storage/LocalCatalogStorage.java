@@ -20,24 +20,140 @@
  */
 package org.ametro.catalog.storage;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.TreeSet;
+
 import org.ametro.catalog.Catalog;
+import org.ametro.catalog.CatalogMap;
+import org.ametro.model.Model;
+import org.ametro.model.TransportType;
+import org.ametro.model.storage.ModelBuilder;
 
 public class LocalCatalogStorage {
 
-	public static int FILE_TYPE_AMETRO = 1;
-	public static int FILE_TYPE_PMETRO = 2;
+	public final static int FILE_TYPE_AMETRO = 1;
+	public final static int FILE_TYPE_PMETRO = 2;
+
+	public final static String AMETRO_EXTENSION = ".ametro";
+	public final static String PMETRO_EXTENSION = ".pmz";
 	
-	Catalog loadCatalog(String fileName){
-		//Catalog c = new Catalog();
-		return null;
+	public static Catalog loadCatalog(String url){
+		BufferedInputStream strm = null;
+		try{
+			strm = new BufferedInputStream(new FileInputStream(url));
+			Catalog catalog = CatalogDeserializer.deserializeCatalog(strm);
+			return catalog;
+		}catch(Exception ex){
+			return null;
+		}finally{
+			if(strm!=null){
+				try { strm.close(); }catch(IOException ex){}
+			}
+		}
 	}
 	
-	Catalog scanCatalog(String path, int fileTypes){
-		return null;
+	public static Catalog scanCatalog(String baseUrl, int fileTypes){
+		File dir = new File(baseUrl);
+		ArrayList<CatalogMap> maps = new ArrayList<CatalogMap>();
+		if(dir.exists() && dir.isDirectory() ){
+			for(File file: dir.listFiles()){
+				final String fileName = file.getName().toLowerCase();
+				if( ((fileTypes & FILE_TYPE_PMETRO)!=0 && fileName.endsWith(PMETRO_EXTENSION))||
+					((fileTypes & FILE_TYPE_AMETRO)!=0 && fileName.endsWith(AMETRO_EXTENSION))){
+
+					Model model = ModelBuilder.loadModelDescription(file.getAbsolutePath());
+					if(model!=null){
+						final String[] locales = model.locales;
+
+						final int len = locales.length;
+						final int countryId = model.countryName;
+						final int cityId = model.cityName;
+						final String[][] texts = model.localeTexts;
+						
+						final TreeSet<ModelDescription> modelLocales = new TreeSet<ModelDescription>();
+						
+						for(int i=0; i<len;i++){
+							modelLocales.add( new ModelDescription(locales[i], texts[i][cityId], texts[i][countryId], "Not supported yet.") );
+						}
+
+						int index = 0;
+						final String[] country = new String[len];
+						final String[] city = new String[len];
+						final String[] description = new String[len];
+						for(ModelDescription m : modelLocales){
+							locales[index] = m.locale;
+							city[index] = m.city;
+							country[index] = m.country;
+							description[index] = m.description;
+							index++;
+						}
+						
+						long transports = TransportType.METRO_ID;
+						long version = Model.VERSION;
+						
+						String systemName = fileName;
+						if(fileName.endsWith(PMETRO_EXTENSION)){
+							systemName += AMETRO_EXTENSION;
+						}
+						
+				    	CatalogMap map = new CatalogMap(
+				    			 systemName,
+				    			 fileName,
+				    			 file.lastModified(),
+				    			 transports,
+				    			 version,
+				    			 locales,
+				    			 country,
+				    			 city,
+				    			 description
+				    			 );
+				    	maps.add(map);
+					}
+				}
+			}
+		}
+		return new Catalog(dir.lastModified(), baseUrl, maps);
 	}
 	
-	void saveCatalog(String fileName){
+	public static void saveCatalog(String url, Catalog catalog){
+		BufferedOutputStream strm = null;
+		try{
+			strm = new BufferedOutputStream(new FileOutputStream(url));
+			CatalogSerializer.serializeCatalog(catalog, strm);
+		}catch(Exception ex){
+		}finally{
+			if(strm!=null){
+				try { strm.close(); }catch(IOException ex){}
+			}
+		}
+	}
+	
+	
+	private static class ModelDescription implements Comparable<ModelDescription>
+	{
+		String locale;
+		String city;
+		String country;
+		String description;
+		
+		public int compareTo(ModelDescription another) {
+			return locale.compareTo(another.locale);
+		}
+
+		public ModelDescription(String locale, String city, String country, String description) {
+			super();
+			this.locale = locale;
+			this.city = city;
+			this.country = country;
+			this.description = description;
+		}
+		
 		
 	}
-	
 }

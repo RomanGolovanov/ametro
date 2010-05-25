@@ -22,14 +22,13 @@ package org.ametro.catalog;
 
 import java.util.HashMap;
 
+import org.ametro.util.StringUtil;
+
 public class CatalogMap {
 
 	/*package*/ String mSystemName;
 	
-	/*package*/ String mFileName;
 	/*package*/ String mUrl;
-	/*package*/ boolean mIsLocal;
-	/*package*/ int mCatalogMapState;
 	
 	/*package*/ long mTimestamp;
 	/*package*/ long mTransports;
@@ -43,13 +42,26 @@ public class CatalogMap {
 	
 
 	
+	public CatalogMap(String systemName, String url, long timestamp, long transports, long version, 
+			String[] locales, String[] country,
+			String[] city, String[] description) {
+		this.mSystemName = systemName;
+		this.mUrl = url;
+		this.mTimestamp = timestamp;
+		this.mTransports = transports;
+		this.mVersion = version;
+		this.mLocales = locales;
+		this.mCountry = country;
+		this.mCity = city;
+		this.mDescription = description;
+
+	}
+
+
 	public String getSystemName() {
 		return mSystemName;
 	}
-	
-	public boolean isLocal(){
-		return mIsLocal;
-	}
+
 	
 	public String getUrl() {
 		return mUrl;
@@ -108,6 +120,10 @@ public class CatalogMap {
 		}
 		Integer localeId = mLocaleIndex.get(code);
 		return localeId != null ? localeId : 0;
+	}
+	
+	public String toString() {
+		return "[NAME:" + mSystemName + ";TRAN:" + mTransports + ";VER:" + mVersion + ";COUNTRY:" + StringUtil.join(mCountry,",") + ";CITY:" + StringUtil.join(mCity,",") + ";LOCALES=" + StringUtil.join(mLocales,",") + ";URL=" + mUrl  + "]";
 	}
 	
 }
