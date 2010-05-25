@@ -18,22 +18,26 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package org.ametro.model;
+package org.ametro.catalog.storage;
 
-public class TransportType {
+import org.ametro.catalog.Catalog;
 
-	public static int UNKNOWN_RESOURCE_INDEX = 0;
-	public static int METRO_RESOURCE_INDEX = 1;
-	public static int TRAM_RESOURCE_INDEX = 2;
-	public static int BUS_RESOURCE_INDEX = 3;
-	public static int TRAIN_RESOURCE_INDEX = 4;
-	public static int WATER_BUS_RESOURCE_INDEX = 5;
+public class LocalCatalogStorage {
+
+	public static int FILE_TYPE_AMETRO = 1;
+	public static int FILE_TYPE_PMETRO = 2;
 	
-	public static int UNKNOWN_ID = 1;
-	public static int METRO_ID = 2;
-	public static int TRAM_ID = 4;
-	public static int BUS_ID = 8;
-	public static int TRAIN_ID = 16;
-	public static int WATER_BUS_ID = 32;
+	Catalog loadCatalog(String fileName){
+		//Catalog c = new Catalog();
+		return null;
+	}
+	
+	Catalog scanCatalog(String path, int fileTypes){
+		return null;
+	}
+	
+	void saveCatalog(String fileName){
+		
+	}
 	
 }

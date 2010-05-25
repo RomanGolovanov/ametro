@@ -18,22 +18,33 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package org.ametro.model;
+package org.ametro.catalog;
 
-public class TransportType {
+public class CatalogMapDifference {
 
-	public static int UNKNOWN_RESOURCE_INDEX = 0;
-	public static int METRO_RESOURCE_INDEX = 1;
-	public static int TRAM_RESOURCE_INDEX = 2;
-	public static int BUS_RESOURCE_INDEX = 3;
-	public static int TRAIN_RESOURCE_INDEX = 4;
-	public static int WATER_BUS_RESOURCE_INDEX = 5;
+
+	public static int NOT_EXIST = 0;
+	public static int DEPRECATED = 1;
+	public static int UP_TO_DATE = 2;
+	public static int OVERRIDE = 3;
+	public static int CORRUPTED = 4;
 	
-	public static int UNKNOWN_ID = 1;
-	public static int METRO_ID = 2;
-	public static int TRAM_ID = 4;
-	public static int BUS_ID = 8;
-	public static int TRAIN_ID = 16;
-	public static int WATER_BUS_ID = 32;
+	
+	/*package*/ CatalogMap mLocal;
+	/*package*/ CatalogMap mRemote;
+	
+	public CatalogMap getLocal() {
+		return mLocal;
+	}
+	
+	public CatalogMap getRemote() {
+		return mRemote;
+	}
+
+	public CatalogMapDifference(CatalogMap mLocal, CatalogMap mRemote) {
+		super();
+		this.mLocal = mLocal;
+		this.mRemote = mRemote;
+	}
 	
 }
