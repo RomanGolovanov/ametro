@@ -27,6 +27,7 @@ import java.util.HashSet;
 public class Catalog {
 
 	/*package*/ long mTimestamp;
+	/*package*/ String mBaseUrl;
 	/*package*/ ArrayList<CatalogMap> mMaps;
 
 	/*package*/ void setTimestamp(long timestamp){
@@ -50,6 +51,14 @@ public class Catalog {
 		return mTimestamp;
 	}
 	
+	public String getBaseUrl() {
+		return mBaseUrl;
+	}
+
+	public void setBaseUrl(String baseUrl) {
+		mBaseUrl = baseUrl;
+	}
+	
 	/*package*/ void setMaps(ArrayList<CatalogMap> maps){
 		mMaps = maps;
 	}
@@ -58,8 +67,9 @@ public class Catalog {
 		return mMaps;
 	}
 
-	public Catalog(long timestamp, ArrayList<CatalogMap> maps) {
+	public Catalog(long timestamp, String baseUrl, ArrayList<CatalogMap> maps) {
 		mTimestamp = timestamp;
+		mBaseUrl = baseUrl;
 		mMaps = maps;
 	}
 	

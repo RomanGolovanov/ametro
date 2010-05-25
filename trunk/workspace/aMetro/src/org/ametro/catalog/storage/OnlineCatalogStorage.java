@@ -20,13 +20,35 @@
  */
 package org.ametro.catalog.storage;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 import org.ametro.catalog.Catalog;
 
 public class OnlineCatalogStorage {
 
-	Catalog loadCatalog(String url){
-		//Catalog c = new Catalog();
-		return null;
+	public final static String DEFAULT_URL = "http://sites.google.com/site/ametrohome/file-cabinet/catalog.xml";
+	
+	public static Catalog loadCatalog(String url){
+		BufferedInputStream strm = null;
+		try{
+			URL catalogUrl = new URL(url);
+			HttpURLConnection  conn = (HttpURLConnection)catalogUrl.openConnection();
+			conn.setUseCaches(false);
+			conn.setRequestMethod("GET");
+			strm = new BufferedInputStream(conn.getInputStream());
+			Catalog catalog = CatalogDeserializer.deserializeCatalog(strm);
+			catalog.setBaseUrl(url.substring(0, url.lastIndexOf('/')));
+			return catalog;
+		}catch(Exception ex){
+			return null;
+		}finally{
+			if(strm!=null){
+				try { strm.close(); }catch(IOException ex){}
+			}
+		}
 	}
 	
 }

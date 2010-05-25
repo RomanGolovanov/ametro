@@ -72,7 +72,6 @@ public class MapSettings {
         }
         CountryLibrary.setContext(context);
         StationLibrary.setContext(context);
-
     }
 
     public static String getMapFileName(String mapName) {
