@@ -656,24 +656,24 @@ public class PmzStorage implements IModelStorage {
 					}else if (section.equalsIgnoreCase("Options")){
 						if(key.equalsIgnoreCase("Type")){
 							if(TRANSPORT_TYPE_METRO.equalsIgnoreCase(value)){
-								map.typeName = TransportType.METRO;
+								map.typeName = TransportType.METRO_RESOURCE_INDEX;
 							}else if(TRANSPORT_TYPE_TRAM.equalsIgnoreCase(value)){
-								map.typeName = TransportType.TRAM;
+								map.typeName = TransportType.TRAM_RESOURCE_INDEX;
 							}else if(TRANSPORT_TYPE_BUS.equalsIgnoreCase(value)){
-								map.typeName = TransportType.BUS;
+								map.typeName = TransportType.BUS_RESOURCE_INDEX;
 							}else if(TRANSPORT_TYPE_TRAIN.equalsIgnoreCase(value)){
-								map.typeName = TransportType.TRAIN;
+								map.typeName = TransportType.TRAIN_RESOURCE_INDEX;
 							}else if(TRANSPORT_TYPE_WATER_BUS.equalsIgnoreCase(value)){
-								map.typeName = TransportType.WATER_BUS;
+								map.typeName = TransportType.WATER_BUS_RESOURCE_INDEX;
 							}else{
-								map.typeName = TransportType.UNKNOWN;
+								map.typeName = TransportType.UNKNOWN_RESOURCE_INDEX;
 							}
 						}
 					}
 				}
 				
 				if(map.typeName == 0){
-					map.typeName = TransportType.UNKNOWN;
+					map.typeName = TransportType.UNKNOWN_RESOURCE_INDEX;
 				}
 				
 				if(line!=null){ // if end of line 
