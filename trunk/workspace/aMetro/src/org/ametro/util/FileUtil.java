@@ -75,13 +75,15 @@ public class FileUtil {
 		return fileName;
 	}
 	
-	public static void writeToStream(InputStream in , OutputStream out) throws IOException 
+	public static void writeToStream(InputStream in , OutputStream out, boolean closeOnExit) throws IOException 
 	{
 		byte[] bytes = new byte[2048];
 		for (int c = in.read(bytes); c != -1; c = in.read(bytes)) {
 			out.write(bytes,0, c);
 		}
-		in.close();
-		out.close();    		
+		if(closeOnExit){
+			in.close();
+			out.close();
+		}
 	}	
 }
