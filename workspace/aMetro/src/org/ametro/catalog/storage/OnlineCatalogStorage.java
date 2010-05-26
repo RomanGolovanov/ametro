@@ -22,23 +22,19 @@ package org.ametro.catalog.storage;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.net.URL;
 
 import org.ametro.catalog.Catalog;
+import org.ametro.util.WebUtil;
 
 public class OnlineCatalogStorage {
 
-	public final static String DEFAULT_URL = "http://sites.google.com/site/ametrohome/file-cabinet/catalog.xml";
+	public final static String DEFAULT_URL = "http://sites.google.com/site/ametroupdate/file-cabinet/catalog.xml";
 	
 	public static Catalog loadCatalog(String url){
 		BufferedInputStream strm = null;
 		try{
-			URL catalogUrl = new URL(url);
-			HttpURLConnection  conn = (HttpURLConnection)catalogUrl.openConnection();
-			conn.setUseCaches(false);
-			conn.setRequestMethod("GET");
-			strm = new BufferedInputStream(conn.getInputStream());
+			strm = new BufferedInputStream(WebUtil.executeHttpGetRequest(new URL(url)));
 			Catalog catalog = CatalogDeserializer.deserializeCatalog(strm);
 			catalog.setBaseUrl(url.substring(0, url.lastIndexOf('/')));
 			return catalog;
@@ -50,5 +46,19 @@ public class OnlineCatalogStorage {
 			}
 		}
 	}
+	
+//  try {
+//    LocalCatalogStorage.saveCatalog(CATALOG_LOCAL, LocalCatalogStorage.scanCatalog(MapSettings.MAPS_PATH, LocalCatalogStorage.FILE_TYPE_AMETRO));
+//    LocalCatalogStorage.saveCatalog(CATALOG_IMPORT, LocalCatalogStorage.scanCatalog(MapSettings.IMPORT_PATH, LocalCatalogStorage.FILE_TYPE_PMETRO));
+//    LocalCatalogStorage.saveCatalog(CATALOG_REMOTE, OnlineCatalogStorage.loadCatalog(OnlineCatalogStorage.DEFAULT_URL));
+//    
+//    Catalog remote = LocalCatalogStorage.loadCatalog(CATALOG_REMOTE);
+//    Catalog local = LocalCatalogStorage.loadCatalog(CATALOG_LOCAL);
+//    CatalogMap map = remote.getMap("moscow.pmz.ametro");
+//    
+//	WebUtil.downloadFile(remote.getBaseUrl() + map.getUrl(), local.getBaseUrl() + map.getUrl());
+//} catch (Exception e) {
+//	Log.e(Constants.LOG_TAG_MAIN, "Error downloading file");
+//}	
 	
 }
