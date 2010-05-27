@@ -28,6 +28,7 @@ public class LineView {
 	
 	public int lineColor; 
 	public int labelColor;
+	public int labelBackgroundColor;
 	public ModelRect lineNameRect;
 
 	public Model owner;

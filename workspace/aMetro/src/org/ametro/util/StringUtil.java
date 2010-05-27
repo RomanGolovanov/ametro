@@ -482,6 +482,11 @@ public class StringUtil {
 		return Integer.parseInt(value, 16);
 	}
 
+	public static int parseColor(String value, int defaultValue) {
+		if(StringUtil.isEmpty(value)) return defaultValue;
+		return Integer.parseInt(value, 16);
+	}
+	
 	public static Double[] parseDoubleArray(String value) {
 		String[] parts = fastSplit(value);
 		ArrayList<Double> vals = new ArrayList<Double>();

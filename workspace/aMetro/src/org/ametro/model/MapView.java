@@ -33,6 +33,8 @@ public class MapView {
 
 	public int id;
 	public String systemName;
+	
+	public long transportTypes;
 
 	public int width;
 	public int height;

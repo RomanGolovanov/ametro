@@ -50,6 +50,9 @@ public class RenderStationName extends RenderElement {
 
     private int colorNormal;
     private int colorGrayed;
+    
+    private int colorBackgroundNormal;
+    private int colorBackgroundGrayed;
 	
 	public RenderStationName(MapView map, StationView view, TransportStation station) {
 		final boolean isUpperCase = map.isUpperCase;
@@ -63,6 +66,14 @@ public class RenderStationName extends RenderElement {
         colorNormal = map.lines[view.lineViewId].labelColor;
         colorGrayed = RenderProgram.getGrayedColor(colorNormal);
 
+        colorBackgroundNormal = map.lines[view.lineViewId].labelBackgroundColor;
+        if(colorBackgroundNormal==-1){
+        	colorBackgroundNormal = Color.WHITE;
+        	colorBackgroundGrayed = Color.WHITE;
+        }else{
+            colorBackgroundGrayed = RenderProgram.getGrayedColor(colorBackgroundNormal);
+        }
+        
 		final Paint textPaint = new Paint();
 		textPaint.setAntiAlias(true);
 		textPaint.setTypeface(Typeface.DEFAULT);
@@ -156,6 +167,10 @@ public class RenderStationName extends RenderElement {
 	protected void setMode(boolean grayed) { 
 		mTextPaint.setColor(grayed ? colorGrayed : colorNormal);
 		mTextPaint.setAlpha(255);
+		
+		mBorderPaint.setColor(grayed ? colorBackgroundGrayed: colorBackgroundNormal);
+		mBorderPaint.setAlpha(255);
+		
 	}
 
 	public void draw(Canvas canvas) {
