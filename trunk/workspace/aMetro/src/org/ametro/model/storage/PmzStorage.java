@@ -1,5 +1,4 @@
 /*
- * http://code.google.com/p/ametro/
  * Transport map viewer for Android platform
  * Copyright (C) 2009-2010 Roman.Golovanov@gmail.com and other
  * respective project committers (see project home page)
@@ -60,6 +59,8 @@ import org.ametro.util.StringUtil;
 
 public class PmzStorage implements IModelStorage {
 
+	private static final int DEFAULT_LINE_BACKGOUND_COLOR = 0xFFFFFFFF; 
+	
 	private static final String TRANSPORT_TYPE_METRO = "Метро";
 	private static final String TRANSPORT_TYPE_TRAIN = "Электричка";
 	private static final String TRANSPORT_TYPE_TRAM = "Трамвай";
@@ -388,20 +389,21 @@ public class PmzStorage implements IModelStorage {
 							if(line!=null){
 								lineView = new LineView();
 
+								lineView.labelBackgroundColor = DEFAULT_LINE_BACKGOUND_COLOR;
+								
 								LineView def = viewsDefaults.get(section);
 								if(def == null){
 									viewsDefaults.put(section, lineView);
 								}else{
 									lineView.labelColor = def.labelColor;
 									lineView.lineColor = def.lineColor;
+									lineView.labelBackgroundColor = def.labelBackgroundColor;
 								}
 								lineView.id = lines.size();
 								lineView.lineId = line.id;
 								lineView.owner = model;
 								lines.add(lineView);
 								lineViewIndex.put(line.id, lineView.id);
-
-
 							}
 						}
 						if(lineView!=null){					
@@ -417,7 +419,9 @@ public class PmzStorage implements IModelStorage {
 								heights = StringUtil.parseIntegerArray(value);
 							}else if(key.equalsIgnoreCase("Rect")){
 								lineView.lineNameRect = StringUtil.parseModelRect(value);
-							}			
+							}else if(key.equalsIgnoreCase("LabelsBColor")){
+								lineView.labelBackgroundColor = StringUtil.parseColor(value, DEFAULT_LINE_BACKGOUND_COLOR);
+							}
 						}
 
 					}
@@ -657,16 +661,22 @@ public class PmzStorage implements IModelStorage {
 						if(key.equalsIgnoreCase("Type")){
 							if(TRANSPORT_TYPE_METRO.equalsIgnoreCase(value)){
 								map.typeName = TransportType.METRO_RESOURCE_INDEX;
+								map.typeId = TransportType.METRO_ID;
 							}else if(TRANSPORT_TYPE_TRAM.equalsIgnoreCase(value)){
 								map.typeName = TransportType.TRAM_RESOURCE_INDEX;
+								map.typeId = TransportType.TRAM_ID;
 							}else if(TRANSPORT_TYPE_BUS.equalsIgnoreCase(value)){
 								map.typeName = TransportType.BUS_RESOURCE_INDEX;
+								map.typeId = TransportType.BUS_ID;
 							}else if(TRANSPORT_TYPE_TRAIN.equalsIgnoreCase(value)){
 								map.typeName = TransportType.TRAIN_RESOURCE_INDEX;
+								map.typeId = TransportType.TRAIN_ID;
 							}else if(TRANSPORT_TYPE_WATER_BUS.equalsIgnoreCase(value)){
 								map.typeName = TransportType.WATER_BUS_RESOURCE_INDEX;
+								map.typeId = TransportType.WATER_BUS_ID;
 							}else{
 								map.typeName = TransportType.UNKNOWN_RESOURCE_INDEX;
+								map.typeId = TransportType.UNKNOWN_ID;
 							}
 						}
 					}
@@ -738,6 +748,8 @@ public class PmzStorage implements IModelStorage {
 			model.fileSystemName = mFile.getAbsolutePath();
 			model.timestamp = mFile.lastModified();
 
+
+			makeTransportTypes();
 			makeGlobalization();
 
 			if(!mDescriptionOnly){
@@ -751,6 +763,33 @@ public class PmzStorage implements IModelStorage {
 							station.location = l;
 						}
 					}
+				}
+			}
+		}
+
+		private void makeTransportTypes() {
+			final Model model = mModel;
+			long transports = 0;
+			HashMap<TransportMap,Long> transportIndex = new HashMap<TransportMap, Long>();
+			for(TransportMap map : model.maps){
+				long typeId = map.typeId;
+				transports |= typeId;
+				transportIndex.put(map, typeId);
+				
+			}
+			model.transportTypes = transports;
+			
+			for(MapView view : model.views){
+				if(view.transports!=null){
+					transports = 0;
+					for(int mapId : view.transports){
+						final TransportMap map = model.maps[mapId];
+						final Long transportType = transportIndex.get(map);
+						if(map!=null){
+							transports |= transportType;
+						}
+					}
+					view.transportTypes = transports;
 				}
 			}
 		}

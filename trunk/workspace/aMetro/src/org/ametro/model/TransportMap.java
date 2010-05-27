@@ -23,10 +23,12 @@ package org.ametro.model;
 public class TransportMap {
 
 	public int id;
+	public int typeId;
 	
 	public String systemName;
 	public int typeName;
 	
 	public Model owner;
+
 
 }

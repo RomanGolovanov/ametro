@@ -205,6 +205,7 @@ public class CsvStorage implements IModelStorage {
 		reader.next();
 		view.id = reader.readInt();
 		view.systemName = reader.readString();
+		view.transportTypes = reader.readLong();
 		view.width = reader.readInt();
 		view.height = reader.readInt();
 		view.stationDiameter = reader.readInt();
@@ -232,6 +233,7 @@ public class CsvStorage implements IModelStorage {
 			obj.lineId = reader.readInt();
 			obj.lineColor = reader.readInt();
 			obj.labelColor = reader.readInt();
+			obj.labelBackgroundColor = reader.readInt();
 			obj.lineNameRect = reader.readModelRect();
 			obj.owner = model;
 			view.lines[i] = obj;
@@ -379,6 +381,7 @@ public class CsvStorage implements IModelStorage {
 		while(reader.next()){
 			TransportMap obj = new TransportMap();
 			obj.id = reader.readInt();
+			obj.typeId = reader.readInt();
 			obj.systemName = reader.readString();
 			obj.typeName = reader.readInt();
 			obj.owner = model;
@@ -401,6 +404,7 @@ public class CsvStorage implements IModelStorage {
 		model.timestamp = reader.readLong();
 		model.countryName = reader.readInt();
 		model.cityName = reader.readInt();
+		model.transportTypes = reader.readLong();
 		model.location = reader.readModelLocation();
 		model.locales = reader.readStringArray();
 		model.localeCurrent = reader.readString();
@@ -423,6 +427,7 @@ public class CsvStorage implements IModelStorage {
 		writer.writeLong(model.timestamp);
 		writer.writeInt(model.countryName);
 		writer.writeInt(model.cityName);
+		writer.writeLong(model.transportTypes);
 		writer.writeModelLocation(model.location);
 		writer.writeStringArray(model.locales);
 		writer.writeString(model.localeCurrent);
@@ -469,6 +474,7 @@ public class CsvStorage implements IModelStorage {
 
 			writer.writeInt(obj.id);
 			writer.writeString(obj.systemName);
+			writer.writeLong(obj.transportTypes);
 			writer.writeInt(obj.width);
 			writer.writeInt(obj.height);
 			writer.writeInt(obj.stationDiameter);
@@ -490,6 +496,7 @@ public class CsvStorage implements IModelStorage {
 				writer.writeInt(v.lineId);
 				writer.writeInt(v.lineColor);
 				writer.writeInt(v.labelColor);
+				writer.writeInt(v.labelBackgroundColor);
 				writer.writeModelRect(v.lineNameRect);
 				writer.newRecord();
 			}
@@ -530,6 +537,7 @@ public class CsvStorage implements IModelStorage {
 		zip.putNextEntry(zipEntry);
 		for(TransportMap obj : model.maps){
 			writer.writeInt(obj.id);
+			writer.writeInt(obj.typeId);
 			writer.writeString(obj.systemName);
 			writer.writeInt(obj.typeName);
 			writer.newRecord();

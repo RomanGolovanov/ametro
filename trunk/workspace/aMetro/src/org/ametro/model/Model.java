@@ -40,6 +40,8 @@ public class Model {
 	public int[] delays;
 	public int[] comments;
 	
+	public long transportTypes;
+	
 	public ModelLocation location;
 	
 	public String systemName;
