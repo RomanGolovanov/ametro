@@ -8,7 +8,7 @@
 		android:ellipsize="marquee"
 		android:scrollHorizontally="true"
 		android:lines="1"
-		android:textSize="14sp"
+		android:textSize="16sp"
 		android:background="@drawable/white_gradient"
 		android:textColor="#ff000000" 
 		/>
@@ -16,6 +16,6 @@
 	<TextView android:id="@+id/addon_entry_list_item_text"
 		android:layout_width="fill_parent" 
 		android:layout_height="wrap_content"
-		android:textSize="12sp" 
+		android:textSize="14sp" 
 		/>
 </LinearLayout>

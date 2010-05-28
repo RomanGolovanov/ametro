@@ -16,12 +16,12 @@
 		android:ellipsize="marquee" 
 		android:scrollHorizontally="true"
 		android:lines="1"
-		android:paddingLeft="0px" android:textSize="14sp" />
+		android:paddingLeft="0px" android:textSize="16sp" />
 
 	<TextView android:id="@+id/import_row_status"
 		android:layout_alignBottom="@android:id/text1"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"
 		android:paddingLeft="0px" android:text="not imported"
-		android:textSize="12sp" />
+		android:textSize="14sp" />
 
 </RelativeLayout>
