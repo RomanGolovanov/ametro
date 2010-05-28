@@ -294,7 +294,9 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	public Locale getLocale(){
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
 		final String localeName = settings.getString(getString(R.string.pref_locale_key), null);
-		return localeName!=null && localeName.length()>0 ? new Locale(localeName) : mDefaultLocale;
+		return !StringUtil.isEmpty(localeName) && !"auto".equalsIgnoreCase(localeName)  
+				? new Locale(localeName) 
+				: mDefaultLocale;
 	}
 
 	public void setupLocale() {
