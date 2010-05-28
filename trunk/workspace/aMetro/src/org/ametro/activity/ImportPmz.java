@@ -145,7 +145,7 @@ public class ImportPmz extends Activity {
 			String fullFileName = MapSettings.IMPORT_PATH + fileName;
 			try {
 				Model pmz = ModelBuilder.loadModelDescription(fullFileName);
-				String mapName = pmz.getCountryName() + " - " + pmz.getCityName() + "(" + fileName + ")";
+				String mapName = pmz.getCountryName() + " - " + pmz.getCityName() + " (" + fileName + ")";
 				int severity = 5;
 				int statusId = R.string.import_status_not_imported;
 				int color = Color.RED;
