@@ -22,7 +22,7 @@
 			android:scrollHorizontally="true"
 			android:lines="1"
 			android:paddingRight="5dip"
-			android:textSize="8pt" />
+			android:textSize="16sp" />
 	
 		<LinearLayout 
 			android:layout_width="fill_parent" 
@@ -36,13 +36,13 @@
 				android:ellipsize="marquee"
 				android:scrollHorizontally="true"
 				android:lines="1"
-				android:textSize="6pt" 
+				android:textSize="13sp" 
 				android:layout_weight="1"/>
 		
 			<TextView android:id="@+id/station_list_item_delay"
 				android:layout_width="wrap_content" 
 				android:layout_height="wrap_content"
-				android:textSize="6pt" 
+				android:textSize="13sp" 
 				
 				android:layout_weight="0"/>
 		</LinearLayout>

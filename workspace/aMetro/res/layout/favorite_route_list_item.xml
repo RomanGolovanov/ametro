@@ -18,7 +18,7 @@
 			<TextView android:id="@+id/route_favorite_list_item_name_from"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
 				android:ellipsize="marquee" android:scrollHorizontally="true"
-				android:lines="1" android:paddingRight="5dip" android:textSize="7pt" />
+				android:lines="1" android:paddingRight="5dip" android:textSize="14sp" />
 
 		</LinearLayout>
 		<LinearLayout android:layout_width="fill_parent"
@@ -29,7 +29,7 @@
 			<TextView android:id="@+id/route_favorite_list_item_name_to"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
 				android:ellipsize="marquee" android:scrollHorizontally="true"
-				android:lines="1" android:paddingRight="5dip" android:textSize="7pt" />
+				android:lines="1" android:paddingRight="5dip" android:textSize="14sp" />
 
 			<ImageView android:id="@+id/route_favorite_list_item_image_to"
 				android:layout_width="wrap_content" android:layout_height="wrap_content" />
