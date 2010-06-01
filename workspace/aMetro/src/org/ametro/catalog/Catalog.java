@@ -77,18 +77,22 @@ public class Catalog {
 	{
 		final ArrayList<CatalogMapDifference> diff = new ArrayList<CatalogMapDifference>();
 		HashSet<String> systemMapNames = new HashSet<String>(  );
-		for(CatalogMap map : localCatalog.getMaps()){
-			systemMapNames.add(map.getSystemName());
+		if(localCatalog!=null){
+			for(CatalogMap map : localCatalog.getMaps()){
+				systemMapNames.add(map.getSystemName());
+			}
 		}
-		for(CatalogMap map : remoteCatalog.getMaps()){
-			systemMapNames.add(map.getSystemName());
+		if(remoteCatalog!=null){
+			for(CatalogMap map : remoteCatalog.getMaps()){
+				systemMapNames.add(map.getSystemName());
+			}
 		}
 		for(String systemName : systemMapNames){
-			final CatalogMap local = localCatalog.getMap(systemName);
-			final CatalogMap remote = remoteCatalog.getMap(systemName);
+			final CatalogMap local = localCatalog!=null ? localCatalog.getMap(systemName) : null;
+			final CatalogMap remote = remoteCatalog!=null ? remoteCatalog.getMap(systemName) : null;
 			diff.add(new CatalogMapDifference(local, remote));
 		}
 		return diff;
 	}
-	
+
 }

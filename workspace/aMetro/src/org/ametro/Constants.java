@@ -38,6 +38,11 @@ public class Constants {
 	public final static String STATION_FROM_ID = "STATION_FROM_ID";
 	public final static String STATION_TO_ID = "STATION_TO_ID";
 	
+    public static final String PREFERENCE_PACKAGE_FILE_NAME = "PACKAGE_FILE_NAME";
+    public static final String PREFERENCE_SCROLL_POSITION = "SCROLL_POSITION";
+    public static final String PREFERENCE_ZOOM_LEVEL = "ZOOM_LEVEL";
+    public static final String PREFERENCE_FAVORITE_ROUTES = "FAVORITE_ROUTES";
+    public static final String PREFERENCE_ONLINE_CATALOG_URL = "ONLINE_CATALOG_URL";
 
 	
 }

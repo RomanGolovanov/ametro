@@ -30,6 +30,9 @@ import org.ametro.util.FileUtil;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Environment;
+
+import static org.ametro.Constants.PREFERENCE_ONLINE_CATALOG_URL;
 
 public class MapSettings {
 
@@ -37,57 +40,41 @@ public class MapSettings {
         return 5;
     }
 
-    public static final String PREFERENCE_PACKAGE_FILE_NAME = "PACKAGE_FILE_NAME";
-    public static final String PREFERENCE_SCROLL_POSITION = "SCROLL_POSITION";
-    public static final String PREFERENCE_ZOOM_LEVEL = "ZOOM_LEVEL";
-    public static final String PREFERENCE_FAVORITE_ROUTES = "FAVORITE_ROUTES";
-
-    public static final String ROOT_PATH = "/sdcard/ametro/";
-    public static final String MAPS_PATH = ROOT_PATH + "maps/";
-    public static final String CACHE_PATH = ROOT_PATH + "cache/";
-    public static final String IMPORT_PATH = ROOT_PATH + "import/";
-    
     public static final String DEFAULT_MAP = "metro";
 
     public static final String MAPS_LIST = "maps.dat";
+    
     public static final String NO_MEDIA_TAG = ".nomedia";
-
     public static final String MAP_FILE_TYPE = ".ametro";
     public static final String PMZ_FILE_TYPE = ".pmz";
     public static final String TEMP_FILE_TYPE = ".tmp.ametro";
-    public static final String CACHE_FILE_TYPE = ".zip";
-    public static final String MAP_ENTRY_NAME = "map.dat";
-    public static final String DESCRIPTION_ENTRY_NAME = "description.dat";
     
+	private static final File ROOT_PATH = new File(Environment.getExternalStorageDirectory(), "ametro");
+	private static final String DEFAULT_ONLINE_CATALOG_URL = "http://sites.google.com/site/ametroupdate/files";
+	private static final File LOCAL_CATALOG_PATH = new File(ROOT_PATH, "maps");
+	private static final File IMPORT_CATALOG_PATH = new File(ROOT_PATH, "import");
+    
+	private static final File ONLINE_CATALOG_STORAGE = new File(ROOT_PATH,"catalog.online.xml");
+	private static final File LOCAL_CATALOG_STORAGE = new File(ROOT_PATH,"catalog.local.xml");
+	private static final File IMPORT_CATALOG_STORAGE = new File(ROOT_PATH,"catalog.import.xml");
+	
     public static void checkPrerequisite( Context context ) {
     	Natives.Initialize();
-        File root = new File(ROOT_PATH);
-        File maps = new File(MAPS_PATH);
-        File cache = new File(CACHE_PATH);
-        if (!root.exists() || !maps.exists() || !cache.exists()) {
-        	FileUtil.createDirectory(MAPS_PATH);
-        	FileUtil.createDirectory(IMPORT_PATH);
-        	FileUtil.createDirectory(CACHE_PATH);
-        	FileUtil.createFile(ROOT_PATH + NO_MEDIA_TAG);
+        if (!ROOT_PATH.exists() || !LOCAL_CATALOG_PATH.exists() || !IMPORT_CATALOG_PATH.exists()) {
+        	FileUtil.createDirectory(LOCAL_CATALOG_PATH);
+        	FileUtil.createDirectory(IMPORT_CATALOG_PATH);
+        	FileUtil.createFile(new File(ROOT_PATH, NO_MEDIA_TAG));
         }
         CountryLibrary.setContext(context);
         StationLibrary.setContext(context);
     }
 
     public static String getMapFileName(String mapName) {
-        return (MAPS_PATH + mapName + MAP_FILE_TYPE).toLowerCase();
+        return new File(LOCAL_CATALOG_PATH, mapName + MAP_FILE_TYPE).getAbsolutePath().toLowerCase();
     }
 
     public static String getTemporaryMapFile(String mapName) {
-        return (MAPS_PATH + mapName + TEMP_FILE_TYPE).toLowerCase();
-    }
-
-    public static String getTemporaryCacheFile(String mapName) {
-        return (CACHE_PATH + mapName + TEMP_FILE_TYPE).toLowerCase();
-    }
-
-    public static String getCacheFileName(String mapName) {
-        return (CACHE_PATH + mapName + CACHE_FILE_TYPE).toLowerCase();
+        return new File(LOCAL_CATALOG_PATH, mapName + TEMP_FILE_TYPE).getAbsolutePath().toLowerCase();
     }
 
     public static String getMapFileName(Uri uri) {
@@ -95,7 +82,38 @@ public class MapSettings {
     }
 
     public static void refreshMapList() {
-        FileUtil.delete(new File(ROOT_PATH + MAPS_LIST));
+        FileUtil.delete(new File(ROOT_PATH, MAPS_LIST));
     }
 
+	public static String getOnlineCatalogUrl(Context context) {
+		return context.getSharedPreferences(Constants.PREFERENCE_NAME, 0).getString(PREFERENCE_ONLINE_CATALOG_URL, DEFAULT_ONLINE_CATALOG_URL);
+	}
+
+	public static File getLocalCatalog() {
+		return LOCAL_CATALOG_PATH;
+	}
+
+	public static File getImportCatalog() {
+		return IMPORT_CATALOG_PATH;
+	}
+
+	public static String getOnlineCatalogStorageUrl() {
+		return ONLINE_CATALOG_STORAGE.getAbsolutePath();
+	}
+
+	public static File getLocalCatalogStorageUrl() {
+		return LOCAL_CATALOG_STORAGE;
+	}
+
+	public static File getImportCatalogStorageUrl() {
+		return IMPORT_CATALOG_STORAGE;
+	}
+
+    public static void refreshLocalCatalogStorage() {
+        FileUtil.delete(LOCAL_CATALOG_STORAGE);
+    }
+
+	public static String getApplicationRoot() {
+		return ROOT_PATH.getAbsolutePath().toLowerCase() + "/";
+	}	
 }

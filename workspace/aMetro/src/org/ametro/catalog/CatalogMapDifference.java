@@ -20,15 +20,32 @@
  */
 package org.ametro.catalog;
 
+import java.util.Comparator;
+
 public class CatalogMapDifference {
 
+	public static class CatalogMapDifferenceCityNameComparator implements Comparator<CatalogMapDifference>
+	{
+		private String mCode;
+		
+		public CatalogMapDifferenceCityNameComparator(String code){
+			mCode = code;
+		}
 
+		public int compare(CatalogMapDifference left, CatalogMapDifference right) {
+			return left.getCity(mCode).compareTo(right.getCity(mCode));
+		}
+		
+	}
+
+	
+	
 	public static int NOT_EXIST = 0;
 	public static int DEPRECATED = 1;
 	public static int UP_TO_DATE = 2;
 	public static int OVERRIDE = 3;
 	public static int CORRUPTED = 4;
-	
+	public static int REMOTE_ONLY = 5;
 	
 	/*package*/ CatalogMap mLocal;
 	/*package*/ CatalogMap mRemote;
@@ -45,6 +62,48 @@ public class CatalogMapDifference {
 		super();
 		this.mLocal = mLocal;
 		this.mRemote = mRemote;
+	}
+	
+	public boolean isEquals(){
+		return mLocal!=null && mRemote!=null && mLocal.completeEqual(mRemote);
+	}
+	
+	public int getState(){
+		if(mLocal!=null && mRemote == null){
+			return NOT_EXIST;
+		}
+		if(mLocal==null && mRemote!=null){
+			return REMOTE_ONLY;
+		}
+		if(mLocal.getTimestamp() < mRemote.getTimestamp()){
+			return DEPRECATED;
+		}
+		
+		return UP_TO_DATE;
+	}
+
+	public long getTransports() {
+		return preffered().getTransports();
+	}
+	
+	public String getCity(String code) {
+		return preffered().getCity(code);
+	}
+	
+	public String getCountry(String code) {
+		return preffered().getCountry(code);
+	}
+	
+	public String getDescription(String code) {
+		return preffered().getDescription(code);
+	}
+
+	private CatalogMap preffered(){
+		return mLocal!=null ? mLocal : mRemote;
+	}
+
+	public String getUrl() {
+		return preffered().getUrl();
 	}
 	
 }

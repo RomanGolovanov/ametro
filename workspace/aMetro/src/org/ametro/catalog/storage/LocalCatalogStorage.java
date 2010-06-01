@@ -42,8 +42,28 @@ public class LocalCatalogStorage {
 
 	public final static String AMETRO_EXTENSION = ".ametro";
 	public final static String PMETRO_EXTENSION = ".pmz";
+
+	public static Catalog loadCatalog(File url, File path, boolean refresh, int fileTypes)
+	{
+		Catalog cat = null;
+		if(!refresh && url.exists()){
+			cat = loadCatalog(url);			
+		}
+		if(cat==null || isDerpecated(cat)){
+			cat = scanCatalog(path, fileTypes);
+			if(cat!=null){
+				saveCatalog(url, cat);
+			}
+		}
+		return cat;
+		
+	}
 	
-	public static Catalog loadCatalog(String url){
+	public static boolean isDerpecated(Catalog catalog){
+		return new File(catalog.getBaseUrl()).lastModified() > catalog.getTimestamp();
+	}
+	
+	public static Catalog loadCatalog(File url){
 		BufferedInputStream strm = null;
 		try{
 			strm = new BufferedInputStream(new FileInputStream(url));
@@ -58,11 +78,10 @@ public class LocalCatalogStorage {
 		}
 	}
 	
-	public static Catalog scanCatalog(String baseUrl, int fileTypes){
-		File dir = new File(baseUrl);
+	public static Catalog scanCatalog(File baseUrl, int fileTypes){
 		ArrayList<CatalogMap> maps = new ArrayList<CatalogMap>();
-		if(dir.exists() && dir.isDirectory() ){
-			for(File file: dir.listFiles()){
+		if(baseUrl.exists() && baseUrl.isDirectory() ){
+			for(File file: baseUrl.listFiles()){
 				final String fileName = file.getName().toLowerCase();
 				if( ((fileTypes & FILE_TYPE_PMETRO)!=0 && fileName.endsWith(PMETRO_EXTENSION))||
 					((fileTypes & FILE_TYPE_AMETRO)!=0 && fileName.endsWith(AMETRO_EXTENSION))){
@@ -75,6 +94,7 @@ public class LocalCatalogStorage {
 						final int countryId = model.countryName;
 						final int cityId = model.cityName;
 						final String[][] texts = model.localeTexts;
+						final long lastModified = model.timestamp;
 						
 						final TreeSet<ModelDescription> modelLocales = new TreeSet<ModelDescription>();
 						
@@ -105,7 +125,7 @@ public class LocalCatalogStorage {
 				    	CatalogMap map = new CatalogMap(
 				    			 systemName,
 				    			 fileName,
-				    			 file.lastModified(),
+				    			 lastModified,
 				    			 transports,
 				    			 version,
 				    			 locales,
@@ -118,10 +138,10 @@ public class LocalCatalogStorage {
 				}
 			}
 		}
-		return new Catalog(dir.lastModified(), baseUrl, maps);
+		return new Catalog(baseUrl.lastModified(), baseUrl.getAbsolutePath().toLowerCase(), maps);
 	}
 	
-	public static void saveCatalog(String url, Catalog catalog){
+	public static void saveCatalog(File url, Catalog catalog){
 		BufferedOutputStream strm = null;
 		try{
 			strm = new BufferedOutputStream(new FileOutputStream(url));

@@ -24,7 +24,14 @@
 	    <item>Train</item>
 	    <item>Water Bus</item>
     </string-array>
-    
+    <string-array name="catalog_map_states">
+	    <item>Local</item>
+	    <item>Deprecated</item>
+	    <item>Updated</item>
+	    <item>Override</item>
+	    <item>Corrupted</item>
+	    <item>Remote Only</item>
+    </string-array>
     <string-array name="version_changelog">
         <item>0.1.0.r163: changed stations/route lists appearance</item>
         <item>0.1.1.r164: removed obsolete code</item>
@@ -78,6 +85,7 @@
     	<item>0.2.3.r228: added online/local storage for map catalogs</item>
     	<item>0.2.4.r229: fixed station names rendering, added transport types into model, maps became incompatible with previous version</item>
     	<item>0.2.4.r234: font sizes changed to scaled pixels</item>
+    	<item>0.2.4.r235: compare maps between two catalogs</item>
     </string-array>
 
     <string-array name="create_route_modes">

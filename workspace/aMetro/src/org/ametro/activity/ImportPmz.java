@@ -142,7 +142,7 @@ public class ImportPmz extends Activity {
 		private void indexPmzFile(ArrayList<ImportRecord> imports, String fileName) {
 			String mapFileName = MapSettings.getMapFileName(fileName);
 			File mapFile = new File(mapFileName);
-			String fullFileName = MapSettings.IMPORT_PATH + fileName;
+			String fullFileName = new File( MapSettings.getImportCatalog(), fileName).getAbsolutePath().toLowerCase();
 			try {
 				Model pmz = ModelBuilder.loadModelDescription(fullFileName);
 				String mapName = pmz.getCountryName() + " - " + pmz.getCityName() + " (" + fileName + ")";
@@ -197,7 +197,7 @@ public class ImportPmz extends Activity {
 
 
 		protected List<ImportRecord> doInBackground(Void... params) {
-			File dir = new File(MapSettings.IMPORT_PATH);
+			File dir = MapSettings.getImportCatalog();
 			ProgressInfo pi = new ProgressInfo(0, 0, null, getString(R.string.msg_search_pmz_files));
 			this.publishProgress(pi);
 			String[] files = dir.list(new FilenameFilter() {

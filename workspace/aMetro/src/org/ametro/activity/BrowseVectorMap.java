@@ -22,10 +22,10 @@
 package org.ametro.activity;
 
 import static org.ametro.Constants.LOG_TAG_MAIN;
-import static org.ametro.MapSettings.PREFERENCE_FAVORITE_ROUTES;
-import static org.ametro.MapSettings.PREFERENCE_PACKAGE_FILE_NAME;
-import static org.ametro.MapSettings.PREFERENCE_SCROLL_POSITION;
-import static org.ametro.MapSettings.PREFERENCE_ZOOM_LEVEL;
+import static org.ametro.Constants.PREFERENCE_FAVORITE_ROUTES;
+import static org.ametro.Constants.PREFERENCE_PACKAGE_FILE_NAME;
+import static org.ametro.Constants.PREFERENCE_SCROLL_POSITION;
+import static org.ametro.Constants.PREFERENCE_ZOOM_LEVEL;
 
 import java.util.ArrayList;
 import java.util.Arrays;
