@@ -79,6 +79,7 @@ ExpandableListView.OnChildClickListener {
 				android.R.drawable.ic_menu_preferences);
 		menu.add(0, MAIN_MENU_ABOUT, 6, R.string.menu_about).setIcon(
 				android.R.drawable.ic_menu_help);
+		menu.add(0, MAIN_MENU_EXPERIMENTAL, 7,R.string.menu_experimental);
 
 		return true;
 	}
@@ -114,7 +115,9 @@ ExpandableListView.OnChildClickListener {
 		case MAIN_MENU_ABOUT:
 			startActivity(new Intent(this, About.class));
 			return true;
-
+		case MAIN_MENU_EXPERIMENTAL:
+			startActivity(new Intent(this, BrowseCatalog.class));
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -197,6 +200,7 @@ ExpandableListView.OnChildClickListener {
 	private final int MAIN_MENU_IMPORT = 5;
 	private final int MAIN_MENU_SETTINGS = 6;
 	private final int MAIN_MENU_ABOUT = 7;
+	private final int MAIN_MENU_EXPERIMENTAL = 8;
 
 	private final static int MODE_ALL_MAPS = 0;
 	private final static int MODE_MY_MAPS = 1;
@@ -339,8 +343,8 @@ ExpandableListView.OnChildClickListener {
 		private void scanModelFileContent(FileGroupsDictionary map,
 				String fileName, String fullFileName) {
 			try {
-				Model model = ModelBuilder.loadModelDescription(MapSettings.MAPS_PATH + fileName);
-				map.putFile(model.getCountryName(), model.getCityName(), MapSettings.MAPS_PATH + fileName);
+				Model model = ModelBuilder.loadModelDescription(fullFileName);
+				map.putFile(model.getCountryName(), model.getCityName(), fullFileName);
 			} catch (Exception e) {
 				if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)) {
 					Log.d(Constants.LOG_TAG_MAIN,
@@ -382,9 +386,8 @@ ExpandableListView.OnChildClickListener {
 		}
 
 		protected FileGroupsDictionary doInBackground(Void... params) {
-			final String cacheFileName = MapSettings.ROOT_PATH
-			+ MapSettings.MAPS_LIST;
-			final File dir = new File(MapSettings.MAPS_PATH);
+			final String cacheFileName = MapSettings.getApplicationRoot() + MapSettings.MAPS_LIST;
+			final File dir = MapSettings.getLocalCatalog();
 			FileGroupsDictionary map = FileGroupsDictionary.read(cacheFileName);
 			if (map == null || map.timestamp < dir.lastModified()) {
 				map = scanMapDirectory(dir);

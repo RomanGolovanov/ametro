@@ -53,7 +53,14 @@ public class FileUtil {
 		return new File(filename).lastModified();
 	}
 
-
+	public static void createFile(File f) {
+		try {
+			f.createNewFile();
+		} catch (IOException e) {
+			// scoop exception
+		}
+	}
+	
 	public static void createFile(String path) {
 		try {
 			File f = new File(path);
@@ -66,6 +73,10 @@ public class FileUtil {
 	public static void createDirectory(String path) {
 		File f = new File(path);
 		f.mkdirs();
+	}
+
+	public static void createDirectory(File path) {
+		path.mkdirs();
 	}
 
 	public static String getFileName(String path){
