@@ -684,6 +684,7 @@ public class PmzStorage implements IModelStorage {
 				
 				if(map.typeName == 0){
 					map.typeName = TransportType.UNKNOWN_RESOURCE_INDEX;
+					map.typeId = TransportType.UNKNOWN_ID;
 				}
 				
 				if(line!=null){ // if end of line 
