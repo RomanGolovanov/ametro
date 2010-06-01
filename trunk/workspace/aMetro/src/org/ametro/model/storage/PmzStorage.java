@@ -66,6 +66,7 @@ public class PmzStorage implements IModelStorage {
 	private static final String TRANSPORT_TYPE_TRAM = "Трамвай";
 	private static final String TRANSPORT_TYPE_BUS = "Автобус";
 	private static final String TRANSPORT_TYPE_WATER_BUS = "Речной трамвай";
+	private static final String TRANSPORT_TYPE_TROLLEYBUS = "Троллейбус";
 	
 	private static final String ENCODING = "windows-1251";
 
@@ -674,6 +675,9 @@ public class PmzStorage implements IModelStorage {
 							}else if(TRANSPORT_TYPE_WATER_BUS.equalsIgnoreCase(value)){
 								map.typeName = TransportType.WATER_BUS_RESOURCE_INDEX;
 								map.typeId = TransportType.WATER_BUS_ID;
+							}else if(TRANSPORT_TYPE_TROLLEYBUS.equalsIgnoreCase(value)){
+								map.typeName = TransportType.TROLLEYBUS_RESOURCE_INDEX;
+								map.typeId = TransportType.TROLLEYBUS_ID;
 							}else{
 								map.typeName = TransportType.UNKNOWN_RESOURCE_INDEX;
 								map.typeId = TransportType.UNKNOWN_ID;

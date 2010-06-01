@@ -33,6 +33,7 @@ public class Model {
 	public final static String LOCALE_EN = "en";
 
 	public static final int VERSION = 1;
+	public static final String COMPATIBILITY_VERSION = "0.2.4.r224";
 	
 	public int countryName;
 	public int cityName;

@@ -32,7 +32,6 @@ import java.util.TreeSet;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.model.Model;
-import org.ametro.model.TransportType;
 import org.ametro.model.storage.ModelBuilder;
 
 public class LocalCatalogStorage {
@@ -90,6 +89,9 @@ public class LocalCatalogStorage {
 					if(model!=null){
 						final String[] locales = model.locales;
 
+						final long size = file.length();
+						final String minVersion = Model.COMPATIBILITY_VERSION;
+						
 						final int len = locales.length;
 						final int countryId = model.countryName;
 						final int cityId = model.cityName;
@@ -128,6 +130,8 @@ public class LocalCatalogStorage {
 				    			 lastModified,
 				    			 transports,
 				    			 version,
+				    			 size,
+				    			 minVersion,
 				    			 locales,
 				    			 country,
 				    			 city,

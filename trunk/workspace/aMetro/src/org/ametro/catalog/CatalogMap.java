@@ -33,6 +33,9 @@ public class CatalogMap {
 	/*package*/ long mTimestamp;
 	/*package*/ long mTransports;
 	/*package*/ long mVersion;
+
+	/*package*/ long mSize;
+	/*package*/ String mMinVersion;
 	
 	/*package*/ String[] mLocales;
 	
@@ -42,7 +45,8 @@ public class CatalogMap {
 	
 
 	
-	public CatalogMap(String systemName, String url, long timestamp, long transports, long version, 
+	public CatalogMap(String systemName, String url, long timestamp, long transports, long version,
+			long size, String minVersion,
 			String[] locales, String[] country,
 			String[] city, String[] description) {
 		this.mSystemName = systemName;
@@ -50,11 +54,12 @@ public class CatalogMap {
 		this.mTimestamp = timestamp;
 		this.mTransports = transports;
 		this.mVersion = version;
+		this.mSize = size;
+		this.mMinVersion = minVersion;
 		this.mLocales = locales;
 		this.mCountry = country;
 		this.mCity = city;
 		this.mDescription = description;
-
 	}
 
 
@@ -95,6 +100,13 @@ public class CatalogMap {
 		return mDescription[getLocale(code)];
 	}
 
+	public long getSize() {
+		return mSize;
+	}
+	
+	public String getMinVersion() {
+		return mMinVersion;
+	}
 
 	public boolean completeEqual(CatalogMap other) {
 		return locationEqual(other) 
@@ -125,5 +137,7 @@ public class CatalogMap {
 	public String toString() {
 		return "[NAME:" + mSystemName + ";TRAN:" + mTransports + ";VER:" + mVersion + ";COUNTRY:" + StringUtil.join(mCountry,",") + ";CITY:" + StringUtil.join(mCity,",") + ";LOCALES=" + StringUtil.join(mLocales,",") + ";URL=" + mUrl  + "]";
 	}
-	
+
+
+
 }
