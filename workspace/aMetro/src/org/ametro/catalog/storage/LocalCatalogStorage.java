@@ -114,7 +114,7 @@ public class LocalCatalogStorage {
 							index++;
 						}
 						
-						long transports = TransportType.METRO_ID;
+						long transports = model.transportTypes;
 						long version = Model.VERSION;
 						
 						String systemName = fileName;
