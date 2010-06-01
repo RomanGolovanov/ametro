@@ -165,7 +165,7 @@ public class RouteFavoriteListAdapter extends BaseAdapter implements OnClickList
 		wrapper.ImageTo.setImageDrawable(getItemIcon(lineTo));
 		wrapper.Delete.setVisibility(mIsCheckboxesVisible ? View.VISIBLE : View.GONE);
 		if(mIsCheckboxesVisible){
-			wrapper.Delete.setBackgroundResource( mChecked[position] ? R.drawable.ic_delete : R.drawable.ic_delete_disabled );
+			wrapper.Delete.setBackgroundResource( mChecked[position] ? R.drawable.icon_delete : R.drawable.icon_delete_disabled );
 			wrapper.Delete.setTag(position);
 		}
 		return view;		

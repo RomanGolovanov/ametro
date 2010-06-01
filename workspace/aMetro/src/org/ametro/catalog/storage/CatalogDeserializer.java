@@ -47,6 +47,8 @@ public class CatalogDeserializer {
 	public static String ATTR_TRANSPORTS = "transports";
 	public static String ATTR_VERSION = "version";
 	public static String ATTR_CODE = "code";
+	public static String ATTR_SIZE = "size";
+	public static String ATTR_MIN_VERSION = "minVersion";
 	
 	public static Catalog deserializeCatalog(BufferedInputStream stream) 
 	throws IOException, XmlPullParserException
@@ -60,6 +62,8 @@ public class CatalogDeserializer {
 		long lastModified = 0;
 		long transports = 0;
 		long version = 0;
+		long size = 0;
+		String minVersion = null;
 		
 		ArrayList<String> mapLocales = new ArrayList<String>();
 		
@@ -90,6 +94,8 @@ public class CatalogDeserializer {
 		    	 lastModified = StringUtil.parseLong(xpp.getAttributeValue("", ATTR_LAST_MODIFIED),0);
 		    	 transports = StringUtil.parseLong(xpp.getAttributeValue("", ATTR_TRANSPORTS),0); 
 		    	 version = StringUtil.parseLong(xpp.getAttributeValue("", ATTR_VERSION),0);
+		    	 size = StringUtil.parseLong(xpp.getAttributeValue("", ATTR_SIZE),0);
+		    	 minVersion = xpp.getAttributeValue("", ATTR_MIN_VERSION);
 		     }else if(TAG_LOCALE.equals(tagName)){
 		    	 mapLocales.add( xpp.getAttributeValue("", ATTR_CODE) );
 		     }
@@ -101,6 +107,8 @@ public class CatalogDeserializer {
 		    			 lastModified,
 		    			 transports,
 		    			 version,
+		    			 size,
+		    			 minVersion,
 		    			 (String[]) mapLocales.toArray(new String[mapLocales.size()]),
 		    			 (String[]) mapCountry.toArray(new String[mapCountry.size()]),
 		    			 (String[]) mapCity.toArray(new String[mapCity.size()]),

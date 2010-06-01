@@ -39,6 +39,8 @@ import static org.ametro.catalog.storage.CatalogDeserializer.ATTR_LAST_MODIFIED;
 import static org.ametro.catalog.storage.CatalogDeserializer.ATTR_TRANSPORTS;
 import static org.ametro.catalog.storage.CatalogDeserializer.ATTR_VERSION;
 import static org.ametro.catalog.storage.CatalogDeserializer.ATTR_CODE;
+import static org.ametro.catalog.storage.CatalogDeserializer.ATTR_SIZE;
+import static org.ametro.catalog.storage.CatalogDeserializer.ATTR_MIN_VERSION;
 
 public class CatalogSerializer {
 
@@ -57,6 +59,8 @@ public class CatalogSerializer {
 				serializer.attribute("", ATTR_LAST_MODIFIED, ""+map.getTimestamp());
 				serializer.attribute("", ATTR_TRANSPORTS, ""+map.getTransports());
 				serializer.attribute("", ATTR_VERSION, ""+map.getVersion());
+				serializer.attribute("", ATTR_SIZE, ""+map.getSize());
+				serializer.attribute("", ATTR_MIN_VERSION, ""+map.getMinVersion());
 				
 				for(String localeCode : map.getLocales()){
 					serializer.startTag("", TAG_LOCALE);

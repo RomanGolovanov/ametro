@@ -22,18 +22,20 @@ package org.ametro.model;
 
 public class TransportType {
 
-	public static int UNKNOWN_RESOURCE_INDEX = 0;
-	public static int METRO_RESOURCE_INDEX = 1;
-	public static int TRAM_RESOURCE_INDEX = 2;
-	public static int BUS_RESOURCE_INDEX = 3;
-	public static int TRAIN_RESOURCE_INDEX = 4;
-	public static int WATER_BUS_RESOURCE_INDEX = 5;
+	public final static int UNKNOWN_RESOURCE_INDEX = 0;
+	public final static int METRO_RESOURCE_INDEX = 1;
+	public final static int TRAM_RESOURCE_INDEX = 2;
+	public final static int BUS_RESOURCE_INDEX = 3;
+	public final static int TRAIN_RESOURCE_INDEX = 4;
+	public final static int WATER_BUS_RESOURCE_INDEX = 5;
+	public final static int TROLLEYBUS_RESOURCE_INDEX = 5;
 	
-	public static int UNKNOWN_ID = 1;
-	public static int METRO_ID = 2;
-	public static int TRAM_ID = 4;
-	public static int BUS_ID = 8;
-	public static int TRAIN_ID = 16;
-	public static int WATER_BUS_ID = 32;
+	public final static int UNKNOWN_ID = 1;
+	public final static int METRO_ID = 2;
+	public final static int TRAM_ID = 4;
+	public final static int BUS_ID = 8;
+	public final static int TRAIN_ID = 16;
+	public final static int WATER_BUS_ID = 32;
+	public final static int TROLLEYBUS_ID = 64;
 	
 }

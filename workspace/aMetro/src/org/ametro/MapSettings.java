@@ -24,6 +24,7 @@ package org.ametro;
 import java.io.File;
 
 import org.ametro.jni.Natives;
+import org.ametro.model.TransportType;
 import org.ametro.model.util.CountryLibrary;
 import org.ametro.model.util.StationLibrary;
 import org.ametro.util.FileUtil;
@@ -115,5 +116,29 @@ public class MapSettings {
 
 	public static String getApplicationRoot() {
 		return ROOT_PATH.getAbsolutePath().toLowerCase() + "/";
+	}
+	
+	public static int getTransportTypeBlackIconId(int transportTypeId){
+		switch(transportTypeId){
+			case TransportType.METRO_ID : return R.drawable.icon_b_metro;
+			case TransportType.TRAM_ID : return R.drawable.icon_b_tram;
+			case TransportType.BUS_ID : return R.drawable.icon_b_bus;
+			case TransportType.TRAIN_ID : return R.drawable.icon_b_train;
+			case TransportType.WATER_BUS_ID : return R.drawable.icon_b_water_bus;
+			case TransportType.TROLLEYBUS_ID : return R.drawable.icon_b_trolleybus;		
+		}
+		return R.drawable.icon_b_unknown;
 	}	
+	
+	public static int getTransportTypeWhiteIconId(int transportTypeId){
+		switch(transportTypeId){
+			case TransportType.METRO_ID : return R.drawable.icon_w_metro;
+			case TransportType.TRAM_ID : return R.drawable.icon_w_tram;
+			case TransportType.BUS_ID : return R.drawable.icon_w_bus;
+			case TransportType.TRAIN_ID : return R.drawable.icon_w_train;
+			case TransportType.WATER_BUS_ID : return R.drawable.icon_w_water_bus;
+			case TransportType.TROLLEYBUS_ID : return R.drawable.icon_w_trolleybus;		
+		}
+		return R.drawable.icon_w_unknown;
+	}		
 }

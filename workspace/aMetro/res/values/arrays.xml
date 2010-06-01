@@ -23,6 +23,7 @@
 	    <item>Bus</item>
 	    <item>Train</item>
 	    <item>Water Bus</item>
+	    <item>Trolleybus</item>
     </string-array>
     <string-array name="catalog_map_states">
 	    <item>Local</item>
@@ -45,7 +46,7 @@
         <item>0.1.9.r172: rewrited UI for favorite routes</item>
         <item>0.1.10.r173: added context menu for favorite routes list</item>
         <item>0.1.11.r174: optimized map loading time, pre-styled station info page</item>
-        <item>0.1.12.r175: added 'Delete' mode in favorite routes list, changed some icons</item>
+        <item>0.1.12.r175: added \'Delete\' mode in favorite routes list, changed some icons</item>
         <item>0.1.13.r176: finally favorite routes list, rewrited map and import menus, fixed routing errors</item>
         <item>0.1.14.r177: a lot of minor fixes</item>
         <item>0.1.15.r178: background design changes, reversed favorite routes list</item>
@@ -61,10 +62,10 @@
         <item>0.1.25.r190: rewrited drawing of stations names</item>
     	<item>0.2.1.r198: global model refactoring: multiple maps support, languages, GPS coordinates,layers</item>
     	<item>0.2.1.r199: delayed scheme loading</item>
-    	<item>0.2.1.r200: delayed locales' texts loading</item>
-    	<item>0.2.1.r201: bug fixing</item>
+    	<item>0.2.1.r200: delayed locales\' texts loading</item>
+    	<item>0.2.1.r201: bug fixing</item>1
     	<item>0.2.1.r206: rewrited grayed objects rendering - using color recalculation instead alfa-channel</item>
-    	<item>0.2.1.r207: render entire map cache if it isn't exceed VM memory limits</item>
+    	<item>0.2.1.r207: render entire map cache if it isn\'t exceed VM memory limits</item>
     	<item>0.2.1.r208: fixed anti-aliasing bug on change zoom level while scrolling</item>
     	<item>0.2.1.r210: rewrited import list</item>
     	<item>0.2.1.r211: import list bugs fixing</item>
@@ -86,6 +87,7 @@
     	<item>0.2.4.r229: fixed station names rendering, added transport types into model, maps became incompatible with previous version</item>
     	<item>0.2.4.r234: font sizes changed to scaled pixels</item>
     	<item>0.2.4.r235: compare maps between two catalogs</item>
+    	<item>0.2.4.r236: added transport icons on experimental map list</item>
     </string-array>
 
     <string-array name="create_route_modes">
