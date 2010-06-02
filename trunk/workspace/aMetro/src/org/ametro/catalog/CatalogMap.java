@@ -43,12 +43,13 @@ public class CatalogMap {
 	/*package*/ String[] mCountry;
 	/*package*/ String[] mDescription;
 	
+	/*package*/ boolean mCorrupted;
 
-	
 	public CatalogMap(String systemName, String url, long timestamp, long transports, long version,
 			long size, String minVersion,
 			String[] locales, String[] country,
-			String[] city, String[] description) {
+			String[] city, String[] description, 
+			boolean corrupted) {
 		this.mSystemName = systemName;
 		this.mUrl = url;
 		this.mTimestamp = timestamp;
@@ -60,8 +61,8 @@ public class CatalogMap {
 		this.mCountry = country;
 		this.mCity = city;
 		this.mDescription = description;
+		this.mCorrupted = corrupted;
 	}
-
 
 	public String getSystemName() {
 		return mSystemName;
@@ -138,6 +139,12 @@ public class CatalogMap {
 		return "[NAME:" + mSystemName + ";TRAN:" + mTransports + ";VER:" + mVersion + ";COUNTRY:" + StringUtil.join(mCountry,",") + ";CITY:" + StringUtil.join(mCity,",") + ";LOCALES=" + StringUtil.join(mLocales,",") + ";URL=" + mUrl  + "]";
 	}
 
+	public boolean isCorruted() {
+		return mCorrupted;
+	}
 
+	public boolean isSupported() {
+		return true;
+	}
 
 }

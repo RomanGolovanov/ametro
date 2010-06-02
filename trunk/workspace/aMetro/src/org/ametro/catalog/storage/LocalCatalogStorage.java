@@ -41,6 +41,9 @@ public class LocalCatalogStorage {
 
 	public final static String AMETRO_EXTENSION = ".ametro";
 	public final static String PMETRO_EXTENSION = ".pmz";
+	
+	private static final String UNKNOWN_EN = "Unknown";
+	private static final String UNKNOWN_RU = "Неизвестно";
 
 	public static Catalog loadCatalog(File url, File path, boolean refresh, int fileTypes)
 	{
@@ -87,62 +90,93 @@ public class LocalCatalogStorage {
 
 					Model model = ModelBuilder.loadModelDescription(file.getAbsolutePath());
 					if(model!=null){
-						final String[] locales = model.locales;
-
-						final long size = file.length();
-						final String minVersion = Model.COMPATIBILITY_VERSION;
+				    	maps.add(extractCatalogMap(file, fileName, model));
+					}else{
+						maps.add(makeBadCatalogMap(file, fileName));
 						
-						final int len = locales.length;
-						final int countryId = model.countryName;
-						final int cityId = model.cityName;
-						final String[][] texts = model.localeTexts;
-						final long lastModified = model.timestamp;
-						
-						final TreeSet<ModelDescription> modelLocales = new TreeSet<ModelDescription>();
-						
-						for(int i=0; i<len;i++){
-							modelLocales.add( new ModelDescription(locales[i], texts[i][cityId], texts[i][countryId], "Not supported yet.") );
-						}
-
-						int index = 0;
-						final String[] country = new String[len];
-						final String[] city = new String[len];
-						final String[] description = new String[len];
-						for(ModelDescription m : modelLocales){
-							locales[index] = m.locale;
-							city[index] = m.city;
-							country[index] = m.country;
-							description[index] = m.description;
-							index++;
-						}
-						
-						long transports = model.transportTypes;
-						long version = Model.VERSION;
-						
-						String systemName = fileName;
-						if(fileName.endsWith(PMETRO_EXTENSION)){
-							systemName += AMETRO_EXTENSION;
-						}
-						
-				    	CatalogMap map = new CatalogMap(
-				    			 systemName,
-				    			 fileName,
-				    			 lastModified,
-				    			 transports,
-				    			 version,
-				    			 size,
-				    			 minVersion,
-				    			 locales,
-				    			 country,
-				    			 city,
-				    			 description
-				    			 );
-				    	maps.add(map);
 					}
 				}
 			}
 		}
 		return new Catalog(baseUrl.lastModified(), baseUrl.getAbsolutePath().toLowerCase(), maps);
+	}
+
+	private static CatalogMap makeBadCatalogMap(File file, final String fileName) {
+		
+		final String suggestedMapName = fileName.substring(0, fileName.indexOf('.'));
+		
+		final String[] locales = new String[]{"en","ru"};
+		final String[] country = new String[]{UNKNOWN_EN,UNKNOWN_RU};
+		final String[] city = new String[]{suggestedMapName,suggestedMapName};
+		final String[] description = new String[]{"",""};
+		
+		String systemName = fileName;
+		if(fileName.endsWith(PMETRO_EXTENSION)){
+			systemName += AMETRO_EXTENSION;
+		}
+		
+		CatalogMap map = new CatalogMap(
+				 systemName,
+				 fileName,
+				 0,
+				 0,
+				 Model.VERSION,
+				 0,
+				 Model.COMPATIBILITY_VERSION,
+				 locales,
+				 country,
+				 city,
+				 description,
+				 true
+				 );
+		return map;
+	}
+	
+	private static CatalogMap extractCatalogMap(File file, final String fileName, Model model) {
+		final String[] locales = model.locales;
+		final int len = locales.length;
+		final int countryId = model.countryName;
+		final int cityId = model.cityName;
+		final String[][] texts = model.localeTexts;
+		
+		final TreeSet<ModelDescription> modelLocales = new TreeSet<ModelDescription>();
+		
+		for(int i=0; i<len;i++){
+			modelLocales.add( new ModelDescription(locales[i], texts[i][cityId], texts[i][countryId], "Not supported yet.") );
+		}
+
+		int index = 0;
+		final String[] country = new String[len];
+		final String[] city = new String[len];
+		final String[] description = new String[len];
+		for(ModelDescription m : modelLocales){
+			locales[index] = m.locale;
+			city[index] = m.city;
+			country[index] = m.country;
+			description[index] = m.description;
+			index++;
+		}
+		
+		String systemName = fileName;
+		if(fileName.endsWith(PMETRO_EXTENSION)){
+			systemName += AMETRO_EXTENSION;
+		}
+		
+		CatalogMap map = new CatalogMap(
+				 systemName,
+				 fileName,
+				 model.timestamp,
+				 model.transportTypes,
+				 Model.VERSION,
+				 file.length(),
+				 Model.COMPATIBILITY_VERSION,
+				 locales,
+				 country,
+				 city,
+				 description,
+				 false
+				 );
+		return map;
 	}
 	
 	public static void saveCatalog(File url, Catalog catalog){

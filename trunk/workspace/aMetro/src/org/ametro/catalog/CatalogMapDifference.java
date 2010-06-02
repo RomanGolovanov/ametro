@@ -38,14 +38,12 @@ public class CatalogMapDifference {
 		
 	}
 
-	
-	
-	public static int NOT_EXIST = 0;
-	public static int DEPRECATED = 1;
-	public static int UP_TO_DATE = 2;
-	public static int OVERRIDE = 3;
-	public static int CORRUPTED = 4;
-	public static int REMOTE_ONLY = 5;
+	public final static int OFFLINE = 0;
+	public final static int NOT_SUPPORTED = 1;
+	public final static int CORRUPTED = 2;
+	public final static int DOWNLOAD = 3;
+	public final static int UPDATE = 4;
+	public final static int INSTALLED = 5;
 	
 	/*package*/ CatalogMap mLocal;
 	/*package*/ CatalogMap mRemote;
@@ -70,16 +68,19 @@ public class CatalogMapDifference {
 	
 	public int getState(){
 		if(mLocal!=null && mRemote == null){
-			return NOT_EXIST;
+			return mLocal.isCorruted() ? CORRUPTED : OFFLINE;
 		}
 		if(mLocal==null && mRemote!=null){
-			return REMOTE_ONLY;
+			return mRemote.isCorruted() ? CORRUPTED : DOWNLOAD;
 		}
-		if(mLocal.getTimestamp() < mRemote.getTimestamp()){
-			return DEPRECATED;
+		if(mLocal.isCorruted() && mRemote.isCorruted()){
+			return CORRUPTED;
 		}
 		
-		return UP_TO_DATE;
+		if(mLocal.getTimestamp() < mRemote.getTimestamp()){
+			return UPDATE;
+		}
+		return INSTALLED;
 	}
 
 	public long getTransports() {

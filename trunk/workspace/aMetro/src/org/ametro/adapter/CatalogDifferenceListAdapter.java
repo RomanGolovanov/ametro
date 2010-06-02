@@ -56,12 +56,12 @@ public class CatalogDifferenceListAdapter  extends BaseExpandableListAdapter {
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		mStates = context.getResources().getStringArray(R.array.catalog_map_states);
 		mStateColors = new int[]{
+			Color.LTGRAY,
+			Color.RED,
+			Color.RED,
 			Color.WHITE,
 			Color.YELLOW,
-			Color.GREEN,
-			Color.RED,
-			Color.RED,
-			Color.LTGRAY
+			Color.WHITE
 		};
 	
 		mData = data;
