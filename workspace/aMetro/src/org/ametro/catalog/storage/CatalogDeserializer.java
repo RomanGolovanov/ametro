@@ -49,6 +49,7 @@ public class CatalogDeserializer {
 	public static String ATTR_CODE = "code";
 	public static String ATTR_SIZE = "size";
 	public static String ATTR_MIN_VERSION = "minVersion";
+	public static String ATTR_CORRUPTED = "corrupted";
 	
 	public static Catalog deserializeCatalog(BufferedInputStream stream) 
 	throws IOException, XmlPullParserException
@@ -64,6 +65,7 @@ public class CatalogDeserializer {
 		long version = 0;
 		long size = 0;
 		String minVersion = null;
+		boolean corrupted = false;
 		
 		ArrayList<String> mapLocales = new ArrayList<String>();
 		
@@ -96,6 +98,7 @@ public class CatalogDeserializer {
 		    	 version = StringUtil.parseLong(xpp.getAttributeValue("", ATTR_VERSION),0);
 		    	 size = StringUtil.parseLong(xpp.getAttributeValue("", ATTR_SIZE),0);
 		    	 minVersion = xpp.getAttributeValue("", ATTR_MIN_VERSION);
+		    	 corrupted = StringUtil.parseBoolean(xpp.getAttributeValue("", ATTR_CORRUPTED),false);
 		     }else if(TAG_LOCALE.equals(tagName)){
 		    	 mapLocales.add( xpp.getAttributeValue("", ATTR_CODE) );
 		     }
@@ -112,7 +115,8 @@ public class CatalogDeserializer {
 		    			 (String[]) mapLocales.toArray(new String[mapLocales.size()]),
 		    			 (String[]) mapCountry.toArray(new String[mapCountry.size()]),
 		    			 (String[]) mapCity.toArray(new String[mapCity.size()]),
-		    			 (String[]) mapDescription.toArray(new String[mapDescription.size()])
+		    			 (String[]) mapDescription.toArray(new String[mapDescription.size()]),
+		    			 corrupted
 		    			 );
 		    	 mapLocales.clear();
 		    	 mapCity.clear();

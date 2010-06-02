@@ -26,12 +26,12 @@
 	    <item>Trolleybus</item>
     </string-array>
     <string-array name="catalog_map_states">
-	    <item>Local</item>
-	    <item>Deprecated</item>
-	    <item>Updated</item>
-	    <item>Override</item>
+	    <item>Offline</item>
+	    <item>Not supported</item>
 	    <item>Corrupted</item>
-	    <item>Remote Only</item>
+	    <item>Download</item>
+	    <item>Update</item>
+	    <item>Installed</item>
     </string-array>
     <string-array name="version_changelog">
         <item>0.1.0.r163: changed stations/route lists appearance</item>
