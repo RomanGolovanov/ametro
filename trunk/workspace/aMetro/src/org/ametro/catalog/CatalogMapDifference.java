@@ -106,5 +106,9 @@ public class CatalogMapDifference {
 	public String getUrl() {
 		return preffered().getUrl();
 	}
+
+	public String getSystemName() {
+		return preffered().getSystemName();
+	}
 	
 }

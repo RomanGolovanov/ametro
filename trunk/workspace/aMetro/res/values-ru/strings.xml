@@ -72,7 +72,9 @@
 &lt;/p&gt;
 
 &lt;p&gt;Схемы и время проезда взяты из проекта pMetro Мурадова Бориса с согласия автора (www.pmetro.su).&lt;/p&gt;
-&lt;p&gt;Maps icons collection: http://code.google.com/p/google-maps-icons/&lt;/p&gt;
+&lt;p&gt;Иконки типов транспортов: http://code.google.com/p/google-maps-icons/&lt;/p&gt;
+&lt;p&gt;Коллекция иконок: http://www.iconsearch.ru/search/?q=iconset:snowish&lt;/p&gt;
+
 &lt;p&gt;Сайт проекта: http://ametro.no-ip.org&lt;/p&gt;
 &lt;p&gt;Вопросы и пожелания присылайте на ametroproject@gmail.com&lt;/p&gt;
 	</string>
@@ -114,7 +116,6 @@
     <string name="msg_no_map_loaded">Нет карты</string>
     <string name="msg_press_menu_maps">нажмите menu и выберите карту</string>
     <string name="msg_import_pmz_progress">"Импортируется карта %s/%s"</string>
-    <string name="msg_no_maps_in_import">Нет PMZ карт для импорта</string>
     <string name="msg_copy_files_to_import">Скопируйте PMZ файлы на карту памяти в каталог</string>
     <string name="msg_import_path">/sdcard/ametro/import</string>
     <string name="msg_loading_maps">Загрузка карт...</string>
@@ -138,7 +139,16 @@
     <string name="msg_select_transports">Выберите транспорт</string>
     <string name="msg_select_layer">Выберите Слой</string>
     <string name="msg_select_scheme">Выберите Карту</string>
+    <string name="msg_catalog_download_failed">Ошибка загрузки онлайн каталога</string>
+    <string name="msg_no_maps_in_favorites">Нет избранных карт</string>
+    <string name="msg_no_maps_in_local">Нет установленных карт</string>
+    <string name="msg_no_maps_in_online">Онлайн каталог пуст</string>
+    <string name="msg_no_maps_in_import">Нет PMZ карт для импорта</string>
     <string name="msg_"/>
+    <string name="tab_maps_favorited">Избранное</string>
+    <string name="tab_maps_local">Установлено</string>
+    <string name="tab_maps_online">Онлайн</string>
+    <string name="tab_maps_import">Импорт</string>
     <string name="log_map_indexing_failed">Map indexing failed for </string>
     <string name="log_save_map_zoom">Save map zoom </string>
     <string name="log_save_map_position">Save map position </string>

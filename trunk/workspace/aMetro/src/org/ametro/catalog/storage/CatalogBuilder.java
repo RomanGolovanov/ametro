@@ -26,6 +26,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
@@ -33,8 +34,9 @@ import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.model.Model;
 import org.ametro.model.storage.ModelBuilder;
+import org.ametro.util.WebUtil;
 
-public class LocalCatalogStorage {
+public class CatalogBuilder {
 
 	public final static int FILE_TYPE_AMETRO = 1;
 	public final static int FILE_TYPE_PMETRO = 2;
@@ -45,6 +47,37 @@ public class LocalCatalogStorage {
 	private static final String UNKNOWN_EN = "Unknown";
 	private static final String UNKNOWN_RU = "Неизвестно";
 
+	public static Catalog downloadCatalog(String url){
+		BufferedInputStream strm = null;
+		try{
+			
+			strm = new BufferedInputStream(WebUtil.executeHttpGetRequest(new URL(url)));
+			Catalog catalog = CatalogDeserializer.deserializeCatalog(strm);
+			catalog.setBaseUrl(url.substring(0, url.lastIndexOf('/')));
+			return catalog;
+		}catch(Exception ex){
+			return null;
+		}finally{
+			if(strm!=null){
+				try { strm.close(); }catch(IOException ex){}
+			}
+		}
+	}
+
+	public static Catalog downloadCatalog(File url, String path, boolean refresh) {
+		Catalog cat = null;
+		if(!refresh && url.exists()){
+			cat = loadCatalog(url);			
+		}
+		if(cat==null){
+			cat = downloadCatalog(path);
+			if(cat!=null){
+				saveCatalog(url, cat);
+			}
+		}
+		return cat;
+	}
+		
 	public static Catalog loadCatalog(File url, File path, boolean refresh, int fileTypes)
 	{
 		Catalog cat = null;

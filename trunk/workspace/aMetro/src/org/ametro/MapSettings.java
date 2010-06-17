@@ -51,7 +51,7 @@ public class MapSettings {
     public static final String TEMP_FILE_TYPE = ".tmp.ametro";
     
 	private static final File ROOT_PATH = new File(Environment.getExternalStorageDirectory(), "ametro");
-	private static final String DEFAULT_ONLINE_CATALOG_URL = "http://sites.google.com/site/ametroupdate/files";
+	private static final String DEFAULT_ONLINE_CATALOG_URL = "http://sites.google.com/site/ametroupdate/files/catalog.xml";
 	private static final File LOCAL_CATALOG_PATH = new File(ROOT_PATH, "maps");
 	private static final File IMPORT_CATALOG_PATH = new File(ROOT_PATH, "import");
     
@@ -59,7 +59,10 @@ public class MapSettings {
 	private static final File LOCAL_CATALOG_STORAGE = new File(ROOT_PATH,"catalog.local.xml");
 	private static final File IMPORT_CATALOG_STORAGE = new File(ROOT_PATH,"catalog.import.xml");
 	
+	private static Context mContext;
+	
     public static void checkPrerequisite( Context context ) {
+    	mContext = context;
     	Natives.Initialize();
         if (!ROOT_PATH.exists() || !LOCAL_CATALOG_PATH.exists() || !IMPORT_CATALOG_PATH.exists()) {
         	FileUtil.createDirectory(LOCAL_CATALOG_PATH);
@@ -86,8 +89,8 @@ public class MapSettings {
         FileUtil.delete(new File(ROOT_PATH, MAPS_LIST));
     }
 
-	public static String getOnlineCatalogUrl(Context context) {
-		return context.getSharedPreferences(Constants.PREFERENCE_NAME, 0).getString(PREFERENCE_ONLINE_CATALOG_URL, DEFAULT_ONLINE_CATALOG_URL);
+	public static String getOnlineCatalogUrl() {
+		return mContext.getSharedPreferences(Constants.PREFERENCE_NAME, 0).getString(PREFERENCE_ONLINE_CATALOG_URL, DEFAULT_ONLINE_CATALOG_URL);
 	}
 
 	public static File getLocalCatalog() {
@@ -98,8 +101,8 @@ public class MapSettings {
 		return IMPORT_CATALOG_PATH;
 	}
 
-	public static String getOnlineCatalogStorageUrl() {
-		return ONLINE_CATALOG_STORAGE.getAbsolutePath();
+	public static File getOnlineCatalogStorageUrl() {
+		return ONLINE_CATALOG_STORAGE;
 	}
 
 	public static File getLocalCatalogStorageUrl() {
