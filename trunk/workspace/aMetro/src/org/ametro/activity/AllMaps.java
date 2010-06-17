@@ -45,16 +45,16 @@ public class AllMaps extends TabActivity {
 		final TabHost tabHost = getTabHost();
 		final Resources res = getResources();
 
-		tabHost.addTab(tabHost.newTabSpec("tab1").setIndicator("Favorites", res.getDrawable(R.drawable.icon_tab_star))
+		tabHost.addTab(tabHost.newTabSpec("tab1").setIndicator(res.getString(R.string.tab_maps_favorited), res.getDrawable(R.drawable.icon_tab_star))
 				.setContent(new Intent(this, LocalMaps.class).putExtra(LocalMaps.EXTRA_FAVORITES_ONLY, true)));
 
-		tabHost.addTab(tabHost.newTabSpec("tab2").setIndicator("Installed", res.getDrawable(R.drawable.icon_tab_fdd))
+		tabHost.addTab(tabHost.newTabSpec("tab2").setIndicator(res.getString(R.string.tab_maps_local), res.getDrawable(R.drawable.icon_tab_fdd))
 				.setContent(new Intent(this, LocalMaps.class)));
 
-		tabHost.addTab(tabHost.newTabSpec("tab3").setIndicator("Online", res.getDrawable(R.drawable.icon_tab_browse))
+		tabHost.addTab(tabHost.newTabSpec("tab3").setIndicator(res.getString(R.string.tab_maps_online), res.getDrawable(R.drawable.icon_tab_browse))
 				.setContent(new Intent(this, OnlineMaps.class)));
 
-		tabHost.addTab(tabHost.newTabSpec("tab4").setIndicator("Import", res.getDrawable(R.drawable.icon_tab_unbox))
+		tabHost.addTab(tabHost.newTabSpec("tab4").setIndicator(res.getString(R.string.tab_maps_import), res.getDrawable(R.drawable.icon_tab_unbox))
 				.setContent(new Intent(this, ImportMaps.class)));
 		
 	}
