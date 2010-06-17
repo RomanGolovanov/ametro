@@ -116,7 +116,7 @@ ExpandableListView.OnChildClickListener {
 			startActivity(new Intent(this, About.class));
 			return true;
 		case MAIN_MENU_EXPERIMENTAL:
-			startActivity(new Intent(this, BrowseCatalog.class));
+			startActivity(new Intent(this, AllMaps.class));
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

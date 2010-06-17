@@ -206,6 +206,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		menu.add(0, MAIN_MENU_SETTINGS, 6, R.string.menu_settings).setIcon(android.R.drawable.ic_menu_preferences);
 		menu.add(0, MAIN_MENU_ABOUT, 7, R.string.menu_about).setIcon(android.R.drawable.ic_menu_help);
 		menu.add(0, MAIN_MENU_LOCATION, 8, R.string.menu_location).setIcon(android.R.drawable.ic_menu_mylocation);
+		menu.add(0, MAIN_MENU_EXPERIMENTAL, 9,R.string.menu_experimental);
 
 		return true;
 	}
@@ -278,6 +279,9 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			return true;
 		case MAIN_MENU_LOCATION:
 			startActivityForResult(new Intent(this, SearchLocation.class), REQUEST_LOCATION);
+			return true;
+		case MAIN_MENU_EXPERIMENTAL:
+			startActivity(new Intent(this, AllMaps.class));
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -1073,6 +1077,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	private static final int MAIN_MENU_SETTINGS = 7;
 	private static final int MAIN_MENU_ABOUT = 8;
 	private static final int MAIN_MENU_LOCATION = 9;
+	private static final int MAIN_MENU_EXPERIMENTAL = 10;
 
 	private final float[] ZOOMS = new float[]{1.5f, 1.0f, 0.8f, 0.6f, 0.4f, 0.3f, 0.2f, 0.1f};
 	private final int[] STEPS = new int[]{15, 10, 8, 6, 4, 3, 2, 1};

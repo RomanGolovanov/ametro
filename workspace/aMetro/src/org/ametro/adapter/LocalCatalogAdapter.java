@@ -28,7 +28,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class CatalogDifferenceListAdapter  extends BaseExpandableListAdapter {
+public class LocalCatalogAdapter  extends BaseExpandableListAdapter {
 
 	private String mLanguageCode;
 	
@@ -51,7 +51,7 @@ public class CatalogDifferenceListAdapter  extends BaseExpandableListAdapter {
         return mRefs[groupId][childId];
     }
 
-    public CatalogDifferenceListAdapter(Context context, List<CatalogMapDifference> data, String code) {
+    public LocalCatalogAdapter(Context context, List<CatalogMapDifference> data, String code) {
         mContext = context;
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		mStates = context.getResources().getStringArray(R.array.catalog_map_states);

@@ -73,7 +73,9 @@ Design: Dusty Rat&lt;br/&gt;
 &lt;/p&gt;
 
 &lt;p&gt;Thanks to Boris Muradov (pMetro’s author, www.pmetro.su) for providing info and materials.&lt;/p&gt;
-&lt;p&gt;Maps icons collection: http://ametro.no-ip.org&lt;/p&gt;
+&lt;p&gt;Maps icons collection: http://code.google.com/p/google-maps-icons/&lt;/p&gt;
+&lt;p&gt;Icons collection: http://www.iconsearch.ru/search/?q=iconset:snowish&lt;/p&gt;
+
 &lt;p&gt;Developers’s site: http://ametro.no-ip.org&lt;/p&gt;
 &lt;p&gt;Your questions and suggestions send to ametroproject@gmail.com&lt;/p&gt;
 	</string>
@@ -116,7 +118,6 @@ Design: Dusty Rat&lt;br/&gt;
     <string name="msg_no_map_loaded">No map loaded</string>
     <string name="msg_press_menu_maps">press menu and select map</string>
     <string name="msg_import_pmz_progress">"Importing map %s/%s"</string>
-    <string name="msg_no_maps_in_import">No PMZ maps in import</string>
     <string name="msg_copy_files_to_import">copy PMZ files to SD card catalog</string>
     <string name="msg_import_path">/sdcard/ametro/import</string>
     <string name="msg_loading_maps">Loading maps...</string>
@@ -140,7 +141,16 @@ Design: Dusty Rat&lt;br/&gt;
     <string name="msg_select_transports">Select transports</string>
     <string name="msg_select_layer">Select Layer</string>
     <string name="msg_select_scheme">Select Scheme</string>
+    <string name="msg_catalog_download_failed">Online catalog download failed</string>
+    <string name="msg_no_maps_in_favorites">No starred maps</string>
+    <string name="msg_no_maps_in_local">No installed maps</string>
+    <string name="msg_no_maps_in_online">Online catalog is empty</string>
+    <string name="msg_no_maps_in_import">No PMZ maps for import</string>
     <string name="msg_"/>
+    <string name="tab_maps_favorited">Favorites</string>
+    <string name="tab_maps_local">Installed</string>
+    <string name="tab_maps_online">Online</string>
+    <string name="tab_maps_import">Import</string>
     <string name="log_map_indexing_failed">Map indexing failed for </string>
     <string name="log_save_map_zoom">Save map zoom </string>
     <string name="log_save_map_position">Save map position </string>

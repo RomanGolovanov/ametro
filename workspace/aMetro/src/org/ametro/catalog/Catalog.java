@@ -26,6 +26,10 @@ import java.util.HashSet;
 
 public class Catalog {
 
+	public static final int MODE_CROSS_JOIN = 0;
+	public static final int MODE_LEFT_JOIN = 1;
+	public static final int MODE_RIGHT_JOIN = 2;
+	
 	/*package*/ long mTimestamp;
 	/*package*/ String mBaseUrl;
 	/*package*/ ArrayList<CatalogMap> mMaps;
@@ -34,7 +38,9 @@ public class Catalog {
 		mTimestamp = timestamp;
 	}
 	
-	private HashMap<String, CatalogMap> mMapIndex; 
+	
+	/* VOLATILE FIELDS */
+	private HashMap<String, CatalogMap> mMapIndex;
 	
 	public CatalogMap getMap(String systemName){
 		if(mMapIndex == null){
@@ -73,16 +79,20 @@ public class Catalog {
 		mMaps = maps;
 	}
 	
-	public static ArrayList<CatalogMapDifference> diff(Catalog localCatalog, Catalog remoteCatalog)
+	public String toString() {
+		return "[TIME:" + getTimestamp() + ";URL:" + getBaseUrl() + ";COUNT:" + (getMaps()!=null ? getMaps().size() : "null") + "]";
+	}
+	
+	public static ArrayList<CatalogMapDifference> diff(Catalog localCatalog, Catalog remoteCatalog, int mode)
 	{
 		final ArrayList<CatalogMapDifference> diff = new ArrayList<CatalogMapDifference>();
 		HashSet<String> systemMapNames = new HashSet<String>(  );
-		if(localCatalog!=null){
+		if(localCatalog!=null && mode != MODE_RIGHT_JOIN){
 			for(CatalogMap map : localCatalog.getMaps()){
 				systemMapNames.add(map.getSystemName());
 			}
 		}
-		if(remoteCatalog!=null){
+		if(remoteCatalog!=null && mode != MODE_LEFT_JOIN){
 			for(CatalogMap map : remoteCatalog.getMaps()){
 				systemMapNames.add(map.getSystemName());
 			}
@@ -94,5 +104,12 @@ public class Catalog {
 		}
 		return diff;
 	}
+	
+//	public static void updateDiffLocal(ArrayList<CatalogMapDifference> diff, Catalog localCatalog){
+//		for(CatalogMapDifference d : diff){
+//			final String systemName = d.getSystemName();
+//			final CatalogMap local = localCatalog!=null ? localCatalog.getMap(systemName) : null;
+//		}
+//	}
 
 }
