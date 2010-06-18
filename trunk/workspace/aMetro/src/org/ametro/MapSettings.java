@@ -38,6 +38,9 @@ import android.os.Environment;
 import android.preference.PreferenceManager;
 
 import static org.ametro.Constants.PREFERENCE_ONLINE_CATALOG_URL;
+import static org.ametro.Constants.PREFERENCE_DEBUG;
+import static org.ametro.Constants.PREFERENCE_AUTO_UPDATE_INDEX;
+import static org.ametro.Constants.PREFERENCE_AUTO_UPDATE_MAPS;
 
 public class MapSettings {
 
@@ -66,15 +69,17 @@ public class MapSettings {
 	private static Context mContext;
 	
     public static void checkPrerequisite( Context context ) {
-    	mContext = context;
-    	Natives.Initialize();
-        if (!ROOT_PATH.exists() || !LOCAL_CATALOG_PATH.exists() || !IMPORT_CATALOG_PATH.exists()) {
-        	FileUtil.createDirectory(LOCAL_CATALOG_PATH);
-        	FileUtil.createDirectory(IMPORT_CATALOG_PATH);
-        	FileUtil.createFile(new File(ROOT_PATH, NO_MEDIA_TAG));
-        }
-        CountryLibrary.setContext(context);
-        StationLibrary.setContext(context);
+    	if(mContext==null){
+	    	mContext = context;
+	    	Natives.Initialize();
+	        if (!ROOT_PATH.exists() || !LOCAL_CATALOG_PATH.exists() || !IMPORT_CATALOG_PATH.exists()) {
+	        	FileUtil.createDirectory(LOCAL_CATALOG_PATH);
+	        	FileUtil.createDirectory(IMPORT_CATALOG_PATH);
+	        	FileUtil.createFile(new File(ROOT_PATH, NO_MEDIA_TAG));
+	        }
+	        CountryLibrary.setContext(context);
+	        StationLibrary.setContext(context);
+    	}
     }
 
     public static String getMapFileName(String mapName) {
@@ -97,6 +102,18 @@ public class MapSettings {
 		return PreferenceManager.getDefaultSharedPreferences(mContext).getString(PREFERENCE_ONLINE_CATALOG_URL, DEFAULT_ONLINE_CATALOG_URL);
 	}
 
+	public static boolean isDebugMessagesEnabled() {
+		return PreferenceManager.getDefaultSharedPreferences(mContext).getBoolean(PREFERENCE_DEBUG, false);
+	}
+
+	public static boolean isAutoUpdateIndexEnabled() {
+		return PreferenceManager.getDefaultSharedPreferences(mContext).getBoolean(PREFERENCE_AUTO_UPDATE_INDEX, false);
+	}
+
+	public static boolean isAutoUpdateMapsEnabled() {
+		return PreferenceManager.getDefaultSharedPreferences(mContext).getBoolean(PREFERENCE_AUTO_UPDATE_MAPS, false);
+	}
+	
 	public static void setOnlineCatalogUrl(String url) {
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
 		Editor editor = prefs.edit();

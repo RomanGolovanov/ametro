@@ -9,7 +9,7 @@ import org.ametro.catalog.Catalog;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class CatalogStorage {
+public class CatalogStorage implements ICatalogBuilderListener {
 
 	public static final int CATALOG_LOCAL = 0;
 	public static final int CATALOG_IMPORT = 1;
@@ -22,6 +22,16 @@ public class CatalogStorage {
 		this.mImportPath = importPath;
 		this.mOnlineStorage = onlineStorage;
 		this.mOnlineUrl = onlineUrl;
+		
+		this.mOnlineCatalogBuilder = new CatalogBuilder();
+		this.mOnlineCatalogBuilder.addOnCatalogBuilderEvents(this);
+		
+		this.mLocalCatalogBuilder = new CatalogBuilder();
+		this.mLocalCatalogBuilder.addOnCatalogBuilderEvents(this);
+		
+		this.mImportCatalogBuilder = new CatalogBuilder();
+		this.mImportCatalogBuilder.addOnCatalogBuilderEvents(this);
+		
 	}
 	
 	public void addCatalogChangedListener(ICatalogStorageListener listener){
@@ -35,6 +45,18 @@ public class CatalogStorage {
 	public void fireCatalogChanged(int catalogId, Catalog catalog){
 		for(ICatalogStorageListener listener : mCatalogListeners){
 			listener.onCatalogLoaded(catalogId, catalog);
+		}
+	}
+
+	public void fireCatalogOperationFailed(int catalogId, String message){
+		for(ICatalogStorageListener listener : mCatalogListeners){
+			listener.onCatalogOperationFailed(catalogId, message);
+		}
+	}
+
+	public void fireCatalogOperationProgress(int catalogId, int progress, int total, String message){
+		for(ICatalogStorageListener listener : mCatalogListeners){
+			listener.onCatalogOperationProgress(catalogId, progress, total, message);
 		}
 	}
 	
@@ -86,7 +108,6 @@ public class CatalogStorage {
 		}	
 	}	
 	
-	
 	void cleanupLoadLocalCatalogTask(){
 		synchronized (mMutex) {
 			mLoadLocalCatalogTask = null;
@@ -122,11 +143,15 @@ public class CatalogStorage {
 	/*package*/ Catalog mOnlineCatalog;
 	/*package*/ Catalog mImportCatalog;
 
+	/*package*/ CatalogBuilder mLocalCatalogBuilder;
+	/*package*/ CatalogBuilder mOnlineCatalogBuilder;
+	/*package*/ CatalogBuilder mImportCatalogBuilder;
+	
 	/*package*/ ArrayList<ICatalogStorageListener> mCatalogListeners = new ArrayList<ICatalogStorageListener>();
 
 	private class OnlineCatalogLoadTask extends AsyncTask<Boolean, Void, Catalog> {
 		protected Catalog doInBackground(Boolean... params) {
-			return CatalogBuilder.downloadCatalog(mOnlineStorage, mOnlineUrl, params[0]);
+			return mOnlineCatalogBuilder.downloadCatalog(mOnlineStorage, mOnlineUrl, params[0]);
 		}
 		
 		protected void onPreExecute() {
@@ -154,7 +179,7 @@ public class CatalogStorage {
 	
 	private class LocalCatalogLoadTask extends AsyncTask<Boolean, Void, Catalog> {
 		protected Catalog doInBackground(Boolean... params) {
-			return CatalogBuilder.loadCatalog(mLocalStorage, mLocalPath, params[0], CatalogBuilder.FILE_TYPE_AMETRO);
+			return mLocalCatalogBuilder.loadCatalog(mLocalStorage, mLocalPath, params[0], CatalogBuilder.FILE_TYPE_AMETRO);
 		}
 		
 		protected void onPreExecute() {
@@ -182,7 +207,7 @@ public class CatalogStorage {
 	
 	private class ImportCatalogLoadTask extends AsyncTask<Boolean, Void, Catalog> {
 		protected Catalog doInBackground(Boolean... params) {
-			return CatalogBuilder.loadCatalog(mImportStorage, mImportPath, params[0], CatalogBuilder.FILE_TYPE_PMETRO);
+			return mImportCatalogBuilder.loadCatalog(mImportStorage, mImportPath, params[0], CatalogBuilder.FILE_TYPE_PMETRO);
 		}
 		
 		protected void onPreExecute() {
@@ -206,6 +231,25 @@ public class CatalogStorage {
 			cleanupLoadImportCatalogTask();
 			super.onCancelled();
 		}
+	}
+
+	private int getCatalogId(CatalogBuilder source) {
+		if(source == mImportCatalogBuilder){
+			return CATALOG_IMPORT;
+		}else if(source == mOnlineCatalogBuilder){
+			return CATALOG_ONLINE;
+		}else if(source == mLocalCatalogBuilder){
+			return CATALOG_LOCAL;
+		}
+		throw new RuntimeException("Unknown CatalogBuilder instance");
+	}
+	
+	public void onCatalogBuilderOperationFailed(CatalogBuilder source, String message) {
+		fireCatalogOperationFailed(getCatalogId(source), message);
+	}
+
+	public void onCatalogBuilderOperationProgress(CatalogBuilder source, int progress, int total, String message) {
+		fireCatalogOperationProgress(getCatalogId(source), progress, total, message);
 	}
 
 

@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import org.ametro.Constants;
+import org.ametro.MapSettings;
 import org.ametro.MapUri;
 import org.ametro.R;
 import org.ametro.adapter.LocalCatalogAdapter;
@@ -36,11 +37,13 @@ import org.ametro.catalog.storage.ICatalogStorageListener;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ExpandableListView.OnChildClickListener;
@@ -64,6 +67,18 @@ public class LocalMaps extends Activity implements ICatalogStorageListener, OnCh
 	private ArrayList<CatalogMapDifference> mCatalogDifferences;
 	private ExpandableListView mList;
 	
+	private TextView mCounterTextView;
+	private TextView mMessageTextView;
+	private ProgressBar mProgressBar;
+	
+	private int mProgress;
+	private int mTotal;
+	private String mMessage;
+	
+	private Handler mUIEventDispacher = new Handler();
+	
+	private String mErrorMessage;
+	
 	private boolean mFavoritesOnly;
 	
 	private final int MAIN_MENU_REFRESH = 1;
@@ -86,6 +101,7 @@ public class LocalMaps extends Activity implements ICatalogStorageListener, OnCh
 
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		menu.findItem(MAIN_MENU_LOCATION).setVisible(true);
+		menu.findItem(MAIN_MENU_REFRESH).setEnabled(mMode != MODE_WAIT);
 		return super.onPrepareOptionsMenu(menu);
 	}
 
@@ -110,6 +126,7 @@ public class LocalMaps extends Activity implements ICatalogStorageListener, OnCh
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		MapSettings.checkPrerequisite(this);
 		Intent data = getIntent();
 		if(data!=null){
 			mFavoritesOnly = data.getBooleanExtra(EXTRA_FAVORITES_ONLY, false);
@@ -178,8 +195,13 @@ public class LocalMaps extends Activity implements ICatalogStorageListener, OnCh
 	}
 	
 	private void setWaitView() {
-		setContentView(R.layout.maps_wait);
-		mMode = MODE_WAIT;
+		if(mMode!=MODE_WAIT){
+			setContentView(R.layout.maps_wait);
+			mMessageTextView = (TextView)findViewById(R.id.message);
+			mCounterTextView = (TextView)findViewById(R.id.counter);
+			mProgressBar = (ProgressBar)findViewById(R.id.progress);
+			mMode = MODE_WAIT;
+		}
 	}
 	
 	private void setEmptyView() {
@@ -208,6 +230,41 @@ public class LocalMaps extends Activity implements ICatalogStorageListener, OnCh
 		}
 	}
 
+	public void onCatalogOperationFailed(int catalogId, String message)
+	{
+		if(MapSettings.isDebugMessagesEnabled()){
+			mErrorMessage = message;
+			mUIEventDispacher.post(mCatalogError);
+		}
+	}
+	
+	public void onCatalogOperationProgress(int catalogId, int progress, int total, String message)
+	{
+		if(catalogId == CatalogStorage.CATALOG_LOCAL){
+			mProgress = progress;
+			mTotal = total;
+			mMessage = message;
+			mUIEventDispacher.post(mUpdateProgress);
+		}
+	}
+	
+	private Runnable mCatalogError = new Runnable() {
+		public void run() {
+			Toast.makeText(LocalMaps.this, mErrorMessage, Toast.LENGTH_LONG).show();
+		}
+	};
+	
+	private Runnable mUpdateProgress = new Runnable() {
+		public void run() {
+			if(mMode == MODE_WAIT){
+				mProgressBar.setMax(mTotal);
+				mProgressBar.setProgress(mProgress);
+				mMessageTextView.setText( mMessage );
+				mCounterTextView.setText( mProgress + " / " + mTotal );
+			}
+		}
+	};
+	
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 		CatalogMapDifference diff = (CatalogMapDifference)mAdapter.getChild(groupPosition, childPosition);
 		if(diff.isLocalAvailable()){

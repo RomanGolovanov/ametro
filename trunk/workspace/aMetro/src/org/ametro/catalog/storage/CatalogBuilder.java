@@ -44,10 +44,7 @@ public class CatalogBuilder {
 	public final static String AMETRO_EXTENSION = ".ametro";
 	public final static String PMETRO_EXTENSION = ".pmz";
 	
-	private static final String UNKNOWN_EN = "Unknown";
-	private static final String UNKNOWN_RU = "Неизвестно";
-
-	public static Catalog downloadCatalog(String url){
+	private Catalog downloadCatalog(String url){
 		BufferedInputStream strm = null;
 		try{
 			
@@ -56,6 +53,7 @@ public class CatalogBuilder {
 			catalog.setBaseUrl(url.substring(0, url.lastIndexOf('/')));
 			return catalog;
 		}catch(Exception ex){
+			fireOperationFailed("Failed download catalog due error: " + ex.getMessage());
 			return null;
 		}finally{
 			if(strm!=null){
@@ -64,12 +62,12 @@ public class CatalogBuilder {
 		}
 	}
 
-	public static Catalog downloadCatalog(File url, String path, boolean refresh) {
+	public Catalog downloadCatalog(File url, String path, boolean refresh) {
 		Catalog cat = null;
 		if(!refresh && url.exists()){
 			cat = loadCatalog(url);			
 		}
-		if(cat==null){
+		if(cat==null && refresh){
 			cat = downloadCatalog(path);
 			if(cat!=null){
 				saveCatalog(url, cat);
@@ -78,7 +76,7 @@ public class CatalogBuilder {
 		return cat;
 	}
 		
-	public static Catalog loadCatalog(File url, File path, boolean refresh, int fileTypes)
+	public Catalog loadCatalog(File url, File path, boolean refresh, int fileTypes)
 	{
 		Catalog cat = null;
 		if(!refresh && url.exists()){
@@ -94,11 +92,11 @@ public class CatalogBuilder {
 		
 	}
 	
-	public static boolean isDerpecated(Catalog catalog){
+	public boolean isDerpecated(Catalog catalog){
 		return new File(catalog.getBaseUrl()).lastModified() > catalog.getTimestamp();
 	}
 	
-	public static Catalog loadCatalog(File url){
+	public Catalog loadCatalog(File url){
 		BufferedInputStream strm = null;
 		try{
 			strm = new BufferedInputStream(new FileInputStream(url));
@@ -113,28 +111,83 @@ public class CatalogBuilder {
 		}
 	}
 	
-	public static Catalog scanCatalog(File baseUrl, int fileTypes){
-		ArrayList<CatalogMap> maps = new ArrayList<CatalogMap>();
-		if(baseUrl.exists() && baseUrl.isDirectory() ){
-			for(File file: baseUrl.listFiles()){
-				final String fileName = file.getName().toLowerCase();
-				if( ((fileTypes & FILE_TYPE_PMETRO)!=0 && fileName.endsWith(PMETRO_EXTENSION))||
-					((fileTypes & FILE_TYPE_AMETRO)!=0 && fileName.endsWith(AMETRO_EXTENSION))){
-
-					Model model = ModelBuilder.loadModelDescription(file.getAbsolutePath());
-					if(model!=null){
-				    	maps.add(extractCatalogMap(file, fileName, model));
-					}else{
-						maps.add(makeBadCatalogMap(file, fileName));
+	public Catalog scanCatalog(File baseUrl, int fileTypes){
+		try{
+			ArrayList<CatalogMap> maps = new ArrayList<CatalogMap>();
+			if(baseUrl.exists() && baseUrl.isDirectory() ){
+				File[] files =  baseUrl.listFiles();
+				final int total = files.length;
+				int progress = 0;
+				for(File file: files){
+					progress++;
+					try{
+						final String fileName = file.getName().toLowerCase();
 						
+						fireProgressChanged(progress, total, fileName);
+						
+						if( ((fileTypes & FILE_TYPE_PMETRO)!=0 && fileName.endsWith(PMETRO_EXTENSION))||
+							((fileTypes & FILE_TYPE_AMETRO)!=0 && fileName.endsWith(AMETRO_EXTENSION))){
+		
+							Model model = ModelBuilder.loadModelDescription(file.getAbsolutePath());
+							if(model!=null){
+						    	maps.add(extractCatalogMap(file, fileName, model));
+							}else{
+								maps.add(makeBadCatalogMap(file, fileName));
+								
+							}
+						}
+					}catch(Exception ex){
+						// skip file due error
 					}
 				}
 			}
+			return new Catalog(baseUrl.lastModified(), baseUrl.getAbsolutePath().toLowerCase(), maps);
+		}catch(Exception ex){
+			fireOperationFailed("Failed scan catalog due error: " + ex.getMessage());
+			
+			return null;
 		}
-		return new Catalog(baseUrl.lastModified(), baseUrl.getAbsolutePath().toLowerCase(), maps);
 	}
 
-	private static CatalogMap makeBadCatalogMap(File file, final String fileName) {
+	public void saveCatalog(File url, Catalog catalog){
+		try{
+			BufferedOutputStream strm = null;
+			try{
+				strm = new BufferedOutputStream(new FileOutputStream(url));
+				CatalogSerializer.serializeCatalog(catalog, strm);
+			}catch(Exception ex){
+			}finally{
+				if(strm!=null){
+					try { strm.close(); }catch(IOException ex){}
+				}
+			}
+		}catch(Exception ex){
+			fireOperationFailed("Cannot save catalog due error: " + ex.getMessage());
+		}
+	}
+	
+	public void addOnCatalogBuilderEvents(ICatalogBuilderListener listener) {
+		mEventListeners.add(listener);
+	}
+	public void removeOnCatalogBuilderEvents(ICatalogBuilderListener listener) {
+		mEventListeners.remove(listener);
+	}
+	
+	private void fireProgressChanged(int progress, int total, String message)
+	{
+		for(ICatalogBuilderListener listener : mEventListeners){
+			listener.onCatalogBuilderOperationProgress(this, progress, total, message);
+		}
+	}
+	
+	private void fireOperationFailed(String message)
+	{
+		for(ICatalogBuilderListener listener : mEventListeners){
+			listener.onCatalogBuilderOperationFailed(this, message);
+		}
+	}
+	
+	private CatalogMap makeBadCatalogMap(File file, final String fileName) {
 		
 		final String suggestedMapName = fileName.substring(0, fileName.indexOf('.'));
 		
@@ -165,7 +218,7 @@ public class CatalogBuilder {
 		return map;
 	}
 	
-	private static CatalogMap extractCatalogMap(File file, final String fileName, Model model) {
+	private CatalogMap extractCatalogMap(File file, final String fileName, Model model) {
 		final String[] locales = model.locales;
 		final int len = locales.length;
 		final int countryId = model.countryName;
@@ -212,20 +265,6 @@ public class CatalogBuilder {
 		return map;
 	}
 	
-	public static void saveCatalog(File url, Catalog catalog){
-		BufferedOutputStream strm = null;
-		try{
-			strm = new BufferedOutputStream(new FileOutputStream(url));
-			CatalogSerializer.serializeCatalog(catalog, strm);
-		}catch(Exception ex){
-		}finally{
-			if(strm!=null){
-				try { strm.close(); }catch(IOException ex){}
-			}
-		}
-	}
-	
-	
 	private static class ModelDescription implements Comparable<ModelDescription>
 	{
 		String locale;
@@ -244,7 +283,11 @@ public class CatalogBuilder {
 			this.country = country;
 			this.description = description;
 		}
-		
-		
 	}
+	
+	private static final String UNKNOWN_EN = "Unknown";
+	private static final String UNKNOWN_RU = "Неизвестно";
+
+	private ArrayList<ICatalogBuilderListener> mEventListeners = new ArrayList<ICatalogBuilderListener>();
+
 }
