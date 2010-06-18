@@ -85,6 +85,7 @@ public class Catalog {
 	
 	public static ArrayList<CatalogMapDifference> diff(Catalog localCatalog, Catalog remoteCatalog, int mode)
 	{
+		final int preffered = (mode == MODE_RIGHT_JOIN) ? CatalogMapDifference.PREFFERED_REMOTE : CatalogMapDifference.PREFFERED_LOCAL;
 		final ArrayList<CatalogMapDifference> diff = new ArrayList<CatalogMapDifference>();
 		HashSet<String> systemMapNames = new HashSet<String>(  );
 		if(localCatalog!=null && mode != MODE_RIGHT_JOIN){
@@ -100,7 +101,7 @@ public class Catalog {
 		for(String systemName : systemMapNames){
 			final CatalogMap local = localCatalog!=null ? localCatalog.getMap(systemName) : null;
 			final CatalogMap remote = remoteCatalog!=null ? remoteCatalog.getMap(systemName) : null;
-			diff.add(new CatalogMapDifference(local, remote));
+			diff.add(new CatalogMapDifference(local, remote, preffered));
 		}
 		return diff;
 	}

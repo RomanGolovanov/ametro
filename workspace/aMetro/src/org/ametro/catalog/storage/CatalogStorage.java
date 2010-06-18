@@ -12,8 +12,8 @@ import android.util.Log;
 public class CatalogStorage {
 
 	public static final int CATALOG_LOCAL = 0;
-	public static final int CATALOG_IMPORT = 0;
-	public static final int CATALOG_ONLINE = 0;
+	public static final int CATALOG_IMPORT = 1;
+	public static final int CATALOG_ONLINE = 2;
 	
 	public CatalogStorage(File localStorage, File localPath, File importStorage, File importPath, File onlineStorage, String onlineUrl){
 		this.mLocalStorage = localStorage;
@@ -52,20 +52,6 @@ public class CatalogStorage {
 	
 	public void requestLocalCatalog(boolean refresh)
 	{
-		invokeLoadLocalCatalogTask(refresh);
-	}
-	
-	public void requestImportCatalog(boolean refresh)
-	{
-		invokeLoadImportCatalogTask(refresh);
-	}
-	
-	public void requestOnlineCatalog(boolean refresh)
-	{
-		invokeLoadOnlineCatalogTask(refresh);
-	}	
-	
-	/*package*/ void invokeLoadLocalCatalogTask(boolean refresh){
 		if(mLoadLocalCatalogTask==null){
 			synchronized (mMutex) {
 				if(mLoadLocalCatalogTask==null){
@@ -76,13 +62,8 @@ public class CatalogStorage {
 		}		
 	}
 	
-	/*package*/ void cleanupLoadLocalCatalogTask(){
-		synchronized (mMutex) {
-			mLoadLocalCatalogTask = null;
-		}
-	}
-	
-	/*package*/ void invokeLoadImportCatalogTask(boolean refresh){
+	public void requestImportCatalog(boolean refresh)
+	{
 		if(mLoadImportCatalogTask==null){
 			synchronized (mMutex) {
 				if(mLoadImportCatalogTask==null){
@@ -93,13 +74,8 @@ public class CatalogStorage {
 		}		
 	}
 	
-	/*package*/ void cleanupLoadImportCatalogTask(){
-		synchronized (mMutex) {
-			mLoadImportCatalogTask = null;
-		}
-	}	
-	
-	/*package*/ void invokeLoadOnlineCatalogTask(boolean refresh){
+	public void requestOnlineCatalog(boolean refresh)
+	{
 		if(mLoadOnlineCatalogTask==null){
 			synchronized (mMutex) {
 				if(mLoadOnlineCatalogTask==null){
@@ -107,10 +83,24 @@ public class CatalogStorage {
 					mLoadOnlineCatalogTask.execute(refresh);
 				}
 			}
-		}		
+		}	
+	}	
+	
+	
+	void cleanupLoadLocalCatalogTask(){
+		synchronized (mMutex) {
+			mLoadLocalCatalogTask = null;
+		}
 	}
 	
-	/*package*/ void cleanupLoadOnlineCatalogTask(){
+	
+	void cleanupLoadImportCatalogTask(){
+		synchronized (mMutex) {
+			mLoadImportCatalogTask = null;
+		}
+	}	
+	
+	void cleanupLoadOnlineCatalogTask(){
 		synchronized (mMutex) {
 			mLoadOnlineCatalogTask = null;
 		}
@@ -133,10 +123,6 @@ public class CatalogStorage {
 	/*package*/ Catalog mImportCatalog;
 
 	/*package*/ ArrayList<ICatalogStorageListener> mCatalogListeners = new ArrayList<ICatalogStorageListener>();
-
-//	private boolean mLocalRequested = false;
-//	private boolean mImportRequested = false;
-//	private boolean mOnlineRequested = false;
 
 	private class OnlineCatalogLoadTask extends AsyncTask<Boolean, Void, Catalog> {
 		protected Catalog doInBackground(Boolean... params) {

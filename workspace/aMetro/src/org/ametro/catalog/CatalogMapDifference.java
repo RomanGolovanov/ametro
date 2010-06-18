@@ -45,8 +45,12 @@ public class CatalogMapDifference {
 	public final static int UPDATE = 4;
 	public final static int INSTALLED = 5;
 	
+	public final static int PREFFERED_LOCAL = 0;
+	public final static int PREFFERED_REMOTE = 0;
+	
 	/*package*/ CatalogMap mLocal;
 	/*package*/ CatalogMap mRemote;
+	/*package*/ int mPreffered;
 	
 	public CatalogMap getLocal() {
 		return mLocal;
@@ -56,10 +60,11 @@ public class CatalogMapDifference {
 		return mRemote;
 	}
 
-	public CatalogMapDifference(CatalogMap mLocal, CatalogMap mRemote) {
+	public CatalogMapDifference(CatalogMap mLocal, CatalogMap mRemote, int preffered) {
 		super();
 		this.mLocal = mLocal;
 		this.mRemote = mRemote;
+		this.mPreffered = preffered;
 	}
 	
 	public boolean isEquals(){
@@ -100,7 +105,9 @@ public class CatalogMapDifference {
 	}
 
 	private CatalogMap preffered(){
-		return mLocal!=null ? mLocal : mRemote;
+		return (mPreffered == PREFFERED_LOCAL) ? 
+				(mLocal!=null ? mLocal : mRemote) : 
+				(mRemote!=null ? mRemote: mLocal);
 	}
 
 	public String getUrl() {
@@ -109,6 +116,22 @@ public class CatalogMapDifference {
 
 	public String getSystemName() {
 		return preffered().getSystemName();
+	}
+
+	public boolean isLocalAvailable() {
+		return mLocal != null && !mLocal.isCorruted() && mLocal.isSupported();
+	}
+	
+	public boolean isRemoteAvailable() {
+		return mRemote != null && !mRemote.isCorruted() && mRemote.isSupported();
+	}
+	
+	public String getLocalUrl(){
+		return mLocal != null ? mLocal.getUrl() : null;
+	}
+	
+	public String getRemoteUrl(){
+		return mRemote != null ? mRemote.getUrl() : null;
 	}
 	
 }

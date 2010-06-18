@@ -1,57 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="@string/pref_section_general">
 
-        <ListPreference android:key="@string/pref_locale_key"
-                        android:title="@string/pref_locale"
-                        android:entryValues="@array/pref_locale_values"
-                        android:entries="@array/pref_locale_texts"
-                        android:summary="@string/pref_locale_description"
-                        android:defaultValue="Auto"/>
-
-        <CheckBoxPreference android:title="@string/pref_auto_update_map_index"
-                            android:key="@string/pref_auto_update_map_index_key"
-                            android:summary="@string/pref_auto_update_map_index_description"
-                            android:defaultValue="false"/>
-
-        <CheckBoxPreference android:title="@string/pref_auto_update_maps"
-                            android:key="@string/pref_auto_update_maps_key"
-                            android:summary="@string/pref_auto_update_maps_description"
-                            android:dependency="@string/pref_auto_update_map_index_key"
-                            android:defaultValue="false"/>
-
-        <CheckBoxPreference android:title="@string/pref_auto_locate"
-                            android:key="@string/pref_auto_locate_key"
-                            android:summary="@string/pref_auto_locate_description"
-                            android:defaultValue="false"/>
-                            
-        <CheckBoxPreference android:title="@string/pref_auto_import_addons"
-                            android:key="@string/pref_auto_import_addons_key"
-                            android:summary="@string/pref_auto_import_addons_description"
-                            android:defaultValue="false"/>
-
+	<PreferenceScreen android:title="@string/pref_section_graphic" android:summary="@string/pref_section_graphic_description">
         <CheckBoxPreference android:title="@string/pref_anti_alias"
-                            android:key="@string/pref_anti_alias_key"
-                            android:summary="@string/pref_anti_alias_description"
-                            android:defaultValue="true"/>
-
+                           android:key="@string/pref_anti_alias_key"
+                           android:summary="@string/pref_anti_alias_description"
+                           android:defaultValue="true"/>
         <CheckBoxPreference android:title="@string/pref_anti_alias_disable_on_scroll"
                             android:key="@string/pref_anti_alias_disable_on_scroll_key"
                             android:summary="@string/pref_anti_alias_disable_on_scroll_description"
                             android:dependency="@string/pref_anti_alias_key"
                             android:defaultValue="true"/>
-
-
-    </PreferenceCategory>
-
-    <PreferenceCategory android:title="@string/pref_section_debug">
-
-        <CheckBoxPreference android:title="@string/pref_debug"
-                            android:key="@string/pref_debug_key"
-                            android:summary="@string/pref_debug_description"
+	</PreferenceScreen>
+	<PreferenceScreen android:title="@string/pref_section_auto_update" android:summary="@string/pref_section_auto_update_description">
+        <EditTextPreference android:title="@string/pref_auto_update_url"
+                            android:key="@string/pref_auto_update_url_key"
+                            android:dialogMessage="@string/pref_auto_update_url_message"
+                            android:summary="@string/pref_auto_update_url_description"/>
+        <CheckBoxPreference android:title="@string/pref_auto_update_map_index"
+                            android:key="@string/pref_auto_update_map_index_key"
+                            android:summary="@string/pref_auto_update_map_index_description"
                             android:defaultValue="false"/>
-
+        <CheckBoxPreference android:title="@string/pref_auto_update_maps"
+                            android:key="@string/pref_auto_update_maps_key"
+                            android:summary="@string/pref_auto_update_maps_description"
+                            android:dependency="@string/pref_auto_update_map_index_key"
+                            android:defaultValue="false"/>
+        <ListPreference android:key="@string/pref_auto_update_period_key"
+                        android:title="@string/pref_auto_update_period"
+                        android:entryValues="@array/pref_auto_update_period_values"
+                        android:entries="@array/pref_auto_update_period_texts"
+                        android:summary="@string/pref_auto_update_period_description"
+                        android:dependency="@string/pref_auto_update_map_index_key"
+                        android:defaultValue="daily"/>
+	</PreferenceScreen>
+    <PreferenceCategory android:title="@string/pref_section_general">
+        <ListPreference android:key="@string/pref_locale_key"
+                        android:title="@string/pref_locale"
+                        android:entryValues="@array/pref_locale_values"
+                        android:entries="@array/pref_locale_texts"
+                        android:summary="@string/pref_locale_description"
+                        android:defaultValue="auto"/>
+        <CheckBoxPreference android:title="@string/pref_auto_locate"
+                            android:key="@string/pref_auto_locate_key"
+                            android:summary="@string/pref_auto_locate_description"
+                            android:defaultValue="false"/>
+        <CheckBoxPreference android:title="@string/pref_auto_import_addons"
+                            android:key="@string/pref_auto_import_addons_key"
+                            android:summary="@string/pref_auto_import_addons_description"
+                            android:defaultValue="false"/>
     </PreferenceCategory>
-
-
+	
 </PreferenceScreen>

@@ -26,7 +26,10 @@ import android.os.Bundle;
 
 public class BrowseMapDetails extends Activity {
 
-    protected void onCreate(Bundle savedInstanceState) {
+    public static final String ONLINE_MAP_URL = "ONLINE_MAP_URL";
+    public static final String LOCAL_MAP_URL = "LOCAL_MAP_URL";
+
+	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // TODO Put your code here
     }

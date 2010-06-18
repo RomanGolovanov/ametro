@@ -191,16 +191,16 @@ public class StringUtil {
 	}
 
 
-	public static boolean isEmpty(String value) {
+	public static boolean isNullOrEmpty(String value) {
 		return value == null || "".equals(value.trim());
 	}
 
 	public static String notEmptyElseNull(String value) {
-		return isEmpty(value) ? null : value;
+		return isNullOrEmpty(value) ? null : value;
 	}
 
 	public static String notEmptyElseDefault(String value, String defaultValue) {
-		return isEmpty(value) ? defaultValue : value;
+		return isNullOrEmpty(value) ? defaultValue : value;
 	}
 
 	public static int parseInt(String value, int defaultValue) {
@@ -408,13 +408,13 @@ public class StringUtil {
 	}
 
 	public static ModelPoint[] parseModelPointArray(String value) {
-		if(StringUtil.isEmpty(value)) return new ModelPoint[0];
+		if(StringUtil.isNullOrEmpty(value)) return new ModelPoint[0];
 		ArrayList<ModelPoint> points = parseModelPointList(value);
 		return points.toArray(new ModelPoint[points.size()]);
 	}
 
 	public static ArrayList<ModelPoint> parseModelPointList(String value) {
-		if(StringUtil.isEmpty(value)) return new ArrayList<ModelPoint>();
+		if(StringUtil.isNullOrEmpty(value)) return new ArrayList<ModelPoint>();
 		String[] parts = StringUtil.fastSplit(value);
 		ArrayList<ModelPoint> points = new ArrayList<ModelPoint>();
 		for (int i = 0; i < parts.length / 2; i++) {
@@ -431,7 +431,7 @@ public class StringUtil {
 	}
 
 	public static ModelRect parseModelRect(String value) {
-		if(StringUtil.isEmpty(value)) return null;
+		if(StringUtil.isNullOrEmpty(value)) return null;
 		String[] parts = StringUtil.fastSplit(value);
 		int x1 = Integer.parseInt(parts[0].trim());
 		int y1 = Integer.parseInt(parts[1].trim());
@@ -441,7 +441,7 @@ public class StringUtil {
 	}
 
 	public static ModelRect[] parseModelRectArray(String value) {
-		if(StringUtil.isEmpty(value)) return new ModelRect[0];
+		if(StringUtil.isNullOrEmpty(value)) return new ModelRect[0];
 		String[] parts = StringUtil.fastSplit(value);
 		ArrayList<ModelRect> rects = new ArrayList<ModelRect>();
 		for (int i = 0; i < parts.length / 4; i++) {
@@ -455,7 +455,7 @@ public class StringUtil {
 	}
 
 	public static ModelRect[] parsePmzModelRectArray(String value) {
-		if(StringUtil.isEmpty(value)) return new ModelRect[0];
+		if(StringUtil.isNullOrEmpty(value)) return new ModelRect[0];
 		String[] parts = StringUtil.fastSplit(value);
 		ArrayList<ModelRect> rects = new ArrayList<ModelRect>();
 		for (int i = 0; i < parts.length / 4; i++) {
@@ -470,7 +470,7 @@ public class StringUtil {
 
 
 	public static ModelPoint parseModelPoint(String value) {
-		if(StringUtil.isEmpty(value)) return null;
+		if(StringUtil.isNullOrEmpty(value)) return null;
 		String[] parts = StringUtil.fastSplit(value);
 		int x = Integer.parseInt(parts[0].trim());
 		int y = Integer.parseInt(parts[1].trim());
@@ -478,12 +478,12 @@ public class StringUtil {
 	}
 
 	public static int parseColor(String value) {
-		if(StringUtil.isEmpty(value)) return 0;
+		if(StringUtil.isNullOrEmpty(value)) return 0;
 		return Integer.parseInt(value, 16);
 	}
 
 	public static int parseColor(String value, int defaultValue) {
-		if(StringUtil.isEmpty(value)) return defaultValue;
+		if(StringUtil.isNullOrEmpty(value)) return defaultValue;
 		return Integer.parseInt(value, 16);
 	}
 	
@@ -606,7 +606,7 @@ public class StringUtil {
 	}
 
 	public static ModelSpline parseModelSpline(String value) {
-		if(StringUtil.isEmpty(value)){
+		if(StringUtil.isNullOrEmpty(value)){
 			return null;
 		}
 		final int firstCommaPosition = value.indexOf(',');

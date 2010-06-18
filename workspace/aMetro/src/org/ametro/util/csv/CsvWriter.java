@@ -76,7 +76,7 @@ public class CsvWriter {
 		if (mColumn > 0) {
 			mWriter.write(mSeparator);
 		}
-		if (!StringUtil.isEmpty(value)) {
+		if (!StringUtil.isNullOrEmpty(value)) {
 			mWriter.write(value);
 		}
 		mColumn++;
