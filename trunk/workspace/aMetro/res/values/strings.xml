@@ -34,19 +34,13 @@
     <string name="locate_wait_title">Search city</string>
     <string name="locate_wait_text">Please wait...</string>
     
-    <string name="pref_section_general">General</string>
+    <string name="pref_section_general">Other</string>
     <string name="pref_section_debug">Debug</string>
     <string name="pref_locale_key">LOCALE</string>
     <string name="pref_locale">Language</string>
-    <string name="pref_auto_update_map_index">Auto update map index</string>
-    <string name="pref_auto_update_map_index_key">AUTO_UPDATE_INDEX</string>
-    <string name="pref_auto_update_maps">Auto update maps</string>
-    <string name="pref_auto_update_maps_key">AUTO_UPDATE_MAPS</string>
     <string name="pref_auto_locate">Find Location</string>
     <string name="pref_auto_locate_key">AUTO_LOCATION</string>
     <string name="pref_locale_description">Language with used to display UI and data</string>
-    <string name="pref_auto_update_map_index_description">Update map list when Internet available</string>
-    <string name="pref_auto_update_maps_description">Update maps when Internet available</string>
     <string name="pref_auto_locate_description">Use GPS/GSM location to locate Your position</string>
     <string name="pref_debug">Debug enabled</string>
     <string name="pref_debug_key">DEBUG</string>
@@ -60,6 +54,29 @@
     <string name="pref_anti_alias_disable_on_scroll">Disable Anti-aliasing on scrolling</string>
     <string name="pref_anti_alias_disable_on_scroll_key">ANTI_ALIAS_DISABLE_ON_SCROLL</string>
     <string name="pref_anti_alias_disable_on_scroll_description">Disable Anti-aliasing while map scrolling on slow devices</string>
+
+    <string name="pref_section_graphic">Rendering</string>
+    <string name="pref_section_graphic_description">Map rendering options</string>
+
+    <string name="pref_section_auto_update">Online maps catalog</string>
+    <string name="pref_section_auto_update_description">Online maps catalog access options</string>
+
+    <string name="pref_auto_update_map_index">Auto update map index</string>
+    <string name="pref_auto_update_map_index_key">AUTO_UPDATE_INDEX</string>
+    <string name="pref_auto_update_map_index_description">Update map list when Internet available</string>
+    
+    <string name="pref_auto_update_maps">Auto update maps</string>
+    <string name="pref_auto_update_maps_key">AUTO_UPDATE_MAPS</string>
+    <string name="pref_auto_update_maps_description">Update maps when Internet available</string>
+    
+    <string name="pref_auto_update_url">Online catalog URL</string>
+    <string name="pref_auto_update_url_key">ONLINE_CATALOG_URL</string>
+    <string name="pref_auto_update_url_description">Web URL of online maps catalog. Leave empty for default.</string>
+    <string name="pref_auto_update_url_message">Leave empty for default</string>
+
+    <string name="pref_auto_update_period">Update Period</string>
+    <string name="pref_auto_update_period_key">AUTO_UPDATE_PERIOD</string>
+    <string name="pref_auto_update_period_description">Update period</string>
     
     <string name="text_about">
 &lt;h4&gt;aMetro v.%s&lt;h4&gt;

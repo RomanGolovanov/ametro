@@ -60,8 +60,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class BrowseLibrary extends Activity implements
-ExpandableListView.OnChildClickListener {
+public abstract class BrowseLibrary extends Activity implements ExpandableListView.OnChildClickListener {
 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);

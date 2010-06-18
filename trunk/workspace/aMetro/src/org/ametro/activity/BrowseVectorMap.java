@@ -131,7 +131,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			} else {
 				loadDefaultMapName();
 				if (mModelName == null) {
-					onRequestBrowseLibrary(true);
+					onRequestMap(true);
 				} else {
 					onInitializeMapView(mModelName, mMapViewName);
 				}
@@ -151,7 +151,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
-		case REQUEST_BROWSE_LIBRARY:
+		case REQUEST_MAP:
 			if (resultCode == RESULT_OK) {
 				Uri uri = data.getData();
 				if (uri != null) {
@@ -206,7 +206,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		menu.add(0, MAIN_MENU_SETTINGS, 6, R.string.menu_settings).setIcon(android.R.drawable.ic_menu_preferences);
 		menu.add(0, MAIN_MENU_ABOUT, 7, R.string.menu_about).setIcon(android.R.drawable.ic_menu_help);
 		menu.add(0, MAIN_MENU_LOCATION, 8, R.string.menu_location).setIcon(android.R.drawable.ic_menu_mylocation);
-		menu.add(0, MAIN_MENU_EXPERIMENTAL, 9,R.string.menu_experimental);
+		//menu.add(0, MAIN_MENU_EXPERIMENTAL, 9,R.string.menu_experimental);
 
 		return true;
 	}
@@ -230,7 +230,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			onSearchRequested();
 			return true;
 		case MAIN_MENU_LIBRARY: 
-			onRequestBrowseLibrary(false);
+			onRequestMap(false);
 			return true;
 		case MAIN_MENU_ROUTES:
 			startActivity(new Intent(this, CreateRoute.class));
@@ -298,7 +298,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	public Locale getLocale(){
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
 		final String localeName = settings.getString(getString(R.string.pref_locale_key), null);
-		return !StringUtil.isEmpty(localeName) && !"auto".equalsIgnoreCase(localeName)  
+		return !StringUtil.isNullOrEmpty(localeName) && !"auto".equalsIgnoreCase(localeName)  
 				? new Locale(localeName) 
 				: mDefaultLocale;
 	}
@@ -652,15 +652,15 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		}
 	}
 
-	private void onRequestBrowseLibrary(boolean setNoMapLoadingView) {
+	private void onRequestMap(boolean setNoMapLoadingView) {
 		if (setNoMapLoadingView) {
 			setContentView(R.layout.browse_map_empty);
 		}
-		Intent browseLibrary = new Intent(this, BrowseLibrary.class);
+		Intent i = new Intent(this, AllMaps.class);
 		if (mModelName != null) {
-			browseLibrary.setData(MapUri.create(mModelName));
+			i.setData(MapUri.create(mModelName));
 		}
-		startActivityForResult(browseLibrary, REQUEST_BROWSE_LIBRARY);
+		startActivityForResult(i, REQUEST_MAP);
 	}
 
 	private void onInitializeMapView(String mapName, String viewName) {
@@ -987,7 +987,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 							Toast.LENGTH_SHORT).show();
 				}
 
-				onRequestBrowseLibrary(true);
+				onRequestMap(true);
 
 			}
 			super.onPostExecute(result);
@@ -1126,7 +1126,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	private LoadLocaleTask mLoadLocaleTask;
 	private LocationSearchTask mLocationSearchTask;
 
-	private static final int REQUEST_BROWSE_LIBRARY = 1;
+	private static final int REQUEST_MAP = 1;
 	private static final int REQUEST_SETTINGS = 2;
 	private static final int REQUEST_LOCATION = 3;
 	

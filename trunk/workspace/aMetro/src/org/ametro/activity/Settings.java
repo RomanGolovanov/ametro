@@ -22,18 +22,28 @@
 package org.ametro.activity;
 
 
+import org.ametro.MapSettings;
 import org.ametro.R;
 
 import android.os.Bundle;
+import android.preference.EditTextPreference;
 import android.preference.PreferenceActivity;
+import android.text.InputType;
 
 public class Settings extends PreferenceActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MapSettings.invalidate();
+        
         addPreferencesFromResource(R.xml.settings);
+        
+        ((EditTextPreference)this.findPreference(getString(R.string.pref_auto_update_url_key)))
+	    	.getEditText()
+	    	.setInputType(InputType.TYPE_TEXT_VARIATION_URI);
+    
     }
-
+    
     protected void onStop() {
     	super.onStop();
     }

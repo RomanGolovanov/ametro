@@ -34,7 +34,7 @@ public class ModelBuilder {
 	//private static final int BUFFER_SIZE = 8196;
 
 	private static IModelStorage getStorage(String fileName){
-		if(StringUtil.isEmpty(fileName)) return null;
+		if(StringUtil.isNullOrEmpty(fileName)) return null;
 		if(fileName.toLowerCase().endsWith(".pmz")) return new PmzStorage();
 		if(fileName.toLowerCase().endsWith(".ametro")) return new CsvStorage();
 		return null;

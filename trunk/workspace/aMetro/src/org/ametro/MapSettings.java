@@ -28,10 +28,14 @@ import org.ametro.model.TransportType;
 import org.ametro.model.util.CountryLibrary;
 import org.ametro.model.util.StationLibrary;
 import org.ametro.util.FileUtil;
+import org.ametro.util.StringUtil;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.net.Uri;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 
 import static org.ametro.Constants.PREFERENCE_ONLINE_CATALOG_URL;
 
@@ -90,9 +94,26 @@ public class MapSettings {
     }
 
 	public static String getOnlineCatalogUrl() {
-		return mContext.getSharedPreferences(Constants.PREFERENCE_NAME, 0).getString(PREFERENCE_ONLINE_CATALOG_URL, DEFAULT_ONLINE_CATALOG_URL);
+		return PreferenceManager.getDefaultSharedPreferences(mContext).getString(PREFERENCE_ONLINE_CATALOG_URL, DEFAULT_ONLINE_CATALOG_URL);
 	}
 
+	public static void setOnlineCatalogUrl(String url) {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+		Editor editor = prefs.edit();
+		editor.putString(PREFERENCE_ONLINE_CATALOG_URL, url);
+		editor.commit();
+	}
+	
+	public static void invalidate() {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+		String currentValue = prefs.getString(PREFERENCE_ONLINE_CATALOG_URL, null);
+		if(StringUtil.isNullOrEmpty(currentValue)){
+			Editor editor = prefs.edit();
+			editor.putString(PREFERENCE_ONLINE_CATALOG_URL, DEFAULT_ONLINE_CATALOG_URL);
+			editor.commit();
+		}
+	}	
+	
 	public static File getLocalCatalog() {
 		return LOCAL_CATALOG_PATH;
 	}

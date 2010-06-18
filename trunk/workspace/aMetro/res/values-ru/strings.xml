@@ -34,32 +34,37 @@
     <string name="locate_wait_title">Поиск города</string>
     <string name="locate_wait_text">Пожалуйста подождите...</string>
     
-    <string name="pref_section_general">Основные</string>
+    <string name="pref_section_general">Другое</string>
     <string name="pref_section_debug">Отладка</string>
-    <string name="pref_locale_key">LOCALE</string>
     <string name="pref_locale">Язык</string>
-    <string name="pref_auto_update_map_index">Авто-обновление списка карт</string>
-    <string name="pref_auto_update_map_index_key">AUTO_UPDATE_INDEX</string>
-    <string name="pref_auto_update_maps">Авто-обновление карт</string>
-    <string name="pref_auto_update_maps_key">AUTO_UPDATE_MAPS</string>
     <string name="pref_auto_locate">Определение положения</string>
-    <string name="pref_auto_locate_key">AUTO_LOCATION</string>
     <string name="pref_locale_description">Язык используемый при отображении карт</string>
-    <string name="pref_auto_update_map_index_description">Обновлять список карт с сервера при наличии сети</string>
-    <string name="pref_auto_update_maps_description">Обновлять карты с сервера при наличии сети</string>
     <string name="pref_auto_locate_description">Использовать GPS/GSM для определения местоположения</string>
     <string name="pref_debug">Режим отладки</string>
     <string name="pref_debug_key">DEBUG</string>
     <string name="pref_debug_description">Выводятся дополнительные сообщения</string>
     <string name="pref_auto_import_addons">Импорт доп.информации</string>
     <string name="pref_auto_import_addons_description">Импортировать дополнительные тексты из PMZ карт</string>
-    <string name="pref_auto_import_addons_key">IMPORT_ADDONS</string>
     <string name="pref_anti_alias">Включить сглаживание</string>
-    <string name="pref_anti_alias_key">ANTI_ALIAS</string>
     <string name="pref_anti_alias_description">Сглаживать изображение карты</string>
     <string name="pref_anti_alias_disable_on_scroll">Без сглаживания при прокрутке</string>
-    <string name="pref_anti_alias_disable_on_scroll_key">ANTI_ALIAS_DISABLE_ON_SCROLL</string>
     <string name="pref_anti_alias_disable_on_scroll_description">Увеличит скорость работы на медленных устройствах</string>
+
+    <string name="pref_section_graphic">Графические настройки</string>
+    <string name="pref_section_graphic_description"></string>
+
+    <string name="pref_section_auto_update">Онлайн каталог карт</string>
+    <string name="pref_section_auto_update_description">Настройка доступа к онлайн каталогу карт</string>
+    <string name="pref_auto_update_map_index">Обновление списка карт</string>
+    <string name="pref_auto_update_map_index_description">Автоматически обновлять список карт с сервера при наличии сети</string>
+    <string name="pref_auto_update_maps">Обновление карт</string>
+    <string name="pref_auto_update_maps_description">Автоматически обновлять карты с сервера при наличии сети</string>
+	<string name="pref_auto_update_url">Адрес сервера карт</string>
+    <string name="pref_auto_update_url_description">Web адрес каталога карт. Оставьте пустым для значения по умолчанию</string>
+    <string name="pref_auto_update_url_message">Оставьте пустым для значения по умолчанию</string>
+    <string name="pref_auto_update_period">Период обновлений</string>
+    <string name="pref_auto_update_period_description"></string>
+    
     <string name="text_about">
 &lt;h4&gt;aMetro v.%s&lt;h4&gt;
 &lt;h5&gt;Навигация по картам метро  городов мира.&lt;/h6&gt;
