@@ -43,6 +43,9 @@ public class Constants {
     public static final String PREFERENCE_ZOOM_LEVEL = "ZOOM_LEVEL";
     public static final String PREFERENCE_FAVORITE_ROUTES = "FAVORITE_ROUTES";
     public static final String PREFERENCE_ONLINE_CATALOG_URL = "ONLINE_CATALOG_URL";
+    public static final String PREFERENCE_DEBUG = "DEBUG";
+    public static final String PREFERENCE_AUTO_UPDATE_INDEX = "AUTO_UPDATE_INDEX";
+    public static final String PREFERENCE_AUTO_UPDATE_MAPS = "AUTO_UPDATE_MAPS";
 
 	
 }

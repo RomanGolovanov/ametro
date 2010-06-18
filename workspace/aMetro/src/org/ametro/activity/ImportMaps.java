@@ -24,6 +24,7 @@ package org.ametro.activity;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import org.ametro.MapSettings;
 import org.ametro.R;
 import org.ametro.adapter.LocalCatalogAdapter;
 import org.ametro.catalog.Catalog;
@@ -34,13 +35,17 @@ import org.ametro.catalog.storage.ICatalogStorageListener;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ExpandableListView.OnChildClickListener;
 
-public class ImportMaps extends Activity implements ICatalogStorageListener {
+public class ImportMaps extends Activity implements ICatalogStorageListener, OnChildClickListener {
 
 	private static final int MODE_WAIT = 0;
 	private static final int MODE_LIST = 1;
@@ -58,6 +63,18 @@ public class ImportMaps extends Activity implements ICatalogStorageListener {
 	private ArrayList<CatalogMapDifference> mCatalogDifferences;
 	private ExpandableListView mList ;
 
+	private TextView mCounterTextView;
+	private TextView mMessageTextView;
+	private ProgressBar mProgressBar;
+	
+	private int mProgress;
+	private int mTotal;
+	private String mMessage;
+	
+	private String mErrorMessage;
+
+	private Handler mUIEventDispacher = new Handler();
+	
 	private final int MAIN_MENU_REFRESH = 1;
 	private final int MAIN_MENU_LOCATION = 4;
 	private final int MAIN_MENU_IMPORT = 5;
@@ -81,6 +98,7 @@ public class ImportMaps extends Activity implements ICatalogStorageListener {
 
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		menu.findItem(MAIN_MENU_LOCATION).setVisible(true);
+		menu.findItem(MAIN_MENU_REFRESH).setEnabled(mMode != MODE_WAIT);
 		return super.onPrepareOptionsMenu(menu);
 	}
 
@@ -130,6 +148,7 @@ public class ImportMaps extends Activity implements ICatalogStorageListener {
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		MapSettings.checkPrerequisite(this);
 		mStorage = AllMaps.Instance.getStorage();
 		setWaitView();
 	}
@@ -176,14 +195,20 @@ public class ImportMaps extends Activity implements ICatalogStorageListener {
 		mList = (ExpandableListView)findViewById(R.id.browse_catalog_list);
 		mAdapter = new LocalCatalogAdapter(this, mCatalogDifferences, Locale.getDefault().getLanguage() ); 
 		mList.setAdapter(mAdapter);
+		mList.setOnChildClickListener(this);
 		mMode = MODE_LIST;
 	}
 	
 	private void setWaitView() {
-		setContentView(R.layout.maps_wait);
-		mMode = MODE_WAIT;
+		if(mMode!=MODE_WAIT){
+			setContentView(R.layout.maps_wait);
+			mMessageTextView = (TextView)findViewById(R.id.message);
+			mCounterTextView = (TextView)findViewById(R.id.counter);
+			mProgressBar = (ProgressBar)findViewById(R.id.progress);
+			mMode = MODE_WAIT;
+		}
 	}
-
+	
 	public void onCatalogLoaded(int catalogId, Catalog catalog) {
 		if(catalogId == CatalogStorage.CATALOG_LOCAL){
 			mLocal = catalog;
@@ -195,4 +220,42 @@ public class ImportMaps extends Activity implements ICatalogStorageListener {
 		}
 	}
 	
+	public void onCatalogOperationFailed(int catalogId, String message)
+	{
+		if(MapSettings.isDebugMessagesEnabled()){
+			mErrorMessage = message;
+			mUIEventDispacher.post(mCatalogError);
+		}
+	}
+
+	public void onCatalogOperationProgress(int catalogId, int progress, int total, String message)
+	{
+		if(catalogId == CatalogStorage.CATALOG_IMPORT){
+			mProgress = progress;
+			mTotal = total;
+			mMessage = message;
+			mUIEventDispacher.post(mUpdateProgress);
+		}
+	}
+	
+	private Runnable mCatalogError = new Runnable() {
+		public void run() {
+			Toast.makeText(ImportMaps.this, mErrorMessage, Toast.LENGTH_LONG).show();
+		}
+	};
+	
+	private Runnable mUpdateProgress = new Runnable() {
+		public void run() {
+			if(mMode == MODE_WAIT){
+				mProgressBar.setMax(mTotal);
+				mProgressBar.setProgress(mProgress);
+				mMessageTextView.setText( mMessage );
+				mCounterTextView.setText( mProgress + " / " + mTotal );
+			}
+		}
+	};
+
+	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+		return false;
+	}	
 }
