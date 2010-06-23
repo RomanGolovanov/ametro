@@ -27,7 +27,7 @@ import java.util.Locale;
 import org.ametro.MapSettings;
 import org.ametro.MapUri;
 import org.ametro.R;
-import org.ametro.adapter.LocalCatalogAdapter;
+import org.ametro.adapter.GenericCatalogAdapter;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMapDifference;
 import org.ametro.catalog.storage.CatalogStorage;
@@ -62,7 +62,7 @@ public class OnlineMaps extends Activity implements ICatalogStorageListener,
 
 	private int mMode;
 
-	private LocalCatalogAdapter mAdapter;
+	private GenericCatalogAdapter mAdapter;
 	private ArrayList<CatalogMapDifference> mCatalogDifferences;
 	private ExpandableListView mList;
 
@@ -183,7 +183,7 @@ public class OnlineMaps extends Activity implements ICatalogStorageListener,
 				Catalog.MODE_RIGHT_JOIN);
 		setContentView(R.layout.browse_catalog_main);
 		mList = (ExpandableListView) findViewById(R.id.browse_catalog_list);
-		mAdapter = new LocalCatalogAdapter(this, mCatalogDifferences, Locale
+		mAdapter = new GenericCatalogAdapter(this, mCatalogDifferences, Locale
 				.getDefault().getLanguage());
 		mList.setAdapter(mAdapter);
 		mList.setOnChildClickListener(this);
@@ -247,8 +247,8 @@ public class OnlineMaps extends Activity implements ICatalogStorageListener,
 			AllMaps.Instance.setResult(RESULT_OK, i);
 			AllMaps.Instance.finish();
 		} else {
-			Intent i = new Intent(this, BrowseMapDetails.class);
-			i.putExtra(BrowseMapDetails.ONLINE_MAP_URL, diff.getRemoteUrl());
+			Intent i = new Intent(this, MapDetails.class);
+			i.putExtra(MapDetails.ONLINE_MAP_URL, diff.getRemoteUrl());
 			startActivity(i);
 		}
 		return true;

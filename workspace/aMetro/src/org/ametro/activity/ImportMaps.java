@@ -56,7 +56,6 @@ public class ImportMaps extends BaseExpandableMaps {
 	}
 
 	protected void onCatalogRefresh() {
-		setWaitView();
 		mStorage.requestImportCatalog(true);
 		super.onCatalogRefresh();
 	}
@@ -89,7 +88,8 @@ public class ImportMaps extends BaseExpandableMaps {
 		if(mImport == null){
 			mStorage.requestImportCatalog(false);
 		}
-		onCatalogsUpdate();	
+		onCatalogsUpdate();
+		super.onPrepareView();
 	}
 		
 	private void onCatalogsUpdate() {
@@ -100,6 +100,10 @@ public class ImportMaps extends BaseExpandableMaps {
 				setEmptyView();
 			}
 		}
+	}
+	
+	protected int getEmptyListMessage() {
+		return R.string.msg_no_maps_in_import;
 	}
 	
 	protected ExpandableListAdapter getListAdapter() {
@@ -127,10 +131,11 @@ public class ImportMaps extends BaseExpandableMaps {
 			AllMaps.Instance.setResult(RESULT_OK, i);
 			AllMaps.Instance.finish();
 		}else{
-			Intent i = new Intent(this, BrowseMapDetails.class);
-			i.putExtra(BrowseMapDetails.IMPORT_MAP_URL, diff.getRemoteUrl());
+			Intent i = new Intent(this, MapDetails.class);
+			i.putExtra(MapDetails.IMPORT_MAP_URL, diff.getRemoteUrl());
 			startActivity(i);
 		}
 		return true;		
-	}	
+	}
+	
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<manifest android:versionCode="1" android:versionName="0.2.4.r244"
+<manifest android:versionCode="1" android:versionName="0.2.4.r245"
     package="org.ametro" xmlns:android="http://schemas.android.com/apk/res/android">
     <application android:debuggable="true"
         android:icon="@drawable/appicon" android:label="@string/app_name">
@@ -15,7 +15,7 @@
         </activity>
         <!--activity android:launchMode="singleTop" android:name=".activity.BrowseLibrary"/-->
         <activity android:name=".activity.ImportPmz" android:launchMode="singleTop" />
-        <activity android:name=".activity.BrowseMapDetails"/>
+        <activity android:name=".activity.MapDetails"/>
         <activity android:name=".activity.BrowseRoute"/>
         <activity android:name=".activity.CreateRoute" android:launchMode="singleTop" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".activity.About"/>

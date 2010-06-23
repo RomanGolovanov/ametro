@@ -125,7 +125,6 @@ public abstract class BaseExpandableMaps extends Activity implements ICatalogSto
 			if(resultCode == RESULT_CANCELED){
 				onLocationSearchCanceled();	
 			}
-			
 			break;
 		}
 		super.onActivityResult(requestCode, resultCode, data);
@@ -137,6 +136,7 @@ public abstract class BaseExpandableMaps extends Activity implements ICatalogSto
 		MapSettings.checkPrerequisite(this);
 		mStorage = AllMaps.Instance.getStorage();
 		setWaitNoProgressView();
+		onInitialize();
 	}
 
 	protected void onResume() {
@@ -144,7 +144,6 @@ public abstract class BaseExpandableMaps extends Activity implements ICatalogSto
 		onPrepareView();
 		super.onResume();
 	}
-	
 
 	protected void onPause() {
 		mStorage.removeCatalogChangedListener(this);
@@ -154,7 +153,7 @@ public abstract class BaseExpandableMaps extends Activity implements ICatalogSto
 	protected void setEmptyView() {
 		if(mMode!=MODE_EMPTY){
 			setContentView(R.layout.maps_list_empty);
-			((TextView)findViewById(R.id.maps_message)).setText(R.string.msg_no_maps_in_import);
+			((TextView)findViewById(R.id.maps_message)).setText(getEmptyListMessage());
 			mMode = MODE_EMPTY;
 		}
 	} 
@@ -191,6 +190,15 @@ public abstract class BaseExpandableMaps extends Activity implements ICatalogSto
 			mErrorMessage = message;
 			mUIEventDispacher.post(mCatalogError);
 		}
+		if(catalogId == CatalogStorage.CATALOG_LOCAL){
+			onLocalCatalogFailed();
+		}
+		if(catalogId == CatalogStorage.CATALOG_IMPORT){
+			onImportCatalogFailed();
+		}
+		if(catalogId == CatalogStorage.CATALOG_ONLINE){
+			onOnlineCatalogFailed();
+		}		
 	}
 
 	public void onCatalogLoaded(int catalogId, Catalog catalog) {
@@ -233,16 +241,25 @@ public abstract class BaseExpandableMaps extends Activity implements ICatalogSto
 		}
 	};
 
-	protected abstract void onPrepareView();
+	protected abstract int getEmptyListMessage();
 	protected abstract ExpandableListAdapter getListAdapter();
+
+	protected void onInitialize() {};
+	protected void onPrepareView() {};
 	
-	protected void onCatalogRefresh() {};
+	protected void onCatalogRefresh() { 
+		setWaitView();
+	};
 	protected void onLocationSearch(Location location) {};
 	protected void onSettingsChanged() {};
 
 	protected void onLocalCatalogLoaded(Catalog catalog) {};
 	protected void onOnlineCatalogLoaded(Catalog catalog) {};
 	protected void onImportCatalogLoaded(Catalog catalog) {};
+
+	protected void onLocalCatalogFailed() {};
+	protected void onOnlineCatalogFailed() {};
+	protected void onImportCatalogFailed() {};
 	
 	protected void onLocationSearchCanceled() {}		
 	protected void onLocationSearchUnknown() {
