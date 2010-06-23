@@ -23,6 +23,7 @@ package org.ametro.catalog;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 public class Catalog {
 
@@ -106,21 +107,24 @@ public class Catalog {
 		return diff;
 	}
 	
-	public static ArrayList<CatalogMapDifference> diffImport(Catalog importCatalog, Catalog localCatalog)
+	public static ArrayList<CatalogMapDifference> diffRemote(Catalog importCatalog, Catalog localCatalog)
 	{
 		final ArrayList<CatalogMapDifference> diff = new ArrayList<CatalogMapDifference>();
-		for(CatalogMap map : importCatalog.getMaps()){
-			final CatalogMap local = localCatalog.getMap(map.getSystemName());
-			diff.add(new CatalogMapDifference(local, map, CatalogMapDifference.PREFFERED_REMOTE));
+		for(CatalogMap remote : importCatalog.getMaps()){
+			final CatalogMap local = localCatalog.getMap(remote.getSystemName());
+			diff.add(new CatalogMapDifference(local, remote, CatalogMapDifference.PREFFERED_REMOTE));
 		}
 		return diff;
 	}
-	
-//	public static void updateDiffLocal(ArrayList<CatalogMapDifference> diff, Catalog localCatalog){
-//		for(CatalogMapDifference d : diff){
-//			final String systemName = d.getSystemName();
-//			final CatalogMap local = localCatalog!=null ? localCatalog.getMap(systemName) : null;
-//		}
-//	}
+
+	public static List<CatalogMapDifference> diffLocal(Catalog localCatalog, Catalog onlineCatalog) {
+		final ArrayList<CatalogMapDifference> diff = new ArrayList<CatalogMapDifference>();
+		for(CatalogMap local : localCatalog.getMaps()){
+			final CatalogMap remote = onlineCatalog.getMap(local.getSystemName());
+			diff.add(new CatalogMapDifference(local, remote, CatalogMapDifference.PREFFERED_LOCAL));
+		}
+		return diff;
+	}
+
 
 }

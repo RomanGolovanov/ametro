@@ -38,13 +38,15 @@ public class CatalogMapDifference {
 		
 	}
 
-	public final static int OFFLINE = 0;
-	public final static int NOT_SUPPORTED = 1;
-	public final static int CORRUPTED = 2;
-	public final static int DOWNLOAD = 3;
-	public final static int UPDATE = 4;
-	public final static int INSTALLED = 5;
-	
+	public static final int OFFLINE = 0; 
+	public static final int NOT_SUPPORTED = 1;
+	public static final int CORRUPTED = 2;
+	public static final int UPDATE = 3; 
+	public static final int INSTALLED = 4; 
+	public static final int IMPORT = 5; 
+	public static final int DOWNLOAD = 6; 
+	public static final int UPDATE_NOT_SUPPORTED = 7; 
+		
 	public final static int PREFFERED_LOCAL = 0;
 	public final static int PREFFERED_REMOTE = 0;
 	

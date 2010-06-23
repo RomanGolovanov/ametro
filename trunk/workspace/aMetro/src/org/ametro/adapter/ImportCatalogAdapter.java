@@ -1,5 +1,10 @@
 package org.ametro.adapter;
 
+import static org.ametro.catalog.CatalogMapDifference.CORRUPTED;
+import static org.ametro.catalog.CatalogMapDifference.IMPORT;
+import static org.ametro.catalog.CatalogMapDifference.INSTALLED;
+import static org.ametro.catalog.CatalogMapDifference.UPDATE;
+
 import org.ametro.R;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
@@ -8,23 +13,22 @@ import org.ametro.catalog.CatalogMapDifference;
 import android.content.Context;
 import android.graphics.Color;
 
-public class ImportCatalogAdapter  extends BaseExpandableCatalogAdapter {
-
-	private static final int TYPE_CORRUPTED = 0; 
-	private static final int TYPE_IMPORT = 1; 
-	private static final int TYPE_UPDATE = 2; 
-	private static final int TYPE_INSTALLED = 3; 
+public class ImportCatalogAdapter extends BaseExpandableCatalogAdapter {
 	
     public ImportCatalogAdapter(Context context, Catalog importCatalog, Catalog localCatalog, String code) {
     	super(context, code);
-		mStates = context.getResources().getStringArray(R.array.import_map_states);
+		mStates = context.getResources().getStringArray(R.array.catalog_map_states);
 		mStateColors = new int[]{
-			Color.RED,
-			Color.WHITE,
-			Color.YELLOW,
-			Color.GREEN
-		};
-		mData = Catalog.diffImport(importCatalog, localCatalog);
+				Color.MAGENTA, // SKIP COLOR
+				Color.MAGENTA, // SKIP COLOR
+				Color.RED,
+				Color.YELLOW,
+				Color.WHITE,
+				Color.YELLOW,
+				Color.MAGENTA, // SKIP COLOR
+				Color.MAGENTA  // SKIP COLOR
+			};
+		mData = Catalog.diffRemote(importCatalog, localCatalog);
         bindData(code);
     }
 
@@ -33,17 +37,17 @@ public class ImportCatalogAdapter  extends BaseExpandableCatalogAdapter {
     	CatalogMap local = diff.getLocal();
     	CatalogMap remote = diff.getRemote();
     	if(remote.isCorruted()){
-    		return TYPE_CORRUPTED;
+    		return CORRUPTED;
     	}else{
     		if(local == null){
-    			return TYPE_IMPORT;
+    			return IMPORT;
     		}else if(!local.isSupported() || local.isCorruted()){
-    			return TYPE_UPDATE;
+    			return UPDATE;
     		}else{
     			if(local.getTimestamp() >= remote.getTimestamp()){
-    				return TYPE_INSTALLED;
+    				return INSTALLED;
     			}else{
-    				return TYPE_UPDATE;
+    				return UPDATE;
     			}
     		}
     	}
