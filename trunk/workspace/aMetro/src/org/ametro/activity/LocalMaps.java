@@ -256,12 +256,13 @@ public class LocalMaps extends Activity implements ICatalogStorageListener, OnCh
 	
 	private Runnable mUpdateProgress = new Runnable() {
 		public void run() {
-			if(mMode == MODE_WAIT){
-				mProgressBar.setMax(mTotal);
-				mProgressBar.setProgress(mProgress);
-				mMessageTextView.setText( mMessage );
-				mCounterTextView.setText( mProgress + " / " + mTotal );
+			if(mMode != MODE_WAIT){
+				setWaitView();
 			}
+			mProgressBar.setMax(mTotal);
+			mProgressBar.setProgress(mProgress);
+			mMessageTextView.setText( mMessage );
+			mCounterTextView.setText( mProgress + " / " + mTotal );
 		}
 	};
 	

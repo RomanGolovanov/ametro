@@ -43,6 +43,7 @@ public class CatalogDeserializer {
 	public static String TAG_DESCRIPTION = "description";
 	
 	public static String ATTR_URL = "url";
+	public static String ATTR_SYSTEM_NAME = "name";
 	public static String ATTR_LAST_MODIFIED = "lastModified";
 	public static String ATTR_TRANSPORTS = "transports";
 	public static String ATTR_VERSION = "version";
@@ -59,6 +60,7 @@ public class CatalogDeserializer {
 		long timestamp = 0;
 
 		String baseUrl = null;
+		String systemName = null;
 		String url = null;
 		long lastModified = 0;
 		long transports = 0;
@@ -92,6 +94,7 @@ public class CatalogDeserializer {
 		    	 timestamp = StringUtil.parseLong(xpp.getAttributeValue("", ATTR_LAST_MODIFIED),0);
 		    	 baseUrl = xpp.getAttributeValue(null, ATTR_URL);
 		     }else if(TAG_MAP.equals(tagName)){
+		    	 systemName = xpp.getAttributeValue(null, ATTR_SYSTEM_NAME);
 		    	 url = xpp.getAttributeValue(null, ATTR_URL);
 		    	 lastModified = StringUtil.parseLong(xpp.getAttributeValue("", ATTR_LAST_MODIFIED),0);
 		    	 transports = StringUtil.parseLong(xpp.getAttributeValue("", ATTR_TRANSPORTS),0); 
@@ -105,7 +108,7 @@ public class CatalogDeserializer {
 		 } else if(eventType == XmlPullParser.END_TAG) {
 		     if(TAG_MAP.equals(tags.peek())){
 		    	 CatalogMap map = new CatalogMap(
-		    			 url,
+		    			 systemName,
 		    			 url,
 		    			 lastModified,
 		    			 transports,

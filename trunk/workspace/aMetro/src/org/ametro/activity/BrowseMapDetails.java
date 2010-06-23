@@ -28,6 +28,7 @@ public class BrowseMapDetails extends Activity {
 
     public static final String ONLINE_MAP_URL = "ONLINE_MAP_URL";
     public static final String LOCAL_MAP_URL = "LOCAL_MAP_URL";
+	public static final String IMPORT_MAP_URL = "IMPORT_MAP_URL";
 
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

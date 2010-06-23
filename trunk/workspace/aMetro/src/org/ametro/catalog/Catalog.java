@@ -106,6 +106,16 @@ public class Catalog {
 		return diff;
 	}
 	
+	public static ArrayList<CatalogMapDifference> diffImport(Catalog importCatalog, Catalog localCatalog)
+	{
+		final ArrayList<CatalogMapDifference> diff = new ArrayList<CatalogMapDifference>();
+		for(CatalogMap map : importCatalog.getMaps()){
+			final CatalogMap local = localCatalog.getMap(map.getSystemName());
+			diff.add(new CatalogMapDifference(local, map, CatalogMapDifference.PREFFERED_REMOTE));
+		}
+		return diff;
+	}
+	
 //	public static void updateDiffLocal(ArrayList<CatalogMapDifference> diff, Catalog localCatalog){
 //		for(CatalogMapDifference d : diff){
 //			final String systemName = d.getSystemName();

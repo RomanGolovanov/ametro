@@ -21,104 +21,50 @@
 
 package org.ametro.activity;
 
-import java.util.ArrayList;
 import java.util.Locale;
 
-import org.ametro.MapSettings;
+import org.ametro.MapUri;
 import org.ametro.R;
-import org.ametro.adapter.LocalCatalogAdapter;
+import org.ametro.adapter.ImportCatalogAdapter;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMapDifference;
-import org.ametro.catalog.storage.CatalogStorage;
-import org.ametro.catalog.storage.ICatalogStorageListener;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ExpandableListView.OnChildClickListener;
 
-public class ImportMaps extends Activity implements ICatalogStorageListener, OnChildClickListener {
+public class ImportMaps extends BaseExpandableMaps {
 
-	private static final int MODE_WAIT = 0;
-	private static final int MODE_LIST = 1;
-	private static final int MODE_EMPTY = 2;
-	
-	public static final String EXTRA_FAVORITES_ONLY = "FAVORITES_ONLY";
-	
-	private CatalogStorage mStorage;
 	private Catalog mLocal;
 	private Catalog mImport;
-	
-	private int mMode;
-	
-	private LocalCatalogAdapter mAdapter;
-	private ArrayList<CatalogMapDifference> mCatalogDifferences;
-	private ExpandableListView mList ;
 
-	private TextView mCounterTextView;
-	private TextView mMessageTextView;
-	private ProgressBar mProgressBar;
-	
-	private int mProgress;
-	private int mTotal;
-	private String mMessage;
-	
-	private String mErrorMessage;
-
-	private Handler mUIEventDispacher = new Handler();
-	
-	private final int MAIN_MENU_REFRESH = 1;
-	private final int MAIN_MENU_LOCATION = 4;
-	private final int MAIN_MENU_IMPORT = 5;
-	private final int MAIN_MENU_SETTINGS = 6;
-	private final int MAIN_MENU_ABOUT = 7;
-
+	private final int MAIN_MENU_IMPORT = 1;
 	private final static int REQUEST_IMPORT = 1;
-	private final static int REQUEST_SETTINGS = 2;
-	private final static int REQUEST_LOCATION = 3;
 	
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		menu.add(0, MAIN_MENU_REFRESH, 0, R.string.menu_refresh).setIcon(android.R.drawable.ic_menu_rotate);
-		menu.add(0, MAIN_MENU_LOCATION, 3, R.string.menu_location).setIcon(android.R.drawable.ic_menu_mylocation);
 		menu.add(0, MAIN_MENU_IMPORT, 4, R.string.menu_import).setIcon(android.R.drawable.ic_menu_add);
-		menu.add(0, MAIN_MENU_SETTINGS, 5, R.string.menu_settings).setIcon(android.R.drawable.ic_menu_preferences);
-		menu.add(0, MAIN_MENU_ABOUT, 6, R.string.menu_about).setIcon(android.R.drawable.ic_menu_help);
-
 		return true;
 	}
 
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		menu.findItem(MAIN_MENU_LOCATION).setVisible(true);
-		menu.findItem(MAIN_MENU_REFRESH).setEnabled(mMode != MODE_WAIT);
+		menu.findItem(MAIN_MENU_IMPORT).setEnabled(mMode == MODE_LIST);
 		return super.onPrepareOptionsMenu(menu);
 	}
 
+	protected void onCatalogRefresh() {
+		setWaitView();
+		mStorage.requestImportCatalog(true);
+		super.onCatalogRefresh();
+	}
+	
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case MAIN_MENU_REFRESH:
-			setWaitView();
-			mStorage.requestImportCatalog(true);
-			return true;
-		case MAIN_MENU_LOCATION:
-			startActivityForResult(new Intent(this, SearchLocation.class), REQUEST_LOCATION);
-			return true;
 		case MAIN_MENU_IMPORT:
 			startActivityForResult(new Intent(this, ImportPmz.class), REQUEST_IMPORT);
-			return true;
-		case MAIN_MENU_SETTINGS:
-			startActivityForResult(new Intent(this, Settings.class), REQUEST_SETTINGS);
-			return true;
-		case MAIN_MENU_ABOUT:
-			startActivity(new Intent(this, About.class));
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -130,49 +76,23 @@ public class ImportMaps extends Activity implements ICatalogStorageListener, OnC
 			setWaitView();
 			mStorage.requestImportCatalog(true);
 			break;
-		case REQUEST_SETTINGS:
-			break;
-		case REQUEST_LOCATION:
-//			if(resultCode == RESULT_OK){
-//				Location location = data.getParcelableExtra(SearchLocation.LOCATION);
-//				mLocationSearchTask = new LocationSearchTask();
-//				mLocationSearchTask.execute(location);
-//			}
-			if(resultCode == RESULT_CANCELED){
-				Toast.makeText(this,R.string.msg_location_unknown, Toast.LENGTH_SHORT).show();			
-			}
-			break;
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}	
-	
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		MapSettings.checkPrerequisite(this);
-		mStorage = AllMaps.Instance.getStorage();
-		setWaitView();
-	}
 
-	protected void onResume() {
+	protected void onPrepareView() {
 		mLocal = mStorage.getLocalCatalog();
 		mImport = mStorage.getImportCatalog();
-		mStorage.addCatalogChangedListener(this);
 		if(mLocal == null){
 			mStorage.requestLocalCatalog(false);
 		}
 		if(mImport == null){
 			mStorage.requestImportCatalog(false);
 		}
-		invalidateCatalogs();
-		super.onResume();
-	}
-	
-	protected void onPause() {
-		mStorage.removeCatalogChangedListener(this);
-		super.onPause();
+		onCatalogsUpdate();	
 	}
 		
-	private void invalidateCatalogs() {
+	private void onCatalogsUpdate() {
 		if(mLocal!=null && mImport!=null && mMode != MODE_LIST){
 			if(mImport.getMaps().size()>0){
 				setListView();
@@ -182,80 +102,35 @@ public class ImportMaps extends Activity implements ICatalogStorageListener, OnC
 		}
 	}
 	
-	private void setEmptyView() {
-		setContentView(R.layout.maps_list_empty);
-		((TextView)findViewById(R.id.maps_message)).setText(R.string.msg_no_maps_in_import);
-		mMode = MODE_EMPTY;
-	} 
-
-	private void setListView() {
-		setContentView(R.layout.browse_catalog_list_item);
-		mCatalogDifferences = Catalog.diff(mLocal, mImport, Catalog.MODE_RIGHT_JOIN);
-		setContentView(R.layout.browse_catalog_main);
-		mList = (ExpandableListView)findViewById(R.id.browse_catalog_list);
-		mAdapter = new LocalCatalogAdapter(this, mCatalogDifferences, Locale.getDefault().getLanguage() ); 
-		mList.setAdapter(mAdapter);
-		mList.setOnChildClickListener(this);
-		mMode = MODE_LIST;
+	protected ExpandableListAdapter getListAdapter() {
+		return new ImportCatalogAdapter(this, mImport, mLocal, Locale.getDefault().getLanguage() );
+	}	
+	
+	protected void onLocalCatalogLoaded(Catalog catalog) {
+		mLocal = catalog;
+		onCatalogsUpdate();
+		super.onLocalCatalogLoaded(catalog);
 	}
 	
-	private void setWaitView() {
-		if(mMode!=MODE_WAIT){
-			setContentView(R.layout.maps_wait);
-			mMessageTextView = (TextView)findViewById(R.id.message);
-			mCounterTextView = (TextView)findViewById(R.id.counter);
-			mProgressBar = (ProgressBar)findViewById(R.id.progress);
-			mMode = MODE_WAIT;
-		}
+	protected void onImportCatalogLoaded(Catalog catalog) {
+		mImport = catalog;
+		onCatalogsUpdate();
+		super.onImportCatalogLoaded(catalog);
 	}
 	
-	public void onCatalogLoaded(int catalogId, Catalog catalog) {
-		if(catalogId == CatalogStorage.CATALOG_LOCAL){
-			mLocal = catalog;
-			invalidateCatalogs();
-		}
-		if(catalogId == CatalogStorage.CATALOG_IMPORT){
-			mImport = catalog;
-			invalidateCatalogs();
-		}
-	}
-	
-	public void onCatalogOperationFailed(int catalogId, String message)
-	{
-		if(MapSettings.isDebugMessagesEnabled()){
-			mErrorMessage = message;
-			mUIEventDispacher.post(mCatalogError);
-		}
-	}
-
-	public void onCatalogOperationProgress(int catalogId, int progress, int total, String message)
-	{
-		if(catalogId == CatalogStorage.CATALOG_IMPORT){
-			mProgress = progress;
-			mTotal = total;
-			mMessage = message;
-			mUIEventDispacher.post(mUpdateProgress);
-		}
-	}
-	
-	private Runnable mCatalogError = new Runnable() {
-		public void run() {
-			Toast.makeText(ImportMaps.this, mErrorMessage, Toast.LENGTH_LONG).show();
-		}
-	};
-	
-	private Runnable mUpdateProgress = new Runnable() {
-		public void run() {
-			if(mMode == MODE_WAIT){
-				mProgressBar.setMax(mTotal);
-				mProgressBar.setProgress(mProgress);
-				mMessageTextView.setText( mMessage );
-				mCounterTextView.setText( mProgress + " / " + mTotal );
-			}
-		}
-	};
-
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-		return false;
+		CatalogMapDifference diff = (CatalogMapDifference)mAdapter.getChild(groupPosition, childPosition);
+		if(diff.isLocalAvailable()){
+			String fileName = diff.getLocalUrl();
+			Intent i = new Intent();
+			i.setData(MapUri.create( mLocal.getBaseUrl() + "/" + fileName));
+			AllMaps.Instance.setResult(RESULT_OK, i);
+			AllMaps.Instance.finish();
+		}else{
+			Intent i = new Intent(this, BrowseMapDetails.class);
+			i.putExtra(BrowseMapDetails.IMPORT_MAP_URL, diff.getRemoteUrl());
+			startActivity(i);
+		}
+		return true;		
 	}	
 }

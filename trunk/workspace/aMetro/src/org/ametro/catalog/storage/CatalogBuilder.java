@@ -89,7 +89,6 @@ public class CatalogBuilder {
 			}
 		}
 		return cat;
-		
 	}
 	
 	public boolean isDerpecated(Catalog catalog){
@@ -115,7 +114,7 @@ public class CatalogBuilder {
 		try{
 			ArrayList<CatalogMap> maps = new ArrayList<CatalogMap>();
 			if(baseUrl.exists() && baseUrl.isDirectory() ){
-				File[] files =  baseUrl.listFiles();
+				final File[] files =  baseUrl.listFiles();
 				final int total = files.length;
 				int progress = 0;
 				for(File file: files){
@@ -144,7 +143,6 @@ public class CatalogBuilder {
 			return new Catalog(baseUrl.lastModified(), baseUrl.getAbsolutePath().toLowerCase(), maps);
 		}catch(Exception ex){
 			fireOperationFailed("Failed scan catalog due error: " + ex.getMessage());
-			
 			return null;
 		}
 	}
