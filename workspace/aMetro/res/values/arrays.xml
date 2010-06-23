@@ -43,6 +43,12 @@
 	    <item>Update</item>
 	    <item>Installed</item>
     </string-array>
+    <string-array name="import_map_states">
+	    <item>Corrupted</item>
+	    <item>Import</item>
+	    <item>Update</item>
+	    <item>Installed</item>
+    </string-array>
     <string-array name="version_changelog">
         <item>0.1.0.r163: changed stations/route lists appearance</item>
         <item>0.1.1.r164: removed obsolete code</item>
@@ -101,6 +107,7 @@
     	<item>0.2.4.r240: first draft of new map view with tabs</item>
     	<item>0.2.4.r241: replace map library with new tabbed view, rewrited settings</item>
     	<item>0.2.4.r243: progress bars added into map catalog views</item>
+    	<item>0.2.4.r244: refactored maps activities code, fixed import statuses</item>
     </string-array>
 
     <string-array name="create_route_modes">

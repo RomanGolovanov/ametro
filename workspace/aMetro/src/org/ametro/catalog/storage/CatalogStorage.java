@@ -15,6 +15,10 @@ public class CatalogStorage implements ICatalogBuilderListener {
 	public static final int CATALOG_IMPORT = 1;
 	public static final int CATALOG_ONLINE = 2;
 	
+	public Object getSync(){
+		return mMutex;
+	}
+	
 	public CatalogStorage(File localStorage, File localPath, File importStorage, File importPath, File onlineStorage, String onlineUrl){
 		this.mLocalStorage = localStorage;
 		this.mLocalPath = localPath;
@@ -61,15 +65,21 @@ public class CatalogStorage implements ICatalogBuilderListener {
 	}
 	
 	public Catalog getLocalCatalog() {
-		return mLocalCatalog;
+		synchronized (mMutex) {
+			return mLocalCatalog;
+		}
 	}	
 	
 	public Catalog getOnlineCatalog() {
-		return mOnlineCatalog;
+		synchronized (mMutex) {
+			return mOnlineCatalog;
+		}
 	}
 	
 	public Catalog getImportCatalog() {
-		return mImportCatalog;
+		synchronized (mMutex) {
+			return mImportCatalog;
+		}
 	}	
 	
 	public void requestLocalCatalog(boolean refresh)
@@ -108,25 +118,6 @@ public class CatalogStorage implements ICatalogBuilderListener {
 		}	
 	}	
 	
-	void cleanupLoadLocalCatalogTask(){
-		synchronized (mMutex) {
-			mLoadLocalCatalogTask = null;
-		}
-	}
-	
-	
-	void cleanupLoadImportCatalogTask(){
-		synchronized (mMutex) {
-			mLoadImportCatalogTask = null;
-		}
-	}	
-	
-	void cleanupLoadOnlineCatalogTask(){
-		synchronized (mMutex) {
-			mLoadOnlineCatalogTask = null;
-		}
-	}		
-	
 	/*package*/ File mLocalStorage;
 	/*package*/ File mLocalPath;
 	/*package*/ File mImportStorage;
@@ -143,6 +134,10 @@ public class CatalogStorage implements ICatalogBuilderListener {
 	/*package*/ Catalog mOnlineCatalog;
 	/*package*/ Catalog mImportCatalog;
 
+	/*package*/ Catalog mPreviousLocalCatalog;
+	/*package*/ Catalog mPreviousOnlineCatalog;
+	/*package*/ Catalog mPreviousImportCatalog;
+	
 	/*package*/ CatalogBuilder mLocalCatalogBuilder;
 	/*package*/ CatalogBuilder mOnlineCatalogBuilder;
 	/*package*/ CatalogBuilder mImportCatalogBuilder;
@@ -158,6 +153,11 @@ public class CatalogStorage implements ICatalogBuilderListener {
 			if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
 				Log.d(Constants.LOG_TAG_MAIN, "Requested online catalog");
 			}
+			synchronized(mMutex)
+			{
+				mPreviousOnlineCatalog = mOnlineCatalog;
+				mOnlineCatalog = null;
+			}
 			super.onPreExecute();
 		}
 		
@@ -165,16 +165,19 @@ public class CatalogStorage implements ICatalogBuilderListener {
 			if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
 				Log.d(Constants.LOG_TAG_MAIN, "Online catalog request response: " + result!=null ? result.toString() : "null");
 			}
-			mOnlineCatalog = result;
-			cleanupLoadOnlineCatalogTask();
+			synchronized(mMutex)
+			{
+				if(result!=null){
+					mOnlineCatalog = result;
+				}else{
+					mOnlineCatalog = mPreviousOnlineCatalog;
+				}
+				mLoadOnlineCatalogTask = null;
+			}
 			fireCatalogChanged(CATALOG_ONLINE, result);
 			super.onPostExecute(result);
 		}
 		
-		protected void onCancelled() {
-			cleanupLoadImportCatalogTask();
-			super.onCancelled();
-		}
 	}	
 	
 	private class LocalCatalogLoadTask extends AsyncTask<Boolean, Void, Catalog> {
@@ -186,6 +189,11 @@ public class CatalogStorage implements ICatalogBuilderListener {
 			if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
 				Log.d(Constants.LOG_TAG_MAIN, "Requested local catalog");
 			}
+			synchronized(mMutex)
+			{
+				mPreviousLocalCatalog = mLocalCatalog;
+				mLocalCatalog = null;
+			}
 			super.onPreExecute();
 		}
 		
@@ -193,16 +201,19 @@ public class CatalogStorage implements ICatalogBuilderListener {
 			if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
 				Log.d(Constants.LOG_TAG_MAIN, "Local catalog request response: " + result!=null ? result.toString() : "null");
 			}
-			mLocalCatalog = result;
-			cleanupLoadLocalCatalogTask();
+			synchronized(mMutex)
+			{
+				if(result!=null){
+					mLocalCatalog = result;
+				}else{
+					mLocalCatalog = mPreviousLocalCatalog;
+				}
+				mLoadLocalCatalogTask = null;
+			}			
 			fireCatalogChanged(CATALOG_LOCAL, result);
 			super.onPostExecute(result);
 		}
 		
-		protected void onCancelled() {
-			cleanupLoadLocalCatalogTask();
-			super.onCancelled();
-		}
 	}	
 	
 	private class ImportCatalogLoadTask extends AsyncTask<Boolean, Void, Catalog> {
@@ -214,6 +225,11 @@ public class CatalogStorage implements ICatalogBuilderListener {
 			if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
 				Log.d(Constants.LOG_TAG_MAIN, "Requested import catalog");
 			}
+			synchronized(mMutex)
+			{
+				mPreviousImportCatalog = mImportCatalog;
+				mImportCatalog = null;
+			}			
 			super.onPreExecute();
 		}
 		
@@ -221,16 +237,19 @@ public class CatalogStorage implements ICatalogBuilderListener {
 			if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
 				Log.d(Constants.LOG_TAG_MAIN, "Import catalog request response: " + result!=null ? result.toString() : "null");
 			}
-			mImportCatalog = result;
-			cleanupLoadImportCatalogTask();
+			synchronized(mMutex)
+			{
+				if(result!=null){
+					mImportCatalog = result;
+				}else{
+					mImportCatalog = mPreviousImportCatalog;
+				}
+				mLoadImportCatalogTask = null;
+			}	
 			fireCatalogChanged(CATALOG_IMPORT, result);
 			super.onPostExecute(result);
 		}
 		
-		protected void onCancelled() {
-			cleanupLoadImportCatalogTask();
-			super.onCancelled();
-		}
 	}
 
 	private int getCatalogId(CatalogBuilder source) {
