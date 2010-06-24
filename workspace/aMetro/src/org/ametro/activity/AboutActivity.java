@@ -38,7 +38,7 @@ public class AboutActivity extends Activity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.about);
+        setContentView(R.layout.about_dialog);
         TextView view = (TextView)findViewById(R.id.about_text);
         try {
             PackageManager manager = getPackageManager();

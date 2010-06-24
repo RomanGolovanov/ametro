@@ -18,13 +18,15 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-
 package org.ametro.activity;
 
-import org.ametro.MapSettings;
+import org.ametro.GlobalSettings;
+import org.ametro.MapUri;
 import org.ametro.R;
 import org.ametro.adapter.BaseCatalogExpandableAdapter;
 import org.ametro.catalog.Catalog;
+import org.ametro.catalog.CatalogMap;
+import org.ametro.catalog.CatalogMapPair;
 import org.ametro.catalog.storage.CatalogStorage;
 import org.ametro.catalog.storage.ICatalogStorageListener;
 import org.ametro.dialog.LocationSearchDialog;
@@ -36,6 +38,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -134,7 +137,7 @@ public abstract class BaseExpandableCatalogActivity extends Activity implements 
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		MapSettings.checkPrerequisite(this);
+		GlobalSettings.checkPrerequisite(this);
 		mStorage = CatalogStorage.getStorage();
 		setWaitNoProgressView();
 		onInitialize();
@@ -153,42 +156,24 @@ public abstract class BaseExpandableCatalogActivity extends Activity implements 
 		
 	protected void setEmptyView() {
 		if(mMode!=MODE_EMPTY){
-			setContentView(R.layout.maps_list_empty);
+			setContentView(R.layout.catalog_empty);
 			((TextView)findViewById(R.id.maps_message)).setText(getEmptyListMessage());
 			mMode = MODE_EMPTY;
 		}
 	} 
 
 	protected void setListView() {
-		setContentView(R.layout.browse_catalog_main);
+		setContentView(R.layout.catalog_expandable_list);
 		mList = (ExpandableListView)findViewById(R.id.browse_catalog_list);
 		mAdapter = getListAdapter(); 
 		mList.setAdapter(mAdapter);
 		mList.setOnChildClickListener(this);
 		mMode = MODE_LIST;
 	}
-
-//	protected void updateListView() {
-//		CatalogMapDifference selection = (CatalogMapDifference)mList.getSelectedItem();
-//		mAdapter = getListAdapter(); 
-//		mList.setAdapter(mAdapter);
-//		if(selection!=null){
-//			int groupPosition = mAdapter.getGroupPosition(selection);
-//			int childPosition = mAdapter.getChildPosition(groupPosition, selection);
-//			if(groupPosition!=-1){
-//				if(childPosition!=-1){
-//					mList.setSelectedChild(groupPosition, childPosition, true);
-//				}else{
-//					mList.expandGroup(groupPosition);
-//					mList.setSelectedGroup(groupPosition);
-//				}
-//			}
-//		}
-//	}
 	
 	protected void setWaitView() {
 		if(mMode!=MODE_WAIT){
-			setContentView(R.layout.maps_wait);
+			setContentView(R.layout.operatoins_wait);
 			mMessageTextView = (TextView)findViewById(R.id.message);
 			mCounterTextView = (TextView)findViewById(R.id.counter);
 			mProgressBar = (ProgressBar)findViewById(R.id.progress);
@@ -198,14 +183,14 @@ public abstract class BaseExpandableCatalogActivity extends Activity implements 
 	
 	protected void setWaitNoProgressView() {
 		if(mMode!=MODE_WAIT_NO_PROGRESS){
-			setContentView(R.layout.maps_wait_indeterminate);
+			setContentView(R.layout.operation_wait_no_progress);
 			mMode = MODE_WAIT_NO_PROGRESS;
 		}
 	}
 	
 	public void onCatalogOperationFailed(int catalogId, String message)
 	{
-		if(MapSettings.isDebugMessagesEnabled()){
+		if(GlobalSettings.isDebugMessagesEnabled()){
 			mErrorMessage = message;
 			mUIEventDispacher.post(mCatalogError);
 		}
@@ -267,16 +252,28 @@ public abstract class BaseExpandableCatalogActivity extends Activity implements 
 	protected void onPrepareView() {};
 	
 	protected void onCatalogRefresh() { 
-		setWaitView();
+		setWaitNoProgressView();
 	};
 	protected void onLocationSearch(Location location) {};
-	protected void onSettingsChanged() {};
+
+	
+	protected void onSettingsChanged() {
+		if(mMode == MODE_LIST){
+			String oldLanguage = mAdapter.getLanguage();
+			String newLanguage = GlobalSettings.getLanguage();
+			if(!oldLanguage.equalsIgnoreCase(newLanguage)){
+				mAdapter = getListAdapter(); 
+				mList.setAdapter(mAdapter);
+			}
+		}
+	}
 
 	protected void onLocalCatalogLoaded(Catalog catalog) {};
 	protected void onOnlineCatalogLoaded(Catalog catalog) {};
 	protected void onImportCatalogLoaded(Catalog catalog) {};
 	
-	protected abstract boolean isCatalogProgressEnabled(int catalogId); 
+	protected abstract boolean isCatalogProgressEnabled(int catalogId);
+	//protected abstract Catalog
 
 	protected void onLocalCatalogFailed() {};
 	protected void onOnlineCatalogFailed() {};
@@ -287,6 +284,21 @@ public abstract class BaseExpandableCatalogActivity extends Activity implements 
 		Toast.makeText(this,R.string.msg_location_unknown, Toast.LENGTH_SHORT).show();			
 	}		
 	
+	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+		CatalogMapPair diff = (CatalogMapPair)mAdapter.getChild(groupPosition, childPosition);
+		if(diff.isUpdateAvailable()){
+			Intent i = new Intent(this, MapDetailsActivity.class);
+			i.putExtra(MapDetailsActivity.REMOTE_MAP_URL, diff.getRemoteUrl());
+			startActivity(i);
+		}else if(diff.isLocalAvailable()){
+			CatalogMap local = diff.getLocal();
+			Intent i = new Intent();
+			i.setData(MapUri.create(local.getAbsoluteUrl()));
+			CatalogTabHostActivity.getInstance().setResult(RESULT_OK, i);
+			CatalogTabHostActivity.getInstance().finish();
+		}
+		return true;		
+	}
 	
 	
 }

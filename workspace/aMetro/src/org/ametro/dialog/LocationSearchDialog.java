@@ -42,7 +42,7 @@ public class LocationSearchDialog extends Activity implements LocationListener {
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.search_location_main);
+		setContentView(R.layout.location_search);
 		mPrivateHandler.postDelayed(mReturnResult, WAIT_DELAY);
 		mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 	}

@@ -28,7 +28,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.ametro.Constants;
-import org.ametro.MapSettings;
+import org.ametro.GlobalSettings;
 import org.ametro.R;
 import org.ametro.model.Model;
 import org.ametro.model.storage.ModelBuilder;
@@ -140,9 +140,9 @@ public class ImportPmz extends Activity {
 		private boolean mIsCanceled = false;
 
 		private void indexPmzFile(ArrayList<ImportRecord> imports, String fileName) {
-			String mapFileName = MapSettings.getMapFileName(fileName);
+			String mapFileName = GlobalSettings.getMapFileName(fileName);
 			File mapFile = new File(mapFileName);
-			String fullFileName = new File( MapSettings.getImportCatalog(), fileName).getAbsolutePath().toLowerCase();
+			String fullFileName = new File( GlobalSettings.getImportCatalog(), fileName).getAbsolutePath().toLowerCase();
 			try {
 				Model pmz = ModelBuilder.loadModelDescription(fullFileName);
 				String mapName = pmz.getCountryName() + " - " + pmz.getCityName() + " (" + fileName + ")";
@@ -197,12 +197,12 @@ public class ImportPmz extends Activity {
 
 
 		protected List<ImportRecord> doInBackground(Void... params) {
-			File dir = MapSettings.getImportCatalog();
+			File dir = GlobalSettings.getImportCatalog();
 			ProgressInfo pi = new ProgressInfo(0, 0, null, getString(R.string.msg_search_pmz_files));
 			this.publishProgress(pi);
 			String[] files = dir.list(new FilenameFilter() {
 				public boolean accept(File f, String filename) {
-					return filename.endsWith(MapSettings.PMZ_FILE_TYPE);
+					return filename.endsWith(GlobalSettings.PMZ_FILE_TYPE);
 				}
 			});
 			ArrayList<ImportRecord> imports = new ArrayList<ImportRecord>();
@@ -281,8 +281,8 @@ public class ImportPmz extends Activity {
 					Model city = ModelBuilder.loadModel(record.fileName);
 					// define file names
 					String mapName = city.systemName;
-					String mapFileName = MapSettings.getMapFileName(mapName);
-					String mapFileNameTemp = MapSettings.getTemporaryMapFile(mapName);
+					String mapFileName = GlobalSettings.getMapFileName(mapName);
+					String mapFileNameTemp = GlobalSettings.getTemporaryMapFile(mapName);
 					mapFile = new File(mapFileName);
 					mapFileTemp = new File(mapFileNameTemp);
 					// remove temporary file is exists 
@@ -302,7 +302,7 @@ public class ImportPmz extends Activity {
 					record.status = updateStatus;
 					record.statusColor = Color.GREEN;
 					record.severity = 1;
-					MapSettings.refreshMapList();
+					GlobalSettings.refreshMapList();
 				} catch (Throwable e) {
 					if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)){
 						Log.e(Constants.LOG_TAG_MAIN, getString(R.string.log_import_failed), e);
@@ -512,7 +512,7 @@ public class ImportPmz extends Activity {
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		MapSettings.checkPrerequisite(this);
+		GlobalSettings.checkPrerequisite(this);
 		startIndexMode();
 	}
 

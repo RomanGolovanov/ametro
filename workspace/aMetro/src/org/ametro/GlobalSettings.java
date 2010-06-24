@@ -21,7 +21,14 @@
 
 package org.ametro;
 
+import static org.ametro.Constants.PREFERENCE_AUTO_UPDATE_INDEX;
+import static org.ametro.Constants.PREFERENCE_AUTO_UPDATE_MAPS;
+import static org.ametro.Constants.PREFERENCE_DEBUG;
+import static org.ametro.Constants.PREFERENCE_LOCALE;
+import static org.ametro.Constants.PREFERENCE_ONLINE_CATALOG_URL;
+
 import java.io.File;
+import java.util.Locale;
 
 import org.ametro.jni.Natives;
 import org.ametro.model.TransportType;
@@ -37,12 +44,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 
-import static org.ametro.Constants.PREFERENCE_ONLINE_CATALOG_URL;
-import static org.ametro.Constants.PREFERENCE_DEBUG;
-import static org.ametro.Constants.PREFERENCE_AUTO_UPDATE_INDEX;
-import static org.ametro.Constants.PREFERENCE_AUTO_UPDATE_MAPS;
-
-public class MapSettings {
+public class GlobalSettings {
 
     public static long getSourceVersion() {
         return 5;
@@ -67,10 +69,12 @@ public class MapSettings {
 	private static final File IMPORT_CATALOG_STORAGE = new File(ROOT_PATH,"catalog.import.xml");
 	
 	private static Context mContext;
+	private static String mDefaultLocale;
 	
     public static void checkPrerequisite( Context context ) {
     	if(mContext==null){
 	    	mContext = context;
+	    	mDefaultLocale = Locale.getDefault().getLanguage();
 	    	Natives.Initialize();
 	        if (!ROOT_PATH.exists() || !LOCAL_CATALOG_PATH.exists() || !IMPORT_CATALOG_PATH.exists()) {
 	        	FileUtil.createDirectory(LOCAL_CATALOG_PATH);
@@ -82,6 +86,15 @@ public class MapSettings {
     	}
     }
 
+	public static String getLanguage(){
+		String code = PreferenceManager.getDefaultSharedPreferences(mContext).getString(PREFERENCE_LOCALE, "auto");
+		if("auto".equalsIgnoreCase(code)){
+			return mDefaultLocale;
+		}else{
+			return code;
+		}
+	}
+	
     public static String getMapFileName(String mapName) {
         return new File(LOCAL_CATALOG_PATH, mapName + MAP_FILE_TYPE).getAbsolutePath().toLowerCase();
     }

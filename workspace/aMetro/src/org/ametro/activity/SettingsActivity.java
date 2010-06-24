@@ -22,7 +22,7 @@
 package org.ametro.activity;
 
 
-import org.ametro.MapSettings;
+import org.ametro.GlobalSettings;
 import org.ametro.R;
 
 import android.os.Bundle;
@@ -34,7 +34,7 @@ public class SettingsActivity extends PreferenceActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MapSettings.invalidate();
+        GlobalSettings.invalidate();
         
         addPreferencesFromResource(R.xml.settings);
         

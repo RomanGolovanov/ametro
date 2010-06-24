@@ -135,5 +135,18 @@ public class CatalogMapPair {
 	public String getRemoteUrl(){
 		return mRemote != null ? mRemote.getUrl() : null;
 	}
+
+	public boolean isUpdateAvailable() {
+		if(mLocal==null){
+			if(mRemote.isSupported() && !mRemote.isCorruted()){
+				return true;
+			}
+		}else{
+			if(mRemote!=null && !mRemote.isCorruted() && mRemote.isSupported()){
+				return mLocal.getTimestamp() <= mRemote.getTimestamp();
+			}
+		}
+		return false;
+	}
 	
 }

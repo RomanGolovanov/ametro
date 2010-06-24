@@ -18,22 +18,15 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-
 package org.ametro.activity;
 
-import java.util.Locale;
-
-import org.ametro.MapUri;
 import org.ametro.R;
 import org.ametro.adapter.BaseCatalogExpandableAdapter;
 import org.ametro.adapter.CatalogLocalListAdapter;
 import org.ametro.catalog.Catalog;
-import org.ametro.catalog.CatalogMapPair;
 import org.ametro.catalog.storage.CatalogStorage;
 
 import android.content.Intent;
-import android.view.View;
-import android.widget.ExpandableListView;
 
 public class CatalogLocalListActivity extends BaseExpandableCatalogActivity {
 
@@ -87,7 +80,7 @@ public class CatalogLocalListActivity extends BaseExpandableCatalogActivity {
 	}
 	
 	protected BaseCatalogExpandableAdapter getListAdapter() {
-		return new CatalogLocalListAdapter(this, mLocal, mOnline, Locale.getDefault().getLanguage() );
+		return new CatalogLocalListAdapter(this, mLocal, mOnline);
 	}
 
 	protected void onLocalCatalogLoaded(Catalog catalog) {
@@ -112,23 +105,6 @@ public class CatalogLocalListActivity extends BaseExpandableCatalogActivity {
 	protected boolean isCatalogProgressEnabled(int catalogId)
 	{
 		return catalogId == CatalogStorage.CATALOG_LOCAL;
-	}
-
-	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-		CatalogMapPair diff = (CatalogMapPair)mAdapter.getChild(groupPosition, childPosition);
-		if(diff.isLocalAvailable()){
-			String fileName = diff.getLocalUrl();
-			Intent i = new Intent();
-			i.setData(MapUri.create( mLocal.getBaseUrl() + "/" + fileName));
-			
-			CatalogTabHostActivity.getInstance().setResult(RESULT_OK, i);
-			CatalogTabHostActivity.getInstance().finish();
-		}else{
-			Intent i = new Intent(this, MapDetailsActivity.class);
-			i.putExtra(MapDetailsActivity.ONLINE_MAP_URL, diff.getRemoteUrl());
-			startActivity(i);
-		}
-		return true;
 	}
 
 	protected int getEmptyListMessage() {

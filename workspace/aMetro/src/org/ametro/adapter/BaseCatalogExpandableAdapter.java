@@ -1,4 +1,23 @@
-package org.ametro.adapter;
+/*
+ * http://code.google.com/p/ametro/
+ * Transport map viewer for Android platform
+ * Copyright (C) 2009-2010 Roman.Golovanov@gmail.com and other
+ * respective project committers (see project home page)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ */package org.ametro.adapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,7 +26,7 @@ import java.util.List;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import org.ametro.MapSettings;
+import org.ametro.GlobalSettings;
 import org.ametro.R;
 import org.ametro.catalog.CatalogMapPair;
 import org.ametro.catalog.CatalogMapPair.CatalogMapDifferenceCityNameComparator;
@@ -45,10 +64,19 @@ public abstract class BaseCatalogExpandableAdapter extends BaseExpandableListAda
         return mRefs[groupId][childId];
     }
 
-    public BaseCatalogExpandableAdapter(Context context, String code) {
+    public String getLanguage(){
+    	return mLanguageCode;
+    }
+    
+    public void setLanguage(String languageCode)
+    {
+    	mLanguageCode = languageCode;
+    }
+    
+    public BaseCatalogExpandableAdapter(Context context) {
         mContext = context;
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		mLanguageCode = code;
+		mLanguageCode = GlobalSettings.getLanguage();
 		bindTransportTypes();
     }
 
@@ -85,7 +113,7 @@ public abstract class BaseCatalogExpandableAdapter extends BaseExpandableListAda
 
     	ViewHolder holder;
 		if (convertView == null) {
-			convertView = mInflater.inflate(R.layout.browse_catalog_list_item, null);
+			convertView = mInflater.inflate(R.layout.catalog_list_item, null);
 			holder = new ViewHolder();
 			holder.mText = (TextView) convertView.findViewById(R.id.browse_catalog_list_item_text);
 			holder.mStatus = (TextView) convertView.findViewById(R.id.browse_catalog_list_item_status);
@@ -149,13 +177,13 @@ public abstract class BaseCatalogExpandableAdapter extends BaseExpandableListAda
     protected void bindTransportTypes(){
 		mTransportTypes = new HashMap<Integer, Drawable>();
 		final Resources res = mContext.getResources();
-		mTransportTypes.put( TransportType.UNKNOWN_ID , res.getDrawable(MapSettings.getTransportTypeWhiteIconId(TransportType.UNKNOWN_ID))  );
-		mTransportTypes.put( TransportType.METRO_ID , res.getDrawable(MapSettings.getTransportTypeWhiteIconId(TransportType.METRO_ID))  );
-		mTransportTypes.put( TransportType.TRAM_ID , res.getDrawable(MapSettings.getTransportTypeWhiteIconId(TransportType.TRAM_ID))  );
-		mTransportTypes.put( TransportType.BUS_ID , res.getDrawable(MapSettings.getTransportTypeWhiteIconId(TransportType.BUS_ID))  );
-		mTransportTypes.put( TransportType.TRAIN_ID , res.getDrawable(MapSettings.getTransportTypeWhiteIconId(TransportType.TRAIN_ID))  );
-		mTransportTypes.put( TransportType.WATER_BUS_ID , res.getDrawable(MapSettings.getTransportTypeWhiteIconId(TransportType.WATER_BUS_ID))  );
-		mTransportTypes.put( TransportType.TROLLEYBUS_ID , res.getDrawable(MapSettings.getTransportTypeWhiteIconId(TransportType.TROLLEYBUS_ID))  );
+		mTransportTypes.put( TransportType.UNKNOWN_ID , res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.UNKNOWN_ID))  );
+		mTransportTypes.put( TransportType.METRO_ID , res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.METRO_ID))  );
+		mTransportTypes.put( TransportType.TRAM_ID , res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.TRAM_ID))  );
+		mTransportTypes.put( TransportType.BUS_ID , res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.BUS_ID))  );
+		mTransportTypes.put( TransportType.TRAIN_ID , res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.TRAIN_ID))  );
+		mTransportTypes.put( TransportType.WATER_BUS_ID , res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.WATER_BUS_ID))  );
+		mTransportTypes.put( TransportType.TROLLEYBUS_ID , res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.TROLLEYBUS_ID))  );
     }
     
     protected void bindData(String code) {

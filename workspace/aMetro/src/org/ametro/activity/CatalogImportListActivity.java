@@ -18,25 +18,18 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-
 package org.ametro.activity;
 
-import java.util.Locale;
-
-import org.ametro.MapUri;
 import org.ametro.R;
 import org.ametro.activity.obsolete.ImportPmz;
 import org.ametro.adapter.BaseCatalogExpandableAdapter;
 import org.ametro.adapter.CatalogImportListAdapter;
 import org.ametro.catalog.Catalog;
-import org.ametro.catalog.CatalogMapPair;
 import org.ametro.catalog.storage.CatalogStorage;
 
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ExpandableListView;
 
 public class CatalogImportListActivity extends BaseExpandableCatalogActivity {
 
@@ -118,7 +111,7 @@ public class CatalogImportListActivity extends BaseExpandableCatalogActivity {
 	}
 	
 	protected BaseCatalogExpandableAdapter getListAdapter() {
-		return new CatalogImportListAdapter(this, mImport, mLocal, Locale.getDefault().getLanguage() );
+		return new CatalogImportListAdapter(this, mImport, mLocal);
 	}	
 	
 	protected void onLocalCatalogLoaded(Catalog catalog) {
@@ -136,22 +129,6 @@ public class CatalogImportListActivity extends BaseExpandableCatalogActivity {
 	protected boolean isCatalogProgressEnabled(int catalogId)
 	{
 		return catalogId == CatalogStorage.CATALOG_IMPORT;
-	}
-	
-	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-		CatalogMapPair diff = (CatalogMapPair)mAdapter.getChild(groupPosition, childPosition);
-		if(diff.isLocalAvailable()){
-			String fileName = diff.getLocalUrl();
-			Intent i = new Intent();
-			i.setData(MapUri.create( mLocal.getBaseUrl() + "/" + fileName));
-			CatalogTabHostActivity.getInstance().setResult(RESULT_OK, i);
-			CatalogTabHostActivity.getInstance().finish();
-		}else{
-			Intent i = new Intent(this, MapDetailsActivity.class);
-			i.putExtra(MapDetailsActivity.IMPORT_MAP_URL, diff.getRemoteUrl());
-			startActivity(i);
-		}
-		return true;		
 	}
 	
 }
