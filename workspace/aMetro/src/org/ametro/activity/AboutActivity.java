@@ -34,7 +34,7 @@ import android.text.Spanned;
 import android.text.util.Linkify;
 import android.widget.TextView;
 
-public class About extends Activity {
+public class AboutActivity extends Activity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

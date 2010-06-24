@@ -8,8 +8,8 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 import org.ametro.R;
-import org.ametro.catalog.CatalogMapDifference;
-import org.ametro.catalog.CatalogMapDifference.CatalogMapDifferenceCityNameComparator;
+import org.ametro.catalog.CatalogMapPair;
+import org.ametro.catalog.CatalogMapPair.CatalogMapDifferenceCityNameComparator;
 
 import org.ametro.model.TransportType;
 import org.ametro.MapSettings;
@@ -28,16 +28,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class GenericCatalogAdapter extends BaseExpandableListAdapter {
+public class CatalogGenericListAdapter extends BaseExpandableListAdapter {
 
 	private String mLanguageCode;
 	
     private Context mContext;
 	private LayoutInflater mInflater;
-	private List<CatalogMapDifference> mData;
+	private List<CatalogMapPair> mData;
 	
     private String[] mCountries;
-    private CatalogMapDifference[][] mRefs;
+    private CatalogMapPair[][] mRefs;
 
     private String[] mStates;
     private int[] mStateColors;
@@ -47,11 +47,11 @@ public class GenericCatalogAdapter extends BaseExpandableListAdapter {
     
     private HashMap<Integer,Drawable> mTransportTypes;
 
-    public CatalogMapDifference getData(int groupId, int childId) {
+    public CatalogMapPair getData(int groupId, int childId) {
         return mRefs[groupId][childId];
     }
 
-    public GenericCatalogAdapter(Context context, List<CatalogMapDifference> data, String code) {
+    public CatalogGenericListAdapter(Context context, List<CatalogMapPair> data, String code) {
         mContext = context;
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		mStates = context.getResources().getStringArray(R.array.catalog_map_states);
@@ -84,27 +84,27 @@ public class GenericCatalogAdapter extends BaseExpandableListAdapter {
     
 	private void bindData(String code) {
         TreeSet<String> countries = new TreeSet<String>();
-        TreeMap<String, ArrayList<CatalogMapDifference>> index = new TreeMap<String, ArrayList<CatalogMapDifference>>();
+        TreeMap<String, ArrayList<CatalogMapPair>> index = new TreeMap<String, ArrayList<CatalogMapPair>>();
         CatalogMapDifferenceCityNameComparator comparator = new CatalogMapDifferenceCityNameComparator(code);
 
-        for(CatalogMapDifference diff : mData){
+        for(CatalogMapPair diff : mData){
         	final String country = diff.getCountry(code);
         	countries.add(country);
-        	ArrayList<CatalogMapDifference> cities = index.get(country);
+        	ArrayList<CatalogMapPair> cities = index.get(country);
         	if(cities == null){
-        		cities = new ArrayList<CatalogMapDifference>();
+        		cities = new ArrayList<CatalogMapPair>();
         		index.put(country,cities);
         	}
         	cities.add(diff); 
         }
         mCountries = (String[]) countries.toArray(new String[countries.size()]);
-        mRefs = new CatalogMapDifference[mCountries.length][];
+        mRefs = new CatalogMapPair[mCountries.length][];
         for(int i=0; i<mCountries.length;i++){
         	String country = mCountries[i];
-        	ArrayList<CatalogMapDifference> diffSet = index.get(country);
+        	ArrayList<CatalogMapPair> diffSet = index.get(country);
 			if(diffSet!=null){        	
 	        	int len = diffSet.size();
-	        	mRefs[i] = (CatalogMapDifference[]) diffSet.toArray(new CatalogMapDifference[len]);
+	        	mRefs[i] = (CatalogMapPair[]) diffSet.toArray(new CatalogMapPair[len]);
 	        	Arrays.sort(mRefs[i], comparator);
 			}
         }
@@ -162,7 +162,7 @@ public class GenericCatalogAdapter extends BaseExpandableListAdapter {
 		}
 		
 		final String code = mLanguageCode;
-		final CatalogMapDifference ref = mRefs[groupPosition][childPosition];
+		final CatalogMapPair ref = mRefs[groupPosition][childPosition];
 		final int state = ref.getState();
 		holder.mText.setText(ref.getCity(code));
 		holder.mStatus.setText(mStates[state]);

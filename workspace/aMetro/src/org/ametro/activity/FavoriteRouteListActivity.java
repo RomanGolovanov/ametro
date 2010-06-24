@@ -24,7 +24,7 @@ import static org.ametro.Constants.STATION_FROM_ID;
 import static org.ametro.Constants.STATION_TO_ID;
 
 import org.ametro.R;
-import org.ametro.adapter.RouteFavoriteListAdapter;
+import org.ametro.adapter.FavoriteRoutesListAdapter;
 import org.ametro.model.MapView;
 
 import android.app.Activity;
@@ -45,7 +45,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class FavoriteRouteList extends Activity implements OnClickListener, OnItemClickListener {
+public class FavoriteRouteListActivity extends Activity implements OnClickListener, OnItemClickListener {
 
 	private Point[] mRoutes;
 	private MapView mMapView;
@@ -56,7 +56,7 @@ public class FavoriteRouteList extends Activity implements OnClickListener, OnIt
 	private Button mDelete;
 	private Button mCancel;
 	
-	private RouteFavoriteListAdapter mAdapter;
+	private FavoriteRoutesListAdapter mAdapter;
 	
 	private static final int CONTEXT_MENU_SELECT = 0;
 	private static final int CONTEXT_MENU_REMOVE = 1;
@@ -143,18 +143,18 @@ public class FavoriteRouteList extends Activity implements OnClickListener, OnIt
 	
 	private void onRemove(int position){
 		Point p = mRoutes[position];
-		BrowseVectorMap.Instance.removeFavoriteRoute(p.x, p.y);
+		MapViewActivity.Instance.removeFavoriteRoute(p.x, p.y);
 		onBindData();
 	}
 	
 	private void onBindData() {
-		mRoutes = BrowseVectorMap.Instance.getFavoriteRoutes();
+		mRoutes = MapViewActivity.Instance.getFavoriteRoutes();
 		if(mRoutes==null || mRoutes.length == 0){
 			Toast.makeText(this, R.string.msg_no_favorites, Toast.LENGTH_SHORT).show();
 			finish();
 		}
-		mMapView = BrowseVectorMap.Instance.getMapView();
-		mAdapter = new RouteFavoriteListAdapter(this, mRoutes, mMapView);
+		mMapView = MapViewActivity.Instance.getMapView();
+		mAdapter = new FavoriteRoutesListAdapter(this, mRoutes, mMapView);
 		mList.setAdapter(mAdapter);
 	}
 
@@ -200,7 +200,7 @@ public class FavoriteRouteList extends Activity implements OnClickListener, OnIt
 			for(int i = 0; i < len; i++){
 				if(checked[i]){
 					final Point r = mRoutes[i];
-					BrowseVectorMap.Instance.removeFavoriteRoute(r.x, r.y);
+					MapViewActivity.Instance.removeFavoriteRoute(r.x, r.y);
 				}
 			}
 			onBindData();

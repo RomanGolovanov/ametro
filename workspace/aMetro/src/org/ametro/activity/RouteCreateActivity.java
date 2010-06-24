@@ -58,7 +58,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-public class CreateRoute extends Activity implements OnClickListener,
+public class RouteCreateActivity extends Activity implements OnClickListener,
 		AnimationListener {
 
 	private MapView mMapView;
@@ -97,7 +97,7 @@ public class CreateRoute extends Activity implements OnClickListener,
 	}
 	
 	public boolean onPrepareOptionsMenu(Menu menu) {
-    	final Point[] routes = BrowseVectorMap.Instance.getFavoriteRoutes();
+    	final Point[] routes = MapViewActivity.Instance.getFavoriteRoutes();
     	menu.findItem(MAIN_MENU_FAVORITES).setEnabled(!(routes== null || routes.length == 0));
 		return super.onPrepareOptionsMenu(menu);
 	}
@@ -108,7 +108,7 @@ public class CreateRoute extends Activity implements OnClickListener,
             swapStations();
             return true;
         case MAIN_MENU_FAVORITES:
-   			startActivityForResult(new Intent(this,FavoriteRouteList.class), REQUEST_ROUTE);
+   			startActivityForResult(new Intent(this,FavoriteRouteListActivity.class), REQUEST_ROUTE);
         case MAIN_MENU_TRANSPORTS:
 			showSelectTransportDialog();
         }		
@@ -137,7 +137,7 @@ public class CreateRoute extends Activity implements OnClickListener,
 		mFromText = (AutoCompleteTextView) findViewById(R.id.create_route_from_text);
 		mToText = (AutoCompleteTextView) findViewById(R.id.create_route_to_text);
 		
-		mMapView = BrowseVectorMap.Instance.getMapView();
+		mMapView = MapViewActivity.Instance.getMapView();
 
 		mTransports = mMapView.getTransportCollection(this);
 		
@@ -153,14 +153,14 @@ public class CreateRoute extends Activity implements OnClickListener,
 		mFromText.setSelectAllOnFocus(true);
 		mToText.setSelectAllOnFocus(true);
 
-		final RouteContainer routes = BrowseVectorMap.Instance.getNavigationRoute();
+		final RouteContainer routes = MapViewActivity.Instance.getNavigationRoute();
 		if(routes!=null){
 			StationView fromStation = mMapView.findViewByStationId( routes.getStationFromId() );
 			StationView toStation = mMapView.findViewByStationId( routes.getStationToId() );
 			mFromText.setText( StationListAdapter.getStationName(mMapView, fromStation) );
 			mToText.setText( StationListAdapter.getStationName(mMapView, toStation) );
 		}else{
-			final StationView station = BrowseVectorMap.Instance.getCurrentStation();
+			final StationView station = MapViewActivity.Instance.getCurrentStation();
 			if(station!=null){
 				mFromText.setText( StationListAdapter.getStationName(mMapView, station) );
 			}
@@ -215,7 +215,7 @@ public class CreateRoute extends Activity implements OnClickListener,
 	
 	public void onClick(View v) {
 		if(v==mFromButton){
-			Intent data = new Intent(this, SelectStation.class);
+			Intent data = new Intent(this, StationListActivity.class);
 			StationView from = getStationByName(mFromText.getText().toString());
 			if(from!=null){
 				data.putExtra(Constants.STATION_ID, from.id);
@@ -223,7 +223,7 @@ public class CreateRoute extends Activity implements OnClickListener,
 			startActivityForResult(data, REQUEST_STATION_FROM);
 		}
 		if(v==mToButton){
-			Intent data = new Intent(this, SelectStation.class);
+			Intent data = new Intent(this, StationListActivity.class);
 			StationView to = getStationByName(mToText.getText().toString());
 			if(to!=null){
 				data.putExtra(Constants.STATION_ID, to.id);
@@ -236,7 +236,7 @@ public class CreateRoute extends Activity implements OnClickListener,
 			createRoute(from, to);
 		}
 		if (v == mFavoritesButton){
-   			startActivityForResult(new Intent(this,FavoriteRouteList.class), REQUEST_ROUTE);
+   			startActivityForResult(new Intent(this,FavoriteRouteListActivity.class), REQUEST_ROUTE);
 		}
 	}
 
@@ -318,7 +318,7 @@ public class CreateRoute extends Activity implements OnClickListener,
 
 		protected void onPreExecute() {
 			closePanel();
-			mWaitDialog = ProgressDialog.show(CreateRoute.this,
+			mWaitDialog = ProgressDialog.show(RouteCreateActivity.this,
 					getString(R.string.create_route_wait_title),
 					getString(R.string.create_route_wait_text), true);
 			super.onPreExecute();
@@ -328,12 +328,12 @@ public class CreateRoute extends Activity implements OnClickListener,
 			super.onPostExecute(result);
 			mWaitDialog.dismiss();
 			if (result.hasRoutes()) {
-				BrowseVectorMap.Instance.setNavigationRoute(result);
+				MapViewActivity.Instance.setNavigationRoute(result);
 				String msg = getString(R.string.msg_route_time) + " " + DateUtil.getTimeHHMM(result.getDefaultRoute().getLength());
-				Toast.makeText(BrowseVectorMap.Instance, msg, Toast.LENGTH_LONG).show();
+				Toast.makeText(MapViewActivity.Instance, msg, Toast.LENGTH_LONG).show();
 			} else {
-				Toast.makeText(BrowseVectorMap.Instance, getString(R.string.msg_route_not_found), Toast.LENGTH_SHORT).show();
-				BrowseVectorMap.Instance.setNavigationRoute(null);
+				Toast.makeText(MapViewActivity.Instance, getString(R.string.msg_route_not_found), Toast.LENGTH_SHORT).show();
+				MapViewActivity.Instance.setNavigationRoute(null);
 			}
 			finishActivity();
 		}
@@ -361,7 +361,7 @@ public class CreateRoute extends Activity implements OnClickListener,
 
 	private void finishActivity() {
 		if (mPanel.getVisibility() == View.INVISIBLE) {
-			CreateRoute.this.finish();
+			RouteCreateActivity.this.finish();
 		} else {
 			mExitPending = true;
 			closePanel();

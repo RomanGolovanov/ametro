@@ -1,24 +1,24 @@
 package org.ametro.adapter;
 
-import static org.ametro.catalog.CatalogMapDifference.CORRUPTED;
-import static org.ametro.catalog.CatalogMapDifference.INSTALLED;
-import static org.ametro.catalog.CatalogMapDifference.NOT_SUPPORTED;
-import static org.ametro.catalog.CatalogMapDifference.OFFLINE;
-import static org.ametro.catalog.CatalogMapDifference.UPDATE;
+import static org.ametro.catalog.CatalogMapPair.CORRUPTED;
+import static org.ametro.catalog.CatalogMapPair.INSTALLED;
+import static org.ametro.catalog.CatalogMapPair.NOT_SUPPORTED;
+import static org.ametro.catalog.CatalogMapPair.OFFLINE;
+import static org.ametro.catalog.CatalogMapPair.UPDATE;
 
 import org.ametro.R;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
-import org.ametro.catalog.CatalogMapDifference;
+import org.ametro.catalog.CatalogMapPair;
 
 import android.content.Context;
 import android.graphics.Color;
 
 
-public class LocalCatalogAdapter extends BaseExpandableCatalogAdapter {
+public class CatalogLocalListAdapter extends BaseCatalogExpandableAdapter {
 
 	
-    public LocalCatalogAdapter(Context context, Catalog localCatalog, Catalog onlineCatalog, String code) {
+    public CatalogLocalListAdapter(Context context, Catalog localCatalog, Catalog onlineCatalog, String code) {
     	super(context, code);
 		mStates = context.getResources().getStringArray(R.array.catalog_map_states);
 		mStateColors = new int[]{
@@ -31,11 +31,11 @@ public class LocalCatalogAdapter extends BaseExpandableCatalogAdapter {
 			Color.MAGENTA, // SKIP COLOR
 			Color.MAGENTA  // SKIP COLOR
 		};
-		mData = Catalog.diffLocal(localCatalog,onlineCatalog);
+		mData = Catalog.diff(localCatalog,onlineCatalog, Catalog.DIFF_MODE_LEFT);
         bindData(code);
     }
 
-    public int getState(CatalogMapDifference diff)
+    public int getState(CatalogMapPair diff)
     {
     	CatalogMap local = diff.getLocal();
     	CatalogMap remote = diff.getRemote();

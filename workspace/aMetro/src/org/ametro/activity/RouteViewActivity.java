@@ -24,7 +24,7 @@ package org.ametro.activity;
 import java.util.ArrayList;
 
 import org.ametro.R;
-import org.ametro.adapter.RouteListViewAdapter;
+import org.ametro.adapter.RouteListAdapter;
 import org.ametro.adapter.StationListAdapter;
 import org.ametro.model.MapView;
 import org.ametro.model.StationView;
@@ -43,7 +43,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class BrowseRoute extends Activity implements OnClickListener,
+public class RouteViewActivity extends Activity implements OnClickListener,
 		OnItemClickListener {
 
 	private ListView mRouteList;
@@ -68,9 +68,9 @@ public class BrowseRoute extends Activity implements OnClickListener,
 		mTextTime = (TextView) findViewById(R.id.browse_route_time_text);
 		mFavoritesButton = (ImageButton) findViewById(R.id.browse_route_favorites);
 
-		mMapView = BrowseVectorMap.Instance.getMapView();
-		mRoute = BrowseVectorMap.Instance.getCurrentRouteView();
-		RouteListViewAdapter adapter = new RouteListViewAdapter(this, mRoute,
+		mMapView = MapViewActivity.Instance.getMapView();
+		mRoute = MapViewActivity.Instance.getCurrentRouteView();
+		RouteListAdapter adapter = new RouteListAdapter(this, mRoute,
 				mMapView);
 		adapter.setTextColor(Color.WHITE);
 		mRouteList.setAdapter(adapter);
@@ -88,7 +88,7 @@ public class BrowseRoute extends Activity implements OnClickListener,
 		mFromId = mRoute.getStationFrom().id;
 		mToId = mRoute.getStationTo().id;
 		
-		isChecked = BrowseVectorMap.Instance.isFavoriteRoute(mFromId, mToId);
+		isChecked = MapViewActivity.Instance.isFavoriteRoute(mFromId, mToId);
 		updateFavoritesButton();
 		mFavoritesButton.setOnClickListener(this);
 
@@ -113,9 +113,9 @@ public class BrowseRoute extends Activity implements OnClickListener,
 		if (v == mFavoritesButton) {
 			isChecked = !isChecked;
 			if(isChecked){
-				BrowseVectorMap.Instance.addFavoriteRoute(mFromId,mToId);
+				MapViewActivity.Instance.addFavoriteRoute(mFromId,mToId);
 			}else{
-				BrowseVectorMap.Instance.removeFavoriteRoute(mFromId,mToId);
+				MapViewActivity.Instance.removeFavoriteRoute(mFromId,mToId);
 			}
 			updateFavoritesButton();
 
@@ -129,7 +129,7 @@ public class BrowseRoute extends Activity implements OnClickListener,
 
 	public void onItemClick(AdapterView<?> av, View v, int position, long id) {
 		StationView station = mMapView.stations[(int) id];
-		BrowseVectorMap.Instance.setCurrentStation(station);
+		MapViewActivity.Instance.setCurrentStation(station);
 		finish();
 	}
 }

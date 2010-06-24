@@ -43,7 +43,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class RouteFavoriteListAdapter extends BaseAdapter implements OnClickListener {
+public class FavoriteRoutesListAdapter extends BaseAdapter implements OnClickListener {
 
 	private static class ListItemWrapper
 	{
@@ -63,7 +63,7 @@ public class RouteFavoriteListAdapter extends BaseAdapter implements OnClickList
 		}
 	}	
 
-	public RouteFavoriteListAdapter(Activity activity, Point[] routes, MapView map){
+	public FavoriteRoutesListAdapter(Activity activity, Point[] routes, MapView map){
 		mLineDrawabled = new HashMap<LineView, Drawable>();
 		mLines = map.lines;
 		mStations = map.stations;

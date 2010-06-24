@@ -22,9 +22,9 @@ package org.ametro.catalog;
 
 import java.util.Comparator;
 
-public class CatalogMapDifference {
+public class CatalogMapPair {
 
-	public static class CatalogMapDifferenceCityNameComparator implements Comparator<CatalogMapDifference>
+	public static class CatalogMapDifferenceCityNameComparator implements Comparator<CatalogMapPair>
 	{
 		private String mCode;
 		
@@ -32,7 +32,7 @@ public class CatalogMapDifference {
 			mCode = code;
 		}
 
-		public int compare(CatalogMapDifference left, CatalogMapDifference right) {
+		public int compare(CatalogMapPair left, CatalogMapPair right) {
 			return left.getCity(mCode).compareTo(right.getCity(mCode));
 		}
 		
@@ -62,7 +62,7 @@ public class CatalogMapDifference {
 		return mRemote;
 	}
 
-	public CatalogMapDifference(CatalogMap mLocal, CatalogMap mRemote, int preffered) {
+	public CatalogMapPair(CatalogMap mLocal, CatalogMap mRemote, int preffered) {
 		super();
 		this.mLocal = mLocal;
 		this.mRemote = mRemote;

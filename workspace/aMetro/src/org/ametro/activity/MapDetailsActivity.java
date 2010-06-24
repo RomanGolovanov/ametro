@@ -24,7 +24,7 @@ package org.ametro.activity;
 import android.app.Activity;
 import android.os.Bundle;
 
-public class MapDetails extends Activity {
+public class MapDetailsActivity extends Activity {
 
     public static final String ONLINE_MAP_URL = "ONLINE_MAP_URL";
     public static final String LOCAL_MAP_URL = "LOCAL_MAP_URL";

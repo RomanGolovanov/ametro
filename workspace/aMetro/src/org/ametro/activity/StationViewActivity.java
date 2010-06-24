@@ -23,7 +23,7 @@ package org.ametro.activity;
 import android.app.Activity;
 import android.os.Bundle;
 
-public class BrowseStation extends Activity {
+public class StationViewActivity extends Activity {
 
 
 	protected void onCreate(Bundle savedInstanceState) {

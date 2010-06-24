@@ -34,7 +34,7 @@ import android.graphics.Paint.Style;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
-public class RouteListViewAdapter extends StationListAdapter {
+public class RouteListAdapter extends StationListAdapter {
 
 	protected final Paint mBackgroundPaint;
 
@@ -43,7 +43,7 @@ public class RouteListViewAdapter extends StationListAdapter {
 	private Drawable mFirstItemDrawable;
 	private Drawable mLastItemDrawable;
 
-	public RouteListViewAdapter(Activity activity, RouteView route,
+	public RouteListAdapter(Activity activity, RouteView route,
 			MapView map) {
 		super(activity, route.getStations(), route.getDelays(), map);
 		mBackgroundPaint = new Paint();

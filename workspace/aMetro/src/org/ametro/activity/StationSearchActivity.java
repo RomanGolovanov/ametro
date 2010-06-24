@@ -37,7 +37,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class SearchStation extends ListActivity {
+public class StationSearchActivity extends ListActivity {
 
 	private ArrayList<StationView> mStationList;
 	
@@ -49,8 +49,8 @@ public class SearchStation extends ListActivity {
 	}
 	
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-		BrowseVectorMap.Instance.setNavigationStations(mStationList);
-		BrowseVectorMap.Instance.setCurrentStation(mStationList.get(position));
+		MapViewActivity.Instance.setNavigationStations(mStationList);
+		MapViewActivity.Instance.setCurrentStation(mStationList.get(position));
 		finish();
 	}
 	
@@ -63,9 +63,9 @@ public class SearchStation extends ListActivity {
 			doSearchKeywords(searchKeywords);
 			bindData();
 		}else{
-			mStationList = BrowseVectorMap.Instance.getNavigationStations();
+			mStationList = MapViewActivity.Instance.getNavigationStations();
 			bindData();
-			StationView selected = BrowseVectorMap.Instance.getCurrentStation();
+			StationView selected = MapViewActivity.Instance.getCurrentStation();
 			if(selected!=null){
 				this.setSelection(mStationList.indexOf(selected));
 			}
@@ -73,7 +73,7 @@ public class SearchStation extends ListActivity {
 	}
 
 	private void bindData() {
-		MapView map = BrowseVectorMap.Instance.getMapView();
+		MapView map = MapViewActivity.Instance.getMapView();
 		if(mStationList.size()>0){
 			if(mStationList.size()>1){
 				ArrayList<String> stationNamesList = new ArrayList<String>();
@@ -82,19 +82,19 @@ public class SearchStation extends ListActivity {
 				}
 				this.setListAdapter(new StationListAdapter(this, mStationList, map));
 			}else{
-				BrowseVectorMap.Instance.setNavigationStations(mStationList);
-				BrowseVectorMap.Instance.setCurrentStation(mStationList.get(0));
+				MapViewActivity.Instance.setNavigationStations(mStationList);
+				MapViewActivity.Instance.setCurrentStation(mStationList.get(0));
 				finish();
 			}
 		}else{
-			BrowseVectorMap.Instance.setNavigationStations(null);
+			MapViewActivity.Instance.setNavigationStations(null);
 			Toast.makeText(this, getString(R.string.msg_station_not_found), Toast.LENGTH_SHORT).show();
 			finish();
 		}
 	}
 
 	private MapView doSearchKeywords(String searchKeywords) {
-		MapView map = BrowseVectorMap.Instance.getMapView();
+		MapView map = MapViewActivity.Instance.getMapView();
 		mStationList = new ArrayList<StationView>();
 		for(StationView station : map.stations){
 			if(station.getName().toLowerCase().indexOf(searchKeywords)!=-1){

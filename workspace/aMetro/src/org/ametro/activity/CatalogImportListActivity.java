@@ -25,22 +25,24 @@ import java.util.Locale;
 
 import org.ametro.MapUri;
 import org.ametro.R;
-import org.ametro.adapter.ImportCatalogAdapter;
+import org.ametro.activity.obsolete.ImportPmz;
+import org.ametro.adapter.BaseCatalogExpandableAdapter;
+import org.ametro.adapter.CatalogImportListAdapter;
 import org.ametro.catalog.Catalog;
-import org.ametro.catalog.CatalogMapDifference;
+import org.ametro.catalog.CatalogMapPair;
+import org.ametro.catalog.storage.CatalogStorage;
 
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 
-public class ImportMaps extends BaseExpandableMaps {
+public class CatalogImportListActivity extends BaseExpandableCatalogActivity {
 
 	private Catalog mLocal;
 	private Catalog mImport;
-
+	
 	private final int MAIN_MENU_IMPORT = 1;
 	private final static int REQUEST_IMPORT = 1;
 	
@@ -80,6 +82,8 @@ public class ImportMaps extends BaseExpandableMaps {
 	}	
 
 	protected void onPrepareView() {
+		Catalog localPrevious = mLocal;
+		Catalog importPrevious = mImport;
 		mLocal = mStorage.getLocalCatalog();
 		mImport = mStorage.getImportCatalog();
 		if(mLocal == null){
@@ -88,17 +92,24 @@ public class ImportMaps extends BaseExpandableMaps {
 		if(mImport == null){
 			mStorage.requestImportCatalog(false);
 		}
-		onCatalogsUpdate();
+		onCatalogsUpdate(localPrevious!=mLocal || importPrevious!=mImport);
 		super.onPrepareView();
 	}
 		
-	private void onCatalogsUpdate() {
-		if(mLocal!=null && mImport!=null && mMode != MODE_LIST){
+	private void onCatalogsUpdate(boolean refresh) {
+		if(mLocal!=null && mImport!=null){
 			if(mImport.getMaps().size()>0){
-				setListView();
+				if(mMode != MODE_LIST){
+					setListView();
+				}else{
+					if(refresh){
+						setListView();
+					}
+				}
 			}else{
 				setEmptyView();
 			}
+			
 		}
 	}
 	
@@ -106,33 +117,38 @@ public class ImportMaps extends BaseExpandableMaps {
 		return R.string.msg_no_maps_in_import;
 	}
 	
-	protected ExpandableListAdapter getListAdapter() {
-		return new ImportCatalogAdapter(this, mImport, mLocal, Locale.getDefault().getLanguage() );
+	protected BaseCatalogExpandableAdapter getListAdapter() {
+		return new CatalogImportListAdapter(this, mImport, mLocal, Locale.getDefault().getLanguage() );
 	}	
 	
 	protected void onLocalCatalogLoaded(Catalog catalog) {
 		mLocal = catalog;
-		onCatalogsUpdate();
+		onCatalogsUpdate(true);
 		super.onLocalCatalogLoaded(catalog);
 	}
 	
 	protected void onImportCatalogLoaded(Catalog catalog) {
 		mImport = catalog;
-		onCatalogsUpdate();
+		onCatalogsUpdate(true);
 		super.onImportCatalogLoaded(catalog);
 	}
 	
+	protected boolean isCatalogProgressEnabled(int catalogId)
+	{
+		return catalogId == CatalogStorage.CATALOG_IMPORT;
+	}
+	
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-		CatalogMapDifference diff = (CatalogMapDifference)mAdapter.getChild(groupPosition, childPosition);
+		CatalogMapPair diff = (CatalogMapPair)mAdapter.getChild(groupPosition, childPosition);
 		if(diff.isLocalAvailable()){
 			String fileName = diff.getLocalUrl();
 			Intent i = new Intent();
 			i.setData(MapUri.create( mLocal.getBaseUrl() + "/" + fileName));
-			AllMaps.Instance.setResult(RESULT_OK, i);
-			AllMaps.Instance.finish();
+			CatalogTabHostActivity.getInstance().setResult(RESULT_OK, i);
+			CatalogTabHostActivity.getInstance().finish();
 		}else{
-			Intent i = new Intent(this, MapDetails.class);
-			i.putExtra(MapDetails.IMPORT_MAP_URL, diff.getRemoteUrl());
+			Intent i = new Intent(this, MapDetailsActivity.class);
+			i.putExtra(MapDetailsActivity.IMPORT_MAP_URL, diff.getRemoteUrl());
 			startActivity(i);
 		}
 		return true;		

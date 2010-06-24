@@ -36,6 +36,7 @@ import org.ametro.Constants;
 import org.ametro.MapSettings;
 import org.ametro.MapUri;
 import org.ametro.R;
+import org.ametro.dialog.LocationSearchDialog;
 import org.ametro.model.MapView;
 import org.ametro.model.Model;
 import org.ametro.model.SegmentView;
@@ -81,7 +82,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ZoomControls;
 
-public class BrowseVectorMap extends Activity implements OnClickListener {
+public class MapViewActivity extends Activity implements OnClickListener {
 
 
 	public void onClick(View src) {
@@ -95,10 +96,10 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			clearNavigation(true);
 		}
 		if(src == mNavigateListButton && mCurrentRouteView!=null){
-			startActivity(new Intent(this, BrowseRoute.class));
+			startActivity(new Intent(this, RouteViewActivity.class));
 		}
 		if(src == mNavigateListButton && mCurrentRouteView == null && mNavigationStations!=null){
-			startActivity(new Intent(this, SearchStation.class));
+			startActivity(new Intent(this, StationSearchActivity.class));
 		}
 	}
 
@@ -182,12 +183,12 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			break;
 		case REQUEST_LOCATION:
 			if(resultCode == RESULT_OK){
-				Location location = data.getParcelableExtra(SearchLocation.LOCATION);
+				Location location = data.getParcelableExtra(LocationSearchDialog.LOCATION);
 				mLocationSearchTask = new LocationSearchTask();
 				mLocationSearchTask.execute(location);
 			}
 			if(resultCode == RESULT_CANCELED){
-				Toast.makeText(BrowseVectorMap.this,R.string.msg_location_unknown, Toast.LENGTH_SHORT).show();			
+				Toast.makeText(MapViewActivity.this,R.string.msg_location_unknown, Toast.LENGTH_SHORT).show();			
 			}
 			break;
 		}
@@ -233,13 +234,13 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			onRequestMap(false);
 			return true;
 		case MAIN_MENU_ROUTES:
-			startActivity(new Intent(this, CreateRoute.class));
+			startActivity(new Intent(this, RouteCreateActivity.class));
 			return true;
 		case MAIN_MENU_SETTINGS:
-			startActivityForResult(new Intent(this, Settings.class), REQUEST_SETTINGS);
+			startActivityForResult(new Intent(this, SettingsActivity.class), REQUEST_SETTINGS);
 			return true;
 		case MAIN_MENU_ABOUT:
-			startActivity(new Intent(this, About.class));
+			startActivity(new Intent(this, AboutActivity.class));
 			return true;
 		case MAIN_MENU_LAYERS:
 			return true;
@@ -274,14 +275,14 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			return true;
 		case MAIN_MENU_INFO:
 			if(mCurrentStation!=null){
-				startActivity(new Intent(this, BrowseStation.class));
+				startActivity(new Intent(this, StationViewActivity.class));
 			}
 			return true;
 		case MAIN_MENU_LOCATION:
-			startActivityForResult(new Intent(this, SearchLocation.class), REQUEST_LOCATION);
+			startActivityForResult(new Intent(this, LocationSearchDialog.class), REQUEST_LOCATION);
 			return true;
 		case MAIN_MENU_EXPERIMENTAL:
-			startActivity(new Intent(this, AllMaps.class));
+			startActivity(new Intent(this, CatalogTabHostActivity.class));
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -656,7 +657,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		if (setNoMapLoadingView) {
 			setContentView(R.layout.browse_map_empty);
 		}
-		Intent i = new Intent(this, AllMaps.class);
+		Intent i = new Intent(this, CatalogTabHostActivity.class);
 		if (mModelName != null) {
 			i.setData(MapUri.create(mModelName));
 		}
@@ -681,7 +682,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 					if(v!=null){
 						onShowMap(mModel, v);
 					}else{
-						Toast.makeText(BrowseVectorMap.this, "Scheme loading error", Toast.LENGTH_SHORT).show();
+						Toast.makeText(MapViewActivity.this, "Scheme loading error", Toast.LENGTH_SHORT).show();
 					}
 
 				}
@@ -812,12 +813,12 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 
 		mZoomControls.setOnZoomInClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				BrowseVectorMap.this.onZoomIn();
+				MapViewActivity.this.onZoomIn();
 			}
 		});
 		mZoomControls.setOnZoomOutClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				BrowseVectorMap.this.onZoomOut();
+				MapViewActivity.this.onZoomOut();
 			}
 		});
 
@@ -919,7 +920,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 		ProgressDialog mProgressDialog;
 
 		protected void onPreExecute() {
-			mProgressDialog = ProgressDialog.show(BrowseVectorMap.this, null, "Locale loading...", true);
+			mProgressDialog = ProgressDialog.show(MapViewActivity.this, null, "Locale loading...", true);
 			super.onPreExecute();
 		}
 
@@ -982,7 +983,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			} else {
 				clearDefaultMapName();
 				if (mError != null) {
-					Toast.makeText(BrowseVectorMap.this,
+					Toast.makeText(MapViewActivity.this,
 							getString(R.string.msg_error_map_loading),
 							Toast.LENGTH_SHORT).show();
 				}
@@ -1034,7 +1035,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 
 		protected void onPreExecute() {
 			super.onPreExecute();
-			dialog = ProgressDialog.show(BrowseVectorMap.this,
+			dialog = ProgressDialog.show(MapViewActivity.this,
 					getString(R.string.locate_wait_title),
 					getString(R.string.locate_wait_text), true);
 		}
@@ -1048,7 +1049,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 			dialog.hide();
 			if (view != null) {
 				Toast.makeText(
-						BrowseVectorMap.this,
+						MapViewActivity.this,
 						String.format(getString(R.string.msg_location_station_found),
 								view.getName(),
 								view.getLineName()),
@@ -1057,7 +1058,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 				mVectorMapView.scrollModelCenterTo(point.x, point.y);
 				mVectorMapView.postInvalidate();
 			} else {
-				Toast.makeText(BrowseVectorMap.this,
+				Toast.makeText(MapViewActivity.this,
 						R.string.msg_location_unknown, Toast.LENGTH_SHORT)
 						.show();
 			}
@@ -1066,7 +1067,7 @@ public class BrowseVectorMap extends Activity implements OnClickListener {
 	}
 	
 
-	static BrowseVectorMap Instance;
+	static MapViewActivity Instance;
 
 	private static final int MAIN_MENU_FIND = 1;
 	private static final int MAIN_MENU_LIBRARY = 2;
