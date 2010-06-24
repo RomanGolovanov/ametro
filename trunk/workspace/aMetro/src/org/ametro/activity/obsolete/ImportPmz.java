@@ -282,7 +282,7 @@ public class ImportPmz extends Activity {
 					// define file names
 					String mapName = city.systemName;
 					String mapFileName = GlobalSettings.getMapFileName(mapName);
-					String mapFileNameTemp = GlobalSettings.getTemporaryMapFile(mapName);
+					String mapFileNameTemp = GlobalSettings.getTemporaryImportMapFile(mapName);
 					mapFile = new File(mapFileName);
 					mapFileTemp = new File(mapFileNameTemp);
 					// remove temporary file is exists 

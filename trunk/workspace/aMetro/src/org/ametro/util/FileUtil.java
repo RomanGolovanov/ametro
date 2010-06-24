@@ -61,20 +61,6 @@ public class FileUtil {
 		}
 	}
 	
-	public static void createFile(String path) {
-		try {
-			File f = new File(path);
-			f.createNewFile();
-		} catch (IOException e) {
-			// scoop exception
-		}
-	}
-
-	public static void createDirectory(String path) {
-		File f = new File(path);
-		f.mkdirs();
-	}
-
 	public static void createDirectory(File path) {
 		path.mkdirs();
 	}
@@ -95,6 +81,22 @@ public class FileUtil {
 		if(closeOnExit){
 			in.close();
 			out.close();
+		}
+	}
+
+	public static void touchDirectory(File file) {
+		if(!file.exists()){
+			file.mkdirs();
+		}
+	}		
+	
+	public static void touchFile(File file) {
+		if(!file.exists()){
+			try {
+				file.createNewFile();
+			} catch (IOException e) {
+				// scoop exception
+			}
 		}
 	}	
 }
