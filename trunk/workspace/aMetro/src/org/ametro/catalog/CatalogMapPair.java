@@ -143,7 +143,7 @@ public class CatalogMapPair {
 			}
 		}else{
 			if(mRemote!=null && !mRemote.isCorruted() && mRemote.isSupported()){
-				return mLocal.getTimestamp() <= mRemote.getTimestamp();
+				return mLocal.getTimestamp() < mRemote.getTimestamp();
 			}
 		}
 		return false;
