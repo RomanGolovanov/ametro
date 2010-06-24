@@ -61,7 +61,7 @@ public class RouteViewActivity extends Activity implements OnClickListener,
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.browse_route);
+		setContentView(R.layout.route_view);
 		
 		mRouteList = (ListView) findViewById(R.id.browse_route_list_view);
 		mStationList = (ListView) findViewById(R.id.browse_route_stations);

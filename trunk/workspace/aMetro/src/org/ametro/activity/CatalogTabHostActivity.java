@@ -18,10 +18,9 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-
 package org.ametro.activity;
 
-import org.ametro.MapSettings;
+import org.ametro.GlobalSettings;
 import org.ametro.R;
 
 import android.app.Activity;
@@ -35,7 +34,7 @@ public class CatalogTabHostActivity extends TabActivity {
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		MapSettings.checkPrerequisite(this);
+		GlobalSettings.checkPrerequisite(this);
 		mInstance = this;
 
 		final TabHost tabHost = getTabHost();

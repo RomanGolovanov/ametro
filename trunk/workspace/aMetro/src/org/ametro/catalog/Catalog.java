@@ -35,24 +35,12 @@ public class Catalog {
 	/*package*/ String mBaseUrl;
 	/*package*/ ArrayList<CatalogMap> mMaps;
 
-	/*package*/ void setTimestamp(long timestamp){
+	public Catalog(){}
+	
+	public void setTimestamp(long timestamp){
 		mTimestamp = timestamp;
 	}
-	
-	/* VOLATILE FIELDS */
-	private HashMap<String, CatalogMap> mMapIndex;
-	
-	public CatalogMap getMap(String systemName){
-		if(mMapIndex == null){
-			final HashMap<String, CatalogMap> index = new HashMap<String, CatalogMap>();
-			for(CatalogMap map : mMaps){
-				index.put(map.getSystemName(), map);
-			}
-			mMapIndex = index;
-		}
-		return mMapIndex.get(systemName);
-	}
-	
+
 	public long getTimestamp() {
 		return mTimestamp;
 	}
@@ -65,7 +53,7 @@ public class Catalog {
 		mBaseUrl = baseUrl;
 	}
 	
-	/*package*/ void setMaps(ArrayList<CatalogMap> maps){
+	public void setMaps(ArrayList<CatalogMap> maps){
 		mMaps = maps;
 	}
 	
@@ -134,4 +122,19 @@ public class Catalog {
 		throw new RuntimeException("Unsupported DIFF mode");
 	}
 
+	/* VOLATILE FIELDS */
+	private HashMap<String, CatalogMap> mMapIndex;
+	
+	public CatalogMap getMap(String systemName){
+		if(mMapIndex == null){
+			final HashMap<String, CatalogMap> index = new HashMap<String, CatalogMap>();
+			for(CatalogMap map : mMaps){
+				index.put(map.getSystemName(), map);
+			}
+			mMapIndex = index;
+		}
+		return mMapIndex.get(systemName);
+	}
+	
+	
 }

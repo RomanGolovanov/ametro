@@ -112,6 +112,7 @@ public class CatalogBuilder {
 	
 	public Catalog scanCatalog(File baseUrl, int fileTypes){
 		try{
+			Catalog catalog = new Catalog(baseUrl.lastModified(), baseUrl.getAbsolutePath().toLowerCase(), null);
 			ArrayList<CatalogMap> maps = new ArrayList<CatalogMap>();
 			if(baseUrl.exists() && baseUrl.isDirectory() ){
 				final File[] files =  baseUrl.listFiles();
@@ -129,10 +130,9 @@ public class CatalogBuilder {
 		
 							Model model = ModelBuilder.loadModelDescription(file.getAbsolutePath());
 							if(model!=null){
-						    	maps.add(extractCatalogMap(file, fileName, model));
+						    	maps.add(extractCatalogMap(catalog,file, fileName, model));
 							}else{
-								maps.add(makeBadCatalogMap(file, fileName));
-								
+								maps.add(makeBadCatalogMap(catalog,file, fileName));
 							}
 						}
 					}catch(Exception ex){
@@ -140,7 +140,8 @@ public class CatalogBuilder {
 					}
 				}
 			}
-			return new Catalog(baseUrl.lastModified(), baseUrl.getAbsolutePath().toLowerCase(), maps);
+			catalog.setMaps(maps);
+			return catalog;
 		}catch(Exception ex){
 			fireOperationFailed("Failed scan catalog due error: " + ex.getMessage());
 			return null;
@@ -185,7 +186,7 @@ public class CatalogBuilder {
 		}
 	}
 	
-	private CatalogMap makeBadCatalogMap(File file, final String fileName) {
+	private CatalogMap makeBadCatalogMap(Catalog catalog, File file, final String fileName) {
 		
 		final String suggestedMapName = fileName.substring(0, fileName.indexOf('.'));
 		
@@ -200,6 +201,7 @@ public class CatalogBuilder {
 		}
 		
 		CatalogMap map = new CatalogMap(
+				 catalog,
 				 systemName,
 				 fileName,
 				 0,
@@ -216,7 +218,7 @@ public class CatalogBuilder {
 		return map;
 	}
 	
-	private CatalogMap extractCatalogMap(File file, final String fileName, Model model) {
+	private CatalogMap extractCatalogMap(Catalog catalog, File file, final String fileName, Model model) {
 		final String[] locales = model.locales;
 		final int len = locales.length;
 		final int countryId = model.countryName;
@@ -247,6 +249,7 @@ public class CatalogBuilder {
 		}
 		
 		CatalogMap map = new CatalogMap(
+				 catalog,
 				 systemName,
 				 fileName,
 				 model.timestamp,

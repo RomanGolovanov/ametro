@@ -117,7 +117,7 @@ public class RouteCreateActivity extends Activity implements OnClickListener,
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.create_route);
+		setContentView(R.layout.route_create);
 
 		mExitPending = false;
 

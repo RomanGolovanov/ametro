@@ -45,11 +45,14 @@ public class CatalogMap {
 	
 	/*package*/ boolean mCorrupted;
 
-	public CatalogMap(String systemName, String url, long timestamp, long transports, long version,
+	/*package*/ Catalog mOwner;
+	
+	public CatalogMap(Catalog owner, String systemName, String url, long timestamp, long transports, long version,
 			long size, String minVersion,
 			String[] locales, String[] country,
 			String[] city, String[] description, 
 			boolean corrupted) {
+		this.mOwner = owner;
 		this.mSystemName = systemName;
 		this.mUrl = url;
 		this.mTimestamp = timestamp;
@@ -71,6 +74,10 @@ public class CatalogMap {
 	
 	public String getUrl() {
 		return mUrl;
+	}
+	
+	public String getAbsoluteUrl() {
+		return mOwner.getBaseUrl() + "/" + mUrl;
 	}
 	
 	public long getTimestamp() {
@@ -145,6 +152,10 @@ public class CatalogMap {
 
 	public boolean isSupported() {
 		return true;
+	}
+
+	public boolean isNotSupported() {
+		return false;
 	}
 
 }

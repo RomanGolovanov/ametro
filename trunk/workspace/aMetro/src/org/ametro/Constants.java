@@ -46,6 +46,7 @@ public class Constants {
     public static final String PREFERENCE_DEBUG = "DEBUG";
     public static final String PREFERENCE_AUTO_UPDATE_INDEX = "AUTO_UPDATE_INDEX";
     public static final String PREFERENCE_AUTO_UPDATE_MAPS = "AUTO_UPDATE_MAPS";
+    public static final String PREFERENCE_LOCALE = "LOCALE";
 
 	
 }

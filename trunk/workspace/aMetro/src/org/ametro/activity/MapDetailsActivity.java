@@ -26,12 +26,11 @@ import android.os.Bundle;
 
 public class MapDetailsActivity extends Activity {
 
-    public static final String ONLINE_MAP_URL = "ONLINE_MAP_URL";
-    public static final String LOCAL_MAP_URL = "LOCAL_MAP_URL";
-	public static final String IMPORT_MAP_URL = "IMPORT_MAP_URL";
+    public static final String LOCAL_MAP_URL = "LOCAL_URL";
+	public static final String REMOTE_MAP_URL = "REMOTE_URL";
 
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO Put your code here
+        
     }
 }

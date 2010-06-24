@@ -33,7 +33,7 @@ import java.util.Locale;
 import java.util.TreeMap;
 
 import org.ametro.Constants;
-import org.ametro.MapSettings;
+import org.ametro.GlobalSettings;
 import org.ametro.MapUri;
 import org.ametro.R;
 import org.ametro.dialog.LocationSearchDialog;
@@ -115,11 +115,11 @@ public class MapViewActivity extends Activity implements OnClickListener {
 		Instance = this;
 		Instance.mDefaultLocale = Locale.getDefault();
 
-		MapSettings.checkPrerequisite(this);
+		GlobalSettings.checkPrerequisite(this);
 		setupLocale();
 
 		setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL); 
-		setContentView(R.layout.global_wait);
+		setContentView(R.layout.operation_wait_full_screen);
 
 		if(mModel!=null){
 			onShowMap(mModel, mMapView);
@@ -655,7 +655,7 @@ public class MapViewActivity extends Activity implements OnClickListener {
 
 	private void onRequestMap(boolean setNoMapLoadingView) {
 		if (setNoMapLoadingView) {
-			setContentView(R.layout.browse_map_empty);
+			setContentView(R.layout.map_view_empty);
 		}
 		Intent i = new Intent(this, CatalogTabHostActivity.class);
 		if (mModelName != null) {
@@ -749,7 +749,7 @@ public class MapViewActivity extends Activity implements OnClickListener {
 					+ getString(R.string.log_with_size) + mMapView.width + "x"
 					+ mMapView.height);
 
-		setContentView(R.layout.browse_vector_map_main);
+		setContentView(R.layout.map_view);
 
 		mVectorMapView = (VectorMapView) findViewById(R.id.browse_vector_map_view);
 		updateAntiAliasingState();
@@ -946,7 +946,7 @@ public class MapViewActivity extends Activity implements OnClickListener {
 
 		protected void onPreExecute() {
 			mError = null;
-			setContentView(R.layout.global_wait);
+			setContentView(R.layout.operation_wait_full_screen);
 			super.onPreExecute();
 		}
 
@@ -973,7 +973,7 @@ public class MapViewActivity extends Activity implements OnClickListener {
 		}
 
 		protected void onCancelled() {
-			setContentView(R.layout.browse_map_empty);
+			setContentView(R.layout.map_view_empty);
 			super.onCancelled();
 		}
 

@@ -57,9 +57,6 @@ public class CatalogDeserializer {
 	{
 		ArrayList<CatalogMap> maps = new ArrayList<CatalogMap>();
 
-		long timestamp = 0;
-
-		String baseUrl = null;
 		String systemName = null;
 		String url = null;
 		long lastModified = 0;
@@ -81,6 +78,9 @@ public class CatalogDeserializer {
 		XmlPullParser xpp = factory.newPullParser();
 		xpp.setInput( new InputStreamReader( stream ) );
 		int eventType = xpp.getEventType();
+		
+		Catalog catalog = new Catalog();
+		
 		String tagName = null;
 		while (eventType != XmlPullParser.END_DOCUMENT) {
 		 if(eventType == XmlPullParser.START_DOCUMENT) {
@@ -91,8 +91,8 @@ public class CatalogDeserializer {
 		     tagName = xpp.getName();
 		     tags.push(tagName);
 		     if(TAG_CATALOG.equals(tagName)){
-		    	 timestamp = StringUtil.parseLong(xpp.getAttributeValue("", ATTR_LAST_MODIFIED),0);
-		    	 baseUrl = xpp.getAttributeValue(null, ATTR_URL);
+		    	 catalog.setTimestamp( StringUtil.parseLong(xpp.getAttributeValue("", ATTR_LAST_MODIFIED),0) );
+		    	 catalog.setBaseUrl( xpp.getAttributeValue(null, ATTR_URL) );
 		     }else if(TAG_MAP.equals(tagName)){
 		    	 systemName = xpp.getAttributeValue(null, ATTR_SYSTEM_NAME);
 		    	 url = xpp.getAttributeValue(null, ATTR_URL);
@@ -108,6 +108,7 @@ public class CatalogDeserializer {
 		 } else if(eventType == XmlPullParser.END_TAG) {
 		     if(TAG_MAP.equals(tags.peek())){
 		    	 CatalogMap map = new CatalogMap(
+		    			 catalog,
 		    			 systemName,
 		    			 url,
 		    			 lastModified,
@@ -139,7 +140,8 @@ public class CatalogDeserializer {
 		 }
 		 eventType = xpp.next();
 		}
-		return new Catalog(timestamp, baseUrl, maps);
+		catalog.setMaps(maps);
+		return catalog;
 		
 	}
 	

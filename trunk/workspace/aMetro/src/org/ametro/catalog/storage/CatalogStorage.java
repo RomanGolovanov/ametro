@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import org.ametro.Constants;
-import org.ametro.MapSettings;
+import org.ametro.GlobalSettings;
 import org.ametro.catalog.Catalog;
 
 import android.os.AsyncTask;
@@ -23,14 +23,14 @@ public class CatalogStorage implements ICatalogBuilderListener {
 			synchronized (CatalogStorage.class) {
 				if(mStorage==null){
 					mStorage = new CatalogStorage(
-							MapSettings.getLocalCatalogStorageUrl(), MapSettings.getLocalCatalog(),
-							MapSettings.getImportCatalogStorageUrl(), MapSettings.getImportCatalog(),
-							MapSettings.getOnlineCatalogStorageUrl(), MapSettings.getOnlineCatalogUrl());
+							GlobalSettings.getLocalCatalogStorageUrl(), GlobalSettings.getLocalCatalog(),
+							GlobalSettings.getImportCatalogStorageUrl(), GlobalSettings.getImportCatalog(),
+							GlobalSettings.getOnlineCatalogStorageUrl(), GlobalSettings.getOnlineCatalogUrl());
 				}
 			}
 		}
 		return mStorage;
-	}	
+	}
 	
 	private CatalogStorage(File localStorage, File localPath, File importStorage, File importPath, File onlineStorage, String onlineUrl){
 		this.mLocalStorage = localStorage;
