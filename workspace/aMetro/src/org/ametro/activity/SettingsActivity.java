@@ -26,9 +26,7 @@ import org.ametro.GlobalSettings;
 import org.ametro.R;
 
 import android.os.Bundle;
-import android.preference.EditTextPreference;
 import android.preference.PreferenceActivity;
-import android.text.InputType;
 
 public class SettingsActivity extends PreferenceActivity {
 
@@ -38,9 +36,9 @@ public class SettingsActivity extends PreferenceActivity {
         
         addPreferencesFromResource(R.xml.settings);
         
-        ((EditTextPreference)this.findPreference(getString(R.string.pref_auto_update_url_key)))
-	    	.getEditText()
-	    	.setInputType(InputType.TYPE_TEXT_VARIATION_URI);
+//        ((EditTextPreference)this.findPreference(getString(R.string.pref_auto_update_url_key)))
+//	    	.getEditText()
+//	    	.setInputType(InputType.TYPE_TEXT_VARIATION_URI);
     
     }
     
