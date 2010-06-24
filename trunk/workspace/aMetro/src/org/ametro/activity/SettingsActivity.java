@@ -30,7 +30,7 @@ import android.preference.EditTextPreference;
 import android.preference.PreferenceActivity;
 import android.text.InputType;
 
-public class Settings extends PreferenceActivity {
+public class SettingsActivity extends PreferenceActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

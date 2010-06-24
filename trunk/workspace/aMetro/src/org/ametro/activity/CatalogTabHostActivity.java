@@ -23,39 +23,35 @@ package org.ametro.activity;
 
 import org.ametro.MapSettings;
 import org.ametro.R;
-import org.ametro.catalog.storage.CatalogStorage;
 
+import android.app.Activity;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.TabHost;
 
-public class AllMaps extends TabActivity {
+public class CatalogTabHostActivity extends TabActivity {
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		MapSettings.checkPrerequisite(this);
-		mStorage = new CatalogStorage(
-				MapSettings.getLocalCatalogStorageUrl(), MapSettings.getLocalCatalog(),
-				MapSettings.getImportCatalogStorageUrl(), MapSettings.getImportCatalog(),
-				MapSettings.getOnlineCatalogStorageUrl(), MapSettings.getOnlineCatalogUrl());
-		Instance = this;
+		mInstance = this;
 
 		final TabHost tabHost = getTabHost();
 		final Resources res = getResources();
 
 		tabHost.addTab(tabHost.newTabSpec("tab1").setIndicator(res.getString(R.string.tab_maps_favorited), res.getDrawable(R.drawable.icon_tab_star))
-				.setContent(new Intent(this, LocalMaps.class).putExtra(LocalMaps.EXTRA_FAVORITES_ONLY, true)));
+				.setContent(new Intent(this, CatalogLocalListActivity.class).putExtra(CatalogLocalListActivity.EXTRA_FAVORITES_ONLY, true)));
 
 		tabHost.addTab(tabHost.newTabSpec("tab2").setIndicator(res.getString(R.string.tab_maps_local), res.getDrawable(R.drawable.icon_tab_fdd))
-				.setContent(new Intent(this, LocalMaps.class)));
+				.setContent(new Intent(this, CatalogLocalListActivity.class)));
 
 		tabHost.addTab(tabHost.newTabSpec("tab3").setIndicator(res.getString(R.string.tab_maps_online), res.getDrawable(R.drawable.icon_tab_browse))
-				.setContent(new Intent(this, OnlineMaps.class)));
+				.setContent(new Intent(this, CatalogOnlineListActivity.class)));
 
 		tabHost.addTab(tabHost.newTabSpec("tab4").setIndicator(res.getString(R.string.tab_maps_import), res.getDrawable(R.drawable.icon_tab_unbox))
-				.setContent(new Intent(this, ImportMaps.class)));
+				.setContent(new Intent(this, CatalogImportListActivity.class)));
 		
 	}
 	
@@ -63,11 +59,11 @@ public class AllMaps extends TabActivity {
 		super.onPause();
 	};
 	
-	/*package*/ static AllMaps Instance;
-	private CatalogStorage mStorage;
-		
-	public CatalogStorage getStorage(){
-		return mStorage;
+	private static CatalogTabHostActivity mInstance;
+	
+	public static Activity getInstance()
+	{
+		return mInstance;
 	}
 	
 }

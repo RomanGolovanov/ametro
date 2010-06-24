@@ -9,8 +9,8 @@ import java.util.TreeSet;
 
 import org.ametro.MapSettings;
 import org.ametro.R;
-import org.ametro.catalog.CatalogMapDifference;
-import org.ametro.catalog.CatalogMapDifference.CatalogMapDifferenceCityNameComparator;
+import org.ametro.catalog.CatalogMapPair;
+import org.ametro.catalog.CatalogMapPair.CatalogMapDifferenceCityNameComparator;
 import org.ametro.model.TransportType;
 
 import android.content.Context;
@@ -26,33 +26,33 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public abstract class BaseExpandableCatalogAdapter extends BaseExpandableListAdapter {
+public abstract class BaseCatalogExpandableAdapter extends BaseExpandableListAdapter {
 
 	protected String mLanguageCode;
 	protected Context mContext;
     protected LayoutInflater mInflater;
-	protected List<CatalogMapDifference> mData;
+	protected List<CatalogMapPair> mData;
 	
 	protected String[] mCountries;
-    protected CatalogMapDifference[][] mRefs;
+    protected CatalogMapPair[][] mRefs;
 
     protected String[] mStates;
     protected int[] mStateColors;
     
     protected HashMap<Integer,Drawable> mTransportTypes;
 
-    public CatalogMapDifference getData(int groupId, int childId) {
+    public CatalogMapPair getData(int groupId, int childId) {
         return mRefs[groupId][childId];
     }
 
-    public BaseExpandableCatalogAdapter(Context context, String code) {
+    public BaseCatalogExpandableAdapter(Context context, String code) {
         mContext = context;
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		mLanguageCode = code;
 		bindTransportTypes();
     }
 
-    public abstract int getState(CatalogMapDifference diff);
+    public abstract int getState(CatalogMapPair diff);
 
     public Object getChild(int groupPosition, int childPosition) {
         return mRefs[groupPosition][childPosition];
@@ -96,7 +96,7 @@ public abstract class BaseExpandableCatalogAdapter extends BaseExpandableListAda
 		}
 		
 		final String code = mLanguageCode;
-		final CatalogMapDifference ref = mRefs[groupPosition][childPosition];
+		final CatalogMapPair ref = mRefs[groupPosition][childPosition];
 		final int state = getState(ref);
 		holder.mText.setText(ref.getCity(code));
 		holder.mStatus.setText(mStates[state]);
@@ -160,30 +160,51 @@ public abstract class BaseExpandableCatalogAdapter extends BaseExpandableListAda
     
     protected void bindData(String code) {
         TreeSet<String> countries = new TreeSet<String>();
-        TreeMap<String, ArrayList<CatalogMapDifference>> index = new TreeMap<String, ArrayList<CatalogMapDifference>>();
+        TreeMap<String, ArrayList<CatalogMapPair>> index = new TreeMap<String, ArrayList<CatalogMapPair>>();
         CatalogMapDifferenceCityNameComparator comparator = new CatalogMapDifferenceCityNameComparator(code);
 
-        for(CatalogMapDifference diff : mData){
+        for(CatalogMapPair diff : mData){
         	final String country = diff.getCountry(code);
         	countries.add(country);
-        	ArrayList<CatalogMapDifference> cities = index.get(country);
+        	ArrayList<CatalogMapPair> cities = index.get(country);
         	if(cities == null){
-        		cities = new ArrayList<CatalogMapDifference>();
+        		cities = new ArrayList<CatalogMapPair>();
         		index.put(country,cities);
         	}
         	cities.add(diff); 
         }
         mCountries = (String[]) countries.toArray(new String[countries.size()]);
-        mRefs = new CatalogMapDifference[mCountries.length][];
+        mRefs = new CatalogMapPair[mCountries.length][];
         for(int i=0; i<mCountries.length;i++){
         	String country = mCountries[i];
-        	ArrayList<CatalogMapDifference> diffSet = index.get(country);
+        	ArrayList<CatalogMapPair> diffSet = index.get(country);
 			if(diffSet!=null){        	
 	        	int len = diffSet.size();
-	        	mRefs[i] = (CatalogMapDifference[]) diffSet.toArray(new CatalogMapDifference[len]);
+	        	mRefs[i] = (CatalogMapPair[]) diffSet.toArray(new CatalogMapPair[len]);
 	        	Arrays.sort(mRefs[i], comparator);
 			}
         }
 	}
+
+//	public int getGroupPosition(CatalogMapDifference selection) {
+//		final String countryName = selection.getCountry(mLanguageCode);
+//		final int len = mCountries.length;
+//		for(int i=0; i<len; i++){
+//			if(mCountries[i].equals(countryName)) return i; 
+//		}
+//		return -1;
+//	}
+//
+//	public int getChildPosition(int groupId, CatalogMapDifference selection) {
+//		if(groupId == -1) return -1;
+//		final CatalogMapDifference[] refs = mRefs[groupId];
+//		final String code = mLanguageCode;
+//		final String cityName = selection.getCity(code);
+//		final int len = refs.length;
+//		for(int i=0; i<len; i++){
+//			if(refs[i].getCity(code).equals(cityName)) return i;
+//		}
+//		return -1;
+//	}
     
 }

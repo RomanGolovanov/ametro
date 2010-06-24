@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<manifest android:versionCode="1" android:versionName="0.2.4.r245"
+<manifest android:versionCode="1" android:versionName="0.2.4.r246"
     package="org.ametro" xmlns:android="http://schemas.android.com/apk/res/android">
     <application android:debuggable="true"
         android:icon="@drawable/appicon" android:label="@string/app_name">
         <activity android:label="@string/app_name"
             android:launchMode="singleTop"
-            android:name=".activity.BrowseVectorMap"
+            android:name=".activity.MapViewActivity"
             android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -14,23 +14,23 @@
             <meta-data android:name="android.app.default_searchable" android:value=".activity.SearchStation"/>
         </activity>
         <!--activity android:launchMode="singleTop" android:name=".activity.BrowseLibrary"/-->
-        <activity android:name=".activity.ImportPmz" android:launchMode="singleTop" />
-        <activity android:name=".activity.MapDetails"/>
-        <activity android:name=".activity.BrowseRoute"/>
-        <activity android:name=".activity.CreateRoute" android:launchMode="singleTop" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".activity.About"/>
-        <activity android:name=".activity.Settings"/>
-        <activity android:name=".activity.BrowseStation"/>
-        <activity android:name=".activity.SelectStation"/>
-        <activity android:name=".activity.FavoriteRouteList"/>
-        <activity android:name="org.ametro.activity.AllMaps"/>
-        <activity android:name="org.ametro.activity.LocalMaps"/>
-        <activity android:name="org.ametro.activity.OnlineMaps"/>
-        <activity android:name="org.ametro.activity.ImportMaps"/>
+        <activity android:name=".activity.obsolete.ImportPmz" android:launchMode="singleTop" />
+        <activity android:name=".activity.MapDetailsActivity"/>
+        <activity android:name=".activity.RouteViewActivity"/>
+        <activity android:name=".activity.RouteCreateActivity" android:launchMode="singleTop" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".activity.AboutActivity"/>
+        <activity android:name=".activity.SettingsActivity"/>
+        <activity android:name=".activity.StationViewActivity"/>
+        <activity android:name=".activity.StationListActivity"/>
+        <activity android:name=".activity.FavoriteRouteListActivity"/>
+        <activity android:name=".activity.CatalogTabHostActivity"/>
+        <activity android:name=".activity.CatalogLocalListActivity"/>
+        <activity android:name=".activity.CatalogOnlineListActivity"/>
+        <activity android:name=".activity.CatalogImportListActivity"/>
         <!-- DIALOGS -->
-        <activity android:name=".activity.SearchLocation" android:label="@string/msg_detect_location" android:launchMode="singleTop" android:theme="@android:style/Theme.Dialog"/>
+        <activity android:name=".dialog.LocationSearchDialog" android:label="@string/msg_detect_location" android:launchMode="singleTop" android:theme="@android:style/Theme.Dialog"/>
         <!-- SEARCHS -->
-        <activity android:name=".activity.SearchStation" android:label="@string/search_station" android:launchMode="singleTop" >
+        <activity android:name=".activity.StationSearchActivity" android:label="@string/search_station" android:launchMode="singleTop" >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH"/>
                 <category android:name="android.intent.category.DEFAULT"/>

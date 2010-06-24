@@ -23,9 +23,11 @@ package org.ametro.activity;
 
 import org.ametro.MapSettings;
 import org.ametro.R;
+import org.ametro.adapter.BaseCatalogExpandableAdapter;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.storage.CatalogStorage;
 import org.ametro.catalog.storage.ICatalogStorageListener;
+import org.ametro.dialog.LocationSearchDialog;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -34,14 +36,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ExpandableListView.OnChildClickListener;
 
-public abstract class BaseExpandableMaps extends Activity implements ICatalogStorageListener, OnChildClickListener {
+public abstract class BaseExpandableCatalogActivity extends Activity implements ICatalogStorageListener, OnChildClickListener {
 
 	protected static final int MODE_WAIT_NO_PROGRESS = 1;
 	protected static final int MODE_WAIT = 2;
@@ -52,7 +53,7 @@ public abstract class BaseExpandableMaps extends Activity implements ICatalogSto
 	
 	protected CatalogStorage mStorage;
 	
-	protected ExpandableListAdapter mAdapter;
+	protected BaseCatalogExpandableAdapter mAdapter;
 	protected ExpandableListView mList;
 
 	protected TextView mCounterTextView;
@@ -96,13 +97,13 @@ public abstract class BaseExpandableMaps extends Activity implements ICatalogSto
 			onCatalogRefresh();
 			return true;
 		case MAIN_MENU_LOCATION:
-			startActivityForResult(new Intent(this, SearchLocation.class), REQUEST_LOCATION);
+			startActivityForResult(new Intent(this, LocationSearchDialog.class), REQUEST_LOCATION);
 			return true;
 		case MAIN_MENU_SETTINGS:
-			startActivityForResult(new Intent(this, Settings.class), REQUEST_SETTINGS);
+			startActivityForResult(new Intent(this, SettingsActivity.class), REQUEST_SETTINGS);
 			return true;
 		case MAIN_MENU_ABOUT:
-			startActivity(new Intent(this, About.class));
+			startActivity(new Intent(this, AboutActivity.class));
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -115,7 +116,7 @@ public abstract class BaseExpandableMaps extends Activity implements ICatalogSto
 			break;
 		case REQUEST_LOCATION:
 			if(resultCode == RESULT_OK){
-				Location location = data.getParcelableExtra(SearchLocation.LOCATION);
+				Location location = data.getParcelableExtra(LocationSearchDialog.LOCATION);
 				if(location!=null){
 					onLocationSearch(location);
 				}else{
@@ -134,7 +135,7 @@ public abstract class BaseExpandableMaps extends Activity implements ICatalogSto
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		MapSettings.checkPrerequisite(this);
-		mStorage = AllMaps.Instance.getStorage();
+		mStorage = CatalogStorage.getStorage();
 		setWaitNoProgressView();
 		onInitialize();
 	}
@@ -166,6 +167,24 @@ public abstract class BaseExpandableMaps extends Activity implements ICatalogSto
 		mList.setOnChildClickListener(this);
 		mMode = MODE_LIST;
 	}
+
+//	protected void updateListView() {
+//		CatalogMapDifference selection = (CatalogMapDifference)mList.getSelectedItem();
+//		mAdapter = getListAdapter(); 
+//		mList.setAdapter(mAdapter);
+//		if(selection!=null){
+//			int groupPosition = mAdapter.getGroupPosition(selection);
+//			int childPosition = mAdapter.getChildPosition(groupPosition, selection);
+//			if(groupPosition!=-1){
+//				if(childPosition!=-1){
+//					mList.setSelectedChild(groupPosition, childPosition, true);
+//				}else{
+//					mList.expandGroup(groupPosition);
+//					mList.setSelectedGroup(groupPosition);
+//				}
+//			}
+//		}
+//	}
 	
 	protected void setWaitView() {
 		if(mMode!=MODE_WAIT){
@@ -215,7 +234,7 @@ public abstract class BaseExpandableMaps extends Activity implements ICatalogSto
 	
 	public void onCatalogOperationProgress(int catalogId, int progress, int total, String message)
 	{
-		if(catalogId == CatalogStorage.CATALOG_IMPORT){
+		if(isCatalogProgressEnabled(catalogId)){
 			mProgress = progress;
 			mTotal = total;
 			mMessage = message;
@@ -225,7 +244,7 @@ public abstract class BaseExpandableMaps extends Activity implements ICatalogSto
 	
 	protected Runnable mCatalogError = new Runnable() {
 		public void run() {
-			Toast.makeText(BaseExpandableMaps.this, mErrorMessage, Toast.LENGTH_LONG).show();
+			Toast.makeText(BaseExpandableCatalogActivity.this, mErrorMessage, Toast.LENGTH_LONG).show();
 		}
 	};
 	
@@ -242,7 +261,7 @@ public abstract class BaseExpandableMaps extends Activity implements ICatalogSto
 	};
 
 	protected abstract int getEmptyListMessage();
-	protected abstract ExpandableListAdapter getListAdapter();
+	protected abstract BaseCatalogExpandableAdapter getListAdapter();
 
 	protected void onInitialize() {};
 	protected void onPrepareView() {};
@@ -256,6 +275,8 @@ public abstract class BaseExpandableMaps extends Activity implements ICatalogSto
 	protected void onLocalCatalogLoaded(Catalog catalog) {};
 	protected void onOnlineCatalogLoaded(Catalog catalog) {};
 	protected void onImportCatalogLoaded(Catalog catalog) {};
+	
+	protected abstract boolean isCatalogProgressEnabled(int catalogId); 
 
 	protected void onLocalCatalogFailed() {};
 	protected void onOnlineCatalogFailed() {};

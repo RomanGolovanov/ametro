@@ -27,9 +27,9 @@ import java.util.List;
 
 public class Catalog {
 
-	public static final int MODE_CROSS_JOIN = 0;
-	public static final int MODE_LEFT_JOIN = 1;
-	public static final int MODE_RIGHT_JOIN = 2;
+	public static final int DIFF_MODE_CROSS = 0;
+	public static final int DIFF_MODE_LEFT = 1;
+	public static final int DIFF_MODE_RIGHT = 2;
 	
 	/*package*/ long mTimestamp;
 	/*package*/ String mBaseUrl;
@@ -38,7 +38,6 @@ public class Catalog {
 	/*package*/ void setTimestamp(long timestamp){
 		mTimestamp = timestamp;
 	}
-	
 	
 	/* VOLATILE FIELDS */
 	private HashMap<String, CatalogMap> mMapIndex;
@@ -84,47 +83,55 @@ public class Catalog {
 		return "[TIME:" + getTimestamp() + ";URL:" + getBaseUrl() + ";COUNT:" + (getMaps()!=null ? getMaps().size() : "null") + "]";
 	}
 	
-	public static ArrayList<CatalogMapDifference> diff(Catalog localCatalog, Catalog remoteCatalog, int mode)
+	private static ArrayList<CatalogMapPair> diffCross(Catalog localCatalog, Catalog remoteCatalog)
 	{
-		final int preffered = (mode == MODE_RIGHT_JOIN) ? CatalogMapDifference.PREFFERED_REMOTE : CatalogMapDifference.PREFFERED_LOCAL;
-		final ArrayList<CatalogMapDifference> diff = new ArrayList<CatalogMapDifference>();
+		final int preffered = CatalogMapPair.PREFFERED_LOCAL;
+		final ArrayList<CatalogMapPair> diff = new ArrayList<CatalogMapPair>();
 		HashSet<String> systemMapNames = new HashSet<String>(  );
-		if(localCatalog!=null && mode != MODE_RIGHT_JOIN){
+		if(localCatalog!=null){
 			for(CatalogMap map : localCatalog.getMaps()){
 				systemMapNames.add(map.getSystemName());
 			}
 		}
-		if(remoteCatalog!=null && mode != MODE_LEFT_JOIN){
+		if(remoteCatalog!=null){
 			for(CatalogMap map : remoteCatalog.getMaps()){
 				systemMapNames.add(map.getSystemName());
 			}
 		}
 		for(String systemName : systemMapNames){
-			final CatalogMap local = localCatalog!=null ? localCatalog.getMap(systemName) : null;
-			final CatalogMap remote = remoteCatalog!=null ? remoteCatalog.getMap(systemName) : null;
-			diff.add(new CatalogMapDifference(local, remote, preffered));
+			final CatalogMap localMap = localCatalog!=null ? localCatalog.getMap(systemName) : null;
+			final CatalogMap remoteMap = remoteCatalog!=null ? remoteCatalog.getMap(systemName) : null;
+			diff.add(new CatalogMapPair(localMap, remoteMap, preffered));
 		}
 		return diff;
 	}
 	
-	public static ArrayList<CatalogMapDifference> diffRemote(Catalog importCatalog, Catalog localCatalog)
+	private static ArrayList<CatalogMapPair> diffRemote(Catalog localCatalog, Catalog importCatalog)
 	{
-		final ArrayList<CatalogMapDifference> diff = new ArrayList<CatalogMapDifference>();
+		final ArrayList<CatalogMapPair> diff = new ArrayList<CatalogMapPair>();
 		for(CatalogMap remote : importCatalog.getMaps()){
-			final CatalogMap local = localCatalog.getMap(remote.getSystemName());
-			diff.add(new CatalogMapDifference(local, remote, CatalogMapDifference.PREFFERED_REMOTE));
+			final CatalogMap local = localCatalog==null ? null : localCatalog.getMap(remote.getSystemName());
+			diff.add(new CatalogMapPair(local, remote, CatalogMapPair.PREFFERED_REMOTE));
 		}
 		return diff;
 	}
 
-	public static List<CatalogMapDifference> diffLocal(Catalog localCatalog, Catalog onlineCatalog) {
-		final ArrayList<CatalogMapDifference> diff = new ArrayList<CatalogMapDifference>();
-		for(CatalogMap local : localCatalog.getMaps()){
-			final CatalogMap remote = onlineCatalog.getMap(local.getSystemName());
-			diff.add(new CatalogMapDifference(local, remote, CatalogMapDifference.PREFFERED_LOCAL));
+	private static List<CatalogMapPair> diffLocal(Catalog localCatalog, Catalog remoteCatalog) {
+		final ArrayList<CatalogMapPair> diff = new ArrayList<CatalogMapPair>();
+		for(CatalogMap localMap : localCatalog.getMaps()){
+			final CatalogMap remoteMap = remoteCatalog==null ? null : remoteCatalog.getMap(localMap.getSystemName());
+			diff.add(new CatalogMapPair(localMap, remoteMap, CatalogMapPair.PREFFERED_LOCAL));
 		}
 		return diff;
 	}
 
+	public static List<CatalogMapPair> diff(Catalog local, Catalog remote, int mode) {
+		switch(mode){
+		case DIFF_MODE_LEFT: return diffLocal(local, remote);
+		case DIFF_MODE_RIGHT: return diffRemote(local, remote);
+		case DIFF_MODE_CROSS: return diffCross(local, remote);
+		}
+		throw new RuntimeException("Unsupported DIFF mode");
+	}
 
 }

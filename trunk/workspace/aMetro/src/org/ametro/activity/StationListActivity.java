@@ -39,7 +39,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
-public class SelectStation extends ListActivity {
+public class StationListActivity extends ListActivity {
 
 	private final int MAIN_MENU_BY_NAME = 1;
 	private final int MAIN_MENU_BY_LINE = 2;
@@ -109,7 +109,7 @@ public class SelectStation extends ListActivity {
 				mSelection = id;
 			}
 		}
-		mMap = BrowseVectorMap.Instance.getMapView();
+		mMap = MapViewActivity.Instance.getMapView();
 		mStations = new ArrayList<StationView>( mMap.stations.length );
 		for(StationView station : mMap.stations){
 			mStations.add(station);

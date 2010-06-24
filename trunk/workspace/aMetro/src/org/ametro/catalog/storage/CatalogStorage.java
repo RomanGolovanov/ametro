@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import org.ametro.Constants;
+import org.ametro.MapSettings;
 import org.ametro.catalog.Catalog;
 
 import android.os.AsyncTask;
@@ -15,11 +16,23 @@ public class CatalogStorage implements ICatalogBuilderListener {
 	public static final int CATALOG_IMPORT = 1;
 	public static final int CATALOG_ONLINE = 2;
 	
-	public Object getSync(){
-		return mMutex;
-	}
+	private static CatalogStorage mStorage;
 	
-	public CatalogStorage(File localStorage, File localPath, File importStorage, File importPath, File onlineStorage, String onlineUrl){
+	public static CatalogStorage getStorage(){
+		if(mStorage==null){
+			synchronized (CatalogStorage.class) {
+				if(mStorage==null){
+					mStorage = new CatalogStorage(
+							MapSettings.getLocalCatalogStorageUrl(), MapSettings.getLocalCatalog(),
+							MapSettings.getImportCatalogStorageUrl(), MapSettings.getImportCatalog(),
+							MapSettings.getOnlineCatalogStorageUrl(), MapSettings.getOnlineCatalogUrl());
+				}
+			}
+		}
+		return mStorage;
+	}	
+	
+	private CatalogStorage(File localStorage, File localPath, File importStorage, File importPath, File onlineStorage, String onlineUrl){
 		this.mLocalStorage = localStorage;
 		this.mLocalPath = localPath;
 		this.mImportStorage = importStorage;
@@ -36,6 +49,10 @@ public class CatalogStorage implements ICatalogBuilderListener {
 		this.mImportCatalogBuilder = new CatalogBuilder();
 		this.mImportCatalogBuilder.addOnCatalogBuilderEvents(this);
 		
+	}
+
+	public Object getSync(){
+		return mMutex;
 	}
 	
 	public void addCatalogChangedListener(ICatalogStorageListener listener){

@@ -18,7 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package org.ametro.activity;
+package org.ametro.dialog;
 
 import java.util.List;
 
@@ -35,7 +35,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 
-public class SearchLocation extends Activity implements LocationListener {
+public class LocationSearchDialog extends Activity implements LocationListener {
 
 	public static final String LOCATION = "LOCATION";
 	public static final int WAIT_DELAY = 10000;

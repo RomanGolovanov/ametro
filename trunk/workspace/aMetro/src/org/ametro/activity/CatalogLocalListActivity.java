@@ -21,21 +21,21 @@
 
 package org.ametro.activity;
 
-import java.util.ArrayList;
 import java.util.Locale;
 
 import org.ametro.MapUri;
 import org.ametro.R;
-import org.ametro.adapter.GenericCatalogAdapter;
+import org.ametro.adapter.BaseCatalogExpandableAdapter;
+import org.ametro.adapter.CatalogLocalListAdapter;
 import org.ametro.catalog.Catalog;
-import org.ametro.catalog.CatalogMapDifference;
+import org.ametro.catalog.CatalogMapPair;
+import org.ametro.catalog.storage.CatalogStorage;
 
 import android.content.Intent;
 import android.view.View;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 
-public class LocalMaps extends BaseExpandableMaps {
+public class CatalogLocalListActivity extends BaseExpandableCatalogActivity {
 
 	public static final String EXTRA_FAVORITES_ONLY = "FAVORITES_ONLY";
 	
@@ -56,6 +56,8 @@ public class LocalMaps extends BaseExpandableMaps {
 	}
 
 	protected void onPrepareView() {
+		Catalog localPrevious = mLocal;
+		Catalog onlinePrevious = mOnline;
 		mLocal = mStorage.getLocalCatalog();
 		mOnline = mStorage.getOnlineCatalog();
 		if(mLocal == null){
@@ -64,35 +66,40 @@ public class LocalMaps extends BaseExpandableMaps {
 		if(mOnline == null){
 			mStorage.requestOnlineCatalog(false);
 		}
-		onCatalogsUpdate();
+		onCatalogsUpdate(localPrevious!=mLocal || onlinePrevious!=mOnline);
 		super.onPrepareView();
 	}
 	
-	private void onCatalogsUpdate() {
-		if(mLocal!=null && (mOnline!=null || mOnlineNotAvailable) && mMode != MODE_LIST){
+	private void onCatalogsUpdate(boolean refresh) {
+		if(mLocal!=null && (mOnline!=null || mOnlineNotAvailable)){
 			if(mLocal.getMaps().size()>0){
-				setListView();
+				if(mMode != MODE_LIST){
+					setListView();
+				}else{
+					if(refresh){
+						setListView();
+					}
+				}
 			}else{
 				setEmptyView();
 			}
 		}		
 	}
 	
-	protected ExpandableListAdapter getListAdapter() {
-		 ArrayList<CatalogMapDifference> mCatalogDifferences = Catalog.diff(mLocal, mOnline, Catalog.MODE_LEFT_JOIN);
-		return new GenericCatalogAdapter(this, mCatalogDifferences, Locale.getDefault().getLanguage() );
+	protected BaseCatalogExpandableAdapter getListAdapter() {
+		return new CatalogLocalListAdapter(this, mLocal, mOnline, Locale.getDefault().getLanguage() );
 	}
 
 	protected void onLocalCatalogLoaded(Catalog catalog) {
 		mLocal = catalog;
-		onCatalogsUpdate();
+		onCatalogsUpdate(true);
 		super.onLocalCatalogLoaded(catalog);
 	}
 	
 	protected void onOnlineCatalogLoaded(Catalog catalog) {
 		mOnline = catalog;
 		mOnlineNotAvailable = catalog == null;
-		onCatalogsUpdate();
+		onCatalogsUpdate(true);
 		super.onOnlineCatalogLoaded(catalog);
 	}
 	
@@ -102,39 +109,23 @@ public class LocalMaps extends BaseExpandableMaps {
 		super.onCatalogRefresh();
 	}
 	
-//	public void onCatalogLoaded(int catalogId, Catalog catalog) {
-//		if(catalogId == CatalogStorage.CATALOG_LOCAL){
-//			if(catalog != null){
-//				mLocal = catalog;
-//				setListView();
-//			}else{
-//				setEmptyView();
-//			}
-//			if(mOnline == null){
-//				mDownloading = true;
-//				mStorage.requestOnlineCatalog(false); 
-//			}		
-//		}
-//		if(catalogId == CatalogStorage.CATALOG_ONLINE){
-//			mOnline = catalog;
-//			mDownloading = false;
-//			setListView();
-//		}
-//	}
-
+	protected boolean isCatalogProgressEnabled(int catalogId)
+	{
+		return catalogId == CatalogStorage.CATALOG_LOCAL;
+	}
 
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-		CatalogMapDifference diff = (CatalogMapDifference)mAdapter.getChild(groupPosition, childPosition);
+		CatalogMapPair diff = (CatalogMapPair)mAdapter.getChild(groupPosition, childPosition);
 		if(diff.isLocalAvailable()){
 			String fileName = diff.getLocalUrl();
 			Intent i = new Intent();
 			i.setData(MapUri.create( mLocal.getBaseUrl() + "/" + fileName));
 			
-			AllMaps.Instance.setResult(RESULT_OK, i);
-			AllMaps.Instance.finish();
+			CatalogTabHostActivity.getInstance().setResult(RESULT_OK, i);
+			CatalogTabHostActivity.getInstance().finish();
 		}else{
-			Intent i = new Intent(this, MapDetails.class);
-			i.putExtra(MapDetails.ONLINE_MAP_URL, diff.getRemoteUrl());
+			Intent i = new Intent(this, MapDetailsActivity.class);
+			i.putExtra(MapDetailsActivity.ONLINE_MAP_URL, diff.getRemoteUrl());
 			startActivity(i);
 		}
 		return true;
