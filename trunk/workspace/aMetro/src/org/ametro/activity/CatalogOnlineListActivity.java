@@ -20,17 +20,15 @@
  */
 package org.ametro.activity;
 
-import java.util.Locale;
-
 import org.ametro.R;
-import org.ametro.adapter.BaseCatalogExpandableAdapter;
-import org.ametro.adapter.CatalogOnlineListAdapter;
+import org.ametro.adapter.CatalogExpandableAdapter;
 import org.ametro.catalog.Catalog;
+import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.storage.CatalogStorage;
 
 import android.widget.TextView;
 
-public class CatalogOnlineListActivity extends BaseExpandableCatalogActivity {
+public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity  {
 
 	private static final int MODE_DOWNLOAD_FAILED = 1000;
 
@@ -119,12 +117,34 @@ public class CatalogOnlineListActivity extends BaseExpandableCatalogActivity {
 		return R.string.msg_no_maps_in_online;
 	}
 
-	protected BaseCatalogExpandableAdapter getListAdapter() {
-		return new CatalogOnlineListAdapter(this, mOnline, mLocal, Locale.getDefault().getLanguage());
+	protected CatalogExpandableAdapter getListAdapter() {
+		return new CatalogExpandableAdapter(this,mLocal, mOnline, Catalog.DIFF_MODE_RIGHT, R.array.online_catalog_map_state_colors,this);
 	}
 
 	protected boolean isCatalogProgressEnabled(int catalogId) {
 		return false;
 	}
 
+	public int getCatalogStatus(CatalogMap local, CatalogMap remote) {
+    	if(remote.isNotSupported()){
+    		if(local == null || local.isNotSupported() || local.isCorruted()){
+    			return NOT_SUPPORTED;
+    		}else{
+    			return UPDATE_NOT_SUPPORTED;
+    		}
+    	}else{
+    		if(local == null){
+    			return DOWNLOAD;
+    		}else if(local.isNotSupported() || local.isCorruted()){
+    			return UPDATE;
+    		}else{
+    			if(local.getTimestamp() >= remote.getTimestamp()){
+    				return INSTALLED;
+    			}else{
+    				return UPDATE;
+    			}
+    		}
+    	}
+	}
 }
+

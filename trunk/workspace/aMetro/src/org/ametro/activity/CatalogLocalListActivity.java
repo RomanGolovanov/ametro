@@ -21,14 +21,14 @@
 package org.ametro.activity;
 
 import org.ametro.R;
-import org.ametro.adapter.BaseCatalogExpandableAdapter;
-import org.ametro.adapter.CatalogLocalListAdapter;
+import org.ametro.adapter.CatalogExpandableAdapter;
 import org.ametro.catalog.Catalog;
+import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.storage.CatalogStorage;
 
 import android.content.Intent;
 
-public class CatalogLocalListActivity extends BaseExpandableCatalogActivity {
+public class CatalogLocalListActivity extends BaseCatalogExpandableActivity {
 
 	public static final String EXTRA_FAVORITES_ONLY = "FAVORITES_ONLY";
 	
@@ -79,8 +79,8 @@ public class CatalogLocalListActivity extends BaseExpandableCatalogActivity {
 		}		
 	}
 	
-	protected BaseCatalogExpandableAdapter getListAdapter() {
-		return new CatalogLocalListAdapter(this, mLocal, mOnline);
+	protected CatalogExpandableAdapter getListAdapter() {
+		return new CatalogExpandableAdapter(this, mLocal, mOnline, Catalog.DIFF_MODE_LEFT, R.array.local_catalog_map_state_colors,this);
 	}
 
 	protected void onLocalCatalogLoaded(Catalog catalog) {
@@ -110,5 +110,50 @@ public class CatalogLocalListActivity extends BaseExpandableCatalogActivity {
 	protected int getEmptyListMessage() {
 		return mFavoritesOnly ? R.string.msg_no_maps_in_favorites : R.string.msg_no_maps_in_local;
 	}
-	
+
+	public int getCatalogStatus(CatalogMap local, CatalogMap remote) {
+    	if(remote==null){
+    		// remote not exist
+    		if(local.isCorruted()){
+    			return CORRUPTED;
+    		}else if(!local.isSupported()){
+    			return NOT_SUPPORTED;
+    		}else{
+    			return OFFLINE;
+    		}
+    	}else if(!remote.isSupported()){
+    		// remote not supported
+    		if(local.isCorruted()){
+    			return CORRUPTED;
+    		}else if(!local.isSupported()){
+    			return NOT_SUPPORTED;
+    		}else{
+    			return INSTALLED;
+    		}
+    	}else{
+    		// remote OK
+    		if(local.isCorruted()){
+    			return UPDATE;
+    		}else if(!local.isSupported()){
+    			return UPDATE;
+    		}else{
+    			if(local.getTimestamp() >= remote.getTimestamp()){
+    				return INSTALLED;
+    			}else{
+    				return UPDATE;
+    			}
+    		}
+    	}
+    }
+
+	public boolean onCatalogMapClick(CatalogMap local, CatalogMap remote) {
+		int state = getCatalogStatus(local, remote);
+		switch(state){
+		case UPDATE:
+			invokeFinish(local);
+			return true;
+		}
+		return super.onCatalogMapClick(local, remote);
+	}
+
 }

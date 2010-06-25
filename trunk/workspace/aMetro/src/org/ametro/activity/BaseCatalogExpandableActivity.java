@@ -23,10 +23,11 @@ package org.ametro.activity;
 import org.ametro.GlobalSettings;
 import org.ametro.MapUri;
 import org.ametro.R;
-import org.ametro.adapter.BaseCatalogExpandableAdapter;
+import org.ametro.adapter.CatalogExpandableAdapter;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.CatalogMapPair;
+import org.ametro.catalog.ICatalogStatusProvider;
 import org.ametro.catalog.storage.CatalogStorage;
 import org.ametro.catalog.storage.ICatalogStorageListener;
 import org.ametro.dialog.LocationSearchDialog;
@@ -45,7 +46,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ExpandableListView.OnChildClickListener;
 
-public abstract class BaseExpandableCatalogActivity extends Activity implements ICatalogStorageListener, OnChildClickListener {
+public abstract class BaseCatalogExpandableActivity extends Activity implements ICatalogStorageListener, ICatalogStatusProvider, OnChildClickListener {
 
 	protected static final int MODE_WAIT_NO_PROGRESS = 1;
 	protected static final int MODE_WAIT = 2;
@@ -56,7 +57,7 @@ public abstract class BaseExpandableCatalogActivity extends Activity implements 
 	
 	protected CatalogStorage mStorage;
 	
-	protected BaseCatalogExpandableAdapter mAdapter;
+	protected CatalogExpandableAdapter mAdapter;
 	protected ExpandableListView mList;
 
 	protected TextView mCounterTextView;
@@ -229,7 +230,7 @@ public abstract class BaseExpandableCatalogActivity extends Activity implements 
 	
 	protected Runnable mCatalogError = new Runnable() {
 		public void run() {
-			Toast.makeText(BaseExpandableCatalogActivity.this, mErrorMessage, Toast.LENGTH_LONG).show();
+			Toast.makeText(BaseCatalogExpandableActivity.this, mErrorMessage, Toast.LENGTH_LONG).show();
 		}
 	};
 	
@@ -246,7 +247,7 @@ public abstract class BaseExpandableCatalogActivity extends Activity implements 
 	};
 
 	protected abstract int getEmptyListMessage();
-	protected abstract BaseCatalogExpandableAdapter getListAdapter();
+	protected abstract CatalogExpandableAdapter getListAdapter();
 
 	protected void onInitialize() {};
 	protected void onPrepareView() {};
@@ -286,18 +287,59 @@ public abstract class BaseExpandableCatalogActivity extends Activity implements 
 	
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 		CatalogMapPair diff = (CatalogMapPair)mAdapter.getChild(groupPosition, childPosition);
-		if(diff.isUpdateAvailable()){
-			Intent i = new Intent(this, MapDetailsActivity.class);
-			i.putExtra(MapDetailsActivity.REMOTE_MAP_URL, diff.getRemoteUrl());
-			startActivity(i);
-		}else if(diff.isLocalAvailable()){
-			CatalogMap local = diff.getLocal();
-			Intent i = new Intent();
-			i.setData(MapUri.create(local.getAbsoluteUrl()));
-			CatalogTabHostActivity.getInstance().setResult(RESULT_OK, i);
-			CatalogTabHostActivity.getInstance().finish();
+//		if(diff.isUpdateAvailable()){
+//			Intent i = new Intent(this, MapDetailsActivity.class);
+//			i.putExtra(MapDetailsActivity.REMOTE_MAP_URL, diff.getRemoteUrl());
+//			startActivity(i);
+//		}else if(diff.isLocalAvailable()){
+//			CatalogMap local = diff.getLocal();
+//			Intent i = new Intent();
+//			i.setData(MapUri.create(local.getAbsoluteUrl()));
+//			CatalogTabHostActivity.getInstance().setResult(RESULT_OK, i);
+//			CatalogTabHostActivity.getInstance().finish();
+//		}
+		
+		return onCatalogMapClick(diff.getLocal(), diff.getRemote());		
+	}
+
+	public boolean onCatalogMapClick(CatalogMap local, CatalogMap remote) {
+		int state =  getCatalogStatus(local, remote);
+		switch(state){
+		case OFFLINE:
+		case INSTALLED:
+			invokeFinish(local);
+			return true;
+		case UPDATE:
+		case IMPORT:
+		case DOWNLOAD:
+			invokeMapDetails(remote);
+			return true;
+		case NOT_SUPPORTED:
+		case UPDATE_NOT_SUPPORTED:
+		case CORRUPTED:
+			// do nothing
+			return true;
+		}		
+		return false;
+	}
+
+	protected void invokeMapDetails(CatalogMap remote) {
+		Intent detailsIntent = new Intent(this, MapDetailsActivity.class);
+		detailsIntent.putExtra(MapDetailsActivity.REMOTE_MAP_URL, remote.getUrl());
+		startActivity(detailsIntent);
+	}
+
+	protected void invokeFinish(CatalogMap local) {
+		Intent viewIntent = new Intent();
+		viewIntent.setData(MapUri.create(local.getAbsoluteUrl()));
+		Activity parent =  CatalogTabHostActivity.getInstance();
+		if(parent!=null){
+			parent.setResult(RESULT_OK, viewIntent);
+			parent.finish();
+		}else{
+			setResult(RESULT_OK, viewIntent);
+			finish();
 		}
-		return true;		
 	}
 	
 	

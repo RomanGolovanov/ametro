@@ -45,6 +45,36 @@
 	    <item>Download</item>
 	    <item>Update not supported</item>
     </string-array>
+	<array name="import_catalog_map_state_colors">
+		<item>#ffff00ff</item> 
+		<item>#ffff00ff</item>
+		<item>#ffff0000</item>
+		<item>#ffffff00</item>
+		<item>#ffffffff</item>
+		<item>#ffffff00</item>
+		<item>#ffff00ff</item>
+		<item>#ffff00ff</item>
+	</array>    
+	<array name="online_catalog_map_state_colors">
+		<item>#ffff00ff</item> 
+		<item>#ffff0000</item>
+		<item>#ffff0000</item>
+		<item>#ffffff00</item>
+		<item>#ffffffff</item>
+		<item>#ffff00ff</item>
+		<item>#ffffffff</item>
+		<item>#ffff0000</item>
+	</array>    
+	<array name="local_catalog_map_state_colors">
+		<item>#ffcccccc</item> 
+		<item>#ff000000</item>
+		<item>#ff000000</item>
+		<item>#ffffff00</item>
+		<item>#ffffffff</item>
+		<item>#ffff00ff</item>
+		<item>#ffff00ff</item>
+		<item>#ffff00ff</item>
+	</array>    
     <string-array name="version_changelog">
         <item>0.1.0.r163: changed stations/route lists appearance</item>
         <item>0.1.1.r164: removed obsolete code</item>
@@ -108,6 +138,7 @@
     	<item>0.2.4.r246: activities refactored</item>
     	<item>0.2.4.r247: online catalog states fixed</item>
     	<item>0.2.4.r249: online catalog moved to dropbox</item>
+    	<item>0.2.4.r250: refactored catalog adapter classes</item>
     </string-array>
 
     <string-array name="create_route_modes">
