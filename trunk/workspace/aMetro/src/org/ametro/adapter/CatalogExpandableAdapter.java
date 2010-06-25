@@ -30,7 +30,7 @@ import org.ametro.GlobalSettings;
 import org.ametro.R;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMapPair;
-import org.ametro.catalog.ICatalogStatusProvider;
+import org.ametro.catalog.ICatalogStateProvider;
 import org.ametro.catalog.CatalogMapPair.CatalogMapDifferenceCityNameComparator;
 import org.ametro.model.TransportType;
 
@@ -64,7 +64,7 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter {
     protected String[] mStates;
     protected int[] mStateColors;
     
-    protected ICatalogStatusProvider mStatusProvider;
+    protected ICatalogStateProvider mStatusProvider;
     
     protected HashMap<Integer,Drawable> mTransportTypes;
 
@@ -81,7 +81,7 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter {
     	mLanguageCode = languageCode;
     }
     
-    public CatalogExpandableAdapter(Context context, Catalog local, Catalog remote, int mode, int colorsArray, ICatalogStatusProvider statusProvider) {
+    public CatalogExpandableAdapter(Context context, Catalog local, Catalog remote, int mode, int colorsArray, ICatalogStateProvider statusProvider) {
         mContext = context;
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		mStates = context.getResources().getStringArray(R.array.catalog_map_states);
@@ -91,7 +91,7 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter {
 		mLocal = local;
 		mRemote = remote;
 		mMode = mode;
-		mData = Catalog.diff(local, remote, Catalog.DIFF_MODE_RIGHT);
+		mData = Catalog.diff(local, remote, mode);
 		
 		mLanguageCode = GlobalSettings.getLanguage(); 
 		bindTransportTypes();
@@ -143,7 +143,7 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter {
 		
 		final String code = mLanguageCode;
 		final CatalogMapPair ref = mRefs[groupPosition][childPosition];
-		final int state = mStatusProvider.getCatalogStatus(ref.getLocal(), ref.getRemote());
+		final int state = mStatusProvider.getCatalogState(ref.getLocal(), ref.getRemote());
 		holder.mText.setText(ref.getCity(code));
 		holder.mStatus.setText(mStates[state]);
 		holder.mStatus.setTextColor(mStateColors[state]);

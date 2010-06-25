@@ -42,6 +42,7 @@ public class CatalogMap {
 	/*package*/ String[] mCity;
 	/*package*/ String[] mCountry;
 	/*package*/ String[] mDescription;
+	/*package*/ String[] mChangeLog;
 	
 	/*package*/ boolean mCorrupted;
 
@@ -50,7 +51,7 @@ public class CatalogMap {
 	public CatalogMap(Catalog owner, String systemName, String url, long timestamp, long transports, long version,
 			long size, String minVersion,
 			String[] locales, String[] country,
-			String[] city, String[] description, 
+			String[] city, String[] description, String[] changeLog, 
 			boolean corrupted) {
 		this.mOwner = owner;
 		this.mSystemName = systemName;
@@ -65,6 +66,7 @@ public class CatalogMap {
 		this.mCity = city;
 		this.mDescription = description;
 		this.mCorrupted = corrupted;
+		this.mChangeLog = changeLog;
 	}
 
 	public String getSystemName() {
@@ -108,6 +110,10 @@ public class CatalogMap {
 		return mDescription[getLocale(code)];
 	}
 
+	public String getChangeLog(String code) {
+		return mChangeLog[getLocale(code)];
+	}
+	
 	public long getSize() {
 		return mSize;
 	}
@@ -157,5 +163,6 @@ public class CatalogMap {
 	public boolean isNotSupported() {
 		return false;
 	}
+
 
 }

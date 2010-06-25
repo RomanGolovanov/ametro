@@ -41,6 +41,7 @@ public class CatalogDeserializer {
 	public static String TAG_COUNTRY = "country";
 	public static String TAG_CITY = "city";
 	public static String TAG_DESCRIPTION = "description";
+	public static String TAG_CHANGE_LOG = "changelog";
 	
 	public static String ATTR_URL = "url";
 	public static String ATTR_SYSTEM_NAME = "name";
@@ -71,6 +72,7 @@ public class CatalogDeserializer {
 		ArrayList<String> mapCity = new ArrayList<String>();
 		ArrayList<String> mapCountry = new ArrayList<String>();
 		ArrayList<String> mapDescription = new ArrayList<String>();
+		ArrayList<String> mapChangeLost = new ArrayList<String>();
 		
 		Stack<String> tags = new Stack<String>(); 
 		
@@ -120,6 +122,7 @@ public class CatalogDeserializer {
 		    			 (String[]) mapCountry.toArray(new String[mapCountry.size()]),
 		    			 (String[]) mapCity.toArray(new String[mapCity.size()]),
 		    			 (String[]) mapDescription.toArray(new String[mapDescription.size()]),
+		    			 (String[]) mapChangeLost.toArray(new String[mapChangeLost.size()]),
 		    			 corrupted
 		    			 );
 		    	 mapLocales.clear();
@@ -136,6 +139,8 @@ public class CatalogDeserializer {
 		    	 mapCity.add( xpp.getText() );
 		     }else if(TAG_DESCRIPTION.equals(tagName)){
 		    	 mapDescription.add( xpp.getText() );
+		     }else if(TAG_CHANGE_LOG.equals(tagName)){
+		    	 mapChangeLost.add( xpp.getText() );
 		     }
 		 }
 		 eventType = xpp.next();

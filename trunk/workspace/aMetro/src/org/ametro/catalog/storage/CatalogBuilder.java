@@ -34,6 +34,7 @@ import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.model.Model;
 import org.ametro.model.storage.ModelBuilder;
+import org.ametro.util.FileUtil;
 import org.ametro.util.WebUtil;
 
 public class CatalogBuilder {
@@ -102,6 +103,7 @@ public class CatalogBuilder {
 			Catalog catalog = CatalogDeserializer.deserializeCatalog(strm);
 			return catalog;
 		}catch(Exception ex){
+			FileUtil.delete(url);
 			return null;
 		}finally{
 			if(strm!=null){
@@ -194,6 +196,7 @@ public class CatalogBuilder {
 		final String[] country = new String[]{UNKNOWN_EN,UNKNOWN_RU};
 		final String[] city = new String[]{suggestedMapName,suggestedMapName};
 		final String[] description = new String[]{"",""};
+		final String[] changeLog = new String[]{"",""};
 		
 		String systemName = fileName;
 		if(fileName.endsWith(PMETRO_EXTENSION)){
@@ -213,6 +216,7 @@ public class CatalogBuilder {
 				 country,
 				 city,
 				 description,
+				 changeLog,
 				 true
 				 );
 		return map;
@@ -235,11 +239,13 @@ public class CatalogBuilder {
 		final String[] country = new String[len];
 		final String[] city = new String[len];
 		final String[] description = new String[len];
+		final String[] changeLog = new String[len];
 		for(ModelDescription m : modelLocales){
 			locales[index] = m.locale;
 			city[index] = m.city;
 			country[index] = m.country;
 			description[index] = m.description;
+			changeLog[index] = "";
 			index++;
 		}
 		
@@ -261,6 +267,7 @@ public class CatalogBuilder {
 				 country,
 				 city,
 				 description,
+				 changeLog,
 				 false
 				 );
 		return map;

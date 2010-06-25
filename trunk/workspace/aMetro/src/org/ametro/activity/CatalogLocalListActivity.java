@@ -20,6 +20,13 @@
  */
 package org.ametro.activity;
 
+import static org.ametro.catalog.CatalogMapState.CORRUPTED;
+import static org.ametro.catalog.CatalogMapState.INSTALLED;
+import static org.ametro.catalog.CatalogMapState.NOT_SUPPORTED;
+import static org.ametro.catalog.CatalogMapState.OFFLINE;
+import static org.ametro.catalog.CatalogMapState.UPDATE;
+import static org.ametro.catalog.CatalogMapState.NEED_TO_UPDATE;
+
 import org.ametro.R;
 import org.ametro.adapter.CatalogExpandableAdapter;
 import org.ametro.catalog.Catalog;
@@ -27,6 +34,7 @@ import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.storage.CatalogStorage;
 
 import android.content.Intent;
+
 
 public class CatalogLocalListActivity extends BaseCatalogExpandableActivity {
 
@@ -111,7 +119,7 @@ public class CatalogLocalListActivity extends BaseCatalogExpandableActivity {
 		return mFavoritesOnly ? R.string.msg_no_maps_in_favorites : R.string.msg_no_maps_in_local;
 	}
 
-	public int getCatalogStatus(CatalogMap local, CatalogMap remote) {
+	public int getCatalogState(CatalogMap local, CatalogMap remote) {
     	if(remote==null){
     		// remote not exist
     		if(local.isCorruted()){
@@ -133,9 +141,9 @@ public class CatalogLocalListActivity extends BaseCatalogExpandableActivity {
     	}else{
     		// remote OK
     		if(local.isCorruted()){
-    			return UPDATE;
+    			return NEED_TO_UPDATE;
     		}else if(!local.isSupported()){
-    			return UPDATE;
+    			return NEED_TO_UPDATE;
     		}else{
     			if(local.getTimestamp() >= remote.getTimestamp()){
     				return INSTALLED;
@@ -146,8 +154,7 @@ public class CatalogLocalListActivity extends BaseCatalogExpandableActivity {
     	}
     }
 
-	public boolean onCatalogMapClick(CatalogMap local, CatalogMap remote) {
-		int state = getCatalogStatus(local, remote);
+	public boolean onCatalogMapClick(CatalogMap local, CatalogMap remote, int state) {
 		switch(state){
 		case UPDATE:
 			invokeFinish(local);

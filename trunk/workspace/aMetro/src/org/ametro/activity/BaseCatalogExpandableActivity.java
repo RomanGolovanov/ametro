@@ -20,6 +20,15 @@
  */
 package org.ametro.activity;
 
+import static org.ametro.catalog.CatalogMapState.CORRUPTED;
+import static org.ametro.catalog.CatalogMapState.DOWNLOAD;
+import static org.ametro.catalog.CatalogMapState.IMPORT;
+import static org.ametro.catalog.CatalogMapState.INSTALLED;
+import static org.ametro.catalog.CatalogMapState.NOT_SUPPORTED;
+import static org.ametro.catalog.CatalogMapState.OFFLINE;
+import static org.ametro.catalog.CatalogMapState.UPDATE;
+import static org.ametro.catalog.CatalogMapState.UPDATE_NOT_SUPPORTED;
+
 import org.ametro.GlobalSettings;
 import org.ametro.MapUri;
 import org.ametro.R;
@@ -27,7 +36,7 @@ import org.ametro.adapter.CatalogExpandableAdapter;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.CatalogMapPair;
-import org.ametro.catalog.ICatalogStatusProvider;
+import org.ametro.catalog.ICatalogStateProvider;
 import org.ametro.catalog.storage.CatalogStorage;
 import org.ametro.catalog.storage.ICatalogStorageListener;
 import org.ametro.dialog.LocationSearchDialog;
@@ -37,16 +46,18 @@ import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.ExpandableListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ExpandableListView.OnChildClickListener;
 
-public abstract class BaseCatalogExpandableActivity extends Activity implements ICatalogStorageListener, ICatalogStatusProvider, OnChildClickListener {
+public abstract class BaseCatalogExpandableActivity extends Activity implements ICatalogStorageListener, ICatalogStateProvider, OnChildClickListener {
 
 	protected static final int MODE_WAIT_NO_PROGRESS = 1;
 	protected static final int MODE_WAIT = 2;
@@ -77,9 +88,71 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	private final int MAIN_MENU_SETTINGS = 999;
 	private final int MAIN_MENU_ABOUT = 1000;
 
+	private final int CONTEXT_MENU_SHOW_MAP = 1;
+	private final int CONTEXT_MENU_SHOW_DETAILS = 2;
+	private final int CONTEXT_MENU_DOWNLOAD = 3;
+	private final int CONTEXT_MENU_IMPORT = 4;
+	
+	
+	private final static int REQUEST_DETAILS = 997;
 	private final static int REQUEST_LOCATION = 998;
 	private final static int REQUEST_SETTINGS = 999;
 	
+	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+		ExpandableListView.ExpandableListContextMenuInfo info = (ExpandableListView.ExpandableListContextMenuInfo) menuInfo;
+		int type = ExpandableListView.getPackedPositionType(info.packedPosition);
+		if (type == ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
+			int group = ExpandableListView.getPackedPositionGroup(info.packedPosition);
+			int child = ExpandableListView.getPackedPositionChild(info.packedPosition);
+			CatalogMapPair pair = (CatalogMapPair)mAdapter.getChild(group, child);
+			CatalogMap local = pair.getLocal();
+			CatalogMap remote = pair.getRemote();
+			int state = getCatalogState(local, remote);
+
+			int pos = 0;
+			
+			//menu.setHeaderTitle();
+			if(state == INSTALLED || state == OFFLINE || state == UPDATE){
+				menu.add(0, CONTEXT_MENU_SHOW_MAP, pos++, R.string.context_menu_show_map);
+			}
+			if(state == DOWNLOAD){
+				//menu.add(0, CONTEXT_MENU_DOWNLOAD, pos++, R.string.context_menu_download);
+			}
+			if(state == IMPORT){
+				//menu.add(0, CONTEXT_MENU_IMPORT, pos++, R.string.context_menu_import);
+			}
+			menu.add(0, CONTEXT_MENU_SHOW_DETAILS, pos++, R.string.context_menu_show_map_details);
+		}
+		super.onCreateContextMenu(menu, v, menuInfo);
+	}
+
+	public boolean onContextItemSelected(MenuItem item) {
+		ExpandableListView.ExpandableListContextMenuInfo info = (ExpandableListView.ExpandableListContextMenuInfo) item.getMenuInfo();
+		int type = ExpandableListView.getPackedPositionType(info.packedPosition);
+		if (type == ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
+			int group = ExpandableListView.getPackedPositionGroup(info.packedPosition);
+			int child = ExpandableListView.getPackedPositionChild(info.packedPosition);
+			CatalogMapPair pair = (CatalogMapPair)mAdapter.getChild(group, child);
+			CatalogMap local = pair.getLocal();
+			CatalogMap remote = pair.getRemote();
+			int state = getCatalogState(local, remote);
+			switch (item.getItemId()) {
+			case CONTEXT_MENU_SHOW_MAP:
+				if(state == INSTALLED || state == OFFLINE || state == UPDATE){
+					invokeFinish(local);
+				}
+				return true;
+			case CONTEXT_MENU_SHOW_DETAILS:
+				invokeMapDetails(local, remote,state);
+				return true;
+			case CONTEXT_MENU_IMPORT:
+			case CONTEXT_MENU_DOWNLOAD:
+				// do nothing
+			}
+		}
+		return super.onContextItemSelected(item);
+	}
+			
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		menu.add(0, MAIN_MENU_REFRESH, Menu.NONE, R.string.menu_refresh).setIcon(android.R.drawable.ic_menu_rotate);
@@ -131,6 +204,11 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 				onLocationSearchCanceled();	
 			}
 			break;
+		case REQUEST_DETAILS:
+			if(resultCode == RESULT_OK){
+				Toast.makeText(this, "Operation selected: " + data.getIntExtra(MapDetailsActivity.EXTRA_RESULT, -1), Toast.LENGTH_SHORT).show();
+			}
+			break;
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
@@ -169,6 +247,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		mAdapter = getListAdapter(); 
 		mList.setAdapter(mAdapter);
 		mList.setOnChildClickListener(this);
+		registerForContextMenu(mList);
 		mMode = MODE_LIST;
 	}
 	
@@ -274,7 +353,6 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	protected void onImportCatalogLoaded(Catalog catalog) {};
 	
 	protected abstract boolean isCatalogProgressEnabled(int catalogId);
-	//protected abstract Catalog
 
 	protected void onLocalCatalogFailed() {};
 	protected void onOnlineCatalogFailed() {};
@@ -287,23 +365,11 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 		CatalogMapPair diff = (CatalogMapPair)mAdapter.getChild(groupPosition, childPosition);
-//		if(diff.isUpdateAvailable()){
-//			Intent i = new Intent(this, MapDetailsActivity.class);
-//			i.putExtra(MapDetailsActivity.REMOTE_MAP_URL, diff.getRemoteUrl());
-//			startActivity(i);
-//		}else if(diff.isLocalAvailable()){
-//			CatalogMap local = diff.getLocal();
-//			Intent i = new Intent();
-//			i.setData(MapUri.create(local.getAbsoluteUrl()));
-//			CatalogTabHostActivity.getInstance().setResult(RESULT_OK, i);
-//			CatalogTabHostActivity.getInstance().finish();
-//		}
-		
 		return onCatalogMapClick(diff.getLocal(), diff.getRemote());		
 	}
 
 	public boolean onCatalogMapClick(CatalogMap local, CatalogMap remote) {
-		int state =  getCatalogStatus(local, remote);
+		int state =  getCatalogState(local, remote);
 		switch(state){
 		case OFFLINE:
 		case INSTALLED:
@@ -312,7 +378,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		case UPDATE:
 		case IMPORT:
 		case DOWNLOAD:
-			invokeMapDetails(remote);
+			invokeMapDetails(local,remote,state);
 			return true;
 		case NOT_SUPPORTED:
 		case UPDATE_NOT_SUPPORTED:
@@ -323,10 +389,17 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		return false;
 	}
 
-	protected void invokeMapDetails(CatalogMap remote) {
+	protected void invokeMapDetails(CatalogMap local, CatalogMap remote, int state) {
 		Intent detailsIntent = new Intent(this, MapDetailsActivity.class);
-		detailsIntent.putExtra(MapDetailsActivity.REMOTE_MAP_URL, remote.getUrl());
-		startActivity(detailsIntent);
+		if(local!=null){
+			detailsIntent.putExtra(MapDetailsActivity.EXTRA_LOCAL_MAP_URL, local.getUrl());
+		}
+		if(remote!=null){
+			detailsIntent.putExtra(MapDetailsActivity.EXTRA_REMOTE_MAP_URL, remote.getUrl());
+		}
+		detailsIntent.putExtra(MapDetailsActivity.EXTRA_STATE, state);
+		detailsIntent.putExtra(MapDetailsActivity.EXTRA_SYSTEM_NAME, (local!=null) ? local.getSystemName() : remote.getSystemName() );
+		startActivityForResult(detailsIntent, REQUEST_DETAILS);
 	}
 
 	protected void invokeFinish(CatalogMap local) {
