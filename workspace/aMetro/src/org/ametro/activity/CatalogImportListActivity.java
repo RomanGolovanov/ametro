@@ -22,16 +22,16 @@ package org.ametro.activity;
 
 import org.ametro.R;
 import org.ametro.activity.obsolete.ImportPmz;
-import org.ametro.adapter.BaseCatalogExpandableAdapter;
-import org.ametro.adapter.CatalogImportListAdapter;
+import org.ametro.adapter.CatalogExpandableAdapter;
 import org.ametro.catalog.Catalog;
+import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.storage.CatalogStorage;
 
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class CatalogImportListActivity extends BaseExpandableCatalogActivity {
+public class CatalogImportListActivity extends BaseCatalogExpandableActivity {
 
 	private Catalog mLocal;
 	private Catalog mImport;
@@ -110,8 +110,8 @@ public class CatalogImportListActivity extends BaseExpandableCatalogActivity {
 		return R.string.msg_no_maps_in_import;
 	}
 	
-	protected BaseCatalogExpandableAdapter getListAdapter() {
-		return new CatalogImportListAdapter(this, mImport, mLocal);
+	protected CatalogExpandableAdapter getListAdapter() {
+		return new CatalogExpandableAdapter(this, mLocal, mImport, Catalog.DIFF_MODE_RIGHT, R.array.import_catalog_map_state_colors,this);
 	}	
 	
 	protected void onLocalCatalogLoaded(Catalog catalog) {
@@ -129,6 +129,24 @@ public class CatalogImportListActivity extends BaseExpandableCatalogActivity {
 	protected boolean isCatalogProgressEnabled(int catalogId)
 	{
 		return catalogId == CatalogStorage.CATALOG_IMPORT;
+	}
+
+	public int getCatalogStatus(CatalogMap local, CatalogMap remote) {
+    	if(remote.isCorruted()){
+    		return CORRUPTED;
+    	}else{
+    		if(local == null){
+    			return IMPORT;
+    		}else if(!local.isSupported() || local.isCorruted()){
+    			return UPDATE;
+    		}else{
+    			if(local.getTimestamp() >= remote.getTimestamp()){
+    				return INSTALLED;
+    			}else{
+    				return UPDATE;
+    			}
+    		}
+    	}
 	}
 	
 }

@@ -37,15 +37,6 @@ public class CatalogMapPair {
 		}
 		
 	}
-
-	public static final int OFFLINE = 0; 
-	public static final int NOT_SUPPORTED = 1;
-	public static final int CORRUPTED = 2;
-	public static final int UPDATE = 3; 
-	public static final int INSTALLED = 4; 
-	public static final int IMPORT = 5; 
-	public static final int DOWNLOAD = 6; 
-	public static final int UPDATE_NOT_SUPPORTED = 7; 
 		
 	public final static int PREFFERED_LOCAL = 0;
 	public final static int PREFFERED_REMOTE = 0;
@@ -73,22 +64,22 @@ public class CatalogMapPair {
 		return mLocal!=null && mRemote!=null && mLocal.completeEqual(mRemote);
 	}
 	
-	public int getState(){
-		if(mLocal!=null && mRemote == null){
-			return mLocal.isCorruted() ? CORRUPTED : OFFLINE;
-		}
-		if(mLocal==null && mRemote!=null){
-			return mRemote.isCorruted() ? CORRUPTED : DOWNLOAD;
-		}
-		if(mLocal.isCorruted() && mRemote.isCorruted()){
-			return CORRUPTED;
-		}
-		
-		if(mLocal.getTimestamp() < mRemote.getTimestamp()){
-			return UPDATE;
-		}
-		return INSTALLED;
-	}
+//	public int getState(){
+//		if(mLocal!=null && mRemote == null){
+//			return mLocal.isCorruted() ? CORRUPTED : OFFLINE;
+//		}
+//		if(mLocal==null && mRemote!=null){
+//			return mRemote.isCorruted() ? CORRUPTED : DOWNLOAD;
+//		}
+//		if(mLocal.isCorruted() && mRemote.isCorruted()){
+//			return CORRUPTED;
+//		}
+//		
+//		if(mLocal.getTimestamp() < mRemote.getTimestamp()){
+//			return UPDATE;
+//		}
+//		return INSTALLED;
+//	}
 
 	public long getTransports() {
 		return preffered().getTransports();

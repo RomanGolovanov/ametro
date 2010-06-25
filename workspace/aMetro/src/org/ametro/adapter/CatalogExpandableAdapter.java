@@ -28,7 +28,9 @@ import java.util.TreeSet;
 
 import org.ametro.GlobalSettings;
 import org.ametro.R;
+import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMapPair;
+import org.ametro.catalog.ICatalogStatusProvider;
 import org.ametro.catalog.CatalogMapPair.CatalogMapDifferenceCityNameComparator;
 import org.ametro.model.TransportType;
 
@@ -45,8 +47,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public abstract class BaseCatalogExpandableAdapter extends BaseExpandableListAdapter {
+public class CatalogExpandableAdapter extends BaseExpandableListAdapter {
 
+	protected Catalog mLocal;
+	protected Catalog mRemote;
+	protected int mMode;
+	
 	protected String mLanguageCode;
 	protected Context mContext;
     protected LayoutInflater mInflater;
@@ -57,6 +63,8 @@ public abstract class BaseCatalogExpandableAdapter extends BaseExpandableListAda
 
     protected String[] mStates;
     protected int[] mStateColors;
+    
+    protected ICatalogStatusProvider mStatusProvider;
     
     protected HashMap<Integer,Drawable> mTransportTypes;
 
@@ -73,14 +81,24 @@ public abstract class BaseCatalogExpandableAdapter extends BaseExpandableListAda
     	mLanguageCode = languageCode;
     }
     
-    public BaseCatalogExpandableAdapter(Context context) {
+    public CatalogExpandableAdapter(Context context, Catalog local, Catalog remote, int mode, int colorsArray, ICatalogStatusProvider statusProvider) {
         mContext = context;
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		mLanguageCode = GlobalSettings.getLanguage();
+		mStates = context.getResources().getStringArray(R.array.catalog_map_states);
+		mStateColors = context.getResources().getIntArray(colorsArray);
+		mStatusProvider = statusProvider;
+		
+		mLocal = local;
+		mRemote = remote;
+		mMode = mode;
+		mData = Catalog.diff(local, remote, Catalog.DIFF_MODE_RIGHT);
+		
+		mLanguageCode = GlobalSettings.getLanguage(); 
 		bindTransportTypes();
+		
+        bindData(mLanguageCode);
+		
     }
-
-    public abstract int getState(CatalogMapPair diff);
 
     public Object getChild(int groupPosition, int childPosition) {
         return mRefs[groupPosition][childPosition];
@@ -125,7 +143,7 @@ public abstract class BaseCatalogExpandableAdapter extends BaseExpandableListAda
 		
 		final String code = mLanguageCode;
 		final CatalogMapPair ref = mRefs[groupPosition][childPosition];
-		final int state = getState(ref);
+		final int state = mStatusProvider.getCatalogStatus(ref.getLocal(), ref.getRemote());
 		holder.mText.setText(ref.getCity(code));
 		holder.mStatus.setText(mStates[state]);
 		holder.mStatus.setTextColor(mStateColors[state]);
@@ -213,26 +231,4 @@ public abstract class BaseCatalogExpandableAdapter extends BaseExpandableListAda
 			}
         }
 	}
-
-//	public int getGroupPosition(CatalogMapDifference selection) {
-//		final String countryName = selection.getCountry(mLanguageCode);
-//		final int len = mCountries.length;
-//		for(int i=0; i<len; i++){
-//			if(mCountries[i].equals(countryName)) return i; 
-//		}
-//		return -1;
-//	}
-//
-//	public int getChildPosition(int groupId, CatalogMapDifference selection) {
-//		if(groupId == -1) return -1;
-//		final CatalogMapDifference[] refs = mRefs[groupId];
-//		final String code = mLanguageCode;
-//		final String cityName = selection.getCity(code);
-//		final int len = refs.length;
-//		for(int i=0; i<len; i++){
-//			if(refs[i].getCity(code).equals(cityName)) return i;
-//		}
-//		return -1;
-//	}
-    
 }
