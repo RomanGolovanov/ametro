@@ -127,6 +127,10 @@ Design: Dusty Rat&lt;br/&gt;
     <string name="menu_layers">Layers</string>
     <string name="menu_schemes">Schemes</string>
     <string name="menu_transports">Transports</string>
+    <string name="context_menu_show_map">Map</string>
+    <string name="context_menu_show_map_details">Details</string>
+    <string name="context_menu_download">Download</string>
+    <string name="context_menu_import">Import</string>
     <string name="menu_"/>
     <string name="msg_loading">Loading...</string>
     <string name="msg_caching">Caching map...</string>
@@ -181,5 +185,11 @@ Design: Dusty Rat&lt;br/&gt;
     <string name="log_pmz_indexing_error">PMZ indexing error</string>
     <string name="log_import_failed">Import failed</string>
     <string name="log_"/>
+	<string name="btn_update">Update</string>
+	<string name="btn_import">Import</string>
+	<string name="btn_download">Download</string>
+	<string name="btn_open">Open</string>
+	<string name="btn_delete">Delete</string>
+	<string name="btn_close">Close</string>
 
 </resources>

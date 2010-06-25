@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent">
+
+	<LinearLayout android:layout_alignParentBottom="true"
+		android:id="@+id/bottom_panel" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:gravity="center"
+		android:orientation="horizontal">
+		<Button android:id="@+id/btn_update" android:layout_width="wrap_content"
+			android:layout_weight="1" android:layout_height="wrap_content"
+			android:text="@string/btn_update" />
+		<Button android:id="@+id/btn_import" android:layout_width="wrap_content"
+			android:layout_weight="1" android:layout_height="wrap_content"
+			android:text="@string/btn_import" />
+		<Button android:id="@+id/btn_download" android:layout_width="wrap_content"
+			android:layout_weight="1" android:layout_height="wrap_content"
+			android:text="@string/btn_download" />
+		<Button android:id="@+id/btn_open" android:layout_width="wrap_content"
+			android:layout_weight="1" android:layout_height="wrap_content"
+			android:text="@string/btn_open" />
+		<Button android:id="@+id/btn_delete" android:layout_width="wrap_content"
+			android:layout_weight="1" android:layout_height="wrap_content"
+			android:text="@string/btn_delete" />
+		<Button android:id="@+id/btn_close" android:layout_width="wrap_content"
+			android:layout_weight="1" android:layout_height="wrap_content"
+			android:text="@string/btn_close" />
+	</LinearLayout>
+
+
+	<ScrollView android:layout_alignParentTop="true"
+		android:layout_above="@id/bottom_panel" 
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+		<LinearLayout android:layout_alignParentTop="true"
+			android:orientation="vertical" 
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content">
+			<TextView android:id="@+id/name" android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:text="My Good Map" />
+
+			<TextView android:id="@+id/name" android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:text="map description" />
+			<TextView android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:text="map description" />
+			<TextView android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:text="map description" />
+			<TextView android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:text="map description" />
+			<TextView android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:text="map description" />
+			<TextView android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:text="map description" />
+			<TextView android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:text="map description" />
+			<TextView android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:text="map description" />
+			<TextView android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:text="map description" />
+			<TextView android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:text="map description" />
+			<TextView android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:text="map description" />
+			<TextView android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:text="map description" />
+			<TextView android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:text="map description" />
+			<TextView android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:text="map description" />
+			<TextView android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:text="map description" />
+			<TextView android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:text="map description" />
+			<TextView android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:text="map description" />
+			<TextView android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:text="map description" />
+			<TextView android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:text="map description" />
+			<TextView android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:text="map description" />
+			<TextView android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:text="map description" />
+			<TextView android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:text="map description" />
+			<TextView android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:text="map description" />
+			<TextView android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:text="map description" />
+			<TextView android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:text="map description" />
+			<TextView android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:text="map description" />
+			<TextView android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:text="map description" />
+			<TextView android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:text="map description" />
+			<TextView android:layout_width="fill_parent"
+				android:layout_height="wrap_content" android:text="map description" />
+
+		</LinearLayout>
+	</ScrollView>
+
+
+</RelativeLayout>

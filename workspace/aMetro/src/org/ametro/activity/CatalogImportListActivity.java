@@ -20,6 +20,11 @@
  */
 package org.ametro.activity;
 
+import static org.ametro.catalog.CatalogMapState.CORRUPTED;
+import static org.ametro.catalog.CatalogMapState.IMPORT;
+import static org.ametro.catalog.CatalogMapState.INSTALLED;
+import static org.ametro.catalog.CatalogMapState.UPDATE;
+
 import org.ametro.R;
 import org.ametro.activity.obsolete.ImportPmz;
 import org.ametro.adapter.CatalogExpandableAdapter;
@@ -30,6 +35,7 @@ import org.ametro.catalog.storage.CatalogStorage;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+
 
 public class CatalogImportListActivity extends BaseCatalogExpandableActivity {
 
@@ -131,7 +137,7 @@ public class CatalogImportListActivity extends BaseCatalogExpandableActivity {
 		return catalogId == CatalogStorage.CATALOG_IMPORT;
 	}
 
-	public int getCatalogStatus(CatalogMap local, CatalogMap remote) {
+	public int getCatalogState(CatalogMap local, CatalogMap remote) {
     	if(remote.isCorruted()){
     		return CORRUPTED;
     	}else{

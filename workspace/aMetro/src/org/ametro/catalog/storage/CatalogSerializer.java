@@ -34,6 +34,7 @@ import static org.ametro.catalog.storage.CatalogDeserializer.TAG_LOCALE;
 import static org.ametro.catalog.storage.CatalogDeserializer.TAG_COUNTRY;
 import static org.ametro.catalog.storage.CatalogDeserializer.TAG_CITY;
 import static org.ametro.catalog.storage.CatalogDeserializer.TAG_DESCRIPTION;
+import static org.ametro.catalog.storage.CatalogDeserializer.TAG_CHANGE_LOG;
 import static org.ametro.catalog.storage.CatalogDeserializer.ATTR_URL;
 import static org.ametro.catalog.storage.CatalogDeserializer.ATTR_SYSTEM_NAME;
 import static org.ametro.catalog.storage.CatalogDeserializer.ATTR_LAST_MODIFIED;
@@ -81,7 +82,11 @@ public class CatalogSerializer {
 					serializer.startTag("", TAG_DESCRIPTION);
 					serializer.text(map.getDescription(localeCode));
 					serializer.endTag("", TAG_DESCRIPTION);
-					
+
+					serializer.startTag("", TAG_CHANGE_LOG);
+					serializer.text(map.getChangeLog(localeCode));
+					serializer.endTag("", TAG_CHANGE_LOG);
+
 					serializer.endTag("", TAG_LOCALE);
 				}
 				serializer.endTag("", TAG_MAP);

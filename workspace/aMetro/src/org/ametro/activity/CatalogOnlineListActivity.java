@@ -20,6 +20,13 @@
  */
 package org.ametro.activity;
 
+import static org.ametro.catalog.CatalogMapState.DOWNLOAD;
+import static org.ametro.catalog.CatalogMapState.INSTALLED;
+import static org.ametro.catalog.CatalogMapState.NOT_SUPPORTED;
+import static org.ametro.catalog.CatalogMapState.UPDATE;
+import static org.ametro.catalog.CatalogMapState.UPDATE_NOT_SUPPORTED;
+import static org.ametro.catalog.CatalogMapState.NEED_TO_UPDATE;
+
 import org.ametro.R;
 import org.ametro.adapter.CatalogExpandableAdapter;
 import org.ametro.catalog.Catalog;
@@ -27,6 +34,7 @@ import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.storage.CatalogStorage;
 
 import android.widget.TextView;
+
 
 public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity  {
 
@@ -125,7 +133,7 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity  {
 		return false;
 	}
 
-	public int getCatalogStatus(CatalogMap local, CatalogMap remote) {
+	public int getCatalogState(CatalogMap local, CatalogMap remote) {
     	if(remote.isNotSupported()){
     		if(local == null || local.isNotSupported() || local.isCorruted()){
     			return NOT_SUPPORTED;
@@ -136,7 +144,7 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity  {
     		if(local == null){
     			return DOWNLOAD;
     		}else if(local.isNotSupported() || local.isCorruted()){
-    			return UPDATE;
+    			return NEED_TO_UPDATE;
     		}else{
     			if(local.getTimestamp() >= remote.getTimestamp()){
     				return INSTALLED;

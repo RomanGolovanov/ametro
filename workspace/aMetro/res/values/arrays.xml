@@ -44,6 +44,7 @@
 	    <item>Import</item>
 	    <item>Download</item>
 	    <item>Update not supported</item>
+	    <item>Update needed</item>
     </string-array>
 	<array name="import_catalog_map_state_colors">
 		<item>#ffff00ff</item> 
@@ -52,6 +53,7 @@
 		<item>#ffffff00</item>
 		<item>#ffffffff</item>
 		<item>#ffffff00</item>
+		<item>#ffff00ff</item>
 		<item>#ffff00ff</item>
 		<item>#ffff00ff</item>
 	</array>    
@@ -64,6 +66,7 @@
 		<item>#ffff00ff</item>
 		<item>#ffffffff</item>
 		<item>#ffff0000</item>
+		<item>#ffff0000</item>
 	</array>    
 	<array name="local_catalog_map_state_colors">
 		<item>#ffcccccc</item> 
@@ -74,6 +77,7 @@
 		<item>#ffff00ff</item>
 		<item>#ffff00ff</item>
 		<item>#ffff00ff</item>
+		<item>#ffff0000</item>
 	</array>    
     <string-array name="version_changelog">
         <item>0.1.0.r163: changed stations/route lists appearance</item>
@@ -139,6 +143,7 @@
     	<item>0.2.4.r247: online catalog states fixed</item>
     	<item>0.2.4.r249: online catalog moved to dropbox</item>
     	<item>0.2.4.r250: refactored catalog adapter classes</item>
+    	<item>0.2.4.r251: added fake details page for map and catalog context menu</item>
     </string-array>
 
     <string-array name="create_route_modes">
