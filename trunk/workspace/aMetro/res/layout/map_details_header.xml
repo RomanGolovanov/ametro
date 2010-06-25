@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="18sp">
+
+	<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+		android:id="@+id/text" android:background="#ff303030"
+		android:textColor="#ffa0a0a0" android:layout_width="fill_parent"
+		android:layout_height="18sp" android:textSize="13sp"
+		android:textStyle="bold" android:paddingLeft="6sp" android:text="Header text" />
+	<!-- 	
+	<ImageView android:layout_alignParentTop="true"
+		android:layout_width="fill_parent"
+		android:layout_height="1sp" 
+		android:src="@drawable/gray_splitter" />
+	 -->
+</RelativeLayout>
