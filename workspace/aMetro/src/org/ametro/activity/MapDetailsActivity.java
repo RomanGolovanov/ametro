@@ -21,15 +21,27 @@
 
 package org.ametro.activity;
 
+import org.ametro.GlobalSettings;
 import org.ametro.R;
+import org.ametro.catalog.Catalog;
+import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.CatalogMapState;
+import org.ametro.catalog.storage.CatalogStorage;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.RectShape;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class MapDetailsActivity extends Activity implements OnClickListener {
 
@@ -46,12 +58,19 @@ public class MapDetailsActivity extends Activity implements OnClickListener {
 	public static final int EXTRA_RESULT_OPEN = 4;
 	public static final int EXTRA_RESULT_DELETE = 5;
 	
+	private static final int MENU_DELETE = 1;
+	
 	private Button mUpdateButton;
 	private Button mImportButton;
 	private Button mDownloadButton;
-	private Button mDeleteButton;
 	private Button mOpenButton;
 	private Button mCloseButton;
+	
+	private ImageButton mFavoriteButton;
+	
+	
+	private TextView mCityTextView;
+	private TextView mCountryTextView;
 	
 	private Intent mIntent;
 	
@@ -60,8 +79,42 @@ public class MapDetailsActivity extends Activity implements OnClickListener {
 	private String mRemoteUrl;
 	private int mState;
 	
+	private CatalogMap mLocal;
+	private CatalogMap mRemote;
+	
+	private LayoutInflater mInflater;
+	
+	private LinearLayout mContent;
+	
+	private String mCityName;
+	private String mCountryName;
+	private int[] mTransports;
+	
+	private boolean mIsFavorite;
+	
+	public boolean onCreateOptionsMenu(Menu menu) {
+		menu.add(0,MENU_DELETE, 0, R.string.btn_delete);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		menu.findItem(MENU_DELETE).setVisible(mLocalUrl!=null);
+		return super.onPrepareOptionsMenu(menu);
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()){
+		case MENU_DELETE:
+			finishWithResult(EXTRA_RESULT_DELETE);
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        mInflater = getLayoutInflater();
         
         mIntent = getIntent();
         if(mIntent == null){
@@ -78,25 +131,63 @@ public class MapDetailsActivity extends Activity implements OnClickListener {
         mUpdateButton = (Button)findViewById(R.id.btn_update);
         mImportButton = (Button)findViewById(R.id.btn_import);
         mDownloadButton = (Button)findViewById(R.id.btn_download);
-        mDeleteButton = (Button)findViewById(R.id.btn_delete);
         mOpenButton = (Button)findViewById(R.id.btn_open);
         mCloseButton = (Button)findViewById(R.id.btn_close);
+        
+        mFavoriteButton = (ImageButton)findViewById(R.id.btn_favorite);
 
+        mCityTextView = (TextView)findViewById(R.id.firstLine);
+        mCountryTextView = (TextView)findViewById(R.id.secondLine);
+        
+        mContent = (LinearLayout)findViewById(R.id.content);
+        
         mUpdateButton.setOnClickListener(this);
         mImportButton.setOnClickListener(this);
         mDownloadButton.setOnClickListener(this);
-        mDeleteButton.setOnClickListener(this);
         mOpenButton.setOnClickListener(this);
         mCloseButton.setOnClickListener(this);
+        mFavoriteButton.setOnClickListener(this);
         
         mUpdateButton.setVisibility(mState == CatalogMapState.UPDATE ? View.VISIBLE : View.GONE);
         mImportButton.setVisibility(mState == CatalogMapState.IMPORT ? View.VISIBLE : View.GONE);
         mDownloadButton.setVisibility(mState == CatalogMapState.DOWNLOAD ? View.VISIBLE : View.GONE);
-        mDeleteButton.setVisibility(mLocalUrl!=null ? View.VISIBLE : View.GONE);
         mOpenButton.setVisibility(mLocalUrl!=null ? View.VISIBLE : View.GONE);
         
+        final CatalogStorage storage = CatalogStorage.getStorage();
+        
+        if(mLocalUrl!=null){
+        	Catalog catalog = storage.getLocalCatalog();
+        	if(catalog!=null){
+        		mLocal = catalog.getMap(mSystemName);
+        	}
+        }
+
+        if(mRemoteUrl!=null && mRemoteUrl.endsWith(GlobalSettings.PMZ_FILE_TYPE)){
+        	Catalog catalog = storage.getImportCatalog();
+        	if(catalog!=null){
+        		mRemote = catalog.getMap(mSystemName);
+        	}
+        }
+        
+        if(mRemoteUrl!=null && mRemoteUrl.endsWith(GlobalSettings.MAP_FILE_TYPE)){
+        	Catalog catalog = storage.getOnlineCatalog();
+        	if(catalog!=null){
+        		mRemote = catalog.getMap(mSystemName);
+        	}
+        }
+        
+    	String code = GlobalSettings.getLanguage();
+    	mCityName = preffered().getCity(code);
+    	mCountryName = preffered().getCountry(code);
+        
+        updateFavoriteButton();
+        updateContent();
     }
 
+	private CatalogMap preffered(){
+		return mLocal!=null ? mLocal : mRemote;
+	}
+	
 	public void onClick(View v) {
 		if(v == mCloseButton){
         	finishWithoutResult();
@@ -106,13 +197,35 @@ public class MapDetailsActivity extends Activity implements OnClickListener {
         	finishWithResult(EXTRA_RESULT_IMPORT);
 		}else if(v == mDownloadButton){
         	finishWithResult(EXTRA_RESULT_DOWNLOAD);
-		}else if(v == mDeleteButton){
-        	finishWithResult(EXTRA_RESULT_DELETE);
 		}else if(v == mUpdateButton){
 			finishWithResult(EXTRA_RESULT_UPDATE);
+		}else if(v == mFavoriteButton){
+			mIsFavorite = !mIsFavorite;
+			updateFavoriteButton();
 		}
 	}
 
+	private void updateFavoriteButton() {
+		if (mIsFavorite) {
+			mFavoriteButton.setImageResource(android.R.drawable.btn_star_big_on);
+		} else {
+			mFavoriteButton.setImageResource(android.R.drawable.btn_star_big_off);
+		}
+	}
+
+	private void updateContent() {
+		mCityTextView.setText(mCityName);
+		mCountryTextView.setText(mCountryName);
+
+		mContent.removeAllViews();
+		for(int i = 0; i < 3; i++){
+			getHeaderBlock().setText("header " + i);
+			for(int j = 0; j < 4; j++){
+				getTextBlock();
+			}
+		}
+	}
+	
 	private void finishWithoutResult() {
 		setResult(RESULT_CANCELED);
 		finish();
@@ -124,4 +237,17 @@ public class MapDetailsActivity extends Activity implements OnClickListener {
 		setResult(RESULT_OK, i);
 		finish();
 	}
+	
+	private TextView getHeaderBlock(){
+		View v = (View)mInflater.inflate(R.layout.map_details_header, null);
+		mContent.addView(v);
+		return (TextView)v.findViewById(R.id.text);
+	}
+	
+	private TextView getTextBlock(){
+		View v = (View)mInflater.inflate(R.layout.map_details_text, null);
+		mContent.addView(v);
+		return (TextView)v.findViewById(R.id.text);
+	}
+	
 }
