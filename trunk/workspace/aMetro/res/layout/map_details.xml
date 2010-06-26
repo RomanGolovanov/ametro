@@ -27,6 +27,9 @@
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:background="#00000000" android:src="@android:drawable/btn_star_big_off" />
 	</RelativeLayout>
+	<TextView android:id="@+id/top_panel_splitter" 
+		android:layout_below="@id/top_panel" android:background="@drawable/white_splitter" 
+		android:layout_width="fill_parent" android:layout_height="1sp" />
 	<LinearLayout android:layout_alignParentBottom="true"
 		android:id="@+id/bottom_panel" android:layout_width="fill_parent"
 		android:layout_height="?android:attr/listPreferredItemHeight"
@@ -48,9 +51,13 @@
 			android:layout_weight="1" android:layout_height="wrap_content"
 			android:text="@string/btn_close" />
 	</LinearLayout>
-	<ScrollView android:layout_above="@id/bottom_panel"
-		android:layout_below="@id/top_panel" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:layout_margin="2sp">
+	<TextView android:id="@+id/bottom_panel_splitter" 
+		android:layout_above="@id/bottom_panel" android:background="@drawable/white_splitter" 
+		android:layout_width="fill_parent" android:layout_height="1sp" />
+	
+	<ScrollView android:layout_above="@id/bottom_panel_splitter"
+		android:layout_below="@id/top_panel_splitter" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:layout_marginTop="2sp" android:layout_marginBottom="2sp">
 		<LinearLayout android:layout_alignParentTop="true"
 			android:id="@+id/content" android:orientation="vertical"
 			android:layout_width="fill_parent" android:layout_height="wrap_content">
