@@ -27,6 +27,7 @@ import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.CatalogMapState;
 import org.ametro.catalog.storage.CatalogStorage;
+import org.ametro.widget.TextStripView;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -82,9 +83,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener {
 	private CatalogMap mLocal;
 	private CatalogMap mRemote;
 	
-	private LayoutInflater mInflater;
-	
-	private LinearLayout mContent;
+	private TextStripView mContent;
 	
 	private String mCityName;
 	private String mCountryName;
@@ -114,8 +113,6 @@ public class MapDetailsActivity extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        mInflater = getLayoutInflater();
-        
         mIntent = getIntent();
         if(mIntent == null){
         	finishWithoutResult();
@@ -139,7 +136,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener {
         mCityTextView = (TextView)findViewById(R.id.firstLine);
         mCountryTextView = (TextView)findViewById(R.id.secondLine);
         
-        mContent = (LinearLayout)findViewById(R.id.content);
+        mContent = (TextStripView)findViewById(R.id.content);
         
         mUpdateButton.setOnClickListener(this);
         mImportButton.setOnClickListener(this);
@@ -218,10 +215,17 @@ public class MapDetailsActivity extends Activity implements OnClickListener {
 		mCountryTextView.setText(mCountryName);
 
 		mContent.removeAllViews();
+		
+		Button b = new Button(this);
+		b.setText("press me!");
+		
+		mContent.addHeader("Button block");
+		mContent.addWidgetBlock(b);
+		
 		for(int i = 0; i < 3; i++){
-			getHeaderBlock().setText("header " + i);
+			mContent.addHeader("header " + i);
 			for(int j = 0; j < 4; j++){
-				getTextBlock();
+				mContent.addText("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
 			}
 		}
 	}
@@ -237,17 +241,6 @@ public class MapDetailsActivity extends Activity implements OnClickListener {
 		setResult(RESULT_OK, i);
 		finish();
 	}
-	
-	private TextView getHeaderBlock(){
-		View v = (View)mInflater.inflate(R.layout.map_details_header, null);
-		mContent.addView(v);
-		return (TextView)v.findViewById(R.id.text);
-	}
-	
-	private TextView getTextBlock(){
-		View v = (View)mInflater.inflate(R.layout.map_details_text, null);
-		mContent.addView(v);
-		return (TextView)v.findViewById(R.id.text);
-	}
+
 	
 }
