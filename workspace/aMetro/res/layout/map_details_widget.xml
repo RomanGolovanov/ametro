@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:paddingRight="2sp" android:layout_width="fill_parent"
-	android:layout_height="wrap_content">
-	<TextView android:id="@+id/text" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:padding="6sp"
-		android:textSize="18sp" />
+	android:paddingRight="2sp" 
+	android:layout_width="fill_parent" android:layout_height="wrap_content">
+	<FrameLayout android:id="@+id/content"
+		android:layout_width="fill_parent" 
+		android:layout_height="wrap_content"
+		android:layout_marginTop="4sp" 
+		/>
 	<ImageView android:layout_alignParentTop="true"
 		android:layout_width="fill_parent" android:layout_height="1sp"
 		android:src="@drawable/gray_splitter" />

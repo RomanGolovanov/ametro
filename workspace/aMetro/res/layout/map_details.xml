@@ -34,7 +34,7 @@
 		android:id="@+id/bottom_panel" android:layout_width="fill_parent"
 		android:layout_height="?android:attr/listPreferredItemHeight"
 		android:background="#ff808080" android:gravity="center"
-		android:padding="6sp" android:orientation="horizontal">
+		android:padding="4sp" android:orientation="horizontal">
 		<Button android:id="@+id/btn_update" android:layout_width="wrap_content"
 			android:layout_weight="1" android:layout_height="wrap_content"
 			android:text="@string/btn_update" />
@@ -58,9 +58,11 @@
 	<ScrollView android:layout_above="@id/bottom_panel_splitter"
 		android:layout_below="@id/top_panel_splitter" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:layout_marginTop="2sp" android:layout_marginBottom="2sp">
-		<LinearLayout android:layout_alignParentTop="true"
+		<org.ametro.widget.TextStripView android:layout_alignParentTop="true" android:id="@+id/content" 
+			android:layout_width="fill_parent" android:layout_height="wrap_content"/>
+		<!-- <LinearLayout android:layout_alignParentTop="true"
 			android:id="@+id/content" android:orientation="vertical"
 			android:layout_width="fill_parent" android:layout_height="wrap_content">
-		</LinearLayout>
+		</LinearLayout> -->
 	</ScrollView>
 </RelativeLayout>
