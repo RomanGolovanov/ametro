@@ -31,17 +31,13 @@ import org.ametro.widget.TextStripView;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.RectShape;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MapDetailsActivity extends Activity implements OnClickListener {
@@ -87,7 +83,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener {
 	
 	private String mCityName;
 	private String mCountryName;
-	private int[] mTransports;
+	//private int[] mTransports;
 	
 	private boolean mIsFavorite;
 	
