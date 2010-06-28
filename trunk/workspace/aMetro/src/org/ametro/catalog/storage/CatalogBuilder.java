@@ -30,12 +30,15 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
+import org.ametro.Constants;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.model.Model;
 import org.ametro.model.storage.ModelBuilder;
 import org.ametro.util.FileUtil;
 import org.ametro.util.WebUtil;
+
+import android.util.Log;
 
 public class CatalogBuilder {
 
@@ -157,6 +160,10 @@ public class CatalogBuilder {
 				strm = new BufferedOutputStream(new FileOutputStream(url));
 				CatalogSerializer.serializeCatalog(catalog, strm);
 			}catch(Exception ex){
+				if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)){
+					Log.e(Constants.LOG_TAG_MAIN, "Failed save catalog", ex);
+				}
+				fireOperationFailed("Failed save catalog due error: " + ex.getMessage());
 			}finally{
 				if(strm!=null){
 					try { strm.close(); }catch(IOException ex){}

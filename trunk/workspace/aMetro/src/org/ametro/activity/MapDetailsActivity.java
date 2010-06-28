@@ -21,6 +21,8 @@
 
 package org.ametro.activity;
 
+import java.util.HashMap;
+
 import org.ametro.GlobalSettings;
 import org.ametro.R;
 import org.ametro.catalog.Catalog;
@@ -28,16 +30,17 @@ import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.CatalogMapState;
 import org.ametro.catalog.storage.CatalogStorage;
 import org.ametro.catalog.storage.ICatalogStorageListener;
-import org.ametro.util.StringUtil;
+import org.ametro.model.TransportType;
 import org.ametro.widget.TextStripView;
+import org.ametro.widget.TextStripView.ImportWidgetView;
 import org.ametro.widget.TextStripView.OnlineWidgetView;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,28 +48,32 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class MapDetailsActivity extends Activity implements OnClickListener, ICatalogStorageListener {
+public class MapDetailsActivity extends Activity implements OnClickListener,
+		ICatalogStorageListener {
 
 	protected static final int MODE_WAIT = 1;
 	protected static final int MODE_DETAILS = 2;
-	
+
 	protected int mMode;
-	
+
 	public static final String EXTRA_SYSTEM_NAME = "SYSTEM_NAME";
-	
+
 	public static final String EXTRA_RESULT = "EXTRA_RESULT";
 	private static final int EXTRA_RESULT_OPEN = 1;
-	
+
 	private static final int MENU_DELETE = 1;
+
+	private String mErrorMessage;
 
 	private Button mOpenButton;
 	private Button mCloseButton;
-	
-//	private Button mUpdateButton;
-//	private Button mImportButton;
-//	private Button mDownloadButton;
-//	private Button mCancelButton;
+
+	// private Button mUpdateButton;
+	// private Button mImportButton;
+	// private Button mDownloadButton;
+	// private Button mCancelButton;
 
 	private ImageButton mFavoriteButton;
 
@@ -80,21 +87,26 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 	private CatalogMap mLocal;
 	private CatalogMap mOnline;
 	private CatalogMap mImport;
-	
+
 	private Catalog mLocalCatalog;
 	private Catalog mOnlineCatalog;
 	private Catalog mImportCatalog;
-	
-	private boolean mOnlineDownload; 
-	
+
+	private boolean mOnlineDownload;
+
 	private TextStripView mContent;
 
 	private CatalogStorage mStorage;
-	
+
 	private boolean mIsFavorite;
+	private HashMap<Integer, Drawable> mTransportTypes;
+
+	private OnlineWidgetView mOnlineWidget;
+	private ImportWidgetView mImportWidget;
 
 	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(0, MENU_DELETE, 0, R.string.btn_delete).setIcon(android.R.drawable.ic_menu_delete);
+		menu.add(0, MENU_DELETE, 0, R.string.btn_delete).setIcon(
+				android.R.drawable.ic_menu_delete);
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -115,16 +127,48 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		GlobalSettings.initialize(this);
 		mIntent = getIntent();
 		if (mIntent == null) {
 			finishWithoutResult();
 			return;
 		}
+
+		mTransportTypes = new HashMap<Integer, Drawable>();
+		final Resources res = getResources();
+		mTransportTypes
+				.put(TransportType.UNKNOWN_ID, res.getDrawable(GlobalSettings
+						.getTransportTypeWhiteIconId(TransportType.UNKNOWN_ID)));
+		mTransportTypes.put(TransportType.METRO_ID, res
+				.getDrawable(GlobalSettings
+						.getTransportTypeWhiteIconId(TransportType.METRO_ID)));
+		mTransportTypes.put(TransportType.TRAM_ID, res
+				.getDrawable(GlobalSettings
+						.getTransportTypeWhiteIconId(TransportType.TRAM_ID)));
+		mTransportTypes.put(TransportType.BUS_ID, res
+				.getDrawable(GlobalSettings
+						.getTransportTypeWhiteIconId(TransportType.BUS_ID)));
+		mTransportTypes.put(TransportType.TRAIN_ID, res
+				.getDrawable(GlobalSettings
+						.getTransportTypeWhiteIconId(TransportType.TRAIN_ID)));
+		mTransportTypes
+				.put(
+						TransportType.WATER_BUS_ID,
+						res
+								.getDrawable(GlobalSettings
+										.getTransportTypeWhiteIconId(TransportType.WATER_BUS_ID)));
+		mTransportTypes
+				.put(
+						TransportType.TROLLEYBUS_ID,
+						res
+								.getDrawable(GlobalSettings
+										.getTransportTypeWhiteIconId(TransportType.TROLLEYBUS_ID)));
+
 		mSystemName = mIntent.getStringExtra(EXTRA_SYSTEM_NAME);
 		mStorage = CatalogStorage.getStorage();
 		setWaitNoProgressView();
 	}
-	
+
 	protected void onResume() {
 		mStorage.addCatalogChangedListener(this);
 		mLocalCatalog = mStorage.getLocalCatalog();
@@ -147,22 +191,24 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 		mStorage.removeCatalogChangedListener(this);
 		super.onPause();
 	}
-	
+
 	private void onCatalogsUpdate() {
-		if(mLocalCatalog!=null && (mOnlineCatalog!=null || !mOnlineDownload) && mImportCatalog!=null){
-			if(mLocalCatalog!=null){
+		if (mLocalCatalog != null
+				&& (mOnlineCatalog != null || !mOnlineDownload)
+				&& mImportCatalog != null) {
+			if (mLocalCatalog != null) {
 				mLocal = mLocalCatalog.getMap(mSystemName);
 			}
-			if(mOnlineCatalog!=null){
+			if (mOnlineCatalog != null) {
 				mOnline = mOnlineCatalog.getMap(mSystemName);
 			}
-			if(mImportCatalog!=null){
+			if (mImportCatalog != null) {
 				mImport = mImportCatalog.getMap(mSystemName);
 			}
 			setDetailsView();
 		}
-	}	
-	
+	}
+
 	private CatalogMap preffered() {
 		return mLocal != null ? mLocal : (mOnline != null ? mOnline : mImport);
 	}
@@ -176,88 +222,133 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 			mIsFavorite = !mIsFavorite;
 			updateFavoriteButton();
 		}
+		if (mOnlineWidget != null) {
+			if (v == mOnlineWidget.getCancelButton()) {
+				mStorage.cancelDownload(mSystemName);
+				onCatalogsUpdate();
+			} else if (v == mOnlineWidget.getDownloadButton()) {
+				mStorage.requestDownload(mSystemName);
+				onCatalogsUpdate();
+			} else if (v == mOnlineWidget.getUpdateButton()) {
+				mStorage.requestDownload(mSystemName);
+				onCatalogsUpdate();
+			}
+		}
+		if (mImportWidget != null) {
+			if (v == mImportWidget.getCancelButton()) {
+				mStorage.cancelImport(mSystemName);
+				onCatalogsUpdate();
+			} else if (v == mImportWidget.getImportButton()) {
+				mStorage.requestImport(mSystemName);
+				onCatalogsUpdate();
+			} else if (v == mImportWidget.getUpdateButton()) {
+				mStorage.requestImport(mSystemName);
+				onCatalogsUpdate();
+			}
+		}
 	}
 
 	private void updateFavoriteButton() {
 		if (mIsFavorite) {
-			mFavoriteButton.setImageResource(android.R.drawable.btn_star_big_on);
+			mFavoriteButton
+					.setImageResource(android.R.drawable.btn_star_big_on);
 		} else {
-			mFavoriteButton.setImageResource(android.R.drawable.btn_star_big_off);
+			mFavoriteButton
+					.setImageResource(android.R.drawable.btn_star_big_off);
 		}
 	}
 
-	
 	protected void setWaitNoProgressView() {
-		if(mMode!=MODE_WAIT){
+		if (mMode != MODE_WAIT) {
 			setContentView(R.layout.operation_wait_no_progress);
 			mMode = MODE_WAIT;
 		}
 	}
-		
+
 	private void setDetailsView() {
-		if(mMode!=MODE_DETAILS){
+		if (mMode != MODE_DETAILS) {
 			setContentView(R.layout.map_details);
-		
+
 			mOpenButton = (Button) findViewById(R.id.btn_open);
 			mCloseButton = (Button) findViewById(R.id.btn_close);
 			mFavoriteButton = (ImageButton) findViewById(R.id.btn_favorite);
-	
+
 			mCityTextView = (TextView) findViewById(R.id.firstLine);
 			mCountryTextView = (TextView) findViewById(R.id.secondLine);
-	
+
 			mContent = (TextStripView) findViewById(R.id.content);
-	
+
 			mOpenButton.setOnClickListener(this);
 			mCloseButton.setOnClickListener(this);
 			mFavoriteButton.setOnClickListener(this);
-			
+
+			mFavoriteButton.setVisibility(mLocal != null ? View.VISIBLE : View.GONE);
+
 			String code = GlobalSettings.getLanguage();
-			
+
 			mCityTextView.setText(preffered().getCity(code));
 			mCountryTextView.setText(preffered().getCountry(code));
-	
-			mContent.removeAllViews();
-			
-			final Resources res = getResources();
-			
-			String[] states = res.getStringArray(R.array.catalog_map_states);
-			
-			if(mOnline!=null){
-				int stateId = CatalogMapState.getLocalToOnlineState(mLocal, mOnline);
-				String stateName = states[stateId];
-				int stateColor = (res.getIntArray(R.array.online_catalog_map_state_colors))[stateId];
-				
-				mContent.createHeader().setTextLeft("Online")
-					.setTextRight(stateName).setTextRightColor(stateColor);
-				//StringUtil.formatFileSize( mOnline.getSize(), 3 )
-				
-				final OnlineWidgetView v = mContent.createOnlineWidget();
-				v.setSize(mOnline.getSize());
-				v.setVersion("v." + mOnline.getVersion());
-				v.setVisibility(CatalogMapState.DOWNLOADING);
-				
 
-				
-			}
-			if(mImport!=null){
-				int stateId = CatalogMapState.getLocalToImportState(mLocal, mImport);
-				String stateName = states[stateId];
-				int stateColor = (res.getIntArray(R.array.import_catalog_map_state_colors))[stateId];
-				
-				mContent.createHeader().setTextLeft("Import")
-					.setTextRight(stateName).setTextRightColor(stateColor);
-				mContent.createText().setText("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-				//mContent.createWidget();
-			}
+			final Resources res = getResources();
+			final String[] states = res.getStringArray(R.array.catalog_map_states);
+			final String[] transportNames = res.getStringArray(R.array.transport_types);
 			
-			mContent.createHeader().setTextLeft("Transport");
-			mContent.createText().setText("Metro, Tram, Bus");
-	
+			mContent.removeAllViews();
+			if (mOnline != null) {
+				int stateId = CatalogMapState.getLocalToOnlineState(mLocal,mOnline);
+				String stateName = states[stateId];
+				int stateColor = (res
+						.getIntArray(R.array.online_catalog_map_state_colors))[stateId];
+				mContent.createHeader().setTextLeft("Online").setTextRight(
+						stateName).setTextRightColor(stateColor);
+				mOnlineWidget = mContent.createOnlineWidget();
+				mOnlineWidget.setSize(mOnline.getSize());
+				mOnlineWidget.setVersion("v." + mOnline.getVersion());
+				mOnlineWidget.setVisibility(stateId);
+				mOnlineWidget.getDownloadButton().setOnClickListener(this);
+				mOnlineWidget.getUpdateButton().setOnClickListener(this);
+				mOnlineWidget.getCancelButton().setOnClickListener(this);
+			}
+			if (mImport != null) {
+				int stateId = CatalogMapState.getLocalToImportState(mLocal,
+						mImport);
+				String stateName = states[stateId];
+				int stateColor = (res
+						.getIntArray(R.array.import_catalog_map_state_colors))[stateId];
+				mContent.createHeader().setTextLeft("Import").setTextRight(
+						stateName).setTextRightColor(stateColor);
+				mImportWidget = mContent.createImportWidget();
+				mImportWidget.setSize(mImport.getSize());
+				mImportWidget.setVersion("v." + mImport.getVersion());
+				mImportWidget.setVisibility(stateId);
+				mImportWidget.getImportButton().setOnClickListener(this);
+				mImportWidget.getUpdateButton().setOnClickListener(this);
+				mImportWidget.getCancelButton().setOnClickListener(this);
+			}
+
+			mContent.createHeader().setTextLeft("Transports");
+			long transports = preffered().getTransports();
+			long transportCode = 1;
+			int transportId = 0;
+			while (transports > 0) {
+				if ((transports % 2) > 0) {
+					Drawable d = mTransportTypes.get((int) transportCode);
+					mContent.createTransportWidget().setImageDrawable(d)
+							.setText(transportNames[transportId]);
+				}
+				transports = transports >> 1;
+				transportCode = transportCode << 1;
+				transportId++;
+			}
+
 			mContent.createHeader().setTextLeft("Description");
 			mContent.createText().setText(preffered().getDescription(code));
-		
+
 			updateFavoriteButton();
 			mMode = MODE_DETAILS;
+		}else{
+			// update states!
+			
 		}
 	}
 
@@ -274,32 +365,43 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 	}
 
 	public void onCatalogLoaded(int catalogId, Catalog catalog) {
-		if(catalogId == CatalogStorage.CATALOG_LOCAL){
+		if (catalogId == CatalogStorage.CATALOG_LOCAL) {
 			mLocalCatalog = catalog;
 		}
-		if(catalogId == CatalogStorage.CATALOG_ONLINE){
+		if (catalogId == CatalogStorage.CATALOG_ONLINE) {
 			mOnlineCatalog = catalog;
 			mOnlineDownload = false;
 		}
-		if(catalogId == CatalogStorage.CATALOG_IMPORT){
+		if (catalogId == CatalogStorage.CATALOG_IMPORT) {
 			mImportCatalog = catalog;
 		}
 		mUIEventDispacher.post(mCatalogsUpdate);
 	}
 
 	public void onCatalogOperationFailed(int catalogId, String message) {
+		if (GlobalSettings.isDebugMessagesEnabled()) {
+			mErrorMessage = message;
+			mUIEventDispacher.post(mCatalogError);
+		}
 	}
 
-	public void onCatalogOperationProgress(int catalogId, int progress, int total, String message) {
+	public void onCatalogOperationProgress(int catalogId, int progress,
+			int total, String message) {
 	}
 
 	protected Handler mUIEventDispacher = new Handler();
-	
+
 	private Runnable mCatalogsUpdate = new Runnable() {
-		
 		public void run() {
 			onCatalogsUpdate();
 		}
 	};
-	
+
+	protected Runnable mCatalogError = new Runnable() {
+		public void run() {
+			Toast.makeText(MapDetailsActivity.this, mErrorMessage,
+					Toast.LENGTH_LONG).show();
+		}
+	};
+
 }

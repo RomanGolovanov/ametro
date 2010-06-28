@@ -1,36 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent" android:layout_height="fill_parent">
-
-	<LinearLayout android:layout_width="fill_parent" android:id="@+id/actionbar"
-		android:layout_alignParentTop="true" 
+	<LinearLayout android:layout_width="fill_parent"
+		android:id="@+id/actionbar" android:layout_alignParentTop="true"
 		android:layout_height="50sp" android:background="#ff808080"
 		android:gravity="center_vertical" android:paddingTop="4sp">
 		<ImageButton android:id="@+id/btn_search"
 			android:background="@android:color/transparent" android:src="@drawable/ic_btn_search"
-			android:layout_width="wrap_content" android:layout_height="wrap_content" android:padding="4sp" />
-
-		<TextView android:id="@+id/text_view" android:layout_weight="1" android:text="Header" android:gravity="center"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:padding="4sp" />
+		<TextView android:id="@+id/text_view" android:layout_weight="1"
+			android:text="Header" android:gravity="center" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+		<EditText android:id="@+id/text_edit" android:layout_weight="1"
+			android:visibility="gone" android:inputType="text"
 			android:layout_width="wrap_content" android:layout_height="wrap_content" />
-			
-
-		<EditText android:id="@+id/text_edit" android:layout_weight="1" android:visibility="gone"
-			android:inputType="text"
-			android:layout_width="wrap_content" android:layout_height="wrap_content" />
-
-		<ImageButton android:id="@+id/btn_cancel" 
+		<ImageButton android:id="@+id/btn_cancel"
 			android:background="@android:color/transparent" android:src="@android:drawable/ic_delete"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:layout_marginLeft="-38sp" android:layout_marginRight="10sp" android:visibility="gone" 
-			 />
-
+			android:layout_marginLeft="-38sp" android:layout_marginRight="10sp"
+			android:visibility="gone" />
 		<ImageButton android:id="@+id/btn_mode"
 			android:src="@android:drawable/btn_star_big_on" android:background="@android:color/transparent"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"  android:padding="4sp" />
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:padding="4sp" />
 	</LinearLayout>
-
-	<ExpandableListView android:id="@+id/list" android:layout_below="@id/actionbar" android:layout_alignParentBottom="true"
+	<ExpandableListView android:id="@+id/list"
+		android:layout_below="@id/actionbar" android:layout_alignParentBottom="true"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
 		android:layout_weight="1" />
-
 </RelativeLayout>

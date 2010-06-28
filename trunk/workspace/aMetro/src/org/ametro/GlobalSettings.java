@@ -76,19 +76,17 @@ public class GlobalSettings {
 	private static Context mContext;
 	private static String mDefaultLocale;
 	
-    public static void checkPrerequisite( Context context ) {
-    	if(mContext==null){
-	    	mContext = context;
-	    	mDefaultLocale = Locale.getDefault().getLanguage();
-	    	Natives.Initialize();
-	    	FileUtil.touchDirectory(ROOT_PATH);
-	    	FileUtil.touchDirectory(LOCAL_CATALOG_PATH);
-	    	FileUtil.touchDirectory(IMPORT_CATALOG_PATH);
-	    	FileUtil.touchDirectory(TEMP_CATALOG_PATH);
-	    	FileUtil.touchFile(new File(ROOT_PATH, NO_MEDIA_TAG));
-	        CountryLibrary.setContext(context);
-	        StationLibrary.setContext(context);
-    	}
+    public static void initialize( Context context ) {
+    	mContext = context;
+    	mDefaultLocale = Locale.getDefault().getLanguage();
+    	Natives.Initialize();
+    	FileUtil.touchDirectory(ROOT_PATH);
+    	FileUtil.touchDirectory(LOCAL_CATALOG_PATH);
+    	FileUtil.touchDirectory(IMPORT_CATALOG_PATH);
+    	FileUtil.touchDirectory(TEMP_CATALOG_PATH);
+    	FileUtil.touchFile(new File(ROOT_PATH, NO_MEDIA_TAG));
+        CountryLibrary.setContext(context);
+        StationLibrary.setContext(context);
     }
 
 	public static String getLanguage(){

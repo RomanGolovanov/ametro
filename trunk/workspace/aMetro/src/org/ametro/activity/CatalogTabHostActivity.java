@@ -39,7 +39,7 @@ public class CatalogTabHostActivity extends TabActivity {
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		GlobalSettings.checkPrerequisite(this);
+		GlobalSettings.initialize(this);
 		mInstance = this;
 
 		setContentView(R.layout.catalog_tab_host);

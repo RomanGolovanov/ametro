@@ -233,7 +233,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		GlobalSettings.checkPrerequisite(this);
+		GlobalSettings.initialize(this);
 		mStorage = CatalogStorage.getStorage();
 		setWaitNoProgressView();
 		onInitialize();

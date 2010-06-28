@@ -293,5 +293,25 @@ public class CatalogStorage implements ICatalogBuilderListener {
 		
 	}
 
+	public void cancelDownload(String mSystemName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void requestDownload(String mSystemName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void cancelImport(String mSystemName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void requestImport(String mSystemName) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }
