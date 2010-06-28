@@ -51,13 +51,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.View.OnClickListener;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ExpandableListView.OnChildClickListener;
 
-public abstract class BaseCatalogExpandableActivity extends Activity implements ICatalogStorageListener, ICatalogStateProvider, OnChildClickListener {
+public abstract class BaseCatalogExpandableActivity extends Activity implements ICatalogStorageListener, ICatalogStateProvider, OnChildClickListener, OnClickListener {
 
 	protected static final int MODE_WAIT_NO_PROGRESS = 1;
 	protected static final int MODE_WAIT = 2;
@@ -74,6 +77,12 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	protected TextView mCounterTextView;
 	protected TextView mMessageTextView;
 	protected ProgressBar mProgressBar;
+	
+	protected View mActionBar;
+	protected EditText mActionBarEditText;
+	protected TextView mActionBarTextView;
+	protected ImageButton mActionBarCancelButton;
+	protected ImageButton mActionBarSearchButton;
 	
 	protected int mProgress;
 	protected int mTotal;
@@ -97,6 +106,14 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	private final static int REQUEST_DETAILS = 997;
 	private final static int REQUEST_LOCATION = 998;
 	private final static int REQUEST_SETTINGS = 999;
+	
+	public boolean onSearchRequested() {
+		if(mMode == MODE_LIST && mActionBar!=null){
+			onClick(mActionBarSearchButton);
+			return true;
+		}
+		return false;
+	}
 	
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
 		ExpandableListView.ExpandableListContextMenuInfo info = (ExpandableListView.ExpandableListContextMenuInfo) menuInfo;
@@ -236,18 +253,27 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	protected void setEmptyView() {
 		if(mMode!=MODE_EMPTY){
 			setContentView(R.layout.catalog_empty);
-			((TextView)findViewById(R.id.maps_message)).setText(getEmptyListMessage());
+			((TextView)findViewById(R.id.text)).setText(getEmptyListMessage());
 			mMode = MODE_EMPTY;
 		}
 	} 
 
 	protected void setListView() {
-		setContentView(R.layout.catalog_expandable_list);
-		mList = (ExpandableListView)findViewById(R.id.browse_catalog_list);
+		setContentView(R.layout.catalog_list);
+		mList = (ExpandableListView)findViewById(R.id.list);
 		mAdapter = getListAdapter(); 
 		mList.setAdapter(mAdapter);
 		mList.setOnChildClickListener(this);
 		registerForContextMenu(mList);
+
+		mActionBar = (View)findViewById(R.id.actionbar);
+		mActionBarEditText = (EditText)findViewById(R.id.text_edit);
+		mActionBarTextView = (TextView)findViewById(R.id.text_view);
+		mActionBarCancelButton = (ImageButton)findViewById(R.id.btn_cancel);
+		mActionBarSearchButton = (ImageButton)findViewById(R.id.btn_search);
+		mActionBarCancelButton.setOnClickListener(this);
+		mActionBarSearchButton.setOnClickListener(this);
+
 		mMode = MODE_LIST;
 	}
 	
@@ -391,13 +417,6 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 
 	protected void invokeMapDetails(CatalogMap local, CatalogMap remote, int state) {
 		Intent detailsIntent = new Intent(this, MapDetailsActivity.class);
-		if(local!=null){
-			detailsIntent.putExtra(MapDetailsActivity.EXTRA_LOCAL_MAP_URL, local.getUrl());
-		}
-		if(remote!=null){
-			detailsIntent.putExtra(MapDetailsActivity.EXTRA_REMOTE_MAP_URL, remote.getUrl());
-		}
-		detailsIntent.putExtra(MapDetailsActivity.EXTRA_STATE, state);
 		detailsIntent.putExtra(MapDetailsActivity.EXTRA_SYSTEM_NAME, (local!=null) ? local.getSystemName() : remote.getSystemName() );
 		startActivityForResult(detailsIntent, REQUEST_DETAILS);
 	}
@@ -414,6 +433,20 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 			finish();
 		}
 	}
-	
+
+	public void onClick(View v) {
+		if(v == mActionBarCancelButton){
+			mActionBarCancelButton.setVisibility(View.GONE);
+			mActionBarEditText.setVisibility(View.GONE);
+			mActionBarTextView.setVisibility(View.VISIBLE);
+			mActionBarEditText.setText("");
+		}else if (v == mActionBarSearchButton){
+			mActionBarTextView.setVisibility(View.GONE);
+			mActionBarCancelButton.setVisibility(View.VISIBLE);
+			mActionBarEditText.setVisibility(View.VISIBLE);
+			mActionBarEditText.requestFocus();
+		}
+		
+	}
 	
 }

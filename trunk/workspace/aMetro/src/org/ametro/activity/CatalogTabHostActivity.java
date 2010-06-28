@@ -32,25 +32,30 @@ import android.widget.TabHost;
 
 public class CatalogTabHostActivity extends TabActivity {
 
+	private static final String TAB_LOCAL = "local";
+	private static final String TAB_ONLINE = "online";
+	private static final String TAB_IMPORT = "import";
+	
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		GlobalSettings.checkPrerequisite(this);
 		mInstance = this;
 
+		setContentView(R.layout.catalog_tab_host);
+		
 		final TabHost tabHost = getTabHost();
 		final Resources res = getResources();
 
-		tabHost.addTab(tabHost.newTabSpec("tab1").setIndicator(res.getString(R.string.tab_maps_favorited), res.getDrawable(R.drawable.icon_tab_star))
-				.setContent(new Intent(this, CatalogLocalListActivity.class).putExtra(CatalogLocalListActivity.EXTRA_FAVORITES_ONLY, true)));
-
-		tabHost.addTab(tabHost.newTabSpec("tab2").setIndicator(res.getString(R.string.tab_maps_local), res.getDrawable(R.drawable.icon_tab_fdd))
+		tabHost.addTab(tabHost.newTabSpec(TAB_LOCAL).setIndicator(res.getString(R.string.tab_maps_local), res.getDrawable(R.drawable.icon_tab_fdd))
 				.setContent(new Intent(this, CatalogLocalListActivity.class)));
 
-		tabHost.addTab(tabHost.newTabSpec("tab3").setIndicator(res.getString(R.string.tab_maps_online), res.getDrawable(R.drawable.icon_tab_browse))
+		tabHost.addTab(tabHost.newTabSpec(TAB_ONLINE).setIndicator(res.getString(R.string.tab_maps_online), res.getDrawable(R.drawable.icon_tab_browse))
 				.setContent(new Intent(this, CatalogOnlineListActivity.class)));
 
-		tabHost.addTab(tabHost.newTabSpec("tab4").setIndicator(res.getString(R.string.tab_maps_import), res.getDrawable(R.drawable.icon_tab_unbox))
+		tabHost.addTab(tabHost.newTabSpec(TAB_IMPORT).setIndicator(res.getString(R.string.tab_maps_import), res.getDrawable(R.drawable.icon_tab_unbox))
 				.setContent(new Intent(this, CatalogImportListActivity.class)));
+		
 		
 	}
 	
@@ -64,5 +69,6 @@ public class CatalogTabHostActivity extends TabActivity {
 	{
 		return mInstance;
 	}
+	
 	
 }

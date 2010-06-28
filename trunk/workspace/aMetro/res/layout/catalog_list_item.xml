@@ -6,7 +6,7 @@
 	android:layout_width="fill_parent" android:layout_height="64dip"
 	android:orientation="vertical">
 	
-	<TextView android:id="@+id/browse_catalog_list_item_text"
+	<TextView android:id="@+id/text"
 		android:layout_width="fill_parent" 
 		android:layout_height="wrap_content"
 		android:ellipsize="marquee" 
@@ -19,7 +19,7 @@
 		android:orientation="horizontal">
 
 		<LinearLayout
-			android:id="@+id/browse_catalog_list_item_icons"  
+			android:id="@+id/icons"  
 			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content"
 			android:gravity="left"
@@ -27,7 +27,7 @@
 			/>
 		
 		<TextView
-			android:id="@+id/browse_catalog_list_item_status"  
+			android:id="@+id/state"  
 			android:layout_width="wrap_content" 
 			android:layout_height="wrap_content"
 			android:text="not imported"

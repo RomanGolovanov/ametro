@@ -9,7 +9,7 @@
 		<LinearLayout android:orientation="horizontal"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:gravity="center" android:baselineAligned="true">
-			<TextView android:text="@string/msg_no_maps_in_local" android:id="@+id/maps_message"
+			<TextView android:text="@string/msg_no_maps_in_local" android:id="@+id/text"
 				android:textSize="22sp" android:layout_width="wrap_content"
 				android:gravity="center"
 				android:layout_height="wrap_content" />

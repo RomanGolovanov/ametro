@@ -39,7 +39,7 @@ public class AboutActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about_dialog);
-        TextView view = (TextView)findViewById(R.id.about_text);
+        TextView view = (TextView)findViewById(R.id.text);
         try {
             PackageManager manager = getPackageManager();
             PackageInfo info = manager.getPackageInfo(getPackageName(), 0);

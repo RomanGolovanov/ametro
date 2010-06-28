@@ -27,11 +27,17 @@ import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.CatalogMapState;
 import org.ametro.catalog.storage.CatalogStorage;
+import org.ametro.catalog.storage.ICatalogStorageListener;
+import org.ametro.util.StringUtil;
 import org.ametro.widget.TextStripView;
+import org.ametro.widget.TextStripView.OnlineWidgetView;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,159 +46,133 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class MapDetailsActivity extends Activity implements OnClickListener {
+public class MapDetailsActivity extends Activity implements OnClickListener, ICatalogStorageListener {
 
+	protected static final int MODE_WAIT = 1;
+	protected static final int MODE_DETAILS = 2;
 	
-    public static final String EXTRA_SYSTEM_NAME = "SYSTEM_NAME";
-    public static final String EXTRA_LOCAL_MAP_URL = "LOCAL_URL";
-	public static final String EXTRA_REMOTE_MAP_URL = "REMOTE_URL";
-	public static final String EXTRA_STATE = "STATE";
-	public static final String EXTRA_RESULT = "RESULT";
-
-	public static final int EXTRA_RESULT_UPDATE = 1;
-	public static final int EXTRA_RESULT_IMPORT = 2;
-	public static final int EXTRA_RESULT_DOWNLOAD = 3;
-	public static final int EXTRA_RESULT_OPEN = 4;
-	public static final int EXTRA_RESULT_DELETE = 5;
+	protected int mMode;
+	
+	public static final String EXTRA_SYSTEM_NAME = "SYSTEM_NAME";
+	
+	public static final String EXTRA_RESULT = "EXTRA_RESULT";
+	private static final int EXTRA_RESULT_OPEN = 1;
 	
 	private static final int MENU_DELETE = 1;
-	
-	private Button mUpdateButton;
-	private Button mImportButton;
-	private Button mDownloadButton;
+
 	private Button mOpenButton;
 	private Button mCloseButton;
 	
+//	private Button mUpdateButton;
+//	private Button mImportButton;
+//	private Button mDownloadButton;
+//	private Button mCancelButton;
+
 	private ImageButton mFavoriteButton;
-	
-	
+
 	private TextView mCityTextView;
 	private TextView mCountryTextView;
-	
+
 	private Intent mIntent;
-	
+
 	private String mSystemName;
-	private String mLocalUrl;
-	private String mRemoteUrl;
-	private int mState;
-	
+
 	private CatalogMap mLocal;
-	private CatalogMap mRemote;
+	private CatalogMap mOnline;
+	private CatalogMap mImport;
+	
+	private Catalog mLocalCatalog;
+	private Catalog mOnlineCatalog;
+	private Catalog mImportCatalog;
+	
+	private boolean mOnlineDownload; 
 	
 	private TextStripView mContent;
-	
-	private String mCityName;
-	private String mCountryName;
-	//private int[] mTransports;
+
+	private CatalogStorage mStorage;
 	
 	private boolean mIsFavorite;
-	
+
 	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(0,MENU_DELETE, 0, R.string.btn_delete);
+		menu.add(0, MENU_DELETE, 0, R.string.btn_delete).setIcon(android.R.drawable.ic_menu_delete);
 		return super.onCreateOptionsMenu(menu);
 	}
 
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		menu.findItem(MENU_DELETE).setVisible(mLocalUrl!=null);
+		menu.findItem(MENU_DELETE).setVisible(mLocal != null);
 		return super.onPrepareOptionsMenu(menu);
 	}
-	
+
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch(item.getItemId()){
+		switch (item.getItemId()) {
 		case MENU_DELETE:
-			finishWithResult(EXTRA_RESULT_DELETE);
+			mStorage.deleteMap(mSystemName);
+			finishWithoutResult();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+
 	protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        
-        mIntent = getIntent();
-        if(mIntent == null){
-        	finishWithoutResult();
-        	return;
-        }
-        mSystemName = mIntent.getStringExtra(EXTRA_SYSTEM_NAME);
-        mLocalUrl = mIntent.getStringExtra(EXTRA_LOCAL_MAP_URL);        
-        mRemoteUrl = mIntent.getStringExtra(EXTRA_REMOTE_MAP_URL);        
-        mState = mIntent.getIntExtra(EXTRA_STATE, -1);        
-
-        setContentView(R.layout.map_details);
-        
-        mUpdateButton = (Button)findViewById(R.id.btn_update);
-        mImportButton = (Button)findViewById(R.id.btn_import);
-        mDownloadButton = (Button)findViewById(R.id.btn_download);
-        mOpenButton = (Button)findViewById(R.id.btn_open);
-        mCloseButton = (Button)findViewById(R.id.btn_close);
-        
-        mFavoriteButton = (ImageButton)findViewById(R.id.btn_favorite);
-
-        mCityTextView = (TextView)findViewById(R.id.firstLine);
-        mCountryTextView = (TextView)findViewById(R.id.secondLine);
-        
-        mContent = (TextStripView)findViewById(R.id.content);
-        
-        mUpdateButton.setOnClickListener(this);
-        mImportButton.setOnClickListener(this);
-        mDownloadButton.setOnClickListener(this);
-        mOpenButton.setOnClickListener(this);
-        mCloseButton.setOnClickListener(this);
-        mFavoriteButton.setOnClickListener(this);
-        
-        mUpdateButton.setVisibility(mState == CatalogMapState.UPDATE ? View.VISIBLE : View.GONE);
-        mImportButton.setVisibility(mState == CatalogMapState.IMPORT ? View.VISIBLE : View.GONE);
-        mDownloadButton.setVisibility(mState == CatalogMapState.DOWNLOAD ? View.VISIBLE : View.GONE);
-        mOpenButton.setVisibility(mLocalUrl!=null ? View.VISIBLE : View.GONE);
-        
-        final CatalogStorage storage = CatalogStorage.getStorage();
-        
-        if(mLocalUrl!=null){
-        	Catalog catalog = storage.getLocalCatalog();
-        	if(catalog!=null){
-        		mLocal = catalog.getMap(mSystemName);
-        	}
-        }
-
-        if(mRemoteUrl!=null && mRemoteUrl.endsWith(GlobalSettings.PMZ_FILE_TYPE)){
-        	Catalog catalog = storage.getImportCatalog();
-        	if(catalog!=null){
-        		mRemote = catalog.getMap(mSystemName);
-        	}
-        }
-        
-        if(mRemoteUrl!=null && mRemoteUrl.endsWith(GlobalSettings.MAP_FILE_TYPE)){
-        	Catalog catalog = storage.getOnlineCatalog();
-        	if(catalog!=null){
-        		mRemote = catalog.getMap(mSystemName);
-        	}
-        }
-        
-    	String code = GlobalSettings.getLanguage();
-    	mCityName = preffered().getCity(code);
-    	mCountryName = preffered().getCountry(code);
-        
-        updateFavoriteButton();
-        updateContent();
-    }
-
-	private CatalogMap preffered(){
-		return mLocal!=null ? mLocal : mRemote;
+		super.onCreate(savedInstanceState);
+		mIntent = getIntent();
+		if (mIntent == null) {
+			finishWithoutResult();
+			return;
+		}
+		mSystemName = mIntent.getStringExtra(EXTRA_SYSTEM_NAME);
+		mStorage = CatalogStorage.getStorage();
+		setWaitNoProgressView();
 	}
 	
+	protected void onResume() {
+		mStorage.addCatalogChangedListener(this);
+		mLocalCatalog = mStorage.getLocalCatalog();
+		mOnlineCatalog = mStorage.getOnlineCatalog();
+		mImportCatalog = mStorage.getImportCatalog();
+		if (mLocalCatalog == null) {
+			mStorage.requestLocalCatalog(false);
+		}
+		if (mOnlineCatalog == null && !mOnlineDownload) {
+			mStorage.requestOnlineCatalog(false);
+		}
+		if (mImportCatalog == null) {
+			mStorage.requestImportCatalog(false);
+		}
+		onCatalogsUpdate();
+		super.onResume();
+	}
+
+	protected void onPause() {
+		mStorage.removeCatalogChangedListener(this);
+		super.onPause();
+	}
+	
+	private void onCatalogsUpdate() {
+		if(mLocalCatalog!=null && (mOnlineCatalog!=null || !mOnlineDownload) && mImportCatalog!=null){
+			if(mLocalCatalog!=null){
+				mLocal = mLocalCatalog.getMap(mSystemName);
+			}
+			if(mOnlineCatalog!=null){
+				mOnline = mOnlineCatalog.getMap(mSystemName);
+			}
+			if(mImportCatalog!=null){
+				mImport = mImportCatalog.getMap(mSystemName);
+			}
+			setDetailsView();
+		}
+	}	
+	
+	private CatalogMap preffered() {
+		return mLocal != null ? mLocal : (mOnline != null ? mOnline : mImport);
+	}
+
 	public void onClick(View v) {
-		if(v == mCloseButton){
-        	finishWithoutResult();
-		}else if(v == mOpenButton){
-        	finishWithResult(EXTRA_RESULT_OPEN);
-		}else if(v == mImportButton){
-        	finishWithResult(EXTRA_RESULT_IMPORT);
-		}else if(v == mDownloadButton){
-        	finishWithResult(EXTRA_RESULT_DOWNLOAD);
-		}else if(v == mUpdateButton){
-			finishWithResult(EXTRA_RESULT_UPDATE);
-		}else if(v == mFavoriteButton){
+		if (v == mCloseButton) {
+			finishWithoutResult();
+		} else if (v == mOpenButton) {
+			finishWithResult(EXTRA_RESULT_OPEN);
+		} else if (v == mFavoriteButton) {
 			mIsFavorite = !mIsFavorite;
 			updateFavoriteButton();
 		}
@@ -206,26 +186,81 @@ public class MapDetailsActivity extends Activity implements OnClickListener {
 		}
 	}
 
-	private void updateContent() {
-		mCityTextView.setText(mCityName);
-		mCountryTextView.setText(mCountryName);
-
-		mContent.removeAllViews();
-		
-		Button b = new Button(this);
-		b.setText("press me!");
-		
-		mContent.addHeader("Button block");
-		mContent.addWidgetBlock(b);
-		
-		for(int i = 0; i < 3; i++){
-			mContent.addHeader("header " + i);
-			for(int j = 0; j < 4; j++){
-				mContent.addText("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
-			}
+	
+	protected void setWaitNoProgressView() {
+		if(mMode!=MODE_WAIT){
+			setContentView(R.layout.operation_wait_no_progress);
+			mMode = MODE_WAIT;
 		}
 	}
+		
+	private void setDetailsView() {
+		if(mMode!=MODE_DETAILS){
+			setContentView(R.layout.map_details);
+		
+			mOpenButton = (Button) findViewById(R.id.btn_open);
+			mCloseButton = (Button) findViewById(R.id.btn_close);
+			mFavoriteButton = (ImageButton) findViewById(R.id.btn_favorite);
 	
+			mCityTextView = (TextView) findViewById(R.id.firstLine);
+			mCountryTextView = (TextView) findViewById(R.id.secondLine);
+	
+			mContent = (TextStripView) findViewById(R.id.content);
+	
+			mOpenButton.setOnClickListener(this);
+			mCloseButton.setOnClickListener(this);
+			mFavoriteButton.setOnClickListener(this);
+			
+			String code = GlobalSettings.getLanguage();
+			
+			mCityTextView.setText(preffered().getCity(code));
+			mCountryTextView.setText(preffered().getCountry(code));
+	
+			mContent.removeAllViews();
+			
+			final Resources res = getResources();
+			
+			String[] states = res.getStringArray(R.array.catalog_map_states);
+			
+			if(mOnline!=null){
+				int stateId = CatalogMapState.getLocalToOnlineState(mLocal, mOnline);
+				String stateName = states[stateId];
+				int stateColor = (res.getIntArray(R.array.online_catalog_map_state_colors))[stateId];
+				
+				mContent.createHeader().setTextLeft("Online")
+					.setTextRight(stateName).setTextRightColor(stateColor);
+				//StringUtil.formatFileSize( mOnline.getSize(), 3 )
+				
+				final OnlineWidgetView v = mContent.createOnlineWidget();
+				v.setSize(mOnline.getSize());
+				v.setVersion("v." + mOnline.getVersion());
+				v.setVisibility(CatalogMapState.DOWNLOADING);
+				
+
+				
+			}
+			if(mImport!=null){
+				int stateId = CatalogMapState.getLocalToImportState(mLocal, mImport);
+				String stateName = states[stateId];
+				int stateColor = (res.getIntArray(R.array.import_catalog_map_state_colors))[stateId];
+				
+				mContent.createHeader().setTextLeft("Import")
+					.setTextRight(stateName).setTextRightColor(stateColor);
+				mContent.createText().setText("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+				//mContent.createWidget();
+			}
+			
+			mContent.createHeader().setTextLeft("Transport");
+			mContent.createText().setText("Metro, Tram, Bus");
+	
+			mContent.createHeader().setTextLeft("Description");
+			mContent.createText().setText(preffered().getDescription(code));
+		
+			updateFavoriteButton();
+			mMode = MODE_DETAILS;
+		}
+	}
+
 	private void finishWithoutResult() {
 		setResult(RESULT_CANCELED);
 		finish();
@@ -238,5 +273,33 @@ public class MapDetailsActivity extends Activity implements OnClickListener {
 		finish();
 	}
 
+	public void onCatalogLoaded(int catalogId, Catalog catalog) {
+		if(catalogId == CatalogStorage.CATALOG_LOCAL){
+			mLocalCatalog = catalog;
+		}
+		if(catalogId == CatalogStorage.CATALOG_ONLINE){
+			mOnlineCatalog = catalog;
+			mOnlineDownload = false;
+		}
+		if(catalogId == CatalogStorage.CATALOG_IMPORT){
+			mImportCatalog = catalog;
+		}
+		mUIEventDispacher.post(mCatalogsUpdate);
+	}
+
+	public void onCatalogOperationFailed(int catalogId, String message) {
+	}
+
+	public void onCatalogOperationProgress(int catalogId, int progress, int total, String message) {
+	}
+
+	protected Handler mUIEventDispacher = new Handler();
+	
+	private Runnable mCatalogsUpdate = new Runnable() {
+		
+		public void run() {
+			onCatalogsUpdate();
+		}
+	};
 	
 }

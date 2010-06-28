@@ -25,7 +25,8 @@
 		<ImageButton android:id="@+id/btn_favorite"
 			android:layout_alignParentRight="true" android:layout_centerVertical="true"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:background="#00000000" android:src="@android:drawable/btn_star_big_off" />
+			android:padding="6sp"
+			android:background="@android:color/transparent" android:src="@android:drawable/btn_star_big_off" />
 	</RelativeLayout>
 	<TextView android:id="@+id/top_panel_splitter" 
 		android:layout_below="@id/top_panel" android:background="@drawable/white_splitter" 
@@ -35,15 +36,6 @@
 		android:layout_height="?android:attr/listPreferredItemHeight"
 		android:background="#ff808080" android:gravity="center"
 		android:padding="4sp" android:orientation="horizontal">
-		<Button android:id="@+id/btn_update" android:layout_width="wrap_content"
-			android:layout_weight="1" android:layout_height="wrap_content"
-			android:text="@string/btn_update" />
-		<Button android:id="@+id/btn_import" android:layout_width="wrap_content"
-			android:layout_weight="1" android:layout_height="wrap_content"
-			android:text="@string/btn_import" />
-		<Button android:id="@+id/btn_download" android:layout_width="wrap_content"
-			android:layout_weight="1" android:layout_height="wrap_content"
-			android:text="@string/btn_download" />
 		<Button android:id="@+id/btn_open" android:layout_width="wrap_content"
 			android:layout_weight="1" android:layout_height="wrap_content"
 			android:text="@string/btn_open" />
