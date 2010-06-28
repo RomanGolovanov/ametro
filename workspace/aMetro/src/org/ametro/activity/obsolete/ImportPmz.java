@@ -512,7 +512,7 @@ public class ImportPmz extends Activity {
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		GlobalSettings.checkPrerequisite(this);
+		GlobalSettings.initialize(this);
 		startIndexMode();
 	}
 

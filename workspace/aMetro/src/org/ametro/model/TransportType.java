@@ -28,7 +28,7 @@ public class TransportType {
 	public final static int BUS_RESOURCE_INDEX = 3;
 	public final static int TRAIN_RESOURCE_INDEX = 4;
 	public final static int WATER_BUS_RESOURCE_INDEX = 5;
-	public final static int TROLLEYBUS_RESOURCE_INDEX = 5;
+	public final static int TROLLEYBUS_RESOURCE_INDEX = 6;
 	
 	public final static int UNKNOWN_ID = 1;
 	public final static int METRO_ID = 2;
@@ -37,5 +37,5 @@ public class TransportType {
 	public final static int TRAIN_ID = 16;
 	public final static int WATER_BUS_ID = 32;
 	public final static int TROLLEYBUS_ID = 64;
-	
+
 }

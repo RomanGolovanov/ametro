@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="wrap_content" android:padding="4sp" 
+	android:gravity="center_vertical">
+	<ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/image"
+		android:layout_alignParentLeft="true"/>
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingLeft="6sp"
+		android:id="@+id/text" android:layout_toRightOf="@id/image"/>
+</RelativeLayout>	

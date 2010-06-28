@@ -115,7 +115,7 @@ public class MapViewActivity extends Activity implements OnClickListener {
 		Instance = this;
 		Instance.mDefaultLocale = Locale.getDefault();
 
-		GlobalSettings.checkPrerequisite(this);
+		GlobalSettings.initialize(this);
 		setupLocale();
 
 		setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL); 

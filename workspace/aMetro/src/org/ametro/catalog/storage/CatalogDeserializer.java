@@ -72,7 +72,7 @@ public class CatalogDeserializer {
 		ArrayList<String> mapCity = new ArrayList<String>();
 		ArrayList<String> mapCountry = new ArrayList<String>();
 		ArrayList<String> mapDescription = new ArrayList<String>();
-		ArrayList<String> mapChangeLost = new ArrayList<String>();
+		ArrayList<String> mapChangeLog = new ArrayList<String>();
 		
 		Stack<String> tags = new Stack<String>(); 
 		
@@ -109,6 +109,12 @@ public class CatalogDeserializer {
 		     }
 		 } else if(eventType == XmlPullParser.END_TAG) {
 		     if(TAG_MAP.equals(tags.peek())){
+		    	 while(mapChangeLog.size()<mapLocales.size()){
+		    		 mapChangeLog.add("");
+		    	 }
+		    	 while(mapDescription.size()<mapLocales.size()){
+		    		 mapDescription.add("");
+		    	 }
 		    	 CatalogMap map = new CatalogMap(
 		    			 catalog,
 		    			 systemName,
@@ -122,7 +128,7 @@ public class CatalogDeserializer {
 		    			 (String[]) mapCountry.toArray(new String[mapCountry.size()]),
 		    			 (String[]) mapCity.toArray(new String[mapCity.size()]),
 		    			 (String[]) mapDescription.toArray(new String[mapDescription.size()]),
-		    			 (String[]) mapChangeLost.toArray(new String[mapChangeLost.size()]),
+		    			 (String[]) mapChangeLog.toArray(new String[mapChangeLog.size()]),
 		    			 corrupted
 		    			 );
 		    	 mapLocales.clear();
@@ -140,7 +146,7 @@ public class CatalogDeserializer {
 		     }else if(TAG_DESCRIPTION.equals(tagName)){
 		    	 mapDescription.add( xpp.getText() );
 		     }else if(TAG_CHANGE_LOG.equals(tagName)){
-		    	 mapChangeLost.add( xpp.getText() );
+		    	 mapChangeLog.add( xpp.getText() );
 		     }
 		 }
 		 eventType = xpp.next();
