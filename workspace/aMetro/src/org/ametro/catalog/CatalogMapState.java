@@ -10,4 +10,49 @@ public class CatalogMapState {
 	public static final int DOWNLOAD = 6; 
 	public static final int UPDATE_NOT_SUPPORTED = 7;
 	public static final int NEED_TO_UPDATE = 8;
+	public static final int DOWNLOAD_PENDING = 9;
+	public static final int IMPORT_PENDING = 10;
+	public static final int DOWNLOADING = 11;
+	public static final int IMPORTING = 12;
+	
+	public static int getLocalToOnlineState(CatalogMap local, CatalogMap remote) {
+    	if(remote.isNotSupported()){
+    		if(local == null || local.isNotSupported() || local.isCorruted()){
+    			return NOT_SUPPORTED;
+    		}else{
+    			return UPDATE_NOT_SUPPORTED;
+    		}
+    	}else{
+    		if(local == null){
+    			return DOWNLOAD;
+    		}else if(local.isNotSupported() || local.isCorruted()){
+    			return NEED_TO_UPDATE;
+    		}else{
+    			if(local.getTimestamp() >= remote.getTimestamp()){
+    				return INSTALLED;
+    			}else{
+    				return UPDATE;
+    			}
+    		}
+    	}
+	}
+	
+	public static int getLocalToImportState(CatalogMap local, CatalogMap remote) {
+    	if(remote.isCorruted()){
+    		return CORRUPTED;
+    	}else{
+    		if(local == null){
+    			return IMPORT;
+    		}else if(!local.isSupported() || local.isCorruted()){
+    			return UPDATE;
+    		}else{
+    			if(local.getTimestamp() >= remote.getTimestamp()){
+    				return INSTALLED;
+    			}else{
+    				return UPDATE;
+    			}
+    		}
+    	}
+	}
+	
 }

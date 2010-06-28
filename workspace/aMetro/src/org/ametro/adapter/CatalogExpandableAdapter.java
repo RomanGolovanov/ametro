@@ -133,9 +133,9 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter {
 		if (convertView == null) {
 			convertView = mInflater.inflate(R.layout.catalog_list_item, null);
 			holder = new ViewHolder();
-			holder.mText = (TextView) convertView.findViewById(R.id.browse_catalog_list_item_text);
-			holder.mStatus = (TextView) convertView.findViewById(R.id.browse_catalog_list_item_status);
-			holder.mImageContainer = (LinearLayout) convertView.findViewById(R.id.browse_catalog_list_item_icons);
+			holder.mText = (TextView) convertView.findViewById(R.id.text);
+			holder.mStatus = (TextView) convertView.findViewById(R.id.state);
+			holder.mImageContainer = (LinearLayout) convertView.findViewById(R.id.icons);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();

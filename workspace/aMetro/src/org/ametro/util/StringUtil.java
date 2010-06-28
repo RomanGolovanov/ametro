@@ -21,6 +21,7 @@
 
 package org.ametro.util;
 
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -626,8 +627,24 @@ public class StringUtil {
 		return res;
 	}
 
-
-
-
-
+	public static String formatFileSize(long longSize, int decimalPos)
+	  {
+	     NumberFormat fmt = NumberFormat.getNumberInstance();
+	     if (decimalPos >= 0)
+	     {
+	        fmt.setMaximumFractionDigits(decimalPos);
+	     }
+	     final double size = longSize;
+	     double val = size / (1024 * 1024);
+	     if (val > 1)
+	     {
+	        return fmt.format(val).concat(" MB");
+	     }
+	     val = size / 1024;
+	     if (val > 10)
+	     {
+	        return fmt.format(val).concat(" KB");
+	     }
+	     return fmt.format(val).concat(" bytes");
+	  }
 }

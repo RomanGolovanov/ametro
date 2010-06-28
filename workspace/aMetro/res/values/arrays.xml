@@ -45,6 +45,10 @@
 	    <item>Download</item>
 	    <item>Update not supported</item>
 	    <item>Update needed</item>
+	    <item>Download pending...</item>
+	    <item>Import pending...</item>
+	    <item>Downloading...</item>
+	    <item>Importing...</item>
     </string-array>
 	<array name="import_catalog_map_state_colors">
 		<item>#ffff00ff</item> 
@@ -52,10 +56,14 @@
 		<item>#ffff0000</item>
 		<item>#ffffff00</item>
 		<item>#ffffffff</item>
-		<item>#ffffff00</item>
+		<item>#ffffffff</item>
 		<item>#ffff00ff</item>
 		<item>#ffff00ff</item>
 		<item>#ffff00ff</item>
+		<item>#ff00ff00</item>
+		<item>#ff00ff00</item>
+		<item>#ff00ff00</item>
+		<item>#ff00ff00</item>
 	</array>    
 	<array name="online_catalog_map_state_colors">
 		<item>#ffff00ff</item> 
@@ -67,6 +75,10 @@
 		<item>#ffffffff</item>
 		<item>#ffff0000</item>
 		<item>#ffff0000</item>
+		<item>#ff00ff00</item>
+		<item>#ff00ff00</item>
+		<item>#ff00ff00</item>
+		<item>#ff00ff00</item>
 	</array>    
 	<array name="local_catalog_map_state_colors">
 		<item>#ffcccccc</item> 
@@ -78,6 +90,10 @@
 		<item>#ffff00ff</item>
 		<item>#ffff00ff</item>
 		<item>#ffff0000</item>
+		<item>#ff00ff00</item>
+		<item>#ff00ff00</item>
+		<item>#ff00ff00</item>
+		<item>#ff00ff00</item>
 	</array>    
     <string-array name="version_changelog">
         <item>0.1.0.r163: changed stations/route lists appearance</item>

@@ -288,5 +288,10 @@ public class CatalogStorage implements ICatalogBuilderListener {
 		fireCatalogOperationProgress(getCatalogId(source), progress, total, message);
 	}
 
+	public void deleteMap(String mSystemName) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

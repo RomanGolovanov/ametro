@@ -31,6 +31,7 @@ import org.ametro.R;
 import org.ametro.adapter.CatalogExpandableAdapter;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
+import org.ametro.catalog.CatalogMapState;
 import org.ametro.catalog.storage.CatalogStorage;
 
 import android.widget.TextView;
@@ -91,7 +92,7 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity  {
 	
 	private void setDownloadFailedView() {
 		setContentView(R.layout.catalog_empty);
-		((TextView) findViewById(R.id.maps_message)).setText(R.string.msg_catalog_download_failed);
+		((TextView) findViewById(R.id.text)).setText(R.string.msg_catalog_download_failed);
 		mMode = MODE_DOWNLOAD_FAILED;
 	}
 
@@ -134,25 +135,7 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity  {
 	}
 
 	public int getCatalogState(CatalogMap local, CatalogMap remote) {
-    	if(remote.isNotSupported()){
-    		if(local == null || local.isNotSupported() || local.isCorruted()){
-    			return NOT_SUPPORTED;
-    		}else{
-    			return UPDATE_NOT_SUPPORTED;
-    		}
-    	}else{
-    		if(local == null){
-    			return DOWNLOAD;
-    		}else if(local.isNotSupported() || local.isCorruted()){
-    			return NEED_TO_UPDATE;
-    		}else{
-    			if(local.getTimestamp() >= remote.getTimestamp()){
-    				return INSTALLED;
-    			}else{
-    				return UPDATE;
-    			}
-    		}
-    	}
+		return CatalogMapState.getLocalToOnlineState(local,remote);
 	}
 }
 
