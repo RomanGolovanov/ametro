@@ -21,6 +21,10 @@
 
 package org.ametro;
 
+import java.io.File;
+
+import android.os.Environment;
+
 /**
  * @author Vlad Vinichenko (akerigan@gmail.com)
  *         Date: 10.02.2010
@@ -48,5 +52,28 @@ public class Constants {
     public static final String PREFERENCE_AUTO_UPDATE_MAPS = "AUTO_UPDATE_MAPS";
     public static final String PREFERENCE_LOCALE = "LOCALE";
 
+    public static final String DEFAULT_MAP = "metro";
+
+    public static final String NO_MEDIA_TAG = ".nomedia";
+    public static final String MAP_FILE_TYPE = ".ametro";
+    public static final String PMZ_FILE_TYPE = ".pmz";
+
+    public static final String IMPORT_FILE_TYPE = ".import.ametro";
+    public static final String DOWNLOAD_FILE_TYPE = ".download.ametro";
+    
+	public static final File ROOT_PATH = new File(Environment.getExternalStorageDirectory(), "ametro");
+	
+	public static final String ONLINE_CATALOG_PATH = "http://dl.dropbox.com/u/8171021/0.2.4.r247/catalog.xml";
+	public static final File LOCAL_CATALOG_PATH = new File(ROOT_PATH, "maps");
+	public static final File IMPORT_CATALOG_PATH = new File(ROOT_PATH, "import");
+	public static final File TEMP_CATALOG_PATH = new File(ROOT_PATH,"temp");
+    
+	public static final File ONLINE_CATALOG_STORAGE = new File(ROOT_PATH,"catalog.online.xml");
+	public static final File LOCAL_CATALOG_STORAGE = new File(ROOT_PATH,"catalog.local.xml");
+	public static final File IMPORT_CATALOG_STORAGE = new File(ROOT_PATH,"catalog.import.xml");
+	
+	public static final File NO_MEDIA_FILE = new File(ROOT_PATH, NO_MEDIA_TAG);
+	
+    
 	
 }

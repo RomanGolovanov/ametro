@@ -18,12 +18,32 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package org.ametro.catalog.storage;
+package org.ametro.directory;
 
-public interface ICatalogBuilderListener {
+import org.ametro.model.ext.ModelLocation;
 
-	void onCatalogBuilderOperationFailed(CatalogBuilder source, String message);
+public class StationInfo {
+	private String mLineSystemName;
+	private String mStationSystemName;
+	private ModelLocation mLocation;
 	
-	void onCatalogBuilderOperationProgress(CatalogBuilder source, int progress, int total, String message);
+	public String getLineSystemName() {
+		return mLineSystemName;
+	}
+
+	public String getStationSystemName() {
+		return mStationSystemName;
+	}
+
+	public ModelLocation getLocation() {
+		return mLocation;
+	}
+
+	public StationInfo(String lineSystemName, String stationSystemName, ModelLocation location) {
+		super();
+		mLineSystemName = lineSystemName;
+		mStationSystemName = stationSystemName;
+		mLocation = location;
+	}
 	
 }

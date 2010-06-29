@@ -33,7 +33,6 @@ import java.util.Locale;
 import java.util.TreeMap;
 
 import org.ametro.Constants;
-import org.ametro.GlobalSettings;
 import org.ametro.MapUri;
 import org.ametro.R;
 import org.ametro.dialog.LocationSearchDialog;
@@ -115,7 +114,6 @@ public class MapViewActivity extends Activity implements OnClickListener {
 		Instance = this;
 		Instance.mDefaultLocale = Locale.getDefault();
 
-		GlobalSettings.initialize(this);
 		setupLocale();
 
 		setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL); 

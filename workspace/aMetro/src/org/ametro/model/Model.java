@@ -26,7 +26,6 @@ import org.ametro.model.ext.ModelLocation;
 import org.ametro.model.storage.ModelBuilder;
 import org.ametro.util.StringUtil;
 
-
 public class Model {
 
 	public final static String LOCALE_RU = "ru";

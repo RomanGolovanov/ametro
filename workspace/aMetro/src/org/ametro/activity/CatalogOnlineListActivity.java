@@ -24,13 +24,12 @@ import org.ametro.R;
 import org.ametro.adapter.CatalogExpandableAdapter;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
+import org.ametro.catalog.CatalogMapPair;
 import org.ametro.catalog.CatalogMapState;
-import org.ametro.catalog.storage.CatalogStorage;
 
 import android.widget.TextView;
 
-
-public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity  {
+public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity {
 
 	private static final int MODE_DOWNLOAD_FAILED = 1000;
 
@@ -39,80 +38,75 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity  {
 
 	private boolean mOnlineDownload;
 	private boolean mOnlineDownloadFailed;
-	
+
 	protected void onPrepareView() {
+		Catalog localPrevious = mLocal;
+		Catalog onlinePrevious = mOnline;
 		mLocal = mStorage.getLocalCatalog();
 		mOnline = mStorage.getOnlineCatalog();
-		if (mLocal == null) {
+		if (mLocal == null || !Catalog.equals(mLocal,localPrevious)) {
 			mStorage.requestLocalCatalog(false);
 		}
-		if (mOnline == null && !mOnlineDownload) {
+		if ((mOnline == null && !mOnlineDownload) || !Catalog.equals(mOnline,onlinePrevious)) {
 			mOnlineDownload = true;
 			mOnlineDownloadFailed = false;
 			mStorage.requestOnlineCatalog(false);
 		}
-		onCatalogsUpdate(false);
+		onCatalogsUpdate(!Catalog.equals(mLocal,localPrevious) || !Catalog.equals(mOnline,onlinePrevious));
 		super.onPrepareView();
+
 	}
 
 	private void onCatalogsUpdate(boolean refresh) {
-		if(mLocal!=null && (mOnline!=null || !mOnlineDownload)){
-			if(mOnline!=null && mOnline.getMaps().size()>0){
-				if(mMode != MODE_LIST){
+		if (mLocal != null && (mOnline != null || !mOnlineDownload)) {
+			if (mOnline != null && mOnline.getMaps().size() > 0) {
+				if (mMode != MODE_LIST) {
 					setListView();
-				}else{
-					if(refresh){
+				} else {
+					if (refresh) {
 						setListView();
 					}
 				}
-			}else{
-				if(mOnlineDownloadFailed){
+			} else {
+				if (mOnlineDownloadFailed) {
 					setDownloadFailedView();
-				}else{
+				} else {
 					setEmptyView();
 				}
 			}
-			
+
 		}
 	}
-	
+
 	protected void onCatalogRefresh() {
 		mOnlineDownload = true;
 		mOnlineDownloadFailed = false;
 		mStorage.requestOnlineCatalog(true);
 		super.onCatalogRefresh();
 	}
-	
+
 	private void setDownloadFailedView() {
 		setContentView(R.layout.catalog_empty);
-		((TextView) findViewById(R.id.text)).setText(R.string.msg_catalog_download_failed);
+		((TextView) findViewById(R.id.text))
+				.setText(R.string.msg_catalog_download_failed);
 		mMode = MODE_DOWNLOAD_FAILED;
 	}
 
 	protected void onOnlineCatalogLoaded(Catalog catalog) {
 		mOnline = catalog;
 		mOnlineDownload = false;
-		if(catalog==null){
-			mOnline = CatalogStorage.getStorage().getOnlineCatalog();
-		}
-		mOnlineDownloadFailed = catalog!=null;
+		mOnlineDownloadFailed = catalog == null || catalog.isCorrupted();
 		onCatalogsUpdate(true);
+		if (catalog == null) {
+			mOnline = mStorage.getOnlineCatalog();
+		}
 		super.onOnlineCatalogLoaded(catalog);
 	}
-	
+
 	protected void onLocalCatalogLoaded(Catalog catalog) {
 		mLocal = catalog;
 		onCatalogsUpdate(true);
 		super.onLocalCatalogLoaded(catalog);
-	}
-	
-	protected void onOnlineCatalogFailed() {
-		//mOnlineDownload = false;
-		//mOnline = CatalogStorage.getStorage().getOnlineCatalog();
-		//mOnlineDownloadFailed = mOnline!=null;
-		//onCatalogsUpdate(true);
-		mOnlineDownloadFailed = true;
-		super.onOnlineCatalogFailed();
 	}
 
 	protected int getEmptyListMessage() {
@@ -120,7 +114,9 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity  {
 	}
 
 	protected CatalogExpandableAdapter getListAdapter() {
-		return new CatalogExpandableAdapter(this,mLocal, mOnline, Catalog.DIFF_MODE_RIGHT, R.array.online_catalog_map_state_colors,this);
+		return new CatalogExpandableAdapter(this, mLocal, mOnline,
+				CatalogMapPair.DIFF_MODE_REMOTE,
+				R.array.online_catalog_map_state_colors, this);
 	}
 
 	protected boolean isCatalogProgressEnabled(int catalogId) {
@@ -128,7 +124,6 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity  {
 	}
 
 	public int getCatalogState(CatalogMap local, CatalogMap remote) {
-		return CatalogMapState.getLocalToOnlineState(local,remote);
+		return CatalogMapState.getOnlineCatalogState(local, remote);
 	}
 }
-

@@ -22,7 +22,6 @@
 package org.ametro.activity;
 
 
-import org.ametro.GlobalSettings;
 import org.ametro.R;
 
 import android.os.Bundle;
@@ -32,14 +31,7 @@ public class SettingsActivity extends PreferenceActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        GlobalSettings.invalidate();
-        
         addPreferencesFromResource(R.xml.settings);
-        
-//        ((EditTextPreference)this.findPreference(getString(R.string.pref_auto_update_url_key)))
-//	    	.getEditText()
-//	    	.setInputType(InputType.TYPE_TEXT_VARIATION_URI);
-    
     }
     
     protected void onStop() {

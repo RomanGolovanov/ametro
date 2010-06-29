@@ -51,14 +51,15 @@ public class CatalogBuilder {
 	private Catalog downloadCatalog(String url){
 		BufferedInputStream strm = null;
 		try{
-			
 			strm = new BufferedInputStream(WebUtil.executeHttpGetRequest(new URL(url)));
 			Catalog catalog = CatalogDeserializer.deserializeCatalog(strm);
 			catalog.setBaseUrl(url.substring(0, url.lastIndexOf('/')));
 			return catalog;
 		}catch(Exception ex){
 			fireOperationFailed("Failed download catalog due error: " + ex.getMessage());
-			return null;
+			Catalog badCatalog = new Catalog(System.currentTimeMillis(), url, new ArrayList<CatalogMap>());
+			badCatalog.setCorrupted(true);
+			return badCatalog;
 		}finally{
 			if(strm!=null){
 				try { strm.close(); }catch(IOException ex){}
@@ -74,7 +75,7 @@ public class CatalogBuilder {
 		if(cat==null && refresh){
 			cat = downloadCatalog(path);
 			if(cat!=null){
-				saveCatalog(url, cat);
+				saveCatalog( url, cat);
 			}
 		}
 		return cat;

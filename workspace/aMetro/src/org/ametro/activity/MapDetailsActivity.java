@@ -23,6 +23,7 @@ package org.ametro.activity;
 
 import java.util.HashMap;
 
+import org.ametro.ApplicationEx;
 import org.ametro.GlobalSettings;
 import org.ametro.R;
 import org.ametro.catalog.Catalog;
@@ -127,7 +128,6 @@ public class MapDetailsActivity extends Activity implements OnClickListener,
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		GlobalSettings.initialize(this);
 		mIntent = getIntent();
 		if (mIntent == null) {
 			finishWithoutResult();
@@ -165,7 +165,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener,
 										.getTransportTypeWhiteIconId(TransportType.TROLLEYBUS_ID)));
 
 		mSystemName = mIntent.getStringExtra(EXTRA_SYSTEM_NAME);
-		mStorage = CatalogStorage.getStorage();
+		mStorage =  ((ApplicationEx)getApplicationContext()).getCatalogStorage();
 		setWaitNoProgressView();
 	}
 
@@ -284,7 +284,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener,
 
 			mFavoriteButton.setVisibility(mLocal != null ? View.VISIBLE : View.GONE);
 
-			String code = GlobalSettings.getLanguage();
+			String code = GlobalSettings.getLanguage(this);
 
 			mCityTextView.setText(preffered().getCity(code));
 			mCountryTextView.setText(preffered().getCountry(code));
@@ -295,7 +295,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener,
 			
 			mContent.removeAllViews();
 			if (mOnline != null) {
-				int stateId = CatalogMapState.getLocalToOnlineState(mLocal,mOnline);
+				int stateId = CatalogMapState.getOnlineCatalogState(mLocal,mOnline);
 				String stateName = states[stateId];
 				int stateColor = (res
 						.getIntArray(R.array.online_catalog_map_state_colors))[stateId];
@@ -310,7 +310,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener,
 				mOnlineWidget.getCancelButton().setOnClickListener(this);
 			}
 			if (mImport != null) {
-				int stateId = CatalogMapState.getLocalToImportState(mLocal,
+				int stateId = CatalogMapState.getImportCatalogState(mLocal,
 						mImport);
 				String stateName = states[stateId];
 				int stateColor = (res
@@ -379,7 +379,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener,
 	}
 
 	public void onCatalogOperationFailed(int catalogId, String message) {
-		if (GlobalSettings.isDebugMessagesEnabled()) {
+		if (GlobalSettings.isDebugMessagesEnabled(this)) {
 			mErrorMessage = message;
 			mUIEventDispacher.post(mCatalogError);
 		}

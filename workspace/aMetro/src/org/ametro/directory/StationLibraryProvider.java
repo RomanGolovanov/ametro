@@ -18,7 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package org.ametro.model.util;
+package org.ametro.directory;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -32,38 +32,13 @@ import org.ametro.util.csv.CsvReader;
 
 import android.content.Context;
 
-public  class StationLibrary
+public  class StationLibraryProvider
 {
-	
-	public static class StationLibraryRecord
-	{
-		public String LineSystemName;
-		public String StationSystemName;
-		public ModelLocation Location;
+	public StationLibraryProvider(Context context){
+		mContext = context;
 	}
 	
-
-	private StationLibrary(HashMap<String,HashMap<String,StationLibraryRecord>> index){
-		mIndex = index;
-	}
-
-	public ModelLocation getStationLocation(String lineSystemName, String stationSystemName){
-		StationLibraryRecord r = getRecord(lineSystemName, stationSystemName);
-		if(r!=null){
-			return r.Location;
-		}
-		return null;
-	}
-	
-	public StationLibraryRecord getRecord(String lineSystemName, String stationSystemName){
-		HashMap<String, StationLibraryRecord> city2rec = mIndex.get(lineSystemName);
-		if(city2rec!=null){
-			return city2rec.get(stationSystemName);
-		}
-		return null;
-	}
-	
-	public static StationLibrary load(File pmzFile){
+	public StationLibrary get(File pmzFile){
 		try {
 			InputStream strm;
 			File gpsFile = new File(pmzFile.getAbsolutePath().replace(".pmz", ".gps"));
@@ -76,21 +51,16 @@ public  class StationLibrary
 				return null;
 			}
 			CsvReader reader = new CsvReader(new BufferedReader(new InputStreamReader(strm, "utf-8")),';');
-			HashMap<String, HashMap<String,StationLibraryRecord>> index = new HashMap<String, HashMap<String,StationLibraryRecord>>();
+			HashMap<String, HashMap<String,StationInfo>> index = new HashMap<String, HashMap<String,StationInfo>>();
 			reader.next(); // skip header
 			while(reader.next()){
-				StationLibraryRecord r = new StationLibraryRecord();
-				r.LineSystemName = reader.getString(1);
-				r.StationSystemName = reader.getString(2);
-				if(reader.getCount()>=5){
-					r.Location = new ModelLocation(reader.getFloat(3), reader.getFloat(4) );
-				}
-				HashMap<String, StationLibraryRecord> city2rec = index.get(r.LineSystemName);
+				StationInfo r = new StationInfo(reader.getString(1),reader.getString(2), reader.getCount()>=5 ? new ModelLocation(reader.getFloat(3), reader.getFloat(4) ) : null );
+				HashMap<String, StationInfo> city2rec = index.get(r.getLineSystemName());
 				if(city2rec==null){
-					city2rec = new HashMap<String, StationLibraryRecord>();
-					index.put(r.LineSystemName, city2rec);
+					city2rec = new HashMap<String, StationInfo>();
+					index.put(r.getLineSystemName(), city2rec);
 				}
-				city2rec.put(r.StationSystemName, r);
+				city2rec.put(r.getStationSystemName(), r);
 			}
 			return new StationLibrary(index);
 		} catch (Throwable e) {
@@ -98,11 +68,5 @@ public  class StationLibrary
 		return null;
 	}
 	
-	private final HashMap<String, HashMap<String,StationLibraryRecord>> mIndex;
-	private static Context mContext = null;
-	
-	public static void setContext(Context context)
-	{
-		mContext = context;
-	}	
+	private Context mContext;
 }

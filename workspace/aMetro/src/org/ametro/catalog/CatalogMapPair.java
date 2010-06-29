@@ -20,7 +20,9 @@
  */
 package org.ametro.catalog;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 
 public class CatalogMapPair {
 
@@ -38,8 +40,13 @@ public class CatalogMapPair {
 		
 	}
 		
-	public final static int PREFFERED_LOCAL = 0;
-	public final static int PREFFERED_REMOTE = 0;
+	public final static int PREFFERED_LOCAL = 1;
+	public final static int PREFFERED_REMOTE = 2;
+	
+	public static final int DIFF_MODE_CROSS = 0;
+	public static final int DIFF_MODE_LOCAL = 1;
+	public static final int DIFF_MODE_REMOTE = 2;
+	
 	
 	/*package*/ CatalogMap mLocal;
 	/*package*/ CatalogMap mRemote;
@@ -64,23 +71,6 @@ public class CatalogMapPair {
 		return mLocal!=null && mRemote!=null && mLocal.completeEqual(mRemote);
 	}
 	
-//	public int getState(){
-//		if(mLocal!=null && mRemote == null){
-//			return mLocal.isCorruted() ? CORRUPTED : OFFLINE;
-//		}
-//		if(mLocal==null && mRemote!=null){
-//			return mRemote.isCorruted() ? CORRUPTED : DOWNLOAD;
-//		}
-//		if(mLocal.isCorruted() && mRemote.isCorruted()){
-//			return CORRUPTED;
-//		}
-//		
-//		if(mLocal.getTimestamp() < mRemote.getTimestamp()){
-//			return UPDATE;
-//		}
-//		return INSTALLED;
-//	}
-
 	public long getTransports() {
 		return preffered().getTransports();
 	}
@@ -138,6 +128,57 @@ public class CatalogMapPair {
 			}
 		}
 		return false;
+	}
+	
+	private static ArrayList<CatalogMapPair> diffCross(Catalog localCatalog, Catalog remoteCatalog)
+	{
+		final int preffered = CatalogMapPair.PREFFERED_LOCAL;
+		final ArrayList<CatalogMapPair> diff = new ArrayList<CatalogMapPair>();
+		HashSet<String> systemMapNames = new HashSet<String>(  );
+		if(localCatalog!=null){
+			for(CatalogMap map : localCatalog.getMaps()){
+				systemMapNames.add(map.getSystemName());
+			}
+		}
+		if(remoteCatalog!=null){
+			for(CatalogMap map : remoteCatalog.getMaps()){
+				systemMapNames.add(map.getSystemName());
+			}
+		}
+		for(String systemName : systemMapNames){
+			final CatalogMap localMap = localCatalog!=null ? localCatalog.getMap(systemName) : null;
+			final CatalogMap remoteMap = remoteCatalog!=null ? remoteCatalog.getMap(systemName) : null;
+			diff.add(new CatalogMapPair(localMap, remoteMap, preffered));
+		}
+		return diff;
+	}
+	
+	private static ArrayList<CatalogMapPair> diffRemote(Catalog localCatalog, Catalog importCatalog)
+	{
+		final ArrayList<CatalogMapPair> diff = new ArrayList<CatalogMapPair>();
+		for(CatalogMap remote : importCatalog.getMaps()){
+			final CatalogMap local = localCatalog==null ? null : localCatalog.getMap(remote.getSystemName());
+			diff.add(new CatalogMapPair(local, remote, CatalogMapPair.PREFFERED_REMOTE));
+		}
+		return diff;
+	}
+
+	private static ArrayList<CatalogMapPair> diffLocal(Catalog localCatalog, Catalog remoteCatalog) {
+		final ArrayList<CatalogMapPair> diff = new ArrayList<CatalogMapPair>();
+		for(CatalogMap localMap : localCatalog.getMaps()){
+			final CatalogMap remoteMap = remoteCatalog==null ? null : remoteCatalog.getMap(localMap.getSystemName());
+			diff.add(new CatalogMapPair(localMap, remoteMap, CatalogMapPair.PREFFERED_LOCAL));
+		}
+		return diff;
+	}
+
+	public static ArrayList<CatalogMapPair> diff(Catalog local, Catalog remote, int mode) {
+		switch(mode){
+		case DIFF_MODE_LOCAL: return diffLocal(local, remote);
+		case DIFF_MODE_REMOTE: return diffRemote(local, remote);
+		case DIFF_MODE_CROSS: return diffCross(local, remote);
+		}
+		throw new RuntimeException("Unsupported DIFF mode");
 	}
 	
 }

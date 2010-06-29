@@ -91,9 +91,9 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter {
 		mLocal = local;
 		mRemote = remote;
 		mMode = mode;
-		mData = Catalog.diff(local, remote, mode);
+		mData = CatalogMapPair.diff(local, remote, mode);
 		
-		mLanguageCode = GlobalSettings.getLanguage(); 
+		mLanguageCode = GlobalSettings.getLanguage(mContext); 
 		bindTransportTypes();
 		
         bindData(mLanguageCode);
