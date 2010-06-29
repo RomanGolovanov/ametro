@@ -117,7 +117,7 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity {
 	}
 
 	protected CharSequence formatProgress(int mProgress, int mTotal) {
-		return mProgress + "/" + mTotal + " kbytes"; 
+		return mProgress + "/" + mTotal + " bytes"; 
 	}
 
 	protected CatalogExpandableAdapter getListAdapter() {
