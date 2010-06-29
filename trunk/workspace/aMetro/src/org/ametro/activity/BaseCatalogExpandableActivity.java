@@ -347,8 +347,9 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 			mProgressBar.setMax(mTotal);
 			mProgressBar.setProgress(mProgress);
 			mMessageTextView.setText( mMessage );
-			mCounterTextView.setText( mProgress + " / " + mTotal );
+			mCounterTextView.setText( formatProgress(mProgress, mTotal) );
 		}
+
 	};
 
 	protected abstract int getEmptyListMessage();
@@ -362,6 +363,9 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	};
 	protected void onLocationSearch(Location location) {};
 
+	protected CharSequence formatProgress(int mProgress, int mTotal) {
+		return mProgress + "/" + mTotal;
+	}
 	
 	protected void onSettingsChanged() {
 		if(mMode == MODE_LIST){

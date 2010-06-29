@@ -647,4 +647,5 @@ public class StringUtil {
 	     }
 	     return fmt.format(val).concat(" bytes");
 	  }
+	
 }

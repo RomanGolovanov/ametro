@@ -26,6 +26,7 @@ import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.CatalogMapPair;
 import org.ametro.catalog.CatalogMapState;
+import org.ametro.catalog.storage.CatalogStorage;
 
 import android.widget.TextView;
 
@@ -44,15 +45,17 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity {
 		Catalog onlinePrevious = mOnline;
 		mLocal = mStorage.getLocalCatalog();
 		mOnline = mStorage.getOnlineCatalog();
-		if (mLocal == null || !Catalog.equals(mLocal,localPrevious)) {
+		if (mLocal == null || !Catalog.equals(mLocal, localPrevious)) {
 			mStorage.requestLocalCatalog(false);
 		}
-		if ((mOnline == null && !mOnlineDownload) || !Catalog.equals(mOnline,onlinePrevious)) {
+		if ((mOnline == null && !mOnlineDownload)
+				|| !Catalog.equals(mOnline, onlinePrevious)) {
 			mOnlineDownload = true;
 			mOnlineDownloadFailed = false;
 			mStorage.requestOnlineCatalog(false);
 		}
-		onCatalogsUpdate(!Catalog.equals(mLocal,localPrevious) || !Catalog.equals(mOnline,onlinePrevious));
+		onCatalogsUpdate(!Catalog.equals(mLocal, localPrevious)
+				|| !Catalog.equals(mOnline, onlinePrevious));
 		super.onPrepareView();
 
 	}
@@ -113,6 +116,10 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity {
 		return R.string.msg_no_maps_in_online;
 	}
 
+	protected CharSequence formatProgress(int mProgress, int mTotal) {
+		return mProgress + "/" + mTotal + " kbytes"; 
+	}
+
 	protected CatalogExpandableAdapter getListAdapter() {
 		return new CatalogExpandableAdapter(this, mLocal, mOnline,
 				CatalogMapPair.DIFF_MODE_REMOTE,
@@ -120,7 +127,7 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity {
 	}
 
 	protected boolean isCatalogProgressEnabled(int catalogId) {
-		return false;
+		return catalogId == CatalogStorage.CATALOG_ONLINE;
 	}
 
 	public int getCatalogState(CatalogMap local, CatalogMap remote) {

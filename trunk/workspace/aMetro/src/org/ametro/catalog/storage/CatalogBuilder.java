@@ -26,17 +26,21 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URL;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
+import org.ametro.ApplicationEx;
 import org.ametro.Constants;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.model.Model;
 import org.ametro.model.storage.ModelBuilder;
 import org.ametro.util.FileUtil;
-import org.ametro.util.WebUtil;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 
 import android.util.Log;
 
@@ -51,11 +55,46 @@ public class CatalogBuilder {
 	private Catalog downloadCatalog(String url){
 		BufferedInputStream strm = null;
 		try{
-			strm = new BufferedInputStream(WebUtil.executeHttpGetRequest(new URL(url)));
-			Catalog catalog = CatalogDeserializer.deserializeCatalog(strm);
-			catalog.setBaseUrl(url.substring(0, url.lastIndexOf('/')));
+			HttpClient client = ApplicationEx.getInstance().getHttpClient();
+			HttpGet request = new HttpGet();
+			request.setURI(new URI(url));
+			HttpResponse response = client.execute(request);
+			HttpEntity entity = response.getEntity();
+
+			File catalogTempFile = new File(Constants.TEMP_CATALOG_PATH, "catalog.xml");
+			FileUtil.delete(catalogTempFile);
+			
+			int size = (int)entity.getContentLength();
+			int pos = 0;
+			
+			BufferedInputStream in = null;
+			BufferedOutputStream out = null;
+			try{
+				in = new BufferedInputStream( entity.getContent() );
+				out = new BufferedOutputStream( new FileOutputStream(catalogTempFile) );
+				byte[] bytes = new byte[2048];
+				for (int c = in.read(bytes); c != -1; c = in.read(bytes)) {
+					out.write(bytes,0, c);
+					pos += c;
+					String message = "";
+					fireProgressChanged(pos, size, message);
+				}
+			}finally{
+				if(in!=null){
+					try { in.close(); } catch (Exception e) { }
+				}
+				if(out!=null){
+					try { out.close(); } catch (Exception e) { }
+				}
+			}			
+			
+			Catalog catalog = CatalogDeserializer.deserializeCatalog(new BufferedInputStream(new FileInputStream(catalogTempFile)));
+			FileUtil.delete(catalogTempFile);
 			return catalog;
 		}catch(Exception ex){
+			if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)){
+				Log.e(Constants.LOG_TAG_MAIN, "Failed download catalog", ex);
+			}
 			fireOperationFailed("Failed download catalog due error: " + ex.getMessage());
 			Catalog badCatalog = new Catalog(System.currentTimeMillis(), url, new ArrayList<CatalogMap>());
 			badCatalog.setCorrupted(true);
