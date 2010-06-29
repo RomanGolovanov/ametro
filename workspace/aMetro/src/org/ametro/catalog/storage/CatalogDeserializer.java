@@ -53,8 +53,7 @@ public class CatalogDeserializer {
 	public static String ATTR_MIN_VERSION = "minVersion";
 	public static String ATTR_CORRUPTED = "corrupted";
 	
-	public static Catalog deserializeCatalog(BufferedInputStream stream) 
-	throws IOException, XmlPullParserException
+	public static Catalog deserializeCatalog(BufferedInputStream stream) throws IOException, XmlPullParserException
 	{
 		ArrayList<CatalogMap> maps = new ArrayList<CatalogMap>();
 

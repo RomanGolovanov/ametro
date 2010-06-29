@@ -25,44 +25,61 @@ import org.ametro.directory.CountryLibrary;
 import org.ametro.directory.StationLibraryProvider;
 import org.ametro.jni.Natives;
 import org.ametro.util.FileUtil;
+import org.apache.http.HttpVersion;
+import org.apache.http.client.HttpClient;
+import org.apache.http.conn.ClientConnectionManager;
+import org.apache.http.conn.scheme.PlainSocketFactory;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.conn.ssl.SSLSocketFactory;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpParams;
+import org.apache.http.params.HttpProtocolParams;
+import org.apache.http.protocol.HTTP;
 
 import android.app.Application;
 import android.util.Log;
 
 public class ApplicationEx extends Application {
 
-	public CountryLibrary getCountryLibrary(){
-		if(mCountryLibrary==null){
+	public CountryLibrary getCountryLibrary() {
+		if (mCountryLibrary == null) {
 			synchronized (ApplicationEx.class) {
-				if(mCountryLibrary==null){
-					mCountryLibrary = new CountryLibrary(getApplicationContext());
+				if (mCountryLibrary == null) {
+					mCountryLibrary = new CountryLibrary(
+							getApplicationContext());
 				}
 			}
 		}
 		return mCountryLibrary;
-	}	
+	}
 
 	public StationLibraryProvider getStationLibrary() {
-		if(mStationLibrary==null){
+		if (mStationLibrary == null) {
 			synchronized (ApplicationEx.class) {
-				if(mStationLibrary==null){
-					mStationLibrary = new StationLibraryProvider(getApplicationContext());
+				if (mStationLibrary == null) {
+					mStationLibrary = new StationLibraryProvider(
+							getApplicationContext());
 				}
 			}
 		}
 		return mStationLibrary;
 	}
-	
-	public CatalogStorage getCatalogStorage(){
-		if(mStorage==null){
+
+	public CatalogStorage getCatalogStorage() {
+		if (mStorage == null) {
 			synchronized (ApplicationEx.class) {
-				if(mStorage==null){
-					
+				if (mStorage == null) {
+
 					CatalogStorage instance = new CatalogStorage(
-							Constants.LOCAL_CATALOG_STORAGE, Constants.LOCAL_CATALOG_PATH,
-							Constants.IMPORT_CATALOG_STORAGE, Constants.IMPORT_CATALOG_PATH,
-							Constants.ONLINE_CATALOG_STORAGE, Constants.ONLINE_CATALOG_PATH
-							);
+							Constants.LOCAL_CATALOG_STORAGE,
+							Constants.LOCAL_CATALOG_PATH,
+							Constants.IMPORT_CATALOG_STORAGE,
+							Constants.IMPORT_CATALOG_PATH,
+							Constants.ONLINE_CATALOG_STORAGE,
+							Constants.ONLINE_CATALOG_PATH);
 					instance.requestLocalCatalog(false);
 					instance.requestOnlineCatalog(false);
 					instance.requestImportCatalog(false);
@@ -72,33 +89,67 @@ public class ApplicationEx extends Application {
 		}
 		return mStorage;
 	}
-	
+
 	public void onCreate() {
-		if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)){
+		if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)) {
 			Log.i(Constants.LOG_TAG_MAIN, "aMetro application started");
 		}
 		mInstance = this;
-    	FileUtil.touchDirectory(Constants.ROOT_PATH);
-    	FileUtil.touchDirectory(Constants.LOCAL_CATALOG_PATH);
-    	FileUtil.touchDirectory(Constants.IMPORT_CATALOG_PATH);
-    	FileUtil.touchDirectory(Constants.TEMP_CATALOG_PATH);
-    	FileUtil.touchFile(Constants.NO_MEDIA_FILE);
-    	Natives.Initialize();
+		FileUtil.touchDirectory(Constants.ROOT_PATH);
+		FileUtil.touchDirectory(Constants.LOCAL_CATALOG_PATH);
+		FileUtil.touchDirectory(Constants.IMPORT_CATALOG_PATH);
+		FileUtil.touchDirectory(Constants.TEMP_CATALOG_PATH);
+		FileUtil.touchFile(Constants.NO_MEDIA_FILE);
+		Natives.Initialize();
 		super.onCreate();
 	}
-	
+
 	public void onTerminate() {
+		shutdownHttpClient();
 		super.onTerminate();
 	}
 
-	public static ApplicationEx getInstance(){
+	public static ApplicationEx getInstance() {
 		return mInstance;
 	}
 
+	public HttpClient getHttpClient() {
+		if(mHttpClient==null){
+			synchronized (ApplicationEx.class) {
+				if(mHttpClient==null){
+					mHttpClient = createHttpClient();
+				}
+			}
+		}
+		return mHttpClient;
+	}
+
+	private HttpClient createHttpClient() {
+		if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
+			Log.d(Constants.LOG_TAG_MAIN, "Create HTTP client");
+		}
+		HttpParams params = new BasicHttpParams();
+		HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
+		HttpProtocolParams.setContentCharset(params, HTTP.DEFAULT_CONTENT_CHARSET);
+		HttpProtocolParams.setUseExpectContinue(params, true);
+		SchemeRegistry schReg = new SchemeRegistry();
+		schReg.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
+		schReg.register(new Scheme("https", SSLSocketFactory.getSocketFactory(), 443));
+		ClientConnectionManager conMgr = new ThreadSafeClientConnManager(params, schReg);
+		return new DefaultHttpClient(conMgr, params);
+	}
+	
+	private void shutdownHttpClient() {
+		if (mHttpClient != null && mHttpClient.getConnectionManager() != null) {
+			mHttpClient.getConnectionManager().shutdown();
+		}
+	}
+
+	private HttpClient mHttpClient;
 	private static ApplicationEx mInstance;
 
 	private CountryLibrary mCountryLibrary;
-	private StationLibraryProvider mStationLibrary; 
+	private StationLibraryProvider mStationLibrary;
 	private CatalogStorage mStorage;
 
 }
