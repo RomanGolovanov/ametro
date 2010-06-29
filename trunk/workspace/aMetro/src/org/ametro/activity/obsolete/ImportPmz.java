@@ -140,9 +140,9 @@ public class ImportPmz extends Activity {
 		private boolean mIsCanceled = false;
 
 		private void indexPmzFile(ArrayList<ImportRecord> imports, String fileName) {
-			String mapFileName = GlobalSettings.getMapFileName(fileName);
+			String mapFileName = GlobalSettings.getLocalCatalogMapFileName(fileName);
 			File mapFile = new File(mapFileName);
-			String fullFileName = new File( GlobalSettings.getImportCatalog(), fileName).getAbsolutePath().toLowerCase();
+			String fullFileName = new File(Constants.IMPORT_CATALOG_PATH, fileName).getAbsolutePath().toLowerCase();
 			try {
 				Model pmz = ModelBuilder.loadModelDescription(fullFileName);
 				String mapName = pmz.getCountryName() + " - " + pmz.getCityName() + " (" + fileName + ")";
@@ -197,12 +197,12 @@ public class ImportPmz extends Activity {
 
 
 		protected List<ImportRecord> doInBackground(Void... params) {
-			File dir = GlobalSettings.getImportCatalog();
+			File dir = Constants.IMPORT_CATALOG_PATH;
 			ProgressInfo pi = new ProgressInfo(0, 0, null, getString(R.string.msg_search_pmz_files));
 			this.publishProgress(pi);
 			String[] files = dir.list(new FilenameFilter() {
 				public boolean accept(File f, String filename) {
-					return filename.endsWith(GlobalSettings.PMZ_FILE_TYPE);
+					return filename.endsWith(Constants.PMZ_FILE_TYPE);
 				}
 			});
 			ArrayList<ImportRecord> imports = new ArrayList<ImportRecord>();
@@ -262,7 +262,8 @@ public class ImportPmz extends Activity {
 		private boolean mIsCanceled = false;
 
 		protected List<ImportRecord> doInBackground(ImportRecord... imports) {
-			ArrayList<ImportRecord> result = new ArrayList<ImportRecord>();
+			ArrayList<ImportRecord> failedImports = new ArrayList<ImportRecord>();
+			int successCount = 0;
 			final int count = imports.length;
 			//final boolean isEnableAddons = BrowseVectorMap.Instance.isEnabledAddonsImport();
 			ProgressInfo pi = new ProgressInfo(0, count, null, getString(R.string.msg_import_pmz_files));
@@ -281,7 +282,7 @@ public class ImportPmz extends Activity {
 					Model city = ModelBuilder.loadModel(record.fileName);
 					// define file names
 					String mapName = city.systemName;
-					String mapFileName = GlobalSettings.getMapFileName(mapName);
+					String mapFileName = GlobalSettings.getLocalCatalogMapFileName(mapName);
 					String mapFileNameTemp = GlobalSettings.getTemporaryImportMapFile(mapName);
 					mapFile = new File(mapFileName);
 					mapFileTemp = new File(mapFileNameTemp);
@@ -302,12 +303,12 @@ public class ImportPmz extends Activity {
 					record.status = updateStatus;
 					record.statusColor = Color.GREEN;
 					record.severity = 1;
-					GlobalSettings.refreshMapList();
+					successCount++;
 				} catch (Throwable e) {
 					if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)){
 						Log.e(Constants.LOG_TAG_MAIN, getString(R.string.log_import_failed), e);
 					}
-					result.add(new ImportRecord(-1, 
+					failedImports.add(new ImportRecord(-1, 
 							record.mapName, 
 							record.fileName, 
 							getString(R.string.msg_import_failed) + "\n" + e.toString(), 
@@ -318,8 +319,11 @@ public class ImportPmz extends Activity {
 					}
 				}
 			}
-			Collections.sort(result);
-			return result;
+			if(successCount>0){
+				GlobalSettings.refreshCatalogStorage();
+			}
+			Collections.sort(failedImports);
+			return failedImports;
 		}
 
 
@@ -512,7 +516,6 @@ public class ImportPmz extends Activity {
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		GlobalSettings.initialize(this);
 		startIndexMode();
 	}
 

@@ -18,12 +18,33 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package org.ametro.catalog.storage;
+package org.ametro.directory;
 
-public interface ICatalogBuilderListener {
+import java.util.HashMap;
 
-	void onCatalogBuilderOperationFailed(CatalogBuilder source, String message);
-	
-	void onCatalogBuilderOperationProgress(CatalogBuilder source, int progress, int total, String message);
-	
+import org.ametro.model.ext.ModelLocation;
+
+public class StationLibrary
+{
+	private final HashMap<String, HashMap<String,StationInfo>> mData;
+
+	public StationLibrary(HashMap<String,HashMap<String,StationInfo>> index){
+		mData = index;
+	}
+
+	public ModelLocation getStationLocation(String lineSystemName, String stationSystemName){
+		StationInfo r = getRecord(lineSystemName, stationSystemName);
+		if(r!=null){
+			return r.getLocation();
+		}
+		return null;
+	}
+
+	public StationInfo getRecord(String lineSystemName, String stationSystemName){
+		HashMap<String, StationInfo> city2rec = mData.get(lineSystemName);
+		if(city2rec!=null){
+			return city2rec.get(stationSystemName);
+		}
+		return null;
+	}		
 }

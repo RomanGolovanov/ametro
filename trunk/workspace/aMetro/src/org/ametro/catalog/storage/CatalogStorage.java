@@ -1,10 +1,29 @@
+/*
+ * http://code.google.com/p/ametro/
+ * Transport map viewer for Android platform
+ * Copyright (C) 2009-2010 Roman.Golovanov@gmail.com and other
+ * respective project committers (see project home page)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ */
 package org.ametro.catalog.storage;
 
 import java.io.File;
 import java.util.ArrayList;
 
 import org.ametro.Constants;
-import org.ametro.GlobalSettings;
 import org.ametro.catalog.Catalog;
 
 import android.os.AsyncTask;
@@ -16,23 +35,30 @@ public class CatalogStorage implements ICatalogBuilderListener {
 	public static final int CATALOG_IMPORT = 1;
 	public static final int CATALOG_ONLINE = 2;
 	
-	private static CatalogStorage mStorage;
+//	private static CatalogStorage mStorage;
+//	
+//	public static CatalogStorage getStorage(){
+//		if(mStorage==null){
+//			synchronized (CatalogStorage.class) {
+//				if(mStorage==null){
+//					
+//					CatalogStorage instance = new CatalogStorage(
+//							Constants.LOCAL_CATALOG_STORAGE, Constants.LOCAL_CATALOG_PATH,
+//							Constants.IMPORT_CATALOG_STORAGE, Constants.IMPORT_CATALOG_PATH,
+//							Constants.ONLINE_CATALOG_STORAGE, Constants.ONLINE_CATALOG_PATH
+//							);
+//					instance.requestLocalCatalog(false);
+//					instance.requestOnlineCatalog(false);
+//					instance.requestImportCatalog(false);
+//					mStorage = instance;
+//					
+//				}
+//			}
+//		}
+//		return mStorage;
+//	}
 	
-	public static CatalogStorage getStorage(){
-		if(mStorage==null){
-			synchronized (CatalogStorage.class) {
-				if(mStorage==null){
-					mStorage = new CatalogStorage(
-							GlobalSettings.getLocalCatalogStorageUrl(), GlobalSettings.getLocalCatalog(),
-							GlobalSettings.getImportCatalogStorageUrl(), GlobalSettings.getImportCatalog(),
-							GlobalSettings.getOnlineCatalogStorageUrl(), GlobalSettings.getOnlineCatalogUrl());
-				}
-			}
-		}
-		return mStorage;
-	}
-	
-	private CatalogStorage(File localStorage, File localPath, File importStorage, File importPath, File onlineStorage, String onlineUrl){
+	public CatalogStorage(File localStorage, File localPath, File importStorage, File importPath, File onlineStorage, String onlineUrl){
 		this.mLocalStorage = localStorage;
 		this.mLocalPath = localPath;
 		this.mImportStorage = importStorage;
@@ -230,7 +256,6 @@ public class CatalogStorage implements ICatalogBuilderListener {
 			fireCatalogChanged(CATALOG_LOCAL, result);
 			super.onPostExecute(result);
 		}
-		
 	}	
 	
 	private class ImportCatalogLoadTask extends AsyncTask<Boolean, Void, Catalog> {
@@ -312,6 +337,41 @@ public class CatalogStorage implements ICatalogBuilderListener {
 		// TODO Auto-generated method stub
 		
 	}
+
+//	public IBinder onBind(Intent intent) {
+//		return new IBinder() {
+//			
+//			public boolean unlinkToDeath(DeathRecipient recipient, int flags) {
+//				return false;
+//			}
+//			
+//			public boolean transact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+//				return false;
+//			}
+//			
+//			public IInterface queryLocalInterface(String descriptor) {
+//				return null;
+//			}
+//			
+//			public boolean pingBinder() {
+//				return false;
+//			}
+//			
+//			public void linkToDeath(DeathRecipient recipient, int flags) throws RemoteException {
+//			}
+//			
+//			public boolean isBinderAlive() {
+//				return false;
+//			}
+//			
+//			public String getInterfaceDescriptor() throws RemoteException {
+//				return null;
+//			}
+//			
+//			public void dump(FileDescriptor fd, String[] args) throws RemoteException {
+//			}
+//		}; 
+//	}
 
 
 }

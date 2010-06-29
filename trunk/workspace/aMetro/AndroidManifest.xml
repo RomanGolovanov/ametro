@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<manifest android:versionCode="1" android:versionName="0.2.4.r252"
+<manifest android:versionCode="1" android:versionName="0.2.4.r258"
     package="org.ametro" xmlns:android="http://schemas.android.com/apk/res/android">
-    <application android:debuggable="true"
+    <application android:debuggable="true" android:name="org.ametro.ApplicationEx" 
         android:icon="@drawable/appicon" android:label="@string/app_name">
+        
         <activity android:label="@string/app_name"
             android:launchMode="singleTop"
             android:name=".activity.MapViewActivity"

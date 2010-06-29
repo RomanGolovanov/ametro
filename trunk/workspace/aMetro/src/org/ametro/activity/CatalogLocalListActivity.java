@@ -20,75 +20,59 @@
  */
 package org.ametro.activity;
 
-import static org.ametro.catalog.CatalogMapState.CORRUPTED;
-import static org.ametro.catalog.CatalogMapState.INSTALLED;
-import static org.ametro.catalog.CatalogMapState.NOT_SUPPORTED;
-import static org.ametro.catalog.CatalogMapState.OFFLINE;
 import static org.ametro.catalog.CatalogMapState.UPDATE;
-import static org.ametro.catalog.CatalogMapState.NEED_TO_UPDATE;
 
 import org.ametro.R;
 import org.ametro.adapter.CatalogExpandableAdapter;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
+import org.ametro.catalog.CatalogMapPair;
+import org.ametro.catalog.CatalogMapState;
 import org.ametro.catalog.storage.CatalogStorage;
-
-import android.content.Intent;
-
 
 public class CatalogLocalListActivity extends BaseCatalogExpandableActivity {
 
-	public static final String EXTRA_FAVORITES_ONLY = "FAVORITES_ONLY";
-	
 	private Catalog mLocal;
 	private Catalog mOnline;
 	private boolean mOnlineNotAvailable;
-	
+
 	private boolean mFavoritesOnly;
-	
-	
-	protected void onInitialize(){
-		Intent data = getIntent();
-		if(data!=null){
-			mFavoritesOnly = data.getBooleanExtra(EXTRA_FAVORITES_ONLY, false);
-		}else{
-			mFavoritesOnly = false;
-		}
-	}
 
 	protected void onPrepareView() {
 		Catalog localPrevious = mLocal;
 		Catalog onlinePrevious = mOnline;
 		mLocal = mStorage.getLocalCatalog();
 		mOnline = mStorage.getOnlineCatalog();
-		if(mLocal == null){
+		if (mLocal == null || !Catalog.equals(mLocal,localPrevious)) {
 			mStorage.requestLocalCatalog(false);
 		}
-		if(mOnline == null){
+		if (mOnline == null || !Catalog.equals(mOnline,onlinePrevious)) {
 			mStorage.requestOnlineCatalog(false);
 		}
-		onCatalogsUpdate(localPrevious!=mLocal || onlinePrevious!=mOnline);
+		onCatalogsUpdate(!Catalog.equals(mLocal,localPrevious) || !Catalog.equals(mOnline,onlinePrevious));
 		super.onPrepareView();
 	}
-	
+
 	private void onCatalogsUpdate(boolean refresh) {
-		if(mLocal!=null && (mOnline!=null || mOnlineNotAvailable)){
-			if(mLocal.getMaps().size()>0){
-				if(mMode != MODE_LIST){
+		if (mLocal != null && (mOnline != null || mOnlineNotAvailable)) {
+			if (mLocal.getMaps().size() > 0) {
+				if (mMode != MODE_LIST) {
 					setListView();
-				}else{
-					if(refresh){
+				} else {
+					if (refresh) {
 						setListView();
 					}
 				}
-			}else{
+			} else {
 				setEmptyView();
 			}
-		}		
+		}
 	}
-	
+
 	protected CatalogExpandableAdapter getListAdapter() {
-		return new CatalogExpandableAdapter(this, mLocal, mOnline, Catalog.DIFF_MODE_LEFT, R.array.local_catalog_map_state_colors,this);
+		return new CatalogExpandableAdapter(this, mLocal, mOnline,
+				CatalogMapPair.DIFF_MODE_LOCAL, R.array.local_catalog_map_state_colors,
+				this);
 	}
 
 	protected void onLocalCatalogLoaded(Catalog catalog) {
@@ -96,66 +80,35 @@ public class CatalogLocalListActivity extends BaseCatalogExpandableActivity {
 		onCatalogsUpdate(true);
 		super.onLocalCatalogLoaded(catalog);
 	}
-	
+
 	protected void onOnlineCatalogLoaded(Catalog catalog) {
 		mOnline = catalog;
-		mOnlineNotAvailable = catalog == null;
+		mOnlineNotAvailable = catalog == null || catalog.isCorrupted();
 		onCatalogsUpdate(true);
 		super.onOnlineCatalogLoaded(catalog);
 	}
-	
-	
+
 	protected void onCatalogRefresh() {
 		mStorage.requestLocalCatalog(true);
 		super.onCatalogRefresh();
 	}
-	
-	protected boolean isCatalogProgressEnabled(int catalogId)
-	{
+
+	protected boolean isCatalogProgressEnabled(int catalogId) {
 		return catalogId == CatalogStorage.CATALOG_LOCAL;
 	}
 
 	protected int getEmptyListMessage() {
-		return mFavoritesOnly ? R.string.msg_no_maps_in_favorites : R.string.msg_no_maps_in_local;
+		return mFavoritesOnly ? R.string.msg_no_maps_in_favorites
+				: R.string.msg_no_maps_in_local;
 	}
 
 	public int getCatalogState(CatalogMap local, CatalogMap remote) {
-    	if(remote==null){
-    		// remote not exist
-    		if(local.isCorruted()){
-    			return CORRUPTED;
-    		}else if(!local.isSupported()){
-    			return NOT_SUPPORTED;
-    		}else{
-    			return OFFLINE;
-    		}
-    	}else if(!remote.isSupported()){
-    		// remote not supported
-    		if(local.isCorruted()){
-    			return CORRUPTED;
-    		}else if(!local.isSupported()){
-    			return NOT_SUPPORTED;
-    		}else{
-    			return INSTALLED;
-    		}
-    	}else{
-    		// remote OK
-    		if(local.isCorruted()){
-    			return NEED_TO_UPDATE;
-    		}else if(!local.isSupported()){
-    			return NEED_TO_UPDATE;
-    		}else{
-    			if(local.getTimestamp() >= remote.getTimestamp()){
-    				return INSTALLED;
-    			}else{
-    				return UPDATE;
-    			}
-    		}
-    	}
-    }
+		return CatalogMapState.getLocalCatalogState(local, remote);
+	}
 
-	public boolean onCatalogMapClick(CatalogMap local, CatalogMap remote, int state) {
-		switch(state){
+	public boolean onCatalogMapClick(CatalogMap local, CatalogMap remote,
+			int state) {
+		switch (state) {
 		case UPDATE:
 			invokeFinish(local);
 			return true;

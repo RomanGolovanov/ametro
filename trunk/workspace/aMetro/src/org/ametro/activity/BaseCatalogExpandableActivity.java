@@ -29,6 +29,7 @@ import static org.ametro.catalog.CatalogMapState.OFFLINE;
 import static org.ametro.catalog.CatalogMapState.UPDATE;
 import static org.ametro.catalog.CatalogMapState.UPDATE_NOT_SUPPORTED;
 
+import org.ametro.ApplicationEx;
 import org.ametro.GlobalSettings;
 import org.ametro.MapUri;
 import org.ametro.R;
@@ -233,8 +234,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		GlobalSettings.initialize(this);
-		mStorage = CatalogStorage.getStorage();
+		mStorage = ((ApplicationEx)getApplicationContext()).getCatalogStorage();
 		setWaitNoProgressView();
 		onInitialize();
 	}
@@ -296,7 +296,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	
 	public void onCatalogOperationFailed(int catalogId, String message)
 	{
-		if(GlobalSettings.isDebugMessagesEnabled()){
+		if(GlobalSettings.isDebugMessagesEnabled(this)){
 			mErrorMessage = message;
 			mUIEventDispacher.post(mCatalogError);
 		}
@@ -366,7 +366,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	protected void onSettingsChanged() {
 		if(mMode == MODE_LIST){
 			String oldLanguage = mAdapter.getLanguage();
-			String newLanguage = GlobalSettings.getLanguage();
+			String newLanguage = GlobalSettings.getLanguage(this);
 			if(!oldLanguage.equalsIgnoreCase(newLanguage)){
 				mAdapter = getListAdapter(); 
 				mList.setAdapter(mAdapter);

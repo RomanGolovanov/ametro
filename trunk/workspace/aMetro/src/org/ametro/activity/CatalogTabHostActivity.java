@@ -20,7 +20,6 @@
  */
 package org.ametro.activity;
 
-import org.ametro.GlobalSettings;
 import org.ametro.R;
 
 import android.app.Activity;
@@ -39,7 +38,6 @@ public class CatalogTabHostActivity extends TabActivity {
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		GlobalSettings.initialize(this);
 		mInstance = this;
 
 		setContentView(R.layout.catalog_tab_host);

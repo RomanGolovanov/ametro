@@ -645,7 +645,6 @@ public class CsvStorage implements IModelStorage {
 		}
 	}
 
-
 	private static HashSet<String> mMainEntries = new HashSet<String>();
 
 	private static final String ENCODING = "utf-8";
@@ -663,7 +662,6 @@ public class CsvStorage implements IModelStorage {
 	private static final String TRANSPORT_LINES_ENTRY_NAME = "transport\\lines.csv";
 	private static final String TRANSPORT_TRANSFERS_ENTRY_NAME = "transport\\transfers.csv";
 
-
 	static {
 		mMainEntries.add(MAIN_ENTRY_NAME);
 		mMainEntries.add(TRANSPORT_MAPS_ENTRY_NAME);
@@ -672,7 +670,5 @@ public class CsvStorage implements IModelStorage {
 		mMainEntries.add(TRANSPORT_LINES_ENTRY_NAME);
 		mMainEntries.add(TRANSPORT_TRANSFERS_ENTRY_NAME);
 	}
-
-
 
 }

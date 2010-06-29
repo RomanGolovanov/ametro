@@ -32,6 +32,11 @@ import java.util.Locale;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import org.ametro.ApplicationEx;
+import org.ametro.directory.CityInfo;
+import org.ametro.directory.CountryLibrary;
+import org.ametro.directory.StationLibrary;
+import org.ametro.directory.StationLibraryProvider;
 import org.ametro.model.LineView;
 import org.ametro.model.MapLayerContainer;
 import org.ametro.model.MapView;
@@ -50,10 +55,8 @@ import org.ametro.model.ext.ModelLocation;
 import org.ametro.model.ext.ModelPoint;
 import org.ametro.model.ext.ModelRect;
 import org.ametro.model.ext.ModelSpline;
-import org.ametro.model.util.CountryLibrary;
 import org.ametro.model.util.IniStreamReader;
 import org.ametro.model.util.ModelUtil;
-import org.ametro.model.util.StationLibrary;
 import org.ametro.util.StringUtil;
 
 
@@ -139,6 +142,9 @@ public class PmzStorage implements IModelStorage {
 		private ArrayList<String> mTexts = new ArrayList<String>();
 
 		private HashMap<Integer, StationInfo> mStationInfo = new HashMap<Integer, StationInfo>();
+		
+		private CountryLibrary mCountryLibrary;
+		private StationLibraryProvider mStationLibrary;
 
 		private int[] getMapsNumbers(String[] maps) {
 			ArrayList<Integer> res = new ArrayList<Integer>();
@@ -188,6 +194,10 @@ public class PmzStorage implements IModelStorage {
 			mFile = new File(fileName);
 			mModel = null;
 			mDescriptionOnly = descriptionOnly;
+			ApplicationEx app = ApplicationEx.getInstance();
+			mCountryLibrary = app.getCountryLibrary();
+			mStationLibrary = app.getStationLibrary();
+			
 		}
 
 		public void execute() throws IOException{
@@ -758,7 +768,7 @@ public class PmzStorage implements IModelStorage {
 			makeGlobalization();
 
 			if(!mDescriptionOnly){
-				StationLibrary lib = StationLibrary.load(mFile);
+				StationLibrary lib = mStationLibrary.get(mFile);
 				if(lib!=null){
 					for(TransportStation station : model.stations){
 						String lineSystemName = model.lines[station.lineId].systemName;
@@ -809,8 +819,8 @@ public class PmzStorage implements IModelStorage {
 			// locate country info
 			final String country = originalTexts[mModel.countryName];
 			final String city = originalTexts[mModel.cityName];
-			CountryLibrary.CountryLibraryRecord info = CountryLibrary.search(country,city);
-			mModel.location = info!=null ? info.Location : null;
+			CityInfo info = mCountryLibrary.search(country,city);
+			mModel.location = info!=null ? info.getLocation() : null;
 
 			// make localization
 			if(originalLocale.equals(Model.LOCALE_RU)){
@@ -837,12 +847,12 @@ public class PmzStorage implements IModelStorage {
 			model.textLength = model.localeTexts[0].length;
 		}
 
-		private String[] makeTransliteText(CountryLibrary.CountryLibraryRecord info, final String[] originalTexts, boolean transliterate) { 
+		private String[] makeTransliteText(CityInfo info, final String[] originalTexts, boolean transliterate) { 
 			final int len = originalTexts.length;
 			final String[] translitTexts = new String[len];
 			if(info!=null){
-				translitTexts[mModel.countryName] = info.CountryNameEn;
-				translitTexts[mModel.cityName] = info.CityNameEn;
+				translitTexts[mModel.countryName] = info.getCountryNameEn();
+				translitTexts[mModel.cityName] = info.getCityNameEn();
 			}
 			for(int i=0; i<len; i++){
 				if(translitTexts[i] == null){

@@ -25,6 +25,7 @@ import org.ametro.activity.obsolete.ImportPmz;
 import org.ametro.adapter.CatalogExpandableAdapter;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
+import org.ametro.catalog.CatalogMapPair;
 import org.ametro.catalog.CatalogMapState;
 import org.ametro.catalog.storage.CatalogStorage;
 
@@ -32,18 +33,18 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 
-
 public class CatalogImportListActivity extends BaseCatalogExpandableActivity {
 
 	private Catalog mLocal;
 	private Catalog mImport;
-	
+
 	private final int MAIN_MENU_IMPORT = 1;
 	private final static int REQUEST_IMPORT = 1;
-	
+
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		menu.add(0, MAIN_MENU_IMPORT, 4, R.string.menu_import).setIcon(android.R.drawable.ic_menu_add);
+		menu.add(0, MAIN_MENU_IMPORT, 4, R.string.menu_import).setIcon(
+				android.R.drawable.ic_menu_add);
 		return true;
 	}
 
@@ -56,11 +57,12 @@ public class CatalogImportListActivity extends BaseCatalogExpandableActivity {
 		mStorage.requestImportCatalog(true);
 		super.onCatalogRefresh();
 	}
-	
+
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case MAIN_MENU_IMPORT:
-			startActivityForResult(new Intent(this, ImportPmz.class), REQUEST_IMPORT);
+			startActivityForResult(new Intent(this, ImportPmz.class),
+					REQUEST_IMPORT);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -74,67 +76,67 @@ public class CatalogImportListActivity extends BaseCatalogExpandableActivity {
 			break;
 		}
 		super.onActivityResult(requestCode, resultCode, data);
-	}	
+	}
 
 	protected void onPrepareView() {
 		Catalog localPrevious = mLocal;
 		Catalog importPrevious = mImport;
 		mLocal = mStorage.getLocalCatalog();
 		mImport = mStorage.getImportCatalog();
-		if(mLocal == null){
+		if (mLocal == null || !Catalog.equals(mLocal,localPrevious)) {
 			mStorage.requestLocalCatalog(false);
 		}
-		if(mImport == null){
+		if (mImport == null || !Catalog.equals(mImport,importPrevious)) {
 			mStorage.requestImportCatalog(false);
 		}
-		onCatalogsUpdate(localPrevious!=mLocal || importPrevious!=mImport);
+		onCatalogsUpdate(!Catalog.equals(mLocal,localPrevious) || !Catalog.equals(mImport,importPrevious));
 		super.onPrepareView();
 	}
-		
+
 	private void onCatalogsUpdate(boolean refresh) {
-		if(mLocal!=null && mImport!=null){
-			if(mImport.getMaps().size()>0){
-				if(mMode != MODE_LIST){
+		if (mLocal != null && mImport != null) {
+			if (mImport.getMaps().size() > 0) {
+				if (mMode != MODE_LIST) {
 					setListView();
-				}else{
-					if(refresh){
+				} else {
+					if (refresh) {
 						setListView();
 					}
 				}
-			}else{
+			} else {
 				setEmptyView();
 			}
-			
 		}
 	}
-	
+
 	protected int getEmptyListMessage() {
 		return R.string.msg_no_maps_in_import;
 	}
-	
+
 	protected CatalogExpandableAdapter getListAdapter() {
-		return new CatalogExpandableAdapter(this, mLocal, mImport, Catalog.DIFF_MODE_RIGHT, R.array.import_catalog_map_state_colors,this);
-	}	
-	
+		return new CatalogExpandableAdapter(this, mLocal, mImport,
+				CatalogMapPair.DIFF_MODE_REMOTE,
+				R.array.import_catalog_map_state_colors, this);
+	}
+
 	protected void onLocalCatalogLoaded(Catalog catalog) {
 		mLocal = catalog;
 		onCatalogsUpdate(true);
 		super.onLocalCatalogLoaded(catalog);
 	}
-	
+
 	protected void onImportCatalogLoaded(Catalog catalog) {
 		mImport = catalog;
 		onCatalogsUpdate(true);
 		super.onImportCatalogLoaded(catalog);
 	}
-	
-	protected boolean isCatalogProgressEnabled(int catalogId)
-	{
+
+	protected boolean isCatalogProgressEnabled(int catalogId) {
 		return catalogId == CatalogStorage.CATALOG_IMPORT;
 	}
 
 	public int getCatalogState(CatalogMap local, CatalogMap remote) {
-		return CatalogMapState.getLocalToImportState(local, remote);
+		return CatalogMapState.getImportCatalogState(local, remote);
 	}
-	
+
 }
