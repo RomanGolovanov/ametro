@@ -167,9 +167,7 @@ public class CatalogBuilder {
 					progress++;
 					try{
 						final String fileName = file.getName().toLowerCase();
-						
 						fireProgressChanged(progress, total, fileName);
-						
 						if( ((fileTypes & FILE_TYPE_PMETRO)!=0 && fileName.endsWith(PMETRO_EXTENSION))||
 							((fileTypes & FILE_TYPE_AMETRO)!=0 && fileName.endsWith(AMETRO_EXTENSION))){
 		
@@ -235,7 +233,7 @@ public class CatalogBuilder {
 		}
 	}
 	
-	private CatalogMap makeBadCatalogMap(Catalog catalog, File file, final String fileName) {
+	public static CatalogMap makeBadCatalogMap(Catalog catalog, File file, final String fileName) {
 		
 		final String suggestedMapName = fileName.substring(0, fileName.indexOf('.'));
 		
@@ -269,7 +267,7 @@ public class CatalogBuilder {
 		return map;
 	}
 	
-	private CatalogMap extractCatalogMap(Catalog catalog, File file, final String fileName, Model model) {
+	public static CatalogMap extractCatalogMap(Catalog catalog, File file, final String fileName, Model model) {
 		final String[] locales = model.locales;
 		final int len = locales.length;
 		final int countryId = model.countryName;

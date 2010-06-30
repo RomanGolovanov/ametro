@@ -28,7 +28,6 @@ import org.ametro.GlobalSettings;
 import org.ametro.R;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
-import org.ametro.catalog.CatalogMapState;
 import org.ametro.catalog.storage.CatalogStorage;
 import org.ametro.catalog.storage.ICatalogStorageListener;
 import org.ametro.model.TransportType;
@@ -51,8 +50,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MapDetailsActivity extends Activity implements OnClickListener,
-		ICatalogStorageListener {
+public class MapDetailsActivity extends Activity implements OnClickListener, ICatalogStorageListener {
 
 	protected static final int MODE_WAIT = 1;
 	protected static final int MODE_DETAILS = 2;
@@ -65,6 +63,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener,
 	private static final int EXTRA_RESULT_OPEN = 1;
 
 	private static final int MENU_DELETE = 1;
+	private static final int MENU_DELETE_PMZ = 2;
 
 	private String mErrorMessage;
 
@@ -104,24 +103,38 @@ public class MapDetailsActivity extends Activity implements OnClickListener,
 
 	private OnlineWidgetView mOnlineWidget;
 	private ImportWidgetView mImportWidget;
+	
+	/*package*/ String mMessage;
 
 	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(0, MENU_DELETE, 0, R.string.btn_delete).setIcon(
-				android.R.drawable.ic_menu_delete);
+		menu.add(0, MENU_DELETE, 0, R.string.btn_delete).setIcon(android.R.drawable.ic_menu_delete);
+		menu.add(0, MENU_DELETE_PMZ, 0, R.string.btn_delete_pmz).setIcon(android.R.drawable.ic_menu_delete);
 		return super.onCreateOptionsMenu(menu);
 	}
 
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		menu.findItem(MENU_DELETE).setVisible(mLocal != null);
+		menu.findItem(MENU_DELETE_PMZ).setVisible(mImport != null);
 		return super.onPrepareOptionsMenu(menu);
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case MENU_DELETE:
-			mStorage.deleteMap(mSystemName);
-			finishWithoutResult();
+			mStorage.deleteLocalMap(mSystemName);
+			mLocal = null;
+			if(mImport==null && mOnline==null){
+				finishWithoutResult();
+			}
+			bindData();
 			return true;
+		case MENU_DELETE_PMZ:
+			mStorage.deleteImportMap(mSystemName);
+			mImport = null;
+			if(mLocal==null && mOnline==null){
+				finishWithoutResult();
+			}
+			bindData();
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -136,33 +149,14 @@ public class MapDetailsActivity extends Activity implements OnClickListener,
 
 		mTransportTypes = new HashMap<Integer, Drawable>();
 		final Resources res = getResources();
-		mTransportTypes
-				.put(TransportType.UNKNOWN_ID, res.getDrawable(GlobalSettings
-						.getTransportTypeWhiteIconId(TransportType.UNKNOWN_ID)));
-		mTransportTypes.put(TransportType.METRO_ID, res
-				.getDrawable(GlobalSettings
-						.getTransportTypeWhiteIconId(TransportType.METRO_ID)));
-		mTransportTypes.put(TransportType.TRAM_ID, res
-				.getDrawable(GlobalSettings
-						.getTransportTypeWhiteIconId(TransportType.TRAM_ID)));
-		mTransportTypes.put(TransportType.BUS_ID, res
-				.getDrawable(GlobalSettings
-						.getTransportTypeWhiteIconId(TransportType.BUS_ID)));
-		mTransportTypes.put(TransportType.TRAIN_ID, res
-				.getDrawable(GlobalSettings
-						.getTransportTypeWhiteIconId(TransportType.TRAIN_ID)));
-		mTransportTypes
-				.put(
-						TransportType.WATER_BUS_ID,
-						res
-								.getDrawable(GlobalSettings
-										.getTransportTypeWhiteIconId(TransportType.WATER_BUS_ID)));
-		mTransportTypes
-				.put(
-						TransportType.TROLLEYBUS_ID,
-						res
-								.getDrawable(GlobalSettings
-										.getTransportTypeWhiteIconId(TransportType.TROLLEYBUS_ID)));
+		
+		mTransportTypes.put(TransportType.UNKNOWN_ID, res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.UNKNOWN_ID)));
+		mTransportTypes.put(TransportType.METRO_ID, res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.METRO_ID)));
+		mTransportTypes.put(TransportType.TRAM_ID, res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.TRAM_ID)));
+		mTransportTypes.put(TransportType.BUS_ID, res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.BUS_ID)));
+		mTransportTypes.put(TransportType.TRAIN_ID, res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.TRAIN_ID)));
+		mTransportTypes.put(TransportType.WATER_BUS_ID, res .getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.WATER_BUS_ID)));
+		mTransportTypes.put(TransportType.TROLLEYBUS_ID,res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.TROLLEYBUS_ID)));
 
 		mSystemName = mIntent.getStringExtra(EXTRA_SYSTEM_NAME);
 		mStorage =  ((ApplicationEx)getApplicationContext()).getCatalogStorage();
@@ -225,37 +219,26 @@ public class MapDetailsActivity extends Activity implements OnClickListener,
 		if (mOnlineWidget != null) {
 			if (v == mOnlineWidget.getCancelButton()) {
 				mStorage.cancelDownload(mSystemName);
-				onCatalogsUpdate();
 			} else if (v == mOnlineWidget.getDownloadButton()) {
 				mStorage.requestDownload(mSystemName);
-				onCatalogsUpdate();
 			} else if (v == mOnlineWidget.getUpdateButton()) {
 				mStorage.requestDownload(mSystemName);
-				onCatalogsUpdate();
 			}
 		}
 		if (mImportWidget != null) {
 			if (v == mImportWidget.getCancelButton()) {
 				mStorage.cancelImport(mSystemName);
-				onCatalogsUpdate();
 			} else if (v == mImportWidget.getImportButton()) {
 				mStorage.requestImport(mSystemName);
-				onCatalogsUpdate();
 			} else if (v == mImportWidget.getUpdateButton()) {
 				mStorage.requestImport(mSystemName);
-				onCatalogsUpdate();
 			}
 		}
 	}
 
 	private void updateFavoriteButton() {
-		if (mIsFavorite) {
-			mFavoriteButton
-					.setImageResource(android.R.drawable.btn_star_big_on);
-		} else {
-			mFavoriteButton
-					.setImageResource(android.R.drawable.btn_star_big_off);
-		}
+		mFavoriteButton.setVisibility(mLocal != null ? View.VISIBLE : View.GONE);
+		mFavoriteButton.setImageResource(mIsFavorite ? android.R.drawable.btn_star_big_on : android.R.drawable.btn_star_big_off);
 	}
 
 	protected void setWaitNoProgressView() {
@@ -268,90 +251,86 @@ public class MapDetailsActivity extends Activity implements OnClickListener,
 	private void setDetailsView() {
 		if (mMode != MODE_DETAILS) {
 			setContentView(R.layout.map_details);
-
 			mOpenButton = (Button) findViewById(R.id.btn_open);
 			mCloseButton = (Button) findViewById(R.id.btn_close);
 			mFavoriteButton = (ImageButton) findViewById(R.id.btn_favorite);
-
 			mCityTextView = (TextView) findViewById(R.id.firstLine);
 			mCountryTextView = (TextView) findViewById(R.id.secondLine);
-
 			mContent = (TextStripView) findViewById(R.id.content);
-
 			mOpenButton.setOnClickListener(this);
 			mCloseButton.setOnClickListener(this);
 			mFavoriteButton.setOnClickListener(this);
-
-			mFavoriteButton.setVisibility(mLocal != null ? View.VISIBLE : View.GONE);
-
-			String code = GlobalSettings.getLanguage(this);
-
-			mCityTextView.setText(preffered().getCity(code));
-			mCountryTextView.setText(preffered().getCountry(code));
-
-			final Resources res = getResources();
-			final String[] states = res.getStringArray(R.array.catalog_map_states);
-			final String[] transportNames = res.getStringArray(R.array.transport_types);
-			
-			mContent.removeAllViews();
-			if (mOnline != null) {
-				int stateId = CatalogMapState.getOnlineCatalogState(mLocal,mOnline);
-				String stateName = states[stateId];
-				int stateColor = (res
-						.getIntArray(R.array.online_catalog_map_state_colors))[stateId];
-				mContent.createHeader().setTextLeft("Online").setTextRight(
-						stateName).setTextRightColor(stateColor);
-				mOnlineWidget = mContent.createOnlineWidget();
-				mOnlineWidget.setSize(mOnline.getSize());
-				mOnlineWidget.setVersion("v." + mOnline.getVersion());
-				mOnlineWidget.setVisibility(stateId);
-				mOnlineWidget.getDownloadButton().setOnClickListener(this);
-				mOnlineWidget.getUpdateButton().setOnClickListener(this);
-				mOnlineWidget.getCancelButton().setOnClickListener(this);
-			}
-			if (mImport != null) {
-				int stateId = CatalogMapState.getImportCatalogState(mLocal,
-						mImport);
-				String stateName = states[stateId];
-				int stateColor = (res
-						.getIntArray(R.array.import_catalog_map_state_colors))[stateId];
-				mContent.createHeader().setTextLeft("Import").setTextRight(
-						stateName).setTextRightColor(stateColor);
-				mImportWidget = mContent.createImportWidget();
-				mImportWidget.setSize(mImport.getSize());
-				mImportWidget.setVersion("v." + mImport.getVersion());
-				mImportWidget.setVisibility(stateId);
-				mImportWidget.getImportButton().setOnClickListener(this);
-				mImportWidget.getUpdateButton().setOnClickListener(this);
-				mImportWidget.getCancelButton().setOnClickListener(this);
-			}
-
-			mContent.createHeader().setTextLeft("Transports");
-			long transports = preffered().getTransports();
-			long transportCode = 1;
-			int transportId = 0;
-			while (transports > 0) {
-				if ((transports % 2) > 0) {
-					Drawable d = mTransportTypes.get((int) transportCode);
-					mContent.createTransportWidget().setImageDrawable(d)
-							.setText(transportNames[transportId]);
-				}
-				transports = transports >> 1;
-				transportCode = transportCode << 1;
-				transportId++;
-			}
-
-			mContent.createHeader().setTextLeft("Description");
-			mContent.createText().setText(preffered().getDescription(code));
-
-			updateFavoriteButton();
+			bindData();
 			mMode = MODE_DETAILS;
-		}else{
-			// update states!
-			
 		}
 	}
 
+	private void bindData(){
+
+		String code = GlobalSettings.getLanguage(this);
+
+		mCityTextView.setText(preffered().getCity(code));
+		mCountryTextView.setText(preffered().getCountry(code));
+
+		final Resources res = getResources();
+		final String[] states = res.getStringArray(R.array.catalog_map_states);
+		final String[] transportNames = res.getStringArray(R.array.transport_types);
+		
+		mContent.removeAllViews();
+		if (mOnline != null) {
+			int stateId = mStorage.getOnlineCatalogState(mLocal,mOnline);
+			String stateName = states[stateId];
+			int stateColor = (res
+					.getIntArray(R.array.online_catalog_map_state_colors))[stateId];
+			mContent.createHeader().setTextLeft("Online").setTextRight(
+					stateName).setTextRightColor(stateColor);
+			mOnlineWidget = mContent.createOnlineWidget();
+			mOnlineWidget.setSize(mOnline.getSize());
+			mOnlineWidget.setVersion("v." + mOnline.getVersion());
+			mOnlineWidget.setVisibility(stateId);
+			mOnlineWidget.getDownloadButton().setOnClickListener(this);
+			mOnlineWidget.getUpdateButton().setOnClickListener(this);
+			mOnlineWidget.getCancelButton().setOnClickListener(this);
+		}
+		if (mImport != null) {
+			int stateId = mStorage.getImportCatalogState(mLocal,
+					mImport);
+			String stateName = states[stateId];
+			int stateColor = (res
+					.getIntArray(R.array.import_catalog_map_state_colors))[stateId];
+			mContent.createHeader().setTextLeft("Import").setTextRight(
+					stateName).setTextRightColor(stateColor);
+			mImportWidget = mContent.createImportWidget();
+			mImportWidget.setSize(mImport.getSize());
+			mImportWidget.setVersion("v." + mImport.getVersion());
+			mImportWidget.setVisibility(stateId);
+			mImportWidget.getImportButton().setOnClickListener(this);
+			mImportWidget.getUpdateButton().setOnClickListener(this);
+			mImportWidget.getCancelButton().setOnClickListener(this);
+		}
+
+		mContent.createHeader().setTextLeft("Transports");
+		long transports = preffered().getTransports();
+		long transportCode = 1;
+		int transportId = 0;
+		while (transports > 0) {
+			if ((transports % 2) > 0) {
+				Drawable d = mTransportTypes.get((int) transportCode);
+				mContent.createTransportWidget().setImageDrawable(d)
+						.setText(transportNames[transportId]);
+			}
+			transports = transports >> 1;
+			transportCode = transportCode << 1;
+			transportId++;
+		}
+
+		mContent.createHeader().setTextLeft("Description");
+		mContent.createText().setText(preffered().getDescription(code));
+
+		updateFavoriteButton();
+	}
+	
+	
 	private void finishWithoutResult() {
 		setResult(RESULT_CANCELED);
 		finish();
@@ -375,7 +354,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener,
 		if (catalogId == CatalogStorage.CATALOG_IMPORT) {
 			mImportCatalog = catalog;
 		}
-		mUIEventDispacher.post(mCatalogsUpdate);
+		mUIEventDispacher.post(mCatalogsUpdateRunnable);
 	}
 
 	public void onCatalogOperationFailed(int catalogId, String message) {
@@ -385,23 +364,56 @@ public class MapDetailsActivity extends Activity implements OnClickListener,
 		}
 	}
 
-	public void onCatalogOperationProgress(int catalogId, int progress,
-			int total, String message) {
+	public void onCatalogOperationProgress(int catalogId, int progress, int total, String message) {
 	}
 
+	public void onCatalogMapChanged(String systemName) {
+		if(mSystemName.equals(systemName) ){
+			if(mMode == MODE_DETAILS){
+				mUIEventDispacher.post(mDataBindRunnable);
+			}
+		}
+	}
+
+	public void fireCatalogMapDownloadFailed(String systemName, Throwable ex){
+		mMessage = "Error download map " + systemName;
+		mUIEventDispacher.post(mShowErrorRunnable);
+	}
+
+	public void fireCatalogMapImportFailed(String systemName, Throwable ex){
+		mMessage = "Error download map " + systemName;
+		mUIEventDispacher.post(mShowErrorRunnable);
+	}
+
+	
 	protected Handler mUIEventDispacher = new Handler();
 
-	private Runnable mCatalogsUpdate = new Runnable() {
+	private Runnable mCatalogsUpdateRunnable = new Runnable() {
 		public void run() {
 			onCatalogsUpdate();
 		}
 	};
 
-	protected Runnable mCatalogError = new Runnable() {
+	private Runnable mDataBindRunnable = new Runnable() {
+		public void run() {
+			if(mMode == MODE_DETAILS){
+				bindData();
+			}
+		}
+	};
+
+	private Runnable mShowErrorRunnable = new Runnable() {
+		public void run() {
+			Toast.makeText(MapDetailsActivity.this, mMessage, Toast.LENGTH_LONG).show();
+		}
+	};
+	
+	private Runnable mCatalogError = new Runnable() {
 		public void run() {
 			Toast.makeText(MapDetailsActivity.this, mErrorMessage,
 					Toast.LENGTH_LONG).show();
 		}
 	};
+
 
 }

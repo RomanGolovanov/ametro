@@ -164,5 +164,9 @@ public class CatalogMap {
 		return false;
 	}
 
+	public Catalog getOwner() {
+		return mOwner;
+	}
+
 
 }

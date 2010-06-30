@@ -28,6 +28,11 @@ import static org.ametro.catalog.CatalogMapState.NOT_SUPPORTED;
 import static org.ametro.catalog.CatalogMapState.OFFLINE;
 import static org.ametro.catalog.CatalogMapState.UPDATE;
 import static org.ametro.catalog.CatalogMapState.UPDATE_NOT_SUPPORTED;
+import static org.ametro.catalog.CatalogMapState.NEED_TO_UPDATE;
+import static org.ametro.catalog.CatalogMapState.DOWNLOAD_PENDING;
+import static org.ametro.catalog.CatalogMapState.IMPORT_PENDING;
+import static org.ametro.catalog.CatalogMapState.DOWNLOADING;
+import static org.ametro.catalog.CatalogMapState.IMPORTING;
 
 import org.ametro.ApplicationEx;
 import org.ametro.GlobalSettings;
@@ -323,6 +328,24 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		}
 	}
 	
+	public void onCatalogMapChanged(String systemName) {
+		if(mMode == MODE_LIST){
+			mUIEventDispacher.post(mDataSetChangeNotify);
+		}
+	}
+	
+	public void fireCatalogMapDownloadFailed(String systemName, Throwable ex){
+		if(mMode == MODE_LIST){
+			mUIEventDispacher.post(mDataSetChangeNotify);
+		}
+	}
+	
+	public void fireCatalogMapImportFailed(String systemName, Throwable ex){
+		if(mMode == MODE_LIST){
+			mUIEventDispacher.post(mDataSetChangeNotify);
+		}
+	}
+	
 	public void onCatalogOperationProgress(int catalogId, int progress, int total, String message)
 	{
 		if(isCatalogProgressEnabled(catalogId)){
@@ -332,6 +355,14 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 			mUIEventDispacher.post(mUpdateProgress);
 		}
 	}
+	
+	protected Runnable mDataSetChangeNotify = new Runnable() {
+		public void run() {
+			if(mMode == MODE_LIST){
+				mAdapter.notifyDataSetChanged();
+			}
+		}
+	};
 	
 	protected Runnable mCatalogError = new Runnable() {
 		public void run() {
@@ -408,6 +439,11 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		case UPDATE:
 		case IMPORT:
 		case DOWNLOAD:
+		case DOWNLOAD_PENDING:
+		case DOWNLOADING:
+		case IMPORT_PENDING:
+		case IMPORTING:
+		case NEED_TO_UPDATE:
 			invokeMapDetails(local,remote,state);
 			return true;
 		case NOT_SUPPORTED:
