@@ -326,6 +326,9 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		if(catalogId == CatalogStorage.CATALOG_ONLINE){
 			onOnlineCatalogLoaded(catalog);
 		}
+		if(mMode == MODE_LIST){
+			mUIEventDispacher.post(mDataSetChangeNotify);
+		}
 	}
 	
 	public void onCatalogMapChanged(String systemName) {
@@ -355,6 +358,24 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 			mUIEventDispacher.post(mUpdateProgress);
 		}
 	}
+	
+	public void updateList(Catalog local, Catalog remote){
+		mLocal = local;
+		mRemote = remote;
+		mUIEventDispacher.post(mUpdateList);
+	}
+	
+	private Catalog mLocal;
+	private Catalog mRemote;
+	
+	protected Runnable mUpdateList = new Runnable() {
+		public void run() {
+			if(mMode == MODE_LIST){
+				mAdapter.updateData(mLocal, mRemote);
+				mList.invalidateViews();
+			}
+		}
+	};
 	
 	protected Runnable mDataSetChangeNotify = new Runnable() {
 		public void run() {

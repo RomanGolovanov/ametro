@@ -376,12 +376,18 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 	}
 
 	public void fireCatalogMapDownloadFailed(String systemName, Throwable ex){
-		mMessage = "Error download map " + systemName;
+		mMessage = "Failed download map " + systemName;
+		if(GlobalSettings.isDebugMessagesEnabled(this)){
+			mMessage += " due error: " + ex.getMessage();
+		}
 		mUIEventDispacher.post(mShowErrorRunnable);
 	}
 
 	public void fireCatalogMapImportFailed(String systemName, Throwable ex){
-		mMessage = "Error download map " + systemName;
+		mMessage = "Failed import map " + systemName;
+		if(GlobalSettings.isDebugMessagesEnabled(this)){
+			mMessage += " due error: " + ex.getMessage();
+		}
 		mUIEventDispacher.post(mShowErrorRunnable);
 	}
 

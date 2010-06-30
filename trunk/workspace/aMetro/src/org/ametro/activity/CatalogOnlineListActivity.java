@@ -67,6 +67,8 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity {
 				} else {
 					if (refresh) {
 						setListView();
+					}else{
+						updateList(mLocal, mOnline);
 					}
 				}
 			} else {
@@ -98,10 +100,10 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity {
 		mOnline = catalog;
 		mOnlineDownload = false;
 		mOnlineDownloadFailed = catalog == null || catalog.isCorrupted();
-		onCatalogsUpdate(true);
 		if (catalog == null) {
 			mOnline = mStorage.getOnlineCatalog();
 		}
+		onCatalogsUpdate(true);
 		super.onOnlineCatalogLoaded(catalog);
 	}
 
