@@ -22,17 +22,19 @@ package org.ametro.activity;
 
 import static org.ametro.catalog.CatalogMapState.CORRUPTED;
 import static org.ametro.catalog.CatalogMapState.DOWNLOAD;
+import static org.ametro.catalog.CatalogMapState.DOWNLOADING;
+import static org.ametro.catalog.CatalogMapState.DOWNLOAD_PENDING;
 import static org.ametro.catalog.CatalogMapState.IMPORT;
+import static org.ametro.catalog.CatalogMapState.IMPORTING;
+import static org.ametro.catalog.CatalogMapState.IMPORT_PENDING;
 import static org.ametro.catalog.CatalogMapState.INSTALLED;
+import static org.ametro.catalog.CatalogMapState.NEED_TO_UPDATE;
 import static org.ametro.catalog.CatalogMapState.NOT_SUPPORTED;
 import static org.ametro.catalog.CatalogMapState.OFFLINE;
 import static org.ametro.catalog.CatalogMapState.UPDATE;
 import static org.ametro.catalog.CatalogMapState.UPDATE_NOT_SUPPORTED;
-import static org.ametro.catalog.CatalogMapState.NEED_TO_UPDATE;
-import static org.ametro.catalog.CatalogMapState.DOWNLOAD_PENDING;
-import static org.ametro.catalog.CatalogMapState.IMPORT_PENDING;
-import static org.ametro.catalog.CatalogMapState.DOWNLOADING;
-import static org.ametro.catalog.CatalogMapState.IMPORTING;
+
+import java.util.LinkedList;
 
 import org.ametro.ApplicationEx;
 import org.ametro.GlobalSettings;
@@ -43,6 +45,7 @@ import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.CatalogMapPair;
 import org.ametro.catalog.ICatalogStateProvider;
+import org.ametro.catalog.storage.CatalogEvent;
 import org.ametro.catalog.storage.CatalogStorage;
 import org.ametro.catalog.storage.ICatalogStorageListener;
 import org.ametro.dialog.LocationSearchDialog;
@@ -116,6 +119,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	private Catalog mLocal;
 	private Catalog mRemote;
 	
+	/*package*/ LinkedList<CatalogEvent> mCatalogLoadedEvents = new LinkedList<CatalogEvent>(); 
 	
 	public boolean onSearchRequested() {
 		if(mMode == MODE_LIST && mActionBar!=null){
@@ -321,19 +325,39 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	}
 
 	public void onCatalogLoaded(int catalogId, Catalog catalog) {
-		if(catalogId == CatalogStorage.CATALOG_LOCAL){
-			onLocalCatalogLoaded(catalog);
+		synchronized (mCatalogLoadedEvents) {
+			CatalogEvent event = new CatalogEvent();
+			event.CatalogId = catalogId;
+			event.Catalog = catalog;
+			mCatalogLoadedEvents.offer(event);
 		}
-		if(catalogId == CatalogStorage.CATALOG_IMPORT){
-			onImportCatalogLoaded(catalog);
-		}
-		if(catalogId == CatalogStorage.CATALOG_ONLINE){
-			onOnlineCatalogLoaded(catalog);
-		}
-		if(mMode == MODE_LIST){
-			mUIEventDispacher.post(mDataSetChangeNotify);
-		}
+		mUIEventDispacher.post(mHandleCatalogLoadedEvents);
 	}
+	
+	private Runnable mHandleCatalogLoadedEvents = new Runnable() {
+		public void run() {
+			synchronized (mCatalogLoadedEvents) {
+				while(mCatalogLoadedEvents.size()>0){
+					CatalogEvent event = mCatalogLoadedEvents.poll();
+					int catalogId = event.CatalogId;
+					Catalog catalog = event.Catalog;
+					if(catalogId == CatalogStorage.CATALOG_LOCAL){
+						onLocalCatalogLoaded(catalog);
+					}
+					if(catalogId == CatalogStorage.CATALOG_IMPORT){
+						onImportCatalogLoaded(catalog);
+					}
+					if(catalogId == CatalogStorage.CATALOG_ONLINE){
+						onOnlineCatalogLoaded(catalog);
+					}
+					if(mMode == MODE_LIST){
+						mUIEventDispacher.post(mDataSetChangeNotify);
+					}
+					
+				}
+			}
+		}
+	};
 	
 	public void onCatalogMapChanged(String systemName) {
 		if(mMode == MODE_LIST){
