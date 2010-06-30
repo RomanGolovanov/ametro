@@ -463,8 +463,6 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		switch(state){
 		case OFFLINE:
 		case INSTALLED:
-			invokeFinish(local);
-			return true;
 		case UPDATE:
 		case IMPORT:
 		case DOWNLOAD:

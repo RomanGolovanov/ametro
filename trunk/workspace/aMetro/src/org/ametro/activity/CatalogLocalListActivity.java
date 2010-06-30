@@ -20,8 +20,6 @@
  */
 package org.ametro.activity;
 
-import static org.ametro.catalog.CatalogMapState.UPDATE;
-
 import org.ametro.R;
 import org.ametro.adapter.CatalogExpandableAdapter;
 import org.ametro.catalog.Catalog;
@@ -99,22 +97,16 @@ public class CatalogLocalListActivity extends BaseCatalogExpandableActivity {
 	}
 
 	protected int getEmptyListMessage() {
-		return mFavoritesOnly ? R.string.msg_no_maps_in_favorites
-				: R.string.msg_no_maps_in_local;
+		return mFavoritesOnly ? R.string.msg_no_maps_in_favorites : R.string.msg_no_maps_in_local;
 	}
 
 	public int getCatalogState(CatalogMap local, CatalogMap remote) {
 		return mStorage.getLocalCatalogState(local, remote);
 	}
 
-	public boolean onCatalogMapClick(CatalogMap local, CatalogMap remote,
-			int state) {
-		switch (state) {
-		case UPDATE:
-			invokeFinish(local);
-			return true;
-		}
-		return super.onCatalogMapClick(local, remote);
+	public boolean onCatalogMapClick(CatalogMap local, CatalogMap remote) {
+		invokeFinish(local);
+		return true;
 	}
 
 }
