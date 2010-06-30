@@ -670,8 +670,8 @@ public class CatalogStorage implements ICatalogBuilderListener {
 		synchronized (mMutex) {
 			if(mOnlineCatalog!=null && !mOnlineCatalog.isCorrupted()){
 				CatalogMap map = mOnlineCatalog.getMap(systemName);
-				if(map!=null && !mDownloadQueue.contains(map)){
-					mDownloadQueue.offer(map);
+				if(map!=null && mDownloadQueue.contains(map)){
+					mDownloadQueue.remove(map);
 					fireCatalogMapChanged(map.getSystemName());
 				}
 			}
@@ -695,8 +695,8 @@ public class CatalogStorage implements ICatalogBuilderListener {
 		synchronized (mMutex) {
 			if(mImportCatalog!=null && !mImportCatalog.isCorrupted()){
 				CatalogMap map = mImportCatalog.getMap(systemName);
-				if(map!=null && !mImportQueue.contains(map)){
-					mImportQueue.poll();
+				if(map!=null && mImportQueue.contains(map)){
+					mImportQueue.remove(map);
 					fireCatalogMapChanged(map.getSystemName());
 				}
 			}

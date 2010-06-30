@@ -10,22 +10,26 @@
 			android:layout_height="fill_parent" android:layout_alignParentTop="true"
 			android:layout_alignParentBottom="true" android:layout_marginRight="6sp"
 			android:src="@drawable/appicon" />
-		<TextView android:id="@+id/secondLine" android:layout_width="fill_parent"
+		<TextView android:id="@+id/secondLine" android:layout_width="wrap_content"
 			android:textColor="#ffffffff" android:layout_height="wrap_content"
 			android:layout_toRightOf="@id/icon" android:layout_alignParentBottom="true"
 			android:layout_alignParentRight="true" android:singleLine="true"
 			android:ellipsize="marquee" android:marqueeRepeatLimit="marquee_forever"
 			android:text="Transport types" />
-		<TextView android:layout_width="fill_parent" android:id="@+id/firstLine"
+		<TextView android:layout_width="wrap_content" android:id="@+id/firstLine"
 			android:textColor="#ffffffff" android:layout_height="wrap_content"
 			android:layout_toRightOf="@id/icon" android:layout_alignParentRight="true"
 			android:layout_alignParentTop="true" android:layout_above="@id/secondLine"
-			android:layout_alignWithParentIfMissing="true" android:gravity="center_vertical"
-			android:text="Map Name" />
+			android:layout_alignWithParentIfMissing="true" android:gravity="center_vertical"/>
+
+		<TextView android:id="@+id/version"
+			android:layout_alignParentRight="true" android:layout_alignParentBottom="true"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+			
 		<ImageButton android:id="@+id/btn_favorite"
-			android:layout_alignParentRight="true" android:layout_centerVertical="true"
+			android:layout_above="@id/version" 
+			android:layout_alignParentRight="true" 
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:padding="6sp"
 			android:background="@android:color/transparent" android:src="@android:drawable/btn_star_big_off" />
 	</RelativeLayout>
 	<TextView android:id="@+id/top_panel_splitter" 
