@@ -116,8 +116,22 @@ public class TextStripView extends LinearLayout {
 			mUpdateButton.setVisibility(state == CatalogMapState.UPDATE ? View.VISIBLE : View.GONE);
 			mCancelButton.setVisibility(state == CatalogMapState.DOWNLOADING || state == CatalogMapState.DOWNLOAD_PENDING ? View.VISIBLE : View.GONE);
 			mProgressBar.setVisibility(state == CatalogMapState.DOWNLOADING ? View.VISIBLE : View.GONE);
+			if(state == CatalogMapState.DOWNLOADING){
+				setIndeterminateProgress();
+			}			
 		}
 
+		public void setProgress(int progress, int total){
+			mProgressBar.setIndeterminate(false);
+			mProgressBar.setMax(total);
+			mProgressBar.setProgress(progress);
+		}
+		
+		public void setIndeterminateProgress(){
+			mProgressBar.setIndeterminate(true);
+		}
+		
+		
 		/* package */OnlineWidgetView(Context context) {
 			super(context);
 			mContainer.addView(LayoutInflater.from(context).inflate(
@@ -168,8 +182,21 @@ public class TextStripView extends LinearLayout {
 			mUpdateButton.setVisibility(state == CatalogMapState.UPDATE ? View.VISIBLE : View.GONE);
 			mCancelButton.setVisibility(state == CatalogMapState.IMPORTING || state == CatalogMapState.IMPORT_PENDING ? View.VISIBLE : View.GONE);
 			mProgressBar.setVisibility(state == CatalogMapState.IMPORTING ? View.VISIBLE : View.GONE);
+			if(state == CatalogMapState.IMPORTING){
+				setIndeterminateProgress();
+			}
 		}
 
+		public void setProgress(int progress, int total){
+			mProgressBar.setIndeterminate(false);
+			mProgressBar.setMax(total);
+			mProgressBar.setProgress(progress);
+		}
+		
+		public void setIndeterminateProgress(){
+			mProgressBar.setIndeterminate(true);
+		}
+		
 		/* package */ImportWidgetView(Context context) {
 			super(context);
 			mContainer.addView(LayoutInflater.from(context).inflate(

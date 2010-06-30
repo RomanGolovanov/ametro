@@ -20,12 +20,19 @@
  */
 package org.ametro.catalog.storage;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import org.ametro.ApplicationEx;
 import org.ametro.Constants;
 import org.ametro.GlobalSettings;
 import org.ametro.catalog.Catalog;
@@ -34,7 +41,11 @@ import org.ametro.catalog.CatalogMapState;
 import org.ametro.model.Model;
 import org.ametro.model.storage.ModelBuilder;
 import org.ametro.util.FileUtil;
-import org.ametro.util.WebUtil;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -201,18 +212,18 @@ public class CatalogStorage implements ICatalogBuilderListener {
 					try {
 						File tempFile = new File(GlobalSettings.getTemporaryDownloadMapFile(systemName));
 						File localFile = new File(GlobalSettings.getLocalCatalogMapFileName(systemName));
-						WebUtil.downloadFile(map.getAbsoluteUrl(), tempFile.getAbsolutePath());
-						Model model = ModelBuilder.loadModelDescription(localFile.getAbsolutePath());
+						downloadMap(map, systemName, tempFile);						
 						FileUtil.move( tempFile, localFile );
-
+						Model model = ModelBuilder.loadModelDescription(localFile.getAbsolutePath());
 						final String fileName = localFile.getName().toLowerCase();						
 						downloaded = CatalogBuilder.extractCatalogMap(mLocalCatalog, localFile, fileName, model);
-					} catch (IOException e) {
+					} catch (Exception e) {
 						if(Log.isLoggable(Constants.LOG_TAG_MAIN,Log.ERROR)){
 							Log.e(Constants.LOG_TAG_MAIN, "Failed download map " + systemName + " from catalog " + map.getOwner().getBaseUrl(),e);
 						}
 						fireCatalogMapDownloadFailed(systemName, e);
 					}
+					
 					synchronized (mMutex) {
 						mDownloadingMap = null;
 						if(downloaded!=null){
@@ -234,7 +245,50 @@ public class CatalogStorage implements ICatalogBuilderListener {
 				}
 			}
 		}
-	};	
+	};
+
+	private void downloadMap(CatalogMap map, String systemName,
+			File tempFile) throws URISyntaxException, IOException,
+			ClientProtocolException, FileNotFoundException {
+		BufferedInputStream strm = null;
+		try{
+			HttpClient client = ApplicationEx.getInstance().getHttpClient();
+			HttpGet request = new HttpGet();
+			request.setURI(new URI(map.getAbsoluteUrl()));
+			HttpResponse response = client.execute(request);
+			HttpEntity entity = response.getEntity();
+
+			FileUtil.delete(tempFile);
+			
+			int size = (int)entity.getContentLength();
+			int pos = 0;
+			
+			BufferedInputStream in = null;
+			BufferedOutputStream out = null;
+			try{
+				in = new BufferedInputStream( entity.getContent() );
+				out = new BufferedOutputStream( new FileOutputStream(tempFile.getAbsolutePath()) );
+				byte[] bytes = new byte[2048];
+				for (int c = in.read(bytes); c != -1; c = in.read(bytes)) {
+					out.write(bytes,0, c);
+					pos += c;
+					fireCatalogMapDownloadProgress(systemName, pos, size);
+				}
+			}finally{
+				if(in!=null){
+					try { in.close(); } catch (Exception e) { }
+				}
+				if(out!=null){
+					try { out.close(); } catch (Exception e) { }
+				}
+			}			
+		}finally{
+			if(strm!=null){
+				try { strm.close(); }catch(IOException ex){}
+			}
+		}
+	}
+	
 	public void shutdown(){
 		mIsShutdown = true;
 		fireDownloadSignal();
@@ -278,17 +332,21 @@ public class CatalogStorage implements ICatalogBuilderListener {
 	
 	/*package*/ void fireCatalogMapDownloadFailed(String systemName, Throwable e) {
 		for(ICatalogStorageListener listener : mCatalogListeners){
-			listener.fireCatalogMapDownloadFailed(systemName, e);
+			listener.onCatalogMapDownloadFailed(systemName, e);
 		}
 	}
 	
 	/*package*/ void fireCatalogMapImportFailed(String systemName, Throwable e) {
 		for(ICatalogStorageListener listener : mCatalogListeners){
-			listener.fireCatalogMapImportFailed(systemName, e);
+			listener.onCatalogMapImportFailed(systemName, e);
 		}
 	}
-
-
+	
+	/*package*/ void fireCatalogMapDownloadProgress(String systemName, int progress, int total) {
+		for(ICatalogStorageListener listener : mCatalogListeners){
+			listener.onCatalogMapDownloadProgress(systemName, progress, total);
+		}
+	}
 	
 	/*package*/ void fireImportSignal(){
 		synchronized (mImportSignal) {

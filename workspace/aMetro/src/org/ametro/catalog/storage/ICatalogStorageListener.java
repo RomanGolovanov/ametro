@@ -32,8 +32,10 @@ public interface ICatalogStorageListener {
 
 	void onCatalogMapChanged(String systemName);
 
-	void fireCatalogMapDownloadFailed(String systemName, Throwable ex);
+	void onCatalogMapDownloadFailed(String systemName, Throwable ex);
 
-	void fireCatalogMapImportFailed(String systemName, Throwable e);
+	void onCatalogMapImportFailed(String systemName, Throwable e);
+
+	void onCatalogMapDownloadProgress(String systemName, int progress, int total);
 	
 }
