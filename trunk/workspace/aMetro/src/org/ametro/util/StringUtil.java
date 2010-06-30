@@ -645,7 +645,7 @@ public class StringUtil {
 	     {
 	        return fmt.format(val).concat(" KB");
 	     }
-	     return fmt.format(val).concat(" bytes");
+	     return fmt.format(size).concat(" bytes");
 	  }
 	
 }

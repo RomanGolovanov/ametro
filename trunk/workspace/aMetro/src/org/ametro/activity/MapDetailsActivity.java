@@ -21,6 +21,7 @@
 
 package org.ametro.activity;
 
+import java.util.Date;
 import java.util.HashMap;
 
 import org.ametro.ApplicationEx;
@@ -31,6 +32,7 @@ import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.storage.CatalogStorage;
 import org.ametro.catalog.storage.ICatalogStorageListener;
 import org.ametro.model.TransportType;
+import org.ametro.util.DateUtil;
 import org.ametro.widget.TextStripView;
 import org.ametro.widget.TextStripView.ImportWidgetView;
 import org.ametro.widget.TextStripView.OnlineWidgetView;
@@ -79,6 +81,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 
 	private TextView mCityTextView;
 	private TextView mCountryTextView;
+	private TextView mVersionTextView;
 
 	private Intent mIntent;
 
@@ -260,6 +263,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 			mFavoriteButton = (ImageButton) findViewById(R.id.btn_favorite);
 			mCityTextView = (TextView) findViewById(R.id.firstLine);
 			mCountryTextView = (TextView) findViewById(R.id.secondLine);
+			mVersionTextView = (TextView)findViewById(R.id.version);
 			mContent = (TextStripView) findViewById(R.id.content);
 			mOpenButton.setOnClickListener(this);
 			mCloseButton.setOnClickListener(this);
@@ -275,6 +279,11 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 
 		mCityTextView.setText(preffered().getCity(code));
 		mCountryTextView.setText(preffered().getCountry(code));
+		if(mLocal!=null){
+			mVersionTextView.setText(DateUtil.getDateTime( new Date( mLocal.getTimestamp() ) ) );
+		}else{
+			mVersionTextView.setText("");
+		}
 
 		final Resources res = getResources();
 		final String[] states = res.getStringArray(R.array.catalog_map_states);
@@ -290,7 +299,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 					stateName).setTextRightColor(stateColor);
 			mOnlineWidget = mContent.createOnlineWidget();
 			mOnlineWidget.setSize(mOnline.getSize());
-			mOnlineWidget.setVersion("v." + mOnline.getVersion());
+			mOnlineWidget.setVersion(DateUtil.getDateTime( new Date( mOnline.getTimestamp() ) ) );
 			mOnlineWidget.setVisibility(stateId);
 			mOnlineWidget.getDownloadButton().setOnClickListener(this);
 			mOnlineWidget.getUpdateButton().setOnClickListener(this);
@@ -306,7 +315,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 					stateName).setTextRightColor(stateColor);
 			mImportWidget = mContent.createImportWidget();
 			mImportWidget.setSize(mImport.getSize());
-			mImportWidget.setVersion("v." + mImport.getVersion());
+			mImportWidget.setVersion(DateUtil.getDateTime( new Date( mImport.getTimestamp() ) ) );
 			mImportWidget.setVisibility(stateId);
 			mImportWidget.getImportButton().setOnClickListener(this);
 			mImportWidget.getUpdateButton().setOnClickListener(this);

@@ -92,7 +92,7 @@ public class TextStripView extends LinearLayout {
 		protected ProgressBar mProgressBar;
 
 		public void setSize(long size) {
-			mSize.setText(StringUtil.formatFileSize(size, 3));
+			mSize.setText(StringUtil.formatFileSize(size, 0));
 		}
 
 		public void setVersion(String version) {
@@ -115,6 +115,7 @@ public class TextStripView extends LinearLayout {
 			mDownloadButton.setVisibility(state == CatalogMapState.DOWNLOAD ? View.VISIBLE : View.GONE);
 			mUpdateButton.setVisibility(state == CatalogMapState.UPDATE ? View.VISIBLE : View.GONE);
 			mCancelButton.setVisibility(state == CatalogMapState.DOWNLOADING || state == CatalogMapState.DOWNLOAD_PENDING ? View.VISIBLE : View.GONE);
+			mCancelButton.setEnabled(state == CatalogMapState.DOWNLOAD_PENDING);
 			mProgressBar.setVisibility(state == CatalogMapState.DOWNLOADING ? View.VISIBLE : View.GONE);
 			if(state == CatalogMapState.DOWNLOADING){
 				setIndeterminateProgress();
@@ -157,13 +158,12 @@ public class TextStripView extends LinearLayout {
 		protected ProgressBar mProgressBar;
 
 		public void setSize(long size) {
-			mSize.setText(StringUtil.formatFileSize(size, 3));
+			mSize.setText(StringUtil.formatFileSize(size, 0));
 		}
 
 		public void setVersion(String version) {
 			mVersion.setText(version);
 		}
-
 
 		public Button getImportButton(){
 			return mImportButton;
@@ -181,6 +181,7 @@ public class TextStripView extends LinearLayout {
 			mImportButton.setVisibility(state == CatalogMapState.IMPORT ? View.VISIBLE : View.GONE);
 			mUpdateButton.setVisibility(state == CatalogMapState.UPDATE ? View.VISIBLE : View.GONE);
 			mCancelButton.setVisibility(state == CatalogMapState.IMPORTING || state == CatalogMapState.IMPORT_PENDING ? View.VISIBLE : View.GONE);
+			mCancelButton.setEnabled(state == CatalogMapState.IMPORT_PENDING);
 			mProgressBar.setVisibility(state == CatalogMapState.IMPORTING ? View.VISIBLE : View.GONE);
 			if(state == CatalogMapState.IMPORTING){
 				setIndeterminateProgress();
