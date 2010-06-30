@@ -27,7 +27,6 @@ import org.ametro.adapter.CatalogExpandableAdapter;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.CatalogMapPair;
-import org.ametro.catalog.CatalogMapState;
 import org.ametro.catalog.storage.CatalogStorage;
 
 public class CatalogLocalListActivity extends BaseCatalogExpandableActivity {
@@ -103,7 +102,7 @@ public class CatalogLocalListActivity extends BaseCatalogExpandableActivity {
 	}
 
 	public int getCatalogState(CatalogMap local, CatalogMap remote) {
-		return CatalogMapState.getLocalCatalogState(local, remote);
+		return mStorage.getLocalCatalogState(local, remote);
 	}
 
 	public boolean onCatalogMapClick(CatalogMap local, CatalogMap remote,

@@ -25,7 +25,6 @@ import org.ametro.adapter.CatalogExpandableAdapter;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.CatalogMapPair;
-import org.ametro.catalog.CatalogMapState;
 import org.ametro.catalog.storage.CatalogStorage;
 
 import android.widget.TextView;
@@ -131,6 +130,6 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity {
 	}
 
 	public int getCatalogState(CatalogMap local, CatalogMap remote) {
-		return CatalogMapState.getOnlineCatalogState(local, remote);
+		return mStorage.getOnlineCatalogState(local, remote);
 	}
 }

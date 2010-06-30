@@ -21,7 +21,6 @@
 
 package org.ametro;
 
-import static org.ametro.Constants.DOWNLOAD_FILE_TYPE;
 import static org.ametro.Constants.IMPORT_FILE_TYPE;
 import static org.ametro.Constants.LOCAL_CATALOG_PATH;
 import static org.ametro.Constants.MAP_FILE_TYPE;
@@ -31,13 +30,12 @@ import static org.ametro.Constants.PREFERENCE_DEBUG;
 import static org.ametro.Constants.PREFERENCE_LOCALE;
 import static org.ametro.Constants.TEMP_CATALOG_PATH;
 
-import java.io.File; 
+import java.io.File;
 import java.util.Locale;
 
 import org.ametro.model.TransportType;
 
 import android.content.Context;
-import android.net.Uri;
 import android.preference.PreferenceManager;
 
 public class GlobalSettings {
@@ -45,14 +43,14 @@ public class GlobalSettings {
 	private static String mDefaultLocale = Locale.getDefault().getLanguage();
 	
 	
-    public static String getLocalCatalogMapFileName(String mapName) {
+    public static String getObsoleteLocalCatalogMapFileName(String mapName) {
         return new File(LOCAL_CATALOG_PATH, mapName + MAP_FILE_TYPE).getAbsolutePath().toLowerCase();
     }
-
-    public static String getLocalCatalogMapFileName(Uri uri) {
-        return getLocalCatalogMapFileName(MapUri.getMapName(uri));
-    }
     
+    public static String getObsoleteTemporaryImportMapFile(String mapName) {
+        return new File(TEMP_CATALOG_PATH, mapName + IMPORT_FILE_TYPE).getAbsolutePath().toLowerCase();
+    }
+
 	public static String getLanguage(Context context){
 		String code = PreferenceManager.getDefaultSharedPreferences(context).getString(PREFERENCE_LOCALE, "auto");
 		if("auto".equalsIgnoreCase(code)){
@@ -61,13 +59,17 @@ public class GlobalSettings {
 			return code;
 		}
 	}
-
-    public static String getTemporaryImportMapFile(String mapName) {
-        return new File(TEMP_CATALOG_PATH, mapName + IMPORT_FILE_TYPE).getAbsolutePath().toLowerCase();
+    
+    public static String getLocalCatalogMapFileName(String systemName) {
+        return new File(LOCAL_CATALOG_PATH, systemName).getAbsolutePath().toLowerCase();
     }
 
-    public static String getTemporaryDownloadMapFile(String mapName) {
-        return new File(TEMP_CATALOG_PATH, mapName + DOWNLOAD_FILE_TYPE).getAbsolutePath().toLowerCase();
+    public static String getTemporaryImportMapFile(String systemName) {
+        return new File(TEMP_CATALOG_PATH, systemName.replace(MAP_FILE_TYPE, IMPORT_FILE_TYPE)).getAbsolutePath().toLowerCase();
+    }
+
+    public static String getTemporaryDownloadMapFile(String systemName) {
+        return new File(TEMP_CATALOG_PATH, systemName.replace(MAP_FILE_TYPE, IMPORT_FILE_TYPE)).getAbsolutePath().toLowerCase();
     }
 
 	public static boolean isDebugMessagesEnabled(Context context) {

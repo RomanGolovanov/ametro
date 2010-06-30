@@ -99,4 +99,17 @@ public class Catalog {
 		Catalog obj = (Catalog)o;
 		return mTimestamp == obj.mTimestamp && mBaseUrl.equals(obj.mBaseUrl) && mMaps.size() == obj.mMaps.size();
 	}
+
+	public Catalog deleteMap(CatalogMap map) {
+		mMapIndex.remove(map.getSystemName());
+		mMaps.remove(map);
+		mTimestamp = System.currentTimeMillis();
+		return this;
+	}
+
+	public void addMap(CatalogMap map) {
+		mMapIndex.put(map.getSystemName(), map);
+		mMaps.add(map);
+		mTimestamp = System.currentTimeMillis();
+	}
 }

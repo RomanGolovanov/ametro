@@ -140,7 +140,7 @@ public class ImportPmz extends Activity {
 		private boolean mIsCanceled = false;
 
 		private void indexPmzFile(ArrayList<ImportRecord> imports, String fileName) {
-			String mapFileName = GlobalSettings.getLocalCatalogMapFileName(fileName);
+			String mapFileName = GlobalSettings.getObsoleteLocalCatalogMapFileName(fileName);
 			File mapFile = new File(mapFileName);
 			String fullFileName = new File(Constants.IMPORT_CATALOG_PATH, fileName).getAbsolutePath().toLowerCase();
 			try {
@@ -282,8 +282,8 @@ public class ImportPmz extends Activity {
 					Model city = ModelBuilder.loadModel(record.fileName);
 					// define file names
 					String mapName = city.systemName;
-					String mapFileName = GlobalSettings.getLocalCatalogMapFileName(mapName);
-					String mapFileNameTemp = GlobalSettings.getTemporaryImportMapFile(mapName);
+					String mapFileName = GlobalSettings.getObsoleteLocalCatalogMapFileName(mapName);
+					String mapFileNameTemp = GlobalSettings.getObsoleteTemporaryImportMapFile(mapName);
 					mapFile = new File(mapFileName);
 					mapFileTemp = new File(mapFileNameTemp);
 					// remove temporary file is exists 
