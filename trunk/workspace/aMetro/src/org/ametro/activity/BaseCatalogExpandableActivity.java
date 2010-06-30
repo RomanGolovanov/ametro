@@ -112,6 +112,10 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	private final static int REQUEST_DETAILS = 997;
 	private final static int REQUEST_LOCATION = 998;
 	private final static int REQUEST_SETTINGS = 999;
+
+	private Catalog mLocal;
+	private Catalog mRemote;
+	
 	
 	public boolean onSearchRequested() {
 		if(mMode == MODE_LIST && mActionBar!=null){
@@ -337,13 +341,13 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		}
 	}
 	
-	public void fireCatalogMapDownloadFailed(String systemName, Throwable ex){
+	public void onCatalogMapDownloadFailed(String systemName, Throwable ex){
 		if(mMode == MODE_LIST){
 			mUIEventDispacher.post(mDataSetChangeNotify);
 		}
 	}
 	
-	public void fireCatalogMapImportFailed(String systemName, Throwable ex){
+	public void onCatalogMapImportFailed(String systemName, Throwable ex){
 		if(mMode == MODE_LIST){
 			mUIEventDispacher.post(mDataSetChangeNotify);
 		}
@@ -365,8 +369,9 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		mUIEventDispacher.post(mUpdateList);
 	}
 	
-	private Catalog mLocal;
-	private Catalog mRemote;
+	public void onCatalogMapDownloadProgress(String systemName, int progress, int total) {
+		
+	}
 	
 	protected Runnable mUpdateList = new Runnable() {
 		public void run() {
@@ -405,14 +410,17 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	};
 
 	protected abstract int getEmptyListMessage();
+	
 	protected abstract CatalogExpandableAdapter getListAdapter();
 
 	protected void onInitialize() {};
+	
 	protected void onPrepareView() {};
 	
 	protected void onCatalogRefresh() { 
 		setWaitNoProgressView();
 	};
+	
 	protected void onLocationSearch(Location location) {};
 
 	protected CharSequence formatProgress(int mProgress, int mTotal) {

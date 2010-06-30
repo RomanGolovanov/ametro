@@ -104,7 +104,11 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 	private OnlineWidgetView mOnlineWidget;
 	private ImportWidgetView mImportWidget;
 	
+	/*package*/ int mProgress;
+	/*package*/ int mTotal;
 	/*package*/ String mMessage;
+	
+	protected Handler mUIEventDispacher = new Handler();
 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		menu.add(0, MENU_DELETE, 0, R.string.btn_delete).setIcon(android.R.drawable.ic_menu_delete);
@@ -375,7 +379,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 		}
 	}
 
-	public void fireCatalogMapDownloadFailed(String systemName, Throwable ex){
+	public void onCatalogMapDownloadFailed(String systemName, Throwable ex){
 		mMessage = "Failed download map " + systemName;
 		if(GlobalSettings.isDebugMessagesEnabled(this)){
 			mMessage += " due error: " + ex.getMessage();
@@ -383,7 +387,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 		mUIEventDispacher.post(mShowErrorRunnable);
 	}
 
-	public void fireCatalogMapImportFailed(String systemName, Throwable ex){
+	public void onCatalogMapImportFailed(String systemName, Throwable ex){
 		mMessage = "Failed import map " + systemName;
 		if(GlobalSettings.isDebugMessagesEnabled(this)){
 			mMessage += " due error: " + ex.getMessage();
@@ -391,9 +395,20 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 		mUIEventDispacher.post(mShowErrorRunnable);
 	}
 
-	
-	protected Handler mUIEventDispacher = new Handler();
+	public void onCatalogMapDownloadProgress(String systemName, int progress, int total) {
+		if(mOnlineWidget!=null && mSystemName.equals(systemName)){
+			mTotal = total;
+			mProgress = progress;
+			mUIEventDispacher.post(mDownloadProgressUpdateRunnable);
+		}
+	}
 
+	private Runnable mDownloadProgressUpdateRunnable = new Runnable() {
+		public void run() {
+			mOnlineWidget.setProgress(mProgress, mTotal);
+		}
+	};
+	
 	private Runnable mCatalogsUpdateRunnable = new Runnable() {
 		public void run() {
 			onCatalogsUpdate();
