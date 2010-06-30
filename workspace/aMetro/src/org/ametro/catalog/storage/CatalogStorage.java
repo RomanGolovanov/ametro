@@ -165,8 +165,8 @@ public class CatalogStorage implements ICatalogBuilderListener {
 							mLocalCatalog.addMap(imported);
 							mLocalCatalogBuilder.saveCatalog(mLocalStorage, mLocalCatalog);
 							fireCatalogChanged(CATALOG_LOCAL, mLocalCatalog);
-							fireCatalogMapChanged(systemName);
 						}
+						fireCatalogMapChanged(systemName);
 					}
 				}
 				if(!mIsShutdown){
@@ -188,6 +188,7 @@ public class CatalogStorage implements ICatalogBuilderListener {
 			while(!mIsShutdown){
 				CatalogMap map = null;
 				String systemName = null;
+				CatalogMap downloaded = null;
 				synchronized (mMutex) {
 					map = mDownloadQueue.poll();
 					if(map!=null){
@@ -201,7 +202,11 @@ public class CatalogStorage implements ICatalogBuilderListener {
 						File tempFile = new File(GlobalSettings.getTemporaryDownloadMapFile(systemName));
 						File localFile = new File(GlobalSettings.getLocalCatalogMapFileName(systemName));
 						WebUtil.downloadFile(map.getAbsoluteUrl(), tempFile.getAbsolutePath());
+						Model model = ModelBuilder.loadModelDescription(localFile.getAbsolutePath());
 						FileUtil.move( tempFile, localFile );
+
+						final String fileName = localFile.getName().toLowerCase();						
+						downloaded = CatalogBuilder.extractCatalogMap(mLocalCatalog, localFile, fileName, model);
 					} catch (IOException e) {
 						if(Log.isLoggable(Constants.LOG_TAG_MAIN,Log.ERROR)){
 							Log.e(Constants.LOG_TAG_MAIN, "Failed download map " + systemName + " from catalog " + map.getOwner().getBaseUrl(),e);
@@ -210,9 +215,15 @@ public class CatalogStorage implements ICatalogBuilderListener {
 					}
 					synchronized (mMutex) {
 						mDownloadingMap = null;
+						if(downloaded!=null){
+							mLocalCatalog.addMap(downloaded);
+							mLocalCatalogBuilder.saveCatalog(mLocalStorage, mLocalCatalog);
+							fireCatalogChanged(CATALOG_LOCAL, mLocalCatalog);
+						}
 						fireCatalogMapChanged(systemName);
 					}
 				}
+				
 				if(!mIsShutdown){
 					try {
 						synchronized (mDownloadSignal) {

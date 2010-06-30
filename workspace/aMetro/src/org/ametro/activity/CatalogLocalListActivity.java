@@ -60,6 +60,8 @@ public class CatalogLocalListActivity extends BaseCatalogExpandableActivity {
 				} else {
 					if (refresh) {
 						setListView();
+					}else{
+						updateList(mLocal, mOnline);
 					}
 				}
 			} else {

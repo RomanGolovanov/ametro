@@ -42,8 +42,7 @@ public class CatalogImportListActivity extends BaseCatalogExpandableActivity {
 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		menu.add(0, MAIN_MENU_IMPORT, 4, R.string.menu_import).setIcon(
-				android.R.drawable.ic_menu_add);
+		menu.add(0, MAIN_MENU_IMPORT, 4, R.string.menu_import).setIcon(android.R.drawable.ic_menu_add);
 		return true;
 	}
 
@@ -100,6 +99,8 @@ public class CatalogImportListActivity extends BaseCatalogExpandableActivity {
 				} else {
 					if (refresh) {
 						setListView();
+					}else{
+						updateList(mLocal, mImport);
 					}
 				}
 			} else {

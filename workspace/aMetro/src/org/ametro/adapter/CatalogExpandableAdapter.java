@@ -81,6 +81,14 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter {
     	mLanguageCode = languageCode;
     }
     
+	public void updateData(Catalog local, Catalog remote)
+	{
+		mLocal = local;
+		mRemote = remote;
+		mData = CatalogMapPair.diff(local, remote, mMode);
+		notifyDataSetChanged();
+	}
+    
     public CatalogExpandableAdapter(Context context, Catalog local, Catalog remote, int mode, int colorsArray, ICatalogStateProvider statusProvider) {
         mContext = context;
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
