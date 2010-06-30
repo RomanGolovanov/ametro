@@ -24,9 +24,9 @@
         <activity android:name=".activity.StationListActivity"/>
         <activity android:name=".activity.FavoriteRouteListActivity"/>
         <activity android:name=".activity.CatalogTabHostActivity" android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".activity.CatalogLocalListActivity" android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".activity.CatalogOnlineListActivity" android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".activity.CatalogImportListActivity" android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".activity.CatalogLocalListActivity" android:label="@string/title_catalog_local" android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".activity.CatalogOnlineListActivity" android:label="@string/title_catalog_online" android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".activity.CatalogImportListActivity" android:label="@string/title_catalog_import" android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
         <!-- DIALOGS -->
         <activity android:name=".dialog.LocationSearchDialog" android:label="@string/msg_detect_location" android:launchMode="singleTop" android:theme="@android:style/Theme.Dialog"/>
         <!-- SEARCHS -->

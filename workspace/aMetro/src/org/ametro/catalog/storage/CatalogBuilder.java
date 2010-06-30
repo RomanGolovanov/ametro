@@ -113,7 +113,7 @@ public class CatalogBuilder {
 		}
 		if(cat==null && refresh){
 			cat = downloadCatalog(path);
-			if(cat!=null){
+			if(cat!=null && !cat.isCorrupted()){
 				saveCatalog( url, cat);
 			}
 		}
@@ -128,7 +128,7 @@ public class CatalogBuilder {
 		}
 		if(cat==null || isDerpecated(cat)){
 			cat = scanCatalog(path, fileTypes);
-			if(cat!=null){
+			if(cat!=null && !cat.isCorrupted()){
 				saveCatalog(url, cat);
 			}
 		}

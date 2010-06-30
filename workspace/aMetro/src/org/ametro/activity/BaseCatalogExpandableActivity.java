@@ -273,7 +273,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		mActionBarSearchButton = (ImageButton)findViewById(R.id.btn_search);
 		mActionBarCancelButton.setOnClickListener(this);
 		mActionBarSearchButton.setOnClickListener(this);
-
+		mActionBarTextView.setText(getTitle());
 		mMode = MODE_LIST;
 	}
 	
