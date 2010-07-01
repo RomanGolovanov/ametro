@@ -32,7 +32,6 @@ import org.ametro.GlobalSettings;
 import org.ametro.R;
 import org.ametro.model.Model;
 import org.ametro.model.storage.ModelBuilder;
-import org.ametro.other.ProgressInfo;
 import org.ametro.util.FileUtil;
 
 import android.app.Activity;
@@ -63,6 +62,36 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class ImportPmz extends Activity {
 
+	private static class ProgressInfo {
+	    public int progress;
+	    public int maximum;
+	    public String message;
+	    public String title;
+
+	    public ProgressInfo(int newProgress, int newMaximum, String newMessage, String newTitle) {
+	        super();
+	        progress = newProgress;
+	        maximum = newMaximum;
+	        message = newMessage;
+	        title = newTitle;
+	    }
+
+	    public static void ChangeProgress(ProgressInfo pi, ProgressBar bar, TextView title, TextView msg, TextView counter, String counterTemplate) {
+	        if (bar == null || pi == null) return;
+	        bar.setMax(pi.maximum);
+	        bar.setProgress(pi.progress);
+	        if (pi.message != null && msg != null) {
+	            msg.setText(pi.message);
+	        }
+	        if (pi.title != null && title != null) {
+	            title.setText(pi.title);
+	        }
+	        if (counter != null && !(pi.progress == 0 && pi.maximum == 0)) {
+	            counter.setText(String.format(counterTemplate, pi.progress, pi.maximum));
+	        }
+	    }
+	}	
+	
 	private static class ImportRecord implements Comparable<ImportRecord> {
 
 		private int severity;

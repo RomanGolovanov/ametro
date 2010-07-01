@@ -445,5 +445,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 		}
 	};
 
+	public void onCatalogMapImportProgress(String systemName, int progress, int total) {
+	}
 
 }
