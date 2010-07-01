@@ -380,7 +380,7 @@ public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadList
 		File local = new File(GlobalSettings.getLocalCatalogMapFileName(map.getSystemName()));
 		FileUtil.delete(local);
 		FileUtil.move(file, local);
-		Model model = ModelBuilder.loadModelDescription(file.getAbsolutePath());
+		Model model = ModelBuilder.loadModelDescription(local.getAbsolutePath());
 		synchronized(mMutex){
 			CatalogMap downloaded = Catalog.extractCatalogMap(mBuilders[LOCAL].getCatalog(), file, file.getName().toLowerCase(), model);
 			mBuilders[LOCAL].getCatalog().appendMap(downloaded);

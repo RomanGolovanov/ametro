@@ -111,15 +111,28 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	private final int CONTEXT_MENU_DOWNLOAD = 3;
 	private final int CONTEXT_MENU_IMPORT = 4;
 	
-	
 	private final static int REQUEST_DETAILS = 997;
 	private final static int REQUEST_LOCATION = 998;
 	private final static int REQUEST_SETTINGS = 999;
 
-	private Catalog mLocal;
-	private Catalog mRemote;
+	protected Catalog mLocal;
+	protected Catalog mRemote;
+	
+	protected int mLocalId;
+	protected int mRemoteId;
+	
+	protected int mDiffMode;
+	protected int mDiffColors;
 	
 	/*package*/ LinkedList<CatalogEvent> mCatalogLoadedEvents = new LinkedList<CatalogEvent>(); 
+	
+	protected abstract int getEmptyListMessage();
+	protected abstract boolean isCatalogProgressEnabled(int catalogId);
+	protected abstract int getLocalCatalogId(); 
+	protected abstract int getRemoteCatalogId(); 
+	protected abstract int getDiffMode(); 
+	protected abstract int getDiffColors();
+	
 	
 	public boolean onSearchRequested() {
 		if(mMode == MODE_LIST && mActionBar!=null){
@@ -247,14 +260,28 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		mLocalId = getLocalCatalogId();
+		mRemoteId = getRemoteCatalogId();
+		mDiffMode = getDiffMode();
+		mDiffColors = getDiffColors();
 		mStorage = ((ApplicationEx)getApplicationContext()).getCatalogStorage();
 		setWaitNoProgressView();
-		onInitialize();
 	}
 
 	protected void onResume() {
 		mStorage.addCatalogChangedListener(this);
-		onPrepareView();
+
+		Catalog localPrevious = mLocal;
+		Catalog remotePrevious = mRemote;
+		mLocal = mStorage.getCatalog(mLocalId);
+		mRemote = mStorage.getCatalog(mRemoteId);
+		if (mLocal == null || !Catalog.equals(mLocal,localPrevious)) {
+			mStorage.requestCatalog(mLocalId, false);
+		}
+		if (mRemote == null || !Catalog.equals(mRemote,remotePrevious)) {
+			mStorage.requestCatalog(mRemoteId, false);
+		}
+		onCatalogsUpdated( !Catalog.equals(mLocal,localPrevious) || !Catalog.equals(mRemote,remotePrevious) );
 		super.onResume();
 	}
 
@@ -308,21 +335,37 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		}
 	}
 	
+	private void onCatalogsUpdated(boolean refresh) {
+		if (mLocal != null && mRemote != null) {
+			Catalog mPreffered = (mDiffMode == CatalogMapPair.DIFF_MODE_LOCAL) ? mLocal : mRemote; 
+			if (mPreffered.getMaps().size() > 0) {
+				if (mMode != MODE_LIST) {
+					setListView();
+				}else{
+					if (refresh) {
+						setListView();
+					}else{
+						onDataUpdated(mLocal, mRemote);
+					}
+				}
+			} else {
+				setEmptyView();
+			}
+		}
+	}
+	
+	public void onDataUpdated(Catalog local, Catalog remote){
+		mLocal = local;
+		mRemote = remote;
+		mUIEventDispacher.post(mUpdateList);
+	}
+	
 	public void onCatalogOperationFailed(int catalogId, String message)
 	{
 		if(GlobalSettings.isDebugMessagesEnabled(this)){
 			mErrorMessage = message;
 			mUIEventDispacher.post(mCatalogError);
 		}
-		if(catalogId == CatalogStorage.LOCAL){
-			onLocalCatalogFailed();
-		}
-		if(catalogId == CatalogStorage.IMPORT){
-			onImportCatalogFailed();
-		}
-		if(catalogId == CatalogStorage.ONLINE){
-			onOnlineCatalogFailed();
-		}		
 	}
 
 	public void onCatalogLoaded(int catalogId, Catalog catalog) {
@@ -335,46 +378,21 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		mUIEventDispacher.post(mHandleCatalogLoadedEvents);
 	}
 	
-	private Runnable mHandleCatalogLoadedEvents = new Runnable() {
-		public void run() {
-			synchronized (mCatalogLoadedEvents) {
-				while(mCatalogLoadedEvents.size()>0){
-					CatalogEvent event = mCatalogLoadedEvents.poll();
-					int catalogId = event.CatalogId;
-					Catalog catalog = event.Catalog;
-					if(catalogId == CatalogStorage.LOCAL){
-						onLocalCatalogLoaded(catalog);
-					}
-					if(catalogId == CatalogStorage.IMPORT){
-						onImportCatalogLoaded(catalog);
-					}
-					if(catalogId == CatalogStorage.ONLINE){
-						onOnlineCatalogLoaded(catalog);
-					}
-					if(mMode == MODE_LIST){
-						mUIEventDispacher.post(mDataSetChangeNotify);
-					}
-					
-				}
-			}
-		}
-	};
-	
 	public void onCatalogMapChanged(String systemName) {
 		if(mMode == MODE_LIST){
-			mUIEventDispacher.post(mDataSetChangeNotify);
+			mUIEventDispacher.post(mUpdateList);
 		}
 	}
 	
 	public void onCatalogMapDownloadFailed(String systemName, Throwable ex){
 		if(mMode == MODE_LIST){
-			mUIEventDispacher.post(mDataSetChangeNotify);
+			mUIEventDispacher.post(mUpdateList);
 		}
 	}
 	
 	public void onCatalogMapImportFailed(String systemName, Throwable ex){
 		if(mMode == MODE_LIST){
-			mUIEventDispacher.post(mDataSetChangeNotify);
+			mUIEventDispacher.post(mUpdateList);
 		}
 	}
 	
@@ -388,67 +406,27 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		}
 	}
 	
-	public void updateList(Catalog local, Catalog remote){
-		mLocal = local;
-		mRemote = remote;
-		mUIEventDispacher.post(mUpdateList);
-	}
-	
 	public void onCatalogMapDownloadProgress(String systemName, int progress, int total) {
-		
 	}
 	
-	protected Runnable mUpdateList = new Runnable() {
-		public void run() {
-			if(mMode == MODE_LIST){
-				mAdapter.updateData(mLocal, mRemote);
-				mList.invalidateViews();
-			}
-		}
-	};
-	
-	protected Runnable mDataSetChangeNotify = new Runnable() {
-		public void run() {
-			if(mMode == MODE_LIST){
-				mAdapter.notifyDataSetChanged();
-			}
-		}
-	};
-	
-	protected Runnable mCatalogError = new Runnable() {
-		public void run() {
-			Toast.makeText(BaseCatalogExpandableActivity.this, mErrorMessage, Toast.LENGTH_LONG).show();
-		}
-	};
-	
-	protected Runnable mUpdateProgress = new Runnable() {
-		public void run() {
-			if(mMode!=MODE_WAIT){
-				setWaitView();
-			}
-			mProgressBar.setIndeterminate(false);
-			mProgressBar.setMax(mTotal);
-			mProgressBar.setProgress(mProgress);
-			mMessageTextView.setText( mMessage );
-			mCounterTextView.setText( formatProgress(mProgress, mTotal) );
-		}
+	public void onCatalogMapImportProgress(String systemName, int progress, int total) {
+	}
 
-	};
-
-	protected abstract int getEmptyListMessage();
 	
-	protected abstract CatalogExpandableAdapter getListAdapter();
-
-	protected void onInitialize() {};
-	
-	protected void onPrepareView() {};
+	protected CatalogExpandableAdapter getListAdapter() {
+		return new CatalogExpandableAdapter(
+				this, 
+				mStorage.getCatalog(mLocalId), 
+				mStorage.getCatalog(mRemoteId),
+				mDiffMode,
+				mDiffColors,
+				this);
+	}
 	
 	protected void onCatalogRefresh() { 
 		setWaitNoProgressView();
 	};
 	
-	protected void onLocationSearch(Location location) {};
-
 	protected CharSequence formatProgress(int mProgress, int mTotal) {
 		return mProgress + "/" + mTotal;
 	}
@@ -463,18 +441,11 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 			}
 		}
 	}
-
-	protected void onLocalCatalogLoaded(Catalog catalog) {};
-	protected void onOnlineCatalogLoaded(Catalog catalog) {};
-	protected void onImportCatalogLoaded(Catalog catalog) {};
 	
-	protected abstract boolean isCatalogProgressEnabled(int catalogId);
+	protected void onLocationSearch(Location location) {};
 
-	protected void onLocalCatalogFailed() {};
-	protected void onOnlineCatalogFailed() {};
-	protected void onImportCatalogFailed() {};
+	protected void onLocationSearchCanceled() {}
 	
-	protected void onLocationSearchCanceled() {}		
 	protected void onLocationSearchUnknown() {
 		Toast.makeText(this,R.string.msg_location_unknown, Toast.LENGTH_SHORT).show();			
 	}		
@@ -541,8 +512,57 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		}
 		
 	}
-	
-	public void onCatalogMapImportProgress(String systemName, int progress, int total) {
-	}
 
+
+	private Runnable mHandleCatalogLoadedEvents = new Runnable() {
+		public void run() {
+			synchronized (mCatalogLoadedEvents) {
+				while(mCatalogLoadedEvents.size()>0){
+					
+					CatalogEvent event = mCatalogLoadedEvents.poll();
+					int catalogId = event.CatalogId;
+					
+					Catalog catalog = event.Catalog;
+					if(catalogId == mLocalId){
+						mLocal = catalog;
+						onCatalogsUpdated(false);
+					}else  if(catalogId == mRemoteId){
+						mRemote = catalog;
+						onCatalogsUpdated(false);
+					}
+				}
+			}
+		}
+	};
+	
+	private Runnable mUpdateList = new Runnable() {
+		public void run() {
+			if(mMode == MODE_LIST && mLocal!=null && mRemote!=null){
+				mAdapter.updateData(mStorage.getCatalog(mLocalId), mStorage.getCatalog(mRemoteId));
+				mAdapter.notifyDataSetChanged();
+			}
+		}
+	};
+
+	private Runnable mCatalogError = new Runnable() {
+		public void run() {
+			Toast.makeText(BaseCatalogExpandableActivity.this, mErrorMessage, Toast.LENGTH_LONG).show();
+		}
+	};
+	
+	private Runnable mUpdateProgress = new Runnable() {
+		public void run() {
+			if(mMode!=MODE_WAIT){
+				setWaitView();
+			}
+			mProgressBar.setIndeterminate(false);
+			mProgressBar.setMax(mTotal);
+			mProgressBar.setProgress(mProgress);
+			mMessageTextView.setText( mMessage );
+			mCounterTextView.setText( formatProgress(mProgress, mTotal) );
+		}
+
+	};
+
+	
 }
