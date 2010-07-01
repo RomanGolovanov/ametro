@@ -20,37 +20,24 @@
  */
 package org.ametro.catalog.storage;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
 
-import org.ametro.ApplicationEx;
 import org.ametro.Constants;
 import org.ametro.GlobalSettings;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.CatalogMapState;
+import org.ametro.catalog.storage.MapDownloadQueue.IMapDownloadListener;
+import org.ametro.catalog.storage.MapImportQueue.IMapImportListener;
 import org.ametro.model.Model;
 import org.ametro.model.storage.ModelBuilder;
 import org.ametro.util.FileUtil;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
 
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class CatalogStorage implements ICatalogBuilderListener {
+public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadListener, IMapImportListener {
 
 	public static final int CATALOG_LOCAL = 0;
 	public static final int CATALOG_IMPORT = 1;
@@ -82,18 +69,13 @@ public class CatalogStorage implements ICatalogBuilderListener {
 	
 	/*package*/ ArrayList<ICatalogStorageListener> mCatalogListeners;
 	
-	/*package*/ Queue<CatalogMap> mDownloadQueue;
-	/*package*/ Queue<CatalogMap> mImportQueue;
-	
-	/*package*/ CatalogMap mDownloadingMap;
-	/*package*/ CatalogMap mImportingMap;
+	/*package*/ MapDownloadQueue mMapDownloadQueue;
+	/*package*/ MapImportQueue mMapImportQueue;
 	
 	/*package*/ boolean mIsShutdown;
 	
 	public CatalogStorage(File localStorage, File localPath, File importStorage, File importPath, File onlineStorage, String onlineUrl){
 		this.mCatalogListeners = new ArrayList<ICatalogStorageListener>();
-		this.mDownloadQueue = new LinkedList<CatalogMap>();
-		this.mImportQueue = new LinkedList<CatalogMap>();
 		this.mLocalStorage = localStorage;
 		this.mLocalPath = localPath;
 		this.mImportStorage = importStorage;
@@ -112,186 +94,15 @@ public class CatalogStorage implements ICatalogBuilderListener {
 		
 		this.mIsShutdown = false;
 
-		this.mDownloadSignal = new Object();
-		this.mDownloadThread = new Thread(mDownloadRunnable);
-		this.mDownloadThread.start();
+		this.mMapDownloadQueue = new MapDownloadQueue(this);
+		this.mMapImportQueue = new MapImportQueue(this); 
 		
-		this.mImportSignal = new Object();
-		this.mImportThread = new Thread(mImportRunnable);
-		this.mImportThread.start();
-		
-	}
-	
-	private Object mImportSignal;
-	private Thread mImportThread;
-	private Runnable mImportRunnable = new Runnable() {
-		public void run() {
-			while(!mIsShutdown){
-				CatalogMap map = null;
-				CatalogMap imported = null;
-				String systemName = null;
-				synchronized (mMutex) {
-					map = mImportQueue.poll();
-					if(map!=null){
-						systemName = map.getSystemName();
-						mImportingMap = map;
-						fireCatalogMapChanged(systemName);
-					}
-				}
-				if(map!=null){
-					try {
-						// load model from PMZ file 
-						Model model = ModelBuilder.loadModel(map.getAbsoluteUrl());
-						
-						String mapFileName = GlobalSettings.getLocalCatalogMapFileName(map.getSystemName());
-						String mapFileNameTemp = GlobalSettings.getTemporaryImportMapFile(map.getSystemName());
-						
-						File mapFile = new File(mapFileName);
-						File mapFileTemp = new File(mapFileNameTemp);
-						// remove temporary file is exists 
-						if(mapFileTemp.exists()){
-							FileUtil.delete(mapFileTemp);
-						}
-						// serialize model into temporary file
-						ModelBuilder.saveModel(mapFileTemp.getAbsolutePath(), model);
-						// remove old map file if exists
-						if(mapFile.exists()){
-							FileUtil.delete(mapFile);
-						}
-						// move model from temporary to persistent file name
-						FileUtil.move(mapFileTemp, mapFile);
-						
-						final String fileName = mapFile.getName().toLowerCase();						
-						imported = CatalogBuilder.extractCatalogMap(mLocalCatalog, mapFile, fileName, model);
-						
-					} catch (Throwable e) {
-						if(Log.isLoggable(Constants.LOG_TAG_MAIN,Log.ERROR)){
-							Log.e(Constants.LOG_TAG_MAIN, "Failed Import map " + systemName + " from catalog " + map.getOwner().getBaseUrl(),e);
-						}
-						fireCatalogMapImportFailed(systemName, e);
-					}
-					synchronized (mMutex) {
-						mImportingMap = null;
-						if(imported!=null){
-							mLocalCatalog.addMap(imported);
-							mLocalCatalogBuilder.saveCatalog(mLocalStorage, mLocalCatalog);
-							fireCatalogChanged(CATALOG_LOCAL, mLocalCatalog);
-						}
-						fireCatalogMapChanged(systemName);
-					}
-				}
-				if(!mIsShutdown){
-					try {
-						synchronized (mImportSignal) {
-							mImportSignal.wait();
-						}
-					} catch (InterruptedException e) {
-					}
-				}
-			}
-		}
-	};
-
-	private Object mDownloadSignal;
-	private Thread mDownloadThread;
-	private Runnable mDownloadRunnable = new Runnable() {
-		public void run() {
-			while(!mIsShutdown){
-				CatalogMap map = null;
-				String systemName = null;
-				CatalogMap downloaded = null;
-				synchronized (mMutex) {
-					map = mDownloadQueue.poll();
-					if(map!=null){
-						systemName = map.getSystemName();
-						mDownloadingMap = map;
-						fireCatalogMapChanged(systemName);
-					}
-				}
-				if(map!=null){
-					try {
-						File tempFile = new File(GlobalSettings.getTemporaryDownloadMapFile(systemName));
-						File localFile = new File(GlobalSettings.getLocalCatalogMapFileName(systemName));
-						downloadMap(map, systemName, tempFile);						
-						FileUtil.move( tempFile, localFile );
-						Model model = ModelBuilder.loadModelDescription(localFile.getAbsolutePath());
-						final String fileName = localFile.getName().toLowerCase();						
-						downloaded = CatalogBuilder.extractCatalogMap(mLocalCatalog, localFile, fileName, model);
-					} catch (Exception e) {
-						if(Log.isLoggable(Constants.LOG_TAG_MAIN,Log.ERROR)){
-							Log.e(Constants.LOG_TAG_MAIN, "Failed download map " + systemName + " from catalog " + map.getOwner().getBaseUrl(),e);
-						}
-						fireCatalogMapDownloadFailed(systemName, e);
-					}
-					
-					synchronized (mMutex) {
-						mDownloadingMap = null;
-						if(downloaded!=null){
-							mLocalCatalog.addMap(downloaded);
-							mLocalCatalogBuilder.saveCatalog(mLocalStorage, mLocalCatalog);
-							fireCatalogChanged(CATALOG_LOCAL, mLocalCatalog);
-						}
-						fireCatalogMapChanged(systemName);
-					}
-				}
-				
-				if(!mIsShutdown){
-					try {
-						synchronized (mDownloadSignal) {
-							mDownloadSignal.wait();
-						}
-					} catch (InterruptedException e) {
-					}
-				}
-			}
-		}
-	};
-
-	private void downloadMap(CatalogMap map, String systemName,
-			File tempFile) throws URISyntaxException, IOException,
-			ClientProtocolException, FileNotFoundException {
-		BufferedInputStream strm = null;
-		try{
-			HttpClient client = ApplicationEx.getInstance().getHttpClient();
-			HttpGet request = new HttpGet();
-			request.setURI(new URI(map.getAbsoluteUrl()));
-			HttpResponse response = client.execute(request);
-			HttpEntity entity = response.getEntity();
-
-			FileUtil.delete(tempFile);
-			
-			int size = (int)entity.getContentLength();
-			int pos = 0;
-			
-			BufferedInputStream in = null;
-			BufferedOutputStream out = null;
-			try{
-				in = new BufferedInputStream( entity.getContent() );
-				out = new BufferedOutputStream( new FileOutputStream(tempFile.getAbsolutePath()) );
-				byte[] bytes = new byte[2048];
-				for (int c = in.read(bytes); c != -1; c = in.read(bytes)) {
-					out.write(bytes,0, c);
-					pos += c;
-					fireCatalogMapDownloadProgress(systemName, pos, size);
-				}
-			}finally{
-				if(in!=null){
-					try { in.close(); } catch (Exception e) { }
-				}
-				if(out!=null){
-					try { out.close(); } catch (Exception e) { }
-				}
-			}			
-		}finally{
-			if(strm!=null){
-				try { strm.close(); }catch(IOException ex){}
-			}
-		}
 	}
 	
 	public void shutdown(){
 		mIsShutdown = true;
-		fireDownloadSignal();
+		mMapImportQueue.shutdown();
+		mMapDownloadQueue.shutdown();
 	}
 
 	public Object getSync(){
@@ -348,15 +159,9 @@ public class CatalogStorage implements ICatalogBuilderListener {
 		}
 	}
 	
-	/*package*/ void fireImportSignal(){
-		synchronized (mImportSignal) {
-			mImportSignal.notify();
-		}
-	}
-
-	/*package*/ void fireDownloadSignal(){
-		synchronized (mDownloadSignal) {
-			mDownloadSignal.notify();
+	/*package*/ void fireCatalogMapImportProgress(String systemName, int progress, int total) {
+		for(ICatalogStorageListener listener : mCatalogListeners){
+			listener.onCatalogMapImportProgress(systemName, progress, total);
 		}
 	}
 	
@@ -540,10 +345,10 @@ public class CatalogStorage implements ICatalogBuilderListener {
 				return CatalogMapState.UPDATE_NOT_SUPPORTED;
 			}
 		} else {
-			if(mDownloadingMap == remote){
+			if(mMapDownloadQueue.isProcessed(remote)){
 				return CatalogMapState.DOWNLOADING;
 			}
-			if(mDownloadQueue.contains(remote)){
+			if(mMapDownloadQueue.isPending(remote)){
 				return CatalogMapState.DOWNLOAD_PENDING;
 			}
 			
@@ -565,10 +370,10 @@ public class CatalogStorage implements ICatalogBuilderListener {
 		if (remote.isCorruted()) {
 			return CatalogMapState.CORRUPTED;
 		} else {
-			if(mImportingMap == remote){
+			if(mMapImportQueue.isProcessed(remote)){
 				return CatalogMapState.IMPORTING;
 			}
-			if(mImportQueue.contains(remote)){
+			if(mMapImportQueue.isPending(remote)){
 				return CatalogMapState.IMPORT_PENDING;
 			}
 			
@@ -607,10 +412,10 @@ public class CatalogStorage implements ICatalogBuilderListener {
 			}
 		} else {
 			// remote OK
-			if(mDownloadingMap == remote){
+			if(mMapDownloadQueue.isProcessed(remote)){
 				return CatalogMapState.DOWNLOADING;
 			}
-			if(mDownloadQueue.contains(remote)){
+			if(mMapDownloadQueue.isPending(remote)){
 				return CatalogMapState.DOWNLOAD_PENDING;
 			}
 			
@@ -670,8 +475,8 @@ public class CatalogStorage implements ICatalogBuilderListener {
 		synchronized (mMutex) {
 			if(mOnlineCatalog!=null && !mOnlineCatalog.isCorrupted()){
 				CatalogMap map = mOnlineCatalog.getMap(systemName);
-				if(map!=null && mDownloadQueue.contains(map)){
-					mDownloadQueue.remove(map);
+				if(map!=null){
+					mMapDownloadQueue.cancel(map);
 					fireCatalogMapChanged(map.getSystemName());
 				}
 			}
@@ -682,9 +487,8 @@ public class CatalogStorage implements ICatalogBuilderListener {
 		synchronized (mMutex) {
 			if(mOnlineCatalog!=null && !mOnlineCatalog.isCorrupted()){
 				CatalogMap map = mOnlineCatalog.getMap(systemName);
-				if(map!=null && !mDownloadQueue.contains(map)){
-					mDownloadQueue.offer(map);
-					fireDownloadSignal();
+				if(map!=null){
+					mMapDownloadQueue.request(map);
 					fireCatalogMapChanged(map.getSystemName());
 				}
 			}
@@ -695,8 +499,8 @@ public class CatalogStorage implements ICatalogBuilderListener {
 		synchronized (mMutex) {
 			if(mImportCatalog!=null && !mImportCatalog.isCorrupted()){
 				CatalogMap map = mImportCatalog.getMap(systemName);
-				if(map!=null && mImportQueue.contains(map)){
-					mImportQueue.remove(map);
+				if(map!=null){
+					mMapImportQueue.cancel(map);
 					fireCatalogMapChanged(map.getSystemName());
 				}
 			}
@@ -707,13 +511,85 @@ public class CatalogStorage implements ICatalogBuilderListener {
 		synchronized (mMutex) {
 			if(mImportCatalog!=null && !mImportCatalog.isCorrupted()){
 				CatalogMap map = mImportCatalog.getMap(systemName);
-				if(map!=null && !mImportQueue.contains(map)){
-					mImportQueue.offer(map);
-					fireImportSignal();
+				if(map!=null){
+					mMapImportQueue.request(map);
 					fireCatalogMapChanged(map.getSystemName());
 				}
 			}
 		}
 	}
 
+	public void onMapDownloadBegin(CatalogMap map) {
+		String systemName = map.getSystemName();
+		fireCatalogMapChanged(systemName);
+	}
+
+	public void onMapDownloadCanceled(CatalogMap map) {
+		String systemName = map.getSystemName();
+		fireCatalogMapChanged(systemName);
+	}
+
+	public void onMapDownloadDone(CatalogMap map, File file) {
+		String systemName = map.getSystemName();
+		File local = new File(GlobalSettings.getLocalCatalogMapFileName(map.getSystemName()));
+		FileUtil.delete(local);
+		FileUtil.move(file, local);
+		Model model = ModelBuilder.loadModelDescription(file.getAbsolutePath());
+		synchronized(mMutex){
+			CatalogMap downloaded = CatalogBuilder.extractCatalogMap(mLocalCatalog, file, file.getName().toLowerCase(), model);
+			mLocalCatalog.appendMap(downloaded);
+			mLocalCatalogBuilder.saveCatalog(mLocalStorage, mLocalCatalog);
+		}
+		fireCatalogChanged(CATALOG_LOCAL, mLocalCatalog);
+		fireCatalogMapChanged(systemName);
+	}
+
+	public void onMapDownloadFailed(CatalogMap map, Throwable reason) {
+		String systemName = map.getSystemName();
+		fireCatalogMapDownloadFailed(systemName,reason);
+		fireCatalogMapChanged(systemName);
+	}
+
+	public void onMapDownloadProgressChanged(CatalogMap map, long progress, long total) {
+		String systemName = map.getSystemName();
+		fireCatalogMapDownloadProgress(systemName, (int)progress, (int)total);
+	}
+
+
+	public void onMapImportBegin(CatalogMap map) {
+		String systemName = map.getSystemName();
+		fireCatalogMapChanged(systemName);
+	}
+
+	public void onMapImportCanceled(CatalogMap map) {
+		String systemName = map.getSystemName();
+		fireCatalogMapChanged(systemName);
+	}
+
+	public void onMapImportDone(CatalogMap map, File file) {
+		String systemName = map.getSystemName();
+		File local = new File(GlobalSettings.getLocalCatalogMapFileName(map.getSystemName()));
+		FileUtil.delete(local);
+		FileUtil.move(file, local);
+		Model model = ModelBuilder.loadModelDescription(local.getAbsolutePath());
+		synchronized(mMutex){
+			CatalogMap downloaded = CatalogBuilder.extractCatalogMap(mLocalCatalog, file, file.getName().toLowerCase(), model);
+			mLocalCatalog.appendMap(downloaded);
+			mLocalCatalogBuilder.saveCatalog(mLocalStorage, mLocalCatalog);
+		}
+		fireCatalogChanged(CATALOG_LOCAL, mLocalCatalog);
+		fireCatalogMapChanged(systemName);
+	}
+
+	public void onMapImportFailed(CatalogMap map, Throwable reason) {
+		String systemName = map.getSystemName();
+		fireCatalogMapImportFailed(systemName,reason);
+		fireCatalogMapChanged(systemName);
+	}
+
+	public void onMapImportProgressChanged(CatalogMap map, long progress, long total) {
+		String systemName = map.getSystemName();
+		fireCatalogMapImportProgress(systemName, (int)progress, (int)total);
+	}
+	
 }

@@ -540,4 +540,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		
 	}
 	
+	public void onCatalogMapImportProgress(String systemName, int progress, int total) {
+	}
+
 }

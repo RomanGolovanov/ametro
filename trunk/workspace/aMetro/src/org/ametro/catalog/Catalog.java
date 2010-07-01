@@ -107,8 +107,13 @@ public class Catalog {
 		return this;
 	}
 
-	public void addMap(CatalogMap map) {
-		mMapIndex.put(map.getSystemName(), map);
+	public void appendMap(CatalogMap map) {
+		final String systemName = map.getSystemName(); 
+		if(mMapIndex.containsKey(systemName)){
+			mMapIndex.remove(map.getSystemName());
+			mMaps.remove(map);
+		}
+		mMapIndex.put(systemName, map);
 		mMaps.add(map);
 		mTimestamp = System.currentTimeMillis();
 	}

@@ -47,7 +47,6 @@ import org.ametro.model.route.RouteContainer;
 import org.ametro.model.route.RouteView;
 import org.ametro.model.storage.ModelBuilder;
 import org.ametro.model.util.ModelUtil;
-import org.ametro.other.ProgressInfo;
 import org.ametro.render.RenderProgram;
 import org.ametro.util.DateUtil;
 import org.ametro.util.StringUtil;
@@ -1002,7 +1001,7 @@ public class MapViewActivity extends Activity implements OnClickListener {
 	};
 
 
-	private class LocationSearchTask extends AsyncTask<Location, ProgressInfo, StationView> {
+	private class LocationSearchTask extends AsyncTask<Location, Void, StationView> {
 		private ProgressDialog dialog;
 
 		protected StationView doInBackground(Location... args) {
