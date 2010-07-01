@@ -21,71 +21,11 @@
 package org.ametro.activity;
 
 import org.ametro.R;
-import org.ametro.adapter.CatalogExpandableAdapter;
-import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.CatalogMapPair;
 import org.ametro.catalog.storage.CatalogStorage;
 
 public class CatalogLocalListActivity extends BaseCatalogExpandableActivity {
-
-	private Catalog mLocal;
-	private Catalog mOnline;
-	private boolean mOnlineNotAvailable;
-
-	private boolean mFavoritesOnly;
-
-	protected void onPrepareView() {
-		Catalog localPrevious = mLocal;
-		Catalog onlinePrevious = mOnline;
-		mLocal = mStorage.getCatalog(CatalogStorage.LOCAL);
-		mOnline = mStorage.getCatalog(CatalogStorage.ONLINE);
-		if (mLocal == null || !Catalog.equals(mLocal,localPrevious)) {
-			mStorage.requestCatalog(CatalogStorage.LOCAL, false);
-		}
-		if (mOnline == null || !Catalog.equals(mOnline,onlinePrevious)) {
-			mStorage.requestCatalog(CatalogStorage.ONLINE, false);
-		}
-		onCatalogsUpdate(!Catalog.equals(mLocal,localPrevious) || !Catalog.equals(mOnline,onlinePrevious));
-		super.onPrepareView();
-	}
-
-	private void onCatalogsUpdate(boolean refresh) {
-		if (mLocal != null && (mOnline != null || mOnlineNotAvailable)) {
-			if (mLocal.getMaps().size() > 0) {
-				if (mMode != MODE_LIST) {
-					setListView();
-				} else {
-					if (refresh) {
-						setListView();
-					}else{
-						updateList(mLocal, mOnline);
-					}
-				}
-			} else {
-				setEmptyView();
-			}
-		}
-	}
-
-	protected CatalogExpandableAdapter getListAdapter() {
-		return new CatalogExpandableAdapter(this, mLocal, mOnline,
-				CatalogMapPair.DIFF_MODE_LOCAL, R.array.local_catalog_map_state_colors,
-				this);
-	}
-
-	protected void onLocalCatalogLoaded(Catalog catalog) {
-		mLocal = catalog;
-		onCatalogsUpdate(true);
-		super.onLocalCatalogLoaded(catalog);
-	}
-
-	protected void onOnlineCatalogLoaded(Catalog catalog) {
-		mOnline = catalog;
-		mOnlineNotAvailable = catalog == null || catalog.isCorrupted();
-		onCatalogsUpdate(true);
-		super.onOnlineCatalogLoaded(catalog);
-	}
 
 	protected void onCatalogRefresh() {
 		mStorage.requestCatalog(CatalogStorage.LOCAL, true);
@@ -97,7 +37,7 @@ public class CatalogLocalListActivity extends BaseCatalogExpandableActivity {
 	}
 
 	protected int getEmptyListMessage() {
-		return mFavoritesOnly ? R.string.msg_no_maps_in_favorites : R.string.msg_no_maps_in_local;
+		return R.string.msg_no_maps_in_local;
 	}
 
 	public int getCatalogState(CatalogMap local, CatalogMap remote) {
@@ -109,4 +49,21 @@ public class CatalogLocalListActivity extends BaseCatalogExpandableActivity {
 		return true;
 	}
 
+	protected int getDiffMode() {
+		return CatalogMapPair.DIFF_MODE_LOCAL;
+	}
+
+	protected int getLocalCatalogId() {
+		return CatalogStorage.LOCAL;
+	}
+
+	protected int getRemoteCatalogId() {
+		return CatalogStorage.ONLINE;
+	}
+
+	protected int getDiffColors() {
+		return R.array.local_catalog_map_state_colors;
+	}
+	
+	
 }

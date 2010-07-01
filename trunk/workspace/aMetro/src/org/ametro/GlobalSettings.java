@@ -22,6 +22,7 @@
 package org.ametro;
 
 import static org.ametro.Constants.IMPORT_FILE_TYPE;
+import static org.ametro.Constants.DOWNLOAD_FILE_TYPE;
 import static org.ametro.Constants.LOCAL_CATALOG_PATH;
 import static org.ametro.Constants.MAP_FILE_TYPE;
 import static org.ametro.Constants.PREFERENCE_AUTO_UPDATE_INDEX;
@@ -70,7 +71,7 @@ public class GlobalSettings {
     }
 
     public static String getTemporaryDownloadMapFile(String systemName) {
-        return new File(TEMP_CATALOG_PATH, systemName.replace(MAP_FILE_TYPE, IMPORT_FILE_TYPE)).getAbsolutePath().toLowerCase();
+        return new File(TEMP_CATALOG_PATH, systemName.replace(MAP_FILE_TYPE, DOWNLOAD_FILE_TYPE)).getAbsolutePath().toLowerCase();
     }
 
 	public static boolean isDebugMessagesEnabled(Context context) {

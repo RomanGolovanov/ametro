@@ -21,91 +21,15 @@
 package org.ametro.activity;
 
 import org.ametro.R;
-import org.ametro.adapter.CatalogExpandableAdapter;
-import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.CatalogMapPair;
 import org.ametro.catalog.storage.CatalogStorage;
 
-import android.widget.TextView;
-
 public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity {
 
-	private static final int MODE_DOWNLOAD_FAILED = 1000;
-
-	private Catalog mLocal;
-	private Catalog mOnline;
-
-	private boolean mOnlineDownload;
-	private boolean mOnlineDownloadFailed;
-
-	protected void onPrepareView() {
-		Catalog localPrevious = mLocal;
-		Catalog onlinePrevious = mOnline;
-		mLocal = mStorage.getCatalog(CatalogStorage.LOCAL);
-		mOnline = mStorage.getCatalog(CatalogStorage.ONLINE);
-		if (mLocal == null || !Catalog.equals(mLocal,localPrevious)) {
-			mStorage.requestCatalog(CatalogStorage.LOCAL, false);
-		}
-		if (mOnline == null || !Catalog.equals(mOnline,onlinePrevious)) {
-			mStorage.requestCatalog(CatalogStorage.ONLINE, false);
-		}
-		onCatalogsUpdate(!Catalog.equals(mLocal,localPrevious) || !Catalog.equals(mOnline,onlinePrevious));
-		super.onPrepareView();
-	}
-
-	private void onCatalogsUpdate(boolean refresh) {
-		if (mLocal != null && (mOnline != null || !mOnlineDownload)) {
-			if (mOnline != null && mOnline.getMaps().size() > 0) {
-				if (mMode != MODE_LIST) {
-					setListView();
-				} else {
-					if (refresh) {
-						setListView();
-					}else{
-						updateList(mLocal, mOnline);
-					}
-				}
-			} else {
-				if (mOnlineDownloadFailed) {
-					setDownloadFailedView();
-				} else {
-					setEmptyView();
-				}
-			}
-
-		}
-	}
-
 	protected void onCatalogRefresh() {
-		mOnlineDownload = true;
-		mOnlineDownloadFailed = false;
 		mStorage.requestCatalog(CatalogStorage.ONLINE, true);
 		super.onCatalogRefresh();
-	}
-
-	private void setDownloadFailedView() {
-		setContentView(R.layout.catalog_empty);
-		((TextView) findViewById(R.id.text))
-				.setText(R.string.msg_catalog_download_failed);
-		mMode = MODE_DOWNLOAD_FAILED;
-	}
-
-	protected void onOnlineCatalogLoaded(Catalog catalog) {
-		mOnline = catalog;
-		mOnlineDownload = false;
-		mOnlineDownloadFailed = catalog == null || catalog.isCorrupted();
-		if (catalog == null) {
-			mOnline = mStorage.getCatalog(CatalogStorage.ONLINE);
-		}
-		onCatalogsUpdate(true);
-		super.onOnlineCatalogLoaded(catalog);
-	}
-
-	protected void onLocalCatalogLoaded(Catalog catalog) {
-		mLocal = catalog;
-		onCatalogsUpdate(true);
-		super.onLocalCatalogLoaded(catalog);
 	}
 
 	protected int getEmptyListMessage() {
@@ -116,12 +40,6 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity {
 		return mProgress + "/" + mTotal + " bytes"; 
 	}
 
-	protected CatalogExpandableAdapter getListAdapter() {
-		return new CatalogExpandableAdapter(this, mLocal, mOnline,
-				CatalogMapPair.DIFF_MODE_REMOTE,
-				R.array.online_catalog_map_state_colors, this);
-	}
-
 	protected boolean isCatalogProgressEnabled(int catalogId) {
 		return catalogId == CatalogStorage.ONLINE;
 	}
@@ -129,4 +47,21 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity {
 	public int getCatalogState(CatalogMap local, CatalogMap remote) {
 		return mStorage.getOnlineCatalogState(local, remote);
 	}
+	
+	protected int getDiffMode() {
+		return CatalogMapPair.DIFF_MODE_LOCAL;
+	}
+
+	protected int getLocalCatalogId() {
+		return CatalogStorage.LOCAL;
+	}
+
+	protected int getRemoteCatalogId() {
+		return CatalogStorage.ONLINE;
+	}
+
+	protected int getDiffColors() {
+		return R.array.online_catalog_map_state_colors;
+	}
+	
 }
