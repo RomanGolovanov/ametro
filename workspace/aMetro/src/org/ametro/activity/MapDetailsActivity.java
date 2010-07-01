@@ -172,17 +172,17 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 
 	protected void onResume() {
 		mStorage.addCatalogChangedListener(this);
-		mLocalCatalog = mStorage.getLocalCatalog();
-		mOnlineCatalog = mStorage.getOnlineCatalog();
-		mImportCatalog = mStorage.getImportCatalog();
+		mLocalCatalog = mStorage.getCatalog(CatalogStorage.LOCAL);
+		mOnlineCatalog = mStorage.getCatalog(CatalogStorage.ONLINE);
+		mImportCatalog = mStorage.getCatalog(CatalogStorage.IMPORT);
 		if (mLocalCatalog == null) {
-			mStorage.requestLocalCatalog(false);
+			mStorage.requestCatalog(CatalogStorage.LOCAL, false);
 		}
 		if (mOnlineCatalog == null && !mOnlineDownload) {
-			mStorage.requestOnlineCatalog(false);
+			mStorage.requestCatalog(CatalogStorage.ONLINE, false);
 		}
 		if (mImportCatalog == null) {
-			mStorage.requestImportCatalog(false);
+			mStorage.requestCatalog(CatalogStorage.IMPORT, false);
 		}
 		onCatalogsUpdate();
 		super.onResume();
@@ -357,14 +357,14 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 	}
 
 	public void onCatalogLoaded(int catalogId, Catalog catalog) {
-		if (catalogId == CatalogStorage.CATALOG_LOCAL) {
+		if (catalogId == CatalogStorage.LOCAL) {
 			mLocalCatalog = catalog;
 		}
-		if (catalogId == CatalogStorage.CATALOG_ONLINE) {
+		if (catalogId == CatalogStorage.ONLINE) {
 			mOnlineCatalog = catalog;
 			mOnlineDownload = false;
 		}
-		if (catalogId == CatalogStorage.CATALOG_IMPORT) {
+		if (catalogId == CatalogStorage.IMPORT) {
 			mImportCatalog = catalog;
 		}
 		mUIEventDispacher.post(mCatalogsUpdateRunnable);

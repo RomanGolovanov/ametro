@@ -20,8 +20,13 @@
  */
 package org.ametro.catalog;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.TreeSet;
+
+import org.ametro.Constants;
+import org.ametro.model.Model;
 
 public class Catalog {
 
@@ -79,8 +84,10 @@ public class Catalog {
 	
 	/* VOLATILE FIELDS */
 	private HashMap<String, CatalogMap> mMapIndex;
+	private long mLoadingTimestamp;
 	
 	public CatalogMap getMap(String systemName){
+		mLoadingTimestamp = System.currentTimeMillis();
 		if(mMapIndex == null){
 			final HashMap<String, CatalogMap> index = new HashMap<String, CatalogMap>();
 			for(CatalogMap map : mMaps){
@@ -117,4 +124,116 @@ public class Catalog {
 		mMaps.add(map);
 		mTimestamp = System.currentTimeMillis();
 	}
+
+	public long getLoadingTimestamp() {
+		return mLoadingTimestamp;
+	}
+	
+	public static CatalogMap makeBadCatalogMap(Catalog catalog, File file, final String fileName) {
+		
+		final String suggestedMapName = fileName.substring(0, fileName.indexOf('.'));
+		
+		final String[] locales = new String[]{"en","ru"};
+		final String[] country = new String[]{UNKNOWN_EN,UNKNOWN_RU};
+		final String[] city = new String[]{suggestedMapName,suggestedMapName};
+		final String[] description = new String[]{"",""};
+		final String[] changeLog = new String[]{"",""};
+		
+		String systemName = fileName;
+		if(fileName.endsWith(Constants.PMETRO_EXTENSION)){
+			systemName += Constants.AMETRO_EXTENSION;
+		}
+		
+		CatalogMap map = new CatalogMap(
+				 catalog,
+				 systemName,
+				 fileName,
+				 0,
+				 0,
+				 Model.VERSION,
+				 0,
+				 Model.COMPATIBILITY_VERSION,
+				 locales,
+				 country,
+				 city,
+				 description,
+				 changeLog,
+				 true
+				 );
+		return map;
+	}
+	
+	public static CatalogMap extractCatalogMap(Catalog catalog, File file, final String fileName, Model model) {
+		final String[] locales = model.locales;
+		final int len = locales.length;
+		final int countryId = model.countryName;
+		final int cityId = model.cityName;
+		final String[][] texts = model.localeTexts;
+		
+		final TreeSet<ModelDescription> modelLocales = new TreeSet<ModelDescription>();
+		
+		for(int i=0; i<len;i++){
+			modelLocales.add( new ModelDescription(locales[i], texts[i][cityId], texts[i][countryId], "Not supported yet.") );
+		}
+
+		int index = 0;
+		final String[] country = new String[len];
+		final String[] city = new String[len];
+		final String[] description = new String[len];
+		final String[] changeLog = new String[len];
+		for(ModelDescription m : modelLocales){
+			locales[index] = m.locale;
+			city[index] = m.city;
+			country[index] = m.country;
+			description[index] = m.description;
+			changeLog[index] = "";
+			index++;
+		}
+		
+		String systemName = fileName;
+		if(fileName.endsWith(Constants.PMETRO_EXTENSION)){
+			systemName += Constants.AMETRO_EXTENSION;
+		}
+		
+		CatalogMap map = new CatalogMap(
+				 catalog,
+				 systemName,
+				 fileName,
+				 model.timestamp,
+				 model.transportTypes,
+				 Model.VERSION,
+				 file.length(),
+				 Model.COMPATIBILITY_VERSION,
+				 locales,
+				 country,
+				 city,
+				 description,
+				 changeLog,
+				 false
+				 );
+		return map;
+	}
+	
+	private static class ModelDescription implements Comparable<ModelDescription>
+	{
+		String locale;
+		String city;
+		String country;
+		String description;
+		
+		public int compareTo(ModelDescription another) {
+			return locale.compareTo(another.locale);
+		}
+
+		public ModelDescription(String locale, String city, String country, String description) {
+			super();
+			this.locale = locale;
+			this.city = city;
+			this.country = country;
+			this.description = description;
+		}
+	}
+	
+	private static final String UNKNOWN_EN = "Unknown";
+	private static final String UNKNOWN_RU = "Неизвестно";	
 }

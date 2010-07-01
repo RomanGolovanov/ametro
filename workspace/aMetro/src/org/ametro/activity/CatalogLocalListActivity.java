@@ -38,13 +38,13 @@ public class CatalogLocalListActivity extends BaseCatalogExpandableActivity {
 	protected void onPrepareView() {
 		Catalog localPrevious = mLocal;
 		Catalog onlinePrevious = mOnline;
-		mLocal = mStorage.getLocalCatalog();
-		mOnline = mStorage.getOnlineCatalog();
+		mLocal = mStorage.getCatalog(CatalogStorage.LOCAL);
+		mOnline = mStorage.getCatalog(CatalogStorage.ONLINE);
 		if (mLocal == null || !Catalog.equals(mLocal,localPrevious)) {
-			mStorage.requestLocalCatalog(false);
+			mStorage.requestCatalog(CatalogStorage.LOCAL, false);
 		}
 		if (mOnline == null || !Catalog.equals(mOnline,onlinePrevious)) {
-			mStorage.requestOnlineCatalog(false);
+			mStorage.requestCatalog(CatalogStorage.ONLINE, false);
 		}
 		onCatalogsUpdate(!Catalog.equals(mLocal,localPrevious) || !Catalog.equals(mOnline,onlinePrevious));
 		super.onPrepareView();
@@ -88,12 +88,12 @@ public class CatalogLocalListActivity extends BaseCatalogExpandableActivity {
 	}
 
 	protected void onCatalogRefresh() {
-		mStorage.requestLocalCatalog(true);
+		mStorage.requestCatalog(CatalogStorage.LOCAL, true);
 		super.onCatalogRefresh();
 	}
 
 	protected boolean isCatalogProgressEnabled(int catalogId) {
-		return catalogId == CatalogStorage.CATALOG_LOCAL;
+		return catalogId == CatalogStorage.LOCAL;
 	}
 
 	protected int getEmptyListMessage() {
