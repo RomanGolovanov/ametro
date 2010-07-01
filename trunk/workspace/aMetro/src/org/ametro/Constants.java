@@ -73,6 +73,9 @@ public class Constants {
 	public static final File IMPORT_CATALOG_STORAGE = new File(ROOT_PATH,"catalog.import.xml");
 	
 	public static final File NO_MEDIA_FILE = new File(ROOT_PATH, NO_MEDIA_TAG);
+
+	public static final String PMETRO_EXTENSION = ".pmz";
+	public static final String AMETRO_EXTENSION = ".ametro";
 	
     
 	

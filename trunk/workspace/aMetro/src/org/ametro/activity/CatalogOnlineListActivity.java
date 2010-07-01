@@ -42,21 +42,16 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity {
 	protected void onPrepareView() {
 		Catalog localPrevious = mLocal;
 		Catalog onlinePrevious = mOnline;
-		mLocal = mStorage.getLocalCatalog();
-		mOnline = mStorage.getOnlineCatalog();
-		if (mLocal == null || !Catalog.equals(mLocal, localPrevious)) {
-			mStorage.requestLocalCatalog(false);
+		mLocal = mStorage.getCatalog(CatalogStorage.LOCAL);
+		mOnline = mStorage.getCatalog(CatalogStorage.ONLINE);
+		if (mLocal == null || !Catalog.equals(mLocal,localPrevious)) {
+			mStorage.requestCatalog(CatalogStorage.LOCAL, false);
 		}
-		if ((mOnline == null && !mOnlineDownload)
-				|| !Catalog.equals(mOnline, onlinePrevious)) {
-			mOnlineDownload = true;
-			mOnlineDownloadFailed = false;
-			mStorage.requestOnlineCatalog(false);
+		if (mOnline == null || !Catalog.equals(mOnline,onlinePrevious)) {
+			mStorage.requestCatalog(CatalogStorage.ONLINE, false);
 		}
-		onCatalogsUpdate(!Catalog.equals(mLocal, localPrevious)
-				|| !Catalog.equals(mOnline, onlinePrevious));
+		onCatalogsUpdate(!Catalog.equals(mLocal,localPrevious) || !Catalog.equals(mOnline,onlinePrevious));
 		super.onPrepareView();
-
 	}
 
 	private void onCatalogsUpdate(boolean refresh) {
@@ -85,7 +80,7 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity {
 	protected void onCatalogRefresh() {
 		mOnlineDownload = true;
 		mOnlineDownloadFailed = false;
-		mStorage.requestOnlineCatalog(true);
+		mStorage.requestCatalog(CatalogStorage.ONLINE, true);
 		super.onCatalogRefresh();
 	}
 
@@ -101,7 +96,7 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity {
 		mOnlineDownload = false;
 		mOnlineDownloadFailed = catalog == null || catalog.isCorrupted();
 		if (catalog == null) {
-			mOnline = mStorage.getOnlineCatalog();
+			mOnline = mStorage.getCatalog(CatalogStorage.ONLINE);
 		}
 		onCatalogsUpdate(true);
 		super.onOnlineCatalogLoaded(catalog);
@@ -128,7 +123,7 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity {
 	}
 
 	protected boolean isCatalogProgressEnabled(int catalogId) {
-		return catalogId == CatalogStorage.CATALOG_ONLINE;
+		return catalogId == CatalogStorage.ONLINE;
 	}
 
 	public int getCatalogState(CatalogMap local, CatalogMap remote) {

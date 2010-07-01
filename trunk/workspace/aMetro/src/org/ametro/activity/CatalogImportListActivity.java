@@ -52,7 +52,7 @@ public class CatalogImportListActivity extends BaseCatalogExpandableActivity {
 	}
 
 	protected void onCatalogRefresh() {
-		mStorage.requestImportCatalog(true);
+		mStorage.requestCatalog(CatalogStorage.IMPORT, true);
 		super.onCatalogRefresh();
 	}
 
@@ -70,7 +70,7 @@ public class CatalogImportListActivity extends BaseCatalogExpandableActivity {
 		switch (requestCode) {
 		case REQUEST_IMPORT:
 			setWaitView();
-			mStorage.requestImportCatalog(true);
+			mStorage.requestCatalog(CatalogStorage.IMPORT, true);
 			break;
 		}
 		super.onActivityResult(requestCode, resultCode, data);
@@ -79,13 +79,13 @@ public class CatalogImportListActivity extends BaseCatalogExpandableActivity {
 	protected void onPrepareView() {
 		Catalog localPrevious = mLocal;
 		Catalog importPrevious = mImport;
-		mLocal = mStorage.getLocalCatalog();
-		mImport = mStorage.getImportCatalog();
+		mLocal = mStorage.getCatalog(CatalogStorage.LOCAL);
+		mImport = mStorage.getCatalog(CatalogStorage.IMPORT);
 		if (mLocal == null || !Catalog.equals(mLocal,localPrevious)) {
-			mStorage.requestLocalCatalog(false);
+			mStorage.requestCatalog(CatalogStorage.LOCAL, false);
 		}
 		if (mImport == null || !Catalog.equals(mImport,importPrevious)) {
-			mStorage.requestImportCatalog(false);
+			mStorage.requestCatalog(CatalogStorage.IMPORT, false);
 		}
 		onCatalogsUpdate(!Catalog.equals(mLocal,localPrevious) || !Catalog.equals(mImport,importPrevious));
 		super.onPrepareView();
@@ -115,8 +115,8 @@ public class CatalogImportListActivity extends BaseCatalogExpandableActivity {
 
 	protected CatalogExpandableAdapter getListAdapter() {
 		return new CatalogExpandableAdapter(this, mLocal, mImport,
-				CatalogMapPair.DIFF_MODE_REMOTE,
-				R.array.import_catalog_map_state_colors, this);
+			CatalogMapPair.DIFF_MODE_REMOTE,
+			R.array.import_catalog_map_state_colors, this);
 	}
 
 	protected void onLocalCatalogLoaded(Catalog catalog) {
@@ -132,7 +132,7 @@ public class CatalogImportListActivity extends BaseCatalogExpandableActivity {
 	}
 
 	protected boolean isCatalogProgressEnabled(int catalogId) {
-		return catalogId == CatalogStorage.CATALOG_IMPORT;
+		return catalogId == CatalogStorage.IMPORT; 
 	}
 
 	public int getCatalogState(CatalogMap local, CatalogMap remote) {

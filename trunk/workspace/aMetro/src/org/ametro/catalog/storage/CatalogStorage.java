@@ -21,9 +21,9 @@
 package org.ametro.catalog.storage;
 
 import java.io.File;
+import java.net.URI;
 import java.util.ArrayList;
 
-import org.ametro.Constants;
 import org.ametro.GlobalSettings;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
@@ -35,38 +35,18 @@ import org.ametro.model.storage.ModelBuilder;
 import org.ametro.util.FileUtil;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadListener, IMapImportListener {
 
-	public static final int CATALOG_LOCAL = 0;
-	public static final int CATALOG_IMPORT = 1;
-	public static final int CATALOG_ONLINE = 2;
+	public static final int LOCAL = 0;
+	public static final int IMPORT = 1;
+	public static final int ONLINE = 2;
 
-	/*package*/ File mLocalStorage;
-	/*package*/ File mLocalPath;
-	/*package*/ File mImportStorage;
-	/*package*/ File mImportPath;
-	/*package*/ File mOnlineStorage;
-	/*package*/ String mOnlineUrl;
-	
 	/*package*/ Object mMutex = new Object();
-	/*package*/ LocalCatalogLoadTask mLoadLocalCatalogTask;
-	/*package*/ ImportCatalogLoadTask mLoadImportCatalogTask;
-	/*package*/ OnlineCatalogLoadTask mLoadOnlineCatalogTask;
 	
-	/*package*/ Catalog mLocalCatalog;
-	/*package*/ Catalog mOnlineCatalog;
-	/*package*/ Catalog mImportCatalog;
+	/*package*/ BaseCatalogProvider[] mBuilders;
+	/*package*/ CatalogLoadTask[] mCatalogTasks;
 
-	/*package*/ Catalog mPreviousLocalCatalog;
-	/*package*/ Catalog mPreviousOnlineCatalog;
-	/*package*/ Catalog mPreviousImportCatalog;
-	
-	/*package*/ CatalogBuilder mLocalCatalogBuilder;
-	/*package*/ CatalogBuilder mOnlineCatalogBuilder;
-	/*package*/ CatalogBuilder mImportCatalogBuilder;
-	
 	/*package*/ ArrayList<ICatalogStorageListener> mCatalogListeners;
 	
 	/*package*/ MapDownloadQueue mMapDownloadQueue;
@@ -74,28 +54,25 @@ public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadList
 	
 	/*package*/ boolean mIsShutdown;
 	
-	public CatalogStorage(File localStorage, File localPath, File importStorage, File importPath, File onlineStorage, String onlineUrl){
+	public CatalogStorage(
+			File localStorage, File localPath, 
+			File importStorage, File importPath, 
+			File onlineStorage, String onlineUrl){
+		
 		this.mCatalogListeners = new ArrayList<ICatalogStorageListener>();
-		this.mLocalStorage = localStorage;
-		this.mLocalPath = localPath;
-		this.mImportStorage = importStorage;
-		this.mImportPath = importPath;
-		this.mOnlineStorage = onlineStorage;
-		this.mOnlineUrl = onlineUrl;
-		
-		this.mOnlineCatalogBuilder = new CatalogBuilder();
-		this.mOnlineCatalogBuilder.addOnCatalogBuilderEvents(this);
-		
-		this.mLocalCatalogBuilder = new CatalogBuilder();
-		this.mLocalCatalogBuilder.addOnCatalogBuilderEvents(this);
-		
-		this.mImportCatalogBuilder = new CatalogBuilder();
-		this.mImportCatalogBuilder.addOnCatalogBuilderEvents(this);
-		
+
 		this.mIsShutdown = false;
 
 		this.mMapDownloadQueue = new MapDownloadQueue(this);
 		this.mMapImportQueue = new MapImportQueue(this); 
+		
+		mBuilders = new BaseCatalogProvider[3];
+		
+		mBuilders[LOCAL] = new DirectoryCatalogProvider(this, localStorage, localPath);
+		mBuilders[IMPORT] = new DirectoryCatalogProvider(this, importStorage, importPath);
+		mBuilders[ONLINE] = new WebCatalogProvider(this, onlineStorage, URI.create(onlineUrl));
+		
+		mCatalogTasks = new CatalogLoadTask[3];
 		
 	}
 	
@@ -164,175 +141,51 @@ public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadList
 			listener.onCatalogMapImportProgress(systemName, progress, total);
 		}
 	}
-	
-	public Catalog getLocalCatalog() {
+
+	public Catalog getCatalog(int catalogId) {
 		synchronized (mMutex) {
-			return mLocalCatalog;
+			return mBuilders[catalogId].getCatalog();
 		}
 	}	
 	
-	public Catalog getOnlineCatalog() {
-		synchronized (mMutex) {
-			return mOnlineCatalog;
-		}
-	}
-	
-	public Catalog getImportCatalog() {
-		synchronized (mMutex) {
-			return mImportCatalog;
-		}
-	}	
-	
-	public void requestLocalCatalog(boolean refresh)
+	public void requestCatalog(int catalogId, boolean refresh)
 	{
-		if(mLoadLocalCatalogTask==null){
+		if(mCatalogTasks[catalogId]==null){
 			synchronized (mMutex) {
-				if(mLoadLocalCatalogTask==null){
-					mLoadLocalCatalogTask = new LocalCatalogLoadTask();
-					mLoadLocalCatalogTask.execute(refresh);
-				}
-			}
-		}		
-	}
-	
-	public void requestImportCatalog(boolean refresh)
-	{
-		if(mLoadImportCatalogTask==null){
-			synchronized (mMutex) {
-				if(mLoadImportCatalogTask==null){
-					mLoadImportCatalogTask = new ImportCatalogLoadTask();
-					mLoadImportCatalogTask.execute(refresh);
-				}
-			}
-		}		
-	}
-	
-	public void requestOnlineCatalog(boolean refresh)
-	{
-		if(mLoadOnlineCatalogTask==null){
-			synchronized (mMutex) {
-				if(mLoadOnlineCatalogTask==null){
-					mLoadOnlineCatalogTask = new OnlineCatalogLoadTask();
-					mLoadOnlineCatalogTask.execute(refresh);
+				if(mCatalogTasks[catalogId]==null){
+					mCatalogTasks[catalogId] = new CatalogLoadTask();
+					mCatalogTasks[catalogId].execute(catalogId,refresh);
 				}
 			}
 		}	
 	}	
 
-	private class OnlineCatalogLoadTask extends AsyncTask<Boolean, Void, Catalog> {
-		protected Catalog doInBackground(Boolean... params) {
-			return mOnlineCatalogBuilder.downloadCatalog(mOnlineStorage, mOnlineUrl, params[0]);
-		}
+	private class CatalogLoadTask extends AsyncTask<Object, Void, Catalog> {
 		
-		protected void onPreExecute() {
-			if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
-				Log.d(Constants.LOG_TAG_MAIN, "Requested online catalog");
-			}
-			synchronized(mMutex)
-			{
-				mPreviousOnlineCatalog = mOnlineCatalog;
-				mOnlineCatalog = null;
-			}
-			super.onPreExecute();
+		private int mCatalogId;
+		
+		protected Catalog doInBackground(Object... params) {
+			mCatalogId = (Integer)params[0];
+			boolean refresh = (Boolean)params[1];
+			mBuilders[mCatalogId].load(refresh);
+			return mBuilders[mCatalogId].getCatalog();
 		}
 		
 		protected void onPostExecute(Catalog result) {
-			if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
-				Log.d(Constants.LOG_TAG_MAIN, "Online catalog request response: " + result!=null ? result.toString() : "null");
+			synchronized (mMutex) {
+				mCatalogTasks[mCatalogId] = null;
 			}
-			synchronized(mMutex)
-			{
-				if(result!=null){
-					mOnlineCatalog = result;
-				}else{
-					mOnlineCatalog = mPreviousOnlineCatalog;
-				}
-				mLoadOnlineCatalogTask = null;
-			}
-			fireCatalogChanged(CATALOG_ONLINE, result);
 			super.onPostExecute(result);
 		}
-		
-	}	
-	
-	private class LocalCatalogLoadTask extends AsyncTask<Boolean, Void, Catalog> {
-		protected Catalog doInBackground(Boolean... params) {
-			return mLocalCatalogBuilder.loadCatalog(mLocalStorage, mLocalPath, params[0], CatalogBuilder.FILE_TYPE_AMETRO);
-		}
-		
-		protected void onPreExecute() {
-			if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
-				Log.d(Constants.LOG_TAG_MAIN, "Requested local catalog");
-			}
-			synchronized(mMutex)
-			{
-				mPreviousLocalCatalog = mLocalCatalog;
-				mLocalCatalog = null;
-			}
-			super.onPreExecute();
-		}
-		
-		protected void onPostExecute(Catalog result) {
-			if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
-				Log.d(Constants.LOG_TAG_MAIN, "Local catalog request response: " + result!=null ? result.toString() : "null");
-			}
-			synchronized(mMutex)
-			{
-				if(result!=null){
-					mLocalCatalog = result;
-				}else{
-					mLocalCatalog = mPreviousLocalCatalog;
-				}
-				mLoadLocalCatalogTask = null;
-			}			
-			fireCatalogChanged(CATALOG_LOCAL, result);
-			super.onPostExecute(result);
-		}
-	}	
-	
-	private class ImportCatalogLoadTask extends AsyncTask<Boolean, Void, Catalog> {
-		protected Catalog doInBackground(Boolean... params) {
-			return mImportCatalogBuilder.loadCatalog(mImportStorage, mImportPath, params[0], CatalogBuilder.FILE_TYPE_PMETRO);
-		}
-		
-		protected void onPreExecute() {
-			if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
-				Log.d(Constants.LOG_TAG_MAIN, "Requested import catalog");
-			}
-			synchronized(mMutex)
-			{
-				mPreviousImportCatalog = mImportCatalog;
-				mImportCatalog = null;
-			}			
-			super.onPreExecute();
-		}
-		
-		protected void onPostExecute(Catalog result) {
-			if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
-				Log.d(Constants.LOG_TAG_MAIN, "Import catalog request response: " + result!=null ? result.toString() : "null");
-			}
-			synchronized(mMutex)
-			{
-				if(result!=null){
-					mImportCatalog = result;
-				}else{
-					mImportCatalog = mPreviousImportCatalog;
-				}
-				mLoadImportCatalogTask = null;
-			}	
-			fireCatalogChanged(CATALOG_IMPORT, result);
-			super.onPostExecute(result);
-		}
-		
 	}
 
-	private int getCatalogId(CatalogBuilder source) {
-		if(source == mImportCatalogBuilder){
-			return CATALOG_IMPORT;
-		}else if(source == mOnlineCatalogBuilder){
-			return CATALOG_ONLINE;
-		}else if(source == mLocalCatalogBuilder){
-			return CATALOG_LOCAL;
+	private int getCatalogId(BaseCatalogProvider source) {
+		if(source == mBuilders[IMPORT]){
+			return IMPORT;
+		}else if(source == mBuilders[ONLINE]){
+			return ONLINE;
+		}else if(source == mBuilders[LOCAL]){
+			return LOCAL;
 		}
 		throw new RuntimeException("Unknown CatalogBuilder instance");
 	}
@@ -418,7 +271,6 @@ public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadList
 			if(mMapDownloadQueue.isPending(remote)){
 				return CatalogMapState.DOWNLOAD_PENDING;
 			}
-			
 			if (local.isCorruted()) {
 				return CatalogMapState.NEED_TO_UPDATE;
 			} else if (!local.isSupported()) {
@@ -432,24 +284,18 @@ public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadList
 			}
 		}
 	}	
-	
-	public void onCatalogBuilderOperationFailed(CatalogBuilder source, String message) {
-		fireCatalogOperationFailed(getCatalogId(source), message);
-	}
 
-	public void onCatalogBuilderOperationProgress(CatalogBuilder source, int progress, int total, String message) {
-		fireCatalogOperationProgress(getCatalogId(source), progress, total, message);
-	}
+	
 	
 	public void deleteLocalMap(String systemName) {
 		synchronized (mMutex) {
-			if(mLocalCatalog!=null && !mLocalCatalog.isCorrupted()){
-				CatalogMap map = mLocalCatalog.getMap(systemName);
+			if(mBuilders[LOCAL].getCatalog()!=null && !mBuilders[LOCAL].getCatalog().isCorrupted()){
+				CatalogMap map = mBuilders[LOCAL].getCatalog().getMap(systemName);
 				if(map!=null ){
-					mLocalCatalog.deleteMap(map);
-					mLocalCatalogBuilder.saveCatalog(mLocalStorage, mLocalCatalog);
+					mBuilders[LOCAL].getCatalog().deleteMap(map);
+					mBuilders[LOCAL].save();
 					FileUtil.delete(map.getAbsoluteUrl());
-					fireCatalogChanged(CATALOG_LOCAL, mLocalCatalog);
+					fireCatalogChanged(LOCAL, mBuilders[LOCAL].getCatalog());
 				}
 				
 			}
@@ -458,13 +304,13 @@ public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadList
 
 	public void deleteImportMap(String systemName) {
 		synchronized (mMutex) {
-			if(mImportCatalog!=null && !mImportCatalog.isCorrupted()){
-				CatalogMap map = mImportCatalog.getMap(systemName);
+			if(mBuilders[IMPORT].getCatalog()!=null && !mBuilders[IMPORT].getCatalog().isCorrupted()){
+				CatalogMap map = mBuilders[IMPORT].getCatalog().getMap(systemName);
 				if(map!=null ){
-					mImportCatalog.deleteMap(map);
-					mImportCatalogBuilder.saveCatalog(mImportStorage, mImportCatalog);
+					mBuilders[IMPORT].getCatalog().deleteMap(map);
+					mBuilders[IMPORT].save();
 					FileUtil.delete(map.getAbsoluteUrl());
-					fireCatalogChanged(CATALOG_IMPORT, mImportCatalog);
+					fireCatalogChanged(IMPORT, mBuilders[IMPORT].getCatalog());
 				}
 				
 			}
@@ -473,8 +319,8 @@ public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadList
 	
 	public void cancelDownload(String systemName) {
 		synchronized (mMutex) {
-			if(mOnlineCatalog!=null && !mOnlineCatalog.isCorrupted()){
-				CatalogMap map = mOnlineCatalog.getMap(systemName);
+			if(mBuilders[ONLINE].getCatalog()!=null && !mBuilders[ONLINE].getCatalog().isCorrupted()){
+				CatalogMap map = mBuilders[ONLINE].getCatalog().getMap(systemName);
 				if(map!=null){
 					mMapDownloadQueue.cancel(map);
 					fireCatalogMapChanged(map.getSystemName());
@@ -485,8 +331,8 @@ public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadList
 
 	public void requestDownload(String systemName) {
 		synchronized (mMutex) {
-			if(mOnlineCatalog!=null && !mOnlineCatalog.isCorrupted()){
-				CatalogMap map = mOnlineCatalog.getMap(systemName);
+			if(mBuilders[ONLINE].getCatalog()!=null && !mBuilders[ONLINE].getCatalog().isCorrupted()){
+				CatalogMap map = mBuilders[ONLINE].getCatalog().getMap(systemName);
 				if(map!=null){
 					mMapDownloadQueue.request(map);
 					fireCatalogMapChanged(map.getSystemName());
@@ -497,8 +343,8 @@ public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadList
 
 	public void cancelImport(String systemName) {
 		synchronized (mMutex) {
-			if(mImportCatalog!=null && !mImportCatalog.isCorrupted()){
-				CatalogMap map = mImportCatalog.getMap(systemName);
+			if(mBuilders[IMPORT].getCatalog()!=null && !mBuilders[IMPORT].getCatalog().isCorrupted()){
+				CatalogMap map = mBuilders[IMPORT].getCatalog().getMap(systemName);
 				if(map!=null){
 					mMapImportQueue.cancel(map);
 					fireCatalogMapChanged(map.getSystemName());
@@ -509,8 +355,8 @@ public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadList
 
 	public void requestImport(String systemName) {
 		synchronized (mMutex) {
-			if(mImportCatalog!=null && !mImportCatalog.isCorrupted()){
-				CatalogMap map = mImportCatalog.getMap(systemName);
+			if(mBuilders[IMPORT].getCatalog()!=null && !mBuilders[IMPORT].getCatalog().isCorrupted()){
+				CatalogMap map = mBuilders[IMPORT].getCatalog().getMap(systemName);
 				if(map!=null){
 					mMapImportQueue.request(map);
 					fireCatalogMapChanged(map.getSystemName());
@@ -536,11 +382,11 @@ public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadList
 		FileUtil.move(file, local);
 		Model model = ModelBuilder.loadModelDescription(file.getAbsolutePath());
 		synchronized(mMutex){
-			CatalogMap downloaded = CatalogBuilder.extractCatalogMap(mLocalCatalog, file, file.getName().toLowerCase(), model);
-			mLocalCatalog.appendMap(downloaded);
-			mLocalCatalogBuilder.saveCatalog(mLocalStorage, mLocalCatalog);
+			CatalogMap downloaded = Catalog.extractCatalogMap(mBuilders[LOCAL].getCatalog(), file, file.getName().toLowerCase(), model);
+			mBuilders[LOCAL].getCatalog().appendMap(downloaded);
+			mBuilders[LOCAL].save();
 		}
-		fireCatalogChanged(CATALOG_LOCAL, mLocalCatalog);
+		fireCatalogChanged(LOCAL, mBuilders[LOCAL].getCatalog());
 		fireCatalogMapChanged(systemName);
 	}
 
@@ -573,11 +419,11 @@ public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadList
 		FileUtil.move(file, local);
 		Model model = ModelBuilder.loadModelDescription(local.getAbsolutePath());
 		synchronized(mMutex){
-			CatalogMap downloaded = CatalogBuilder.extractCatalogMap(mLocalCatalog, file, file.getName().toLowerCase(), model);
-			mLocalCatalog.appendMap(downloaded);
-			mLocalCatalogBuilder.saveCatalog(mLocalStorage, mLocalCatalog);
+			CatalogMap downloaded = Catalog.extractCatalogMap(mBuilders[LOCAL].getCatalog(), file, file.getName().toLowerCase(), model);
+			mBuilders[LOCAL].getCatalog().appendMap(downloaded);
+			mBuilders[LOCAL].save();
 		}
-		fireCatalogChanged(CATALOG_LOCAL, mLocalCatalog);
+		fireCatalogChanged(LOCAL, mBuilders[LOCAL].getCatalog());
 		fireCatalogMapChanged(systemName);
 	}
 
@@ -591,5 +437,18 @@ public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadList
 		String systemName = map.getSystemName();
 		fireCatalogMapImportProgress(systemName, (int)progress, (int)total);
 	}
+
+
 	
+	public void onCatalogBuilderCatalogChanged(BaseCatalogProvider source, Catalog catalog) {
+		fireCatalogChanged(getCatalogId(source), catalog);
+	}
+
+	public void onCatalogBuilderProgressChanged(BaseCatalogProvider source, int progress, int total, String message) {
+		fireCatalogOperationProgress(getCatalogId(source), progress, total, message);
+	}
+
+	public void onCatalogBuilderOperationFailed(BaseCatalogProvider source, String message) {
+		fireCatalogOperationFailed(getCatalogId(source), message);
+	}	
 }

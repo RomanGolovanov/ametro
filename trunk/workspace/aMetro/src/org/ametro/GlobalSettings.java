@@ -33,6 +33,7 @@ import static org.ametro.Constants.TEMP_CATALOG_PATH;
 import java.io.File;
 import java.util.Locale;
 
+import org.ametro.catalog.storage.CatalogStorage;
 import org.ametro.model.TransportType;
 
 import android.content.Context;
@@ -85,8 +86,8 @@ public class GlobalSettings {
 	}
 
     public static void refreshCatalogStorage() {
-    	ApplicationEx.getInstance().getCatalogStorage().requestLocalCatalog(true);
-    	ApplicationEx.getInstance().getCatalogStorage().requestImportCatalog(true);
+    	ApplicationEx.getInstance().getCatalogStorage().requestCatalog(CatalogStorage.LOCAL, true);
+    	ApplicationEx.getInstance().getCatalogStorage().requestCatalog(CatalogStorage.IMPORT, true);
     }
 	
 	public static int getTransportTypeBlackIconId(int transportTypeId){

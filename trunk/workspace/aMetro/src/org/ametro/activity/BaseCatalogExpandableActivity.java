@@ -296,6 +296,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 			mMessageTextView = (TextView)findViewById(R.id.message);
 			mCounterTextView = (TextView)findViewById(R.id.counter);
 			mProgressBar = (ProgressBar)findViewById(R.id.progress);
+			mProgressBar.setIndeterminate(true);
 			mMode = MODE_WAIT;
 		}
 	}
@@ -313,13 +314,13 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 			mErrorMessage = message;
 			mUIEventDispacher.post(mCatalogError);
 		}
-		if(catalogId == CatalogStorage.CATALOG_LOCAL){
+		if(catalogId == CatalogStorage.LOCAL){
 			onLocalCatalogFailed();
 		}
-		if(catalogId == CatalogStorage.CATALOG_IMPORT){
+		if(catalogId == CatalogStorage.IMPORT){
 			onImportCatalogFailed();
 		}
-		if(catalogId == CatalogStorage.CATALOG_ONLINE){
+		if(catalogId == CatalogStorage.ONLINE){
 			onOnlineCatalogFailed();
 		}		
 	}
@@ -341,13 +342,13 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 					CatalogEvent event = mCatalogLoadedEvents.poll();
 					int catalogId = event.CatalogId;
 					Catalog catalog = event.Catalog;
-					if(catalogId == CatalogStorage.CATALOG_LOCAL){
+					if(catalogId == CatalogStorage.LOCAL){
 						onLocalCatalogLoaded(catalog);
 					}
-					if(catalogId == CatalogStorage.CATALOG_IMPORT){
+					if(catalogId == CatalogStorage.IMPORT){
 						onImportCatalogLoaded(catalog);
 					}
-					if(catalogId == CatalogStorage.CATALOG_ONLINE){
+					if(catalogId == CatalogStorage.ONLINE){
 						onOnlineCatalogLoaded(catalog);
 					}
 					if(mMode == MODE_LIST){
@@ -425,6 +426,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 			if(mMode!=MODE_WAIT){
 				setWaitView();
 			}
+			mProgressBar.setIndeterminate(false);
 			mProgressBar.setMax(mTotal);
 			mProgressBar.setProgress(mProgress);
 			mMessageTextView.setText( mMessage );

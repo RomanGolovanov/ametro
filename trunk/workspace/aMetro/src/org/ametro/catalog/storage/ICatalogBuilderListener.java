@@ -20,10 +20,12 @@
  */
 package org.ametro.catalog.storage;
 
+import org.ametro.catalog.Catalog;
+
 public interface ICatalogBuilderListener {
 
-	void onCatalogBuilderOperationFailed(CatalogBuilder source, String message);
-	
-	void onCatalogBuilderOperationProgress(CatalogBuilder source, int progress, int total, String message);
+	void onCatalogBuilderOperationFailed(BaseCatalogProvider source, String message);
+	void onCatalogBuilderProgressChanged(BaseCatalogProvider source, int progress, int total, String message);
+	void onCatalogBuilderCatalogChanged(BaseCatalogProvider source, Catalog catalog);
 	
 }
