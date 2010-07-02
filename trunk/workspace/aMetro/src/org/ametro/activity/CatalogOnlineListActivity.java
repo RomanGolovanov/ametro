@@ -49,7 +49,7 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity {
 	}
 	
 	protected int getDiffMode() {
-		return CatalogMapPair.DIFF_MODE_LOCAL;
+		return CatalogMapPair.DIFF_MODE_REMOTE;
 	}
 
 	protected int getLocalCatalogId() {
