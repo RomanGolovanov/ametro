@@ -382,7 +382,7 @@ public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadList
 		FileUtil.move(file, local);
 		Model model = ModelBuilder.loadModelDescription(local.getAbsolutePath());
 		synchronized(mMutex){
-			CatalogMap downloaded = Catalog.extractCatalogMap(mBuilders[LOCAL].getCatalog(), file, file.getName().toLowerCase(), model);
+			CatalogMap downloaded = Catalog.extractCatalogMap(mBuilders[LOCAL].getCatalog(), local, local.getName().toLowerCase(), model);
 			mBuilders[LOCAL].getCatalog().appendMap(downloaded);
 			mBuilders[LOCAL].save();
 		}
@@ -419,7 +419,7 @@ public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadList
 		FileUtil.move(file, local);
 		Model model = ModelBuilder.loadModelDescription(local.getAbsolutePath());
 		synchronized(mMutex){
-			CatalogMap downloaded = Catalog.extractCatalogMap(mBuilders[LOCAL].getCatalog(), file, file.getName().toLowerCase(), model);
+			CatalogMap downloaded = Catalog.extractCatalogMap(mBuilders[LOCAL].getCatalog(), local, local.getName().toLowerCase(), model);
 			mBuilders[LOCAL].getCatalog().appendMap(downloaded);
 			mBuilders[LOCAL].save();
 		}
@@ -437,8 +437,6 @@ public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadList
 		String systemName = map.getSystemName();
 		fireCatalogMapImportProgress(systemName, (int)progress, (int)total);
 	}
-
-
 	
 	public void onCatalogBuilderCatalogChanged(BaseCatalogProvider source, Catalog catalog) {
 		fireCatalogChanged(getCatalogId(source), catalog);
