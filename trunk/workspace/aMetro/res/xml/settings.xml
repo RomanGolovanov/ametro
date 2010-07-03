@@ -45,6 +45,12 @@
                             android:key="@string/pref_auto_locate_key"
                             android:summary="@string/pref_auto_locate_description"
                             android:defaultValue="false"/>
+                            
+        <!-- CheckBoxPreference android:title="@string/pref_import"
+                            android:key="@string/pref_import_key"
+                            android:summary="@string/pref_import_description"
+                            android:defaultValue="false"/-->
+                            
         <CheckBoxPreference android:title="@string/pref_auto_import_addons"
                             android:key="@string/pref_auto_import_addons_key"
                             android:summary="@string/pref_auto_import_addons_description"

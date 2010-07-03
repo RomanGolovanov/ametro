@@ -80,9 +80,9 @@ public class ApplicationEx extends Application {
 							Constants.IMPORT_CATALOG_PATH,
 							Constants.ONLINE_CATALOG_STORAGE,
 							Constants.ONLINE_CATALOG_PATH);
-//					instance.requestCatalog(CatalogStorage.CATALOG_LOCAL, false);
-//					instance.requestCatalog(CatalogStorage.CATALOG_IMPORT, false);
-//					instance.requestCatalog(CatalogStorage.CATALOG_ONLINE, false);
+					instance.requestCatalog(CatalogStorage.LOCAL, false);
+					instance.requestCatalog(CatalogStorage.IMPORT, false);
+					instance.requestCatalog(CatalogStorage.ONLINE, false);
 					mStorage = instance;
 				}
 			}

@@ -80,6 +80,10 @@
     <string name="pref_auto_update_period">Update Period</string>
     <string name="pref_auto_update_period_key">AUTO_UPDATE_PERIOD</string>
     <string name="pref_auto_update_period_description">Update period</string>
+
+    <string name="pref_import">Enable PMZ import</string>
+    <string name="pref_import_key">PMZ_IMPORT</string>
+    <string name="pref_import_description">Check to allow import of PMZ map format</string>
     
     <string name="text_about">
 &lt;h4&gt;aMetro v.%s&lt;h4&gt;
@@ -134,6 +138,7 @@ Design: Dusty Rat&lt;br/&gt;
     <string name="context_menu_show_map_details">Details</string>
     <string name="context_menu_download">Download</string>
     <string name="context_menu_import">Import</string>
+    <string name="context_menu_catalog_header">Show</string>
     <string name="menu_"/>
     <string name="msg_loading">Loading...</string>
     <string name="msg_caching">Caching map...</string>

@@ -27,11 +27,6 @@ import org.ametro.catalog.storage.CatalogStorage;
 
 public class CatalogLocalListActivity extends BaseCatalogExpandableActivity {
 
-	protected void onCatalogRefresh() {
-		mStorage.requestCatalog(CatalogStorage.LOCAL, true);
-		super.onCatalogRefresh();
-	}
-
 	protected boolean isCatalogProgressEnabled(int catalogId) {
 		return catalogId == CatalogStorage.LOCAL;
 	}

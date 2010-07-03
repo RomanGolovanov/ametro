@@ -3,7 +3,10 @@ package org.ametro.catalog.storage;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.net.URI;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 import org.ametro.Constants;
 import org.ametro.util.FileUtil;
@@ -15,15 +18,15 @@ import android.util.Log;
 public class WebCatalogProvider extends BaseCatalogProvider implements IOperationListener {
 
 	protected final URI mURI;
-	protected final File mTempFile;
 	protected final long mDeprecatedTimeout;
+	protected final boolean mCompressed;
 	
-	public WebCatalogProvider(ICatalogBuilderListener listener, File storage, URI uri)
+	public WebCatalogProvider(ICatalogBuilderListener listener, File storage, URI uri, boolean compressed)
 	{
 		super(listener, storage);
 		mURI = uri;
-		mTempFile = new File(Constants.TEMP_CATALOG_PATH, "catalog.xml");
 		mDeprecatedTimeout = 15*60*1000;
+		mCompressed = compressed;
 	}
 
 	public boolean isDerpecated(){
@@ -32,29 +35,52 @@ public class WebCatalogProvider extends BaseCatalogProvider implements IOperatio
 	}
 	
 	public void refresh() {
-		WebUtil.downloadFile(null, mURI, mTempFile, this);
+		WebUtil.downloadFile(null, mURI, new File(Constants.TEMP_CATALOG_PATH, "catalog.zip"), this);
 	}
 	
-	public void onBegin(Object context) {
-		FileUtil.delete(mTempFile);
+	public void onBegin(Object context, File file) {
+		FileUtil.delete(file);
 	}
 
-	public void onCanceled(Object context) {
+	public void onCanceled(Object context, File file) {
 	}
 
-	public void onDone(Object context, File file) {
-		try {
-			mCatalog = CatalogDeserializer.deserializeCatalog(new BufferedInputStream(new FileInputStream(mTempFile)));
-		} catch (Exception e) {
-			onFailed(context, e);
+	public void onDone(Object context, File file) throws Exception {
+		File catalogFile;
+		if(mCompressed){
+			ZipInputStream zip = null;
+			String fileName = null;
+			try{
+				zip = new ZipInputStream(new FileInputStream(file));
+				ZipEntry zipEntry = zip.getNextEntry();
+				if(zipEntry != null) { 
+					fileName = zipEntry.getName();
+					final File outputFile = new File(Constants.TEMP_CATALOG_PATH, fileName); 
+					FileUtil.writeToStream(new BufferedInputStream(zip), new FileOutputStream(outputFile), false);
+					zip.closeEntry();
+				}
+				zip.close();
+				zip = null;
+			}finally{
+				if(zip != null){
+					try{ zip.close(); } catch(Exception e){}
+				}
+			}
+			if(fileName==null){
+				throw new Exception("Invalid map catalog archive");
+			}
+			catalogFile = new File(Constants.TEMP_CATALOG_PATH, fileName);
+		}else{
+			catalogFile = file;
 		}
+		mCatalog = CatalogDeserializer.deserializeCatalog(new BufferedInputStream(new FileInputStream(catalogFile)));
 	}
 
-	public void onFailed(Object context, Throwable reason) {
+	public void onFailed(Object context, File file, Throwable reason) {
 		if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)){
 			Log.e(Constants.LOG_TAG_MAIN, "Failed download catalog", reason);
 		}
-		FileUtil.delete(mTempFile);
+		FileUtil.delete(file);
 		if(mCatalog == null){
 			mCatalog = getCorruptedCatalog();
 		}

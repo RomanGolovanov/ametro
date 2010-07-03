@@ -32,11 +32,6 @@ import android.view.MenuItem;
 
 public class CatalogImportListActivity extends BaseCatalogExpandableActivity {
 
-	protected void onCatalogRefresh() {
-		mStorage.requestCatalog(CatalogStorage.IMPORT, true);
-		super.onCatalogRefresh();
-	}
-
 	protected boolean isCatalogProgressEnabled(int catalogId) {
 		return catalogId == CatalogStorage.IMPORT; 
 	}

@@ -44,10 +44,12 @@ public class MapImportQueue extends Thread implements IOperationListener {
 	}
 
 	public boolean isPending(CatalogMap map) {
+		if(map == null) return false;
 		return mQueue.contains(map);
 	}
 
 	public boolean isProcessed(CatalogMap map) {
+		if(map == null) return false;
 		return mMap == map;
 	}
 
@@ -88,7 +90,7 @@ public class MapImportQueue extends Thread implements IOperationListener {
 
 	private void execute(CatalogMap map)
 	{
-		onBegin(map);
+		onBegin(map, null);
 		onUpdate(map, 0, 100);
 		String absoluteFilePath = map.getAbsoluteUrl();
 		Model model = ModelBuilder.loadModel(absoluteFilePath);
@@ -100,11 +102,11 @@ public class MapImportQueue extends Thread implements IOperationListener {
 		onDone(map, file);
 	}
 
-	public void onBegin(Object context) {
+	public void onBegin(Object context, File file) {
 		mListener.onMapImportBegin((CatalogMap)context);
 	}
 
-	public void onCanceled(Object context) {
+	public void onCanceled(Object context, File file) {
 		mMap = null;
 		mListener.onMapImportCanceled((CatalogMap)context);
 	}
@@ -114,7 +116,7 @@ public class MapImportQueue extends Thread implements IOperationListener {
 		mListener.onMapImportDone((CatalogMap)context, file);
 	}
 
-	public void onFailed(Object context, Throwable reason) {
+	public void onFailed(Object context, File file, Throwable reason) {
 		CatalogMap map = (CatalogMap)context;
 		if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)) {
 			String message = "Failed import map " + map.getSystemName() + " from catalog " + map.getOwner().getBaseUrl();

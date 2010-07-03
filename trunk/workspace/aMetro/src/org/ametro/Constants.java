@@ -51,6 +51,7 @@ public class Constants {
     public static final String PREFERENCE_AUTO_UPDATE_INDEX = "AUTO_UPDATE_INDEX";
     public static final String PREFERENCE_AUTO_UPDATE_MAPS = "AUTO_UPDATE_MAPS";
     public static final String PREFERENCE_LOCALE = "LOCALE";
+    public static final String PREFERENCE_PMZ_IMPORT = "PMZ_IMPORT";
 
     public static final String DEFAULT_MAP = "metro";
 
@@ -63,7 +64,7 @@ public class Constants {
     
 	public static final File ROOT_PATH = new File(Environment.getExternalStorageDirectory(), "ametro");
 	
-	public static final String ONLINE_CATALOG_PATH = "http://dl.dropbox.com/u/8171021/0.2.4.r247/catalog.xml";
+	public static final String ONLINE_CATALOG_PATH = "http://dl.dropbox.com/u/8171021/0.2.4.r247/catalog.zip";
 	public static final File LOCAL_CATALOG_PATH = new File(ROOT_PATH, "maps");
 	public static final File IMPORT_CATALOG_PATH = new File(ROOT_PATH, "import");
 	public static final File TEMP_CATALOG_PATH = new File(ROOT_PATH,"temp");
