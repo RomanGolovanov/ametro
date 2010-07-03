@@ -134,11 +134,14 @@ Design: Dusty Rat&lt;br/&gt;
     <string name="menu_layers">Layers</string>
     <string name="menu_schemes">Schemes</string>
     <string name="menu_transports">Transports</string>
-    <string name="context_menu_show_map">Map</string>
+    <string name="context_menu_show_map">Open</string>
     <string name="context_menu_show_map_details">Details</string>
     <string name="context_menu_download">Download</string>
     <string name="context_menu_import">Import</string>
-    <string name="context_menu_catalog_header">Show</string>
+    <string name="context_menu_update">Update</string>
+    <string name="context_menu_delete">Delete</string>
+    <string name="context_menu_delete_pmz">Delete PMZ</string>
+    <string name="context_menu_catalog_header">Map</string>
     <string name="menu_"/>
     <string name="msg_loading">Loading...</string>
     <string name="msg_caching">Caching map...</string>
@@ -175,6 +178,9 @@ Design: Dusty Rat&lt;br/&gt;
     <string name="msg_no_maps_in_local">No installed maps</string>
     <string name="msg_no_maps_in_online">Online catalog is empty</string>
     <string name="msg_no_maps_in_import">No PMZ maps for import</string>
+    <string name="msg_delete_local_map_confirmation">Remove map %s, %s from my maps?</string>
+    <string name="msg_delete_import_map_confirmation">Remove PMZ map %s, %s from import?</string>
+
     <string name="msg_"/>
     <string name="tab_maps_favorited">Favorites</string>
     <string name="tab_maps_local">My maps</string>

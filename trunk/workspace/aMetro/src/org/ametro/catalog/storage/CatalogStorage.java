@@ -296,6 +296,7 @@ public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadList
 					mBuilders[LOCAL].getCatalog().deleteMap(map);
 					mBuilders[LOCAL].save();
 					FileUtil.delete(map.getAbsoluteUrl());
+					fireCatalogMapChanged(systemName);
 					fireCatalogChanged(LOCAL, mBuilders[LOCAL].getCatalog());
 				}
 				
@@ -311,6 +312,7 @@ public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadList
 					mBuilders[IMPORT].getCatalog().deleteMap(map);
 					mBuilders[IMPORT].save();
 					FileUtil.delete(map.getAbsoluteUrl());
+					fireCatalogMapChanged(systemName);
 					fireCatalogChanged(IMPORT, mBuilders[IMPORT].getCatalog());
 				}
 				

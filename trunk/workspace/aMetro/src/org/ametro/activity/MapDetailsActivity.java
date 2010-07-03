@@ -38,6 +38,8 @@ import org.ametro.widget.TextStripView.ImportWidgetView;
 import org.ametro.widget.TextStripView.OnlineWidgetView;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -126,22 +128,63 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {
+		String code, msg;
+		AlertDialog.Builder builder;
+		AlertDialog alertDialog;
 		switch (item.getItemId()) {
+
 		case MENU_DELETE:
-			mStorage.deleteLocalMap(mSystemName);
-			mLocal = null;
-			if(mImport==null && mOnline==null){
-				finishWithoutResult();
-			}
-			bindData();
+			code = GlobalSettings.getLanguage(this);
+			msg = String.format(getString(R.string.msg_delete_local_map_confirmation), mLocal.getCity(code),mLocal.getCountry(code));
+			builder = new AlertDialog.Builder(this);
+			builder.setMessage(msg)
+			       .setCancelable(false)
+			       .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+			           public void onClick(DialogInterface dialog, int id) {
+				   			mStorage.deleteLocalMap(mSystemName);
+							mLocal = null;
+							if(mImport==null && mOnline==null){
+								finishWithoutResult();
+							}else{
+								bindData();
+							}
+			           }
+			       })
+			       .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+			           public void onClick(DialogInterface dialog, int id) {
+			        	   // put your code here 
+			        	   dialog.cancel();
+			           }
+			       });
+			alertDialog = builder.create();
+			alertDialog.show();
 			return true;
+		
 		case MENU_DELETE_PMZ:
-			mStorage.deleteImportMap(mSystemName);
-			mImport = null;
-			if(mLocal==null && mOnline==null){
-				finishWithoutResult();
-			}
-			bindData();
+			code = GlobalSettings.getLanguage(this);
+			msg = String.format(getString(R.string.msg_delete_import_map_confirmation), mLocal.getCity(code),mLocal.getCountry(code));
+			builder = new AlertDialog.Builder(this);
+			builder.setMessage(msg)
+			       .setCancelable(false)
+			       .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+			           public void onClick(DialogInterface dialog, int id) {
+				   			mStorage.deleteImportMap(mSystemName);
+							mImport = null;
+							if(mLocal==null && mOnline==null){
+								finishWithoutResult();
+							}else{
+								bindData();
+							}
+			           }
+			       })
+			       .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+			           public void onClick(DialogInterface dialog, int id) {
+			        	   // put your code here 
+			        	   dialog.cancel();
+			           }
+			       });
+			alertDialog = builder.create();
+			alertDialog.show();
 		}
 		return super.onOptionsItemSelected(item);
 	}
