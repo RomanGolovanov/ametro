@@ -118,11 +118,14 @@
     <string name="menu_schemes">Схемы</string>
     <string name="menu_transports">Виды транспорта</string>
     <string name="menu_select">Выбрать</string>
-    <string name="context_menu_show_map">Карта</string>
-    <string name="context_menu_show_map_details">Подробнее</string>
+    <string name="context_menu_show_map">Открыть</string>
+    <string name="context_menu_show_map_details">Сведения</string>
     <string name="context_menu_download">Загрузить</string>
     <string name="context_menu_import">Импортировать</string>
-    <string name="context_menu_catalog_header">Показать</string>
+    <string name="context_menu_update">Обновить</string>
+    <string name="context_menu_delete">Удалить</string>
+    <string name="context_menu_delete_pmz">Удалить PMZ</string>
+    <string name="context_menu_catalog_header">Карта</string>
     <string name="menu_"/>
     <string name="msg_loading">Загрузка...</string>
     <string name="msg_caching">Кеширование карты...</string>
@@ -159,7 +162,10 @@
     <string name="msg_no_maps_in_local">Нет установленных карт</string>
     <string name="msg_no_maps_in_online">Онлайн каталог пуст</string>
     <string name="msg_no_maps_in_import">Нет PMZ карт для импорта</string>
+    <string name="msg_delete_local_map_confirmation">Удалить карту %s, %s из моих карт?</string>
+    <string name="msg_delete_import_map_confirmation">Удалить PMZ карту %s, %s из импорта?</string>
     <string name="msg_"/>
+    
     <string name="tab_maps_favorited">Избранное</string>
     <string name="tab_maps_local">Мои карты</string>
     <string name="tab_maps_online">Каталог</string>
