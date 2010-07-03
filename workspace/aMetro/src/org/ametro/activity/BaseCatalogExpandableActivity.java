@@ -318,7 +318,16 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 			break;
 		case REQUEST_DETAILS:
 			if(resultCode == RESULT_OK){
-				Toast.makeText(this, "Operation selected: " + data.getIntExtra(MapDetailsActivity.EXTRA_RESULT, -1), Toast.LENGTH_SHORT).show();
+				int operation = data.getIntExtra(MapDetailsActivity.EXTRA_RESULT, -1);
+				if(mLocal!=null && operation == MapDetailsActivity.EXTRA_RESULT_OPEN){
+					String systemName = data.getStringExtra(MapDetailsActivity.EXTRA_SYSTEM_NAME);
+					if(systemName!=null){
+						CatalogMap map = mLocal.getMap(systemName);
+						if(map!=null){
+							invokeFinish(map);
+						}
+					}
+				}
 			}
 			break;
 		}

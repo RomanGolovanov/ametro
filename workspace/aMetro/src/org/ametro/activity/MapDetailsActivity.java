@@ -64,7 +64,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 	public static final String EXTRA_SYSTEM_NAME = "SYSTEM_NAME";
 
 	public static final String EXTRA_RESULT = "EXTRA_RESULT";
-	private static final int EXTRA_RESULT_OPEN = 1;
+	public static final int EXTRA_RESULT_OPEN = 1;
 
 	private static final int MENU_DELETE = 1;
 	private static final int MENU_DELETE_PMZ = 2;
@@ -332,6 +332,8 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 		final String[] states = res.getStringArray(R.array.catalog_map_states);
 		final String[] transportNames = res.getStringArray(R.array.transport_types);
 		
+		mOpenButton.setVisibility(mLocal!=null ? View.VISIBLE : View.GONE);
+		
 		mContent.removeAllViews();
 		if (mOnline != null) {
 			int stateId = mStorage.getOnlineCatalogState(mLocal,mOnline);
@@ -395,6 +397,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 	private void finishWithResult(int mode) {
 		Intent i = new Intent();
 		i.putExtra(EXTRA_RESULT, mode);
+		i.putExtra(EXTRA_SYSTEM_NAME, mSystemName);
 		setResult(RESULT_OK, i);
 		finish();
 	}
