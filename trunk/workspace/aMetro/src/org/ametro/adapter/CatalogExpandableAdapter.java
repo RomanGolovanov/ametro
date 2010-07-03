@@ -199,7 +199,7 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter {
     }
 
     public boolean hasStableIds() {
-        return true;
+        return false;//true;
     }
     
     protected void bindTransportTypes(){
