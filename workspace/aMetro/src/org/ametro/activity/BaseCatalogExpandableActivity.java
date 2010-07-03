@@ -155,7 +155,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 
 			int pos = 0;
 			
-			//menu.setHeaderTitle();
+			menu.setHeaderTitle(R.string.context_menu_catalog_header);
 			if(state == INSTALLED || state == OFFLINE || state == UPDATE){
 				menu.add(0, CONTEXT_MENU_SHOW_MAP, pos++, R.string.context_menu_show_map);
 			}
@@ -271,17 +271,17 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	protected void onResume() {
 		mStorage.addCatalogChangedListener(this);
 
-		Catalog localPrevious = mLocal;
-		Catalog remotePrevious = mRemote;
+		//Catalog localPrevious = mLocal;
+		//Catalog remotePrevious = mRemote;
 		mLocal = mStorage.getCatalog(mLocalId);
 		mRemote = mStorage.getCatalog(mRemoteId);
-		if (mLocal == null || !Catalog.equals(mLocal,localPrevious)) {
+		if (mLocal == null) { // || Catalog.equals(mLocal,localPrevious)) {
 			mStorage.requestCatalog(mLocalId, false);
 		}
-		if (mRemote == null || !Catalog.equals(mRemote,remotePrevious)) {
+		if (mRemote == null) { // || Catalog.equals(mRemote,remotePrevious)) {
 			mStorage.requestCatalog(mRemoteId, false);
 		}
-		onCatalogsUpdated( !Catalog.equals(mLocal,localPrevious) || !Catalog.equals(mRemote,remotePrevious) );
+		onCatalogsUpdated(false);// !Catalog.equals(mLocal,localPrevious) || !Catalog.equals(mRemote,remotePrevious) );
 		super.onResume();
 	}
 
@@ -423,7 +423,15 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 				this);
 	}
 	
-	protected void onCatalogRefresh() { 
+	protected void onCatalogRefresh() {
+		switch(mDiffMode){
+		case CatalogMapPair.DIFF_MODE_LOCAL:
+			mStorage.requestCatalog(mLocalId, true);
+			break;
+		case CatalogMapPair.DIFF_MODE_REMOTE:
+			mStorage.requestCatalog(mRemoteId, true);
+			break;
+		}
 		setWaitNoProgressView();
 	};
 	
@@ -563,6 +571,4 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		}
 
 	};
-
-	
 }

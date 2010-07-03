@@ -22,7 +22,7 @@ public class WebUtil {
 	public static void downloadFile(Object context, URI uri, File file, IOperationListener listener){
 		BufferedInputStream strm = null;
 		if(listener!=null){
-			listener.onBegin(context);
+			listener.onBegin(context, file);
 		}
 		try{
 			HttpClient client = ApplicationEx.getInstance().getHttpClient();
@@ -67,11 +67,11 @@ public class WebUtil {
 			}	
 		}catch(DownloadCanceledException ex){
 			if(listener!=null){
-				listener.onCanceled(context);
+				listener.onCanceled(context, file);
 			}		
 		}catch(Exception ex){
 			if(listener!=null){
-				listener.onFailed(context, ex);
+				listener.onFailed(context, file, ex);
 			}		
 		}finally{
 			if(strm!=null){

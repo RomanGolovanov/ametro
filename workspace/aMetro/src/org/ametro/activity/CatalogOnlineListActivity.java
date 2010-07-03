@@ -27,11 +27,6 @@ import org.ametro.catalog.storage.CatalogStorage;
 
 public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity {
 
-	protected void onCatalogRefresh() {
-		mStorage.requestCatalog(CatalogStorage.ONLINE, true);
-		super.onCatalogRefresh();
-	}
-
 	protected int getEmptyListMessage() {
 		return R.string.msg_no_maps_in_online;
 	}

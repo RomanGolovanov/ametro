@@ -70,7 +70,7 @@ public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadList
 		
 		mBuilders[LOCAL] = new DirectoryCatalogProvider(this, localStorage, localPath);
 		mBuilders[IMPORT] = new DirectoryCatalogProvider(this, importStorage, importPath);
-		mBuilders[ONLINE] = new WebCatalogProvider(this, onlineStorage, URI.create(onlineUrl));
+		mBuilders[ONLINE] = new WebCatalogProvider(this, onlineStorage, URI.create(onlineUrl), true);
 		
 		mCatalogTasks = new CatalogLoadTask[3];
 		
@@ -191,6 +191,13 @@ public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadList
 	}
 
 	public int getOnlineCatalogState(CatalogMap local, CatalogMap remote) {
+		if(mMapDownloadQueue.isProcessed(remote)){
+			return CatalogMapState.DOWNLOADING;
+		}
+		if(mMapDownloadQueue.isPending(remote)){
+			return CatalogMapState.DOWNLOAD_PENDING;
+		}
+		
 		if (remote.isNotSupported()) {
 			if (local == null || local.isNotSupported() || local.isCorruted()) {
 				return CatalogMapState.NOT_SUPPORTED;
@@ -198,13 +205,6 @@ public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadList
 				return CatalogMapState.UPDATE_NOT_SUPPORTED;
 			}
 		} else {
-			if(mMapDownloadQueue.isProcessed(remote)){
-				return CatalogMapState.DOWNLOADING;
-			}
-			if(mMapDownloadQueue.isPending(remote)){
-				return CatalogMapState.DOWNLOAD_PENDING;
-			}
-			
 			if (local == null) {
 				return CatalogMapState.DOWNLOAD;
 			} else if (local.isNotSupported() || local.isCorruted()) {
@@ -220,16 +220,16 @@ public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadList
 	}
 
 	public int getImportCatalogState(CatalogMap local, CatalogMap remote) {
+		if(mMapImportQueue.isProcessed(remote)){
+			return CatalogMapState.IMPORTING;
+		}
+		if(mMapImportQueue.isPending(remote)){
+			return CatalogMapState.IMPORT_PENDING;
+		}
+		
 		if (remote.isCorruted()) {
 			return CatalogMapState.CORRUPTED;
 		} else {
-			if(mMapImportQueue.isProcessed(remote)){
-				return CatalogMapState.IMPORTING;
-			}
-			if(mMapImportQueue.isPending(remote)){
-				return CatalogMapState.IMPORT_PENDING;
-			}
-			
 			if (local == null) {
 				return CatalogMapState.IMPORT;
 			} else if (!local.isSupported() || local.isCorruted()) {
@@ -245,6 +245,13 @@ public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadList
 	}
 
 	public int getLocalCatalogState(CatalogMap local, CatalogMap remote) {
+		if(mMapDownloadQueue.isProcessed(remote)){
+			return CatalogMapState.DOWNLOADING;
+		}
+		if(mMapDownloadQueue.isPending(remote)){
+			return CatalogMapState.DOWNLOAD_PENDING;
+		}
+
 		if (remote == null) {
 			// remote not exist
 			if (local.isCorruted()) {
@@ -265,12 +272,6 @@ public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadList
 			}
 		} else {
 			// remote OK
-			if(mMapDownloadQueue.isProcessed(remote)){
-				return CatalogMapState.DOWNLOADING;
-			}
-			if(mMapDownloadQueue.isPending(remote)){
-				return CatalogMapState.DOWNLOAD_PENDING;
-			}
 			if (local.isCorruted()) {
 				return CatalogMapState.NEED_TO_UPDATE;
 			} else if (!local.isSupported()) {

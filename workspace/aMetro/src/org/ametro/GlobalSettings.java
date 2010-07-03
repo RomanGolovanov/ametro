@@ -30,6 +30,7 @@ import static org.ametro.Constants.PREFERENCE_AUTO_UPDATE_MAPS;
 import static org.ametro.Constants.PREFERENCE_DEBUG;
 import static org.ametro.Constants.PREFERENCE_LOCALE;
 import static org.ametro.Constants.TEMP_CATALOG_PATH;
+import static org.ametro.Constants.PREFERENCE_PMZ_IMPORT;
 
 import java.io.File;
 import java.util.Locale;
@@ -73,6 +74,10 @@ public class GlobalSettings {
     public static String getTemporaryDownloadMapFile(String systemName) {
         return new File(TEMP_CATALOG_PATH, systemName.replace(MAP_FILE_TYPE, DOWNLOAD_FILE_TYPE)).getAbsolutePath().toLowerCase();
     }
+
+	public static boolean isImportEnabled(Context context) {
+		return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(PREFERENCE_PMZ_IMPORT, false);
+	}
 
 	public static boolean isDebugMessagesEnabled(Context context) {
 		return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(PREFERENCE_DEBUG, false);

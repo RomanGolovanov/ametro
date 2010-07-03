@@ -53,8 +53,6 @@ public class CatalogTabHostActivity extends TabActivity {
 
 		tabHost.addTab(tabHost.newTabSpec(TAB_IMPORT).setIndicator(res.getString(R.string.tab_maps_import), res.getDrawable(R.drawable.icon_tab_unbox))
 				.setContent(new Intent(this, CatalogImportListActivity.class)));
-		
-		
 	}
 	
 	protected void onPause() {
