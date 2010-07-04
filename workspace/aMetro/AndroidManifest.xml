@@ -37,6 +37,10 @@
             </intent-filter>
             <meta-data android:name="android.app.searchable" android:resource="@xml/searchable"/>
         </activity>
+        
+        <!-- THIRD PARTY ACTIVITIES -->
+		<activity android:name="com.paypal.android.MEP.PayPalActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        
     </application>
     <uses-sdk android:minSdkVersion="3"/>
     <uses-permission android:name="android.permission.ACCESS_GPS"/>
