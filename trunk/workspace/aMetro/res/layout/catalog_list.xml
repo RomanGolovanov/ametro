@@ -4,16 +4,17 @@
 	<LinearLayout android:layout_width="fill_parent"
 		android:id="@+id/actionbar" android:layout_alignParentTop="true"
 		android:layout_height="50sp" android:background="#ff808080"
-		android:gravity="center_vertical" android:paddingTop="4sp">
+		android:gravity="center_vertical" android:paddingTop="6sp">
 		<ImageButton android:id="@+id/btn_search"
-			android:background="@android:color/transparent" android:src="@drawable/ic_btn_search"
+			android:src="@drawable/ic_btn_search"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:padding="4sp" />
-		<TextView android:id="@+id/text_view" android:layout_weight="1"
+			android:paddingLeft="8sp" android:paddingRight="8sp"
+			/>
+		<TextView android:id="@+id/text_view" android:layout_weight="1" android:textColor="@android:color/white"
 			android:text="Header" android:gravity="center" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" />
 		<EditText android:id="@+id/text_edit" android:layout_weight="1"
-			android:visibility="gone" android:inputType="text"
+			android:visibility="gone" android:inputType="textFilter"
 			android:layout_width="wrap_content" android:layout_height="wrap_content" />
 		<ImageButton android:id="@+id/btn_cancel"
 			android:background="@android:color/transparent" android:src="@android:drawable/ic_delete"
@@ -21,9 +22,10 @@
 			android:layout_marginLeft="-38sp" android:layout_marginRight="10sp"
 			android:visibility="gone" />
 		<ImageButton android:id="@+id/btn_mode"
-			android:src="@android:drawable/btn_star_big_on" android:background="@android:color/transparent"
+			android:src="@android:drawable/btn_star_big_on" 
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:padding="4sp" />
+			android:paddingLeft="8sp" android:paddingRight="8sp"
+			/>
 	</LinearLayout>
 	<ExpandableListView android:id="@+id/list"
 		android:layout_below="@id/actionbar" android:layout_alignParentBottom="true"

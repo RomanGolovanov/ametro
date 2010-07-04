@@ -285,8 +285,8 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
         @SuppressWarnings("unchecked")
         protected void publishResults(CharSequence constraint, FilterResults results) {
             mObjects = (ArrayList<CatalogMapPair>) results.values;
+        	bindData();
             if (results.count > 0) {
-            	bindData();
                 notifyDataSetChanged();
             } else {
                 notifyDataSetInvalidated();
@@ -304,21 +304,37 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
 
 		for (int i = 0; i < count; i++) {
 		    final CatalogMapPair value = values.get(i);
-		    final String valueText = value.getCity(code).toString().toLowerCase();
+		    final String cityName = value.getCity(code).toString().toLowerCase();
+		    final String countryName = value.getCountry(code).toString().toLowerCase();
 
 		    // First match against the whole, non-splitted value
-		    if (valueText.startsWith(prefixString)) {
+		    if (cityName.startsWith(prefixString) || countryName.startsWith(prefixString)) {
 		        newValues.add(value);
 		    } else {
-		        final String[] words = valueText.split(" ");
-		        final int wordCount = words.length;
+		    	boolean added = false;
+		        final String[] cityWords = cityName.split(" ");
+		        final int cityWordCount = cityWords.length;
 
-		        for (int k = 0; k < wordCount; k++) {
-		            if (words[k].startsWith(prefixString)) {
+		        for (int k = 0; k < cityWordCount; k++) {
+		            if (cityWords[k].startsWith(prefixString)) {
 		                newValues.add(value);
+		                added = true;
 		                break;
 		            }
 		        }
+		        
+		        if(!added){
+			        final String[] countryWords = countryName.split(" ");
+			        final int countryWordCount = countryWords.length;
+
+			        for (int k = 0; k < countryWordCount; k++) {
+			            if (countryWords[k].startsWith(prefixString)) {
+			                newValues.add(value);
+			                break;
+			            }
+			        }
+		        }
+		        
 		    }
 		}
 		return newValues;
