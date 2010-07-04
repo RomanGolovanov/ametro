@@ -95,6 +95,7 @@ public class ApplicationEx extends Application {
 			Log.i(Constants.LOG_TAG_MAIN, "aMetro application started");
 		}
 		mInstance = this;
+		getCatalogStorage();
 		FileUtil.touchDirectory(Constants.ROOT_PATH);
 		FileUtil.touchDirectory(Constants.LOCAL_CATALOG_PATH);
 		FileUtil.touchDirectory(Constants.IMPORT_CATALOG_PATH);
