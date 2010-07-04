@@ -57,6 +57,8 @@ import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -389,7 +391,11 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		mActionBarCancelButton.setOnClickListener(this);
 		mActionBarSearchButton.setOnClickListener(this);
 		mActionBarTextView.setText(getTitle());
+		
+		mActionBarEditText.addTextChangedListener(mActionTextWatcher);
+		
 		mMode = MODE_LIST;
+		
 	}
 	
 	protected void setWaitView() {
@@ -421,7 +427,6 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 						setListView();
 					}else{
 						mAdapter.updateData(mStorage.getCatalog(mLocalId), mStorage.getCatalog(mRemoteId));
-						mAdapter.notifyDataSetChanged();
 					}
 				}
 			} else {
@@ -591,7 +596,6 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		
 	}
 
-
 	private Runnable mHandleCatalogLoadedEvents = new Runnable() {
 		public void run() {
 			synchronized (mCatalogLoadedEvents) {
@@ -641,4 +645,16 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		}
 
 	};
+
+	private TextWatcher mActionTextWatcher = new TextWatcher() {
+		public void onTextChanged(CharSequence s, int start, int before, int count) {
+			mAdapter.getFilter().filter(s);
+		}
+		public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+		}
+		
+		public void afterTextChanged(Editable s) {
+		}
+	};
+	
 }

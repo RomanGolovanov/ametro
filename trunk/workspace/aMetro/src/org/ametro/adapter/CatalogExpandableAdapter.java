@@ -22,7 +22,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
@@ -43,20 +42,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class CatalogExpandableAdapter extends BaseExpandableListAdapter {
+public class CatalogExpandableAdapter extends BaseExpandableListAdapter implements Filterable {
 
-	protected Catalog mLocal;
-	protected Catalog mRemote;
-	protected int mMode;
-	
-	protected String mLanguageCode;
 	protected Context mContext;
     protected LayoutInflater mInflater;
-	protected List<CatalogMapPair> mData;
+    
+	protected ArrayList<CatalogMapPair> mObjects;
+	
+	protected ArrayList<CatalogMapPair> mOriginalValues;
+	
+	protected int mMode;
+	protected String mLanguageCode;
 	
 	protected String[] mCountries;
     protected CatalogMapPair[][] mRefs;
@@ -67,6 +69,10 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter {
     protected ICatalogStateProvider mStatusProvider;
     
     protected HashMap<Integer,Drawable> mTransportTypes;
+    
+	private CatalogFilter mFilter;
+	private Object mLock = new Object();
+	private String mSearchPrefix;
 
     public CatalogMapPair getData(int groupId, int childId) {
         return mRefs[groupId][childId];
@@ -83,11 +89,15 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter {
     
 	public void updateData(Catalog local, Catalog remote)
 	{
-		mLocal = local;
-		mRemote = remote;
-		mData = CatalogMapPair.diff(local, remote, mMode);
-		mLanguageCode = GlobalSettings.getLanguage(mContext); 
-		bindData(mLanguageCode);
+        synchronized (mLock) {
+        	mOriginalValues = CatalogMapPair.diff(local, remote, mMode);
+            if (mSearchPrefix == null || mSearchPrefix.length() == 0) {
+            	mObjects = new ArrayList<CatalogMapPair>(mOriginalValues);
+            } else {
+                mObjects = getFilteredData(mSearchPrefix);
+            }
+        }
+		bindData();
 		notifyDataSetChanged();
 	}
     
@@ -97,17 +107,13 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter {
 		mStates = context.getResources().getStringArray(R.array.catalog_map_states);
 		mStateColors = context.getResources().getIntArray(colorsArray);
 		mStatusProvider = statusProvider;
-		
-		mLocal = local;
-		mRemote = remote;
 		mMode = mode;
-		mData = CatalogMapPair.diff(local, remote, mode);
 		
-		mLanguageCode = GlobalSettings.getLanguage(mContext); 
+    	mObjects = CatalogMapPair.diff(local, remote, mode);
+		
+        bindData();
+
 		bindTransportTypes();
-		
-        bindData(mLanguageCode);
-		
     }
 
     public Object getChild(int groupPosition, int childPosition) {
@@ -214,12 +220,14 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter {
 		mTransportTypes.put( TransportType.TROLLEYBUS_ID , res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.TROLLEYBUS_ID))  );
     }
     
-    protected void bindData(String code) {
+    protected void bindData() {
+    	final String code= GlobalSettings.getLanguage(mContext); 
+    	mLanguageCode = code;
         TreeSet<String> countries = new TreeSet<String>();
         TreeMap<String, ArrayList<CatalogMapPair>> index = new TreeMap<String, ArrayList<CatalogMapPair>>();
         CatalogMapDifferenceCityNameComparator comparator = new CatalogMapDifferenceCityNameComparator(code);
 
-        for(CatalogMapPair diff : mData){
+        for(CatalogMapPair diff : mObjects){
         	final String country = diff.getCountry(code);
         	countries.add(country);
         	ArrayList<CatalogMapPair> cities = index.get(country);
@@ -241,4 +249,78 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter {
 			}
         }
 	}
+
+    public Filter getFilter() {
+        if (mFilter == null) {
+            mFilter = new CatalogFilter();
+        }
+        return mFilter;
+	}
+	
+    private class CatalogFilter extends Filter {
+
+    	protected FilterResults performFiltering(CharSequence prefix) {
+            FilterResults results = new FilterResults();
+        	mSearchPrefix = prefix.toString();
+            if (mOriginalValues == null) {
+                synchronized (mLock) {
+                    mOriginalValues = new ArrayList<CatalogMapPair>(mObjects);
+                }
+            }
+            if (prefix == null || prefix.length() == 0) {
+                synchronized (mLock) {
+                    ArrayList<CatalogMapPair> list = new ArrayList<CatalogMapPair>(mOriginalValues);
+                    results.values = list;
+                    results.count = list.size();
+                }
+            } else {
+                final ArrayList<CatalogMapPair> newValues = getFilteredData(prefix);
+                results.values = newValues;
+                results.count = newValues.size();
+            }
+
+            return results;
+        }
+
+        @SuppressWarnings("unchecked")
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            mObjects = (ArrayList<CatalogMapPair>) results.values;
+            if (results.count > 0) {
+            	bindData();
+                notifyDataSetChanged();
+            } else {
+                notifyDataSetInvalidated();
+            }
+        }
+    }
+	
+	/*package*/ ArrayList<CatalogMapPair> getFilteredData(CharSequence prefix) {
+		String prefixString = prefix.toString().toLowerCase();
+
+		final ArrayList<CatalogMapPair> values = mOriginalValues;
+		final int count = values.size();
+		final String code = mLanguageCode;
+		final ArrayList<CatalogMapPair> newValues = new ArrayList<CatalogMapPair>(count);
+
+		for (int i = 0; i < count; i++) {
+		    final CatalogMapPair value = values.get(i);
+		    final String valueText = value.getCity(code).toString().toLowerCase();
+
+		    // First match against the whole, non-splitted value
+		    if (valueText.startsWith(prefixString)) {
+		        newValues.add(value);
+		    } else {
+		        final String[] words = valueText.split(" ");
+		        final int wordCount = words.length;
+
+		        for (int k = 0; k < wordCount; k++) {
+		            if (words[k].startsWith(prefixString)) {
+		                newValues.add(value);
+		                break;
+		            }
+		        }
+		    }
+		}
+		return newValues;
+	}    
 }
