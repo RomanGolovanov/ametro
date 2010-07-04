@@ -37,6 +37,7 @@ import static org.ametro.catalog.CatalogMapState.UPDATE_NOT_SUPPORTED;
 import java.util.LinkedList;
 
 import org.ametro.ApplicationEx;
+import org.ametro.Constants;
 import org.ametro.GlobalSettings;
 import org.ametro.MapUri;
 import org.ametro.R;
@@ -52,6 +53,7 @@ import org.ametro.dialog.LocationSearchDialog;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
@@ -59,12 +61,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.ContextMenu;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
@@ -73,7 +79,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ExpandableListView.OnChildClickListener;
 
-public abstract class BaseCatalogExpandableActivity extends Activity implements ICatalogStorageListener, ICatalogStateProvider, OnChildClickListener, OnClickListener {
+public abstract class BaseCatalogExpandableActivity extends Activity implements ICatalogStorageListener, ICatalogStateProvider, OnChildClickListener, OnClickListener, OnFocusChangeListener {
 
 	protected static final int MODE_WAIT_NO_PROGRESS = 1;
 	protected static final int MODE_WAIT = 2;
@@ -131,7 +137,10 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	protected int mDiffMode;
 	protected int mDiffColors;
 	
-	/*package*/ LinkedList<CatalogEvent> mCatalogLoadedEvents = new LinkedList<CatalogEvent>(); 
+	/*package*/ LinkedList<CatalogEvent> mCatalogLoadedEvents = new LinkedList<CatalogEvent>();
+	
+	/*package*/ InputMethodManager mInputMethodManager;
+
 	
 	protected abstract int getEmptyListMessage();
 	protected abstract boolean isCatalogProgressEnabled(int catalogId);
@@ -139,6 +148,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	protected abstract int getRemoteCatalogId(); 
 	protected abstract int getDiffMode(); 
 	protected abstract int getDiffColors();
+	
 	
 	
 	public boolean onSearchRequested() {
@@ -225,48 +235,6 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		return super.onContextItemSelected(item);
 	}
 	
-	private void showDeleteLocalMapDialog(final CatalogMap map) {
-		String code = GlobalSettings.getLanguage(this);
-		String msg = String.format(getString(R.string.msg_delete_local_map_confirmation), map.getCity(code),map.getCountry(code));
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage(msg)
-		       .setCancelable(false)
-		       .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-		           public void onClick(DialogInterface dialog, int id) {
-			   			mStorage.deleteLocalMap(map.getSystemName());
-		           }
-		       })
-		       .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-		           public void onClick(DialogInterface dialog, int id) {
-		        	   // put your code here 
-		        	   dialog.cancel();
-		           }
-		       });
-		AlertDialog alertDialog = builder.create();
-		alertDialog.show();
-	}
-
-	private void showDeleteImportMapDialog(final CatalogMap map) {
-		String code = GlobalSettings.getLanguage(this);
-		String msg = String.format(getString(R.string.msg_delete_import_map_confirmation), map.getCity(code),map.getCountry(code));
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage(msg)
-		       .setCancelable(false)
-		       .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-		           public void onClick(DialogInterface dialog, int id) {
-			   			mStorage.deleteLocalMap(map.getSystemName());
-		           }
-		       })
-		       .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-		           public void onClick(DialogInterface dialog, int id) {
-		        	   // put your code here 
-		        	   dialog.cancel();
-		           }
-		       });
-		AlertDialog alertDialog = builder.create();
-		alertDialog.show();
-	}
-	
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		menu.add(0, MAIN_MENU_REFRESH, Menu.NONE, R.string.menu_refresh).setIcon(android.R.drawable.ic_menu_rotate);
@@ -336,9 +304,19 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(keyCode == KeyEvent.KEYCODE_BACK){
+			if(mActionBar!=null && mActionBarEditText.getVisibility() == View.VISIBLE){
+				setActionBarVisibility(false);
+				return true;
+			}
+		}
+		return super.onKeyDown(keyCode, event);
+	}
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		mInputMethodManager =  (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 		mLocalId = getLocalCatalogId();
 		mRemoteId = getRemoteCatalogId();
 		mDiffMode = getDiffMode();
@@ -368,6 +346,9 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	}
 		
 	protected void setEmptyView() {
+		if(mMode==MODE_LIST){
+			mInputMethodManager.hideSoftInputFromWindow(mActionBarEditText.getWindowToken(), 0);
+		}
 		if(mMode!=MODE_EMPTY){
 			setContentView(R.layout.catalog_empty);
 			((TextView)findViewById(R.id.text)).setText(getEmptyListMessage());
@@ -390,15 +371,20 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		mActionBarSearchButton = (ImageButton)findViewById(R.id.btn_search);
 		mActionBarCancelButton.setOnClickListener(this);
 		mActionBarSearchButton.setOnClickListener(this);
+		mActionBarTextView.setOnClickListener(this);
 		mActionBarTextView.setText(getTitle());
 		
 		mActionBarEditText.addTextChangedListener(mActionTextWatcher);
+		mActionBarEditText.setOnFocusChangeListener(this);
 		
 		mMode = MODE_LIST;
 		
 	}
 	
 	protected void setWaitView() {
+		if(mMode==MODE_LIST){
+			mInputMethodManager.hideSoftInputFromWindow(mActionBarEditText.getWindowToken(), 0);
+		}
 		if(mMode!=MODE_WAIT){
 			setContentView(R.layout.operatoins_wait);
 			mMessageTextView = (TextView)findViewById(R.id.message);
@@ -410,9 +396,24 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	}
 	
 	protected void setWaitNoProgressView() {
+		if(mMode==MODE_LIST){
+			mInputMethodManager.hideSoftInputFromWindow(mActionBarEditText.getWindowToken(), 0);
+		}
 		if(mMode!=MODE_WAIT_NO_PROGRESS){
 			setContentView(R.layout.operation_wait_no_progress);
 			mMode = MODE_WAIT_NO_PROGRESS;
+		}
+	}
+	
+	public void onFocusChange(View v, boolean hasFocus) {
+		if(v == mActionBarEditText){
+			if(hasFocus){
+				mInputMethodManager.showSoftInput(v, 0);
+				Log.i(Constants.LOG_TAG_MAIN, "show IME");
+			}else{
+				mInputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
+				Log.i(Constants.LOG_TAG_MAIN, "hide IME");
+			}
 		}
 	}
 	
@@ -583,17 +584,22 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 
 	public void onClick(View v) {
 		if(v == mActionBarCancelButton){
-			mActionBarCancelButton.setVisibility(View.GONE);
-			mActionBarEditText.setVisibility(View.GONE);
-			mActionBarTextView.setVisibility(View.VISIBLE);
-			mActionBarEditText.setText("");
-		}else if (v == mActionBarSearchButton){
-			mActionBarTextView.setVisibility(View.GONE);
-			mActionBarCancelButton.setVisibility(View.VISIBLE);
-			mActionBarEditText.setVisibility(View.VISIBLE);
-			mActionBarEditText.requestFocus();
+			setActionBarVisibility(false);
+		}else if (v == mActionBarSearchButton ){ // || (mActionBarTextView.getVisibility() == View.VISIBLE && (v == mActionBarTextView || v == mActionBar)) ){
+			setActionBarVisibility(true);
 		}
 		
+	}
+	private void setActionBarVisibility(boolean isVisible) {
+		mActionBarCancelButton.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+		mActionBarEditText.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+		mActionBarTextView.setVisibility(isVisible ? View.GONE : View.VISIBLE);
+		if(isVisible){
+			mActionBarEditText.requestFocus();
+		}else{
+			mActionBarEditText.setText("");
+			mList.requestFocus();
+		}
 	}
 
 	private Runnable mHandleCatalogLoadedEvents = new Runnable() {
@@ -656,5 +662,46 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		public void afterTextChanged(Editable s) {
 		}
 	};
-	
+
+	private void showDeleteLocalMapDialog(final CatalogMap map) {
+		String code = GlobalSettings.getLanguage(this);
+		String msg = String.format(getString(R.string.msg_delete_local_map_confirmation), map.getCity(code),map.getCountry(code));
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(msg)
+		       .setCancelable(false)
+		       .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+			   			mStorage.deleteLocalMap(map.getSystemName());
+		           }
+		       })
+		       .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+		        	   // put your code here 
+		        	   dialog.cancel();
+		           }
+		       });
+		AlertDialog alertDialog = builder.create();
+		alertDialog.show();
+	}
+
+	private void showDeleteImportMapDialog(final CatalogMap map) {
+		String code = GlobalSettings.getLanguage(this);
+		String msg = String.format(getString(R.string.msg_delete_import_map_confirmation), map.getCity(code),map.getCountry(code));
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(msg)
+		       .setCancelable(false)
+		       .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+			   			mStorage.deleteLocalMap(map.getSystemName());
+		           }
+		       })
+		       .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+		        	   // put your code here 
+		        	   dialog.cancel();
+		           }
+		       });
+		AlertDialog alertDialog = builder.create();
+		alertDialog.show();
+	}	
 }
