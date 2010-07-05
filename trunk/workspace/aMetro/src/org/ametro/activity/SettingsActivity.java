@@ -21,6 +21,8 @@
 
 package org.ametro.activity;
 
+import java.util.Locale;
+
 import org.ametro.Constants;
 import org.ametro.R;
 
@@ -65,39 +67,54 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	}
 
 	public boolean onPreferenceClick(Preference preference) {
+		final Resources res = getResources();
 		if (preference == mDonatePayPal) {
 		} 
 		if (preference == mDonateYandex) {
-
-			final Resources res = getResources();
 			String[] codes = res.getStringArray(R.array.yandex_currency_codes);
 			String[] names = res.getStringArray(R.array.yandex_currency_names);
+			String url = "https://money.yandex.ru/charity.xml?to=41001667593841&CompanyName=aMetroProject&CompanyLink=http://sites.google.com/site/ametrohome&CompanySum=%%AMOUNT%%";
 			
-			Intent i = new Intent(this, PaymentDetailsDialog.class);
-			i.putExtra(PaymentDetailsDialog.EXTRA_CURRENCY_CODES, codes );
-			i.putExtra(PaymentDetailsDialog.EXTRA_CURRENCY_NAMES, names );
-			i.putExtra(PaymentDetailsDialog.EXTRA_AMOUNT, 50.0f);
-			i.putExtra(PaymentDetailsDialog.EXTRA_CONTEXT, "https://money.yandex.ru/charity.xml?to=41001667593841&CompanyName=aMetroProject&CompanyLink=http://sites.google.com/site/ametrohome&CompanySum=%%AMOUNT%%");
-			startActivityForResult(i, REQUEST_DONATE_DETAILS);
+			invokePaymentDialog(url, codes, names, 0.0f);
 		}
 		if (preference == mDonateWebMoney) {
 			
+			String language = Locale.getDefault().getLanguage();
+			StringBuilder url = new StringBuilder();
+			if(language.equalsIgnoreCase("ru")){
+				url.append("https://light.webmoney.ru/pci.aspx");
+			}else{
+				url.append("https://light.wmtransfer.com/pci.aspx");
+			}
+			url.append("?url="); url.append("http%3A//ametro-en.no-ip.org/thanks.htm");
+			url.append("&purse="); url.append("%%CURRENCY%%");
+			url.append("&amount="); url.append("%%AMOUNT%%");
+			url.append("&method="); url.append("GET");
+			url.append("&desc="); url.append("aMetro%20Project%20Support");
+			url.append("&mode="); url.append("test");
+			
+			String[] codes = res.getStringArray(R.array.webmoney_currency_codes);
+			String[] names = res.getStringArray(R.array.webmoney_currency_names);
+			
+			invokePaymentDialog(url.toString(), codes, names, 0.0f);
 		}
 		if (preference == mDonateMoneyBookers) {
-			
-			final Resources res = getResources();
 			String[] codes = res.getStringArray(R.array.moneybookers_currency_codes);
 			String[] names = res.getStringArray(R.array.moneybookers_currency_names);
-			
-			Intent i = new Intent(this, PaymentDetailsDialog.class);
-			i.putExtra(PaymentDetailsDialog.EXTRA_ALLOW_DECIMAL_AMOUNT, true);
-			i.putExtra(PaymentDetailsDialog.EXTRA_CURRENCY_CODES, codes );
-			i.putExtra(PaymentDetailsDialog.EXTRA_CURRENCY_NAMES, names );
-			i.putExtra(PaymentDetailsDialog.EXTRA_AMOUNT, 5.0f);
-			i.putExtra(PaymentDetailsDialog.EXTRA_CONTEXT, "https://www.moneybookers.com/app/payment.pl?pay_to_email=roman.golovanov@gmail.com&return_url=http://ametro-en.no-ip.org/thanks.htm&language=EN&detail1_description=aMetro%20Project%20Support&detail1_text=aMetro%20Project%20Support&amount=%%AMOUNT%%&currency=%%CURRENCY%%");
-			startActivityForResult(i, REQUEST_DONATE_DETAILS);
+			String url = "https://www.moneybookers.com/app/payment.pl?pay_to_email=roman.golovanov@gmail.com&return_url=http://ametro-en.no-ip.org/thanks.htm&language=EN&detail1_description=aMetro%20Project%20Support&detail1_text=aMetro%20Project%20Support&amount=%%AMOUNT%%&currency=%%CURRENCY%%"; 
+			invokePaymentDialog(url, codes, names, 0.0f);
 		}
 		return false;
+	}
+
+	private void invokePaymentDialog(String url, String[] codes, String[] names, float amount) {
+		Intent i = new Intent(this, PaymentDetailsDialog.class);
+		i.putExtra(PaymentDetailsDialog.EXTRA_ALLOW_DECIMAL_AMOUNT, true);
+		i.putExtra(PaymentDetailsDialog.EXTRA_CURRENCY_CODES, codes );
+		i.putExtra(PaymentDetailsDialog.EXTRA_CURRENCY_NAMES, names );
+		i.putExtra(PaymentDetailsDialog.EXTRA_AMOUNT, amount);
+		i.putExtra(PaymentDetailsDialog.EXTRA_CONTEXT, url);
+		startActivityForResult(i, REQUEST_DONATE_DETAILS);
 	}
 	
 	private static String applyTemplate(String template, String currency, float amount){
