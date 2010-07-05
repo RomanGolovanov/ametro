@@ -78,19 +78,21 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			invokePaymentDialog(url, codes, names, 0.0f);
 		}
 		if (preference == mDonateWebMoney) {
-			
 			String language = Locale.getDefault().getLanguage();
+			
 			StringBuilder url = new StringBuilder();
 			if(language.equalsIgnoreCase("ru")){
 				url.append("https://light.webmoney.ru/pci.aspx");
+				url.append("?url="); url.append("http%3A//ametro.no-ip.org/thanks");
+				url.append("&desc="); url.append("%D0%9F%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%83%20aMetro%20");
 			}else{
 				url.append("https://light.wmtransfer.com/pci.aspx");
+				url.append("?url="); url.append("http%3A//ametro-en.no-ip.org/thanks");
+				url.append("&desc="); url.append("aMetro%20Project%20Support");
 			}
-			url.append("?url="); url.append("http%3A//ametro-en.no-ip.org/thanks.htm");
 			url.append("&purse="); url.append("%%CURRENCY%%");
 			url.append("&amount="); url.append("%%AMOUNT%%");
 			url.append("&method="); url.append("GET");
-			url.append("&desc="); url.append("aMetro%20Project%20Support");
 			url.append("&mode="); url.append("test");
 			
 			String[] codes = res.getStringArray(R.array.webmoney_currency_codes);
@@ -99,10 +101,29 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			invokePaymentDialog(url.toString(), codes, names, 0.0f);
 		}
 		if (preference == mDonateMoneyBookers) {
+			
+			String language = Locale.getDefault().getLanguage();
+			
+			StringBuilder url = new StringBuilder();
+			url.append("https://www.moneybookers.com/app/payment.pl");
+			url.append("?pay_to_email="); url.append("roman.golovanov@gmail.com");
+			if(language.equalsIgnoreCase("ru")){
+				url.append("&return_url="); url.append("http%3A//ametro.no-ip.org/thanks");
+				url.append("&language="); url.append("RU");
+				url.append("&detail1_description="); url.append("%D0%9F%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%83%20aMetro%20");
+				url.append("&detail1_text="); url.append("%D0%9F%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%83%20aMetro%20");
+			}else{
+				url.append("&return_url="); url.append("http%3A//ametro-en.no-ip.org/thanks");
+				url.append("&language="); url.append("EN");
+				url.append("&detail1_description="); url.append("aMetro%20Project%20Support");
+				url.append("&detail1_text="); url.append("aMetro%20Project%20Support");
+			}
+			url.append("&amount="); url.append("%%AMOUNT%%");
+			url.append("&currency="); url.append("%%CURRENCY%%");
+			
 			String[] codes = res.getStringArray(R.array.moneybookers_currency_codes);
 			String[] names = res.getStringArray(R.array.moneybookers_currency_names);
-			String url = "https://www.moneybookers.com/app/payment.pl?pay_to_email=roman.golovanov@gmail.com&return_url=http://ametro-en.no-ip.org/thanks.htm&language=EN&detail1_description=aMetro%20Project%20Support&detail1_text=aMetro%20Project%20Support&amount=%%AMOUNT%%&currency=%%CURRENCY%%"; 
-			invokePaymentDialog(url, codes, names, 0.0f);
+			invokePaymentDialog(url.toString(), codes, names, 0.0f);
 		}
 		return false;
 	}

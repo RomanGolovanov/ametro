@@ -107,11 +107,16 @@ public class PaymentDetailsDialog extends Activity implements OnClickListener, T
 		if(mAllowDecimalAmount){
 			inputType |= InputType.TYPE_NUMBER_FLAG_DECIMAL;
 		}
+		mAmountEditText.setSelectAllOnFocus(true);
 		mAmountEditText.setInputType(inputType);
+		if(mAmount>0){
 		if(mAllowDecimalAmount){
 			mAmountEditText.setText(Float.toString(mAmount));
 		}else{
 			mAmountEditText.setText(Integer.toString((int)mAmount));
+		}
+		}else{
+			mAmountEditText.setText("");
 		}
 	}
 
