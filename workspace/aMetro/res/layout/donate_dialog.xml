@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:gravity="center"
-	android:padding="10sp" android:layout_width="fill_parent"
+	android:paddingLeft="5sp" android:paddingRight="5sp" android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
 	<TextView android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:text="@string/msg_donate_currency" />
