@@ -21,50 +21,43 @@
 
 package org.ametro.activity;
 
+import org.ametro.Constants;
 import org.ametro.R;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.Preference.OnPreferenceClickListener;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.Toast;
+import android.util.Log;
 
-import com.paypal.android.MEP.PayPal;
-import com.paypal.android.MEP.PayPalActivity;
-import com.paypal.android.MEP.PayPalPayment;
-
-public class SettingsActivity extends PreferenceActivity implements
-		OnPreferenceClickListener {
-
-	final Handler mHandler = new Handler();
-	private boolean mPaymentLaunched = false;
-	private PayPal mPayPalObject;
-
-	private Preference mDonatePayPalMPL;
+public class SettingsActivity extends PreferenceActivity implements OnPreferenceClickListener {
+	
+	private static final int REQUEST_DONATE_DETAILS = 1;
+	
 	private Preference mDonatePayPal;
 	private Preference mDonateYandex;
+	private Preference mDonateWebMoney;
+	private Preference mDonateMoneyBookers;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.settings);
 
-		mDonatePayPalMPL = findPreference(getString(R.string.pref_donate_paypal_mpl_key));
 		mDonatePayPal = findPreference(getString(R.string.pref_donate_paypal_key));
 		mDonateYandex = findPreference(getString(R.string.pref_donate_yandex_key));
+		mDonateWebMoney = findPreference(getString(R.string.pref_donate_wm_key));
+		mDonateMoneyBookers = findPreference(getString(R.string.pref_donate_mb_key));
 
-		mDonatePayPalMPL.setOnPreferenceClickListener(this);
 		mDonatePayPal.setOnPreferenceClickListener(this);
 		mDonateYandex.setOnPreferenceClickListener(this);
-
-		initPayPal();
+		mDonateWebMoney.setOnPreferenceClickListener(this);
+		mDonateMoneyBookers.setOnPreferenceClickListener(this);
+		
+		mDonatePayPal.setEnabled(false);
+		
 	}
 
 	protected void onStop() {
@@ -72,124 +65,65 @@ public class SettingsActivity extends PreferenceActivity implements
 	}
 
 	public boolean onPreferenceClick(Preference preference) {
-		if (preference == mDonatePayPalMPL) {
-			invokePayPal();
-		} else if (preference == mDonatePayPal) {
-			invokeWebBrowser(getString(R.string.url_paypal));
-		} else if (preference == mDonateYandex) {
-			invokeWebBrowser(getString(R.string.url_yandex));
+		if (preference == mDonatePayPal) {
+		} 
+		if (preference == mDonateYandex) {
+
+			final Resources res = getResources();
+			String[] codes = res.getStringArray(R.array.yandex_currency_codes);
+			String[] names = res.getStringArray(R.array.yandex_currency_names);
+			
+			Intent i = new Intent(this, PaymentDetailsDialog.class);
+			i.putExtra(PaymentDetailsDialog.EXTRA_CURRENCY_CODES, codes );
+			i.putExtra(PaymentDetailsDialog.EXTRA_CURRENCY_NAMES, names );
+			i.putExtra(PaymentDetailsDialog.EXTRA_AMOUNT, 50.0f);
+			i.putExtra(PaymentDetailsDialog.EXTRA_CONTEXT, "https://money.yandex.ru/charity.xml?to=41001667593841&CompanyName=aMetroProject&CompanyLink=http://sites.google.com/site/ametrohome&CompanySum=%%AMOUNT%%");
+			startActivityForResult(i, REQUEST_DONATE_DETAILS);
+		}
+		if (preference == mDonateWebMoney) {
+			
+		}
+		if (preference == mDonateMoneyBookers) {
+			
+			final Resources res = getResources();
+			String[] codes = res.getStringArray(R.array.moneybookers_currency_codes);
+			String[] names = res.getStringArray(R.array.moneybookers_currency_names);
+			
+			Intent i = new Intent(this, PaymentDetailsDialog.class);
+			i.putExtra(PaymentDetailsDialog.EXTRA_ALLOW_DECIMAL_AMOUNT, true);
+			i.putExtra(PaymentDetailsDialog.EXTRA_CURRENCY_CODES, codes );
+			i.putExtra(PaymentDetailsDialog.EXTRA_CURRENCY_NAMES, names );
+			i.putExtra(PaymentDetailsDialog.EXTRA_AMOUNT, 5.0f);
+			i.putExtra(PaymentDetailsDialog.EXTRA_CONTEXT, "https://www.moneybookers.com/app/payment.pl?pay_to_email=roman.golovanov@gmail.com&return_url=http://ametro-en.no-ip.org/thanks.htm&language=EN&detail1_description=aMetro%20Project%20Support&detail1_text=aMetro%20Project%20Support&amount=%%AMOUNT%%&currency=%%CURRENCY%%");
+			startActivityForResult(i, REQUEST_DONATE_DETAILS);
 		}
 		return false;
 	}
-
-	private void invokeWebBrowser(String uri) {
-		Intent i = new Intent(Intent.ACTION_VIEW);
-		i.setData(Uri.parse(uri));
-		startActivity(i);
+	
+	private static String applyTemplate(String template, String currency, float amount){
+		return template.replaceAll("%%AMOUNT%%", Float.toString(amount) ).replaceAll("%%CURRENCY%%", currency);
 	}
 
-	private void invokePayPal() {
-		if (mPaymentLaunched == false) {
-
-			
-			final EditText edit = new EditText(this);
-			edit.setPadding(5, 5, 5, 5);
-			FrameLayout.LayoutParams layout = new FrameLayout.LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.WRAP_CONTENT);
-			layout.setMargins(5, 5, 5, 5);
-			edit.setLayoutParams(layout);
-			
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder
-				.setMessage(R.string.msg_enter_amount).setCancelable(false)
-				.setView(edit)
-				.setPositiveButton(getString(android.R.string.ok),
-					new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int id) {
-							if (mPaymentLaunched == false) {
-								
-								mPaymentLaunched = true;
-								PayPalPayment newPayment = new PayPalPayment();
-								newPayment.setAmount( edit.getText().toString() );
-								newPayment.setCurrency("USD");
-								newPayment.setRecipient("ivan_1278274849_biz@gmail.com");
-								newPayment.setMerchantName("aMetro Project");
-								newPayment.setItemDescription("Donate to aMetro application developers");
-								Intent payPalIntent = new Intent(SettingsActivity.this, PayPalActivity.class);
-								payPalIntent.putExtra(PayPalActivity.EXTRA_PAYMENT_INFO, newPayment);
-								SettingsActivity.this.startActivityForResult(payPalIntent, 1);
-							}
-						}
-					}).setNegativeButton(getString(android.R.string.cancel),
-					new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog,
-								int id) {
-							// put your code here
-							dialog.cancel();
-						}
-					});
-			AlertDialog alertDialog = builder.create();
-			alertDialog.show();
-
-		}
-	}
-
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		mPaymentLaunched = false;
-		if (requestCode != 1) {
-			return;
-		}
-
-		switch (resultCode) {
-		case RESULT_OK:
-			String transactionID = data
-					.getStringExtra(PayPalActivity.EXTRA_TRANSACTION_ID);
-			this.paymentSucceeded(transactionID);
-			break;
-		case RESULT_CANCELED:
-			this.paymentCanceled();
-			break;
-		case PayPalActivity.RESULT_FAILURE:
-			String errorID = data.getStringExtra(PayPalActivity.EXTRA_ERROR_ID);
-			String errorMessage = data
-					.getStringExtra(PayPalActivity.EXTRA_ERROR_MESSAGE);
-			this.paymentFailed(errorID, errorMessage);
-		}
-	}
-
-	public void paymentFailed(String errorID, String errorMessage) {
-		Toast.makeText(this, getString(R.string.msg_payment_failed) + " " + errorMessage,
-				Toast.LENGTH_SHORT).show();
-	}
-
-	public void paymentSucceeded(String transactionID) {
-		Toast.makeText(this, getString(R.string.msg_payment_success), Toast.LENGTH_SHORT).show();
-	}
-
-	public void paymentCanceled() {
-		Toast.makeText(this, getString(R.string.msg_payment_canceled), Toast.LENGTH_SHORT).show();
-	}
-
-	protected void initPayPal() {
-
-		mDonatePayPalMPL.setEnabled(false);
-
-		Thread t = new Thread() {
-			public void run() {
-				mPayPalObject = PayPal.initWithAppID(SettingsActivity.this
-						.getBaseContext(), "APP-80W284485P519543T",
-						PayPal.ENV_SANDBOX);
-				mPayPalObject.setLang("en_US");
-				mHandler.post(mUpdateResults);
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		switch (requestCode) {
+		case REQUEST_DONATE_DETAILS:
+			if(resultCode == RESULT_OK){
+				String currency = data.getStringExtra(PaymentDetailsDialog.EXTRA_CURRENCY);
+				float amount = data.getFloatExtra(PaymentDetailsDialog.EXTRA_AMOUNT, 0.0f);
+				String template = data.getStringExtra(PaymentDetailsDialog.EXTRA_CONTEXT);
+				String url = applyTemplate(template, currency, amount);
+				Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+				if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)){
+					Log.i(Constants.LOG_TAG_MAIN, "Start payment with currency: " + currency + ", amount: " + amount);
+				}
+				startActivity(webIntent);
 			}
-		};
-		t.start();
-	}
-
-	// Create runnable for posting
-	final Runnable mUpdateResults = new Runnable() {
-		public void run() {
-			mDonatePayPalMPL.setEnabled(true);
+			break;
+		default:
+			break;
 		}
-	};
-
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+	
+	
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<manifest android:versionCode="1" android:versionName="0.2.4.r276"
+<manifest android:versionCode="1" android:versionName="0.2.4.r279"
     package="org.ametro" xmlns:android="http://schemas.android.com/apk/res/android">
-    <application android:debuggable="true" android:name="org.ametro.ApplicationEx" 
-        android:icon="@drawable/appicon" android:label="@string/app_name">
-        
+    <application android:debuggable="true"
+        android:icon="@drawable/appicon"
+        android:label="@string/app_name" android:name="org.ametro.ApplicationEx">
         <activity android:label="@string/app_name"
             android:launchMode="singleTop"
             android:name=".activity.MapViewActivity"
@@ -14,33 +14,42 @@
             </intent-filter>
             <meta-data android:name="android.app.default_searchable" android:value=".activity.SearchStation"/>
         </activity>
-        <activity android:name=".activity.obsolete.ImportPmz" android:launchMode="singleTop" />
+        <activity android:launchMode="singleTop" android:name=".activity.obsolete.ImportPmz"/>
         <activity android:name=".activity.MapDetailsActivity" android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".activity.RouteViewActivity"/>
-        <activity android:name=".activity.RouteCreateActivity" android:launchMode="singleTop" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
+        <activity android:launchMode="singleTop"
+            android:name=".activity.RouteCreateActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".activity.AboutActivity"/>
         <activity android:name=".activity.SettingsActivity"/>
         <activity android:name=".activity.StationViewActivity"/>
         <activity android:name=".activity.StationListActivity"/>
         <activity android:name=".activity.FavoriteRouteListActivity"/>
-        <activity android:name=".activity.CatalogTabHostActivity" android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".activity.CatalogLocalListActivity" android:label="@string/title_catalog_local" android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".activity.CatalogOnlineListActivity" android:label="@string/title_catalog_online" android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".activity.CatalogImportListActivity" android:label="@string/title_catalog_import" android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".activity.CatalogTabHostActivity"
+            android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
+        <activity android:label="@string/title_catalog_local"
+            android:name=".activity.CatalogLocalListActivity"
+            android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
+        <activity android:label="@string/title_catalog_online"
+            android:name=".activity.CatalogOnlineListActivity"
+            android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
+        <activity android:label="@string/title_catalog_import"
+            android:name=".activity.CatalogImportListActivity"
+            android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
         <!-- DIALOGS -->
-        <activity android:name=".dialog.LocationSearchDialog" android:label="@string/msg_detect_location" android:launchMode="singleTop" android:theme="@android:style/Theme.Dialog"/>
+        <activity android:label="@string/msg_donate_title" android:name="org.ametro.activity.PaymentDetailsDialog" android:theme="@android:style/Theme.Dialog"/>
+        <activity android:label="@string/msg_detect_location" android:name=".dialog.LocationSearchDialog" android:theme="@android:style/Theme.Dialog"/>
         <!-- SEARCHS -->
-        <activity android:name=".activity.StationSearchActivity" android:label="@string/search_station" android:launchMode="singleTop" >
+        <activity android:label="@string/search_station"
+            android:launchMode="singleTop" android:name=".activity.StationSearchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
             <meta-data android:name="android.app.searchable" android:resource="@xml/searchable"/>
         </activity>
-        
         <!-- THIRD PARTY ACTIVITIES -->
-		<activity android:name="com.paypal.android.MEP.PayPalActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
-        
+        <!-- <activity android:name="com.paypal.android.MEP.PayPalActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>  -->
     </application>
     <uses-sdk android:minSdkVersion="3"/>
     <uses-permission android:name="android.permission.ACCESS_GPS"/>
