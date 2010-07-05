@@ -92,24 +92,24 @@
     <string name="pref_donate_paypal_mpl">via PayPal</string>
     <string name="pref_donate_paypal_mpl_key">DONATE_PAYPAL_LIBRARY</string>
     <string name="pref_donate_paypal_mpl_description">using official PayPal Mobile Platform Library</string>
-     
-    <string name="pref_donate_paypal">via PayPal Site</string>
+    <string name="pref_donate_paypal">via PayPal</string>
     <string name="pref_donate_paypal_key">DONATE_PAYPAL</string>
-    <string name="pref_donate_paypal_description">open www.paypal.com site in browser</string>
-    
+    <string name="pref_donate_paypal_description">disabled</string>
     <string name="pref_donate_yandex">via Yandex Money</string>
     <string name="pref_donate_yandex_key">DONATE_YANDEX</string>
-    <string name="pref_donate_yandex_description">41001667593841</string>
-    
-     
+    <string name="pref_donate_yandex_description">41001667593841, open donate web form on money.yandex.ru</string>
     <string name="pref_donate_wm">via WebMoney</string>
     <string name="pref_donate_wm_key">DONATE_WM</string>
-    <string name="pref_donate_wm_description">R191907383552, Z422979142707</string>
+    <string name="pref_donate_wm_description">R191907383552, Z422979142707, use instruction on www.webmoney.ru</string>
+    <string name="pref_donate_mb">via MoneyBookers</string>
+    <string name="pref_donate_mb_key">DONATE_MB</string>
+    <string name="pref_donate_mb_description">open donate web form on www.moneybookers.com</string>
     
      
     <string name="url_paypal">https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=N2NHRQWE7BUYG&amp;lc=RU&amp;item_name=aMetro%20Project&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted</string>
-    <string name="url_yandex">https://money.yandex.ru</string>
+    <string name="url_yandex">file:///android_asset/yandex_form.html</string>
     <string name="url_wm"></string>
+    <string name="url_mb">file:///android_asset/moneybookers_form.html</string>
     
     <string name="text_about">
 &lt;h4&gt;aMetro v.%s&lt;h4&gt;
@@ -206,12 +206,13 @@ Design: Dusty Rat&lt;br/&gt;
     <string name="msg_no_maps_in_import">No PMZ maps for import</string>
     <string name="msg_delete_local_map_confirmation">Remove map %s, %s from my maps?</string>
     <string name="msg_delete_import_map_confirmation">Remove PMZ map %s, %s from import?</string>
-
     <string name="msg_enter_amount">Enter amount, in USD</string>
     <string name="msg_payment_success">Payment success</string>
     <string name="msg_payment_failed">Payment failed</string>
     <string name="msg_payment_canceled">Payment canceled</string>
-    
+	<string name="msg_donate_title">Donate details</string>    
+    <string name="msg_donate_currency">Currency:</string>
+    <string name="msg_donate_amount">Amount:</string>
     <string name="msg_"/>
     <string name="tab_maps_favorited">Favorites</string>
     <string name="tab_maps_local">My maps</string>

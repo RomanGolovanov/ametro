@@ -71,19 +71,18 @@
 
 	<string name="pref_section_donate">Поддержать разработчиков</string>
     <string name="pref_section_donate_description">Здесь вы можете материально выразить свои чувства</string>
- 
     <string name="pref_donate_paypal_mpl">Клиент PayPal</string>
     <string name="pref_donate_paypal_mpl_description">используя официальный клиент PayPal Mobile Platform Library</string>
-     
-    <string name="pref_donate_paypal">Сайт PayPal</string>
-    <string name="pref_donate_paypal_description">открыть сайт www.paypal.com</string>
-    
-    <string name="pref_donate_yandex">Yandex Money</string>
-    <string name="pref_donate_yandex_description">41001667593841</string>
-     
+    <string name="pref_donate_paypal">PayPal</string>
+    <string name="pref_donate_paypal_description">отключено</string>
+    <string name="pref_donate_yandex">Яндекс Деньги</string>
+    <string name="pref_donate_yandex_description">41001667593841, открыть форму перевода на сайте money.yandex.ru</string>
     <string name="pref_donate_wm">WebMoney</string>
-    <string name="pref_donate_wm_description">R191907383552, Z422979142707</string>
+    <string name="pref_donate_wm_description">R191907383552, Z422979142707, см. руководство на сайте www.webmoney.ru</string>
+    <string name="pref_donate_mb">MoneyBookers</string>
+    <string name="pref_donate_mb_description">открыть форму перевода на сайте www.moneybookers.com</string>
     
+         
     <string name="text_about">
 &lt;h4&gt;aMetro v.%s&lt;h4&gt;
 &lt;h5&gt;Навигация по картам метро  городов мира.&lt;/h6&gt;
@@ -183,7 +182,10 @@
     <string name="msg_payment_success">Платеж выполнен</string>
     <string name="msg_payment_failed">Ошибка платежа</string>
     <string name="msg_payment_canceled">Платеж отменен</string>
-        <string name="msg_"/>
+	<string name="msg_donate_title">Настройка платежа</string>    
+    <string name="msg_donate_currency">Валюта:</string>
+    <string name="msg_donate_amount">Сумма:</string>
+    <string name="msg_"/>
     
     <string name="tab_maps_favorited">Избранное</string>
     <string name="tab_maps_local">Мои карты</string>

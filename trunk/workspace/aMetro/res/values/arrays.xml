@@ -167,8 +167,9 @@
     	<item>0.2.4.r272: fixed local/online/import catalogs update events</item>
     	<item>0.2.4.r274: delete, import, download, update options in map context menu</item>
     	<item>0.2.4.r276: added search operation in maps catalogs</item>
+    	<item>0.2.4.r279: payment systems integration for donate</item>
+    	
     </string-array>
-
     <string-array name="create_route_modes">
         <item>Minimal Time</item>
         <item>Minimal Transfers</item>
@@ -178,5 +179,26 @@
         <item>Night</item>
         <item>Rush</item>
     </string-array>
-
+    <string-array name="moneybookers_currency_names">
+        <item>US dollar</item>
+        <item>GB pound</item>
+        <item>Euro</item>
+        <item>Yen</item>
+        <item>Canadian $</item>
+		<item>Australian $</item>
+    </string-array>
+    <string-array name="moneybookers_currency_codes">
+        <item>USD</item>
+        <item>GBP</item>
+        <item>EUR</item>
+        <item>JPY</item>
+        <item>CAD</item>
+		<item>AUD</item>
+    </string-array>
+    <string-array name="yandex_currency_names">
+        <item>Rubles</item>
+    </string-array>
+    <string-array name="yandex_currency_codes">
+        <item>RUB</item>
+    </string-array>
 </resources>
