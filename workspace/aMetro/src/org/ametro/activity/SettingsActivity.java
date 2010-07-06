@@ -39,26 +39,24 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	
 	private static final int REQUEST_DONATE_DETAILS = 1;
 	
-	private Preference mDonatePayPal;
 	private Preference mDonateYandex;
 	private Preference mDonateWebMoney;
 	private Preference mDonateMoneyBookers;
+	private Preference mDonateAlertPay;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.settings);
 
-		mDonatePayPal = findPreference(getString(R.string.pref_donate_paypal_key));
+		mDonateAlertPay = findPreference(getString(R.string.pref_donate_alertpay_key));
 		mDonateYandex = findPreference(getString(R.string.pref_donate_yandex_key));
 		mDonateWebMoney = findPreference(getString(R.string.pref_donate_wm_key));
 		mDonateMoneyBookers = findPreference(getString(R.string.pref_donate_mb_key));
 
-		mDonatePayPal.setOnPreferenceClickListener(this);
+		mDonateAlertPay.setOnPreferenceClickListener(this);
 		mDonateYandex.setOnPreferenceClickListener(this);
 		mDonateWebMoney.setOnPreferenceClickListener(this);
 		mDonateMoneyBookers.setOnPreferenceClickListener(this);
-		
-		mDonatePayPal.setEnabled(false);
 		
 	}
 
@@ -68,7 +66,19 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 
 	public boolean onPreferenceClick(Preference preference) {
 		final Resources res = getResources();
-		if (preference == mDonatePayPal) {
+		if (preference == mDonateAlertPay) {
+			String[] codes = res.getStringArray(R.array.alertpay_currency_codes);
+			String[] names = res.getStringArray(R.array.alertpay_currency_names);
+			
+			StringBuilder url = new StringBuilder();
+			url.append("https://www.alertpay.com/PayProcess.aspx");
+			url.append("?ap_currency="); url.append("%%CURRENCY%%");
+			url.append("&ap_amount="); url.append("%%AMOUNT%%");
+			url.append("&ap_itemname="); url.append("aMetro%20Project%20Support");
+			url.append("&ap_purchasetype="); url.append("service");
+			url.append("&ap_merchant="); url.append("roman.golovanov@gmail.com");
+			
+			invokePaymentDialog(url.toString(), codes, names, 1.0f);
 		} 
 		if (preference == mDonateYandex) {
 			String[] codes = res.getStringArray(R.array.yandex_currency_codes);
@@ -106,7 +116,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			
 			StringBuilder url = new StringBuilder();
 			url.append("https://www.moneybookers.com/app/payment.pl");
-			url.append("?pay_to_email="); url.append("roman.golovanov@gmail.com");
+			url.append("?amount="); url.append("%%AMOUNT%%");
+			url.append("&currency="); url.append("%%CURRENCY%%");
 			if(language.equalsIgnoreCase("ru")){
 				url.append("&return_url="); url.append("http%3A//ametro.no-ip.org/thanks");
 				url.append("&language="); url.append("RU");
@@ -118,8 +129,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				url.append("&detail1_description="); url.append("aMetro%20Project%20Support");
 				url.append("&detail1_text="); url.append("aMetro%20Project%20Support");
 			}
-			url.append("&amount="); url.append("%%AMOUNT%%");
-			url.append("&currency="); url.append("%%CURRENCY%%");
+			url.append("&pay_to_email="); url.append("roman.golovanov@gmail.com");
 			
 			String[] codes = res.getStringArray(R.array.moneybookers_currency_codes);
 			String[] names = res.getStringArray(R.array.moneybookers_currency_names);
@@ -153,6 +163,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 				if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)){
 					Log.i(Constants.LOG_TAG_MAIN, "Start payment with currency: " + currency + ", amount: " + amount);
+					Log.i(Constants.LOG_TAG_MAIN, "URL: " + url);
 				}
 				startActivity(webIntent);
 			}
