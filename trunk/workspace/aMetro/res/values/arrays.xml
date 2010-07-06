@@ -181,19 +181,13 @@
     </string-array>
     <string-array name="moneybookers_currency_names">
         <item>USD</item>
-        <item>GBP</item>
         <item>EUR</item>
-        <!--<item>Yen</item>-->
-        <!--<item>Canadian $</item>-->
-		<!--<item>Australian $</item>-->
+        <item>GBP</item>
     </string-array>
     <string-array name="moneybookers_currency_codes">
         <item>USD</item>
-        <item>GBP</item>
         <item>EUR</item>
-        <!--<item>JPY</item>-->
-        <!--<item>CAD</item>-->
-		<!--<item>AUD</item>-->
+        <item>GBP</item>
     </string-array>
     <string-array name="yandex_currency_names">
         <item>RUB</item>
@@ -208,5 +202,15 @@
     <string-array name="webmoney_currency_codes">
         <item>R191907383552</item>
         <item>Z422979142707</item>
+    </string-array>
+    <string-array name="alertpay_currency_names">
+        <item>USD</item>
+        <item>EUR</item>
+        <item>GBP</item>
+    </string-array>
+    <string-array name="alertpay_currency_codes">
+        <item>USD</item>
+        <item>EUR</item>
+        <item>GBP</item>
     </string-array>
 </resources>

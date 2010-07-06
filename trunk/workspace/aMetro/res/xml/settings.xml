@@ -2,14 +2,10 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
 	<PreferenceScreen android:title="@string/pref_section_donate" android:summary="@string/pref_section_donate_description">
-		<!-- 
-		<Preference android:title="@string/pref_donate_paypal_mpl"
-                           android:key="@string/pref_donate_paypal_mpl_key"
-                           android:summary="@string/pref_donate_paypal_mpl_description" />
-		-->
-		<Preference android:title="@string/pref_donate_paypal"
-                           android:key="@string/pref_donate_paypal_key"
-                           android:summary="@string/pref_donate_paypal_description" />
+
+		<Preference android:title="@string/pref_donate_alertpay"
+                           android:key="@string/pref_donate_alertpay_key"
+                           android:summary="@string/pref_donate_alertpay_description" />
 		<Preference android:title="@string/pref_donate_mb"
                            android:key="@string/pref_donate_mb_key"
                            android:summary="@string/pref_donate_mb_description" />
