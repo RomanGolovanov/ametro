@@ -21,16 +21,19 @@
 
 package org.ametro.activity;
 
+import java.io.File;
 import java.util.Date;
 import java.util.HashMap;
 
 import org.ametro.ApplicationEx;
+import org.ametro.Constants;
 import org.ametro.GlobalSettings;
 import org.ametro.R;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.storage.CatalogStorage;
 import org.ametro.catalog.storage.ICatalogStorageListener;
+import org.ametro.directory.CountryDirectory;
 import org.ametro.model.TransportType;
 import org.ametro.util.DateUtil;
 import org.ametro.widget.TextStripView;
@@ -51,6 +54,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -81,6 +85,8 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 
 	private ImageButton mFavoriteButton;
 
+	private ImageView mCountryImageView;
+	
 	private TextView mCityTextView;
 	private TextView mCountryTextView;
 	private TextView mVersionTextView;
@@ -301,6 +307,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 	private void setDetailsView() {
 		if (mMode != MODE_DETAILS) {
 			setContentView(R.layout.map_details);
+			mCountryImageView = (ImageView)findViewById(R.id.iso_icon);
 			mOpenButton = (Button) findViewById(R.id.btn_open);
 			mCloseButton = (Button) findViewById(R.id.btn_close);
 			mFavoriteButton = (ImageButton) findViewById(R.id.btn_favorite);
@@ -331,6 +338,19 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 		final Resources res = getResources();
 		final String[] states = res.getStringArray(R.array.catalog_map_states);
 		final String[] transportNames = res.getStringArray(R.array.transport_types);
+        final CountryDirectory countryDirectory = ApplicationEx.getInstance().getCountryDirectory();
+		
+    	CountryDirectory.Entity entity = countryDirectory.getByName(preffered().getCountry(code));
+    	if(entity!=null){
+			File file = new File(Constants.ICONS_PATH, entity.getISO2() + ".png");
+			if(file.exists()){
+	    		mCountryImageView.setImageDrawable(Drawable.createFromPath(file.getAbsolutePath()));
+			}else{
+	    		mCountryImageView.setImageResource(R.drawable.no_country);
+			}
+    	}else{
+    		mCountryImageView.setImageResource(R.drawable.no_country);
+    	}
 		
 		mOpenButton.setVisibility(mLocal!=null ? View.VISIBLE : View.GONE);
 		

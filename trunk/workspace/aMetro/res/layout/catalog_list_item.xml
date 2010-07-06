@@ -1,41 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout 
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:paddingLeft="36px" android:paddingRight="5px"
-	android:paddingBottom="2px" android:paddingTop="2px" 
-	android:layout_width="fill_parent" android:layout_height="64dip"
-	android:orientation="vertical">
-	
-	<TextView android:id="@+id/text"
-		android:layout_width="fill_parent" 
-		android:layout_height="wrap_content"
-		android:ellipsize="marquee" 
-		android:scrollHorizontally="true"
-		android:lines="1"
-		android:paddingLeft="0px" android:textSize="16sp" />
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:gravity="center_vertical" android:layout_width="fill_parent"
+	android:layout_height="64dip">
 
-	<LinearLayout 
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:orientation="horizontal">
+	<ImageView android:id="@+id/iso_icon" android:layout_width="wrap_content"
+		android:layout_alignParentLeft="true" android:layout_centerVertical="true"
+		android:layout_marginLeft="6sp" android:layout_marginRight="6sp"
+		android:layout_height="wrap_content" android:src="@drawable/no_country" />
 
-		<LinearLayout
-			android:id="@+id/icons"  
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content"
-			android:gravity="left"
-			android:layout_weight="1" 
-			/>
-		
-		<TextView
-			android:id="@+id/state"  
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content"
-			android:text="not imported"
-			android:textSize="14sp"
-			android:layout_weight="0" 
-			android:gravity="right" />
-			
-		
+	<LinearLayout android:layout_toRightOf="@id/iso_icon"
+		android:layout_alignParentRight="true" android:paddingRight="5px"
+		android:paddingBottom="2px" android:paddingTop="2px"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<LinearLayout android:layout_width="fill_parent"
+			android:gravity="center_vertical" android:layout_height="wrap_content"
+			android:orientation="horizontal">
+			<TextView android:id="@+id/city" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:layout_weight="1"
+				android:ellipsize="marquee" android:scrollHorizontally="true"
+				android:lines="1" android:paddingLeft="0px" android:textSize="16sp" />
+			<LinearLayout android:id="@+id/icons"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:gravity="right" android:layout_weight="0" />
+			<FrameLayout android:id="@+id/placeholder"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:layout_weight="0">
+				<TextView android:layout_width="wrap_content" android:id="@+id/size"
+					android:layout_height="wrap_content" android:text="256 KB" />
+			</FrameLayout>
+		</LinearLayout>
+
+		<LinearLayout android:layout_width="fill_parent"
+			android:gravity="center_vertical" android:layout_height="wrap_content"
+			android:orientation="horizontal">
+			<TextView android:id="@+id/country" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="CountryName"
+				android:textSize="14sp" android:layout_weight="1" android:gravity="left" />
+
+			<TextView android:id="@+id/state" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:textSize="14sp"
+				android:layout_weight="0" android:gravity="right" />
+		</LinearLayout>
 	</LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

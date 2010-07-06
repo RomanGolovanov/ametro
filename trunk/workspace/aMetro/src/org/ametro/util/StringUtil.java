@@ -641,7 +641,7 @@ public class StringUtil {
 	        return fmt.format(val).concat(" MB");
 	     }
 	     val = size / 1024;
-	     if (val > 10)
+	     if (val > 1)
 	     {
 	        return fmt.format(val).concat(" KB");
 	     }

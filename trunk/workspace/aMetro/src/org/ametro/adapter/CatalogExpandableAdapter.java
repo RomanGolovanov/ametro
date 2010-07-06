@@ -19,19 +19,24 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */package org.ametro.adapter;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import org.ametro.ApplicationEx;
+import org.ametro.Constants;
 import org.ametro.GlobalSettings;
 import org.ametro.R;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMapPair;
 import org.ametro.catalog.ICatalogStateProvider;
 import org.ametro.catalog.CatalogMapPair.CatalogMapDifferenceCityNameComparator;
+import org.ametro.directory.CountryDirectory;
 import org.ametro.model.TransportType;
+import org.ametro.util.StringUtil;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -54,13 +59,13 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
     protected LayoutInflater mInflater;
     
 	protected ArrayList<CatalogMapPair> mObjects;
-	
 	protected ArrayList<CatalogMapPair> mOriginalValues;
 	
 	protected int mMode;
 	protected String mLanguageCode;
 	
 	protected String[] mCountries;
+    protected Drawable[] mIcons;
     protected CatalogMapPair[][] mRefs;
 
     protected String[] mStates;
@@ -111,6 +116,7 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
 		
     	mObjects = CatalogMapPair.diff(local, remote, mode);
 		
+    	
         bindData();
 
 		bindTransportTypes();
@@ -138,8 +144,11 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
     }
 
 	public static class ViewHolder {
-		TextView mText;
+		TextView mCity;
+		TextView mCountry;
 		TextView mStatus;
+		TextView mSize;
+		ImageView mIsoIcon;
 		LinearLayout mImageContainer;
 	}    
     
@@ -149,8 +158,11 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
 		if (convertView == null) {
 			convertView = mInflater.inflate(R.layout.catalog_list_item, null);
 			holder = new ViewHolder();
-			holder.mText = (TextView) convertView.findViewById(R.id.text);
+			holder.mCity = (TextView) convertView.findViewById(R.id.city);
+			holder.mCountry = (TextView) convertView.findViewById(R.id.country);
 			holder.mStatus = (TextView) convertView.findViewById(R.id.state);
+			holder.mSize = (TextView) convertView.findViewById(R.id.size);
+			holder.mIsoIcon = (ImageView) convertView.findViewById(R.id.iso_icon);
 			holder.mImageContainer = (LinearLayout) convertView.findViewById(R.id.icons);
 			convertView.setTag(holder);
 		} else {
@@ -160,9 +172,13 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
 		final String code = mLanguageCode;
 		final CatalogMapPair ref = mRefs[groupPosition][childPosition];
 		final int state = mStatusProvider.getCatalogState(ref.getLocal(), ref.getRemote());
-		holder.mText.setText(ref.getCity(code));
+		holder.mCity.setText(ref.getCity(code));
+		holder.mCountry.setText(ref.getCountry(code));
 		holder.mStatus.setText(mStates[state]);
 		holder.mStatus.setTextColor(mStateColors[state]);
+		holder.mSize.setText( StringUtil.formatFileSize(ref.getSize(),0) );
+		holder.mIsoIcon.setImageDrawable(mIcons[groupPosition]);
+		
 		
 		final LinearLayout ll = holder.mImageContainer;
 		ll.removeAllViews();
@@ -238,6 +254,23 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
         	cities.add(diff); 
         }
         mCountries = (String[]) countries.toArray(new String[countries.size()]);
+        mIcons = new Drawable[mCountries.length];
+        
+        final CountryDirectory countryDirectory = ApplicationEx.getInstance().getCountryDirectory();
+        final Resources res = mContext.getResources();
+        int lenc = mCountries.length;
+        for(int i=0;i<lenc;i++){
+        	CountryDirectory.Entity entity = countryDirectory.getByName(mCountries[i]);
+        	if(entity!=null){
+    			File file = new File(Constants.ICONS_PATH, entity.getISO2() + ".png");
+    			if(file.exists()){
+    				mIcons[i] = Drawable.createFromPath(file.getAbsolutePath());
+    			}else{
+    				mIcons[i] = res.getDrawable(R.drawable.no_country);
+    			}
+        	}
+        }
+        
         mRefs = new CatalogMapPair[mCountries.length][];
         for(int i=0; i<mCountries.length;i++){
         	String country = mCountries[i];

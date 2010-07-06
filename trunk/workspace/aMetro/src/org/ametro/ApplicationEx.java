@@ -21,7 +21,10 @@
 package org.ametro;
 
 import org.ametro.catalog.storage.CatalogStorage;
+import org.ametro.directory.CityDirectory;
+import org.ametro.directory.CountryDirectory;
 import org.ametro.directory.CountryLibrary;
+import org.ametro.directory.ImportDirectory;
 import org.ametro.directory.StationLibraryProvider;
 import org.ametro.jni.Natives;
 import org.ametro.util.FileUtil;
@@ -44,6 +47,39 @@ import android.util.Log;
 
 public class ApplicationEx extends Application {
 
+	public CountryDirectory getCountryDirectory() {
+		if (mCountryDirectory == null) {
+			synchronized (ApplicationEx.class) {
+				if (mCountryDirectory == null) {
+					mCountryDirectory = new CountryDirectory(this);
+				}
+			}
+		}
+		return mCountryDirectory;
+	}
+
+	public CityDirectory getCityDirectory() {
+		if (mCityDirectory == null) {
+			synchronized (ApplicationEx.class) {
+				if (mCityDirectory == null) {
+					mCityDirectory = new CityDirectory(this);
+				}
+			}
+		}
+		return mCityDirectory;
+	}
+
+	public ImportDirectory getImportDirectory() {
+		if (mImportDirectory == null) {
+			synchronized (ApplicationEx.class) {
+				if (mImportDirectory == null) {
+					mImportDirectory = new ImportDirectory(this);
+				}
+			}
+		}
+		return mImportDirectory;
+	}
+	
 	public CountryLibrary getCountryLibrary() {
 		if (mCountryLibrary == null) {
 			synchronized (ApplicationEx.class) {
@@ -102,6 +138,7 @@ public class ApplicationEx extends Application {
 		FileUtil.touchDirectory(Constants.TEMP_CATALOG_PATH);
 		FileUtil.touchFile(Constants.NO_MEDIA_FILE);
 		Natives.Initialize();
+		
 		super.onCreate();
 	}
 
@@ -153,4 +190,8 @@ public class ApplicationEx extends Application {
 	private StationLibraryProvider mStationLibrary;
 	private CatalogStorage mStorage;
 
+	private ImportDirectory mImportDirectory;
+	private CityDirectory mCityDirectory;
+	private CountryDirectory mCountryDirectory;
+	
 }

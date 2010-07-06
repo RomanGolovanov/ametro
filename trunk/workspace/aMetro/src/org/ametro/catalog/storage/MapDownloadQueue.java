@@ -23,7 +23,6 @@ public class MapDownloadQueue extends Thread implements IOperationListener {
 		void onMapDownloadFailed(CatalogMap map, Throwable reason);
 		void onMapDownloadCanceled(CatalogMap map);
 	}
-	
 
 	private boolean mIsShutdown;
 	
