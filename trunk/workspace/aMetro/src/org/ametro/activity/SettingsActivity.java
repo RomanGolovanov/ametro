@@ -75,7 +75,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			String[] names = res.getStringArray(R.array.yandex_currency_names);
 			String url = "https://money.yandex.ru/charity.xml?to=41001667593841&CompanyName=aMetroProject&CompanyLink=http://sites.google.com/site/ametrohome&CompanySum=%%AMOUNT%%";
 			
-			invokePaymentDialog(url, codes, names, 0.0f);
+			invokePaymentDialog(url, codes, names, 1.0f);
 		}
 		if (preference == mDonateWebMoney) {
 			String language = Locale.getDefault().getLanguage();
@@ -98,7 +98,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			String[] codes = res.getStringArray(R.array.webmoney_currency_codes);
 			String[] names = res.getStringArray(R.array.webmoney_currency_names);
 			
-			invokePaymentDialog(url.toString(), codes, names, 0.0f);
+			invokePaymentDialog(url.toString(), codes, names, 1.0f);
 		}
 		if (preference == mDonateMoneyBookers) {
 			
@@ -123,7 +123,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			
 			String[] codes = res.getStringArray(R.array.moneybookers_currency_codes);
 			String[] names = res.getStringArray(R.array.moneybookers_currency_names);
-			invokePaymentDialog(url.toString(), codes, names, 0.0f);
+			invokePaymentDialog(url.toString(), codes, names, 1.0f);
 		}
 		return false;
 	}
