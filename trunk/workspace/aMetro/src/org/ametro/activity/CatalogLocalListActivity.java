@@ -25,6 +25,20 @@ import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.CatalogMapPair;
 import org.ametro.catalog.storage.CatalogStorage;
 
+import static org.ametro.catalog.CatalogMapState.CORRUPTED;
+import static org.ametro.catalog.CatalogMapState.DOWNLOAD;
+import static org.ametro.catalog.CatalogMapState.DOWNLOADING;
+import static org.ametro.catalog.CatalogMapState.DOWNLOAD_PENDING;
+import static org.ametro.catalog.CatalogMapState.IMPORT;
+import static org.ametro.catalog.CatalogMapState.IMPORTING;
+import static org.ametro.catalog.CatalogMapState.IMPORT_PENDING;
+import static org.ametro.catalog.CatalogMapState.INSTALLED;
+import static org.ametro.catalog.CatalogMapState.NEED_TO_UPDATE;
+import static org.ametro.catalog.CatalogMapState.NOT_SUPPORTED;
+import static org.ametro.catalog.CatalogMapState.OFFLINE;
+import static org.ametro.catalog.CatalogMapState.UPDATE;
+import static org.ametro.catalog.CatalogMapState.UPDATE_NOT_SUPPORTED;
+
 public class CatalogLocalListActivity extends BaseCatalogExpandableActivity {
 
 	protected boolean isCatalogProgressEnabled(int catalogId) {
@@ -39,8 +53,27 @@ public class CatalogLocalListActivity extends BaseCatalogExpandableActivity {
 		return mStorage.getLocalCatalogState(local, remote);
 	}
 
-	public boolean onCatalogMapClick(CatalogMap local, CatalogMap remote) {
-		invokeFinish(local);
+	public boolean onCatalogMapClick(CatalogMap local, CatalogMap remote, int state) {
+		switch(state){
+		case OFFLINE:
+		case INSTALLED:
+		case UPDATE:
+			invokeFinish(local);
+			return true;
+		case IMPORT:
+		case DOWNLOAD:
+		case DOWNLOAD_PENDING:
+		case DOWNLOADING:
+		case IMPORT_PENDING:
+		case IMPORTING:
+		case NEED_TO_UPDATE:
+			invokeMapDetails(local,remote,state);
+			return true;
+		case NOT_SUPPORTED:
+		case UPDATE_NOT_SUPPORTED:
+		case CORRUPTED:
+			// do nothing
+		}				
 		return true;
 	}
 

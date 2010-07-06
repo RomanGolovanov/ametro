@@ -2,6 +2,7 @@ package org.ametro.catalog.storage;
 
 import java.io.File;
 import java.net.URI;
+import java.util.Iterator;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.ametro.Constants;
@@ -53,6 +54,24 @@ public class MapDownloadQueue extends Thread implements IOperationListener {
 		return mMap == map;
 	}
 
+	public boolean isPending(String systemName) {
+		if(systemName == null) return false;
+		Iterator<CatalogMap> iterator = mQueue.iterator();
+		while(iterator.hasNext()){
+			CatalogMap map = iterator.next();
+			if(map.getSystemName().equals(systemName)){
+				return true;
+			}
+		}
+		return false;
+	}	
+	public boolean isProcessed(String systemName) {
+		if(systemName == null) return false;
+		synchronized (mQueue) {
+			return mMap != null && systemName.equals(mMap.getSystemName() );
+		}
+	}
+	
 	public void request(CatalogMap remote) {
 		if (remote != null) {
 			mQueue.offer(remote);

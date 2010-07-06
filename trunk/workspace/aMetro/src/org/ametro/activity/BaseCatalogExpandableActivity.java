@@ -536,11 +536,11 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 		CatalogMapPair diff = (CatalogMapPair)mAdapter.getChild(groupPosition, childPosition);
-		return onCatalogMapClick(diff.getLocal(), diff.getRemote());		
+		int state =  getCatalogState(diff.getLocal(), diff.getRemote());
+		return onCatalogMapClick(diff.getLocal(), diff.getRemote(), state);		
 	}
 
-	public boolean onCatalogMapClick(CatalogMap local, CatalogMap remote) {
-		int state =  getCatalogState(local, remote);
+	public boolean onCatalogMapClick(CatalogMap local, CatalogMap remote, int state) {
 		switch(state){
 		case OFFLINE:
 		case INSTALLED:
