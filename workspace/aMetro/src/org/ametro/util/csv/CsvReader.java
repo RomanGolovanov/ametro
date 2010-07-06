@@ -130,8 +130,7 @@ public class CsvReader {
 		}
 	}
 
-	private static String getValue(String[] record, int currentColumn,
-			int totalColumns) {
+	private static String getValue(String[] record, int currentColumn, int totalColumns) {
 		if (currentColumn < totalColumns) {
 			return StringUtil.notEmptyElseNull(record[currentColumn]);
 		} else {
@@ -170,6 +169,11 @@ public class CsvReader {
 				mTotalColumns), 0);
 	}
 
+	public float readFloat() {
+		return StringUtil.parseFloat(getValue(mRecord, mCurrentColumn++,
+				mTotalColumns), 0);
+	}
+	
 	public Double readNullableDouble() {
 		String value = getValue(mRecord, mCurrentColumn++, mTotalColumns);
 		if (!EMPTY_VALUE.equals(value)) {
@@ -179,6 +183,15 @@ public class CsvReader {
 		}
 	}
 
+	public Integer readNullableInteger() {
+		String value = getValue(mRecord, mCurrentColumn++, mTotalColumns);
+		if ( !StringUtil.isNullOrEmpty(value) && !EMPTY_VALUE.equals(value)) {
+			return StringUtil.parseInt(value, 0);
+		} else {
+			return null;
+		}
+	}
+	
 	public double getDouble(int index) {
 		return StringUtil.parseDouble(getValue(mRecord, index, mTotalColumns), 0);
 	}
@@ -327,6 +340,10 @@ public class CsvReader {
 		} else {
 			return null;
 		}
+	}
+
+	public void skipColumns(int count) {
+		mCurrentColumn+=count;
 	}
 
 }

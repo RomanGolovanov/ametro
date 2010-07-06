@@ -68,6 +68,7 @@ public class Constants {
 	public static final File LOCAL_CATALOG_PATH = new File(ROOT_PATH, "maps");
 	public static final File IMPORT_CATALOG_PATH = new File(ROOT_PATH, "import");
 	public static final File TEMP_CATALOG_PATH = new File(ROOT_PATH,"temp");
+	public static final File ICONS_PATH = new File(ROOT_PATH,"icons");
     
 	public static final File ONLINE_CATALOG_STORAGE = new File(ROOT_PATH,"catalog.online.xml");
 	public static final File LOCAL_CATALOG_STORAGE = new File(ROOT_PATH,"catalog.local.xml");
@@ -77,6 +78,7 @@ public class Constants {
 
 	public static final String PMETRO_EXTENSION = ".pmz";
 	public static final String AMETRO_EXTENSION = ".ametro";
+
 	
     
 	

@@ -180,5 +180,9 @@ public class CatalogMapPair {
 		}
 		throw new RuntimeException("Unsupported DIFF mode");
 	}
+
+	public long getSize() {
+		return preffered().getSize();
+	}
 	
 }
