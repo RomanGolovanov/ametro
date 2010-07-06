@@ -1,6 +1,7 @@
 package org.ametro.catalog.storage;
 
 import java.io.File;
+import java.util.Iterator;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.ametro.Constants;
@@ -31,6 +32,7 @@ public class MapImportQueue extends Thread implements IOperationListener {
 
 	private CatalogMap mMap;
 	private boolean mCanceled;	
+	
 
 	public MapImportQueue(IMapImportListener listener) {
 		mListener = listener;
@@ -53,6 +55,25 @@ public class MapImportQueue extends Thread implements IOperationListener {
 		return mMap == map;
 	}
 
+	public boolean isPending(String systemName) {
+		if(systemName == null) return false;
+		Iterator<CatalogMap> iterator = mQueue.iterator();
+		while(iterator.hasNext()){
+			CatalogMap map = iterator.next();
+			if(map.getSystemName().equals(systemName)){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean isProcessed(String systemName) {
+		if(systemName == null) return false;
+		synchronized (mQueue) {
+			return mMap != null && systemName.equals(mMap.getSystemName() );
+		}
+	}
+	
 	public void request(CatalogMap remote) {
 		if (remote != null) {
 			mQueue.offer(remote);
@@ -73,16 +94,6 @@ public class MapImportQueue extends Thread implements IOperationListener {
 				mMap = mQueue.take();
 				mCanceled = false;
 				execute(mMap);
-				// remove old map file if exists
-				// move model from temporary to persistent file name
-//				String mapFileName = GlobalSettings.getLocalCatalogMapFileName(map.getSystemName());
-//				if(mapFile.exists()){
-//					FileUtil.delete(mapFile);
-//				}
-				//FileUtil.move(mapFileTemp, mapFile);
-				//final String fileName = mapFile.getName().toLowerCase();						
-				//CatalogMap imported = CatalogBuilder.extractCatalogMap(mLocalCatalog, mapFile, fileName, model);				
-				
 			}
 		} catch (InterruptedException e) {
 		}

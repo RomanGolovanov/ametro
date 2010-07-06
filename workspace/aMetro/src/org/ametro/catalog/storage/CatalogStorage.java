@@ -198,6 +198,14 @@ public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadList
 			return CatalogMapState.DOWNLOAD_PENDING;
 		}
 		
+		String systemName = local!=null ? local.getSystemName() : remote.getSystemName();
+		if(mMapImportQueue.isProcessed(systemName)){
+			return CatalogMapState.IMPORTING;
+		}
+		if(mMapImportQueue.isPending(systemName)){
+			return CatalogMapState.IMPORT_PENDING;
+		}
+		
 		if (remote.isNotSupported()) {
 			if (local == null || local.isNotSupported() || local.isCorruted()) {
 				return CatalogMapState.NOT_SUPPORTED;
@@ -227,6 +235,14 @@ public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadList
 			return CatalogMapState.IMPORT_PENDING;
 		}
 		
+		String systemName = local!=null ? local.getSystemName() : remote.getSystemName();
+		if(mMapDownloadQueue.isProcessed(systemName)){
+			return CatalogMapState.DOWNLOADING;
+		}
+		if(mMapDownloadQueue.isPending(systemName)){
+			return CatalogMapState.DOWNLOAD_PENDING;
+		}
+		
 		if (remote.isCorruted()) {
 			return CatalogMapState.CORRUPTED;
 		} else {
@@ -252,6 +268,14 @@ public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadList
 			return CatalogMapState.DOWNLOAD_PENDING;
 		}
 
+		String systemName = local!=null ? local.getSystemName() : remote.getSystemName();
+		if(mMapImportQueue.isProcessed(systemName)){
+			return CatalogMapState.IMPORTING;
+		}
+		if(mMapImportQueue.isPending(systemName)){
+			return CatalogMapState.IMPORT_PENDING;
+		}
+		
 		if (remote == null) {
 			// remote not exist
 			if (local.isCorruted()) {
