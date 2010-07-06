@@ -32,6 +32,7 @@ public class PaymentDetailsDialog extends Activity implements OnClickListener, T
 	
 	public boolean mAllowDecimalAmount;
 	private float mAmount;
+	private float mAmountMinimal;
 	private String mDialogContext;
 	
 	private Spinner mCurrencySpinner;
@@ -58,6 +59,7 @@ public class PaymentDetailsDialog extends Activity implements OnClickListener, T
 	protected void onResume() {
 		mAmountEditText.addTextChangedListener(this);
 		afterTextChanged(mAmountEditText.getEditableText());
+		mAmountEditText.requestFocus();
 		super.onResume();
 	}
 	
@@ -75,6 +77,7 @@ public class PaymentDetailsDialog extends Activity implements OnClickListener, T
 		
 		mAllowDecimalAmount = data.getBooleanExtra(EXTRA_ALLOW_DECIMAL_AMOUNT, false);
 		mAmount = data.getFloatExtra(EXTRA_AMOUNT, 0.0f);
+		mAmountMinimal = mAmount;
 		mDialogContext = data.getStringExtra(EXTRA_CONTEXT);
 		
 		if(mCurrencyCode == null){
@@ -125,10 +128,8 @@ public class PaymentDetailsDialog extends Activity implements OnClickListener, T
 			setResult(RESULT_CANCELED);
 			finish();
 		}else if(v == mOkButton){
-			String amountString = mAmountEditText.getText().toString();
-			if(amountString!=null && amountString.length()!=0){
-				float amount = Float.parseFloat( amountString );
-				if(amount>0){
+			float amount = getAmount();
+				if(amount>=mAmountMinimal){
 					Intent data = new Intent();
 					data.putExtra(EXTRA_CONTEXT, mDialogContext);
 					data.putExtra(EXTRA_CURRENCY, mCurrencyCodes[ mCurrencySpinner.getSelectedItemPosition()] );
@@ -136,19 +137,23 @@ public class PaymentDetailsDialog extends Activity implements OnClickListener, T
 					setResult(RESULT_OK, data);
 					finish();
 				}
-			}
 		}
 	}
 
 	public void afterTextChanged(Editable s) {
-		String amountString = s.toString();
-		if(amountString==null || amountString.length()==0){
-			amountString = "0";
-		}	
-		float amount = Float.parseFloat( amountString );
-		mOkButton.setEnabled(amount>0);
+		float amount = getAmount(); 
+		mOkButton.setEnabled(amount>=mAmountMinimal);
 	}
 
+	public float getAmount(){
+		String amountString = mAmountEditText.getText().toString();
+		try{
+			return Float.parseFloat( amountString );
+		}catch(Exception ex){
+			return 0.0f;
+		}
+	}
+	
 	public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 		// TODO Auto-generated method stub
 		
