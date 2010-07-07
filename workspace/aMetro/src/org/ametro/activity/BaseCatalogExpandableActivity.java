@@ -153,8 +153,6 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	protected abstract int getDiffMode(); 
 	protected abstract int getDiffColors();
 	
-	
-	
 	public boolean onSearchRequested() {
 		if(mMode == MODE_LIST && mActionBar!=null && mActionBar.getVisibility() == View.GONE){
 			setActionBarVisibility(true);
@@ -315,7 +313,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if(keyCode == KeyEvent.KEYCODE_BACK){
-			if(mActionBar!=null && mActionBarEditText.getVisibility() == View.VISIBLE){
+			if(mActionBar!=null && mActionBar.getVisibility() == View.VISIBLE){
 				setActionBarVisibility(false);
 				return true;
 			}
