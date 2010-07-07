@@ -83,12 +83,14 @@ public class WebUtil {
 					notificationManager.cancelAll();
 					context.Notification = new Notification(android.R.drawable.stat_sys_warning,"Icons download failed", System.currentTimeMillis());
 					context.Notification.setLatestEventInfo(appContext, "aMetro", "Icons downloaded failed", context.ContentIntent);
-					notificationManager.notify(3, context.Notification);
+					notificationManager.notify(2, context.Notification);
+					
 				}else if (context.IsUnpackFinished){
 					notificationManager.cancelAll();
 					context.Notification = new Notification(android.R.drawable.stat_sys_download_done,"Icons unpacked", System.currentTimeMillis());
 					context.Notification.setLatestEventInfo(appContext, "aMetro", "Icons downloaded and unpacked.", context.ContentIntent);
-					notificationManager.notify(4, context.Notification);
+					notificationManager.notify(3, context.Notification);
+					
 				}else if(context.Position==0 && context.Total == 0){
 					context.Notification.setLatestEventInfo(appContext, "aMetro", "Download icons: connecting server", context.ContentIntent);
 					notificationManager.notify(1, context.Notification);
@@ -96,11 +98,8 @@ public class WebUtil {
 					context.Notification.setLatestEventInfo(appContext, "aMetro", "Download icons: " + context.Position + "/" + context.Total, context.ContentIntent);
 					notificationManager.notify(1, context.Notification);
 				}else{
-					notificationManager.cancelAll();
-					context.Notification = new Notification(android.R.drawable.stat_sys_download,"Icons unpacking", System.currentTimeMillis());
-					context.Notification.flags = Notification.FLAG_NO_CLEAR;
 					context.Notification.setLatestEventInfo(appContext, "aMetro", "Icons unpacking", context.ContentIntent);
-					notificationManager.notify(2, context.Notification);
+					notificationManager.notify(1, context.Notification);
 				}
 			}
 		};
@@ -113,6 +112,7 @@ public class WebUtil {
 						DownloadContext downloadContext = (DownloadContext)context;
 						downloadContext.Total = 0;
 						downloadContext.Position = 0;
+						handler.removeCallbacks(updateProgress);
 						handler.post(updateProgress);
 					}
 					
@@ -120,6 +120,7 @@ public class WebUtil {
 						DownloadContext downloadContext = (DownloadContext)context;
 						downloadContext.Total = total;
 						downloadContext.Position = position;
+						handler.removeCallbacks(updateProgress);
 						handler.post(updateProgress);
 						return !downloadContext.IsCanceled;
 					}
@@ -129,13 +130,22 @@ public class WebUtil {
 						File path = downloadContext.Path;
 						ZipUtil.unzip(file, path);
 						downloadContext.IsUnpackFinished=true;
+						handler.removeCallbacks(updateProgress);
 						handler.post(updateProgress);
 					}
 
 					public void onCanceled(Object context, File file) {
+						DownloadContext downloadContext = (DownloadContext)context;
+						downloadContext.IsCanceled=true;
+						handler.removeCallbacks(updateProgress);
+						handler.post(updateProgress);
 					}
 
 					public void onFailed(Object context, File file, Throwable reason) {
+						DownloadContext downloadContext = (DownloadContext)context;
+						downloadContext.IsFailed=true;
+						handler.removeCallbacks(updateProgress);
+						handler.post(updateProgress);
 					}
 					
 				});
