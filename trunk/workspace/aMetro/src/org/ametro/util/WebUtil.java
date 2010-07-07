@@ -34,13 +34,117 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Handler;
+
 public class WebUtil {
+	
+	private static class DownloadContext
+	{
+		public File Path;
+		public long Total;
+		public long Position;
+		public boolean IsCanceled;
+		public Notification Notification;
+		public PendingIntent ContentIntent;
+		public boolean IsUnpackFinished;
+		public boolean IsFailed;
+	}
 	
 	public static class DownloadCanceledException extends Exception {
 		private static final long serialVersionUID = 1049597925954850843L;
 	}
 	
-	public static void downloadFile(Object context, URI uri, File file, IOperationListener listener){
+	public static  void downloadFileAsync(final Context appContext, final File path, final URI uri, final File temp) {
+		
+		final DownloadContext context = new DownloadContext();
+		context.Path = path;
+		context.IsCanceled = false;
+		context.IsUnpackFinished = false;
+		context.IsFailed = false;
+
+		final NotificationManager notificationManager = (NotificationManager) appContext.getSystemService(Context.NOTIFICATION_SERVICE); 
+		
+		final Handler handler = new Handler();
+		
+		final Runnable updateProgress = new Runnable() {
+			public void run() {
+				if(context.Notification == null){
+					context.Notification = new Notification(android.R.drawable.stat_sys_download,"Downloading icons", System.currentTimeMillis());
+					context.Notification.flags = Notification.FLAG_NO_CLEAR;
+					Intent notificationIntent = new Intent();
+					context.ContentIntent = PendingIntent.getActivity(appContext, 0, notificationIntent, 0);					
+				}
+				if(context.IsFailed){
+					notificationManager.cancelAll();
+					context.Notification = new Notification(android.R.drawable.stat_sys_warning,"Icons download failed", System.currentTimeMillis());
+					context.Notification.setLatestEventInfo(appContext, "aMetro", "Icons downloaded failed", context.ContentIntent);
+					notificationManager.notify(3, context.Notification);
+				}else if (context.IsUnpackFinished){
+					notificationManager.cancelAll();
+					context.Notification = new Notification(android.R.drawable.stat_sys_download_done,"Icons unpacked", System.currentTimeMillis());
+					context.Notification.setLatestEventInfo(appContext, "aMetro", "Icons downloaded and unpacked.", context.ContentIntent);
+					notificationManager.notify(4, context.Notification);
+				}else if(context.Position==0 && context.Total == 0){
+					context.Notification.setLatestEventInfo(appContext, "aMetro", "Download icons: connecting server", context.ContentIntent);
+					notificationManager.notify(1, context.Notification);
+				}else  if(context.Position < context.Total){
+					context.Notification.setLatestEventInfo(appContext, "aMetro", "Download icons: " + context.Position + "/" + context.Total, context.ContentIntent);
+					notificationManager.notify(1, context.Notification);
+				}else{
+					notificationManager.cancelAll();
+					context.Notification = new Notification(android.R.drawable.stat_sys_download,"Icons unpacking", System.currentTimeMillis());
+					context.Notification.flags = Notification.FLAG_NO_CLEAR;
+					context.Notification.setLatestEventInfo(appContext, "aMetro", "Icons unpacking", context.ContentIntent);
+					notificationManager.notify(2, context.Notification);
+				}
+			}
+		};
+		
+		final Thread async = new Thread(){
+			public void run() {
+				WebUtil.downloadFile(context, uri, temp, new IDownloadListener(){
+
+					public void onBegin(Object context, File file) {
+						DownloadContext downloadContext = (DownloadContext)context;
+						downloadContext.Total = 0;
+						downloadContext.Position = 0;
+						handler.post(updateProgress);
+					}
+					
+					public boolean onUpdate(Object context, long position, long total) {
+						DownloadContext downloadContext = (DownloadContext)context;
+						downloadContext.Total = total;
+						downloadContext.Position = position;
+						handler.post(updateProgress);
+						return !downloadContext.IsCanceled;
+					}
+					
+					public void onDone(Object context, File file) throws Exception {
+						DownloadContext downloadContext = (DownloadContext)context;
+						File path = downloadContext.Path;
+						ZipUtil.unzip(file, path);
+						downloadContext.IsUnpackFinished=true;
+						handler.post(updateProgress);
+					}
+
+					public void onCanceled(Object context, File file) {
+					}
+
+					public void onFailed(Object context, File file, Throwable reason) {
+					}
+					
+				});
+			};
+		};
+		async.start();
+	}
+	
+	public static void downloadFile(Object context, URI uri, File file, IDownloadListener listener){
 		BufferedInputStream strm = null;
 		if(listener!=null){
 			listener.onBegin(context, file);

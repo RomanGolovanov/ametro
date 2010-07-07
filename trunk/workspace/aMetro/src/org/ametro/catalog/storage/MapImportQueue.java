@@ -31,11 +31,11 @@ import org.ametro.catalog.CatalogMap;
 import org.ametro.model.Model;
 import org.ametro.model.storage.ModelBuilder;
 import org.ametro.util.FileUtil;
-import org.ametro.util.IOperationListener;
+import org.ametro.util.IDownloadListener;
 
 import android.util.Log;
 
-public class MapImportQueue extends Thread implements IOperationListener {
+public class MapImportQueue extends Thread implements IDownloadListener {
 
 	public static interface IMapImportListener
 	{

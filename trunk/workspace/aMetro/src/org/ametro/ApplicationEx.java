@@ -20,6 +20,9 @@
  */
 package org.ametro;
 
+import java.io.File;
+import java.net.URI;
+
 import org.ametro.catalog.storage.CatalogStorage;
 import org.ametro.directory.CityDirectory;
 import org.ametro.directory.CountryDirectory;
@@ -27,6 +30,7 @@ import org.ametro.directory.ImportDirectory;
 import org.ametro.directory.StationDirectory;
 import org.ametro.jni.Natives;
 import org.ametro.util.FileUtil;
+import org.ametro.util.WebUtil;
 import org.apache.http.HttpVersion;
 import org.apache.http.client.HttpClient;
 import org.apache.http.conn.ClientConnectionManager;
@@ -123,11 +127,26 @@ public class ApplicationEx extends Application {
 		FileUtil.touchDirectory(Constants.LOCAL_CATALOG_PATH);
 		FileUtil.touchDirectory(Constants.IMPORT_CATALOG_PATH);
 		FileUtil.touchDirectory(Constants.TEMP_CATALOG_PATH);
+		FileUtil.touchDirectory(Constants.ICONS_PATH);
 		FileUtil.touchFile(Constants.NO_MEDIA_FILE);
 		Natives.Initialize();
 		
+		if(Constants.ICONS_PATH.exists() && Constants.ICONS_PATH.isDirectory())
+		{
+			String[] files = Constants.ICONS_PATH.list();
+			if(files == null || files.length == 0){
+				final File path = Constants.ICONS_PATH;
+				final URI uri = URI.create(Constants.ONLINE_ICONS_PATH);
+				final File temp = GlobalSettings.getTemporaryDownloadIconFile();
+				WebUtil.downloadFileAsync(this, path, uri, temp);
+				
+			}
+		}
+		
 		super.onCreate();
 	}
+
+
 
 	public void onTerminate() {
 		shutdownHttpClient();

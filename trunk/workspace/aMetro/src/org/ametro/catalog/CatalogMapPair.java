@@ -184,5 +184,9 @@ public class CatalogMapPair {
 	public long getSize() {
 		return preffered().getSize();
 	}
+
+	public String getCountryISO() {
+		return preffered().getCountryISO();
+	}
 	
 }

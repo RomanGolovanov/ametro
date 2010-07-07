@@ -118,5 +118,9 @@ public class GlobalSettings {
 			case TransportType.TROLLEYBUS_ID : return R.drawable.icon_w_trolleybus;		
 		}
 		return R.drawable.icon_w_unknown;
+	}
+
+	public static File getTemporaryDownloadIconFile() {
+		return new File(Constants.TEMP_CATALOG_PATH, "icons.zip");
 	}		
 }

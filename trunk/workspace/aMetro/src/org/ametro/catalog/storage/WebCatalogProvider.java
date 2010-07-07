@@ -31,12 +31,12 @@ import java.util.zip.ZipInputStream;
 
 import org.ametro.Constants;
 import org.ametro.util.FileUtil;
-import org.ametro.util.IOperationListener;
+import org.ametro.util.IDownloadListener;
 import org.ametro.util.WebUtil;
 
 import android.util.Log;
 
-public class WebCatalogProvider extends BaseCatalogProvider implements IOperationListener {
+public class WebCatalogProvider extends BaseCatalogProvider implements IDownloadListener {
 
 	protected final URI mURI;
 	protected final long mDeprecatedTimeout;

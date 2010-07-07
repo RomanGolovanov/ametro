@@ -868,6 +868,7 @@ public class PmzStorage implements IModelStorage {
 			model.localeCurrent = model.locales[0];
 			model.texts = model.localeTexts[0];
 			model.textLength = model.localeTexts[0].length;
+			model.countryIso = countryEntity!=null ? countryEntity.getISO2() : null; 
 			
 			int len = model.locales.length;
 			for(int i=0;i<len;i++){
