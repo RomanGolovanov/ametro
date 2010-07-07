@@ -27,18 +27,19 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 
+import org.ametro.directory.CityStationDictionary.Entity;
 import org.ametro.model.ext.ModelLocation;
 import org.ametro.util.csv.CsvReader;
 
 import android.content.Context;
 
-public  class StationLibraryProvider
+public  class StationDirectory
 {
-	public StationLibraryProvider(Context context){
+	public StationDirectory(Context context){
 		mContext = context;
 	}
 	
-	public StationLibrary get(File pmzFile){
+	public CityStationDictionary get(File pmzFile){
 		try {
 			InputStream strm;
 			File gpsFile = new File(pmzFile.getAbsolutePath().replace(".pmz", ".gps"));
@@ -51,18 +52,18 @@ public  class StationLibraryProvider
 				return null;
 			}
 			CsvReader reader = new CsvReader(new BufferedReader(new InputStreamReader(strm, "utf-8")),';');
-			HashMap<String, HashMap<String,StationInfo>> index = new HashMap<String, HashMap<String,StationInfo>>();
+			HashMap<String, HashMap<String,Entity>> index = new HashMap<String, HashMap<String,Entity>>();
 			reader.next(); // skip header
 			while(reader.next()){
-				StationInfo r = new StationInfo(reader.getString(1),reader.getString(2), reader.getCount()>=5 ? new ModelLocation(reader.getFloat(3), reader.getFloat(4) ) : null );
-				HashMap<String, StationInfo> city2rec = index.get(r.getLineSystemName());
+				Entity r = new Entity(reader.getString(1),reader.getString(2), reader.getCount()>=5 ? new ModelLocation(reader.getFloat(3), reader.getFloat(4) ) : null );
+				HashMap<String, Entity> city2rec = index.get(r.getLineSystemName());
 				if(city2rec==null){
-					city2rec = new HashMap<String, StationInfo>();
+					city2rec = new HashMap<String, Entity>();
 					index.put(r.getLineSystemName(), city2rec);
 				}
 				city2rec.put(r.getStationSystemName(), r);
 			}
-			return new StationLibrary(index);
+			return new CityStationDictionary(index);
 		} catch (Throwable e) {
 		}
 		return null;

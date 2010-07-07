@@ -24,24 +24,50 @@ import java.util.HashMap;
 
 import org.ametro.model.ext.ModelLocation;
 
-public class StationLibrary
+public class CityStationDictionary
 {
-	private final HashMap<String, HashMap<String,StationInfo>> mData;
 
-	public StationLibrary(HashMap<String,HashMap<String,StationInfo>> index){
+	public static class Entity {
+		private String mLineSystemName;
+		private String mStationSystemName;
+		private ModelLocation mLocation;
+		
+		public String getLineSystemName() {
+			return mLineSystemName;
+		}
+
+		public String getStationSystemName() {
+			return mStationSystemName;
+		}
+
+		public ModelLocation getLocation() {
+			return mLocation;
+		}
+
+		public Entity(String lineSystemName, String stationSystemName, ModelLocation location) {
+			super();
+			mLineSystemName = lineSystemName;
+			mStationSystemName = stationSystemName;
+			mLocation = location;
+		}
+	}
+	
+	private final HashMap<String, HashMap<String,Entity>> mData;
+
+	public CityStationDictionary(HashMap<String,HashMap<String,Entity>> index){
 		mData = index;
 	}
 
 	public ModelLocation getStationLocation(String lineSystemName, String stationSystemName){
-		StationInfo r = getRecord(lineSystemName, stationSystemName);
+		Entity r = getRecord(lineSystemName, stationSystemName);
 		if(r!=null){
 			return r.getLocation();
 		}
 		return null;
 	}
 
-	public StationInfo getRecord(String lineSystemName, String stationSystemName){
-		HashMap<String, StationInfo> city2rec = mData.get(lineSystemName);
+	public Entity getRecord(String lineSystemName, String stationSystemName){
+		HashMap<String, Entity> city2rec = mData.get(lineSystemName);
 		if(city2rec!=null){
 			return city2rec.get(stationSystemName);
 		}

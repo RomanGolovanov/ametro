@@ -23,9 +23,8 @@ package org.ametro;
 import org.ametro.catalog.storage.CatalogStorage;
 import org.ametro.directory.CityDirectory;
 import org.ametro.directory.CountryDirectory;
-import org.ametro.directory.CountryLibrary;
 import org.ametro.directory.ImportDirectory;
-import org.ametro.directory.StationLibraryProvider;
+import org.ametro.directory.StationDirectory;
 import org.ametro.jni.Natives;
 import org.ametro.util.FileUtil;
 import org.apache.http.HttpVersion;
@@ -79,29 +78,17 @@ public class ApplicationEx extends Application {
 		}
 		return mImportDirectory;
 	}
-	
-	public CountryLibrary getCountryLibrary() {
-		if (mCountryLibrary == null) {
-			synchronized (ApplicationEx.class) {
-				if (mCountryLibrary == null) {
-					mCountryLibrary = new CountryLibrary(
-							getApplicationContext());
-				}
-			}
-		}
-		return mCountryLibrary;
-	}
 
-	public StationLibraryProvider getStationLibrary() {
-		if (mStationLibrary == null) {
+	public StationDirectory getStationDirectory() {
+		if (mStationDirectory == null) {
 			synchronized (ApplicationEx.class) {
-				if (mStationLibrary == null) {
-					mStationLibrary = new StationLibraryProvider(
+				if (mStationDirectory == null) {
+					mStationDirectory = new StationDirectory(
 							getApplicationContext());
 				}
 			}
 		}
-		return mStationLibrary;
+		return mStationDirectory;
 	}
 
 	public CatalogStorage getCatalogStorage() {
@@ -186,8 +173,7 @@ public class ApplicationEx extends Application {
 	private HttpClient mHttpClient;
 	private static ApplicationEx mInstance;
 
-	private CountryLibrary mCountryLibrary;
-	private StationLibraryProvider mStationLibrary;
+	private StationDirectory mStationDirectory;
 	private CatalogStorage mStorage;
 
 	private ImportDirectory mImportDirectory;
