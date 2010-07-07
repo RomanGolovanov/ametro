@@ -5,7 +5,7 @@
 	<TextView android:id="@+id/text" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:padding="6sp"
 		android:layout_marginRight="2sp"
-		android:textSize="18sp" />
+		 />
 	<ImageView android:layout_alignParentTop="true"
 		android:layout_width="fill_parent" android:layout_height="1sp"
 		android:src="@drawable/gray_splitter" />
