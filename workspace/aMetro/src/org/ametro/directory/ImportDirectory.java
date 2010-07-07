@@ -40,7 +40,7 @@ public class ImportDirectory {
 			CsvReader reader = new CsvReader(new BufferedReader(new InputStreamReader(strm, "utf-8")),',');
 			if(reader.next()){
 				while(reader.next()){
-					String fileName = reader.getString(0);
+					String fileName = reader.getString(0).toLowerCase();
 					int cityId = reader.getInt(1);
 					Entity entity = new Entity(fileName, cityId);
 					mIndex.put(fileName, entity);

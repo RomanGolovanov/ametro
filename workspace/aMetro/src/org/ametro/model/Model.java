@@ -20,6 +20,7 @@
  */
 package org.ametro.model;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 import org.ametro.model.ext.ModelLocation;
@@ -34,6 +35,7 @@ public class Model {
 	public final static int VERSION = 1;
 	public final static String COMPATIBILITY_VERSION = "0.2.4.r224";
 	
+	public String countryIso;
 	public int countryName;
 	public int cityName;
 	public int[] authors;
@@ -116,6 +118,18 @@ public class Model {
 		return locales[0];
 	}
 
+	public int getLocaleId(String languageCode){
+		if(languageCode!=null){
+			final int len = locales.length;
+			for(int i = 0; i < len; i++){
+				if( languageCode.equals(locales[i]) ){
+					return i;
+				}
+			}
+		}
+		return 0;
+	}
+	
 	public int getLocaleId(Locale locale){
 		if(locale!=null){
 			final int len = locales.length;
@@ -272,6 +286,18 @@ public class Model {
 			}
 		}
 		return null;
+	}
+
+	public ArrayList<String> getAuthors(String languageCode) {
+		final int localeId = getLocaleId(languageCode);
+		final String[] texts = localeTexts[localeId];
+		final ArrayList<String> res = new ArrayList<String>();
+		final int[] authors = this.authors; 
+		final int len = authors.length;
+		for(int i=0; i<len; i++){
+			res.add(texts[ authors[i] ]);
+		}
+		return res;
 	}
 
 	

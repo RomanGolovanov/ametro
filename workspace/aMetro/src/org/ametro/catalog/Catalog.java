@@ -27,6 +27,7 @@ import java.util.TreeSet;
 
 import org.ametro.Constants;
 import org.ametro.model.Model;
+import org.ametro.util.StringUtil;
 
 public class Catalog {
 
@@ -174,7 +175,7 @@ public class Catalog {
 		final TreeSet<ModelDescription> modelLocales = new TreeSet<ModelDescription>();
 		
 		for(int i=0; i<len;i++){
-			modelLocales.add( new ModelDescription(locales[i], texts[i][cityId], texts[i][countryId], "Not supported yet.") );
+			modelLocales.add( new ModelDescription(locales[i], texts[i][cityId], texts[i][countryId], StringUtil.join(model.getAuthors(locales[i]), "\n") ) );
 		}
 
 		int index = 0;

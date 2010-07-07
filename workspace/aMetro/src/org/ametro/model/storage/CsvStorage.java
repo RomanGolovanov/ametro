@@ -402,6 +402,7 @@ public class CsvStorage implements IModelStorage {
 		}
 		model.systemName = reader.readString();
 		model.timestamp = reader.readLong();
+		model.countryIso = reader.readString();
 		model.countryName = reader.readInt();
 		model.cityName = reader.readInt();
 		model.transportTypes = reader.readLong();
@@ -425,6 +426,7 @@ public class CsvStorage implements IModelStorage {
 		writer.writeInt(Model.VERSION);
 		writer.writeString(model.systemName);
 		writer.writeLong(model.timestamp);
+		writer.writeString(model.countryIso);
 		writer.writeInt(model.countryName);
 		writer.writeInt(model.cityName);
 		writer.writeLong(model.transportTypes);

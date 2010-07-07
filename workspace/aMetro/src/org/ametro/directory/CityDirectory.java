@@ -89,6 +89,7 @@ public class CityDirectory {
 	
 	public CityDirectory(Context context) {
 		mIndex = new HashMap<Integer, Entity>();
+		mNameIndex = new HashMap<String, Entity>();
 		try {
 			InputStream strm = context.getAssets().open("cities.dict");
 			CsvReader reader = new CsvReader(new BufferedReader(new InputStreamReader(strm, "utf-8")),',');
@@ -110,6 +111,9 @@ public class CityDirectory {
 					String[] names = getNames(reader, locales.length);
 					Entity entity = new Entity(id, countryId, location, names, locales);
 					mIndex.put(id, entity);
+					for(String name : names){
+						mNameIndex.put(name, entity);						
+					}
 				}
 			}
 		} catch (Throwable e) {
@@ -147,8 +151,12 @@ public class CityDirectory {
 	public Entity get(int id){
 		return mIndex.get(id);
 	}
+
+	public Entity getByName(String name){
+		return mNameIndex.get(name);
+	}
 	
 	private final HashMap<Integer, Entity> mIndex;
-		
+	private final HashMap<String, Entity> mNameIndex;
 
 }

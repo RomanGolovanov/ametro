@@ -71,6 +71,10 @@ public class TextStripView extends LinearLayout {
 			super(context, R.layout.map_details_text);
 			mText = (TextView) mContent.findViewById(R.id.text);
 		}
+		
+		public TextView getText() {
+			return mText;
+		}		
 	}
 
 	public static class WidgetBlockView extends Element {
