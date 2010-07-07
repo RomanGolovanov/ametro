@@ -10,17 +10,21 @@
  		android:layout_alignParentTop="true"
  		android:background="#ff808080"
 		android:visibility="gone"
-		android:gravity="center_vertical" 
-		android:paddingTop="6sp">
+		android:gravity="center_vertical"
+		android:paddingTop="4sp"
+		>
 		
 		<EditText android:id="@+id/actionbar_text" android:layout_weight="1"
 			android:inputType="textFilter"
-			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:layout_marginLeft="4sp"
+			 />
 			
 		<ImageButton android:id="@+id/actionbar_hide"
 			android:src="@android:drawable/ic_delete" 
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:paddingLeft="8sp" android:paddingRight="8sp"
+			android:paddingLeft="6sp"
+			android:paddingRight="6sp"
 			/>
 	</LinearLayout>
 	

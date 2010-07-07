@@ -111,7 +111,8 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	protected String mErrorMessage;
 
 	protected Handler mUIEventDispacher = new Handler();
-	
+
+	private final int MAIN_MENU_SEARCH = 996;
 	private final int MAIN_MENU_REFRESH = 997;
 	private final int MAIN_MENU_LOCATION = 998;
 	private final int MAIN_MENU_SETTINGS = 999;
@@ -240,6 +241,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
+		menu.add(0, MAIN_MENU_SEARCH, Menu.NONE, R.string.menu_search).setIcon(android.R.drawable.ic_menu_search);
 		menu.add(0, MAIN_MENU_REFRESH, Menu.NONE, R.string.menu_refresh).setIcon(android.R.drawable.ic_menu_rotate);
 		menu.add(0, MAIN_MENU_LOCATION, Menu.NONE, R.string.menu_location).setIcon(android.R.drawable.ic_menu_mylocation);
 		menu.add(0, MAIN_MENU_SETTINGS, 999, R.string.menu_settings).setIcon(android.R.drawable.ic_menu_preferences);
@@ -248,6 +250,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	}
 
 	public boolean onPrepareOptionsMenu(Menu menu) {
+		menu.findItem(MAIN_MENU_SEARCH).setEnabled(mMode == MODE_LIST);
 		menu.findItem(MAIN_MENU_LOCATION).setEnabled(mMode == MODE_LIST);
 		menu.findItem(MAIN_MENU_REFRESH).setEnabled( (mMode != MODE_WAIT) && (mMode != MODE_WAIT_NO_PROGRESS) );
 		return super.onPrepareOptionsMenu(menu);
@@ -255,6 +258,9 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
+		case MAIN_MENU_SEARCH:
+			onSearchRequested();
+			return true;
 		case MAIN_MENU_REFRESH:
 			onCatalogRefresh();
 			return true;
@@ -596,7 +602,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 			if(mActionBar.getVisibility() == View.GONE){
 				mIsActionBarAnimated = true;
 				TranslateAnimation anim = new TranslateAnimation(0, 0, -50*scale , 0);
-				anim.setDuration(500);
+				anim.setDuration(250);
 				anim.setAnimationListener(new AnimationListener() {
 					public void onAnimationStart(Animation animation) {
 					}
@@ -614,7 +620,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 			if(mActionBar.getVisibility() == View.VISIBLE){
 				mIsActionBarAnimated = true;
 				TranslateAnimation anim = new TranslateAnimation(0, 0, 0, -50*scale);
-				anim.setDuration(500);
+				anim.setDuration(250);
 				anim.setAnimationListener(new AnimationListener() {
 					public void onAnimationStart(Animation animation) {
 					}

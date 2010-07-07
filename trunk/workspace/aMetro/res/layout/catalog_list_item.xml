@@ -16,15 +16,6 @@
 	<RelativeLayout android:gravity="center_vertical"
 		android:layout_width="fill_parent" android:padding="6sp"
 		android:layout_height="?android:attr/listPreferredItemHeight">
-		<TextView android:id="@+id/city"
-			android:layout_alignParentTop="true" android:layout_marginLeft="4sp"
-			android:textColor="@android:color/white"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:textSize="18sp" android:text="Moscow" />
-		<TextView android:id="@+id/state"
-			android:layout_alignParentBottom="true" android:layout_marginLeft="4sp"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:textSize="14sp" android:text="Installed" />
 		<LinearLayout android:id="@+id/icons" android:layout_alignParentTop="true"
 			android:layout_alignParentRight="true"
 			android:layout_marginRight="4sp"
@@ -34,5 +25,20 @@
 			android:layout_alignParentRight="true" 
 			android:layout_width="wrap_content" 
 			android:layout_marginRight="4sp" android:layout_height="wrap_content" android:text="256 KB" />
+		<TextView android:id="@+id/city" android:gravity="left|center_vertical"
+			android:textColor="@android:color/white"
+			android:layout_alignParentTop="true" 
+			android:layout_alignParentLeft="true" 
+			android:layout_marginLeft="4sp"
+			android:layout_toLeftOf="@id/icons"
+			android:lines="1"
+			android:ellipsize="marquee"
+			android:marqueeRepeatLimit="marquee_forever"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:textSize="20sp" android:text="Moscow" />
+		<TextView android:id="@+id/state"
+			android:layout_alignParentBottom="true" android:layout_marginLeft="4sp"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:textSize="14sp" android:text="Installed" />
 	</RelativeLayout>
 </LinearLayout>
