@@ -33,8 +33,9 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import org.ametro.ApplicationEx;
-import org.ametro.directory.CityInfo;
-import org.ametro.directory.CountryLibrary;
+import org.ametro.directory.CityDirectory;
+import org.ametro.directory.CountryDirectory;
+import org.ametro.directory.ImportDirectory;
 import org.ametro.directory.StationLibrary;
 import org.ametro.directory.StationLibraryProvider;
 import org.ametro.model.LineView;
@@ -143,7 +144,6 @@ public class PmzStorage implements IModelStorage {
 
 		private HashMap<Integer, StationInfo> mStationInfo = new HashMap<Integer, StationInfo>();
 		
-		private CountryLibrary mCountryLibrary;
 		private StationLibraryProvider mStationLibrary;
 
 		private int[] getMapsNumbers(String[] maps) {
@@ -194,9 +194,7 @@ public class PmzStorage implements IModelStorage {
 			mFile = new File(fileName);
 			mModel = null;
 			mDescriptionOnly = descriptionOnly;
-			ApplicationEx app = ApplicationEx.getInstance();
-			mCountryLibrary = app.getCountryLibrary();
-			mStationLibrary = app.getStationLibrary();
+			mStationLibrary = ApplicationEx.getInstance().getStationLibrary();
 			
 		}
 
@@ -734,6 +732,7 @@ public class PmzStorage implements IModelStorage {
 				}
 			}
 			final Model m = mModel;
+			m.systemName = mFile.getName().toLowerCase() + ".ametro";
 			m.cityName = appendLocalizedText(city);
 			m.countryName = appendLocalizedText(country);
 			m.authors = appendTextArray((String[]) authors.toArray(new String[authors.size()]));
@@ -817,43 +816,75 @@ public class PmzStorage implements IModelStorage {
 			final String originalLocale = determineLocale(originalTexts);
 
 			// locate country info
-			final String country = originalTexts[mModel.countryName];
-			final String city = originalTexts[mModel.cityName];
-			CityInfo info = mCountryLibrary.search(country,city);
-			mModel.location = info!=null ? info.getLocation() : null;
+			final String countryName = originalTexts[mModel.countryName];
+			final String cityName = originalTexts[mModel.cityName];
+			
+			//CityInfo info = mCountryLibrary.search(country,city);
+			final ApplicationEx instance = ApplicationEx.getInstance();
+			ImportDirectory importDirectory = instance.getImportDirectory();
+			CityDirectory cityDirectory = instance.getCityDirectory();
+			CountryDirectory countryDirectory = instance.getCountryDirectory();
 
+			ImportDirectory.Entity importEntity = null;
+			CityDirectory.Entity cityEntity = null;
+			CountryDirectory.Entity countryEntity = null;
+			
+			importEntity = importDirectory.get(mFile.getName().toLowerCase().replaceAll(".pmz", ""));
+			if(importEntity!=null){
+				cityEntity = cityDirectory.get(importEntity.getCityId());
+				if(cityEntity!=null){
+					countryEntity = countryDirectory.get(cityEntity.getCountryId());
+				}
+			}else{
+				cityEntity = cityDirectory.getByName( cityName );
+				if(cityEntity!=null){
+					countryEntity = countryDirectory.get(cityEntity.getCountryId());
+				}else{
+					countryEntity = countryDirectory.getByName( countryName );
+				}
+			}
+			
 			// make localization
 			if(originalLocale.equals(Model.LOCALE_RU)){
+				localeList.add(Model.LOCALE_EN);
+				textList.add(makeTransliteText(originalTexts, true));
 				localeList.add(originalLocale);
 				textList.add(originalTexts);
-				localeList.add(Model.LOCALE_EN);
-				textList.add(makeTransliteText(info,originalTexts, true));
 			}
 			if(originalLocale.equals(Model.LOCALE_EN)){
 				// localize description fields
 				localeList.add(originalLocale);
-				textList.add(makeTransliteText(info,originalTexts, false));
+				textList.add(makeTransliteText(originalTexts, true));
 				localeList.add(Model.LOCALE_RU);
 				textList.add(originalTexts);
-
 			}
 
+			
 			// setup model
 			final Model model = mModel;
+			model.location = cityEntity!=null ? cityEntity.getLocation() : null;
 			model.locales = (String[]) localeList.toArray(new String[localeList.size()]);
 			model.localeTexts = (String[][]) textList.toArray(new String[textList.size()][]);
 			model.localeCurrent = model.locales[0];
 			model.texts = model.localeTexts[0];
 			model.textLength = model.localeTexts[0].length;
+			
+			int len = model.locales.length;
+			for(int i=0;i<len;i++){
+				final String code = model.locales[i];
+				if(cityEntity!=null){
+					model.localeTexts[i][model.cityName] = cityEntity.getName(code);
+				}
+				if(countryEntity!=null){
+					model.localeTexts[i][model.countryName] = countryEntity.getName(code);
+				}
+			}
+
 		}
 
-		private String[] makeTransliteText(CityInfo info, final String[] originalTexts, boolean transliterate) { 
+		private String[] makeTransliteText(final String[] originalTexts, boolean transliterate) { 
 			final int len = originalTexts.length;
 			final String[] translitTexts = new String[len];
-			if(info!=null){
-				translitTexts[mModel.countryName] = info.getCountryNameEn();
-				translitTexts[mModel.cityName] = info.getCityNameEn();
-			}
 			for(int i=0; i<len; i++){
 				if(translitTexts[i] == null){
 					translitTexts[i] = transliterate ?  StringUtil.toTranslit(originalTexts[i]) : originalTexts[i];

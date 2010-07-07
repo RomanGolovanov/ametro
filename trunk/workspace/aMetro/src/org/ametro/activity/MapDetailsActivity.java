@@ -39,6 +39,7 @@ import org.ametro.util.DateUtil;
 import org.ametro.widget.TextStripView;
 import org.ametro.widget.TextStripView.ImportWidgetView;
 import org.ametro.widget.TextStripView.OnlineWidgetView;
+import org.ametro.widget.TextStripView.TextBlockView;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -48,6 +49,8 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Html;
+import android.text.util.Linkify;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -360,7 +363,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 			String stateName = states[stateId];
 			int stateColor = (res
 					.getIntArray(R.array.online_catalog_map_state_colors))[stateId];
-			mContent.createHeader().setTextLeft("Online").setTextRight(
+			mContent.createHeader().setTextLeft(getString(R.string.msg_online)).setTextRight(
 					stateName).setTextRightColor(stateColor);
 			mOnlineWidget = mContent.createOnlineWidget();
 			mOnlineWidget.setSize(mOnline.getSize());
@@ -376,7 +379,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 			String stateName = states[stateId];
 			int stateColor = (res
 					.getIntArray(R.array.import_catalog_map_state_colors))[stateId];
-			mContent.createHeader().setTextLeft("Import").setTextRight(
+			mContent.createHeader().setTextLeft(getString(R.string.msg_import)).setTextRight(
 					stateName).setTextRightColor(stateColor);
 			mImportWidget = mContent.createImportWidget();
 			mImportWidget.setSize(mImport.getSize());
@@ -387,7 +390,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 			mImportWidget.getCancelButton().setOnClickListener(this);
 		}
 
-		mContent.createHeader().setTextLeft("Transports");
+		mContent.createHeader().setTextLeft(getString(R.string.msg_transports));
 		long transports = preffered().getTransports();
 		long transportCode = 1;
 		int transportId = 0;
@@ -402,9 +405,17 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 			transportId++;
 		}
 
+		String description = preffered().getDescription(code);
+		if(description!=null){
+			description = description.replaceAll("\n", "<br/>");
+		}else{
+			description = getString(R.string.msg_no_desription);
+		}
 		mContent.createHeader().setTextLeft("Description");
-		mContent.createText().setText(preffered().getDescription(code));
-
+		TextBlockView text = mContent.createText();
+		text.setText(Html.fromHtml(description));
+		Linkify.addLinks(text.getText(), Linkify.ALL);
+		
 		updateFavoriteButton();
 	}
 	
