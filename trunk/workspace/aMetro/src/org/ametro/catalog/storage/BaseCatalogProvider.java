@@ -35,7 +35,7 @@ public abstract class BaseCatalogProvider {
 	
 	public void load(boolean refreshCatalog){
 		if(!refreshCatalog && mStorage.exists()){
-			loadFromStorage();			
+			loadFromStorage();
 		}
 		if(mCatalog==null || refreshCatalog){
 			refresh();
