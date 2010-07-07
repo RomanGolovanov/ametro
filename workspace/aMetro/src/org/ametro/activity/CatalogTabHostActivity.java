@@ -40,7 +40,7 @@ public class CatalogTabHostActivity extends TabActivity {
 		super.onCreate(savedInstanceState);
 		mInstance = this;
 
-		setContentView(R.layout.catalog_tab_host);
+		//setContentView(R.layout.catalog_tab_host);
 		
 		final TabHost tabHost = getTabHost();
 		final Resources res = getResources();

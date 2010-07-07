@@ -1,48 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:gravity="center_vertical" android:layout_width="fill_parent"
-	android:layout_height="64dip">
-
-	<ImageView android:id="@+id/iso_icon" android:layout_width="wrap_content"
-		android:layout_alignParentLeft="true" android:layout_centerVertical="true"
-		android:layout_marginLeft="6sp" android:layout_marginRight="6sp"
-		android:layout_height="wrap_content" android:src="@drawable/no_country" />
-
-	<LinearLayout android:layout_toRightOf="@id/iso_icon"
-		android:layout_alignParentRight="true" android:paddingRight="5px"
-		android:paddingBottom="2px" android:paddingTop="2px"
-		android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:orientation="vertical">
-
-		<LinearLayout android:layout_width="fill_parent"
-			android:gravity="center_vertical" android:layout_height="wrap_content"
-			android:orientation="horizontal">
-			<TextView android:id="@+id/city" android:layout_width="wrap_content"
-				android:layout_height="wrap_content" android:layout_weight="1"
-				android:ellipsize="marquee" android:scrollHorizontally="true"
-				android:lines="1" android:paddingLeft="0px" android:textSize="16sp" />
-			<LinearLayout android:id="@+id/icons"
-				android:layout_width="wrap_content" android:layout_height="wrap_content"
-				android:gravity="right" android:layout_weight="0" />
-			<FrameLayout android:id="@+id/placeholder"
-				android:layout_width="wrap_content" android:layout_height="wrap_content"
-				android:layout_weight="0">
-				<TextView android:layout_width="wrap_content" android:id="@+id/size"
-					android:layout_height="wrap_content" android:text="256 KB" />
-			</FrameLayout>
-		</LinearLayout>
-
-		<LinearLayout android:layout_width="fill_parent"
-			android:gravity="center_vertical" android:layout_height="wrap_content"
-			android:orientation="horizontal">
-			<TextView android:id="@+id/country" android:layout_width="wrap_content"
-				android:layout_height="wrap_content" android:text="CountryName"
-				android:textSize="14sp" android:layout_weight="1" android:gravity="left" />
-
-			<TextView android:id="@+id/state" android:layout_width="wrap_content"
-				android:layout_height="wrap_content" android:textSize="14sp"
-				android:layout_weight="0" android:gravity="right" />
-		</LinearLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:orientation="horizontal"
+	android:gravity="center_vertical" android:layout_height="?android:attr/listPreferredItemHeight">
+	<LinearLayout android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:orientation="vertical"
+		android:gravity="center">
+		<ImageView android:id="@+id/iso_icon" android:layout_width="wrap_content"
+			android:layout_margin="0px"
+			android:layout_height="wrap_content" android:src="@drawable/no_country" />
+		<TextView android:id="@+id/country" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:textSize="14sp"
+			android:layout_margin="0px"
+			android:text="RUS" android:gravity="top" />
 	</LinearLayout>
-
-</RelativeLayout>
+	<RelativeLayout android:gravity="center_vertical"
+		android:layout_width="fill_parent" android:padding="6sp"
+		android:layout_height="?android:attr/listPreferredItemHeight">
+		<TextView android:id="@+id/city"
+			android:layout_alignParentTop="true" android:layout_marginLeft="4sp"
+			android:textColor="@android:color/white"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:textSize="18sp" android:text="Moscow" />
+		<TextView android:id="@+id/state"
+			android:layout_alignParentBottom="true" android:layout_marginLeft="4sp"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:textSize="14sp" android:text="Installed" />
+		<LinearLayout android:id="@+id/icons" android:layout_alignParentTop="true"
+			android:layout_alignParentRight="true"
+			android:layout_marginRight="4sp"
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+		<TextView android:id="@+id/size" 
+			android:layout_alignParentBottom="true" 
+			android:layout_alignParentRight="true" 
+			android:layout_width="wrap_content" 
+			android:layout_marginRight="4sp" android:layout_height="wrap_content" android:text="256 KB" />
+	</RelativeLayout>
+</LinearLayout>

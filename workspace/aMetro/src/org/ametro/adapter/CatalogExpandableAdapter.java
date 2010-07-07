@@ -41,11 +41,9 @@ import org.ametro.util.StringUtil;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -65,6 +63,7 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
 	protected String mLanguageCode;
 	
 	protected String[] mCountries;
+	protected String[] mISO;
     protected Drawable[] mIcons;
     protected CatalogMapPair[][] mRefs;
 
@@ -115,10 +114,7 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
 		mMode = mode;
 		
     	mObjects = CatalogMapPair.diff(local, remote, mode);
-		
-    	
         bindData();
-
 		bindTransportTypes();
     }
 
@@ -134,14 +130,14 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
         return mRefs[groupPosition].length;
     }
 
-    public TextView getGenericView() {
-        AbsListView.LayoutParams lp = new AbsListView.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 64);
-        TextView textView = new TextView(mContext);
-        textView.setLayoutParams(lp);
-        textView.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
-        textView.setPadding(36, 0, 0, 0);
-        return textView;
-    }
+//    public TextView getGenericView() {
+//        AbsListView.LayoutParams lp = new AbsListView.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 64);
+//        TextView textView = new TextView(mContext);
+//        textView.setLayoutParams(lp);
+//        textView.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
+//        textView.setPadding(36, 0, 0, 0);
+//        return textView;
+//    }
 
 	public static class ViewHolder {
 		TextView mCity;
@@ -150,6 +146,10 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
 		TextView mSize;
 		ImageView mIsoIcon;
 		LinearLayout mImageContainer;
+	}    
+
+	public static class GroupViewHolder {
+		TextView mCountry;
 	}    
     
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
@@ -173,7 +173,7 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
 		final CatalogMapPair ref = mRefs[groupPosition][childPosition];
 		final int state = mStatusProvider.getCatalogState(ref.getLocal(), ref.getRemote());
 		holder.mCity.setText(ref.getCity(code));
-		holder.mCountry.setText(ref.getCountry(code));
+		holder.mCountry.setText( mISO[groupPosition] );
 		holder.mStatus.setText(mStates[state]);
 		holder.mStatus.setTextColor(mStateColors[state]);
 		holder.mSize.setText( StringUtil.formatFileSize(ref.getSize(),0) );
@@ -211,9 +211,17 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
     }
 
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        TextView textView = getGenericView();
-        textView.setText(getGroup(groupPosition).toString());
-        return textView;
+    	GroupViewHolder holder;
+		if (convertView == null) {
+			convertView = mInflater.inflate(R.layout.catalog_list_group_item, null);
+			holder = new GroupViewHolder();
+			holder.mCountry = (TextView) convertView.findViewById(R.id.text);
+			convertView.setTag(holder);
+		} else {
+			holder = (GroupViewHolder) convertView.getTag();
+		}    	
+		holder.mCountry.setText(mCountries[groupPosition]);
+		return convertView;
     }
 
     public boolean isChildSelectable(int groupPosition, int childPosition) {
@@ -255,13 +263,25 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
         }
         mCountries = (String[]) countries.toArray(new String[countries.size()]);
         mIcons = new Drawable[mCountries.length];
+        mISO = new String[mCountries.length];
+        mRefs = new CatalogMapPair[mCountries.length][];
         
         final CountryDirectory countryDirectory = ApplicationEx.getInstance().getCountryDirectory();
         final Resources res = mContext.getResources();
         int lenc = mCountries.length;
         for(int i=0;i<lenc;i++){
-        	CountryDirectory.Entity entity = countryDirectory.getByName(mCountries[i]);
+        	String country = mCountries[i];
+        	
+        	ArrayList<CatalogMapPair> diffSet = index.get(country);
+			if(diffSet!=null){        	
+	        	int len = diffSet.size();
+	        	mRefs[i] = (CatalogMapPair[]) diffSet.toArray(new CatalogMapPair[len]);
+	        	Arrays.sort(mRefs[i], comparator);
+			}
+        	
+        	CountryDirectory.Entity entity = countryDirectory.getByName(country);
         	if(entity!=null){
+        		mISO[i] = entity.getISO2()!=null ? entity.getISO2().toUpperCase() : null;
     			File file = new File(Constants.ICONS_PATH, entity.getISO2() + ".png");
     			if(file.exists()){
     				mIcons[i] = Drawable.createFromPath(file.getAbsolutePath());
@@ -271,15 +291,7 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
         	}
         }
         
-        mRefs = new CatalogMapPair[mCountries.length][];
         for(int i=0; i<mCountries.length;i++){
-        	String country = mCountries[i];
-        	ArrayList<CatalogMapPair> diffSet = index.get(country);
-			if(diffSet!=null){        	
-	        	int len = diffSet.size();
-	        	mRefs[i] = (CatalogMapPair[]) diffSet.toArray(new CatalogMapPair[len]);
-	        	Arrays.sort(mRefs[i], comparator);
-			}
         }
 	}
 

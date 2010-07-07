@@ -70,6 +70,9 @@ import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
+import android.view.animation.Animation.AnimationListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
@@ -99,9 +102,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	
 	protected View mActionBar;
 	protected EditText mActionBarEditText;
-	protected TextView mActionBarTextView;
 	protected ImageButton mActionBarCancelButton;
-	protected ImageButton mActionBarSearchButton;
 	
 	protected int mProgress;
 	protected int mTotal;
@@ -137,6 +138,8 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	protected int mDiffMode;
 	protected int mDiffColors;
 	
+	protected boolean mIsActionBarAnimated = false;
+	
 	/*package*/ LinkedList<CatalogEvent> mCatalogLoadedEvents = new LinkedList<CatalogEvent>();
 	
 	/*package*/ InputMethodManager mInputMethodManager;
@@ -152,8 +155,8 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	
 	
 	public boolean onSearchRequested() {
-		if(mMode == MODE_LIST && mActionBar!=null){
-			onClick(mActionBarSearchButton);
+		if(mMode == MODE_LIST && mActionBar!=null && mActionBar.getVisibility() == View.GONE){
+			setActionBarVisibility(true);
 			return true;
 		}
 		return false;
@@ -365,14 +368,9 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		registerForContextMenu(mList);
 
 		mActionBar = (View)findViewById(R.id.actionbar);
-		mActionBarEditText = (EditText)findViewById(R.id.text_edit);
-		mActionBarTextView = (TextView)findViewById(R.id.text_view);
-		mActionBarCancelButton = (ImageButton)findViewById(R.id.btn_cancel);
-		mActionBarSearchButton = (ImageButton)findViewById(R.id.btn_search);
+		mActionBarEditText = (EditText)findViewById(R.id.actionbar_text);
+		mActionBarCancelButton = (ImageButton)findViewById(R.id.actionbar_hide);
 		mActionBarCancelButton.setOnClickListener(this);
-		mActionBarSearchButton.setOnClickListener(this);
-		mActionBarTextView.setOnClickListener(this);
-		mActionBarTextView.setText(getTitle());
 		
 		mActionBarEditText.addTextChangedListener(mActionTextWatcher);
 		mActionBarEditText.setOnFocusChangeListener(this);
@@ -585,20 +583,52 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	public void onClick(View v) {
 		if(v == mActionBarCancelButton){
 			setActionBarVisibility(false);
-		}else if (v == mActionBarSearchButton ){ // || (mActionBarTextView.getVisibility() == View.VISIBLE && (v == mActionBarTextView || v == mActionBar)) ){
-			setActionBarVisibility(true);
 		}
-		
 	}
+
+	
 	private void setActionBarVisibility(boolean isVisible) {
-		mActionBarCancelButton.setVisibility(isVisible ? View.VISIBLE : View.GONE);
-		mActionBarEditText.setVisibility(isVisible ? View.VISIBLE : View.GONE);
-		mActionBarTextView.setVisibility(isVisible ? View.GONE : View.VISIBLE);
+		if(mIsActionBarAnimated){ 
+			return;
+		}
+		final float scale = getResources().getDisplayMetrics().density;
 		if(isVisible){
-			mActionBarEditText.requestFocus();
+			if(mActionBar.getVisibility() == View.GONE){
+				mIsActionBarAnimated = true;
+				TranslateAnimation anim = new TranslateAnimation(0, 0, -50*scale , 0);
+				anim.setDuration(500);
+				anim.setAnimationListener(new AnimationListener() {
+					public void onAnimationStart(Animation animation) {
+					}
+					public void onAnimationRepeat(Animation animation) {
+					}
+					public void onAnimationEnd(Animation animation) {
+						mActionBarEditText.requestFocus();
+						mIsActionBarAnimated = false;
+					}
+				});
+				mActionBar.startAnimation(anim);
+				mActionBar.setVisibility(View.VISIBLE);
+			}
 		}else{
-			mActionBarEditText.setText("");
-			mList.requestFocus();
+			if(mActionBar.getVisibility() == View.VISIBLE){
+				mIsActionBarAnimated = true;
+				TranslateAnimation anim = new TranslateAnimation(0, 0, 0, -50*scale);
+				anim.setDuration(500);
+				anim.setAnimationListener(new AnimationListener() {
+					public void onAnimationStart(Animation animation) {
+					}
+					public void onAnimationRepeat(Animation animation) {
+					}
+					public void onAnimationEnd(Animation animation) {
+						mActionBarEditText.setText("");
+						mActionBar.setVisibility(View.GONE);
+						mList.requestFocus();
+						mIsActionBarAnimated = false;
+					}
+				});
+				mActionBar.startAnimation(anim);
+			}
 		}
 	}
 
