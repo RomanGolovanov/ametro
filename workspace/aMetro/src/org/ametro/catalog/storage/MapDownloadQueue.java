@@ -29,12 +29,12 @@ import java.util.concurrent.LinkedBlockingQueue;
 import org.ametro.Constants;
 import org.ametro.GlobalSettings;
 import org.ametro.catalog.CatalogMap;
-import org.ametro.util.IOperationListener;
+import org.ametro.util.IDownloadListener;
 import org.ametro.util.WebUtil;
 
 import android.util.Log;
 
-public class MapDownloadQueue extends Thread implements IOperationListener {
+public class MapDownloadQueue extends Thread implements IDownloadListener {
 
 	public static interface IMapDownloadListener
 	{

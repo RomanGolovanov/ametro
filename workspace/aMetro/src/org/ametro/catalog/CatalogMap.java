@@ -39,6 +39,8 @@ public class CatalogMap {
 	
 	/*package*/ String[] mLocales;
 	
+	/*package*/ String mCountryISO;
+	
 	/*package*/ String[] mCity;
 	/*package*/ String[] mCountry;
 	/*package*/ String[] mDescription;
@@ -50,7 +52,7 @@ public class CatalogMap {
 	
 	public CatalogMap(Catalog owner, String systemName, String url, long timestamp, long transports, long version,
 			long size, String minVersion,
-			String[] locales, String[] country,
+			String[] locales, String[] country, String countryISO,
 			String[] city, String[] description, String[] changeLog, 
 			boolean corrupted) {
 		this.mOwner = owner;
@@ -63,6 +65,7 @@ public class CatalogMap {
 		this.mMinVersion = minVersion;
 		this.mLocales = locales;
 		this.mCountry = country;
+		this.mCountryISO = countryISO;
 		this.mCity = city;
 		this.mDescription = description;
 		this.mCorrupted = corrupted;
@@ -73,6 +76,9 @@ public class CatalogMap {
 		return mSystemName;
 	}
 
+	public String getCountryISO(){
+		return mCountryISO;
+	}
 	
 	public String getUrl() {
 		return mUrl;

@@ -44,6 +44,7 @@ public class CatalogDeserializer {
 	public static String TAG_CHANGE_LOG = "changelog";
 	
 	public static String ATTR_URL = "url";
+	public static String ATTR_COUNTRY_ISO = "iso";
 	public static String ATTR_SYSTEM_NAME = "name";
 	public static String ATTR_LAST_MODIFIED = "lastModified";
 	public static String ATTR_TRANSPORTS = "transports";
@@ -59,6 +60,7 @@ public class CatalogDeserializer {
 
 		String systemName = null;
 		String url = null;
+		String countryISO = null;
 		long lastModified = 0;
 		long transports = 0;
 		long version = 0;
@@ -97,6 +99,7 @@ public class CatalogDeserializer {
 		     }else if(TAG_MAP.equals(tagName)){
 		    	 systemName = xpp.getAttributeValue(null, ATTR_SYSTEM_NAME);
 		    	 url = xpp.getAttributeValue(null, ATTR_URL);
+		    	 countryISO = xpp.getAttributeValue(null, ATTR_COUNTRY_ISO);
 		    	 lastModified = StringUtil.parseLong(xpp.getAttributeValue("", ATTR_LAST_MODIFIED),0);
 		    	 transports = StringUtil.parseLong(xpp.getAttributeValue("", ATTR_TRANSPORTS),0); 
 		    	 version = StringUtil.parseLong(xpp.getAttributeValue("", ATTR_VERSION),0);
@@ -125,6 +128,7 @@ public class CatalogDeserializer {
 		    			 minVersion,
 		    			 (String[]) mapLocales.toArray(new String[mapLocales.size()]),
 		    			 (String[]) mapCountry.toArray(new String[mapCountry.size()]),
+		    			 countryISO,
 		    			 (String[]) mapCity.toArray(new String[mapCity.size()]),
 		    			 (String[]) mapDescription.toArray(new String[mapDescription.size()]),
 		    			 (String[]) mapChangeLog.toArray(new String[mapChangeLog.size()]),
@@ -135,6 +139,8 @@ public class CatalogDeserializer {
 		    	 mapCountry.clear();
 		    	 mapDescription.clear();
 		    	 maps.add(map);
+		    	 
+		    	 countryISO = null;
 		     }
 		     tags.pop();
 		 } else if(eventType == XmlPullParser.TEXT && !xpp.isWhitespace()) {
@@ -152,7 +158,6 @@ public class CatalogDeserializer {
 		}
 		catalog.setMaps(maps);
 		return catalog;
-		
 	}
 	
 }

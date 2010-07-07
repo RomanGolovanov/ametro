@@ -140,6 +140,7 @@ public class Catalog {
 		final String[] city = new String[]{suggestedMapName,suggestedMapName};
 		final String[] description = new String[]{"",""};
 		final String[] changeLog = new String[]{"",""};
+		final String iso = null;
 		
 		String systemName = fileName;
 		if(fileName.endsWith(Constants.PMETRO_EXTENSION)){
@@ -157,6 +158,7 @@ public class Catalog {
 				 Model.COMPATIBILITY_VERSION,
 				 locales,
 				 country,
+				 iso,
 				 city,
 				 description,
 				 changeLog,
@@ -171,6 +173,11 @@ public class Catalog {
 		final int countryId = model.countryName;
 		final int cityId = model.cityName;
 		final String[][] texts = model.localeTexts;
+		final String iso = model.countryIso;
+		final String[] country = new String[len];
+		final String[] city = new String[len];
+		final String[] description = new String[len];
+		final String[] changeLog = new String[len];
 		
 		final TreeSet<ModelDescription> modelLocales = new TreeSet<ModelDescription>();
 		
@@ -179,10 +186,6 @@ public class Catalog {
 		}
 
 		int index = 0;
-		final String[] country = new String[len];
-		final String[] city = new String[len];
-		final String[] description = new String[len];
-		final String[] changeLog = new String[len];
 		for(ModelDescription m : modelLocales){
 			locales[index] = m.locale;
 			city[index] = m.city;
@@ -208,6 +211,7 @@ public class Catalog {
 				 Model.COMPATIBILITY_VERSION,
 				 locales,
 				 country,
+				 iso,
 				 city,
 				 description,
 				 changeLog,
