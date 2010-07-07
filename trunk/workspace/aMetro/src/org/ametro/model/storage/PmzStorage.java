@@ -36,8 +36,8 @@ import org.ametro.ApplicationEx;
 import org.ametro.directory.CityDirectory;
 import org.ametro.directory.CountryDirectory;
 import org.ametro.directory.ImportDirectory;
-import org.ametro.directory.StationLibrary;
-import org.ametro.directory.StationLibraryProvider;
+import org.ametro.directory.CityStationDictionary;
+import org.ametro.directory.StationDirectory;
 import org.ametro.model.LineView;
 import org.ametro.model.MapLayerContainer;
 import org.ametro.model.MapView;
@@ -144,7 +144,7 @@ public class PmzStorage implements IModelStorage {
 
 		private HashMap<Integer, StationInfo> mStationInfo = new HashMap<Integer, StationInfo>();
 		
-		private StationLibraryProvider mStationLibrary;
+		private StationDirectory mStationLibrary;
 
 		private int[] getMapsNumbers(String[] maps) {
 			ArrayList<Integer> res = new ArrayList<Integer>();
@@ -194,7 +194,7 @@ public class PmzStorage implements IModelStorage {
 			mFile = new File(fileName);
 			mModel = null;
 			mDescriptionOnly = descriptionOnly;
-			mStationLibrary = ApplicationEx.getInstance().getStationLibrary();
+			mStationLibrary = ApplicationEx.getInstance().getStationDirectory();
 			
 		}
 
@@ -767,7 +767,7 @@ public class PmzStorage implements IModelStorage {
 			makeGlobalization();
 
 			if(!mDescriptionOnly){
-				StationLibrary lib = mStationLibrary.get(mFile);
+				CityStationDictionary lib = mStationLibrary.get(mFile);
 				if(lib!=null){
 					for(TransportStation station : model.stations){
 						String lineSystemName = model.lines[station.lineId].systemName;

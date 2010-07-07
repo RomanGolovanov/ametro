@@ -56,7 +56,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -80,13 +79,6 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 
 	private Button mOpenButton;
 	private Button mCloseButton;
-
-	// private Button mUpdateButton;
-	// private Button mImportButton;
-	// private Button mDownloadButton;
-	// private Button mCancelButton;
-
-	private ImageButton mFavoriteButton;
 
 	private ImageView mCountryImageView;
 	
@@ -112,7 +104,6 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 
 	private CatalogStorage mStorage;
 
-	private boolean mIsFavorite;
 	private HashMap<Integer, Drawable> mTransportTypes;
 
 	private OnlineWidgetView mOnlineWidget;
@@ -269,12 +260,10 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 	public void onClick(View v) {
 		if (v == mCloseButton) {
 			finishWithoutResult();
-		} else if (v == mOpenButton) {
+		} 
+		if (v == mOpenButton) {
 			finishWithResult(EXTRA_RESULT_OPEN);
-		} else if (v == mFavoriteButton) {
-			mIsFavorite = !mIsFavorite;
-			updateFavoriteButton();
-		}
+		} 
 		if (mOnlineWidget != null) {
 			if (v == mOnlineWidget.getCancelButton()) {
 				mStorage.cancelDownload(mSystemName);
@@ -295,11 +284,6 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 		}
 	}
 
-	private void updateFavoriteButton() {
-		mFavoriteButton.setVisibility(mLocal != null ? View.VISIBLE : View.GONE);
-		mFavoriteButton.setImageResource(mIsFavorite ? android.R.drawable.btn_star_big_on : android.R.drawable.btn_star_big_off);
-	}
-
 	protected void setWaitNoProgressView() {
 		if (mMode != MODE_WAIT) {
 			setContentView(R.layout.operation_wait_no_progress);
@@ -313,14 +297,12 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 			mCountryImageView = (ImageView)findViewById(R.id.iso_icon);
 			mOpenButton = (Button) findViewById(R.id.btn_open);
 			mCloseButton = (Button) findViewById(R.id.btn_close);
-			mFavoriteButton = (ImageButton) findViewById(R.id.btn_favorite);
 			mCityTextView = (TextView) findViewById(R.id.firstLine);
 			mCountryTextView = (TextView) findViewById(R.id.secondLine);
 			mVersionTextView = (TextView)findViewById(R.id.version);
 			mContent = (TextStripView) findViewById(R.id.content);
 			mOpenButton.setOnClickListener(this);
 			mCloseButton.setOnClickListener(this);
-			mFavoriteButton.setOnClickListener(this);
 			bindData();
 			mMode = MODE_DETAILS;
 		}
@@ -407,7 +389,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 
 		String description = preffered().getDescription(code);
 		if(description!=null){
-			description = description.replaceAll("\n", "<br/>");
+			description = description.replaceAll("\n", "<br/>").replaceAll("\\\\n", "<br/>");
 		}else{
 			description = getString(R.string.msg_no_desription);
 		}
@@ -415,8 +397,6 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 		TextBlockView text = mContent.createText();
 		text.setText(Html.fromHtml(description));
 		Linkify.addLinks(text.getText(), Linkify.ALL);
-		
-		updateFavoriteButton();
 	}
 	
 	
