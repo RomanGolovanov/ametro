@@ -257,13 +257,6 @@ public class MapViewActivity extends Activity implements OnClickListener {
 				public void onClick(DialogInterface dialog, int item) {
 					onInitializeMapView(mModelName, mModel.viewNames[item]);
 					dialog.dismiss();
-					//			    	MapView v = mModel.loadView(mModel.viewNames[item]);
-					//			    	if(v!=null){
-					//			    		onShowMap(v);
-					//			    		dialog.dismiss();
-					//			    	}else{
-					//			    		Toast.makeText(BrowseVectorMap.this, "Scheme loading error", Toast.LENGTH_SHORT).show();
-					//			    	}
 				}
 			});			
 			AlertDialog alertDialog = builder.create();

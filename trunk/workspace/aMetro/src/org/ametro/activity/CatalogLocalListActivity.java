@@ -39,7 +39,7 @@ import static org.ametro.catalog.CatalogMapState.OFFLINE;
 import static org.ametro.catalog.CatalogMapState.UPDATE;
 import static org.ametro.catalog.CatalogMapState.UPDATE_NOT_SUPPORTED;
 
-public class CatalogLocalListActivity extends BaseCatalogExpandableActivity {
+public class CatalogLocalListActivity extends BaseCatalogActivity {
 
 	protected boolean isCatalogProgressEnabled(int catalogId) {
 		return catalogId == CatalogStorage.LOCAL;

@@ -26,11 +26,11 @@ import java.util.HashSet;
 
 public class CatalogMapPair {
 
-	public static class CatalogMapDifferenceCityNameComparator implements Comparator<CatalogMapPair>
+	public static class CatalogMapPairCityComparator implements Comparator<CatalogMapPair>
 	{
 		private String mCode;
 		
-		public CatalogMapDifferenceCityNameComparator(String code){
+		public CatalogMapPairCityComparator(String code){
 			mCode = code;
 		}
 
@@ -40,6 +40,24 @@ public class CatalogMapPair {
 		
 	}
 		
+	public static class CatalogMapPairCountryComparator implements Comparator<CatalogMapPair>
+	{
+		private String mCode;
+		
+		public CatalogMapPairCountryComparator(String code){
+			mCode = code;
+		}
+
+		public int compare(CatalogMapPair left, CatalogMapPair right) {
+			int res = left.getCountry(mCode).compareTo(right.getCountry(mCode));
+			if(res == 0){
+				return left.getCity(mCode).compareTo(right.getCity(mCode));
+			}
+			return res;
+		}
+		
+	}	
+	
 	public final static int PREFFERED_LOCAL = 1;
 	public final static int PREFFERED_REMOTE = 2;
 	

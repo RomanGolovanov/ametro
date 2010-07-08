@@ -41,7 +41,7 @@ import org.ametro.Constants;
 import org.ametro.GlobalSettings;
 import org.ametro.MapUri;
 import org.ametro.R;
-import org.ametro.adapter.CatalogExpandableAdapter;
+import org.ametro.adapter.CatalogAdapter;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.CatalogMapPair;
@@ -74,15 +74,16 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.ExpandableListView;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ExpandableListView.OnChildClickListener;
+import android.widget.AdapterView.OnItemClickListener;
 
-public abstract class BaseCatalogExpandableActivity extends Activity implements ICatalogStorageListener, ICatalogStateProvider, OnChildClickListener, OnClickListener, OnFocusChangeListener {
+public abstract class BaseCatalogActivity extends Activity implements ICatalogStorageListener, ICatalogStateProvider, OnClickListener, OnFocusChangeListener, OnItemClickListener {
 
 	protected static final int MODE_WAIT_NO_PROGRESS = 1;
 	protected static final int MODE_WAIT = 2;
@@ -93,8 +94,8 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	
 	protected CatalogStorage mStorage;
 	
-	protected CatalogExpandableAdapter mAdapter;
-	protected ExpandableListView mList;
+	protected CatalogAdapter mAdapter;
+	protected ListView mList;
 
 	protected TextView mCounterTextView;
 	protected TextView mMessageTextView;
@@ -112,6 +113,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 
 	protected Handler mUIEventDispacher = new Handler();
 
+	private final int MAIN_MENU_SORT = 995;
 	private final int MAIN_MENU_SEARCH = 996;
 	private final int MAIN_MENU_REFRESH = 997;
 	private final int MAIN_MENU_LOCATION = 998;
@@ -142,9 +144,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	protected boolean mIsActionBarAnimated = false;
 	
 	/*package*/ LinkedList<CatalogEvent> mCatalogLoadedEvents = new LinkedList<CatalogEvent>();
-	
 	/*package*/ InputMethodManager mInputMethodManager;
-
 	
 	protected abstract int getEmptyListMessage();
 	protected abstract boolean isCatalogProgressEnabled(int catalogId);
@@ -162,77 +162,67 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	}
 	
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-		ExpandableListView.ExpandableListContextMenuInfo info = (ExpandableListView.ExpandableListContextMenuInfo) menuInfo;
-		int type = ExpandableListView.getPackedPositionType(info.packedPosition);
-		if (type == ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
-			int group = ExpandableListView.getPackedPositionGroup(info.packedPosition);
-			int child = ExpandableListView.getPackedPositionChild(info.packedPosition);
-			CatalogMapPair pair = (CatalogMapPair)mAdapter.getChild(group, child);
-			CatalogMap local = pair.getLocal();
-			CatalogMap remote = pair.getRemote();
-			int state = getCatalogState(local, remote);
+		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;		
+		CatalogMapPair pair = (CatalogMapPair)mAdapter.getData(info.position);
+		CatalogMap local = pair.getLocal();
+		CatalogMap remote = pair.getRemote();
+		int state = getCatalogState(local, remote);
 
-			int pos = 0;
-			
-			menu.setHeaderTitle(R.string.context_menu_catalog_header);
-			if(state == INSTALLED || state == OFFLINE || state == UPDATE){
-				menu.add(0, CONTEXT_MENU_SHOW_MAP, pos++, R.string.context_menu_show_map);
-			}
-			menu.add(0, CONTEXT_MENU_SHOW_DETAILS, pos++, R.string.context_menu_show_map_details);
-			if(state == DOWNLOAD){
-				menu.add(0, CONTEXT_MENU_DOWNLOAD, pos++, R.string.context_menu_download);
-			}
-			if(state == IMPORT){
-				menu.add(0, CONTEXT_MENU_IMPORT, pos++, R.string.context_menu_import);
-			}
-			if(state == UPDATE){
-				menu.add(0, CONTEXT_MENU_UPDATE, pos++, R.string.context_menu_update);
-			}
-			if(mLocalId == CatalogStorage.LOCAL && local!=null){
-				menu.add(0, CONTEXT_MENU_DELETE, pos++, R.string.context_menu_delete);
-			}
-			if(mRemoteId == CatalogStorage.IMPORT && remote!=null){
-				menu.add(0, CONTEXT_MENU_DELETE_PMZ, pos++, R.string.context_menu_delete_pmz);
-			}
+		int pos = 0;
+		
+		menu.setHeaderTitle(R.string.context_menu_catalog_header);
+		if(state == INSTALLED || state == OFFLINE || state == UPDATE){
+			menu.add(0, CONTEXT_MENU_SHOW_MAP, pos++, R.string.context_menu_show_map);
+		}
+		menu.add(0, CONTEXT_MENU_SHOW_DETAILS, pos++, R.string.context_menu_show_map_details);
+		if(state == DOWNLOAD){
+			menu.add(0, CONTEXT_MENU_DOWNLOAD, pos++, R.string.context_menu_download);
+		}
+		if(state == IMPORT){
+			menu.add(0, CONTEXT_MENU_IMPORT, pos++, R.string.context_menu_import);
+		}
+		if(state == UPDATE){
+			menu.add(0, CONTEXT_MENU_UPDATE, pos++, R.string.context_menu_update);
+		}
+		if(mLocalId == CatalogStorage.LOCAL && local!=null){
+			menu.add(0, CONTEXT_MENU_DELETE, pos++, R.string.context_menu_delete);
+		}
+		if(mRemoteId == CatalogStorage.IMPORT && remote!=null){
+			menu.add(0, CONTEXT_MENU_DELETE_PMZ, pos++, R.string.context_menu_delete_pmz);
 		}
 		super.onCreateContextMenu(menu, v, menuInfo);
 	}
 
 	public boolean onContextItemSelected(MenuItem item) {
-		ExpandableListView.ExpandableListContextMenuInfo info = (ExpandableListView.ExpandableListContextMenuInfo) item.getMenuInfo();
-		int type = ExpandableListView.getPackedPositionType(info.packedPosition);
-		if (type == ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
-			int group = ExpandableListView.getPackedPositionGroup(info.packedPosition);
-			int child = ExpandableListView.getPackedPositionChild(info.packedPosition);
-			CatalogMapPair pair = (CatalogMapPair)mAdapter.getChild(group, child);
-			final CatalogMap local = pair.getLocal();
-			final CatalogMap remote = pair.getRemote();
-			final int state = getCatalogState(local, remote);
-			switch (item.getItemId()) {
-			case CONTEXT_MENU_SHOW_MAP:
-				if(state == INSTALLED || state == OFFLINE || state == UPDATE){
-					invokeFinish(local);
-				}
-				return true;
-			case CONTEXT_MENU_SHOW_DETAILS:
-				invokeMapDetails(local, remote,state);
-				return true;
-			case CONTEXT_MENU_IMPORT:
-				mStorage.requestImport(remote.getSystemName());
-				return true;
-			case CONTEXT_MENU_DOWNLOAD:
-				mStorage.requestDownload(remote.getSystemName());
-				return true;
-			case CONTEXT_MENU_UPDATE:
-				mStorage.requestDownload(remote.getSystemName());
-				return true;
-			case CONTEXT_MENU_DELETE:
-				showDeleteLocalMapDialog(local);				
-				return true;
-			case CONTEXT_MENU_DELETE_PMZ:
-				showDeleteImportMapDialog(remote);				
-				return true;
+		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();		
+		CatalogMapPair pair = (CatalogMapPair)mAdapter.getData(info.position);
+		final CatalogMap local = pair.getLocal();
+		final CatalogMap remote = pair.getRemote();
+		final int state = getCatalogState(local, remote);
+		switch (item.getItemId()) {
+		case CONTEXT_MENU_SHOW_MAP:
+			if(state == INSTALLED || state == OFFLINE || state == UPDATE){
+				invokeFinish(local);
 			}
+			return true;
+		case CONTEXT_MENU_SHOW_DETAILS:
+			invokeMapDetails(local, remote,state);
+			return true;
+		case CONTEXT_MENU_IMPORT:
+			mStorage.requestImport(remote.getSystemName());
+			return true;
+		case CONTEXT_MENU_DOWNLOAD:
+			mStorage.requestDownload(remote.getSystemName());
+			return true;
+		case CONTEXT_MENU_UPDATE:
+			mStorage.requestDownload(remote.getSystemName());
+			return true;
+		case CONTEXT_MENU_DELETE:
+			showDeleteLocalMapDialog(local);				
+			return true;
+		case CONTEXT_MENU_DELETE_PMZ:
+			showDeleteImportMapDialog(remote);				
+			return true;
 		}
 		return super.onContextItemSelected(item);
 	}
@@ -241,6 +231,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		super.onCreateOptionsMenu(menu);
 		menu.add(0, MAIN_MENU_SEARCH, Menu.NONE, R.string.menu_search).setIcon(android.R.drawable.ic_menu_search);
 		menu.add(0, MAIN_MENU_REFRESH, Menu.NONE, R.string.menu_refresh).setIcon(android.R.drawable.ic_menu_rotate);
+		menu.add(0, MAIN_MENU_SORT, Menu.NONE, R.string.menu_sort).setIcon(android.R.drawable.ic_menu_sort_alphabetically);
 		menu.add(0, MAIN_MENU_LOCATION, Menu.NONE, R.string.menu_location).setIcon(android.R.drawable.ic_menu_mylocation);
 		menu.add(0, MAIN_MENU_SETTINGS, 999, R.string.menu_settings).setIcon(android.R.drawable.ic_menu_preferences);
 		menu.add(0, MAIN_MENU_ABOUT, 1000, R.string.menu_about).setIcon(android.R.drawable.ic_menu_help);
@@ -249,6 +240,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		menu.findItem(MAIN_MENU_SEARCH).setEnabled(mMode == MODE_LIST);
+		menu.findItem(MAIN_MENU_SORT).setEnabled(mMode == MODE_LIST);
 		menu.findItem(MAIN_MENU_LOCATION).setEnabled(mMode == MODE_LIST);
 		menu.findItem(MAIN_MENU_REFRESH).setEnabled( (mMode != MODE_WAIT) && (mMode != MODE_WAIT_NO_PROGRESS) );
 		return super.onPrepareOptionsMenu(menu);
@@ -261,6 +253,9 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 			return true;
 		case MAIN_MENU_REFRESH:
 			onCatalogRefresh();
+			return true;
+		case MAIN_MENU_SORT:
+			onSortModeChange();
 			return true;
 		case MAIN_MENU_LOCATION:
 			startActivityForResult(new Intent(this, LocationSearchDialog.class), REQUEST_LOCATION);
@@ -364,11 +359,11 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	} 
 
 	protected void setListView() {
-		setContentView(R.layout.catalog_expandable_list);
-		mList = (ExpandableListView)findViewById(R.id.list);
+		setContentView(R.layout.catalog_list);
+		mList = (ListView)findViewById(R.id.list);
 		mAdapter = getListAdapter(); 
 		mList.setAdapter(mAdapter);
-		mList.setOnChildClickListener(this);
+		mList.setOnItemClickListener(this);
 		registerForContextMenu(mList);
 
 		mActionBar = (View)findViewById(R.id.actionbar);
@@ -406,7 +401,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 			mMode = MODE_WAIT_NO_PROGRESS;
 		}
 	}
-	
+
 	public void onFocusChange(View v, boolean hasFocus) {
 		if(v == mActionBarEditText){
 			if(hasFocus){
@@ -417,6 +412,20 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 				Log.i(Constants.LOG_TAG_MAIN, "hide IME");
 			}
 		}
+	}
+	
+	private void onSortModeChange() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.menu_sort);
+		
+		builder.setSingleChoiceItems(R.array.sort_modes, mAdapter.getSortMode()== CatalogAdapter.SORT_MODE_CITY ? 0 : 1  , new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int item) {
+				mAdapter.updateSort( item==0 ? CatalogAdapter.SORT_MODE_CITY : CatalogAdapter.SORT_MODE_COUNTRY );
+				dialog.dismiss();
+			}
+		});			
+		AlertDialog alertDialog = builder.create();
+		alertDialog.show();
 	}
 	
 	private void onCatalogsUpdated(boolean refresh) {
@@ -491,15 +500,16 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	}
 
 	
-	protected CatalogExpandableAdapter getListAdapter() {
-		return new CatalogExpandableAdapter(
+	protected CatalogAdapter getListAdapter() {
+		return new CatalogAdapter(
 				this, 
 				mStorage.getCatalog(mLocalId), 
 				mStorage.getCatalog(mRemoteId),
 				mDiffMode,
 				mDiffColors,
-				this);
-	}
+				this,
+				CatalogAdapter.SORT_MODE_COUNTRY);
+	} 
 	
 	protected void onCatalogRefresh() {
 		switch(mDiffMode){
@@ -536,11 +546,13 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		Toast.makeText(this,R.string.msg_location_unknown, Toast.LENGTH_SHORT).show();			
 	}		
 	
-	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-		CatalogMapPair diff = (CatalogMapPair)mAdapter.getChild(groupPosition, childPosition);
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		CatalogMapPair diff = (CatalogMapPair)mAdapter.getData(position);
 		int state =  getCatalogState(diff.getLocal(), diff.getRemote());
-		return onCatalogMapClick(diff.getLocal(), diff.getRemote(), state);		
+		onCatalogMapClick(diff.getLocal(), diff.getRemote(), state);		
 	}
+	
+	
 
 	public boolean onCatalogMapClick(CatalogMap local, CatalogMap remote, int state) {
 		switch(state){
@@ -668,7 +680,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 
 	private Runnable mCatalogError = new Runnable() {
 		public void run() {
-			Toast.makeText(BaseCatalogExpandableActivity.this, mErrorMessage, Toast.LENGTH_LONG).show();
+			Toast.makeText(BaseCatalogActivity.this, mErrorMessage, Toast.LENGTH_LONG).show();
 		}
 	};
 	
@@ -737,5 +749,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		       });
 		AlertDialog alertDialog = builder.create();
 		alertDialog.show();
-	}	
+	}
+	
+	
 }

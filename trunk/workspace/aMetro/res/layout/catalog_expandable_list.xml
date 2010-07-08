@@ -31,7 +31,7 @@
 			/>
 	</LinearLayout>
 	
-	<ListView android:id="@+id/list" android:fadingEdge="none"
+	<ExpandableListView android:id="@+id/list" android:fadingEdge="none"
 		android:layout_below="@id/actionbar"
 		android:layout_alignParentBottom="true"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
