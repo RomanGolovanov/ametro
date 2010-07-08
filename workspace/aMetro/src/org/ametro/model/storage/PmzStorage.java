@@ -33,10 +33,10 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import org.ametro.ApplicationEx;
+import org.ametro.directory.CatalogMapSuggestion;
 import org.ametro.directory.CityDirectory;
-import org.ametro.directory.CountryDirectory;
-import org.ametro.directory.ImportDirectory;
 import org.ametro.directory.CityStationDictionary;
+import org.ametro.directory.CountryDirectory;
 import org.ametro.directory.StationDirectory;
 import org.ametro.model.LineView;
 import org.ametro.model.MapLayerContainer;
@@ -819,30 +819,9 @@ public class PmzStorage implements IModelStorage {
 			final String countryName = originalTexts[mModel.countryName];
 			final String cityName = originalTexts[mModel.cityName];
 			
-			//CityInfo info = mCountryLibrary.search(country,city);
-			final ApplicationEx instance = ApplicationEx.getInstance();
-			ImportDirectory importDirectory = instance.getImportDirectory();
-			CityDirectory cityDirectory = instance.getCityDirectory();
-			CountryDirectory countryDirectory = instance.getCountryDirectory();
-
-			ImportDirectory.Entity importEntity = null;
-			CityDirectory.Entity cityEntity = null;
-			CountryDirectory.Entity countryEntity = null;
-			
-			importEntity = importDirectory.get(mFile.getName().toLowerCase().replaceAll(".pmz", ""));
-			if(importEntity!=null){
-				cityEntity = cityDirectory.get(importEntity.getCityId());
-				if(cityEntity!=null){
-					countryEntity = countryDirectory.get(cityEntity.getCountryId());
-				}
-			}else{
-				cityEntity = cityDirectory.getByName( cityName );
-				if(cityEntity!=null){
-					countryEntity = countryDirectory.get(cityEntity.getCountryId());
-				}else{
-					countryEntity = countryDirectory.getByName( countryName );
-				}
-			}
+			CatalogMapSuggestion suggestion = CatalogMapSuggestion.create(ApplicationEx.getInstance(), mFile, cityName, countryName );
+			CityDirectory.Entity cityEntity = suggestion.getCity();
+			CountryDirectory.Entity countryEntity = suggestion.getCountry();
 			
 			// make localization
 			if(originalLocale.equals(Model.LOCALE_RU)){
