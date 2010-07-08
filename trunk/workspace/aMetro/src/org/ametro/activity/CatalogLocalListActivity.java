@@ -67,11 +67,11 @@ public class CatalogLocalListActivity extends BaseCatalogExpandableActivity {
 		case IMPORT_PENDING:
 		case IMPORTING:
 		case NEED_TO_UPDATE:
-			invokeMapDetails(local,remote,state);
-			return true;
 		case NOT_SUPPORTED:
 		case UPDATE_NOT_SUPPORTED:
 		case CORRUPTED:
+			invokeMapDetails(local,remote,state);
+			return true;
 			// do nothing
 		}				
 		return true;

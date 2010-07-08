@@ -42,6 +42,7 @@ public class CountryDirectory {
 	{
 		private int mId;
 		private String mISO2;
+		private String mISO3;
 		
 		private String[] mNames;
 		private String[] mLocales;
@@ -57,6 +58,10 @@ public class CountryDirectory {
 			return mISO2;
 		}
 
+		public String getISO3() {
+			return mISO3;
+		}
+		
 		public String getName(String code) {
 			return mLocaleToName.containsKey(code) ? mLocaleToName.get(code) : mDefaultName;
 		}
@@ -73,10 +78,11 @@ public class CountryDirectory {
 			return mLocales;
 		}
 
-		public Entity(int id, String iso2, String[] names, String[] locales) {
+		public Entity(int id, String iso2, String iso3, String[] names, String[] locales) {
 			super();
 			this.mId = id;
 			this.mISO2 = iso2;
+			this.mISO3 = iso3;
 			this.mNames = names;
 			this.mLocales = locales;
 			this.mLocaleToName = new HashMap<String, String>();
@@ -112,10 +118,10 @@ public class CountryDirectory {
 				String[] locales = getLocales(reader);
 				while(reader.next()){
 					int id = reader.getInt(0);
-					String iso = reader.getString(1);
-					iso = iso!=null ? iso.trim().toLowerCase() : null;
+					String iso2 = reader.getString(1);
+					String iso3 = reader.getString(2);
 					String[] names = getNames(reader, locales.length);
-					Entity entity = new Entity(id, iso, names, locales);
+					Entity entity = new Entity(id, iso2, iso3, names, locales);
 					mIndex.put(id, entity);
 					for(String name : names){
 						mNameIndex.put(name, entity);						

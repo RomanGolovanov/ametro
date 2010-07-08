@@ -25,8 +25,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeSet;
 
+import org.ametro.ApplicationEx;
 import org.ametro.Constants;
+import org.ametro.directory.CatalogMapSuggestion;
+import org.ametro.directory.CityDirectory;
+import org.ametro.directory.CountryDirectory;
 import org.ametro.model.Model;
+import org.ametro.model.TransportType;
 import org.ametro.util.StringUtil;
 
 public class Catalog {
@@ -133,32 +138,51 @@ public class Catalog {
 	
 	public static CatalogMap makeBadCatalogMap(Catalog catalog, File file, final String fileName) {
 		
-		final String suggestedMapName = fileName.substring(0, fileName.indexOf('.'));
-		
+		String suggestedMapName = fileName.substring(0, fileName.indexOf('.'));
+
+		final int len = 2;
 		final String[] locales = new String[]{"en","ru"};
 		final String[] country = new String[]{UNKNOWN_EN,UNKNOWN_RU};
 		final String[] city = new String[]{suggestedMapName,suggestedMapName};
 		final String[] description = new String[]{"",""};
 		final String[] changeLog = new String[]{"",""};
-		final String iso = null;
+		String iso2 = null;
+
 		
 		String systemName = fileName;
 		if(fileName.endsWith(Constants.PMETRO_EXTENSION)){
 			systemName += Constants.AMETRO_EXTENSION;
+		}
+
+		// try to suggest map city/country from directories
+		CatalogMapSuggestion suggestion = CatalogMapSuggestion.create(ApplicationEx.getInstance(), file, null, null);
+		CityDirectory.Entity cityEntity = suggestion.getCity();
+		CountryDirectory.Entity countryEntity = suggestion.getCountry();
+
+		if(cityEntity!=null){
+			for(int i=0;i<len;i++){
+				city[i] = cityEntity.getName(locales[i]);
+			}
+		}
+		if(countryEntity!=null){
+			for(int i=0;i<len;i++){
+				country[i] = countryEntity.getName(locales[i]);
+			}
+			iso2 = countryEntity.getISO2();
 		}
 		
 		CatalogMap map = new CatalogMap(
 				 catalog,
 				 systemName,
 				 fileName,
-				 0,
-				 0,
+				 file.lastModified(),
+				 TransportType.UNKNOWN_ID,
 				 Model.VERSION,
-				 0,
+				 file.length(),
 				 Model.COMPATIBILITY_VERSION,
 				 locales,
 				 country,
-				 iso,
+				 iso2,
 				 city,
 				 description,
 				 changeLog,

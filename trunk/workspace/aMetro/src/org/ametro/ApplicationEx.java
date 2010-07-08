@@ -49,7 +49,7 @@ import android.app.Application;
 import android.util.Log;
 
 public class ApplicationEx extends Application {
-
+	
 	public CountryDirectory getCountryDirectory() {
 		if (mCountryDirectory == null) {
 			synchronized (ApplicationEx.class) {
