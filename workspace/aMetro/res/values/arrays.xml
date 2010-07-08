@@ -171,6 +171,7 @@
     	<item>0.2.4.r285: catalog statuses changed, show Importing/Downloading (Pending) status everywere</item>
     	<item>0.2.4.r287: changed catalog item layout, added country icons (need to download icon pack in /sdcard/ametro/icons)</item>
     	<item>0.2.5.r290: added description to map detail view, maps became incompatible with previous version</item>
+    	<item>0.2.5.r299: plain list view for local maps catalog</item>
     </string-array>
     <string-array name="create_route_modes">
         <item>Minimal Time</item>
@@ -214,5 +215,9 @@
         <item>USD</item>
         <item>EUR</item>
         <item>GBP</item>
+    </string-array>
+    <string-array name="sort_modes">
+    	<item>By City</item>
+    	<item>By Country</item>
     </string-array>
 </resources>

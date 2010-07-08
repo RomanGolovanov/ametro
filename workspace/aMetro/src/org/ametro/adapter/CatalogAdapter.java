@@ -21,12 +21,10 @@
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
-import java.util.TreeMap;
-import java.util.TreeSet;
 
-import org.ametro.ApplicationEx;
 import org.ametro.Constants;
 import org.ametro.GlobalSettings;
 import org.ametro.R;
@@ -34,9 +32,8 @@ import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMapPair;
 import org.ametro.catalog.ICatalogStateProvider;
 import org.ametro.catalog.CatalogMapPair.CatalogMapPairCityComparator;
-import org.ametro.directory.CountryDirectory;
+import org.ametro.catalog.CatalogMapPair.CatalogMapPairCountryComparator;
 import org.ametro.model.TransportType;
-import org.ametro.util.StringUtil;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -44,15 +41,18 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseExpandableListAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class CatalogExpandableAdapter extends BaseExpandableListAdapter implements Filterable {
+public class CatalogAdapter extends BaseAdapter implements Filterable {
 
+	public static final int SORT_MODE_CITY = 1;
+	public static final int SORT_MODE_COUNTRY = 2;
+	
 	protected Context mContext;
     protected LayoutInflater mInflater;
     
@@ -60,12 +60,11 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
 	protected ArrayList<CatalogMapPair> mOriginalValues;
 	
 	protected int mMode;
+	protected int mSortMode;
 	protected String mLanguageCode;
-	
-	protected String[] mCountries;
-	protected String[] mISO;
-    protected Drawable[] mIcons;
-    protected CatalogMapPair[][] mRefs;
+
+    //protected Drawable[] mIcons;
+	protected HashMap<String,Drawable> mIcons;
 
     protected String[] mStates;
     protected int[] mStateColors;
@@ -79,8 +78,8 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
 	private String mSearchPrefix;
 	private Drawable mNoCountryIcon;
 
-    public CatalogMapPair getData(int groupId, int childId) {
-        return mRefs[groupId][childId];
+    public CatalogMapPair getData(int itemId) {
+        return mObjects.get(itemId);
     }
 
     public String getLanguage(){
@@ -106,7 +105,13 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
 		notifyDataSetChanged();
 	}
     
-    public CatalogExpandableAdapter(Context context, Catalog local, Catalog remote, int mode, int colorsArray, ICatalogStateProvider statusProvider) {
+	public void updateSort(int sortMode){
+		mSortMode = sortMode;
+		bindData();
+		notifyDataSetChanged();
+	}
+	
+    public CatalogAdapter(Context context, Catalog local, Catalog remote, int mode, int colorsArray, ICatalogStateProvider statusProvider, int sortMode) {
         mContext = context;
         mNoCountryIcon = context.getResources().getDrawable(R.drawable.no_country);
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -114,126 +119,24 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
 		mStateColors = context.getResources().getIntArray(colorsArray);
 		mStatusProvider = statusProvider;
 		mMode = mode;
+		mSortMode = sortMode;
 		
     	mObjects = CatalogMapPair.diff(local, remote, mode);
         bindData();
 		bindTransportTypes();
     }
 
-    public Object getChild(int groupPosition, int childPosition) {
-        return mRefs[groupPosition][childPosition];
-    }
-
-    public long getChildId(int groupPosition, int childPosition) {
-        return childPosition;
-    }
-
-    public int getChildrenCount(int groupPosition) {
-        return mRefs[groupPosition].length;
-    }
-
 	public static class ViewHolder {
 		TextView mCity;
 		TextView mCountry;
+		TextView mCountryISO;
 		TextView mStatus;
-		TextView mSize;
 		ImageView mIsoIcon;
 		LinearLayout mImageContainer;
 	}    
 
-	public static class GroupViewHolder {
-		TextView mCountry;
-	}    
-    
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-
-    	ViewHolder holder;
-		if (convertView == null) {
-			convertView = mInflater.inflate(R.layout.catalog_expandable_list_item, null);
-			holder = new ViewHolder();
-			holder.mCity = (TextView) convertView.findViewById(R.id.city);
-			holder.mCountry = (TextView) convertView.findViewById(R.id.country);
-			holder.mStatus = (TextView) convertView.findViewById(R.id.state);
-			holder.mSize = (TextView) convertView.findViewById(R.id.size);
-			holder.mIsoIcon = (ImageView) convertView.findViewById(R.id.iso_icon);
-			holder.mImageContainer = (LinearLayout) convertView.findViewById(R.id.icons);
-			convertView.setTag(holder);
-		} else {
-			holder = (ViewHolder) convertView.getTag();
-		}
-		
-		final String code = mLanguageCode;
-		final CatalogMapPair ref = mRefs[groupPosition][childPosition];
-		final int state = mStatusProvider.getCatalogState(ref.getLocal(), ref.getRemote());
-		holder.mCity.setText(ref.getCity(code));
-		holder.mCountry.setText( mISO[groupPosition] );
-		holder.mStatus.setText(mStates[state]);
-		holder.mStatus.setTextColor(mStateColors[state]);
-		holder.mSize.setText( StringUtil.formatFileSize(ref.getSize(),0) );
-		
-		final String iso = mISO[groupPosition];
-		Drawable d = mIcons[groupPosition];
-		if(d == null){
-			File file = new File(Constants.ICONS_PATH, iso + ".png");
-			if(file.exists()){
-				d = Drawable.createFromPath(file.getAbsolutePath());
-			}else{
-				d = mNoCountryIcon;
-			}
-			mIcons[groupPosition] = d;
-		}
-		holder.mIsoIcon.setImageDrawable(d);
-		
-		final LinearLayout ll = holder.mImageContainer;
-		ll.removeAllViews();
-		long transports = ref.getTransports();
-		int transportId = 1;
-		while(transports>0){
-			if((transports % 2)>0){
-				ImageView img = new ImageView(mContext);
-				img.setImageDrawable(mTransportTypes.get(transportId));
-				ll.addView( img );
-			}
-			transports = transports >> 1;
-			transportId = transportId << 1;
-		}
-		
-		return convertView;
-		
-    }
-
-    public Object getGroup(int groupPosition) {
-        return mCountries[groupPosition];
-    }
-
-    public int getGroupCount() {
-        return mCountries.length;
-    }
-
-    public long getGroupId(int groupPosition) {
-        return groupPosition;
-    }
-
-    public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-    	GroupViewHolder holder;
-		if (convertView == null) {
-			convertView = mInflater.inflate(R.layout.catalog_list_group_item, null);
-			holder = new GroupViewHolder();
-			holder.mCountry = (TextView) convertView.findViewById(R.id.text);
-			convertView.setTag(holder);
-		} else {
-			holder = (GroupViewHolder) convertView.getTag();
-		}    	
-		holder.mCountry.setText(mCountries[groupPosition]);
-		return convertView;
-    }
-
-    public boolean isChildSelectable(int groupPosition, int childPosition) {
-        return true;
-    }
-
     public boolean hasStableIds() {
-        return false;//true;
+        return false;
     }
     
     protected void bindTransportTypes(){
@@ -251,49 +154,14 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
     protected void bindData() {
     	final String code= GlobalSettings.getLanguage(mContext); 
     	mLanguageCode = code;
-        TreeSet<String> countries = new TreeSet<String>();
-        TreeMap<String, ArrayList<CatalogMapPair>> index = new TreeMap<String, ArrayList<CatalogMapPair>>();
-        CatalogMapPairCityComparator comparator = new CatalogMapPairCityComparator(code);
-
-        for(CatalogMapPair diff : mObjects){
-        	final String country = diff.getCountry(code);
-        	countries.add(country);
-        	ArrayList<CatalogMapPair> cities = index.get(country);
-        	if(cities == null){
-        		cities = new ArrayList<CatalogMapPair>();
-        		index.put(country,cities);
-        	}
-        	cities.add(diff); 
-        }
-        mCountries = (String[]) countries.toArray(new String[countries.size()]);
-        mIcons = new Drawable[mCountries.length];
-        mISO = new String[mCountries.length];
-        mRefs = new CatalogMapPair[mCountries.length][];
-
-        int lenc = mCountries.length;
-        final CountryDirectory countryDirectory = ApplicationEx.getInstance().getCountryDirectory();
-        for(int i=0;i<lenc;i++){
-        	final String country = mCountries[i];
-        	final ArrayList<CatalogMapPair> diffSet = index.get(country);
-			if(diffSet!=null){        	
-	        	int len = diffSet.size();
-	        	CatalogMapPair[] arr = (CatalogMapPair[]) diffSet.toArray(new CatalogMapPair[len]);
-	        	Arrays.sort(arr, comparator);
-	        	
-	        	if(arr.length>0){
-	        		String iso = arr[0].getCountryISO();
-	        		if(iso==null){
-	        			CountryDirectory.Entity entity = countryDirectory.getByName(country);
-	        			if(entity!=null){
-	        				iso = entity.getISO2();
-	        			}
-	        		}
-	        		mISO[i] = iso!=null ? iso.toUpperCase() : null;
-	        	}
-	        	mRefs[i] = arr;
-	        	mIcons[i] = null;
-			}
-        }
+    	Comparator<CatalogMapPair> comparator;
+    	if(mSortMode == SORT_MODE_CITY){
+    		comparator  = new CatalogMapPairCityComparator(code);
+    	}else{
+    		comparator  = new CatalogMapPairCountryComparator(code);
+    	}
+        mIcons = new HashMap<String, Drawable>();
+        Collections.sort(mObjects, comparator);
 	}
 
     public Filter getFilter() {
@@ -384,5 +252,77 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
 		    }
 		}
 		return newValues;
+	}
+	
+	
+	public int getCount() {
+		return mObjects.size();
+	}
+
+	public Object getItem(int position) {
+		return mObjects.get(position);
+	}
+
+	public long getItemId(int position) {
+		return position;
+	}
+
+	public View getView(int position, View convertView, ViewGroup g) {
+    	ViewHolder holder;
+		if (convertView == null) {
+			convertView = mInflater.inflate(R.layout.catalog_list_item, null);
+			holder = new ViewHolder();
+			holder.mCity = (TextView) convertView.findViewById(R.id.city);
+			holder.mCountry = (TextView) convertView.findViewById(R.id.country);
+			holder.mStatus = (TextView) convertView.findViewById(R.id.state);
+			holder.mCountryISO = (TextView) convertView.findViewById(R.id.country_iso);
+			holder.mIsoIcon = (ImageView) convertView.findViewById(R.id.iso_icon);
+			holder.mImageContainer = (LinearLayout) convertView.findViewById(R.id.icons);
+			convertView.setTag(holder);
+		} else {
+			holder = (ViewHolder) convertView.getTag();
+		}
+		
+		final String code = mLanguageCode;
+		final CatalogMapPair ref = mObjects.get(position);
+		final String iso = ref.getCountryISO();
+		final int state = mStatusProvider.getCatalogState(ref.getLocal(), ref.getRemote());
+		holder.mCity.setText(ref.getCity(code));
+		holder.mCountry.setText(ref.getCountry(code));
+		holder.mStatus.setText(mStates[state]);
+		holder.mStatus.setTextColor(mStateColors[state]);
+		holder.mCountryISO.setText( iso );
+		
+		Drawable d = mIcons.get(iso);
+		if(d == null){
+			File file = new File(Constants.ICONS_PATH, iso + ".png");
+			if(file.exists()){
+				d = Drawable.createFromPath(file.getAbsolutePath());
+			}else{
+				d = mNoCountryIcon;
+			}
+			mIcons.put(iso, d);
+		}
+		holder.mIsoIcon.setImageDrawable(d);
+		
+		final LinearLayout ll = holder.mImageContainer;
+		ll.removeAllViews();
+		long transports = ref.getTransports();
+		int transportId = 1;
+		while(transports>0){
+			if((transports % 2)>0){
+				ImageView img = new ImageView(mContext);
+				img.setImageDrawable(mTransportTypes.get(transportId));
+				ll.addView( img );
+			}
+			transports = transports >> 1;
+			transportId = transportId << 1;
+		}
+		
+		return convertView;
+	}
+
+	public int getSortMode() {
+		return mSortMode;
 	}    
 }
