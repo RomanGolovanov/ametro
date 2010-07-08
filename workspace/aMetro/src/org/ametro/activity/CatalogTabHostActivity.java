@@ -46,15 +46,15 @@ public class CatalogTabHostActivity extends TabActivity {
 		final Resources res = getResources();
 
 		tabHost.addTab(tabHost.newTabSpec(TAB_LOCAL)
-				.setIndicator(res.getString(R.string.tab_maps_local), res.getDrawable(R.drawable.icon_tab_fdd))
+				.setIndicator(res.getString(R.string.tab_maps_local), res.getDrawable(R.drawable.icon_tab_maps))
 				.setContent(new Intent(this, CatalogLocalListActivity.class)));
 
 		tabHost.addTab(tabHost.newTabSpec(TAB_ONLINE)
-				.setIndicator(res.getString(R.string.tab_maps_online), res.getDrawable(R.drawable.icon_tab_browse))
+				.setIndicator(res.getString(R.string.tab_maps_online), res.getDrawable(R.drawable.icon_tab_web))
 				.setContent(new Intent(this, CatalogOnlineListActivity.class)));
 
 		tabHost.addTab(tabHost.newTabSpec(TAB_IMPORT)
-				.setIndicator(res.getString(R.string.tab_maps_import), res.getDrawable(R.drawable.icon_tab_unbox))
+				.setIndicator(res.getString(R.string.tab_maps_import), res.getDrawable(R.drawable.icon_tab_import))
 				.setContent(new Intent(this, CatalogImportListActivity.class)));
 	}
 	

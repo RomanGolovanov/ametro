@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import org.ametro.ApplicationEx;
 import org.ametro.Constants;
 import org.ametro.GlobalSettings;
 import org.ametro.R;
@@ -33,6 +34,7 @@ import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMapPair;
 import org.ametro.catalog.ICatalogStateProvider;
 import org.ametro.catalog.CatalogMapPair.CatalogMapDifferenceCityNameComparator;
+import org.ametro.directory.CountryDirectory;
 import org.ametro.model.TransportType;
 import org.ametro.util.StringUtil;
 
@@ -269,16 +271,24 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
         mRefs = new CatalogMapPair[mCountries.length][];
 
         int lenc = mCountries.length;
+        final CountryDirectory countryDirectory = ApplicationEx.getInstance().getCountryDirectory();
         for(int i=0;i<lenc;i++){
-        	String country = mCountries[i];
-        	ArrayList<CatalogMapPair> diffSet = index.get(country);
+        	final String country = mCountries[i];
+        	final ArrayList<CatalogMapPair> diffSet = index.get(country);
 			if(diffSet!=null){        	
 	        	int len = diffSet.size();
 	        	CatalogMapPair[] arr = (CatalogMapPair[]) diffSet.toArray(new CatalogMapPair[len]);
 	        	Arrays.sort(arr, comparator);
 	        	
 	        	if(arr.length>0){
-	        		mISO[i] = arr[0].getCountryISO();
+	        		String iso = arr[0].getCountryISO();
+	        		if(iso==null){
+	        			CountryDirectory.Entity entity = countryDirectory.getByName(country);
+	        			if(entity!=null){
+	        				iso = entity.getISO2();
+	        			}
+	        		}
+	        		mISO[i] = iso!=null ? iso.toUpperCase() : null;
 	        	}
 	        	mRefs[i] = arr;
 	        	mIcons[i] = null;
