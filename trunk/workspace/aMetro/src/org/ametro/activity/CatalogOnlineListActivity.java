@@ -40,7 +40,7 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity {
 	}
 
 	public int getCatalogState(CatalogMap local, CatalogMap remote) {
-		return mStorage.getOnlineCatalogState(local, remote);
+		return mStorageState.getOnlineCatalogState(local, remote);
 	}
 	
 	protected int getDiffMode() {

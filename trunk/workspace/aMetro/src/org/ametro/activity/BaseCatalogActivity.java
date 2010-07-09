@@ -48,6 +48,7 @@ import org.ametro.catalog.CatalogMapPair;
 import org.ametro.catalog.ICatalogStateProvider;
 import org.ametro.catalog.storage.CatalogEvent;
 import org.ametro.catalog.storage.CatalogStorage;
+import org.ametro.catalog.storage.CatalogStorageStateProvider;
 import org.ametro.catalog.storage.ICatalogStorageListener;
 import org.ametro.dialog.LocationSearchDialog;
 
@@ -93,6 +94,7 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 	protected int mMode;
 	
 	protected CatalogStorage mStorage;
+	protected CatalogStorageStateProvider mStorageState;
 	
 	protected CatalogAdapter mAdapter;
 	protected ListView mList;
@@ -324,6 +326,7 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 		mDiffMode = getDiffMode();
 		mDiffColors = getDiffColors();
 		mStorage = ((ApplicationEx)getApplicationContext()).getCatalogStorage();
+		mStorageState = new CatalogStorageStateProvider(mStorage);
 		setWaitNoProgressView();
 	}
 
@@ -447,7 +450,7 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 		}
 	}
 	
-	public void onCatalogOperationFailed(int catalogId, String message)
+	public void onCatalogFailed(int catalogId, String message)
 	{
 		if(GlobalSettings.isDebugMessagesEnabled(this)){
 			mErrorMessage = message;
@@ -483,7 +486,7 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 		}
 	}
 	
-	public void onCatalogOperationProgress(int catalogId, int progress, int total, String message)
+	public void onCatalogProgress(int catalogId, int progress, int total, String message)
 	{
 		if(isCatalogProgressEnabled(catalogId)){
 			mProgress = progress;

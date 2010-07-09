@@ -19,7 +19,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-package org.ametro.catalog.storage;
+package org.ametro.catalog.storage.obsolete;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -32,6 +32,8 @@ import java.util.ArrayList;
 import org.ametro.Constants;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
+import org.ametro.catalog.storage.CatalogDeserializer;
+import org.ametro.catalog.storage.CatalogSerializer;
 import org.ametro.util.FileUtil;
 
 import android.util.Log;
@@ -46,9 +48,9 @@ public abstract class BaseCatalogProvider {
 	
 	protected Catalog mCatalog;
 	protected File mStorage;
-	protected ICatalogBuilderListener mListener;
+	protected ICatalogProviderListener mListener;
 	
-	public BaseCatalogProvider(ICatalogBuilderListener listener, File storage)
+	public BaseCatalogProvider(ICatalogProviderListener listener, File storage)
 	{
 		mListener = listener;
 		mStorage = storage;
@@ -129,17 +131,17 @@ public abstract class BaseCatalogProvider {
 	
 	protected void fireProgressChanged(int progress, int total, String message)
 	{
-		mListener.onCatalogBuilderProgressChanged(this, progress, total, message);
+		mListener.onCatalogProviderProgressChanged(this, progress, total, message);
 	}
 	
 	protected void fireOperationFailed(String message)
 	{
-		mListener.onCatalogBuilderOperationFailed(this, message);
+		mListener.onCatalogProviderOperationFailed(this, message);
 	}	
 	
 	protected void fireCatalogChanged(Catalog catalog)
 	{
-		mListener.onCatalogBuilderCatalogChanged(this, catalog);
+		mListener.onCatalogProviderCatalogChanged(this, catalog);
 	}
 
 	public Catalog getCatalog() {

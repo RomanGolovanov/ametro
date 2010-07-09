@@ -29,6 +29,7 @@ import org.ametro.directory.CountryDirectory;
 import org.ametro.directory.ImportDirectory;
 import org.ametro.directory.StationDirectory;
 import org.ametro.jni.Natives;
+import org.ametro.service.CatalogService;
 import org.ametro.util.FileUtil;
 import org.ametro.util.WebUtil;
 import org.apache.http.HttpVersion;
@@ -46,6 +47,7 @@ import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.HTTP;
 
 import android.app.Application;
+import android.content.Intent;
 import android.util.Log;
 
 public class ApplicationEx extends Application {
@@ -99,7 +101,6 @@ public class ApplicationEx extends Application {
 		if (mStorage == null) {
 			synchronized (ApplicationEx.class) {
 				if (mStorage == null) {
-
 					CatalogStorage instance = new CatalogStorage(
 							Constants.LOCAL_CATALOG_STORAGE,
 							Constants.LOCAL_CATALOG_PATH,
@@ -131,6 +132,8 @@ public class ApplicationEx extends Application {
 		FileUtil.touchFile(Constants.NO_MEDIA_FILE);
 		Natives.Initialize();
 		
+		startService(new Intent(this, CatalogService.class));
+		
 		if(Constants.ICONS_PATH.exists() && Constants.ICONS_PATH.isDirectory())
 		{
 			String[] files = Constants.ICONS_PATH.list();
@@ -149,6 +152,7 @@ public class ApplicationEx extends Application {
 
 
 	public void onTerminate() {
+		stopService(new Intent(this, CatalogService.class));
 		shutdownHttpClient();
 		super.onTerminate();
 	}

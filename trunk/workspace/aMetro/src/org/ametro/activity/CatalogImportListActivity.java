@@ -41,7 +41,7 @@ public class CatalogImportListActivity extends BaseCatalogExpandableActivity {
 	}
 
 	public int getCatalogState(CatalogMap local, CatalogMap remote) {
-		return mStorage.getImportCatalogState(local, remote);
+		return mStorageState.getImportCatalogState(local, remote);
 	}
 
 	protected int getDiffMode() {

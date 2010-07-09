@@ -50,7 +50,7 @@ public class CatalogLocalListActivity extends BaseCatalogActivity {
 	}
 
 	public int getCatalogState(CatalogMap local, CatalogMap remote) {
-		return mStorage.getLocalCatalogState(local, remote);
+		return mStorageState.getLocalCatalogState(local, remote);
 	}
 
 	public boolean onCatalogMapClick(CatalogMap local, CatalogMap remote, int state) {
