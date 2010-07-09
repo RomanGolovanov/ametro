@@ -18,14 +18,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package org.ametro.catalog.storage;
+package org.ametro.catalog.storage.obsolete;
 
 import org.ametro.catalog.Catalog;
 
-public interface ICatalogBuilderListener {
+public interface ICatalogProviderListener {
 
-	void onCatalogBuilderOperationFailed(BaseCatalogProvider source, String message);
-	void onCatalogBuilderProgressChanged(BaseCatalogProvider source, int progress, int total, String message);
-	void onCatalogBuilderCatalogChanged(BaseCatalogProvider source, Catalog catalog);
+	void onCatalogProviderOperationFailed(BaseCatalogProvider source, String message);
+	void onCatalogProviderProgressChanged(BaseCatalogProvider source, int progress, int total, String message);
+	void onCatalogProviderCatalogChanged(BaseCatalogProvider source, Catalog catalog);
 	
 }

@@ -37,8 +37,10 @@
             android:name=".activity.CatalogImportListActivity"
             android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
         <!-- DIALOGS -->
-        <activity android:label="@string/msg_donate_title" android:name="org.ametro.activity.PaymentDetailsDialog" android:theme="@android:style/Theme.Dialog"/>
-        <activity android:label="@string/msg_detect_location" android:name=".dialog.LocationSearchDialog" android:theme="@android:style/Theme.Dialog"/>
+        <activity android:label="@string/msg_donate_title"
+            android:name="org.ametro.activity.PaymentDetailsDialog" android:theme="@android:style/Theme.Dialog"/>
+        <activity android:label="@string/msg_detect_location"
+            android:name=".dialog.LocationSearchDialog" android:theme="@android:style/Theme.Dialog"/>
         <!-- SEARCHS -->
         <activity android:label="@string/search_station"
             android:launchMode="singleTop" android:name=".activity.StationSearchActivity">
@@ -50,6 +52,8 @@
         </activity>
         <!-- THIRD PARTY ACTIVITIES -->
         <!-- <activity android:name="com.paypal.android.MEP.PayPalActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>  -->
+        <!-- SERVICES --> 
+        <service android:name="org.ametro.service.CatalogService"/>
     </application>
     <uses-sdk android:minSdkVersion="3"/>
     <uses-permission android:name="android.permission.ACCESS_GPS"/>

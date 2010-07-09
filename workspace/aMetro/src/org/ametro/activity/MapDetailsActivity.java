@@ -32,6 +32,7 @@ import org.ametro.R;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.storage.CatalogStorage;
+import org.ametro.catalog.storage.CatalogStorageStateProvider;
 import org.ametro.catalog.storage.ICatalogStorageListener;
 import org.ametro.directory.CountryDirectory;
 import org.ametro.model.TransportType;
@@ -103,9 +104,10 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 	private TextStripView mContent;
 
 	private CatalogStorage mStorage;
+	private CatalogStorageStateProvider mStorageState;
 
 	private HashMap<Integer, Drawable> mTransportTypes;
-
+	
 	private OnlineWidgetView mOnlineWidget;
 	private ImportWidgetView mImportWidget;
 	
@@ -210,6 +212,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 
 		mSystemName = mIntent.getStringExtra(EXTRA_SYSTEM_NAME);
 		mStorage =  ((ApplicationEx)getApplicationContext()).getCatalogStorage();
+		mStorageState = new CatalogStorageStateProvider(mStorage);
 		setWaitNoProgressView();
 	}
 
@@ -341,7 +344,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 		
 		mContent.removeAllViews();
 		if (mOnline != null) {
-			int stateId = mStorage.getOnlineCatalogState(mLocal,mOnline);
+			int stateId = mStorageState.getOnlineCatalogState(mLocal,mOnline);
 			String stateName = states[stateId];
 			int stateColor = (res
 					.getIntArray(R.array.online_catalog_map_state_colors))[stateId];
@@ -356,7 +359,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 			mOnlineWidget.getCancelButton().setOnClickListener(this);
 		}
 		if (mImport != null) {
-			int stateId = mStorage.getImportCatalogState(mLocal,
+			int stateId = mStorageState.getImportCatalogState(mLocal,
 					mImport);
 			String stateName = states[stateId];
 			int stateColor = (res
@@ -427,14 +430,14 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 		mUIEventDispacher.post(mCatalogsUpdateRunnable);
 	}
 
-	public void onCatalogOperationFailed(int catalogId, String message) {
+	public void onCatalogFailed(int catalogId, String message) {
 		if (GlobalSettings.isDebugMessagesEnabled(this)) {
 			mErrorMessage = message;
 			mUIEventDispacher.post(mCatalogError);
 		}
 	}
 
-	public void onCatalogOperationProgress(int catalogId, int progress, int total, String message) {
+	public void onCatalogProgress(int catalogId, int progress, int total, String message) {
 	}
 
 	public void onCatalogMapChanged(String systemName) {

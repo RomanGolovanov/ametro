@@ -25,8 +25,8 @@ import org.ametro.catalog.Catalog;
 public interface ICatalogStorageListener {
 	
 	void onCatalogLoaded(int catalogId, Catalog catalog);
-	void onCatalogOperationFailed(int catalogId, String message);
-	void onCatalogOperationProgress(int catalogId, int progress, int total, String message);
+	void onCatalogFailed(int catalogId, String message);
+	void onCatalogProgress(int catalogId, int progress, int total, String message);
 
 	void onCatalogMapChanged(String systemName);
 	void onCatalogMapDownloadFailed(String systemName, Throwable ex);

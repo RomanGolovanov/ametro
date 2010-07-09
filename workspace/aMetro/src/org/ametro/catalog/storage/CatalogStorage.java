@@ -23,20 +23,29 @@ package org.ametro.catalog.storage;
 import java.io.File;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.concurrent.LinkedBlockingQueue;
 
+import org.ametro.Constants;
 import org.ametro.GlobalSettings;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
-import org.ametro.catalog.CatalogMapState;
-import org.ametro.catalog.storage.MapDownloadQueue.IMapDownloadListener;
-import org.ametro.catalog.storage.MapImportQueue.IMapImportListener;
+import org.ametro.catalog.storage.obsolete.BaseCatalogProvider;
+import org.ametro.catalog.storage.obsolete.DirectoryCatalogProvider;
+import org.ametro.catalog.storage.obsolete.ICatalogProviderListener;
+import org.ametro.catalog.storage.obsolete.MapDownloadQueue;
+import org.ametro.catalog.storage.obsolete.MapImportQueue;
+import org.ametro.catalog.storage.obsolete.WebCatalogProvider;
+import org.ametro.catalog.storage.obsolete.MapDownloadQueue.IMapDownloadListener;
+import org.ametro.catalog.storage.obsolete.MapImportQueue.IMapImportListener;
+import org.ametro.catalog.storage.tasks.CatalogStorageTask;
 import org.ametro.model.Model;
 import org.ametro.model.storage.ModelBuilder;
 import org.ametro.util.FileUtil;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
-public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadListener, IMapImportListener {
+public class CatalogStorage implements Runnable, ICatalogProviderListener, IMapDownloadListener, IMapImportListener {
 
 	public static final int LOCAL = 0;
 	public static final int IMPORT = 1;
@@ -53,6 +62,8 @@ public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadList
 	/*package*/ MapImportQueue mMapImportQueue;
 	
 	/*package*/ boolean mIsShutdown;
+
+	private LinkedBlockingQueue<CatalogStorageTask> mQueue = new LinkedBlockingQueue<CatalogStorageTask>();
 	
 	public CatalogStorage(
 			File localStorage, File localPath, 
@@ -82,9 +93,6 @@ public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadList
 		mMapDownloadQueue.shutdown();
 	}
 
-	public Object getSync(){
-		return mMutex;
-	}
 	
 	public void addCatalogChangedListener(ICatalogStorageListener listener){
 		mCatalogListeners.add(listener);
@@ -102,13 +110,13 @@ public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadList
 
 	/*package*/ void fireCatalogOperationFailed(int catalogId, String message){
 		for(ICatalogStorageListener listener : mCatalogListeners){
-			listener.onCatalogOperationFailed(catalogId, message);
+			listener.onCatalogFailed(catalogId, message);
 		}
 	}
 
 	/*package*/ void fireCatalogOperationProgress(int catalogId, int progress, int total, String message){
 		for(ICatalogStorageListener listener : mCatalogListeners){
-			listener.onCatalogOperationProgress(catalogId, progress, total, message);
+			listener.onCatalogProgress(catalogId, progress, total, message);
 		}
 	}
 	
@@ -190,127 +198,7 @@ public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadList
 		throw new RuntimeException("Unknown CatalogBuilder instance");
 	}
 
-	public int getOnlineCatalogState(CatalogMap local, CatalogMap remote) {
-		if(mMapDownloadQueue.isProcessed(remote)){
-			return CatalogMapState.DOWNLOADING;
-		}
-		if(mMapDownloadQueue.isPending(remote)){
-			return CatalogMapState.DOWNLOAD_PENDING;
-		}
-		
-		String systemName = local!=null ? local.getSystemName() : remote.getSystemName();
-		if(mMapImportQueue.isProcessed(systemName)){
-			return CatalogMapState.IMPORTING;
-		}
-		if(mMapImportQueue.isPending(systemName)){
-			return CatalogMapState.IMPORT_PENDING;
-		}
-		
-		if (remote.isNotSupported()) {
-			if (local == null || local.isNotSupported() || local.isCorruted()) {
-				return CatalogMapState.NOT_SUPPORTED;
-			} else {
-				return CatalogMapState.UPDATE_NOT_SUPPORTED;
-			}
-		} else {
-			if (local == null) {
-				return CatalogMapState.DOWNLOAD;
-			} else if (local.isNotSupported() || local.isCorruted()) {
-				return CatalogMapState.NEED_TO_UPDATE;
-			} else {
-				if (local.getTimestamp() >= remote.getTimestamp()) {
-					return CatalogMapState.INSTALLED;
-				} else {
-					return CatalogMapState.UPDATE;
-				}
-			}
-		}
-	}
 
-	public int getImportCatalogState(CatalogMap local, CatalogMap remote) {
-		if(mMapImportQueue.isProcessed(remote)){
-			return CatalogMapState.IMPORTING;
-		}
-		if(mMapImportQueue.isPending(remote)){
-			return CatalogMapState.IMPORT_PENDING;
-		}
-		
-		String systemName = local!=null ? local.getSystemName() : remote.getSystemName();
-		if(mMapDownloadQueue.isProcessed(systemName)){
-			return CatalogMapState.DOWNLOADING;
-		}
-		if(mMapDownloadQueue.isPending(systemName)){
-			return CatalogMapState.DOWNLOAD_PENDING;
-		}
-		
-		if (remote.isCorruted()) {
-			return CatalogMapState.CORRUPTED;
-		} else {
-			if (local == null) {
-				return CatalogMapState.IMPORT;
-			} else if (!local.isSupported() || local.isCorruted()) {
-				return CatalogMapState.UPDATE;
-			} else {
-				if (local.getTimestamp() >= remote.getTimestamp()) {
-					return CatalogMapState.INSTALLED;
-				} else {
-					return CatalogMapState.UPDATE;
-				}
-			}
-		}
-	}
-
-	public int getLocalCatalogState(CatalogMap local, CatalogMap remote) {
-		if(mMapDownloadQueue.isProcessed(remote)){
-			return CatalogMapState.DOWNLOADING;
-		}
-		if(mMapDownloadQueue.isPending(remote)){
-			return CatalogMapState.DOWNLOAD_PENDING;
-		}
-
-		String systemName = local!=null ? local.getSystemName() : remote.getSystemName();
-		if(mMapImportQueue.isProcessed(systemName)){
-			return CatalogMapState.IMPORTING;
-		}
-		if(mMapImportQueue.isPending(systemName)){
-			return CatalogMapState.IMPORT_PENDING;
-		}
-		
-		if (remote == null) {
-			// remote not exist
-			if (local.isCorruted()) {
-				return CatalogMapState.CORRUPTED;
-			} else if (!local.isSupported()) {
-				return CatalogMapState.NOT_SUPPORTED;
-			} else {
-				return CatalogMapState.OFFLINE;
-			}
-		} else if (!remote.isSupported()) {
-			// remote not supported
-			if (local.isCorruted()) {
-				return CatalogMapState.CORRUPTED;
-			} else if (!local.isSupported()) {
-				return CatalogMapState.NOT_SUPPORTED;
-			} else {
-				return CatalogMapState.INSTALLED;
-			}
-		} else {
-			// remote OK
-			if (local.isCorruted()) {
-				return CatalogMapState.NEED_TO_UPDATE;
-			} else if (!local.isSupported()) {
-				return CatalogMapState.NEED_TO_UPDATE;
-			} else {
-				if (local.getTimestamp() >= remote.getTimestamp()) {
-					return CatalogMapState.INSTALLED;
-				} else {
-					return CatalogMapState.UPDATE;
-				}
-			}
-		}
-	}	
-
-	
 	
 	public void deleteLocalMap(String systemName) {
 		synchronized (mMutex) {
@@ -465,15 +353,57 @@ public class CatalogStorage implements ICatalogBuilderListener, IMapDownloadList
 		fireCatalogMapImportProgress(systemName, (int)progress, (int)total);
 	}
 	
-	public void onCatalogBuilderCatalogChanged(BaseCatalogProvider source, Catalog catalog) {
+	public void onCatalogProviderCatalogChanged(BaseCatalogProvider source, Catalog catalog) {
 		fireCatalogChanged(getCatalogId(source), catalog);
 	}
 
-	public void onCatalogBuilderProgressChanged(BaseCatalogProvider source, int progress, int total, String message) {
+	public void onCatalogProviderProgressChanged(BaseCatalogProvider source, int progress, int total, String message) {
 		fireCatalogOperationProgress(getCatalogId(source), progress, total, message);
 	}
 
-	public void onCatalogBuilderOperationFailed(BaseCatalogProvider source, String message) {
+	public void onCatalogProviderOperationFailed(BaseCatalogProvider source, String message) {
 		fireCatalogOperationFailed(getCatalogId(source), message);
-	}	
+	}
+
+	
+	
+	public void run() {
+		while(!mIsShutdown){
+			try {
+				CatalogStorageTask task = mQueue.take();
+				if(task!=null){
+					task.execute(this);
+				}
+			} catch (InterruptedException e) {
+				Log.w(Constants.LOG_TAG_MAIN, "Interrupted CatalogService task waiting");
+			} catch(Exception e){
+				Log.e(Constants.LOG_TAG_MAIN, "Failed CatalogService task",e);
+			} 
+		}
+	}
+
+	public boolean isTaskCanceled(CatalogStorageTask task){
+		if(mIsShutdown){
+			return true;
+		}
+		return false;
+	}
+	
+	public void onTaskUpdated(CatalogStorageTask task, long progress, long total, long message){
+	}
+	
+	public void onTaskCanceled(CatalogStorageTask task){
+	}
+	
+	public void onTaskFailed(CatalogStorageTask task){
+	}
+	
+	public void onTaskBegin(CatalogStorageTask task){
+	}
+	
+	public void onTaskDone(CatalogStorageTask task){
+	}
+	
+	
+	
 }

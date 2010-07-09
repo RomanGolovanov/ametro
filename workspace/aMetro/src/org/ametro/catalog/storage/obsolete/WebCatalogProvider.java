@@ -19,7 +19,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-package org.ametro.catalog.storage;
+package org.ametro.catalog.storage.obsolete;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -30,6 +30,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import org.ametro.Constants;
+import org.ametro.catalog.storage.CatalogDeserializer;
 import org.ametro.util.FileUtil;
 import org.ametro.util.IDownloadListener;
 import org.ametro.util.WebUtil;
@@ -42,7 +43,7 @@ public class WebCatalogProvider extends BaseCatalogProvider implements IDownload
 	protected final long mDeprecatedTimeout;
 	protected final boolean mCompressed;
 	
-	public WebCatalogProvider(ICatalogBuilderListener listener, File storage, URI uri, boolean compressed)
+	public WebCatalogProvider(ICatalogProviderListener listener, File storage, URI uri, boolean compressed)
 	{
 		super(listener, storage);
 		mURI = uri;

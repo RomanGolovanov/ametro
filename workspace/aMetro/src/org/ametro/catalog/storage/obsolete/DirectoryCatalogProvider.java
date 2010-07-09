@@ -19,7 +19,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-package org.ametro.catalog.storage;
+package org.ametro.catalog.storage.obsolete;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ public class DirectoryCatalogProvider extends BaseCatalogProvider  {
 
 	protected final File mPath;
 
-	public DirectoryCatalogProvider(ICatalogBuilderListener listener, File storage, File path)
+	public DirectoryCatalogProvider(ICatalogProviderListener listener, File storage, File path)
 	{
 		super(listener, storage);
 		mPath = path;
