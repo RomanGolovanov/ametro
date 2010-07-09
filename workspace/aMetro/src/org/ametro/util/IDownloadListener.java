@@ -25,7 +25,7 @@ import java.io.File;
 
 public interface IDownloadListener {
 	void onBegin(Object context, File file);
-	boolean onUpdate(Object context, long position, long total);
+	boolean onUpdate(Object context, long position, long total) throws Exception;
 	void onDone(Object context, File file) throws Exception;
 	void onFailed(Object context, File file, Throwable reason);
 	void onCanceled(Object context, File file);
