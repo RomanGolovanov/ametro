@@ -79,8 +79,5 @@ public class LoadFileCatalogTask extends LoadBaseCatalogTask {
 			return new LoadFileCatalogTask[size];
 		}
 	};
-
-		
-	
 	
 }

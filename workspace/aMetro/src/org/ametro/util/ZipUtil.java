@@ -14,6 +14,9 @@ public class ZipUtil {
 		ZipInputStream zip = null;
 		String fileName = null;
 		try{
+			if(!path.exists()){
+				path.mkdirs();
+			}
 			zip = new ZipInputStream(new FileInputStream(archive));
 			ZipEntry zipEntry; 
 			while((zipEntry=zip.getNextEntry()) != null) { 

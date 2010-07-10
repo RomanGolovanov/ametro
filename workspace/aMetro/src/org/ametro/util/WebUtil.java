@@ -106,7 +106,7 @@ public class WebUtil {
 		
 		final Thread async = new Thread(){
 			public void run() {
-				WebUtil.downloadFile(context, uri, temp, new IDownloadListener(){
+				WebUtil.downloadFile(context, uri, temp, false, new IDownloadListener(){
 
 					public void onBegin(Object context, File file) {
 						DownloadContext downloadContext = (DownloadContext)context;
@@ -207,7 +207,7 @@ public class WebUtil {
 		}
 	}	
 	
-	public static void downloadFile(Object context, URI uri, File file, IDownloadListener listener){
+	public static void downloadFile(Object context, URI uri, File file, boolean reuse, IDownloadListener listener){
 		BufferedInputStream strm = null;
 		if(listener!=null){
 			listener.onBegin(context, file);
@@ -222,34 +222,36 @@ public class WebUtil {
 			long total = (int)entity.getContentLength();
 			long position = 0;
 			
-			if(file.exists()){
-				file.delete();
-			}
-
-			BufferedInputStream in = null;
-			BufferedOutputStream out = null;
-			try{
-				in = new BufferedInputStream( entity.getContent() );
-				out = new BufferedOutputStream( new FileOutputStream(file) );
-				byte[] bytes = new byte[2048];
-				for (int c = in.read(bytes); c != -1; c = in.read(bytes)) {
-					out.write(bytes,0, c);
-					position += c;
-					if(listener!=null){
-						if(!listener.onUpdate(context, position, total)){
-							throw new DownloadCanceledException();
+			if(!(file.exists() && reuse && file.length() == total)){
+				if(file.exists()){
+					file.delete();
+				}
+				BufferedInputStream in = null;
+				BufferedOutputStream out = null;
+				try{
+					in = new BufferedInputStream( entity.getContent() );
+					out = new BufferedOutputStream( new FileOutputStream(file) );
+					byte[] bytes = new byte[2048];
+					for (int c = in.read(bytes); c != -1; c = in.read(bytes)) {
+						out.write(bytes,0, c);
+						position += c;
+						if(listener!=null){
+							if(!listener.onUpdate(context, position, total)){
+								throw new DownloadCanceledException();
+							}
 						}
 					}
-				}
-				
-			}finally{
-				if(in!=null){
-					try { in.close(); } catch (Exception e) { }
-				}
-				if(out!=null){
-					try { out.close(); } catch (Exception e) { }
-				}
-			}	
+					
+				}finally{
+					if(in!=null){
+						try { in.close(); } catch (Exception e) { }
+					}
+					if(out!=null){
+						try { out.close(); } catch (Exception e) { }
+					}
+				}	
+			}
+			
 			if(listener!=null){
 				listener.onDone(context, file);
 			}	

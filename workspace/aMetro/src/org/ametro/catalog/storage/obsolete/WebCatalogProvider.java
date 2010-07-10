@@ -57,7 +57,7 @@ public class WebCatalogProvider extends BaseCatalogProvider implements IDownload
 	}
 	
 	public void refresh() {
-		WebUtil.downloadFile(null, mURI, new File(Constants.TEMP_CATALOG_PATH, "catalog.zip"), this);
+		WebUtil.downloadFile(null, mURI, new File(Constants.TEMP_CATALOG_PATH, "catalog.zip"), false, this);
 	}
 	
 	public void onBegin(Object context, File file) {
