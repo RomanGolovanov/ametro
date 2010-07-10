@@ -281,5 +281,9 @@ public class Catalog {
 				try { strm.close(); }catch(IOException ex){}
 			}
 		}
+	}
+
+	public void save(File storage) throws IOException {
+		Catalog.save(this, storage);
 	}	
 }

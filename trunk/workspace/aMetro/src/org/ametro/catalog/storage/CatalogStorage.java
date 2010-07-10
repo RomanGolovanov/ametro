@@ -21,6 +21,7 @@
 package org.ametro.catalog.storage;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -28,37 +29,33 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import org.ametro.ApplicationEx;
 import org.ametro.Constants;
-import org.ametro.GlobalSettings;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
-import org.ametro.catalog.storage.obsolete.MapDownloadQueue;
-import org.ametro.catalog.storage.obsolete.MapDownloadQueue.IMapDownloadListener;
 import org.ametro.catalog.storage.tasks.BaseTask;
+import org.ametro.catalog.storage.tasks.DownloadMapTask;
 import org.ametro.catalog.storage.tasks.ICatalogStorageTaskListener;
 import org.ametro.catalog.storage.tasks.ImportMapTask;
 import org.ametro.catalog.storage.tasks.LoadBaseCatalogTask;
 import org.ametro.catalog.storage.tasks.LoadFileCatalogTask;
 import org.ametro.catalog.storage.tasks.LoadWebCatalogTask;
 import org.ametro.catalog.storage.tasks.UpdateMapTask;
-import org.ametro.model.Model;
-import org.ametro.model.storage.ModelBuilder;
 import org.ametro.util.FileUtil;
 
 import android.util.Log;
 
-public class CatalogStorage implements Runnable, ICatalogStorageTaskListener, IMapDownloadListener { //, IMapImportListener {
+public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { //, IMapDownloadListener { //, IMapImportListener {
 
 	public static final int LOCAL = 0;
 	public static final int IMPORT = 1;
 	public static final int ONLINE = 2;
 
-	/*package*/ Object mMutex = new Object();
+	/*package*/// Object mMutex = new Object();
 	
 	/*package*/ Catalog[] mCatalogs;
 
 	/*package*/ ArrayList<ICatalogStorageListener> mCatalogListeners;
 	
-	/*package*/ MapDownloadQueue mMapDownloadQueue;
+	/*package*/ //MapDownloadQueue mMapDownloadQueue;
 	
 	/*package*/ //MapImportQueue mMapImportQueue;
 	
@@ -79,7 +76,7 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener, IM
 
 		this.mIsShutdown = false;
 
-		this.mMapDownloadQueue = new MapDownloadQueue(this);
+		//this.mMapDownloadQueue = new MapDownloadQueue(this);
 		//this.mMapImportQueue = new MapImportQueue(this); 
 		
 		mCatalogs = new Catalog[3];
@@ -91,7 +88,7 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener, IM
 	public void shutdown(){
 		mIsShutdown = true;
 		//mMapImportQueue.shutdown();
-		mMapDownloadQueue.shutdown();
+		//mMapDownloadQueue.shutdown();
 	}
 
 	
@@ -152,7 +149,7 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener, IM
 	}
 
 	public Catalog getCatalog(int catalogId) {
-		synchronized (mMutex) {
+		synchronized (mTaskQueue) {
 			return mCatalogs[catalogId];
 		}
 	}	
@@ -170,19 +167,24 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener, IM
 			task = new LoadWebCatalogTask(ONLINE, Constants.ONLINE_CATALOG_STORAGE, URI.create(Constants.ONLINE_CATALOG_PATH), refresh);
 		}
 		requestTask(task);
-		//mTaskQueue.add(task);
 	}	
 	
 	public void deleteLocalMap(String systemName) {
-		synchronized (mMutex) {
+		synchronized (mTaskQueue) {
 			if(mCatalogs[LOCAL]!=null && !mCatalogs[LOCAL].isCorrupted()){
 				CatalogMap map = mCatalogs[LOCAL].getMap(systemName);
 				if(map!=null ){
-					mCatalogs[LOCAL].deleteMap(map);
-					//mCatalogs[LOCAL].save();
-					FileUtil.delete(map.getAbsoluteUrl());
-					fireCatalogMapChanged(systemName);
-					fireCatalogChanged(LOCAL, mCatalogs[LOCAL]);
+					try {
+						mCatalogs[LOCAL].deleteMap(map);
+						mCatalogs[LOCAL].save(Constants.LOCAL_CATALOG_STORAGE);
+						FileUtil.delete(map.getAbsoluteUrl());
+						fireCatalogMapChanged(systemName);
+						fireCatalogChanged(LOCAL, mCatalogs[LOCAL]);
+					} catch (IOException e) {
+						if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)){
+							Log.e(Constants.LOG_TAG_MAIN, "Delete local map failed", e);
+						}
+					}
 				}
 				
 			}
@@ -190,42 +192,45 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener, IM
 	}
 
 	public void deleteImportMap(String systemName) {
-		synchronized (mMutex) {
+		synchronized (mTaskQueue) {
 			if(mCatalogs[IMPORT]!=null && !mCatalogs[IMPORT].isCorrupted()){
 				CatalogMap map = mCatalogs[IMPORT].getMap(systemName);
 				if(map!=null ){
-					mCatalogs[IMPORT].deleteMap(map);
-					//mCatalogs[IMPORT].save();
-					FileUtil.delete(map.getAbsoluteUrl());
-					fireCatalogMapChanged(systemName);
-					fireCatalogChanged(IMPORT, mCatalogs[IMPORT]);
+					
+					try {
+						mCatalogs[IMPORT].deleteMap(map);
+						mCatalogs[IMPORT].save(Constants.IMPORT_CATALOG_STORAGE);
+						FileUtil.delete(map.getAbsoluteUrl());
+						fireCatalogMapChanged(systemName);
+						fireCatalogChanged(IMPORT, mCatalogs[IMPORT]);
+					} catch (IOException e) {
+						if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)){
+							Log.e(Constants.LOG_TAG_MAIN, "Delete import map failed", e);
+						}
+					}					
 				}
-				
 			}
 		}
 	}
 	
 	public void cancelDownload(String systemName) {
-		synchronized (mMutex) {
-			if(mCatalogs[ONLINE]!=null && !mCatalogs[ONLINE].isCorrupted()){
-				CatalogMap map = mCatalogs[ONLINE].getMap(systemName);
-				if(map!=null){
-					mMapDownloadQueue.cancel(map);
-					fireCatalogMapChanged(map.getSystemName());
-				}
+		synchronized (mTaskQueue) {
+			DownloadMapTask task = findQueuedDownloadTask(systemName);
+			if(task!=null){
+				mTaskQueue.remove(task);
+				fireCatalogMapChanged(systemName);
+			}
+			if(mSyncRunTask instanceof DownloadMapTask && systemName.equals( mSyncRunTask.getTaskId())){
+				mSyncRunTask.abort();
+				fireCatalogMapChanged(systemName);
 			}
 		}
 	}
 
 	public void requestDownload(String systemName) {
-		synchronized (mMutex) {
-			if(mCatalogs[ONLINE]!=null && !mCatalogs[ONLINE].isCorrupted()){
-				CatalogMap map = mCatalogs[ONLINE].getMap(systemName);
-				if(map!=null){
-					mMapDownloadQueue.request(map);
-					fireCatalogMapChanged(map.getSystemName());
-				}
-			}
+		synchronized (mTaskQueue) {
+			requestTask(new DownloadMapTask(systemName));
+			fireCatalogMapChanged(systemName);
 		}
 	}
 
@@ -246,6 +251,17 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener, IM
 		}
 	}
 
+	public boolean isImportingTask(String systemName){
+		synchronized (mTaskQueue) {
+			return mSyncRunTask!=null && mSyncRunTask instanceof ImportMapTask && !mSyncRunTask.isDone() && systemName.equals(mSyncRunTask.getTaskId());
+		}
+	}
+	
+	public boolean isDownloadingTask(String systemName){
+		synchronized (mTaskQueue) {
+			return mSyncRunTask!=null && mSyncRunTask instanceof DownloadMapTask && !mSyncRunTask.isDone() && systemName.equals(mSyncRunTask.getTaskId());
+		}
+	}	
 	public ImportMapTask findQueuedImportTask(String systemName){
 		synchronized (mTaskQueue) {
 			for(BaseTask queued : mTaskQueue){
@@ -256,43 +272,18 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener, IM
 		}
 		return null;
 	}
-	
-	public void onMapDownloadBegin(CatalogMap map) {
-		String systemName = map.getSystemName();
-		fireCatalogMapChanged(systemName);
-	}
 
-	public void onMapDownloadCanceled(CatalogMap map) {
-		String systemName = map.getSystemName();
-		fireCatalogMapChanged(systemName);
-	}
-
-	public void onMapDownloadDone(CatalogMap map, File file) {
-		String systemName = map.getSystemName();
-		File local = new File(GlobalSettings.getLocalCatalogMapFileName(map.getSystemName()));
-		FileUtil.delete(local);
-		FileUtil.move(file, local);
-		Model model = ModelBuilder.loadModelDescription(local.getAbsolutePath());
-		synchronized(mMutex){
-			CatalogMap downloaded = Catalog.extractCatalogMap(mCatalogs[LOCAL], local, local.getName().toLowerCase(), model);
-			mCatalogs[LOCAL].appendMap(downloaded);
-			//mCatalogs[LOCAL].save();
+	public DownloadMapTask findQueuedDownloadTask(String systemName){
+		synchronized (mTaskQueue) {
+			for(BaseTask queued : mTaskQueue){
+				if(queued instanceof DownloadMapTask && systemName.equals(queued.getTaskId())){
+					return (DownloadMapTask)queued;
+				}
+			}			
 		}
-		fireCatalogChanged(LOCAL, mCatalogs[LOCAL]);
-		fireCatalogMapChanged(systemName);
-	}
-
-	public void onMapDownloadFailed(CatalogMap map, Throwable reason) {
-		String systemName = map.getSystemName();
-		fireCatalogMapDownloadFailed(systemName,reason);
-		fireCatalogMapChanged(systemName);
-	}
-
-	public void onMapDownloadProgressChanged(CatalogMap map, long progress, long total) {
-		String systemName = map.getSystemName();
-		fireCatalogMapDownloadProgress(systemName, (int)progress, (int)total);
-	}
-
+		return null;
+	}	
+	
 	public boolean hasTasks(){
 		synchronized (mTaskQueue) {
 			return mSyncRunTask!=null || mTaskQueue.size()>0 || mAsyncRunQueue.size()>0;
@@ -350,6 +341,9 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener, IM
 		}
 		if(task instanceof ImportMapTask){
 			fireCatalogMapImportProgress((String)task.getTaskId(),(int)progress,(int)total);
+		}
+		if(task instanceof DownloadMapTask){
+			fireCatalogMapDownloadProgress((String)task.getTaskId(),(int)progress,(int)total);
 		}
 	}
 	
