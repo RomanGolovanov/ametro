@@ -20,10 +20,8 @@
  */
 package org.ametro;
 
-import java.io.File;
-import java.net.URI;
-
 import org.ametro.catalog.storage.CatalogStorage;
+import org.ametro.catalog.storage.tasks.DownloadIconsTask;
 import org.ametro.directory.CityDirectory;
 import org.ametro.directory.CountryDirectory;
 import org.ametro.directory.ImportDirectory;
@@ -31,7 +29,6 @@ import org.ametro.directory.StationDirectory;
 import org.ametro.jni.Natives;
 import org.ametro.service.CatalogService;
 import org.ametro.util.FileUtil;
-import org.ametro.util.WebUtil;
 import org.apache.http.HttpVersion;
 import org.apache.http.client.HttpClient;
 import org.apache.http.conn.ClientConnectionManager;
@@ -108,9 +105,6 @@ public class ApplicationEx extends Application {
 							Constants.IMPORT_CATALOG_PATH,
 							Constants.ONLINE_CATALOG_STORAGE,
 							Constants.ONLINE_CATALOG_PATH);
-					instance.requestCatalog(CatalogStorage.LOCAL, false);
-					instance.requestCatalog(CatalogStorage.IMPORT, false);
-					instance.requestCatalog(CatalogStorage.ONLINE, false);
 					mStorage = instance;
 				}
 			}
@@ -133,19 +127,19 @@ public class ApplicationEx extends Application {
 		Natives.Initialize();
 		
 		startService(new Intent(this, CatalogService.class));
-		
 		if(Constants.ICONS_PATH.exists() && Constants.ICONS_PATH.isDirectory())
 		{
 			String[] files = Constants.ICONS_PATH.list();
 			if(files == null || files.length == 0){
-				final File path = Constants.ICONS_PATH;
-				final URI uri = URI.create(Constants.ONLINE_ICONS_PATH);
-				final File temp = GlobalSettings.getTemporaryDownloadIconFile();
-				WebUtil.downloadFileAsync(this, path, uri, temp);
-				
+				getCatalogStorage().requestTask( new DownloadIconsTask() );
 			}
+		}else{
+			FileUtil.deleteAll(Constants.ICONS_PATH);
+			getCatalogStorage().requestTask( new DownloadIconsTask() );
 		}
-		
+		getCatalogStorage().requestCatalog(CatalogStorage.LOCAL, false);
+		getCatalogStorage().requestCatalog(CatalogStorage.IMPORT, false);
+		getCatalogStorage().requestCatalog(CatalogStorage.ONLINE, false);
 		super.onCreate();
 	}
 

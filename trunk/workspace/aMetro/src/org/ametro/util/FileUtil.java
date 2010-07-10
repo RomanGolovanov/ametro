@@ -102,5 +102,22 @@ public class FileUtil {
 				// scoop exception
 			}
 		}
+	}
+
+	public static boolean deleteAll(File file) {
+		if(file!=null && file.exists()){
+			if(file.isDirectory()){
+				File[] children = file.listFiles();
+				if(children!=null){
+					for(File child : children){
+						if(!deleteAll(child)){
+							return false;
+						}
+					}
+				}
+			}
+			return file.delete();
+		}
+		return true;
 	}	
 }

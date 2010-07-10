@@ -113,7 +113,7 @@ public class MapDownloadQueue extends Thread implements IDownloadListener {
 				mCanceled = false;
 				URI uri = URI.create(mMap.getAbsoluteUrl());
 				File file = new File(GlobalSettings.getTemporaryDownloadMapFile(mMap.getSystemName()));
-				WebUtil.downloadFile(mMap, uri, file, this);
+				WebUtil.downloadFile(mMap, uri, file, false, this);
 			}
 		} catch (InterruptedException e) {
 		}

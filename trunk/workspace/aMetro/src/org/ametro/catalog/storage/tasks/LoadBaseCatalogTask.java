@@ -15,6 +15,7 @@ import org.ametro.catalog.storage.CatalogDeserializer;
 import org.ametro.catalog.storage.CatalogSerializer;
 import org.ametro.util.FileUtil;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.util.Log;
 
@@ -24,6 +25,7 @@ public abstract class LoadBaseCatalogTask extends CatalogStorageTask {
 	protected final File mFile;
 	protected final boolean mForceRefresh;
 	protected final int mCatalogId;
+	protected final long mId;
 	
 	/* TRANSITITION STATE */
 	protected Catalog mCatalog;
@@ -31,13 +33,23 @@ public abstract class LoadBaseCatalogTask extends CatalogStorageTask {
 	public abstract boolean isDerpecated();
 	public abstract void refresh() throws Exception;
 	
+	public boolean isAsync() {
+		return false;
+	}
+	
+	public long getTaskId() {
+		return mId;
+	}
+	
 	public LoadBaseCatalogTask(int catalogId, File file, boolean forceRefresh){
 		this.mCatalogId = catalogId;
 		this.mFile = file;
 		this.mForceRefresh = forceRefresh;
+		this.mId = catalogId + (forceRefresh ? 100 : 0);
 	}
 
 	protected LoadBaseCatalogTask(Parcel in) {
+		mId = in.readLong();
 		mCatalogId = in.readInt();
 		mForceRefresh = in.readInt()!=0;
 		mFile = new File(in.readString());
@@ -52,18 +64,21 @@ public abstract class LoadBaseCatalogTask extends CatalogStorageTask {
 		super.failed(reason);
 	}
 	
-	protected void run() throws Exception{
-		if(!mForceRefresh && mFile.exists()){
-			update(0, 0, "Loading catalog from XML");
-			loadFromStorage();
-		}
-		if(mCatalog==null || mForceRefresh || isDerpecated()){
-			refresh();
-			if(mCatalog!=null && !mCatalog.isCorrupted()){
-				update(0, 0, "Saving catalog to XML");
-				saveToStorage();
+	protected void run(Context context) throws Exception{
+		//mCatalog = ApplicationEx.getInstance().getCatalogStorage().getCatalog(getCatalogId());
+		if(mCatalog==null || mForceRefresh){
+			if(!mForceRefresh && mFile.exists()){
+				update(0, 0, "Loading catalog from XML");
+				loadFromStorage();
 			}
-		}		
+			if(mCatalog==null || mForceRefresh || isDerpecated()){
+				refresh();
+				if(mCatalog!=null && !mCatalog.isCorrupted()){
+					update(0, 0, "Saving catalog to XML");
+					saveToStorage();
+				}
+			}		
+		}
 	}
 
 	protected Catalog getEmptyCatalog()
@@ -125,6 +140,7 @@ public abstract class LoadBaseCatalogTask extends CatalogStorageTask {
 	}
 
 	public void writeToParcel(Parcel out, int flags) {
+		out.writeLong(mId);
 		out.writeInt(mCatalogId);
 		out.writeInt(mForceRefresh ? 1 : 0);
 		out.writeString(mFile.getAbsolutePath());

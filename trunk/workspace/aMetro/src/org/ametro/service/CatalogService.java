@@ -1,5 +1,6 @@
 package org.ametro.service;
 
+import org.ametro.ApplicationEx;
 import org.ametro.Constants;
 
 import android.app.Service;
@@ -21,6 +22,7 @@ public class CatalogService extends Service {
 
 	public void onStart(Intent intent, int startId) {
 		Log.i(Constants.LOG_TAG_MAIN, "CatalogService.onStart");
+		((ApplicationEx)getApplicationContext()).getCatalogStorage();
 	}
 
 	public void onDestroy() {

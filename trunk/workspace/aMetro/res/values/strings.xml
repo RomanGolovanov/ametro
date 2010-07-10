@@ -81,6 +81,10 @@
     <string name="pref_auto_update_period_key">AUTO_UPDATE_PERIOD</string>
     <string name="pref_auto_update_period_description">Update period</string>
 
+    <string name="pref_auto_update_refresh_icons">Refresh icons</string>
+    <string name="pref_auto_update_refresh_icons_key">REFRESH_ICONS</string>
+    <string name="pref_auto_update_refresh_icons_description">Force update country icons pack from server</string>
+
     <string name="pref_import">Enable PMZ import</string>
     <string name="pref_import_key">PMZ_IMPORT</string>
     <string name="pref_import_description">Check to allow import of PMZ map format</string>
@@ -107,6 +111,7 @@
     <string name="pref_donate_alertpay">via AlertPay</string>
     <string name="pref_donate_alertpay_key">DONATE_ALERTPAY</string>
     <string name="pref_donate_alertpay_description">open donate web form on www.alertpay.com</string>
+
      
     <string name="url_paypal">https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=N2NHRQWE7BUYG&amp;lc=RU&amp;item_name=aMetro%20Project&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted</string>
     <string name="url_yandex">file:///android_asset/yandex_form.html</string>
@@ -221,6 +226,12 @@ Design: Dusty Rat&lt;br/&gt;
     <string name="msg_transports">Transports</string>
     <string name="msg_import">Import</string>
     <string name="msg_online">Catalog</string>
+    <string name="msg_begin_download_icons">Begin download icons pack</string>
+    <string name="msg_begin_unpack_icons">Begin unpack icons pack</string>
+    <string name="msg_icons_pack_installed">Icons pack installed</string>
+    <string name="msg_icons_pack_download_progress">Icons pack download:</string>
+    <string name="msg_icons_pack_download_failed">Icons pack installation failed</string>
+    <string name="msg_icons_pack_download_canceled">Icon pack download canceled</string>
     <string name="msg_"/>
     
     <string name="tab_maps_favorited">Favorites</string>
