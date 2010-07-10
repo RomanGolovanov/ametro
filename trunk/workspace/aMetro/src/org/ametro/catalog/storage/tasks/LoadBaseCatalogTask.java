@@ -19,13 +19,12 @@ import android.content.Context;
 import android.os.Parcel;
 import android.util.Log;
 
-public abstract class LoadBaseCatalogTask extends CatalogStorageTask {
+public abstract class LoadBaseCatalogTask extends BaseTask {
 
 	/* PERSISTENT STATE */
 	protected final File mFile;
 	protected final boolean mForceRefresh;
 	protected final int mCatalogId;
-	protected final long mId;
 	
 	/* TRANSITITION STATE */
 	protected Catalog mCatalog;
@@ -37,19 +36,17 @@ public abstract class LoadBaseCatalogTask extends CatalogStorageTask {
 		return false;
 	}
 	
-	public long getTaskId() {
-		return mId;
+	public Object getTaskId() {
+		return mCatalogId;
 	}
 	
 	public LoadBaseCatalogTask(int catalogId, File file, boolean forceRefresh){
 		this.mCatalogId = catalogId;
 		this.mFile = file;
 		this.mForceRefresh = forceRefresh;
-		this.mId = catalogId + (forceRefresh ? 100 : 0);
 	}
 
 	protected LoadBaseCatalogTask(Parcel in) {
-		mId = in.readLong();
 		mCatalogId = in.readInt();
 		mForceRefresh = in.readInt()!=0;
 		mFile = new File(in.readString());
@@ -140,7 +137,6 @@ public abstract class LoadBaseCatalogTask extends CatalogStorageTask {
 	}
 
 	public void writeToParcel(Parcel out, int flags) {
-		out.writeLong(mId);
 		out.writeInt(mCatalogId);
 		out.writeInt(mForceRefresh ? 1 : 0);
 		out.writeString(mFile.getAbsolutePath());

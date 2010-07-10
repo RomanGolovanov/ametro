@@ -20,13 +20,17 @@
  */
 package org.ametro.catalog;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeSet;
 
 import org.ametro.ApplicationEx;
 import org.ametro.Constants;
+import org.ametro.catalog.storage.CatalogSerializer;
 import org.ametro.directory.CatalogMapSuggestion;
 import org.ametro.directory.CityDirectory;
 import org.ametro.directory.CountryDirectory;
@@ -265,5 +269,17 @@ public class Catalog {
 	}
 	
 	private static final String UNKNOWN_EN = "Unknown";
-	private static final String UNKNOWN_RU = "Неизвестно";	
+	private static final String UNKNOWN_RU = "Неизвестно";
+
+	public static void save(Catalog catalog, File storage) throws IOException {
+		BufferedOutputStream strm = null;
+		try{
+			strm = new BufferedOutputStream(new FileOutputStream(storage));
+			CatalogSerializer.serializeCatalog(catalog, strm);
+		}finally{
+			if(strm!=null){
+				try { strm.close(); }catch(IOException ex){}
+			}
+		}
+	}	
 }

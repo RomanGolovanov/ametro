@@ -2,6 +2,7 @@ package org.ametro.catalog.storage;
 
 import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.CatalogMapState;
+import org.ametro.catalog.storage.tasks.ImportMapTask;
 
 public class CatalogStorageStateProvider {
 
@@ -20,10 +21,10 @@ public class CatalogStorageStateProvider {
 		}
 		
 		String systemName = local!=null ? local.getSystemName() : remote.getSystemName();
-		if(mStorage.mMapImportQueue.isProcessed(systemName)){
+		if(mStorage.mSyncRunTask!=null && mStorage.mSyncRunTask instanceof ImportMapTask && systemName.equals(mStorage.mSyncRunTask.getTaskId()) ){
 			return CatalogMapState.IMPORTING;
 		}
-		if(mStorage.mMapImportQueue.isPending(systemName)){
+		if(mStorage.findQueuedImportTask(systemName)!=null){
 			return CatalogMapState.IMPORT_PENDING;
 		}
 		
@@ -49,14 +50,15 @@ public class CatalogStorageStateProvider {
 	}
 
 	public int getImportCatalogState(CatalogMap local, CatalogMap remote) {
-		if(mStorage.mMapImportQueue.isProcessed(remote)){
+		String systemName = local!=null ? local.getSystemName() : remote.getSystemName();
+
+		if(mStorage.mSyncRunTask!=null && mStorage.mSyncRunTask instanceof ImportMapTask && systemName.equals(mStorage.mSyncRunTask.getTaskId()) ){
 			return CatalogMapState.IMPORTING;
 		}
-		if(mStorage.mMapImportQueue.isPending(remote)){
+		if(mStorage.findQueuedImportTask(systemName)!=null){
 			return CatalogMapState.IMPORT_PENDING;
-		}
+		}		
 		
-		String systemName = local!=null ? local.getSystemName() : remote.getSystemName();
 		if(mStorage.mMapDownloadQueue.isProcessed(systemName)){
 			return CatalogMapState.DOWNLOADING;
 		}
@@ -90,10 +92,10 @@ public class CatalogStorageStateProvider {
 		}
 
 		String systemName = local!=null ? local.getSystemName() : remote.getSystemName();
-		if(mStorage.mMapImportQueue.isProcessed(systemName)){
+		if(mStorage.mSyncRunTask!=null && mStorage.mSyncRunTask instanceof ImportMapTask && systemName.equals(mStorage.mSyncRunTask.getTaskId()) ){
 			return CatalogMapState.IMPORTING;
 		}
-		if(mStorage.mMapImportQueue.isPending(systemName)){
+		if(mStorage.findQueuedImportTask(systemName)!=null){
 			return CatalogMapState.IMPORT_PENDING;
 		}
 		

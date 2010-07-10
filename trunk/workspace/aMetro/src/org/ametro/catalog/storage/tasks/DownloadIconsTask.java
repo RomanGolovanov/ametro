@@ -22,7 +22,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
-public class DownloadIconsTask extends CatalogStorageTask implements IDownloadListener {
+public class DownloadIconsTask extends BaseTask implements IDownloadListener {
 
 	private static final int NOTIFICATION_ID = 1;
 	
@@ -41,8 +41,8 @@ public class DownloadIconsTask extends CatalogStorageTask implements IDownloadLi
 		return true;
 	}
 	
-	public long getTaskId() {
-		return 0;
+	public Object getTaskId() {
+		return DownloadIconsTask.class;
 	}
 	
 	protected void run(Context context) throws Exception {
@@ -120,7 +120,7 @@ public class DownloadIconsTask extends CatalogStorageTask implements IDownloadLi
 		mNotificationManager.notify(NOTIFICATION_ID, notification);
 	}
 
-	public static CatalogStorageTask create(boolean force) {
+	public static BaseTask create(boolean force) {
 		if(force){
 			FileUtil.delete(GlobalSettings.getTemporaryDownloadIconFile());
 		}
