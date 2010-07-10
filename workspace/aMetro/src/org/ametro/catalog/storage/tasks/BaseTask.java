@@ -21,12 +21,17 @@ public abstract class BaseTask implements Parcelable {
 	public abstract Object getTaskId();
 	
 	private ICatalogStorageTaskListener mCallback;
+	private boolean mIsCanceled;
+	private boolean mIsDone;
 
 	public void execute(Context context, ICatalogStorageTaskListener callback) {
+		mIsCanceled = false;
+		mIsDone = false;
 		mCallback = callback;
 		try {
 			begin();
 			run(context);
+			mIsDone = true;
 			done();
 		}catch(CanceledException ex){
 			canceled();
@@ -48,11 +53,11 @@ public abstract class BaseTask implements Parcelable {
 	}
 
 	protected boolean isCanceled() {
-		return mCallback.isTaskCanceled(this);
+		return mIsCanceled || mCallback.isTaskCanceled(this);
 	}
 	
 	protected void cancelCheck() throws CanceledException{
-		if(mCallback.isTaskCanceled(this)){
+		if(mIsCanceled || mCallback.isTaskCanceled(this)){
 			throw new CanceledException();
 		}
 	}
@@ -69,5 +74,13 @@ public abstract class BaseTask implements Parcelable {
 
 	public String toString() {
 		return "[ID:" + getTaskId() + ";CLASS=" + getClass().getName() + "]";
+	}
+	
+	public void abort() {
+		mIsCanceled = true;
+	}
+	
+	public boolean isDone(){
+		return mIsDone;
 	}
 }

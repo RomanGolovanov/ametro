@@ -173,6 +173,7 @@
     	<item>0.2.5.r290: added description to map detail view, maps became incompatible with previous version</item>
     	<item>0.2.5.r299: plain list view for local maps catalog</item>
     	<item>0.2.5.r302: migrate from independent task to to sync/async catalog task queue architecture</item>
+    	<item>0.2.5.r304: all catalog operations migrated to task queue</item>
     </string-array>
     <string-array name="create_route_modes">
         <item>Minimal Time</item>
