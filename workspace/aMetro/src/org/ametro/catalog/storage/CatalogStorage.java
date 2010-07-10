@@ -32,21 +32,21 @@ import org.ametro.GlobalSettings;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.storage.obsolete.MapDownloadQueue;
-import org.ametro.catalog.storage.obsolete.MapImportQueue;
 import org.ametro.catalog.storage.obsolete.MapDownloadQueue.IMapDownloadListener;
-import org.ametro.catalog.storage.obsolete.MapImportQueue.IMapImportListener;
-import org.ametro.catalog.storage.tasks.CatalogStorageTask;
+import org.ametro.catalog.storage.tasks.BaseTask;
 import org.ametro.catalog.storage.tasks.ICatalogStorageTaskListener;
+import org.ametro.catalog.storage.tasks.ImportMapTask;
 import org.ametro.catalog.storage.tasks.LoadBaseCatalogTask;
 import org.ametro.catalog.storage.tasks.LoadFileCatalogTask;
 import org.ametro.catalog.storage.tasks.LoadWebCatalogTask;
+import org.ametro.catalog.storage.tasks.UpdateMapTask;
 import org.ametro.model.Model;
 import org.ametro.model.storage.ModelBuilder;
 import org.ametro.util.FileUtil;
 
 import android.util.Log;
 
-public class CatalogStorage implements Runnable, ICatalogStorageTaskListener, IMapDownloadListener, IMapImportListener {
+public class CatalogStorage implements Runnable, ICatalogStorageTaskListener, IMapDownloadListener { //, IMapImportListener {
 
 	public static final int LOCAL = 0;
 	public static final int IMPORT = 1;
@@ -59,15 +59,16 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener, IM
 	/*package*/ ArrayList<ICatalogStorageListener> mCatalogListeners;
 	
 	/*package*/ MapDownloadQueue mMapDownloadQueue;
-	/*package*/ MapImportQueue mMapImportQueue;
+	
+	/*package*/ //MapImportQueue mMapImportQueue;
 	
 	/*package*/ boolean mIsShutdown;
 	
 	/*package*/ Thread mTaskWorker;
 
-	/*package*/ LinkedBlockingQueue<CatalogStorageTask> mTaskQueue = new LinkedBlockingQueue<CatalogStorageTask>();
-	/*package*/ LinkedList<CatalogStorageTask> mAsyncRunQueue = new LinkedList<CatalogStorageTask>();
-	/*package*/ CatalogStorageTask mSyncRunTask = null;
+	/*package*/ LinkedBlockingQueue<BaseTask> mTaskQueue = new LinkedBlockingQueue<BaseTask>();
+	/*package*/ LinkedList<BaseTask> mAsyncRunQueue = new LinkedList<BaseTask>();
+	/*package*/ BaseTask mSyncRunTask = null;
 	
 	public CatalogStorage(
 			File localStorage, File localPath, 
@@ -79,7 +80,7 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener, IM
 		this.mIsShutdown = false;
 
 		this.mMapDownloadQueue = new MapDownloadQueue(this);
-		this.mMapImportQueue = new MapImportQueue(this); 
+		//this.mMapImportQueue = new MapImportQueue(this); 
 		
 		mCatalogs = new Catalog[3];
 
@@ -89,7 +90,7 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener, IM
 	
 	public void shutdown(){
 		mIsShutdown = true;
-		mMapImportQueue.shutdown();
+		//mMapImportQueue.shutdown();
 		mMapDownloadQueue.shutdown();
 	}
 
@@ -229,29 +230,33 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener, IM
 	}
 
 	public void cancelImport(String systemName) {
-		synchronized (mMutex) {
-			if(mCatalogs[IMPORT]!=null && !mCatalogs[IMPORT].isCorrupted()){
-				CatalogMap map = mCatalogs[IMPORT].getMap(systemName);
-				if(map!=null){
-					mMapImportQueue.cancel(map);
-					fireCatalogMapChanged(map.getSystemName());
-				}
+		synchronized (mTaskQueue) {
+			ImportMapTask task = findQueuedImportTask(systemName);
+			if(task!=null){
+				mTaskQueue.remove(task);
+				fireCatalogMapChanged(systemName);
 			}
 		}
 	}
 
 	public void requestImport(String systemName) {
-		synchronized (mMutex) {
-			if(mCatalogs[IMPORT]!=null && !mCatalogs[IMPORT].isCorrupted()){
-				CatalogMap map = mCatalogs[IMPORT].getMap(systemName);
-				if(map!=null){
-					mMapImportQueue.request(map);
-					fireCatalogMapChanged(map.getSystemName());
-				}
-			}
+		synchronized (mTaskQueue) {
+			requestTask(new ImportMapTask(systemName));
+			fireCatalogMapChanged(systemName);
 		}
 	}
 
+	public ImportMapTask findQueuedImportTask(String systemName){
+		synchronized (mTaskQueue) {
+			for(BaseTask queued : mTaskQueue){
+				if(queued instanceof ImportMapTask && systemName.equals(queued.getTaskId())){
+					return (ImportMapTask)queued;
+				}
+			}			
+		}
+		return null;
+	}
+	
 	public void onMapDownloadBegin(CatalogMap map) {
 		String systemName = map.getSystemName();
 		fireCatalogMapChanged(systemName);
@@ -288,65 +293,35 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener, IM
 		fireCatalogMapDownloadProgress(systemName, (int)progress, (int)total);
 	}
 
-	public void onMapImportBegin(CatalogMap map) {
-		String systemName = map.getSystemName();
-		fireCatalogMapChanged(systemName);
-	}
-
-	public void onMapImportCanceled(CatalogMap map) {
-		String systemName = map.getSystemName();
-		fireCatalogMapChanged(systemName);
-	}
-
-	public void onMapImportDone(CatalogMap map, File file) {
-		String systemName = map.getSystemName();
-		File local = new File(GlobalSettings.getLocalCatalogMapFileName(map.getSystemName()));
-		FileUtil.delete(local);
-		FileUtil.move(file, local);
-		Model model = ModelBuilder.loadModelDescription(local.getAbsolutePath());
-		synchronized(mMutex){
-			CatalogMap downloaded = Catalog.extractCatalogMap(mCatalogs[LOCAL], local, local.getName().toLowerCase(), model);
-			mCatalogs[LOCAL].appendMap(downloaded);
-			
-			//mCatalogs[LOCAL].save();
-		}
-		fireCatalogChanged(LOCAL, mCatalogs[LOCAL]);
-		fireCatalogMapChanged(systemName);
-	}
-
-	public void onMapImportFailed(CatalogMap map, Throwable reason) {
-		String systemName = map.getSystemName();
-		fireCatalogMapImportFailed(systemName,reason);
-		fireCatalogMapChanged(systemName);
-	}
-
-	public void onMapImportProgressChanged(CatalogMap map, long progress, long total) {
-		String systemName = map.getSystemName();
-		fireCatalogMapImportProgress(systemName, (int)progress, (int)total);
-	}
-	
-
 	public boolean hasTasks(){
-		return mSyncRunTask!=null || mTaskQueue.size()>0;
+		synchronized (mTaskQueue) {
+			return mSyncRunTask!=null || mTaskQueue.size()>0 || mAsyncRunQueue.size()>0;
+		}
 	}
 	
 	public void run() {
 		while(!mIsShutdown){
 			try {
-				mSyncRunTask = null;
-				CatalogStorageTask task = mTaskQueue.take();
+				synchronized (mTaskQueue) {
+					mSyncRunTask = null;
+				}
+				BaseTask task = mTaskQueue.take();
 				if(task!=null){
 					if(task.isAsync()){
-						final CatalogStorageTask asyncTask = task;
-						mAsyncRunQueue.add(asyncTask);
-						Thread runner = new Thread(new Runnable() {
-							public void run() {
-								asyncTask.execute(ApplicationEx.getInstance(), CatalogStorage.this);
-							}
-						});
-						runner.start();
+						synchronized (mTaskQueue) {
+							final BaseTask asyncTask = task;
+							mAsyncRunQueue.add(asyncTask);
+							Thread runner = new Thread(new Runnable() {
+								public void run() {
+									asyncTask.execute(ApplicationEx.getInstance(), CatalogStorage.this);
+								}
+							});
+							runner.start();
+						}
 					}else{
-						mSyncRunTask = task;
+						synchronized (mTaskQueue) {
+							mSyncRunTask = task;
+						}
 						task.execute(ApplicationEx.getInstance(), this);
 						synchronized (mTaskQueue) {
 							mSyncRunTask = null;
@@ -361,34 +336,62 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener, IM
 		}
 	}
 
-	public boolean isTaskCanceled(CatalogStorageTask task){
+	public boolean isTaskCanceled(BaseTask task){
 		if(mIsShutdown){
 			return true;
 		}
 		return false;
 	}
 	
-	public void onTaskUpdated(CatalogStorageTask task, long progress, long total, String message){
+	public void onTaskUpdated(BaseTask task, long progress, long total, String message){
 		if(task instanceof LoadBaseCatalogTask){
 			LoadBaseCatalogTask info = (LoadBaseCatalogTask)task;
 			fireCatalogOperationProgress(info.getCatalogId(), (int)progress, (int)total, message);
 		}
+		if(task instanceof ImportMapTask){
+			fireCatalogMapImportProgress((String)task.getTaskId(),(int)progress,(int)total);
+		}
 	}
 	
-	public void onTaskCanceled(CatalogStorageTask task){
+	public void onTaskCanceled(BaseTask task){
 		if(task instanceof LoadBaseCatalogTask){
 			LoadBaseCatalogTask info = (LoadBaseCatalogTask)task;
 			int catalogId = info.getCatalogId();
 			Catalog catalog = info.getCatalog();
 			mCatalogs[catalogId] = catalog;
 			fireCatalogChanged(catalogId, catalog);
+		}
+		if(task instanceof UpdateMapTask){
+			fireCatalogMapChanged((String)task.getTaskId());
+		}		
+		if(mAsyncRunQueue.contains(task)){
+			mAsyncRunQueue.remove(task);
+		}
+	}
+	
+	public void onTaskFailed(BaseTask task, Throwable reason){
+		if(task instanceof LoadBaseCatalogTask){
+			LoadBaseCatalogTask info = (LoadBaseCatalogTask)task;
+			int catalogId = info.getCatalogId();
+			Catalog catalog = info.getCatalog();
+			mCatalogs[catalogId] = catalog;
+			fireCatalogChanged(catalogId, catalog);
+		}
+		if(task instanceof UpdateMapTask){
+			fireCatalogMapChanged((String)task.getTaskId());
 		}
 		if(mAsyncRunQueue.contains(task)){
 			mAsyncRunQueue.remove(task);
 		}
 	}
 	
-	public void onTaskFailed(CatalogStorageTask task, Throwable reason){
+	public void onTaskBegin(BaseTask task){
+		if(task instanceof UpdateMapTask){
+			fireCatalogMapChanged((String)task.getTaskId());
+		}
+	}
+	
+	public void onTaskDone(BaseTask task){
 		if(task instanceof LoadBaseCatalogTask){
 			LoadBaseCatalogTask info = (LoadBaseCatalogTask)task;
 			int catalogId = info.getCatalogId();
@@ -396,50 +399,41 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener, IM
 			mCatalogs[catalogId] = catalog;
 			fireCatalogChanged(catalogId, catalog);
 		}
-		if(mAsyncRunQueue.contains(task)){
-			mAsyncRunQueue.remove(task);
-		}
-	}
-	
-	public void onTaskBegin(CatalogStorageTask task){
-	}
-	
-	public void onTaskDone(CatalogStorageTask task){
-		if(task instanceof LoadBaseCatalogTask){
-			LoadBaseCatalogTask info = (LoadBaseCatalogTask)task;
-			int catalogId = info.getCatalogId();
-			Catalog catalog = info.getCatalog();
-			mCatalogs[catalogId] = catalog;
-			fireCatalogChanged(catalogId, catalog);
+		if(task instanceof UpdateMapTask){
+			fireCatalogMapChanged((String)task.getTaskId());
+			fireCatalogChanged(LOCAL, mCatalogs[LOCAL]);
 		}
 		if(mAsyncRunQueue.contains(task)){
 			mAsyncRunQueue.remove(task);
 		}
 	}
 
-	public boolean requestTask(CatalogStorageTask task) {
+	public boolean requestTask(BaseTask task) {
 		synchronized (mTaskQueue) {
-			Class<? extends CatalogStorageTask> newTaskClass = task.getClass();
-			for(CatalogStorageTask queued : mTaskQueue){
-				if(queued.getClass().equals(newTaskClass) && queued.getTaskId() == task.getTaskId()){
+			final Object taskId = task.getTaskId();
+			if(taskId!=null){
+				final Class<? extends BaseTask> newTaskClass = task.getClass();
+				for(BaseTask queued : mTaskQueue){
+					if(queued.getClass().equals(newTaskClass) && taskId.equals( queued.getTaskId() )){
+						if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.WARN)){
+							Log.w(Constants.LOG_TAG_MAIN, "Reject task " + task.toString() + " due it already queued");
+						}
+						return false;
+					}
+				}
+				if(mSyncRunTask!=null && mSyncRunTask.getClass().equals(newTaskClass) && taskId.equals( mSyncRunTask.getTaskId() )){
 					if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.WARN)){
-						Log.w(Constants.LOG_TAG_MAIN, "Reject task " + task.toString() + " due it already queued");
+						Log.w(Constants.LOG_TAG_MAIN, "Reject task " + task.toString() + " due it already runned");
 					}
 					return false;
 				}
-			}
-			if(mSyncRunTask!=null && mSyncRunTask.getClass().equals(newTaskClass) && mSyncRunTask.getTaskId() == task.getTaskId()){
-				if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.WARN)){
-					Log.w(Constants.LOG_TAG_MAIN, "Reject task " + task.toString() + " due it already runned");
-				}
-				return false;
-			}
-			for(CatalogStorageTask running : mAsyncRunQueue){
-				if(running.getClass().equals(newTaskClass) && running.getTaskId() == task.getTaskId()){
-					if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.WARN)){
-						Log.w(Constants.LOG_TAG_MAIN, "Reject task " + task.toString() + " due it already runned async.");
+				for(BaseTask running : mAsyncRunQueue){
+					if(running.getClass().equals(newTaskClass) && taskId.equals( running.getTaskId() )){
+						if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.WARN)){
+							Log.w(Constants.LOG_TAG_MAIN, "Reject task " + task.toString() + " due it already runned async.");
+						}
+						return false;
 					}
-					return false;
 				}
 			}
 		}
