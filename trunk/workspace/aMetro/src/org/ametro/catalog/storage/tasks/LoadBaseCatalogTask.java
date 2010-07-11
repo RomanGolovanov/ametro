@@ -72,10 +72,15 @@ public abstract class LoadBaseCatalogTask extends BaseTask {
 				loadFromStorage();
 			}
 			if(mCatalog==null || mForceRefresh || isDerpecated()){
+				Catalog backup = mCatalog;
 				refresh();
 				if(mCatalog!=null && !mCatalog.isCorrupted()){
 					update(0, 0, res.getString(R.string.msg_save_catalog));
 					saveToStorage();
+				}else{
+					if(backup!=null && !backup.isCorrupted()){
+						mCatalog = backup;
+					}
 				}
 			}		
 		}

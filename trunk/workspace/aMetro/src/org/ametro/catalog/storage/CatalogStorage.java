@@ -20,6 +20,7 @@
  */
 package org.ametro.catalog.storage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
@@ -40,6 +41,8 @@ import org.ametro.catalog.storage.tasks.LoadWebCatalogTask;
 import org.ametro.catalog.storage.tasks.UpdateMapTask;
 import org.ametro.util.FileUtil;
 
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 
 public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { //, IMapDownloadListener { //, IMapImportListener {
@@ -48,6 +51,7 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 	public static final int IMPORT = 1;
 	public static final int ONLINE = 2;
 
+	public static final int SAVING_DELAY = 30 * 1000;
 	public static final String QUEUE_THREAD_NAME = "TASK_QUEUE";
 	
 	/*package*/ Catalog[] mCatalogs = new Catalog[3];
@@ -452,5 +456,50 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 		mTaskQueue.add(task);
 		return true;
 	}
+
+	private Handler mCatalogSaveHandler = new Handler(){
+		public void handleMessage(Message msg) {
+			synchronized (mTaskQueue) {
+				Catalog catalog = null;
+				File storage = null;
+				switch (msg.what) {
+				case LOCAL:
+					catalog = mCatalogs[LOCAL];
+					storage = Constants.LOCAL_CATALOG_STORAGE;
+					break;
+				case IMPORT:
+					catalog = mCatalogs[IMPORT];
+					storage = Constants.IMPORT_CATALOG_STORAGE;
+					break;
+				case ONLINE:
+					catalog = mCatalogs[ONLINE];
+					storage = Constants.ONLINE_CATALOG_STORAGE;
+					break;
+				}
+				if(catalog!=null){
+					try {
+						catalog.save(storage);
+					} catch (IOException e) {
+						if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)){
+							Log.e(Constants.LOG_TAG_MAIN, "Failed to save catalog " + storage.toString(), e );
+						}
+					}
+				}
+			}
+			super.handleMessage(msg);
+		}
+	};
+	
+	public void requestCatalogSave(int catalogId) {
+		synchronized (mTaskQueue) {
+			mCatalogSaveHandler.removeMessages(catalogId);
+			if(mTaskQueue.isEmpty()){
+				mCatalogSaveHandler.sendEmptyMessage(catalogId);
+			}else{
+				mCatalogSaveHandler.sendEmptyMessageDelayed(catalogId, SAVING_DELAY);
+			}
+		}
+	}
+	
 	
 }
