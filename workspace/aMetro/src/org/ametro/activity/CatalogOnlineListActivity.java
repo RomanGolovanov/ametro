@@ -21,6 +21,7 @@
 package org.ametro.activity;
 
 import org.ametro.R;
+import org.ametro.adapter.CheckedCatalogAdapter;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.CatalogMapPair;
 import org.ametro.catalog.storage.CatalogStorage;
@@ -84,6 +85,8 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity {
 		case MAIN_MENU_DOWNLOAD:
 			Intent i = new Intent(this, CatalogMapSelectionActivity.class);
 			i.putExtra(CatalogMapSelectionActivity.EXTRA_REMOTE_ID, CatalogStorage.ONLINE);
+			i.putExtra(CatalogMapSelectionActivity.EXTRA_FILTER, mActionBarEditText.getText().toString());
+			i.putExtra(CatalogMapSelectionActivity.EXTRA_SORT_MODE, CheckedCatalogAdapter.SORT_MODE_COUNTRY);
 			startActivityForResult(i, REQUEST_DOWNLOAD);
 			return true;
 		}

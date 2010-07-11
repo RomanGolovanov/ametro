@@ -121,7 +121,7 @@ public class CheckedCatalogAdapter extends BaseAdapter implements Filterable {
 		notifyDataSetChanged();
 	}
 	
-    public CheckedCatalogAdapter(Context context, Catalog local, Catalog remote, int mode, int colorsArray, ICatalogStateProvider statusProvider, int sortMode) {
+    public CheckedCatalogAdapter(Context context, Catalog local, Catalog remote, int mode, int colorsArray, ICatalogStateProvider statusProvider, int sortMode, String filter) {
     	mItemId = R.layout.catalog_list_item_check;
         mContext = context;
         mNoCountryIcon = context.getResources().getDrawable(R.drawable.no_country);
@@ -132,10 +132,13 @@ public class CheckedCatalogAdapter extends BaseAdapter implements Filterable {
 		mMode = mode;
 		mSortMode = sortMode;
 		mCheckedItems = new HashSet<String>();
-		
-    	mObjects = CatalogMapPair.diff(local, remote, mode);
-        bindData();
+		mSearchPrefix = filter;
 		bindTransportTypes();
+
+		updateData(local, remote);
+		
+//    	mObjects = CatalogMapPair.diff(local, remote, mode);
+//        bindData();
     }
 
 	public static class ViewHolder {
