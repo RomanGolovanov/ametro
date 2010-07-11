@@ -24,13 +24,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 
 import org.ametro.Constants;
 import org.ametro.GlobalSettings;
 import org.ametro.R;
-import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMapPair;
+import org.ametro.catalog.CatalogMapPairEx;
 import org.ametro.catalog.ICatalogStateProvider;
 import org.ametro.catalog.CatalogMapPair.CatalogMapPairCityComparator;
 import org.ametro.catalog.CatalogMapPair.CatalogMapPairCountryComparator;
@@ -44,102 +43,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckedTextView;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
-public class CheckedCatalogAdapter extends BaseAdapter implements Filterable { 
-
-	public static final int SORT_MODE_CITY = 1;
-	public static final int SORT_MODE_COUNTRY = 2;
-	
-	protected Context mContext;
-    protected LayoutInflater mInflater;
-    
-	protected ArrayList<CatalogMapPair> mObjects;
-	protected ArrayList<CatalogMapPair> mOriginalValues;
-	
-	protected int mItemId;
-	
-	protected int mMode;
-	protected int mSortMode;
-	protected String mLanguageCode;
-
-	protected HashMap<String,Drawable> mIcons;
-
-    protected String[] mStates;
-    protected int[] mStateColors;
-    
-    protected ICatalogStateProvider mStatusProvider;
-    
-    protected HashMap<Integer,Drawable> mTransportTypes;
-    
-    protected CatalogFilter mFilter;
-    protected Object mLock = new Object();
-    protected String mSearchPrefix;
-    protected Drawable mNoCountryIcon;
-	
-    protected HashSet<String> mCheckedItems;
-
-    public CatalogMapPair getData(int itemId) {
-        return mObjects.get(itemId);
-    }
-
-    public String getLanguage(){
-    	return mLanguageCode;
-    }
-    
-    public void setLanguage(String languageCode)
-    {
-    	mLanguageCode = languageCode;
-    }
-    
-	public void updateLanguage() {
-		bindData();
-		notifyDataSetChanged();
-	}    
-    
-	public void updateData(Catalog local, Catalog remote)
-	{
-        synchronized (mLock) {
-        	mOriginalValues = CatalogMapPair.diff(local, remote, mMode);
-            if (mSearchPrefix == null || mSearchPrefix.length() == 0) {
-            	mObjects = new ArrayList<CatalogMapPair>(mOriginalValues);
-            } else {
-                mObjects = getFilteredData(mSearchPrefix);
-            }
-        }
-		bindData();
-		notifyDataSetChanged();
-	}
-    
-	public void updateSort(int sortMode){
-		mSortMode = sortMode;
-		bindData();
-		notifyDataSetChanged();
-	}
-	
-    public CheckedCatalogAdapter(Context context, Catalog local, Catalog remote, int mode, int colorsArray, ICatalogStateProvider statusProvider, int sortMode, String filter) {
-    	mItemId = R.layout.catalog_list_item_check;
-        mContext = context;
-        mNoCountryIcon = context.getResources().getDrawable(R.drawable.no_country);
-		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		mStates = context.getResources().getStringArray(R.array.catalog_map_states);
-		mStateColors = context.getResources().getIntArray(colorsArray);
-		mStatusProvider = statusProvider;
-		mMode = mode;
-		mSortMode = sortMode;
-		mCheckedItems = new HashSet<String>();
-		mSearchPrefix = filter;
-		bindTransportTypes();
-
-		updateData(local, remote);
-		
-//    	mObjects = CatalogMapPair.diff(local, remote, mode);
-//        bindData();
-    }
+public class CheckedCatalogAdapter extends BaseAdapter { 
 
 	public static class ViewHolder {
 		CheckedTextView mCity;
@@ -149,6 +58,45 @@ public class CheckedCatalogAdapter extends BaseAdapter implements Filterable {
 		ImageView mIsoIcon;
 		LinearLayout mImageContainer;
 	}    
+	
+	public static final int SORT_MODE_CITY = 1;
+	public static final int SORT_MODE_COUNTRY = 2;
+	
+	private Context mContext;
+	private LayoutInflater mInflater;
+    
+	private ArrayList<CatalogMapPairEx> mObjects;
+	private int mSortMode;
+	private String mLanguageCode;
+
+	private int[] mStates;
+	private String[] mStateNames;
+	private int[] mStateColors;
+	private ICatalogStateProvider mStatusProvider;
+    
+	private HashMap<String,Drawable> mIcons;
+	private HashMap<Integer,Drawable> mTransportTypes;
+    
+	private Drawable mNoCountryIcon;
+	private ListView mListView;
+
+    public CatalogMapPairEx getData(int itemId) {
+        return mObjects.get(itemId);
+    }
+
+    public CheckedCatalogAdapter(Context context, ListView owner, ArrayList<CatalogMapPairEx> objects, int colorsArray, ICatalogStateProvider statusProvider, int sortMode) {
+        mContext = context;
+        mListView = owner;
+        mNoCountryIcon = context.getResources().getDrawable(R.drawable.no_country);
+		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		mStateNames = context.getResources().getStringArray(R.array.catalog_map_states);
+		mStateColors = context.getResources().getIntArray(colorsArray);
+		mStatusProvider = statusProvider;
+		mSortMode = sortMode;
+		bindTransportTypes();
+		mObjects = objects;
+		bindData();
+    }
 
     public boolean hasStableIds() {
         return false;
@@ -167,7 +115,7 @@ public class CheckedCatalogAdapter extends BaseAdapter implements Filterable {
     }
     
     protected void bindData() {
-    	final String code= GlobalSettings.getLanguage(mContext); 
+    	final String code = GlobalSettings.getLanguage(mContext); 
     	mLanguageCode = code;
     	Comparator<CatalogMapPair> comparator;
     	if(mSortMode == SORT_MODE_CITY){
@@ -177,98 +125,14 @@ public class CheckedCatalogAdapter extends BaseAdapter implements Filterable {
     	}
         mIcons = new HashMap<String, Drawable>();
         Collections.sort(mObjects, comparator);
-	}
-
-    public Filter getFilter() {
-        if (mFilter == null) {
-            mFilter = new CatalogFilter();
+        
+        final int len = mObjects.size();
+        mStates = new int[len];
+        for(int i=0;i<len;i++){
+        	CatalogMapPairEx ref = mObjects.get(i);
+        	mStates[i] = mStatusProvider.getCatalogState(ref.getLocal(), ref.getRemote());
         }
-        return mFilter;
 	}
-	
-    private class CatalogFilter extends Filter {
-
-    	protected FilterResults performFiltering(CharSequence prefix) {
-            FilterResults results = new FilterResults();
-        	mSearchPrefix = prefix.toString();
-            if (mOriginalValues == null) {
-                synchronized (mLock) {
-                    mOriginalValues = new ArrayList<CatalogMapPair>(mObjects);
-                }
-            }
-            if (prefix == null || prefix.length() == 0) {
-                synchronized (mLock) {
-                    ArrayList<CatalogMapPair> list = new ArrayList<CatalogMapPair>(mOriginalValues);
-                    results.values = list;
-                    results.count = list.size();
-                }
-            } else {
-                final ArrayList<CatalogMapPair> newValues = getFilteredData(prefix);
-                results.values = newValues;
-                results.count = newValues.size();
-            }
-
-            return results;
-        }
-
-        @SuppressWarnings("unchecked")
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-            mObjects = (ArrayList<CatalogMapPair>) results.values;
-        	bindData();
-            if (results.count > 0) {
-                notifyDataSetChanged();
-            } else {
-                notifyDataSetInvalidated();
-            }
-        }
-    }
-	
-	/*package*/ ArrayList<CatalogMapPair> getFilteredData(CharSequence prefix) {
-		String prefixString = prefix.toString().toLowerCase();
-
-		final ArrayList<CatalogMapPair> values = mOriginalValues;
-		final int count = values.size();
-		final String code = mLanguageCode;
-		final ArrayList<CatalogMapPair> newValues = new ArrayList<CatalogMapPair>(count);
-
-		for (int i = 0; i < count; i++) {
-		    final CatalogMapPair value = values.get(i);
-		    final String cityName = value.getCity(code).toString().toLowerCase();
-		    final String countryName = value.getCountry(code).toString().toLowerCase();
-
-		    // First match against the whole, non-splitted value
-		    if (cityName.startsWith(prefixString) || countryName.startsWith(prefixString)) {
-		        newValues.add(value);
-		    } else {
-		    	boolean added = false;
-		        final String[] cityWords = cityName.split(" ");
-		        final int cityWordCount = cityWords.length;
-
-		        for (int k = 0; k < cityWordCount; k++) {
-		            if (cityWords[k].startsWith(prefixString)) {
-		                newValues.add(value);
-		                added = true;
-		                break;
-		            }
-		        }
-		        
-		        if(!added){
-			        final String[] countryWords = countryName.split(" ");
-			        final int countryWordCount = countryWords.length;
-
-			        for (int k = 0; k < countryWordCount; k++) {
-			            if (countryWords[k].startsWith(prefixString)) {
-			                newValues.add(value);
-			                break;
-			            }
-			        }
-		        }
-		        
-		    }
-		}
-		return newValues;
-	}
-	
 	
 	public int getCount() {
 		return mObjects.size();
@@ -285,7 +149,7 @@ public class CheckedCatalogAdapter extends BaseAdapter implements Filterable {
 	public View getView(int position, View convertView, ViewGroup g) {
     	ViewHolder holder;
 		if (convertView == null) {
-			convertView = mInflater.inflate(mItemId, null);
+			convertView = mInflater.inflate(R.layout.catalog_list_item_check, null);
 			holder = new ViewHolder();
 			holder.mCity = (CheckedTextView) convertView.findViewById(android.R.id.text1);
 			holder.mCountry = (TextView) convertView.findViewById(R.id.country);
@@ -299,14 +163,23 @@ public class CheckedCatalogAdapter extends BaseAdapter implements Filterable {
 		}
 		
 		final String code = mLanguageCode;
-		final CatalogMapPair ref = mObjects.get(position);
+		final CatalogMapPairEx ref = mObjects.get(position);
 		final String iso = ref.getCountryISO();
-		final int state = mStatusProvider.getCatalogState(ref.getLocal(), ref.getRemote());
+		final int state = mStates[position];
 		holder.mCity.setText(ref.getCity(code));
 		holder.mCountry.setText(ref.getCountry(code));
-		holder.mStatus.setText(mStates[state]);
+		holder.mStatus.setText(mStateNames[state]);
 		holder.mStatus.setTextColor(mStateColors[state]);
 		holder.mCountryISO.setText( iso );
+		
+		if(ref.isCheckable()){
+			holder.mCity.setChecked(mListView.isItemChecked(position));
+			holder.mCity.setEnabled(true);
+		}else{
+			holder.mCity.setChecked( false );
+			holder.mCity.setEnabled(false);
+		}
+		
 		
 		Drawable d = mIcons.get(iso);
 		if(d == null){
@@ -337,7 +210,4 @@ public class CheckedCatalogAdapter extends BaseAdapter implements Filterable {
 		return convertView;
 	}
 
-	public int getSortMode() {
-		return mSortMode;
-	}
 }

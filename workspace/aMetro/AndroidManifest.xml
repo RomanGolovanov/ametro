@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<manifest android:versionCode="1" android:versionName="0.2.5.r304"
+<manifest android:versionCode="1" android:versionName="0.2.5.r308"
     package="org.ametro" xmlns:android="http://schemas.android.com/apk/res/android">
     <application android:debuggable="true"
         android:icon="@drawable/appicon"
@@ -14,7 +14,6 @@
             </intent-filter>
             <meta-data android:name="android.app.default_searchable" android:value=".activity.SearchStation"/>
         </activity>
-        <activity android:launchMode="singleTop" android:name=".activity.obsolete.ImportPmz"/>
         <activity android:name=".activity.MapDetailsActivity" android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".activity.RouteViewActivity"/>
         <activity android:launchMode="singleTop"
