@@ -25,6 +25,10 @@ import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.CatalogMapPair;
 import org.ametro.catalog.storage.CatalogStorage;
 
+import android.content.Intent;
+import android.view.Menu;
+import android.view.MenuItem;
+
 public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity {
 
 	protected int getEmptyListMessage() {
@@ -58,5 +62,46 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity {
 	protected int getDiffColors() {
 		return R.array.online_catalog_map_state_colors;
 	}
+
+	/****************** MAIN MENU ********************/
 	
+	private final int MAIN_MENU_DOWNLOAD = 1;
+	private final static int REQUEST_DOWNLOAD = 1;
+
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		menu.add(0, MAIN_MENU_DOWNLOAD, 4, R.string.menu_download).setIcon(android.R.drawable.ic_menu_add);
+		return true;
+	}
+
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		menu.findItem(MAIN_MENU_DOWNLOAD).setEnabled(mMode == MODE_LIST);
+		return super.onPrepareOptionsMenu(menu);
+	}
+
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case MAIN_MENU_DOWNLOAD:
+			Intent i = new Intent(this, CatalogMapSelectionActivity.class);
+			i.putExtra(CatalogMapSelectionActivity.EXTRA_REMOTE_ID, CatalogStorage.ONLINE);
+			startActivityForResult(i, REQUEST_DOWNLOAD);
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		switch (requestCode) {
+		case REQUEST_DOWNLOAD:
+			if(resultCode == RESULT_OK && data!=null){
+				String[] names = data.getStringArrayExtra(CatalogMapSelectionActivity.EXTRA_SELECTION);
+				for (String systemName : names) {
+					mStorage.requestDownload(systemName);
+				}
+			}
+			break;
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+		
 }

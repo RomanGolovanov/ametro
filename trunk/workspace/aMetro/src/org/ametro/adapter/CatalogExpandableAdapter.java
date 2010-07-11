@@ -151,7 +151,7 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
 		if (convertView == null) {
 			convertView = mInflater.inflate(R.layout.catalog_expandable_list_item, null);
 			holder = new ViewHolder();
-			holder.mCity = (TextView) convertView.findViewById(R.id.city);
+			holder.mCity = (TextView) convertView.findViewById(android.R.id.text1);
 			holder.mCountry = (TextView) convertView.findViewById(R.id.country);
 			holder.mStatus = (TextView) convertView.findViewById(R.id.state);
 			holder.mSize = (TextView) convertView.findViewById(R.id.size);
