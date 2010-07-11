@@ -23,11 +23,17 @@ public class CheckedLinearLayout extends LinearLayout implements Checkable {
 	}
 
 	public void setChecked(boolean checked) {
-		getTextView().setChecked(checked);
+		CheckedTextView view = getTextView();
+		if(view.isEnabled()){
+			view.setChecked(checked);
+		}
 	}
 
 	public void toggle() {
-		getTextView().toggle();
+		CheckedTextView view = getTextView();
+		if(view.isEnabled()){
+			view.toggle();
+		}
 	}
 
 	private CheckedTextView getTextView(){

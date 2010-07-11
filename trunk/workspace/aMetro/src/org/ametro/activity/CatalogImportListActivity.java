@@ -21,9 +21,10 @@
 package org.ametro.activity;
 
 import org.ametro.R;
-import org.ametro.activity.obsolete.ImportPmz;
+import org.ametro.adapter.CheckedCatalogAdapter;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.CatalogMapPair;
+import org.ametro.catalog.CatalogMapState;
 import org.ametro.catalog.storage.CatalogStorage;
 
 import android.content.Intent;
@@ -80,7 +81,12 @@ public class CatalogImportListActivity extends BaseCatalogExpandableActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case MAIN_MENU_IMPORT:
-			startActivityForResult(new Intent(this, ImportPmz.class), REQUEST_IMPORT);
+			Intent i = new Intent(this, CatalogMapSelectionActivity.class);
+			i.putExtra(CatalogMapSelectionActivity.EXTRA_REMOTE_ID, CatalogStorage.IMPORT);
+			i.putExtra(CatalogMapSelectionActivity.EXTRA_FILTER, mActionBarEditText.getText().toString());
+			i.putExtra(CatalogMapSelectionActivity.EXTRA_SORT_MODE, CheckedCatalogAdapter.SORT_MODE_COUNTRY);
+			i.putExtra(CatalogMapSelectionActivity.EXTRA_CHECKABLE_STATES, new int[]{ CatalogMapState.IMPORT, CatalogMapState.UPDATE } );
+			startActivityForResult(i, REQUEST_IMPORT);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -89,9 +95,12 @@ public class CatalogImportListActivity extends BaseCatalogExpandableActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
 		case REQUEST_IMPORT:
-			setWaitView();
-			mStorage.requestCatalog(CatalogStorage.LOCAL, true);
-			mStorage.requestCatalog(CatalogStorage.IMPORT, true);
+			if(resultCode == RESULT_OK && data!=null){
+				String[] names = data.getStringArrayExtra(CatalogMapSelectionActivity.EXTRA_SELECTION);
+				for (String systemName : names) {
+					mStorage.requestImport(systemName);
+				}
+			}
 			break;
 		}
 		super.onActivityResult(requestCode, resultCode, data);

@@ -24,6 +24,7 @@ import org.ametro.R;
 import org.ametro.adapter.CheckedCatalogAdapter;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.CatalogMapPair;
+import org.ametro.catalog.CatalogMapState;
 import org.ametro.catalog.storage.CatalogStorage;
 
 import android.content.Intent;
@@ -87,6 +88,7 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity {
 			i.putExtra(CatalogMapSelectionActivity.EXTRA_REMOTE_ID, CatalogStorage.ONLINE);
 			i.putExtra(CatalogMapSelectionActivity.EXTRA_FILTER, mActionBarEditText.getText().toString());
 			i.putExtra(CatalogMapSelectionActivity.EXTRA_SORT_MODE, CheckedCatalogAdapter.SORT_MODE_COUNTRY);
+			i.putExtra(CatalogMapSelectionActivity.EXTRA_CHECKABLE_STATES, new int[]{ CatalogMapState.DOWNLOAD, CatalogMapState.UPDATE } );
 			startActivityForResult(i, REQUEST_DOWNLOAD);
 			return true;
 		}
@@ -106,5 +108,4 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity {
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
-		
 }
