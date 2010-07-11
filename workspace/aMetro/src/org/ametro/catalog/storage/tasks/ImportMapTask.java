@@ -3,7 +3,6 @@ package org.ametro.catalog.storage.tasks;
 import java.io.File;
 
 import org.ametro.ApplicationEx;
-import org.ametro.Constants;
 import org.ametro.GlobalSettings;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
@@ -49,7 +48,10 @@ public class ImportMapTask extends UpdateMapTask {
 		FileUtil.move(importFile, localFile);
 		CatalogMap localMap = Catalog.extractCatalogMap(localCatalog, localFile, localFile.getName().toLowerCase(), model);
 		localCatalog.appendMap(localMap);
-		Catalog.save(localCatalog, Constants.LOCAL_CATALOG_STORAGE);
+		
+		ApplicationEx.getInstance().getCatalogStorage().requestCatalogSave(CatalogStorage.LOCAL);
+		//Catalog.save(localCatalog, Constants.LOCAL_CATALOG_STORAGE);
+		
 		update(100,100,mSystemName);
 	}
 	

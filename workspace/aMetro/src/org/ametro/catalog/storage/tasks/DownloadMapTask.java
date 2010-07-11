@@ -84,7 +84,8 @@ public class DownloadMapTask extends UpdateMapTask implements IDownloadListener 
 		Model model = ModelBuilder.loadModelDescription(localFile.getAbsolutePath());
 		CatalogMap localMap = Catalog.extractCatalogMap(mLocalCatalog, localFile, localFile.getName().toLowerCase(), model);
 		mLocalCatalog.appendMap(localMap);
-		Catalog.save(mLocalCatalog, Constants.LOCAL_CATALOG_STORAGE);
+		//Catalog.save(mLocalCatalog, Constants.LOCAL_CATALOG_STORAGE);
+		ApplicationEx.getInstance().getCatalogStorage().requestCatalogSave(CatalogStorage.LOCAL);
 	}
 
 	public void onFailed(Object context, File file, Throwable reason) {
