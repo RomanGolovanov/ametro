@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import org.ametro.Constants;
 import org.ametro.GlobalSettings;
@@ -42,13 +43,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckedTextView;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class CatalogAdapter extends BaseAdapter implements Filterable {
+public class CheckedCatalogAdapter extends BaseAdapter implements Filterable { 
 
 	public static final int SORT_MODE_CITY = 1;
 	public static final int SORT_MODE_COUNTRY = 2;
@@ -59,11 +61,12 @@ public class CatalogAdapter extends BaseAdapter implements Filterable {
 	protected ArrayList<CatalogMapPair> mObjects;
 	protected ArrayList<CatalogMapPair> mOriginalValues;
 	
+	protected int mItemId;
+	
 	protected int mMode;
 	protected int mSortMode;
 	protected String mLanguageCode;
 
-    //protected Drawable[] mIcons;
 	protected HashMap<String,Drawable> mIcons;
 
     protected String[] mStates;
@@ -73,10 +76,12 @@ public class CatalogAdapter extends BaseAdapter implements Filterable {
     
     protected HashMap<Integer,Drawable> mTransportTypes;
     
-	private CatalogFilter mFilter;
-	private Object mLock = new Object();
-	private String mSearchPrefix;
-	private Drawable mNoCountryIcon;
+    protected CatalogFilter mFilter;
+    protected Object mLock = new Object();
+    protected String mSearchPrefix;
+    protected Drawable mNoCountryIcon;
+	
+    protected HashSet<String> mCheckedItems;
 
     public CatalogMapPair getData(int itemId) {
         return mObjects.get(itemId);
@@ -116,7 +121,8 @@ public class CatalogAdapter extends BaseAdapter implements Filterable {
 		notifyDataSetChanged();
 	}
 	
-    public CatalogAdapter(Context context, Catalog local, Catalog remote, int mode, int colorsArray, ICatalogStateProvider statusProvider, int sortMode) {
+    public CheckedCatalogAdapter(Context context, Catalog local, Catalog remote, int mode, int colorsArray, ICatalogStateProvider statusProvider, int sortMode) {
+    	mItemId = R.layout.catalog_list_item_check;
         mContext = context;
         mNoCountryIcon = context.getResources().getDrawable(R.drawable.no_country);
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -125,6 +131,7 @@ public class CatalogAdapter extends BaseAdapter implements Filterable {
 		mStatusProvider = statusProvider;
 		mMode = mode;
 		mSortMode = sortMode;
+		mCheckedItems = new HashSet<String>();
 		
     	mObjects = CatalogMapPair.diff(local, remote, mode);
         bindData();
@@ -132,7 +139,7 @@ public class CatalogAdapter extends BaseAdapter implements Filterable {
     }
 
 	public static class ViewHolder {
-		TextView mCity;
+		CheckedTextView mCity;
 		TextView mCountry;
 		TextView mCountryISO;
 		TextView mStatus;
@@ -275,9 +282,9 @@ public class CatalogAdapter extends BaseAdapter implements Filterable {
 	public View getView(int position, View convertView, ViewGroup g) {
     	ViewHolder holder;
 		if (convertView == null) {
-			convertView = mInflater.inflate(R.layout.catalog_list_item, null);
+			convertView = mInflater.inflate(mItemId, null);
 			holder = new ViewHolder();
-			holder.mCity = (TextView) convertView.findViewById(android.R.id.text1);
+			holder.mCity = (CheckedTextView) convertView.findViewById(android.R.id.text1);
 			holder.mCountry = (TextView) convertView.findViewById(R.id.country);
 			holder.mStatus = (TextView) convertView.findViewById(R.id.state);
 			holder.mCountryISO = (TextView) convertView.findViewById(R.id.country_iso);
@@ -330,5 +337,4 @@ public class CatalogAdapter extends BaseAdapter implements Filterable {
 	public int getSortMode() {
 		return mSortMode;
 	}
-
 }

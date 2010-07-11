@@ -25,7 +25,7 @@
 			android:layout_alignParentRight="true" 
 			android:layout_width="wrap_content" 
 			android:layout_marginRight="4sp" android:layout_height="wrap_content" android:text="256 KB" />
-		<TextView android:id="@+id/city" android:gravity="left|center_vertical"
+		<TextView android:id="@android:id/text1" android:gravity="left|center_vertical"
 			android:textColor="@android:color/white"
 			android:layout_alignParentTop="true" 
 			android:layout_alignParentLeft="true" 

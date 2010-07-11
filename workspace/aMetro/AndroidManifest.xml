@@ -52,8 +52,9 @@
         </activity>
         <!-- THIRD PARTY ACTIVITIES -->
         <!-- <activity android:name="com.paypal.android.MEP.PayPalActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>  -->
-        <!-- SERVICES --> 
+        <!-- SERVICES -->
         <service android:name="org.ametro.service.CatalogService"/>
+        <activity android:name="org.ametro.activity.CatalogMapSelectionActivity"/>
     </application>
     <uses-sdk android:minSdkVersion="3"/>
     <uses-permission android:name="android.permission.ACCESS_GPS"/>
