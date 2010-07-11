@@ -696,7 +696,11 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 			mProgressBar.setMax(mTotal);
 			mProgressBar.setProgress(mProgress);
 			mMessageTextView.setText( mMessage );
-			mCounterTextView.setText( formatProgress(mProgress, mTotal) );
+			if(mProgress!=0 && mTotal!=0){
+				mCounterTextView.setText( formatProgress(mProgress, mTotal) );
+			}else{
+				mCounterTextView.setText(null);
+			}
 		}
 
 	};

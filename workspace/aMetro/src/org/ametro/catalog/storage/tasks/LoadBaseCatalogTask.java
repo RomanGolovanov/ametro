@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.ametro.Constants;
+import org.ametro.R;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.storage.CatalogDeserializer;
@@ -16,6 +17,7 @@ import org.ametro.catalog.storage.CatalogSerializer;
 import org.ametro.util.FileUtil;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Parcel;
 import android.util.Log;
 
@@ -63,15 +65,16 @@ public abstract class LoadBaseCatalogTask extends BaseTask {
 	
 	protected void run(Context context) throws Exception{
 		//mCatalog = ApplicationEx.getInstance().getCatalogStorage().getCatalog(getCatalogId());
+		final Resources res = context.getResources();
 		if(mCatalog==null || mForceRefresh){
 			if(!mForceRefresh && mFile.exists()){
-				update(0, 0, "Loading catalog from XML");
+				update(0, 0, res.getString(R.string.msg_init_catalog));
 				loadFromStorage();
 			}
 			if(mCatalog==null || mForceRefresh || isDerpecated()){
 				refresh();
 				if(mCatalog!=null && !mCatalog.isCorrupted()){
-					update(0, 0, "Saving catalog to XML");
+					update(0, 0, res.getString(R.string.msg_save_catalog));
 					saveToStorage();
 				}
 			}		

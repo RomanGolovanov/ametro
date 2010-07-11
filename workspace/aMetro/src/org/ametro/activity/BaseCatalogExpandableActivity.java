@@ -680,11 +680,16 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 			if(mMode!=MODE_WAIT){
 				setWaitView();
 			}
-			mProgressBar.setIndeterminate(false);
 			mProgressBar.setMax(mTotal);
 			mProgressBar.setProgress(mProgress);
 			mMessageTextView.setText( mMessage );
-			mCounterTextView.setText( formatProgress(mProgress, mTotal) );
+			if(mProgress!=0 && mTotal!=0){
+				mProgressBar.setIndeterminate(false);
+				mCounterTextView.setText( formatProgress(mProgress, mTotal) );
+			}else{
+				mProgressBar.setIndeterminate(true);
+				mCounterTextView.setText(null);
+			}
 		}
 
 	};

@@ -94,10 +94,8 @@ public class Catalog {
 	
 	/* VOLATILE FIELDS */
 	private HashMap<String, CatalogMap> mMapIndex;
-	private long mLoadingTimestamp;
 	
 	public CatalogMap getMap(String systemName){
-		mLoadingTimestamp = System.currentTimeMillis();
 		if(mMapIndex == null){
 			final HashMap<String, CatalogMap> index = new HashMap<String, CatalogMap>();
 			for(CatalogMap map : mMaps){
@@ -136,10 +134,6 @@ public class Catalog {
 		mTimestamp = System.currentTimeMillis();
 	}
 
-	public long getLoadingTimestamp() {
-		return mLoadingTimestamp;
-	}
-	
 	public static CatalogMap makeBadCatalogMap(Catalog catalog, File file, final String fileName) {
 		
 		String suggestedMapName = fileName.substring(0, fileName.indexOf('.'));
