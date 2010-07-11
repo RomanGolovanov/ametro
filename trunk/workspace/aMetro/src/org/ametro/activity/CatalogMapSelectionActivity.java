@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.ametro.ApplicationEx;
 import org.ametro.Constants;
 import org.ametro.R;
-import org.ametro.adapter.CatalogAdapter;
 import org.ametro.adapter.CheckedCatalogAdapter;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
@@ -36,10 +35,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
-public class CatalogMapSelectionActivity extends Activity implements
-		ICatalogStateProvider, OnClickListener, OnFocusChangeListener {
+public class CatalogMapSelectionActivity extends Activity implements ICatalogStateProvider, OnClickListener, OnFocusChangeListener {
 
 	public static final String EXTRA_REMOTE_ID = "EXTRA_REMOTE_ID";
+	public static final String EXTRA_FILTER = "EXTRA_FILTER";
+	public static final String EXTRA_SORT_MODE = "EXTRA_SORT_MODE";
 	public static final String EXTRA_SELECTION = "EXTRA_SELECTION";
 
 	protected CatalogStorage mStorage;
@@ -67,6 +67,9 @@ public class CatalogMapSelectionActivity extends Activity implements
 	protected int mDiffMode = CatalogMapPair.DIFF_MODE_REMOTE;
 	protected int mDiffColors;
 
+	protected String mFilter;
+	protected int mSortMode;
+	
 	protected boolean mIsActionBarAnimated = false;
 
 	/* package */InputMethodManager mInputMethodManager;
@@ -126,11 +129,13 @@ public class CatalogMapSelectionActivity extends Activity implements
 		mInputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		mLocalId = CatalogStorage.LOCAL;
 		mRemoteId = data.getIntExtra(EXTRA_REMOTE_ID, -1);
+		mFilter = data.getStringExtra(EXTRA_FILTER);
+		mSortMode = data.getIntExtra(EXTRA_SORT_MODE, CheckedCatalogAdapter.SORT_MODE_COUNTRY);
+		
 		mDiffMode = CatalogMapPair.DIFF_MODE_REMOTE;
 		mDiffColors = mRemoteId == CatalogStorage.ONLINE ? R.array.online_catalog_map_state_colors
 				: R.array.import_catalog_map_state_colors;
-		mStorage = ((ApplicationEx) getApplicationContext())
-				.getCatalogStorage();
+		mStorage = ((ApplicationEx) getApplicationContext()) .getCatalogStorage();
 		mStorageState = new CatalogStorageStateProvider(mStorage);
 
 		mLocal = mStorage.getCatalog(mLocalId);
@@ -143,8 +148,7 @@ public class CatalogMapSelectionActivity extends Activity implements
 	}
 
 	protected void setListView() {
-		mAdapter = new CheckedCatalogAdapter(this, mLocal, mRemote, mDiffMode,
-				mDiffColors, this, CatalogAdapter.SORT_MODE_COUNTRY);
+		mAdapter = new CheckedCatalogAdapter(this, mLocal, mRemote, mDiffMode, mDiffColors, this, mSortMode, mFilter);
 
 		setContentView(R.layout.catalog_list);
 		mList = (ListView) findViewById(R.id.list);
@@ -210,8 +214,7 @@ public class CatalogMapSelectionActivity extends Activity implements
 		if (isVisible) {
 			if (mActionBar.getVisibility() == View.GONE) {
 				mIsActionBarAnimated = true;
-				TranslateAnimation anim = new TranslateAnimation(0, 0, -50
-						* scale, 0);
+				TranslateAnimation anim = new TranslateAnimation(0, 0, -50 * scale, 0);
 				anim.setDuration(250);
 				anim.setAnimationListener(new AnimationListener() {
 					public void onAnimationStart(Animation animation) {
