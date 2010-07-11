@@ -25,6 +25,7 @@ public class DownloadMapTask extends UpdateMapTask implements IDownloadListener 
 
 	private Catalog mLocalCatalog;
 	private Catalog mOnlineCatalog;
+	private Throwable mFailReason;
 	
 	public DownloadMapTask(String systemName) {
 		super(systemName);
@@ -49,6 +50,9 @@ public class DownloadMapTask extends UpdateMapTask implements IDownloadListener 
 		File file = new File(GlobalSettings.getTemporaryDownloadMapFile(map.getSystemName()));
 
 		WebUtil.downloadFile(map, uri, file, false, this);
+		if(mFailReason!=null){
+			throw new Exception("Map download failed", mFailReason);
+		}
 	}
 	
 	public DownloadMapTask(Parcel in) {
@@ -69,7 +73,6 @@ public class DownloadMapTask extends UpdateMapTask implements IDownloadListener 
 	}
 
 	public void onCanceled(Object context, File file) {
-		
 	}
 
 	public void onDone(Object context, File file) throws IOException {
@@ -81,7 +84,7 @@ public class DownloadMapTask extends UpdateMapTask implements IDownloadListener 
 		Model model = ModelBuilder.loadModelDescription(localFile.getAbsolutePath());
 		CatalogMap localMap = Catalog.extractCatalogMap(mLocalCatalog, localFile, localFile.getName().toLowerCase(), model);
 		mLocalCatalog.appendMap(localMap);
-		Catalog.save(mLocalCatalog, Constants.LOCAL_CATALOG_STORAGE);		
+		Catalog.save(mLocalCatalog, Constants.LOCAL_CATALOG_STORAGE);
 	}
 
 	public void onFailed(Object context, File file, Throwable reason) {
@@ -89,7 +92,7 @@ public class DownloadMapTask extends UpdateMapTask implements IDownloadListener 
 			String message = "Failed download map " + mSystemName + " from catalog " + mOnlineCatalog.getBaseUrl();
 			Log.e(Constants.LOG_TAG_MAIN, message, reason);
 		}
-		failed(reason);
+		mFailReason = reason;
 	}
 
 	public boolean onUpdate(Object context, long position, long total) throws CanceledException {

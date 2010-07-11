@@ -25,7 +25,7 @@ public class LoadWebCatalogTask extends LoadBaseCatalogTask implements IDownload
 
 	public boolean isDerpecated() {
 		if(mCatalog == null) return true;
-		return System.currentTimeMillis() > (mCatalog.getLoadingTimestamp() + DEPRECATED_TIMEOUT);
+		return System.currentTimeMillis() > (mCatalog.getTimestamp() + DEPRECATED_TIMEOUT);
 	}
 
 	public void refresh() throws Exception {
@@ -90,6 +90,8 @@ public class LoadWebCatalogTask extends LoadBaseCatalogTask implements IDownload
 		}
 		catalogFile = new File(Constants.TEMP_CATALOG_PATH, fileName);
 		mCatalog = CatalogDeserializer.deserializeCatalog(new BufferedInputStream(new FileInputStream(catalogFile)));
+		// set timestamp to now for timeout detection 
+		mCatalog.setTimestamp(System.currentTimeMillis()); 
 	}
 
 	public boolean onUpdate(Object context, long position, long total) throws Exception {

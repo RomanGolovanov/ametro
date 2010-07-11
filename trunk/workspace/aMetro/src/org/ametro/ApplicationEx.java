@@ -98,14 +98,7 @@ public class ApplicationEx extends Application {
 		if (mStorage == null) {
 			synchronized (ApplicationEx.class) {
 				if (mStorage == null) {
-					CatalogStorage instance = new CatalogStorage(
-							Constants.LOCAL_CATALOG_STORAGE,
-							Constants.LOCAL_CATALOG_PATH,
-							Constants.IMPORT_CATALOG_STORAGE,
-							Constants.IMPORT_CATALOG_PATH,
-							Constants.ONLINE_CATALOG_STORAGE,
-							Constants.ONLINE_CATALOG_PATH);
-					mStorage = instance;
+					mStorage = new CatalogStorage();
 				}
 			}
 		}
@@ -138,12 +131,10 @@ public class ApplicationEx extends Application {
 			getCatalogStorage().requestTask( new DownloadIconsTask() );
 		}
 		getCatalogStorage().requestCatalog(CatalogStorage.LOCAL, false);
-		getCatalogStorage().requestCatalog(CatalogStorage.IMPORT, false);
 		getCatalogStorage().requestCatalog(CatalogStorage.ONLINE, false);
+		getCatalogStorage().requestCatalog(CatalogStorage.IMPORT, false);
 		super.onCreate();
 	}
-
-
 
 	public void onTerminate() {
 		stopService(new Intent(this, CatalogService.class));
