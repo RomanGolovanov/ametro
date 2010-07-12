@@ -70,6 +70,7 @@ public class Constants {
 	public static final File IMPORT_CATALOG_PATH = new File(ROOT_PATH, "import");
 	public static final File TEMP_CATALOG_PATH = new File(ROOT_PATH,"temp");
 	public static final File ICONS_PATH = new File(ROOT_PATH,"icons");
+	public static final File ICONS_CHECK= new File(ICONS_PATH,".checked");
     
 	public static final File ONLINE_CATALOG_STORAGE = new File(ROOT_PATH,"catalog.online.xml");
 	public static final File LOCAL_CATALOG_STORAGE = new File(ROOT_PATH,"catalog.local.xml");

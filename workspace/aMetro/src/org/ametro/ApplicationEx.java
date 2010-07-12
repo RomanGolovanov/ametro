@@ -21,7 +21,6 @@
 package org.ametro;
 
 import org.ametro.catalog.storage.CatalogStorage;
-import org.ametro.catalog.storage.tasks.DownloadIconsTask;
 import org.ametro.directory.CityDirectory;
 import org.ametro.directory.CountryDirectory;
 import org.ametro.directory.ImportDirectory;
@@ -104,7 +103,7 @@ public class ApplicationEx extends Application {
 		}
 		return mStorage;
 	}
-
+	
 	public void onCreate() {
 		if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)) {
 			Log.i(Constants.LOG_TAG_MAIN, "aMetro application started");
@@ -119,20 +118,7 @@ public class ApplicationEx extends Application {
 		FileUtil.touchFile(Constants.NO_MEDIA_FILE);
 		Natives.Initialize();
 		
-		startService(new Intent(this, CatalogService.class));
-		if(Constants.ICONS_PATH.exists() && Constants.ICONS_PATH.isDirectory())
-		{
-			String[] files = Constants.ICONS_PATH.list();
-			if(files == null || files.length == 0){
-				getCatalogStorage().requestTask( new DownloadIconsTask() );
-			}
-		}else{
-			FileUtil.deleteAll(Constants.ICONS_PATH);
-			getCatalogStorage().requestTask( new DownloadIconsTask() );
-		}
-		getCatalogStorage().requestCatalog(CatalogStorage.LOCAL, false);
-		getCatalogStorage().requestCatalog(CatalogStorage.ONLINE, false);
-		getCatalogStorage().requestCatalog(CatalogStorage.IMPORT, false);
+		//startService(new Intent(this, CatalogService.class));
 		super.onCreate();
 	}
 

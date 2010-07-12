@@ -32,6 +32,7 @@ import org.ametro.Constants;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.storage.tasks.BaseTask;
+import org.ametro.catalog.storage.tasks.DownloadIconsTask;
 import org.ametro.catalog.storage.tasks.DownloadMapTask;
 import org.ametro.catalog.storage.tasks.ICatalogStorageTaskListener;
 import org.ametro.catalog.storage.tasks.ImportMapTask;
@@ -415,6 +416,11 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 		if(task instanceof UpdateMapTask){
 			fireCatalogChanged(LOCAL, mCatalogs[LOCAL]);
 			fireCatalogMapChanged((String)task.getTaskId());
+		}
+		if(task instanceof DownloadIconsTask){
+			fireCatalogChanged(LOCAL, mCatalogs[LOCAL]);
+			fireCatalogChanged(IMPORT, mCatalogs[IMPORT]);
+			fireCatalogChanged(ONLINE, mCatalogs[ONLINE]);
 		}
 		if(mAsyncRunQueue.contains(task)){
 			mAsyncRunQueue.remove(task);
