@@ -63,7 +63,6 @@ public class CatalogAdapter extends BaseAdapter implements Filterable {
 	protected int mSortMode;
 	protected String mLanguageCode;
 
-    //protected Drawable[] mIcons;
 	protected HashMap<String,Drawable> mIcons;
 
     protected String[] mStates;
@@ -72,6 +71,8 @@ public class CatalogAdapter extends BaseAdapter implements Filterable {
     protected ICatalogStateProvider mStatusProvider;
     
     protected HashMap<Integer,Drawable> mTransportTypes;
+    
+    private boolean mShowCountryFlags;
     
 	private CatalogFilter mFilter;
 	private Object mLock = new Object();
@@ -138,6 +139,7 @@ public class CatalogAdapter extends BaseAdapter implements Filterable {
 		TextView mStatus;
 		ImageView mIsoIcon;
 		LinearLayout mImageContainer;
+		LinearLayout mCountryFlagContainer;
 	}    
 
     public boolean hasStableIds() {
@@ -157,6 +159,7 @@ public class CatalogAdapter extends BaseAdapter implements Filterable {
     }
     
     protected void bindData() {
+        mShowCountryFlags = GlobalSettings.isCountryIconsEnabled(mContext);
     	final String code= GlobalSettings.getLanguage(mContext); 
     	mLanguageCode = code;
     	Comparator<CatalogMapPair> comparator;
@@ -283,6 +286,7 @@ public class CatalogAdapter extends BaseAdapter implements Filterable {
 			holder.mCountryISO = (TextView) convertView.findViewById(R.id.country_iso);
 			holder.mIsoIcon = (ImageView) convertView.findViewById(R.id.iso_icon);
 			holder.mImageContainer = (LinearLayout) convertView.findViewById(R.id.icons);
+			holder.mCountryFlagContainer = (LinearLayout) convertView.findViewById(R.id.country_flag_panel);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -290,25 +294,30 @@ public class CatalogAdapter extends BaseAdapter implements Filterable {
 		
 		final String code = mLanguageCode;
 		final CatalogMapPair ref = mObjects.get(position);
-		final String iso = ref.getCountryISO();
 		final int state = mStatusProvider.getCatalogState(ref.getLocal(), ref.getRemote());
 		holder.mCity.setText(ref.getCity(code));
 		holder.mCountry.setText(ref.getCountry(code));
 		holder.mStatus.setText(mStates[state]);
 		holder.mStatus.setTextColor(mStateColors[state]);
-		holder.mCountryISO.setText( iso );
 		
-		Drawable d = mIcons.get(iso);
-		if(d == null){
-			File file = new File(Constants.ICONS_PATH, iso + ".png");
-			if(file.exists()){
-				d = Drawable.createFromPath(file.getAbsolutePath());
-			}else{
-				d = mNoCountryIcon;
+		if(mShowCountryFlags){
+			final String iso = ref.getCountryISO();
+			holder.mCountryISO.setText( iso );
+			Drawable d = mIcons.get(iso);
+			if(d == null){
+				File file = new File(Constants.ICONS_PATH, iso + ".png");
+				if(file.exists()){
+					d = Drawable.createFromPath(file.getAbsolutePath());
+				}else{
+					d = mNoCountryIcon;
+				}
+				mIcons.put(iso, d);
 			}
-			mIcons.put(iso, d);
+			holder.mIsoIcon.setImageDrawable(d);
+			holder.mCountryFlagContainer.setVisibility(View.VISIBLE);
+		}else{
+			holder.mCountryFlagContainer.setVisibility(View.GONE);
 		}
-		holder.mIsoIcon.setImageDrawable(d);
 		
 		final LinearLayout ll = holder.mImageContainer;
 		ll.removeAllViews();

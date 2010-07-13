@@ -20,26 +20,18 @@
  */
 package org.ametro.activity;
 
-import org.ametro.ApplicationEx;
 import org.ametro.Constants;
+import org.ametro.GlobalSettings;
 import org.ametro.R;
 import org.ametro.catalog.storage.tasks.DownloadIconsTask;
-import org.ametro.util.FileUtil;
+import org.ametro.dialog.DownloadIconsDialog;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.TabActivity;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.text.Html;
-import android.text.SpannableString;
-import android.text.method.LinkMovementMethod;
-import android.text.util.Linkify;
 import android.widget.TabHost;
-import android.widget.TextView;
 
 public class CatalogTabHostActivity extends TabActivity {
 
@@ -51,7 +43,6 @@ public class CatalogTabHostActivity extends TabActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mInstance = this;
-		checkIcons();
 		final TabHost tabHost = getTabHost();
 		final Resources res = getResources();
 
@@ -74,11 +65,18 @@ public class CatalogTabHostActivity extends TabActivity {
 		{
 			String[] files = Constants.ICONS_PATH.list();
 			if(files == null || files.length == 0){
-				DownloadIconsDialog.create(this).show();				
-				FileUtil.touchFile(Constants.ICONS_CHECK);
+				DownloadIconsDialog dialog = new DownloadIconsDialog(this,true);
+				dialog.show();
 			}
 		}
 	}	
+	
+	protected void onResume() {
+		if(!DownloadIconsTask.isRunning() && GlobalSettings.isCountryIconsEnabled(this)){
+			checkIcons();
+		}
+		super.onResume();
+	}
 	
 	protected void onPause() {
 		super.onPause();
@@ -90,35 +88,5 @@ public class CatalogTabHostActivity extends TabActivity {
 	{
 		return mInstance;
 	}
-	
-	private static class DownloadIconsDialog {
-
-		 public static AlertDialog create(final Context context) {
-		  final TextView message = new TextView(context);
-		  final SpannableString s = new SpannableString(
-				  Html.fromHtml(
-						  context.getText(R.string.msg_download_icons_dialog_content).toString()));
-		  Linkify.addLinks(s, Linkify.WEB_URLS);
-		  message.setText(s);
-		  message.setMovementMethod(LinkMovementMethod.getInstance());
-		  message.setPadding(5, 5, 5, 5);
-		  return new AlertDialog.Builder(context)
-			.setTitle(R.string.msg_download_icons_dialog_title)
-			.setCancelable(true)
-			.setIcon(android.R.drawable.ic_dialog_info)
-			.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int id) {
-					((ApplicationEx)context.getApplicationContext()).getCatalogStorage().requestTask( new DownloadIconsTask() );
-				}
-			})
-			.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int which) {
-					dialog.dismiss();
-				}
-			})
-			.setView(message)
-			.create();
-		 }
-	}	
-	
+		
 }
