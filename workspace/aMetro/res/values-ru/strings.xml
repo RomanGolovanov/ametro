@@ -51,10 +51,10 @@
     <string name="pref_anti_alias_disable_on_scroll_description">Увеличит скорость работы на медленных устройствах</string>
 
     <string name="pref_section_graphic">Графические настройки</string>
-    <string name="pref_section_graphic_description"></string>
+    <string name="pref_section_graphic_description">Настройки отображения карт</string>
 
     <string name="pref_section_auto_update">Онлайн каталог карт</string>
-    <string name="pref_section_auto_update_description">Настройка доступа к онлайн каталогу карт</string>
+    <string name="pref_section_auto_update_description">Доступ к онлайн каталогу карт</string>
     <string name="pref_auto_update_map_index">Обновление списка карт</string>
     <string name="pref_auto_update_map_index_description">Автоматически обновлять список карт с сервера при наличии сети</string>
     <string name="pref_auto_update_maps">Обновление карт</string>
@@ -65,6 +65,9 @@
     <string name="pref_auto_update_period">Период обновлений</string>
     <string name="pref_auto_update_period_description"></string>
     
+    <string name="pref_section_maplist">Списки Карт</string>
+    <string name="pref_section_maplist_description">Режимы отбражения списков карт</string>
+
     <string name="pref_refresh_country_icons">Загрузить флаги</string>
     <string name="pref_refresh_country_icons_description">Загрузить флаги стран с сервера</string>
     <string name="pref_enable_country_icons">Отображать флаги</string>

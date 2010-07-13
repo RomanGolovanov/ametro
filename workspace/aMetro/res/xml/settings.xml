@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-
 	<PreferenceScreen android:title="@string/pref_section_donate" android:summary="@string/pref_section_donate_description">
-
 		<Preference android:title="@string/pref_donate_alertpay"
                            android:key="@string/pref_donate_alertpay_key"
                            android:summary="@string/pref_donate_alertpay_description" />
@@ -16,7 +14,6 @@
                            android:key="@string/pref_donate_wm_key"
                            android:summary="@string/pref_donate_wm_description" />
 	</PreferenceScreen>
-
 	<PreferenceScreen android:title="@string/pref_section_graphic" android:summary="@string/pref_section_graphic_description">
         <CheckBoxPreference android:title="@string/pref_anti_alias"
                            android:key="@string/pref_anti_alias_key"
@@ -27,6 +24,16 @@
                             android:summary="@string/pref_anti_alias_disable_on_scroll_description"
                             android:dependency="@string/pref_anti_alias_key"
                             android:defaultValue="true"/>
+	</PreferenceScreen>
+	<PreferenceScreen android:title="@string/pref_section_maplist" android:summary="@string/pref_section_maplist_description">
+        <CheckBoxPreference android:title="@string/pref_enable_country_icons"
+                            android:key="@string/pref_enable_country_icons_key"
+                            android:summary="@string/pref_enable_country_icons_description"
+                            android:defaultValue="true"/>
+		<Preference android:title="@string/pref_refresh_country_icons"
+                           android:key="@string/pref_refresh_country_icons_key"
+                           android:dependency="@string/pref_enable_country_icons_key"
+                           android:summary="@string/pref_refresh_country_icons_description" />
 	</PreferenceScreen>
 	<PreferenceScreen android:title="@string/pref_section_auto_update" android:summary="@string/pref_section_auto_update_description">
         <!-- <EditTextPreference android:title="@string/pref_auto_update_url"
@@ -61,27 +68,15 @@
                             android:key="@string/pref_auto_locate_key"
                             android:summary="@string/pref_auto_locate_description"
                             android:defaultValue="false"/>
-                            
-        <CheckBoxPreference android:title="@string/pref_enable_country_icons"
-                            android:key="@string/pref_enable_country_icons_key"
-                            android:summary="@string/pref_enable_country_icons_description"
-                            android:defaultValue="true"/>
-		<Preference android:title="@string/pref_refresh_country_icons"
-                           android:key="@string/pref_refresh_country_icons_key"
-                           android:dependency="@string/pref_enable_country_icons_key"
-                           android:summary="@string/pref_refresh_country_icons_description" />
-                            
         <!-- CheckBoxPreference android:title="@string/pref_import"
                             android:key="@string/pref_import_key"
                             android:summary="@string/pref_import_description"
                             android:defaultValue="false"/-->
-                            
         <CheckBoxPreference android:title="@string/pref_auto_import_addons"
                             android:key="@string/pref_auto_import_addons_key"
                             android:summary="@string/pref_auto_import_addons_description"
                             android:defaultValue="false"/>
     </PreferenceCategory>
-
 	<PreferenceCategory android:title="@string/pref_section_debug">
 		<CheckBoxPreference android:title="@string/pref_debug"
 		                    android:key="@string/pref_debug_key"
