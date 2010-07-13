@@ -3,6 +3,7 @@
 	android:layout_width="fill_parent" android:orientation="horizontal" android:id="@+id/content"
 	android:gravity="center_vertical" android:layout_height="?android:attr/listPreferredItemHeight">
 	<LinearLayout android:layout_width="wrap_content"
+		android:id="@+id/country_flag_panel"
 		android:layout_height="wrap_content" android:orientation="vertical"
 		android:gravity="center">
 		<ImageView android:id="@+id/iso_icon" android:layout_width="wrap_content"

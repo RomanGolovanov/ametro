@@ -31,6 +31,7 @@ import static org.ametro.Constants.PREFERENCE_DEBUG;
 import static org.ametro.Constants.PREFERENCE_LOCALE;
 import static org.ametro.Constants.TEMP_CATALOG_PATH;
 import static org.ametro.Constants.PREFERENCE_PMZ_IMPORT;
+import static org.ametro.Constants.PREFERENCE_ENABLE_COUNTRY_ICONS;
 
 import java.io.File;
 import java.util.Locale;
@@ -39,20 +40,13 @@ import org.ametro.catalog.storage.CatalogStorage;
 import org.ametro.model.TransportType;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
 
 public class GlobalSettings {
 
 	private static String mDefaultLocale = Locale.getDefault().getLanguage();
-	
-	
-    public static String getObsoleteLocalCatalogMapFileName(String mapName) {
-        return new File(LOCAL_CATALOG_PATH, mapName + MAP_FILE_TYPE).getAbsolutePath().toLowerCase();
-    }
-    
-    public static String getObsoleteTemporaryImportMapFile(String mapName) {
-        return new File(TEMP_CATALOG_PATH, mapName + IMPORT_FILE_TYPE).getAbsolutePath().toLowerCase();
-    }
 
 	public static String getLanguage(Context context){
 		String code = PreferenceManager.getDefaultSharedPreferences(context).getString(PREFERENCE_LOCALE, "auto");
@@ -79,6 +73,18 @@ public class GlobalSettings {
 		return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(PREFERENCE_PMZ_IMPORT, false);
 	}
 
+	public static boolean isCountryIconsEnabled(Context context) {
+		return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(PREFERENCE_ENABLE_COUNTRY_ICONS, true);
+	}
+
+	public static void setCountryIconsEnabled(Context context, boolean enabled) {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+		Editor editor = prefs.edit();
+		editor.putBoolean(PREFERENCE_ENABLE_COUNTRY_ICONS, enabled);
+		editor.commit();
+	}
+
+	
 	public static boolean isDebugMessagesEnabled(Context context) {
 		return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(PREFERENCE_DEBUG, false);
 	}

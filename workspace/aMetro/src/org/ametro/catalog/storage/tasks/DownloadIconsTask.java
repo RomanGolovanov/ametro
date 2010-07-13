@@ -24,6 +24,14 @@ import android.util.Log;
 
 public class DownloadIconsTask extends BaseTask implements IDownloadListener {
 
+	private static class Holder{
+		private static DownloadIconsTask INSTANCE = new DownloadIconsTask();
+	}
+	
+	public static DownloadIconsTask getInstance(){
+		return Holder.INSTANCE;
+	}
+	
 	private static final int NOTIFICATION_ID = 1;
 	
 	private static final int DOWNLOAD_ICON = android.R.drawable.stat_sys_download;
@@ -33,9 +41,9 @@ public class DownloadIconsTask extends BaseTask implements IDownloadListener {
 	
 	private String mProgressMessage;
 	
-	NotificationManager mNotificationManager;
-	Context mContext;
-	Resources mResources;
+	private NotificationManager mNotificationManager;
+	private Context mContext;
+	private Resources mResources;
 	
 	public boolean isAsync() {
 		return true;
@@ -55,10 +63,10 @@ public class DownloadIconsTask extends BaseTask implements IDownloadListener {
 		WebUtil.downloadFile(null, uri, temp, true, this);
 	}
 
-	public DownloadIconsTask(Parcel in) {
+	private DownloadIconsTask(Parcel in) {
 	}
 
-	public DownloadIconsTask(){
+	private DownloadIconsTask(){
 		
 	}
 	
@@ -125,5 +133,9 @@ public class DownloadIconsTask extends BaseTask implements IDownloadListener {
 			FileUtil.delete(GlobalSettings.getTemporaryDownloadIconFile());
 		}
 		return new DownloadIconsTask();
+	}
+
+	public static boolean isRunning() {
+		return Holder.INSTANCE.mIsRunning;
 	}	
 }

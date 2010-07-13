@@ -52,6 +52,7 @@ public class Constants {
     public static final String PREFERENCE_AUTO_UPDATE_MAPS = "AUTO_UPDATE_MAPS";
     public static final String PREFERENCE_LOCALE = "LOCALE";
     public static final String PREFERENCE_PMZ_IMPORT = "PMZ_IMPORT";
+    public static final String PREFERENCE_ENABLE_COUNTRY_ICONS = "ENABLE_COUNTRY_ICONS";
 
     public static final String DEFAULT_MAP = "metro";
 

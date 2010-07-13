@@ -23,10 +23,9 @@ package org.ametro.activity;
 
 import java.util.Locale;
 
-import org.ametro.ApplicationEx;
 import org.ametro.Constants;
 import org.ametro.R;
-import org.ametro.catalog.storage.tasks.DownloadIconsTask;
+import org.ametro.dialog.DownloadIconsDialog;
 import org.ametro.dialog.PaymentDetailsDialog;
 
 import android.content.Intent;
@@ -52,12 +51,12 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.settings);
-
+ 
 		mDonateAlertPay = findPreference(getString(R.string.pref_donate_alertpay_key));
 		mDonateYandex = findPreference(getString(R.string.pref_donate_yandex_key));
 		mDonateWebMoney = findPreference(getString(R.string.pref_donate_wm_key));
 		mDonateMoneyBookers = findPreference(getString(R.string.pref_donate_mb_key));
-		mRefreshIconPack = findPreference(getString(R.string.pref_auto_update_refresh_icons_key));
+		mRefreshIconPack = findPreference(getString(R.string.pref_refresh_country_icons_key));
 
 		mDonateAlertPay.setOnPreferenceClickListener(this);
 		mDonateYandex.setOnPreferenceClickListener(this);
@@ -73,8 +72,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	public boolean onPreferenceClick(Preference preference) {
 		final Resources res = getResources();
 		if (preference == mRefreshIconPack){
-			ApplicationEx app = (ApplicationEx)getApplicationContext();
-			app.getCatalogStorage().requestTask(DownloadIconsTask.create(true));
+			DownloadIconsDialog dialog = new DownloadIconsDialog(this,false);
+			dialog.show();
 		}
 		if (preference == mDonateAlertPay) {
 			String[] codes = res.getStringArray(R.array.alertpay_currency_codes);

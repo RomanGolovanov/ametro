@@ -49,12 +49,6 @@
                         android:summary="@string/pref_auto_update_period_description"
                         android:dependency="@string/pref_auto_update_map_index_key"
                         android:defaultValue="daily"/>
-
-		<Preference android:title="@string/pref_auto_update_refresh_icons"
-                           android:key="@string/pref_auto_update_refresh_icons_key"
-                           android:summary="@string/pref_auto_update_refresh_icons_description" />
-
-                        
 	</PreferenceScreen>
     <PreferenceCategory android:title="@string/pref_section_general">
         <ListPreference android:key="@string/pref_locale_key"
@@ -67,6 +61,15 @@
                             android:key="@string/pref_auto_locate_key"
                             android:summary="@string/pref_auto_locate_description"
                             android:defaultValue="false"/>
+                            
+        <CheckBoxPreference android:title="@string/pref_enable_country_icons"
+                            android:key="@string/pref_enable_country_icons_key"
+                            android:summary="@string/pref_enable_country_icons_description"
+                            android:defaultValue="true"/>
+		<Preference android:title="@string/pref_refresh_country_icons"
+                           android:key="@string/pref_refresh_country_icons_key"
+                           android:dependency="@string/pref_enable_country_icons_key"
+                           android:summary="@string/pref_refresh_country_icons_description" />
                             
         <!-- CheckBoxPreference android:title="@string/pref_import"
                             android:key="@string/pref_import_key"

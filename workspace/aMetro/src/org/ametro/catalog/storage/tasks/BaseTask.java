@@ -21,10 +21,13 @@ public abstract class BaseTask implements Parcelable {
 	public abstract Object getTaskId();
 	
 	private ICatalogStorageTaskListener mCallback;
-	private boolean mIsCanceled;
-	private boolean mIsDone;
+	protected boolean mIsCanceled;
+	protected boolean mIsDone;
+	protected boolean mIsRunning;
+
 
 	public void execute(Context context, ICatalogStorageTaskListener callback) {
+		mIsRunning = true;
 		mIsCanceled = false;
 		mIsDone = false;
 		mCallback = callback;
@@ -38,6 +41,7 @@ public abstract class BaseTask implements Parcelable {
 		} catch (Throwable reason) {
 			failed(reason);
 		}
+		mIsRunning = false;
 	}
 
 	protected void begin() {
