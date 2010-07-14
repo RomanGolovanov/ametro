@@ -74,7 +74,7 @@ public class CatalogImportListActivity extends BaseCatalogExpandableActivity {
 	}
 
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		menu.findItem(MAIN_MENU_IMPORT).setEnabled(mMode == MODE_LIST);
+		menu.findItem(MAIN_MENU_IMPORT).setEnabled(mMode == MODE_LIST  && !mStorage.hasTasks());
 		return super.onPrepareOptionsMenu(menu);
 	}
 
