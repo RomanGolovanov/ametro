@@ -85,6 +85,7 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity {
 		switch (item.getItemId()) {
 		case MAIN_MENU_DOWNLOAD:
 			Intent i = new Intent(this, CatalogMapSelectionActivity.class);
+			i.putExtra(CatalogMapSelectionActivity.EXTRA_TITLE, getText(R.string.menu_download));
 			i.putExtra(CatalogMapSelectionActivity.EXTRA_REMOTE_ID, CatalogStorage.ONLINE);
 			i.putExtra(CatalogMapSelectionActivity.EXTRA_FILTER, mActionBarEditText.getText().toString());
 			i.putExtra(CatalogMapSelectionActivity.EXTRA_SORT_MODE, CheckedCatalogAdapter.SORT_MODE_COUNTRY);

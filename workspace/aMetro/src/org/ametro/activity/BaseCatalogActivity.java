@@ -232,9 +232,9 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		menu.add(0, MAIN_MENU_SEARCH, Menu.NONE, R.string.menu_search).setIcon(android.R.drawable.ic_menu_search);
-		menu.add(0, MAIN_MENU_REFRESH, Menu.NONE, R.string.menu_refresh).setIcon(android.R.drawable.ic_menu_rotate);
-		menu.add(0, MAIN_MENU_SORT, Menu.NONE, R.string.menu_sort).setIcon(android.R.drawable.ic_menu_sort_alphabetically);
+		menu.add(0, MAIN_MENU_REFRESH, Menu.NONE, R.string.menu_refresh_list).setIcon(android.R.drawable.ic_menu_rotate);
 		menu.add(0, MAIN_MENU_LOCATION, Menu.NONE, R.string.menu_location).setIcon(android.R.drawable.ic_menu_mylocation);
+		menu.add(0, MAIN_MENU_SORT, 998, R.string.menu_sort).setIcon(android.R.drawable.ic_menu_sort_alphabetically);
 		menu.add(0, MAIN_MENU_SETTINGS, 999, R.string.menu_settings).setIcon(android.R.drawable.ic_menu_preferences);
 		menu.add(0, MAIN_MENU_ABOUT, 1000, R.string.menu_about).setIcon(android.R.drawable.ic_menu_help);
 		return true;

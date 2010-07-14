@@ -21,9 +21,15 @@
 package org.ametro.activity;
 
 import org.ametro.R;
+import org.ametro.adapter.CheckedCatalogAdapter;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.CatalogMapPair;
+import org.ametro.catalog.CatalogMapState;
 import org.ametro.catalog.storage.CatalogStorage;
+
+import android.content.Intent;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import static org.ametro.catalog.CatalogMapState.CORRUPTED;
 import static org.ametro.catalog.CatalogMapState.DOWNLOAD;
@@ -93,5 +99,50 @@ public class CatalogLocalListActivity extends BaseCatalogActivity {
 		return R.array.local_catalog_map_state_colors;
 	}
 	
+	/****************** MAIN MENU ********************/
 	
+	private final int MAIN_MENU_UPDATE = 1;
+	private final static int REQUEST_UPDATE = 1;
+
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		menu.add(0, MAIN_MENU_UPDATE, 4, R.string.menu_update_maps).setIcon(android.R.drawable.ic_menu_add);
+		return true;
+	}
+
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		menu.findItem(MAIN_MENU_UPDATE).setEnabled(mMode == MODE_LIST);
+		return super.onPrepareOptionsMenu(menu);
+	}
+
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case MAIN_MENU_UPDATE:
+			Intent i = new Intent(this, CatalogMapSelectionActivity.class);
+			i.putExtra(CatalogMapSelectionActivity.EXTRA_TITLE, getText(R.string.menu_update_maps));
+			i.putExtra(CatalogMapSelectionActivity.EXTRA_REMOTE_ID, CatalogStorage.ONLINE);
+			i.putExtra(CatalogMapSelectionActivity.EXTRA_FILTER, mActionBarEditText.getText().toString());
+			i.putExtra(CatalogMapSelectionActivity.EXTRA_SORT_MODE, CheckedCatalogAdapter.SORT_MODE_COUNTRY);
+			i.putExtra(CatalogMapSelectionActivity.EXTRA_CHECKABLE_STATES, new int[]{ CatalogMapState.IMPORT, CatalogMapState.UPDATE } );
+			i.putExtra(CatalogMapSelectionActivity.EXTRA_VISIBLE_STATES, new int[]{ CatalogMapState.IMPORT, CatalogMapState.UPDATE } );
+			startActivityForResult(i, REQUEST_UPDATE);
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		switch (requestCode) {
+		case REQUEST_UPDATE:
+			if(resultCode == RESULT_OK && data!=null){
+				String[] names = data.getStringArrayExtra(CatalogMapSelectionActivity.EXTRA_SELECTION);
+				for (String systemName : names) {
+					mStorage.requestDownload(systemName);
+				}
+			}
+			break;
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+		
 }

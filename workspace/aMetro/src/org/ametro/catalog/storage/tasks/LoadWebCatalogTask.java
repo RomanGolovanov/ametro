@@ -9,6 +9,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import org.ametro.Constants;
+import org.ametro.catalog.Catalog;
 import org.ametro.catalog.storage.CatalogDeserializer;
 import org.ametro.util.FileUtil;
 import org.ametro.util.IDownloadListener;
@@ -16,6 +17,7 @@ import org.ametro.util.WebUtil;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 public class LoadWebCatalogTask extends LoadBaseCatalogTask implements IDownloadListener {
 
@@ -66,32 +68,42 @@ public class LoadWebCatalogTask extends LoadBaseCatalogTask implements IDownload
 	}
 
 	public void onDone(Object context, File file) throws Exception {
-		File catalogFile;
-		ZipInputStream zip = null;
-		String fileName = null;
 		try{
-			zip = new ZipInputStream(new FileInputStream(file));
-			ZipEntry zipEntry = zip.getNextEntry();
-			if(zipEntry != null) { 
-				fileName = zipEntry.getName();
-				final File outputFile = new File(Constants.TEMP_CATALOG_PATH, fileName); 
-				FileUtil.writeToStream(new BufferedInputStream(zip), new FileOutputStream(outputFile), false);
-				zip.closeEntry();
+			File catalogFile;
+			ZipInputStream zip = null;
+			String fileName = null;
+			try{
+				zip = new ZipInputStream(new FileInputStream(file));
+				ZipEntry zipEntry = zip.getNextEntry();
+				if(zipEntry != null) { 
+					fileName = zipEntry.getName();
+					final File outputFile = new File(Constants.TEMP_CATALOG_PATH, fileName); 
+					FileUtil.writeToStream(new BufferedInputStream(zip), new FileOutputStream(outputFile), false);
+					zip.closeEntry();
+				}
+				zip.close();
+				zip = null;
+			}finally{
+				if(zip != null){
+					try{ zip.close(); } catch(Exception e){}
+				}
 			}
-			zip.close();
-			zip = null;
-		}finally{
-			if(zip != null){
-				try{ zip.close(); } catch(Exception e){}
+			if(fileName==null){
+				throw new Exception("Invalid map catalog archive");
 			}
+			catalogFile = new File(Constants.TEMP_CATALOG_PATH, fileName);
+			mCatalog = CatalogDeserializer.deserializeCatalog(new BufferedInputStream(new FileInputStream(catalogFile)));
+			// set timestamp to now for timeout detection 
+			mCatalog.setTimestamp(System.currentTimeMillis());
+		}catch(Exception ex){
+			if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.WARN)){
+				Log.w(Constants.LOG_TAG_MAIN,"Failed download catalog " + mCatalogId, ex);
+			}
+			mCatalog = new Catalog();
+			mCatalog.setCorrupted(true);
+			mCatalog.setBaseUrl(mURI.toString());
+			mCatalog.setTimestamp(System.currentTimeMillis());
 		}
-		if(fileName==null){
-			throw new Exception("Invalid map catalog archive");
-		}
-		catalogFile = new File(Constants.TEMP_CATALOG_PATH, fileName);
-		mCatalog = CatalogDeserializer.deserializeCatalog(new BufferedInputStream(new FileInputStream(catalogFile)));
-		// set timestamp to now for timeout detection 
-		mCatalog.setTimestamp(System.currentTimeMillis()); 
 	}
 
 	public boolean onUpdate(Object context, long position, long total) throws Exception {
