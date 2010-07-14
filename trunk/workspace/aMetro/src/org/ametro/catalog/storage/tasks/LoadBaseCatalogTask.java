@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.ametro.ApplicationEx;
 import org.ametro.Constants;
 import org.ametro.R;
 import org.ametro.catalog.Catalog;
@@ -64,23 +65,37 @@ public abstract class LoadBaseCatalogTask extends BaseTask {
 	}
 	
 	protected void run(Context context) throws Exception{
-		//mCatalog = ApplicationEx.getInstance().getCatalogStorage().getCatalog(getCatalogId());
+		Catalog backup = ApplicationEx.getInstance().getCatalogStorage().getCatalog(getCatalogId());
+		
 		final Resources res = context.getResources();
 		if(mCatalog==null || mForceRefresh){
+			if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)){
+				Log.i(Constants.LOG_TAG_MAIN,"Begin load catalog " + mCatalogId);
+			}
 			if(!mForceRefresh && mFile.exists()){
+				if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)){
+					Log.i(Constants.LOG_TAG_MAIN,"Load catalog storage " + mCatalogId);
+				}
 				update(0, 0, res.getString(R.string.msg_init_catalog));
 				loadFromStorage();
+				if(mCatalog!=null && !mCatalog.isCorrupted()){
+					backup = mCatalog;
+				}
 			}
 			if(mCatalog==null || mForceRefresh || isDerpecated()){
-				Catalog backup = mCatalog;
+				if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)){
+					Log.i(Constants.LOG_TAG_MAIN,"Need refresh catalog " + mCatalogId);
+				}
 				refresh();
 				if(mCatalog!=null && !mCatalog.isCorrupted()){
 					update(0, 0, res.getString(R.string.msg_save_catalog));
 					saveToStorage();
-				}else{
-					if(backup!=null && !backup.isCorrupted()){
-						mCatalog = backup;
+				}
+				if((mCatalog==null || mCatalog.isCorrupted()) && backup!=null && !backup.isCorrupted()){
+					if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)){
+						Log.i(Constants.LOG_TAG_MAIN,"Restore storage version of catalog " + mCatalogId);
 					}
+					mCatalog = backup;
 				}
 			}		
 		}

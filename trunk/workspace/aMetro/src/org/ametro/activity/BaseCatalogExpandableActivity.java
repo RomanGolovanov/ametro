@@ -242,7 +242,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		menu.add(0, MAIN_MENU_SEARCH, Menu.NONE, R.string.menu_search).setIcon(android.R.drawable.ic_menu_search);
-		menu.add(0, MAIN_MENU_REFRESH, Menu.NONE, R.string.menu_refresh).setIcon(android.R.drawable.ic_menu_rotate);
+		menu.add(0, MAIN_MENU_REFRESH, Menu.NONE, R.string.menu_refresh_list).setIcon(android.R.drawable.ic_menu_rotate);
 		menu.add(0, MAIN_MENU_LOCATION, Menu.NONE, R.string.menu_location).setIcon(android.R.drawable.ic_menu_mylocation);
 		menu.add(0, MAIN_MENU_SETTINGS, 999, R.string.menu_settings).setIcon(android.R.drawable.ic_menu_preferences);
 		menu.add(0, MAIN_MENU_ABOUT, 1000, R.string.menu_about).setIcon(android.R.drawable.ic_menu_help);
@@ -423,20 +423,22 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	}
 	
 	private void onCatalogsUpdated(boolean refresh) {
-		if (mLocal != null && mRemote != null) {
-			Catalog mPreffered = (mDiffMode == CatalogMapPair.DIFF_MODE_LOCAL) ? mLocal : mRemote; 
-			if (mPreffered.getMaps().size() > 0) {
-				if (mMode != MODE_LIST) {
-					setListView();
-				}else{
-					if (refresh) {
+		synchronized (mCatalogLoadedEvents) {
+			if (mLocal != null && mRemote != null) {
+				Catalog mPreffered = (mDiffMode == CatalogMapPair.DIFF_MODE_LOCAL) ? mLocal : mRemote; 
+				if (mPreffered.getMaps().size() > 0) {
+					if (mMode != MODE_LIST) {
 						setListView();
 					}else{
-						mAdapter.updateData(mStorage.getCatalog(mLocalId), mStorage.getCatalog(mRemoteId));
+						if (refresh) {
+							setListView();
+						}else{
+							mAdapter.updateData(mStorage.getCatalog(mLocalId), mStorage.getCatalog(mRemoteId));
+						}
 					}
+				} else {
+					setEmptyView();
 				}
-			} else {
-				setEmptyView();
 			}
 		}
 	}
@@ -650,12 +652,11 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 					Catalog catalog = event.Catalog;
 					if(catalogId == mLocalId){
 						mLocal = catalog;
-						onCatalogsUpdated(false);
 					}else  if(catalogId == mRemoteId){
 						mRemote = catalog;
-						onCatalogsUpdated(false);
 					}
 				}
+				onCatalogsUpdated(false);
 			}
 		}
 	};
