@@ -77,7 +77,7 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity {
 	}
 
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		menu.findItem(MAIN_MENU_DOWNLOAD).setEnabled(mMode == MODE_LIST);
+		menu.findItem(MAIN_MENU_DOWNLOAD).setEnabled(mMode == MODE_LIST && !mStorage.hasTasks());
 		return super.onPrepareOptionsMenu(menu);
 	}
 

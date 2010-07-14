@@ -244,7 +244,7 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 		menu.findItem(MAIN_MENU_SEARCH).setEnabled(mMode == MODE_LIST);
 		menu.findItem(MAIN_MENU_SORT).setEnabled(mMode == MODE_LIST);
 		menu.findItem(MAIN_MENU_LOCATION).setEnabled(mMode == MODE_LIST);
-		menu.findItem(MAIN_MENU_REFRESH).setEnabled( (mMode != MODE_WAIT) && (mMode != MODE_WAIT_NO_PROGRESS) );
+		menu.findItem(MAIN_MENU_REFRESH).setEnabled( (mMode != MODE_WAIT) && (mMode != MODE_WAIT_NO_PROGRESS)  && !mStorage.hasTasks() );
 		return super.onPrepareOptionsMenu(menu);
 	}
 

@@ -101,23 +101,23 @@ public class CatalogLocalListActivity extends BaseCatalogActivity {
 	
 	/****************** MAIN MENU ********************/
 	
-	private final int MAIN_MENU_UPDATE = 1;
+	private final int MAIN_MENU_UPDATE_MAPS = 1;
 	private final static int REQUEST_UPDATE = 1;
 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		menu.add(0, MAIN_MENU_UPDATE, 4, R.string.menu_update_maps).setIcon(android.R.drawable.ic_menu_add);
+		menu.add(0, MAIN_MENU_UPDATE_MAPS, 4, R.string.menu_update_maps).setIcon(android.R.drawable.ic_menu_add);
 		return true;
 	}
 
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		menu.findItem(MAIN_MENU_UPDATE).setEnabled(mMode == MODE_LIST);
+		menu.findItem(MAIN_MENU_UPDATE_MAPS).setEnabled(mMode == MODE_LIST && !mStorage.hasTasks());
 		return super.onPrepareOptionsMenu(menu);
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case MAIN_MENU_UPDATE:
+		case MAIN_MENU_UPDATE_MAPS:
 			Intent i = new Intent(this, CatalogMapSelectionActivity.class);
 			i.putExtra(CatalogMapSelectionActivity.EXTRA_TITLE, getText(R.string.menu_update_maps));
 			i.putExtra(CatalogMapSelectionActivity.EXTRA_REMOTE_ID, CatalogStorage.ONLINE);
