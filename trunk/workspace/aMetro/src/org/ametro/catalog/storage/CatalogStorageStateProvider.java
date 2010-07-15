@@ -71,8 +71,8 @@ public class CatalogStorageStateProvider {
 		} else {
 			if (local == null) {
 				return CatalogMapState.IMPORT;
-			} else if (!local.isSupported() || local.isCorruted()) {
-				return CatalogMapState.UPDATE;
+			} else if (local.isNotSupported() || local.isCorruted()) {
+				return CatalogMapState.NEED_TO_UPDATE;
 			} else {
 				if (local.getTimestamp() >= remote.getTimestamp()) {
 					return CatalogMapState.INSTALLED;

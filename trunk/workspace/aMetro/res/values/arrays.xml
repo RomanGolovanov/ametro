@@ -55,8 +55,8 @@
 		<item>#ffff00ff</item>
 		<item>#ffff0000</item>
 		<item>#ffffff00</item>
-		<item>#ffffffff</item>
-		<item>#ffffffff</item>
+		<item>#ffbfbfbf</item>
+		<item>#ffbfbfbf</item>
 		<item>#ffff00ff</item>
 		<item>#ffff00ff</item>
 		<item>#ffff00ff</item>
@@ -70,9 +70,9 @@
 		<item>#ffff0000</item>
 		<item>#ffff0000</item>
 		<item>#ffffff00</item>
-		<item>#ffffffff</item>
+		<item>#ffbfbfbf</item>
 		<item>#ffff00ff</item>
-		<item>#ffffffff</item>
+		<item>#ffbfbfbf</item>
 		<item>#ffff0000</item>
 		<item>#ffff0000</item>
 		<item>#ff00ff00</item>
@@ -85,7 +85,7 @@
 		<item>#ffff0000</item>
 		<item>#ffff0000</item>
 		<item>#ffffff00</item>
-		<item>#ffffffff</item>
+		<item>#ffbfbfbf</item>
 		<item>#ffff00ff</item>
 		<item>#ffff00ff</item>
 		<item>#ffff00ff</item>
@@ -176,6 +176,7 @@
     	<item>0.2.5.r304: all catalog operations migrated to task queue</item>
     	<item>0.2.5.r308: activity for selecting maps for download/import (pre-alpha version)</item>
     	<item>0.2.5.r310: country icons download confirmation dialog</item>
+    	<item>0.2.5.r317: map catalogs UI tuning</item>
     </string-array>
     <string-array name="create_route_modes">
         <item>Minimal Time</item>

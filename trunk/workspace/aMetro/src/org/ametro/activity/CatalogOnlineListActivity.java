@@ -30,6 +30,7 @@ import org.ametro.catalog.storage.CatalogStorage;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity {
 
@@ -72,7 +73,7 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity {
 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		menu.add(0, MAIN_MENU_DOWNLOAD, 4, R.string.menu_download).setIcon(android.R.drawable.ic_menu_add);
+		menu.add(0, MAIN_MENU_DOWNLOAD, 4, R.string.menu_download_maps).setIcon(R.drawable.icon_tab_import_selected);
 		return true;
 	}
 
@@ -85,11 +86,12 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity {
 		switch (item.getItemId()) {
 		case MAIN_MENU_DOWNLOAD:
 			Intent i = new Intent(this, CatalogMapSelectionActivity.class);
-			i.putExtra(CatalogMapSelectionActivity.EXTRA_TITLE, getText(R.string.menu_download));
+			i.putExtra(CatalogMapSelectionActivity.EXTRA_TITLE, getText(R.string.menu_download_maps));
 			i.putExtra(CatalogMapSelectionActivity.EXTRA_REMOTE_ID, CatalogStorage.ONLINE);
 			i.putExtra(CatalogMapSelectionActivity.EXTRA_FILTER, mActionBarEditText.getText().toString());
 			i.putExtra(CatalogMapSelectionActivity.EXTRA_SORT_MODE, CheckedCatalogAdapter.SORT_MODE_COUNTRY);
-			i.putExtra(CatalogMapSelectionActivity.EXTRA_CHECKABLE_STATES, new int[]{ CatalogMapState.DOWNLOAD, CatalogMapState.UPDATE } );
+			i.putExtra(CatalogMapSelectionActivity.EXTRA_CHECKABLE_STATES, new int[]{ CatalogMapState.DOWNLOAD, CatalogMapState.UPDATE, CatalogMapState.NEED_TO_UPDATE } );
+			i.putExtra(CatalogMapSelectionActivity.EXTRA_VISIBLE_STATES, new int[]{ CatalogMapState.DOWNLOAD, CatalogMapState.UPDATE, CatalogMapState.NEED_TO_UPDATE } );
 			startActivityForResult(i, REQUEST_DOWNLOAD);
 			return true;
 		}
@@ -104,6 +106,9 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity {
 				for (String systemName : names) {
 					mStorage.requestDownload(systemName);
 				}
+			}
+			if(resultCode == CatalogMapSelectionActivity.RESULT_MAP_LIST_EMPTY){
+				Toast.makeText(this, R.string.msg_no_maps_to_download, Toast.LENGTH_SHORT).show();
 			}
 			break;
 		}
