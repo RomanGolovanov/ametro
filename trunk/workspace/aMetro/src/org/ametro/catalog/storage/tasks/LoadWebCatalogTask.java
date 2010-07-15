@@ -21,7 +21,7 @@ import android.util.Log;
 
 public class LoadWebCatalogTask extends LoadBaseCatalogTask implements IDownloadListener {
 
-	protected static final long DEPRECATED_TIMEOUT =  15*60*1000;
+	protected static final long DEPRECATED_TIMEOUT =  60*60*1000; // 1 hour
 	
 	protected final URI mURI;
 
@@ -31,7 +31,11 @@ public class LoadWebCatalogTask extends LoadBaseCatalogTask implements IDownload
 	}
 
 	public void refresh() throws Exception {
-		WebUtil.downloadFileUnchecked(null, mURI, new File(Constants.TEMP_CATALOG_PATH, "catalog.zip"), this);
+		try{
+			WebUtil.downloadFileUnchecked(null, mURI, new File(Constants.TEMP_CATALOG_PATH, "catalog.zip"), this);
+		} catch(Exception ex){
+			mCatalog = getCorruptedCatalog();
+		}
 	}
 
 	public LoadWebCatalogTask(int catalogId, File file, URI uri, boolean forceRefresh) {
