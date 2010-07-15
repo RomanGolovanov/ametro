@@ -108,6 +108,7 @@ public abstract class LoadBaseCatalogTask extends BaseTask {
 	
 	protected Catalog getCorruptedCatalog(){
 		Catalog catalog = getEmptyCatalog();
+		catalog.setMaps(new ArrayList<CatalogMap>());
 		catalog.setCorrupted(true);
 		return catalog;
 	}

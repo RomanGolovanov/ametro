@@ -98,8 +98,10 @@ public class Catalog {
 	public CatalogMap getMap(String systemName){
 		if(mMapIndex == null){
 			final HashMap<String, CatalogMap> index = new HashMap<String, CatalogMap>();
-			for(CatalogMap map : mMaps){
-				index.put(map.getSystemName(), map);
+			if(mMaps!=null){
+				for(CatalogMap map : mMaps){
+					index.put(map.getSystemName(), map);
+				}
 			}
 			mMapIndex = index;
 		}

@@ -426,7 +426,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		synchronized (mCatalogLoadedEvents) {
 			if (mLocal != null && mRemote != null) {
 				Catalog mPreffered = (mDiffMode == CatalogMapPair.DIFF_MODE_LOCAL) ? mLocal : mRemote; 
-				if (mPreffered.getMaps().size() > 0) {
+				if (mPreffered.getMaps()!=null && mPreffered.getMaps().size() > 0) {
 					if (mMode != MODE_LIST) {
 						setListView();
 					}else{

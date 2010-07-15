@@ -34,7 +34,9 @@
 	<ExpandableListView android:id="@+id/list" android:fadingEdge="none"
 		android:layout_below="@id/actionbar"
 		android:layout_alignParentBottom="true"
+		android:groupIndicator="@drawable/grey_group_indicator"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
 		android:layout_alignWithParentIfMissing="true"		
 		/>
+	<!-- android:groupIndicator="@drawable/grey_group_indicator" -->
 </RelativeLayout>
