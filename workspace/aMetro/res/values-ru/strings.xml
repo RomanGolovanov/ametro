@@ -121,7 +121,9 @@
     <string name="menu_about">О программе</string>
     <string name="menu_experimental">Тестовый режим</string>
     <string name="menu_refresh_list">Обновить список</string>
-    <string name="menu_update_maps">Обновить карты</string>
+    <string name="menu_update_maps">Обновить</string>
+    <string name="menu_import_maps">Импортировать</string>
+    <string name="menu_download_maps">Загрузить</string>
     <string name="menu_location">Где я?</string>
     <string name="menu_import">Импорт</string>
     <string name="menu_download">Загрузить</string>
@@ -213,6 +215,9 @@
     <string name="msg_save_catalog">Подготовка списка карт...</string>
     <string name="msg_download_icons_dialog_title">Флаги Стран</string>
     <string name="msg_download_icons_dialog_content">&lt;p&gt;Загрузить архив флагов стран с сервера?&lt;p/&gt;&lt;p&gt;Архив занимает примерно 260Kb, поэтому мы рекомендуем использовать бесплатную точку доступа Wi-Fi или безлимитный тариф. Вы всегда сможете выполнить загрузку флагов из Настроек программы.&lt;p/&gt;&lt;p&gt;Вы также можете загрузить архив с флагами самостоятельно с нашего сайта:&lt;br/&gt;http://ametro.no-ip.org&lt;p/&gt;</string>
+    <string name="msg_no_maps_to_update">Нет обновлений</string>
+    <string name="msg_no_maps_to_import">Нет карт для импорта</string>
+    <string name="msg_no_maps_to_download">Нет карт для загрузки</string>
     <string name="msg_"/>
     
     <string name="tab_maps_favorited">Избранное</string>

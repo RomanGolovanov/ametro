@@ -36,13 +36,14 @@ public class CatalogMapSelectionActivity extends Activity implements ICatalogSta
 	public static final String EXTRA_SORT_MODE = "EXTRA_SORT_MODE";
 	public static final String EXTRA_SELECTION = "EXTRA_SELECTION";
 
+	public static final int RESULT_MAP_LIST_EMPTY = 999;
+	
 	private CatalogStorage mStorage;
 	private CatalogStorageStateProvider mStorageState;
 
 	private CheckedCatalogAdapter mAdapter;
 	private ListView mList;
 
-	private final int MAIN_MENU_DONE = 1;
 	private final int MAIN_MENU_SELECT_ALL = 2;
 	private final int MAIN_MENU_SELECT_NONE = 3;
 
@@ -70,8 +71,6 @@ public class CatalogMapSelectionActivity extends Activity implements ICatalogSta
 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		int doneText = mRemoteId == CatalogStorage.ONLINE ? R.string.menu_download : R.string.menu_import;
-		menu.add(0, MAIN_MENU_DONE, Menu.NONE, doneText).setIcon( android.R.drawable.ic_menu_add);
 		menu.add(0, MAIN_MENU_SELECT_ALL, 1, R.string.menu_select_all).setIcon(android.R.drawable.ic_menu_agenda);
 		menu.add(0, MAIN_MENU_SELECT_NONE, 2, R.string.menu_select_none).setIcon(android.R.drawable.ic_menu_close_clear_cancel);
 		return true;
@@ -79,9 +78,6 @@ public class CatalogMapSelectionActivity extends Activity implements ICatalogSta
 
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case MAIN_MENU_DONE:
-			invokeFinishWithResult();
-			return true;
 		case MAIN_MENU_SELECT_ALL:
 			setCheckAll();
 			mList.invalidateViews();
@@ -116,7 +112,7 @@ public class CatalogMapSelectionActivity extends Activity implements ICatalogSta
 		
 		ArrayList<CatalogMapPairEx> data = getFilteredData();
 		if(data == null || data.size() == 0){
-			invokeFinish();
+			invokeFinishWithEmptyResult(RESULT_MAP_LIST_EMPTY);
 			return;
 		}
 		mAdapter = new CheckedCatalogAdapter(this, mList, data, mDiffColors, this, mSortMode);
@@ -203,6 +199,11 @@ public class CatalogMapSelectionActivity extends Activity implements ICatalogSta
 
 	protected void invokeFinish() {
 		setResult(RESULT_CANCELED);
+		finish();
+	}
+
+	protected void invokeFinishWithEmptyResult(int result) {
+		setResult(result);
 		finish();
 	}
 

@@ -30,6 +30,7 @@ import org.ametro.catalog.storage.CatalogStorage;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import static org.ametro.catalog.CatalogMapState.CORRUPTED;
 import static org.ametro.catalog.CatalogMapState.DOWNLOAD;
@@ -106,7 +107,7 @@ public class CatalogLocalListActivity extends BaseCatalogActivity {
 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		menu.add(0, MAIN_MENU_UPDATE_MAPS, 4, R.string.menu_update_maps).setIcon(android.R.drawable.ic_menu_add);
+		menu.add(0, MAIN_MENU_UPDATE_MAPS, 4, R.string.menu_update_maps).setIcon(R.drawable.icon_tab_import_selected);
 		return true;
 	}
 
@@ -123,8 +124,8 @@ public class CatalogLocalListActivity extends BaseCatalogActivity {
 			i.putExtra(CatalogMapSelectionActivity.EXTRA_REMOTE_ID, CatalogStorage.ONLINE);
 			i.putExtra(CatalogMapSelectionActivity.EXTRA_FILTER, mActionBarEditText.getText().toString());
 			i.putExtra(CatalogMapSelectionActivity.EXTRA_SORT_MODE, CheckedCatalogAdapter.SORT_MODE_COUNTRY);
-			i.putExtra(CatalogMapSelectionActivity.EXTRA_CHECKABLE_STATES, new int[]{ CatalogMapState.IMPORT, CatalogMapState.UPDATE } );
-			i.putExtra(CatalogMapSelectionActivity.EXTRA_VISIBLE_STATES, new int[]{ CatalogMapState.IMPORT, CatalogMapState.UPDATE } );
+			i.putExtra(CatalogMapSelectionActivity.EXTRA_CHECKABLE_STATES, new int[]{ CatalogMapState.UPDATE, CatalogMapState.NEED_TO_UPDATE } );
+			i.putExtra(CatalogMapSelectionActivity.EXTRA_VISIBLE_STATES, new int[]{ CatalogMapState.UPDATE, CatalogMapState.NEED_TO_UPDATE } );
 			startActivityForResult(i, REQUEST_UPDATE);
 			return true;
 		}
@@ -139,6 +140,9 @@ public class CatalogLocalListActivity extends BaseCatalogActivity {
 				for (String systemName : names) {
 					mStorage.requestDownload(systemName);
 				}
+			}
+			if(resultCode == CatalogMapSelectionActivity.RESULT_MAP_LIST_EMPTY){
+				Toast.makeText(this, R.string.msg_no_maps_to_update, Toast.LENGTH_SHORT).show();
 			}
 			break;
 		}
