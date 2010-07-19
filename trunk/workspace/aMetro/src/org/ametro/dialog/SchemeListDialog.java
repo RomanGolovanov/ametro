@@ -72,6 +72,21 @@ public class SchemeListDialog implements OnClickListener {
 				parent.Children.add(child);
 			}
 		}	
+		if(list.size()==0){
+			for(int i=0;i<len;i++){
+				String systemName = model.viewSystemNames[i];
+				String name = Model.getLocalizedString(model, model.viewNames[i] );
+				long type = model.viewTransportTypes[i];
+				ListItem item = new ListItem();
+				item.Name = name;
+				item.SystemName = systemName;
+				item.Type = type;
+				item.Children = null;
+				
+				list.add(item);
+				
+			}
+		}
 		return list;
 	}
 	
