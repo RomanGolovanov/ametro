@@ -176,6 +176,7 @@ public class StringUtil {
 	}
 
 	public static String toTranslit(String text) {
+		if(text == null) return null;
 		char charBuffer[] = text.toCharArray();
 		StringBuilder sb = new StringBuilder(text.length());
 		for (char symbol : charBuffer) {
