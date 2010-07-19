@@ -29,7 +29,7 @@ import org.ametro.model.MapView;
 import org.ametro.model.Model;
 import org.ametro.model.TransportSegment;
 import org.ametro.model.TransportTransfer;
-import org.ametro.model.util.ModelUtil;
+import org.ametro.util.CollectionUtil;
 
 public class RouteBuilder {
 
@@ -138,12 +138,12 @@ public class RouteBuilder {
 		    TransportRoute route = new TransportRoute();
 		    route.from = from;
 		    route.to = to;
-	    	route.transfers = ModelUtil.toIntArray(transfers);
-	    	route.segments = ModelUtil.toIntArray(segments);
+	    	route.transfers =CollectionUtil.toArray(transfers);
+	    	route.segments = CollectionUtil.toArray(segments);
     		Collections.reverse(stations);
-    		route.stations = ModelUtil.toIntArray(stations);
+    		route.stations = CollectionUtil.toArray(stations);
     		Collections.reverse(delays);
-    		route.delays = ModelUtil.toLongArray(delays);
+    		route.delays = CollectionUtil.toArray(delays);
     		route.length = length;
 	    	 //mStationDelays = stationToDelay;
     		return route;

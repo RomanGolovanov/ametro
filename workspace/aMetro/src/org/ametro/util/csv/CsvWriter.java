@@ -233,7 +233,24 @@ public class CsvWriter {
 			writeString(StringUtil.formatModelSpline(value));
 		} else {
 			writeString(EMPTY_VALUE);
-		}	}
+		}	
+	}
+
+	public void writeLongArray(long[] value) throws IOException{
+		if(value != null){
+			writeString(StringUtil.formatLongArray(value));	
+		}else{
+			writeString(EMPTY_VALUE);
+		}	
+	}
+
+	public void writeBoolArray(boolean[] value) throws IOException{
+		if(value != null){
+			writeString(StringUtil.formatBoolArray(value));	
+		}else{
+			writeString(EMPTY_VALUE);
+		}
+	}
 
 
 }

@@ -23,7 +23,7 @@ package org.ametro.model;
 public class TransportMap {
 
 	public int id;
-	public int typeId;
+	public int transportTypes;
 	
 	public String systemName;
 	public int typeName;

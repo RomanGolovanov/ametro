@@ -20,6 +20,11 @@
  */
 package org.ametro.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import org.ametro.util.CollectionUtil;
+
 public class TransportType {
 
 	public final static int UNKNOWN_RESOURCE_INDEX = 0;
@@ -38,4 +43,86 @@ public class TransportType {
 	public final static int WATER_BUS_ID = 32;
 	public final static int TROLLEYBUS_ID = 64;
 
+	public final static int TRANSPORT_COUNT = 6;
+	
+	private final static String TRANSPORT_TYPE_METRO = "Метро";
+	private final static String TRANSPORT_TYPE_TRAIN = "Электричка";
+	private final static String TRANSPORT_TYPE_TRAM = "Трамвай";
+	private final static String TRANSPORT_TYPE_BUS = "Автобус";
+	private final static String TRANSPORT_TYPE_WATER_BUS = "Речной трамвай";
+	private final static String TRANSPORT_TYPE_TROLLEYBUS = "Троллейбус";
+	
+	private final static HashMap<String, Integer> mIndex;
+	private final static HashMap<String, Integer> mResourceIndex;
+	private final static HashMap<Integer, Integer> mResourceByIdIndex;
+	
+	static {
+		mIndex = new HashMap<String, Integer>();
+		mIndex.put(TRANSPORT_TYPE_METRO, METRO_ID);
+		mIndex.put(TRANSPORT_TYPE_TRAM, TRAM_ID);
+		mIndex.put(TRANSPORT_TYPE_BUS, BUS_ID);
+		mIndex.put(TRANSPORT_TYPE_TRAIN, TRAIN_ID);
+		mIndex.put(TRANSPORT_TYPE_WATER_BUS, WATER_BUS_ID);
+		mIndex.put(TRANSPORT_TYPE_TROLLEYBUS, TROLLEYBUS_ID);
+		
+		mResourceIndex = new HashMap<String, Integer>();
+		mResourceIndex.put(TRANSPORT_TYPE_METRO, METRO_RESOURCE_INDEX);
+		mResourceIndex.put(TRANSPORT_TYPE_TRAM, TRAM_RESOURCE_INDEX);
+		mResourceIndex.put(TRANSPORT_TYPE_BUS, BUS_RESOURCE_INDEX);
+		mResourceIndex.put(TRANSPORT_TYPE_TRAIN, TRAIN_RESOURCE_INDEX);
+		mResourceIndex.put(TRANSPORT_TYPE_WATER_BUS, WATER_BUS_RESOURCE_INDEX);
+		mResourceIndex.put(TRANSPORT_TYPE_TROLLEYBUS, TROLLEYBUS_RESOURCE_INDEX);
+		
+		mResourceByIdIndex = new HashMap<Integer, Integer>();
+		mResourceByIdIndex.put(UNKNOWN_ID, UNKNOWN_RESOURCE_INDEX);
+		mResourceByIdIndex.put(METRO_ID, METRO_RESOURCE_INDEX);
+		mResourceByIdIndex.put(TRAM_ID, TRAM_RESOURCE_INDEX);
+		mResourceByIdIndex.put(BUS_ID, BUS_RESOURCE_INDEX);
+		mResourceByIdIndex.put(TRAIN_ID, TRAIN_RESOURCE_INDEX);
+		mResourceByIdIndex.put(WATER_BUS_ID, WATER_BUS_RESOURCE_INDEX);
+		mResourceByIdIndex.put(TROLLEYBUS_ID, TROLLEYBUS_RESOURCE_INDEX);
+	}
+	
+	public static int getTransportTypeId(String value){
+		Integer id = mIndex.get(value);
+		if(id != null){
+			return id;
+		}
+		return UNKNOWN_ID;	
+	}
+
+	public static int getTransportTypeResource(String value){
+		Integer resId = mResourceIndex.get(value);
+		return resId!=null ? resId : UNKNOWN_RESOURCE_INDEX;
+	}
+
+	public static int getTransportTypeResource(int transportType) {
+		Integer resId = mResourceByIdIndex.get(transportType);
+		return resId!=null ? resId : UNKNOWN_RESOURCE_INDEX;
+	}	
+	
+	public static int[] unpackTransports(long transports){
+		int transportBit = 1;
+		int transportId = 0;
+		ArrayList<Integer> list = new ArrayList<Integer>();  
+		while(transports>0){
+			if((transports % 2)>0){
+				list.add(transportId);
+			}
+			transports = transports >> 1;
+			transportBit = transportBit << 1;
+			transportId++;
+		}
+		return CollectionUtil.toArray(list);
+		
+	}
+
+	public static long packTransports(int[] transports){
+		long val = 0;
+		for(int transportId : transports){
+			val |= transportId;
+		}
+		return val;
+	}
+	
 }

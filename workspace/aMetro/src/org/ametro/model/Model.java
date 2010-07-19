@@ -66,7 +66,10 @@ public class Model {
 	public TransportStation[] stations;
 	public TransportStationInfo[] stationInfos;
 
-	public String[] viewNames;
+	public String[] viewSystemNames;
+	public int[] viewNames;
+	public long[] viewTransportTypes;
+	public boolean[] viewIsMain;
 	public MapView[] views;
 
 	public String[] layerNames;
@@ -259,7 +262,7 @@ public class Model {
 	public Integer getViewId(String viewName) {
 		final int len = views.length;
 		for(int i=0;i<len;i++){
-			if(viewNames[i].equals(viewName)){
+			if(viewSystemNames[i].equals(viewName)){
 				return i;
 			}
 		}

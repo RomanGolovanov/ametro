@@ -242,7 +242,7 @@ public class StringUtil {
 
 	public static boolean parseBoolean(String value, boolean defaultValue) {
 		return value != null
-		? "true".equalsIgnoreCase(value.trim()) || parseInt(value, 0) > 0
+		? "true".equalsIgnoreCase(value.trim()) || "yes".equalsIgnoreCase(value.trim()) || parseInt(value, 0) > 0
 				: defaultValue;
 	}
 
@@ -351,6 +351,23 @@ public class StringUtil {
 		for (int i = 0; i < len; i++) {
 			try {
 				r[i] = Integer.parseInt(parts[i]);
+			} catch (NumberFormatException e) {
+				r[i] = -1;
+			}
+		}
+		return r;
+	}
+	
+	public static long[] parseLongArray(String text) {
+		final String[] parts = fastSplit(text);
+		if(parts==null){
+			return new long[0];
+		}		
+		final int len = parts.length;
+		final long[] r = new long[len];
+		for (int i = 0; i < len; i++) {
+			try {
+				r[i] = Long.parseLong(parts[i]);
 			} catch (NumberFormatException e) {
 				r[i] = -1;
 			}
@@ -562,6 +579,18 @@ public class StringUtil {
 		return sb.toString();	
 	}
 
+	public static String formatLongArray(long[] value) {
+		StringBuffer sb = new StringBuffer(value.length * 3 * 3);
+		for(long i : value){
+			sb.append(i);
+			sb.append(",");
+		}
+		if(sb.length()>0){
+			sb.deleteCharAt(sb.length()-1);
+		}
+		return sb.toString();	
+	}
+
 	public static String formatIntegerArray(Integer[] value) {
 		StringBuffer sb = new StringBuffer(value.length * 3 * 3);
 		for(Integer i : value){
@@ -647,5 +676,35 @@ public class StringUtil {
 	     }
 	     return fmt.format(size).concat(" bytes");
 	  }
+
+	public static boolean[] parseBoolArray(String text) {
+		final String[] parts = fastSplit(text);
+		if(parts==null){
+			return new boolean[0];
+		}		
+		final int len = parts.length;
+		final boolean[] r = new boolean[len];
+		for (int i = 0; i < len; i++) {
+			try {
+				r[i] = Boolean.parseBoolean(parts[i]);
+			} catch (NumberFormatException e) {
+				r[i] = false;
+			}
+		}
+		return r;
+	}
+
+	public static String formatBoolArray(boolean[] value) {
+		StringBuffer sb = new StringBuffer(value.length * 3 * 3);
+		for(boolean i : value){
+			sb.append(i);
+			sb.append(",");
+		}
+		if(sb.length()>0){
+			sb.deleteCharAt(sb.length()-1);
+		}
+		return sb.toString();	
+	}
+
 	
 }

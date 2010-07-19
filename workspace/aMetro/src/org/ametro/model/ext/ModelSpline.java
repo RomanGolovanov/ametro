@@ -25,6 +25,6 @@ public class ModelSpline {
 	public ModelPoint[] points;
 	
 	public boolean isZero() {
-		return points==null || ModelPoint.isNullOrZero(points[0]);
+		return points==null || points.length == 0 || ModelPoint.isNullOrZero(points[0]);
 	}
 }

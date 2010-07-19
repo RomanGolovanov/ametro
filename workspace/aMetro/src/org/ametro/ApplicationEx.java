@@ -24,6 +24,8 @@ import org.ametro.catalog.storage.CatalogStorage;
 import org.ametro.directory.CityDirectory;
 import org.ametro.directory.CountryDirectory;
 import org.ametro.directory.ImportDirectory;
+import org.ametro.directory.ImportMapDirectory;
+import org.ametro.directory.ImportTransportDirectory;
 import org.ametro.directory.StationDirectory;
 import org.ametro.jni.Natives;
 import org.ametro.service.CatalogService;
@@ -70,6 +72,28 @@ public class ApplicationEx extends Application {
 		return mCityDirectory;
 	}
 
+	public ImportTransportDirectory getImportTransportDirectory() {
+		if (mImportTransportDirectory == null) {
+			synchronized (ApplicationEx.class) {
+				if (mImportTransportDirectory == null) {
+					mImportTransportDirectory = new ImportTransportDirectory(this);
+				}
+			}
+		}
+		return mImportTransportDirectory;
+	}
+	
+	public ImportMapDirectory getImportMapDirectory() {
+		if (mImportMapDirectory == null) {
+			synchronized (ApplicationEx.class) {
+				if (mImportMapDirectory == null) {
+					mImportMapDirectory = new ImportMapDirectory(this);
+				}
+			}
+		}
+		return mImportMapDirectory;
+	}
+	
 	public ImportDirectory getImportDirectory() {
 		if (mImportDirectory == null) {
 			synchronized (ApplicationEx.class) {
@@ -171,7 +195,10 @@ public class ApplicationEx extends Application {
 	private CatalogStorage mStorage;
 
 	private ImportDirectory mImportDirectory;
+	private ImportMapDirectory mImportMapDirectory;
+	private ImportTransportDirectory mImportTransportDirectory;
 	private CityDirectory mCityDirectory;
 	private CountryDirectory mCountryDirectory;
+	
 	
 }

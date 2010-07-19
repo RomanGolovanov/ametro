@@ -37,7 +37,11 @@ import org.ametro.directory.CatalogMapSuggestion;
 import org.ametro.directory.CityDirectory;
 import org.ametro.directory.CityStationDictionary;
 import org.ametro.directory.CountryDirectory;
+import org.ametro.directory.ImportMapDirectory;
+import org.ametro.directory.ImportTransportDirectory;
 import org.ametro.directory.StationDirectory;
+import org.ametro.directory.ImportMapDirectory.ImportMapEntity;
+import org.ametro.directory.ImportTransportDirectory.TransportMapEntity;
 import org.ametro.model.LineView;
 import org.ametro.model.MapLayerContainer;
 import org.ametro.model.MapView;
@@ -58,19 +62,12 @@ import org.ametro.model.ext.ModelRect;
 import org.ametro.model.ext.ModelSpline;
 import org.ametro.model.util.IniStreamReader;
 import org.ametro.model.util.ModelUtil;
+import org.ametro.util.CollectionUtil;
 import org.ametro.util.StringUtil;
-
 
 public class PmzStorage implements IModelStorage {
 
 	private static final int DEFAULT_LINE_BACKGOUND_COLOR = 0xFFFFFFFF; 
-	
-	private static final String TRANSPORT_TYPE_METRO = "Метро";
-	private static final String TRANSPORT_TYPE_TRAIN = "Электричка";
-	private static final String TRANSPORT_TYPE_TRAM = "Трамвай";
-	private static final String TRANSPORT_TYPE_BUS = "Автобус";
-	private static final String TRANSPORT_TYPE_WATER_BUS = "Речной трамвай";
-	private static final String TRANSPORT_TYPE_TROLLEYBUS = "Троллейбус";
 	
 	private static final String ENCODING = "windows-1251";
 
@@ -131,7 +128,7 @@ public class PmzStorage implements IModelStorage {
 		private ArrayList<TransportTransfer> mTransportTransfers = new ArrayList<TransportTransfer>();
 
 		private ArrayList<MapView> mMapViews = new ArrayList<MapView>();
-		private ArrayList<String> mMapViewNames = new ArrayList<String>();
+		private ArrayList<String> mMapViewSystemNames = new ArrayList<String>();
 
 		private ArrayList<MapLayerContainer> mMapLayers = new ArrayList<MapLayerContainer>();
 		private ArrayList<String> mMapLayerNames = new ArrayList<String>();
@@ -140,11 +137,14 @@ public class PmzStorage implements IModelStorage {
 		private HashMap<String,TransportLine> mTransportLineIndex = new HashMap<String, TransportLine>();
 		private HashMap<String,TransportMap> mTransportMapIndex = new HashMap<String, TransportMap>();
 
-		private ArrayList<String> mTexts = new ArrayList<String>();
+		private ArrayList<String> mTextsOriginal = new ArrayList<String>();
+		private ArrayList<String> mTextsTranslit = new ArrayList<String>();
 
 		private HashMap<Integer, StationInfo> mStationInfo = new HashMap<Integer, StationInfo>();
 		
-		private StationDirectory mStationLibrary;
+		private StationDirectory mStationDirectory;
+		private ImportMapDirectory mImportMapDirectory;
+		private ImportTransportDirectory mImportTransportDirectory;
 
 		private int[] getMapsNumbers(String[] maps) {
 			ArrayList<Integer> res = new ArrayList<Integer>();
@@ -154,7 +154,7 @@ public class PmzStorage implements IModelStorage {
 					res.add(map.id);
 				}
 			}
-			return ModelUtil.toIntArray(res);
+			return CollectionUtil.toArray(res);
 		}
 
 		private TransportStation getStation(String lineSystemName, String stationSystemName)
@@ -172,30 +172,41 @@ public class PmzStorage implements IModelStorage {
 			}
 		}
 
-		private int[] appendTextArray(String[] txt){
-			if(txt == null) return null;
-			final int len = txt.length;
+		private int[] appendTextArray(String[] texts){
+			if(texts == null) return null;
+			final int len = texts.length;
 			int[] r = new int[len];
-			int base = mTexts.size();
+			int base = mTextsOriginal.size();
 			for(int i = 0; i < len; i++){
 				r[i] = base + i;
-				mTexts.add(txt[i]);
+				String txt = texts[i];
+				mTextsOriginal.add(txt);
+				mTextsTranslit.add(StringUtil.toTranslit(txt));
 			}
 			return r;
 		}
 
 		private int appendLocalizedText(String txt){
-			int pos = mTexts.size();
-			mTexts.add(txt);
+			int pos = mTextsOriginal.size();
+			mTextsOriginal.add(txt);
+			mTextsTranslit.add(StringUtil.toTranslit(txt));
 			return pos;
 		}
 
+		private int appendLocalizedText(String en, String ru) {
+			int pos = mTextsOriginal.size();
+			mTextsTranslit.add(en);
+			mTextsOriginal.add(ru);
+			return pos;
+		}
+		
 		public PmzImporter(String fileName, boolean descriptionOnly){
 			mFile = new File(fileName);
 			mModel = null;
 			mDescriptionOnly = descriptionOnly;
-			mStationLibrary = ApplicationEx.getInstance().getStationDirectory();
-			
+			mStationDirectory = ApplicationEx.getInstance().getStationDirectory();
+			mImportMapDirectory = ApplicationEx.getInstance().getImportMapDirectory();
+			mImportTransportDirectory = ApplicationEx.getInstance().getImportTransportDirectory();
 		}
 
 		public void execute() throws IOException{
@@ -342,7 +353,7 @@ public class PmzStorage implements IModelStorage {
 				view.isVector = true;
 				view.owner = model;
 				mMapViews.add(view);
-				mMapViewNames.add(view.systemName);
+				mMapViewSystemNames.add(view.systemName);
 
 				TransportLine line = null;
 				LineView lineView = null;
@@ -445,6 +456,17 @@ public class PmzStorage implements IModelStorage {
 				view.segments = makeSegmentViews(view, lineViewIndex, stationViews, additionalNodes);
 				view.transfers = makeTransferViews(view, stationViews);
 
+				ImportMapEntity entity = mImportMapDirectory.get(mFile.getName(), view.systemName);
+				if(entity!=null){
+					view.transportTypes = entity.getTransportType();
+					view.name = appendLocalizedText(entity.getName(Model.LOCALE_EN), entity.getName(Model.LOCALE_RU));
+					view.isMain = entity.isMain();
+				}else{
+					view.transportTypes = 0;
+					view.name = appendLocalizedText(view.systemName);
+					view.isMain = false;
+				}
+				
 				fixViewDimensions(view);
 			}
 
@@ -668,45 +690,28 @@ public class PmzStorage implements IModelStorage {
 						// do nothing at this time
 					}else if (section.equalsIgnoreCase("Options")){
 						if(key.equalsIgnoreCase("Type")){
-							if(TRANSPORT_TYPE_METRO.equalsIgnoreCase(value)){
-								map.typeName = TransportType.METRO_RESOURCE_INDEX;
-								map.typeId = TransportType.METRO_ID;
-							}else if(TRANSPORT_TYPE_TRAM.equalsIgnoreCase(value)){
-								map.typeName = TransportType.TRAM_RESOURCE_INDEX;
-								map.typeId = TransportType.TRAM_ID;
-							}else if(TRANSPORT_TYPE_BUS.equalsIgnoreCase(value)){
-								map.typeName = TransportType.BUS_RESOURCE_INDEX;
-								map.typeId = TransportType.BUS_ID;
-							}else if(TRANSPORT_TYPE_TRAIN.equalsIgnoreCase(value)){
-								map.typeName = TransportType.TRAIN_RESOURCE_INDEX;
-								map.typeId = TransportType.TRAIN_ID;
-							}else if(TRANSPORT_TYPE_WATER_BUS.equalsIgnoreCase(value)){
-								map.typeName = TransportType.WATER_BUS_RESOURCE_INDEX;
-								map.typeId = TransportType.WATER_BUS_ID;
-							}else if(TRANSPORT_TYPE_TROLLEYBUS.equalsIgnoreCase(value)){
-								map.typeName = TransportType.TROLLEYBUS_RESOURCE_INDEX;
-								map.typeId = TransportType.TROLLEYBUS_ID;
-							}else{
-								map.typeName = TransportType.UNKNOWN_RESOURCE_INDEX;
-								map.typeId = TransportType.UNKNOWN_ID;
-							}
+							map.typeName = TransportType.getTransportTypeResource(value);
+							map.transportTypes = TransportType.getTransportTypeId(value);
 						}
 					}
 				}
-				
 				if(map.typeName == 0){
-					map.typeName = TransportType.UNKNOWN_RESOURCE_INDEX;
-					map.typeId = TransportType.UNKNOWN_ID;
+					TransportMapEntity entity = mImportTransportDirectory.get(mFile.getName(), map.systemName);
+					if(entity!=null){
+						int transportType = entity.getTransportType();
+						map.transportTypes = transportType;
+						map.typeName = TransportType.getTransportTypeResource(transportType);
+					}else{
+						map.typeName = TransportType.UNKNOWN_RESOURCE_INDEX;
+						map.transportTypes = TransportType.UNKNOWN_ID;
+					}
 				}
-				
 				if(line!=null){ // if end of line 
 					makeLineObjects(line, stationList, drivingList, aliasesList); // make station and segments
 				}
-
 			}
 		}
-
-
+		
 		private void importCityFile() throws IOException {
 			String city = null;
 			String country = null;
@@ -738,7 +743,7 @@ public class PmzStorage implements IModelStorage {
 			m.authors = appendTextArray((String[]) authors.toArray(new String[authors.size()]));
 			m.comments = appendTextArray((String[]) comments.toArray(new String[comments.size()]));
 			m.delays = appendTextArray(delays);
-			m.textLengthDescription = mTexts.size();
+			m.textLengthDescription = mTextsOriginal.size();
 		}
 
 
@@ -752,22 +757,23 @@ public class PmzStorage implements IModelStorage {
 			model.transfers = (TransportTransfer[]) mTransportTransfers.toArray(new TransportTransfer[mTransportTransfers.size()]);
 
 			model.views = (MapView[]) mMapViews.toArray(new MapView[mMapViews.size()]);
-			model.viewNames = (String[]) mMapViewNames.toArray(new String[mMapViewNames.size()]);
+			model.viewSystemNames = (String[]) mMapViewSystemNames.toArray(new String[mMapViewSystemNames.size()]);
 
 			model.layers = (MapLayerContainer[]) mMapLayers.toArray(new MapLayerContainer[mMapLayers.size()]);
 			model.layerNames = (String[]) mMapLayerNames.toArray(new String[mMapLayerNames.size()]);
 
-			model.systemName = mFile.getName();
+			model.systemName = mFile.getName().toLowerCase();
 
 			model.fileSystemName = mFile.getAbsolutePath();
 			model.timestamp = mFile.lastModified();
 
 
-			makeTransportTypes();
-			makeGlobalization();
+			makeTransportTypes(model);
+			makeGlobalization(model);
+			makeModelViewArrays(model);
 
 			if(!mDescriptionOnly){
-				CityStationDictionary lib = mStationLibrary.get(mFile);
+				CityStationDictionary lib = mStationDirectory.get(mFile);
 				if(lib!=null){
 					for(TransportStation station : model.stations){
 						String lineSystemName = model.lines[station.lineId].systemName;
@@ -781,39 +787,58 @@ public class PmzStorage implements IModelStorage {
 			}
 		}
 
-		private void makeTransportTypes() {
-			final Model model = mModel;
+		private void makeTransportTypes(final Model model) {
 			long transports = 0;
-			HashMap<TransportMap,Long> transportIndex = new HashMap<TransportMap, Long>();
+			final HashMap<TransportMap,Long> transportIndex = new HashMap<TransportMap, Long>();
 			for(TransportMap map : model.maps){
-				long typeId = map.typeId;
+				long typeId = map.transportTypes;
 				transports |= typeId;
 				transportIndex.put(map, typeId);
 				
 			}
 			model.transportTypes = transports;
-			
 			for(MapView view : model.views){
-				if(view.transports!=null){
-					transports = 0;
-					for(int mapId : view.transports){
-						final TransportMap map = model.maps[mapId];
-						final Long transportType = transportIndex.get(map);
-						if(map!=null){
-							transports |= transportType;
-						}
-					}
-					view.transportTypes = transports;
+				if(view.transportTypes == 0){
+					view.transportTypes = extractViewTransportType(model, transportIndex, view);
 				}
 			}
 		}
 
-		private void makeGlobalization() {
+		private void makeModelViewArrays(final Model model) {
+			final int len = model.views.length;
+			model.viewNames = new int[len];
+			model.viewIsMain = new boolean[len];
+			model.viewTransportTypes = new long[len];
+			for(int i=0; i<len; i++){
+				final MapView view = model.views[i];
+				model.viewNames[i] = view.name;
+				model.viewIsMain[i] = view.isMain;
+				model.viewTransportTypes[i] = view.transportTypes;
+			}
+		}
+
+		private long extractViewTransportType(final Model model, final HashMap<TransportMap, Long> transportIndex, MapView view){
+			if(view.transports!=null){
+				long transports = 0;
+				for(int mapId : view.transports){
+					final TransportMap map = model.maps[mapId];
+					final Long transportType = transportIndex.get(map);
+					if(map!=null){
+						transports |= transportType;
+					}
+				}
+				return transports;
+			}else{
+				return TransportType.UNKNOWN_ID;
+			}			
+		}
+		
+		private void makeGlobalization(final Model model) {
 			// prepare 
 			final ArrayList<String> localeList = new ArrayList<String>();
 			final ArrayList<String[]> textList = new ArrayList<String[]>();
-			final String[] originalTexts = mTexts.toArray(new String[mTexts.size()]);
-			final String originalLocale = determineLocale(originalTexts);
+			final String[] originalTexts = mTextsOriginal.toArray(new String[mTextsOriginal.size()]);
+			final String[] translitTexts = mTextsTranslit.toArray(new String[mTextsTranslit.size()]);
 
 			// locate country info
 			final String countryName = originalTexts[mModel.countryName];
@@ -823,24 +848,12 @@ public class PmzStorage implements IModelStorage {
 			CityDirectory.Entity cityEntity = suggestion.getCity();
 			CountryDirectory.Entity countryEntity = suggestion.getCountry();
 			
-			// make localization
-			if(originalLocale.equals(Model.LOCALE_RU)){
-				localeList.add(Model.LOCALE_EN);
-				textList.add(makeTransliteText(originalTexts, true));
-				localeList.add(originalLocale);
-				textList.add(originalTexts);
-			}
-			if(originalLocale.equals(Model.LOCALE_EN)){
-				// localize description fields
-				localeList.add(originalLocale);
-				textList.add(makeTransliteText(originalTexts, true));
-				localeList.add(Model.LOCALE_RU);
-				textList.add(originalTexts);
-			}
-
+			localeList.add(Model.LOCALE_EN);
+			textList.add(translitTexts);
+			localeList.add(Model.LOCALE_RU);
+			textList.add(originalTexts);
 			
 			// setup model
-			final Model model = mModel;
 			model.location = cityEntity!=null ? cityEntity.getLocation() : null;
 			model.locales = (String[]) localeList.toArray(new String[localeList.size()]);
 			model.localeTexts = (String[][]) textList.toArray(new String[textList.size()][]);
@@ -859,36 +872,6 @@ public class PmzStorage implements IModelStorage {
 					model.localeTexts[i][model.countryName] = countryEntity.getName(code);
 				}
 			}
-
-		}
-
-		private String[] makeTransliteText(final String[] originalTexts, boolean transliterate) { 
-			final int len = originalTexts.length;
-			final String[] translitTexts = new String[len];
-			for(int i=0; i<len; i++){
-				if(translitTexts[i] == null){
-					translitTexts[i] = transliterate ?  StringUtil.toTranslit(originalTexts[i]) : originalTexts[i];
-				}
-			}
-			return translitTexts;
-		}
-
-		private String determineLocale(String[] originalTexts) {
-			int low = 0;
-			int high = 0;
-			for(String txt : originalTexts){
-				final int len = txt.length();
-				for(int i = 0; i<len; i++){
-					char ch = txt.charAt(i);
-					if( ch >= 128 ){
-						high++;
-					}else{
-						low++;
-					}
-				}
-			}
-			String originalLocale = low>high ? Model.LOCALE_EN : Model.LOCALE_RU;
-			return originalLocale;
 		}
 
 		private void makeLineObjects(TransportLine line, String stationList, String drivingList, String aliasesList) {
