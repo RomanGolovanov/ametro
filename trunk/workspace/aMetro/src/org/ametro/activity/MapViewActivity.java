@@ -36,6 +36,7 @@ import org.ametro.Constants;
 import org.ametro.MapUri;
 import org.ametro.R;
 import org.ametro.dialog.LocationSearchDialog;
+import org.ametro.dialog.SchemeListDialog;
 import org.ametro.model.MapView;
 import org.ametro.model.Model;
 import org.ametro.model.SegmentView;
@@ -54,9 +55,7 @@ import org.ametro.widget.VectorMapView;
 import org.ametro.widget.BaseMapView.OnMapEventListener;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Point;
@@ -82,6 +81,7 @@ import android.widget.ZoomControls;
 
 public class MapViewActivity extends Activity implements OnClickListener {
 
+	
 
 	public void onClick(View src) {
 		if(src == mNavigatePreviousButton){
@@ -242,26 +242,13 @@ public class MapViewActivity extends Activity implements OnClickListener {
 		case MAIN_MENU_LAYERS:
 			return true;
 		case MAIN_MENU_SCHEMES:
-
-			int checked = 0;
-			int idx = 0;
-			for(String v : mModel.viewSystemNames){
-				if(mMapView.systemName.equals(v)){
-					checked = idx;
+			SchemeListDialog dialog = new SchemeListDialog(this, mModel, getMapView()){
+				public void onMapViewSelected(String mapViewSystemName) {
+					onInitializeMapView(mModelName, mapViewSystemName);
+					super.onMapViewSelected(mapViewSystemName);
 				}
-				idx++;
-			}
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setTitle(R.string.msg_select_scheme);
-			builder.setSingleChoiceItems(mModel.viewSystemNames, checked, new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int item) {
-					onInitializeMapView(mModelName, mModel.viewSystemNames[item]);
-					dialog.dismiss();
-				}
-			});			
-			AlertDialog alertDialog = builder.create();
-			alertDialog.show();
-
+			};
+			dialog.show();
 			return true;
 		case MAIN_MENU_INFO:
 			if(mCurrentStation!=null){
