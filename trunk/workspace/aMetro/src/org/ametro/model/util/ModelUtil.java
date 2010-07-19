@@ -20,10 +20,6 @@
  */
 package org.ametro.model.util;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-
 import org.ametro.model.StationView;
 import org.ametro.model.ext.ModelPoint;
 import org.ametro.model.ext.ModelRect;
@@ -153,22 +149,6 @@ public class ModelUtil {
 		}
 	}
 
-	public 	static int[] toIntArray(List<Integer> src) {
-		int[] res = new int[src.size()];
-		for (int i = 0; i < src.size(); i++) {
-			res[i] = src.get(i);
-		}
-		return res;
-	}
-
-	public static long[] toLongArray(ArrayList<Long> src) {
-		long[] res = new long[src.size()];
-		for (int i = 0; i < src.size(); i++) {
-			res[i] = src.get(i);
-		}
-		return res;
-	}
-	
 	public static ModelRect getDimensions(StationView stations[]) {
 		int xmin = Integer.MAX_VALUE;
 		int ymin = Integer.MAX_VALUE;
@@ -220,13 +200,5 @@ public class ModelUtil {
 		return new Point(p.x,p.y);
 	}
 
-	public static HashSet<Integer> toIntHashSet(int[] transportsChecked) {
-		final int len = transportsChecked.length;
-		final HashSet<Integer> res = new HashSet<Integer>(len);
-		for(int i=0; i<len; i++){
-			res.add(transportsChecked[i]);
-		}
-		return res;
-	}
 
 }

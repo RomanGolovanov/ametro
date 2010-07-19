@@ -245,7 +245,7 @@ public class MapViewActivity extends Activity implements OnClickListener {
 
 			int checked = 0;
 			int idx = 0;
-			for(String v : mModel.viewNames){
+			for(String v : mModel.viewSystemNames){
 				if(mMapView.systemName.equals(v)){
 					checked = idx;
 				}
@@ -253,9 +253,9 @@ public class MapViewActivity extends Activity implements OnClickListener {
 			}
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setTitle(R.string.msg_select_scheme);
-			builder.setSingleChoiceItems(mModel.viewNames, checked, new DialogInterface.OnClickListener() {
+			builder.setSingleChoiceItems(mModel.viewSystemNames, checked, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int item) {
-					onInitializeMapView(mModelName, mModel.viewNames[item]);
+					onInitializeMapView(mModelName, mModel.viewSystemNames[item]);
 					dialog.dismiss();
 				}
 			});			
@@ -949,7 +949,7 @@ public class MapViewActivity extends Activity implements OnClickListener {
 					if(mViewName!=null){
 						m.loadView(mViewName);
 					}else{
-						mViewName = m.viewNames[0];
+						mViewName = m.viewSystemNames[0];
 					}
 				}
 				return m;

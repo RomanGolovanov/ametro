@@ -312,6 +312,19 @@ public class CsvReader {
 		}
 	}
 
+	public long[] readLongArray() {
+		String value = getValue(mRecord, mCurrentColumn++, mTotalColumns);
+		if (!EMPTY_VALUE.equals(value)) {
+			if(value == null){
+				return new long[0];
+			}
+			return StringUtil.parseLongArray(value);
+		} else {
+			return null;
+		}
+	}
+
+	
 	public Integer[] readIntegerArray() {
 		String value = getValue(mRecord, mCurrentColumn++, mTotalColumns);
 		if (!EMPTY_VALUE.equals(value)) {
@@ -324,6 +337,18 @@ public class CsvReader {
 		}
 	}
 
+	public boolean[] readBoolArray() {
+		String value = getValue(mRecord, mCurrentColumn++, mTotalColumns);
+		if (!EMPTY_VALUE.equals(value)) {
+			if(value == null){
+				return new boolean[0];
+			}
+			return StringUtil.parseBoolArray(value);
+		} else {
+			return null;
+		}
+	}
+	
 	public Integer readInteger() {
 		String value = getValue(mRecord, mCurrentColumn++, mTotalColumns);
 		if (!EMPTY_VALUE.equals(value)) {

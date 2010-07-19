@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import org.ametro.R;
-import org.ametro.model.util.ModelUtil;
+import org.ametro.util.CollectionUtil;
 
 import android.content.Context;
 
@@ -33,6 +33,8 @@ public class MapView {
 
 	public int id;
 	public String systemName;
+	public int name;
+	public boolean isMain;
 	
 	public long transportTypes;
 
@@ -234,7 +236,7 @@ public class MapView {
 					lst.add(maps[i].id);
 				}
 			}
-			return ModelUtil.toIntArray(lst);
+			return CollectionUtil.toArray(lst);
 		}
 		
 		public TransportCollection(TransportCollection src){
@@ -244,7 +246,7 @@ public class MapView {
 		}
 		
 		public TransportCollection(MapView view, Context context) {
-			final HashSet<Integer> checkedSet = ModelUtil.toIntHashSet(view.getCheckedTransports());
+			final HashSet<Integer> checkedSet = CollectionUtil.toHashSet(view.getCheckedTransports());
 			final String[] transportNames = context.getResources().getStringArray(R.array.transport_types);
 			final int[] transports = view.getTransports();
 			final int len = transports.length;

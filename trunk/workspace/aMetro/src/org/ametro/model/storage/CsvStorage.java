@@ -171,10 +171,10 @@ public class CsvStorage implements IModelStorage {
 				}
 			}
 
-			len = model.viewNames.length;
+			len = model.viewSystemNames.length;
 			model.views = new MapView[len];
 			for(int i = 0; i < len; i++){
-				String viewName = model.viewNames[i];
+				String viewName = model.viewSystemNames[i];
 				model.views[i] = views.get(viewName);
 			}
 
@@ -205,6 +205,8 @@ public class CsvStorage implements IModelStorage {
 		reader.next();
 		view.id = reader.readInt();
 		view.systemName = reader.readString();
+		view.name = reader.readInt();
+		view.isMain =reader.readBoolean();
 		view.transportTypes = reader.readLong();
 		view.width = reader.readInt();
 		view.height = reader.readInt();
@@ -336,19 +338,6 @@ public class CsvStorage implements IModelStorage {
 			obj.name = reader.readInt();
 			obj.systemName = reader.readString();
 			obj.location = reader.readModelLocation();
-
-//			int[] captions = reader.readIntArray();
-//			if(captions!=null){
-//				final int len = captions.length;
-//				TransportStationInfo inf = new TransportStationInfo();
-//				inf.id = obj.id;
-//				inf.captions = captions;
-//				inf.owner = model;
-//				inf.lines = new int[len][];
-//				for(int i = 0; i < len; i++){
-//					inf.lines[i] = reader.readIntArray();
-//				}
-//			}
 			
 			obj.owner = model;
 			lst.add(obj);
@@ -381,7 +370,7 @@ public class CsvStorage implements IModelStorage {
 		while(reader.next()){
 			TransportMap obj = new TransportMap();
 			obj.id = reader.readInt();
-			obj.typeId = reader.readInt();
+			obj.transportTypes = reader.readInt();
 			obj.systemName = reader.readString();
 			obj.typeName = reader.readInt();
 			obj.owner = model;
@@ -415,7 +404,11 @@ public class CsvStorage implements IModelStorage {
 		model.authors = reader.readIntArray();
 		model.comments = reader.readIntArray();
 		model.delays = reader.readIntArray();
-		model.viewNames = reader.readStringArray();
+		model.viewSystemNames = reader.readStringArray();
+		model.viewNames = reader.readIntArray();
+		model.viewTransportTypes = reader.readLongArray();
+		model.viewIsMain = reader.readBoolArray();
+		
 		model.layerNames = reader.readStringArray();
 	}
 
@@ -438,7 +431,12 @@ public class CsvStorage implements IModelStorage {
 		writer.writeIntArray(model.authors);
 		writer.writeIntArray(model.comments);
 		writer.writeIntArray(model.delays);
-		writer.writeStringArray(model.viewNames);
+		
+		writer.writeStringArray(model.viewSystemNames);
+		writer.writeIntArray(model.viewNames);
+		writer.writeLongArray(model.viewTransportTypes);
+		writer.writeBoolArray(model.viewIsMain);
+		
 		writer.writeStringArray(model.layerNames);
 		writer.newRecord();
 
@@ -476,6 +474,8 @@ public class CsvStorage implements IModelStorage {
 
 			writer.writeInt(obj.id);
 			writer.writeString(obj.systemName);
+			writer.writeInt(obj.name);
+			writer.writeBoolean(obj.isMain);
 			writer.writeLong(obj.transportTypes);
 			writer.writeInt(obj.width);
 			writer.writeInt(obj.height);
@@ -539,7 +539,7 @@ public class CsvStorage implements IModelStorage {
 		zip.putNextEntry(zipEntry);
 		for(TransportMap obj : model.maps){
 			writer.writeInt(obj.id);
-			writer.writeInt(obj.typeId);
+			writer.writeInt(obj.transportTypes);
 			writer.writeString(obj.systemName);
 			writer.writeInt(obj.typeName);
 			writer.newRecord();
@@ -575,17 +575,6 @@ public class CsvStorage implements IModelStorage {
 			writer.writeInt(obj.name);
 			writer.writeString(obj.systemName);
 			writer.writeModelLocation(obj.location);
-			
-//			TransportStationInfo inf = model.stationInfos[obj.id];
-//			if(inf!=null){
-//				writer.writeIntArray(inf.captions);
-//				for(int[] section : inf.lines){
-//					writer.writeIntArray(section);
-//				}
-//			}else{
-//				writer.writeIntArray(null);
-//			}
-			
 			writer.newRecord();
 		}
 		writer.flush();
