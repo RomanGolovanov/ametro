@@ -713,8 +713,9 @@ public class PmzStorage implements IModelStorage {
 		}
 		
 		private void importCityFile() throws IOException {
-			String city = null;
+			String cityNameRus = null;
 			String country = null;
+			String cityNameEng = null;
 			final ArrayList<String> authors = new ArrayList<String>();
 			final ArrayList<String> comments = new ArrayList<String>();
 			String[] delays = null;
@@ -725,7 +726,9 @@ public class PmzStorage implements IModelStorage {
 				final String key = ini.getKey();
 				final String value = ini.getValue();
 				if(key.equalsIgnoreCase("RusName")){
-					city = value;
+					cityNameRus = value;
+				}else if(key.equalsIgnoreCase("CityName")){
+					cityNameEng = value;
 				}else if(key.equalsIgnoreCase("Country")){
 					country = value;
 				}else if(key.equalsIgnoreCase("MapAuthors")){
@@ -738,7 +741,7 @@ public class PmzStorage implements IModelStorage {
 			}
 			final Model m = mModel;
 			m.systemName = mFile.getName().toLowerCase() + ".ametro";
-			m.cityName = appendLocalizedText(city);
+			m.cityName = appendLocalizedText(cityNameRus!=null ? cityNameRus : cityNameEng);
 			m.countryName = appendLocalizedText(country);
 			m.authors = appendTextArray((String[]) authors.toArray(new String[authors.size()]));
 			m.comments = appendTextArray((String[]) comments.toArray(new String[comments.size()]));

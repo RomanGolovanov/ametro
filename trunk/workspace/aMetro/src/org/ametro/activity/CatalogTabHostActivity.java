@@ -45,7 +45,6 @@ public class CatalogTabHostActivity extends TabActivity {
 		mInstance = this;
 		final TabHost tabHost = getTabHost();
 		final Resources res = getResources();
-
 		tabHost.addTab(tabHost.newTabSpec(TAB_LOCAL)
 				.setIndicator(res.getString(R.string.tab_maps_local), res.getDrawable(R.drawable.icon_tab_maps))
 				.setContent(new Intent(this, CatalogLocalListActivity.class)));
