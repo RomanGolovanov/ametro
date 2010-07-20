@@ -41,6 +41,7 @@ public class RouteParameters implements Parcelable {
 	/*package*/ int[] exclude;
 
 	/*package*/ int flags;
+	/*package*/ int delay;
 
 	/*package*/ int[] transports;
 	
@@ -53,6 +54,7 @@ public class RouteParameters implements Parcelable {
 		dest.writeInt(this.from);
 		dest.writeInt(this.to);
 		dest.writeInt(this.flags);
+		dest.writeInt(this.delay);
 		dest.writeInt(this.include.length);
 		dest.writeIntArray(this.include);
 		dest.writeInt(this.exclude.length);
@@ -66,6 +68,7 @@ public class RouteParameters implements Parcelable {
 		from = in.readInt();
 		to = in.readInt();
 		flags = in.readInt();
+		delay = in.readInt();
 		include = new int[in.readInt()];		
 		in.readIntArray(include);
 		exclude =new int[in.readInt()];		
@@ -74,7 +77,7 @@ public class RouteParameters implements Parcelable {
 		in.readIntArray(transports);
 	}
 		
-	public RouteParameters(int from, int to, int[] include, int[] exclude, int flags, int[] transports)
+	public RouteParameters(int from, int to, int[] include, int[] exclude, int flags, int[] transports, int delay)
 	{
 		this.from = from;
 		this.to = to;
@@ -82,6 +85,7 @@ public class RouteParameters implements Parcelable {
 		this.exclude = exclude;
 		this.flags = flags;
 		this.transports = transports;
+		this.delay = delay;
 	}
 	
 }

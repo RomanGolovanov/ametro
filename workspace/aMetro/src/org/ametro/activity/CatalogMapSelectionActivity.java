@@ -161,7 +161,13 @@ public class CatalogMapSelectionActivity extends Activity implements ICatalogSta
 		mSortMode = data.getIntExtra(EXTRA_SORT_MODE, CheckedCatalogAdapter.SORT_MODE_COUNTRY);
 		
 		mDiffMode = data.getIntExtra(EXTRA_REMOTE_MODE, CatalogMapPair.DIFF_MODE_REMOTE);
-		mDiffColors = mRemoteId == CatalogStorage.ONLINE ? R.array.online_catalog_map_state_colors : R.array.import_catalog_map_state_colors;
+		if(mDiffMode == CatalogMapPair.DIFF_MODE_LOCAL){
+			mDiffColors = R.array.local_catalog_map_state_colors;
+		}else{
+			mDiffColors = mRemoteId == CatalogStorage.ONLINE ? R.array.online_catalog_map_state_colors : R.array.import_catalog_map_state_colors;
+		}
+		
+		
 		mStorage = ((ApplicationEx) getApplicationContext()) .getCatalogStorage();
 		mStorageState = new CatalogStorageStateProvider(mStorage);
 
@@ -246,9 +252,13 @@ public class CatalogMapSelectionActivity extends Activity implements ICatalogSta
 	}
 
 	public int getCatalogState(CatalogMap local, CatalogMap remote) {
-		return mRemoteId == CatalogStorage.ONLINE ? mStorageState
-				.getOnlineCatalogState(local, remote) : mStorageState
-				.getImportCatalogState(local, remote);
+		if(mDiffMode == CatalogMapPair.DIFF_MODE_LOCAL){
+			return mStorageState.getLocalCatalogState(local, remote);
+		}else{
+			return mRemoteId == CatalogStorage.ONLINE ? mStorageState
+					.getOnlineCatalogState(local, remote) : mStorageState
+					.getImportCatalogState(local, remote);
+		}
 	}
 
 	

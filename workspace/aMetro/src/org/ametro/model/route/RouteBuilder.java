@@ -27,6 +27,7 @@ import java.util.HashSet;
 import org.ametro.algorithm.DijkstraHeap;
 import org.ametro.model.MapView;
 import org.ametro.model.Model;
+import org.ametro.model.TransportLine;
 import org.ametro.model.TransportSegment;
 import org.ametro.model.TransportTransfer;
 import org.ametro.util.CollectionUtil;
@@ -63,6 +64,7 @@ public class RouteBuilder {
 		
 		final int from = parameters.from;
 		final int to = parameters.to;
+		final int delayMode = parameters.delay;
 //		final int[] include = parameters.include;
 //		final int[] exclude = parameters.exclude;
 //		final int flags = parameters.flags;
@@ -88,6 +90,16 @@ public class RouteBuilder {
 			if(checkedTransports.contains(tr.mapFromId) && checkedTransports.contains(tr.mapToId)){
 				Integer delay = tr.delay;
 				if (delay != null && delay != 0) {
+					if(delayMode!=-1 ){
+						final TransportLine line = model.lines[tr.lineToId];
+						final Integer[] lineDelays = line.delays; 
+						if(delayMode < lineDelays.length){
+							final Integer lineDelay = lineDelays[delayMode];
+							if(lineDelay!=null){
+								delay+=lineDelay; // add line waiting delay to transfer delay
+							}
+						}
+					}
 					g.addEdge(tr.stationFromId,tr.stationToId, delay);
 					g.addEdge(tr.stationToId, tr.stationFromId, delay);
 				}

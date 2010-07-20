@@ -201,7 +201,7 @@ public class Model {
 		final String[] res = new String[len];
 		final String[] texts = owner.texts;
 		for(int i = 0; i < len; i++){
-			res[i] = texts[i];
+			res[i] = texts[ids[i]];
 		}
 		return res;
 	}
