@@ -332,7 +332,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		mDiffColors = getDiffColors();
 		mStorage = ((ApplicationEx)getApplicationContext()).getCatalogStorage();
 		mStorageState = new CatalogStorageStateProvider(mStorage);
-		setWaitNoProgressView();
+		setWaitView();
 	}
 
 	protected void onResume() {
@@ -397,16 +397,6 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 			mProgressBar = (ProgressBar)findViewById(R.id.progress);
 			mProgressBar.setIndeterminate(true);
 			mMode = MODE_WAIT;
-		}
-	}
-	
-	protected void setWaitNoProgressView() {
-		if(mMode==MODE_LIST){
-			mInputMethodManager.hideSoftInputFromWindow(mActionBarEditText.getWindowToken(), 0);
-		}
-		if(mMode!=MODE_WAIT_NO_PROGRESS){
-			setContentView(R.layout.operation_wait_no_progress);
-			mMode = MODE_WAIT_NO_PROGRESS;
 		}
 	}
 	
@@ -515,7 +505,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 			mStorage.requestCatalog(mRemoteId, true);
 			break;
 		}
-		setWaitNoProgressView();
+		setWaitView();
 	};
 	
 	protected CharSequence formatProgress(int mProgress, int mTotal) {
@@ -681,11 +671,11 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 			if(mMode!=MODE_WAIT){
 				setWaitView();
 			}
-			mProgressBar.setMax(mTotal);
-			mProgressBar.setProgress(mProgress);
 			mMessageTextView.setText( mMessage );
 			if(mProgress!=0 && mTotal!=0){
 				mProgressBar.setIndeterminate(false);
+				mProgressBar.setMax(mTotal);
+				mProgressBar.setProgress(mProgress);
 				mCounterTextView.setText( formatProgress(mProgress, mTotal) );
 			}else{
 				mProgressBar.setIndeterminate(true);

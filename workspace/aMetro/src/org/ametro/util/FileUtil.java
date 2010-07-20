@@ -37,14 +37,16 @@ import static org.ametro.Constants.LOG_TAG_MAIN;
  */
 public class FileUtil {
 
-	public static void delete(File file) {
+	public static boolean delete(File file) {
 		if (file != null && file.exists() && !file.delete() && Log.isLoggable(LOG_TAG_MAIN, Log.WARN)) {
 			Log.w(LOG_TAG_MAIN, "Can't delete file: '" + file.toString() + "'");
+			return false;
 		}
+		return true;
 	}
 
-	public static void delete(String file) {
-		delete(new File(file));
+	public static boolean delete(String file) {
+		return delete(new File(file));
 	}
 
 	public static void move(File src, File dest) {

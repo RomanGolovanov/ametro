@@ -156,12 +156,14 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 				CatalogMap map = mCatalogs[LOCAL].getMap(systemName);
 				if(map!=null ){
 					try {
-						mCatalogs[LOCAL].deleteMap(map);
-						mCatalogs[LOCAL].save(Constants.LOCAL_CATALOG_STORAGE);
-						FileUtil.delete(map.getAbsoluteUrl());
-						fireCatalogMapChanged(systemName);
-						fireCatalogChanged(LOCAL, mCatalogs[LOCAL]);
-					} catch (IOException e) {
+						if(FileUtil.delete(map.getAbsoluteUrl())){
+							mCatalogs[LOCAL].deleteMap(map);
+							mCatalogs[LOCAL].setTimestamp(System.currentTimeMillis());
+							requestCatalogSave(LOCAL);
+							fireCatalogMapChanged(systemName);
+							fireCatalogChanged(LOCAL, mCatalogs[LOCAL]);
+						}
+					} catch (Exception e) {
 						if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)){
 							Log.e(Constants.LOG_TAG_MAIN, "Delete local map failed", e);
 						}
@@ -179,12 +181,15 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 				if(map!=null ){
 					
 					try {
-						mCatalogs[IMPORT].deleteMap(map);
-						mCatalogs[IMPORT].save(Constants.IMPORT_CATALOG_STORAGE);
-						FileUtil.delete(map.getAbsoluteUrl());
-						fireCatalogMapChanged(systemName);
-						fireCatalogChanged(IMPORT, mCatalogs[IMPORT]);
-					} catch (IOException e) {
+						if(FileUtil.delete(map.getAbsoluteUrl())){
+							mCatalogs[IMPORT].deleteMap(map);
+							mCatalogs[IMPORT].setTimestamp(System.currentTimeMillis());
+							requestCatalogSave(IMPORT);
+							FileUtil.delete(map.getAbsoluteUrl());
+							fireCatalogMapChanged(systemName);
+							fireCatalogChanged(IMPORT, mCatalogs[IMPORT]);
+						}
+					} catch (Exception e) {
 						if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)){
 							Log.e(Constants.LOG_TAG_MAIN, "Delete import map failed", e);
 						}

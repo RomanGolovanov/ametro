@@ -103,30 +103,31 @@ public class CatalogLocalListActivity extends BaseCatalogActivity {
 	/****************** MAIN MENU ********************/
 	
 	private final int MAIN_MENU_UPDATE_MAPS = 1;
+	private final int MAIN_MENU_DELETE_MAPS = 2;
+	
 	private final static int REQUEST_UPDATE = 1;
+	private final static int REQUEST_DELETE = 2;
 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		menu.add(0, MAIN_MENU_UPDATE_MAPS, 4, R.string.menu_update_maps).setIcon(R.drawable.icon_tab_import_selected);
+		menu.add(0, MAIN_MENU_UPDATE_MAPS, 5, R.string.menu_update_maps).setIcon(R.drawable.icon_tab_import_selected);
+		menu.add(0, MAIN_MENU_DELETE_MAPS, 6, R.string.menu_delete_maps).setIcon(android.R.drawable.ic_menu_delete);
 		return true;
 	}
 
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		menu.findItem(MAIN_MENU_UPDATE_MAPS).setEnabled(mMode == MODE_LIST && !mStorage.hasTasks());
+		menu.findItem(MAIN_MENU_DELETE_MAPS).setEnabled(mMode == MODE_LIST && !mStorage.hasTasks());
 		return super.onPrepareOptionsMenu(menu);
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case MAIN_MENU_UPDATE_MAPS:
-			Intent i = new Intent(this, CatalogMapSelectionActivity.class);
-			i.putExtra(CatalogMapSelectionActivity.EXTRA_TITLE, getText(R.string.menu_update_maps));
-			i.putExtra(CatalogMapSelectionActivity.EXTRA_REMOTE_ID, CatalogStorage.ONLINE);
-			i.putExtra(CatalogMapSelectionActivity.EXTRA_FILTER, mActionBarEditText.getText().toString());
-			i.putExtra(CatalogMapSelectionActivity.EXTRA_SORT_MODE, CheckedCatalogAdapter.SORT_MODE_COUNTRY);
-			i.putExtra(CatalogMapSelectionActivity.EXTRA_CHECKABLE_STATES, new int[]{ CatalogMapState.UPDATE, CatalogMapState.NEED_TO_UPDATE } );
-			i.putExtra(CatalogMapSelectionActivity.EXTRA_VISIBLE_STATES, new int[]{ CatalogMapState.UPDATE, CatalogMapState.NEED_TO_UPDATE } );
-			startActivityForResult(i, REQUEST_UPDATE);
+			invokeSelectUpdateMaps();
+			return true;
+		case MAIN_MENU_DELETE_MAPS:
+			invokeSelectDeleteMaps();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -145,8 +146,40 @@ public class CatalogLocalListActivity extends BaseCatalogActivity {
 				Toast.makeText(this, R.string.msg_no_maps_to_update, Toast.LENGTH_SHORT).show();
 			}
 			break;
+		case REQUEST_DELETE:
+			if(resultCode == RESULT_OK && data!=null){
+				String[] names = data.getStringArrayExtra(CatalogMapSelectionActivity.EXTRA_SELECTION);
+				for (String systemName : names) {
+					mStorage.deleteLocalMap(systemName);
+				}
+			}
+			if(resultCode == CatalogMapSelectionActivity.RESULT_MAP_LIST_EMPTY){
+				Toast.makeText(this, R.string.msg_no_maps_to_delete, Toast.LENGTH_SHORT).show();
+			}
+			break;
+			
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
-		
+
+	private void invokeSelectDeleteMaps() {
+		Intent i = new Intent(this, CatalogMapSelectionActivity.class);
+		i.putExtra(CatalogMapSelectionActivity.EXTRA_TITLE, getText(R.string.menu_delete_maps));
+		i.putExtra(CatalogMapSelectionActivity.EXTRA_REMOTE_ID, CatalogStorage.ONLINE);
+		i.putExtra(CatalogMapSelectionActivity.EXTRA_REMOTE_MODE, CatalogMapPair.DIFF_MODE_LOCAL);
+		i.putExtra(CatalogMapSelectionActivity.EXTRA_FILTER, mActionBarEditText.getText().toString());
+		i.putExtra(CatalogMapSelectionActivity.EXTRA_SORT_MODE, CheckedCatalogAdapter.SORT_MODE_COUNTRY);
+		startActivityForResult(i, REQUEST_DELETE);
+	}
+
+	private void invokeSelectUpdateMaps() {
+		Intent i = new Intent(this, CatalogMapSelectionActivity.class);
+		i.putExtra(CatalogMapSelectionActivity.EXTRA_TITLE, getText(R.string.menu_update_maps));
+		i.putExtra(CatalogMapSelectionActivity.EXTRA_REMOTE_ID, CatalogStorage.ONLINE);
+		i.putExtra(CatalogMapSelectionActivity.EXTRA_FILTER, mActionBarEditText.getText().toString());
+		i.putExtra(CatalogMapSelectionActivity.EXTRA_SORT_MODE, CheckedCatalogAdapter.SORT_MODE_COUNTRY);
+		i.putExtra(CatalogMapSelectionActivity.EXTRA_CHECKABLE_STATES, new int[]{ CatalogMapState.UPDATE, CatalogMapState.NEED_TO_UPDATE } );
+		i.putExtra(CatalogMapSelectionActivity.EXTRA_VISIBLE_STATES, new int[]{ CatalogMapState.UPDATE, CatalogMapState.NEED_TO_UPDATE } );
+		startActivityForResult(i, REQUEST_UPDATE);
+	}	
 }

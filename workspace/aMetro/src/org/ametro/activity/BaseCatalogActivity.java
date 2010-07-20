@@ -115,6 +115,8 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 
 	protected Handler mUIEventDispacher = new Handler();
 
+	protected final int MAIN_MENU_END = 800;
+	
 	private final int MAIN_MENU_SORT = 995;
 	private final int MAIN_MENU_SEARCH = 996;
 	private final int MAIN_MENU_REFRESH = 997;
@@ -234,7 +236,7 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 		menu.add(0, MAIN_MENU_SEARCH, Menu.NONE, R.string.menu_search).setIcon(android.R.drawable.ic_menu_search);
 		menu.add(0, MAIN_MENU_REFRESH, Menu.NONE, R.string.menu_refresh_list).setIcon(android.R.drawable.ic_menu_rotate);
 		menu.add(0, MAIN_MENU_LOCATION, Menu.NONE, R.string.menu_location).setIcon(android.R.drawable.ic_menu_mylocation);
-		menu.add(0, MAIN_MENU_SORT, 998, R.string.menu_sort).setIcon(android.R.drawable.ic_menu_sort_alphabetically);
+		menu.add(0, MAIN_MENU_SORT, Menu.NONE, R.string.menu_sort).setIcon(android.R.drawable.ic_menu_sort_alphabetically);
 		menu.add(0, MAIN_MENU_SETTINGS, 999, R.string.menu_settings).setIcon(android.R.drawable.ic_menu_preferences);
 		menu.add(0, MAIN_MENU_ABOUT, 1000, R.string.menu_about).setIcon(android.R.drawable.ic_menu_help);
 		return true;
@@ -327,7 +329,7 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 		mDiffColors = getDiffColors();
 		mStorage = ((ApplicationEx)getApplicationContext()).getCatalogStorage();
 		mStorageState = new CatalogStorageStateProvider(mStorage);
-		setWaitNoProgressView();
+		setWaitView();
 	}
 
 	protected void onResume() {
@@ -392,16 +394,6 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 			mProgressBar = (ProgressBar)findViewById(R.id.progress);
 			mProgressBar.setIndeterminate(true);
 			mMode = MODE_WAIT;
-		}
-	}
-	
-	protected void setWaitNoProgressView() {
-		if(mMode==MODE_LIST){
-			mInputMethodManager.hideSoftInputFromWindow(mActionBarEditText.getWindowToken(), 0);
-		}
-		if(mMode!=MODE_WAIT_NO_PROGRESS){
-			setContentView(R.layout.operation_wait_no_progress);
-			mMode = MODE_WAIT_NO_PROGRESS;
 		}
 	}
 
@@ -523,7 +515,7 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 			mStorage.requestCatalog(mRemoteId, true);
 			break;
 		}
-		setWaitNoProgressView();
+		setWaitView();
 	};
 	
 	protected CharSequence formatProgress(int mProgress, int mTotal) {
@@ -692,13 +684,14 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 			if(mMode!=MODE_WAIT){
 				setWaitView();
 			}
-			mProgressBar.setIndeterminate(false);
-			mProgressBar.setMax(mTotal);
-			mProgressBar.setProgress(mProgress);
 			mMessageTextView.setText( mMessage );
 			if(mProgress!=0 && mTotal!=0){
+				mProgressBar.setIndeterminate(false);
+				mProgressBar.setMax(mTotal);
+				mProgressBar.setProgress(mProgress);
 				mCounterTextView.setText( formatProgress(mProgress, mTotal) );
 			}else{
+				mProgressBar.setIndeterminate(true);
 				mCounterTextView.setText(null);
 			}
 		}
