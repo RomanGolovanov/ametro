@@ -124,6 +124,8 @@
     <string name="menu_update_maps">Обновить</string>
     <string name="menu_import_maps">Импортировать</string>
     <string name="menu_download_maps">Загрузить</string>
+    <string name="menu_delete_maps">Удалить</string>
+    <string name="menu_delete_pmz">Удалить</string>
     <string name="menu_location">Где я?</string>
     <string name="menu_import">Импорт</string>
     <string name="menu_download">Загрузить</string>
@@ -208,7 +210,7 @@
     <string name="msg_begin_download_icons">Запуск загрузки флагов стран</string>
     <string name="msg_begin_unpack_icons">Идет распаковка флагов стран</string>
     <string name="msg_icons_pack_installed">Флаги стран установлены</string>
-    <string name="msg_icons_pack_download_progress">Загрузки флагов стран:</string>
+    <string name="msg_icons_pack_download_progress">Загрузка флагов стран:</string>
     <string name="msg_icons_pack_download_failed">Ошибка установки флагов стран</string>
     <string name="msg_icons_pack_download_canceled">Установка флагов стран отменена</string>
     <string name="msg_init_catalog">Загрузка списка карт...</string>
@@ -218,6 +220,7 @@
     <string name="msg_no_maps_to_update">Нет обновлений</string>
     <string name="msg_no_maps_to_import">Нет карт для импорта</string>
     <string name="msg_no_maps_to_download">Нет карт для загрузки</string>
+    <string name="msg_no_maps_to_delete">Нет карт для удаления</string>
     <string name="msg_"/>
     
     <string name="tab_maps_favorited">Избранное</string>

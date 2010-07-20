@@ -51,6 +51,7 @@ public class CatalogMapSelectionActivity extends Activity implements ICatalogSta
 
 	public static final String EXTRA_TITLE = "EXTRA_TITLE";
 	public static final String EXTRA_REMOTE_ID = "EXTRA_REMOTE_ID";
+	public static final String EXTRA_REMOTE_MODE = "EXTRA_REMOTE_MODE";
 	public static final String EXTRA_FILTER = "EXTRA_FILTER";
 	public static final String EXTRA_CHECKABLE_STATES = "EXTRA_CHECKABLE_STATES";
 	public static final String EXTRA_VISIBLE_STATES = "EXTRA_VISIBLE_STATES";
@@ -74,7 +75,7 @@ public class CatalogMapSelectionActivity extends Activity implements ICatalogSta
 	private int mLocalId;
 	private int mRemoteId;
 
-	private int mDiffMode = CatalogMapPair.DIFF_MODE_REMOTE;
+	private int mDiffMode;
 	private int mDiffColors;
 
 	private String mFilter;
@@ -153,12 +154,13 @@ public class CatalogMapSelectionActivity extends Activity implements ICatalogSta
 		
 		mLocalId = CatalogStorage.LOCAL;
 		mRemoteId = data.getIntExtra(EXTRA_REMOTE_ID, -1);
+		
 		mFilter = data.getStringExtra(EXTRA_FILTER);
 		mCheckableStates = CollectionUtil.toHashSet(data.getIntArrayExtra(EXTRA_CHECKABLE_STATES));
 		mVisibleStates = CollectionUtil.toHashSet(data.getIntArrayExtra(EXTRA_VISIBLE_STATES));
 		mSortMode = data.getIntExtra(EXTRA_SORT_MODE, CheckedCatalogAdapter.SORT_MODE_COUNTRY);
 		
-		mDiffMode = CatalogMapPair.DIFF_MODE_REMOTE;
+		mDiffMode = data.getIntExtra(EXTRA_REMOTE_MODE, CatalogMapPair.DIFF_MODE_REMOTE);
 		mDiffColors = mRemoteId == CatalogStorage.ONLINE ? R.array.online_catalog_map_state_colors : R.array.import_catalog_map_state_colors;
 		mStorage = ((ApplicationEx) getApplicationContext()) .getCatalogStorage();
 		mStorageState = new CatalogStorageStateProvider(mStorage);
