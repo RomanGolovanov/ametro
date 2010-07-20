@@ -21,6 +21,8 @@
 package org.ametro.dialog;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 
 import org.ametro.R;
@@ -33,8 +35,10 @@ import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.DialogInterface.OnKeyListener;
+import android.view.KeyEvent;
 
-public class SchemeListDialog implements OnClickListener {
+public class SchemeListDialog implements OnClickListener, OnKeyListener {
 
 	private AlertDialog mDialog;
 	private Context mContext;
@@ -42,15 +46,27 @@ public class SchemeListDialog implements OnClickListener {
 	private String[] mTransportLineNames;
 	
 	private String[] mTexts;
-	private ArrayList<ArrayList<ListItem>> mChildren;
 	private String[] mSystemNames;
 
+	private ArrayList<ArrayList<ListItem>> mChildren;
+	private ArrayList<ListItem> mRoot;
+	private ArrayList<ListItem> mCurrent;
+	
 	private static class ListItem
 	{
 		public String Name;
 		public String SystemName;
 		public long Type;
 		public ArrayList<ListItem> Children;
+	}
+	
+	private static class ListItemComparator implements Comparator<ListItem>{
+		public int compare(ListItem left, ListItem right) {
+			if(left.Name!=null && right.Name!=null){
+				return left.Name.compareTo(right.Name);
+			}
+			return left.SystemName.compareTo(right.SystemName);
+		}
 	}
 	
 	private ArrayList<ListItem> parseModel(final Model model){
@@ -127,12 +143,14 @@ public class SchemeListDialog implements OnClickListener {
 		mSystemNames = (String[]) systemNames.toArray(new String[systemNames.size()]);
 		mTexts = (String[]) names.toArray(new String[names.size()]);
 		mChildren = children;
+		mCurrent = data;
 	}
 	
 	public SchemeListDialog(final Context context, Model model, MapView current) {
 		mContext = context;
 		mTransportLineNames = mContext.getResources().getStringArray(R.array.transport_type_lines);
-		createDialog( parseModel(model));
+		mRoot = parseModel(model);
+		createDialog(mRoot);
 	}
 
 	private void createDialog(ArrayList<ListItem> data) {
@@ -142,6 +160,7 @@ public class SchemeListDialog implements OnClickListener {
 		builder.setCancelable(true);
 		builder.setIcon(android.R.drawable.ic_dialog_map);
 		builder.setItems(mTexts, this);
+		builder.setOnKeyListener(this);
 		mDialog = builder.create();
 	}
 
@@ -153,6 +172,7 @@ public class SchemeListDialog implements OnClickListener {
 		ArrayList<ListItem> children = mChildren.get(which);
 		if(children!=null){
 			mDialog.dismiss();
+			Collections.sort(children, new ListItemComparator());
 			createDialog(children);
 			mDialog.show();
 		}else{
@@ -163,5 +183,16 @@ public class SchemeListDialog implements OnClickListener {
 	public void show() {
 		mDialog.show();
 	}
+
+	public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+		if(keyCode == KeyEvent.KEYCODE_BACK && mCurrent != mRoot){
+			mDialog.dismiss();
+			createDialog(mRoot);
+			mDialog.show();
+			return true;
+		}
+		return false;
+	}
+	
 	
 }
