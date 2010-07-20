@@ -67,9 +67,15 @@ import org.ametro.util.StringUtil;
 
 public class PmzStorage implements IModelStorage {
 
-	private static final int DEFAULT_LINE_BACKGOUND_COLOR = 0xFFFFFFFF; 
+	/*package*/ static final int DEFAULT_LINE_BACKGOUND_COLOR = 0xFFFFFFFF; 
 	
-	private static final String ENCODING = "windows-1251";
+	/*package*/ static final String ENCODING = "windows-1251";
+	/*package*/ static final String DELAY_DAY_RU = "День";
+	/*package*/ static final String DELAY_NIGHT_RU = "Ночь";
+	/*package*/ static final String DELAY_RUSH_HOUR_RU = "Час-пик";
+	/*package*/ static final String DELAY_DAY_EN = "Day";
+	/*package*/ static final String DELAY_NIGHT_EN = "Night";
+	/*package*/ static final String DELAY_RUSH_HOUR_EN = "Rush Hour";
 
 	public Model loadModel(String fileName, Locale locale) throws IOException {
 		PmzImporter importer = new PmzImporter(fileName,false);
@@ -186,6 +192,18 @@ public class PmzStorage implements IModelStorage {
 			return r;
 		}
 
+		private int[] appendTextArray(String[] en, String[] ru){
+			if(en==null || ru==null || en.length!=ru.length) return null;
+			final int len = en.length;
+			int[] r = new int[len];
+			int base = mTextsOriginal.size();
+			for(int i = 0; i < len; i++){
+				r[i] = base + i;
+				mTextsOriginal.add(ru[i]);
+				mTextsTranslit.add(en[i]);
+			}
+			return r;
+		}		
 		private int appendLocalizedText(String txt){
 			int pos = mTextsOriginal.size();
 			mTextsOriginal.add(txt);
@@ -718,7 +736,8 @@ public class PmzStorage implements IModelStorage {
 			String cityNameEng = null;
 			final ArrayList<String> authors = new ArrayList<String>();
 			final ArrayList<String> comments = new ArrayList<String>();
-			String[] delays = null;
+			String[] russianDelays = null;
+			String[] englishDelays = null;
 
 			InputStream stream = mZipFile.getInputStream(mZipFile.getEntry(mCityFile));
 			final IniStreamReader ini = new IniStreamReader(new InputStreamReader(stream, ENCODING));
@@ -736,7 +755,12 @@ public class PmzStorage implements IModelStorage {
 				}else if(key.equalsIgnoreCase("Comment")){
 					comments.add(value);
 				}else if(key.equalsIgnoreCase("DelayNames")){
-					delays = value.split(",");
+					russianDelays = value.split(",");
+					englishDelays = new String[russianDelays.length];
+					int len = russianDelays.length;
+					for(int i=0;i<len;i++){
+						englishDelays[i] = translateDelays(russianDelays[i]);
+					}
 				}
 			}
 			final Model m = mModel;
@@ -745,10 +769,24 @@ public class PmzStorage implements IModelStorage {
 			m.countryName = appendLocalizedText(country);
 			m.authors = appendTextArray((String[]) authors.toArray(new String[authors.size()]));
 			m.comments = appendTextArray((String[]) comments.toArray(new String[comments.size()]));
-			m.delays = appendTextArray(delays);
+			
+			
+			m.delays = appendTextArray(englishDelays, russianDelays);
+			
 			m.textLengthDescription = mTextsOriginal.size();
 		}
 
+
+		private String translateDelays(String delayName) {
+			if(DELAY_DAY_RU.equalsIgnoreCase(delayName)){
+				return DELAY_DAY_EN;
+			}else if(DELAY_NIGHT_RU.equalsIgnoreCase(delayName)){
+				return DELAY_NIGHT_EN;
+			}else if(DELAY_RUSH_HOUR_RU.equalsIgnoreCase(delayName)){
+				return DELAY_RUSH_HOUR_EN;
+			}
+			return StringUtil.toTranslit(delayName);
+		}
 
 		private void postProcessModel() {
 			final Model model = mModel;

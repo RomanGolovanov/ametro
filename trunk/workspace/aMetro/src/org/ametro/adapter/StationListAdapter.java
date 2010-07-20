@@ -54,50 +54,63 @@ public class StationListAdapter extends BaseAdapter implements Filterable {
 			public StationView[] Stations; 
 			public Long[] Delays;
 		}
-		
-		protected FilterResults performFiltering(CharSequence constraint) {
-			FilterResults results = new FilterResults();
 
-			ArrayList<StationView> stations = new ArrayList<StationView>();
-			ArrayList<Long> delays = new ArrayList<Long>();
-			
+		protected FilterResults performFiltering(CharSequence constraint) {
 			final StationView[] allStations = mStations;
 			final Long[] allDelays = mDelays;
-			final int length = allStations.length;
-			StationView station;
-			Long delay = null;
 
-			final String text = constraint!=null ? constraint.toString().toLowerCase() : null; 
-			
-			for(int i = 0; i < length; i++){
-				station = allStations[i];
-				if(allDelays!=null){
-					delay = allDelays[i];
-				}
-				if(text==null || text.length()==0){
-					stations.add(station);
-					if(allDelays!=null){
-						delays.add(delay);
-					}
-				}else{
+			if(constraint==null || constraint.length() == 0){
+				ResultContainer container = new ResultContainer();
+				container.Stations = allStations;
+				container.Delays = allDelays;
+				FilterResults results = new FilterResults();
+				results.values = container;
+				results.count = allStations.length;
+				return results;
+			}else{
+				final String prefix = constraint.toString().toLowerCase();
+				final ArrayList<StationView> stations = new ArrayList<StationView>();
+				final ArrayList<Long> delays = new ArrayList<Long>();
+				final ArrayList<StationView> stationsAtEnd = new ArrayList<StationView>();
+				final ArrayList<Long> delaysAtEnd = new ArrayList<Long>();
+				final int length = allStations.length;
+				StationView station;
+				
+				for(int i = 0; i < length; i++){
+					station = allStations[i];
 					final String name = station.getName().toLowerCase();
-					if(name.contains(text)){
+					if(name.startsWith(prefix)){
 						stations.add(station);
 						if(allDelays!=null){
-							delays.add(delay);
+							delays.add(allDelays[i]);
 						}
-					}
-				}
-			}
+					}else{
+				        final String[] words = name.split(" ");
+				        final int wordsCount = words.length;
 
-			ResultContainer container = new ResultContainer();
-			container.Stations = (StationView[]) stations.toArray(new StationView[stations.size()]);
-			if(allDelays!=null){
-				container.Delays = (Long[]) delays.toArray(new Long[delays.size()]);
+				        for (int k = 0; k < wordsCount; k++) {
+				            if (words[k].startsWith(prefix)) {
+				            	stationsAtEnd.add(station);
+								if(allDelays!=null){
+									delaysAtEnd.add(allDelays[i]);
+								}
+				                break;
+				            }
+				        }						
+					}
+				}	
+				stations.addAll(stationsAtEnd);
+				delays.addAll(delaysAtEnd);
+				ResultContainer container = new ResultContainer();
+				container.Stations = (StationView[]) stations.toArray(new StationView[stations.size()]);
+				if(allDelays!=null){
+					container.Delays = (Long[]) delays.toArray(new Long[delays.size()]);
+				}
+				FilterResults results = new FilterResults();
+				results.values = container;
+				results.count = stations.size();
+				return results;
 			}
-			results.values = container;
-			results.count = stations.size();
-			return results;
 		}
 
 		protected void publishResults(CharSequence constraint, FilterResults results) {

@@ -21,6 +21,7 @@
 package org.ametro.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
@@ -52,6 +53,13 @@ public class CollectionUtil {
 			res[i] = src.get(i);
 		}
 		return res;
+	}
+
+	public static String[] join(String[] left, String[] right) {
+		ArrayList<String> list = new ArrayList<String>();
+		list.addAll( Arrays.asList(left) );
+		list.addAll( Arrays.asList(right) );
+		return (String[]) list.toArray(new String[list.size()]);
 	}
 	
 

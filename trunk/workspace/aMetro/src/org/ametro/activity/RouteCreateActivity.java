@@ -28,11 +28,13 @@ import org.ametro.Constants;
 import org.ametro.R;
 import org.ametro.adapter.StationListAdapter;
 import org.ametro.model.MapView;
+import org.ametro.model.Model;
 import org.ametro.model.StationView;
 import org.ametro.model.MapView.TransportCollection;
 import org.ametro.model.route.RouteBuilder;
 import org.ametro.model.route.RouteContainer;
 import org.ametro.model.route.RouteParameters;
+import org.ametro.util.CollectionUtil;
 import org.ametro.util.DateUtil;
 
 import android.app.Activity;
@@ -61,8 +63,10 @@ import android.widget.Toast;
 public class RouteCreateActivity extends Activity implements OnClickListener,
 		AnimationListener {
 
+	private Model mModel;
 	private MapView mMapView;
 
+	private int mDelayMode = 0;
 	private TransportCollection mTransports;
 	
 	private AutoCompleteTextView mFromText;
@@ -88,17 +92,20 @@ public class RouteCreateActivity extends Activity implements OnClickListener,
     private final int MAIN_MENU_SWAP = 1;
     private final int MAIN_MENU_FAVORITES = 2;
     private final int MAIN_MENU_TRANSPORTS = 3;
+    private final int MAIN_MENU_TIME = 4;
 	
 	public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, MAIN_MENU_SWAP, 0, R.string.menu_swap).setIcon(android.R.drawable.ic_menu_revert);
-        menu.add(0, MAIN_MENU_FAVORITES, 1, R.string.menu_favorites).setIcon(R.drawable.icon_btn_star);
-        menu.add(0, MAIN_MENU_TRANSPORTS, 2, R.string.menu_transports).setIcon(android.R.drawable.ic_menu_agenda);
+        menu.add(0, MAIN_MENU_SWAP, Menu.NONE, R.string.menu_swap).setIcon(android.R.drawable.ic_menu_revert);
+        menu.add(0, MAIN_MENU_FAVORITES, Menu.NONE, R.string.menu_favorites).setIcon(R.drawable.icon_btn_star);
+        menu.add(0, MAIN_MENU_TRANSPORTS, Menu.NONE, R.string.menu_transports).setIcon(android.R.drawable.ic_menu_agenda);
+        menu.add(0, MAIN_MENU_TIME, Menu.NONE, R.string.menu_time).setIcon(android.R.drawable.ic_menu_today);
 		return super.onCreateOptionsMenu(menu);
 	}
 	
 	public boolean onPrepareOptionsMenu(Menu menu) {
     	final Point[] routes = MapViewActivity.Instance.getFavoriteRoutes();
     	menu.findItem(MAIN_MENU_FAVORITES).setEnabled(!(routes== null || routes.length == 0));
+    	menu.findItem(MAIN_MENU_TIME).setEnabled(mModel.delays!=null && mModel.delays.length>0);
 		return super.onPrepareOptionsMenu(menu);
 	}
 	
@@ -106,12 +113,18 @@ public class RouteCreateActivity extends Activity implements OnClickListener,
         switch (item.getItemId()) {
         case MAIN_MENU_SWAP:
             swapStations();
-            return true;
+   			break;
         case MAIN_MENU_FAVORITES:
    			startActivityForResult(new Intent(this,FavoriteRouteListActivity.class), REQUEST_ROUTE);
+   			break;
         case MAIN_MENU_TRANSPORTS:
 			showSelectTransportDialog();
-        }		
+   			break;
+        case MAIN_MENU_TIME:
+        	showSelectTimeDialog();
+   			break;
+        }	
+        	
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -138,6 +151,12 @@ public class RouteCreateActivity extends Activity implements OnClickListener,
 		mToText = (AutoCompleteTextView) findViewById(R.id.create_route_to_text);
 		
 		mMapView = MapViewActivity.Instance.getMapView();
+		mModel = mMapView.owner;
+		if(mModel.delays!=null && mModel.delays.length>0){
+			mDelayMode = 0;
+		}else{
+			mDelayMode = -1;
+		}
 
 		mTransports = mMapView.getTransportCollection(this);
 		
@@ -165,7 +184,6 @@ public class RouteCreateActivity extends Activity implements OnClickListener,
 				mFromText.setText( StationListAdapter.getStationName(mMapView, station) );
 			}
 		}
-		
 	}
 
 	protected void onStop() {
@@ -240,6 +258,33 @@ public class RouteCreateActivity extends Activity implements OnClickListener,
 		}
 	}
 
+	private void showSelectTimeDialog() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.msg_time_of_day);
+		builder.setIcon(android.R.drawable.ic_menu_today);
+
+		final int[] delays = mModel.delays;
+		final String[] names = CollectionUtil.join(
+				Model.getLocalizedStrings(mModel, delays), 
+				new String[]{getText(R.string.create_route_without_time).toString()}
+				);  
+		final int noDelay = names.length-1;
+		
+		builder.setCancelable(true);
+		builder.setSingleChoiceItems(names, mDelayMode!=-1 ? mDelayMode : noDelay, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				if(which!=noDelay){
+					mDelayMode = which;
+				}else{
+					mDelayMode = -1;
+				}
+				dialog.dismiss();
+			}
+		});
+		AlertDialog alertDialog = builder.create();
+		alertDialog.show();
+	}
+	
 	private void showSelectTransportDialog() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.msg_select_transports);
@@ -307,7 +352,8 @@ public class RouteCreateActivity extends Activity implements OnClickListener,
 			}
 			int[] exclude = new int[0];
 			int[] transports = mTransports.getCheckedTransports();
-			RouteParameters routeParameters = new RouteParameters(from, to, include, exclude, RouteBuilder.ROUTE_OPTION_ALL, transports);
+			
+			RouteParameters routeParameters = new RouteParameters(from, to, include, exclude, RouteBuilder.ROUTE_OPTION_ALL, transports, mDelayMode);
 			return RouteBuilder.createRoutes(mMapView.owner, routeParameters);
 		}
 
