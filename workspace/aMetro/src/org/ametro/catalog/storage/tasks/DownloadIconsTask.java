@@ -80,6 +80,8 @@ public class DownloadIconsTask extends BaseTask implements IDownloadListener {
 		mProgressMessage = mResources.getString(R.string.msg_icons_pack_download_progress);
 		final URI uri = URI.create(Constants.ONLINE_ICONS_PATH);
 		final File temp = GlobalSettings.getTemporaryDownloadIconFile();
+		FileUtil.touchDirectory(Constants.TEMP_CATALOG_PATH);
+		FileUtil.touchDirectory(Constants.ICONS_PATH);
 		WebUtil.downloadFile(null, uri, temp, true, this);
 	}
 
