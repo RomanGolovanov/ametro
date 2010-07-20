@@ -23,6 +23,7 @@ package org.ametro.catalog.storage.tasks;
 import java.io.File;
 
 import org.ametro.ApplicationEx;
+import org.ametro.Constants;
 import org.ametro.GlobalSettings;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
@@ -63,6 +64,8 @@ public class ImportMapTask extends UpdateMapTask {
 		Model model = ModelBuilder.loadModel(absoluteFilePath);
 		update(50,100,mSystemName);
 		FileUtil.delete(importFile);
+		FileUtil.touchDirectory(Constants.TEMP_CATALOG_PATH);
+		FileUtil.touchDirectory(Constants.LOCAL_CATALOG_PATH);
 		ModelBuilder.saveModel(importFile.getAbsolutePath(), model);
 		FileUtil.delete(localFile);
 		FileUtil.move(importFile, localFile);

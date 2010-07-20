@@ -76,6 +76,7 @@ public abstract class LoadBaseCatalogTask extends BaseTask {
 	}
 	
 	protected void begin() {
+		FileUtil.touchDirectory(Constants.ROOT_PATH);
 		super.begin();
 	}
 

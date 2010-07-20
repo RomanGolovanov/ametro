@@ -52,6 +52,7 @@ public class LoadWebCatalogTask extends LoadBaseCatalogTask implements IDownload
 
 	public void refresh() throws Exception {
 		try{
+			FileUtil.touchDirectory(Constants.TEMP_CATALOG_PATH);
 			WebUtil.downloadFileUnchecked(null, mURI, new File(Constants.TEMP_CATALOG_PATH, "catalog.zip"), this);
 		} catch(Exception ex){
 			mCatalog = getCorruptedCatalog();

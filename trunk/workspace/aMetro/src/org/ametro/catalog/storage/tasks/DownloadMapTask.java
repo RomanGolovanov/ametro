@@ -68,7 +68,8 @@ public class DownloadMapTask extends UpdateMapTask implements IDownloadListener 
 		
 		URI uri = URI.create(map.getAbsoluteUrl());
 		File file = new File(GlobalSettings.getTemporaryDownloadMapFile(map.getSystemName()));
-
+		FileUtil.touchDirectory(Constants.TEMP_CATALOG_PATH);
+		FileUtil.touchDirectory(Constants.LOCAL_CATALOG_PATH);
 		WebUtil.downloadFile(map, uri, file, false, this);
 		if(mFailReason!=null){
 			throw new Exception("Map download failed", mFailReason);
