@@ -22,7 +22,6 @@ package org.ametro.catalog.storage;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -145,7 +144,7 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 			task = new LoadFileCatalogTask(IMPORT, Constants.IMPORT_CATALOG_STORAGE, Constants.IMPORT_CATALOG_PATH, refresh);
 		}
 		if(catalogId == ONLINE){
-			task = new LoadWebCatalogTask(ONLINE, Constants.ONLINE_CATALOG_STORAGE, URI.create(Constants.ONLINE_CATALOG_PATH), refresh);
+			task = new LoadWebCatalogTask(ONLINE, Constants.ONLINE_CATALOG_STORAGE, Constants.ONLINE_CATALOG_URL, Constants.ONLINE_CATALOG_BASE_URLS, refresh);
 		}
 		requestTask(task);
 	}	
