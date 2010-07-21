@@ -66,8 +66,18 @@ public class Constants {
     
 	public static final File ROOT_PATH = new File(Environment.getExternalStorageDirectory(), "ametro");
 	
-	public static final String ONLINE_ICONS_PATH = "http://dl.dropbox.com/u/8171021/icons.zip";
-	public static final String ONLINE_CATALOG_PATH = "http://dl.dropbox.com/u/8171021/0.2.6/catalog.zip";
+	public static final String[] ICONS_URLS = {
+		"http://dl.dropbox.com/u/8171021/icons.zip",
+		"http://ametro-project.narod.ru/icons.zip"
+	};
+	
+	public static final String[] ONLINE_CATALOG_BASE_URLS = {
+		"http://dl.dropbox.com/u/8171021/0.2.6/",
+		"http://ametro-project.narod.ru/"
+	};
+	
+	public static final String ONLINE_CATALOG_URL = "catalog.zip";
+	
 	public static final File LOCAL_CATALOG_PATH = new File(ROOT_PATH, "maps");
 	public static final File IMPORT_CATALOG_PATH = new File(ROOT_PATH, "import");
 	public static final File TEMP_CATALOG_PATH = new File(ROOT_PATH,"temp");

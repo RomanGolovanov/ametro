@@ -29,7 +29,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import org.ametro.Constants;
-import org.ametro.catalog.Catalog;
 import org.ametro.catalog.storage.CatalogDeserializer;
 import org.ametro.util.FileUtil;
 import org.ametro.util.IDownloadListener;
@@ -43,7 +42,11 @@ public class LoadWebCatalogTask extends LoadBaseCatalogTask implements IDownload
 
 	protected static final long DEPRECATED_TIMEOUT =  60*60*1000; // 1 hour
 	
-	protected final URI mURI;
+	protected String mCatalogUrl;
+	protected String[] mCatalogBaseUrls;
+	
+	protected boolean mCompleted;
+	//protected final URI mURI;
 
 	public boolean isDerpecated() {
 		if(mCatalog == null) return true;
@@ -51,22 +54,41 @@ public class LoadWebCatalogTask extends LoadBaseCatalogTask implements IDownload
 	}
 
 	public void refresh() throws Exception {
-		try{
-			FileUtil.touchDirectory(Constants.TEMP_CATALOG_PATH);
-			WebUtil.downloadFileUnchecked(null, mURI, new File(Constants.TEMP_CATALOG_PATH, "catalog.zip"), this);
-		} catch(Exception ex){
+		mCompleted = false;
+		File temp = new File(Constants.TEMP_CATALOG_PATH, "catalog.zip");
+		for(String catalogUrl : mCatalogBaseUrls){
+			String url = catalogUrl + mCatalogUrl; 
+			if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)){
+				Log.i(Constants.LOG_TAG_MAIN,"Download web catalog from " + url + " to local file " + temp.getAbsolutePath() );
+			}
+			try{
+				FileUtil.touchDirectory(Constants.TEMP_CATALOG_PATH);
+				WebUtil.downloadFileUnchecked(catalogUrl, URI.create(url), temp, this);
+				if(mCompleted){
+					break;
+				} 
+			} catch(Exception ex){
+				if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.WARN)){
+					Log.w(Constants.LOG_TAG_MAIN,"Failed download web catalog from " + url + mCatalogUrl, ex);
+				}
+			}
+		}
+		if(!mCompleted){
 			mCatalog = getCorruptedCatalog();
 		}
 	}
-
-	public LoadWebCatalogTask(int catalogId, File file, URI uri, boolean forceRefresh) {
+	
+	public LoadWebCatalogTask(int catalogId, File file, String catalogUrl, String[] catalogBaseUrls, boolean forceRefresh) {
 		super(catalogId, file, forceRefresh);
-		mURI = uri;
+		mCatalogUrl = catalogUrl;
+		mCatalogBaseUrls = catalogBaseUrls;
 	}
 
 	protected LoadWebCatalogTask(Parcel in) {
 		super(in);
-		mURI = URI.create(in.readString());
+		mCatalogUrl = in.readString();
+		mCatalogBaseUrls = new String[in.readInt()]; 
+		in.readStringArray(mCatalogBaseUrls);
 	}
 	
 	public int describeContents() {
@@ -75,7 +97,9 @@ public class LoadWebCatalogTask extends LoadBaseCatalogTask implements IDownload
 	
 	public void writeToParcel(Parcel out, int flags) {
 		super.writeToParcel(out, flags);
-		out.writeString(mURI.toString());
+		out.writeString(mCatalogUrl);
+		out.writeInt(mCatalogBaseUrls.length);
+		out.writeStringArray(mCatalogBaseUrls);
 	}
 	
 	public static final Parcelable.Creator<LoadWebCatalogTask> CREATOR = new Parcelable.Creator<LoadWebCatalogTask>() {
@@ -120,14 +144,12 @@ public class LoadWebCatalogTask extends LoadBaseCatalogTask implements IDownload
 			mCatalog = CatalogDeserializer.deserializeCatalog(new BufferedInputStream(new FileInputStream(catalogFile)));
 			// set timestamp to now for timeout detection 
 			mCatalog.setTimestamp(System.currentTimeMillis());
+			mCatalog.setBaseUrl((String)context + mCatalog.getBaseUrl());
+			mCompleted = true;
 		}catch(Exception ex){
 			if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.WARN)){
-				Log.w(Constants.LOG_TAG_MAIN,"Failed download catalog " + mCatalogId, ex);
+				Log.w(Constants.LOG_TAG_MAIN,"Failed extract web catalog from " +(String)context + mCatalogUrl, ex);
 			}
-			mCatalog = new Catalog();
-			mCatalog.setCorrupted(true);
-			mCatalog.setBaseUrl(mURI.toString());
-			mCatalog.setTimestamp(System.currentTimeMillis());
 		}
 	}
 

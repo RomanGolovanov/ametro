@@ -65,6 +65,8 @@ public class DownloadIconsTask extends BaseTask implements IDownloadListener {
 	private Context mContext;
 	private Resources mResources;
 	
+	private boolean mCompleted;
+	
 	public boolean isAsync() {
 		return true;
 	}
@@ -78,11 +80,23 @@ public class DownloadIconsTask extends BaseTask implements IDownloadListener {
 		mContext = context;
 		mResources = context.getResources();
 		mProgressMessage = mResources.getString(R.string.msg_icons_pack_download_progress);
-		final URI uri = URI.create(Constants.ONLINE_ICONS_PATH);
-		final File temp = GlobalSettings.getTemporaryDownloadIconFile();
+
 		FileUtil.touchDirectory(Constants.TEMP_CATALOG_PATH);
 		FileUtil.touchDirectory(Constants.ICONS_PATH);
-		WebUtil.downloadFile(null, uri, temp, true, this);
+		final File temp = GlobalSettings.getTemporaryDownloadIconFile();
+		
+		mCompleted = false;
+		for(String iconUrl : Constants.ICONS_URLS){
+			try{
+				WebUtil.downloadFile(null, URI.create(iconUrl), temp, true, this);
+				if(mCompleted){
+					break;
+				}
+			}catch(Exception ex){
+				FileUtil.delete(temp);
+			}
+		}
+		
 	}
 
 	private DownloadIconsTask(Parcel in) {
@@ -118,6 +132,7 @@ public class DownloadIconsTask extends BaseTask implements IDownloadListener {
 		final File path = Constants.ICONS_PATH;
 		ZipUtil.unzip(file, path);
 		displayNotification(mResources.getString(R.string.msg_icons_pack_installed),false,DONE_ICON);
+		mCompleted = true;
 	}
 
 	public boolean onUpdate(Object context, long position, long total) throws Exception {
