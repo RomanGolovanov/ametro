@@ -672,7 +672,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 				setWaitView();
 			}
 			mMessageTextView.setText( mMessage );
-			if(mProgress!=0 && mTotal>0){
+			if(mProgress>0 && mTotal>0){
 				mProgressBar.setIndeterminate(false);
 				mProgressBar.setMax(mTotal);
 				mProgressBar.setProgress(mProgress);
