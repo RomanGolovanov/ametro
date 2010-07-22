@@ -32,6 +32,12 @@ import android.os.Environment;
  */
 public class Constants {
 
+	public final static String LOCALE_RU = "ru";
+	public final static String LOCALE_EN = "en";
+
+	public final static int MODEL_VERSION = 1;
+	public final static String MODEL_COMPATIBILITY_VERSION = "0.2.7";
+	
     public static final String LOG_TAG_MAIN = "aMetro";
     
 	public static final int DEFAULT_BUFFER_SIZE = 8196;
@@ -72,8 +78,8 @@ public class Constants {
 	};
 	
 	public static final String[] ONLINE_CATALOG_BASE_URLS = {
-		"http://dl.dropbox.com/u/8171021/0.2.6/",
-		"http://ametro-project.narod.ru/"
+		"http://dl.dropbox.com/u/8171021/0.2.7/",
+		"http://ametro-project.narod.ru/0.2.7/"
 	};
 	
 	public static final String ONLINE_CATALOG_URL = "catalog.zip";

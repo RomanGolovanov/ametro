@@ -37,6 +37,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
+import org.ametro.Constants;
 import org.ametro.model.LineView;
 import org.ametro.model.MapLayerContainer;
 import org.ametro.model.MapView;
@@ -387,7 +388,7 @@ public class CsvStorage implements IModelStorage {
 
 		int version = reader.readInt();
 
-		if(version!=Model.VERSION){
+		if(version!=Constants.MODEL_VERSION){
 			throw new IOException("Unsupported version");
 		}
 		model.systemName = reader.readString();
@@ -417,7 +418,7 @@ public class CsvStorage implements IModelStorage {
 		ZipEntry zipEntry = new ZipEntry(MAIN_ENTRY_NAME);
 		zip.putNextEntry(zipEntry);
 		writer.newRecord();
-		writer.writeInt(Model.VERSION);
+		writer.writeInt(Constants.MODEL_VERSION);
 		writer.writeString(model.systemName);
 		writer.writeLong(model.timestamp);
 		writer.writeString(model.countryIso);
