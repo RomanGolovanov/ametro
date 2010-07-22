@@ -20,39 +20,163 @@
  */
 package org.ametro.activity;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.ametro.ApplicationEx;
+import org.ametro.Constants;
+import org.ametro.GlobalSettings;
+import org.ametro.R;
+import org.ametro.catalog.Catalog;
+import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.storage.CatalogStorage;
 import org.ametro.catalog.storage.tasks.BaseTask;
+import org.ametro.catalog.storage.tasks.DownloadMapTask;
+import org.ametro.catalog.storage.tasks.ImportMapTask;
+import org.ametro.catalog.storage.tasks.UpdateMapTask;
+import org.ametro.directory.CatalogMapSuggestion;
+import org.ametro.model.TransportType;
+import org.ametro.util.StringUtil;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class TaskFailedList extends ListActivity {
 
-	CatalogStorage mStorage;
-	
+	private CatalogStorage mStorage;
+	ArrayList<BaseTask> mTasks;
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mStorage = ((ApplicationEx)getApplicationContext()).getCatalogStorage();
-		setListAdapter(new FailedTaskListAdapter(this, mStorage.takeFailedTaskList()));
+		final ApplicationEx app = ((ApplicationEx)getApplicationContext());
+		mStorage = app.getCatalogStorage();
+		mTasks = mStorage.takeFailedTaskList();
+		if(mTasks==null || mTasks.size()==0){
+			finish();
+			return;
+		}
+		final String languageCode = GlobalSettings.getLanguage(this);
+		final Catalog mImport = mStorage.getCatalog(CatalogStorage.IMPORT);
+		final Catalog mOnline = mStorage.getCatalog(CatalogStorage.ONLINE);
+		ArrayList<FailedTaskListAdapter.DataHolder> data = new ArrayList<FailedTaskListAdapter.DataHolder>();
+		for(BaseTask task : mTasks){
+			FailedTaskListAdapter.DataHolder dh = new FailedTaskListAdapter.DataHolder();
+			if(task instanceof UpdateMapTask){
+				String systemName = (String)task.getTaskId();
+				CatalogMap map = null;
+				String status = null;
+				if(mOnline!=null && task instanceof DownloadMapTask){
+					map = mOnline.getMap(systemName);
+					status = getString(R.string.msg_download_failed);
+				}else if(mImport!=null && task instanceof ImportMapTask){
+					map = mImport.getMap(systemName);
+					status = getString(R.string.msg_import_failed);
+				}
+				if(map!=null){
+					dh.City = map.getCity(languageCode);
+					dh.Country = map.getCountry(languageCode);
+					dh.ISO = map.getCountryISO();
+					dh.Status = status;
+					dh.Transports = map.getTransports();
+				}else{
+					CatalogMapSuggestion suggestion = CatalogMapSuggestion.create(this, new File(systemName), systemName, getString(R.string.msg_unknown_country), "", TransportType.UNKNOWN_ID);
+					dh.City = suggestion.getCity(languageCode);
+					dh.Country = suggestion.getCountry(languageCode);
+					dh.ISO = suggestion.getCountryISO();
+					dh.Status = status;
+					dh.Transports = suggestion.getTransports();
+				}
+			}else{
+				dh.City = task.toString();
+				dh.Country = task.getFailReason().getMessage();
+			}
+			data.add(dh);
+		}
+		setListAdapter(new FailedTaskListAdapter(this,data));
 	}
-	
+
+
+	protected void onListItemClick(android.widget.ListView l, View v, int position, long id) {
+		String reason = StringUtil.toString( mTasks.get(position).getFailReason() );
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.msg_error_description_title)
+		.setIcon(android.R.drawable.ic_dialog_alert)
+		.setCancelable(true)
+		.setMessage(reason)
+		.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				dialog.dismiss();
+			}
+		});
+		AlertDialog alertDialog = builder.create();
+		alertDialog.show();
+	};
+
 	private static class FailedTaskListAdapter extends BaseAdapter{
 
-		ArrayList<BaseTask> mData;
-		Context mContext;
-		
-		public FailedTaskListAdapter(Context context, ArrayList<BaseTask> data) {
-			mContext = context;
-			mData = data;
+		private ArrayList<DataHolder> mData;
+		private Context mContext;
+		private LayoutInflater mInflater;
+
+		private HashMap<String,Drawable> mIcons;
+		protected HashMap<Integer,Drawable> mTransportTypes;
+		private boolean mShowCountryFlags;
+		private Drawable mNoCountryIcon;
+
+		public static class DataHolder {
+			public String Status;
+			public String City;
+			public String Country;
+			public String ISO;
+			public long Transports;
 		}
+
+		public static class ViewHolder {
+			TextView mCity;
+			TextView mCountry;
+			TextView mCountryISO;
+			TextView mStatus;
+			ImageView mIsoIcon;
+			LinearLayout mImageContainer;
+			LinearLayout mCountryFlagContainer;
+		}  
+
+		public FailedTaskListAdapter(Context context, ArrayList<DataHolder> data) {
+			mContext = context;
+			mInflater = LayoutInflater.from(context);
+			mShowCountryFlags = GlobalSettings.isCountryIconsEnabled(mContext);
+			mNoCountryIcon = context.getResources().getDrawable(R.drawable.no_country);
+			mIcons = new HashMap<String, Drawable>();
+
+			mData = data;
+			bindTransportTypes();
+		}
+
+		private  void bindTransportTypes(){
+			mTransportTypes = new HashMap<Integer, Drawable>();
+			final Resources res = mContext.getResources();
+			mTransportTypes.put( TransportType.UNKNOWN_ID , res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.UNKNOWN_ID))  );
+			mTransportTypes.put( TransportType.METRO_ID , res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.METRO_ID))  );
+			mTransportTypes.put( TransportType.TRAM_ID , res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.TRAM_ID))  );
+			mTransportTypes.put( TransportType.BUS_ID , res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.BUS_ID))  );
+			mTransportTypes.put( TransportType.TRAIN_ID , res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.TRAIN_ID))  );
+			mTransportTypes.put( TransportType.WATER_BUS_ID , res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.WATER_BUS_ID))  );
+			mTransportTypes.put( TransportType.TROLLEYBUS_ID , res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.TROLLEYBUS_ID))  );
+		}
+
 
 		public int getCount() {
 			return mData.size();
@@ -66,15 +190,69 @@ public class TaskFailedList extends ListActivity {
 			return position;
 		}
 
-		public View getView(int position, View convertView, ViewGroup viewGroup) {
-			TextView v = new TextView(mContext);
-			//v.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, 64));
-			
-			BaseTask task = mData.get(position);
-			v.setText(task.toString());
-			
-			return v;
+		public View getView(int position, View convertView, ViewGroup g) {
+			ViewHolder holder;
+			if (convertView == null) {
+				convertView = mInflater.inflate(R.layout.catalog_list_item, null);
+				holder = new ViewHolder();
+				holder.mCity = (TextView) convertView.findViewById(android.R.id.text1);
+				holder.mCountry = (TextView) convertView.findViewById(R.id.country);
+				holder.mStatus = (TextView) convertView.findViewById(R.id.state);
+				holder.mCountryISO = (TextView) convertView.findViewById(R.id.country_iso);
+				holder.mIsoIcon = (ImageView) convertView.findViewById(R.id.iso_icon);
+				holder.mImageContainer = (LinearLayout) convertView.findViewById(R.id.icons);
+				holder.mCountryFlagContainer = (LinearLayout) convertView.findViewById(R.id.country_flag_panel);
+				convertView.setTag(holder);
+			} else {
+				holder = (ViewHolder) convertView.getTag();
+			}
+
+			final DataHolder ref = mData.get(position);
+			holder.mCity.setText(ref.City);
+			holder.mCountry.setText(ref.Country);
+			holder.mStatus.setText(ref.Status);
+
+			if(mShowCountryFlags){
+				final String iso = ref.ISO;
+				if(iso!=null && iso!=""){
+					Drawable d = mIcons.get(iso);
+					if(d == null){
+						File file = new File(Constants.ICONS_PATH, iso + ".png");
+						if(file.exists()){
+							d = Drawable.createFromPath(file.getAbsolutePath());
+						}else{
+							d = mNoCountryIcon;
+						}
+						mIcons.put(iso, d);
+					}
+					holder.mIsoIcon.setImageDrawable(d);
+					holder.mCountryISO.setText( iso );
+					holder.mCountryFlagContainer.setVisibility(View.VISIBLE);
+				}else{
+					holder.mCountryISO.setText( "" );
+					holder.mCountryFlagContainer.setVisibility(View.INVISIBLE);
+				}
+			}else{
+				holder.mCountryFlagContainer.setVisibility(View.GONE);
+			}
+
+
+			final LinearLayout ll = holder.mImageContainer;
+			ll.removeAllViews();
+			long transports = ref.Transports;
+			int transportId = 1;
+			while(transports>0){
+				if((transports % 2)>0){
+					ImageView img = new ImageView(mContext);
+					img.setImageDrawable(mTransportTypes.get(transportId));
+					ll.addView( img );
+				}
+				transports = transports >> 1;
+				transportId = transportId << 1;
+			}
+
+			return convertView;
 		}
-		
+
 	}
 }

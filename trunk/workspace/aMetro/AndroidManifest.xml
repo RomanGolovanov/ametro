@@ -22,7 +22,7 @@
         <activity android:label="@string/title_catalog_import" android:name=".activity.CatalogImportListActivity" android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".activity.CatalogMapSelectionActivity"/>
         <activity android:name=".activity.TaskQueuedList"/>
-        <activity android:name=".activity.TaskFailedList"/>
+        <activity android:name=".activity.TaskFailedList" android:configChanges="orientation|keyboardHidden"/>
         <!-- DIALOGS -->
         <activity android:label="@string/msg_donate_title" android:name=".dialog.PaymentDetailsDialog" android:theme="@android:style/Theme.Dialog"/>
         <activity android:label="@string/msg_detect_location" android:name=".dialog.LocationSearchDialog" android:theme="@android:style/Theme.Dialog"/>

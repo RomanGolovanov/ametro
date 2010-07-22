@@ -21,6 +21,8 @@
 
 package org.ametro.util;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -707,5 +709,12 @@ public class StringUtil {
 		return sb.toString();	
 	}
 
+
+	public static String toString(Throwable th){
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+	    th.printStackTrace(new PrintStream(out));
+	    return new String(out.toByteArray());
+	}
+	
 	
 }

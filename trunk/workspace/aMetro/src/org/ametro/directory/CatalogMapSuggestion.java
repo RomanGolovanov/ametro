@@ -23,77 +23,101 @@ package org.ametro.directory;
 import java.io.File;
 
 import org.ametro.ApplicationEx;
+import org.ametro.model.TransportType;
 
 import android.content.Context;
 
 public class CatalogMapSuggestion {
 
 	private final File mFile;
-	private final String mCityName;
-	private final String mCountryName;
+	private final String mCity;
+	private final String mCountry;
+	private final String mCountryISO;
+	private final long mTransports;
 	
-	private final ImportDirectory.Entity mImport;
-	private final CityDirectory.Entity mCity;
-	private final CountryDirectory.Entity mCountry;
+	private final ImportDirectory.Entity mImportEntity;
+	private final CityDirectory.Entity mCityEntity;
+	private final CountryDirectory.Entity mCountryEntity;
 	
-	private CatalogMapSuggestion(File file, String cityName, String countryName, ImportDirectory.Entity imports, CityDirectory.Entity city, CountryDirectory.Entity country) {
+	private CatalogMapSuggestion(File file, String city, String country, String countryIso, long transports, ImportDirectory.Entity importEntity, CityDirectory.Entity cityEntity, CountryDirectory.Entity countryEntity) {
 		super();
 		this.mFile = file;
-		this.mCityName = cityName;
-		this.mCountryName = countryName;
-		this.mImport = imports;
 		this.mCity = city;
 		this.mCountry = country;
+		this.mCountryISO = countryIso;
+		this.mTransports = transports;
+		this.mImportEntity = importEntity;
+		this.mCityEntity = cityEntity;
+		this.mCountryEntity = countryEntity;
 	}
 
-	public ImportDirectory.Entity getImport() {
-		return mImport;
+	public ImportDirectory.Entity getImportEntity() {
+		return mImportEntity;
 	}
 
-	public CityDirectory.Entity getCity() {
-		return mCity;
+	public CityDirectory.Entity getCityEntity() {
+		return mCityEntity;
 	}
 
-	public CountryDirectory.Entity getCountry() {
-		return mCountry;
+	public CountryDirectory.Entity getCountryEntity() {
+		return mCountryEntity;
 	}
 	
 	public File getFile() {
 		return mFile;
 	}
 
-	public String getCityName() {
-		return mCityName;
+	public String getCity() {
+		return mCity;
 	}
 
-	public String getCountryName() {
-		return mCountryName;
+	public String getCountry() {
+		return mCountry;
 	}
 
-	public static CatalogMapSuggestion create(Context context, File file, String cityName, String countryName){
-		ApplicationEx app = (ApplicationEx)context.getApplicationContext();
-		ImportDirectory.Entity importEntity = null;
-		CityDirectory.Entity cityEntity = null;
-		CountryDirectory.Entity countryEntity = null;
-		
-		String fileName = file.getName();
-		String mapName = fileName.substring(0, fileName.indexOf('.'));
-		
-		importEntity = app.getImportDirectory().get(mapName);
-		if(importEntity!=null){
-			cityEntity = app.getCityDirectory().get(importEntity.getCityId());
-			if(cityEntity!=null){
-				countryEntity = app.getCountryDirectory().get(cityEntity.getCountryId());
-			}
-		}else{
-			cityEntity = app.getCityDirectory().getByName( cityName );
-			if(cityEntity!=null){
-				countryEntity = app.getCountryDirectory().get(cityEntity.getCountryId());
+	public static CatalogMapSuggestion create(Context context, File file, String city, String country){
+		return create(context, file, city, country, null, TransportType.UNKNOWN_ID);
+	}
+
+	public String getCity(String languageCode) {
+		return mCityEntity!=null ? mCityEntity.getName(languageCode) : mCity;
+	}
+
+	public String getCountry(String languageCode) {
+		return mCountryEntity!=null ? mCountryEntity.getName(languageCode) : mCountry;
+	}
+
+	public String getCountryISO() {
+		return mCountryEntity!=null ? mCountryEntity.getISO2() : mCountryISO;
+	}
+
+	public long getTransports() {
+		return mTransports;
+	}
+
+	public static CatalogMapSuggestion create(Context context, File file, String city, String country, String countryIso, long transports){
+			ApplicationEx app = (ApplicationEx)context.getApplicationContext();
+			ImportDirectory.Entity importEntity = null;
+			CityDirectory.Entity cityEntity = null;
+			CountryDirectory.Entity countryEntity = null;
+			
+			String fileName = file.getName();
+			String mapName = fileName.substring(0, fileName.indexOf('.'));
+			
+			importEntity = app.getImportDirectory().get(mapName);
+			if(importEntity!=null){
+				cityEntity = app.getCityDirectory().get(importEntity.getCityId());
+				if(cityEntity!=null){
+					countryEntity = app.getCountryDirectory().get(cityEntity.getCountryId());
+				}
 			}else{
-				countryEntity = app.getCountryDirectory().getByName( countryName );
+				cityEntity = app.getCityDirectory().getByName( city );
+				if(cityEntity!=null){
+					countryEntity = app.getCountryDirectory().get(cityEntity.getCountryId());
+				}else{
+					countryEntity = app.getCountryDirectory().getByName( country );
+				}
 			}
-		}
-		return new CatalogMapSuggestion(file, cityName, countryName, importEntity, cityEntity, countryEntity);
-	}	
-	
+			return new CatalogMapSuggestion(file, city, country, countryIso, transports, importEntity, cityEntity, countryEntity);
+		}	
 }

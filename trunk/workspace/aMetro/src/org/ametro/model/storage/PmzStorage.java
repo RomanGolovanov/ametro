@@ -894,8 +894,8 @@ public class PmzStorage implements IModelStorage {
 			final String cityName = originalTexts[mModel.cityName];
 			
 			CatalogMapSuggestion suggestion = CatalogMapSuggestion.create(ApplicationEx.getInstance(), mFile, cityName, countryName );
-			CityDirectory.Entity cityEntity = suggestion.getCity();
-			CountryDirectory.Entity countryEntity = suggestion.getCountry();
+			CityDirectory.Entity cityEntity = suggestion.getCityEntity();
+			CountryDirectory.Entity countryEntity = suggestion.getCountryEntity();
 			
 			localeList.add(LOCALE_EN);
 			textList.add(translitTexts);
