@@ -156,8 +156,8 @@ public class Catalog {
 
 		// try to suggest map city/country from directories
 		CatalogMapSuggestion suggestion = CatalogMapSuggestion.create(ApplicationEx.getInstance(), file, null, null);
-		CityDirectory.Entity cityEntity = suggestion.getCity();
-		CountryDirectory.Entity countryEntity = suggestion.getCountry();
+		CityDirectory.Entity cityEntity = suggestion.getCityEntity();
+		CountryDirectory.Entity countryEntity = suggestion.getCountryEntity();
 
 		if(cityEntity!=null){
 			for(int i=0;i<len;i++){

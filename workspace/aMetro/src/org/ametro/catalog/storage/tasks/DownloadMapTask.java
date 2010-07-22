@@ -99,7 +99,6 @@ public class DownloadMapTask extends UpdateMapTask implements IDownloadListener 
 	public void onDone(Object context, File file) throws IOException {
 		final File onlineFile = new File(GlobalSettings.getTemporaryDownloadMapFile(mSystemName));
 		final File localFile = new File(GlobalSettings.getLocalCatalogMapFileName(mSystemName));
-		
 		FileUtil.delete(localFile);
 		FileUtil.move(onlineFile, localFile);
 		Model model = ModelBuilder.loadModelDescription(localFile.getAbsolutePath());

@@ -71,10 +71,7 @@ public class ImportMapTask extends UpdateMapTask {
 		FileUtil.move(importFile, localFile);
 		CatalogMap localMap = Catalog.extractCatalogMap(localCatalog, localFile, localFile.getName().toLowerCase(), model);
 		localCatalog.appendMap(localMap);
-		
 		ApplicationEx.getInstance().getCatalogStorage().requestCatalogSave(CatalogStorage.LOCAL);
-		//Catalog.save(localCatalog, Constants.LOCAL_CATALOG_STORAGE);
-		
 		update(100,100,mSystemName);
 	}
 	

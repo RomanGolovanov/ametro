@@ -211,6 +211,7 @@ Design: Dusty Rat&lt;br/&gt;
     <string name="msg_read_pmz_files">Read PMZ files...</string>
     <string name="msg_import_pmz_files">Importing PMZ files...</string>
     <string name="msg_import_failed">Import failed</string>
+	<string name="msg_download_failed">Download failed</string>
     <string name="msg_station_not_found">Not Found</string>
     <string name="msg_route_added_to_favorites">Added to Favorites</string>
     <string name="msg_route_removed_from_favorites">Removed from Favorites</string>
@@ -262,7 +263,9 @@ Design: Dusty Rat&lt;br/&gt;
     <string name="msg_queue_size_notify_title">aMetro. Operations</string>
     <string name="msg_operation_progress">progress:</string>
     <string name="msg_operation_queue_size">operations queue size:</string>
-    
+    <string name="msg_error_description_title">Error Description</string>
+    <string name="msg_unknown_country">Unknown country</string>
+        
     <string name="tab_maps_favorited">Favorites</string>
     <string name="tab_maps_local">My maps</string>
     <string name="tab_maps_online">Catalog</string>

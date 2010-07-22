@@ -87,7 +87,6 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 	private String mFailedTaskNotificationText;
 	private String mQueueSizeNotificationTitle;
 	private String mQueueSizeText;
-	private String mProgressText;
 
 	private Notification mQueueNotification;
 	private Notification mFailedNotification;
@@ -160,7 +159,6 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 		mFailedTaskNotificationText = res.getString(R.string.msg_task_error_notify_text);
 		mQueueSizeNotificationTitle = res.getString(R.string.msg_queue_size_notify_title);
 		mQueueSizeText = res.getString(R.string.msg_operation_queue_size);
-		mProgressText = res.getString(R.string.msg_operation_progress);
 		
 		mNotificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
 	}
@@ -439,7 +437,7 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 			
 			displayTaskProgressNotification(
 					mImportNotificationTitle,
-					mapName + " " + mProgressText + " " +  progress + "/" + total,
+					mapName + ", " +  progress + "/" + total,
 					android.R.drawable.stat_sys_download);
 		}
 		if(task instanceof DownloadMapTask){
@@ -448,7 +446,7 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 			
 			displayTaskProgressNotification(
 					mDownloadNotificationTitle,
-					mapName + " " + mProgressText + " " +  progress + "/" + total,
+					mapName + ", " +  progress + "/" + total,
 					android.R.drawable.stat_sys_download);
 		}
 	}
@@ -489,6 +487,8 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 				mSyncRunTask = null;
 			}
 		}
+		mFailedQueue.add(task);
+
 		if(task instanceof LoadBaseCatalogTask){
 			LoadBaseCatalogTask info = (LoadBaseCatalogTask)task;
 			int catalogId = info.getCatalogId();
@@ -506,7 +506,6 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 		if(mAsyncRunQueue.contains(task)){
 			mAsyncRunQueue.remove(task);
 		}
-		mFailedQueue.add(task);
 	}
 	
 	public void onTaskBegin(BaseTask task){
