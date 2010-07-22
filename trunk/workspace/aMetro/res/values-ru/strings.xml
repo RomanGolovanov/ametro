@@ -223,7 +223,13 @@
     <string name="msg_no_maps_to_import">Нет карт для импорта</string>
     <string name="msg_no_maps_to_download">Нет карт для загрузки</string>
     <string name="msg_no_maps_to_delete">Нет карт для удаления</string>
-    <string name="msg_"/>
+    <string name="msg_download_notify_title">aMetro. Загрузка</string>
+    <string name="msg_import_notify_title">aMetro. Импорт</string>
+    <string name="msg_task_error_notify_title">aMetro. Ошибки</string>
+    <string name="msg_task_error_notify_text">не выполнено операций:</string>
+    <string name="msg_queue_size_notify_title">aMetro. Операции</string>
+    <string name="msg_operation_progress">прогресс:</string>
+    <string name="msg_operation_queue_size">операций в очереди:</string>
     
     <string name="tab_maps_favorited">Избранное</string>
     <string name="tab_maps_local">Мои карты</string>

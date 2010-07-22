@@ -121,7 +121,7 @@ public class ApplicationEx extends Application {
 		if (mStorage == null) {
 			synchronized (ApplicationEx.class) {
 				if (mStorage == null) {
-					mStorage = new CatalogStorage();
+					mStorage = new CatalogStorage(this);
 				}
 			}
 		}

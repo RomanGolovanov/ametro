@@ -28,6 +28,9 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import org.ametro.ApplicationEx;
 import org.ametro.Constants;
+import org.ametro.R;
+import org.ametro.activity.TaskFailedList;
+import org.ametro.activity.TaskQueuedList;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.storage.tasks.BaseTask;
@@ -41,6 +44,12 @@ import org.ametro.catalog.storage.tasks.LoadWebCatalogTask;
 import org.ametro.catalog.storage.tasks.UpdateMapTask;
 import org.ametro.util.FileUtil;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -62,10 +71,98 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 
 	/*package*/ LinkedBlockingQueue<BaseTask> mTaskQueue = new LinkedBlockingQueue<BaseTask>();
 	/*package*/ LinkedList<BaseTask> mAsyncRunQueue = new LinkedList<BaseTask>();
+	/*package*/ LinkedList<BaseTask> mFailedQueue = new LinkedList<BaseTask>();
 	/*package*/ BaseTask mSyncRunTask = null;
 	
-	public CatalogStorage(){
+	private NotificationManager mNotificationManager;
+	private Context mContext;
+
+	private static final int TASK_QUEUE_ID = 2;
+	private static final int TASK_PROGRESS_ID = 3;
+	private static final int TASK_FAILED_ID = 4;
+	
+	private String mDownloadNotificationTitle;
+	private String mImportNotificationTitle;
+	private String mFailedTaskNotificationTitle;
+	private String mFailedTaskNotificationText;
+	private String mQueueSizeNotificationTitle;
+	private String mQueueSizeText;
+	private String mProgressText;
+
+	private Notification mQueueNotification;
+	private Notification mFailedNotification;
+	private Notification mProgressNotification;
+	
+	private void removeTaskQueueNotification(){
+		mQueueNotification = null;
+		mNotificationManager.cancel(TASK_QUEUE_ID);
+	}
+	
+	private void removeTaskProgressNotification(){
+		mNotificationManager.cancel(TASK_PROGRESS_ID);
+	}
+	
+	private void displayTaskQueueNotification(int taskLeft)
+	{
+		Notification notification = mQueueNotification;
+		if(notification==null){
+			notification = new Notification(android.R.drawable.stat_notify_sync, null,System.currentTimeMillis());
+			notification.flags |= Notification.FLAG_ONGOING_EVENT |Notification.FLAG_NO_CLEAR;
+			mQueueNotification = notification;
+		}
+		notification.number = taskLeft;
+		PendingIntent contentIntent = PendingIntent.getActivity(mContext, 0, new Intent(mContext, TaskQueuedList.class), 0);
+		notification.setLatestEventInfo(mContext, mQueueSizeNotificationTitle , mQueueSizeText + " " + taskLeft, contentIntent);
+		mNotificationManager.notify(TASK_QUEUE_ID, notification);
+	}	
+
+	private void displayTaskProgressNotification(String title, String message, int iconId)
+	{
+		Notification notification = mProgressNotification;
+		if(notification==null){
+			notification = new Notification(iconId, null,System.currentTimeMillis());
+			notification.flags |= Notification.FLAG_ONGOING_EVENT | Notification.FLAG_NO_CLEAR;
+			mProgressNotification = notification;
+		}
+		PendingIntent contentIntent = PendingIntent.getActivity(mContext, 0, new Intent(mContext, TaskQueuedList.class), 0);
+		notification.when = System.currentTimeMillis();
+		notification.setLatestEventInfo(mContext, title ,message, contentIntent);
+		mNotificationManager.notify(TASK_PROGRESS_ID, notification);
+	}	
+	
+	private void displayTaskFailedNotification()
+	{
+		Notification notification = mFailedNotification;
+		if(notification==null){
+			notification = new Notification(android.R.drawable.stat_notify_error, null, System.currentTimeMillis());
+			notification.flags |= Notification.FLAG_AUTO_CANCEL;
+			mFailedNotification = notification;
+		}
+		int count = mFailedQueue.size();
+		String message = mFailedTaskNotificationText + " " + count;
+		notification.when = System.currentTimeMillis();
+		notification.number = count;
+		PendingIntent contentIntent = PendingIntent.getActivity(mContext, 0, new Intent(mContext, TaskFailedList.class), 0);
+		notification.setLatestEventInfo(mContext, mFailedTaskNotificationTitle, message, contentIntent);
+		mNotificationManager.notify(TASK_FAILED_ID, notification);
+	}	
+	
+	public CatalogStorage(Context context){
+		mTaskWorker.setPriority(Thread.MIN_PRIORITY);
+		mTaskWorker.setDaemon(true);
 		mTaskWorker.start();
+		mContext = context;
+
+		final Resources res = mContext.getResources();
+		mDownloadNotificationTitle = res.getString(R.string.msg_download_notify_title);
+		mImportNotificationTitle = res.getString(R.string.msg_import_notify_title);
+		mFailedTaskNotificationTitle = res.getString(R.string.msg_task_error_notify_title);
+		mFailedTaskNotificationText = res.getString(R.string.msg_task_error_notify_text);
+		mQueueSizeNotificationTitle = res.getString(R.string.msg_queue_size_notify_title);
+		mQueueSizeText = res.getString(R.string.msg_operation_queue_size);
+		mProgressText = res.getString(R.string.msg_operation_progress);
+		
+		mNotificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
 	}
 	
 	public void shutdown(){
@@ -281,6 +378,10 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 			try {
 				synchronized (mTaskQueue) {
 					mSyncRunTask = null;
+					if(mTaskQueue.size() == 0){
+						removeTaskQueueNotification();
+						removeTaskProgressNotification();
+					}
 				}
 				BaseTask task = mTaskQueue.take();
 				if(task.isAsync()){
@@ -297,11 +398,16 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 				}else{
 					synchronized (mTaskQueue) {
 						mSyncRunTask = task;
+						int taskLeft = mTaskQueue.size()+1;
+						if(taskLeft>1){
+							displayTaskQueueNotification(taskLeft);
+						}
 					}
 					task.execute(ApplicationEx.getInstance(), this);
 					synchronized (mTaskQueue) {
 						mSyncRunTask = null;
 					}
+					Thread.sleep(50);
 				}
 			} catch (InterruptedException e) {
 				if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.WARN)){
@@ -328,10 +434,22 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 			fireCatalogOperationProgress(info.getCatalogId(), (int)progress, (int)total, message);
 		}
 		if(task instanceof ImportMapTask){
-			fireCatalogMapImportProgress((String)task.getTaskId(),(int)progress,(int)total);
+			String mapName = (String)task.getTaskId();
+			fireCatalogMapImportProgress(mapName,(int)progress,(int)total);
+			
+			displayTaskProgressNotification(
+					mImportNotificationTitle,
+					mapName + " " + mProgressText + " " +  progress + "/" + total,
+					android.R.drawable.stat_sys_download);
 		}
 		if(task instanceof DownloadMapTask){
-			fireCatalogMapDownloadProgress((String)task.getTaskId(),(int)progress,(int)total);
+			String mapName = (String)task.getTaskId();
+			fireCatalogMapDownloadProgress(mapName,(int)progress,(int)total);
+			
+			displayTaskProgressNotification(
+					mDownloadNotificationTitle,
+					mapName + " " + mProgressText + " " +  progress + "/" + total,
+					android.R.drawable.stat_sys_download);
 		}
 	}
 	
@@ -383,10 +501,12 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 		if(task instanceof UpdateMapTask){
 			fireCatalogChanged(LOCAL, mCatalogs[LOCAL]);
 			fireCatalogMapChanged((String)task.getTaskId());
+			displayTaskFailedNotification();
 		}
 		if(mAsyncRunQueue.contains(task)){
 			mAsyncRunQueue.remove(task);
 		}
+		mFailedQueue.add(task);
 	}
 	
 	public void onTaskBegin(BaseTask task){
@@ -510,6 +630,11 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 			}
 		}
 	}
-
+	
+	public ArrayList<BaseTask> takeFailedTaskList(){
+		ArrayList<BaseTask> lst = new ArrayList<BaseTask>(mFailedQueue);
+		mFailedQueue.removeAll(lst);
+		return lst;
+	}
 	
 }
