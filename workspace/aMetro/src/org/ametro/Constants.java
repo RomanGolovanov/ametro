@@ -93,7 +93,4 @@ public class Constants {
 	public static final String PMETRO_EXTENSION = ".pmz";
 	public static final String AMETRO_EXTENSION = ".ametro";
 
-	
-    
-	
 }

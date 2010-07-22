@@ -223,7 +223,7 @@ public class Catalog {
 		if(fileName.endsWith(Constants.PMETRO_EXTENSION)){
 			systemName += Constants.AMETRO_EXTENSION;
 		}
-		
+	
 		CatalogMap map = new CatalogMap(
 				 catalog,
 				 systemName,

@@ -60,6 +60,10 @@ public class ImportTransportDirectory {
 			this.mTransportType = transportType;
 		}
 
+		public String getName(String locale) {
+			return mFileName;
+		}
+
 	}
 	
 	public ImportTransportDirectory(Context context) {
