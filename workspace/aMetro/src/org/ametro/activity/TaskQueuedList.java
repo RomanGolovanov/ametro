@@ -18,36 +18,15 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package org.ametro.catalog.storage.tasks;
+package org.ametro.activity;
 
-import android.os.Parcel;
+import android.app.Activity;
+import android.os.Bundle;
 
-public abstract class UpdateMapTask extends BaseTask {
+public class TaskQueuedList extends Activity {
 
-	protected final String mSystemName;
-
-	public UpdateMapTask(String systemName) {
-		this.mSystemName = systemName;
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		// TODO Put your code here
 	}
-	
-	public UpdateMapTask(Parcel in) {
-		this.mSystemName = in.readString();
-	}
-
-	public Object getTaskId() {
-		return mSystemName;
-	}
-
-	public boolean isAsync() {
-		return false;
-	}
-
-	public int describeContents() {
-		return 0;
-	}
-
-	public void writeToParcel(Parcel out, int flags) {
-		out.writeString(mSystemName);
-	}
-
 }

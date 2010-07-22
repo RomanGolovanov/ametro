@@ -41,12 +41,26 @@ public abstract class BaseTask implements Parcelable {
 	public abstract Object getTaskId();
 	
 	private ICatalogStorageTaskListener mCallback;
+	private Throwable mFailReason;
+	private long mBeginTimestamp;
+	private long mEndTimestamp;
+	
 	protected boolean mIsCanceled;
 	protected boolean mIsDone;
 	protected boolean mIsRunning;
 
-
+	public Throwable getFailReason() {
+		return mFailReason;
+	}
+	public long getBeginTimestamp() {
+		return mBeginTimestamp;
+	}
+	public long getEndTimestamp() {
+		return mEndTimestamp;
+	}
+	
 	public void execute(Context context, ICatalogStorageTaskListener callback) {
+		mBeginTimestamp = System.currentTimeMillis();
 		mIsRunning = true;
 		mIsCanceled = false;
 		mIsDone = false;
@@ -59,8 +73,10 @@ public abstract class BaseTask implements Parcelable {
 		}catch(CanceledException ex){
 			canceled();
 		} catch (Throwable reason) {
+			mFailReason = reason;
 			failed(reason);
 		}
+		mEndTimestamp = System.currentTimeMillis();
 		mIsRunning = false;
 	}
 
