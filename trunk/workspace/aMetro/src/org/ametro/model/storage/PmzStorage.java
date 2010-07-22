@@ -699,7 +699,7 @@ public class PmzStorage implements IModelStorage {
 						}else if(key.equalsIgnoreCase("Alias")){
 							lineName = value;
 						}else if(key.equalsIgnoreCase("Aliases")){
-							lineName = value;
+							aliasesList = value;
 						}			
 
 					}else if(section.equalsIgnoreCase("Transfers")){
