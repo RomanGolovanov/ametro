@@ -29,12 +29,6 @@ import org.ametro.util.StringUtil;
 
 public class Model {
 
-	public final static String LOCALE_RU = "ru";
-	public final static String LOCALE_EN = "en";
-
-	public final static int VERSION = 1;
-	public final static String COMPATIBILITY_VERSION = "0.2.4.r224";
-	
 	public String countryIso;
 	public int countryName;
 	public int cityName;

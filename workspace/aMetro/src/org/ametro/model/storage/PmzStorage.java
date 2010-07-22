@@ -65,6 +65,9 @@ import org.ametro.model.util.ModelUtil;
 import org.ametro.util.CollectionUtil;
 import org.ametro.util.StringUtil;
 
+import static org.ametro.Constants.LOCALE_EN;
+import static org.ametro.Constants.LOCALE_RU;
+
 public class PmzStorage implements IModelStorage {
 
 	/*package*/ static final int DEFAULT_LINE_BACKGOUND_COLOR = 0xFFFFFFFF; 
@@ -479,7 +482,7 @@ public class PmzStorage implements IModelStorage {
 				ImportMapEntity entity = mImportMapDirectory.get(mFile.getName(), view.systemName);
 				if(entity!=null){
 					view.transportTypes = entity.getTransportType();
-					view.name = appendLocalizedText(entity.getName(Model.LOCALE_EN), entity.getName(Model.LOCALE_RU));
+					view.name = appendLocalizedText(entity.getName(LOCALE_EN), entity.getName(LOCALE_RU));
 					view.isMain = entity.isMain();
 				}else{
 					view.transportTypes = 0;
@@ -719,7 +722,7 @@ public class PmzStorage implements IModelStorage {
 					int transportType = entity.getTransportType();
 					map.transportTypes = transportType;
 					map.typeName = TransportType.getTransportTypeResource(transportType);
-					map.name = appendLocalizedText(entity.getName(Model.LOCALE_EN), entity.getName(Model.LOCALE_RU));
+					map.name = appendLocalizedText(entity.getName(LOCALE_EN), entity.getName(LOCALE_RU));
 				}else{
 					if(map.typeName == 0){
 							map.typeName = TransportType.UNKNOWN_RESOURCE_INDEX;
@@ -894,9 +897,9 @@ public class PmzStorage implements IModelStorage {
 			CityDirectory.Entity cityEntity = suggestion.getCity();
 			CountryDirectory.Entity countryEntity = suggestion.getCountry();
 			
-			localeList.add(Model.LOCALE_EN);
+			localeList.add(LOCALE_EN);
 			textList.add(translitTexts);
-			localeList.add(Model.LOCALE_RU);
+			localeList.add(LOCALE_RU);
 			textList.add(originalTexts);
 			
 			// setup model
