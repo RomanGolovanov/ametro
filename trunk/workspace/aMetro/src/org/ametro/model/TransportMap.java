@@ -26,6 +26,7 @@ public class TransportMap {
 	public int transportTypes;
 	
 	public String systemName;
+	public int name;
 	public int typeName;
 	
 	public Model owner;

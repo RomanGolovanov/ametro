@@ -346,10 +346,8 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 		if (mOnline != null) {
 			int stateId = mStorageState.getOnlineCatalogState(mLocal,mOnline);
 			String stateName = states[stateId];
-			int stateColor = (res
-					.getIntArray(R.array.online_catalog_map_state_colors))[stateId];
-			mContent.createHeader().setTextLeft(getString(R.string.msg_online)).setTextRight(
-					stateName).setTextRightColor(stateColor);
+			int stateColor = (res.getIntArray(R.array.online_catalog_map_state_colors))[stateId];
+			mContent.createHeader().setTextLeft(getString(R.string.msg_online)).setTextRight(stateName).setTextRightColor(stateColor);
 			mOnlineWidget = mContent.createOnlineWidget();
 			mOnlineWidget.setSize(mOnline.getSize());
 			mOnlineWidget.setVersion(DateUtil.getDateTime( new Date( mOnline.getTimestamp() ) ) );
@@ -362,10 +360,8 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 			int stateId = mStorageState.getImportCatalogState(mLocal,
 					mImport);
 			String stateName = states[stateId];
-			int stateColor = (res
-					.getIntArray(R.array.import_catalog_map_state_colors))[stateId];
-			mContent.createHeader().setTextLeft(getString(R.string.msg_import)).setTextRight(
-					stateName).setTextRightColor(stateColor);
+			int stateColor = (res.getIntArray(R.array.import_catalog_map_state_colors))[stateId];
+			mContent.createHeader().setTextLeft(getString(R.string.msg_import)).setTextRight(stateName).setTextRightColor(stateColor);
 			mImportWidget = mContent.createImportWidget();
 			mImportWidget.setSize(mImport.getSize());
 			mImportWidget.setVersion(DateUtil.getDateTime( new Date( mImport.getTimestamp() ) ) );

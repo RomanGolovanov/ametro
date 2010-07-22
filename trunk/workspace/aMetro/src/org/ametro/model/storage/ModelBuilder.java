@@ -93,14 +93,12 @@ public class ModelBuilder {
 						locale);
 				if (Model.isDescriptionLoaded(model)) {
 					if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)) {
-						Log
-								.i(
-										Constants.LOG_TAG_MAIN,
-										"Model description loading time is "
-												+ (System.currentTimeMillis() - startTime)
-												+ "ms, Provider "
-												+ storage.getClass()
-														.getSimpleName());
+						Log.i(Constants.LOG_TAG_MAIN,
+							"Model description loading time is "
+									+ (System.currentTimeMillis() - startTime)
+									+ "ms, Provider "
+									+ storage.getClass()
+											.getSimpleName());
 					}
 				} else {
 					if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)) {
@@ -113,8 +111,8 @@ public class ModelBuilder {
 			} catch (Throwable e) {
 				if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)) {
 					Log.e(Constants.LOG_TAG_MAIN,
-							"Model description loading error, Provider "
-									+ storage.getClass().getSimpleName(), e);
+						"Model description loading error, Provider "
+								+ storage.getClass().getSimpleName(), e);
 				}
 			}
 		}
@@ -202,7 +200,6 @@ public class ModelBuilder {
 								+ localeName + " not found, Provider "
 								+ storage.getClass().getSimpleName());
 					}
-
 				}
 				return texts;
 			} catch (Throwable e) {

@@ -118,6 +118,8 @@ public class PmzStorage implements IModelStorage {
 		private Model mModel;
 		private boolean mDescriptionOnly;
 
+		private long mTimestamp;
+		
 		private String mCityFile = null;
 		private ArrayList<String> mTrpFiles = new ArrayList<String>(); 
 		private ArrayList<String> mMapFiles = new ArrayList<String>(); 
@@ -701,7 +703,6 @@ public class PmzStorage implements IModelStorage {
 						}else if(key.equalsIgnoreCase("Aliases")){
 							aliasesList = value;
 						}			
-
 					}else if(section.equalsIgnoreCase("Transfers")){
 						makeTransfer(value);
 					}else if (section.equalsIgnoreCase("AdditionalInfo")){
@@ -713,16 +714,18 @@ public class PmzStorage implements IModelStorage {
 						}
 					}
 				}
-				if(map.typeName == 0){
-					TransportMapEntity entity = mImportTransportDirectory.get(mFile.getName(), map.systemName);
-					if(entity!=null){
-						int transportType = entity.getTransportType();
-						map.transportTypes = transportType;
-						map.typeName = TransportType.getTransportTypeResource(transportType);
-					}else{
-						map.typeName = TransportType.UNKNOWN_RESOURCE_INDEX;
-						map.transportTypes = TransportType.UNKNOWN_ID;
-					}
+				TransportMapEntity entity = mImportTransportDirectory.get(mFile.getName(), map.systemName);
+				if(entity!=null){
+					int transportType = entity.getTransportType();
+					map.transportTypes = transportType;
+					map.typeName = TransportType.getTransportTypeResource(transportType);
+					map.name = appendLocalizedText(entity.getName(Model.LOCALE_EN), entity.getName(Model.LOCALE_RU));
+				}else{
+					if(map.typeName == 0){
+							map.typeName = TransportType.UNKNOWN_RESOURCE_INDEX;
+							map.transportTypes = TransportType.UNKNOWN_ID;
+					}					
+					map.name = appendLocalizedText(map.systemName);
 				}
 				if(line!=null){ // if end of line 
 					makeLineObjects(line, stationList, drivingList, aliasesList); // make station and segments
@@ -739,7 +742,9 @@ public class PmzStorage implements IModelStorage {
 			String[] russianDelays = null;
 			String[] englishDelays = null;
 
-			InputStream stream = mZipFile.getInputStream(mZipFile.getEntry(mCityFile));
+			ZipEntry cityEntry = mZipFile.getEntry(mCityFile);
+			mTimestamp = cityEntry.getTime();
+			InputStream stream = mZipFile.getInputStream(cityEntry);
 			final IniStreamReader ini = new IniStreamReader(new InputStreamReader(stream, ENCODING));
 			while(ini.readNext()){
 				final String key = ini.getKey();
@@ -806,7 +811,7 @@ public class PmzStorage implements IModelStorage {
 			model.systemName = mFile.getName().toLowerCase();
 
 			model.fileSystemName = mFile.getAbsolutePath();
-			model.timestamp = mFile.lastModified();
+			model.timestamp = mTimestamp;
 
 
 			makeTransportTypes(model);
@@ -1206,8 +1211,6 @@ public class PmzStorage implements IModelStorage {
 		public String toString() {
 			return "[FROM:" + from + ";TO:" + to + ";DELAY:" + delay + "]";
 		}
-
 	}
-
 }
 

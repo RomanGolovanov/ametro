@@ -372,6 +372,7 @@ public class CsvStorage implements IModelStorage {
 			obj.id = reader.readInt();
 			obj.transportTypes = reader.readInt();
 			obj.systemName = reader.readString();
+			obj.name = reader.readInt();
 			obj.typeName = reader.readInt();
 			obj.owner = model;
 			lst.add(obj);
@@ -541,6 +542,7 @@ public class CsvStorage implements IModelStorage {
 			writer.writeInt(obj.id);
 			writer.writeInt(obj.transportTypes);
 			writer.writeString(obj.systemName);
+			writer.writeInt(obj.name);
 			writer.writeInt(obj.typeName);
 			writer.newRecord();
 		}
