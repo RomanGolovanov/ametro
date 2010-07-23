@@ -21,17 +21,12 @@
 package org.ametro.model.route;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 
-import org.ametro.algorithm.DijkstraHeap;
 import org.ametro.model.MapView;
-import org.ametro.model.Model;
 import org.ametro.model.SegmentView;
 import org.ametro.model.StationView;
 import org.ametro.model.TransferView;
-import org.ametro.model.TransportSegment;
-import org.ametro.model.TransportTransfer;
 import org.ametro.model.util.ModelUtil;
 
 import android.graphics.Rect;
@@ -109,96 +104,6 @@ public class RouteView {
 
 	public ArrayList<TransferView> getTransfers() {
 		return mTransfers;
-	}
-	
-
-	public void findRoute() {
-		
-		final Model model = mMapView.owner;
-		final MapView map = mMapView;
-		
-		final int count = model.stations.length;
-		
-		DijkstraHeap.Graph g = new DijkstraHeap.Graph(count);
-		
-		for (SegmentView seg : map.segments) {
-			TransportSegment tseg = model.segments[seg.segmentId];
-			Integer delay = tseg.delay;
-			if (delay != null) {
-				g.addEdge(tseg.stationFromId,tseg.stationToId, (int)delay);
-			}
-		}
-		
-		for(TransferView tr : map.transfers){
-			TransportTransfer ttr = model.transfers[tr.transferId];
-			Integer delay = ttr.delay;
-			if (delay != null && delay != 0) {
-				g.addEdge(ttr.stationFromId,ttr.stationToId, delay);
-				g.addEdge(ttr.stationToId, ttr.stationFromId, delay);
-			}
-		}
-		
-	    long[] distances = new long[count];
-	    int[] pred = new int[count];
-	    DijkstraHeap.dijkstra(g, map.stations[mFrom].stationId, distances, pred);
-		
-	    ArrayList<SegmentView> segments = new ArrayList<SegmentView>();
-	    ArrayList<StationView> stations = new ArrayList<StationView>();
-	    ArrayList<TransferView> transfers = new ArrayList<TransferView>();
-	    ArrayList<Long> delays = new ArrayList<Long>();
-	    HashMap<StationView, Long> stationToDelay = new HashMap<StationView, Long>();
-	    
-//		
-//	    int to = mToId;
-//	    int from = pred[to];
-//	    mTime = distances[to];
-//	    StationView st = map.stations[to];
-//	    stations.add(st);
-//	    delays.add(distances[to]);
-//	    stationToDelay.put(st, distances[to]);
-//	    while( from!=-1 ){
-//	    	SegmentView seg = map.getSegment(from, to);
-//	    	if(seg!=null){
-//	    		segments.add(seg);
-//	    	}else{
-//	    		TransferView transfer = map.getTransfer(from, to);
-//	    		if(transfer!=null){
-//	    			transfers.add(transfer);
-//	    		}else{
-//	    			transfer = map.getTransfer(to, from);
-//	    			if(transfer!=null){
-//		    			transfers.add(transfer);
-//		    		}
-//	    		}
-//	    	}
-//	    	to = from;
-//	    	from = pred[to];
-//	    	
-//    		st = map.stations[to];
-//		    stations.add(st);
-//		    delays.add(distances[to]);
-//		    stationToDelay.put(st, distances[to]);
-//	    	
-//	    }
-	    
-	    if(segments!=null && segments.size()>0){
-	    	mTransfers = transfers;
-	    	mSegments = segments;
-    		Collections.reverse(stations);
-	    	mStations = stations;
-    		Collections.reverse(delays);
-    		mDelays = delays;
-	    	mStationDelays = stationToDelay;
-	    	//mHasRoute = true;
-//	    	mRect = ModelUtil.getDimensions(
-//	    			(SegmentView[]) segments.toArray(new SegmentView[segments.size()]), 
-//	    			(StationView[]) stations.toArray(new StationView[stations.size()]));
-	    }else{
-	    	//mHasRoute = false;
-	    	mSegments = null;
-	    	mStations = null;
-	    	mRect = null;
-	    }
 	}
 
 	public StationView getStationFrom() {

@@ -52,7 +52,7 @@ public class RouteBuilder {
 
 	private static TransportRoute[] findRoutes(Model model, RouteParameters parameters) {
 		TransportRoute route = findRoute(model, parameters);
-		if(route!=null){
+		if(route!=null && route.steps>0){
 			TransportRoute[] routes = new TransportRoute[1];
 			routes[0] = route;
 			return routes;
@@ -122,6 +122,7 @@ public class RouteBuilder {
 	    stations.add(_to);
 	    delays.add(distances[_to]);
 	    long length = distances[_to];
+	    int steps = 0;
 	    while( _from!=-1 ){
 	    	TransportSegment seg = model.getTransportSegment(_from, _to);
 	    	if(seg!=null){
@@ -143,6 +144,7 @@ public class RouteBuilder {
 		    stations.add(_to);
 		    delays.add(distances[_to]);
 	    	
+		    steps++;
 	    }
 	    
 	    
@@ -157,6 +159,7 @@ public class RouteBuilder {
     		Collections.reverse(delays);
     		route.delays = CollectionUtil.toArray(delays);
     		route.length = length;
+    		route.steps = steps;
 	    	 //mStationDelays = stationToDelay;
     		return route;
 	    }
