@@ -243,7 +243,8 @@ public class VectorMapView extends BaseMapView {
 
 	private void invalidateTileCache(Rect screenCoords, boolean force) {
 		try{
-			if(isCacheEntireImage()){
+			if(mScale < mTileCacheScale || isCacheEntireImage()){
+				mDisableEntireImageCaching = false;
 				int width = getContentWidth();
 				int height = getContentHeight();
 				final boolean isViewportChanged = mTileCacheScale != mScale || mTileCacheWidth != width || mTileCacheHeight != height;
@@ -276,7 +277,6 @@ public class VectorMapView extends BaseMapView {
 				return;
 			}
 		}catch(OutOfMemoryError e){
-			//mEntireCacheLimits = mEntireCacheLimits * 80 / 100;
 			mDisableEntireImageCaching = true;
 			if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)){
 				Log.e(Constants.LOG_TAG_MAIN, "Disable entire map caching limits due out of memory");

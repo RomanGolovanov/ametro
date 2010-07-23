@@ -32,6 +32,7 @@ public class TransportRoute {
 	/*package*/ int[] transfers;
 	
 	/*package*/ long length;
+	/*package*/ int steps;
 
 	public long getLength() {
 		return length;
