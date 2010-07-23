@@ -170,9 +170,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				String template = data.getStringExtra(PaymentDetailsDialog.EXTRA_CONTEXT);
 				String url = applyTemplate(template, currency, amount);
 				Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-				if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)){
-					Log.i(Constants.LOG_TAG_MAIN, "Start payment with currency: " + currency + ", amount: " + amount);
-					Log.i(Constants.LOG_TAG_MAIN, "URL: " + url);
+				if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
+					Log.d(Constants.LOG_TAG_MAIN, "Start payment with currency: " + currency + ", amount: " + amount);
+					Log.d(Constants.LOG_TAG_MAIN, "URL: " + url);
 				}
 				startActivity(webIntent);
 			}

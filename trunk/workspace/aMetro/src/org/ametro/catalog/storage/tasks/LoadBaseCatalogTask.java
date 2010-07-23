@@ -90,12 +90,12 @@ public abstract class LoadBaseCatalogTask extends BaseTask {
 		
 		final Resources res = context.getResources();
 		if(mCatalog==null || mForceRefresh){
-			if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)){
-				Log.i(Constants.LOG_TAG_MAIN,"Begin load catalog " + mCatalogId);
+			if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
+				Log.d(Constants.LOG_TAG_MAIN,"Begin load catalog " + mCatalogId);
 			}
 			if(!mForceRefresh && mFile.exists()){
-				if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)){
-					Log.i(Constants.LOG_TAG_MAIN,"Load catalog storage " + mCatalogId);
+				if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
+					Log.d(Constants.LOG_TAG_MAIN,"Load catalog storage " + mCatalogId);
 				}
 				update(0, 0, res.getString(R.string.msg_init_catalog));
 				loadFromStorage();
@@ -104,8 +104,8 @@ public abstract class LoadBaseCatalogTask extends BaseTask {
 				}
 			}
 			if(mCatalog==null || mForceRefresh || isDerpecated()){
-				if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)){
-					Log.i(Constants.LOG_TAG_MAIN,"Need refresh catalog " + mCatalogId);
+				if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
+					Log.d(Constants.LOG_TAG_MAIN,"Need refresh catalog " + mCatalogId);
 				}
 				refresh();
 				if(mCatalog!=null && !mCatalog.isCorrupted()){
@@ -113,8 +113,8 @@ public abstract class LoadBaseCatalogTask extends BaseTask {
 					saveToStorage();
 				}
 				if((mCatalog==null || mCatalog.isCorrupted()) && backup!=null && !backup.isCorrupted()){
-					if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)){
-						Log.i(Constants.LOG_TAG_MAIN,"Restore storage version of catalog " + mCatalogId);
+					if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
+						Log.d(Constants.LOG_TAG_MAIN,"Restore storage version of catalog " + mCatalogId);
 					}
 					mCatalog = backup;
 				}

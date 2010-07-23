@@ -58,8 +58,8 @@ public class LoadWebCatalogTask extends LoadBaseCatalogTask implements IDownload
 		File temp = new File(Constants.TEMP_CATALOG_PATH, "catalog.zip");
 		for(String catalogUrl : mCatalogBaseUrls){
 			String url = catalogUrl + mCatalogUrl; 
-			if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)){
-				Log.i(Constants.LOG_TAG_MAIN,"Download web catalog from " + url + " to local file " + temp.getAbsolutePath() );
+			if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
+				Log.d(Constants.LOG_TAG_MAIN,"Download web catalog from " + url + " to local file " + temp.getAbsolutePath() );
 			}
 			try{
 				FileUtil.touchDirectory(Constants.TEMP_CATALOG_PATH);

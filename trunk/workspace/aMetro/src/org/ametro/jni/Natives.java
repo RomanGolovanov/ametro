@@ -32,15 +32,14 @@ public class Natives {
 	public static boolean REQUESTED;
 	
 	static {
-		boolean ini;
+		boolean ini = false;
 		try {
 			System.loadLibrary("ametro");
-			ini = true;
+			//ini = true; //  <- Do not use natives now, for performance issues
     		if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)){
     			Log.i(Constants.LOG_TAG_MAIN,"Native library initialized");
     		}
 		} catch (Throwable t) {
-			ini = false;
     		if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.WARN)){
     			Log.w(Constants.LOG_TAG_MAIN, "Native library loading error", t);
     		}

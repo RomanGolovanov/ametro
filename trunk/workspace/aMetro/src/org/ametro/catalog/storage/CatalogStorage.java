@@ -452,8 +452,8 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 	}
 	
 	public void onTaskCanceled(BaseTask task){
-		if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)){
-			Log.w(Constants.LOG_TAG_MAIN, "Canceled task " + task.toString());
+		if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
+			Log.d(Constants.LOG_TAG_MAIN, "Canceled task " + task.toString());
 		}
 		synchronized (mTaskQueue) {
 			if(mSyncRunTask==task){
@@ -479,8 +479,8 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 	}
 	
 	public void onTaskFailed(BaseTask task, Throwable reason){
-		if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)){
-			Log.w(Constants.LOG_TAG_MAIN, "Failed task " + task.toString());
+		if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
+			Log.d(Constants.LOG_TAG_MAIN, "Failed task " + task.toString());
 		}
 		synchronized (mTaskQueue) {
 			if(mSyncRunTask==task){
@@ -509,8 +509,8 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 	}
 	
 	public void onTaskBegin(BaseTask task){
-		if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)){
-			Log.w(Constants.LOG_TAG_MAIN, "Begin task " + task.toString());
+		if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
+			Log.d(Constants.LOG_TAG_MAIN, "Begin task " + task.toString());
 		}
 		if(task instanceof UpdateMapTask){
 			fireCatalogChanged(LOCAL, mCatalogs[LOCAL]);
@@ -519,8 +519,8 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 	}
 	
 	public void onTaskDone(BaseTask task){
-		if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)){
-			Log.w(Constants.LOG_TAG_MAIN, "Done task " + task.toString());
+		if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
+			Log.d(Constants.LOG_TAG_MAIN, "Done task " + task.toString());
 		}
 		synchronized (mTaskQueue) {
 			if(mSyncRunTask==task){
@@ -557,30 +557,30 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 				final Class<? extends BaseTask> newTaskClass = task.getClass();
 				for(BaseTask queued : mTaskQueue){
 					if(queued.getClass().equals(newTaskClass) && taskId.equals( queued.getTaskId() )){
-						if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.WARN)){
-							Log.w(Constants.LOG_TAG_MAIN, "Reject task " + task.toString() + " due it already queued");
+						if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
+							Log.d(Constants.LOG_TAG_MAIN, "Reject task " + task.toString() + " due it already queued");
 						}
 						return false;
 					}
 				}
 				if(mSyncRunTask!=null && mSyncRunTask.getClass().equals(newTaskClass) && taskId.equals( mSyncRunTask.getTaskId() )){
-					if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.WARN)){
-						Log.w(Constants.LOG_TAG_MAIN, "Reject task " + task.toString() + " due it already runned");
+					if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
+						Log.d(Constants.LOG_TAG_MAIN, "Reject task " + task.toString() + " due it already runned");
 					}
 					return false;
 				}
 				for(BaseTask running : mAsyncRunQueue){
 					if(running.getClass().equals(newTaskClass) && taskId.equals( running.getTaskId() )){
-						if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.WARN)){
-							Log.w(Constants.LOG_TAG_MAIN, "Reject task " + task.toString() + " due it already runned async.");
+						if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
+							Log.d(Constants.LOG_TAG_MAIN, "Reject task " + task.toString() + " due it already runned async.");
 						}
 						return false;
 					}
 				}
 			}
 		}
-		if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.WARN)){
-			Log.w(Constants.LOG_TAG_MAIN, "Queued task " + task.toString() );
+		if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
+			Log.d(Constants.LOG_TAG_MAIN, "Queued task " + task.toString() );
 		}
 		mTaskQueue.add(task);
 		return true;
