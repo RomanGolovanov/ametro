@@ -695,7 +695,9 @@ public class MapViewActivity extends Activity implements OnClickListener {
 					mNavigationSegments = mCurrentRouteView.getSegments();
 					mNavigationStations = mCurrentRouteView.getStations();
 					mNavigationTransfers = mCurrentRouteView.getTransfers();
-					mCurrentStation = mNavigationStations.get(0);
+					if(mNavigationStations!=null && mNavigationStations.size()>0){
+						mCurrentStation = mNavigationStations.get(0);
+					}
 				}else if (mNavigationStations!=null){
 					clearNavigation(false);
 				}else{
@@ -708,7 +710,9 @@ public class MapViewActivity extends Activity implements OnClickListener {
 					mNavigationSegments = mCurrentRouteView.getSegments();
 					mNavigationStations = mCurrentRouteView.getStations();
 					mNavigationTransfers = mCurrentRouteView.getTransfers();
-					mCurrentStation = mNavigationStations.get(0);
+					if(mNavigationStations!=null && mNavigationStations.size()>0){
+						mCurrentStation = mNavigationStations.get(0);
+					}
 				}else {				
 					clearNavigation(false);
 				}
