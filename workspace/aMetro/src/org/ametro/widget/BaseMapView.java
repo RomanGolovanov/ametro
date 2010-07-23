@@ -110,8 +110,8 @@ public abstract class BaseMapView extends ScrollView {
             if (mIsScrollNeeded) {
                 mScrollX = mScrollCenterX - getWidth() / 2;
                 mScrollY = mScrollCenterY - getHeight() / 2;
-                if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO))
-                    Log.i(LOG_TAG_MAIN, "Set scroll center to " + mScrollCenterX + "x"
+                if (Log.isLoggable(LOG_TAG_MAIN, Log.DEBUG))
+                    Log.d(LOG_TAG_MAIN, "Set scroll center to " + mScrollCenterX + "x"
                             + mScrollCenterY);
                 invalidateScroll();
                 mIsScrollNeeded = false;

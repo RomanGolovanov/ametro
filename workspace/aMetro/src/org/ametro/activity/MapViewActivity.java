@@ -81,7 +81,7 @@ import android.widget.ZoomControls;
 
 public class MapViewActivity extends Activity implements OnClickListener {
 
-	
+
 
 	public void onClick(View src) {
 		if(src == mNavigatePreviousButton){
@@ -181,11 +181,10 @@ public class MapViewActivity extends Activity implements OnClickListener {
 		case REQUEST_LOCATION:
 			if(resultCode == RESULT_OK){
 				Location location = data.getParcelableExtra(LocationSearchDialog.LOCATION);
-				mLocationSearchTask = new LocationSearchTask();
-				mLocationSearchTask.execute(location);
-			}
-			if(resultCode == RESULT_CANCELED){
-				Toast.makeText(MapViewActivity.this,R.string.msg_location_unknown, Toast.LENGTH_SHORT).show();			
+				if(location!=null){
+					mLocationSearchTask = new LocationSearchTask();
+					mLocationSearchTask.execute(location);
+				}
 			}
 			break;
 		}
@@ -277,8 +276,8 @@ public class MapViewActivity extends Activity implements OnClickListener {
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
 		final String localeName = settings.getString(getString(R.string.pref_locale_key), null);
 		return !StringUtil.isNullOrEmpty(localeName) && !"auto".equalsIgnoreCase(localeName)  
-				? new Locale(localeName) 
-				: mDefaultLocale;
+		? new Locale(localeName) 
+		: mDefaultLocale;
 	}
 
 	public void setupLocale() {
@@ -590,8 +589,9 @@ public class MapViewActivity extends Activity implements OnClickListener {
 				&& mModelName != null) {
 			Integer zoom = loadZoom();
 			if (zoom != null) {
-				if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO))
-					Log.i(LOG_TAG_MAIN, getString(R.string.log_restore_map_zoom) + zoom);
+				if (Log.isLoggable(LOG_TAG_MAIN, Log.DEBUG)){ 
+					Log.d(LOG_TAG_MAIN, getString(R.string.log_restore_map_zoom) + zoom);
+				}
 				setZoom(zoom);
 			} else {
 				zoom = MIN_ZOOM_LEVEL;
@@ -608,21 +608,22 @@ public class MapViewActivity extends Activity implements OnClickListener {
 					}
 					zoom++;
 				}
-				if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO))
-					Log.i(LOG_TAG_MAIN, getString(R.string.log_default_map_zoom) + zoom);
+				if (Log.isLoggable(LOG_TAG_MAIN, Log.DEBUG)){
+					Log.d(LOG_TAG_MAIN, getString(R.string.log_default_map_zoom) + zoom);
+				}
 				setZoom(zoom);
 			}
 			PointF pos = loadScrollPosition();
 			if (pos != null) {
-				if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO))
-					Log.i(LOG_TAG_MAIN, getString(R.string.log_restore_map_position) + pos.x
-							+ "x" + pos.y);
+				if (Log.isLoggable(LOG_TAG_MAIN, Log.DEBUG)){
+					Log.d(LOG_TAG_MAIN, getString(R.string.log_restore_map_position) + pos.x + "x" + pos.y);
+				}
 				mVectorMapView.setModelScrollCenter(pos);
 			} else {
 				int x = mMapView.width / 2;
 				int y = mMapView.height / 2;
-				if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO))
-					Log.i(LOG_TAG_MAIN, getString(R.string.log_default_map_position) + x
+				if (Log.isLoggable(LOG_TAG_MAIN, Log.DEBUG))
+					Log.d(LOG_TAG_MAIN, getString(R.string.log_default_map_position) + x
 							+ "x" + y);
 				mVectorMapView.setModelScrollCenter(new PointF(x, y));
 			}
@@ -701,7 +702,7 @@ public class MapViewActivity extends Activity implements OnClickListener {
 					clearNavigation(false);
 				}
 			}else{
-				
+
 				if(mRouteContainer!=null){
 					mCurrentRouteView = new RouteView(view, mRouteContainer.getDefaultRoute());
 					mNavigationSegments = mCurrentRouteView.getSegments();
@@ -712,17 +713,17 @@ public class MapViewActivity extends Activity implements OnClickListener {
 					clearNavigation(false);
 				}
 			}
-			
+
 		}else{
 			// we change model, so need to drop any route/selection
 			clearNavigation(false);
-			
+
 		}
 
 
 
-		if (Log.isLoggable(LOG_TAG_MAIN, Log.INFO))
-			Log.i(LOG_TAG_MAIN, getString(R.string.log_loaded_subway_map) + mMapView.systemName
+		if (Log.isLoggable(LOG_TAG_MAIN, Log.DEBUG))
+			Log.d(LOG_TAG_MAIN, getString(R.string.log_loaded_subway_map) + mMapView.systemName
 					+ getString(R.string.log_with_size) + mMapView.width + "x"
 					+ mMapView.height);
 
@@ -1035,14 +1036,12 @@ public class MapViewActivity extends Activity implements OnClickListener {
 				mVectorMapView.scrollModelCenterTo(point.x, point.y);
 				mVectorMapView.postInvalidate();
 			} else {
-				Toast.makeText(MapViewActivity.this,
-						R.string.msg_location_unknown, Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(MapViewActivity.this, R.string.msg_location_unknown, Toast.LENGTH_SHORT).show();
 			}
 			super.onPostExecute(view);
 		}
 	}
-	
+
 
 	static MapViewActivity Instance;
 
@@ -1107,7 +1106,7 @@ public class MapViewActivity extends Activity implements OnClickListener {
 	private static final int REQUEST_MAP = 1;
 	private static final int REQUEST_SETTINGS = 2;
 	private static final int REQUEST_LOCATION = 3;
-	
+
 
 	private ArrayList<StationView> mNavigationStations;
 	private ArrayList<SegmentView> mNavigationSegments;

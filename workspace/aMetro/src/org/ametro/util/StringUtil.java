@@ -59,7 +59,7 @@ public class StringUtil {
 	//	public static String[] splitCommaSeparatedString(String value) {
 	//		if(value == null || value.length() == 0) return new String[0];
 	//		value = value.replaceAll("/\\(.*\\)/", "");
-	//		return value.s0plit(",");
+	//		return value.split(",");
 	//	}
 
 	public static String formatStringArray(String[] value) {

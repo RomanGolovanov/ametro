@@ -32,78 +32,110 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.Toast;
 
-public class LocationSearchDialog extends Activity implements LocationListener {
+public class LocationSearchDialog extends Activity implements LocationListener, OnClickListener {
 
 	public static final String LOCATION = "LOCATION";
-	public static final int WAIT_DELAY = 10000;
 
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.location_search);
-		mPrivateHandler.postDelayed(mReturnResult, WAIT_DELAY);
-		mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-	}
-
-	protected void onResume() {
-		mProviders = mLocationManager.getAllProviders();
-		for (String provider : mProviders) {
-			if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)) {
-				Log.i(Constants.LOG_TAG_MAIN,
-						"Register listener for location provider " + provider);
-			}
-			mLocationManager.requestLocationUpdates(provider, 0, 0, this);
-		}
-		super.onResume();
-	}
-
-	protected void onPause() {
-		if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)) {
-			Log.i(Constants.LOG_TAG_MAIN,
-					"Remove listeners for location providers");
-		}		
-		mLocationManager.removeUpdates(this);
-		super.onPause();
-	}
+	private Location mLocation;
 
 	private List<String> mProviders;
 
 	private LocationManager mLocationManager;
-	private Location mLocation;
+	private Button mCancelButton;
+	
+	private static final int REQUEST_ENABLE_LOCATION_SERVICES = 1;
 
-	private Object mMutex = new Object();
-	private Handler mPrivateHandler = new Handler();
-	private Runnable mReturnResult = new Runnable() {
-		public void run() {
-			if (mLocation != null) {
-				Intent data = new Intent();
-				data.putExtra(LOCATION, mLocation);
-				setResult(RESULT_OK, data);
-			} else {
-				setResult(RESULT_CANCELED);
-			}
-			finish();
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.location_search);
+		mCancelButton = (Button)findViewById(R.id.btn_cancel);
+		mCancelButton.setOnClickListener(this);
+		mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+		if(!isLocationProvidersEnabled()){
+			startActivityForResult(new Intent(android.provider.Settings.ACTION_SECURITY_SETTINGS), REQUEST_ENABLE_LOCATION_SERVICES); 
+			Toast.makeText(this, R.string.msg_location_need_enable_providers, Toast.LENGTH_LONG).show();
 		}
-	};
+	}
+
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		switch (requestCode) {
+		case REQUEST_ENABLE_LOCATION_SERVICES:
+			if(!isLocationProvidersEnabled()){
+				setResult(RESULT_CANCELED);
+				finish();
+			}
+			break;
+
+		default:
+			break;
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+	
+	protected void onResume() {
+		bindLocationProviders();
+		super.onResume();
+	}
+
+	protected void onPause() {
+		unbindLocationProviders();
+		super.onPause();
+	}
 
 	public void onLocationChanged(Location location) {
 		if (location != null) {
-			if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)) {
-				Log.i(Constants.LOG_TAG_MAIN,
+			if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)) {
+				Log.d(Constants.LOG_TAG_MAIN,
 						"Received location change from provider "
-								+ location.getProvider().toUpperCase());
+						+ location.getProvider().toUpperCase());
 			}
 			if (mLocation == null) {
-				synchronized (mMutex) {
-					if (mLocation == null) {
-						mLocation = new Location(location);
-					}
-					mPrivateHandler.post(mReturnResult);
+				if (mLocation == null) {
+					mLocation = new Location(location);
 				}
+				finishWithResult();
 			}
 		}
+	}
+
+	private boolean isLocationProvidersEnabled() {
+		mProviders = mLocationManager.getProviders(true);
+		return mProviders!=null && mProviders.size() > 0;
+	}	
+
+	private void bindLocationProviders() {
+		mProviders = mLocationManager.getAllProviders();
+		for (String provider : mProviders) {
+			if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)) {
+				Log.d(Constants.LOG_TAG_MAIN, "Register listener for location provider " + provider);
+			}
+			mLocationManager.requestLocationUpdates(provider, 0, 0, this);
+		}
+	}
+
+	private void unbindLocationProviders() {
+		if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)) {
+			Log.d(Constants.LOG_TAG_MAIN, "Remove listeners for location providers");
+		}		
+		mLocationManager.removeUpdates(this);
+	}
+
+	private void finishWithResult(){
+		if (mLocation != null) {
+			Intent data = new Intent();
+			data.putExtra(LOCATION, mLocation);
+			setResult(RESULT_OK, data);
+		} else {
+			setResult(RESULT_OK);
+		}
+		finish();
 	}
 
 	public void onProviderDisabled(String provider) {
@@ -113,6 +145,13 @@ public class LocationSearchDialog extends Activity implements LocationListener {
 	}
 
 	public void onStatusChanged(String provider, int status, Bundle bundle) {
+	}
+
+	public void onClick(View v) {
+		if(v == mCancelButton){
+			setResult(RESULT_CANCELED);
+			finish();
+		}
 	}
 
 }

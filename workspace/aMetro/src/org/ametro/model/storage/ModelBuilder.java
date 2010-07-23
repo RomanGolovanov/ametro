@@ -55,25 +55,21 @@ public class ModelBuilder {
 				long startTime = System.currentTimeMillis();
 				Model model = storage.loadModel(fileName, locale);
 				if (!Model.isNullOrEmpty(model)) {
-					if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)) {
-						Log.i(Constants.LOG_TAG_MAIN, "Model loading time is "
+					if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)) {
+						Log.d(Constants.LOG_TAG_MAIN, "Model loading time is "
 								+ (System.currentTimeMillis() - startTime)
 								+ "ms, Provider "
 								+ storage.getClass().getSimpleName());
 					}
 				} else {
 					if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)) {
-						Log.e(Constants.LOG_TAG_MAIN,
-								"Model loading error - incorrect file, Provider "
-										+ storage.getClass().getSimpleName());
+						Log.e(Constants.LOG_TAG_MAIN, "Model loading error - incorrect file, Provider " + storage.getClass().getSimpleName());
 					}
 				}
 				return model;
 			} catch (Throwable e) {
 				if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)) {
-					Log.e(Constants.LOG_TAG_MAIN,
-							"Model loading error, Provider "
-									+ storage.getClass().getSimpleName(), e);
+					Log.e(Constants.LOG_TAG_MAIN, "Model loading error, Provider " + storage.getClass().getSimpleName(), e);
 				}
 			}
 		}
@@ -92,8 +88,8 @@ public class ModelBuilder {
 				Model model = storage.loadModelDescription(fileName,
 						locale);
 				if (Model.isDescriptionLoaded(model)) {
-					if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)) {
-						Log.i(Constants.LOG_TAG_MAIN,
+					if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)) {
+						Log.d(Constants.LOG_TAG_MAIN,
 							"Model description loading time is "
 									+ (System.currentTimeMillis() - startTime)
 									+ "ms, Provider "
@@ -125,8 +121,8 @@ public class ModelBuilder {
 			try {
 				long startTime = System.currentTimeMillis();
 				storage.saveModel(fileName, model);
-				if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)) {
-					Log.i(Constants.LOG_TAG_MAIN, "Model saving time is "
+				if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)) {
+					Log.d(Constants.LOG_TAG_MAIN, "Model saving time is "
 							+ (System.currentTimeMillis() - startTime)
 							+ "ms, Provider "
 							+ storage.getClass().getSimpleName());
@@ -150,16 +146,16 @@ public class ModelBuilder {
 				MapView view = storage.loadModelView(fileName, model,
 						name);
 				if (view != null) {
-					if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)) {
-						Log.i(Constants.LOG_TAG_MAIN, "Model view " + name
+					if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)) {
+						Log.d(Constants.LOG_TAG_MAIN, "Model view " + name
 								+ " loading time is "
 								+ (System.currentTimeMillis() - startTime)
 								+ "ms, Provider "
 								+ storage.getClass().getSimpleName());
 					}
 				} else {
-					if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)) {
-						Log.i(Constants.LOG_TAG_MAIN, "Model view " + name
+					if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)) {
+						Log.e(Constants.LOG_TAG_MAIN, "Model view " + name
 								+ " not found, Provider "
 								+ storage.getClass().getSimpleName());
 					}
@@ -177,8 +173,7 @@ public class ModelBuilder {
 		return null;
 	}
 
-	public static String[] loadModelLocale(String fileName,
-			Model model, int localeId) {
+	public static String[] loadModelLocale(String fileName, Model model, int localeId) {
 		IModelStorage storage = getStorage(fileName);
 		if (storage != null) {
 			try {
@@ -187,16 +182,16 @@ public class ModelBuilder {
 				String[] texts = storage.loadModelLocale(fileName,
 						model, localeId);
 				if (texts != null) {
-					if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)) {
-						Log.i(Constants.LOG_TAG_MAIN, "Model locale "
+					if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)) {
+						Log.d(Constants.LOG_TAG_MAIN, "Model locale "
 								+ localeName + " loading time is "
 								+ (System.currentTimeMillis() - startTime)
 								+ "ms, Provider "
 								+ storage.getClass().getSimpleName());
 					}
 				} else {
-					if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)) {
-						Log.i(Constants.LOG_TAG_MAIN, "Model locale "
+					if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)) {
+						Log.e(Constants.LOG_TAG_MAIN, "Model locale "
 								+ localeName + " not found, Provider "
 								+ storage.getClass().getSimpleName());
 					}
