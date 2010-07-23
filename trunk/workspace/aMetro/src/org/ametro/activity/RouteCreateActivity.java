@@ -176,8 +176,10 @@ public class RouteCreateActivity extends Activity implements OnClickListener,
 		if(routes!=null){
 			StationView fromStation = mMapView.findViewByStationId( routes.getStationFromId() );
 			StationView toStation = mMapView.findViewByStationId( routes.getStationToId() );
+			if(fromStation!=null && toStation!=null){
 			mFromText.setText( StationListAdapter.getStationName(mMapView, fromStation) );
 			mToText.setText( StationListAdapter.getStationName(mMapView, toStation) );
+			}
 		}else{
 			final StationView station = MapViewActivity.Instance.getCurrentStation();
 			if(station!=null){

@@ -81,16 +81,15 @@ public class MapView {
 
 	public boolean hasConnections(StationView station) {
 		if (station != null) {
-			return true;
-			//			final int id = station.id;
-			//			for (SegmentView segment : segments) {
-			//				if(segment.stationViewFromId == id || segment.stationViewToId == id){
-			//					Integer delay = owner.segments[segment.id].delay;
-			//					if (delay != null && delay != 0) {
-			//						return true;
-			//					}
-			//				}			
-			//			}
+			final int id = station.stationId;
+			for(TransportSegment seg : owner.segments){
+				if(seg.stationFromId == id || seg.stationToId == id){
+					Integer delay = seg.delay;
+					if (delay != null && delay != 0) {
+						return true;
+					}
+				}
+			}
 		}
 		return false;
 	}
@@ -130,30 +129,6 @@ public class MapView {
 		return segmentsIndexed.get( (fromId << 32) + toId );
 	}
 
-	public StationView getStationView(String lineName, String stationName) {
-		LineView lineView = getLineView(lineName);
-		if(lineView!=null){
-			for(StationView station : stations){
-				if(station.lineViewId == lineView.id){
-					if(station.getSystemName().equalsIgnoreCase(stationName)){
-						return station;
-					}
-				}
-			}
-		}
-		return null;
-	}
-
-	public LineView getLineView(String lineName) {
-		for(LineView line : lines){
-			final TransportLine l = owner.lines[line.id];
-			if(l.systemName.equalsIgnoreCase(lineName)){
-				return line;
-			}
-		}
-		return null;
-	}
-
 	public StationView getStationViewByDisplayName(String lineName, String stationName) {
 		LineView lineView = getLineViewByDisplayName(lineName);
 		if(lineView!=null){
@@ -170,7 +145,7 @@ public class MapView {
 
 	public LineView getLineViewByDisplayName(String lineName) {
 		for(LineView line : lines){
-			final TransportLine l = owner.lines[line.id];
+			final TransportLine l = owner.lines[line.lineId];
 			if(l.getName().equalsIgnoreCase(lineName)){
 				return line;
 			}
