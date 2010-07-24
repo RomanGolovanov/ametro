@@ -44,11 +44,13 @@ public abstract class BaseTask implements Parcelable {
 	private Throwable mFailReason;
 	private long mBeginTimestamp;
 	private long mEndTimestamp;
+	private Context mContext;
 	
 	protected boolean mIsCanceled;
 	protected boolean mIsDone;
 	protected boolean mIsRunning;
 
+	
 	public Throwable getFailReason() {
 		return mFailReason;
 	}
@@ -59,7 +61,12 @@ public abstract class BaseTask implements Parcelable {
 		return mEndTimestamp;
 	}
 	
+	protected Context getContext(){
+		return mContext;
+	}
+	
 	public void execute(Context context, ICatalogStorageTaskListener callback) {
+		mContext = context;
 		mBeginTimestamp = System.currentTimeMillis();
 		mIsRunning = true;
 		mIsCanceled = false;

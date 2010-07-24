@@ -97,6 +97,10 @@
     <string name="pref_import_key">PMZ_IMPORT</string>
     <string name="pref_import_description">Check to allow import of PMZ map format</string>
 
+    <string name="pref_section_license">License</string>
+    <string name="pref_section_license_key">LICENSE</string>
+    <string name="pref_section_license_description">See information about program license</string>
+ 
     <string name="pref_section_donate">Support Developers</string>
     <string name="pref_section_donate_key">DONATE</string>
     <string name="pref_section_donate_description">You can donate to developers here</string>
@@ -126,25 +130,6 @@
     <string name="url_wm"></string>
     <string name="url_mb">file:///android_asset/moneybookers_form.html</string>
     
-    <string name="text_about">
-&lt;h4&gt;aMetro v.%s&lt;h4&gt;
-&lt;h5&gt;This is a program of cities underground and Metro.&lt;/h6&gt;
-&lt;h6&gt;Displays the metro schemes, allows you to find the shortest path between stations, and also describes what is next to the stations. Maps are compatible with the project from pMetro. ©2010&lt;/h6&gt;
-
-&lt;p&gt;
-Developers: Golovanov Roman, Vinichenko Vlad&lt;br/&gt;
-Testers: Kuzmin Alexander, Nikitin Alexey&lt;br/&gt;
-Design: Dusty Rat&lt;br/&gt;
-&lt;/p&gt;
-
-&lt;p&gt;Thanks to Boris Muradov (pMetro’s author, www.pmetro.su) for providing info and materials.&lt;/p&gt;
-&lt;p&gt;Maps icons collection: http://code.google.com/p/google-maps-icons/&lt;/p&gt;
-&lt;p&gt;Icons collection: http://www.iconsearch.ru/search/?q=iconset:snowish&lt;/p&gt;
-&lt;p&gt;Flag collection: http://icondrawer.com/free.php&lt;/p&gt;
-
-&lt;p&gt;Developers’s site: http://ametro.no-ip.org&lt;/p&gt;
-&lt;p&gt;Your questions and suggestions send to ametroproject@gmail.com&lt;/p&gt;
-	</string>
     <string name="menu_search">Search</string>
     <string name="menu_library">Maps</string>
     <string name="menu_routes">Routes</string>
@@ -266,6 +251,10 @@ Design: Dusty Rat&lt;br/&gt;
     <string name="msg_error_description_title">Error Description</string>
     <string name="msg_unknown_country">Unknown country</string>
     <string name="msg_location_need_enable_providers">You need enable location services</string>
+    <string name="msg_online_catalog_dropbox">primary map list</string>
+    <string name="msg_online_catalog_narod">secondary map list</string>
+    <string name="msg_try_download_catalog">Try download</string>
+    <string name="msg_please_wait">Please wait...</string>
         
     <string name="tab_maps_favorited">Favorites</string>
     <string name="tab_maps_local">My maps</string>
@@ -292,4 +281,10 @@ Design: Dusty Rat&lt;br/&gt;
 	<string name="btn_close">Close</string>
 	<string name="btn_cancel">Cancel</string>
 	<string name="btn_delete_pmz">Delete PMZ</string>
+	<string name="btn_changelog">Changes</string>
+	<string name="btn_donate">Donate</string>
+	<string name="btn_ok">Ok</string>
+	<string name="btn_gpl">GPL</string>
+	
+    <string name="title_eula">EULA</string>
 </resources>

@@ -35,6 +35,8 @@ import java.util.TreeMap;
 import org.ametro.Constants;
 import org.ametro.MapUri;
 import org.ametro.R;
+import org.ametro.dialog.AboutDialog;
+import org.ametro.dialog.EULADialog;
 import org.ametro.dialog.LocationSearchDialog;
 import org.ametro.dialog.SchemeListDialog;
 import org.ametro.model.MapView;
@@ -55,9 +57,12 @@ import org.ametro.widget.VectorMapView;
 import org.ametro.widget.BaseMapView.OnMapEventListener;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.DialogInterface.OnDismissListener;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.location.Location;
@@ -79,9 +84,27 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ZoomControls;
 
-public class MapViewActivity extends Activity implements OnClickListener {
+public class MapViewActivity extends Activity implements OnClickListener, OnDismissListener {
 
+	protected Dialog onCreateDialog(int id) {
+		switch (id) {
+		case DIALOG_EULA:
+			EULADialog dlg = new EULADialog(this);
+			dlg.setOnDismissListener(this);
+			return dlg;
+		default:
+			break;
+		}
+		return super.onCreateDialog(id);
+	}
 
+	public void onDismiss(DialogInterface dialog) {
+		if(dialog instanceof EULADialog){
+			if(!Constants.EULA_ACCEPTED_FILE.exists()){
+				finish();
+			}		
+		}
+	}
 
 	public void onClick(View src) {
 		if(src == mNavigatePreviousButton){
@@ -137,6 +160,13 @@ public class MapViewActivity extends Activity implements OnClickListener {
 		}
 	}
 
+	protected void onResume() {
+		if(!Constants.EULA_ACCEPTED_FILE.exists()){
+			showDialog(DIALOG_EULA);
+		}
+		super.onResume();
+	}
+	
 	protected void onPause() {
 		onSaveMapState();
 		super.onPause();
@@ -236,7 +266,7 @@ public class MapViewActivity extends Activity implements OnClickListener {
 			startActivityForResult(new Intent(this, SettingsActivity.class), REQUEST_SETTINGS);
 			return true;
 		case MAIN_MENU_ABOUT:
-			startActivity(new Intent(this, AboutActivity.class));
+			AboutDialog.show(this);
 			return true;
 		case MAIN_MENU_LAYERS:
 			return true;
@@ -1049,6 +1079,8 @@ public class MapViewActivity extends Activity implements OnClickListener {
 
 	static MapViewActivity Instance;
 
+	private static final int DIALOG_EULA = 1;
+	
 	private static final int MAIN_MENU_FIND = 1;
 	private static final int MAIN_MENU_LIBRARY = 2;
 	private static final int MAIN_MENU_ROUTES = 3;
@@ -1118,6 +1150,4 @@ public class MapViewActivity extends Activity implements OnClickListener {
 	private StationView mCurrentStation;
 
 	private Locale mDefaultLocale;
-
-
 }

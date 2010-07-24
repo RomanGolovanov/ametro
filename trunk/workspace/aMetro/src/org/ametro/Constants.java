@@ -77,6 +77,11 @@ public class Constants {
 		"http://ametro-project.narod.ru/icons.zip"
 	};
 	
+	public static final int[] ONLINE_CATALOG_NAMES = {
+		R.string.msg_online_catalog_dropbox,
+		R.string.msg_online_catalog_narod,
+	};
+	
 	public static final String[] ONLINE_CATALOG_BASE_URLS = {
 		"http://dl.dropbox.com/u/8171021/0.2.7/",
 		"http://ametro-project.narod.ru/0.2.7/"
@@ -95,6 +100,9 @@ public class Constants {
 	public static final File IMPORT_CATALOG_STORAGE = new File(ROOT_PATH,"catalog.import.xml");
 	
 	public static final File NO_MEDIA_FILE = new File(ROOT_PATH, NO_MEDIA_TAG);
+	
+	public static final File EULA_ACCEPTED_FILE = new File(ROOT_PATH, ".eula_accepted");
+	public static final File EULA_FILE = new File(ROOT_PATH, "gpl.html");
 
 	public static final String PMETRO_EXTENSION = ".pmz";
 	public static final String AMETRO_EXTENSION = ".ametro";

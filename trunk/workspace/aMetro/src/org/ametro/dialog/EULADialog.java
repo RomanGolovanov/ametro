@@ -21,64 +21,75 @@
 package org.ametro.dialog;
 
 import org.ametro.ApplicationEx;
-import org.ametro.GlobalSettings;
+import org.ametro.Constants;
 import org.ametro.R;
-import org.ametro.catalog.storage.tasks.DownloadIconsTask;
+import org.ametro.util.FileUtil;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnCancelListener;
+import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.net.Uri;
 import android.text.Html;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
-public class DownloadIconsDialog extends AlertDialog implements OnClickListener, OnCancelListener {
-
-	private boolean mChangeSettingsEnabled;
-
-	public DownloadIconsDialog(final Context context, final boolean changeSettings) {
-		super(context);
-		mChangeSettingsEnabled = changeSettings;
-
-		setTitle(R.string.msg_download_icons_dialog_title);
-		setCancelable(true);
-		setIcon(android.R.drawable.ic_dialog_info);
+public class EULADialog extends AlertDialog implements OnClickListener {
 		
+	public static void show(Context context){
+		new EULADialog(context).show();
+	}
+	
+	public EULADialog(Context context) {
+		super(context);
+		setTitle(R.string.title_eula);
+		setCancelable(true);
+		setIcon(android.R.drawable.ic_dialog_alert);
+		setButton(BUTTON_POSITIVE, context.getString(android.R.string.ok), this);
+		if(!Constants.EULA_ACCEPTED_FILE.exists()){
+			setButton(BUTTON_NEGATIVE, context.getString(android.R.string.cancel), this);
+		}
+		setButton(BUTTON_NEUTRAL, context.getString(R.string.btn_gpl), this);
+		String str;
+		try {
+			str = FileUtil.writeToString(context.getResources().openRawResource(R.raw.eula));
+		} catch (Exception e) {
+			str = e.toString();
+		}
 		final TextView message = new TextView(context);
-		final SpannableString s = new SpannableString(Html.fromHtml(context.getText(R.string.msg_download_icons_dialog_content).toString()));
+		final SpannableString s = new SpannableString(Html.fromHtml(str));
 		Linkify.addLinks(s, Linkify.WEB_URLS);
 		message.setText(s);
 		message.setMovementMethod(LinkMovementMethod.getInstance());
 		message.setPadding(5, 5, 5, 5);
-		setView(message);
-		
-		setButton(AlertDialog.BUTTON_POSITIVE, context.getText(android.R.string.yes), this);
-		setButton(AlertDialog.BUTTON_NEGATIVE, context.getText(android.R.string.no), this);
-		setOnCancelListener(this);
 
+		final ScrollView view= new ScrollView(context);
+		view.addView(message);
+		setView(view);
 	}
 
 	public void onClick(DialogInterface dialog, int which) {
-		if(which == AlertDialog.BUTTON_POSITIVE){
-			((ApplicationEx)getContext().getApplicationContext()).getCatalogStorage().requestTask( DownloadIconsTask.getInstance() );
+		if(which == BUTTON_POSITIVE){
+			FileUtil.touchFile(Constants.EULA_ACCEPTED_FILE);
+			dismiss();
 		}
-		if(which == AlertDialog.BUTTON_NEGATIVE){
-			if(mChangeSettingsEnabled){
-				GlobalSettings.setCountryIconsEnabled(getContext(), false);
+		if(which == BUTTON_NEGATIVE){
+			FileUtil.delete(Constants.EULA_ACCEPTED_FILE);
+			dismiss();
+		}
+		if(which == BUTTON_NEUTRAL){
+			if(!Constants.EULA_FILE.exists()){
+				ApplicationEx.extractEULA(getContext());
 			}
-			dialog.dismiss();
-		}
-
-	}
-
-	public void onCancel(DialogInterface dialog) {
-		if(mChangeSettingsEnabled){
-			GlobalSettings.setCountryIconsEnabled(getContext(), false);
+			Intent intent = new Intent();
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setAction(android.content.Intent.ACTION_VIEW);
+            intent.setDataAndType(Uri.fromFile(Constants.EULA_FILE), "text/plain");
+			getContext().startActivity(intent);
 		}
 	}
-
 }

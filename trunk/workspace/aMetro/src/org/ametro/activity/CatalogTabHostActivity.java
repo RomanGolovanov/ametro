@@ -25,20 +25,49 @@ import org.ametro.GlobalSettings;
 import org.ametro.R;
 import org.ametro.catalog.storage.tasks.DownloadIconsTask;
 import org.ametro.dialog.DownloadIconsDialog;
+import org.ametro.dialog.EULADialog;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.TabActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnDismissListener;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.TabHost;
 
-public class CatalogTabHostActivity extends TabActivity {
+public class CatalogTabHostActivity extends TabActivity implements OnDismissListener{
 
+	private static final int DIALOG_EULA = 1;
+	
 	private static final String TAB_LOCAL = "local";
 	private static final String TAB_ONLINE = "online";
 	private static final String TAB_IMPORT = "import";
 	
+	protected Dialog onCreateDialog(int id) {
+		switch (id) {
+		case DIALOG_EULA:
+			EULADialog dlg = new EULADialog(this);
+			dlg.setOnDismissListener(this);
+			return dlg;
+		default:
+			break;
+		}
+		return super.onCreateDialog(id);
+	}
+
+	public void onDismiss(DialogInterface dialog) {
+		if(dialog instanceof EULADialog){
+			if(!Constants.EULA_ACCEPTED_FILE.exists()){
+				finish();
+			}else{
+				if(!DownloadIconsTask.isRunning() && GlobalSettings.isCountryIconsEnabled(this)){
+					checkIcons();
+				}
+			}
+		}
+	}
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -71,7 +100,9 @@ public class CatalogTabHostActivity extends TabActivity {
 	}	
 	
 	protected void onResume() {
-		if(!DownloadIconsTask.isRunning() && GlobalSettings.isCountryIconsEnabled(this)){
+		if(!Constants.EULA_ACCEPTED_FILE.exists()){
+			showDialog(DIALOG_EULA);
+		}else if(!DownloadIconsTask.isRunning() && GlobalSettings.isCountryIconsEnabled(this)){
 			checkIcons();
 		}
 		super.onResume();
