@@ -11,7 +11,7 @@
         <activity android:name=".activity.MapDetailsActivity" android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".activity.RouteViewActivity"/>
         <activity android:launchMode="singleTop" android:name=".activity.RouteCreateActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".activity.AboutActivity"/>
+        <activity android:name=".activity.DonateActivity"/>
         <activity android:name=".activity.SettingsActivity"/>
         <activity android:name=".activity.StationViewActivity"/>
         <activity android:name=".activity.StationListActivity"/>

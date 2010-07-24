@@ -78,6 +78,9 @@
     <string name="pref_import_key">PMZ_IMPORT</string>
     <string name="pref_import_description">Включите при необходимости импорта карт из PMZ формата</string>
 
+    <string name="pref_section_license">Лицензия</string>
+    <string name="pref_section_license_description">Посмотреть информацию о пользовательском соглашении</string>
+
 	<string name="pref_section_donate">Поддержать разработчиков</string>
     <string name="pref_section_donate_description">Здесь вы можете материально выразить свои чувства</string>
     <string name="pref_donate_paypal_mpl">Клиент PayPal</string>
@@ -92,27 +95,7 @@
     <string name="pref_donate_mb_description">открыть форму перевода на сайте www.moneybookers.com</string>
     <string name="pref_donate_alertpay">AlertPay</string>
     <string name="pref_donate_alertpay_description">открыть форму перевода на сайте www.alertpay.com</string>
-    
-         
-    <string name="text_about">
-&lt;h4&gt;aMetro v.%s&lt;h4&gt;
-&lt;h5&gt;Навигация по картам метро  городов мира.&lt;/h6&gt;
-&lt;h6&gt;Отображает схемы метро (и других транспортных сетей), позволяет Вам находить кратчайший путь между двумя точками. Карты совместимы с 
-картами проекта pMetro. ©2010&lt;/h6&gt;
-&lt;p&gt;
-Разработчики: Голованов Роман, Виниченко Влад&lt;br/&gt;
-Тестеры: Кузьмин Александр, Никитин Алексей&lt;br/&gt;
-Дизайн: Dusty Rat&lt;br/&gt;
-&lt;/p&gt;
 
-&lt;p&gt;Схемы и время проезда взяты из проекта pMetro Мурадова Бориса с согласия автора (www.pmetro.su).&lt;/p&gt;
-&lt;p&gt;Иконки типов транспортов: http://code.google.com/p/google-maps-icons/&lt;/p&gt;
-&lt;p&gt;Коллекция иконок: http://www.iconsearch.ru/search/?q=iconset:snowish&lt;/p&gt;
-&lt;p&gt;Коллекция флагов: http://icondrawer.com/free.php&lt;/p&gt;
-
-&lt;p&gt;Сайт проекта: http://ametro.no-ip.org&lt;/p&gt;
-&lt;p&gt;Вопросы и пожелания присылайте на ametroproject@gmail.com&lt;/p&gt;
-	</string>
     <string name="menu_search">Поиск</string>
     <string name="menu_library">Карты</string>
     <string name="menu_routes">Маршрут</string>
@@ -234,6 +217,10 @@
     <string name="msg_error_description_title">Информация об ошибке</string>
     <string name="msg_unknown_country">Страна неизвестна</string>
     <string name="msg_location_need_enable_providers">Необходимо включить определение местоположения</string>
+    <string name="msg_online_catalog_dropbox">основного списка</string>
+    <string name="msg_online_catalog_narod">резервного списка</string>
+    <string name="msg_try_download_catalog">Загрузка </string>
+    <string name="msg_please_wait">Пожалуйста подождите...</string>
     
     <string name="tab_maps_favorited">Избранное</string>
     <string name="tab_maps_local">Мои карты</string>
@@ -260,4 +247,9 @@
 	<string name="btn_close">Закрыть</string>
 	<string name="btn_cancel">Отменить</string>
 	<string name="btn_delete_pmz">Удалить PMZ</string>
+	<string name="btn_changelog">Новое</string>
+	<string name="btn_donate">Помочь</string>
+	<string name="btn_ok">Ok</string>
+	
+    <string name="title_eula">Соглашение</string>
 </resources>

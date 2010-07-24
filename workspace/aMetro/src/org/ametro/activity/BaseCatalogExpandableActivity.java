@@ -50,6 +50,7 @@ import org.ametro.catalog.storage.CatalogEvent;
 import org.ametro.catalog.storage.CatalogStorage;
 import org.ametro.catalog.storage.CatalogStorageStateProvider;
 import org.ametro.catalog.storage.ICatalogStorageListener;
+import org.ametro.dialog.AboutDialog;
 import org.ametro.dialog.LocationSearchDialog;
 
 import android.app.Activity;
@@ -271,7 +272,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 			startActivityForResult(new Intent(this, SettingsActivity.class), REQUEST_SETTINGS);
 			return true;
 		case MAIN_MENU_ABOUT:
-			startActivity(new Intent(this, AboutActivity.class));
+			AboutDialog.show(this);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

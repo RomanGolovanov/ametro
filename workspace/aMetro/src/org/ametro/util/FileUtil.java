@@ -21,14 +21,16 @@
 
 package org.ametro.util;
 
-import android.util.Log;
+import static org.ametro.Constants.LOG_TAG_MAIN;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 
-import static org.ametro.Constants.LOG_TAG_MAIN;
+import android.util.Log;
 
 /**
  * @author Vlad Vinichenko (akerigan@gmail.com)
@@ -121,5 +123,19 @@ public class FileUtil {
 			return file.delete();
 		}
 		return true;
-	}	
+	}
+
+	public static String writeToString(InputStream stream) throws java.io.IOException{
+        StringBuffer fileData = new StringBuffer(1000);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(stream,"utf-8"));
+        char[] buf = new char[1024];
+        int numRead=0;
+        while((numRead=reader.read(buf)) != -1){
+            String readData = String.valueOf(buf, 0, numRead);
+            fileData.append(readData);
+            buf = new char[1024];
+        }
+        reader.close();
+        return fileData.toString();
+    }
 }

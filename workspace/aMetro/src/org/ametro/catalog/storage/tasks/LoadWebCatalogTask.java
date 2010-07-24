@@ -29,24 +29,26 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import org.ametro.Constants;
+import org.ametro.R;
 import org.ametro.catalog.storage.CatalogDeserializer;
 import org.ametro.util.FileUtil;
 import org.ametro.util.IDownloadListener;
 import org.ametro.util.WebUtil;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
 public class LoadWebCatalogTask extends LoadBaseCatalogTask implements IDownloadListener {
 
-	protected static final long DEPRECATED_TIMEOUT =  60*60*1000; // 1 hour
+	private static final long DEPRECATED_TIMEOUT =  60*60*1000; // 1 hour
 	
-	protected String mCatalogUrl;
-	protected String[] mCatalogBaseUrls;
+	private String mCatalogUrl;
+	private String[] mCatalogBaseUrls;
 	
-	protected boolean mCompleted;
-	//protected final URI mURI;
+	private boolean mCompleted;
+	private String mProgressMessage;
 
 	public boolean isDerpecated() {
 		if(mCatalog == null) return true;
@@ -56,8 +58,12 @@ public class LoadWebCatalogTask extends LoadBaseCatalogTask implements IDownload
 	public void refresh() throws Exception {
 		mCompleted = false;
 		File temp = new File(Constants.TEMP_CATALOG_PATH, "catalog.zip");
+		int catalogId = 0;
+		final Context ctx = getContext();
 		for(String catalogUrl : mCatalogBaseUrls){
-			String url = catalogUrl + mCatalogUrl; 
+			String url = catalogUrl + mCatalogUrl;
+			mProgressMessage = ctx.getString(R.string.msg_try_download_catalog) + " " + ctx.getString(Constants.ONLINE_CATALOG_NAMES[catalogId]); 
+			update(0, 0, mProgressMessage);
 			if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
 				Log.d(Constants.LOG_TAG_MAIN,"Download web catalog from " + url + " to local file " + temp.getAbsolutePath() );
 			}
@@ -72,6 +78,7 @@ public class LoadWebCatalogTask extends LoadBaseCatalogTask implements IDownload
 					Log.w(Constants.LOG_TAG_MAIN,"Failed download web catalog from " + url + mCatalogUrl, ex);
 				}
 			}
+			catalogId++;
 		}
 		if(!mCompleted){
 			mCatalog = getCorruptedCatalog();
@@ -154,7 +161,7 @@ public class LoadWebCatalogTask extends LoadBaseCatalogTask implements IDownload
 	}
 
 	public boolean onUpdate(Object context, long position, long total) throws Exception {
-		update(position,total, "");
+		update(position, total, mProgressMessage);
 		cancelCheck(); // can throws CanceledException 
 		return true;
 	}

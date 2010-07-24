@@ -58,6 +58,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -289,7 +290,9 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 
 	protected void setWaitNoProgressView() {
 		if (mMode != MODE_WAIT) {
-			setContentView(R.layout.operation_wait_no_progress);
+			setContentView(R.layout.operatoins_wait);
+			ProgressBar progressBar = (ProgressBar)findViewById(R.id.progress);
+			progressBar.setIndeterminate(true);
 			mMode = MODE_WAIT;
 		}
 	}

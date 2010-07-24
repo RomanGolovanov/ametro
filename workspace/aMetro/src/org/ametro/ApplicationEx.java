@@ -20,6 +20,8 @@
  */
 package org.ametro;
 
+import java.io.FileOutputStream;
+
 import org.ametro.catalog.storage.CatalogStorage;
 import org.ametro.directory.CityDirectory;
 import org.ametro.directory.CountryDirectory;
@@ -45,6 +47,7 @@ import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.HTTP;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
@@ -140,10 +143,23 @@ public class ApplicationEx extends Application {
 		FileUtil.touchDirectory(Constants.TEMP_CATALOG_PATH);
 		FileUtil.touchDirectory(Constants.ICONS_PATH);
 		FileUtil.touchFile(Constants.NO_MEDIA_FILE);
+
+		extractEULA(this);
+		
 		Natives.Initialize();
 		
 		//startService(new Intent(this, CatalogService.class));
 		super.onCreate();
+	}
+
+	public static void extractEULA(Context context) {
+		if(!Constants.EULA_FILE.exists()){
+			try {
+				FileUtil.writeToStream( context.getAssets().open("gpl.html") , new FileOutputStream(Constants.EULA_FILE), true);
+			} catch (Exception e) {
+				// do nothing!
+			}
+		}
 	}
 
 	public void onTerminate() {
