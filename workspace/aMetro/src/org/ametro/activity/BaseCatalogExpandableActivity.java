@@ -337,7 +337,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	}
 
 	protected void onResume() {
-		mStorage.addCatalogChangedListener(this);
+		mStorage.addCatalogStorageListener(this);
 
 		mLocal = mStorage.getCatalog(mLocalId);
 		mRemote = mStorage.getCatalog(mRemoteId);
@@ -352,7 +352,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	}
 
 	protected void onPause() {
-		mStorage.removeCatalogChangedListener(this);
+		mStorage.removeCatalogStorageListener(this);
 		super.onPause();
 	}
 		

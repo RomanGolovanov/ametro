@@ -126,7 +126,7 @@ public class Catalog {
 
 	public void appendMap(CatalogMap map) {
 		final String systemName = map.getSystemName(); 
-		if(mMapIndex.containsKey(systemName)){
+		if(getMap(systemName)!=null){
 			CatalogMap old = mMapIndex.get(systemName);
 			mMapIndex.remove(systemName);
 			mMaps.remove(old);

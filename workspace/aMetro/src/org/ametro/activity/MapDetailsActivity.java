@@ -218,7 +218,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 	}
 
 	protected void onResume() {
-		mStorage.addCatalogChangedListener(this);
+		mStorage.addCatalogStorageListener(this);
 		mLocalCatalog = mStorage.getCatalog(CatalogStorage.LOCAL);
 		mOnlineCatalog = mStorage.getCatalog(CatalogStorage.ONLINE);
 		mImportCatalog = mStorage.getCatalog(CatalogStorage.IMPORT);
@@ -236,7 +236,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 	}
 
 	protected void onPause() {
-		mStorage.removeCatalogChangedListener(this);
+		mStorage.removeCatalogStorageListener(this);
 		super.onPause();
 	}
 

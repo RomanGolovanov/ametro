@@ -29,6 +29,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import org.ametro.Constants;
+import org.ametro.GlobalSettings;
 import org.ametro.R;
 import org.ametro.catalog.storage.CatalogDeserializer;
 import org.ametro.util.FileUtil;
@@ -153,6 +154,7 @@ public class LoadWebCatalogTask extends LoadBaseCatalogTask implements IDownload
 			mCatalog.setTimestamp(System.currentTimeMillis());
 			mCatalog.setBaseUrl((String)context + mCatalog.getBaseUrl());
 			mCompleted = true;
+			GlobalSettings.setOnlineCatalogUpdateDate(getContext(), mCatalog.getTimestamp());
 		}catch(Exception ex){
 			if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.WARN)){
 				Log.w(Constants.LOG_TAG_MAIN,"Failed extract web catalog from " +(String)context + mCatalogUrl, ex);
