@@ -30,7 +30,8 @@ import org.ametro.directory.ImportMapDirectory;
 import org.ametro.directory.ImportTransportDirectory;
 import org.ametro.directory.StationDirectory;
 import org.ametro.jni.Natives;
-import org.ametro.service.CatalogService;
+import org.ametro.receiver.AutoUpdateReceiver;
+import org.ametro.service.AutoUpdateService;
 import org.ametro.util.FileUtil;
 import org.apache.http.HttpVersion;
 import org.apache.http.client.HttpClient;
@@ -46,9 +47,12 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.HTTP;
 
+import android.app.AlarmManager;
 import android.app.Application;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.util.Log;
 
 public class ApplicationEx extends Application {
@@ -136,20 +140,26 @@ public class ApplicationEx extends Application {
 			Log.i(Constants.LOG_TAG_MAIN, "aMetro application started");
 		}
 		mInstance = this;
-		//getCatalogStorage();
+		Natives.Initialize();
+
 		FileUtil.touchDirectory(Constants.ROOT_PATH);
 		FileUtil.touchDirectory(Constants.LOCAL_CATALOG_PATH);
 		FileUtil.touchDirectory(Constants.IMPORT_CATALOG_PATH);
 		FileUtil.touchDirectory(Constants.TEMP_CATALOG_PATH);
 		FileUtil.touchDirectory(Constants.ICONS_PATH);
 		FileUtil.touchFile(Constants.NO_MEDIA_FILE);
-
 		extractEULA(this);
-		
-		Natives.Initialize();
-		
-		//startService(new Intent(this, CatalogService.class));
+
+		createAutoUpdateAlarm();
 		super.onCreate();
+	}
+
+	private void createAutoUpdateAlarm() {
+		AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+		Intent intent = new Intent(this, AutoUpdateReceiver.class);
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+		alarmManager.cancel(pendingIntent);
+		alarmManager.setInexactRepeating(AlarmManager.RTC, System.currentTimeMillis() + 1000*60 , AlarmManager.INTERVAL_DAY, pendingIntent);
 	}
 
 	public static void extractEULA(Context context) {
@@ -163,7 +173,7 @@ public class ApplicationEx extends Application {
 	}
 
 	public void onTerminate() {
-		stopService(new Intent(this, CatalogService.class));
+		stopService(new Intent(this, AutoUpdateService.class));
 		shutdownHttpClient();
 		super.onTerminate();
 	}
@@ -183,6 +193,26 @@ public class ApplicationEx extends Application {
 		return mHttpClient;
 	}
 
+	public boolean checkAutoUpdate() {
+		final ConnectivityManager conn = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+		if(conn.getBackgroundDataSetting()){
+			boolean isConnected = conn.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnected() ||conn.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected();
+			if(isConnected){
+				long lastModified = GlobalSettings.getOnlineCatalogUpdateDate(this);
+				long currentDate = System.currentTimeMillis();
+				long updateTimeout = GlobalSettings.getOnlineCatalogUpdatePeriod(this);
+				long timeout = (currentDate - lastModified)/1000;
+				Log.d(Constants.LOG_TAG_MAIN, "Check catalog update period: online="+lastModified+", now="+currentDate+", dt=" + timeout +", timeout="+updateTimeout);
+				if(timeout > updateTimeout){
+					Log.d(Constants.LOG_TAG_MAIN, "Start AutoUpdateService");
+					startService(new Intent(this, AutoUpdateService.class));
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
 	private HttpClient createHttpClient() {
 		if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
 			Log.d(Constants.LOG_TAG_MAIN, "Create HTTP client");

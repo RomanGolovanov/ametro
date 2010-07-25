@@ -42,6 +42,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
+import static org.ametro.Notifications.DOWNLOAD_ICONS_ID;
+
 public class DownloadIconsTask extends BaseTask implements IDownloadListener {
 
 	private static class Holder{
@@ -52,7 +54,6 @@ public class DownloadIconsTask extends BaseTask implements IDownloadListener {
 		return Holder.INSTANCE;
 	}
 	
-	private static final int NOTIFICATION_ID = 1;
 	
 	private static final int DOWNLOAD_ICON = android.R.drawable.stat_sys_download;
 	private static final int UNPACK_ICON = android.R.drawable.stat_sys_download;
@@ -162,7 +163,7 @@ public class DownloadIconsTask extends BaseTask implements IDownloadListener {
 		}
 		PendingIntent contentIntent = PendingIntent.getActivity(mContext, 0, new Intent(mContext, CatalogTabHostActivity.class), 0);
 		notification.setLatestEventInfo(mContext, "aMetro" ,message, contentIntent);
-		mNotificationManager.notify(NOTIFICATION_ID, notification);
+		mNotificationManager.notify(DOWNLOAD_ICONS_ID, notification);
 	}
 
 	public static BaseTask create(boolean force) {

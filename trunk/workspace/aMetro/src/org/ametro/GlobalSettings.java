@@ -96,6 +96,17 @@ public class GlobalSettings {
 		editor.commit();
 	}
 	
+	public static long getOnlineCatalogUpdatePeriod(Context context) {
+		String value = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getString(R.string.pref_auto_update_period_key), null);
+		if("weekly".equalsIgnoreCase(value)){
+			return 604800;
+		}
+		if("monthly".equalsIgnoreCase(value)){
+			return 2592000; 
+		}
+		return 86400;
+	}		
+	
 	public static boolean isDebugMessagesEnabled(Context context) {
 		return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(PREFERENCE_DEBUG, false);
 	}
@@ -139,5 +150,6 @@ public class GlobalSettings {
 
 	public static File getTemporaryDownloadIconFile() {
 		return new File(Constants.TEMP_CATALOG_PATH, "icons.zip");
-	}		
+	}
+
 }

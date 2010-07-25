@@ -24,10 +24,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.ametro.ApplicationEx;
 import org.ametro.Constants;
+import org.ametro.GlobalSettings;
 import org.ametro.R;
 import org.ametro.activity.TaskFailedList;
 import org.ametro.activity.TaskQueuedList;
@@ -54,6 +56,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+import static org.ametro.Notifications.TASK_FAILED_ID;
+import static org.ametro.Notifications.TASK_PROGRESS_ID;
+import static org.ametro.Notifications.TASK_QUEUE_ID;
+
 public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { //, IMapDownloadListener { //, IMapImportListener {
 
 	public static final int LOCAL = 0;
@@ -64,7 +70,7 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 	public static final String QUEUE_THREAD_NAME = "TASK_QUEUE";
 	
 	/*package*/ Catalog[] mCatalogs = new Catalog[3];
-	/*package*/ ArrayList<ICatalogStorageListener> mCatalogListeners = new ArrayList<ICatalogStorageListener>();
+	/*package*/ ArrayList<ICatalogStorageListener> mListeners = new ArrayList<ICatalogStorageListener>();
 
 	/*package*/ boolean mIsShutdown = false;
 	/*package*/ Thread mTaskWorker = new Thread(this,QUEUE_THREAD_NAME);
@@ -77,9 +83,6 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 	private NotificationManager mNotificationManager;
 	private Context mContext;
 
-	private static final int TASK_QUEUE_ID = 2;
-	private static final int TASK_PROGRESS_ID = 3;
-	private static final int TASK_FAILED_ID = 4;
 	
 	private String mDownloadNotificationTitle;
 	private String mImportNotificationTitle;
@@ -167,58 +170,58 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 		mIsShutdown = true;
 	}
 	
-	public void addCatalogChangedListener(ICatalogStorageListener listener){
-		mCatalogListeners.add(listener);
+	public void addCatalogStorageListener(ICatalogStorageListener listener){
+		mListeners.add(listener);
 	}
 	
-	public void removeCatalogChangedListener(ICatalogStorageListener listener){
-		mCatalogListeners.remove(listener);
+	public void removeCatalogStorageListener(ICatalogStorageListener listener){
+		mListeners.remove(listener);
 	}
 
 	/*package*/ void fireCatalogChanged(int catalogId, Catalog catalog){
-		for(ICatalogStorageListener listener : mCatalogListeners){
+		for(ICatalogStorageListener listener : mListeners){
 			listener.onCatalogLoaded(catalogId, catalog);
 		}
 	}
 
 	/*package*/ void fireCatalogOperationFailed(int catalogId, String message){
-		for(ICatalogStorageListener listener : mCatalogListeners){
+		for(ICatalogStorageListener listener : mListeners){
 			listener.onCatalogFailed(catalogId, message);
 		}
 	}
 
 	/*package*/ void fireCatalogOperationProgress(int catalogId, int progress, int total, String message){
-		for(ICatalogStorageListener listener : mCatalogListeners){
+		for(ICatalogStorageListener listener : mListeners){
 			listener.onCatalogProgress(catalogId, progress, total, message);
 		}
 	}
 	
 	/*package*/ void fireCatalogMapChanged(String systemName){
-		for(ICatalogStorageListener listener : mCatalogListeners){
+		for(ICatalogStorageListener listener : mListeners){
 			listener.onCatalogMapChanged(systemName);
 		}
 	}
 	
 	/*package*/ void fireCatalogMapDownloadFailed(String systemName, Throwable e) {
-		for(ICatalogStorageListener listener : mCatalogListeners){
+		for(ICatalogStorageListener listener : mListeners){
 			listener.onCatalogMapDownloadFailed(systemName, e);
 		}
 	}
 	
 	/*package*/ void fireCatalogMapImportFailed(String systemName, Throwable e) {
-		for(ICatalogStorageListener listener : mCatalogListeners){
+		for(ICatalogStorageListener listener : mListeners){
 			listener.onCatalogMapImportFailed(systemName, e);
 		}
 	}
 	
 	/*package*/ void fireCatalogMapDownloadProgress(String systemName, int progress, int total) {
-		for(ICatalogStorageListener listener : mCatalogListeners){
+		for(ICatalogStorageListener listener : mListeners){
 			listener.onCatalogMapDownloadProgress(systemName, progress, total);
 		}
 	}
 	
 	/*package*/ void fireCatalogMapImportProgress(String systemName, int progress, int total) {
-		for(ICatalogStorageListener listener : mCatalogListeners){
+		for(ICatalogStorageListener listener : mListeners){
 			listener.onCatalogMapImportProgress(systemName, progress, total);
 		}
 	}
@@ -314,6 +317,16 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 		}
 	}
 
+	public void requestDownload(List<String> systemNames) {
+		synchronized (mTaskQueue) {
+			for(String systemName : systemNames){
+				requestTask(new DownloadMapTask(systemName));
+				fireCatalogMapChanged(systemName);
+			}
+		}
+	}
+	
+	
 	public void cancelImport(String systemName) {
 		synchronized (mTaskQueue) {
 			ImportMapTask task = findQueuedImportTask(systemName);
@@ -603,11 +616,13 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 				case ONLINE:
 					catalog = mCatalogs[ONLINE];
 					storage = Constants.ONLINE_CATALOG_STORAGE;
+					GlobalSettings.setOnlineCatalogUpdateDate(mContext, catalog.getTimestamp());
 					break;
 				}
 				if(catalog!=null){
 					try {
 						catalog.save(storage);
+
 					} catch (IOException e) {
 						if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)){
 							Log.e(Constants.LOG_TAG_MAIN, "Failed to save catalog " + storage.toString(), e );
@@ -635,5 +650,5 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 		mFailedQueue.removeAll(lst);
 		return lst;
 	}
-	
+
 }

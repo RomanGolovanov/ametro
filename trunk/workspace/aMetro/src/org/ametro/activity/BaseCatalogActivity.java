@@ -334,7 +334,7 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 	}
 
 	protected void onResume() {
-		mStorage.addCatalogChangedListener(this);
+		mStorage.addCatalogStorageListener(this);
 
 		mLocal = mStorage.getCatalog(mLocalId);
 		mRemote = mStorage.getCatalog(mRemoteId);
@@ -349,7 +349,7 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 	}
 
 	protected void onPause() {
-		mStorage.removeCatalogChangedListener(this);
+		mStorage.removeCatalogStorageListener(this);
 		super.onPause();
 	}
 		
@@ -547,8 +547,6 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 		int state =  getCatalogState(diff.getLocal(), diff.getRemote());
 		onCatalogMapClick(diff.getLocal(), diff.getRemote(), state);		
 	}
-	
-	
 
 	public boolean onCatalogMapClick(CatalogMap local, CatalogMap remote, int state) {
 		switch(state){
