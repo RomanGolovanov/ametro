@@ -118,6 +118,7 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 
 	protected final int MAIN_MENU_END = 800;
 	
+	
 	private final int MAIN_MENU_SORT = 995;
 	private final int MAIN_MENU_SEARCH = 996;
 	private final int MAIN_MENU_REFRESH = 997;
@@ -381,7 +382,6 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 		mActionBarEditText.setOnFocusChangeListener(this);
 		
 		mMode = MODE_LIST;
-		
 	}
 	
 	protected void setWaitView() {

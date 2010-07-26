@@ -1,5 +1,4 @@
 /*
- * http://code.google.com/p/ametro/
  * Transport map viewer for Android platform
  * Copyright (C) 2009-2010 Roman.Golovanov@gmail.com and other
  * respective project committers (see project home page)
@@ -33,6 +32,7 @@ import java.util.Locale;
 import java.util.TreeMap;
 
 import org.ametro.Constants;
+import org.ametro.GlobalSettings;
 import org.ametro.MapUri;
 import org.ametro.R;
 import org.ametro.dialog.AboutDialog;
@@ -100,7 +100,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 
 	public void onDismiss(DialogInterface dialog) {
 		if(dialog instanceof EULADialog){
-			if(!Constants.EULA_ACCEPTED_FILE.exists()){
+			if(!GlobalSettings.isAcceptedEULA(this)){
 				finish();
 			}		
 		}
@@ -161,7 +161,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	}
 
 	protected void onResume() {
-		if(!Constants.EULA_ACCEPTED_FILE.exists()){
+		if(!GlobalSettings.isAcceptedEULA(this)){
 			showDialog(DIALOG_EULA);
 		}
 		super.onResume();
@@ -501,6 +501,10 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 
 	public String getMapName() {
 		return mModelName;
+	}
+
+	public String getSystemMapName() {
+		return mModelName==null ? null : mModelName.substring(mModelName.lastIndexOf('/')+1);
 	}
 
 	/*package*/ StationView getCurrentStation()

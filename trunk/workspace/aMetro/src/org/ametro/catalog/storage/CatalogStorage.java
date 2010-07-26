@@ -616,7 +616,7 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 				case ONLINE:
 					catalog = mCatalogs[ONLINE];
 					storage = Constants.ONLINE_CATALOG_STORAGE;
-					GlobalSettings.setOnlineCatalogUpdateDate(mContext, catalog.getTimestamp());
+					GlobalSettings.setUpdateDate(mContext, catalog.getTimestamp());
 					break;
 				}
 				if(catalog!=null){

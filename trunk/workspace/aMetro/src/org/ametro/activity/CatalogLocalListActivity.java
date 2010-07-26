@@ -28,6 +28,7 @@ import org.ametro.catalog.CatalogMapState;
 import org.ametro.catalog.storage.CatalogStorage;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -48,6 +49,38 @@ import static org.ametro.catalog.CatalogMapState.UPDATE_NOT_SUPPORTED;
 
 public class CatalogLocalListActivity extends BaseCatalogActivity {
 
+	public static final String EXTRA_INVOKE_LOCAL_UPDATE_LIST = "EXTRA_INVOKE_LOCAL_UPDATE_LIST";
+	
+	private boolean mInvokeSelectCurrent;
+	private boolean mInvokeUpdateList;
+	
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		mInvokeSelectCurrent = true;
+		Intent data = getIntent();
+		if(data!=null){
+			mInvokeUpdateList = data.getBooleanExtra(EXTRA_INVOKE_LOCAL_UPDATE_LIST, false);
+		}
+	}
+	
+	protected void setListView() {
+		super.setListView();
+		
+		if(mInvokeSelectCurrent){
+			mInvokeSelectCurrent = false;
+			String systemMapName = MapViewActivity.Instance.getSystemMapName();
+			int position = mAdapter.findItemPosition(systemMapName);
+			if(position!=-1){
+				mList.setSelection(position);
+			}
+		}
+		
+		if(mInvokeUpdateList){
+			mInvokeUpdateList = false;
+			invokeSelectUpdateMaps();
+		}		
+	}
+	
 	protected boolean isCatalogProgressEnabled(int catalogId) {
 		return catalogId == CatalogStorage.LOCAL;
 	}

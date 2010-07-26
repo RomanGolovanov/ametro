@@ -60,6 +60,7 @@ public class Constants {
     public static final String PREFERENCE_PMZ_IMPORT = "PMZ_IMPORT";
     public static final String PREFERENCE_ENABLE_COUNTRY_ICONS = "ENABLE_COUNTRY_ICONS";
     public static final String PREFERENCE_ONLINE_CATALOG_UPDATE_DATE = "ONLINE_CATALOG_UPDATE_DATE";
+    public static final String PREFERENCE_IS_EULA_ACCEPTED = "EULA_ACCEPTED";
 
     public static final String DEFAULT_MAP = "metro";
 
@@ -101,7 +102,6 @@ public class Constants {
 	
 	public static final File NO_MEDIA_FILE = new File(ROOT_PATH, NO_MEDIA_TAG);
 	
-	public static final File EULA_ACCEPTED_FILE = new File(ROOT_PATH, ".eula_accepted");
 	public static final File EULA_FILE = new File(ROOT_PATH, "gpl.html");
 
 	public static final String PMETRO_EXTENSION = ".pmz";

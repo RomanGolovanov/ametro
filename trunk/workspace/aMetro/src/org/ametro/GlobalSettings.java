@@ -33,6 +33,7 @@ import static org.ametro.Constants.PREFERENCE_LOCALE;
 import static org.ametro.Constants.PREFERENCE_ONLINE_CATALOG_UPDATE_DATE;
 import static org.ametro.Constants.PREFERENCE_PMZ_IMPORT;
 import static org.ametro.Constants.TEMP_CATALOG_PATH;
+import static org.ametro.Constants.PREFERENCE_IS_EULA_ACCEPTED;
 
 import java.io.File;
 import java.util.Locale;
@@ -85,18 +86,29 @@ public class GlobalSettings {
 		editor.commit();
 	}
 
-	public static long getOnlineCatalogUpdateDate(Context context) {
+	public static long getUpdateDate(Context context) {
 		return PreferenceManager.getDefaultSharedPreferences(context).getLong(PREFERENCE_ONLINE_CATALOG_UPDATE_DATE, 0);
 	}
 
-	public static void setOnlineCatalogUpdateDate(Context context, long timestamp) {
+	public static void setUpdateDate(Context context, long timestamp) {
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		Editor editor = prefs.edit();
 		editor.putLong(PREFERENCE_ONLINE_CATALOG_UPDATE_DATE, timestamp);
 		editor.commit();
 	}
 	
-	public static long getOnlineCatalogUpdatePeriod(Context context) {
+	public static boolean isAcceptedEULA(Context context) {
+		return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(PREFERENCE_IS_EULA_ACCEPTED, false);
+	}
+
+	public static void setAcceptedEULA(Context context, boolean accepted) {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+		Editor editor = prefs.edit();
+		editor.putBoolean(PREFERENCE_IS_EULA_ACCEPTED, accepted);
+		editor.commit();
+	}
+		
+	public static long getUpdatePeriod(Context context) {
 		String value = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getString(R.string.pref_auto_update_period_key), null);
 		if("weekly".equalsIgnoreCase(value)){
 			return 604800;
@@ -104,9 +116,20 @@ public class GlobalSettings {
 		if("monthly".equalsIgnoreCase(value)){
 			return 2592000; 
 		}
+		if("debug".equalsIgnoreCase(value)){
+			return 0;
+		}
 		return 86400;
 	}		
-	
+
+	public static boolean isUpdateOnlyByWifi(Context context) {
+		String value = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getString(R.string.pref_auto_update_networks_key), null);
+		if("any".equalsIgnoreCase(value)){
+			return false;
+		}
+		return true;
+	}		
+		
 	public static boolean isDebugMessagesEnabled(Context context) {
 		return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(PREFERENCE_DEBUG, false);
 	}

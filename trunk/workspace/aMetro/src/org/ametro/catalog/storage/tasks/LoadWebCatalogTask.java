@@ -154,7 +154,7 @@ public class LoadWebCatalogTask extends LoadBaseCatalogTask implements IDownload
 			mCatalog.setTimestamp(System.currentTimeMillis());
 			mCatalog.setBaseUrl((String)context + mCatalog.getBaseUrl());
 			mCompleted = true;
-			GlobalSettings.setOnlineCatalogUpdateDate(getContext(), mCatalog.getTimestamp());
+			GlobalSettings.setUpdateDate(getContext(), mCatalog.getTimestamp());
 		}catch(Exception ex){
 			if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.WARN)){
 				Log.w(Constants.LOG_TAG_MAIN,"Failed extract web catalog from " +(String)context + mCatalogUrl, ex);

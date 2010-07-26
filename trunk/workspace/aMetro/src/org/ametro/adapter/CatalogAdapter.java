@@ -340,4 +340,15 @@ public class CatalogAdapter extends BaseAdapter implements Filterable {
 		return mSortMode;
 	}
 
+	public int findItemPosition(String systemMapName) {
+		int pos = 0;
+		for(CatalogMapPair item : mObjects){
+			if(systemMapName.equalsIgnoreCase(item.getSystemName())){
+				return pos;
+			}
+			pos++;
+		}
+		return -1;
+	}
+
 }

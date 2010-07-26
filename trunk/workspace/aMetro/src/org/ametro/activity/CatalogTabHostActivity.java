@@ -59,7 +59,7 @@ public class CatalogTabHostActivity extends TabActivity implements OnDismissList
 
 	public void onDismiss(DialogInterface dialog) {
 		if(dialog instanceof EULADialog){
-			if(!Constants.EULA_ACCEPTED_FILE.exists()){
+			if(!GlobalSettings.isAcceptedEULA(this)){
 				finish();
 			}else{
 				if(!DownloadIconsTask.isRunning() && GlobalSettings.isCountryIconsEnabled(this)){
@@ -72,19 +72,36 @@ public class CatalogTabHostActivity extends TabActivity implements OnDismissList
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mInstance = this;
+		Intent i = getIntent();
+		Bundle extras = null;
+		if(i!=null){
+			extras = i.getExtras();
+		}
 		final TabHost tabHost = getTabHost();
 		final Resources res = getResources();
+		Intent intentLocalCatalog = new Intent(this, CatalogLocalListActivity.class);
+		if(extras!=null){
+			intentLocalCatalog.putExtras(extras);
+		}
 		tabHost.addTab(tabHost.newTabSpec(TAB_LOCAL)
 				.setIndicator(res.getString(R.string.tab_maps_local), res.getDrawable(R.drawable.icon_tab_maps))
-				.setContent(new Intent(this, CatalogLocalListActivity.class)));
+				.setContent(intentLocalCatalog));
 
+		Intent intentOnlineCatalog = new Intent(this, CatalogOnlineListActivity.class);
+		if(extras!=null){
+			intentOnlineCatalog.putExtras(extras);
+		}
 		tabHost.addTab(tabHost.newTabSpec(TAB_ONLINE)
 				.setIndicator(res.getString(R.string.tab_maps_online), res.getDrawable(R.drawable.icon_tab_web))
-				.setContent(new Intent(this, CatalogOnlineListActivity.class)));
+				.setContent(intentOnlineCatalog));
 
+		Intent intentImportCatalog = new Intent(this, CatalogImportListActivity.class);
+		if(extras!=null){
+			intentImportCatalog.putExtras(extras);
+		}
 		tabHost.addTab(tabHost.newTabSpec(TAB_IMPORT)
 				.setIndicator(res.getString(R.string.tab_maps_import), res.getDrawable(R.drawable.icon_tab_import))
-				.setContent(new Intent(this, CatalogImportListActivity.class)));
+				.setContent(intentImportCatalog));
 	}
 
 
@@ -100,7 +117,7 @@ public class CatalogTabHostActivity extends TabActivity implements OnDismissList
 	}	
 	
 	protected void onResume() {
-		if(!Constants.EULA_ACCEPTED_FILE.exists()){
+		if(!GlobalSettings.isAcceptedEULA(this)){
 			showDialog(DIALOG_EULA);
 		}else if(!DownloadIconsTask.isRunning() && GlobalSettings.isCountryIconsEnabled(this)){
 			checkIcons();
