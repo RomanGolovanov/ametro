@@ -43,6 +43,13 @@
                         android:summary="@string/pref_auto_update_period_description"
                         android:dependency="@string/pref_auto_update_map_index_key"
                         android:defaultValue="daily"/>
+        <ListPreference android:key="@string/pref_auto_update_networks_key"
+                        android:title="@string/pref_auto_update_networks"
+                        android:entryValues="@array/pref_auto_update_networks_values"
+                        android:entries="@array/pref_auto_update_networks_texts"
+                        android:summary="@string/pref_auto_update_networks_description"
+                        android:dependency="@string/pref_auto_update_map_index_key"
+                        android:defaultValue="wifi"/>
 	</PreferenceScreen>
     <PreferenceCategory android:title="@string/pref_section_general">
         <ListPreference android:key="@string/pref_locale_key"

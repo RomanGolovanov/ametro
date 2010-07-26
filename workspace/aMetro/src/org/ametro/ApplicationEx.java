@@ -195,12 +195,19 @@ public class ApplicationEx extends Application {
 
 	public boolean checkAutoUpdate() {
 		final ConnectivityManager conn = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-		if(conn.getBackgroundDataSetting()){
-			boolean isConnected = conn.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnected() ||conn.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected();
+		if(GlobalSettings.isAutoUpdateIndexEnabled(this) && conn.getBackgroundDataSetting()){
+			boolean isWifiConnected =  conn.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected();
+			boolean isMobileConnected = conn.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnected();
+			boolean isConnected = false;
+			if(GlobalSettings.isUpdateOnlyByWifi(this)){
+				isConnected = isWifiConnected;
+			}else{
+				isConnected = isWifiConnected || isMobileConnected;
+			}
 			if(isConnected){
-				long lastModified = GlobalSettings.getOnlineCatalogUpdateDate(this);
+				long lastModified = GlobalSettings.getUpdateDate(this);
 				long currentDate = System.currentTimeMillis();
-				long updateTimeout = GlobalSettings.getOnlineCatalogUpdatePeriod(this);
+				long updateTimeout = GlobalSettings.getUpdatePeriod(this);
 				long timeout = (currentDate - lastModified)/1000;
 				Log.d(Constants.LOG_TAG_MAIN, "Check catalog update period: online="+lastModified+", now="+currentDate+", dt=" + timeout +", timeout="+updateTimeout);
 				if(timeout > updateTimeout){

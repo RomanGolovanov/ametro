@@ -31,6 +31,7 @@ import java.util.LinkedList;
 import org.ametro.ApplicationEx;
 import org.ametro.Constants;
 import org.ametro.GlobalSettings;
+import org.ametro.activity.CatalogLocalListActivity;
 import org.ametro.activity.CatalogTabHostActivity;
 import org.ametro.activity.TaskQueuedList;
 import org.ametro.catalog.Catalog;
@@ -201,11 +202,14 @@ public class AutoUpdateService extends Service implements ICatalogStorageListene
 
 	private void createAutoUpdatesResultNotification() {
 		Notification notification = new Notification(android.R.drawable.stat_notify_sync_noanim, null,System.currentTimeMillis());
-		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, CatalogTabHostActivity.class), 0);
+		Intent i = new Intent(this, CatalogTabHostActivity.class);
 		if(mDownloadMaps.size()>0){
+			i.putExtra(CatalogLocalListActivity.EXTRA_INVOKE_LOCAL_UPDATE_LIST, true);
+			PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i, 0);
 			notification.setLatestEventInfo(this, "aMetro" , "map updates available", contentIntent);
-		notification.number = mDownloadMaps.size();
+			notification.number = mDownloadMaps.size();
 		}else{
+			PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i, 0);
 			notification.setLatestEventInfo(this, "aMetro" , "updated " + mUpdatedMapCount + " maps", contentIntent);
 			notification.number = mUpdatedMapCount;
 		}
