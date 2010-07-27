@@ -40,10 +40,10 @@ import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+import static org.ametro.Constants.ONLINE_CATALOG_DEPRECATED_TIMEOUT;
 
 public class LoadWebCatalogTask extends LoadBaseCatalogTask implements IDownloadListener {
 
-	private static final long DEPRECATED_TIMEOUT =  60*60*1000; // 1 hour
 	
 	private String mCatalogUrl;
 	private String[] mCatalogBaseUrls;
@@ -53,7 +53,7 @@ public class LoadWebCatalogTask extends LoadBaseCatalogTask implements IDownload
 
 	public boolean isDerpecated() {
 		if(mCatalog == null) return true;
-		return System.currentTimeMillis() > (mCatalog.getTimestamp() + DEPRECATED_TIMEOUT);
+		return System.currentTimeMillis() > (mCatalog.getTimestamp() + ONLINE_CATALOG_DEPRECATED_TIMEOUT);
 	}
 
 	public void refresh() throws Exception {
@@ -152,7 +152,7 @@ public class LoadWebCatalogTask extends LoadBaseCatalogTask implements IDownload
 			mCatalog = CatalogDeserializer.deserializeCatalog(new BufferedInputStream(new FileInputStream(catalogFile)));
 			// set timestamp to now for timeout detection 
 			mCatalog.setTimestamp(System.currentTimeMillis());
-			mCatalog.setBaseUrl((String)context + mCatalog.getBaseUrl());
+			//mCatalog.setBaseUrl((String)context + mCatalog.getBaseUrl());
 			mCompleted = true;
 			GlobalSettings.setUpdateDate(getContext(), mCatalog.getTimestamp());
 		}catch(Exception ex){

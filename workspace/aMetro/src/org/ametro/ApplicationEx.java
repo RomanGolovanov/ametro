@@ -43,6 +43,7 @@ import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.HTTP;
@@ -54,6 +55,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.util.Log;
+
+import static org.ametro.Constants.HTTP_CONNECTION_TIMEOUT;
+import static org.ametro.Constants.HTTP_SOCKET_TIMEOUT;
 
 public class ApplicationEx extends Application {
 	
@@ -228,6 +232,9 @@ public class ApplicationEx extends Application {
 		HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
 		HttpProtocolParams.setContentCharset(params, HTTP.DEFAULT_CONTENT_CHARSET);
 		HttpProtocolParams.setUseExpectContinue(params, true);
+		HttpConnectionParams.setConnectionTimeout(params, HTTP_CONNECTION_TIMEOUT);
+		HttpConnectionParams.setSoTimeout(params, HTTP_SOCKET_TIMEOUT);
+
 		SchemeRegistry schReg = new SchemeRegistry();
 		schReg.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
 		schReg.register(new Scheme("https", SSLSocketFactory.getSocketFactory(), 443));

@@ -341,9 +341,10 @@ public class CatalogAdapter extends BaseAdapter implements Filterable {
 	}
 
 	public int findItemPosition(String systemMapName) {
+		if(systemMapName == null || mObjects == null) return -1;
 		int pos = 0;
 		for(CatalogMapPair item : mObjects){
-			if(systemMapName.equalsIgnoreCase(item.getSystemName())){
+			if(item!=null && systemMapName.equalsIgnoreCase(item.getSystemName())){
 				return pos;
 			}
 			pos++;
