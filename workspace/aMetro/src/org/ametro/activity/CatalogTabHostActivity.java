@@ -39,6 +39,8 @@ import android.widget.TabHost;
 
 public class CatalogTabHostActivity extends TabActivity implements OnDismissListener{
 
+	public static final int RESULT_EULA_CANCELED = 100; 
+	
 	private static final int DIALOG_EULA = 1;
 	
 	private static final String TAB_LOCAL = "local";
@@ -60,6 +62,7 @@ public class CatalogTabHostActivity extends TabActivity implements OnDismissList
 	public void onDismiss(DialogInterface dialog) {
 		if(dialog instanceof EULADialog){
 			if(!GlobalSettings.isAcceptedEULA(this)){
+				setResult(RESULT_EULA_CANCELED);
 				finish();
 			}else{
 				if(!DownloadIconsTask.isRunning() && GlobalSettings.isCountryIconsEnabled(this)){

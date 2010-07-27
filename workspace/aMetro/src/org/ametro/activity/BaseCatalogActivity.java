@@ -479,6 +479,18 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 		}
 	}
 	
+	public void onCatalogMapDownloadDone(String systemName) {
+		if(mMode == MODE_LIST){
+			mUIEventDispacher.post(mUpdateList);
+		}
+	}
+
+	public void onCatalogMapImportDone(String systemName) {
+		if(mMode == MODE_LIST){
+			mUIEventDispacher.post(mUpdateList);
+		}
+	}
+	
 	public void onCatalogProgress(int catalogId, int progress, int total, String message)
 	{
 		if(isCatalogProgressEnabled(catalogId)){

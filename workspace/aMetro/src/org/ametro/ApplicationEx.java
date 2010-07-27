@@ -133,6 +133,9 @@ public class ApplicationEx extends Application {
 			synchronized (ApplicationEx.class) {
 				if (mStorage == null) {
 					mStorage = new CatalogStorage(this);
+					//mStorage.requestCatalog(CatalogStorage.LOCAL, false);
+					//mStorage.requestCatalog(CatalogStorage.ONLINE, false);
+					//mStorage.requestCatalog(CatalogStorage.IMPORT, false);
 				}
 			}
 		}
@@ -144,6 +147,7 @@ public class ApplicationEx extends Application {
 			Log.i(Constants.LOG_TAG_MAIN, "aMetro application started");
 		}
 		mInstance = this;
+		mConnectionManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
 		Natives.Initialize();
 
 		FileUtil.touchDirectory(Constants.ROOT_PATH);
@@ -197,18 +201,27 @@ public class ApplicationEx extends Application {
 		return mHttpClient;
 	}
 
+	public boolean isNetworkAvailable(){
+		boolean isWifiConnected =  mConnectionManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected();
+		boolean isMobileConnected = mConnectionManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnected();
+		return isWifiConnected || isMobileConnected;
+	}
+		
+	public boolean isAutoUpdateNetworkAvailable(){
+		boolean isWifiConnected =  mConnectionManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected();
+		boolean isMobileConnected = mConnectionManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnected();
+		boolean isConnected = false;
+		if(GlobalSettings.isUpdateOnlyByWifi(this)){
+			isConnected = isWifiConnected;
+		}else{
+			isConnected = isWifiConnected || isMobileConnected;
+		}
+		return isConnected;
+	}
+	
 	public boolean checkAutoUpdate() {
-		final ConnectivityManager conn = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-		if(GlobalSettings.isAutoUpdateIndexEnabled(this) && conn.getBackgroundDataSetting()){
-			boolean isWifiConnected =  conn.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected();
-			boolean isMobileConnected = conn.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnected();
-			boolean isConnected = false;
-			if(GlobalSettings.isUpdateOnlyByWifi(this)){
-				isConnected = isWifiConnected;
-			}else{
-				isConnected = isWifiConnected || isMobileConnected;
-			}
-			if(isConnected){
+		if(GlobalSettings.isAutoUpdateIndexEnabled(this) && mConnectionManager.getBackgroundDataSetting()){
+			if(isAutoUpdateNetworkAvailable()){
 				long lastModified = GlobalSettings.getUpdateDate(this);
 				long currentDate = System.currentTimeMillis();
 				long updateTimeout = GlobalSettings.getUpdatePeriod(this);
@@ -251,6 +264,9 @@ public class ApplicationEx extends Application {
 	private HttpClient mHttpClient;
 	private static ApplicationEx mInstance;
 
+	private ConnectivityManager mConnectionManager;
+	
+	
 	private StationDirectory mStationDirectory;
 	private CatalogStorage mStorage;
 

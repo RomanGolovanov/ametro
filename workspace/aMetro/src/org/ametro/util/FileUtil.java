@@ -36,7 +36,7 @@ import android.util.Log;
  * @author Vlad Vinichenko (akerigan@gmail.com)
  *         Date: 06.02.2010
  *         Time: 19:59:03
- */
+ */ 
 public class FileUtil {
 
 	public static boolean delete(File file) {

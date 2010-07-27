@@ -458,6 +458,18 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		}
 	}
 	
+	public void onCatalogMapDownloadDone(String systemName) {
+		if(mMode == MODE_LIST){
+			mUIEventDispacher.post(mUpdateList);
+		}
+	}
+
+	public void onCatalogMapImportDone(String systemName) {
+		if(mMode == MODE_LIST){
+			mUIEventDispacher.post(mUpdateList);
+		}
+	}
+	
 	public void onCatalogMapDownloadFailed(String systemName, Throwable ex){
 		if(mMode == MODE_LIST){
 			mUIEventDispacher.post(mUpdateList);

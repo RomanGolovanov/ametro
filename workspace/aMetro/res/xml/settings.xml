@@ -27,6 +27,11 @@
                             android:key="@string/pref_auto_update_url_key"
                             android:dialogMessage="@string/pref_auto_update_url_message"
                             android:summary="@string/pref_auto_update_url_description"/> -->
+        <!-- CheckBoxPreference android:title="@string/pref_auto_update_map_index_on_show"
+                            android:key="@string/pref_auto_update_map_index_on_show_key"
+                            android:summary="@string/pref_auto_update_map_index_on_show_description"
+                            android:defaultValue="false"/-->
+                            
         <CheckBoxPreference android:title="@string/pref_auto_update_map_index"
                             android:key="@string/pref_auto_update_map_index_key"
                             android:summary="@string/pref_auto_update_map_index_description"

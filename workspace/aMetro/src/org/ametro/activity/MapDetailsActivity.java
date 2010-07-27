@@ -241,9 +241,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 	}
 
 	private void onCatalogsUpdate() {
-		if (mLocalCatalog != null
-				&& (mOnlineCatalog != null || !mOnlineDownload)
-				&& mImportCatalog != null) {
+		if (mLocalCatalog != null && (mOnlineCatalog != null || !mOnlineDownload) && mImportCatalog != null) {
 			if (mLocalCatalog != null) {
 				mLocal = mLocalCatalog.getMap(mSystemName);
 			}
@@ -441,36 +439,64 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 
 	public void onCatalogMapChanged(String systemName) {
 		if(mSystemName.equals(systemName) ){
-			if(mMode == MODE_DETAILS){
-				mUIEventDispacher.post(mDataBindRunnable);
-			}
+			mUIEventDispacher.post(mDataBindRunnable);
 		}
 	}
 
 	public void onCatalogMapDownloadFailed(String systemName, Throwable ex){
-		mMessage = "Failed download map " + systemName;
-		if(GlobalSettings.isDebugMessagesEnabled(this)){
-			mMessage += " due error: " + ex.getMessage();
+		if(mSystemName.equals(systemName) ){
+			mMessage = "Failed download map " + systemName;
+			mUIEventDispacher.post(mShowErrorRunnable);
+			mUIEventDispacher.post(mDataBindRunnable);
 		}
-		mUIEventDispacher.post(mShowErrorRunnable);
 	}
 
 	public void onCatalogMapImportFailed(String systemName, Throwable ex){
-		mMessage = "Failed import map " + systemName;
-		if(GlobalSettings.isDebugMessagesEnabled(this)){
-			mMessage += " due error: " + ex.getMessage();
+		if(mSystemName.equals(systemName) ){
+			mMessage = "Failed import map " + systemName;
+			mUIEventDispacher.post(mShowErrorRunnable);
+			mUIEventDispacher.post(mDataBindRunnable);
 		}
-		mUIEventDispacher.post(mShowErrorRunnable);
 	}
 
 	public void onCatalogMapDownloadProgress(String systemName, int progress, int total) {
-		if(mOnlineWidget!=null && mSystemName.equals(systemName)){
+		if(mOnlineWidget!=null && mSystemName.equals(systemName) && (progress!=0 && total!=0)){
 			mTotal = total;
 			mProgress = progress;
 			mUIEventDispacher.post(mDownloadProgressUpdateRunnable);
 		}
 	}
 
+	public void onCatalogMapImportProgress(String systemName, int progress, int total) {
+		if(mImportWidget!=null && mSystemName.equals(systemName) && (progress!=0 && total!=0)){
+			mTotal = total;
+			mProgress = progress;
+			mUIEventDispacher.post(mImportProgressUpdateRunnable);
+		}
+	}
+
+	public void onCatalogMapDownloadDone(String systemName) {
+		if(mSystemName.equals(systemName) ){
+			if(mMode == MODE_DETAILS){
+				mUIEventDispacher.post(mDataBindRunnable);
+			}
+		}
+	}
+
+	public void onCatalogMapImportDone(String systemName) {
+		if(mSystemName.equals(systemName) ){
+			if(mMode == MODE_DETAILS){
+				mUIEventDispacher.post(mDataBindRunnable);
+			}
+		}
+	}
+	
+	private Runnable mImportProgressUpdateRunnable = new Runnable() {
+		public void run() {
+			mImportWidget.setProgress(mProgress, mTotal);
+		}
+	};
+	
 	private Runnable mDownloadProgressUpdateRunnable = new Runnable() {
 		public void run() {
 			mOnlineWidget.setProgress(mProgress, mTotal);
@@ -503,8 +529,5 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 					Toast.LENGTH_LONG).show();
 		}
 	};
-
-	public void onCatalogMapImportProgress(String systemName, int progress, int total) {
-	}
 
 }

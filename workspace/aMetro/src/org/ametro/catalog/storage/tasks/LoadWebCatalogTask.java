@@ -28,6 +28,7 @@ import java.net.URI;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import org.ametro.ApplicationEx;
 import org.ametro.Constants;
 import org.ametro.GlobalSettings;
 import org.ametro.R;
@@ -61,25 +62,27 @@ public class LoadWebCatalogTask extends LoadBaseCatalogTask implements IDownload
 		File temp = new File(Constants.TEMP_CATALOG_PATH, "catalog.zip");
 		int catalogId = 0;
 		final Context ctx = getContext();
-		for(String catalogUrl : mCatalogBaseUrls){
-			String url = catalogUrl + mCatalogUrl;
-			mProgressMessage = ctx.getString(R.string.msg_try_download_catalog) + " " + ctx.getString(Constants.ONLINE_CATALOG_NAMES[catalogId]); 
-			update(0, 0, mProgressMessage);
-			if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
-				Log.d(Constants.LOG_TAG_MAIN,"Download web catalog from " + url + " to local file " + temp.getAbsolutePath() );
-			}
-			try{
-				FileUtil.touchDirectory(Constants.TEMP_CATALOG_PATH);
-				WebUtil.downloadFileUnchecked(catalogUrl, URI.create(url), temp, this);
-				if(mCompleted){
-					break;
-				} 
-			} catch(Exception ex){
-				if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.WARN)){
-					Log.w(Constants.LOG_TAG_MAIN,"Failed download web catalog from " + url + mCatalogUrl, ex);
+		if(ApplicationEx.getInstance().isNetworkAvailable()){
+			for(String catalogUrl : mCatalogBaseUrls){
+				String url = catalogUrl + mCatalogUrl;
+				mProgressMessage = ctx.getString(R.string.msg_try_download_catalog) + " " + ctx.getString(Constants.ONLINE_CATALOG_NAMES[catalogId]); 
+				update(0, 0, mProgressMessage);
+				if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
+					Log.d(Constants.LOG_TAG_MAIN,"Download web catalog from " + url + " to local file " + temp.getAbsolutePath() );
 				}
+				try{
+					FileUtil.touchDirectory(Constants.TEMP_CATALOG_PATH);
+					WebUtil.downloadFileUnchecked(catalogUrl, URI.create(url), temp, this);
+					if(mCompleted){
+						break;
+					} 
+				} catch(Exception ex){
+					if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.WARN)){
+						Log.w(Constants.LOG_TAG_MAIN,"Failed download web catalog from " + url + mCatalogUrl, ex);
+					}
+				}
+				catalogId++;
 			}
-			catalogId++;
 		}
 		if(!mCompleted){
 			mCatalog = getCorruptedCatalog();
