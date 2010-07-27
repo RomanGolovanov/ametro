@@ -31,6 +31,7 @@ import org.ametro.GlobalSettings;
 import org.ametro.R;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
+import org.ametro.catalog.CatalogMapState;
 import org.ametro.catalog.storage.CatalogStorage;
 import org.ametro.catalog.storage.CatalogStorageStateProvider;
 import org.ametro.catalog.storage.ICatalogStorageListener;
@@ -345,9 +346,12 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 		
 		mContent.removeAllViews();
 		if (mOnline != null) {
-			int stateId = mStorageState.getOnlineCatalogState(mLocal,mOnline);
+			int stateId = mStorageState.getOnlineCatalogState(mLocal, mOnline);
 			String stateName = states[stateId];
 			int stateColor = (res.getIntArray(R.array.online_catalog_map_state_colors))[stateId];
+			if(stateId == CatalogMapState.IMPORTING || stateId == CatalogMapState.IMPORT_PENDING){
+				stateName = "";
+			}
 			mContent.createHeader().setTextLeft(getString(R.string.msg_online)).setTextRight(stateName).setTextRightColor(stateColor);
 			mOnlineWidget = mContent.createOnlineWidget();
 			mOnlineWidget.setSize(mOnline.getSize());
@@ -358,10 +362,12 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 			mOnlineWidget.getCancelButton().setOnClickListener(this);
 		}
 		if (mImport != null) {
-			int stateId = mStorageState.getImportCatalogState(mLocal,
-					mImport);
+			int stateId = mStorageState.getImportCatalogState(mLocal, mImport);
 			String stateName = states[stateId];
 			int stateColor = (res.getIntArray(R.array.import_catalog_map_state_colors))[stateId];
+			if(stateId == CatalogMapState.DOWNLOADING || stateId == CatalogMapState.DOWNLOAD_PENDING){
+				stateName = "";
+			}
 			mContent.createHeader().setTextLeft(getString(R.string.msg_import)).setTextRight(stateName).setTextRightColor(stateColor);
 			mImportWidget = mContent.createImportWidget();
 			mImportWidget.setSize(mImport.getSize());
@@ -393,7 +399,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 		}else{
 			description = getString(R.string.msg_no_desription);
 		}
-		mContent.createHeader().setTextLeft("Description");
+		mContent.createHeader().setTextLeft(getString(R.string.msg_description));
 		TextBlockView text = mContent.createText();
 		text.setText(Html.fromHtml(description));
 		Linkify.addLinks(text.getText(), Linkify.ALL);
