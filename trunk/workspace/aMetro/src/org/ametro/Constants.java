@@ -32,8 +32,8 @@ import android.os.Environment;
  */
 public class Constants {
 
-	public static final int HTTP_CONNECTION_TIMEOUT = 30000;
-	public static final int HTTP_SOCKET_TIMEOUT = 30000;
+	public static final int HTTP_CONNECTION_TIMEOUT = 10000;
+	public static final int HTTP_SOCKET_TIMEOUT = 10000;
 	
 	public static final long ONLINE_CATALOG_DEPRECATED_TIMEOUT =  60*60*1000; // 1 hour
 	

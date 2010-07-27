@@ -167,6 +167,9 @@ public class AutoUpdateService extends Service implements ICatalogStorageListene
 	}
 
 	public void onCatalogMapChanged(String systemName) {
+	}
+
+	public void onCatalogMapDownloadDone(String systemName) {
 		if(mStage == STAGE_DOWNLOAD_MAPS){
 			if(mDownloadMaps.remove(systemName)){
 				mUpdatedMapCount++;
@@ -191,6 +194,9 @@ public class AutoUpdateService extends Service implements ICatalogStorageListene
 	public void onCatalogMapDownloadProgress(String systemName, int progress, int total) {
 	}
 
+	public void onCatalogMapImportDone(String systemName) {
+	}
+	
 	public void onCatalogMapImportFailed(String systemName, Throwable e) {
 	}
 
@@ -301,7 +307,9 @@ public class AutoUpdateService extends Service implements ICatalogStorageListene
 					}
 					downloadMaps();
 				}
-				createAutoUpdatesResultNotification();
+				//if(mDownloadMaps.size()>0 || mUpdatedMapCount>0){
+					createAutoUpdatesResultNotification();
+				//}
 			}
 		}catch(Exception ex){
 			if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.ERROR)){

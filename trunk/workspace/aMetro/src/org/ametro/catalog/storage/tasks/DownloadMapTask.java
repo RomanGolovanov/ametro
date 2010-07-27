@@ -54,6 +54,9 @@ public class DownloadMapTask extends UpdateMapTask implements IDownloadListener 
 	}
 
 	protected void run(Context context) throws Exception {
+		if(!ApplicationEx.getInstance().isNetworkAvailable()){
+			throw new Exception("No network available");
+		}
 		final CatalogStorage storage = ApplicationEx.getInstance().getCatalogStorage();
 		 mOnlineCatalog = storage.getCatalog(CatalogStorage.ONLINE);
 		if(mOnlineCatalog==null){

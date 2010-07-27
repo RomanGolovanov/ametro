@@ -31,6 +31,7 @@ import org.ametro.ApplicationEx;
 import org.ametro.Constants;
 import org.ametro.GlobalSettings;
 import org.ametro.R;
+import org.ametro.activity.MapDetailsActivity;
 import org.ametro.activity.TaskFailedList;
 import org.ametro.activity.TaskQueuedList;
 import org.ametro.catalog.Catalog;
@@ -93,7 +94,9 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 
 	private Notification mQueueNotification;
 	private Notification mFailedNotification;
+	
 	private Notification mProgressNotification;
+	private PendingIntent mProgressNotificationIntent;
 	
 	private void removeTaskQueueNotification(){
 		mQueueNotification = null;
@@ -118,7 +121,7 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 		mNotificationManager.notify(TASK_QUEUE_ID, notification);
 	}	
 
-	private void displayTaskProgressNotification(String title, String message, int iconId)
+	private void displayTaskProgressNotification(BaseTask task, String title, String message, int iconId)
 	{
 		Notification notification = mProgressNotification;
 		if(notification==null){
@@ -126,7 +129,17 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 			notification.flags |= Notification.FLAG_ONGOING_EVENT | Notification.FLAG_NO_CLEAR;
 			mProgressNotification = notification;
 		}
-		PendingIntent contentIntent = PendingIntent.getActivity(mContext, 0, new Intent(mContext, TaskQueuedList.class), 0);
+		PendingIntent contentIntent = mProgressNotificationIntent;
+		if(contentIntent!=null){
+			contentIntent.cancel();
+		}
+		if(task instanceof ImportMapTask || task instanceof DownloadMapTask){
+			Intent detailsIntent = new Intent(mContext, MapDetailsActivity.class);
+			detailsIntent.putExtra(MapDetailsActivity.EXTRA_SYSTEM_NAME, (String)task.getTaskId() );
+			contentIntent = PendingIntent.getActivity(mContext, 0, detailsIntent, 0);
+		}else{
+			contentIntent = PendingIntent.getActivity(mContext, 0, new Intent(mContext, TaskQueuedList.class), 0);
+		}
 		notification.when = System.currentTimeMillis();
 		notification.setLatestEventInfo(mContext, title ,message, contentIntent);
 		mNotificationManager.notify(TASK_PROGRESS_ID, notification);
@@ -201,6 +214,18 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 			listener.onCatalogMapChanged(systemName);
 		}
 	}
+	
+	/*package*/ void fireCatalogMapDownloadDone(String systemName) {
+		for(ICatalogStorageListener listener : mListeners){
+			listener.onCatalogMapDownloadDone(systemName);
+		}
+	}
+	
+	/*package*/ void fireCatalogMapImportDone(String systemName) {
+		for(ICatalogStorageListener listener : mListeners){
+			listener.onCatalogMapImportDone(systemName);
+		}
+	}	
 	
 	/*package*/ void fireCatalogMapDownloadFailed(String systemName, Throwable e) {
 		for(ICatalogStorageListener listener : mListeners){
@@ -319,7 +344,7 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 
 	public void requestDownload(List<String> systemNames) {
 		synchronized (mTaskQueue) {
-			for(String systemName : systemNames){
+			for(String systemName : new LinkedList<String>(systemNames)){
 				requestTask(new DownloadMapTask(systemName));
 				fireCatalogMapChanged(systemName);
 			}
@@ -410,9 +435,7 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 					synchronized (mTaskQueue) {
 						mSyncRunTask = task;
 						int taskLeft = mTaskQueue.size()+1;
-						if(taskLeft>1){
-							displayTaskQueueNotification(taskLeft);
-						}
+						displayTaskQueueNotification(taskLeft);
 					}
 					task.execute(ApplicationEx.getInstance(), this);
 					synchronized (mTaskQueue) {
@@ -449,6 +472,7 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 			fireCatalogMapImportProgress(mapName,(int)progress,(int)total);
 			
 			displayTaskProgressNotification(
+					task,
 					mImportNotificationTitle,
 					mapName + ", " +  progress + "/" + total,
 					android.R.drawable.stat_sys_download);
@@ -458,6 +482,7 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 			fireCatalogMapDownloadProgress(mapName,(int)progress,(int)total);
 			
 			displayTaskProgressNotification(
+					task,
 					mDownloadNotificationTitle,
 					mapName + ", " +  progress + "/" + total,
 					android.R.drawable.stat_sys_download);
@@ -513,7 +538,13 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 		}
 		if(task instanceof UpdateMapTask){
 			fireCatalogChanged(LOCAL, mCatalogs[LOCAL]);
-			fireCatalogMapChanged((String)task.getTaskId());
+			if(task instanceof DownloadMapTask){
+				fireCatalogChanged(ONLINE, mCatalogs[ONLINE]);			
+				fireCatalogMapDownloadFailed((String)task.getTaskId(), reason);
+			}else  if(task instanceof ImportMapTask){
+				fireCatalogChanged(IMPORT, mCatalogs[IMPORT]);
+				fireCatalogMapImportFailed((String)task.getTaskId(), reason);	
+			}
 			displayTaskFailedNotification();
 		}
 		if(mAsyncRunQueue.contains(task)){
@@ -528,6 +559,22 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 		if(task instanceof UpdateMapTask){
 			fireCatalogChanged(LOCAL, mCatalogs[LOCAL]);
 			fireCatalogMapChanged((String)task.getTaskId());
+			String mapName = (String)task.getTaskId();
+			
+			if(task instanceof ImportMapTask){
+				displayTaskProgressNotification(
+						task,
+						mImportNotificationTitle,
+						mapName,
+						android.R.drawable.stat_sys_download);
+			}
+			if(task instanceof DownloadMapTask){
+				displayTaskProgressNotification(
+						task,
+						mDownloadNotificationTitle,
+						mapName,
+						android.R.drawable.stat_sys_download);
+			}			
 		}
 	}
 	
@@ -548,12 +595,16 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 				mCatalogs[catalogId] = catalog;
 			}
 			fireCatalogChanged(catalogId, catalog);
-		}
-		if(task instanceof UpdateMapTask){
+		}else if(task instanceof UpdateMapTask){
 			fireCatalogChanged(LOCAL, mCatalogs[LOCAL]);
-			fireCatalogMapChanged((String)task.getTaskId());
-		}
-		if(task instanceof DownloadIconsTask){
+			if(task instanceof DownloadMapTask){
+				fireCatalogChanged(ONLINE, mCatalogs[ONLINE]);
+				fireCatalogMapDownloadDone((String)task.getTaskId());
+			}else  if(task instanceof ImportMapTask){
+				fireCatalogChanged(IMPORT, mCatalogs[IMPORT]);
+				fireCatalogMapImportDone((String)task.getTaskId());
+			}
+		}else if(task instanceof DownloadIconsTask){
 			fireCatalogChanged(LOCAL, mCatalogs[LOCAL]);
 			fireCatalogChanged(IMPORT, mCatalogs[IMPORT]);
 			fireCatalogChanged(ONLINE, mCatalogs[ONLINE]);

@@ -50,9 +50,9 @@ public class EULADialog extends AlertDialog implements OnClickListener {
 		setTitle(R.string.title_eula);
 		setCancelable(true);
 		setIcon(android.R.drawable.ic_dialog_alert);
-		setButton(BUTTON_POSITIVE, context.getString( !GlobalSettings.isAcceptedEULA(context) ? R.string.btn_ok : R.string.btn_close ) , this);
+		setButton(BUTTON_POSITIVE, context.getString( !GlobalSettings.isAcceptedEULA(context) ? R.string.btn_accept : R.string.btn_close ) , this);
 		if(!GlobalSettings.isAcceptedEULA(context)){
-			setButton(BUTTON_NEGATIVE, context.getString(android.R.string.cancel), this);
+			setButton(BUTTON_NEGATIVE, context.getString(R.string.btn_reject), this);
 		}
 		setButton(BUTTON_NEUTRAL, context.getString(R.string.btn_gpl), this);
 		String str;
@@ -79,7 +79,6 @@ public class EULADialog extends AlertDialog implements OnClickListener {
 			dismiss();
 		}
 		if(which == BUTTON_NEGATIVE){
-			GlobalSettings.setAcceptedEULA(getContext(), false);
 			dismiss();
 		}
 		if(which == BUTTON_NEUTRAL){

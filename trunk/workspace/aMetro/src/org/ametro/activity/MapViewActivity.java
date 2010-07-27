@@ -126,6 +126,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		mDisableEulaDialog = false;
 		if(Instance != null){
 			mModel = Instance.mModel;
 			mMapView = Instance.mMapView;
@@ -160,13 +161,6 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		}
 	}
 
-	protected void onResume() {
-		if(!GlobalSettings.isAcceptedEULA(this)){
-			showDialog(DIALOG_EULA);
-		}
-		super.onResume();
-	}
-	
 	protected void onPause() {
 		onSaveMapState();
 		super.onPause();
@@ -180,6 +174,10 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
 		case REQUEST_MAP:
+			if(resultCode == CatalogTabHostActivity.RESULT_EULA_CANCELED){
+				mDisableEulaDialog = true;
+				finish();
+			}
 			if (resultCode == RESULT_OK) {
 				Uri uri = data.getData();
 				if (uri != null) {
@@ -189,7 +187,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 					}
 				} 
 			}
-			if( resultCode == RESULT_CANCELED && mModelName == null){
+			if(resultCode == RESULT_CANCELED && mModelName == null){
 				finish();
 			}
 			if(isConfigurationChanged()){
@@ -677,34 +675,38 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	}
 
 	private void onInitializeMapView(String mapName, String viewName) {
-		if(mModel!=null && mMapViewName!=null){
-			String mapNameLoaded = mModel.fileSystemName;
-			String schemeNameLoaded = mMapView.systemName;
-			if( mapNameLoaded.equals(mapName) ){
-				if(schemeNameLoaded.equals(viewName)){
-					// map and view is similar
-					// so only need to check locales
-					Locale locale = getLocale();
-					mLoadLocaleTask = new LoadLocaleTask();
-					mLoadLocaleTask.execute(locale);
-				}else{
-					// load new view
-					//clearNavigation(true);
-					MapView v = mModel.loadView(viewName);
-					if(v!=null){
-						onShowMap(mModel, v);
+		if(!mDisableEulaDialog && !GlobalSettings.isAcceptedEULA(this)){
+			showDialog(DIALOG_EULA);
+		}else{
+			if(mModel!=null && mMapViewName!=null){
+				String mapNameLoaded = mModel.fileSystemName;
+				String schemeNameLoaded = mMapView.systemName;
+				if( mapNameLoaded.equals(mapName) ){
+					if(schemeNameLoaded.equals(viewName)){
+						// map and view is similar
+						// so only need to check locales
+						Locale locale = getLocale();
+						mLoadLocaleTask = new LoadLocaleTask();
+						mLoadLocaleTask.execute(locale);
 					}else{
-						Toast.makeText(MapViewActivity.this, "Scheme loading error", Toast.LENGTH_SHORT).show();
+						// load new view
+						//clearNavigation(true);
+						MapView v = mModel.loadView(viewName);
+						if(v!=null){
+							onShowMap(mModel, v);
+						}else{
+							Toast.makeText(MapViewActivity.this, "Scheme loading error", Toast.LENGTH_SHORT).show();
+						}
+	
 					}
-
+				}else{
+					mInitTask = new InitTask();
+					mInitTask.execute(mapName, viewName);
 				}
 			}else{
 				mInitTask = new InitTask();
 				mInitTask.execute(mapName, viewName);
 			}
-		}else{
-			mInitTask = new InitTask();
-			mInitTask.execute(mapName, viewName);
 		}
 	}
 
@@ -1154,4 +1156,5 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	private StationView mCurrentStation;
 
 	private Locale mDefaultLocale;
+	private boolean mDisableEulaDialog;
 }
