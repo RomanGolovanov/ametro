@@ -33,6 +33,7 @@ import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMapPair;
 import org.ametro.catalog.ICatalogStateProvider;
 import org.ametro.catalog.CatalogMapPair.CatalogMapPairCityComparator;
+import org.ametro.directory.CityDirectory;
 import org.ametro.model.TransportType;
 import org.ametro.util.StringUtil;
 
@@ -43,6 +44,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -377,5 +379,23 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
 		    }
 		}
 		return newValues;
+	}
+
+	public long findItemPosition(CityDirectory.Entity city) {
+		if(city == null || mObjects == null) return -1;
+		final String code = mLanguageCode;
+		final String cityName = city.getName(code);
+		final int countriesLen = mCountries.length;
+		for(int group=0; group<countriesLen; group++ ){
+			CatalogMapPair[] cities = mRefs[group];
+			final int len = cities.length;
+			for(int child=0; child<len; child++){
+				CatalogMapPair item = cities[child];
+				if(item!=null &&  cityName.equalsIgnoreCase(item.getCity(code))){
+					return ExpandableListView.getPackedPositionForChild(group, child);
+				}
+			}
+		}
+		return -1;
 	}    
 }

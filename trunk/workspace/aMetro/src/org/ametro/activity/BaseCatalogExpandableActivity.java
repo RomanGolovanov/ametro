@@ -52,6 +52,7 @@ import org.ametro.catalog.storage.CatalogStorageStateProvider;
 import org.ametro.catalog.storage.ICatalogStorageListener;
 import org.ametro.dialog.AboutDialog;
 import org.ametro.dialog.LocationSearchDialog;
+import org.ametro.directory.CityDirectory;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -536,8 +537,25 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		}
 	}
 	
-	protected void onLocationSearch(Location location) {};
-
+	protected void onLocationSearch(Location location) {
+		CityDirectory.Entity cityEntity = ApplicationEx.getInstance().getCityDirectory().getByLocation(location);
+		if(cityEntity!=null){
+			final long packedPosition = mAdapter.findItemPosition(cityEntity);
+			if(packedPosition!=-1){
+				final int group = ExpandableListView.getPackedPositionGroup(packedPosition);
+				final int child = ExpandableListView.getPackedPositionChild(packedPosition);
+				CatalogMapPair pair = mAdapter.getData(group, child);
+				Toast.makeText(this, pair.getCity(GlobalSettings.getLanguage(this)) , Toast.LENGTH_LONG).show();
+				mUIEventDispacher.post(new Runnable() {
+					public void run() {
+						mList.expandGroup(group);
+						mList.setSelectedChild(group, child, true);
+					}
+				});
+			}
+		}
+	}
+	
 	protected void onLocationSearchCanceled() {}
 	
 	protected void onLocationSearchUnknown() {
