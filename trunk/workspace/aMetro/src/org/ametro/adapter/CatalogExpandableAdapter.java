@@ -23,6 +23,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
@@ -62,7 +63,7 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
 	protected int mMode;
 	protected String mLanguageCode;
 	
-	protected String[] mCountries;
+	protected CountryInfo[] mCountries;
 	protected HashMap<String,Drawable> mIcons;
     protected CatalogMapPair[][] mRefs;
 
@@ -80,6 +81,12 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
 	private String mSearchPrefix;
 	private Drawable mNoCountryIcon;
 
+	private TreeMap<String,Long> mChildrenIds = new TreeMap<String, Long>();
+	private TreeMap<String,Long> mGroupsIds = new TreeMap<String, Long>();
+	
+	private long mNextChildId;
+	private long mNextGroupId;
+	
     public CatalogMapPair getData(int groupId, int childId) {
         return mRefs[groupId][childId];
     }
@@ -126,7 +133,13 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
     }
 
     public long getChildId(int groupPosition, int childPosition) {
-        return childPosition;
+    	String mapSystemName = mRefs[groupPosition][childPosition].getSystemName(); 
+        Long id = mChildrenIds.get(mapSystemName);
+        if(id == null){
+        	id = mNextChildId++;
+        	mChildrenIds.put(mapSystemName,id);
+        }
+        return id;
     }
 
     public int getChildrenCount(int groupPosition) {
@@ -219,8 +232,14 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
     }
 
     public long getGroupId(int groupPosition) {
-        return groupPosition;
-    }
+    	String countryName = mCountries[groupPosition].Id; 
+        Long id = mGroupsIds.get(countryName);
+        if(id == null){
+        	id = mNextGroupId++;
+        	mGroupsIds.put(countryName,id);
+        }
+        return id;    
+	}
 
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
     	GroupViewHolder holder;
@@ -232,7 +251,7 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
 		} else {
 			holder = (GroupViewHolder) convertView.getTag();
 		}    	
-		holder.mCountry.setText(mCountries[groupPosition]);
+		holder.mCountry.setText(mCountries[groupPosition].Name);
 		return convertView;
     }
 
@@ -241,7 +260,7 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
     }
 
     public boolean hasStableIds() {
-        return false;//true;
+        return true;
     }
     
     protected void bindTransportTypes(){
@@ -260,13 +279,23 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
         mShowCountryFlags = GlobalSettings.isCountryIconsEnabled(mContext);
     	final String code= GlobalSettings.getLanguage(mContext); 
     	mLanguageCode = code;
-        TreeSet<String> countries = new TreeSet<String>();
+    	TreeSet<CountryInfo> countries = new TreeSet<CountryInfo>();
+    	HashSet<String> addedCountries = new HashSet<String>();
         TreeMap<String, ArrayList<CatalogMapPair>> index = new TreeMap<String, ArrayList<CatalogMapPair>>();
         CatalogMapPairCityComparator comparator = new CatalogMapPairCityComparator(code);
 
         for(CatalogMapPair diff : mObjects){
         	final String country = diff.getCountry(code);
-        	countries.add(country);
+        	if(!addedCountries.contains(country)){
+        		addedCountries.add(country);
+        		
+            	final String countryId = diff.getCountry(Constants.LOCALE_EN);
+            	CountryInfo info = new CountryInfo();
+            	info.Id = countryId;
+            	info.Name = country;
+            	countries.add(info);
+        	}
+
         	ArrayList<CatalogMapPair> cities = index.get(country);
         	if(cities == null){
         		cities = new ArrayList<CatalogMapPair>();
@@ -274,13 +303,13 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
         	}
         	cities.add(diff); 
         }
-        mCountries = (String[]) countries.toArray(new String[countries.size()]);
+        mCountries = (CountryInfo[]) countries.toArray(new CountryInfo[countries.size()]);
         mIcons = new HashMap<String, Drawable>();
         mRefs = new CatalogMapPair[mCountries.length][];
 
         int lenc = mCountries.length;
         for(int i=0;i<lenc;i++){
-        	final String country = mCountries[i];
+        	final String country = mCountries[i].Name;
         	final ArrayList<CatalogMapPair> diffSet = index.get(country);
 			if(diffSet!=null){        	
 	        	int len = diffSet.size();
@@ -397,5 +426,15 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
 			}
 		}
 		return -1;
-	}    
+	}
+	
+	private static class CountryInfo implements Comparable<CountryInfo>
+	{
+		public String Id;
+		public String Name;
+
+		public int compareTo(CountryInfo another) {
+			return Name.compareTo(another.Name);
+		}
+	}
 }
