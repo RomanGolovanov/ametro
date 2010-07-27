@@ -47,6 +47,8 @@ public class DownloadMapTask extends UpdateMapTask implements IDownloadListener 
 	private Catalog mOnlineCatalog;
 	private Throwable mFailReason;
 	
+	private boolean mCompleted;
+	
 	public DownloadMapTask(String systemName) {
 		super(systemName);
 	}
@@ -66,14 +68,22 @@ public class DownloadMapTask extends UpdateMapTask implements IDownloadListener 
 			throw new CanceledException("No maps found in import catalog with system name " + mSystemName);
 		}
 		
-		URI uri = URI.create(map.getAbsoluteUrl());
 		File file = new File(GlobalSettings.getTemporaryDownloadMapFile(map.getSystemName()));
 		FileUtil.touchDirectory(Constants.TEMP_CATALOG_PATH);
 		FileUtil.touchDirectory(Constants.LOCAL_CATALOG_PATH);
-		WebUtil.downloadFile(map, uri, file, false, this);
+
+		mCompleted = false;
+		for(String catalogUrl : Constants.ONLINE_CATALOG_BASE_URLS){
+			URI uri = URI.create( catalogUrl + map.getAbsoluteUrl());
+			WebUtil.downloadFile(map, uri, file, false, this);
+			if(mCompleted){
+				break;
+			}
+		}
 		if(mFailReason!=null){
 			throw new Exception("Map download failed", mFailReason);
 		}
+		
 	}
 	
 	public DownloadMapTask(Parcel in) {
@@ -105,6 +115,7 @@ public class DownloadMapTask extends UpdateMapTask implements IDownloadListener 
 		CatalogMap localMap = Catalog.extractCatalogMap(mLocalCatalog, localFile, localFile.getName().toLowerCase(), model);
 		mLocalCatalog.appendMap(localMap);
 		//Catalog.save(mLocalCatalog, Constants.LOCAL_CATALOG_STORAGE);
+		mCompleted = true;
 		ApplicationEx.getInstance().getCatalogStorage().requestCatalogSave(CatalogStorage.LOCAL);
 	}
 

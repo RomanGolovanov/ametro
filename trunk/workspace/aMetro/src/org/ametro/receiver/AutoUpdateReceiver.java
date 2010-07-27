@@ -21,18 +21,14 @@
 package org.ametro.receiver;
 
 import org.ametro.ApplicationEx;
-import org.ametro.Constants;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 public class AutoUpdateReceiver extends BroadcastReceiver {
 
 	public void onReceive(Context context, Intent intent) {
-		final String action = intent.getAction();
-		Log.w(Constants.LOG_TAG_MAIN, "RECEIVED INTENT :" + action);
 		ApplicationEx.getInstance().checkAutoUpdate();
 	}
 	

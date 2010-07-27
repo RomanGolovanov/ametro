@@ -31,6 +31,7 @@ import java.net.URI;
 import org.ametro.ApplicationEx;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 
@@ -164,68 +165,16 @@ public class WebUtil {
 			HttpGet request = new HttpGet();
 			request.setURI(uri);
 			HttpResponse response = client.execute(request);
-			HttpEntity entity = response.getEntity();
-
-			long total = (int)entity.getContentLength();
-			long position = 0;
-			
-			if(file.exists()){
-				file.delete();
-			}
-
-			BufferedInputStream in = null;
-			BufferedOutputStream out = null;
-			try{
-				in = new BufferedInputStream( entity.getContent() );
-				out = new BufferedOutputStream( new FileOutputStream(file) );
-				byte[] bytes = new byte[2048];
-				for (int c = in.read(bytes); c != -1; c = in.read(bytes)) {
-					out.write(bytes,0, c);
-					position += c;
-					if(listener!=null){
-						if(!listener.onUpdate(context, position, total)){
-							throw new DownloadCanceledException();
-						}
-					}
-				}
+			StatusLine status = response.getStatusLine();
+			if(status.getStatusCode() == 200){
+				HttpEntity entity = response.getEntity();
+				long total = (int)entity.getContentLength();
+				long position = 0;
 				
-			}finally{
-				if(in!=null){
-					try { in.close(); } catch (Exception e) { }
-				}
-				if(out!=null){
-					try { out.close(); } catch (Exception e) { }
-				}
-			}	
-			if(listener!=null){
-				listener.onDone(context, file);
-			}	
-		}finally{
-			if(strm!=null){
-				try { strm.close(); }catch(IOException ex){}
-			}
-		}
-	}	
-	
-	public static void downloadFile(Object context, URI uri, File file, boolean reuse, IDownloadListener listener){
-		BufferedInputStream strm = null;
-		if(listener!=null){
-			listener.onBegin(context, file);
-		}
-		try{
-			HttpClient client = ApplicationEx.getInstance().getHttpClient();
-			HttpGet request = new HttpGet();
-			request.setURI(uri);
-			HttpResponse response = client.execute(request);
-			HttpEntity entity = response.getEntity();
-
-			long total = (int)entity.getContentLength();
-			long position = 0;
-			
-			if(!(file.exists() && reuse && file.length() == total)){
 				if(file.exists()){
 					file.delete();
 				}
+	
 				BufferedInputStream in = null;
 				BufferedOutputStream out = null;
 				try{
@@ -249,12 +198,76 @@ public class WebUtil {
 					if(out!=null){
 						try { out.close(); } catch (Exception e) { }
 					}
-				}	
+				}
+				if(listener!=null){
+					listener.onDone(context, file);
+				}
+			}else{
+				String message =
+					"Failed to download URL " + uri.toString() + 
+					" due error " + status.getStatusCode() + " " + status.getReasonPhrase(); 
+				throw new Exception(message);
 			}
-			
-			if(listener!=null){
-				listener.onDone(context, file);
-			}	
+		}finally{
+			if(strm!=null){
+				try { strm.close(); }catch(IOException ex){}
+			}
+		}
+	}	
+	
+	public static void downloadFile(Object context, URI uri, File file, boolean reuse, IDownloadListener listener){
+		BufferedInputStream strm = null;
+		if(listener!=null){
+			listener.onBegin(context, file);
+		}
+		try{
+			HttpClient client = ApplicationEx.getInstance().getHttpClient();
+			HttpGet request = new HttpGet();
+			request.setURI(uri);
+			HttpResponse response = client.execute(request);
+			StatusLine status = response.getStatusLine();
+			if(status.getStatusCode() == 200){
+				HttpEntity entity = response.getEntity();
+				long total = (int)entity.getContentLength();
+				long position = 0;
+				if(!(file.exists() && reuse && file.length() == total)){
+					if(file.exists()){
+						file.delete();
+					}
+					BufferedInputStream in = null;
+					BufferedOutputStream out = null;
+					try{
+						in = new BufferedInputStream( entity.getContent() );
+						out = new BufferedOutputStream( new FileOutputStream(file) );
+						byte[] bytes = new byte[2048];
+						for (int c = in.read(bytes); c != -1; c = in.read(bytes)) {
+							out.write(bytes,0, c);
+							position += c;
+							if(listener!=null){
+								if(!listener.onUpdate(context, position, total)){
+									throw new DownloadCanceledException();
+								}
+							}
+						}
+						
+					}finally{
+						if(in!=null){
+							try { in.close(); } catch (Exception e) { }
+						}
+						if(out!=null){
+							try { out.close(); } catch (Exception e) { }
+						}
+					}	
+				}
+				if(listener!=null){
+					listener.onDone(context, file);
+				}	
+			}else{
+				String message =
+					"Failed to download URL " + uri.toString() + 
+					" due error " + status.getStatusCode() + " " + status.getReasonPhrase(); 
+				throw new Exception(message);
+			}
 		}catch(DownloadCanceledException ex){
 			if(listener!=null){
 				listener.onCanceled(context, file);
