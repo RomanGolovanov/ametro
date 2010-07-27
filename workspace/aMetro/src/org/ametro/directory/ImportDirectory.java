@@ -52,6 +52,10 @@ public class ImportDirectory {
 			this.mFileName = mFileName;
 			this.mCityId = mCity;
 		}
+
+		public String getMapSystemName() {
+			return mFileName.toLowerCase() + ".pmz.ametro";
+		}
 	}
 	
 	public ImportDirectory(Context context) {
@@ -79,6 +83,16 @@ public class ImportDirectory {
 	}
 	
 	private final HashMap<String, Entity> mIndex;
+
+	public Entity getByCityId(int cityId) {
+		for(String key: mIndex.keySet()){
+			Entity entity = mIndex.get(key);
+			if(entity.getCityId() == cityId){
+				return entity;
+			}
+		}
+		return null;
+	}
 		
 
 }

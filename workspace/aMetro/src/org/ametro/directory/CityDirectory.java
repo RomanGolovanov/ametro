@@ -26,15 +26,19 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.TreeMap;
 
 import org.ametro.Constants;
 import org.ametro.model.ext.ModelLocation;
 import org.ametro.util.csv.CsvReader;
 
 import android.content.Context;
+import android.location.Location;
 import android.util.Log;
 
 public class CityDirectory {
+	
+	public static final float MAXIMUM_CITY_DISTANCE = 50000;
 	
 	public static final float DEFAULT_WIDTH = 30;
 	public static final float DEFAULT_HEIGHT = 30;
@@ -176,8 +180,27 @@ public class CityDirectory {
 	public Entity getByName(String name){
 		return mNameIndex.get(name);
 	}
+
+	public Entity getByLocation(Location location) {
+		TreeMap<Float, Entity> distances = new TreeMap<Float, Entity>();
+		for(int id : mIndex.keySet()){
+			Entity entity = mIndex.get(id);
+			ModelLocation modelLocation = entity.getLocation();
+			if(modelLocation!=null){
+				float[] results = new float[3];
+				Location.distanceBetween(location.getLatitude(), location.getLongitude(), modelLocation.latitude, modelLocation.longtitude, results);
+				distances.put(results[0], entity);
+			}
+		}
+		if(distances.size()>0){
+			Float nearest = distances.firstKey();
+			if(nearest<MAXIMUM_CITY_DISTANCE){
+				return distances.get(nearest);
+			}
+		}
+		return null;
+	}
 	
 	private final HashMap<Integer, Entity> mIndex;
 	private final HashMap<String, Entity> mNameIndex;
-
 }

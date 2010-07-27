@@ -33,6 +33,7 @@ import org.ametro.catalog.CatalogMapPair;
 import org.ametro.catalog.ICatalogStateProvider;
 import org.ametro.catalog.CatalogMapPair.CatalogMapPairCityComparator;
 import org.ametro.catalog.CatalogMapPair.CatalogMapPairCountryComparator;
+import org.ametro.directory.CityDirectory;
 import org.ametro.model.TransportType;
 
 import android.content.Context;
@@ -352,4 +353,17 @@ public class CatalogAdapter extends BaseAdapter implements Filterable {
 		return -1;
 	}
 
+	public int findItemPosition(CityDirectory.Entity city) {
+		if(city == null || mObjects == null) return -1;
+		int pos = 0;
+		final String code = mLanguageCode;
+		final String cityName = city.getName(code);
+		for(CatalogMapPair item : mObjects){
+			if(item!=null &&  cityName.equalsIgnoreCase(item.getCity(code))){
+				return pos;
+			}
+			pos++;
+		}
+		return -1;
+	}	
 }
