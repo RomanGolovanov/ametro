@@ -133,9 +133,9 @@ public class ApplicationEx extends Application {
 			synchronized (ApplicationEx.class) {
 				if (mStorage == null) {
 					mStorage = new CatalogStorage(this);
-					//mStorage.requestCatalog(CatalogStorage.LOCAL, false);
-					//mStorage.requestCatalog(CatalogStorage.ONLINE, false);
-					//mStorage.requestCatalog(CatalogStorage.IMPORT, false);
+					mStorage.requestCatalog(CatalogStorage.LOCAL, false);
+					mStorage.requestCatalog(CatalogStorage.ONLINE, false);
+					mStorage.requestCatalog(CatalogStorage.IMPORT, false);
 				}
 			}
 		}

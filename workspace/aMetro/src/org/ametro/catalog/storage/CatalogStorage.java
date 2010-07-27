@@ -702,4 +702,15 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 		return lst;
 	}
 
+	public ArrayList<BaseTask> takeQueuedTaskList() {
+		synchronized (mTaskQueue) {
+			ArrayList<BaseTask> lst = new ArrayList<BaseTask>(mTaskQueue.size()+1);
+			if(mSyncRunTask!=null){
+				lst.add(mSyncRunTask);
+			}
+			lst.addAll(mTaskQueue);
+			return lst;
+		}
+	}
+
 }
