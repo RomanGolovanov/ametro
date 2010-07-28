@@ -30,6 +30,7 @@ import static org.ametro.Constants.PREFERENCE_AUTO_UPDATE_MAPS;
 import static org.ametro.Constants.PREFERENCE_AUTO_UPDATE_ON_SHOW;
 import static org.ametro.Constants.PREFERENCE_DEBUG;
 import static org.ametro.Constants.PREFERENCE_ENABLE_COUNTRY_ICONS;
+import static org.ametro.Constants.PREFERENCE_ENABLE_LOCATION;
 import static org.ametro.Constants.PREFERENCE_IS_EULA_ACCEPTED;
 import static org.ametro.Constants.PREFERENCE_LOCALE;
 import static org.ametro.Constants.PREFERENCE_ONLINE_CATALOG_UPDATE_DATE;
@@ -79,6 +80,10 @@ public class GlobalSettings {
 		return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(PREFERENCE_ENABLE_COUNTRY_ICONS, true);
 	}
 
+	public static boolean isLocateUserEnabled(Context context) {
+		return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(PREFERENCE_ENABLE_LOCATION, false);
+	}
+
 	public static void setCountryIconsEnabled(Context context, boolean enabled) {
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		Editor editor = prefs.edit();
@@ -100,7 +105,7 @@ public class GlobalSettings {
 	public static boolean isAcceptedEULA(Context context) {
 		return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(PREFERENCE_IS_EULA_ACCEPTED, false);
 	}
-
+	
 	public static void setAcceptedEULA(Context context, boolean accepted) {
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		Editor editor = prefs.edit();

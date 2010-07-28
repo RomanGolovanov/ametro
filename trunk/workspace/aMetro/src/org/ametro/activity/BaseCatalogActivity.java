@@ -248,7 +248,7 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		menu.findItem(MAIN_MENU_SEARCH).setEnabled(mMode == MODE_LIST);
 		menu.findItem(MAIN_MENU_SORT).setEnabled(mMode == MODE_LIST);
-		menu.findItem(MAIN_MENU_LOCATION).setEnabled(mMode == MODE_LIST);
+		menu.findItem(MAIN_MENU_LOCATION).setVisible(mMode == MODE_LIST && GlobalSettings.isLocateUserEnabled(this));
 		menu.findItem(MAIN_MENU_REFRESH).setEnabled( (mMode != MODE_WAIT) && (mMode != MODE_WAIT_NO_PROGRESS)  && !mStorage.hasTasks() );
 		return super.onPrepareOptionsMenu(menu);
 	}
@@ -569,7 +569,8 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 			final int position = mAdapter.findItemPosition(cityEntity);
 			if(position!=-1){
 				CatalogMapPair pair = mAdapter.getData(position);
-				Toast.makeText(this, pair.getCity(GlobalSettings.getLanguage(this)) , Toast.LENGTH_LONG).show();
+				String code = GlobalSettings.getLanguage(this);
+				Toast.makeText(this, pair.getCity(code) + ", " + pair.getCountry(code) , Toast.LENGTH_LONG).show();
 				mUIEventDispacher.post(new Runnable() {
 					public void run() {
 						mList.setSelection(position);
