@@ -150,6 +150,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	/*package*/ InputMethodManager mInputMethodManager;
 
 	
+	protected abstract int getEmptyListHeader();
 	protected abstract int getEmptyListMessage();
 	protected abstract boolean isCatalogProgressEnabled(int catalogId);
 	protected abstract int getLocalCatalogId(); 
@@ -363,7 +364,8 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		}
 		if(mMode!=MODE_EMPTY){
 			setContentView(R.layout.catalog_empty);
-			((TextView)findViewById(R.id.text)).setText(getEmptyListMessage());
+			((TextView)findViewById(R.id.header)).setText(getEmptyListHeader());
+			((TextView)findViewById(R.id.message)).setText(getEmptyListMessage());
 			mMode = MODE_EMPTY;
 		}
 	} 

@@ -213,9 +213,12 @@
     <string name="msg_select_scheme">Select Scheme</string>
     <string name="msg_catalog_download_failed">Online catalog download failed</string>
     <string name="msg_no_maps_in_favorites">No starred maps</string>
-    <string name="msg_no_maps_in_local">No installed maps</string>
-    <string name="msg_no_maps_in_online">Online catalog is empty</string>
-    <string name="msg_no_maps_in_import">No PMZ maps for import</string>
+    <string name="msg_no_maps_in_local_header">No installed maps</string>
+    <string name="msg_no_maps_in_local">Use Online or Import catalog to install new maps, or see detailed instructions on site http://ametro-en.no-ip.org</string>
+    <string name="msg_no_maps_in_online_header">Online catalog is empty</string>
+    <string name="msg_no_maps_in_online">Use need to be connected to Internet to download Online catalog map list. Press Refresh to begin download</string>
+    <string name="msg_no_maps_in_import_header">No PMZ maps for import</string>
+    <string name="msg_no_maps_in_import">Use need to copy .PMZ files into /sdcard/ametro/import and detach your smartphone from PC. Press Refresh to refresh</string>
     <string name="msg_delete_local_map_confirmation">Remove map %s, %s from my maps?</string>
     <string name="msg_delete_import_map_confirmation">Remove PMZ map %s, %s from import?</string>
     <string name="msg_enter_amount">Enter amount, in USD</string>

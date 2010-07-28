@@ -34,12 +34,16 @@ import android.widget.Toast;
 
 public class CatalogImportListActivity extends BaseCatalogExpandableActivity {
 
-	protected boolean isCatalogProgressEnabled(int catalogId) {
-		return catalogId == CatalogStorage.IMPORT; 
+	protected int getEmptyListHeader() {
+		return R.string.msg_no_maps_in_import_header;
 	}
 
 	protected int getEmptyListMessage() {
 		return R.string.msg_no_maps_in_import;
+	}
+
+	protected boolean isCatalogProgressEnabled(int catalogId) {
+		return catalogId == CatalogStorage.IMPORT; 
 	}
 
 	public int getCatalogState(CatalogMap local, CatalogMap remote) {

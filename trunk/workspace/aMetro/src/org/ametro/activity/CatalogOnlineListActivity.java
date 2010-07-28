@@ -34,6 +34,10 @@ import android.widget.Toast;
 
 public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity {
 
+	protected int getEmptyListHeader() {
+		return R.string.msg_no_maps_in_online_header;
+	}
+
 	protected int getEmptyListMessage() {
 		return R.string.msg_no_maps_in_online;
 	}

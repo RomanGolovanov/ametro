@@ -82,6 +82,10 @@ public class CatalogLocalListActivity extends BaseCatalogActivity {
 	protected boolean isCatalogProgressEnabled(int catalogId) {
 		return catalogId == CatalogStorage.LOCAL;
 	}
+	
+	protected int getEmptyListHeader() {
+		return R.string.msg_no_maps_in_local_header;
+	}
 
 	protected int getEmptyListMessage() {
 		return R.string.msg_no_maps_in_local;
