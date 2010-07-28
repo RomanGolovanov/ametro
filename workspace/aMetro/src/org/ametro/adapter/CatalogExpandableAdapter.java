@@ -133,6 +133,7 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
     }
 
     public long getChildId(int groupPosition, int childPosition) {
+    	if(mRefs==null || mRefs.length<groupPosition || mRefs[groupPosition]==null || mRefs[groupPosition].length<childPosition) return -1;
     	String mapSystemName = mRefs[groupPosition][childPosition].getSystemName(); 
         Long id = mChildrenIds.get(mapSystemName);
         if(id == null){
@@ -232,6 +233,7 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
     }
 
     public long getGroupId(int groupPosition) {
+    	if(mCountries==null || mCountries.length<groupPosition) return -1;
     	String countryName = mCountries[groupPosition].Id; 
         Long id = mGroupsIds.get(countryName);
         if(id == null){
@@ -356,11 +358,7 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
         protected void publishResults(CharSequence constraint, FilterResults results) {
             mObjects = (ArrayList<CatalogMapPair>) results.values;
         	bindData();
-            if (results.count > 0) {
-                notifyDataSetChanged();
-            } else {
-                notifyDataSetInvalidated();
-            }
+            notifyDataSetChanged();
         }
     }
 	

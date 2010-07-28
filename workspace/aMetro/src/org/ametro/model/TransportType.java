@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.ametro.util.CollectionUtil;
+import org.ametro.util.StringUtil;
 
 public class TransportType {
 
@@ -34,6 +35,7 @@ public class TransportType {
 	public final static int TRAIN_RESOURCE_INDEX = 4;
 	public final static int WATER_BUS_RESOURCE_INDEX = 5;
 	public final static int TROLLEYBUS_RESOURCE_INDEX = 6;
+	public final static int CABLEWAY_RESOURCE_INDEX = 7;
 	
 	public final static int UNKNOWN_ID = 1;
 	public final static int METRO_ID = 2;
@@ -42,8 +44,9 @@ public class TransportType {
 	public final static int TRAIN_ID = 16;
 	public final static int WATER_BUS_ID = 32;
 	public final static int TROLLEYBUS_ID = 64;
+	public final static int CABLEWAY_ID = 128;
 
-	public final static int TRANSPORT_COUNT = 6;
+	public final static int TRANSPORT_COUNT = 7;
 	
 	private final static String TRANSPORT_TYPE_METRO = "Метро";
 	private final static String TRANSPORT_TYPE_TRAIN = "Электричка";
@@ -51,6 +54,7 @@ public class TransportType {
 	private final static String TRANSPORT_TYPE_BUS = "Автобус";
 	private final static String TRANSPORT_TYPE_WATER_BUS = "Речной трамвай";
 	private final static String TRANSPORT_TYPE_TROLLEYBUS = "Троллейбус";
+	private final static String TRANSPORT_TYPE_CABLEWAY = "Фуникулер";
 	
 	private final static HashMap<String, Integer> mIndex;
 	private final static HashMap<String, Integer> mResourceIndex;
@@ -64,6 +68,7 @@ public class TransportType {
 		mIndex.put(TRANSPORT_TYPE_TRAIN, TRAIN_ID);
 		mIndex.put(TRANSPORT_TYPE_WATER_BUS, WATER_BUS_ID);
 		mIndex.put(TRANSPORT_TYPE_TROLLEYBUS, TROLLEYBUS_ID);
+		mIndex.put(TRANSPORT_TYPE_CABLEWAY, CABLEWAY_ID);
 		
 		mResourceIndex = new HashMap<String, Integer>();
 		mResourceIndex.put(TRANSPORT_TYPE_METRO, METRO_RESOURCE_INDEX);
@@ -72,6 +77,7 @@ public class TransportType {
 		mResourceIndex.put(TRANSPORT_TYPE_TRAIN, TRAIN_RESOURCE_INDEX);
 		mResourceIndex.put(TRANSPORT_TYPE_WATER_BUS, WATER_BUS_RESOURCE_INDEX);
 		mResourceIndex.put(TRANSPORT_TYPE_TROLLEYBUS, TROLLEYBUS_RESOURCE_INDEX);
+		mResourceIndex.put(TRANSPORT_TYPE_CABLEWAY, CABLEWAY_RESOURCE_INDEX);
 		
 		mResourceByIdIndex = new HashMap<Integer, Integer>();
 		mResourceByIdIndex.put(UNKNOWN_ID, UNKNOWN_RESOURCE_INDEX);
@@ -81,12 +87,29 @@ public class TransportType {
 		mResourceByIdIndex.put(TRAIN_ID, TRAIN_RESOURCE_INDEX);
 		mResourceByIdIndex.put(WATER_BUS_ID, WATER_BUS_RESOURCE_INDEX);
 		mResourceByIdIndex.put(TROLLEYBUS_ID, TROLLEYBUS_RESOURCE_INDEX);
+		mResourceByIdIndex.put(CABLEWAY_ID, CABLEWAY_RESOURCE_INDEX);
 	}
 	
 	public static int getTransportTypeId(String value){
-		Integer id = mIndex.get(value);
-		if(id != null){
-			return id;
+		if(value.indexOf('+')==-1){
+			Integer id = mIndex.get(value);
+			if(id != null){
+				return id;
+			}
+		}else{
+			int types = 0;
+			String[] parts = StringUtil.fastSplit(value,'+');
+			for(String part : parts){
+				Integer id = mIndex.get(part);
+				if(id != null){
+					types |= id;
+				}else{
+					types |= UNKNOWN_ID;
+				}
+			}
+			if(types>0){
+				return types;
+			}
 		}
 		return UNKNOWN_ID;	
 	}
