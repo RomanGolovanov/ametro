@@ -73,6 +73,7 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Display;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -106,6 +107,23 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		}
 	}
 
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(keyCode == KeyEvent.KEYCODE_BACK){
+			MapView view = getMapView();
+			if(view!=null){
+				if(isNavigationActive()){
+					clearNavigation(true);
+					return true;
+				}
+				if(!view.systemName.equalsIgnoreCase(mModel.viewSystemNames[0])){
+					onInitializeMapView(getMapName(), mModel.viewSystemNames[0]);
+					return true;
+				}
+			}
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+	
 	public void onClick(View src) {
 		if(src == mNavigatePreviousButton){
 			navigatePreviuosStation();
@@ -272,7 +290,10 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		case MAIN_MENU_SCHEMES:
 			SchemeListDialog dialog = new SchemeListDialog(this, mModel, getMapView()){
 				public void onMapViewSelected(String mapViewSystemName) {
-					onInitializeMapView(mModelName, mapViewSystemName);
+					if(mapViewSystemName!=getMapView().systemName){
+						clearNavigation(true);
+						onInitializeMapView(mModelName, mapViewSystemName);
+					}
 					super.onMapViewSelected(mapViewSystemName);
 				}
 			};
@@ -597,6 +618,10 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		}
 	}
 
+	/*package*/ boolean isNavigationActive(){
+		return mRouteContainer!=null || mNavigationStations!=null;
+	}
+	
 	/*package*/ void clearNavigation(boolean changeUI){
 		if(changeUI){
 			hideNavigationControls();

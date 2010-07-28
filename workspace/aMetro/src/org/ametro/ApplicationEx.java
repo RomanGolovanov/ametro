@@ -20,6 +20,9 @@
  */
 package org.ametro;
 
+import static org.ametro.Constants.HTTP_CONNECTION_TIMEOUT;
+import static org.ametro.Constants.HTTP_SOCKET_TIMEOUT;
+
 import java.io.FileOutputStream;
 
 import org.ametro.catalog.storage.CatalogStorage;
@@ -55,9 +58,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.util.Log;
-
-import static org.ametro.Constants.HTTP_CONNECTION_TIMEOUT;
-import static org.ametro.Constants.HTTP_SOCKET_TIMEOUT;
 
 public class ApplicationEx extends Application {
 	
@@ -142,6 +142,16 @@ public class ApplicationEx extends Application {
 		return mStorage;
 	}
 	
+	public static void extractEULA(Context context) {
+		if(!Constants.EULA_FILE.exists()){
+			try {
+				FileUtil.writeToStream( context.getAssets().open("gpl.html") , new FileOutputStream(Constants.EULA_FILE), true);
+			} catch (Exception e) {
+				// do nothing!
+			}
+		}
+	}
+	
 	public void onCreate() {
 		if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)) {
 			Log.i(Constants.LOG_TAG_MAIN, "aMetro application started");
@@ -162,23 +172,6 @@ public class ApplicationEx extends Application {
 		super.onCreate();
 	}
 
-	private void createAutoUpdateAlarm() {
-		AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-		Intent intent = new Intent(this, AutoUpdateReceiver.class);
-		PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
-		alarmManager.cancel(pendingIntent);
-		alarmManager.setInexactRepeating(AlarmManager.RTC, System.currentTimeMillis() + 1000*60 , AlarmManager.INTERVAL_DAY, pendingIntent);
-	}
-
-	public static void extractEULA(Context context) {
-		if(!Constants.EULA_FILE.exists()){
-			try {
-				FileUtil.writeToStream( context.getAssets().open("gpl.html") , new FileOutputStream(Constants.EULA_FILE), true);
-			} catch (Exception e) {
-				// do nothing!
-			}
-		}
-	}
 
 	public void onTerminate() {
 		stopService(new Intent(this, AutoUpdateService.class));
@@ -235,6 +228,14 @@ public class ApplicationEx extends Application {
 			}
 		}
 		return false;
+	}
+	
+	private void createAutoUpdateAlarm() {
+		AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+		Intent intent = new Intent(this, AutoUpdateReceiver.class);
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+		alarmManager.cancel(pendingIntent);
+		alarmManager.setInexactRepeating(AlarmManager.RTC, System.currentTimeMillis() + 1000*60 , AlarmManager.INTERVAL_DAY, pendingIntent);
 	}
 	
 	private HttpClient createHttpClient() {

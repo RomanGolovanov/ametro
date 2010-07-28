@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:gravity="center"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:background="#000000">
+		<ImageView android:src="@drawable/small_logo"
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+		<TextView android:text="@string/msg_media_unmounted" android:gravity="center"
+			android:layout_width="fill_parent" android:layout_height="wrap_content" />
+</LinearLayout>
+	
