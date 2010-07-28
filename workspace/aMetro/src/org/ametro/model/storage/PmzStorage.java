@@ -19,6 +19,9 @@
  */
 package org.ametro.model.storage;
 
+import static org.ametro.Constants.LOCALE_EN;
+import static org.ametro.Constants.LOCALE_RU;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -63,10 +66,8 @@ import org.ametro.model.ext.ModelSpline;
 import org.ametro.model.util.IniStreamReader;
 import org.ametro.model.util.ModelUtil;
 import org.ametro.util.CollectionUtil;
+import org.ametro.util.DateUtil;
 import org.ametro.util.StringUtil;
-
-import static org.ametro.Constants.LOCALE_EN;
-import static org.ametro.Constants.LOCALE_RU;
 
 public class PmzStorage implements IModelStorage {
 
@@ -746,7 +747,8 @@ public class PmzStorage implements IModelStorage {
 			String[] englishDelays = null;
 
 			ZipEntry cityEntry = mZipFile.getEntry(mCityFile);
-			mTimestamp = cityEntry.getTime();
+			mTimestamp = DateUtil.toUTC( cityEntry.getTime() );
+			
 			InputStream stream = mZipFile.getInputStream(cityEntry);
 			final IniStreamReader ini = new IniStreamReader(new InputStreamReader(stream, ENCODING));
 			while(ini.readNext()){

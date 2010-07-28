@@ -23,6 +23,7 @@ package org.ametro.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -103,5 +104,17 @@ public class DateUtil {
     public static Date parseTimeDate(String date) throws ParseException {
         return parseDate(date, "HH:mm dd.MM.yyyy");
     }
+
+	public static long toUTC(long timestamp) {
+		Calendar cal = Calendar.getInstance();
+		int offset = cal.getTimeZone().getOffset(timestamp);
+		return timestamp + offset;
+	}
+
+	public static long toLocal(long timestamp) {
+		Calendar cal = Calendar.getInstance();
+		int offset = cal.getTimeZone().getOffset(timestamp);
+		return timestamp - offset;
+	}
 
 }

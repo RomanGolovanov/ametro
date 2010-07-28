@@ -85,8 +85,7 @@ public class ModelBuilder {
 		if (storage != null) {
 			try {
 				long startTime = System.currentTimeMillis();
-				Model model = storage.loadModelDescription(fileName,
-						locale);
+				Model model = storage.loadModelDescription(fileName, locale);
 				if (Model.isDescriptionLoaded(model)) {
 					if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)) {
 						Log.d(Constants.LOG_TAG_MAIN,
