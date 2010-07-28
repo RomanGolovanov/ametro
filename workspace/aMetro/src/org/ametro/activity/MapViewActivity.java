@@ -245,7 +245,8 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		menu.findItem(MAIN_MENU_LAYERS).setEnabled(false);//mModel!=null);
 		menu.findItem(MAIN_MENU_SCHEMES).setEnabled(mModel!=null);
 		menu.findItem(MAIN_MENU_LIBRARY).setEnabled(mModel!=null);
-		menu.findItem(MAIN_MENU_LOCATION).setEnabled(mModel!=null);
+		menu.findItem(MAIN_MENU_LOCATION).setVisible(mModel!=null && GlobalSettings.isLocateUserEnabled(this));
+		
 		return super.onPrepareOptionsMenu(menu);
 	}
 
@@ -1054,7 +1055,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		protected void onPreExecute() {
 			super.onPreExecute();
 			dialog = ProgressDialog.show(MapViewActivity.this,
-					getString(R.string.locate_wait_title),
+					getString(R.string.locate_station_wait_title),
 					getString(R.string.locate_wait_text), true);
 		}
 

@@ -67,6 +67,7 @@ public class Constants {
     public static final String PREFERENCE_ENABLE_COUNTRY_ICONS = "ENABLE_COUNTRY_ICONS";
     public static final String PREFERENCE_ONLINE_CATALOG_UPDATE_DATE = "ONLINE_CATALOG_UPDATE_DATE";
     public static final String PREFERENCE_IS_EULA_ACCEPTED = "EULA_ACCEPTED";
+    public static final String PREFERENCE_ENABLE_LOCATION = "AUTO_LOCATION";
 
     public static final String DEFAULT_MAP = "metro";
 
