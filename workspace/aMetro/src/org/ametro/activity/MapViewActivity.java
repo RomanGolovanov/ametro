@@ -50,11 +50,9 @@ import org.ametro.model.route.RouteContainer;
 import org.ametro.model.route.RouteView;
 import org.ametro.model.storage.ModelBuilder;
 import org.ametro.model.util.ModelUtil;
-import org.ametro.render.RenderProgram;
 import org.ametro.util.DateUtil;
 import org.ametro.util.StringUtil;
 import org.ametro.widget.VectorMapView;
-import org.ametro.widget.BaseMapView.OnMapEventListener;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -79,7 +77,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
-import android.view.animation.AlphaAnimation;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -641,7 +638,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	private void onSaveMapState() {
 		if (mMapView != null && mVectorMapView != null && mModelName != null) {
 			PointF pos = mVectorMapView.getModelScrollCenter();
-			int zoom = mZoom;
+			int zoom = mVectorMapView.getModelZoom();;
 			saveScrollPosition(pos);
 			saveZoom(zoom);
 		}
@@ -655,17 +652,17 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 				if (Log.isLoggable(LOG_TAG_MAIN, Log.DEBUG)){ 
 					Log.d(LOG_TAG_MAIN, getString(R.string.log_restore_map_zoom) + zoom);
 				}
-				setZoom(zoom);
+				mVectorMapView.setZoom(zoom);
 			} else {
-				zoom = MIN_ZOOM_LEVEL;
+				zoom = VectorMapView.MIN_ZOOM_LEVEL;
 				int modelWidth = mMapView.width;
 				int modelHeight = mMapView.height;
 				Display display = ((WindowManager) getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
 				int width = display.getWidth();
 				int height = display.getHeight();
-				while (zoom < MAX_ZOOM_LEVEL) {
-					int scaledWidth = (int) (modelWidth * ZOOMS[zoom]);
-					int scaledHeight = (int) (modelHeight * ZOOMS[zoom]);
+				while (zoom < VectorMapView.MAX_ZOOM_LEVEL) {
+					int scaledWidth = (int) (modelWidth * VectorMapView.ZOOMS[zoom]);
+					int scaledHeight = (int) (modelHeight * VectorMapView.ZOOMS[zoom]);
 					if (scaledWidth <= width && scaledHeight <= height) {
 						break;
 					}
@@ -674,7 +671,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 				if (Log.isLoggable(LOG_TAG_MAIN, Log.DEBUG)){
 					Log.d(LOG_TAG_MAIN, getString(R.string.log_default_map_zoom) + zoom);
 				}
-				setZoom(zoom);
+			 	mVectorMapView.setZoom(zoom);
 			}
 			PointF pos = loadScrollPosition();
 			if (pos != null) {
@@ -805,8 +802,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 
 		mVectorMapView.setModel(mMapView);
 		mVectorMapView.setModelSelection(mNavigationStations, mNavigationSegments, mNavigationTransfers);
-		mZoomControls = (ZoomControls) findViewById(R.id.browse_vector_map_zoom);
-		mZoomControls.setVisibility(View.INVISIBLE);
+		mVectorMapView.setZoomControls((ZoomControls) findViewById(R.id.browse_vector_map_zoom));
 
 		mNavigationPanelTop = (View)findViewById(R.id.browse_vector_map_panel_top);
 		mNavigationPanelBottom = (View)findViewById(R.id.browse_vector_map_panel_bottom);
@@ -832,91 +828,9 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 
 		onRestoreMapState();
 
-		bindMapEvents();
-
 		mVectorMapView.requestFocus();
 
 		saveDefaultMapName();
-	}
-
-	private void bindMapEvents() {
-		mVectorMapView.setOnMapEventListener(new OnMapEventListener() {
-			public void onShortClick(int x, int y) {
-				if (mZoomControls.getVisibility() != View.VISIBLE) {
-					showZoom();
-				}
-				delayZoom();
-				//Toast.makeText(BrowseVectorMap.this, "clicked!", 100).show();
-			}
-
-			public void onMove(int newx, int newy, int oldx, int oldy) {
-				if (mZoomControls.getVisibility() != View.VISIBLE) {
-					showZoom();
-				}
-				delayZoom();
-			}
-
-			public void onLongClick(int x, int y) {
-			}
-		});
-
-		mZoomControls.setOnZoomInClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				MapViewActivity.this.onZoomIn();
-			}
-		});
-		mZoomControls.setOnZoomOutClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				MapViewActivity.this.onZoomOut();
-			}
-		});
-
-		mZoomControlRunnable = new Runnable() {
-			public void run() {
-				if (!mZoomControls.hasFocus()) {
-					hideZoom();
-				} else {
-					delayZoom();
-				}
-			}
-		};
-
-	}
-
-	private void onZoomIn() {
-		setZoom(mZoom - 1);
-	}
-
-	private void onZoomOut() {
-		setZoom(mZoom + 1);
-	}
-
-	private void setZoom(int zoom) {
-		mZoom = Math.min(Math.max(zoom, MIN_ZOOM_LEVEL), MAX_ZOOM_LEVEL);
-		mZoomControls.setIsZoomInEnabled(mZoom > MIN_ZOOM_LEVEL);
-		mZoomControls.setIsZoomOutEnabled(mZoom < MAX_ZOOM_LEVEL);
-		mVectorMapView.setRenderFilter(FILTERS[mZoom]);
-		mVectorMapView.setScale(ZOOMS[mZoom], STEPS[mZoom]);
-	}
-
-	private void delayZoom() {
-		mPrivateHandler.removeCallbacks(mZoomControlRunnable);
-		mPrivateHandler.postDelayed(mZoomControlRunnable, ZOOM_CONTROLS_TIMEOUT);
-	}
-
-	public void showZoom() {
-		fadeZoom(View.VISIBLE, 0.0f, 1.0f);
-	}
-
-	public void hideZoom() {
-		fadeZoom(View.INVISIBLE, 1.0f, 0.0f);
-	}
-
-	private void fadeZoom(int visibility, float startAlpha, float endAlpha) {
-		AlphaAnimation anim = new AlphaAnimation(startAlpha, endAlpha);
-		anim.setDuration(500);
-		mZoomControls.startAnimation(anim);
-		mZoomControls.setVisibility(visibility);
 	}
 
 	private void hideNavigationControls() {
@@ -1129,24 +1043,6 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	private static final int MAIN_MENU_LOCATION = 9;
 	private static final int MAIN_MENU_EXPERIMENTAL = 10;
 
-	private final float[] ZOOMS = new float[]{1.5f, 1.0f, 0.8f, 0.6f, 0.4f, 0.3f, 0.2f, 0.1f};
-	private final int[] STEPS = new int[]{15, 10, 8, 6, 4, 3, 2, 1};
-	private final int[] FILTERS = new int[]{
-			RenderProgram.ALL,
-			RenderProgram.ALL,
-			RenderProgram.ALL,
-			RenderProgram.ALL,
-			RenderProgram.ALL,
-			RenderProgram.ALL,
-			RenderProgram.ALL,
-			RenderProgram.ALL,
-	};
-
-	private final int MIN_ZOOM_LEVEL = 0;
-	private final int MAX_ZOOM_LEVEL = 7;
-	private final int DEFAULT_ZOOM_LEVEL = 1;
-	private final int ZOOM_CONTROLS_TIMEOUT = 2000;
-	private int mZoom = DEFAULT_ZOOM_LEVEL;
 
 	private String mModelName;
 	private String mMapViewName;
@@ -1154,10 +1050,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	private Model mModel;
 
 	private VectorMapView mVectorMapView;
-
-	private ZoomControls mZoomControls;
-	private Runnable mZoomControlRunnable;
-
+	
 	private View mNavigationPanelTop;
 	private View mNavigationPanelBottom;
 	private ImageButton mNavigatePreviousButton;
@@ -1169,7 +1062,6 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	private RouteView mCurrentRouteView;
 	private RouteContainer mRouteContainer;
 
-	private Handler mPrivateHandler = new Handler();
 	private Handler mScrollHandler = new Handler();
 
 	private InitTask mInitTask;

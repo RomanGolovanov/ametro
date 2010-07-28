@@ -42,9 +42,138 @@ import android.graphics.Bitmap.Config;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.widget.ZoomControls;
 
 public class VectorMapView extends BaseMapView {
 
+	public static final float[] ZOOMS = new float[]{1.5f, 1.0f, 0.8f, 0.6f, 0.4f, 0.3f, 0.2f, 0.1f};
+	public static final int[] STEPS = new int[]{15, 10, 8, 6, 4, 3, 2, 1};
+	public static final int[] FILTERS = new int[]{
+			RenderProgram.ALL,
+			RenderProgram.ALL,
+			RenderProgram.ALL,
+			RenderProgram.ALL,
+			RenderProgram.ALL,
+			RenderProgram.ALL,
+			RenderProgram.ALL,
+			RenderProgram.ALL,
+	};
+
+	public static final int MIN_ZOOM_LEVEL = 0;
+	public static final int MAX_ZOOM_LEVEL = 7;
+	public static final int DEFAULT_ZOOM_LEVEL = 1;
+	public static final int ZOOM_CONTROLS_TIMEOUT = 2000;
+	
+	private int mZoom = DEFAULT_ZOOM_LEVEL;
+
+	private ZoomControls mZoomControls;
+	
+	public void setZoomControls(ZoomControls zoomControls) {
+		mZoomControls = zoomControls;
+		bindMapEvents();
+	}
+
+	public int getModelZoom() {
+		return mZoom;
+	}
+	
+	public void setModelZoom(int zoom){
+		mZoom = zoom;
+	}
+	
+	private Runnable mZoomControlRunnable = new Runnable() {
+		public void run() {
+			if (!mZoomControls.hasFocus()) {
+				hideZoom();
+			} else {
+				delayZoom();
+			}
+		}
+	};
+	
+	private void bindMapEvents() {
+		mZoomControls.setVisibility(View.INVISIBLE);
+		
+		this.setOnMapEventListener(new OnMapEventListener() {
+			public void onShortClick(int x, int y) {
+				if (mZoomControls.getVisibility() != View.VISIBLE) {
+					showZoom();
+				}
+				delayZoom();
+			}
+
+			public void onMove(int newx, int newy, int oldx, int oldy) {
+				if (mZoomControls.getVisibility() != View.VISIBLE) {
+					showZoom();
+				}
+				delayZoom();
+			}
+
+			public void onLongClick(int x, int y) {
+			}
+		});
+
+		mZoomControls.setOnZoomInClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				onZoomIn();
+			}
+		});
+		mZoomControls.setOnZoomOutClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				onZoomOut();
+			}
+		});
+
+	}
+
+	private void onZoomIn() {
+		setZoom(mZoom - 1);
+	}
+
+	private void onZoomOut() {
+		setZoom(mZoom + 1);
+	}
+
+	public void setZoom(int zoom) {
+		int newZoom = Math.min(Math.max(zoom, MIN_ZOOM_LEVEL), MAX_ZOOM_LEVEL);
+		float newScale = ZOOMS[newZoom];
+		int width = (int) Math.ceil(mMapView.width * newScale);
+		int height = (int) Math.ceil(mMapView.height * newScale);
+		if(width<getWidth() && height<getHeight() && getContentWidth()<getWidth() && getContentHeight()<getHeight()){
+			// FIXIT: temporary, disable zoomout on full screen map
+			return;
+		}
+		mZoom = Math.min(Math.max(zoom, MIN_ZOOM_LEVEL), MAX_ZOOM_LEVEL);
+		mZoomControls.setIsZoomInEnabled(mZoom > MIN_ZOOM_LEVEL);
+		mZoomControls.setIsZoomOutEnabled(mZoom < MAX_ZOOM_LEVEL);
+		setRenderFilter(FILTERS[mZoom]);
+		setScale(ZOOMS[mZoom], STEPS[mZoom]);
+	}
+
+	private void delayZoom() {
+		mPrivateHandler.removeCallbacks(mZoomControlRunnable);
+		mPrivateHandler.postDelayed(mZoomControlRunnable, ZOOM_CONTROLS_TIMEOUT);
+	}
+
+	public void showZoom() {
+		fadeZoom(View.VISIBLE, 0.0f, 1.0f);
+	}
+
+	public void hideZoom() {
+		fadeZoom(View.INVISIBLE, 1.0f, 0.0f);
+	}
+
+	private void fadeZoom(int visibility, float startAlpha, float endAlpha) {
+		AlphaAnimation anim = new AlphaAnimation(startAlpha, endAlpha);
+		anim.setDuration(500);
+		mZoomControls.startAnimation(anim);
+		mZoomControls.setVisibility(visibility);
+	}
+	
+	
+	
 	public VectorMapView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 	}
