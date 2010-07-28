@@ -56,11 +56,14 @@ import org.ametro.directory.CityDirectory;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -130,6 +133,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	private final int CONTEXT_MENU_DELETE = 6;
 	private final int CONTEXT_MENU_DELETE_PMZ = 7;
 	
+	private final static int REQUEST_SDCARD = 996;
 	private final static int REQUEST_DETAILS = 997;
 	private final static int REQUEST_LOCATION = 998;
 	private final static int REQUEST_SETTINGS = 999;
@@ -282,6 +286,11 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
+		case REQUEST_SDCARD:
+			if(resultCode != RESULT_OK){
+				invokeFinish(null);
+			}
+			break;
 		case REQUEST_SETTINGS:
 			onSettingsChanged();
 			break;
@@ -339,6 +348,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	}
 
 	protected void onResume() {
+		startWatchingExternalStorage();
 		mStorage.addCatalogStorageListener(this);
 
 		mLocal = mStorage.getCatalog(mLocalId);
@@ -354,6 +364,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	}
 
 	protected void onPause() {
+		stopWatchingExternalStorage();
 		mStorage.removeCatalogStorageListener(this);
 		super.onPause();
 	}
@@ -770,5 +781,43 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		       });
 		AlertDialog alertDialog = builder.create();
 		alertDialog.show();
+	}
+	
+	private void updateExternalStorageState() {
+	    String state = Environment.getExternalStorageState();
+	    if (Environment.MEDIA_MOUNTED.equals(state)) {
+	        mExternalStorageAvailable = mExternalStorageWriteable = true;
+	    } else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+	        mExternalStorageAvailable = true;
+	        mExternalStorageWriteable = false;
+	    } else {
+	        mExternalStorageAvailable = mExternalStorageWriteable = false;
+	    }
+	    
+	    if(!(mExternalStorageAvailable && mExternalStorageWriteable)){
+	    	startActivityForResult(new Intent(this,MediaUnmountedActivity.class), REQUEST_SDCARD);
+	    }
+	}
+
+	private void startWatchingExternalStorage() {
+	    mExternalStorageReceiver = new BroadcastReceiver() {
+	        public void onReceive(Context context, Intent intent) {
+	            updateExternalStorageState();
+	        }
+	    };
+	    IntentFilter filter = new IntentFilter();
+	    filter.addAction(Intent.ACTION_MEDIA_MOUNTED);
+	    filter.addAction(Intent.ACTION_MEDIA_REMOVED);
+	    registerReceiver(mExternalStorageReceiver, filter);
+	    updateExternalStorageState();
+	}
+
+	private void stopWatchingExternalStorage() {
+	    unregisterReceiver(mExternalStorageReceiver);
 	}	
+	
+	private BroadcastReceiver mExternalStorageReceiver;
+	private boolean mExternalStorageAvailable = false;
+	private boolean mExternalStorageWriteable = false;
+		
 }

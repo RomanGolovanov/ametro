@@ -56,11 +56,14 @@ import org.ametro.directory.CityDirectory;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -119,7 +122,6 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 
 	protected final int MAIN_MENU_END = 800;
 	
-	
 	private final int MAIN_MENU_SORT = 995;
 	private final int MAIN_MENU_SEARCH = 996;
 	private final int MAIN_MENU_REFRESH = 997;
@@ -135,10 +137,11 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 	private final int CONTEXT_MENU_DELETE = 6;
 	private final int CONTEXT_MENU_DELETE_PMZ = 7;
 	
+	private final static int REQUEST_SDCARD = 996;
 	private final static int REQUEST_DETAILS = 997;
 	private final static int REQUEST_LOCATION = 998;
 	private final static int REQUEST_SETTINGS = 999;
-
+	
 	protected Catalog mLocal;
 	protected Catalog mRemote;
 	
@@ -280,6 +283,11 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
+		case REQUEST_SDCARD:
+			if(resultCode != RESULT_OK){
+				invokeFinish(null);
+			}
+			break;
 		case REQUEST_SETTINGS:
 			onSettingsChanged();
 			break;
@@ -337,8 +345,8 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 	}
 
 	protected void onResume() {
+		startWatchingExternalStorage();
 		mStorage.addCatalogStorageListener(this);
-
 		mLocal = mStorage.getCatalog(mLocalId);
 		mRemote = mStorage.getCatalog(mRemoteId);
 		if (mLocal == null) { 
@@ -349,6 +357,7 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 	}
 
 	protected void onPause() {
+		stopWatchingExternalStorage();
 		mStorage.removeCatalogStorageListener(this);
 		super.onPause();
 	}
@@ -617,6 +626,7 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 		return false;
 	}
 
+	
 	protected void invokeMapDetails(CatalogMap local, CatalogMap remote, int state) {
 		Intent detailsIntent = new Intent(this, MapDetailsActivity.class);
 		detailsIntent.putExtra(MapDetailsActivity.EXTRA_SYSTEM_NAME, (local!=null) ? local.getSystemName() : remote.getSystemName() );
@@ -624,14 +634,19 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 	}
 
 	protected void invokeFinish(CatalogMap local) {
-		Intent viewIntent = new Intent();
-		viewIntent.setData(MapUri.create(local.getAbsoluteUrl()));
-		Activity parent =  CatalogTabHostActivity.getInstance();
-		if(parent!=null){
-			parent.setResult(RESULT_OK, viewIntent);
-			parent.finish();
+		if(local!=null){
+			Intent viewIntent = new Intent();
+			viewIntent.setData(MapUri.create(local.getAbsoluteUrl()));
+			Activity parent =  CatalogTabHostActivity.getInstance();
+			if(parent!=null){
+				parent.setResult(RESULT_OK, viewIntent);
+				parent.finish();
+			}else{
+				setResult(RESULT_OK, viewIntent);
+				finish();
+			}
 		}else{
-			setResult(RESULT_OK, viewIntent);
+			setResult(RESULT_CANCELED);
 			finish();
 		}
 	}
@@ -794,6 +809,43 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 		AlertDialog alertDialog = builder.create();
 		alertDialog.show();
 	}
+
+	private void updateExternalStorageState() {
+	    String state = Environment.getExternalStorageState();
+	    if (Environment.MEDIA_MOUNTED.equals(state)) {
+	        mExternalStorageAvailable = mExternalStorageWriteable = true;
+	    } else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+	        mExternalStorageAvailable = true;
+	        mExternalStorageWriteable = false;
+	    } else {
+	        mExternalStorageAvailable = mExternalStorageWriteable = false;
+	    }
+	    
+	    if(!(mExternalStorageAvailable && mExternalStorageWriteable)){
+	    	startActivityForResult(new Intent(this,MediaUnmountedActivity.class), REQUEST_SDCARD);
+	    }
+	}
+
+	private void startWatchingExternalStorage() {
+	    mExternalStorageReceiver = new BroadcastReceiver() {
+	        public void onReceive(Context context, Intent intent) {
+	            updateExternalStorageState();
+	        }
+	    };
+	    IntentFilter filter = new IntentFilter();
+	    filter.addAction(Intent.ACTION_MEDIA_MOUNTED);
+	    filter.addAction(Intent.ACTION_MEDIA_REMOVED);
+	    registerReceiver(mExternalStorageReceiver, filter);
+	    updateExternalStorageState();
+	}
+
+	private void stopWatchingExternalStorage() {
+	    unregisterReceiver(mExternalStorageReceiver);
+	}	
+	
+	private BroadcastReceiver mExternalStorageReceiver;
+	private boolean mExternalStorageAvailable = false;
+	private boolean mExternalStorageWriteable = false;
 	
 	
 }
