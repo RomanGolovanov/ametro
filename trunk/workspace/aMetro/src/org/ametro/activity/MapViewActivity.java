@@ -240,16 +240,16 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		menu.findItem(MAIN_MENU_INFO).setEnabled(mCurrentStation!=null);
 
 		menu.findItem(MAIN_MENU_FIND).setEnabled(mModel!=null);
-		menu.findItem(MAIN_MENU_INFO).setEnabled(false);//mModel!=null);
+		menu.findItem(MAIN_MENU_INFO).setEnabled(mModel!=null);
 		menu.findItem(MAIN_MENU_ROUTES).setEnabled(mModel!=null);
-		menu.findItem(MAIN_MENU_LAYERS).setEnabled(false);//mModel!=null);
+		menu.findItem(MAIN_MENU_LAYERS).setVisible(false); //menu.findItem(MAIN_MENU_LAYERS).setEnabled(false);//mModel!=null);
 		menu.findItem(MAIN_MENU_SCHEMES).setEnabled(mModel!=null);
 		menu.findItem(MAIN_MENU_LIBRARY).setEnabled(mModel!=null);
 		menu.findItem(MAIN_MENU_LOCATION).setVisible(mModel!=null && GlobalSettings.isLocateUserEnabled(this));
 		
 		return super.onPrepareOptionsMenu(menu);
 	}
-
+	
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case MAIN_MENU_FIND:
@@ -279,9 +279,14 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			dialog.show();
 			return true;
 		case MAIN_MENU_INFO:
-			if(mCurrentStation!=null){
-				startActivity(new Intent(this, StationViewActivity.class));
-			}
+			String systemName = getSystemMapName();
+			Intent detailsIntent = new Intent(this, MapDetailsActivity.class);
+			detailsIntent.putExtra(MapDetailsActivity.EXTRA_HIDE_OPEN, true);
+			detailsIntent.putExtra(MapDetailsActivity.EXTRA_SYSTEM_NAME, systemName);
+			startActivity(detailsIntent);
+//			if(mCurrentStation!=null){
+//				startActivity(new Intent(this, StationViewActivity.class));
+//			}
 			return true;
 		case MAIN_MENU_LOCATION:
 			startActivityForResult(new Intent(this, LocationSearchDialog.class), REQUEST_LOCATION);
