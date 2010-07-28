@@ -73,6 +73,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 	public static final String EXTRA_SYSTEM_NAME = "SYSTEM_NAME";
 
 	public static final String EXTRA_RESULT = "EXTRA_RESULT";
+	public static final String EXTRA_HIDE_OPEN = "EXTRA_HIDE_OPEN";
 	public static final int EXTRA_RESULT_OPEN = 1;
 
 	private static final int MENU_DELETE = 1;
@@ -116,6 +117,8 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 	/*package*/ int mProgress;
 	/*package*/ int mTotal;
 	/*package*/ String mMessage;
+	
+	private boolean mForceOpenButtonDisable;
 	
 	protected Handler mUIEventDispacher = new Handler();
 
@@ -202,6 +205,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 		}
 		mTransportTypes = TransportType.getIconsMap(this);
 		mSystemName = mIntent.getStringExtra(EXTRA_SYSTEM_NAME);
+		mForceOpenButtonDisable = mIntent.getBooleanExtra(EXTRA_HIDE_OPEN, false); 
 		mStorage =  ((ApplicationEx)getApplicationContext()).getCatalogStorage();
 		mStorageState = new CatalogStorageStateProvider(mStorage);
 		setWaitNoProgressView();
@@ -331,7 +335,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
     		mCountryImageView.setImageResource(R.drawable.no_country);
     	}
 		
-		mOpenButton.setVisibility(mLocal!=null ? View.VISIBLE : View.GONE);
+		mOpenButton.setVisibility( (mLocal!=null && !mForceOpenButtonDisable) ? View.VISIBLE : View.GONE);
 		
 		mContent.removeAllViews();
 		if (mOnline != null) {
