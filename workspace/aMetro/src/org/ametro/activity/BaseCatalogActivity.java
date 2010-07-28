@@ -343,9 +343,6 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 		if (mLocal == null) { 
 			mStorage.requestCatalog(mLocalId, false);
 		}
-		if (mRemote == null) { 
-			mStorage.requestCatalog(mRemoteId, false);
-		}
 		onCatalogsUpdated(false);
 		super.onResume();
 	}
@@ -426,9 +423,9 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 	}
 	
 	private void onCatalogsUpdated(boolean refresh) {
-		if (mLocal != null && mRemote != null) {
-			Catalog mPreffered = (mDiffMode == CatalogMapPair.DIFF_MODE_LOCAL) ? mLocal : mRemote; 
-			if (mPreffered.getMaps().size() > 0) {
+		Catalog mPrimary = getPrimary(); 
+		if (mPrimary!=null) {
+			if (mPrimary.getMaps().size() > 0) {
 				if (mMode != MODE_LIST) {
 					setListView();
 				}else{
@@ -442,6 +439,22 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 				setEmptyView();
 			}
 		}
+	}
+
+	private int getPrimaryId() {
+		return (mDiffMode == CatalogMapPair.DIFF_MODE_LOCAL) ? mLocalId : mRemoteId;
+	}
+	
+	private int getSecondaryId() {
+		return (mDiffMode == CatalogMapPair.DIFF_MODE_LOCAL) ? mRemoteId : mLocalId;
+	}
+	
+	private Catalog getPrimary() {
+		return (mDiffMode == CatalogMapPair.DIFF_MODE_LOCAL) ? mLocal : mRemote;
+	}
+	
+	private Catalog getSecondary() {
+		return (mDiffMode == CatalogMapPair.DIFF_MODE_LOCAL) ? mRemote : mLocal;
 	}
 	
 	public void onCatalogFailed(int catalogId, String message)
@@ -458,6 +471,9 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 			event.CatalogId = catalogId;
 			event.Catalog = catalog;
 			mCatalogLoadedEvents.offer(event);
+		}
+		if(catalogId == getPrimaryId() && getSecondary()==null){
+			mStorage.requestCatalog(getSecondaryId(), false);
 		}
 		mUIEventDispacher.post(mHandleCatalogLoadedEvents);
 	}
@@ -622,7 +638,6 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 			setActionBarVisibility(false);
 		}
 	}
-
 	
 	private void setActionBarVisibility(boolean isVisible) {
 		if(mIsActionBarAnimated){ 

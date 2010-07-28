@@ -43,7 +43,6 @@ import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -157,26 +156,12 @@ public class TaskFailedList extends ListActivity {
 		public FailedTaskListAdapter(Context context, ArrayList<DataHolder> data) {
 			mContext = context;
 			mInflater = LayoutInflater.from(context);
-			mShowCountryFlags = GlobalSettings.isCountryIconsEnabled(mContext);
+			mShowCountryFlags = GlobalSettings.isCountryIconsEnabled(context);
 			mNoCountryIcon = context.getResources().getDrawable(R.drawable.no_country);
 			mIcons = new HashMap<String, Drawable>();
-
+			mTransportTypes = TransportType.getIconsMap(context);
 			mData = data;
-			bindTransportTypes();
 		}
-
-		private  void bindTransportTypes(){
-			mTransportTypes = new HashMap<Integer, Drawable>();
-			final Resources res = mContext.getResources();
-			mTransportTypes.put( TransportType.UNKNOWN_ID , res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.UNKNOWN_ID))  );
-			mTransportTypes.put( TransportType.METRO_ID , res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.METRO_ID))  );
-			mTransportTypes.put( TransportType.TRAM_ID , res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.TRAM_ID))  );
-			mTransportTypes.put( TransportType.BUS_ID , res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.BUS_ID))  );
-			mTransportTypes.put( TransportType.TRAIN_ID , res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.TRAIN_ID))  );
-			mTransportTypes.put( TransportType.WATER_BUS_ID , res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.WATER_BUS_ID))  );
-			mTransportTypes.put( TransportType.TROLLEYBUS_ID , res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.TROLLEYBUS_ID))  );
-		}
-
 
 		public int getCount() {
 			return mData.size();

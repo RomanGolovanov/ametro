@@ -35,4 +35,6 @@ public class CatalogMapState {
 	public static final int IMPORT_PENDING = 10;
 	public static final int DOWNLOADING = 11;
 	public static final int IMPORTING = 12;
+	public static final int CALCULATING = 13;
+	
 }

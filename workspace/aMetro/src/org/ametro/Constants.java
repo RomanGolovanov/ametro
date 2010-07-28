@@ -60,6 +60,7 @@ public class Constants {
     public static final String PREFERENCE_ONLINE_CATALOG_URL = "ONLINE_CATALOG_URL";
     public static final String PREFERENCE_DEBUG = "DEBUG";
     public static final String PREFERENCE_AUTO_UPDATE_INDEX = "AUTO_UPDATE_INDEX";
+    public static final String PREFERENCE_AUTO_UPDATE_ON_SHOW = "AUTO_UPDATE_INDEX_ON_SHOW";
     public static final String PREFERENCE_AUTO_UPDATE_MAPS = "AUTO_UPDATE_MAPS";
     public static final String PREFERENCE_LOCALE = "LOCALE";
     public static final String PREFERENCE_PMZ_IMPORT = "PMZ_IMPORT";

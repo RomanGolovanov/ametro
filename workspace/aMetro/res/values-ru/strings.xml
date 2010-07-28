@@ -58,7 +58,7 @@
     <string name="pref_section_auto_update">Онлайн каталог карт</string>
     <string name="pref_section_auto_update_description">Доступ к онлайн каталогу карт</string>
     <string name="pref_auto_update_map_index_on_show">Обновление при открытии</string>
-    <string name="pref_auto_update_map_index_on_show_description">Обновлять при каждом открытии но не чаще раза в час</string>
+    <string name="pref_auto_update_map_index_on_show_description">Обновлять список карт при открытии, но не чаще раза в час</string>
     <string name="pref_auto_update_map_index">Обновление списка карт</string>
     <string name="pref_auto_update_map_index_description">Автоматически обновлять список карт с сервера при наличии сети</string>
     <string name="pref_auto_update_maps">Обновление карт</string>
@@ -207,7 +207,6 @@
     <string name="msg_init_catalog">Загрузка списка карт...</string>
     <string name="msg_save_catalog">Подготовка списка карт...</string>
     <string name="msg_download_icons_dialog_title">Флаги Стран</string>
-    <string name="msg_download_icons_dialog_content">&lt;p&gt;Загрузить архив флагов стран с сервера?&lt;p/&gt;&lt;p&gt;Архив занимает примерно 260Kb, поэтому мы рекомендуем использовать бесплатную точку доступа Wi-Fi или безлимитный тариф. Вы всегда сможете выполнить загрузку флагов из Настроек программы.&lt;p/&gt;&lt;p&gt;Вы также можете загрузить архив с флагами самостоятельно с нашего сайта:&lt;br/&gt;http://ametro.no-ip.org&lt;p/&gt;</string>
     <string name="msg_no_maps_to_update">Нет обновлений</string>
     <string name="msg_no_maps_to_import">Нет карт для импорта</string>
     <string name="msg_no_maps_to_download">Нет карт для загрузки</string>

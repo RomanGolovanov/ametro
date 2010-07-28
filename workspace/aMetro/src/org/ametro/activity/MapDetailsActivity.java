@@ -200,18 +200,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 			finishWithoutResult();
 			return;
 		}
-
-		mTransportTypes = new HashMap<Integer, Drawable>();
-		final Resources res = getResources();
-		
-		mTransportTypes.put(TransportType.UNKNOWN_ID, res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.UNKNOWN_ID)));
-		mTransportTypes.put(TransportType.METRO_ID, res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.METRO_ID)));
-		mTransportTypes.put(TransportType.TRAM_ID, res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.TRAM_ID)));
-		mTransportTypes.put(TransportType.BUS_ID, res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.BUS_ID)));
-		mTransportTypes.put(TransportType.TRAIN_ID, res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.TRAIN_ID)));
-		mTransportTypes.put(TransportType.WATER_BUS_ID, res .getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.WATER_BUS_ID)));
-		mTransportTypes.put(TransportType.TROLLEYBUS_ID,res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.TROLLEYBUS_ID)));
-
+		mTransportTypes = TransportType.getIconsMap(this);
 		mSystemName = mIntent.getStringExtra(EXTRA_SYSTEM_NAME);
 		mStorage =  ((ApplicationEx)getApplicationContext()).getCatalogStorage();
 		mStorageState = new CatalogStorageStateProvider(mStorage);

@@ -65,7 +65,6 @@ public class CatalogLocalListActivity extends BaseCatalogActivity {
 	
 	protected void setListView() {
 		super.setListView();
-		
 		if(mInvokeSelectCurrent){
 			mInvokeSelectCurrent = false;
 			String systemMapName = MapViewActivity.Instance.getSystemMapName();
@@ -74,7 +73,6 @@ public class CatalogLocalListActivity extends BaseCatalogActivity {
 				mList.setSelection(position);
 			}
 		}
-		
 		if(mInvokeUpdateList){
 			mInvokeUpdateList = false;
 			invokeSelectUpdateMaps();
@@ -88,9 +86,9 @@ public class CatalogLocalListActivity extends BaseCatalogActivity {
 	protected int getEmptyListMessage() {
 		return R.string.msg_no_maps_in_local;
 	}
-
+	
 	public int getCatalogState(CatalogMap local, CatalogMap remote) {
-		return mStorageState.getLocalCatalogState(local, remote);
+		return mRemote!=null && mLocal!=null ? mStorageState.getLocalCatalogState(local, remote) : CatalogMapState.CALCULATING;
 	}
 
 	public boolean onCatalogMapClick(CatalogMap local, CatalogMap remote, int state) {
