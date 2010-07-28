@@ -54,7 +54,11 @@ public class LoadWebCatalogTask extends LoadBaseCatalogTask implements IDownload
 
 	public boolean isDerpecated() {
 		if(mCatalog == null) return true;
-		return System.currentTimeMillis() > (mCatalog.getTimestamp() + ONLINE_CATALOG_DEPRECATED_TIMEOUT);
+		if(GlobalSettings.isAutoUpdateIndexEveryHourEnabled(getContext())){
+			return System.currentTimeMillis() > (mCatalog.getTimestamp() + ONLINE_CATALOG_DEPRECATED_TIMEOUT);
+		}else{
+			return false;
+		}
 	}
 
 	public void refresh() throws Exception {

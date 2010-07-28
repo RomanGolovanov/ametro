@@ -24,6 +24,7 @@ import org.ametro.ApplicationEx;
 import org.ametro.GlobalSettings;
 import org.ametro.R;
 import org.ametro.catalog.storage.tasks.DownloadIconsTask;
+import org.ametro.util.FileUtil;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -49,7 +50,13 @@ public class DownloadIconsDialog extends AlertDialog implements OnClickListener,
 		setIcon(android.R.drawable.ic_dialog_info);
 		
 		final TextView message = new TextView(context);
-		final SpannableString s = new SpannableString(Html.fromHtml(context.getText(R.string.msg_download_icons_dialog_content).toString()));
+		String str;
+		try {
+			str = FileUtil.writeToString(context.getResources().openRawResource(R.raw.icons_pack));
+		} catch (Exception e) {
+			str = e.toString();
+		}
+		final SpannableString s = new SpannableString(Html.fromHtml(str));
 		Linkify.addLinks(s, Linkify.WEB_URLS);
 		message.setText(s);
 		message.setMovementMethod(LinkMovementMethod.getInstance());

@@ -37,7 +37,6 @@ import org.ametro.directory.CityDirectory;
 import org.ametro.model.TransportType;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -127,10 +126,9 @@ public class CatalogAdapter extends BaseAdapter implements Filterable {
 		mStatusProvider = statusProvider;
 		mMode = mode;
 		mSortMode = sortMode;
-		
+		mTransportTypes = TransportType.getIconsMap(context);
     	mObjects = CatalogMapPair.diff(local, remote, mode);
         bindData();
-		bindTransportTypes();
     }
 
 	public static class ViewHolder {
@@ -145,18 +143,6 @@ public class CatalogAdapter extends BaseAdapter implements Filterable {
 
     public boolean hasStableIds() {
         return false;
-    }
-    
-    protected void bindTransportTypes(){
-		mTransportTypes = new HashMap<Integer, Drawable>();
-		final Resources res = mContext.getResources();
-		mTransportTypes.put( TransportType.UNKNOWN_ID , res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.UNKNOWN_ID))  );
-		mTransportTypes.put( TransportType.METRO_ID , res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.METRO_ID))  );
-		mTransportTypes.put( TransportType.TRAM_ID , res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.TRAM_ID))  );
-		mTransportTypes.put( TransportType.BUS_ID , res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.BUS_ID))  );
-		mTransportTypes.put( TransportType.TRAIN_ID , res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.TRAIN_ID))  );
-		mTransportTypes.put( TransportType.WATER_BUS_ID , res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.WATER_BUS_ID))  );
-		mTransportTypes.put( TransportType.TROLLEYBUS_ID , res.getDrawable(GlobalSettings.getTransportTypeWhiteIconId(TransportType.TROLLEYBUS_ID))  );
     }
     
     protected void bindData() {

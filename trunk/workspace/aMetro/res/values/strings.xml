@@ -65,13 +65,13 @@
     <string name="pref_section_auto_update">Online maps catalog</string>
     <string name="pref_section_auto_update_description">Online maps catalog access options</string>
 
-    <string name="pref_auto_update_map_index_on_show">Update online catalog on show</string>
+    <string name="pref_auto_update_map_index_on_show">Update at show</string>
     <string name="pref_auto_update_map_index_on_show_key">AUTO_UPDATE_INDEX_ON_SHOW</string>
-    <string name="pref_auto_update_map_index_on_show_description">Update online map list when displayed, not frequently than once a hour</string>
+    <string name="pref_auto_update_map_index_on_show_description">Download online maps list when displayed, but not frequently than once a hour</string>
 
     <string name="pref_auto_update_map_index">Auto update online catalog</string>
     <string name="pref_auto_update_map_index_key">AUTO_UPDATE_INDEX</string>
-    <string name="pref_auto_update_map_index_description">Update online map list when Internet available</string>
+    <string name="pref_auto_update_map_index_description">Update online maps list when Internet available</string>
     
     <string name="pref_auto_update_maps">Auto update maps</string>
     <string name="pref_auto_update_maps_key">AUTO_UPDATE_MAPS</string>
@@ -130,13 +130,7 @@
     <string name="pref_donate_alertpay">via AlertPay</string>
     <string name="pref_donate_alertpay_key">DONATE_ALERTPAY</string>
     <string name="pref_donate_alertpay_description">open donate web form on www.alertpay.com</string>
-
      
-    <string name="url_paypal">https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=N2NHRQWE7BUYG&amp;lc=RU&amp;item_name=aMetro%20Project&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted</string>
-    <string name="url_yandex">file:///android_asset/yandex_form.html</string>
-    <string name="url_wm"></string>
-    <string name="url_mb">file:///android_asset/moneybookers_form.html</string>
-    
     <string name="menu_search">Search</string>
     <string name="menu_library">Maps</string>
     <string name="menu_routes">Routes</string>
@@ -243,7 +237,6 @@
     <string name="msg_init_catalog">Initialize map list...</string>
     <string name="msg_save_catalog">Prepare map list...</string>
     <string name="msg_download_icons_dialog_title">Country Icons</string>
-    <string name="msg_download_icons_dialog_content">&lt;p&gt;Download country icons pack from server?&lt;p/&gt;&lt;p&gt;It takes about 260Kb, so we recommend using a free Wi-Fi hotspot or an unlimited data plan to download icons. You can start download from Settings later.&lt;p/&gt;&lt;p&gt;You can also download it by yourself from our site&lt;br/&gt;http://ametro-en.no-ip.org&lt;p/&gt;</string>
     <string name="msg_no_maps_to_update">No maps to update</string>
     <string name="msg_no_maps_to_import">No maps to import</string>
     <string name="msg_no_maps_to_download">No maps to download</string>
@@ -269,6 +262,7 @@
     <string name="tab_maps_local">My maps</string>
     <string name="tab_maps_online">Catalog</string>
     <string name="tab_maps_import">Import</string>
+    
     <string name="log_map_indexing_failed">Map indexing failed for </string>
     <string name="log_save_map_zoom">Save map zoom </string>
     <string name="log_save_map_position">Save map position </string>
@@ -281,7 +275,7 @@
     <string name="log_failed_map_loading">Failed map loading</string>
     <string name="log_pmz_indexing_error">PMZ indexing error</string>
     <string name="log_import_failed">Import failed</string>
-    <string name="log_"/>
+
 	<string name="btn_update">Update</string>
 	<string name="btn_import">Import</string>
 	<string name="btn_download">Download</string>
@@ -296,7 +290,6 @@
 	<string name="btn_accept">Accept</string>
 	<string name="btn_reject">Reject</string>
 	<string name="btn_gpl">GPL</string>
-	
 	
     <string name="title_eula">EULA</string>
 </resources>

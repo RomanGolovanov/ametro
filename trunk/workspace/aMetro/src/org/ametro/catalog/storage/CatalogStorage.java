@@ -83,7 +83,6 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 	
 	private NotificationManager mNotificationManager;
 	private Context mContext;
-
 	
 	private String mDownloadNotificationTitle;
 	private String mImportNotificationTitle;
@@ -435,7 +434,9 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 					synchronized (mTaskQueue) {
 						mSyncRunTask = task;
 						int taskLeft = mTaskQueue.size()+1;
-						displayTaskQueueNotification(taskLeft);
+						if(taskLeft>1){
+							displayTaskQueueNotification(taskLeft);
+						}
 					}
 					task.execute(ApplicationEx.getInstance(), this);
 					synchronized (mTaskQueue) {
