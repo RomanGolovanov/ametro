@@ -30,11 +30,15 @@ import org.ametro.dialog.EULADialog;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.TabActivity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Environment;
 import android.widget.TabHost;
 
 public class CatalogTabHostActivity extends TabActivity implements OnDismissListener{
@@ -42,6 +46,8 @@ public class CatalogTabHostActivity extends TabActivity implements OnDismissList
 	public static final int RESULT_EULA_CANCELED = 100; 
 	
 	private static final int DIALOG_EULA = 1;
+	
+	private static final int REQUEST_SDCARD = 1;
 	
 	private static final String TAB_LOCAL = "local";
 	private static final String TAB_ONLINE = "online";
@@ -72,6 +78,20 @@ public class CatalogTabHostActivity extends TabActivity implements OnDismissList
 		}
 	}
 	
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		switch (requestCode) {
+		case REQUEST_SDCARD:
+			if(resultCode != RESULT_OK){
+				setResult(RESULT_CANCELED);
+				finish();
+			}
+			break;
+		default:
+			break;
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mInstance = this;
@@ -105,9 +125,59 @@ public class CatalogTabHostActivity extends TabActivity implements OnDismissList
 		tabHost.addTab(tabHost.newTabSpec(TAB_IMPORT)
 				.setIndicator(res.getString(R.string.tab_maps_import), res.getDrawable(R.drawable.icon_tab_import))
 				.setContent(intentImportCatalog));
+		
 	}
 
+	
+	protected void onResume() {
+		if(!GlobalSettings.isAcceptedEULA(this)){
+			showDialog(DIALOG_EULA);
+		}else if(!DownloadIconsTask.isRunning() && GlobalSettings.isCountryIconsEnabled(this)){
+			checkIcons();
+		}
+		startWatchingExternalStorage();
+		super.onResume();
+	}
+	
+	protected void onPause() {
+		stopWatchingExternalStorage();
+		super.onPause();
+	};
+	
+	private void updateExternalStorageState() {
+	    String state = Environment.getExternalStorageState();
+	    if (Environment.MEDIA_MOUNTED.equals(state)) {
+	        mExternalStorageAvailable = mExternalStorageWriteable = true;
+	    } else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+	        mExternalStorageAvailable = true;
+	        mExternalStorageWriteable = false;
+	    } else {
+	        mExternalStorageAvailable = mExternalStorageWriteable = false;
+	    }
+	    
+	    if(!(mExternalStorageAvailable && mExternalStorageWriteable)){
+	    	startActivityForResult(new Intent(this,MediaUnmountedActivity.class), REQUEST_SDCARD);
+	    }
+	}
 
+	private void startWatchingExternalStorage() {
+	    mExternalStorageReceiver = new BroadcastReceiver() {
+	        public void onReceive(Context context, Intent intent) {
+	            updateExternalStorageState();
+	        }
+	    };
+	    IntentFilter filter = new IntentFilter();
+	    filter.addAction(Intent.ACTION_MEDIA_MOUNTED);
+	    filter.addAction(Intent.ACTION_MEDIA_REMOVED);
+	    registerReceiver(mExternalStorageReceiver, filter);
+	    updateExternalStorageState();
+	}
+
+	private void stopWatchingExternalStorage() {
+	    unregisterReceiver(mExternalStorageReceiver);
+	}	
+
+	
 	private void checkIcons(){
 		if(Constants.ICONS_PATH.exists() && Constants.ICONS_PATH.isDirectory())
 		{
@@ -119,19 +189,10 @@ public class CatalogTabHostActivity extends TabActivity implements OnDismissList
 		}
 	}	
 	
-	protected void onResume() {
-		if(!GlobalSettings.isAcceptedEULA(this)){
-			showDialog(DIALOG_EULA);
-		}else if(!DownloadIconsTask.isRunning() && GlobalSettings.isCountryIconsEnabled(this)){
-			checkIcons();
-		}
-		super.onResume();
-	}
-	
-	protected void onPause() {
-		super.onPause();
-	};
-	
+	private BroadcastReceiver mExternalStorageReceiver;
+	private boolean mExternalStorageAvailable = false;
+	private boolean mExternalStorageWriteable = false;
+
 	private static CatalogTabHostActivity mInstance;
 	
 	public static Activity getInstance()
