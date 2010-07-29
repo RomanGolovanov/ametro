@@ -233,6 +233,7 @@
     <string name="msg_description">Информация</string>
 	<string name="msg_task_queue_loading">Загрузка</string>
     <string name="msg_media_unmounted">Карта памяти недоступна. Пожалуйста, вставьте карту памяти или отключите коммуникатор от компьютера.</string>
+    <string name="msg_render_failed">Ошибка отображения.</string>
     
     <string name="tab_maps_favorited">Избранное</string>
     <string name="tab_maps_local">Мои карты</string>
@@ -267,4 +268,6 @@
 	
     <string name="title_eula">Соглашение</string>
     <string name="title_info">Информация</string>
+    
+    <string name="toast_render_failed">Ошибка отображения. Пожалуйста, выберите другую карту (схему) или попробуйте сменить масштаб. Приносим извинения за неудобства.</string>
 </resources>
