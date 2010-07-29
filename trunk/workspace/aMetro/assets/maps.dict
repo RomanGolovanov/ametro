@@ -321,93 +321,96 @@ PeterburgOld,Railways_Moscow,Электричка,,Moscow & Ladozh,Москов�
 PeterburgOld,Railways_Novgorod_Pskov,Электричка,,Novgorod-Pskov,Новгород и Псков
 PeterburgOld,Railways_Vitebsk,Электричка,,Vitebsk,Витебский вокзал
 Petrozavodsk,Metro,Электричка,Yes,RailWay,Электропоезда
-Philadelphia,Metro,?
-Pittsburgh,Metro,?
-Portland,Metro,?
-Porto,Metro,?
-Porto-Alegre,Metro,?
-Poznan,Metro,?
-Praha,A,?
-Praha,B,?
-Praha,C,?
-Praha,Metro,?
-Pyongyang,Metro,?
-Recife,Metro,?
-Rennes,Metro,?
-Rio-De-Janeiro,Metro,?
-Roma,A,?
-Roma,B,?
-Roma,B1,?
-Roma,Metro,?
-Roma,RailWay,?
-Rotterdam,1,?
-Rotterdam,2,?
-Rotterdam,Metro,?
-Rouen,Metro,?
-Sacramento,Metro,?
-Saint-Louis,Metro,?
-Salt-Lake-City,Metro,?
+Philadelphia,Metro,Метро,Yes,Metro,Метро
+Pittsburgh,Metro,Электричка,Yes,RailWay,Электропоезда
+Portland,Metro,Электричка,Yes,Light Rail,Электропоезда
+Porto,Metro,Метро,Yes,Metro,Метро
+Porto-Alegre,Metro,Метро,Yes,Metro,Метро
+Poznan,Metro,Трамвай,Yes,Tram,Трамвай
+Praha,A,Метро,,A,A
+Praha,B,Метро,,B,B
+Praha,C,Метро,,C,C
+Praha,Metro,Метро,Yes,Metro,Метро
+Pyongyang,Metro,Метро,Yes,Metro,Метро
+Recife,Metro,Метро,Yes,Metro,Метро
+Rennes,Metro,Метро,Yes,Metro,Метро
+Rio-De-Janeiro,Metro,Метро,Yes,Metro,Метро
+Roma,A,Метро,,A,A
+Roma,B,Метро,,B,B
+Roma,B1,Метро,,B1,B1
+Roma,Metro,Метро,Yes,Metro,Метро
+Roma,RailWay,Электричка,Yes,RailWay,Электропоезда
+Rotterdam,1,Метро,,Calandlijn,Calandlijn
+Rotterdam,2,Метро,,Erasmuslijn,Erasmuslijn
+Rotterdam,Metro,Метро,Yes,Metro,Метро
+Rouen,Metro,Трамвай,,Tram,Трамвай
+Sacramento,Metro,Электричка,Yes,Light Rail,Электричка
+Saint-Louis,Metro,Электричка,Yes,Light Rail,Электричка
+Salt-Lake-City,Metro,Электричка,Yes,Light Rail,Электричка
 Samara,Metro,Метро,Yes,Metro,Метро
-San-Diego,Metro,?
-San-Francisco,Metro,?
-San-Jose,Metro,?
-San-Juan,Metro,?
-San-Paulo,Metro,?
-Santiago,1 linea,?
-Santiago,2 linea,?
-Santiago,3 linea,?
-Santiago,4 linea,?
-Santiago,5 linea,?
-Santiago,Metro,?
-Santo-Domingo,Metro,?
-Sapporo,Metro,?
+San-Diego,Metro,Трамвай,Yes,Trolley ,Трамвай
+San-Francisco,Metro,Трамвай,Yes,Muni Metro,Метротрам
+San-Jose,Metro,Электричка,Yes,Light Rail,Железная дорога
+San-Juan,Metro,Метро,Yes,Tren Urbano,Метро
+San-Paulo,Metro,Метро,Yes,Metro,Метро
+Santiago,1 linea,Метро,,L1,L1
+Santiago,2 linea,Метро,,L2,L2
+Santiago,3 linea,Метро,,L3,L3
+Santiago,4 linea,Метро,,L4,L4
+Santiago,5 linea,Метро,,L5,L5
+Santiago,Metro,Метро,Yes,Metro,Метро
+Santo-Domingo,Metro,Метро,Yes,Metro,Метро
+Sapporo,Metro,Метро,Yes,Subway,Метро
 Saransk,Metro,Метро,Yes,Dream Metro,Метро мечтателя
-Sendai,Metro,?
-Seoul,Metro,?
-Serfaus,Metro,?
-Sevilla,Metro,?
-Shanghai,Metro,?
-Shenyang,Metro,?
-Shenzhen,Metro,?
-Singapore,Metro,?
+Sendai,Metro,Метро,Yes,Subway,Метро
+Seoul,Metro,Метро,Yes,Subway,Метро
+Serfaus,Metro,Фуникулер,Yes,Dorfbahn,Подземная дорога
+Sevilla,Metro,Метро,Yes,Metro,Метро
+Shanghai,Metro,Метро,Yes,Metro,Метро
+Shenyang,Metro,Метро,Yes,Metro,Метро
+Shenzhen,Metro,Метро,Yes,Metro,Метро
+Singapore,Metro,Метро,Yes,Rapid Transit,Метро
 Sochi,Metro,Электричка,Yes,RailWay,Электропоезда
-Sofia,Metro,?
-Stockholm,Metro,?
-Strasbourg,Metro,?
-Stuttgart,Metro,?
-Sydney,Metro,?
-Taipei,Metro,?
-Tashkent,Chilonzor,?
-Tashkent,Metro,?
-Tashkent,Ozbekiston,?
-Tashkent,Yunusobod,?
-Tbilisi,Metro,?
-Tehran,Metro,?
-Tianjin,Metro,?
-Tokyo,Metro,?
-Torino,Metro,?
-Toronto,Bloor,?
-Toronto,Metro,?
-Toronto,RT,?
-Toronto,Sheppard,?
-Toronto,Yonge,?
-Toulouse,Metro,?
-Tunis,Metro,?
-Ulan-Bator,Metro,?
-Utrecht,Metro,?
-Valencia,Metro,?
-Valparaiso,Metro,?
-Vancouver,Metro,?
+Sofia,Metro,Метро,Yes,Metro,Метро
+Stockholm,Metro,Метро,Yes,Metro,Метро
+Strasbourg,Metro,Трамвай,Yes,Tram,Трамвай
+Stuttgart,Metro,Электричка,Yes,Stadtbahn,Железная дорога
+Sydney,Metro,Метро,Yes,Metro,Метро
+Taipei,Metro,Метро,Yes,Rapid Transit System,Метро
+Tashkent,Chilonzor,Метро,,Chilonzor,Chilonzor
+Tashkent,Metro,Метро,Yes,Metro,Метро
+Tashkent,Ozbekiston,Метро,,Ozbekiston,Ozbekiston
+Tashkent,Yunusobod,Метро,,Yunusobod,Yunusobod
+Tbilisi,Metro,Метро,Yes,Metro,Метро
+TbilisiGru,Metro,Метро,Yes,Metro,Метро
+Tehran,Metro,Метро,Yes,Metro,Метро
+Tianjin,Metro,Метро,Yes,Metro,Метро
+Tokyo,Metro,Метро,Yes,Metro,Метро
+Tokyo1,Metro,Метро,Yes,Metro,Метро
+Torino,Metro,Метро,Yes,Metrotorino,Метро
+Toronto,Bloor,Метро,,Bloor,Bloor
+Toronto,Metro,Метро,Yes,Subway / RT,Метро
+Toronto,RT,Метро,,Scarborought RT,Scarborought RT
+Toronto,Sheppard,Метро,,Sheppard,Sheppard
+Toronto,Yonge,Метро,Yes,Yonge,Yonge
+Toulouse,Metro,Метро,Yes,Metro,Метро
+Tunis,Metro,Трамвай,Yes,Tram,Трамвай
+Ulan-Bator,Metro,Метро,Yes,Dream Metro,Метро мечтателя
+Utrecht,Metro,Электричка,Yes,Light Rail,Электричка
+Valencia,Metro,Метро,Yes,Metro,Метро
+ValenciaV,Metro,Метро,Yes,Metro,Метро
+Valparaiso,Metro,Метро,Yes,Metro,Метро
+Vancouver,Metro,Метро,Yes,SkyTrain,Лёгкое метро
 Volgograd,Metro,Трамвай,Yes,Metrotram,Метротрам
-Warsaw,1,?
-Warsaw,Metro,?
-Washington,Metro,?
-Wienn,Metro,?
-Wienn,U1,?
-Wienn,U2,?
-Wienn,U3,?
-Wienn,U4,?
-Wienn,U6,?
-Wuhan,Metro,?
-Wuppertal,Metro,?
-Yokohama,Metro,?
+Warsaw,1,Метро,,1,1
+Warsaw,Metro,Метро,Yes,Metro,Метро
+Washington,Metro,Метро,Yes,Metro,Метро
+Wienn,Metro,Метро,Yes,U-Bahn,Метро
+Wienn,U1,Метро,,U1,U1
+Wienn,U2,Метро,,U2,U2
+Wienn,U3,Метро,,U3,U3
+Wienn,U4,Метро,,U4,U4
+Wienn,U6,Метро,,U6,U6
+Wuhan,Metro,Метро,Yes,Metro,Метро
+Wuppertal,Metro,Фуникулер,Yes,Schwebebahn,Подвесная дорога
+Yokohama,Metro,Метро,Yes,Subway,Метро

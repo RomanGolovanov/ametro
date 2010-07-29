@@ -40,17 +40,6 @@ import android.widget.Scroller;
 
 public abstract class BaseMapView extends ScrollView {
 
-    public static interface OnMapEventListener {
-        void onShortClick(int x, int y);
-
-        void onLongClick(int x, int y);
-
-        void onMove(int newx, int newy, int oldx, int oldy);
-    }
-
-    private Context mContext;
-    private OnMapEventListener mEventListener;
-
     public BaseMapView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         mContext = context;
@@ -68,11 +57,6 @@ public abstract class BaseMapView extends ScrollView {
         mContext = context;
         initializeControls();
     }
-
-    public void setOnMapEventListener(OnMapEventListener listener) {
-        mEventListener = listener;
-    }
-
 
     protected abstract void onDrawRect(Canvas canvas, Rect viewport);
 
@@ -350,7 +334,8 @@ public abstract class BaseMapView extends ScrollView {
 	                    mPrivateHandler.removeMessages(SWITCH_TO_SHORTPRESS);
 	                    mPrivateHandler.removeMessages(SWITCH_TO_LONGPRESS);
 	                    mTouchMode = TOUCH_DONE_MODE;
-                        fireShortClickEvent((int) (mScrollX + event.getX()), (int) (mScrollY + event.getY()));
+	                    performClick();
+                        //fireShortClickEvent((int) (mScrollX + event.getX()), (int) (mScrollY + event.getY()));
                         break;
                     case TOUCH_DRAG_MODE:
                         // if the user waits a while w/o moving before the
@@ -427,10 +412,14 @@ public abstract class BaseMapView extends ScrollView {
         mScrollX = Math.max(0, Math.min(maxX, mScrollX));
         mScrollY = Math.max(0, Math.min(maxY, mScrollY));
         if (mScrollX != mPreviousScrollX || mScrollCenterY != mPreviousScrollY) {
-            fireMoveEvent(mScrollX, mScrollY, mPreviousScrollX, mPreviousScrollY);
+        	performMove(mScrollX, mScrollY, mPreviousScrollX, mPreviousScrollY);
             mPreviousScrollX = mScrollX;
             mPreviousScrollY = mScrollY;
         }
+    }
+    
+    public boolean performMove(int x, int y, int nx, int ny){
+    	return true;
     }
 
     // Expects x in view coordinates
@@ -470,24 +459,6 @@ public abstract class BaseMapView extends ScrollView {
         }
     }
 
-    private void fireShortClickEvent(int x, int y) {
-        if (mInitialized && mEventListener != null) {
-            mEventListener.onShortClick(x, y);
-        }
-    }
-
-//    private void fireLongClickEvent(int x, int y) {
-//        if (mInitialized && mEventListener != null) {
-//            mEventListener.onLongClick(x, y);
-//        }
-//    }
-
-    private void fireMoveEvent(int newx, int newy, int oldx, int oldy) {
-        if (mInitialized && mEventListener != null) {
-            mEventListener.onMove(newx, newy, oldx, oldy);
-        }
-    }
-
     private boolean mInitialized;
 
 
@@ -501,9 +472,9 @@ public abstract class BaseMapView extends ScrollView {
     
     // adjustable parameters
     private static final int MIN_FLING_TIME = 250; // 250
-    
-    private float mTouchSlopSquare; 
 
+	private Context mContext;
+    
     private int mScrollX;
     private int mScrollY;
 
@@ -528,12 +499,13 @@ public abstract class BaseMapView extends ScrollView {
 
     private static final int TRACKBALL_SCROLL_SPEED = 10;
 
+    private float mTouchSlopSquare; 
     private float mLastTouchX;
     private float mLastTouchY;
     private long mLastTouchTime;
-
     private int mTouchMode = TOUCH_DONE_MODE;
 
+    
     private static final int TOUCH_INIT_MODE = 1;
     private static final int TOUCH_DRAG_START_MODE = 2;
     private static final int TOUCH_DRAG_MODE = 3;
