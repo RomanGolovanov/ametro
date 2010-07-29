@@ -46,7 +46,7 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.ZoomControls;
 
-public class VectorMapView extends BaseMapView {
+public class VectorMapView extends BaseMapView{
 
 	public static final float[] ZOOMS = new float[]{1.5f, 1.0f, 0.8f, 0.6f, 0.4f, 0.3f, 0.2f, 0.1f};
 	public static final int[] STEPS = new int[]{15, 10, 8, 6, 4, 3, 2, 1};
@@ -72,7 +72,18 @@ public class VectorMapView extends BaseMapView {
 	
 	public void setZoomControls(ZoomControls zoomControls) {
 		mZoomControls = zoomControls;
-		bindMapEvents();
+		mZoomControls.setVisibility(View.INVISIBLE);
+		
+		mZoomControls.setOnZoomInClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				onZoomIn();
+			}
+		});
+		mZoomControls.setOnZoomOutClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				onZoomOut();
+			}
+		});
 	}
 
 	public int getModelZoom() {
@@ -93,39 +104,20 @@ public class VectorMapView extends BaseMapView {
 		}
 	};
 	
-	private void bindMapEvents() {
-		mZoomControls.setVisibility(View.INVISIBLE);
-		
-		this.setOnMapEventListener(new OnMapEventListener() {
-			public void onShortClick(int x, int y) {
-				if (mZoomControls.getVisibility() != View.VISIBLE) {
-					showZoom();
-				}
-				delayZoom();
-			}
-
-			public void onMove(int newx, int newy, int oldx, int oldy) {
-				if (mZoomControls.getVisibility() != View.VISIBLE) {
-					showZoom();
-				}
-				delayZoom();
-			}
-
-			public void onLongClick(int x, int y) {
-			}
-		});
-
-		mZoomControls.setOnZoomInClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				onZoomIn();
-			}
-		});
-		mZoomControls.setOnZoomOutClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				onZoomOut();
-			}
-		});
-
+	public boolean performClick() {
+		if (mZoomControls.getVisibility() != View.VISIBLE) {
+			showZoom();
+		}
+		delayZoom();
+		return super.performClick();
+	};
+	
+	public boolean performMove(int x, int y, int nx, int ny){
+		if (mZoomControls.getVisibility() != View.VISIBLE) {
+			showZoom();
+		}
+		delayZoom();
+		return super.performMove(x, y, nx, ny);
 	}
 
 	private void onZoomIn() {
