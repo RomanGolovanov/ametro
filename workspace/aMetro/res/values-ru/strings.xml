@@ -58,17 +58,23 @@
 
     <string name="pref_section_auto_update">Онлайн каталог карт</string>
     <string name="pref_section_auto_update_description">Доступ к онлайн каталогу карт</string>
+    
     <string name="pref_auto_update_map_index_on_show">Обновление при открытии</string>
     <string name="pref_auto_update_map_index_on_show_description">Обновлять список карт при открытии, но не чаще раза в час</string>
-    <string name="pref_auto_update_map_index">Обновление списка карт</string>
-    <string name="pref_auto_update_map_index_description">Автоматически обновлять список карт с сервера при наличии сети</string>
-    <string name="pref_auto_update_maps">Обновление карт</string>
+    
+    <string name="pref_auto_update_map_index">Проверка обновлений карт</string>
+    <string name="pref_auto_update_map_index_description">Автоматически проверять обновления карт с сервера при наличии сети</string>
+    
+    <string name="pref_auto_update_maps">Загрузка обновлений</string>
     <string name="pref_auto_update_maps_description">Автоматически обновлять карты с сервера при наличии сети</string>
+    
 	<string name="pref_auto_update_url">Адрес сервера карт</string>
     <string name="pref_auto_update_url_description">Web адрес каталога карт. Оставьте пустым для значения по умолчанию</string>
     <string name="pref_auto_update_url_message">Оставьте пустым для значения по умолчанию</string>
+    
     <string name="pref_auto_update_period">Период обновлений</string>
     <string name="pref_auto_update_period_description"></string>
+    
     <string name="pref_auto_update_networks">Используемая сеть</string>
     <string name="pref_auto_update_networks_description">Какие сети использовать для получения обновлений</string>
     
@@ -140,6 +146,7 @@
     <string name="menu_transports">Виды транспорта</string>
     <string name="menu_select">Выбрать</string>
     <string name="menu_sort">Сортировка</string>
+    <string name="menu_cancel_all">Отменить Все</string>
     <string name="context_menu_show_map">Открыть</string>
     <string name="context_menu_show_map_details">Сведения</string>
     <string name="context_menu_download">Загрузить</string>
@@ -234,6 +241,7 @@
 	<string name="msg_task_queue_loading">Загрузка</string>
     <string name="msg_media_unmounted">Карта памяти недоступна. Пожалуйста, вставьте карту памяти или отключите коммуникатор от компьютера.</string>
     <string name="msg_render_failed">Ошибка отображения.</string>
+    <string name="msg_locale_loading">Загрузка локали...</string>
     
     <string name="tab_maps_favorited">Избранное</string>
     <string name="tab_maps_local">Мои карты</string>

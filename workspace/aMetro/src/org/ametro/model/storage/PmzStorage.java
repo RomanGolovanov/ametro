@@ -444,6 +444,7 @@ public class PmzStorage implements IModelStorage {
 									lineView.labelBackgroundColor = def.labelBackgroundColor;
 								}
 								lineView.id = lines.size();
+								lineView.lineWidth = view.lineWidth;
 								lineView.lineId = line.id;
 								lineView.owner = model;
 								lines.add(lineView);
@@ -463,13 +464,13 @@ public class PmzStorage implements IModelStorage {
 								heights = StringUtil.parseIntegerArray(value);
 							}else if(key.equalsIgnoreCase("Rect")){
 								lineView.lineNameRect = StringUtil.parseModelRect(value);
+							}else if(key.equalsIgnoreCase("Width")){
+								lineView.lineWidth = StringUtil.parseInt(value, view.lineWidth);
 							}else if(key.equalsIgnoreCase("LabelsBColor")){
 								lineView.labelBackgroundColor = StringUtil.parseColor(value, DEFAULT_LINE_BACKGOUND_COLOR);
 							}
 						}
-
 					}
-
 				}
 				// finalize map view
 				if(lineView!=null){

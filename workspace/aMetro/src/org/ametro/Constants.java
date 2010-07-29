@@ -41,7 +41,7 @@ public class Constants {
 	public final static String LOCALE_EN = "en";
 
 	public final static int MODEL_VERSION = 1;
-	public final static String MODEL_COMPATIBILITY_VERSION = "0.2.7";
+	public final static String MODEL_COMPATIBILITY_VERSION = "0.3.0";
 	
     public static final String LOG_TAG_MAIN = "aMetro";
     
@@ -91,8 +91,8 @@ public class Constants {
 	};
 	
 	public static final String[] ONLINE_CATALOG_BASE_URLS = {
-		"http://dl.dropbox.com/u/8171021/0.2.7/",
-		"http://ametro-project.narod.ru/0.2.7/"
+		"http://dl.dropbox.com/u/8171021/0.3.0/",
+		"http://ametro-project.narod.ru/0.3.0/"
 	};
 	
 	public static final String ONLINE_CATALOG_URL = "catalog.zip";

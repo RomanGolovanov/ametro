@@ -19,13 +19,11 @@
         <item>Daily</item>
         <item>Weekly</item>
         <item>Monthly</item>
-        <item>Immediately</item>
     </string-array>
     <string-array name="pref_auto_update_period_values">
         <item>daily</item>
         <item>weekly</item>
         <item>monthly</item>
-        <item>debug</item>
     </string-array>
 	<string-array name="pref_auto_update_networks_texts">
         <item>WiFi only</item>
@@ -216,6 +214,7 @@
     	<item>0.2.7.r334: tasks notifications added</item>
     	<item>0.2.7.r342: new location search dialog, GPL confirmation, maps autoupdate</item>
     	<item>0.2.7.r349: delayed online catalog loading</item>
+    	<item>0.3.0: release candidate 1</item>
     </string-array>
     <string-array name="create_route_modes">
         <item>Minimal Time</item>

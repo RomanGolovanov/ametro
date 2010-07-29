@@ -26,6 +26,7 @@ public class LineView {
 	public int id;
 	public int lineId;
 	
+	public int lineWidth;
 	public int lineColor; 
 	public int labelColor;
 	public int labelBackgroundColor;

@@ -70,12 +70,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.Display;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -654,20 +652,21 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 				}
 				mVectorMapView.setZoom(zoom);
 			} else {
-				zoom = VectorMapView.MIN_ZOOM_LEVEL;
-				int modelWidth = mMapView.width;
-				int modelHeight = mMapView.height;
-				Display display = ((WindowManager) getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
-				int width = display.getWidth();
-				int height = display.getHeight();
-				while (zoom < VectorMapView.MAX_ZOOM_LEVEL) {
-					int scaledWidth = (int) (modelWidth * VectorMapView.ZOOMS[zoom]);
-					int scaledHeight = (int) (modelHeight * VectorMapView.ZOOMS[zoom]);
-					if (scaledWidth <= width && scaledHeight <= height) {
-						break;
-					}
-					zoom++;
-				}
+				zoom = VectorMapView.DEFAULT_ZOOM_LEVEL+1;
+//				zoom = VectorMapView.MIN_ZOOM_LEVEL;
+//				int modelWidth = mMapView.width;
+//				int modelHeight = mMapView.height;
+//				Display display = ((WindowManager) getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
+//				int width = display.getWidth();
+//				int height = display.getHeight();
+//				while (zoom < VectorMapView.MAX_ZOOM_LEVEL) {
+//					int scaledWidth = (int) (modelWidth * VectorMapView.ZOOMS[zoom]);
+//					int scaledHeight = (int) (modelHeight * VectorMapView.ZOOMS[zoom]);
+//					if (scaledWidth <= width && scaledHeight <= height) {
+//						break;
+//					}
+//					zoom++;
+//				}
 				if (Log.isLoggable(LOG_TAG_MAIN, Log.DEBUG)){
 					Log.d(LOG_TAG_MAIN, getString(R.string.log_default_map_zoom) + zoom);
 				}
@@ -788,8 +787,6 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 
 		}
 
-
-
 		if (Log.isLoggable(LOG_TAG_MAIN, Log.DEBUG))
 			Log.d(LOG_TAG_MAIN, getString(R.string.log_loaded_subway_map) + mMapView.systemName
 					+ getString(R.string.log_with_size) + mMapView.width + "x"
@@ -883,7 +880,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		ProgressDialog mProgressDialog;
 
 		protected void onPreExecute() {
-			mProgressDialog = ProgressDialog.show(MapViewActivity.this, null, "Locale loading...", true);
+			mProgressDialog = ProgressDialog.show(MapViewActivity.this, null, getString(R.string.msg_locale_loading), true);
 			super.onPreExecute();
 		}
 
