@@ -71,7 +71,7 @@
     <string name="pref_auto_update_map_index_on_show_key">AUTO_UPDATE_INDEX_ON_SHOW</string>
     <string name="pref_auto_update_map_index_on_show_description">Download online maps list when displayed, but not frequently than once a hour</string>
 
-    <string name="pref_auto_update_map_index">Auto update online catalog</string>
+    <string name="pref_auto_update_map_index">Check maps updates</string>
     <string name="pref_auto_update_map_index_key">AUTO_UPDATE_INDEX</string>
     <string name="pref_auto_update_map_index_description">Update online maps list when Internet available</string>
     
@@ -171,6 +171,7 @@
     <string name="menu_schemes">Schemes</string>
     <string name="menu_transports">Transports</string>
     <string name="menu_sort">Sort</string>
+    <string name="menu_cancel_all">Cancel All</string>
     <string name="context_menu_show_map">Open</string>
     <string name="context_menu_show_map_details">Details</string>
     <string name="context_menu_download">Download</string>
@@ -264,6 +265,7 @@
     <string name="msg_task_queue_loading">Loading</string>
     <string name="msg_media_unmounted">SD card unavailable. Please insert SD card or detach smartphone from PC.</string>
     <string name="msg_render_failed">Render failed.</string>
+    <string name="msg_locale_loading">Locale loading...</string>
 	    
     <string name="tab_maps_favorited">Favorites</string>
     <string name="tab_maps_local">My maps</string>

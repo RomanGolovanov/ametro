@@ -70,10 +70,10 @@
                             android:key="@string/pref_import_key"
                             android:summary="@string/pref_import_description"
                             android:defaultValue="false"/-->
-        <CheckBoxPreference android:title="@string/pref_auto_import_addons"
+        <!-- <CheckBoxPreference android:title="@string/pref_auto_import_addons"
                             android:key="@string/pref_auto_import_addons_key"
                             android:summary="@string/pref_auto_import_addons_description"
-                            android:defaultValue="false"/>
+                            android:defaultValue="false"/> -->
 		<Preference android:title="@string/pref_section_license" android:summary="@string/pref_section_license_description" android:key="@string/pref_section_license_key" />
     </PreferenceCategory>
 	<PreferenceCategory android:title="@string/pref_section_debug">

@@ -234,6 +234,7 @@ public class CsvStorage implements IModelStorage {
 			LineView obj = new LineView();
 			obj.id = reader.readInt();
 			obj.lineId = reader.readInt();
+			obj.lineWidth = reader.readInt();
 			obj.lineColor = reader.readInt();
 			obj.labelColor = reader.readInt();
 			obj.labelBackgroundColor = reader.readInt();
@@ -498,6 +499,7 @@ public class CsvStorage implements IModelStorage {
 			for(LineView v : obj.lines){
 				writer.writeInt(v.id);
 				writer.writeInt(v.lineId);
+				writer.writeInt(v.lineWidth);
 				writer.writeInt(v.lineColor);
 				writer.writeInt(v.labelColor);
 				writer.writeInt(v.labelBackgroundColor);

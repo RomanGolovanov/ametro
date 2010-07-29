@@ -22,6 +22,7 @@
 package org.ametro.render;
 
 import org.ametro.graphics.ExtendedPath;
+import org.ametro.model.LineView;
 import org.ametro.model.MapView;
 import org.ametro.model.SegmentView;
 import org.ametro.model.StationView;
@@ -49,6 +50,7 @@ public class RenderSegment extends RenderElement {
 
     public RenderSegment(MapView map, SegmentView view, TransportSegment segment) {
         super();
+        final LineView lineView = map.lines[ view.lineViewId ];
         final StationView from = map.stations[view.stationViewFromId];
         final StationView to = map.stations[view.stationViewToId];
 
@@ -57,19 +59,19 @@ public class RenderSegment extends RenderElement {
 
         final Integer delay = segment.delay;
         final boolean lineWorking = (delay != null && delay > 0);
-        final int lineWidth = map.lineWidth;
+        final int lineWidth = lineView.lineWidth;
 
         localPaint.setStyle(Style.STROKE);
         localPaint.setAntiAlias(true);
 
         if (lineWorking) {
             localPaint.setStrokeWidth(lineWidth);
-            localPaint.setPathEffect(new CornerPathEffect(lineWidth * 0.6f));
+            localPaint.setPathEffect(new CornerPathEffect(lineWidth * 0.2f));
         } else {
             localPaint.setStrokeWidth(lineWidth * 0.75f);
             localPaint.setPathEffect(new ComposePathEffect(
                     new DashPathEffect(new float[]{lineWidth * 0.8f, lineWidth * 0.2f}, 0),
-                    new CornerPathEffect(lineWidth * 0.6f)
+                    new CornerPathEffect(lineWidth * 0.2f)
             ));
         }
         colorNormal = map.lines[view.lineViewId].lineColor;

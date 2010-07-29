@@ -95,7 +95,6 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 	private Notification mFailedNotification;
 	
 	private Notification mProgressNotification;
-	private PendingIntent mProgressNotificationIntent;
 	
 	private void removeTaskQueueNotification(){
 		mQueueNotification = null;
@@ -128,19 +127,17 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 			notification.flags |= Notification.FLAG_ONGOING_EVENT | Notification.FLAG_NO_CLEAR;
 			mProgressNotification = notification;
 		}
-		PendingIntent contentIntent = mProgressNotificationIntent;
-		if(contentIntent!=null){
-			contentIntent.cancel();
-		}
+		PendingIntent contentIntent;
 		if(task instanceof ImportMapTask || task instanceof DownloadMapTask){
 			Intent detailsIntent = new Intent(mContext, MapDetailsActivity.class);
+			detailsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			detailsIntent.putExtra(MapDetailsActivity.EXTRA_SYSTEM_NAME, (String)task.getTaskId() );
-			contentIntent = PendingIntent.getActivity(mContext, 0, detailsIntent, 0);
+			contentIntent = PendingIntent.getActivity(mContext, 0, detailsIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 		}else{
 			contentIntent = PendingIntent.getActivity(mContext, 0, new Intent(mContext, TaskQueuedList.class), 0);
 		}
 		notification.when = System.currentTimeMillis();
-		notification.setLatestEventInfo(mContext, title ,message, contentIntent);
+		notification.setLatestEventInfo(mContext, title, message, contentIntent);
 		mNotificationManager.notify(TASK_PROGRESS_ID, notification);
 	}	
 	
@@ -379,6 +376,13 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 			return mSyncRunTask!=null && mSyncRunTask instanceof DownloadMapTask && !mSyncRunTask.isDone() && systemName.equals(mSyncRunTask.getTaskId());
 		}
 	}	
+	
+	public void cancelAllTasks(){
+		synchronized (mTaskQueue) {
+			mTaskQueue.clear();
+			removeTaskQueueNotification();
+		}
+	}
 	
 	public ImportMapTask findQueuedImportTask(String systemName){
 		synchronized (mTaskQueue) {

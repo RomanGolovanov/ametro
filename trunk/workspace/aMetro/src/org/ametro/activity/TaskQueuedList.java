@@ -48,6 +48,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -64,6 +66,23 @@ public class TaskQueuedList extends ListActivity implements ICatalogStorageListe
 	private String mLoadingText;
 	private Handler mUIDispatcher = new Handler();
 
+	private static final int MAIN_MENU_CANCEL_ALL = 1;
+	
+	public boolean onCreateOptionsMenu(Menu menu) {
+		menu.add(0, MAIN_MENU_CANCEL_ALL, 0, R.string.menu_cancel_all).setIcon(android.R.drawable.ic_menu_close_clear_cancel);
+		return true;
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case MAIN_MENU_CANCEL_ALL:
+			mStorage.cancelAllTasks();
+			finish();
+			return true;
+		}
+		return super.onContextItemSelected(item);
+	}
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		final ApplicationEx app = ((ApplicationEx)getApplicationContext());
