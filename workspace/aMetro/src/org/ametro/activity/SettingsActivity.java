@@ -24,18 +24,24 @@ package org.ametro.activity;
 import org.ametro.R;
 import org.ametro.dialog.DownloadIconsDialog;
 import org.ametro.dialog.EULADialog;
+import org.ametro.dialog.InfoDialog;
+import org.ametro.util.FileUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 
-public class SettingsActivity extends PreferenceActivity implements OnPreferenceClickListener {
+public class SettingsActivity extends PreferenceActivity implements OnPreferenceChangeListener, OnPreferenceClickListener {
 
 	private Preference mDonate;
 	private Preference mLicense;
 	private Preference mRefreshIconPack;
+	
+	private CheckBoxPreference mLocationSearchEnabled;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -44,9 +50,13 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		mLicense = findPreference(getString(R.string.pref_section_license_key));
 		mRefreshIconPack = findPreference(getString(R.string.pref_refresh_country_icons_key));
 
+		mLocationSearchEnabled = (CheckBoxPreference)findPreference(getString(R.string.pref_auto_locate_key));
+		
 		mDonate.setOnPreferenceClickListener(this);
 		mLicense.setOnPreferenceClickListener(this);
 		mRefreshIconPack.setOnPreferenceClickListener(this);
+		
+		mLocationSearchEnabled.setOnPreferenceChangeListener(this);
 	}
 
 	protected void onStop() {
@@ -67,6 +77,18 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		return false;
 	}
 
-	
+	public boolean onPreferenceChange(Preference preference, Object newValue) {
+		if(preference == mLocationSearchEnabled){
+			boolean value = (Boolean)newValue;
+			if(value){
+				try {
+					String text = FileUtil.writeToString(getResources().openRawResource(R.raw.location_warning));
+					InfoDialog.showInfoDialog(this, "Information", text, android.R.drawable.ic_dialog_info);
+				} catch (Exception e) {
+				} 
+			}
+		}
+		return true;
+	}
 	
 }
