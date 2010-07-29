@@ -83,7 +83,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			if(value){
 				try {
 					String text = FileUtil.writeToString(getResources().openRawResource(R.raw.location_warning));
-					InfoDialog.showInfoDialog(this, "Information", text, android.R.drawable.ic_dialog_info);
+					InfoDialog.showInfoDialog(this, getString(R.string.title_info), text, android.R.drawable.ic_dialog_info);
 				} catch (Exception e) {
 				} 
 			}
