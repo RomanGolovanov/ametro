@@ -263,6 +263,7 @@
     <string name="msg_description">Description</string>
     <string name="msg_task_queue_loading">Loading</string>
     <string name="msg_media_unmounted">SD card unavailable. Please insert SD card or detach smartphone from PC.</string>
+    <string name="msg_render_failed">Render failed.</string>
 	    
     <string name="tab_maps_favorited">Favorites</string>
     <string name="tab_maps_local">My maps</string>
@@ -299,4 +300,6 @@
 	
     <string name="title_eula">EULA</string>
     <string name="title_info">Information</string>
+    
+    <string name="toast_render_failed">Render failed. Please, select another map/scheme or try to change current zoom. Sorry for the inconvenience</string>
 </resources>

@@ -22,11 +22,16 @@
 package org.ametro.widget;
 
 import static org.ametro.Constants.LOG_TAG_MAIN;
+
+import org.ametro.R;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.graphics.Paint.Align;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
@@ -37,10 +42,17 @@ import android.view.VelocityTracker;
 import android.view.ViewConfiguration;
 import android.widget.ScrollView;
 import android.widget.Scroller;
+import android.widget.Toast;
 
 public abstract class BaseMapView extends ScrollView {
 
-    public BaseMapView(Context context, AttributeSet attrs, int defStyle) {
+    private Runnable mShowRenderFailedRunnable = new Runnable() {
+		public void run() {
+			Toast.makeText(getContext(), R.string.toast_render_failed, Toast.LENGTH_LONG).show();
+		}
+	};
+
+	public BaseMapView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         mContext = context;
         initializeControls();
@@ -66,6 +78,9 @@ public abstract class BaseMapView extends ScrollView {
 
     protected void setInitialized(boolean status) {
         invalidateScroll();
+        if(mInitialized){
+    		clearRenderFailed();
+        }
         mInitialized = status;
     }
 
@@ -89,33 +104,51 @@ public abstract class BaseMapView extends ScrollView {
         super.onSizeChanged(w, h, oldw, oldh);
     }
 
+    protected void setRenderFailed(Throwable th){
+        mPrivateHandler.post(mShowRenderFailedRunnable);
+    	mRenderFailed = true;
+    }
+    
+    protected void clearRenderFailed(){
+    	mRenderFailed = false;
+    }
+    
     protected void onDraw(Canvas canvas) {
-        if (mInitialized) {
-            if (mIsScrollNeeded) {
-                mScrollX = mScrollCenterX - getWidth() / 2;
-                mScrollY = mScrollCenterY - getHeight() / 2;
-                if (Log.isLoggable(LOG_TAG_MAIN, Log.DEBUG))
-                    Log.d(LOG_TAG_MAIN, "Set scroll center to " + mScrollCenterX + "x"
-                            + mScrollCenterY);
-                invalidateScroll();
-                mIsScrollNeeded = false;
-            }
-
-            final int left = mScrollX;
-            final int top = mScrollY;
-            final int right = left + getWidth();
-            final int bottom = top + getHeight();
-            Rect viewport = new Rect(left, top, right, bottom);
-            final int dx = Math.max(getWidth() - getContentWidth(), 0);
-            final int dy = Math.max(getHeight() - getContentHeight(), 0);
-            if (dx != 0 || dy != 0) {
-                canvas.translate(dx / 2, dy / 2);
-            }
-            canvas.save();
-            canvas.drawColor(Color.WHITE);
-            onDrawRect(canvas, viewport);
-            canvas.restore();
+        if (mInitialized && !mRenderFailed) {
+	    	try{
+	            if (mIsScrollNeeded) {
+	                mScrollX = mScrollCenterX - getWidth() / 2;
+	                mScrollY = mScrollCenterY - getHeight() / 2;
+	                if (Log.isLoggable(LOG_TAG_MAIN, Log.DEBUG))
+	                    Log.d(LOG_TAG_MAIN, "Set scroll center to " + mScrollCenterX + "x"
+	                            + mScrollCenterY);
+	                invalidateScroll();
+	                mIsScrollNeeded = false;
+	            }
+	            final int left = mScrollX;
+	            final int top = mScrollY;
+	            final int right = left + getWidth();
+	            final int bottom = top + getHeight();
+	            Rect viewport = new Rect(left, top, right, bottom);
+	            final int dx = Math.max(getWidth() - getContentWidth(), 0);
+	            final int dy = Math.max(getHeight() - getContentHeight(), 0);
+	            if (dx != 0 || dy != 0) {
+	                canvas.translate(dx / 2, dy / 2);
+	            }
+	            canvas.save();
+	            canvas.drawColor(Color.WHITE);
+	            onDrawRect(canvas, viewport);
+	            canvas.restore();
+	    	}catch(Exception ex){
+	    		setRenderFailed(ex);
+	    	}
         }
+    	if(mRenderFailed){
+			Paint p = new Paint();
+			p.setColor(Color.WHITE);
+			p.setTextAlign(Align.CENTER);
+			canvas.drawText(mRenderFailedErrorText, getWidth()/2, getHeight()/2, p);
+    	}
         super.onDraw(canvas);
     }
 
@@ -155,19 +188,19 @@ public abstract class BaseMapView extends ScrollView {
     }
 
     protected int computeVerticalScrollOffset() {
-        return mInitialized ? mScrollY : 0;
+        return mInitialized && !mRenderFailed ? mScrollY : 0;
     }
 
     protected int computeVerticalScrollRange() {
-        return mInitialized ? getContentHeight() : 0;
+        return mInitialized && !mRenderFailed ? getContentHeight() : 0;
     }
 
     protected int computeHorizontalScrollOffset() {
-        return mInitialized ? mScrollX : 0;
+        return mInitialized && !mRenderFailed ? mScrollX : 0;
     }
 
     protected int computeHorizontalScrollRange() {
-        return mInitialized ? getContentWidth() : 0;
+        return mInitialized && !mRenderFailed ? getContentWidth() : 0;
     }
 
     public abstract void onScrollBegin();
@@ -388,6 +421,7 @@ public abstract class BaseMapView extends ScrollView {
     }
 
     private void initializeControls() {
+    	mRenderFailedErrorText = getContext().getString(R.string.msg_render_failed);
         mInitialized = false;
         setVerticalScrollBarEnabled(true);
         setHorizontalScrollBarEnabled(true);
@@ -525,6 +559,9 @@ public abstract class BaseMapView extends ScrollView {
     private static final int SWITCH_TO_SHORTPRESS = 3;
     private static final int SWITCH_TO_LONGPRESS = 4;
 
+    private boolean mRenderFailed = false;
+    private String mRenderFailedErrorText;
+    
     
     /**
      * General handler to receive message coming from webkit thread

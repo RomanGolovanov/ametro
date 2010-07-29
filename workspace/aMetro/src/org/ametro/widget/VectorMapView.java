@@ -142,6 +142,7 @@ public class VectorMapView extends BaseMapView{
 		mZoomControls.setIsZoomOutEnabled(mZoom < MAX_ZOOM_LEVEL);
 		setRenderFilter(FILTERS[mZoom]);
 		setScale(ZOOMS[mZoom], STEPS[mZoom]);
+		clearRenderFailed();
 	}
 
 	private void delayZoom() {
@@ -283,77 +284,82 @@ public class VectorMapView extends BaseMapView{
 	}
 
 	private void updateTileCache(Rect screenCoords) {
-		final Rect tileOuter = screenToOuterTileRect(screenCoords);
-		RectF modelOuter = tileToModelRect(tileOuter);
-
-		Rect entireCache;
-		Bitmap cacheImage;
-		synchronized(sync){
-			entireCache = mTileCacheRect;
-			cacheImage = mTileCache;
-		}
-
-		final Rect cache = new Rect(entireCache);
-		cache.intersect(tileOuter);
-
-		final Rect dst = new Rect(cache); // control canvas position
-		dst.offsetTo(cache.left - tileOuter.left, cache.top - tileOuter.top);
-		final Rect dstOnScreen = tileToScreenRect(dst);
-
-		final Rect src = new Rect(cache); // cache canvas position
-		src.offsetTo(cache.left - entireCache.left, cache.top - entireCache.top);
-		final Rect srcOnScreen = tileToScreenRect(src);
-
-		final Rect verticalSpan = new Rect(tileOuter);
-		final Rect horizontalSpan = new Rect(tileOuter);
-
-		if (tileOuter.right == cache.right && tileOuter.bottom == cache.bottom) {
-			horizontalSpan.bottom = cache.top;
-			verticalSpan.right = cache.left;
-		} else if (tileOuter.right == cache.right && tileOuter.top == cache.top) {
-			horizontalSpan.top = cache.bottom;
-			verticalSpan.right = cache.left;
-		} else if (tileOuter.left == cache.left && tileOuter.bottom == cache.bottom) {
-			horizontalSpan.bottom = cache.top;
-			verticalSpan.left = cache.right;
-		} else if (tileOuter.left == cache.left && tileOuter.top == cache.top) {
-			horizontalSpan.top = cache.bottom;
-			verticalSpan.left = cache.right;
-		} else {
-			throw new RuntimeException("Invalid viewport splitting algorithm");
-		}
-
-		final RectF horizontalSpanInModel = tileToModelRect(horizontalSpan);
-		final RectF verticalSpanInModel = tileToModelRect(verticalSpan);
-
-		final Canvas canvas = new Canvas(mTileCacheBuffer);
-		canvas.drawColor(Color.WHITE);
-
-		canvas.save();
-		canvas.scale(mScale, mScale);
-		canvas.translate(-modelOuter.left, -modelOuter.top);
-		if(screenCoords != mUpdateTileCacheRect) return;
-
-		mRenderProgram.setVisibilityTwice(horizontalSpanInModel, verticalSpanInModel);
-		if(screenCoords != mUpdateTileCacheRect) return;
-
-		mRenderProgram.draw(canvas);
-		if(screenCoords != mUpdateTileCacheRect) return;
-
-		canvas.restore();
-
-		canvas.save();
-		canvas.clipRect(dstOnScreen);
-		canvas.drawBitmap(cacheImage, srcOnScreen, dstOnScreen, null);
-		canvas.restore();
-
-		synchronized (sync) {
-			if(screenCoords == mUpdateTileCacheRect){
-				mTileCacheRect = tileOuter;
-				Bitmap swap = mTileCache;
-				mTileCache = mTileCacheBuffer;
-				mTileCacheBuffer = swap;
+		if(mTileCacheBuffer == null) return;
+		try{
+			final Rect tileOuter = screenToOuterTileRect(screenCoords);
+			RectF modelOuter = tileToModelRect(tileOuter);
+	
+			Rect entireCache;
+			Bitmap cacheImage;
+			synchronized(sync){
+				entireCache = mTileCacheRect;
+				cacheImage = mTileCache;
 			}
+	
+			final Rect cache = new Rect(entireCache);
+			cache.intersect(tileOuter);
+	
+			final Rect dst = new Rect(cache); // control canvas position
+			dst.offsetTo(cache.left - tileOuter.left, cache.top - tileOuter.top);
+			final Rect dstOnScreen = tileToScreenRect(dst);
+	
+			final Rect src = new Rect(cache); // cache canvas position
+			src.offsetTo(cache.left - entireCache.left, cache.top - entireCache.top);
+			final Rect srcOnScreen = tileToScreenRect(src);
+	
+			final Rect verticalSpan = new Rect(tileOuter);
+			final Rect horizontalSpan = new Rect(tileOuter);
+	
+			if (tileOuter.right == cache.right && tileOuter.bottom == cache.bottom) {
+				horizontalSpan.bottom = cache.top;
+				verticalSpan.right = cache.left;
+			} else if (tileOuter.right == cache.right && tileOuter.top == cache.top) {
+				horizontalSpan.top = cache.bottom;
+				verticalSpan.right = cache.left;
+			} else if (tileOuter.left == cache.left && tileOuter.bottom == cache.bottom) {
+				horizontalSpan.bottom = cache.top;
+				verticalSpan.left = cache.right;
+			} else if (tileOuter.left == cache.left && tileOuter.top == cache.top) {
+				horizontalSpan.top = cache.bottom;
+				verticalSpan.left = cache.right;
+			} else {
+				throw new RuntimeException("Invalid viewport splitting algorithm");
+			}
+	
+			final RectF horizontalSpanInModel = tileToModelRect(horizontalSpan);
+			final RectF verticalSpanInModel = tileToModelRect(verticalSpan);
+	
+			final Canvas canvas = new Canvas(mTileCacheBuffer);
+			canvas.drawColor(Color.WHITE);
+	
+			canvas.save();
+			canvas.scale(mScale, mScale);
+			canvas.translate(-modelOuter.left, -modelOuter.top);
+			if(screenCoords != mUpdateTileCacheRect) return;
+	
+			mRenderProgram.setVisibilityTwice(horizontalSpanInModel, verticalSpanInModel);
+			if(screenCoords != mUpdateTileCacheRect) return;
+	
+			mRenderProgram.draw(canvas);
+			if(screenCoords != mUpdateTileCacheRect) return;
+	
+			canvas.restore();
+	
+			canvas.save();
+			canvas.clipRect(dstOnScreen);
+			canvas.drawBitmap(cacheImage, srcOnScreen, dstOnScreen, null);
+			canvas.restore();
+	
+			synchronized (sync) {
+				if(screenCoords == mUpdateTileCacheRect){
+					mTileCacheRect = tileOuter;
+					Bitmap swap = mTileCache;
+					mTileCache = mTileCacheBuffer;
+					mTileCacheBuffer = swap;
+				}
+			}
+		}catch(Exception ex){
+			setRenderFailed(ex);
 		}
 	}
 
