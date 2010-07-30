@@ -59,7 +59,7 @@ public class LocationSearchDialog extends Activity implements LocationListener, 
 		mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
 		if(!isLocationProvidersEnabled()){
-			startActivityForResult(new Intent(android.provider.Settings.ACTION_SECURITY_SETTINGS), REQUEST_ENABLE_LOCATION_SERVICES); 
+			startActivityForResult(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS), REQUEST_ENABLE_LOCATION_SERVICES); 
 			Toast.makeText(this, R.string.msg_location_need_enable_providers, Toast.LENGTH_LONG).show();
 		}
 	}
