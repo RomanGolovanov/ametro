@@ -130,16 +130,18 @@ public class VectorMapView extends BaseMapView{
 
 	public void setZoom(int zoom) {
 		int newZoom = Math.min(Math.max(zoom, MIN_ZOOM_LEVEL), MAX_ZOOM_LEVEL);
-		float newScale = ZOOMS[newZoom];
-		int width = (int) Math.ceil(mMapView.width * newScale);
-		int height = (int) Math.ceil(mMapView.height * newScale);
-		if(width<getWidth() && height<getHeight() && getContentWidth()<getWidth() && getContentHeight()<getHeight()){
-			// FIXIT: temporary, disable zoomout on full screen map
-			return;
+		boolean disableZoomOut = true;
+		if(newZoom<MAX_ZOOM_LEVEL){
+			final float newScale = ZOOMS[newZoom];
+			final int widgetWidth = getWidth();
+			final int widgetHeight = getHeight();
+			final int width = (int) Math.ceil(mMapView.width * newScale);
+			final int height = (int) Math.ceil(mMapView.height * newScale);
+			disableZoomOut = width<=widgetWidth && height<=widgetHeight;
 		}
-		mZoom = Math.min(Math.max(zoom, MIN_ZOOM_LEVEL), MAX_ZOOM_LEVEL);
+		mZoom = newZoom;
 		mZoomControls.setIsZoomInEnabled(mZoom > MIN_ZOOM_LEVEL);
-		mZoomControls.setIsZoomOutEnabled(mZoom < MAX_ZOOM_LEVEL);
+		mZoomControls.setIsZoomOutEnabled(!disableZoomOut);
 		setRenderFilter(FILTERS[mZoom]);
 		setScale(ZOOMS[mZoom], STEPS[mZoom]);
 		clearRenderFailed();
@@ -456,6 +458,7 @@ public class VectorMapView extends BaseMapView{
 			mTileCacheBuffer.recycle();
 			mTileCacheBuffer = null;
 		}
+		System.gc();
 	}
 
 	private Rect tileToScreenRect(Rect src) {
