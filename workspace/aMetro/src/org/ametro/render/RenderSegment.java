@@ -95,7 +95,7 @@ public class RenderSegment extends RenderElement {
                 box.union(node.x, node.y);
             }
         }
-        setProperties(RenderProgram.TYPE_LINE, box);
+        setProperties(lineWorking ? RenderProgram.TYPE_LINE : RenderProgram.TYPE_LINE_DASHED, box);
     }
     
     private void drawSegmentPath(MapView map, SegmentView view, TransportSegment segment, StationView from, StationView to, ExtendedPath path) {
