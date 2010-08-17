@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<manifest android:versionCode="1" android:versionName="0.3.0"
+<manifest android:versionCode="1" android:versionName="0.3.1"
     package="org.ametro" xmlns:android="http://schemas.android.com/apk/res/android">
     <application android:debuggable="true"
         android:icon="@drawable/appicon"
@@ -12,7 +12,7 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-            <meta-data android:name="android.app.default_searchable" android:value=".activity.SearchStation"/>
+            <meta-data android:name="android.app.default_searchable" android:value=".activity.StationSearchActivity"/>
         </activity>
         <activity android:name=".activity.MediaUnmountedActivity"/>
         <activity android:name=".activity.MapDetailsActivity" android:theme="@android:style/Theme.NoTitleBar"/>
@@ -34,13 +34,13 @@
         <activity android:label="@string/msg_donate_title"
             android:name=".dialog.PaymentDetailsDialog" android:theme="@android:style/Theme.Dialog"/>
         <activity android:label="@string/msg_detect_location"
+        	android:icon="@android:drawable/ic_dialog_map"
             android:name=".dialog.LocationSearchDialog" android:theme="@android:style/Theme.Dialog"/>
         <!-- SEARCHS -->
         <activity android:label="@string/search_station"
             android:launchMode="singleTop" android:name=".activity.StationSearchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH"/>
-                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
             <meta-data android:name="android.app.searchable" android:resource="@xml/searchable"/>
         </activity>
