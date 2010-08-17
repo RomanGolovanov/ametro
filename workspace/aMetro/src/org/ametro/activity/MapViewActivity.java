@@ -55,6 +55,7 @@ import org.ametro.util.StringUtil;
 import org.ametro.widget.VectorMapView;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -88,6 +89,25 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			EULADialog dlg = new EULADialog(this);
 			dlg.setOnDismissListener(this);
 			return dlg;
+		case DIALOG_RELOAD_MAP:
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder
+			.setCancelable(false)
+			.setTitle(R.string.msg_map_reload_title)
+			.setMessage(R.string.msg_map_reload_confirmation)
+			.setIcon(android.R.drawable.ic_dialog_map)
+			.setPositiveButton(R.string.btn_apply, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int id) {
+					onInitializeMapView(mModelName, null, true);
+				}
+			})
+			.setNegativeButton(R.string.btn_later, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int id) {
+					dialog.cancel();
+					mDisableMapReload = true;
+				}
+			});
+			return builder.create();
 		default:
 			break;
 		}
@@ -147,6 +167,10 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			mRouteContainer = Instance.mRouteContainer;
 			mModelName = Instance.mModelName;
 			mMapViewName = Instance.mMapViewName;
+			if(mModel!=null && isUpdateNeeded()){
+				mModel = null;
+				mMapView = null;
+			}
 		}
 		Instance = this;
 		Instance.mDefaultLocale = Locale.getDefault();
@@ -175,6 +199,13 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		}
 	}
 
+	protected void onResume() {
+		if(!mDisableMapReload && isUpdateNeeded()){
+			showDialog(DIALOG_RELOAD_MAP);
+		}
+		super.onResume();
+	}
+	
 	protected void onPause() {
 		onSaveMapState();
 		super.onPause();
@@ -184,7 +215,6 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		//Instance = null;
 		super.onDestroy();
 	}
-
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
@@ -197,8 +227,10 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 				Uri uri = data.getData();
 				if (uri != null) {
 					String mapName = MapUri.getMapName(uri);
-					long timestamp = data.getLongExtra(Constants.EXTRA_TIMESTAMP, 0);
-					if(!mapName.equalsIgnoreCase(getMapName()) || timestamp!=mModelTimestamp){
+					if(!mapName.equalsIgnoreCase(getMapName())){
+						onInitializeMapView(mapName,null, false);
+					}else if(isUpdateNeeded()){
+						mDisableMapReload = true;
 						onInitializeMapView(mapName,null, true);
 					}
 				} 
@@ -206,15 +238,9 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 				finish();
 				break;
 			}else{
-				// check for updates
-				try{
-					Model description = ModelBuilder.loadModelDescription(mModelName);
-					long timestamp = description.timestamp;
-					if(timestamp!=mModelTimestamp){
-						onInitializeMapView(mModelName,null, true);
-					}
-				}catch(Exception ex){
-					// scoop exception
+				if(isUpdateNeeded()){
+					mDisableMapReload = true;
+					onInitializeMapView(mModelName,null, true);
 				}
 			}
 			if(isConfigurationChanged()){
@@ -247,6 +273,18 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
+	private boolean isUpdateNeeded(){
+		if(mModelName!=null && mModel!=null){
+			Model description = ModelBuilder.loadModelDescription(mModelName);
+			if(description!=null){
+				long timestamp = description.timestamp;
+				if(timestamp!=mModelTimestamp){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
@@ -748,6 +786,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			onSaveMapState();
 		}
 
+		mDisableMapReload = false;
 		mModel = model;
 		mModelTimestamp = model.timestamp;
 		mMapView = view;
@@ -1030,6 +1069,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	static MapViewActivity Instance;
 
 	private static final int DIALOG_EULA = 1;
+	private static final int DIALOG_RELOAD_MAP = 2;
 	
 	private static final int MAIN_MENU_FIND = 1;
 	private static final int MAIN_MENU_LIBRARY = 2;
@@ -1080,4 +1120,6 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 
 	private Locale mDefaultLocale;
 	private boolean mDisableEulaDialog;
+	
+	private boolean mDisableMapReload;
 }
