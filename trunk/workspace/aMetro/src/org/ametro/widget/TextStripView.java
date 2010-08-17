@@ -21,6 +21,9 @@
 
 package org.ametro.widget;
 
+import static org.ametro.catalog.CatalogMapState.IMPORT_NEED_TO_UPDATE;
+import static org.ametro.catalog.CatalogMapState.IMPORT_UPDATE;
+
 import org.ametro.R;
 import org.ametro.catalog.CatalogMapState;
 import org.ametro.util.StringUtil;
@@ -138,7 +141,7 @@ public class TextStripView extends LinearLayout {
 		
 		public void setVisibility(int state) {
 			mDownloadButton.setVisibility(state == CatalogMapState.DOWNLOAD ? View.VISIBLE : View.GONE);
-			mUpdateButton.setVisibility(state == CatalogMapState.UPDATE ? View.VISIBLE : View.GONE);
+			mUpdateButton.setVisibility(state == CatalogMapState.UPDATE || state == CatalogMapState.NEED_TO_UPDATE ? View.VISIBLE : View.GONE);
 			mCancelButton.setVisibility(state == CatalogMapState.DOWNLOADING || state == CatalogMapState.DOWNLOAD_PENDING ? View.VISIBLE : View.GONE);
 			mCancelButton.setEnabled(state == CatalogMapState.DOWNLOAD_PENDING);
 			mProgressBar.setVisibility(state == CatalogMapState.DOWNLOADING ? View.VISIBLE : View.GONE);
@@ -204,7 +207,7 @@ public class TextStripView extends LinearLayout {
 		
 		public void setVisibility(int state) {
 			mImportButton.setVisibility(state == CatalogMapState.IMPORT ? View.VISIBLE : View.GONE);
-			mUpdateButton.setVisibility(state == CatalogMapState.UPDATE ? View.VISIBLE : View.GONE);
+			mUpdateButton.setVisibility(state == IMPORT_UPDATE || state == IMPORT_NEED_TO_UPDATE ? View.VISIBLE : View.GONE);
 			mCancelButton.setVisibility(state == CatalogMapState.IMPORTING || state == CatalogMapState.IMPORT_PENDING ? View.VISIBLE : View.GONE);
 			mCancelButton.setEnabled(state == CatalogMapState.IMPORT_PENDING);
 			mProgressBar.setVisibility(state == CatalogMapState.IMPORTING ? View.VISIBLE : View.GONE);

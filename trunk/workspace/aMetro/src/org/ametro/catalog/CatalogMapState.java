@@ -37,4 +37,6 @@ public class CatalogMapState {
 	public static final int IMPORTING = 12;
 	public static final int CALCULATING = 13;
 	
+	public static final int IMPORT_UPDATE = 14;
+	public static final int IMPORT_NEED_TO_UPDATE = 15;
 }

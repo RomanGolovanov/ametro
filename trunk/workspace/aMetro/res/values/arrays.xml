@@ -74,6 +74,8 @@
 	    <item>Downloading...</item>
 	    <item>Importing...</item>
 	    <item>Calculating...</item>
+	    <item>Update</item>
+	    <item>Update Needed</item>
     </string-array>
 	<array name="import_catalog_map_state_colors">
 		<item>#ffff00ff</item> 
@@ -90,6 +92,8 @@
 		<item>#ff00ff00</item>
 		<item>#ff00ff00</item>
 		<item>#ffbfbfbf</item>
+		<item>#ffbfbfbf</item>
+		<item>#ffff00ff</item>
 	</array>    
 	<array name="online_catalog_map_state_colors">
 		<item>#ffff00ff</item> 
@@ -106,6 +110,8 @@
 		<item>#ff00ff00</item>
 		<item>#ff00ff00</item>
 		<item>#ffbfbfbf</item>
+		<item>#ffffff00</item>
+		<item>#ffffff00</item>
 	</array>    
 	<array name="local_catalog_map_state_colors">
 		<item>#ffcccccc</item> 
@@ -122,6 +128,8 @@
 		<item>#ff00ff00</item>
 		<item>#ff00ff00</item>
 		<item>#ffbfbfbf</item>
+		<item>#ffbfbfbf</item>
+		<item>#ffff00ff</item>
 	</array>    
     <string-array name="version_changelog">
         <item>0.1.0.r163: changed stations/route lists appearance</item>
@@ -216,6 +224,7 @@
     	<item>0.2.7.r349: delayed online catalog loading</item>
     	<item>0.3.0: release candidate 1</item>
     	<item>0.3.1: fixed station search in map activity, location search dialog</item>
+    	<item>0.3.2: fixed corrupted/unsupported map import/download issue</item>
     </string-array>
     <string-array name="create_route_modes">
         <item>Minimal Time</item>
