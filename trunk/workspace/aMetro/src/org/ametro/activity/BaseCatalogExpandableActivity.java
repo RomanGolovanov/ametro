@@ -619,6 +619,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 	protected void invokeFinish(CatalogMap local) {
 		Intent viewIntent = new Intent();
 		viewIntent.setData(MapUri.create(local.getAbsoluteUrl()));
+		viewIntent.putExtra(Constants.EXTRA_TIMESTAMP, local.getTimestamp());
 		Activity parent =  CatalogTabHostActivity.getInstance();
 		if(parent!=null){
 			parent.setResult(RESULT_OK, viewIntent);

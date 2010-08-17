@@ -111,7 +111,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 					return true;
 				}
 				if(!view.systemName.equalsIgnoreCase(mModel.viewSystemNames[0])){
-					onInitializeMapView(getMapName(), mModel.viewSystemNames[0]);
+					onInitializeMapView(getMapName(), mModel.viewSystemNames[0], false);
 					return true;
 				}
 			}
@@ -142,6 +142,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		mDisableEulaDialog = false;
 		if(Instance != null){
 			mModel = Instance.mModel;
+			mModelTimestamp = Instance.mModelTimestamp;
 			mMapView = Instance.mMapView;
 			mRouteContainer = Instance.mRouteContainer;
 			mModelName = Instance.mModelName;
@@ -162,13 +163,13 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			Uri uri = intent != null ? intent.getData() : null;
 			if (uri != null) {
 				String mapName = MapUri.getMapName(uri);
-				onInitializeMapView(mapName, null);
+				onInitializeMapView(mapName, null, false);
 			} else {
 				loadDefaultMapName();
 				if (mModelName == null) {
 					onRequestMap(true);
 				} else {
-					onInitializeMapView(mModelName, mMapViewName);
+					onInitializeMapView(mModelName, mMapViewName, false);
 				}
 			}
 		}
@@ -196,19 +197,21 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 				Uri uri = data.getData();
 				if (uri != null) {
 					String mapName = MapUri.getMapName(uri);
-					if(!mapName.equalsIgnoreCase(getMapName())){
-						onInitializeMapView(mapName,null);
+					long timestamp = data.getLongExtra(Constants.EXTRA_TIMESTAMP, 0);
+					if(!mapName.equalsIgnoreCase(getMapName()) || timestamp!=mModelTimestamp){
+						onInitializeMapView(mapName,null, true);
 					}
 				} 
-			}
-			if(resultCode == RESULT_CANCELED && mModelName == null){
+			}else if(resultCode == RESULT_CANCELED && mModelName == null){
 				finish();
+				break;
 			}
 			if(isConfigurationChanged()){
 				setupLocale();
 				if (mModelName != null) {
-					onInitializeMapView(mModelName, mMapViewName);
+					onInitializeMapView(mModelName, mMapViewName, false);
 				}			
+				return;
 			}
 			break; 
 		case REQUEST_SETTINGS:
@@ -216,7 +219,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			if(isConfigurationChanged()){
 				setupLocale();
 				if (mModelName != null) {
-					onInitializeMapView(mModelName, mMapViewName);
+					onInitializeMapView(mModelName, mMapViewName, false);
 				}			
 			}
 			break;
@@ -288,7 +291,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 				public void onMapViewSelected(String mapViewSystemName) {
 					if(mapViewSystemName!=getMapView().systemName){
 						clearNavigation(true);
-						onInitializeMapView(mModelName, mapViewSystemName);
+						onInitializeMapView(mModelName, mapViewSystemName, false);
 					}
 					super.onMapViewSelected(mapViewSystemName);
 				}
@@ -654,20 +657,6 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 				mVectorMapView.setZoom(zoom);
 			} else {
 				zoom = VectorMapView.DEFAULT_ZOOM_LEVEL+1;
-//				zoom = VectorMapView.MIN_ZOOM_LEVEL;
-//				int modelWidth = mMapView.width;
-//				int modelHeight = mMapView.height;
-//				Display display = ((WindowManager) getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
-//				int width = display.getWidth();
-//				int height = display.getHeight();
-//				while (zoom < VectorMapView.MAX_ZOOM_LEVEL) {
-//					int scaledWidth = (int) (modelWidth * VectorMapView.ZOOMS[zoom]);
-//					int scaledHeight = (int) (modelHeight * VectorMapView.ZOOMS[zoom]);
-//					if (scaledWidth <= width && scaledHeight <= height) {
-//						break;
-//					}
-//					zoom++;
-//				}
 				if (Log.isLoggable(LOG_TAG_MAIN, Log.DEBUG)){
 					Log.d(LOG_TAG_MAIN, getString(R.string.log_default_map_zoom) + zoom);
 				}
@@ -702,14 +691,14 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		startActivityForResult(i, REQUEST_MAP);
 	}
 
-	private void onInitializeMapView(String mapName, String viewName) {
+	private void onInitializeMapView(String mapName, String viewName, boolean force) {
 		if(!mDisableEulaDialog && !GlobalSettings.isAcceptedEULA(this)){
 			showDialog(DIALOG_EULA);
 		}else{
-			if(mModel!=null && mMapViewName!=null){
+			if(!force && mModel!=null && mMapViewName!=null){
 				String mapNameLoaded = mModel.fileSystemName;
 				String schemeNameLoaded = mMapView.systemName;
-				if( mapNameLoaded.equals(mapName) ){
+				if(mapNameLoaded.equals(mapName) ){
 					if(schemeNameLoaded.equals(viewName)){
 						// map and view is similar
 						// so only need to check locales
@@ -749,6 +738,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		}
 
 		mModel = model;
+		mModelTimestamp = model.timestamp;
 		mMapView = view;
 
 		if(previousModel==model){
@@ -1046,6 +1036,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	private String mMapViewName;
 	private MapView mMapView;
 	private Model mModel;
+	private long mModelTimestamp;
 
 	private VectorMapView mVectorMapView;
 	
