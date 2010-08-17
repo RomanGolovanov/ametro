@@ -184,6 +184,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		super.onDestroy();
 	}
 
+
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
 		case REQUEST_MAP:

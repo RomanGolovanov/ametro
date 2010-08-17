@@ -34,9 +34,11 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 public class LocationSearchDialog extends Activity implements LocationListener, OnClickListener {
 
@@ -47,36 +49,55 @@ public class LocationSearchDialog extends Activity implements LocationListener, 
 	private List<String> mProviders;
 
 	private LocationManager mLocationManager;
+	
+	private TextView mText;
+	private ProgressBar mProgress;
 	private Button mCancelButton;
+	private Button mSettingsButton;
 	
 	private static final int REQUEST_ENABLE_LOCATION_SERVICES = 1;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.location_search);
+		
+		mText = (TextView)findViewById(R.id.text);
+		mProgress = (ProgressBar)findViewById(R.id.progressbar);
+		
 		mCancelButton = (Button)findViewById(R.id.btn_cancel);
 		mCancelButton.setOnClickListener(this);
+		
+		mSettingsButton = (Button)findViewById(R.id.btn_settings);
+		mSettingsButton.setOnClickListener(this);
+		
 		mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-		if(!isLocationProvidersEnabled()){
-			startActivityForResult(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS), REQUEST_ENABLE_LOCATION_SERVICES); 
-			Toast.makeText(this, R.string.msg_location_need_enable_providers, Toast.LENGTH_LONG).show();
-		}
+		updateMode();
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
 		case REQUEST_ENABLE_LOCATION_SERVICES:
-			if(!isLocationProvidersEnabled()){
-				setResult(RESULT_CANCELED);
-				finish();
-			}
+			updateMode();
 			break;
 
 		default:
 			break;
 		}
 		super.onActivityResult(requestCode, resultCode, data);
+	}
+	
+	private void updateMode(){
+		if(!isLocationProvidersEnabled()){
+			mProgress.setVisibility(View.GONE);
+			mText.setText(getText(R.string.msg_location_need_enable_providers));
+			mSettingsButton.setVisibility(View.VISIBLE);
+		}else{
+			mProgress.setVisibility(View.VISIBLE);
+			mText.setText(getText(R.string.locate_wait_text));
+			mSettingsButton.setVisibility(View.GONE);
+		}
 	}
 	
 	protected void onResume() {
@@ -151,6 +172,9 @@ public class LocationSearchDialog extends Activity implements LocationListener, 
 		if(v == mCancelButton){
 			setResult(RESULT_CANCELED);
 			finish();
+		}
+		if(v == mSettingsButton){
+			startActivityForResult(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS), REQUEST_ENABLE_LOCATION_SERVICES); 
 		}
 	}
 
