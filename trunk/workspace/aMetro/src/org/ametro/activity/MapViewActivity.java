@@ -205,6 +205,17 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			}else if(resultCode == RESULT_CANCELED && mModelName == null){
 				finish();
 				break;
+			}else{
+				// check for updates
+				try{
+					Model description = ModelBuilder.loadModelDescription(mModelName);
+					long timestamp = description.timestamp;
+					if(timestamp!=mModelTimestamp){
+						onInitializeMapView(mModelName,null, true);
+					}
+				}catch(Exception ex){
+					// scoop exception
+				}
 			}
 			if(isConfigurationChanged()){
 				setupLocale();
