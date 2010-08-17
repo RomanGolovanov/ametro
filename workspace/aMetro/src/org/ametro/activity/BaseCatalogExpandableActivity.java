@@ -33,6 +33,9 @@ import static org.ametro.catalog.CatalogMapState.NOT_SUPPORTED;
 import static org.ametro.catalog.CatalogMapState.OFFLINE;
 import static org.ametro.catalog.CatalogMapState.UPDATE;
 import static org.ametro.catalog.CatalogMapState.UPDATE_NOT_SUPPORTED;
+import static org.ametro.catalog.CatalogMapState.IMPORT_NEED_TO_UPDATE;
+import static org.ametro.catalog.CatalogMapState.IMPORT_UPDATE;
+
 
 import java.util.LinkedList;
 
@@ -191,7 +194,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 			if(state == DOWNLOAD){
 				menu.add(0, CONTEXT_MENU_DOWNLOAD, pos++, R.string.context_menu_download);
 			}
-			if(state == IMPORT){
+			if(state == IMPORT || state == IMPORT_UPDATE || state == IMPORT_NEED_TO_UPDATE){
 				menu.add(0, CONTEXT_MENU_IMPORT, pos++, R.string.context_menu_import);
 			}
 			if(state == UPDATE){
@@ -594,6 +597,8 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		case IMPORT_PENDING:
 		case IMPORTING:
 		case NEED_TO_UPDATE:
+		case IMPORT_UPDATE:
+		case IMPORT_NEED_TO_UPDATE:
 			invokeMapDetails(local,remote,state);
 			return true;
 		case NOT_SUPPORTED:

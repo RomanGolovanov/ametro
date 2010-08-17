@@ -92,12 +92,12 @@ public class CatalogStorageStateProvider {
 			if (local == null) {
 				return CatalogMapState.IMPORT;
 			} else if (local.isNotSupported() || local.isCorruted()) {
-				return CatalogMapState.NEED_TO_UPDATE;
+				return CatalogMapState.IMPORT_NEED_TO_UPDATE;
 			} else {
 				if (local.getTimestamp() >= remote.getTimestamp()) {
 					return CatalogMapState.INSTALLED;
 				} else {
-					return CatalogMapState.UPDATE;
+					return CatalogMapState.IMPORT_UPDATE;
 				}
 			}
 		}
