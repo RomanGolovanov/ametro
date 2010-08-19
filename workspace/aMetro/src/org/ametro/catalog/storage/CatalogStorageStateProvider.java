@@ -49,7 +49,7 @@ public class CatalogStorageStateProvider {
 		}
 		
 		if (remote.isNotSupported()) {
-			if (local == null || local.isNotSupported() || local.isCorruted()) {
+			if (local == null || local.isNotSupported() || local.isCorrupted()) {
 				return CatalogMapState.NOT_SUPPORTED;
 			} else {
 				return CatalogMapState.UPDATE_NOT_SUPPORTED;
@@ -57,7 +57,7 @@ public class CatalogStorageStateProvider {
 		} else {
 			if (local == null) {
 				return CatalogMapState.DOWNLOAD;
-			} else if (local.isNotSupported() || local.isCorruted()) {
+			} else if (local.isNotSupported() || local.isCorrupted()) {
 				return CatalogMapState.NEED_TO_UPDATE;
 			} else {
 				if (local.getTimestamp() >= remote.getTimestamp()) {
@@ -86,12 +86,12 @@ public class CatalogStorageStateProvider {
 			return CatalogMapState.DOWNLOAD_PENDING;
 		}
 		
-		if (remote.isCorruted()) {
+		if (remote.isCorrupted()) {
 			return CatalogMapState.CORRUPTED;
 		} else {
 			if (local == null) {
 				return CatalogMapState.IMPORT;
-			} else if (local.isNotSupported() || local.isCorruted()) {
+			} else if (local.isNotSupported() || local.isCorrupted()) {
 				return CatalogMapState.IMPORT_NEED_TO_UPDATE;
 			} else {
 				if (local.getTimestamp() >= remote.getTimestamp()) {
@@ -122,7 +122,7 @@ public class CatalogStorageStateProvider {
 		
 		if (remote == null) {
 			// remote not exist
-			if (local.isCorruted()) {
+			if (local.isCorrupted()) {
 				return CatalogMapState.CORRUPTED;
 			} else if (!local.isSupported()) {
 				return CatalogMapState.NOT_SUPPORTED;
@@ -131,7 +131,7 @@ public class CatalogStorageStateProvider {
 			}
 		} else if (!remote.isSupported()) {
 			// remote not supported
-			if (local.isCorruted()) {
+			if (local.isCorrupted()) {
 				return CatalogMapState.CORRUPTED;
 			} else if (!local.isSupported()) {
 				return CatalogMapState.NOT_SUPPORTED;
@@ -140,7 +140,7 @@ public class CatalogStorageStateProvider {
 			}
 		} else {
 			// remote OK
-			if (local.isCorruted()) {
+			if (local.isCorrupted()) {
 				return CatalogMapState.NEED_TO_UPDATE;
 			} else if (!local.isSupported()) {
 				return CatalogMapState.NEED_TO_UPDATE;

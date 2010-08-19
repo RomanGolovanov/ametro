@@ -158,7 +158,7 @@ public class CatalogMap {
 		return "[NAME:" + mSystemName + ";TRAN:" + mTransports + ";VER:" + mVersion + ";COUNTRY:" + StringUtil.join(mCountry,",") + ";CITY:" + StringUtil.join(mCity,",") + ";LOCALES=" + StringUtil.join(mLocales,",") + ";URL=" + mUrl  + "]";
 	}
 
-	public boolean isCorruted() {
+	public boolean isCorrupted() {
 		return mCorrupted;
 	}
 

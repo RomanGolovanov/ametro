@@ -44,11 +44,9 @@ import android.util.Log;
 import static org.ametro.Constants.ONLINE_CATALOG_DEPRECATED_TIMEOUT;
 
 public class LoadWebCatalogTask extends LoadBaseCatalogTask implements IDownloadListener {
-
 	
 	private String mCatalogUrl;
 	private String[] mCatalogBaseUrls;
-	
 	private boolean mCompleted;
 	private String mProgressMessage;
 
