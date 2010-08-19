@@ -120,11 +120,11 @@ public class CatalogMapPair {
 	}
 
 	public boolean isLocalAvailable() {
-		return mLocal != null && !mLocal.isCorruted() && mLocal.isSupported();
+		return mLocal != null && !mLocal.isCorrupted() && mLocal.isSupported();
 	}
 	
 	public boolean isRemoteAvailable() {
-		return mRemote != null && !mRemote.isCorruted() && mRemote.isSupported();
+		return mRemote != null && !mRemote.isCorrupted() && mRemote.isSupported();
 	}
 	
 	public String getLocalUrl(){
@@ -137,11 +137,11 @@ public class CatalogMapPair {
 
 	public boolean isUpdateAvailable() {
 		if(mLocal==null){
-			if(mRemote.isSupported() && !mRemote.isCorruted()){
+			if(mRemote.isSupported() && !mRemote.isCorrupted()){
 				return true;
 			}
 		}else{
-			if(mRemote!=null && !mRemote.isCorruted() && mRemote.isSupported()){
+			if(mRemote!=null && !mRemote.isCorrupted() && mRemote.isSupported()){
 				return mLocal.getTimestamp() < mRemote.getTimestamp();
 			}
 		}

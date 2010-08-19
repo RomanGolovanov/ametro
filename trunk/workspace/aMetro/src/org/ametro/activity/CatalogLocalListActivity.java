@@ -46,6 +46,7 @@ import static org.ametro.catalog.CatalogMapState.NOT_SUPPORTED;
 import static org.ametro.catalog.CatalogMapState.OFFLINE;
 import static org.ametro.catalog.CatalogMapState.UPDATE;
 import static org.ametro.catalog.CatalogMapState.UPDATE_NOT_SUPPORTED;
+import static org.ametro.catalog.CatalogMapState.CALCULATING;;
 
 public class CatalogLocalListActivity extends BaseCatalogActivity {
 
@@ -97,6 +98,13 @@ public class CatalogLocalListActivity extends BaseCatalogActivity {
 
 	public boolean onCatalogMapClick(CatalogMap local, CatalogMap remote, int state) {
 		switch(state){
+		case CALCULATING:
+			if(!(local.isCorrupted() || !local.isSupported())){
+				invokeFinish(local);
+			}else{
+				invokeMapDetails(local,remote,state);
+			}
+			return true;
 		case OFFLINE:
 		case INSTALLED:
 		case UPDATE:

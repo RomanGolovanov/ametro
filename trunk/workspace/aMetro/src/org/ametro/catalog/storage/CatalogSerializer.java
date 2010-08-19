@@ -69,7 +69,7 @@ public class CatalogSerializer {
 			serializer.attribute("", ATTR_VERSION, "" + map.getVersion());
 			serializer.attribute("", ATTR_SIZE, "" + map.getSize());
 			serializer.attribute("", ATTR_MIN_VERSION, "" + map.getMinVersion());
-			serializer.attribute("", ATTR_CORRUPTED, map.isCorruted() ? "true" : "false");
+			serializer.attribute("", ATTR_CORRUPTED, map.isCorrupted() ? "true" : "false");
 
 			for (String localeCode : map.getLocales()) {
 				serializer.startTag("", TAG_LOCALE);
