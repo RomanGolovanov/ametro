@@ -817,7 +817,7 @@ public class PmzStorage implements IModelStorage {
 			model.systemName = mFile.getName().toLowerCase();
 
 			model.fileSystemName = mFile.getAbsolutePath();
-			model.timestamp = mTimestamp;
+			model.timestamp =  mTimestamp;
 
 
 			makeTransportTypes(model);
