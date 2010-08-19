@@ -122,19 +122,19 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 
 	protected Handler mUIEventDispacher = new Handler();
 
-	private final int MAIN_MENU_SEARCH = 996;
-	private final int MAIN_MENU_REFRESH = 997;
-	private final int MAIN_MENU_LOCATION = 998;
-	private final int MAIN_MENU_SETTINGS = 999;
-	private final int MAIN_MENU_ABOUT = 1000;
+	protected final static int MAIN_MENU_SEARCH = 996;
+	protected final static int MAIN_MENU_REFRESH = 997;
+	protected final static int MAIN_MENU_LOCATION = 998;
+	protected final static int MAIN_MENU_SETTINGS = 999;
+	protected final static int MAIN_MENU_ABOUT = 1000;
 
-	private final int CONTEXT_MENU_SHOW_MAP = 1;
-	private final int CONTEXT_MENU_SHOW_DETAILS = 2;
-	private final int CONTEXT_MENU_DOWNLOAD = 3;
-	private final int CONTEXT_MENU_IMPORT = 4;
-	private final int CONTEXT_MENU_UPDATE = 5;
-	private final int CONTEXT_MENU_DELETE = 6;
-	private final int CONTEXT_MENU_DELETE_PMZ = 7;
+	private final static int CONTEXT_MENU_SHOW_MAP = 1;
+	private final static int CONTEXT_MENU_SHOW_DETAILS = 2;
+	private final static int CONTEXT_MENU_DOWNLOAD = 3;
+	private final static int CONTEXT_MENU_IMPORT = 4;
+	private final static int CONTEXT_MENU_UPDATE = 5;
+	private final static int CONTEXT_MENU_DELETE = 6;
+	private final static int CONTEXT_MENU_DELETE_PMZ = 7;
 	
 	private final static int REQUEST_SDCARD = 996;
 	private final static int REQUEST_DETAILS = 997;

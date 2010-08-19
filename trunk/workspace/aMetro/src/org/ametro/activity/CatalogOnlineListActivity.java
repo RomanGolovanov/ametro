@@ -20,6 +20,7 @@
  */
 package org.ametro.activity;
 
+import org.ametro.ApplicationEx;
 import org.ametro.R;
 import org.ametro.adapter.CheckedCatalogAdapter;
 import org.ametro.catalog.CatalogMap;
@@ -71,8 +72,7 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity {
 	}
 
 	/****************** MAIN MENU ********************/
-	
-	private final int MAIN_MENU_DOWNLOAD = 1;
+	private final static int MAIN_MENU_DOWNLOAD = 1;
 	private final static int REQUEST_DOWNLOAD = 1;
 
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -88,6 +88,12 @@ public class CatalogOnlineListActivity extends BaseCatalogExpandableActivity {
 
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
+		case MAIN_MENU_REFRESH:
+			if(!ApplicationEx.getInstance().isNetworkAvailable()){
+				Toast.makeText(this, R.string.msg_no_network_available, Toast.LENGTH_SHORT).show();
+				return true;
+			}
+			break;
 		case MAIN_MENU_DOWNLOAD:
 			Intent i = new Intent(this, CatalogMapSelectionActivity.class);
 			i.putExtra(CatalogMapSelectionActivity.EXTRA_TITLE, getText(R.string.menu_download_maps));
