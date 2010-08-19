@@ -350,12 +350,14 @@ public class AutoUpdateService extends Service implements ICatalogStorageListene
 	private void loadOnlineCatalog() throws Exception {
 		// get current online catalog
 		mStage = STAGE_REQUEST_ONLINE_CATALOG;
-		mStorage.requestCatalog(ONLINE, false);
+		mStorage.requestCatalog(ONLINE, true);
 		synchronized (mMutex) {
 			mMutex.wait();
 		}
 		if(mOnlineCatalog==null || mOnlineCatalog.isCorrupted()){
 			throw new Exception("Online catalog is empty or failed");
+		}else{
+			mStorage.requestCatalogSave(CatalogStorage.ONLINE);
 		}
 	}
 
