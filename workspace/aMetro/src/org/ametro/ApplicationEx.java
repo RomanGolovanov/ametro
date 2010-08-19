@@ -199,7 +199,7 @@ public class ApplicationEx extends Application {
 		boolean isMobileConnected = mConnectionManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnected();
 		return isWifiConnected || isMobileConnected;
 	}
-		
+	
 	public boolean isAutoUpdateNetworkAvailable(){
 		boolean isWifiConnected =  mConnectionManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected();
 		boolean isMobileConnected = mConnectionManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnected();
