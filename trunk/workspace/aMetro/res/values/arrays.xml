@@ -10,34 +10,14 @@
         <item>Russian</item>
         <item>English</item>
     </string-array>
-    <string-array name="pref_locale_values">
-        <item></item>
-        <item>ru</item>
-        <item>en</item>
-    </string-array>
     <string-array name="pref_auto_update_period_texts">
         <item>Daily</item>
         <item>Weekly</item>
         <item>Monthly</item>
     </string-array>
-    <string-array name="pref_auto_update_period_values">
-        <item>daily</item>
-        <item>weekly</item>
-        <item>monthly</item>
-    </string-array>
 	<string-array name="pref_auto_update_networks_texts">
         <item>WiFi only</item>
         <item>WiFi or Mobile</item>
-    </string-array>
-    <string-array name="pref_auto_update_networks_values">
-        <item>wifi</item>
-        <item>any</item>
-    </string-array>    
-    <string-array name="import_pmz_cleanup_items">
-        <item>Selected</item>
-        <item>Obsolete</item>
-        <item>Invalid</item>
-        <item>All</item>
     </string-array>
     <string-array name="transport_types">
 	    <item>Unknown</item>
@@ -77,156 +57,6 @@
 	    <item>Update</item>
 	    <item>Update Needed</item>
     </string-array>
-	<array name="import_catalog_map_state_colors">
-		<item>#ffff00ff</item> 
-		<item>#ffff00ff</item>
-		<item>#ffff0000</item>
-		<item>#ffffff00</item>
-		<item>#ffbfbfbf</item>
-		<item>#ffbfbfbf</item>
-		<item>#ffff00ff</item>
-		<item>#ffff00ff</item>
-		<item>#ffff00ff</item>
-		<item>#ff00ff00</item>
-		<item>#ff00ff00</item>
-		<item>#ff00ff00</item>
-		<item>#ff00ff00</item>
-		<item>#ffbfbfbf</item>
-		<item>#ffbfbfbf</item>
-		<item>#ffff00ff</item>
-	</array>    
-	<array name="online_catalog_map_state_colors">
-		<item>#ffff00ff</item> 
-		<item>#ffff0000</item>
-		<item>#ffff0000</item>
-		<item>#ffffff00</item>
-		<item>#ffbfbfbf</item>
-		<item>#ffff00ff</item>
-		<item>#ffbfbfbf</item>
-		<item>#ffff0000</item>
-		<item>#ffff0000</item>
-		<item>#ff00ff00</item>
-		<item>#ff00ff00</item>
-		<item>#ff00ff00</item>
-		<item>#ff00ff00</item>
-		<item>#ffbfbfbf</item>
-		<item>#ffffff00</item>
-		<item>#ffffff00</item>
-	</array>    
-	<array name="local_catalog_map_state_colors">
-		<item>#ffcccccc</item> 
-		<item>#ffff0000</item>
-		<item>#ffff0000</item>
-		<item>#ffffff00</item>
-		<item>#ffbfbfbf</item>
-		<item>#ffff00ff</item>
-		<item>#ffff00ff</item>
-		<item>#ffff00ff</item>
-		<item>#ffff0000</item>
-		<item>#ff00ff00</item>
-		<item>#ff00ff00</item>
-		<item>#ff00ff00</item>
-		<item>#ff00ff00</item>
-		<item>#ffbfbfbf</item>
-		<item>#ffbfbfbf</item>
-		<item>#ffff00ff</item>
-	</array>    
-    <string-array name="version_changelog">
-        <item>0.1.0.r163: changed stations/route lists appearance</item>
-        <item>0.1.1.r164: removed obsolete code</item>
-        <item>0.1.2.r165: added station selection activity, change log in about</item>
-        <item>0.1.3.r166: fixed import error on line end</item>
-        <item>0.1.4.r167: RU localization, station selection changed</item>
-        <item>0.1.5.r168: swap button moved to menu in create route, some resource improvements</item>
-        <item>0.1.6.r169: new browse route activity design</item>
-        <item>0.1.7.r170: favorites draft</item>
-        <item>0.1.8.r171: fixed UI for routes</item>
-        <item>0.1.9.r172: rewrited UI for favorite routes</item>
-        <item>0.1.10.r173: added context menu for favorite routes list</item>
-        <item>0.1.11.r174: optimized map loading time, pre-styled station info page</item>
-        <item>0.1.12.r175: added \'Delete\' mode in favorite routes list, changed some icons</item>
-        <item>0.1.13.r176: finally favorite routes list, rewrited map and import menus, fixed routing errors</item>
-        <item>0.1.14.r177: a lot of minor fixes</item>
-        <item>0.1.15.r178: background design changes, reversed favorite routes list</item>
-        <item>0.1.16.r179: bug fixed: open station info failed when no station selected or file not exists</item>
-        <item>0.1.17.r180: fix route drop after map locale changing</item>
-        <item>0.1.18.r181: experimental backgound-thread rendering</item>
-        <item>0.1.19.r182: experimental rendering optimizations</item>
-        <item>0.1.20.r184: added settings for disable anti-aliasing</item>
-        <item>0.1.21.r185: experimental GPS/GSM location search</item>
-        <item>0.1.22.r186: GPS/GSM location search worked</item>
-        <item>0.1.23.r187: added native library</item>
-        <item>0.1.24.r188: added search coordinates activity</item>
-        <item>0.1.25.r190: rewrited drawing of stations names</item>
-    	<item>0.2.1.r198: global model refactoring: multiple maps support, languages, GPS coordinates,layers</item>
-    	<item>0.2.1.r199: delayed scheme loading</item>
-    	<item>0.2.1.r200: delayed locales\' texts loading</item>
-    	<item>0.2.1.r201: bug fixing</item>1
-    	<item>0.2.1.r206: rewrited grayed objects rendering - using color recalculation instead alfa-channel</item>
-    	<item>0.2.1.r207: render entire map cache if it isn\'t exceed VM memory limits</item>
-    	<item>0.2.1.r208: fixed anti-aliasing bug on change zoom level while scrolling</item>
-    	<item>0.2.1.r210: rewrited import list</item>
-    	<item>0.2.1.r211: import list bugs fixing</item>
-    	<item>0.2.1.r212: added infrastructure for GPS location injection into model, added coordinates for stations in Moscow city via moscow.gps asset</item>
-    	<item>0.2.1.r213: locate nearest station</item>
-    	<item>0.2.1.r214: fixed short-click handler</item>
-    	<item>0.2.1.r216: using B-tree clipping</item>
-    	<item>0.2.1.r218: repaired route searching</item>
-    	<item>0.2.1.r219: fixed some route issues</item>
-    	<item>0.2.2.r220: transport selection for route, maps became incompatible with previous version</item>
-    	<item>0.2.2.r221: fixed bug with single transport maps</item>
-    	<item>0.2.2.r222: fixed transport types localizations</item>
-    	<item>0.2.3.r223: fixed scheme changing force-close while route is selected, maps became incompatible with previous version</item>
-    	<item>0.2.3.r224: changed icon and logo</item>
-    	<item>0.2.3.r225: fixed FC without manual language set</item>
-    	<item>0.2.3.r226: fixed FC on import cleanup mode change with ru_RU locale</item>
-    	<item>0.2.3.r227: added classes for map repository infrastructure, added GPL header to some files</item>
-    	<item>0.2.3.r228: added online/local storage for map catalogs</item>
-    	<item>0.2.4.r229: fixed station names rendering, added transport types into model, maps became incompatible with previous version</item>
-    	<item>0.2.4.r234: font sizes changed to scaled pixels</item>
-    	<item>0.2.4.r235: compare maps between two catalogs</item>
-    	<item>0.2.4.r236: added transport icons on experimental map list</item>
-    	<item>0.2.4.r240: first draft of new map view with tabs</item>
-    	<item>0.2.4.r241: replace map library with new tabbed view, rewrited settings</item>
-    	<item>0.2.4.r243: progress bars added into map catalog views</item>
-    	<item>0.2.4.r244: refactored maps activities code, fixed import statuses</item>
-    	<item>0.2.4.r245: fixed local/favorites statuses</item>
-    	<item>0.2.4.r246: activities refactored</item>
-    	<item>0.2.4.r247: online catalog states fixed</item>
-    	<item>0.2.4.r249: online catalog moved to dropbox</item>
-    	<item>0.2.4.r250: refactored catalog adapter classes</item>
-    	<item>0.2.4.r251: added fake details page for map and catalog context menu</item>
-    	<item>0.2.4.r252: preview of map details activity</item>
-    	<item>0.2.4.r258: refactored data persistence classes</item>
-    	<item>0.2.4.r259: online catalog loading progress</item>
-    	<item>0.2.4.r262: preview of import/online operations from map details activity</item>
-    	<item>0.2.4.r272: fixed local/online/import catalogs update events</item>
-    	<item>0.2.4.r274: delete, import, download, update options in map context menu</item>
-    	<item>0.2.4.r276: added search operation in maps catalogs</item>
-    	<item>0.2.4.r279: payment systems integration for donate</item>
-    	<item>0.2.4.r285: catalog statuses changed, show Importing/Downloading (Pending) status everywere</item>
-    	<item>0.2.4.r287: changed catalog item layout, added country icons (need to download icon pack in /sdcard/ametro/icons)</item>
-    	<item>0.2.5.r290: added description to map detail view, maps became incompatible with previous version</item>
-    	<item>0.2.5.r299: plain list view for local maps catalog</item>
-    	<item>0.2.5.r302: migrate from independent task to to sync/async catalog task queue architecture</item>
-    	<item>0.2.5.r304: all catalog operations migrated to task queue</item>
-    	<item>0.2.5.r308: activity for selecting maps for download/import (pre-alpha version)</item>
-    	<item>0.2.5.r310: country icons download confirmation dialog</item>
-    	<item>0.2.5.r317: map catalogs UI tuning</item>
-    	<item>0.2.6.r321: added maps transport types dictionaries, maps became incompatible with previous version</item>
-    	<item>0.2.6.r322: map schemes selection dialog</item>
-    	<item>0.2.6.r324: bug fixes</item>
-    	<item>0.2.6.r326: added delete maps operation in local catalog</item>
-    	<item>0.2.6.r327: added preview of line delays for routing</item>
-    	<item>0.2.7.r332: multiple catalogs sources support, fixed station aliases, changed map timestamp detection, maps became incompatible with previous version</item>
-    	<item>0.2.7.r334: tasks notifications added</item>
-    	<item>0.2.7.r342: new location search dialog, GPL confirmation, maps autoupdate</item>
-    	<item>0.2.7.r349: delayed online catalog loading</item>
-    	<item>0.3.0: release candidate 1</item>
-    	<item>0.3.1: fixed station search in map activity, location search dialog</item>
-    	<item>0.3.2: fixed corrupted/unsupported map import/download issue</item>
-    	<item>0.3.3: fixed map reloading after refresh</item>
-    </string-array>
     <string-array name="create_route_modes">
         <item>Minimal Time</item>
         <item>Minimal Transfers</item>
@@ -235,40 +65,6 @@
         <item>Day</item>
         <item>Night</item>
         <item>Rush</item>
-    </string-array>
-    <string-array name="moneybookers_currency_names">
-        <item>USD</item>
-        <item>EUR</item>
-        <item>GBP</item>
-    </string-array>
-    <string-array name="moneybookers_currency_codes">
-        <item>USD</item>
-        <item>EUR</item>
-        <item>GBP</item>
-    </string-array>
-    <string-array name="yandex_currency_names">
-        <item>RUB</item>
-    </string-array>
-    <string-array name="yandex_currency_codes">
-        <item>RUB</item>
-    </string-array>
-    <string-array name="webmoney_currency_names">
-        <item>RUB</item>
-        <item>USD</item>
-    </string-array>
-    <string-array name="webmoney_currency_codes">
-        <item>R191907383552</item>
-        <item>Z422979142707</item>
-    </string-array>
-    <string-array name="alertpay_currency_names">
-        <item>USD</item>
-        <item>EUR</item>
-        <item>GBP</item>
-    </string-array>
-    <string-array name="alertpay_currency_codes">
-        <item>USD</item>
-        <item>EUR</item>
-        <item>GBP</item>
     </string-array>
     <string-array name="sort_modes">
     	<item>By City</item>
