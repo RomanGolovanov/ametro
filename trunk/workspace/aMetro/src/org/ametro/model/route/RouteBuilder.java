@@ -169,6 +169,7 @@ public class RouteBuilder {
 				final Integer[] lineDelays = line.delays; 
 				if(delayMode < lineDelays.length){
 					final Integer lineDelay = lineDelays[delayMode];
+					route.length+=lineDelay;
 					if(lineDelay!=null){
 						final int len = route.delays.length;
 						for(int i=0;i<len;i++){

@@ -22,6 +22,7 @@
 package org.ametro.activity;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.ametro.R;
 import org.ametro.adapter.RouteListAdapter;
@@ -92,8 +93,10 @@ public class RouteViewActivity extends Activity implements OnClickListener,
 		updateFavoritesButton();
 		mFavoritesButton.setOnClickListener(this);
 
+		Date date = new Date(mRoute.getTime() * 1000);
+		
 		mTextTime.setText(getString(R.string.msg_route_time) + " "
-				+ DateUtil.getTimeHHMM(mRoute.getTime()));
+				+ String.format(getString(R.string.route_time_format), DateUtil.getDateUTC(date, "HH"), DateUtil.getDateUTC(date, "mm")));
 		
 		mStationList.setDividerHeight(0);
 		//mRouteList.setDividerHeight(0);
