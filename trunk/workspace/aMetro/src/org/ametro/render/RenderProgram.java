@@ -58,13 +58,13 @@ public class RenderProgram {
 		}
 	}
 	
-	public static final int TYPE_LINE_DASHED = 1;
-	public static final int TYPE_LINE = 2;
-	public static final int TYPE_TRANSFER_BACKGROUND = 4;
-	public static final int TYPE_TRANSFER = 8;
-	public static final int TYPE_STATION = 16;
-	public static final int TYPE_STATION_NAME = 32;
-	public static final int TYPE_BACKGROUND = 64;
+	public static final int TYPE_LINE_DASHED = 0x00010000;
+	public static final int TYPE_LINE = 0x00020000;
+	public static final int TYPE_TRANSFER_BACKGROUND = 0x00040000;
+	public static final int TYPE_TRANSFER = 0x00080000;
+	public static final int TYPE_STATION = 0x000100000;
+	public static final int TYPE_STATION_NAME = 0x000200000;
+	public static final int TYPE_BACKGROUND = 0x000400000;
 
 	public static final int ONLY_TRANSPORT = TYPE_LINE_DASHED | TYPE_LINE | TYPE_TRANSFER_BACKGROUND | TYPE_TRANSFER | TYPE_STATION;
 	public static final int ALL = ONLY_TRANSPORT | TYPE_STATION_NAME;
