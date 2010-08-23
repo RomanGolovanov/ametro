@@ -32,6 +32,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Locale;
+import java.util.TreeMap;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -158,6 +159,9 @@ public class PmzStorage implements IModelStorage {
 		private ImportMapDirectory mImportMapDirectory;
 		private ImportTransportDirectory mImportTransportDirectory;
 
+		private ArrayList<String> mDelayNames = new ArrayList<String>();
+		private TreeMap<String,Integer> mDelayIndexes = new TreeMap<String, Integer>();
+		
 		private int[] getMapsNumbers(String[] maps) {
 			ArrayList<Integer> res = new ArrayList<Integer>();
 			for(String mapSystemName : maps){
@@ -666,6 +670,7 @@ public class PmzStorage implements IModelStorage {
 				String aliasesList = null;
 				String drivingList = null; // for single line
 				String lineName = null;
+				ArrayList<Integer> delays = null;
 
 				while(ini.readNext()){ // for each key in file
 					final String key = ini.getKey(); // extract current properties
@@ -675,12 +680,13 @@ public class PmzStorage implements IModelStorage {
 
 					if(line!=null && isSectionChanged){ // if end of line
 						line.name  = appendLocalizedText(lineName);
-						makeLineObjects(line, stationList, drivingList, aliasesList); // make station and segments
+						makeLineObjects(line, stationList, drivingList, aliasesList, delays); // make station and segments
 						line = null; // clear loop variables
 						stationList = null;
 						drivingList = null;
 						aliasesList = null;
 						lineName = null;
+						delays = null;
 					}
 					if(section.startsWith("Line")){ // for line sections
 						if(isSectionChanged){
@@ -707,7 +713,27 @@ public class PmzStorage implements IModelStorage {
 							lineName = value;
 						}else if(key.equalsIgnoreCase("Aliases")){
 							aliasesList = value;
-						}			
+						}else if(key.startsWith("Delay")){
+							String delayName = key.substring(5);
+							if(DELAY_DAY_EN.equalsIgnoreCase(delayName)){
+								delayName = DELAY_DAY_RU;
+							}else if(DELAY_NIGHT_EN.equalsIgnoreCase(delayName)){
+								delayName = DELAY_NIGHT_RU;
+							}else if(DELAY_RUSH_HOUR_EN.equalsIgnoreCase(delayName)){
+								delayName = DELAY_RUSH_HOUR_RU;
+							}
+							if(!mDelayIndexes.containsKey(delayName)){
+								mDelayIndexes.put(delayName, mDelayNames.size());
+								mDelayNames.add(delayName);
+							}
+							Integer delayValue = StringUtil.parseDelay(value);
+							if(delays == null){
+								delays = new ArrayList<Integer>();
+							}
+							int index = mDelayIndexes.get(delayName);
+							CollectionUtil.ensureSize(delays,index+1);
+							delays.set(index,delayValue);
+						}
 					}else if(section.equalsIgnoreCase("Transfers")){
 						makeTransfer(value);
 					}else if (section.equalsIgnoreCase("AdditionalInfo")){
@@ -733,7 +759,7 @@ public class PmzStorage implements IModelStorage {
 					map.name = appendLocalizedText(map.systemName);
 				}
 				if(line!=null){ // if end of line 
-					makeLineObjects(line, stationList, drivingList, aliasesList); // make station and segments
+					makeLineObjects(line, stationList, drivingList, aliasesList, delays); // make station and segments
 				}
 			}
 		}
@@ -744,8 +770,6 @@ public class PmzStorage implements IModelStorage {
 			String cityNameEng = null;
 			final ArrayList<String> authors = new ArrayList<String>();
 			final ArrayList<String> comments = new ArrayList<String>();
-			String[] russianDelays = null;
-			String[] englishDelays = null;
 
 			ZipEntry cityEntry = mZipFile.getEntry(mCityFile);
 			mTimestamp = DateUtil.toUTC( cityEntry.getTime() );
@@ -766,29 +790,20 @@ public class PmzStorage implements IModelStorage {
 				}else if(key.equalsIgnoreCase("Comment")){
 					comments.add(value);
 				}else if(key.equalsIgnoreCase("DelayNames")){
-					russianDelays = value.split(",");
-					englishDelays = new String[russianDelays.length];
-					int len = russianDelays.length;
-					for(int i=0;i<len;i++){
-						englishDelays[i] = translateDelays(russianDelays[i]);
-					}
+					mDelayNames.addAll(StringUtil.fastSplitToList(value,','));
 				}
 			}
-			final Model m = mModel;
-			m.systemName = mFile.getName().toLowerCase() + ".ametro";
-			m.cityName = appendLocalizedText(cityNameRus!=null ? cityNameRus : cityNameEng);
-			m.countryName = appendLocalizedText(country);
-			m.authors = appendTextArray((String[]) authors.toArray(new String[authors.size()]));
-			m.comments = appendTextArray((String[]) comments.toArray(new String[comments.size()]));
-			
-			
-			m.delays = appendTextArray(englishDelays, russianDelays);
-			
-			m.textLengthDescription = mTextsOriginal.size();
+			final Model model = mModel;
+			model.systemName = mFile.getName().toLowerCase() + ".ametro";
+			model.cityName = appendLocalizedText(cityNameRus!=null ? cityNameRus : cityNameEng);
+			model.countryName = appendLocalizedText(country);
+			model.authors = appendTextArray((String[]) authors.toArray(new String[authors.size()]));
+			model.comments = appendTextArray((String[]) comments.toArray(new String[comments.size()]));
+			model.textLengthDescription = mTextsOriginal.size();
 		}
 
 
-		private String translateDelays(String delayName) {
+		private String translateDelay(String delayName) {
 			if(DELAY_DAY_RU.equalsIgnoreCase(delayName)){
 				return DELAY_DAY_EN;
 			}else if(DELAY_NIGHT_RU.equalsIgnoreCase(delayName)){
@@ -819,11 +834,18 @@ public class PmzStorage implements IModelStorage {
 			model.fileSystemName = mFile.getAbsolutePath();
 			model.timestamp =  mTimestamp;
 
+			String[] russianDelays = (String[]) mDelayNames.toArray(new String[mDelayNames.size()]);
+			String[] englishDelays = new String[russianDelays.length];
+			int len = russianDelays.length;
+			for(int i=0;i<len;i++){
+				englishDelays[i] = translateDelay(russianDelays[i]);
+			}
+			model.delays = appendTextArray(englishDelays, russianDelays);
 
 			makeTransportTypes(model);
 			makeGlobalization(model);
 			makeModelViewArrays(model);
-
+	
 			if(!mDescriptionOnly){
 				CityStationDictionary lib = mStationDirectory.get(mFile);
 				if(lib!=null){
@@ -926,7 +948,7 @@ public class PmzStorage implements IModelStorage {
 			}
 		}
 
-		private void makeLineObjects(TransportLine line, String stationList, String drivingList, String aliasesList) {
+		private void makeLineObjects(TransportLine line, String stationList, String drivingList, String aliasesList, ArrayList<Integer> delays) {
 
 			final int mapId = line.mapId;
 			
@@ -985,6 +1007,12 @@ public class PmzStorage implements IModelStorage {
 
 			updateStationIndex(line);
 			mTransportLineIndex.put(line.systemName, line);
+			
+			if(delays!=null){
+				int size = mDelayNames.size();
+				CollectionUtil.ensureSize(delays,size);
+				line.delays = (Integer[]) delays.toArray(new Integer[size]);
+			}
 		}
 
 		private HashMap<String, String> makeAliasDictionary(String aliasesList) {

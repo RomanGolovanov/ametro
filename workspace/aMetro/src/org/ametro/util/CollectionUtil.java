@@ -61,6 +61,12 @@ public class CollectionUtil {
 		list.addAll( Arrays.asList(right) );
 		return (String[]) list.toArray(new String[list.size()]);
 	}
+
+	public static void ensureSize(ArrayList<?> collection, int size) {
+		while(collection.size()<size){
+			collection.add(null);
+		}
+	}
 	
 
 }

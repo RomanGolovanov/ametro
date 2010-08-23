@@ -55,12 +55,6 @@ public class StringUtil {
 	static final SimpleDateFormat DEFAULT_DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
 
 	private static final Pattern csvPattern = Pattern.compile("(?:^|,)(\"(?:[^\"]|\"\")*\"|[^,]*)");
-	//
-	//	public static String[] splitCommaSeparatedString(String value) {
-	//		if(value == null || value.length() == 0) return new String[0];
-	//		value = value.replaceAll("/\\(.*\\)/", "");
-	//		return value.split(",");
-	//	}
 
 	public static String formatStringArray(String[] value) {
 		return join(value,",");
@@ -79,8 +73,7 @@ public class StringUtil {
 		return elements.toArray(new String[elements.size()]);
 	}
 
-	public static String[] fastSplit(final String line, final char delimeter) {
-
+	public static ArrayList<String> fastSplitToList(final String line, final char delimeter) {
 		final ArrayList<String> parts = new ArrayList<String>();
 		final StringBuilder sb = new StringBuilder();
 		final int length = line.length(); 
@@ -99,6 +92,12 @@ public class StringUtil {
 			position++;
 		}
 		parts.add(sb.toString());
+		return parts;	
+	}
+	
+	
+	public static String[] fastSplit(final String line, final char delimeter) {
+		final ArrayList<String> parts = fastSplitToList(line, delimeter);
 		return (String[]) parts.toArray(new String[parts.size()]);
 	}
 
@@ -393,7 +392,21 @@ public class StringUtil {
 			}
 		}
 		return r;
-	}	
+	}
+	
+	public static Integer parseDelay(String text) {
+		if(text==null || text.length()==0) return null;
+		try {
+			double value = Double.parseDouble(text);
+			int minutes = (int)value;
+			int seconds = (int)((value - minutes) * 100);
+			int delay = (minutes * 60) + seconds;
+			return delay;
+		} catch (Exception ex) {
+			return null;
+		}
+	}
+		
 	public static Integer[] parseDelayArray(String text) {
 		String[] parts = fastSplit(text);
 		if(parts==null){
@@ -715,6 +728,5 @@ public class StringUtil {
 	    th.printStackTrace(new PrintStream(out));
 	    return new String(out.toByteArray());
 	}
-	
-	
+
 }
