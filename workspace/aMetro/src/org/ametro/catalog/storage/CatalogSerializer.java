@@ -40,6 +40,7 @@ import static org.ametro.catalog.storage.CatalogDeserializer.ATTR_URL;
 import static org.ametro.catalog.storage.CatalogDeserializer.ATTR_SYSTEM_NAME;
 import static org.ametro.catalog.storage.CatalogDeserializer.ATTR_COUNTRY_ISO;
 import static org.ametro.catalog.storage.CatalogDeserializer.ATTR_LAST_MODIFIED;
+import static org.ametro.catalog.storage.CatalogDeserializer.ATTR_FILE_TIMESTAMP;
 import static org.ametro.catalog.storage.CatalogDeserializer.ATTR_TRANSPORTS;
 import static org.ametro.catalog.storage.CatalogDeserializer.ATTR_VERSION;
 import static org.ametro.catalog.storage.CatalogDeserializer.ATTR_CODE;
@@ -65,6 +66,7 @@ public class CatalogSerializer {
 				serializer.attribute("", ATTR_COUNTRY_ISO, map.getCountryISO());
 			}
 			serializer.attribute("", ATTR_LAST_MODIFIED, "" + map.getTimestamp());
+			serializer.attribute("", ATTR_FILE_TIMESTAMP, "" + map.getFileTimestamp());
 			serializer.attribute("", ATTR_TRANSPORTS, "" + map.getTransports());
 			serializer.attribute("", ATTR_VERSION, "" + map.getVersion());
 			serializer.attribute("", ATTR_SIZE, "" + map.getSize());

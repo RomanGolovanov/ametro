@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import org.ametro.Constants;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
+import org.ametro.catalog.storage.CatalogStorage;
 import org.ametro.model.Model;
 import org.ametro.model.storage.ModelBuilder;
 
@@ -38,8 +39,28 @@ public class LoadFileCatalogTask extends LoadBaseCatalogTask {
 
 	public boolean isDerpecated() {
 		if(mCatalog == null) return true;
-		return new File(mCatalog.getBaseUrl()).lastModified() > mCatalog.getTimestamp();
+		File catalogFile = new File(mCatalog.getBaseUrl());
+		if(catalogFile.lastModified() > mCatalog.getTimestamp()) return true;
+		if(mCatalogId == CatalogStorage.IMPORT){
+			File[] files = catalogFile.listFiles();
+			if(files == null && mCatalog.getSize()>0) return true;
+			int mapFileCount = 0;
+			if(files!=null){
+				for(File f : files){
+					String fileName = f.getName();
+					if(fileName.endsWith(Constants.PMETRO_EXTENSION)){
+						CatalogMap map = mCatalog.getMap(fileName.toLowerCase() + Constants.AMETRO_EXTENSION);
+						if(map==null) return true;
+						if(map.getFileTimestamp() != f.lastModified()) return true;
+						mapFileCount++;
+					}
+				}
+			}
+			if(mapFileCount != mCatalog.getSize()) return true;
+		}
+		return false;
 	}
+	
 
 	public void refresh() throws Exception {
 		Catalog catalog = new Catalog(mPath.lastModified(), mPath.getAbsolutePath().toLowerCase(), null);

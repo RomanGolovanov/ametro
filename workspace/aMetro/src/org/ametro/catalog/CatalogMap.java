@@ -31,6 +31,7 @@ public class CatalogMap {
 	/*package*/ String mUrl;
 	
 	/*package*/ long mTimestamp;
+	/*package*/ long mFileTimestamp;
 	/*package*/ long mTransports;
 	/*package*/ long mVersion;
 
@@ -50,7 +51,7 @@ public class CatalogMap {
 
 	/*package*/ Catalog mOwner;
 	
-	public CatalogMap(Catalog owner, String systemName, String url, long timestamp, long transports, long version,
+	public CatalogMap(Catalog owner, String systemName, String url, long timestamp, long fileTimestamp, long transports, long version,
 			long size, String minVersion,
 			String[] locales, String[] country, String countryISO,
 			String[] city, String[] description, String[] changeLog, 
@@ -59,6 +60,7 @@ public class CatalogMap {
 		this.mSystemName = systemName;
 		this.mUrl = url;
 		this.mTimestamp = timestamp;
+		this.mFileTimestamp = fileTimestamp;
 		this.mTransports = transports;
 		this.mVersion = version;
 		this.mSize = size;
@@ -90,6 +92,10 @@ public class CatalogMap {
 	
 	public long getTimestamp() {
 		return mTimestamp;
+	}
+	
+	public long getFileTimestamp() {
+		return mFileTimestamp;
 	}
 	
 	public long getTransports() {
