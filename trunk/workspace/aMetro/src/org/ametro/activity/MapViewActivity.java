@@ -103,13 +103,14 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			.setIcon(android.R.drawable.ic_dialog_map)
 			.setPositiveButton(R.string.btn_apply, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int id) {
+					mDisableMapReload = true;
 					onInitializeMapView(mModelFileName, null, true);
 				}
 			})
 			.setNegativeButton(R.string.btn_later, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int id) {
-					dialog.cancel();
 					mDisableMapReload = true;
+					dialog.cancel();
 				}
 			});
 			return builder.create();
@@ -259,11 +260,6 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			}else if(resultCode == RESULT_CANCELED && mModelFileName == null){
 				finish();
 				break;
-			}else{
-				if(isUpdateNeeded()){
-					mDisableMapReload = true;
-					onInitializeMapView(mModelFileName,null, true);
-				}
 			}
 			if(isConfigurationChanged()){
 				setupLocale();

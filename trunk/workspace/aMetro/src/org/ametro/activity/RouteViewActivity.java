@@ -88,7 +88,7 @@ public class RouteViewActivity extends Activity implements OnClickListener,
 
 		mFromId = mRoute.getStationFrom().id;
 		mToId = mRoute.getStationTo().id;
-		
+		 
 		isChecked = MapViewActivity.Instance.isFavoriteRoute(mFromId, mToId);
 		updateFavoritesButton();
 		mFavoritesButton.setOnClickListener(this);
