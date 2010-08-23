@@ -176,6 +176,7 @@ public class Catalog {
 				 systemName,
 				 fileName,
 				 file.lastModified(),
+				 file.lastModified(),
 				 TransportType.UNKNOWN_ID,
 				 Constants.MODEL_VERSION,
 				 file.length(),
@@ -229,6 +230,7 @@ public class Catalog {
 				 systemName,
 				 fileName,
 				 model.timestamp,
+				 file.lastModified(),
 				 model.transportTypes,
 				 Constants.MODEL_VERSION,
 				 file.length(),
@@ -281,5 +283,9 @@ public class Catalog {
 
 	public void save(File storage) throws IOException {
 		Catalog.save(this, storage);
+	}
+
+	public int getSize() {
+		return mMaps!=null ? mMaps.size() : 0;
 	}	
 }

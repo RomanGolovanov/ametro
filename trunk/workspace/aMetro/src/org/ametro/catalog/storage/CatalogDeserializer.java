@@ -47,6 +47,7 @@ public class CatalogDeserializer {
 	public static String ATTR_COUNTRY_ISO = "iso";
 	public static String ATTR_SYSTEM_NAME = "name";
 	public static String ATTR_LAST_MODIFIED = "lastModified";
+	public static String ATTR_FILE_TIMESTAMP = "fileTimestamp";
 	public static String ATTR_TRANSPORTS = "transports";
 	public static String ATTR_VERSION = "version";
 	public static String ATTR_CODE = "code";
@@ -63,6 +64,7 @@ public class CatalogDeserializer {
 		String countryISO = null;
 		long lastModified = 0;
 		long transports = 0;
+		long fileTimestamp = 0;
 		long version = 0;
 		long size = 0;
 		String minVersion = null;
@@ -101,6 +103,7 @@ public class CatalogDeserializer {
 		    	 url = xpp.getAttributeValue(null, ATTR_URL);
 		    	 countryISO = xpp.getAttributeValue(null, ATTR_COUNTRY_ISO);
 		    	 lastModified = StringUtil.parseLong(xpp.getAttributeValue("", ATTR_LAST_MODIFIED),0);
+		    	 fileTimestamp = StringUtil.parseLong(xpp.getAttributeValue("", ATTR_FILE_TIMESTAMP),0);
 		    	 transports = StringUtil.parseLong(xpp.getAttributeValue("", ATTR_TRANSPORTS),0); 
 		    	 version = StringUtil.parseLong(xpp.getAttributeValue("", ATTR_VERSION),0);
 		    	 size = StringUtil.parseLong(xpp.getAttributeValue("", ATTR_SIZE),0);
@@ -122,6 +125,7 @@ public class CatalogDeserializer {
 		    			 systemName,
 		    			 url,
 		    			 lastModified,
+		    			 fileTimestamp,
 		    			 transports,
 		    			 version,
 		    			 size,
