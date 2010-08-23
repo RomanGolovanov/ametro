@@ -29,6 +29,7 @@ import org.ametro.model.MapView;
 import org.ametro.model.Model;
 import org.ametro.model.TransportLine;
 import org.ametro.model.TransportSegment;
+import org.ametro.model.TransportStation;
 import org.ametro.model.TransportTransfer;
 import org.ametro.util.CollectionUtil;
 
@@ -161,6 +162,23 @@ public class RouteBuilder {
     		route.length = length;
     		route.steps = steps;
 	    	 //mStationDelays = stationToDelay;
+
+			if(delayMode!=-1 ){
+				final TransportStation station = model.stations[from];
+				final TransportLine line = model.lines[station.lineId];
+				final Integer[] lineDelays = line.delays; 
+				if(delayMode < lineDelays.length){
+					final Integer lineDelay = lineDelays[delayMode];
+					if(lineDelay!=null){
+						final int len = route.delays.length;
+						for(int i=0;i<len;i++){
+							route.delays[i] += lineDelay; // add start line delay to all steps 
+						}
+					}
+				}
+			}
+    		
+    		
     		return route;
 	    }
     	return null;

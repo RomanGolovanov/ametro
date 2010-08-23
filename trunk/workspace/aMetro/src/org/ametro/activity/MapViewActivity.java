@@ -26,8 +26,10 @@ import static org.ametro.Constants.PREFERENCE_PACKAGE_FILE_NAME;
 import static org.ametro.Constants.PREFERENCE_SCROLL_POSITION;
 import static org.ametro.Constants.PREFERENCE_ZOOM_LEVEL;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Locale;
 import java.util.TreeMap;
 
@@ -98,7 +100,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			.setIcon(android.R.drawable.ic_dialog_map)
 			.setPositiveButton(R.string.btn_apply, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int id) {
-					onInitializeMapView(mModelName, null, true);
+					onInitializeMapView(mModelFileName, null, true);
 				}
 			})
 			.setNegativeButton(R.string.btn_later, new DialogInterface.OnClickListener() {
@@ -163,9 +165,10 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		if(Instance != null){
 			mModel = Instance.mModel;
 			mModelTimestamp = Instance.mModelTimestamp;
+			mModelLastModified = Instance.mModelLastModified;
 			mMapView = Instance.mMapView;
 			mRouteContainer = Instance.mRouteContainer;
-			mModelName = Instance.mModelName;
+			mModelFileName = Instance.mModelFileName;
 			mMapViewName = Instance.mMapViewName;
 			if(mModel!=null && isUpdateNeeded()){
 				mModel = null;
@@ -190,10 +193,10 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 				onInitializeMapView(mapName, null, false);
 			} else {
 				loadDefaultMapName();
-				if (mModelName == null) {
+				if (mModelFileName == null) {
 					onRequestMap(true);
 				} else {
-					onInitializeMapView(mModelName, mMapViewName, false);
+					onInitializeMapView(mModelFileName, mMapViewName, false);
 				}
 			}
 		}
@@ -234,19 +237,19 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 						onInitializeMapView(mapName,null, true);
 					}
 				} 
-			}else if(resultCode == RESULT_CANCELED && mModelName == null){
+			}else if(resultCode == RESULT_CANCELED && mModelFileName == null){
 				finish();
 				break;
 			}else{
 				if(isUpdateNeeded()){
 					mDisableMapReload = true;
-					onInitializeMapView(mModelName,null, true);
+					onInitializeMapView(mModelFileName,null, true);
 				}
 			}
 			if(isConfigurationChanged()){
 				setupLocale();
-				if (mModelName != null) {
-					onInitializeMapView(mModelName, mMapViewName, false);
+				if (mModelFileName != null) {
+					onInitializeMapView(mModelFileName, mMapViewName, false);
 				}			
 				return;
 			}
@@ -255,8 +258,8 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			updateAntiAliasingState();
 			if(isConfigurationChanged()){
 				setupLocale();
-				if (mModelName != null) {
-					onInitializeMapView(mModelName, mMapViewName, false);
+				if (mModelFileName != null) {
+					onInitializeMapView(mModelFileName, mMapViewName, false);
 				}			
 			}
 			break;
@@ -274,8 +277,12 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	}
 
 	private boolean isUpdateNeeded(){
-		if(mModelName!=null && mModel!=null){
-			Model description = ModelBuilder.loadModelDescription(mModelName);
+		if(mModelFileName!=null && mModel!=null){
+			File file = new File(mModelFileName);
+			if(file.lastModified()!=mModelLastModified){
+				return true;
+			}
+			Model description = ModelBuilder.loadModelDescription(mModelFileName);
 			if(description!=null){
 				long timestamp = description.timestamp;
 				if(timestamp!=mModelTimestamp){
@@ -340,7 +347,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 				public void onMapViewSelected(String mapViewSystemName) {
 					if(mapViewSystemName!=getMapView().systemName){
 						clearNavigation(true);
-						onInitializeMapView(mModelName, mapViewSystemName, false);
+						onInitializeMapView(mModelFileName, mapViewSystemName, false);
 					}
 					super.onMapViewSelected(mapViewSystemName);
 				}
@@ -417,14 +424,14 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		if(mapPath!=null){
 			try{
 				String[] parts = StringUtil.parseStringArray(mapPath);
-				mModelName = parts[0];
+				mModelFileName = parts[0];
 				mMapViewName = parts[1];
 			}catch(Throwable e){
-				mModelName = null;
+				mModelFileName = null;
 				mMapViewName = null;		
 			}
 		}else{
-			mModelName = null;
+			mModelFileName = null;
 			mMapViewName = null;		
 		}
 	}
@@ -433,8 +440,8 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
 		SharedPreferences.Editor editor = preferences.edit();
 		String mapPath = null;
-		if(mModelName!=null && mMapViewName!=null){
-			mapPath = mModelName + "," + mMapViewName;		
+		if(mModelFileName!=null && mMapViewName!=null){
+			mapPath = mModelFileName + "," + mMapViewName;		
 		}
 		editor.putString(PREFERENCE_PACKAGE_FILE_NAME, mapPath);
 		editor.commit();
@@ -445,7 +452,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		SharedPreferences.Editor editor = preferences.edit();
 		editor.remove(PREFERENCE_PACKAGE_FILE_NAME);
 		editor.commit();
-		mModelName = null;
+		mModelFileName = null;
 	}
 
 	public void addFavoriteRoute(int fromId, int toId)
@@ -479,7 +486,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	{
 		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
 		SharedPreferences.Editor editor = preferences.edit();
-		editor.putString(PREFERENCE_FAVORITE_ROUTES + "_" + mModelName, "");
+		editor.putString(PREFERENCE_FAVORITE_ROUTES + "_" + mModelFileName, "");
 		editor.commit();
 	}
 
@@ -497,14 +504,14 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		}
 		String routesBudle = sb.toString();
 		SharedPreferences.Editor editor = preferences.edit();
-		editor.putString(PREFERENCE_FAVORITE_ROUTES + "_" + mModelName, routesBudle);
+		editor.putString(PREFERENCE_FAVORITE_ROUTES + "_" + mModelFileName, routesBudle);
 		editor.commit();
 	}
 
 	public Point[] getFavoriteRoutes()
 	{
 		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
-		String routes = preferences.getString(PREFERENCE_FAVORITE_ROUTES + "_" + mModelName, "");
+		String routes = preferences.getString(PREFERENCE_FAVORITE_ROUTES + "_" + mModelFileName, "");
 		return StringUtil.parsePointArray(routes);
 
 	}
@@ -513,7 +520,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
 		SharedPreferences.Editor editor = preferences.edit();
 		String scrollPosition = StringUtil.formatPointF(position);
-		editor.putString(PREFERENCE_SCROLL_POSITION + "_" + mModelName + "_" + mMapViewName, scrollPosition);
+		editor.putString(PREFERENCE_SCROLL_POSITION + "_" + mModelFileName + "_" + mMapViewName, scrollPosition);
 		editor.commit();
 		if (Log.isLoggable(LOG_TAG_MAIN, Log.DEBUG)){
 			Log.d(LOG_TAG_MAIN, getString(R.string.log_save_map_position) + scrollPosition);
@@ -522,7 +529,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 
 	public PointF loadScrollPosition() {
 		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
-		String pref = preferences.getString(PREFERENCE_SCROLL_POSITION + "_" + mModelName + "_" + mMapViewName, null);
+		String pref = preferences.getString(PREFERENCE_SCROLL_POSITION + "_" + mModelFileName + "_" + mMapViewName, null);
 		if (pref != null) {
 			return StringUtil.parsePointF(pref);
 		} else {
@@ -542,7 +549,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	public void saveZoom(int zoomLevel) {
 		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
 		SharedPreferences.Editor editor = preferences.edit();
-		editor.putString(PREFERENCE_ZOOM_LEVEL + "_" + mModelName + "_" + mMapViewName, Integer.toString(zoomLevel));
+		editor.putString(PREFERENCE_ZOOM_LEVEL + "_" + mModelFileName + "_" + mMapViewName, Integer.toString(zoomLevel));
 		editor.commit();
 		if (Log.isLoggable(LOG_TAG_MAIN, Log.DEBUG)){
 			Log.d(LOG_TAG_MAIN, getString(R.string.log_save_map_zoom) + zoomLevel);
@@ -551,7 +558,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 
 	public Integer loadZoom() {
 		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
-		String pref = preferences.getString(PREFERENCE_ZOOM_LEVEL + "_" + mModelName + "_" + mMapViewName, null);
+		String pref = preferences.getString(PREFERENCE_ZOOM_LEVEL + "_" + mModelFileName + "_" + mMapViewName, null);
 		if (pref != null) {
 			return StringUtil.parseNullableInteger(pref);
 		} else {
@@ -573,11 +580,11 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	}
 
 	public String getMapName() {
-		return mModelName;
+		return mModelFileName;
 	}
 
 	public String getSystemMapName() {
-		return mModelName==null ? null : mModelName.substring(mModelName.lastIndexOf('/')+1);
+		return mModelFileName==null ? null : mModelFileName.substring(mModelFileName.lastIndexOf('/')+1);
 	}
 
 	/*package*/ StationView getCurrentStation()
@@ -687,7 +694,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	}
 
 	private void onSaveMapState() {
-		if (mMapView != null && mVectorMapView != null && mModelName != null) {
+		if (mMapView != null && mVectorMapView != null && mModelFileName != null) {
 			PointF pos = mVectorMapView.getModelScrollCenter();
 			int zoom = mVectorMapView.getModelZoom();;
 			saveScrollPosition(pos);
@@ -697,7 +704,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 
 	private void onRestoreMapState() {
 		if (mMapView != null && mVectorMapView != null
-				&& mModelName != null) {
+				&& mModelFileName != null) {
 			Integer zoom = loadZoom();
 			if (zoom != null) {
 				if (Log.isLoggable(LOG_TAG_MAIN, Log.DEBUG)){ 
@@ -734,8 +741,8 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			setContentView(R.layout.map_view_empty);
 		}
 		Intent i = new Intent(this, CatalogTabHostActivity.class);
-		if (mModelName != null) {
-			i.setData(MapUri.create(mModelName));
+		if (mModelFileName != null) {
+			i.setData(MapUri.create(mModelFileName));
 		}
 		startActivityForResult(i, REQUEST_MAP);
 	}
@@ -779,9 +786,6 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 
 	private void onShowMap(Model model, MapView view) {
 
-		Model previousModel = mModel;
-		MapView previousMap = mMapView;
-
 		if(mModel!=null && mMapView!=null){
 			onSaveMapState();
 		}
@@ -789,44 +793,48 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		mDisableMapReload = false;
 		mModel = model;
 		mModelTimestamp = model.timestamp;
+		mModelLastModified = (new File(mModelFileName)).lastModified();
 		mMapView = view;
 
-		if(previousModel==model){
-			// we only change view, model didn't change
-			if( previousMap!=null && previousMap.systemName.equals(view.systemName)){
-				if(mRouteContainer!=null){
-					mCurrentRouteView = new RouteView(view, mRouteContainer.getDefaultRoute());
-					mNavigationSegments = mCurrentRouteView.getSegments();
-					mNavigationStations = mCurrentRouteView.getStations();
-					mNavigationTransfers = mCurrentRouteView.getTransfers();
-					if(mNavigationStations!=null && mNavigationStations.size()>0){
-						mCurrentStation = mNavigationStations.get(0);
-					}
-				}else if (mNavigationStations!=null){
-					clearNavigation(false);
-				}else{
-					clearNavigation(false);
-				}
-			}else{
-
-				if(mRouteContainer!=null){
-					mCurrentRouteView = new RouteView(view, mRouteContainer.getDefaultRoute());
-					mNavigationSegments = mCurrentRouteView.getSegments();
-					mNavigationStations = mCurrentRouteView.getStations();
-					mNavigationTransfers = mCurrentRouteView.getTransfers();
-					if(mNavigationStations!=null && mNavigationStations.size()>0){
-						mCurrentStation = mNavigationStations.get(0);
-					}
-				}else {				
-					clearNavigation(false);
-				}
-			}
-
-		}else{
-			// we change model, so need to drop any route/selection
-			clearNavigation(false);
-
-		}
+		clearNavigation(false);
+		
+// 		TODO: resolve errors with map/view reloading.
+//		Model previousModel = mModel;
+//		MapView previousMap = mMapView;
+//		if(previousModel==model){
+//			// we only change view, model didn't change
+//			if( previousMap!=null && previousMap.systemName.equals(view.systemName)){
+//				if(mRouteContainer!=null){
+//					mCurrentRouteView = new RouteView(view, mRouteContainer.getDefaultRoute());
+//					mNavigationSegments = mCurrentRouteView.getSegments();
+//					mNavigationStations = mCurrentRouteView.getStations();
+//					mNavigationTransfers = mCurrentRouteView.getTransfers();
+//					if(mNavigationStations!=null && mNavigationStations.size()>0){
+//						mCurrentStation = mNavigationStations.get(0);
+//					}
+//				}else if (mNavigationStations!=null){
+//					clearNavigation(false);
+//				}else{
+//					clearNavigation(false);
+//				}
+//			}else{
+//
+//				if(mRouteContainer!=null){
+//					mCurrentRouteView = new RouteView(view, mRouteContainer.getDefaultRoute());
+//					mNavigationSegments = mCurrentRouteView.getSegments();
+//					mNavigationStations = mCurrentRouteView.getStations();
+//					mNavigationTransfers = mCurrentRouteView.getTransfers();
+//					if(mNavigationStations!=null && mNavigationStations.size()>0){
+//						mCurrentStation = mNavigationStations.get(0);
+//					}
+//				}else {				
+//					clearNavigation(false);
+//				}
+//			}
+//		}else{
+//			// we change model, so need to drop any route/selection
+//			clearNavigation(false);
+//		}
 
 		if (Log.isLoggable(LOG_TAG_MAIN, Log.DEBUG))
 			Log.d(LOG_TAG_MAIN, getString(R.string.log_loaded_subway_map) + mMapView.systemName
@@ -861,7 +869,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			hideNavigationControls();
 		} 
 
-		mModelName = mMapView.owner.fileSystemName;
+		mModelFileName = mMapView.owner.fileSystemName;
 		mMapViewName = view.systemName;
 
 		onRestoreMapState();
@@ -881,7 +889,8 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		mNavigationPanelTop.setVisibility(View.VISIBLE);
 		if(mCurrentRouteView!=null){
 			long time = mCurrentRouteView.getStationDelay(mNavigationStations.get(mNavigationStations.size()-1));
-			mNavigateTimeText.setText(DateUtil.getTimeHHMM(time));
+			Date date = new Date(time * 1000);
+			mNavigateTimeText.setText(String.format(getString(R.string.route_time_format), DateUtil.getDateUTC(date, "HH"), DateUtil.getDateUTC(date, "mm")));
 			mNavigateTimeText.setVisibility(View.VISIBLE);
 		}else{
 			mNavigateTimeText.setText("");
@@ -1083,11 +1092,12 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	private static final int MAIN_MENU_EXPERIMENTAL = 10;
 
 
-	private String mModelName;
+	private String mModelFileName;
 	private String mMapViewName;
 	private MapView mMapView;
 	private Model mModel;
 	private long mModelTimestamp;
+	private long mModelLastModified;
 
 	private VectorMapView mVectorMapView;
 	
