@@ -160,8 +160,10 @@ public class RouteCreateActivity extends Activity implements OnClickListener,
 
 		mTransports = mMapView.getTransportCollection(this);
 		
-		StationListAdapter fromAdapter = new StationListAdapter(this, mMapView.stations, mMapView); 
-		StationListAdapter toAdapter = new StationListAdapter(this, mMapView.stations, mMapView); 
+		StationView[] stations = mMapView.getStationArray(false);
+		
+		StationListAdapter fromAdapter = new StationListAdapter(this, stations, mMapView); 
+		StationListAdapter toAdapter = new StationListAdapter(this, stations, mMapView); 
 		
 		fromAdapter.setTextColor(Color.BLACK);
 		toAdapter.setTextColor(Color.BLACK);
@@ -177,12 +179,12 @@ public class RouteCreateActivity extends Activity implements OnClickListener,
 			StationView fromStation = mMapView.findViewByStationId( routes.getStationFromId() );
 			StationView toStation = mMapView.findViewByStationId( routes.getStationToId() );
 			if(fromStation!=null && toStation!=null){
-			mFromText.setText( StationListAdapter.getStationName(mMapView, fromStation) );
-			mToText.setText( StationListAdapter.getStationName(mMapView, toStation) );
+				mFromText.setText( StationListAdapter.getStationName(mMapView, fromStation) );
+				mToText.setText( StationListAdapter.getStationName(mMapView, toStation) );
 			}
 		}else{
 			final StationView station = MapViewActivity.Instance.getCurrentStation();
-			if(station!=null){
+			if(station!=null && mMapView.hasConnections(station)){
 				mFromText.setText( StationListAdapter.getStationName(mMapView, station) );
 			}
 		}
@@ -308,7 +310,7 @@ public class RouteCreateActivity extends Activity implements OnClickListener,
 	}
 	
 	private void createRoute(StationView from, StationView to) {
-		if (from != null && to != null) {
+		if (from != null && to != null && mMapView.hasConnections(from) && mMapView.hasConnections(to)) {
 			mCreateRouteTask = new CreateRouteTask();
 			mCreateRouteTask.execute(from.stationId, to.stationId);
 		}

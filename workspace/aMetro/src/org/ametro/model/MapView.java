@@ -251,4 +251,21 @@ public class MapView {
 		return (this.transportsChecked!=null && this.transportsChecked.length>0) ? this.transportsChecked : new int[]{0};
 	}
 
+	public StationView[] getStationArray(boolean includeUnderConstruction) {
+		ArrayList<StationView> result = getStationList(includeUnderConstruction);
+		return (StationView[]) result.toArray(new StationView[result.size()]);
+	}
+
+	public ArrayList<StationView> getStationList(boolean includeUnderConstruction) {
+		ArrayList<StationView> result = new ArrayList<StationView>();
+		final StationView[] stations = this.stations; 
+		final int len = stations.length;
+		for(int i=0; i<len; i++){
+			StationView station = stations[i];
+	        if(!includeUnderConstruction || hasConnections(station)){
+	        	result.add(station);
+	        }
+		}
+		return result;
+	}	
 }
