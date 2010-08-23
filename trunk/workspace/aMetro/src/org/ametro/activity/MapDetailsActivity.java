@@ -258,7 +258,10 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 			finishWithoutResult();
 		} 
 		if (v == mOpenButton) {
-			finishWithResult(EXTRA_RESULT_OPEN);
+				Intent i = new Intent(this, MapViewActivity.class);
+				i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				i.putExtra(MapViewActivity.EXTRA_SYSTEM_NAME, mSystemName);
+				startActivity(i);
 		} 
 		if (mOnlineWidget != null) {
 			if (v == mOnlineWidget.getCancelButton()) {
@@ -398,17 +401,8 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 		Linkify.addLinks(text.getText(), Linkify.ALL);
 	}
 	
-	
 	private void finishWithoutResult() {
 		setResult(RESULT_CANCELED);
-		finish();
-	}
-
-	private void finishWithResult(int mode) {
-		Intent i = new Intent();
-		i.putExtra(EXTRA_RESULT, mode);
-		i.putExtra(EXTRA_SYSTEM_NAME, mSystemName);
-		setResult(RESULT_OK, i);
 		finish();
 	}
 

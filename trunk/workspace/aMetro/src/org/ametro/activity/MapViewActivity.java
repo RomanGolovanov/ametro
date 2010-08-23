@@ -33,10 +33,13 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TreeMap;
 
+import org.ametro.ApplicationEx;
 import org.ametro.Constants;
 import org.ametro.GlobalSettings;
 import org.ametro.MapUri;
 import org.ametro.R;
+import org.ametro.catalog.Catalog;
+import org.ametro.catalog.storage.ICatalogStorageListener;
 import org.ametro.dialog.AboutDialog;
 import org.ametro.dialog.EULADialog;
 import org.ametro.dialog.LocationSearchDialog;
@@ -83,7 +86,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ZoomControls;
 
-public class MapViewActivity extends Activity implements OnClickListener, OnDismissListener {
+public class MapViewActivity extends Activity implements OnClickListener, OnDismissListener, ICatalogStorageListener {
 
 	protected Dialog onCreateDialog(int id) {
 		switch (id) {
@@ -202,15 +205,31 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		}
 	}
 
+	protected void onNewIntent(Intent intent) {
+		String systemName = intent.getStringExtra(EXTRA_SYSTEM_NAME);
+		if (systemName!=null) {
+			String mapPath = GlobalSettings.getLocalCatalogMapFileName(systemName);
+			if(!mapPath.equalsIgnoreCase(getMapName())){
+				onInitializeMapView(mapPath,null, false);
+			}else if(isUpdateNeeded()){
+				mDisableMapReload = true;
+				onInitializeMapView(mapPath,null, true);
+			}
+		} 
+		super.onNewIntent(intent);
+	}
+	
 	protected void onResume() {
 		if(!mDisableMapReload && isUpdateNeeded()){
 			showDialog(DIALOG_RELOAD_MAP);
 		}
+		ApplicationEx.getInstance().getCatalogStorage().addCatalogStorageListener(this);
 		super.onResume();
 	}
 	
 	protected void onPause() {
 		onSaveMapState();
+		ApplicationEx.getInstance().getCatalogStorage().removeCatalogStorageListener(this);
 		super.onPause();
 	}
 
@@ -588,6 +607,47 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		return mModelFileName==null ? null : mModelFileName.substring(mModelFileName.lastIndexOf('/')+1);
 	}
 
+	public void onCatalogMapChanged(String systemName) {
+		final String name = systemName;
+		mUIDispatcher.post(new Runnable() {
+			public void run() {
+				String mapPath = GlobalSettings.getLocalCatalogMapFileName(name);
+				if(mModelFileName!=null && mModelFileName.equalsIgnoreCase(mapPath)){
+					showDialog(DIALOG_RELOAD_MAP);
+				}
+			}
+		});
+	}
+	
+	public void onCatalogMapDownloadDone(String systemName) {
+		onCatalogMapChanged(systemName);
+	}
+
+	public void onCatalogMapImportDone(String systemName) {
+		onCatalogMapChanged(systemName);
+	}
+
+	public void onCatalogFailed(int catalogId, String message) {
+	}
+
+	public void onCatalogLoaded(int catalogId, Catalog catalog) {
+	}
+
+	public void onCatalogMapDownloadFailed(String systemName, Throwable ex) {
+	}
+
+	public void onCatalogMapDownloadProgress(String systemName, int progress, int total) {
+	}
+
+	public void onCatalogMapImportFailed(String systemName, Throwable e) {
+	}
+
+	public void onCatalogMapImportProgress(String systemName, int progress, int total) {
+	}
+
+	public void onCatalogProgress(int catalogId, int progress, int total, String message) {
+	}
+	
 	/*package*/ StationView getCurrentStation()
 	{
 		return mCurrentStation;	
@@ -608,7 +668,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 				mNavigatePreviousButton.setVisibility(View.INVISIBLE);
 				mNavigateNextButton.setVisibility(View.INVISIBLE);
 			}
-			mScrollHandler.post(mUpdateUI);
+			mUIDispatcher.post(mUpdateUI);
 		}else{
 			mCurrentStation = null;
 		}
@@ -1113,7 +1173,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	private RouteView mCurrentRouteView;
 	private RouteContainer mRouteContainer;
 
-	private Handler mScrollHandler = new Handler();
+	private Handler mUIDispatcher = new Handler();
 
 	private InitTask mInitTask;
 	private LoadLocaleTask mLoadLocaleTask;
@@ -1122,7 +1182,6 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	private static final int REQUEST_MAP = 1;
 	private static final int REQUEST_SETTINGS = 2;
 	private static final int REQUEST_LOCATION = 3;
-
 
 	private ArrayList<StationView> mNavigationStations;
 	private ArrayList<SegmentView> mNavigationSegments;
@@ -1133,4 +1192,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	private boolean mDisableEulaDialog;
 	
 	private boolean mDisableMapReload;
+	
+	public static final String EXTRA_SYSTEM_NAME = "EXTRA_SYSTEM_NAME";
+
 }
