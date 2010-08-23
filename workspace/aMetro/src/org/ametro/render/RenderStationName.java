@@ -143,7 +143,7 @@ public class RenderStationName extends RenderElement {
 		mBorderPaint.setTextAlign(align);
 
 		Rect box = new Rect(textRect);
-		setProperties(RenderProgram.TYPE_STATION_NAME, box);
+		setProperties(RenderProgram.TYPE_STATION_NAME + view.id, box);
 	}
 
 	private static Point initializeLine(final String text, boolean vertical, final Rect rect, final Paint paint, final Align align) {

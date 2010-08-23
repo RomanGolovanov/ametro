@@ -280,6 +280,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		if(mModelFileName!=null && mModel!=null){
 			File file = new File(mModelFileName);
 			if(file.lastModified()!=mModelLastModified){
+				//Log.w(Constants.LOG_TAG_MAIN,"Map file timestamps aren't same: " + file.lastModified() + " vs " + mModelLastModified );
 				return true;
 			}
 			Model description = ModelBuilder.loadModelDescription(mModelFileName);
@@ -793,7 +794,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		mDisableMapReload = false;
 		mModel = model;
 		mModelTimestamp = model.timestamp;
-		mModelLastModified = (new File(mModelFileName)).lastModified();
+		mModelLastModified = (new File(model.fileSystemName)).lastModified();
 		mMapView = view;
 
 		clearNavigation(false);

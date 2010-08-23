@@ -79,7 +79,7 @@ public class RenderStation extends RenderElement {
         radiusExternal = radius * 1.10f;
         paintColor = localPaintColor;
 
-        setProperties(RenderProgram.TYPE_STATION, new Rect(localX - radius, localY - radius, localX + radius, localY + radius));
+        setProperties(RenderProgram.TYPE_STATION + view.id, new Rect(localX - radius, localY - radius, localX + radius, localY + radius));
     }
 
     public void setAntiAlias(boolean enabled)

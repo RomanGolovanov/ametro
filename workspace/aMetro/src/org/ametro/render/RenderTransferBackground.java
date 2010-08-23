@@ -74,7 +74,7 @@ public class RenderTransferBackground extends RenderElement {
         final int top = Math.min(FromY, ToY) - radius;
         final int bottom = Math.max(FromY, ToY) + radius;
 
-        setProperties(RenderProgram.TYPE_TRANSFER_BACKGROUND, new Rect(left, top, right, bottom));
+        setProperties(RenderProgram.TYPE_TRANSFER_BACKGROUND + view.id, new Rect(left, top, right, bottom));
     }
 
     public void setAntiAlias(boolean enabled)
