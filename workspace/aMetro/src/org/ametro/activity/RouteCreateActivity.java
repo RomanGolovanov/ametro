@@ -24,6 +24,8 @@ package org.ametro.activity;
 import static org.ametro.Constants.STATION_FROM_ID;
 import static org.ametro.Constants.STATION_TO_ID;
 
+import java.util.Date;
+
 import org.ametro.Constants;
 import org.ametro.R;
 import org.ametro.adapter.StationListAdapter;
@@ -379,7 +381,8 @@ public class RouteCreateActivity extends Activity implements OnClickListener,
 			mWaitDialog.dismiss();
 			if (result.hasRoutes()) {
 				MapViewActivity.Instance.setNavigationRoute(result);
-				String msg = getString(R.string.msg_route_time) + " " + DateUtil.getTimeHHMM(result.getDefaultRoute().getLength());
+				Date date = new Date(result.getDefaultRoute().getLength() * 1000);
+				String msg = getString(R.string.msg_route_time) + " " + String.format(getString(R.string.route_time_format), DateUtil.getDateUTC(date, "HH"), DateUtil.getDateUTC(date, "mm"));
 				Toast.makeText(MapViewActivity.Instance, msg, Toast.LENGTH_LONG).show();
 			} else {
 				Toast.makeText(MapViewActivity.Instance, getString(R.string.msg_route_not_found), Toast.LENGTH_SHORT).show();
