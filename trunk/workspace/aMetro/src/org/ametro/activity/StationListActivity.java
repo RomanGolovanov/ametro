@@ -71,11 +71,8 @@ public class StationListActivity extends ListActivity {
 	}	
 	
 	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(0, MAIN_MENU_BY_NAME, 0, R.string.menu_sort_by_name).setIcon(
-				android.R.drawable.ic_menu_sort_alphabetically);
-		menu.add(0, MAIN_MENU_BY_LINE, 1, R.string.menu_sort_by_line).setIcon(
-				android.R.drawable.ic_menu_sort_by_size);
-
+		menu.add(0, MAIN_MENU_BY_NAME, 0, R.string.menu_sort_by_name).setIcon(android.R.drawable.ic_menu_sort_alphabetically);
+		menu.add(0, MAIN_MENU_BY_LINE, 1, R.string.menu_sort_by_line).setIcon(android.R.drawable.ic_menu_sort_by_size);
 		return super.onCreateOptionsMenu(menu);
 	}
 	
@@ -110,10 +107,7 @@ public class StationListActivity extends ListActivity {
 			}
 		}
 		mMap = MapViewActivity.Instance.getMapView();
-		mStations = new ArrayList<StationView>( mMap.stations.length );
-		for(StationView station : mMap.stations){
-			mStations.add(station);
-		}
+		mStations = mMap.getStationList(false);
 		updateSortOrder(mSortByName);
 	}
 	
