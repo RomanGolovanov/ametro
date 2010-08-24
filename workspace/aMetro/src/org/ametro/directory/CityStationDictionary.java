@@ -57,7 +57,7 @@ public class CityStationDictionary
 	public CityStationDictionary(HashMap<String,HashMap<String,Entity>> index){
 		mData = index;
 	}
-
+	
 	public ModelLocation getStationLocation(String lineSystemName, String stationSystemName){
 		Entity r = getRecord(lineSystemName, stationSystemName);
 		if(r!=null){

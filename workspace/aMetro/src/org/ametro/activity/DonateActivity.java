@@ -44,6 +44,7 @@ public class DonateActivity extends PreferenceActivity implements OnPreferenceCl
 	private Preference mDonateWebMoney;
 	private Preference mDonateMoneyBookers;
 	private Preference mDonateAlertPay;
+	private Preference mDonateQiwi;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -53,11 +54,13 @@ public class DonateActivity extends PreferenceActivity implements OnPreferenceCl
 		mDonateYandex = findPreference(getString(R.string.pref_donate_yandex_key));
 		mDonateWebMoney = findPreference(getString(R.string.pref_donate_wm_key));
 		mDonateMoneyBookers = findPreference(getString(R.string.pref_donate_mb_key));
+		mDonateQiwi = findPreference(getString(R.string.pref_donate_qiwi_key));
 
 		mDonateAlertPay.setOnPreferenceClickListener(this);
 		mDonateYandex.setOnPreferenceClickListener(this);
 		mDonateWebMoney.setOnPreferenceClickListener(this);
 		mDonateMoneyBookers.setOnPreferenceClickListener(this);
+		mDonateQiwi.setOnPreferenceClickListener(this);
 	}
 
 	protected void onStop() {
@@ -135,7 +138,12 @@ public class DonateActivity extends PreferenceActivity implements OnPreferenceCl
 			String[] names = res.getStringArray(R.array.moneybookers_currency_names);
 			invokePaymentDialog(url.toString(), codes, names, 1.0f);
 		}
-		return false;
+		if(preference == mDonateQiwi){
+			String url = "http://m.qiwi.ru/";
+			Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+			startActivity(webIntent);			
+		}
+		return true;
 	}
 
 	private void invokePaymentDialog(String url, String[] codes, String[] names, float amount) {

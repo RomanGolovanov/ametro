@@ -54,6 +54,8 @@ public class InfoDialog  {
 		message.setText(s);
 		message.setMovementMethod(LinkMovementMethod.getInstance());
 		message.setPadding(5, 5, 5, 5);
+		message.setTextColor(context.getResources().getColorStateList(R.color.dialog_text_color));
+		message.setLinkTextColor(context.getResources().getColorStateList(R.color.links_color));
 
 		final ScrollView view= new ScrollView(context);
 		view.addView(message);

@@ -25,6 +25,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
 /**
@@ -115,6 +116,13 @@ public class DateUtil {
 		Calendar cal = Calendar.getInstance();
 		int offset = cal.getTimeZone().getOffset(timestamp);
 		return timestamp - offset;
+	}
+
+	public static long createTimestamp(int year, int month, int day) {
+		Calendar cal = new GregorianCalendar(year, month, day);
+		long timestamp = cal.getTime().getTime();
+		int offset = cal.getTimeZone().getOffset(timestamp);
+		return timestamp + offset;
 	}
 
 }
