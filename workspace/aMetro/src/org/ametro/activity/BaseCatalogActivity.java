@@ -35,6 +35,7 @@ import static org.ametro.catalog.CatalogMapState.UPDATE;
 import static org.ametro.catalog.CatalogMapState.UPDATE_NOT_SUPPORTED;
 import static org.ametro.catalog.CatalogMapState.IMPORT_NEED_TO_UPDATE;
 import static org.ametro.catalog.CatalogMapState.IMPORT_UPDATE;
+import static org.ametro.catalog.CatalogMapState.CALCULATING;
 
 import java.util.LinkedList;
 
@@ -184,7 +185,7 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 		int pos = 0;
 		
 		menu.setHeaderTitle(R.string.context_menu_catalog_header);
-		if(state == INSTALLED || state == OFFLINE || state == UPDATE){
+		if(state == INSTALLED || state == OFFLINE || state == UPDATE || (state == CALCULATING && local.isAvailable() )){
 			menu.add(0, CONTEXT_MENU_SHOW_MAP, pos++, R.string.context_menu_show_map);
 		}
 		menu.add(0, CONTEXT_MENU_SHOW_DETAILS, pos++, R.string.context_menu_show_map_details);

@@ -99,7 +99,7 @@ public class CatalogLocalListActivity extends BaseCatalogActivity {
 	public boolean onCatalogMapClick(CatalogMap local, CatalogMap remote, int state) {
 		switch(state){
 		case CALCULATING:
-			if(!(local.isCorrupted() || !local.isSupported())){
+			if(local.isAvailable()){
 				invokeFinish(local);
 			}else{
 				invokeMapDetails(local,remote,state);

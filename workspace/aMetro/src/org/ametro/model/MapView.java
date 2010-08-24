@@ -261,7 +261,7 @@ public class MapView {
 		final int len = stations.length;
 		for(int i=0; i<len; i++){
 			StationView station = stations[i];
-	        if(!includeUnderConstruction || hasConnections(station)){
+	        if(includeUnderConstruction || hasConnections(station)){
 	        	result.add(station);
 	        }
 		}

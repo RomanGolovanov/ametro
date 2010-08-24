@@ -180,5 +180,9 @@ public class CatalogMap {
 		return mOwner;
 	}
 
+	public boolean isAvailable() {
+		return !(isCorrupted() || !isSupported());
+	}
+
 
 }

@@ -293,6 +293,11 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	private boolean isUpdateNeeded(){
 		if(mModelFileName!=null && mModel!=null){
 			File file = new File(mModelFileName);
+			if(!file.exists()) {
+				clearDefaultMapName();
+				setContentView(R.layout.map_view_empty);
+				return false;
+			}
 			if(file.lastModified()!=mModelLastModified){
 				//Log.w(Constants.LOG_TAG_MAIN,"Map file timestamps aren't same: " + file.lastModified() + " vs " + mModelLastModified );
 				return true;
@@ -332,7 +337,6 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		menu.findItem(MAIN_MENU_ROUTES).setEnabled(mModel!=null);
 		menu.findItem(MAIN_MENU_LAYERS).setVisible(false); //menu.findItem(MAIN_MENU_LAYERS).setEnabled(false);//mModel!=null);
 		menu.findItem(MAIN_MENU_SCHEMES).setEnabled(mModel!=null);
-		menu.findItem(MAIN_MENU_LIBRARY).setEnabled(mModel!=null);
 		menu.findItem(MAIN_MENU_LOCATION).setVisible(mModel!=null && GlobalSettings.isLocateUserEnabled(this));
 		
 		return super.onPrepareOptionsMenu(menu);
@@ -468,6 +472,8 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		editor.remove(PREFERENCE_PACKAGE_FILE_NAME);
 		editor.commit();
 		mModelFileName = null;
+		mModel = null;
+		mMapView = null;
 	}
 
 	public void addFavoriteRoute(int fromId, int toId)
@@ -791,7 +797,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 
 		}
 	}
-
+	
 	private void onRequestMap(boolean setNoMapLoadingView) {
 		if (setNoMapLoadingView) {
 			setContentView(R.layout.map_view_empty);
@@ -1054,9 +1060,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 							getString(R.string.msg_error_map_loading),
 							Toast.LENGTH_SHORT).show();
 				}
-
 				onRequestMap(true);
-
 			}
 			super.onPostExecute(result);
 		}
