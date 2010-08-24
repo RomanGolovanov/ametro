@@ -23,6 +23,7 @@ package org.ametro.dialog;
 
 import org.ametro.Constants;
 import org.ametro.R;
+import org.ametro.util.StringUtil;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -86,9 +87,20 @@ public class ChangeLogDialog extends AlertDialog implements OnClickListener {
 			int count = 10;
 			for (int i = mChangelog.length - 1; i >= 0; i--) {
 				String change = mChangelog[i];
+				
+				String[] mainParts = StringUtil.fastSplit(change, ':');
+				String version = mainParts[0];
+				String changeList = mainParts[1];
+				String[] changes = StringUtil.fastSplit(changeList,';');
+				
 				htmlText.append("<p>");
-				htmlText.append(change);
-				htmlText.append("</p>");
+				htmlText.append(version);
+				htmlText.append(":<ul>");
+				for(String changeText: changes){
+					htmlText.append(changeText);
+					htmlText.append(";<br/>");
+				}
+				htmlText.append("</ul></p>");
 				count--;
 				if (count <= 0) {
 					break;
