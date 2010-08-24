@@ -94,7 +94,7 @@ public class RouteBuilder {
 					if(delayMode!=-1 ){
 						final TransportLine line = model.lines[tr.lineToId];
 						final Integer[] lineDelays = line.delays; 
-						if(delayMode < lineDelays.length){
+						if(lineDelays!=null && delayMode < lineDelays.length){
 							final Integer lineDelay = lineDelays[delayMode];
 							if(lineDelay!=null){
 								delay+=lineDelay; // add line waiting delay to transfer delay

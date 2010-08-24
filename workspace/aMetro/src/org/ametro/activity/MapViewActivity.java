@@ -944,8 +944,9 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		mNavigationPanelBottom.setVisibility(View.VISIBLE);
 		mNavigationPanelTop.setVisibility(View.VISIBLE);
 		if(mCurrentRouteView!=null){
-			long time = mCurrentRouteView.getStationDelay(mNavigationStations.get(mNavigationStations.size()-1));
-			Date date = new Date(time * 1000);
+			long secs = mCurrentRouteView.getStationDelay(mNavigationStations.get(mNavigationStations.size()-1));
+			secs = ( secs/60 + (secs%60 == 0 ? 0 : 1) ) * 60;
+			Date date = new Date(secs * 1000);
 			mNavigateTimeText.setText(String.format(getString(R.string.route_time_format), DateUtil.getDateUTC(date, "HH"), DateUtil.getDateUTC(date, "mm")));
 			mNavigateTimeText.setVisibility(View.VISIBLE);
 		}else{
