@@ -22,7 +22,6 @@ package org.ametro.activity;
 
 import static org.ametro.Constants.LOG_TAG_MAIN;
 import static org.ametro.Constants.PREFERENCE_FAVORITE_ROUTES;
-import static org.ametro.Constants.PREFERENCE_PACKAGE_FILE_NAME;
 import static org.ametro.Constants.PREFERENCE_SCROLL_POSITION;
 import static org.ametro.Constants.PREFERENCE_ZOOM_LEVEL;
 
@@ -438,39 +437,17 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	}
 
 	public void loadDefaultMapName(){
-		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
-		String mapPath = preferences.getString(PREFERENCE_PACKAGE_FILE_NAME, null);
-		if(mapPath!=null){
-			try{
-				String[] parts = StringUtil.parseStringArray(mapPath);
-				mModelFileName = parts[0];
-				mMapViewName = parts[1];
-			}catch(Throwable e){
-				mModelFileName = null;
-				mMapViewName = null;		
-			}
-		}else{
-			mModelFileName = null;
-			mMapViewName = null;		
-		}
+		GlobalSettings.MapPath path = GlobalSettings.getCurrentMap(this);
+		mModelFileName = path.FilePath;
+		mMapViewName = path.ViewName;		
 	}
 
 	public void saveDefaultMapName() {
-		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
-		SharedPreferences.Editor editor = preferences.edit();
-		String mapPath = null;
-		if(mModelFileName!=null && mMapViewName!=null){
-			mapPath = mModelFileName + "," + mMapViewName;		
-		}
-		editor.putString(PREFERENCE_PACKAGE_FILE_NAME, mapPath);
-		editor.commit();
+		GlobalSettings.setCurrentMap(this, mModelFileName, mMapViewName);
 	}
 
 	public void clearDefaultMapName() {
-		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
-		SharedPreferences.Editor editor = preferences.edit();
-		editor.remove(PREFERENCE_PACKAGE_FILE_NAME);
-		editor.commit();
+		GlobalSettings.clearCurrentMap(this);
 		mModelFileName = null;
 		mModel = null;
 		mMapView = null;

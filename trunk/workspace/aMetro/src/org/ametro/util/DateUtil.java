@@ -61,6 +61,14 @@ public class DateUtil {
         return getDate(date, "dd.MM.yyyy HH:mm");
     }
 
+	public static String getLocalDate(Date date) {
+        return getDate(date, "dd.MM.yyyy");
+	}    
+	
+	public static String getLocalDate(long timestamp) {
+        return getLocalDate(new Date(timestamp));
+	}    
+	
     public static String getTimeDate(Date date) {
         return getDate(date, "HH:mm dd.MM.yyyy");
     }
@@ -124,5 +132,7 @@ public class DateUtil {
 		int offset = cal.getTimeZone().getOffset(timestamp);
 		return timestamp + offset;
 	}
+
+
 
 }

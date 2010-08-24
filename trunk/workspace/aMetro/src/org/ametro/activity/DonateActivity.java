@@ -139,7 +139,7 @@ public class DonateActivity extends PreferenceActivity implements OnPreferenceCl
 			invokePaymentDialog(url.toString(), codes, names, 1.0f);
 		}
 		if(preference == mDonateQiwi){
-			String url = "http://m.qiwi.ru/";
+			String url = "https://m.qiwi.ru/";
 			Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 			startActivity(webIntent);			
 		}

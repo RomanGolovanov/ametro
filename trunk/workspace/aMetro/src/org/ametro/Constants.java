@@ -44,7 +44,7 @@ public class Constants {
 
 	public final static int MODEL_VERSION = 1;
 	public final static String MODEL_COMPATIBILITY_VERSION = "0.4.0";
-	public final static long MODEL_IMPORT_TIMESTAMP = DateUtil.createTimestamp(2010,8,23);
+	public final static long MODEL_IMPORT_TIMESTAMP = DateUtil.createTimestamp(2010,7,23);
 	
     public static final String LOG_TAG_MAIN = "aMetro";
     
