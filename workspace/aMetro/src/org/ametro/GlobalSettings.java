@@ -34,6 +34,7 @@ import static org.ametro.Constants.PREFERENCE_ENABLE_LOCATION;
 import static org.ametro.Constants.PREFERENCE_IS_EULA_ACCEPTED;
 import static org.ametro.Constants.PREFERENCE_LOCALE;
 import static org.ametro.Constants.PREFERENCE_ONLINE_CATALOG_UPDATE_DATE;
+import static org.ametro.Constants.PREFERENCE_PACKAGE_FILE_NAME;
 import static org.ametro.Constants.PREFERENCE_PMZ_IMPORT;
 import static org.ametro.Constants.TEMP_CATALOG_PATH;
 
@@ -41,6 +42,7 @@ import java.io.File;
 import java.util.Locale;
 
 import org.ametro.catalog.storage.CatalogStorage;
+import org.ametro.util.StringUtil;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -49,8 +51,47 @@ import android.preference.PreferenceManager;
 
 public class GlobalSettings {
 
+	public static class MapPath{
+		public String FilePath;
+		public String ViewName;
+		
+		public String getSystemMapName() {
+			return FilePath==null ? null : FilePath.substring(FilePath.lastIndexOf('/')+1);
+		}
+		
+		public MapPath(String path){
+			if(path!=null){
+				try{
+					String[] parts = StringUtil.parseStringArray(path);
+					FilePath = parts[0];
+					ViewName = parts[1];
+				}catch(Throwable e){
+				}
+			}
+		}
+	}
+	
 	private static String mDefaultLocale = Locale.getDefault().getLanguage();
 
+	public static void clearCurrentMap(Context context){
+		SharedPreferences preferences = context.getSharedPreferences(Constants.PREFERENCE_NAME, 0);
+		SharedPreferences.Editor editor = preferences.edit();
+		editor.remove(PREFERENCE_PACKAGE_FILE_NAME);
+		editor.commit();
+	}
+	
+	public static void setCurrentMap(Context context, String file, String view){
+		SharedPreferences preferences = context.getSharedPreferences(Constants.PREFERENCE_NAME, 0);
+		SharedPreferences.Editor editor = preferences.edit();
+		editor.putString(PREFERENCE_PACKAGE_FILE_NAME, file + "," + view);
+		editor.commit();
+	}
+
+	public static MapPath getCurrentMap(Context context){
+		SharedPreferences preferences = context.getSharedPreferences(Constants.PREFERENCE_NAME, 0);
+		return new MapPath(preferences.getString(PREFERENCE_PACKAGE_FILE_NAME, null));
+	}
+	
 	public static String getLanguage(Context context){
 		String code = PreferenceManager.getDefaultSharedPreferences(context).getString(PREFERENCE_LOCALE, "auto");
 		if("auto".equalsIgnoreCase(code)){

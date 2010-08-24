@@ -22,7 +22,6 @@
 package org.ametro.activity;
 
 import java.io.File;
-import java.util.Date;
 import java.util.HashMap;
 
 import org.ametro.ApplicationEx;
@@ -316,6 +315,8 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 			mCloseButton.setOnClickListener(this);
 			bindData();
 			mMode = MODE_DETAILS;
+		}else{
+			bindData();
 		}
 	}
 
@@ -326,7 +327,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 		mCityTextView.setText(preffered().getCity(code));
 		mCountryTextView.setText(preffered().getCountry(code));
 		if(mLocal!=null){
-			mVersionTextView.setText(DateUtil.getDateTime( new Date( mLocal.getTimestamp() ) ) );
+			mVersionTextView.setText(DateUtil.getLocalDate(mLocal.getTimestamp()));
 		}else{
 			mVersionTextView.setText("");
 		}
@@ -361,7 +362,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 			mContent.createHeader().setTextLeft(getString(R.string.msg_online)).setTextRight(stateName).setTextRightColor(stateColor);
 			mOnlineWidget = mContent.createOnlineWidget();
 			mOnlineWidget.setSize(mOnline.getSize());
-			mOnlineWidget.setVersion(( new Date( mOnline.getTimestamp() ) ).toLocaleString() );
+			mOnlineWidget.setVersion(DateUtil.getLocalDate(mOnline.getTimestamp()));
 			mOnlineWidget.setVisibility(stateId);
 			mOnlineWidget.getDownloadButton().setOnClickListener(this);
 			mOnlineWidget.getUpdateButton().setOnClickListener(this);
@@ -377,7 +378,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 			mContent.createHeader().setTextLeft(getString(R.string.msg_import)).setTextRight(stateName).setTextRightColor(stateColor);
 			mImportWidget = mContent.createImportWidget();
 			mImportWidget.setSize(mImport.getSize());
-			mImportWidget.setVersion(( new Date( mImport.getTimestamp() ) ).toLocaleString() );
+			mImportWidget.setVersion(DateUtil.getLocalDate(mImport.getTimestamp()));
 			mImportWidget.setVisibility(stateId);
 			mImportWidget.getImportButton().setOnClickListener(this);
 			mImportWidget.getUpdateButton().setOnClickListener(this);

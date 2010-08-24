@@ -20,6 +20,7 @@
  */
 package org.ametro.activity;
 
+import org.ametro.GlobalSettings;
 import org.ametro.R;
 import org.ametro.adapter.CheckedCatalogAdapter;
 import org.ametro.catalog.CatalogMap;
@@ -68,10 +69,13 @@ public class CatalogLocalListActivity extends BaseCatalogActivity {
 		super.setListView();
 		if(mInvokeSelectCurrent){
 			mInvokeSelectCurrent = false;
-			String systemMapName = MapViewActivity.Instance.getSystemMapName();
-			int position = mAdapter.findItemPosition(systemMapName);
-			if(position!=-1){
-				mList.setSelection(position);
+			GlobalSettings.MapPath path = GlobalSettings.getCurrentMap(this);
+			String systemMapName = path.getSystemMapName();
+			if(systemMapName!=null){
+				int position = mAdapter.findItemPosition(systemMapName);
+				if(position!=-1){
+					mList.setSelection(position);
+				}
 			}
 		}
 		if(mInvokeUpdateList){
@@ -200,7 +204,6 @@ public class CatalogLocalListActivity extends BaseCatalogActivity {
 				Toast.makeText(this, R.string.msg_no_maps_to_delete, Toast.LENGTH_SHORT).show();
 			}
 			break;
-			
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}

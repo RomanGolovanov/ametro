@@ -24,36 +24,54 @@ package org.ametro.dialog;
 import org.ametro.Constants;
 import org.ametro.R;
 import org.ametro.activity.DonateActivity;
-import org.ametro.util.FileUtil;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.DialogInterface.OnClickListener;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.text.Html;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
-import android.text.method.LinkMovementMethod;
-import android.text.util.Linkify;
 import android.util.Log;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
-public class AboutDialog extends AlertDialog implements OnClickListener {
+public class AboutDialog {
 
-	private String mAppName;
-	private String mVersionName;
-	private String[] mChangelog;
 		
 	public static void show(Context context){
 		try {
-			new AboutDialog(context).show();
+			PackageManager manager = context.getPackageManager();
+			PackageInfo info;
+			info = manager.getPackageInfo(context.getPackageName(), 0);
+			String versionName = info.versionName;
+			String appName = context.getString( info.applicationInfo.labelRes );
+			
+			final Context dialogContex = context;
+			AlertDialog.Builder builder = new AlertDialog.Builder(context);
+			builder
+			.setTitle(appName + " v." + versionName)
+			.setIcon(android.R.drawable.ic_dialog_info)
+			.setCancelable(true)
+			.setItems(R.array.about_list, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					switch(which){
+					case 0:
+						AboutDetailsDialog.show(dialogContex);
+						break;
+					case 1:
+						ChangeLogDialog.show(dialogContex);
+						break;
+					case 2:
+						EULADialog.show(dialogContex);
+						break;
+					case 3:
+						Intent intent = new Intent(dialogContex, DonateActivity.class);
+						dialogContex.startActivity(intent);
+						break;
+					}
+					dialog.dismiss();
+				}
+			});
+			AlertDialog alertDialog = builder.create();
+			alertDialog.show();
 		} catch (Exception e) {
 			if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.WARN)){
 				Log.w(Constants.LOG_TAG_MAIN,"Failed to show about dialog", e);
@@ -61,77 +79,5 @@ public class AboutDialog extends AlertDialog implements OnClickListener {
 		}
 	}
 	
-	protected AboutDialog(Context context) throws Exception {
-		super(context);
-		bindData(context);
-		setTitle(mAppName + " v." + mVersionName );
-		setCancelable(true);
-		setIcon(android.R.drawable.ic_dialog_info);
-		setButton(BUTTON_POSITIVE, context.getString(R.string.btn_close), this);
-		// TODO: enable after creating changelog activity 
-		//setButton(BUTTON_NEGATIVE, context.getString(R.string.btn_changelog), this);
-		setButton(BUTTON_NEUTRAL, context.getString(R.string.btn_donate), this);
-		
-		final TextView message = new TextView(context);
-		final SpannableString s = new SpannableString(getContent());
-		Linkify.addLinks(s, Linkify.WEB_URLS);
-		message.setText(s);
-		message.setMovementMethod(LinkMovementMethod.getInstance());
-		message.setPadding(5, 5, 5, 5);
-		message.setTextColor(context.getResources().getColorStateList(R.color.dialog_text_color));
-		message.setLinkTextColor(context.getResources().getColorStateList(R.color.links_color));
 
-		final ScrollView view= new ScrollView(context);
-		view.addView(message);
-		setView(view);
-	}
-
-	protected Spannable getContent() {
-		try {
-			final Context context = getContext();
-			String template = FileUtil.writeToString(context.getResources().openRawResource(R.raw.about));
-			StringBuilder htmlText = new StringBuilder(template);
-			htmlText.append("<p>");
-			int count = 10;
-			for (int i = mChangelog.length - 1; i >= 0; i--) {
-				String chages = mChangelog[i];
-				htmlText.append(chages);
-				htmlText.append("<br/>");
-				count--;
-				if (count <= 0) {
-					break;
-				}
-			}
-			htmlText.append("</p>");
-			Spanned text = Html.fromHtml(htmlText.toString());
-			SpannableStringBuilder spannable = new SpannableStringBuilder(text);
-			Linkify.addLinks(spannable, Linkify.EMAIL_ADDRESSES | Linkify.WEB_URLS);
-			return spannable;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	private void bindData(final Context context) throws NameNotFoundException {
-		PackageManager manager = context.getPackageManager();
-		PackageInfo info;
-		info = manager.getPackageInfo(context.getPackageName(), 0);
-		mVersionName = info.versionName;
-		mAppName = getContext().getString( info.applicationInfo.labelRes );
-		mChangelog = context.getResources().getStringArray(R.array.version_changelog);
-	}
-
-	public void onClick(DialogInterface dialog, int which) {
-		if(which == BUTTON_POSITIVE){
-			dismiss();
-		}
-		if(which == BUTTON_NEGATIVE){
-			// TODO: start change log activity
-		}
-		if(which == BUTTON_NEUTRAL){
-			Context ctx = getContext();
-			ctx.startActivity(new Intent(ctx, DonateActivity.class));
-		}
-	}
 }
