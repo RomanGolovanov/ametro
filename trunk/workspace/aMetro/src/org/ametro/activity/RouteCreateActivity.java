@@ -381,7 +381,9 @@ public class RouteCreateActivity extends Activity implements OnClickListener,
 			mWaitDialog.dismiss();
 			if (result.hasRoutes()) {
 				MapViewActivity.Instance.setNavigationRoute(result);
-				Date date = new Date(result.getDefaultRoute().getLength() * 1000);
+				long secs = result.getDefaultRoute().getLength();
+				secs = ( secs/60 + (secs%60 == 0 ? 0 : 1) ) * 60;
+				Date date = new Date(secs * 1000);
 				String msg = getString(R.string.msg_route_time) + " " + String.format(getString(R.string.route_time_format), DateUtil.getDateUTC(date, "HH"), DateUtil.getDateUTC(date, "mm"));
 				Toast.makeText(MapViewActivity.Instance, msg, Toast.LENGTH_LONG).show();
 			} else {

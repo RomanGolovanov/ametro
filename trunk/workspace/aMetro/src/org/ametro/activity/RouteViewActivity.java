@@ -93,8 +93,9 @@ public class RouteViewActivity extends Activity implements OnClickListener,
 		updateFavoritesButton();
 		mFavoritesButton.setOnClickListener(this);
 
-		Date date = new Date(mRoute.getTime() * 1000);
-		
+		long secs = mRoute.getTime();
+		secs = ( secs/60 + (secs%60 == 0 ? 0 : 1) ) * 60;
+		Date date = new Date(secs * 1000);
 		mTextTime.setText(getString(R.string.msg_route_time) + " "
 				+ String.format(getString(R.string.route_time_format), DateUtil.getDateUTC(date, "HH"), DateUtil.getDateUTC(date, "mm")));
 		
