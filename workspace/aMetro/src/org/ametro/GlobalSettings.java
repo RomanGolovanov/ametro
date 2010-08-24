@@ -35,6 +35,7 @@ import static org.ametro.Constants.PREFERENCE_IS_EULA_ACCEPTED;
 import static org.ametro.Constants.PREFERENCE_LOCALE;
 import static org.ametro.Constants.PREFERENCE_ONLINE_CATALOG_UPDATE_DATE;
 import static org.ametro.Constants.PREFERENCE_PACKAGE_FILE_NAME;
+import static org.ametro.Constants.PREFERENCE_CHANGE_LOW_SHOWED;
 import static org.ametro.Constants.PREFERENCE_PMZ_IMPORT;
 import static org.ametro.Constants.TEMP_CATALOG_PATH;
 
@@ -47,6 +48,8 @@ import org.ametro.util.StringUtil;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
 
 public class GlobalSettings {
@@ -153,7 +156,36 @@ public class GlobalSettings {
 		editor.putBoolean(PREFERENCE_IS_EULA_ACCEPTED, accepted);
 		editor.commit();
 	}
-		
+
+	public static boolean isChangeLogShowed(Context context) {
+		try{
+			PackageManager manager = context.getPackageManager();
+			PackageInfo info;
+			info = manager.getPackageInfo(context.getPackageName(), 0);
+			String versionName = info.versionName;
+			return versionName.equals( PreferenceManager.getDefaultSharedPreferences(context).getString(PREFERENCE_CHANGE_LOW_SHOWED, null) );
+		}catch(Exception ex)
+		{
+			
+		}
+		return true;
+	}
+	
+	public static void setChangeLogShowed(Context context) {
+		try{
+			PackageManager manager = context.getPackageManager();
+			PackageInfo info;
+			info = manager.getPackageInfo(context.getPackageName(), 0);
+			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+			Editor editor = prefs.edit();
+			editor.putString(PREFERENCE_CHANGE_LOW_SHOWED, info.versionName);
+			editor.commit();
+		}catch(Exception ex)
+		{
+			
+		}
+	}	
+	
 	public static long getUpdatePeriod(Context context) {
 		String value = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getString(R.string.pref_auto_update_period_key), null);
 		if("weekly".equalsIgnoreCase(value)){

@@ -40,6 +40,7 @@ import org.ametro.R;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.storage.ICatalogStorageListener;
 import org.ametro.dialog.AboutDialog;
+import org.ametro.dialog.ChangeLogDialog;
 import org.ametro.dialog.EULADialog;
 import org.ametro.dialog.LocationSearchDialog;
 import org.ametro.dialog.SchemeListDialog;
@@ -789,37 +790,42 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	private void onInitializeMapView(String mapName, String viewName, boolean force) {
 		if(!mDisableEulaDialog && !GlobalSettings.isAcceptedEULA(this)){
 			showDialog(DIALOG_EULA);
-		}else{
-			if(!force && mModel!=null && mMapViewName!=null){
-				String mapNameLoaded = mModel.fileSystemName;
-				String schemeNameLoaded = mMapView.systemName;
-				if(mapNameLoaded.equals(mapName) ){
-					if(schemeNameLoaded.equals(viewName)){
-						// map and view is similar
-						// so only need to check locales
-						Locale locale = getLocale();
-						mLoadLocaleTask = new LoadLocaleTask();
-						mLoadLocaleTask.execute(locale);
-					}else{
-						// load new view
-						//clearNavigation(true);
-						MapView v = mModel.loadView(viewName);
-						if(v!=null){
-							onShowMap(mModel, v);
-						}else{
-							Toast.makeText(MapViewActivity.this, "Scheme loading error", Toast.LENGTH_SHORT).show();
-						}
-	
-					}
+			return;
+		}
+		if(!GlobalSettings.isChangeLogShowed(this)){
+			ChangeLogDialog.show(this);
+			GlobalSettings.setChangeLogShowed(this);
+		}
+		if(!force && mModel!=null && mMapViewName!=null){
+			String mapNameLoaded = mModel.fileSystemName;
+			String schemeNameLoaded = mMapView.systemName;
+			if(mapNameLoaded.equals(mapName) ){
+				if(schemeNameLoaded.equals(viewName)){
+					// map and view is similar
+					// so only need to check locales
+					Locale locale = getLocale();
+					mLoadLocaleTask = new LoadLocaleTask();
+					mLoadLocaleTask.execute(locale);
 				}else{
-					mInitTask = new InitTask();
-					mInitTask.execute(mapName, viewName);
+					// load new view
+					//clearNavigation(true);
+					MapView v = mModel.loadView(viewName);
+					if(v!=null){
+						onShowMap(mModel, v);
+					}else{
+						Toast.makeText(MapViewActivity.this, "Scheme loading error", Toast.LENGTH_SHORT).show();
+					}
+
 				}
 			}else{
 				mInitTask = new InitTask();
 				mInitTask.execute(mapName, viewName);
 			}
+		}else{
+			mInitTask = new InitTask();
+			mInitTask.execute(mapName, viewName);
 		}
+		
 	}
 
 
