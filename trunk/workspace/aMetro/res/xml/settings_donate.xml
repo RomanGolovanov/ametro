@@ -12,4 +12,7 @@
 	<Preference android:title="@string/pref_donate_wm"
                           android:key="@string/pref_donate_wm_key"
                           android:summary="@string/pref_donate_wm_description" />
+	<Preference android:title="@string/pref_donate_qiwi"
+                          android:key="@string/pref_donate_qiwi_key"
+                          android:summary="@string/pref_donate_qiwi_description" />
 </PreferenceScreen>

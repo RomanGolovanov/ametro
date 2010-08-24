@@ -66,6 +66,8 @@ public class EULADialog extends AlertDialog implements OnClickListener {
 		Linkify.addLinks(s, Linkify.WEB_URLS);
 		message.setText(s);
 		message.setMovementMethod(LinkMovementMethod.getInstance());
+		message.setTextColor(context.getResources().getColorStateList(R.color.dialog_text_color));
+		message.setLinkTextColor(context.getResources().getColorStateList(R.color.links_color));
 		message.setPadding(5, 5, 5, 5);
 
 		final ScrollView view= new ScrollView(context);

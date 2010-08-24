@@ -45,6 +45,7 @@ import org.ametro.widget.TextStripView.TextBlockView;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -257,11 +258,20 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 		if (v == mCloseButton) {
 			finishWithoutResult();
 		} 
-		if (v == mOpenButton) {
+		if (v == mOpenButton) { 
+			ComponentName callingActivity = getCallingActivity();
+			if(callingActivity!=null){
+				Intent i = new Intent();
+				i.putExtra(EXTRA_RESULT, EXTRA_RESULT_OPEN);
+				i.putExtra(EXTRA_SYSTEM_NAME, mSystemName);
+				setResult(RESULT_OK, i);
+				finish();				
+			}else{
 				Intent i = new Intent(this, MapViewActivity.class);
 				i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				i.putExtra(MapViewActivity.EXTRA_SYSTEM_NAME, mSystemName);
 				startActivity(i);
+			}
 		} 
 		if (mOnlineWidget != null) {
 			if (v == mOnlineWidget.getCancelButton()) {
@@ -351,7 +361,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 			mContent.createHeader().setTextLeft(getString(R.string.msg_online)).setTextRight(stateName).setTextRightColor(stateColor);
 			mOnlineWidget = mContent.createOnlineWidget();
 			mOnlineWidget.setSize(mOnline.getSize());
-			mOnlineWidget.setVersion(DateUtil.getDateTime( new Date( mOnline.getTimestamp() ) ) );
+			mOnlineWidget.setVersion(( new Date( mOnline.getTimestamp() ) ).toLocaleString() );
 			mOnlineWidget.setVisibility(stateId);
 			mOnlineWidget.getDownloadButton().setOnClickListener(this);
 			mOnlineWidget.getUpdateButton().setOnClickListener(this);
@@ -367,22 +377,26 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 			mContent.createHeader().setTextLeft(getString(R.string.msg_import)).setTextRight(stateName).setTextRightColor(stateColor);
 			mImportWidget = mContent.createImportWidget();
 			mImportWidget.setSize(mImport.getSize());
-			mImportWidget.setVersion(DateUtil.getDateTime( new Date( mImport.getTimestamp() ) ) );
+			mImportWidget.setVersion(( new Date( mImport.getTimestamp() ) ).toLocaleString() );
 			mImportWidget.setVisibility(stateId);
 			mImportWidget.getImportButton().setOnClickListener(this);
 			mImportWidget.getUpdateButton().setOnClickListener(this);
 			mImportWidget.getCancelButton().setOnClickListener(this);
 		}
 
-		mContent.createHeader().setTextLeft(getString(R.string.msg_transports));
+		boolean transportHeaderCreated = false;
+		
 		long transports = preffered().getTransports();
 		long transportCode = 1;
 		int transportId = 0;
 		while (transports > 0) {
 			if ((transports % 2) > 0) {
 				Drawable d = mTransportTypes.get((int) transportCode);
-				mContent.createTransportWidget().setImageDrawable(d)
-						.setText(transportNames[transportId]);
+				if(!transportHeaderCreated){
+					mContent.createHeader().setTextLeft(getString(R.string.msg_transports));
+					transportHeaderCreated = true;
+				}
+				mContent.createTransportWidget().setImageDrawable(d).setText(transportNames[transportId]);
 			}
 			transports = transports >> 1;
 			transportCode = transportCode << 1;
@@ -398,7 +412,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 		mContent.createHeader().setTextLeft(getString(R.string.msg_description));
 		TextBlockView text = mContent.createText();
 		text.setText(Html.fromHtml(description));
-		Linkify.addLinks(text.getText(), Linkify.ALL);
+		Linkify.addLinks(text.getText(), Linkify.WEB_URLS);
 	}
 	
 	private void finishWithoutResult() {

@@ -37,6 +37,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import org.ametro.ApplicationEx;
+import org.ametro.Constants;
 import org.ametro.directory.CatalogMapSuggestion;
 import org.ametro.directory.CityDirectory;
 import org.ametro.directory.CityStationDictionary;
@@ -832,7 +833,6 @@ public class PmzStorage implements IModelStorage {
 			model.systemName = mFile.getName().toLowerCase();
 
 			model.fileSystemName = mFile.getAbsolutePath();
-			model.timestamp =  mTimestamp;
 
 			String[] russianDelays = (String[]) mDelayNames.toArray(new String[mDelayNames.size()]);
 			String[] englishDelays = new String[russianDelays.length];
@@ -845,7 +845,10 @@ public class PmzStorage implements IModelStorage {
 			makeTransportTypes(model);
 			makeGlobalization(model);
 			makeModelViewArrays(model);
-	
+
+			long gpsTimestamp = mStationDirectory.getTimestamp(mFile);
+			model.timestamp =  Math.max(Math.max( mTimestamp, Constants.MODEL_IMPORT_TIMESTAMP), gpsTimestamp);
+			
 			if(!mDescriptionOnly){
 				CityStationDictionary lib = mStationDirectory.get(mFile);
 				if(lib!=null){

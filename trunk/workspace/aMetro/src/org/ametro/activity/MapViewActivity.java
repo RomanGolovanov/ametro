@@ -183,7 +183,6 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		Instance.mDefaultLocale = Locale.getDefault();
 
 		setupLocale();
-
 		setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL); 
 		setContentView(R.layout.operation_wait_full_screen);
 
