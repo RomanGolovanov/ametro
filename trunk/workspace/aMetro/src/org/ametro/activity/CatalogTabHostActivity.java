@@ -24,6 +24,7 @@ import org.ametro.Constants;
 import org.ametro.GlobalSettings;
 import org.ametro.R;
 import org.ametro.catalog.storage.tasks.DownloadIconsTask;
+import org.ametro.dialog.ChangeLogDialog;
 import org.ametro.dialog.DownloadIconsDialog;
 import org.ametro.dialog.EULADialog;
 
@@ -111,6 +112,9 @@ public class CatalogTabHostActivity extends TabActivity implements OnDismissList
 	protected void onResume() {
 		if(!GlobalSettings.isAcceptedEULA(this)){
 			showDialog(DIALOG_EULA);
+		}else if(!GlobalSettings.isChangeLogShowed(this)){
+			ChangeLogDialog.show(this);
+			GlobalSettings.setChangeLogShowed(this);
 		}else if(!DownloadIconsTask.isRunning() && GlobalSettings.isCountryIconsEnabled(this)){
 			checkIcons();
 		}
