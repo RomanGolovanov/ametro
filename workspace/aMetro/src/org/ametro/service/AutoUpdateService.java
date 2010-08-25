@@ -31,6 +31,7 @@ import java.util.LinkedList;
 import org.ametro.ApplicationEx;
 import org.ametro.Constants;
 import org.ametro.GlobalSettings;
+import org.ametro.R;
 import org.ametro.activity.CatalogLocalListActivity;
 import org.ametro.activity.CatalogTabHostActivity;
 import org.ametro.activity.TaskQueuedList;
@@ -212,11 +213,11 @@ public class AutoUpdateService extends Service implements ICatalogStorageListene
 		if(mDownloadMaps.size()>0){
 			i.putExtra(CatalogLocalListActivity.EXTRA_INVOKE_LOCAL_UPDATE_LIST, true);
 			PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i, 0);
-			notification.setLatestEventInfo(this, "aMetro" , "map updates available", contentIntent);
+			notification.setLatestEventInfo(this, getString(R.string.app_name), getString(R.string.msg_map_updates_available), contentIntent);
 			notification.number = mDownloadMaps.size();
 		}else{
 			PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i, 0);
-			notification.setLatestEventInfo(this, "aMetro" , "updated " + mUpdatedMapCount + " maps", contentIntent);
+			notification.setLatestEventInfo(this, getString(R.string.app_name), String.format(getString(R.string.msg_map_updates_count), mUpdatedMapCount), contentIntent);
 			notification.number = mUpdatedMapCount;
 		}
 		notification.flags |= Notification.FLAG_AUTO_CANCEL;
@@ -232,7 +233,7 @@ public class AutoUpdateService extends Service implements ICatalogStorageListene
 			mNotification = notification;
 		}
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, TaskQueuedList.class), 0);
-		notification.setLatestEventInfo(this, "aMetro" , "update online catalog...", contentIntent);
+		notification.setLatestEventInfo(this, getString(R.string.app_name), getString(R.string.msg_update_online_catalog), contentIntent);
 		mNotificationManager.notify(AUTO_UPDATE_ID, notification);
 	}
 
