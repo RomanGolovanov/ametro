@@ -95,6 +95,7 @@ public class SchemeListDialog implements OnClickListener, OnKeyListener {
 				ListItem parent = index.get(type);
 				if(parent == null){
 					parent = new ListItem();
+					parent.Type = type;
 					index.put(type, parent);
 				}
 				if(parent.Children == null){
@@ -108,6 +109,13 @@ public class SchemeListDialog implements OnClickListener, OnKeyListener {
 				parent.Children.add(child);
 			}
 		}	
+		for(Long type : index.keySet()){
+			ListItem parent = index.get(type);
+			if(!list.contains(parent)){
+				list.add(parent);
+			}
+		}
+		
 		if(list.size()==0){
 			for(int i=0;i<len;i++){
 				String systemName = model.viewSystemNames[i];
@@ -131,9 +139,11 @@ public class SchemeListDialog implements OnClickListener, OnKeyListener {
 		final ArrayList<String> systemNames = new ArrayList<String>();
 		final ArrayList<ArrayList<ListItem>> children = new ArrayList<ArrayList<ListItem>>();
 		for(ListItem item : data){
-			names.add(item.Name);
-			systemNames.add(item.SystemName);
-			children.add(null);
+			if(item.Name!=null){
+				names.add(item.Name);
+				systemNames.add(item.SystemName);
+				children.add(null);
+			}
 			if(item.Children!=null){
 				names.add( mTransportLineNames[TransportType.getTransportTypeResource((int)item.Type)] );
 				systemNames.add(null);

@@ -164,7 +164,7 @@ public class CsvStorage implements IModelStorage {
 				String localeName = model.locales[i];
 				model.localeTexts[i] = locales.get(localeName);
 
-				if(locale!=null && localeName.equals(locale.getLanguage())){
+				if(locale!=null && localeName.equals(defaultLocaleName)){
 					model.texts = model.localeTexts[i];
 					model.localeCurrent = localeName;
 				}else if(localeName.equals(model.localeCurrent)){
