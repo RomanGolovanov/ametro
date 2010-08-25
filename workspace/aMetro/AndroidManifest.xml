@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<manifest android:versionCode="1" android:versionName="0.4.1"
+<manifest android:versionCode="1" android:versionName="1.0.0"
     package="org.ametro" xmlns:android="http://schemas.android.com/apk/res/android">
     <application android:debuggable="true"
         android:icon="@drawable/appicon"
@@ -42,7 +42,7 @@
         <!-- DIALOGS -->
         <activity android:label="@string/msg_donate_title"
             android:name=".dialog.PaymentDetailsDialog" android:theme="@android:style/Theme.Dialog"/>
-        <activity android:icon="@android:drawable/ic_dialog_map"
+        <activity 
             android:label="@string/msg_detect_location"
             android:name=".dialog.LocationSearchDialog" android:theme="@android:style/Theme.Dialog"/>
         <!-- SEARCHS -->
