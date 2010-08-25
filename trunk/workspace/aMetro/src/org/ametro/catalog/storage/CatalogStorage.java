@@ -20,6 +20,9 @@
  */
 package org.ametro.catalog.storage;
 
+import static org.ametro.Notifications.TASK_FAILED_ID;
+import static org.ametro.Notifications.TASK_PROGRESS_ID;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -45,6 +48,7 @@ import org.ametro.catalog.storage.tasks.LoadBaseCatalogTask;
 import org.ametro.catalog.storage.tasks.LoadFileCatalogTask;
 import org.ametro.catalog.storage.tasks.LoadWebCatalogTask;
 import org.ametro.catalog.storage.tasks.UpdateMapTask;
+import org.ametro.service.CatalogTaskQueueService;
 import org.ametro.util.FileUtil;
 
 import android.app.Notification;
@@ -56,10 +60,6 @@ import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-
-import static org.ametro.Notifications.TASK_FAILED_ID;
-import static org.ametro.Notifications.TASK_PROGRESS_ID;
-import static org.ametro.Notifications.TASK_QUEUE_ID;
 
 public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { //, IMapDownloadListener { //, IMapImportListener {
 
@@ -88,17 +88,13 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 	private String mImportNotificationTitle;
 	private String mFailedTaskNotificationTitle;
 	private String mFailedTaskNotificationText;
-	private String mQueueSizeNotificationTitle;
-	private String mQueueSizeText;
 
-	private Notification mQueueNotification;
 	private Notification mFailedNotification;
 	
 	private Notification mProgressNotification;
 	
 	private void removeTaskQueueNotification(){
-		mQueueNotification = null;
-		mNotificationManager.cancel(TASK_QUEUE_ID);
+		mContext.stopService(new Intent(mContext, CatalogTaskQueueService.class));
 	}
 	
 	private void removeTaskProgressNotification(){
@@ -107,16 +103,9 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 	
 	private void displayTaskQueueNotification(int taskLeft)
 	{
-		Notification notification = mQueueNotification;
-		if(notification==null){
-			notification = new Notification(android.R.drawable.stat_notify_sync, null,System.currentTimeMillis());
-			notification.flags |= Notification.FLAG_ONGOING_EVENT |Notification.FLAG_NO_CLEAR;
-			mQueueNotification = notification;
-		}
-		notification.number = taskLeft;
-		PendingIntent contentIntent = PendingIntent.getActivity(mContext, 0, new Intent(mContext, TaskQueuedList.class), 0);
-		notification.setLatestEventInfo(mContext, mQueueSizeNotificationTitle , mQueueSizeText + " " + taskLeft, contentIntent);
-		mNotificationManager.notify(TASK_QUEUE_ID, notification);
+		Intent intent = new Intent(mContext, CatalogTaskQueueService.class);
+		intent.putExtra(CatalogTaskQueueService.EXTRA_TASK_LEFT, taskLeft);
+		mContext.startService(intent);
 	}	
 
 	private void displayTaskProgressNotification(BaseTask task, String title, String message, int iconId)
@@ -169,8 +158,6 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 		mImportNotificationTitle = res.getString(R.string.msg_import_notify_title);
 		mFailedTaskNotificationTitle = res.getString(R.string.msg_task_error_notify_title);
 		mFailedTaskNotificationText = res.getString(R.string.msg_task_error_notify_text);
-		mQueueSizeNotificationTitle = res.getString(R.string.msg_queue_size_notify_title);
-		mQueueSizeText = res.getString(R.string.msg_operation_queue_size);
 		
 		mNotificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
 	}
@@ -438,9 +425,7 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 					synchronized (mTaskQueue) {
 						mSyncRunTask = task;
 						int taskLeft = mTaskQueue.size()+1;
-						if(taskLeft>1){
-							displayTaskQueueNotification(taskLeft);
-						}
+						displayTaskQueueNotification(taskLeft);
 					}
 					task.execute(ApplicationEx.getInstance(), this);
 					synchronized (mTaskQueue) {

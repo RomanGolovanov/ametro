@@ -177,6 +177,9 @@
     <string name="msg_map_reload_title">Map changed</string>
     <string name="msg_map_reload_confirmation">New version of map installed.</string>
     <string name="msg_no_network_available">Cannot download online catalog. Check network status.</string>
+    <string name="msg_map_updates_available">map updates available</string>
+    <string name="msg_map_updates_count">updated %s maps</string>
+    <string name="msg_update_online_catalog">update online catalog...</string>
 	    
     <string name="tab_maps_favorited">Favorites</string>
     <string name="tab_maps_local">My maps</string>
@@ -218,4 +221,5 @@
     <string name="title_info">Information</string>
     
     <string name="toast_render_failed">Render failed. Please, select another map/scheme or try to change current zoom. Sorry for the inconvenience</string>
+    
 </resources>

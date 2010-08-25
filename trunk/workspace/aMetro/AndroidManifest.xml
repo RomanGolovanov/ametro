@@ -17,24 +17,33 @@
         <activity android:name=".activity.MediaUnmountedActivity"/>
         <activity android:name=".activity.MapDetailsActivity" android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".activity.RouteViewActivity"/>
-        <activity android:launchMode="singleTop" android:name=".activity.RouteCreateActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
+        <activity android:launchMode="singleTop"
+            android:name=".activity.RouteCreateActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".activity.DonateActivity"/>
         <activity android:name=".activity.SettingsActivity"/>
         <activity android:name=".activity.StationViewActivity"/>
         <activity android:name=".activity.StationListActivity"/>
         <activity android:name=".activity.FavoriteRouteListActivity"/>
-        <activity android:name=".activity.CatalogTabHostActivity" android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
-        <activity android:label="@string/title_catalog_local" android:name=".activity.CatalogLocalListActivity" android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
-        <activity android:label="@string/title_catalog_online" android:name=".activity.CatalogOnlineListActivity" android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
-        <activity android:label="@string/title_catalog_import" android:name=".activity.CatalogImportListActivity" android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".activity.CatalogTabHostActivity"
+            android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
+        <activity android:label="@string/title_catalog_local"
+            android:name=".activity.CatalogLocalListActivity"
+            android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
+        <activity android:label="@string/title_catalog_online"
+            android:name=".activity.CatalogOnlineListActivity"
+            android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
+        <activity android:label="@string/title_catalog_import"
+            android:name=".activity.CatalogImportListActivity"
+            android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".activity.CatalogMapSelectionActivity"/>
         <activity android:name=".activity.TaskQueuedList"/>
         <activity android:name=".activity.TaskFailedList"/>
         <!-- DIALOGS -->
         <activity android:label="@string/msg_donate_title"
             android:name=".dialog.PaymentDetailsDialog" android:theme="@android:style/Theme.Dialog"/>
-        <activity android:label="@string/msg_detect_location"
-        	android:icon="@android:drawable/ic_dialog_map"
+        <activity android:icon="@android:drawable/ic_dialog_map"
+            android:label="@string/msg_detect_location"
             android:name=".dialog.LocationSearchDialog" android:theme="@android:style/Theme.Dialog"/>
         <!-- SEARCHS -->
         <activity android:label="@string/search_station"
@@ -58,6 +67,7 @@
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
             </intent-filter>
         </receiver>
+        <service android:name="org.ametro.service.CatalogTaskQueueService"/>
     </application>
     <uses-sdk android:minSdkVersion="3"/>
     <uses-permission android:name="android.permission.ACCESS_GPS"/>
