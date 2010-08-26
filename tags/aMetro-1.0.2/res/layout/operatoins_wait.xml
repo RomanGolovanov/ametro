@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:gravity="center"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:background="#000000">
+	<TextView android:id="@+id/title" android:text="@string/msg_please_wait"
+		android:layout_width="wrap_content" android:layout_height="wrap_content" />
+	<TextView android:id="@+id/message" android:layout_width="wrap_content"
+		android:layout_marginTop="4sp"
+		android:layout_height="wrap_content" />
+	<ProgressBar android:id="@+id/progress"
+		android:layout_marginTop="4sp"
+		android:keepScreenOn="true" style="?android:attr/progressBarStyleHorizontal"
+		android:layout_width="200dip" android:layout_height="wrap_content" />
+	<TextView android:id="@+id/counter" android:layout_width="wrap_content"
+		android:layout_height="wrap_content" />
+</LinearLayout>
+	

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="wrap_content" android:padding="4sp">
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:id="@+id/size" 
+		android:layout_alignParentLeft="true" />
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:id="@+id/version" 
+		android:layout_alignParentLeft="true" android:layout_below="@id/size" />
+		
+	<Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:id="@+id/btn_download" android:text="@string/btn_download"
+		android:layout_alignParentRight="true"
+		android:visibility="gone"  
+		/>
+	<Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:id="@+id/btn_update" android:text="@string/btn_update"
+		android:layout_alignParentRight="true"  
+		android:visibility="gone"  
+		/>
+	<Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:id="@+id/btn_cancel" android:text="@string/btn_cancel"
+		android:layout_alignParentRight="true"  
+		android:visibility="gone"  
+		/>
+	<ProgressBar android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:id="@+id/progressbar"
+		android:layout_below="@id/btn_cancel"
+		style="?android:attr/progressBarStyleHorizontal"
+		android:indeterminate="true"
+		android:paddingTop="4sp"
+		android:paddingBottom="4sp"
+		android:visibility="gone"/>
+</RelativeLayout>	
