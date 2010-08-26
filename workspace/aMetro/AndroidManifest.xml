@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<manifest android:versionCode="5" android:versionName="1.0.4"
+<manifest android:versionCode="6" android:versionName="1.0.5"
     package="org.ametro" xmlns:android="http://schemas.android.com/apk/res/android">
     
     <uses-sdk android:minSdkVersion="3" android:targetSdkVersion="4" />
-	<supports-screens android:largeScreens="true" android:normalScreens="true" android:smallScreens="true" android:anyDensity="true" />
+	<supports-screens android:anyDensity="false" />
 	<!-- 
 	<uses-sdk android:minSdkVersion="3" /> 
 	 -->
