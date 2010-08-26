@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<manifest android:versionCode="4" android:versionName="1.0.3"
+<manifest android:versionCode="5" android:versionName="1.0.4"
     package="org.ametro" xmlns:android="http://schemas.android.com/apk/res/android">
     
     <uses-sdk android:minSdkVersion="3" android:targetSdkVersion="4" />
 	<supports-screens android:largeScreens="true" android:normalScreens="true" android:smallScreens="true" android:anyDensity="true" />
-
 	<!-- 
 	<uses-sdk android:minSdkVersion="3" /> 
 	 -->
@@ -77,6 +76,7 @@
         </receiver>
         <service android:name="org.ametro.service.CatalogTaskQueueService"/>
     </application>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_GPS"/>
     <uses-permission android:name="android.permission.ACCESS_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
