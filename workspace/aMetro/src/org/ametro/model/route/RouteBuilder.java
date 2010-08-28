@@ -167,7 +167,7 @@ public class RouteBuilder {
 				final TransportStation station = model.stations[from];
 				final TransportLine line = model.lines[station.lineId];
 				final Integer[] lineDelays = line.delays; 
-				if(delayMode < lineDelays.length){
+				if(lineDelays!=null && delayMode < lineDelays.length){
 					final Integer lineDelay = lineDelays[delayMode];
 					route.length+=lineDelay;
 					if(lineDelay!=null){

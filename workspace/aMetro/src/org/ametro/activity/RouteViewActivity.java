@@ -71,8 +71,7 @@ public class RouteViewActivity extends Activity implements OnClickListener,
 
 		mMapView = MapViewActivity.Instance.getMapView();
 		mRoute = MapViewActivity.Instance.getCurrentRouteView();
-		RouteListAdapter adapter = new RouteListAdapter(this, mRoute,
-				mMapView);
+		RouteListAdapter adapter = new RouteListAdapter(this, mRoute, mMapView);
 		adapter.setTextColor(Color.WHITE);
 		mRouteList.setAdapter(adapter);
 		mRouteList.setOnItemClickListener(this);

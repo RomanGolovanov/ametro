@@ -2,26 +2,34 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:gravity="center_vertical" android:layout_width="fill_parent"
 	android:layout_height="54dip">
-	<ImageView android:id="@+id/line_image" android:layout_width="30sp"
-		android:paddingLeft="10sp" android:paddingRight="10sp"
-		android:paddingTop="0sp" android:paddingBottom="0sp"
-		android:layout_height="54dip" android:src="@drawable/rect_white"
-		android:layout_alignParentLeft="true"
-		android:layout_alignParentBottom="true" android:layout_alignParentTop="true"
-		android:visibility="invisible" />
-	<ImageView android:id="@+id/station_image"
-		android:layout_width="30sp" android:layout_height="16sp"
-		android:paddingLeft="7sp" android:paddingRight="7sp"
-		android:src="@drawable/circle_white" android:layout_centerVertical="true"
-		android:layout_alignParentLeft="true" />
-	<ImageView android:id="@+id/station_image_shadow"
-		android:layout_width="30sp" android:layout_height="18sp"
-		android:paddingLeft="6sp" android:paddingRight="6sp"
-		android:src="@drawable/circle_black" android:layout_centerVertical="true"
-		android:layout_alignParentLeft="true" android:visibility="gone" />
-	<LinearLayout android:layout_toRightOf="@id/station_image"
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:layout_weight="1" android:layout_centerVertical="true"
+	
+	<FrameLayout android:id="@+id/icon" android:layout_height="54dip" android:layout_width="30dip">
+	
+		<ImageView android:id="@+id/line_image" android:layout_width="30dip"
+			android:paddingLeft="10dip" android:paddingRight="10dip"
+			android:paddingTop="0dip" android:paddingBottom="0dip"
+			android:layout_height="54dip" android:src="@drawable/rect_white"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentBottom="true" android:layout_alignParentTop="true"
+			android:visibility="invisible" />
+		<ImageView android:id="@+id/station_image"
+			android:layout_gravity="center_vertical"			
+			android:layout_width="30dip" android:layout_height="16dip"
+			android:paddingLeft="7dip" android:paddingRight="7dip"
+			android:src="@drawable/circle_white" android:layout_centerVertical="true"
+			android:layout_alignParentLeft="true" />
+		<ImageView android:id="@+id/station_image_shadow"
+			android:layout_gravity="center_vertical"			
+			android:layout_width="30dip" android:layout_height="18dip"
+			android:paddingLeft="6dip" android:paddingRight="6dip"
+			android:src="@drawable/circle_black" android:layout_centerVertical="true"
+			android:layout_alignParentLeft="true" android:visibility="gone" />
+	</FrameLayout>
+	
+		
+	<LinearLayout android:layout_toRightOf="@id/icon"
+		android:layout_width="fill_parent" android:layout_height="54dip"
+		android:layout_weight="1" 
 		android:orientation="vertical">
 		<TextView android:id="@+id/station_name"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"

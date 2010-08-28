@@ -37,9 +37,9 @@ public class RouteView {
 	private int mFrom;
 	private int mTo;
 
-	private ArrayList<SegmentView> mSegments;
-	private ArrayList<StationView> mStations;
-	private ArrayList<TransferView> mTransfers;
+	private ArrayList<SegmentView> mSegmentViews;
+	private ArrayList<StationView> mStationViews;
+	private ArrayList<TransferView> mTransferViews;
 	private HashMap<StationView,Long> mStationDelays;
 	private ArrayList<Long> mDelays;
 	
@@ -60,14 +60,14 @@ public class RouteView {
 		mTo = route.to;
 		mTime = route.length;
 
-		mStations = findStationViews(map, route.stations);
-		mSegments = findSegmentViews(map, route.segments);
-		mTransfers = findTransferViews(map, route.transfers);
+		mStationViews = findStationViews(map, route.stations);
+		mSegmentViews = findSegmentViews(map, route.segments);
+		mTransferViews = findTransferViews(map, route.transfers);
 		
 		Rect routeRect = null;
 		mStationDelays = new HashMap<StationView, Long>();
-		for(int i = 0; i < mStations.size(); i++){
-			StationView view = mStations.get(i);
+		for(int i = 0; i < mStationViews.size(); i++){
+			StationView view = mStationViews.get(i);
 			mStationDelays.put(view,route.getDelay(i));
 			if(view.stationNameRect!=null){
 				Rect stationRect = ModelUtil.toRect( view.stationNameRect );
@@ -90,7 +90,7 @@ public class RouteView {
 	}
 	
 	public ArrayList<StationView> getStations() {
-		return mStations;
+		return mStationViews;
 	}
 	
 	public ArrayList<Long> getDelays() {
@@ -99,11 +99,11 @@ public class RouteView {
 
 	
 	public ArrayList<SegmentView> getSegments() {
-		return mSegments;
+		return mSegmentViews;
 	}
 
 	public ArrayList<TransferView> getTransfers() {
-		return mTransfers;
+		return mTransferViews;
 	}
 
 	public StationView getStationFrom() {
