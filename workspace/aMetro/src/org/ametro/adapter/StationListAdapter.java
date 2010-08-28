@@ -29,14 +29,10 @@ import org.ametro.model.MapView;
 import org.ametro.model.StationView;
 import org.ametro.util.DateUtil;
 
-import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Bitmap.Config;
-import android.graphics.Paint.Style;
-import android.graphics.drawable.BitmapDrawable;
+import android.content.Context;
+import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.Drawable;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -126,68 +122,59 @@ public class StationListAdapter extends BaseAdapter implements Filterable {
 		
 	}
 	
-	private static class ListItemWrapper
+	public static class ListItemWrapper
 	{
 		public final TextView Name;
 		public final TextView Line;
-		public final ImageView Image;
+		public final ImageView StationImage;
+		public final ImageView StationImageShadow;
+		public final ImageView LineImage;
 		public final TextView Delay;
 		
 		public ListItemWrapper(View view) {
-			Name = (TextView)view.findViewById(R.id.station_list_item_name);
-			Line = (TextView)view.findViewById(R.id.station_list_item_line);
-			Image = (ImageView)view.findViewById(R.id.station_list_item_image);
-			Delay = (TextView)view.findViewById(R.id.station_list_item_delay);
+			Name = (TextView)view.findViewById(R.id.station_name);
+			Line = (TextView)view.findViewById(R.id.line_name);
+			StationImage = (ImageView)view.findViewById(R.id.station_image);
+			StationImageShadow = (ImageView)view.findViewById(R.id.station_image_shadow);
+			LineImage = (ImageView)view.findViewById(R.id.line_image);
+			Delay = (TextView)view.findViewById(R.id.delay);
 			view.setTag(this);
 		}
 	}	
 
-	public StationListAdapter(Activity activity, ArrayList<StationView> stations,MapView map){
+	public StationListAdapter(Context activity, ArrayList<StationView> stations,MapView map){
 		this(activity, stations,null,map);
 	}
 
-	public StationListAdapter(Activity activity, ArrayList<StationView> stations, ArrayList<Long> delays, MapView map){
-		this(activity
+	public StationListAdapter(Context context, ArrayList<StationView> stations, ArrayList<Long> delays, MapView map){
+		this(context
 			, (StationView[]) stations.toArray(new StationView[stations.size()])
 			, delays==null ? null : (Long[]) delays.toArray(new Long[delays.size()])
 			, map);
 	}
 
-	public StationListAdapter(Activity activity, StationView[] stations, MapView map){
-		this(activity, stations, null, map);
+	public StationListAdapter(Context context, StationView[] stations, MapView map){
+		this(context, stations, null, map);
 	}
 
-	public StationListAdapter(Activity activity, StationView[] stations, Long[] delays, MapView map){
+	public StationListAdapter(Context context, StationView[] stations, Long[] delays, MapView map){
+		mInflater = LayoutInflater.from(context);
 		mLineDrawabled = new HashMap<LineView, Drawable>();
 		mLines = map.lines;
 		mStations = stations;// (StationView[]) stations.toArray(new StationView[stations.size()]);
 		mDelays = delays;// (Long[]) delays.toArray(new Long[delays.size()]);
-		mContextActivity = activity;
-		
-		mPaint = new Paint();
-		mPaint.setStyle(Style.FILL);
-		mPaint.setAntiAlias(true);
-		mPaint.setStrokeWidth(0);
+		mContext = context;
 		
 		mFilteredStations = mStations;
 		mFilteredDelays = mDelays;
 		mMapView = map;
 	}
 	
-	protected static final int ICON_WIDTH = 30;
-	protected static final int ICON_HEIGHT = 46;
-	protected static final int ICON_DIAMETER = 7;
-	protected static final int ICON_LINE_WITH = 5;
-	protected static final int ICON_HALF_WIDTH = ICON_WIDTH/2;
-	protected static final int ICON_HALF_HEIGHT = ICON_HEIGHT/2;
-	
-	
-	
 	protected final MapView mMapView;
-	protected final Activity mContextActivity;
+	protected final Context mContext;
+	protected LayoutInflater mInflater;
 	protected final HashMap<LineView, Drawable> mLineDrawabled;
 	protected final LineView[] mLines;
-	protected final Paint mPaint;
 	protected Integer mTextColor;
 	
 	protected final StationView[] mStations;
@@ -226,17 +213,20 @@ public class StationListAdapter extends BaseAdapter implements Filterable {
 		ListItemWrapper wrapper = null;
 		
 		if(convertView==null){
-			view = mContextActivity.getLayoutInflater().inflate(R.layout.station_list_item, null);
+			view = mInflater.inflate(R.layout.station_list_item, null);
 			wrapper = new ListItemWrapper(view);
 			if(mTextColor!=null){
 				wrapper.Name.setTextColor(mTextColor);
-				//wrapper.Line.setTextColor(mTextColor);
 			}
 		}else{
 			view = convertView;
 			wrapper = (ListItemWrapper)view.getTag();
 		}
+		setListItemView(wrapper, position);
+		return view;		
+	}
 
+	protected void setListItemView(ListItemWrapper wrapper, int position){
 		final StationView station = mFilteredStations[position];
 		final LineView line = mLines[station.lineViewId]; 
 		wrapper.Name.setText(station.getName());
@@ -246,25 +236,10 @@ public class StationListAdapter extends BaseAdapter implements Filterable {
 		}else{
 			wrapper.Delay.setText("");
 		}
-		wrapper.Image.setImageDrawable(getItemIcon(position));
-		return view;		
+		wrapper.StationImage.setColorFilter(0xFF000000 | line.lineColor, Mode.SRC);
+		wrapper.LineImage.setColorFilter(0xFF000000 | line.lineColor, Mode.SRC);
 	}
-
-	protected Drawable getItemIcon(int position) {
-		LineView line = mLines[ mFilteredStations[position].lineViewId ];
-		Drawable dw = mLineDrawabled.get(line);
-		if(dw == null){
-			Bitmap bmp = Bitmap.createBitmap(ICON_WIDTH, ICON_HEIGHT, Config.ARGB_8888);
-			Canvas c = new Canvas(bmp);
-			mPaint.setColor(0xFF000000 | line.lineColor);
-			c.drawCircle(ICON_WIDTH/2, ICON_HEIGHT/2, ICON_DIAMETER, mPaint);
-			
-			dw = new BitmapDrawable(bmp);
-			mLineDrawabled.put(line, dw);
-		}
-		return dw;
-	}
-
+	
 	public Filter getFilter() {
 		return new StationFilter();
 	}

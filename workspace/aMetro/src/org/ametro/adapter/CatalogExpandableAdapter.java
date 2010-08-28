@@ -36,9 +36,12 @@ import org.ametro.catalog.ICatalogStateProvider;
 import org.ametro.catalog.CatalogMapPair.CatalogMapPairCityComparator;
 import org.ametro.directory.CityDirectory;
 import org.ametro.model.TransportType;
+import org.ametro.util.BitmapUtil;
 import org.ametro.util.StringUtil;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -79,6 +82,7 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
 	private Object mLock = new Object();
 	private String mSearchPrefix;
 	private Drawable mNoCountryIcon;
+	private final float mDisplayScale;
 
 	private TreeMap<String,Long> mChildrenIds = new TreeMap<String, Long>();
 	private TreeMap<String,Long> mGroupsIds = new TreeMap<String, Long>();
@@ -115,6 +119,7 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
     
     public CatalogExpandableAdapter(Context context, Catalog local, Catalog remote, int mode, int colorsArray, ICatalogStateProvider statusProvider) {
         mContext = context;
+		mDisplayScale = mContext.getResources().getDisplayMetrics().density;
         mNoCountryIcon = context.getResources().getDrawable(R.drawable.no_country);
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		mStates = context.getResources().getStringArray(R.array.catalog_map_states);
@@ -193,7 +198,8 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
 			if(d == null){
 				File file = new File(Constants.ICONS_PATH, iso + ".png");
 				if(file.exists()){
-					d = Drawable.createFromPath(file.getAbsolutePath());
+					Bitmap bmp = BitmapUtil.createScaledBitmap(file.getAbsolutePath(), mDisplayScale, false);
+					d = new BitmapDrawable(bmp);
 				}else{
 					d = mNoCountryIcon;
 				}

@@ -40,10 +40,13 @@ import org.ametro.catalog.storage.tasks.LoadBaseCatalogTask;
 import org.ametro.catalog.storage.tasks.UpdateMapTask;
 import org.ametro.directory.CatalogMapSuggestion;
 import org.ametro.model.TransportType;
+import org.ametro.util.BitmapUtil;
 
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -164,6 +167,7 @@ public class TaskQueuedList extends ListActivity implements ICatalogStorageListe
 		protected HashMap<Integer,Drawable> mTransportTypes;
 		private boolean mShowCountryFlags;
 		private Drawable mNoCountryIcon;
+		private float mDisplayScale;
 
 		public static class DataHolder {
 			public String Status;
@@ -185,6 +189,7 @@ public class TaskQueuedList extends ListActivity implements ICatalogStorageListe
 
 		public QueuedTaskListAdapter(Context context, ArrayList<DataHolder> data) {
 			mContext = context;
+			mDisplayScale = mContext.getResources().getDisplayMetrics().density;
 			mInflater = LayoutInflater.from(context);
 			mShowCountryFlags = GlobalSettings.isCountryIconsEnabled(context);
 			mNoCountryIcon = context.getResources().getDrawable(R.drawable.no_country);
@@ -235,7 +240,8 @@ public class TaskQueuedList extends ListActivity implements ICatalogStorageListe
 					if(d == null){
 						File file = new File(Constants.ICONS_PATH, iso + ".png");
 						if(file.exists()){
-							d = Drawable.createFromPath(file.getAbsolutePath());
+							Bitmap bmp = BitmapUtil.createScaledBitmap(file.getAbsolutePath(), mDisplayScale, false);
+							d = new BitmapDrawable(bmp);
 						}else{
 							d = mNoCountryIcon;
 						}

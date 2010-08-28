@@ -36,6 +36,7 @@ import org.ametro.catalog.storage.CatalogStorageStateProvider;
 import org.ametro.catalog.storage.ICatalogStorageListener;
 import org.ametro.directory.CountryDirectory;
 import org.ametro.model.TransportType;
+import org.ametro.util.BitmapUtil;
 import org.ametro.util.DateUtil;
 import org.ametro.widget.TextStripView;
 import org.ametro.widget.TextStripView.ImportWidgetView;
@@ -48,6 +49,8 @@ import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -121,7 +124,8 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 	private boolean mForceOpenButtonDisable;
 	
 	protected Handler mUIEventDispacher = new Handler();
-
+	private float mDisplayScale;
+	
 	public boolean onCreateOptionsMenu(Menu menu) {
 		menu.add(0, MENU_DELETE, 0, R.string.btn_delete).setIcon(android.R.drawable.ic_menu_delete);
 		menu.add(0, MENU_DELETE_PMZ, 0, R.string.btn_delete_pmz).setIcon(android.R.drawable.ic_menu_delete);
@@ -204,6 +208,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 			return;
 		}
 		mTransportTypes = TransportType.getIconsMap(this);
+		mDisplayScale = getResources().getDisplayMetrics().density;
 		mSystemName = mIntent.getStringExtra(EXTRA_SYSTEM_NAME);
 		mForceOpenButtonDisable = mIntent.getBooleanExtra(EXTRA_HIDE_OPEN, false); 
 		mStorage =  ((ApplicationEx)getApplicationContext()).getCatalogStorage();
@@ -341,7 +346,9 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
     	if(entity!=null){
 			File file = new File(Constants.ICONS_PATH, entity.getISO2() + ".png");
 			if(file.exists()){
-	    		mCountryImageView.setImageDrawable(Drawable.createFromPath(file.getAbsolutePath()));
+				Bitmap bmp = BitmapUtil.createScaledBitmap(file.getAbsolutePath(), mDisplayScale, false);
+				;
+	    		mCountryImageView.setImageDrawable(new BitmapDrawable(bmp));
 			}else{
 	    		mCountryImageView.setImageResource(R.drawable.no_country);
 			}

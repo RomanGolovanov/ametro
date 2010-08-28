@@ -37,12 +37,15 @@ import org.ametro.catalog.storage.tasks.ImportMapTask;
 import org.ametro.catalog.storage.tasks.UpdateMapTask;
 import org.ametro.directory.CatalogMapSuggestion;
 import org.ametro.model.TransportType;
+import org.ametro.util.BitmapUtil;
 import org.ametro.util.StringUtil;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -134,6 +137,7 @@ public class TaskFailedList extends ListActivity {
 		protected HashMap<Integer,Drawable> mTransportTypes;
 		private boolean mShowCountryFlags;
 		private Drawable mNoCountryIcon;
+		private float mDisplayScale;
 
 		public static class DataHolder {
 			public String Status;
@@ -155,6 +159,7 @@ public class TaskFailedList extends ListActivity {
 
 		public FailedTaskListAdapter(Context context, ArrayList<DataHolder> data) {
 			mContext = context;
+			mDisplayScale = mContext.getResources().getDisplayMetrics().density;
 			mInflater = LayoutInflater.from(context);
 			mShowCountryFlags = GlobalSettings.isCountryIconsEnabled(context);
 			mNoCountryIcon = context.getResources().getDrawable(R.drawable.no_country);
@@ -204,7 +209,8 @@ public class TaskFailedList extends ListActivity {
 					if(d == null){
 						File file = new File(Constants.ICONS_PATH, iso + ".png");
 						if(file.exists()){
-							d = Drawable.createFromPath(file.getAbsolutePath());
+							Bitmap bmp = BitmapUtil.createScaledBitmap(file.getAbsolutePath(), mDisplayScale, false);
+							d = new BitmapDrawable(bmp);
 						}else{
 							d = mNoCountryIcon;
 						}

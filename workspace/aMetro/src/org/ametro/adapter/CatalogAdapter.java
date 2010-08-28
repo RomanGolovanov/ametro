@@ -35,8 +35,11 @@ import org.ametro.catalog.CatalogMapPair.CatalogMapPairCityComparator;
 import org.ametro.catalog.CatalogMapPair.CatalogMapPairCountryComparator;
 import org.ametro.directory.CityDirectory;
 import org.ametro.model.TransportType;
+import org.ametro.util.BitmapUtil;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,9 +78,10 @@ public class CatalogAdapter extends BaseAdapter implements Filterable {
     private boolean mShowCountryFlags;
     
 	private CatalogFilter mFilter;
-	private Object mLock = new Object();
+	private final Object mLock = new Object();
 	private String mSearchPrefix;
-	private Drawable mNoCountryIcon;
+	private final Drawable mNoCountryIcon;
+	private final float mDisplayScale;
 
     public CatalogMapPair getData(int itemId) {
         return mObjects.get(itemId);
@@ -119,6 +123,7 @@ public class CatalogAdapter extends BaseAdapter implements Filterable {
 	
     public CatalogAdapter(Context context, Catalog local, Catalog remote, int mode, int colorsArray, ICatalogStateProvider statusProvider, int sortMode) {
         mContext = context;
+		mDisplayScale = mContext.getResources().getDisplayMetrics().density;
         mNoCountryIcon = context.getResources().getDrawable(R.drawable.no_country);
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		mStates = context.getResources().getStringArray(R.array.catalog_map_states);
@@ -294,7 +299,8 @@ public class CatalogAdapter extends BaseAdapter implements Filterable {
 			if(d == null){
 				File file = new File(Constants.ICONS_PATH, iso + ".png");
 				if(file.exists()){
-					d = Drawable.createFromPath(file.getAbsolutePath());
+					Bitmap bmp = BitmapUtil.createScaledBitmap(file.getAbsolutePath(), mDisplayScale, false);
+					d = new BitmapDrawable(bmp);
 				}else{
 					d = mNoCountryIcon;
 				}
