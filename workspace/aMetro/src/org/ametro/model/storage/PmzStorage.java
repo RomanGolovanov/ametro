@@ -773,7 +773,9 @@ public class PmzStorage implements IModelStorage {
 			final ArrayList<String> comments = new ArrayList<String>();
 
 			ZipEntry cityEntry = mZipFile.getEntry(mCityFile);
-			mTimestamp = DateUtil.toUTC( cityEntry.getTime() );
+
+			long gpsTimestamp = mStationDirectory.getTimestamp(mFile);
+			mTimestamp =  Math.max(Math.max( DateUtil.toUTC( cityEntry.getTime() ), Constants.MODEL_IMPORT_TIMESTAMP), gpsTimestamp);
 			
 			InputStream stream = mZipFile.getInputStream(cityEntry);
 			final IniStreamReader ini = new IniStreamReader(new InputStreamReader(stream, ENCODING));
@@ -846,8 +848,7 @@ public class PmzStorage implements IModelStorage {
 			makeGlobalization(model);
 			makeModelViewArrays(model);
 
-			long gpsTimestamp = mStationDirectory.getTimestamp(mFile);
-			model.timestamp =  Math.max(Math.max( mTimestamp, Constants.MODEL_IMPORT_TIMESTAMP), gpsTimestamp);
+			model.timestamp =  mTimestamp;
 			
 			if(!mDescriptionOnly){
 				CityStationDictionary lib = mStationDirectory.get(mFile);
