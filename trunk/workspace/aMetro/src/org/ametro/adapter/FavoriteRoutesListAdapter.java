@@ -34,6 +34,7 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Bitmap.Config;
 import android.graphics.Paint.Style;
+import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -161,8 +162,14 @@ public class FavoriteRoutesListAdapter extends BaseAdapter implements OnClickLis
 		final LineView lineTo = mLines[stationTo.lineViewId]; 
 		wrapper.NameFrom.setText(stationFrom.getName());
 		wrapper.NameTo.setText(stationTo.getName());
-		wrapper.ImageFrom.setImageDrawable(getItemIcon(lineFrom));
-		wrapper.ImageTo.setImageDrawable(getItemIcon(lineTo));
+		
+		wrapper.ImageFrom.setColorFilter(0xFF000000 | lineFrom.lineColor, Mode.SRC);
+		wrapper.ImageTo.setColorFilter(0xFF000000 | lineTo.lineColor, Mode.SRC);
+		
+		
+		//wrapper.ImageFrom.setImageDrawable(getItemIcon(lineFrom));
+		//wrapper.ImageTo.setImageDrawable(getItemIcon(lineTo));
+		
 		wrapper.Delete.setVisibility(mIsCheckboxesVisible ? View.VISIBLE : View.GONE);
 		if(mIsCheckboxesVisible){
 			wrapper.Delete.setBackgroundResource( mChecked[position] ? R.drawable.icon_delete : R.drawable.icon_delete_disabled );

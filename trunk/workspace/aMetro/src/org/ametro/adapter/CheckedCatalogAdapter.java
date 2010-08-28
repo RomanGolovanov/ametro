@@ -34,8 +34,11 @@ import org.ametro.catalog.ICatalogStateProvider;
 import org.ametro.catalog.CatalogMapPair.CatalogMapPairCityComparator;
 import org.ametro.catalog.CatalogMapPair.CatalogMapPairCountryComparator;
 import org.ametro.model.TransportType;
+import org.ametro.util.BitmapUtil;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,6 +84,7 @@ public class CheckedCatalogAdapter extends BaseAdapter {
 	
 	private Drawable mNoCountryIcon;
 	private ListView mListView;
+	private float mDisplayScale;
 
     public CatalogMapPairEx getData(int itemId) {
         return mObjects.get(itemId);
@@ -88,6 +92,7 @@ public class CheckedCatalogAdapter extends BaseAdapter {
 
     public CheckedCatalogAdapter(Context context, ListView owner, ArrayList<CatalogMapPairEx> objects, int colorsArray, ICatalogStateProvider statusProvider, int sortMode) {
         mContext = context;
+		mDisplayScale = mContext.getResources().getDisplayMetrics().density;
         mListView = owner;
         mNoCountryIcon = context.getResources().getDrawable(R.drawable.no_country);
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -178,7 +183,8 @@ public class CheckedCatalogAdapter extends BaseAdapter {
 			if(d == null){
 				File file = new File(Constants.ICONS_PATH, iso + ".png");
 				if(file.exists()){
-					d = Drawable.createFromPath(file.getAbsolutePath());
+					Bitmap bmp = BitmapUtil.createScaledBitmap(file.getAbsolutePath(), mDisplayScale, false);
+					d = new BitmapDrawable(bmp);
 				}else{
 					d = mNoCountryIcon;
 				}

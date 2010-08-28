@@ -1,5 +1,4 @@
-/*
- * http://code.google.com/p/ametro/
+/* http://code.google.com/p/ametro/
  * Transport map viewer for Android platform
  * Copyright (C) 2009-2010 Roman.Golovanov@gmail.com and other
  * respective project committers (see project home page)
@@ -48,9 +47,10 @@ import android.widget.ZoomControls;
 
 public class VectorMapView extends BaseMapView{
 
-	public static final float[] ZOOMS = new float[]{1.5f, 1.0f, 0.8f, 0.6f, 0.4f, 0.3f, 0.2f, 0.1f};
-	public static final int[] STEPS = new int[]{15, 10, 8, 6, 4, 3, 2, 1};
+	public static final float[] ZOOMS = new float[]{2.0f, 1.5f, 1.0f, 0.8f, 0.6f, 0.4f, 0.3f, 0.2f, 0.1f};
+	public static final int[] STEPS = new int[]{15, 15, 10, 8, 6, 4, 3, 2, 1};
 	public static final int[] FILTERS = new int[]{
+			RenderProgram.ALL,
 			RenderProgram.ALL,
 			RenderProgram.ALL,
 			RenderProgram.ALL,
@@ -63,9 +63,13 @@ public class VectorMapView extends BaseMapView{
 
 	public static final int MIN_ZOOM_LEVEL = 0;
 	public static final int MAX_ZOOM_LEVEL = 7;
-	public static final int DEFAULT_ZOOM_LEVEL = 1;
-	public static final int ZOOM_CONTROLS_TIMEOUT = 2000;
 	
+	
+	public static final int DEFAULT_ZOOM_LEVEL = 2;
+	public static final int ZOOM_CONTROLS_TIMEOUT = 2000;
+
+	private int mZoomMin = MIN_ZOOM_LEVEL;
+	private int mZoomMax = MAX_ZOOM_LEVEL;
 	private int mZoom = DEFAULT_ZOOM_LEVEL;
 
 	private ZoomControls mZoomControls;
@@ -73,7 +77,6 @@ public class VectorMapView extends BaseMapView{
 	public void setZoomControls(ZoomControls zoomControls) {
 		mZoomControls = zoomControls;
 		mZoomControls.setVisibility(View.INVISIBLE);
-		
 		mZoomControls.setOnZoomInClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				onZoomIn();
@@ -103,7 +106,7 @@ public class VectorMapView extends BaseMapView{
 			}
 		}
 	};
-	
+
 	public boolean performClick() {
 		if (mZoomControls.getVisibility() != View.VISIBLE) {
 			showZoom();
@@ -129,22 +132,33 @@ public class VectorMapView extends BaseMapView{
 	}
 
 	public void setZoom(int zoom) {
-		int newZoom = Math.min(Math.max(zoom, MIN_ZOOM_LEVEL), MAX_ZOOM_LEVEL);
-		boolean disableZoomOut = true;
-		if(newZoom<MAX_ZOOM_LEVEL){
-			final float newScale = ZOOMS[newZoom];
-			final int widgetWidth = getWidth();
-			final int widgetHeight = getHeight();
-			final int width = (int) Math.ceil(mMapView.width * newScale);
-			final int height = (int) Math.ceil(mMapView.height * newScale);
-			disableZoomOut = width<=widgetWidth && height<=widgetHeight;
-		}
-		mZoom = newZoom;
-		mZoomControls.setIsZoomInEnabled(mZoom > MIN_ZOOM_LEVEL);
-		mZoomControls.setIsZoomOutEnabled(!disableZoomOut);
+		mZoom = Math.min(Math.max(zoom, mZoomMin), mZoomMax);
+		calculateZoomBounds();
 		setRenderFilter(FILTERS[mZoom]);
 		setScale(ZOOMS[mZoom], STEPS[mZoom]);
 		clearRenderFailed();
+	}
+	
+	private void calculateZoomBounds(){
+		final int widgetWidth = getWidth();
+		final int widgetHeight = getHeight();
+		int zoom = MIN_ZOOM_LEVEL;
+		while(zoom<MAX_ZOOM_LEVEL){
+			final float scale = ZOOMS[zoom];
+			final int width = (int) Math.ceil(mMapView.width * scale);
+			final int height = (int) Math.ceil(mMapView.height * scale);
+			if(width<=widgetWidth && height<=widgetHeight){
+				break;
+			}
+			zoom++;
+		}
+		mZoomMin = MIN_ZOOM_LEVEL;
+		mZoomMax = zoom;
+		mZoom = Math.min(Math.max(mZoom, mZoomMin), mZoomMax);
+		if(mZoomControls != null){
+			mZoomControls.setIsZoomInEnabled(mZoom > mZoomMin);
+			mZoomControls.setIsZoomOutEnabled(mZoom < mZoomMax);
+		}
 	}
 
 	private void delayZoom() {
@@ -190,6 +204,8 @@ public class VectorMapView extends BaseMapView{
 			mMapView = map;
 			mRenderProgram = new RenderProgram(map);
 			calculateDimensions();
+			setZoom(DEFAULT_ZOOM_LEVEL);
+			mInitializeZoom = true;
 			setInitialized(true);
 		} else {
 			setInitialized(false);
@@ -251,6 +267,14 @@ public class VectorMapView extends BaseMapView{
 		return mContentWidth;
 	}
 
+	protected void onDraw(Canvas canvas) {
+		if(mInitializeZoom){
+			calculateZoomBounds();
+			mInitializeZoom = false;
+		}
+		super.onDraw(canvas);
+	}
+	
 	protected void onDrawRect(Canvas canvas, Rect viewport) {
 		invalidateTileCache(viewport, false);
 		final Rect tileOuter = screenToOuterTileRect(viewport);
@@ -575,6 +599,8 @@ public class VectorMapView extends BaseMapView{
 
 	private boolean mDisableEntireImageCaching = false;
 	private int mEntireCacheLimits = 4 * 1024 * 1024;
+	private boolean mInitializeZoom = true;	
+	
 
 	public void setAntiAliasingEnabled(boolean enabled){
 		mUpdatedAntiAlias = enabled;

@@ -20,76 +20,36 @@
  */
 package org.ametro.adapter;
 
-import org.ametro.model.LineView;
 import org.ametro.model.MapView;
 import org.ametro.model.route.RouteView;
 
-import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Bitmap.Config;
-import android.graphics.Paint.Style;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
+import android.content.Context;
+import android.view.View;
+import android.widget.ImageView;
 
 public class RouteListAdapter extends StationListAdapter {
 
-	protected final Paint mBackgroundPaint;
-
-	protected static final int ICON_DIAMETER = 9;
+	private static final int HEIGHT = 54; // in DIP
+	private final int mHalfHeight;
 	
-	private Drawable mFirstItemDrawable;
-	private Drawable mLastItemDrawable;
-
-	public RouteListAdapter(Activity activity, RouteView route,
-			MapView map) {
-		super(activity, route.getStations(), route.getDelays(), map);
-		mBackgroundPaint = new Paint();
-		mBackgroundPaint.setStyle(Style.STROKE);
-		mBackgroundPaint.setAntiAlias(true);
-		mBackgroundPaint.setColor(Color.BLACK);
-		mBackgroundPaint.setStrokeWidth(2);
+	public RouteListAdapter(Context context, RouteView route, MapView map) {
+		super(context, route.getStations(), route.getDelays(), map);
+		final float scale = context.getResources().getDisplayMetrics().density;
+		mHalfHeight = (int) (HEIGHT * scale + 0.5f)/2;
 	}
 
-	protected Drawable getItemIcon(int position) {
-		final LineView line = mLines[mFilteredStations[position].lineViewId];
-		final int color = 0xFF000000 | line.lineColor;
-		Drawable dw = null;
+	protected void setListItemView(ListItemWrapper wrapper, int position) {
+		wrapper.StationImageShadow.setVisibility(View.VISIBLE);
+		final ImageView img = wrapper.LineImage;
+		img.setVisibility(View.VISIBLE);
 		if (position == 0) {
-			dw = mFirstItemDrawable;
-			if (dw == null) {
-				dw = createItemDrawable(color, ICON_HALF_HEIGHT, ICON_HEIGHT);
-				mFirstItemDrawable = dw;
-			}
+			img.setPadding(img.getPaddingLeft(), mHalfHeight, img.getPaddingRight(), 0);
 		} else if (position == (mFilteredStations.length - 1)) {
-			dw = mLastItemDrawable;
-			if (dw == null) {
-				dw = createItemDrawable(color, 0, ICON_HALF_HEIGHT);
-				mLastItemDrawable = dw;
-			}
+			img.setPadding(img.getPaddingLeft(), 0, img.getPaddingRight(), mHalfHeight);
 		} else {
-			dw = mLineDrawabled.get(line);
-			if (dw == null) {
-				dw = createItemDrawable(color, 0, ICON_HEIGHT);
-				mLineDrawabled.put(line, dw);
-			}
-		}
-		return dw;
+			img.setPadding(img.getPaddingLeft(), 0, img.getPaddingRight(), 0);
+		}		
+		super.setListItemView(wrapper, position);
 	}
-
-	private Drawable createItemDrawable(final int color, int ymin, int ymax) {
-		Drawable dw;
-		Bitmap bmp = Bitmap.createBitmap(ICON_WIDTH, ICON_HEIGHT,
-				Config.ARGB_8888);
-		Canvas c = new Canvas(bmp);
-		mPaint.setColor(color);
-		c.drawRect(ICON_HALF_WIDTH - ICON_LINE_WITH, ymin, ICON_HALF_WIDTH + ICON_LINE_WITH, ymax, mPaint);
-		c.drawCircle(ICON_HALF_WIDTH, ICON_HALF_HEIGHT, ICON_DIAMETER, mPaint);
-		c.drawCircle(ICON_HALF_WIDTH, ICON_HALF_HEIGHT, ICON_DIAMETER,
-				mBackgroundPaint);
-		dw = new BitmapDrawable(bmp);
-		return dw;
-	}
+	
 }
