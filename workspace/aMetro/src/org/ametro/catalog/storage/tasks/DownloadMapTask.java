@@ -80,6 +80,7 @@ public class DownloadMapTask extends UpdateMapTask implements IDownloadListener 
 			URI uri = URI.create( catalogUrl + map.getAbsoluteUrl());
 			WebUtil.downloadFile(map, uri, file, false, this);
 			if(mCompleted){
+				mFailReason = null;	
 				break;
 			}
 		}

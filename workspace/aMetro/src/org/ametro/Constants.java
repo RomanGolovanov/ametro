@@ -121,5 +121,6 @@ public class Constants {
 	public static final String AMETRO_EXTENSION = ".ametro";
 	
 	public static final String EXTRA_TIMESTAMP = "EXTRA_TIMESTAMP";
+	public static final String EXTRA_SYSTEM_MAP_NAME = "EXTRA_SYSTEM_MAP_NAME";
 
 }

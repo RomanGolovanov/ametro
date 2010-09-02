@@ -273,7 +273,7 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 			}else{
 				Intent i = new Intent(this, MapViewActivity.class);
 				i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				i.putExtra(MapViewActivity.EXTRA_SYSTEM_NAME, mSystemName);
+				i.putExtra(Constants.EXTRA_SYSTEM_MAP_NAME, mSystemName);
 				startActivity(i);
 			}
 		} 

@@ -35,7 +35,6 @@ import java.util.TreeMap;
 import org.ametro.ApplicationEx;
 import org.ametro.Constants;
 import org.ametro.GlobalSettings;
-import org.ametro.MapUri;
 import org.ametro.R;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.storage.ICatalogStorageListener;
@@ -70,7 +69,6 @@ import android.content.DialogInterface.OnDismissListener;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.location.Location;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -190,10 +188,10 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			onShowMap(mModel, mMapView);
 		}else{
 			Intent intent = getIntent();
-			Uri uri = intent != null ? intent.getData() : null;
-			if (uri != null) {
-				String mapName = MapUri.getMapName(uri);
-				onInitializeMapView(mapName, null, false);
+			String systemMapName = intent!=null ? intent.getStringExtra(Constants.EXTRA_SYSTEM_MAP_NAME) : null;
+			if (systemMapName != null) {
+				String mapPath = GlobalSettings.getLocalCatalogMapFileName(systemMapName);
+				onInitializeMapView(mapPath, null, false);
 			} else {
 				loadDefaultMapName();
 				if (mModelFileName == null) {
@@ -206,9 +204,9 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	}
 
 	protected void onNewIntent(Intent intent) {
-		String systemName = intent.getStringExtra(EXTRA_SYSTEM_NAME);
-		if (systemName!=null) {
-			String mapPath = GlobalSettings.getLocalCatalogMapFileName(systemName);
+		String systemMapName = intent.getStringExtra(Constants.EXTRA_SYSTEM_MAP_NAME);
+		if (systemMapName!=null) {
+			String mapPath = GlobalSettings.getLocalCatalogMapFileName(systemMapName);
 			if(!mapPath.equalsIgnoreCase(getMapName())){
 				onInitializeMapView(mapPath,null, false);
 			}else if(isUpdateNeeded()){
@@ -246,14 +244,14 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 				finish();
 			}
 			if (resultCode == RESULT_OK) {
-				Uri uri = data.getData();
-				if (uri != null) {
-					String mapName = MapUri.getMapName(uri);
-					if(!mapName.equalsIgnoreCase(getMapName())){
-						onInitializeMapView(mapName,null, false);
-					}else if(isUpdateNeeded()){
+				
+				String systemMapName = data.getStringExtra(Constants.EXTRA_SYSTEM_MAP_NAME);
+				if (systemMapName != null) {
+					String mapPath = GlobalSettings.getLocalCatalogMapFileName(systemMapName);
+					String currentMapPath = getMapName();
+					if(!mapPath.equalsIgnoreCase(currentMapPath) || isUpdateNeeded()){
 						mDisableMapReload = true;
-						onInitializeMapView(mapName,null, true);
+						onInitializeMapView(mapPath,null, true);
 					}
 				} 
 			}else if(resultCode == RESULT_CANCELED && mModelFileName == null){
@@ -782,7 +780,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		}
 		Intent i = new Intent(this, CatalogTabHostActivity.class);
 		if (mModelFileName != null) {
-			i.setData(MapUri.create(mModelFileName));
+			i.putExtra(Constants.EXTRA_SYSTEM_MAP_NAME, getSystemMapName());
 		}
 		startActivityForResult(i, REQUEST_MAP);
 	}
@@ -1176,6 +1174,4 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	
 	private boolean mDisableMapReload;
 	
-	public static final String EXTRA_SYSTEM_NAME = "EXTRA_SYSTEM_NAME";
-
 }
