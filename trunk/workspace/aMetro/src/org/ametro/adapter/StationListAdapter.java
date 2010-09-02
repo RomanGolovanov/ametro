@@ -30,8 +30,8 @@ import org.ametro.model.StationView;
 import org.ametro.util.DateUtil;
 
 import android.content.Context;
-import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -236,8 +236,18 @@ public class StationListAdapter extends BaseAdapter implements Filterable {
 		}else{
 			wrapper.Delay.setText("");
 		}
-		wrapper.StationImage.setColorFilter(0xFF000000 | line.lineColor, Mode.SRC);
-		wrapper.LineImage.setColorFilter(0xFF000000 | line.lineColor, Mode.SRC);
+
+
+		
+		
+		GradientDrawable stationDrawable = (GradientDrawable)wrapper.StationImage.getDrawable();
+		stationDrawable.setColor(0xFF000000 | line.lineColor);
+		
+		GradientDrawable lineDrawable = (GradientDrawable)wrapper.LineImage.getDrawable();
+		lineDrawable.setColor(0xFF000000 | line.lineColor);
+		
+		//wrapper.StationImage.setColorFilter(0xFF000000 | line.lineColor, Mode.SRC_ATOP);
+		//wrapper.LineImage.setColorFilter(0xFF000000 | line.lineColor, Mode.SRC_ATOP);
 	}
 	
 	public Filter getFilter() {

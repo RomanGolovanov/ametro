@@ -42,7 +42,6 @@ import java.util.LinkedList;
 import org.ametro.ApplicationEx;
 import org.ametro.Constants;
 import org.ametro.GlobalSettings;
-import org.ametro.MapUri;
 import org.ametro.R;
 import org.ametro.adapter.CatalogAdapter;
 import org.ametro.catalog.Catalog;
@@ -641,7 +640,7 @@ public abstract class BaseCatalogActivity extends Activity implements ICatalogSt
 	protected void invokeFinish(CatalogMap local) {
 		if(local!=null){
 			Intent viewIntent = new Intent();
-			viewIntent.setData(MapUri.create(local.getAbsoluteUrl()));
+			viewIntent.putExtra(Constants.EXTRA_SYSTEM_MAP_NAME, local.getSystemName());
 			viewIntent.putExtra(Constants.EXTRA_TIMESTAMP, local.getTimestamp());
 			Activity parent =  CatalogTabHostActivity.getInstance();
 			if(parent!=null){
