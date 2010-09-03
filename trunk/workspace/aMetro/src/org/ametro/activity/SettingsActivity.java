@@ -72,7 +72,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		mLocationSearchEnabled.setOnPreferenceChangeListener(this);
 		
 		if(mEnableAutoUpdateBeforeChange){
-			mAutoUpdateEnabled.setSummary("Last update: " + DateUtil.getDateTime(new Date( GlobalSettings.getUpdateDate(this) )));
+			mAutoUpdateEnabled.setSummary(getString(R.string.msg_last_update) + " " + DateUtil.getDateTime(new Date( GlobalSettings.getUpdateDate(this) )));
 		}
 		
 	}

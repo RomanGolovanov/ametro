@@ -20,6 +20,7 @@
  */
 package org.ametro.activity;
 
+import org.ametro.ApplicationEx;
 import org.ametro.Constants;
 import org.ametro.GlobalSettings;
 import org.ametro.R;
@@ -114,6 +115,7 @@ public class CatalogTabHostActivity extends TabActivity implements OnDismissList
 			showDialog(DIALOG_EULA);
 		}else if(!GlobalSettings.isChangeLogShowed(this)){
 			ChangeLogDialog.show(this);
+			ApplicationEx.getInstance().invalidateAutoUpdate();
 			GlobalSettings.setChangeLogShowed(this);
 		}else if(!DownloadIconsTask.isRunning() && GlobalSettings.isCountryIconsEnabled(this)){
 			checkIcons();

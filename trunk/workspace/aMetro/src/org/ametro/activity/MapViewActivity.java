@@ -792,6 +792,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		}
 		if(!GlobalSettings.isChangeLogShowed(this)){
 			ChangeLogDialog.show(this);
+			ApplicationEx.getInstance().invalidateAutoUpdate();
 			GlobalSettings.setChangeLogShowed(this);
 		}
 		if(!force && mModel!=null && mMapViewName!=null){

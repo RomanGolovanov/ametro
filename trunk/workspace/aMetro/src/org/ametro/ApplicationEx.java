@@ -172,7 +172,6 @@ public class ApplicationEx extends Application {
 		FileUtil.touchFile(Constants.NO_MEDIA_FILE);
 		extractEULA(this);
 
-		//invalidateAutoUpdate();
 		super.onCreate();
 	}
 
