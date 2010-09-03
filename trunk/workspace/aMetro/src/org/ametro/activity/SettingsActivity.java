@@ -21,6 +21,7 @@
 
 package org.ametro.activity;
 
+import org.ametro.ApplicationEx;
 import org.ametro.R;
 import org.ametro.dialog.DownloadIconsDialog;
 import org.ametro.dialog.EULADialog;
@@ -40,15 +41,21 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private Preference mDonate;
 	private Preference mLicense;
 	private Preference mRefreshIconPack;
+	private Preference mEnableAutoUpdate;
+
+	private boolean mEnableAutoUpdateChanged;
 	
 	private CheckBoxPreference mLocationSearchEnabled;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		mEnableAutoUpdateChanged = false;
+		
 		addPreferencesFromResource(R.xml.settings);
 		mDonate = findPreference(getString(R.string.pref_section_donate_key));
 		mLicense = findPreference(getString(R.string.pref_section_license_key));
 		mRefreshIconPack = findPreference(getString(R.string.pref_refresh_country_icons_key));
+		mEnableAutoUpdate = findPreference(getString(R.string.pref_auto_update_map_index_key));
 
 		mLocationSearchEnabled = (CheckBoxPreference)findPreference(getString(R.string.pref_auto_locate_key));
 		
@@ -56,6 +63,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		mLicense.setOnPreferenceClickListener(this);
 		mRefreshIconPack.setOnPreferenceClickListener(this);
 		
+		mEnableAutoUpdate.setOnPreferenceChangeListener(this);
 		mLocationSearchEnabled.setOnPreferenceChangeListener(this);
 	}
 
@@ -63,6 +71,13 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		super.onStop();
 	}
 
+	protected void onPause() {
+		if(mEnableAutoUpdateChanged){
+			ApplicationEx.getInstance().invalidateAutoUpdate();
+		}
+		super.onPause();
+	}
+	
 	public boolean onPreferenceClick(Preference preference) {
 		if (preference == mRefreshIconPack){
 			DownloadIconsDialog dialog = new DownloadIconsDialog(this,false);
@@ -78,6 +93,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	}
 
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
+		if(preference == mEnableAutoUpdate){
+			mEnableAutoUpdateChanged = true;
+		}
 		if(preference == mLocationSearchEnabled){
 			boolean value = (Boolean)newValue;
 			if(value){

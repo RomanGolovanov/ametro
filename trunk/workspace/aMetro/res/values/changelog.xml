@@ -7,6 +7,6 @@
         <item>1.0.2: - Fixed schemes lists</item>
         <item>1.0.5: - Support devices with QVGA displays</item>
         <item>1.0.6: - Fixed image scaling on QVGA/WVGA displays, improve image quality; - Added new zoom level, fixed zoom buttons behavior; - Fixed FC while create the route in some cities/schemes</item>
-        <item>1.0.7: - (?) Fixed folder path bug at Samsung I9000 with Froyo</item>
+        <item>1.0.7: - Fixed folder path bug at Samsung I9000 with Froyo;  - App do not starts at every network mode change, only if need to update maps</item>
     </string-array>
 </resources>
