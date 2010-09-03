@@ -23,8 +23,8 @@ package org.ametro.receiver;
 import org.ametro.ApplicationEx;
 
 import android.content.BroadcastReceiver;
-import android.content.Intent;
 import android.content.Context;
+import android.content.Intent;
 
 public class AlarmReceiver extends BroadcastReceiver {
 
