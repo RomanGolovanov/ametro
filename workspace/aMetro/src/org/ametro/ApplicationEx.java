@@ -33,7 +33,8 @@ import org.ametro.directory.ImportMapDirectory;
 import org.ametro.directory.ImportTransportDirectory;
 import org.ametro.directory.StationDirectory;
 import org.ametro.jni.Natives;
-import org.ametro.receiver.AutoUpdateReceiver;
+import org.ametro.receiver.AlarmReceiver;
+import org.ametro.receiver.NetworkStateReceiver;
 import org.ametro.service.AutoUpdateService;
 import org.ametro.util.FileUtil;
 import org.apache.http.HttpVersion;
@@ -54,8 +55,10 @@ import org.apache.http.protocol.HTTP;
 import android.app.AlarmManager;
 import android.app.Application;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.util.Log;
 
@@ -168,7 +171,9 @@ public class ApplicationEx extends Application {
 		FileUtil.touchFile(Constants.NO_MEDIA_FILE);
 		extractEULA(this);
 
-		createAutoUpdateAlarm();
+		if(GlobalSettings.isAutoUpdateIndexEnabled(this)){
+			changeAlarmReceiverState(true);
+		}
 		super.onCreate();
 	}
 
@@ -212,31 +217,54 @@ public class ApplicationEx extends Application {
 		return isConnected;
 	}
 	
+	public void invalidateAutoUpdate(){
+		if(GlobalSettings.isAutoUpdateIndexEnabled(this)){
+			changeAlarmReceiverState(true);
+		}else{
+			changeAlarmReceiverState(false);
+			changeNetworkStateReceiverState(false);
+		}
+	}
+	
+	public void changeAlarmReceiverState(boolean enabled) {
+		AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+		Intent intent = new Intent(this, AlarmReceiver.class);
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+		alarmManager.cancel(pendingIntent);
+		if(enabled){
+			alarmManager.setInexactRepeating(AlarmManager.RTC, System.currentTimeMillis() + 1000*60 , AlarmManager.INTERVAL_DAY, pendingIntent);
+		}
+	}
+	
+	public void changeNetworkStateReceiverState(boolean enabled){
+		PackageManager manager = getPackageManager();
+		ComponentName name = new ComponentName(this, NetworkStateReceiver.class);
+		int state = enabled ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
+		manager.setComponentEnabledSetting(name, state, PackageManager.DONT_KILL_APP);
+	}
+	
 	public boolean checkAutoUpdate() {
-		if(GlobalSettings.isAutoUpdateIndexEnabled(this) && mConnectionManager.getBackgroundDataSetting()){
-			if(isAutoUpdateNetworkAvailable()){
-				long lastModified = GlobalSettings.getUpdateDate(this);
-				long currentDate = System.currentTimeMillis();
-				long updateTimeout = GlobalSettings.getUpdatePeriod(this);
-				long timeout = (currentDate - lastModified)/1000;
-				Log.d(Constants.LOG_TAG_MAIN, "Check catalog update period: online="+lastModified+", now="+currentDate+", dt=" + timeout +", timeout="+updateTimeout);
-				if(timeout > updateTimeout){
-					Log.d(Constants.LOG_TAG_MAIN, "Start AutoUpdateService");
+		if(GlobalSettings.isAutoUpdateIndexEnabled(this)){
+			long lastModified = GlobalSettings.getUpdateDate(this);
+			long currentDate = System.currentTimeMillis();
+			long updateTimeout = GlobalSettings.getUpdatePeriod(this);
+			long timeout = (currentDate - lastModified)/1000;
+			if(timeout > updateTimeout){
+				if(isAutoUpdateNetworkAvailable() && mConnectionManager.getBackgroundDataSetting()){
+					changeNetworkStateReceiverState(false);
 					startService(new Intent(this, AutoUpdateService.class));
 					return true;
+				}else{
+					changeNetworkStateReceiverState(true);
 				}
 			}
+		}else{
+			changeNetworkStateReceiverState(false);
+			changeAlarmReceiverState(false);
 		}
 		return false;
 	}
-	
-	private void createAutoUpdateAlarm() {
-		AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-		Intent intent = new Intent(this, AutoUpdateReceiver.class);
-		PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
-		alarmManager.cancel(pendingIntent);
-		alarmManager.setInexactRepeating(AlarmManager.RTC, System.currentTimeMillis() + 1000*60 , AlarmManager.INTERVAL_DAY, pendingIntent);
-	}
+
 	
 	private HttpClient createHttpClient() {
 		if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)){
