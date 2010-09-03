@@ -34,6 +34,7 @@ import org.ametro.directory.ImportTransportDirectory;
 import org.ametro.directory.StationDirectory;
 import org.ametro.jni.Natives;
 import org.ametro.receiver.AlarmReceiver;
+import org.ametro.receiver.BootCompletedReceiver;
 import org.ametro.receiver.NetworkStateReceiver;
 import org.ametro.service.AutoUpdateService;
 import org.ametro.util.FileUtil;
@@ -171,9 +172,7 @@ public class ApplicationEx extends Application {
 		FileUtil.touchFile(Constants.NO_MEDIA_FILE);
 		extractEULA(this);
 
-		if(GlobalSettings.isAutoUpdateIndexEnabled(this)){
-			changeAlarmReceiverState(true);
-		}
+		//invalidateAutoUpdate();
 		super.onCreate();
 	}
 
@@ -219,8 +218,10 @@ public class ApplicationEx extends Application {
 	
 	public void invalidateAutoUpdate(){
 		if(GlobalSettings.isAutoUpdateIndexEnabled(this)){
+			changeBootCompletedReceiverState(true);
 			changeAlarmReceiverState(true);
 		}else{
+			changeBootCompletedReceiverState(false);
 			changeAlarmReceiverState(false);
 			changeNetworkStateReceiverState(false);
 		}
@@ -232,7 +233,8 @@ public class ApplicationEx extends Application {
 		PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
 		alarmManager.cancel(pendingIntent);
 		if(enabled){
-			alarmManager.setInexactRepeating(AlarmManager.RTC, System.currentTimeMillis() + 1000*60 , AlarmManager.INTERVAL_DAY, pendingIntent);
+			long interval = (GlobalSettings.getUpdatePeriod(this) == 900) ? AlarmManager.INTERVAL_FIFTEEN_MINUTES : AlarmManager.INTERVAL_DAY;
+			alarmManager.setInexactRepeating(AlarmManager.RTC, System.currentTimeMillis() + 1000*60*2 , interval, pendingIntent);
 		}
 	}
 	
@@ -242,7 +244,14 @@ public class ApplicationEx extends Application {
 		int state = enabled ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
 		manager.setComponentEnabledSetting(name, state, PackageManager.DONT_KILL_APP);
 	}
-	
+
+	public void changeBootCompletedReceiverState(boolean enabled){
+		PackageManager manager = getPackageManager();
+		ComponentName name = new ComponentName(this, BootCompletedReceiver.class);
+		int state = enabled ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
+		manager.setComponentEnabledSetting(name, state, PackageManager.DONT_KILL_APP);
+	}
+		
 	public boolean checkAutoUpdate() {
 		if(GlobalSettings.isAutoUpdateIndexEnabled(this)){
 			long lastModified = GlobalSettings.getUpdateDate(this);
@@ -255,10 +264,11 @@ public class ApplicationEx extends Application {
 					startService(new Intent(this, AutoUpdateService.class));
 					return true;
 				}else{
-					changeNetworkStateReceiverState(true);
+					changeNetworkStateReceiverState(mConnectionManager.getBackgroundDataSetting());
 				}
 			}
 		}else{
+			changeBootCompletedReceiverState(false);
 			changeNetworkStateReceiverState(false);
 			changeAlarmReceiverState(false);
 		}

@@ -195,7 +195,7 @@ public class GlobalSettings {
 			return 2592000; 
 		}
 		if("debug".equalsIgnoreCase(value)){
-			return 0;
+			return 900;
 		}
 		return 86400;
 	}		
