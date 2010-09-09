@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="catalog_names">
+        <item>Mes cartes</item>
+        <item>Import</item>
+        <item>Connecté</item>
+    </string-array>   
+    <string-array name="pref_locale_texts">
+        <item>Auto</item>
+        <item>Russe</item>
+        <item>Anglais</item>
+    </string-array>
+    <string-array name="pref_auto_update_period_texts">
+        <item>Quotidien</item>
+        <item>Hebdomadaire</item>
+        <item>Mensuel</item>
+        <!-- <item>Every 15 minutes</item> -->
+    </string-array>
+	<string-array name="pref_auto_update_networks_texts">
+        <item>WiFi uniquement</item>
+        <item>WiFi ou Mobile</item>
+    </string-array>
+    <string-array name="transport_types">
+	    <item>Inconnu</item>
+		<item>Métro</item>
+	    <item>Tramway</item>
+	    <item>Bus</item>
+	    <item>Train</item>
+	    <item>Bus maritime</item>
+	    <item>Trolley bus</item>
+	    <item>Bus à Câble</item>
+    </string-array>
+    <string-array name="transport_type_lines">
+	    <item>Lignes inconnues...</item>
+		<item>Lignes Métro...</item>
+	    <item>Lignes Tramway...</item>
+	    <item>lignes Bus...</item>
+	    <item>Lignes Trains...</item>
+	    <item>Lignes Bus maritime...</item>
+	    <item>Lignes Trolley bus...</item>
+	    <item>Lignes Bus à câbles...</item>
+    </string-array>
+    <string-array name="catalog_map_states">
+	    <item>Déconnecté</item>
+	    <item>Non supporté</item>
+	    <item>Corrompu</item>
+	    <item>Mise à jour disponible</item>
+	    <item>Installé</item>
+	    <item>Import disponible</item>
+	    <item>Téléchargement disponible</item>
+	    <item>Mise à jour non supportée</item>
+	    <item>Mise à jour nécessaire</item>
+	    <item>Téléchargement en attente...</item>
+	    <item>Import en attente...</item>
+	    <item>Téléchargement...</item>
+	    <item>Importation...</item>
+	    <item>Calcul...</item>
+	    <item>Mise à jour</item>
+	    <item>Mise à jour nécessaire</item>
+    </string-array>
+    <string-array name="create_route_modes">
+        <item>Durée minimum</item>
+        <item>Transferts minimum</item>
+    </string-array>
+    <string-array name="create_route_times">
+        <item>Jour</item>
+        <item>Nuit</item>
+        <item>Pic d\'affluence</item>
+    </string-array>
+    <string-array name="sort_modes">
+    	<item>Par villes</item>
+    	<item>Par pays</item>
+    </string-array>
+    <string-array name="about_list">
+    	<item>A propos</item>
+    	<item>Mise à jour</item>
+    	<item>Termes et Conditions</item>
+    	<item>Nous aider</item>
+    </string-array>
+</resources>
