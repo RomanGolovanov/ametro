@@ -48,6 +48,7 @@ public class CsvReader {
 	private String[] mRecord;
 	private int mCurrentColumn;
 	private int mTotalColumns;
+	private String mEntireRecord;
 
 	public CsvReader(BufferedReader reader, char separator) {
 		mReader = reader;
@@ -76,6 +77,7 @@ public class CsvReader {
 			line = mReader.readLine();
 		} 
 		if (line != null) {
+			mEntireRecord = line;
 			if(Natives.INITIALIZED){ 
 				return Natives.SplitCsvString(line, mSeparator);
 			}else
@@ -99,10 +101,9 @@ public class CsvReader {
 				}
 				parts.add(sb.toString());
 				return (String[]) parts.toArray(new String[parts.size()]);
-				//return line.split(""+mSeparator);
 			}
-					
 		} else {
+			mEntireRecord = null;
 			return null;
 		}
 	}
@@ -371,4 +372,11 @@ public class CsvReader {
 		mCurrentColumn+=count;
 	}
 
+	public String getEntireRecord() {
+		return mEntireRecord;
+	}
+
+	public boolean isComment(){
+		return mEntireRecord!=null && (mEntireRecord.startsWith("#") || mEntireRecord.startsWith(";"));
+	}
 }

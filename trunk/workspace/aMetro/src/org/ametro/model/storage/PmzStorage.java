@@ -157,6 +157,7 @@ public class PmzStorage implements IModelStorage {
 		private HashMap<Integer, StationInfo> mStationInfo = new HashMap<Integer, StationInfo>();
 		
 		private StationDirectory mStationDirectory;
+		private CityStationDictionary mCityStationDictionary;
 		private ImportMapDirectory mImportMapDirectory;
 		private ImportTransportDirectory mImportTransportDirectory;
 
@@ -234,6 +235,7 @@ public class PmzStorage implements IModelStorage {
 			mModel = null;
 			mDescriptionOnly = descriptionOnly;
 			mStationDirectory = ApplicationEx.getInstance().getStationDirectory();
+			mCityStationDictionary = mStationDirectory.get(mFile);
 			mImportMapDirectory = ApplicationEx.getInstance().getImportMapDirectory();
 			mImportTransportDirectory = ApplicationEx.getInstance().getImportTransportDirectory();
 		}
@@ -796,6 +798,16 @@ public class PmzStorage implements IModelStorage {
 					mDelayNames.addAll(StringUtil.fastSplitToList(value,','));
 				}
 			}
+
+			final CityStationDictionary lib = mCityStationDictionary;
+			if(lib!=null){
+				ArrayList<String> gpsComments = lib.getComments();
+				if(gpsComments!=null && gpsComments.size()>0){
+					authors.add("");
+					authors.addAll(gpsComments);
+				}
+			}
+			
 			final Model model = mModel;
 			model.systemName = mFile.getName().toLowerCase() + ".ametro";
 			model.cityName = appendLocalizedText(cityNameRus!=null ? cityNameRus : cityNameEng);
@@ -851,8 +863,9 @@ public class PmzStorage implements IModelStorage {
 			model.timestamp =  mTimestamp;
 			
 			if(!mDescriptionOnly){
-				CityStationDictionary lib = mStationDirectory.get(mFile);
+				final CityStationDictionary lib = mCityStationDictionary;
 				if(lib!=null){
+					
 					for(TransportStation station : model.stations){
 						String lineSystemName = model.lines[station.lineId].systemName;
 						String stationSystemName = station.systemName;
