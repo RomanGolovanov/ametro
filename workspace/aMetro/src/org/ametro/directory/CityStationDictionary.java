@@ -20,6 +20,7 @@
  */
 package org.ametro.directory;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.ametro.model.ext.ModelLocation;
@@ -53,9 +54,15 @@ public class CityStationDictionary
 	}
 	
 	private final HashMap<String, HashMap<String,Entity>> mData;
+	private ArrayList<String> mComments;
 
-	public CityStationDictionary(HashMap<String,HashMap<String,Entity>> index){
+	public CityStationDictionary(HashMap<String,HashMap<String,Entity>> index, ArrayList<String> comments){
+		mComments = comments;
 		mData = index;
+	}
+	
+	public ArrayList<String> getComments(){
+		return mComments;
 	}
 	
 	public ModelLocation getStationLocation(String lineSystemName, String stationSystemName){

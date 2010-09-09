@@ -25,6 +25,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.ametro.Constants;
@@ -54,6 +55,7 @@ public  class StationDirectory
 		try {
 			InputStream strm;
 			File gpsFile = new File(pmzFile.getAbsolutePath().replace(".pmz", ".gps"));
+			ArrayList<String> comments = null;
 			if(gpsFile.exists()){
 				strm = new FileInputStream(gpsFile);
 			}else if (mContext!=null){
@@ -64,17 +66,26 @@ public  class StationDirectory
 			}
 			CsvReader reader = new CsvReader(new BufferedReader(new InputStreamReader(strm, "utf-8")),';');
 			HashMap<String, HashMap<String,Entity>> index = new HashMap<String, HashMap<String,Entity>>();
-			reader.next(); // skip header
 			while(reader.next()){
-				Entity r = new Entity(reader.getString(1),reader.getString(2), reader.getCount()>=5 ? new ModelLocation(reader.getFloat(3), reader.getFloat(4) ) : null );
-				HashMap<String, Entity> city2rec = index.get(r.getLineSystemName());
-				if(city2rec==null){
-					city2rec = new HashMap<String, Entity>();
-					index.put(r.getLineSystemName(), city2rec);
+				if(reader.isComment()){
+					String comment = reader.getEntireRecord();
+					if(comment.startsWith("#")){
+						if(comments==null){
+							comments = new ArrayList<String>();
+						}
+						comments.add(comment.substring(1));
+					}
+				}else{
+					Entity r = new Entity(reader.getString(1),reader.getString(2), reader.getCount()>=5 ? new ModelLocation(reader.getFloat(3), reader.getFloat(4) ) : null );
+					HashMap<String, Entity> city2rec = index.get(r.getLineSystemName());
+					if(city2rec==null){
+						city2rec = new HashMap<String, Entity>();
+						index.put(r.getLineSystemName(), city2rec);
+					}
+					city2rec.put(r.getStationSystemName(), r);
 				}
-				city2rec.put(r.getStationSystemName(), r);
 			}
-			return new CityStationDictionary(index);
+			return new CityStationDictionary(index, comments);
 		} catch (Throwable e) {
 		}
 		return null;
