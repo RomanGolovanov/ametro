@@ -1,7 +1,7 @@
 /*
  * http://code.google.com/p/ametro/
  * Transport map viewer for Android platform
- * Copyright (C) 2009-2010 Roman.Golovanov@gmail.com and other
+ * Copyright (C) 2009-2010 contacts@ametro.org Roman Golovanov and other
  * respective project committers (see project home page)
  *
  * This program is free software: you can redistribute it and/or modify
@@ -29,14 +29,18 @@ import org.ametro.R;
 import org.ametro.dialog.DownloadIconsDialog;
 import org.ametro.dialog.EULADialog;
 import org.ametro.dialog.InfoDialog;
+import org.ametro.util.CollectionUtil;
 import org.ametro.util.DateUtil;
 import org.ametro.util.FileUtil;
+import org.ametro.util.StringUtil;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 
@@ -47,21 +51,26 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private Preference mRefreshIconPack;
 	private Preference mAutoUpdateEnabled;
 
+	private Preference mAutoUpdatePeriod;
+	private Preference mAutoUpdateNetworks;
+	
 	private boolean mEnableAutoUpdateBeforeChange;
-	private long mAutoUpdatePeriod;
+	private long mAutoUpdatePeriodValue;
 	
 	private CheckBoxPreference mLocationSearchEnabled;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mEnableAutoUpdateBeforeChange = GlobalSettings.isAutoUpdateIndexEnabled(this);
-		mAutoUpdatePeriod = GlobalSettings.getUpdatePeriod(this);
+		mAutoUpdatePeriodValue = GlobalSettings.getUpdatePeriod(this);
 		
 		addPreferencesFromResource(R.xml.settings);
 		mDonate = findPreference(getString(R.string.pref_section_donate_key));
 		mLicense = findPreference(getString(R.string.pref_section_license_key));
 		mRefreshIconPack = findPreference(getString(R.string.pref_refresh_country_icons_key));
 		mAutoUpdateEnabled = findPreference(getString(R.string.pref_auto_update_map_index_key));
+		mAutoUpdatePeriod = findPreference(getString(R.string.pref_auto_update_period_key));
+		mAutoUpdateNetworks = findPreference(getString(R.string.pref_auto_update_networks_key));
 
 		mLocationSearchEnabled = (CheckBoxPreference)findPreference(getString(R.string.pref_auto_locate_key));
 		
@@ -70,9 +79,40 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		mRefreshIconPack.setOnPreferenceClickListener(this);
 		
 		mLocationSearchEnabled.setOnPreferenceChangeListener(this);
+		mAutoUpdatePeriod.setOnPreferenceChangeListener(this);
+		mAutoUpdateNetworks.setOnPreferenceChangeListener(this);
 		
 		if(mEnableAutoUpdateBeforeChange){
 			mAutoUpdateEnabled.setSummary(getString(R.string.msg_last_update) + " " + DateUtil.getDateTime(new Date( GlobalSettings.getUpdateDate(this) )));
+		}
+
+		
+		updateDescription(mAutoUpdatePeriod, 
+				R.string.pref_auto_update_period_key, 
+				R.string.pref_auto_update_period_description,
+				R.array.pref_auto_update_period_texts, 
+				R.array.pref_auto_update_period_values,
+				null);
+		
+		updateDescription(mAutoUpdateNetworks, 
+				R.string.pref_auto_update_networks_key, 
+				R.string.pref_auto_update_networks_description,
+				R.array.pref_auto_update_networks_texts, 
+				R.array.pref_auto_update_networks_values,
+				null);		
+	}
+
+	private void updateDescription(Preference pref, int prefId, int prefSummaryId, int textsId, int valuesId, String value) {
+		final Resources res = getResources();
+		String[] names = res.getStringArray(textsId);
+		String[] keys = res.getStringArray(valuesId);
+		if(value == null){
+			value = PreferenceManager.getDefaultSharedPreferences(this).getString(res.getString(prefId), null);
+		}
+		int index = CollectionUtil.indexOf(keys, value);
+		if(index!=-1){
+			String baseSummary = getString(prefSummaryId);
+			pref.setSummary( (StringUtil.isNullOrEmpty(baseSummary) ? "" : baseSummary + ", ") + names[index]);
 		}
 		
 	}
@@ -82,7 +122,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	}
 	
 	protected void onPause() {
-		if(mEnableAutoUpdateBeforeChange!=GlobalSettings.isAutoUpdateIndexEnabled(this) || mAutoUpdatePeriod!=GlobalSettings.getUpdatePeriod(this)){
+		if(mEnableAutoUpdateBeforeChange!=GlobalSettings.isAutoUpdateIndexEnabled(this) || mAutoUpdatePeriodValue!=GlobalSettings.getUpdatePeriod(this)){
 			ApplicationEx.getInstance().invalidateAutoUpdate();
 		}
 		super.onPause();
@@ -112,6 +152,24 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				} catch (Exception e) {
 				} 
 			}
+		}
+		if(preference == mAutoUpdatePeriod){
+			String value = (String)newValue;
+			updateDescription(mAutoUpdatePeriod, 
+					R.string.pref_auto_update_period_key, 
+					R.string.pref_auto_update_period_description,
+					R.array.pref_auto_update_period_texts, 
+					R.array.pref_auto_update_period_values,
+					value);
+		}
+		if(preference == mAutoUpdateNetworks){
+			String value = (String)newValue;
+			updateDescription(mAutoUpdateNetworks, 
+					R.string.pref_auto_update_networks_key, 
+					R.string.pref_auto_update_networks_description,
+					R.array.pref_auto_update_networks_texts, 
+					R.array.pref_auto_update_networks_values,
+					value);				
 		}
 		return true;
 	}

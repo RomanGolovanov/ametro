@@ -1,7 +1,7 @@
 /*
  * http://code.google.com/p/ametro/
  * Transport map viewer for Android platform
- * Copyright (C) 2009-2010 Roman.Golovanov@gmail.com and other
+ * Copyright (C) 2009-2010 contacts@ametro.org Roman Golovanov and other
  * respective project committers (see project home page)
  *
  * This program is free software: you can redistribute it and/or modify
@@ -86,7 +86,7 @@ public class DonateActivity extends PreferenceActivity implements OnPreferenceCl
 		if (preference == mDonateYandex) {
 			String[] codes = res.getStringArray(R.array.yandex_currency_codes);
 			String[] names = res.getStringArray(R.array.yandex_currency_names);
-			String url = "https://money.yandex.ru/charity.xml?to=41001667593841&CompanyName=aMetroProject&CompanyLink=http://sites.google.com/site/ametrohome&CompanySum=%%AMOUNT%%";
+			String url = "https://money.yandex.ru/charity.xml?to=41001667593841&CompanyName=aMetroProject&CompanyLink=http://www.ametro.org&CompanySum=%%AMOUNT%%";
 			
 			invokePaymentDialog(url, codes, names, 1.0f);
 		}
@@ -96,11 +96,11 @@ public class DonateActivity extends PreferenceActivity implements OnPreferenceCl
 			StringBuilder url = new StringBuilder();
 			if(language.equalsIgnoreCase("ru")){
 				url.append("https://light.webmoney.ru/pci.aspx");
-				url.append("?url="); url.append("http%3A//ametro.no-ip.org/thanks");
+				url.append("?url="); url.append("http%3A//www.ametro.org/thanks");
 				url.append("&desc="); url.append("%D0%9F%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%83%20aMetro%20");
 			}else{
 				url.append("https://light.wmtransfer.com/pci.aspx");
-				url.append("?url="); url.append("http%3A//ametro-en.no-ip.org/thanks");
+				url.append("?url="); url.append("http%3A//www.ametro.org/thanks");
 				url.append("&desc="); url.append("aMetro%20Project%20Support");
 			}
 			url.append("&purse="); url.append("%%CURRENCY%%");
@@ -122,12 +122,12 @@ public class DonateActivity extends PreferenceActivity implements OnPreferenceCl
 			url.append("?amount="); url.append("%%AMOUNT%%");
 			url.append("&currency="); url.append("%%CURRENCY%%");
 			if(language.equalsIgnoreCase("ru")){
-				url.append("&return_url="); url.append("http%3A//ametro.no-ip.org/thanks");
+				url.append("&return_url="); url.append("http%3A//www.ametro.org/thanks");
 				url.append("&language="); url.append("RU");
 				url.append("&detail1_description="); url.append("%D0%9F%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%83%20aMetro%20");
 				url.append("&detail1_text="); url.append("%D0%9F%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%83%20aMetro%20");
 			}else{
-				url.append("&return_url="); url.append("http%3A//ametro-en.no-ip.org/thanks");
+				url.append("&return_url="); url.append("http%3A//www.ametro.org/thanks");
 				url.append("&language="); url.append("EN");
 				url.append("&detail1_description="); url.append("aMetro%20Project%20Support");
 				url.append("&detail1_text="); url.append("aMetro%20Project%20Support");
