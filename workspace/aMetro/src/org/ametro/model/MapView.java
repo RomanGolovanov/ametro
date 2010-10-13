@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.ametro.R;
+import org.ametro.model.ext.ModelPoint;
+import org.ametro.model.ext.ModelRect;
 import org.ametro.util.CollectionUtil;
 
 import android.content.Context;
@@ -266,5 +268,20 @@ public class MapView {
 	        }
 		}
 		return result;
+	}
+
+	public StationView findStation(int x, int y) {
+		for(StationView station : this.stations){
+			final ModelRect r = station.stationNameRect;
+			if(r!=null && r.contains(x,y)){
+				return station;
+			}
+			final ModelPoint p = station.stationPoint;
+			if(p!=null && p.distance(x,y) <= this.stationDiameter ){
+				return station;
+			}
+			
+		}
+		return null;
 	}	
 }

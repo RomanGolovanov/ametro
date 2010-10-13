@@ -39,14 +39,20 @@ public class ModelRect {
 		this.right = right;
 		this.bottom = bottom;
 	}
+	
 	public void offset(int dx, int dy) {
 		left += dx;
 		right += dx;
 		top += dy;
 		bottom += dy;
 	}
+	
 	public boolean isZero() {
 		return left==0 && right==0 && top==0 && bottom ==0;
+	}
+	
+	public boolean contains(int x, int y) {
+		return x >= left && x <= right && y >= top && y <= bottom;
 	}
 	
 }

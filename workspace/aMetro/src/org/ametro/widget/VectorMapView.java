@@ -107,6 +107,14 @@ public class VectorMapView extends BaseMapView{
 		}
 	};
 
+	public int getModelClickPositionX(){
+		return (int)( getMapClickPositionX() / mScale );
+	}
+	
+	public int getModelClickPositionY(){
+		return (int)( getMapClickPositionY() / mScale );
+	}
+	
 	public boolean performClick() {
 		if (mZoomControls.getVisibility() != View.VISIBLE) {
 			showZoom();
