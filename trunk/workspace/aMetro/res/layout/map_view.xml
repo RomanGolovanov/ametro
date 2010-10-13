@@ -4,9 +4,16 @@
 	android:layout_width="fill_parent" 
 	android:layout_height="fill_parent">
 
-	<org.ametro.widget.VectorMapView
-		android:id="@+id/browse_vector_map_view" android:layout_width="fill_parent"
-		android:layout_height="fill_parent" />
+	<FrameLayout
+		android:id="@+id/map_frame" 
+		android:layout_width="fill_parent" 
+		android:layout_height="fill_parent">
+
+		<org.ametro.widget.VectorMapView
+			android:id="@+id/browse_vector_map_view" android:layout_width="fill_parent"
+			android:layout_height="fill_parent" />
+
+	</FrameLayout>
 
 	<LinearLayout
 		android:id="@+id/browse_vector_map_panel_top"

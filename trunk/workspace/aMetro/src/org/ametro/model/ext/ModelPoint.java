@@ -45,5 +45,11 @@ public class ModelPoint {
 	public static boolean  isNullOrZero(ModelPoint p){
 		return p==null || (p.x==0 && p.y==0);
 	}
+
+	public int distance(int x0, int y0) {
+		final int dx = Math.abs(x-x0);
+		final int dy = Math.abs(y-y0);
+		return (int)Math.sqrt(dx*dx+dy*dy);
+	}
 	
 }

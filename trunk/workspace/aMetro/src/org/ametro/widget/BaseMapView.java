@@ -264,6 +264,14 @@ public abstract class BaseMapView extends ScrollView {
         return super.onKeyUp(keyCode, event);
     }
 
+    protected float getMapClickPositionX(){
+		return mScrollX + mLastTouchX;
+	}
+	
+	protected float getMapClickPositionY(){
+		return mScrollY + mLastTouchY;
+	}
+	
     public boolean onTrackballEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_MOVE:

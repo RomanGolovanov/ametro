@@ -50,7 +50,9 @@ import org.ametro.model.StationView;
 import org.ametro.model.TransferView;
 import org.ametro.model.TransportStation;
 import org.ametro.model.ext.ModelLocation;
+import org.ametro.model.route.RouteBuilder;
 import org.ametro.model.route.RouteContainer;
+import org.ametro.model.route.RouteParameters;
 import org.ametro.model.route.RouteView;
 import org.ametro.model.storage.ModelBuilder;
 import org.ametro.model.util.ModelUtil;
@@ -79,6 +81,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -86,6 +89,15 @@ import android.widget.ZoomControls;
 
 public class MapViewActivity extends Activity implements OnClickListener, OnDismissListener, ICatalogStorageListener {
 
+	private int mSelectionMode = SELECTION_MODE_BEGIN;
+	private StationView mStartStationView;
+	private StationView mEndStationView;
+	
+	private static final int SELECTION_MODE_BEGIN = 0;
+	private static final int SELECTION_MODE_FIRST = 1;
+	private static final int SELECTION_MODE_SECOND = 2;
+	private static final int SELECTION_MODE_DONE = 3;
+	
 	protected Dialog onCreateDialog(int id) {
 		switch (id) {
 		case DIALOG_EULA:
@@ -143,6 +155,37 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		return super.onKeyDown(keyCode, event);
 	}
 	
+	private class SearchRouteTask extends AsyncTask<Void, Void, RouteContainer>{
+
+		protected RouteContainer doInBackground(Void... arg0) {
+			int from = mStartStationView.stationId;
+			int to = mEndStationView.stationId;
+			int[] include = new int[0];
+			int[] exclude = new int[0];
+			int[] transports = mMapView.getCheckedTransports();
+			
+			RouteParameters routeParameters = new RouteParameters(from, to, include, exclude, RouteBuilder.ROUTE_OPTION_ALL, transports, 0);
+			return RouteBuilder.createRoutes(mMapView.owner, routeParameters);
+		}
+
+		protected void onPostExecute(RouteContainer result) {
+			if (result.hasRoutes()) {
+				mSelectionMode = SELECTION_MODE_DONE;
+				setNavigationRoute(result);
+				long secs = result.getDefaultRoute().getLength();
+				secs = ( secs/60 + (secs%60 == 0 ? 0 : 1) ) * 60;
+				Date date = new Date(secs * 1000);
+				String msg = getString(R.string.msg_route_time) + " " + String.format(getString(R.string.route_time_format), DateUtil.getDateUTC(date, "HH"), DateUtil.getDateUTC(date, "mm"));
+				Toast.makeText(MapViewActivity.Instance, msg, Toast.LENGTH_LONG).show();
+			} else {
+				mSelectionMode = SELECTION_MODE_FIRST;
+				Toast.makeText(MapViewActivity.Instance, getString(R.string.msg_route_not_found), Toast.LENGTH_SHORT).show();
+			}
+			super.onPostExecute(result);
+		}
+		
+	}
+	
 	public void onClick(View src) {
 		if(src == mNavigatePreviousButton){
 			navigatePreviuosStation();
@@ -158,6 +201,45 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		}
 		if(src == mNavigateListButton && mCurrentRouteView == null && mNavigationStations!=null){
 			startActivity(new Intent(this, StationSearchActivity.class));
+		}
+		if(src == mVectorMapView){
+			int x = mVectorMapView.getModelClickPositionX();
+			int y = mVectorMapView.getModelClickPositionY();
+			StationView station = mMapView.findStation(x,y);
+			switch(mSelectionMode){
+			case SELECTION_MODE_BEGIN:
+				if(station!=null){
+					mSelectionMode = SELECTION_MODE_FIRST;
+					mStartStationView = station;
+					Toast.makeText(this, "start from " + station.getName(), Toast.LENGTH_SHORT).show();
+				}else{
+					Toast.makeText(this, "no stations", Toast.LENGTH_SHORT).show();
+				}
+				break;
+			case SELECTION_MODE_FIRST:
+				if(station!=null){
+					mSelectionMode = SELECTION_MODE_SECOND;
+					mEndStationView = station;
+					Toast.makeText(this, "end at " + station.getName() , Toast.LENGTH_SHORT).show();
+					SearchRouteTask task = new SearchRouteTask();
+					task.execute();
+				}else{
+					Toast.makeText(this, "no stations", Toast.LENGTH_SHORT).show();
+				}
+				break;
+			case SELECTION_MODE_DONE:
+				clearNavigation(true);
+				mSelectionMode = SELECTION_MODE_BEGIN;
+				Toast.makeText(this, "clear selection", Toast.LENGTH_SHORT).show();
+				break;
+			}
+			
+//			if(station == null){
+//				Toast.makeText(this, "no stations", Toast.LENGTH_SHORT).show();
+//			}else{
+//				Toast.makeText(this, "clicked at " + station.getName(), Toast.LENGTH_SHORT).show();				
+//			}
+			
 		}
 	}
 
@@ -706,6 +788,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 				mNavigationTransfers = null;
 				setCurrentStation(null);
 			}
+			mSelectionMode = SELECTION_MODE_DONE;
 			mVectorMapView.setModelSelection(mNavigationStations, mNavigationSegments,mNavigationTransfers);
 			mVectorMapView.postInvalidate();
 		}
@@ -719,6 +802,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		if(changeUI){
 			hideNavigationControls();
 		}
+		mSelectionMode = SELECTION_MODE_BEGIN;
 		mRouteContainer = null;
 		mCurrentRouteView = null;
 		mNavigationStations = null;
@@ -887,6 +971,8 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 
 		setContentView(R.layout.map_view);
 
+		mMapFrame = (FrameLayout)findViewById(R.id.map_frame);
+		
 		mVectorMapView = (VectorMapView) findViewById(R.id.browse_vector_map_view);
 		updateAntiAliasingState();
 
@@ -909,6 +995,8 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		mNavigateClearButton.setOnClickListener(this);
 		mNavigateListButton.setOnClickListener(this);
 
+		mVectorMapView.setOnClickListener(this);
+		
 		if(mCurrentRouteView==null && mCurrentStation == null){
 			hideNavigationControls();
 		} 
@@ -1174,5 +1262,6 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	private boolean mDisableEulaDialog;
 	
 	private boolean mDisableMapReload;
-	
+
+	private FrameLayout mMapFrame;
 }
