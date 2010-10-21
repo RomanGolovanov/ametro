@@ -36,6 +36,7 @@ import org.ametro.catalog.CatalogMapPair.CatalogMapPairCountryComparator;
 import org.ametro.directory.CityDirectory;
 import org.ametro.model.TransportType;
 import org.ametro.util.BitmapUtil;
+import org.ametro.util.StringUtil;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -218,11 +219,11 @@ public class CatalogAdapter extends BaseAdapter implements Filterable {
 
 		for (int i = 0; i < count; i++) {
 		    final CatalogMapPair value = values.get(i);
-		    final String cityName = value.getCity(code).toString().toLowerCase();
-		    final String countryName = value.getCountry(code).toString().toLowerCase();
+		    final String cityName = value.getCity(code);
+		    final String countryName = value.getCountry(code);
 
 		    // First match against the whole, non-splitted value
-		    if (cityName.startsWith(prefixString) || countryName.startsWith(prefixString)) {
+		    if (StringUtil.startsWithoutDiacritics(cityName,prefixString) || StringUtil.startsWithoutDiacritics(countryName,prefixString)) {
 		        newValues.add(value);
 		    } else {
 		    	boolean added = false;
@@ -230,7 +231,7 @@ public class CatalogAdapter extends BaseAdapter implements Filterable {
 		        final int cityWordCount = cityWords.length;
 
 		        for (int k = 0; k < cityWordCount; k++) {
-		            if (cityWords[k].startsWith(prefixString)) {
+		            if (StringUtil.startsWithoutDiacritics(cityWords[k],prefixString)) {
 		                newValues.add(value);
 		                added = true;
 		                break;
@@ -242,7 +243,7 @@ public class CatalogAdapter extends BaseAdapter implements Filterable {
 			        final int countryWordCount = countryWords.length;
 
 			        for (int k = 0; k < countryWordCount; k++) {
-			            if (countryWords[k].startsWith(prefixString)) {
+			            if (StringUtil.startsWithoutDiacritics(countryWords[k],prefixString)) {
 			                newValues.add(value);
 			                break;
 			            }

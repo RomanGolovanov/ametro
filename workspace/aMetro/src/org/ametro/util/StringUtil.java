@@ -23,6 +23,7 @@ package org.ametro.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.text.Collator;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -52,8 +53,23 @@ import android.graphics.Rect;
  */
 public class StringUtil {
 
-	static final SimpleDateFormat DEFAULT_DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
+	public static final SimpleDateFormat DEFAULT_DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
+	public static final Collator COLLATOR = Collator.getInstance();
 
+	static{
+		COLLATOR.setStrength(Collator.PRIMARY);
+	}
+	
+	public static boolean startsWithoutDiacritics(String text, String prefix){
+		final int textLength = text.length();
+		final int prefixLength = prefix.length();
+		if(textLength<prefixLength){
+			return false;
+		}
+		String textPrefix = text.substring(0, prefixLength);
+		return COLLATOR.compare(textPrefix, prefix) == 0;
+	}
+	
 	private static final Pattern csvPattern = Pattern.compile("(?:^|,)(\"(?:[^\"]|\"\")*\"|[^,]*)");
 
 	public static String formatStringArray(String[] value) {

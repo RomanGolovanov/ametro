@@ -28,6 +28,7 @@ import org.ametro.R;
 import org.ametro.adapter.StationListAdapter;
 import org.ametro.model.MapView;
 import org.ametro.model.StationView;
+import org.ametro.util.StringUtil;
 
 import android.app.ListActivity;
 import android.app.SearchManager;
@@ -44,7 +45,7 @@ public class StationSearchActivity extends ListActivity {
 	private static class StationSortComparator implements Comparator<StationView>
 	{
 		public int compare(StationView first, StationView second) {
-			return first.getName().compareTo(second.getName());
+			return StringUtil.COLLATOR.compare(first.getName(),second.getName());
 		}
 	}
 	
@@ -96,11 +97,23 @@ public class StationSearchActivity extends ListActivity {
 	private MapView doSearchKeywords(String searchKeywords) {
 		MapView map = MapViewActivity.Instance.getMapView();
 		mStationList = new ArrayList<StationView>();
+		final ArrayList<StationView> stations = new ArrayList<StationView>();
 		for(StationView station : map.stations){
-			if(station.getName().toLowerCase().indexOf(searchKeywords)!=-1){
-				mStationList.add(station);
+			final String name = station.getName();
+			if(StringUtil.startsWithoutDiacritics(name,searchKeywords)){
+				stations.add(station);
+			}else{
+		        final String[] words = name.split(" ");
+		        final int wordsCount = words.length;
+		        for (int k = 0; k < wordsCount; k++) {
+		            if (StringUtil.startsWithoutDiacritics(words[k],searchKeywords)) {
+		            	stations.add(station);
+		                break;
+		            }
+		        }						
 			}
-		}
+		}			
+		mStationList = stations;
 		Collections.sort(mStationList, new StationSortComparator());
 		return map;
 	}
