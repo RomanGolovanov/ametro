@@ -38,6 +38,7 @@ public class ImportDirectory {
 	{
 		private String mFileName;
 		private int mCityId;
+		private String mCharset;
 		
 		public String getFileName() {
 			return mFileName;
@@ -47,10 +48,15 @@ public class ImportDirectory {
 			return mCityId;
 		}
 		
-		public Entity(String mFileName, int mCity) {
+		public String getCharSet(){
+			return mCharset;
+		}
+		
+		public Entity(String mFileName, int mCity, String mCharSet) {
 			super();
 			this.mFileName = mFileName;
 			this.mCityId = mCity;
+			this.mCharset = mCharSet;
 		}
 
 		public String getMapSystemName() {
@@ -67,7 +73,8 @@ public class ImportDirectory {
 				while(reader.next()){
 					String fileName = reader.getString(0).toLowerCase();
 					int cityId = reader.getInt(1);
-					Entity entity = new Entity(fileName, cityId);
+					String charSet = reader.getString(2);
+					Entity entity = new Entity(fileName, cityId, charSet);
 					mIndex.put(fileName, entity);
 				}
 			}

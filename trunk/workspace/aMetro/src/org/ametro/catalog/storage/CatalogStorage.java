@@ -261,6 +261,7 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 				CatalogMap map = mCatalogs[LOCAL].getMap(systemName);
 				if(map!=null ){
 					try {
+						Log.w(Constants.LOG_TAG_MAIN, "Delete local map " + map.getAbsoluteUrl());
 						if(FileUtil.delete(map.getAbsoluteUrl())){
 							mCatalogs[LOCAL].deleteMap(map);
 							mCatalogs[LOCAL].setTimestamp(System.currentTimeMillis());
@@ -284,13 +285,12 @@ public class CatalogStorage implements Runnable, ICatalogStorageTaskListener { /
 			if(mCatalogs[IMPORT]!=null && !mCatalogs[IMPORT].isCorrupted()){
 				CatalogMap map = mCatalogs[IMPORT].getMap(systemName);
 				if(map!=null ){
-					
 					try {
+						Log.w(Constants.LOG_TAG_MAIN, "Delete import map " + map.getAbsoluteUrl());
 						if(FileUtil.delete(map.getAbsoluteUrl())){
 							mCatalogs[IMPORT].deleteMap(map);
 							mCatalogs[IMPORT].setTimestamp(System.currentTimeMillis());
 							requestCatalogSave(IMPORT);
-							FileUtil.delete(map.getAbsoluteUrl());
 							fireCatalogMapChanged(systemName);
 							fireCatalogChanged(IMPORT, mCatalogs[IMPORT]);
 						}

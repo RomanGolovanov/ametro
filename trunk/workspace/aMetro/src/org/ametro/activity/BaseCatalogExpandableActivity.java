@@ -775,7 +775,7 @@ public abstract class BaseCatalogExpandableActivity extends Activity implements 
 		       .setCancelable(false)
 		       .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 		           public void onClick(DialogInterface dialog, int id) {
-			   			mStorage.deleteLocalMap(map.getSystemName());
+			   			mStorage.deleteImportMap(map.getSystemName());
 		           }
 		       })
 		       .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {

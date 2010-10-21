@@ -42,6 +42,7 @@ import org.ametro.directory.CatalogMapSuggestion;
 import org.ametro.directory.CityDirectory;
 import org.ametro.directory.CityStationDictionary;
 import org.ametro.directory.CountryDirectory;
+import org.ametro.directory.ImportDirectory;
 import org.ametro.directory.ImportMapDirectory;
 import org.ametro.directory.ImportTransportDirectory;
 import org.ametro.directory.StationDirectory;
@@ -75,7 +76,7 @@ public class PmzStorage implements IModelStorage {
 
 	/*package*/ static final int DEFAULT_LINE_BACKGOUND_COLOR = 0xFFFFFFFF; 
 	
-	/*package*/ static final String ENCODING = "windows-1251";
+	/*package*/ static final String DEFAULT_ENCODING = "windows-1251";
 	/*package*/ static final String DELAY_DAY_RU = "День";
 	/*package*/ static final String DELAY_NIGHT_RU = "Ночь";
 	/*package*/ static final String DELAY_RUSH_HOUR_RU = "Час-пик";
@@ -160,9 +161,12 @@ public class PmzStorage implements IModelStorage {
 		private CityStationDictionary mCityStationDictionary;
 		private ImportMapDirectory mImportMapDirectory;
 		private ImportTransportDirectory mImportTransportDirectory;
+		private ImportDirectory mImportDirectory;
 
 		private ArrayList<String> mDelayNames = new ArrayList<String>();
 		private TreeMap<String,Integer> mDelayIndexes = new TreeMap<String, Integer>();
+
+		private String mCharset;
 		
 		private int[] getMapsNumbers(String[] maps) {
 			ArrayList<Integer> res = new ArrayList<Integer>();
@@ -238,6 +242,7 @@ public class PmzStorage implements IModelStorage {
 			mCityStationDictionary = mStationDirectory.get(mFile);
 			mImportMapDirectory = ApplicationEx.getInstance().getImportMapDirectory();
 			mImportTransportDirectory = ApplicationEx.getInstance().getImportTransportDirectory();
+			mImportDirectory = ApplicationEx.getInstance().getImportDirectory();
 		}
 
 		public void execute() throws IOException{
@@ -245,6 +250,16 @@ public class PmzStorage implements IModelStorage {
 			try{
 				mZipFile = new ZipFile(mFile, ZipFile.OPEN_READ);
 				mModel = new Model();
+
+				String fileName = mFile.getName();
+				String mapName = fileName.substring(0, fileName.indexOf('.'));
+				ImportDirectory.Entity importInfo = mImportDirectory.get(mapName);
+				if(importInfo!=null && importInfo.getCharSet()!=null){
+					mCharset = importInfo.getCharSet();
+				}else{
+					mCharset = DEFAULT_ENCODING; 
+				}
+				
 				findModelFiles(); // find map files in archive
 				importCityFile(); // load data from .cty file - map description
 				if(!mDescriptionOnly) { 
@@ -268,7 +283,7 @@ public class PmzStorage implements IModelStorage {
 
 			for(String fileName : mTxtFiles){
 				InputStream stream = mZipFile.getInputStream(mZipFile.getEntry(fileName));
-				IniStreamReader ini = new IniStreamReader(new InputStreamReader(stream, ENCODING)); // access as INI file
+				IniStreamReader ini = new IniStreamReader(new InputStreamReader(stream, mCharset)); // access as INI file
 
 				boolean addToStationInfo = false;
 				String caption = null;
@@ -372,7 +387,7 @@ public class PmzStorage implements IModelStorage {
 
 			for(String fileName : mMapFiles){ // for each .map file in catalog
 				InputStream stream = mZipFile.getInputStream(mZipFile.getEntry(fileName));
-				IniStreamReader ini = new IniStreamReader(new InputStreamReader(stream, ENCODING)); // access as INI file
+				IniStreamReader ini = new IniStreamReader(new InputStreamReader(stream, mCharset)); // access as INI file
 
 				MapView view = new MapView();
 				view.id = mMapViews.size();
@@ -659,7 +674,7 @@ public class PmzStorage implements IModelStorage {
 		private void importTrpFiles() throws IOException {
 			for(String fileName : mTrpFiles){ // for each .trp file in catalog
 				InputStream stream = mZipFile.getInputStream(mZipFile.getEntry(fileName));
-				IniStreamReader ini = new IniStreamReader(new InputStreamReader(stream, ENCODING)); // access as INI file
+				IniStreamReader ini = new IniStreamReader(new InputStreamReader(stream, mCharset)); // access as INI file
 
 				TransportMap map = new TransportMap(); // create new transport map
 				map.id = mTransportMaps.size();
@@ -780,7 +795,7 @@ public class PmzStorage implements IModelStorage {
 			mTimestamp =  Math.max(Math.max( DateUtil.toUTC( cityEntry.getTime() ), Constants.MODEL_IMPORT_TIMESTAMP), gpsTimestamp);
 			
 			InputStream stream = mZipFile.getInputStream(cityEntry);
-			final IniStreamReader ini = new IniStreamReader(new InputStreamReader(stream, ENCODING));
+			final IniStreamReader ini = new IniStreamReader(new InputStreamReader(stream, DEFAULT_ENCODING));
 			while(ini.readNext()){
 				final String key = ini.getKey();
 				final String value = ini.getValue();
