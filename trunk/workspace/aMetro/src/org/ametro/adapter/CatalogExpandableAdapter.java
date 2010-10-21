@@ -365,11 +365,11 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
 
 		for (int i = 0; i < count; i++) {
 		    final CatalogMapPair value = values.get(i);
-		    final String cityName = value.getCity(code).toString().toLowerCase();
-		    final String countryName = value.getCountry(code).toString().toLowerCase();
+		    final String cityName = value.getCity(code);
+		    final String countryName = value.getCountry(code);
 
 		    // First match against the whole, non-splitted value
-		    if (cityName.startsWith(prefixString) || countryName.startsWith(prefixString)) {
+		    if (StringUtil.startsWithoutDiacritics(cityName,prefixString) || StringUtil.startsWithoutDiacritics(countryName,prefixString)) {
 		        newValues.add(value);
 		    } else {
 		    	boolean added = false;
@@ -377,7 +377,7 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
 		        final int cityWordCount = cityWords.length;
 
 		        for (int k = 0; k < cityWordCount; k++) {
-		            if (cityWords[k].startsWith(prefixString)) {
+		            if (StringUtil.startsWithoutDiacritics(cityWords[k],prefixString)) {
 		                newValues.add(value);
 		                added = true;
 		                break;
@@ -389,7 +389,7 @@ public class CatalogExpandableAdapter extends BaseExpandableListAdapter implemen
 			        final int countryWordCount = countryWords.length;
 
 			        for (int k = 0; k < countryWordCount; k++) {
-			            if (countryWords[k].startsWith(prefixString)) {
+			            if (StringUtil.startsWithoutDiacritics(countryWords[k],prefixString)) {
 			                newValues.add(value);
 			                break;
 			            }

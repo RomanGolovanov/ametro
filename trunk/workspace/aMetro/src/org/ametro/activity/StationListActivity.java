@@ -30,6 +30,7 @@ import org.ametro.R;
 import org.ametro.adapter.StationListAdapter;
 import org.ametro.model.MapView;
 import org.ametro.model.StationView;
+import org.ametro.util.StringUtil;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -58,15 +59,15 @@ public class StationListActivity extends ListActivity {
 	private class NameComparator implements Comparator<StationView>
 	{
 		public int compare(StationView left, StationView right) {
-			return left.getName().compareTo(right.getName());
+			return StringUtil.COLLATOR.compare(left.getName(),right.getName());
 		}
 	}
 	
 	private class LineComparator implements Comparator<StationView>
 	{
 		public int compare(StationView left, StationView right) {
-			int lineCompare = mMap.lines[left.lineViewId].getName().compareTo(mMap.lines[right.lineViewId].getName());
-			return (lineCompare!=0) ? lineCompare : left.getName().compareTo(right.getName()); 
+			int lineCompare = StringUtil.COLLATOR.compare( mMap.lines[left.lineViewId].getName(), mMap.lines[right.lineViewId].getName());
+			return (lineCompare!=0) ? lineCompare : StringUtil.COLLATOR.compare(left.getName(),right.getName()); 
 		}
 	}	
 	

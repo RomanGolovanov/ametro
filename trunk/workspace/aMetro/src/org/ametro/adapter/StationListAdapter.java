@@ -28,6 +28,7 @@ import org.ametro.model.LineView;
 import org.ametro.model.MapView;
 import org.ametro.model.StationView;
 import org.ametro.util.DateUtil;
+import org.ametro.util.StringUtil;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -51,6 +52,7 @@ public class StationListAdapter extends BaseAdapter implements Filterable {
 			public Long[] Delays;
 		}
 
+		
 		protected FilterResults performFiltering(CharSequence constraint) {
 			final StationView[] allStations = mStations;
 			final Long[] allDelays = mDelays;
@@ -72,10 +74,11 @@ public class StationListAdapter extends BaseAdapter implements Filterable {
 				final int length = allStations.length;
 				StationView station;
 				
+				
 				for(int i = 0; i < length; i++){
 					station = allStations[i];
 					final String name = station.getName().toLowerCase();
-					if(name.startsWith(prefix)){
+					if(StringUtil.startsWithoutDiacritics(name,prefix)){
 						stations.add(station);
 						if(allDelays!=null){
 							delays.add(allDelays[i]);
@@ -85,7 +88,7 @@ public class StationListAdapter extends BaseAdapter implements Filterable {
 				        final int wordsCount = words.length;
 
 				        for (int k = 0; k < wordsCount; k++) {
-				            if (words[k].startsWith(prefix)) {
+				            if (StringUtil.startsWithoutDiacritics(words[k],prefix)) {
 				            	stationsAtEnd.add(station);
 								if(allDelays!=null){
 									delaysAtEnd.add(allDelays[i]);
