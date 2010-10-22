@@ -340,21 +340,26 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 		final Resources res = getResources();
 		final String[] states = res.getStringArray(R.array.catalog_map_states);
 		final String[] transportNames = res.getStringArray(R.array.transport_types);
-        final CountryDirectory countryDirectory = ApplicationEx.getInstance().getCountryDirectory();
 		
-    	CountryDirectory.Entity entity = countryDirectory.getByName(preffered().getCountry(code));
-    	if(entity!=null){
-			File file = new File(Constants.ICONS_PATH, entity.getISO2() + ".png");
-			if(file.exists()){
-				Bitmap bmp = BitmapUtil.createScaledBitmap(file.getAbsolutePath(), mDisplayScale, false);
-				;
-	    		mCountryImageView.setImageDrawable(new BitmapDrawable(bmp));
-			}else{
+		if(GlobalSettings.isCountryIconsEnabled(this)){
+			mCountryImageView.setVisibility(View.VISIBLE);
+	        final CountryDirectory countryDirectory = ApplicationEx.getInstance().getCountryDirectory();
+	    	CountryDirectory.Entity entity = countryDirectory.getByName(preffered().getCountry(code));
+	    	if(entity!=null){
+				File file = new File(Constants.ICONS_PATH, entity.getISO2() + ".png");
+				if(file.exists()){
+					Bitmap bmp = BitmapUtil.createScaledBitmap(file.getAbsolutePath(), mDisplayScale, false);
+		    		mCountryImageView.setImageDrawable(new BitmapDrawable(bmp));
+				}else{
+		    		mCountryImageView.setImageResource(R.drawable.no_country);
+				}
+	    	}else{
 	    		mCountryImageView.setImageResource(R.drawable.no_country);
-			}
-    	}else{
-    		mCountryImageView.setImageResource(R.drawable.no_country);
-    	}
+	    	}
+		}else{
+			mCountryImageView.setVisibility(View.GONE);
+		}
+		
 		
 		mOpenButton.setVisibility( (mLocal!=null && !mForceOpenButtonDisable) ? View.VISIBLE : View.GONE);
 		
