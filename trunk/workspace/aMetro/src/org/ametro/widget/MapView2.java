@@ -7,6 +7,7 @@ import org.ametro.render.RenderProgram;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.PointF;
 import android.graphics.Rect;
@@ -55,6 +56,7 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 	Handler dispatcher = new Handler();
 	Object mutex = new Object();
 
+	Bitmap cacheImage0;
 	Bitmap cacheImage;
 	RectF cacheModelRect;
 	Rect cacheScreenRect;
@@ -62,11 +64,12 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 	float cacheScale;
 	float cacheX;
 	float cacheY;
+	float cacheWidth;
+	float cacheHeight;
 	
 	Runnable updateCache = new Runnable() {
 		public void run() {
 			drawOnCache(true);
-			postInvalidate();
 		}
 	}; 
 	
@@ -74,12 +77,78 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 		if(!force && cacheImage!=null){
 			if(currentScale == cacheScale){
 				dispatcher.removeCallbacks(updateCache);
-				dispatcher.postDelayed(updateCache, 500);
+				dispatcher.post(updateCache);
 				return;
 			}
 		}
 
-		RectF viewport = getModelRect();
+		Rect screen = new Rect(0,0,getWidth(), getHeight());
+		if(cacheScale == currentScale && screen.equals(cacheScreenRect) && (mode != TOUCH_DONE_MODE || !scroller.isFinished() ) ){
+			drawPartial();
+		}else{
+			drawEntire();
+		}
+		
+	}
+
+	private void drawPartial() {
+	
+		final RectF cache = new RectF(cacheModelRect);
+		final RectF viewport = getModelVisibleRect();
+		final RectF v = new RectF(viewport);
+		final RectF h = new RectF(viewport);
+		final RectF i = new RectF(viewport);
+		i.intersect(cache);
+
+		if (viewport.right == i.right && viewport.bottom == i.bottom) {
+			h.bottom = i.top;
+			v.right = i.left;
+		} else if (viewport.right == i.right && viewport.top == i.top) {
+			h.top = i.bottom;
+			v.right = i.left;
+		} else if (viewport.left == i.left && viewport.bottom == i.bottom) {
+			h.bottom = i.top;
+			v.left = i.right;
+		} else if (viewport.left == i.left && viewport.top == i.top) {
+			h.top = i.bottom;
+			v.left = i.right;
+		} else {
+			throw new RuntimeException("Invalid viewport splitting algorithm");
+		}
+
+		Rect screen = new Rect(0,0,getWidth(), getHeight());
+		if(cacheImage0 == null){
+			cacheImage0 = Bitmap.createBitmap(screen.width(), screen.height(), Config.RGB_565); 
+		}
+		Bitmap bmp = cacheImage0;
+		
+		Canvas c = new Canvas(bmp);
+		
+		c.save();
+		c.setMatrix(currentMatrix);
+		c.clipRect(viewport);
+		
+		renderer.setVisibilityTwice(h,v);
+		renderer.draw(c);
+
+		c.restore();
+
+		float dx = cacheX - currentX;
+		float dy = cacheY - currentY;
+		c.drawBitmap(cacheImage, dx, dy, null);
+		
+		cacheImage0 = cacheImage;
+		cacheImage = bmp;
+		cacheModelRect = viewport;
+		cacheScreenRect = screen;
+		cacheMatrix = new Matrix(currentMatrix);
+		cacheScale = currentScale;
+		cacheX = currentX;
+		cacheY = currentY;
+	}
+
+	private void drawEntire() {
+		RectF viewport = getModelVisibleRect();
 		Rect screen = new Rect(0,0,getWidth(), getHeight());
 		
 		Bitmap bmp = Bitmap.createBitmap(screen.width(), screen.height(), Config.RGB_565);
@@ -96,15 +165,13 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 		cacheScale = currentScale;
 		cacheX = currentX;
 		cacheY = currentY;
-		
 	}
 	
 	protected void onDraw(Canvas canvas) {
+		canvas.drawColor(Color.WHITE);
 		if(renderer!=null){
 			if(mode == TOUCH_ZOOM_MODE){
 				float scale = currentScale / cacheScale;
-				int width = getWidth();
-				int height = getHeight();
 				canvas.save();
 				canvas.scale(scale, scale, mid.x, mid.y);
 				canvas.drawBitmap(cacheImage, 0, 0, null);
@@ -120,15 +187,10 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 		super.onDraw(canvas);
 	}
 
-	private RectF getModelRect() {
-		final float scale = currentScale;
-		float x = currentX / scale;
-		float y = currentY / scale;
-		float width = currentWidth / scale;
-		float height = currentHeight / scale;
-		
-		RectF viewport = new RectF(x, y, x + width, y + height);
-		return viewport;
+	private RectF getModelVisibleRect() {
+		RectF rect = new RectF(0, 0, getWidth(), getHeight());
+		reversedMatrix.mapRect(rect);
+		return rect;
 	}
 
 	protected int computeVerticalScrollOffset() {
@@ -352,6 +414,9 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 			currentScale = matrixValues[Matrix.MSCALE_X];
 			currentHeight = getContentHeight() * currentScale;
 			currentWidth = getContentWidth() * currentScale;
+			
+			reversedMatrix.setTranslate(currentX, currentY);
+			reversedMatrix.postScale(1/currentScale, 1/currentScale);
 		}
 		postInvalidate();
 	}
@@ -442,6 +507,7 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 	Matrix matrix = new Matrix();
 	Matrix savedMatrix = new Matrix();
 	Matrix currentMatrix = new Matrix();
+	Matrix reversedMatrix = new Matrix();
 
 	private float currentX;
 	private float currentY;
