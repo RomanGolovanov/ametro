@@ -404,7 +404,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		menu.add(0, MAIN_MENU_SETTINGS, 6, R.string.menu_settings).setIcon(android.R.drawable.ic_menu_preferences);
 		menu.add(0, MAIN_MENU_ABOUT, 7, R.string.menu_about).setIcon(android.R.drawable.ic_menu_help);
 		menu.add(0, MAIN_MENU_LOCATION, 8, R.string.menu_location).setIcon(android.R.drawable.ic_menu_mylocation);
-		//menu.add(0, MAIN_MENU_EXPERIMENTAL, 9,R.string.menu_experimental);
+		menu.add(0, MAIN_MENU_EXPERIMENTAL, 9,R.string.menu_experimental);
 
 		return true;
 	}
@@ -467,7 +467,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			startActivityForResult(new Intent(this, LocationSearchDialog.class), REQUEST_LOCATION);
 			return true;
 		case MAIN_MENU_EXPERIMENTAL:
-			startActivity(new Intent(this, CatalogTabHostActivity.class));
+			startActivity(new Intent(this, MapView2Activity.class));
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
