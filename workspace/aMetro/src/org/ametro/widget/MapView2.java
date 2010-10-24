@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -66,6 +67,7 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 	float cacheY;
 	float cacheWidth;
 	float cacheHeight;
+	Paint cachePaint;
 	
 	Runnable updateCache = new Runnable() {
 		public void run() {
@@ -74,6 +76,11 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 	}; 
 	
 	void drawOnCache(boolean force){
+		if(cachePaint==null){
+			cachePaint = new Paint();
+			cachePaint.setAntiAlias(true);
+		}
+		
 		if(!force && cacheImage!=null){
 			if(currentScale == cacheScale){
 				dispatcher.removeCallbacks(updateCache);
@@ -173,13 +180,13 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 				float scale = currentScale / cacheScale;
 				canvas.save();
 				canvas.scale(scale, scale, mid.x, mid.y);
-				canvas.drawBitmap(cacheImage, 0, 0, null);
+				canvas.drawBitmap(cacheImage, 0, 0, cachePaint);
 				canvas.restore();
 			}else{
 				drawOnCache(scroller.isFinished());
 				float dx = cacheX - currentX;
 				float dy = cacheY - currentY;
-				canvas.drawBitmap(cacheImage, dx, dy, null);
+				canvas.drawBitmap(cacheImage, dx, dy, cachePaint);
 			}
 			
 		}
@@ -540,6 +547,7 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 
 	//private Bitmap img;
 
+	
 	private Model model;
 	private MapView scheme;
 	private RenderProgram renderer;
