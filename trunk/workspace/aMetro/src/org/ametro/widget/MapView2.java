@@ -88,7 +88,9 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 		}else{
 			drawEntire();
 		}
-		
+		if(force){
+			postInvalidate();
+		}
 	}
 
 	private void drawPartial() {
@@ -441,8 +443,7 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 		int vy = (int) velocityTracker.getYVelocity() / 2;
 		int maxX = (int) Math.max(currentWidth - getWidth(), 0);
 		int maxY = (int) Math.max(currentHeight - getHeight(), 0);
-		scroller.fling((int) currentX, (int) currentY, -vx, -vy, 0, maxX, 0,
-				maxY);
+		scroller.fling((int) currentX, (int) currentY, -vx, -vy, 0, maxX, 0, maxY);
 	}
 
 	@SuppressWarnings("unused")

@@ -1,6 +1,7 @@
 package org.ametro.activity;
 
 import org.ametro.GlobalSettings;
+import org.ametro.GlobalSettings.MapPath;
 import org.ametro.model.MapView;
 import org.ametro.model.Model;
 import org.ametro.model.storage.ModelBuilder;
@@ -28,6 +29,7 @@ public class MapView2Activity extends Activity {
 		
 		protected Model doInBackground(Void... params) {
 			GlobalSettings.MapPath path = GlobalSettings.getCurrentMap(MapView2Activity.this);
+			//MapPath path = new MapPath("/sdcard/ametro/maps/peterburg.pmz.ametro,Metro.map");
 			Model m = ModelBuilder.loadModel(path.FilePath);
 			mapView = m.loadView(path.ViewName);
 			return m;
