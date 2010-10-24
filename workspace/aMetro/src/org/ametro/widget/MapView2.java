@@ -88,9 +88,6 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 		}else{
 			drawEntire();
 		}
-		if(force){
-			postInvalidate();
-		}
 	}
 
 	private void drawPartial() {
@@ -179,7 +176,7 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 				canvas.drawBitmap(cacheImage, 0, 0, null);
 				canvas.restore();
 			}else{
-				drawOnCache(false);
+				drawOnCache(scroller.isFinished());
 				float dx = cacheX - currentX;
 				float dy = cacheY - currentY;
 				canvas.drawBitmap(cacheImage, dx, dy, null);
