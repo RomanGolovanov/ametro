@@ -71,25 +71,20 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 	
 	Runnable updateCache = new Runnable() {
 		public void run() {
-			drawOnCache(true);
+			invalidateCache(false);
+			postInvalidate();
 		}
 	}; 
 	
-	void drawOnCache(boolean force){
+	void invalidateCache(boolean invalidateOnly){
 		if(cachePaint==null){
 			cachePaint = new Paint();
 			cachePaint.setAntiAlias(true);
 		}
-		
-		if(!force && cacheImage!=null){
-			if(currentScale == cacheScale){
-				dispatcher.removeCallbacks(updateCache);
-				dispatcher.post(updateCache);
-				return;
-			}
-		}
-
 		Rect screen = new Rect(0,0,getWidth(), getHeight());
+		if(invalidateOnly && cacheImage!=null && screen.equals(cacheScreenRect) && cacheScale == currentScale){
+			return;
+		}
 		if(cacheScale == currentScale && screen.equals(cacheScreenRect) && (mode != TOUCH_DONE_MODE || !scroller.isFinished() ) ){
 			drawPartial();
 		}else{
@@ -174,6 +169,7 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 	}
 	
 	protected void onDraw(Canvas canvas) {
+		//Log.w(TAG, "draw, Scroller.IsFinish() = " + scroller.isFinished());
 		canvas.drawColor(Color.WHITE);
 		if(renderer!=null){
 			if(mode == TOUCH_ZOOM_MODE){
@@ -183,12 +179,14 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 				canvas.drawBitmap(cacheImage, 0, 0, cachePaint);
 				canvas.restore();
 			}else{
-				drawOnCache(scroller.isFinished());
+				invalidateCache(true);
 				float dx = cacheX - currentX;
 				float dy = cacheY - currentY;
 				canvas.drawBitmap(cacheImage, dx, dy, cachePaint);
+				if(dx!=0 || dy!=0){
+					dispatcher.post(updateCache);
+				}
 			}
-			
 		}
 		super.onDraw(canvas);
 	}
@@ -245,7 +243,6 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 	public boolean onTouch(View v, MotionEvent event) {
 		// Dump touch event to log
 		//dumpEvent(event);
-		long eventTime = event.getEventTime();
 
 		// Handle touch events here...
 		switch (event.getAction() & MotionEvent.ACTION_MASK) {
@@ -262,9 +259,7 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 				// TAP_TIMEOUT);
 			}
 			// Remember where the motion event started
-			savedMatrix.set(matrix);
-			startTouchPoint.set(event.getX(), event.getY());
-			startTouchTime = eventTime;
+			doBeginTouch(event);
 			velocityTracker = VelocityTracker.obtain();
 			break;
 		case MotionEvent.ACTION_POINTER_DOWN:
@@ -294,7 +289,7 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 			case TOUCH_DRAG_START_MODE:
 				// if the user waits a while w/o moving before the
 				// up, we don't want to do a fling
-				if (eventTime - startTouchTime <= MIN_FLING_TIME) {
+				if ((event.getEventTime() - startTouchTime) <= MIN_FLING_TIME) {
 					velocityTracker.addMovement(event);
 					doFling();
 					break;
@@ -342,9 +337,16 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 				mode = TOUCH_DRAG_MODE;
 			}
 			doDrag(event);
+			doBeginTouch(event);
 			break;
 		}
 		return true; // indicate event was handled
+	}
+
+	private void doBeginTouch(MotionEvent event) {
+		savedMatrix.set(matrix);
+		startTouchPoint.set(event.getX(), event.getY());
+		startTouchTime = event.getEventTime();
 	}
 
 	private void doZoom(MotionEvent event) {
@@ -542,7 +544,7 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 	private Scroller scroller;
 	private VelocityTracker velocityTracker;
 
-	private static final int MIN_FLING_TIME = 500; // 250
+	private static final int MIN_FLING_TIME = 250; // 250
 	private int touchSlopSquare;
 
 	//private Bitmap img;
