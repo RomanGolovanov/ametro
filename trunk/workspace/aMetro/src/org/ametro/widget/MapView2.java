@@ -20,13 +20,11 @@ import android.util.FloatMath;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
-import android.view.View;
 import android.view.ViewConfiguration;
-import android.view.View.OnTouchListener;
 import android.widget.ScrollView;
 import android.widget.Scroller;
 
-public class MapView2 extends ScrollView implements OnTouchListener {
+public class MapView2 extends ScrollView {
 
 	public MapView2(Context context, Model model, MapView scheme) {
 		super(context);
@@ -72,10 +70,10 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 	Runnable updateCache = new Runnable() {
 		public void run() {
 			invalidateCache(false);
-			postInvalidate();
+			invalidate();
 		}
 	}; 
-	
+
 	void invalidateCache(boolean invalidateOnly){
 		if(cachePaint==null){
 			cachePaint = new Paint();
@@ -91,7 +89,37 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 			drawEntire();
 		}
 	}
+	
+	protected void onDraw(Canvas canvas) {
+		canvas.drawColor(Color.WHITE);
+		if(renderer!=null){
+			if(mode == TOUCH_ZOOM_MODE){
+				float scale = currentScale / cacheScale;
+				canvas.save();
+				canvas.scale(scale, scale, mid.x, mid.y);
+				canvas.drawBitmap(cacheImage, 0, 0, cachePaint);
+				canvas.restore();
+			}else{
+				invalidateCache(true);
+				float dx = cacheX - currentX;
+				float dy = cacheY - currentY;
+				canvas.drawBitmap(cacheImage, dx, dy, cachePaint);
 
+				/// SAMSUNG GALAXY S bug workaround
+				if(dx!=0 || dy!=0 || overrenderCount<MAX_OVERRENDER_COUNT){
+					dispatcher.post(updateCache);
+
+					/// SAMSUNG GALAXY S bug workaround
+					if(dx==0 && dy==0){
+						 overrenderCount++;
+					}else{
+						overrenderCount = 0;
+					}
+				}
+			}
+		}
+		super.onDraw(canvas);
+	}
 	private void drawPartial() {
 	
 		final RectF cache = new RectF(cacheModelRect);
@@ -167,29 +195,7 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 		cacheX = currentX;
 		cacheY = currentY;
 	}
-	
-	protected void onDraw(Canvas canvas) {
-		//Log.w(TAG, "draw, Scroller.IsFinish() = " + scroller.isFinished());
-		canvas.drawColor(Color.WHITE);
-		if(renderer!=null){
-			if(mode == TOUCH_ZOOM_MODE){
-				float scale = currentScale / cacheScale;
-				canvas.save();
-				canvas.scale(scale, scale, mid.x, mid.y);
-				canvas.drawBitmap(cacheImage, 0, 0, cachePaint);
-				canvas.restore();
-			}else{
-				invalidateCache(true);
-				float dx = cacheX - currentX;
-				float dy = cacheY - currentY;
-				canvas.drawBitmap(cacheImage, dx, dy, cachePaint);
-				if(dx!=0 || dy!=0){
-					dispatcher.post(updateCache);
-				}
-			}
-		}
-		super.onDraw(canvas);
-	}
+
 
 	private RectF getModelVisibleRect() {
 		RectF rect = new RectF(0, 0, getWidth(), getHeight());
@@ -227,8 +233,6 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 		scroller = new Scroller(context);
 		setVerticalScrollBarEnabled(true);
 		setHorizontalScrollBarEnabled(true);
-		setOnTouchListener(this);
-		
 	}
 
 	public int getContentWidth() {
@@ -240,7 +244,7 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 	}
 
 	@Override
-	public boolean onTouch(View v, MotionEvent event) {
+	public boolean onTouchEvent(MotionEvent event) {
 		// Dump touch event to log
 		//dumpEvent(event);
 
@@ -264,7 +268,7 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 			break;
 		case MotionEvent.ACTION_POINTER_DOWN:
 			oldDist = spacing(event);
-			Log.d(TAG, "oldDist=" + oldDist);
+			//Log.d(TAG, "oldDist=" + oldDist);
 			if (oldDist > 10f) {
 				if (!scroller.isFinished()) {
 					scroller.abortAnimation();
@@ -296,7 +300,7 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 				}
 				break;
 			case TOUCH_ZOOM_MODE:
-				postInvalidate();
+				invalidate();
 			case TOUCH_DONE_MODE:
 				// do nothing
 				break;
@@ -351,7 +355,7 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 
 	private void doZoom(MotionEvent event) {
 		float newDist = spacing(event);
-		Log.d(TAG, "newDist=" + newDist);
+		//Log.d(TAG, "newDist=" + newDist);
 		if (newDist > 10f) {
 			matrix.set(savedMatrix);
 			float scale = newDist / oldDist;
@@ -410,6 +414,7 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 			dx += diffRight;
 		}
 		matrix.postTranslate(dx, dy);
+		//Log.w(TAG, "Drag " + dx + ", " + dy);
 		updateMatrix();
 	}
 
@@ -426,7 +431,7 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 			reversedMatrix.setTranslate(currentX, currentY);
 			reversedMatrix.postScale(1/currentScale, 1/currentScale);
 		}
-		postInvalidate();
+		invalidate();
 	}
 
 	public void computeScroll() {
@@ -437,6 +442,9 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 			float dy = currentY - y;
 			matrix.postTranslate(dx, dy);
 			updateMatrix();
+			//Log.w(TAG, "Compute scroll " + dx + ", " + dy);
+		}else{
+			//Log.w(TAG, "Compute scroll end");
 		}
 	}
 
@@ -450,6 +458,7 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 		int maxX = (int) Math.max(currentWidth - getWidth(), 0);
 		int maxY = (int) Math.max(currentHeight - getHeight(), 0);
 		scroller.fling((int) currentX, (int) currentY, -vx, -vy, 0, maxX, 0, maxY);
+		//Log.w(TAG, "Fling " + vx + ", " + vy);
 	}
 
 	@SuppressWarnings("unused")
@@ -547,11 +556,13 @@ public class MapView2 extends ScrollView implements OnTouchListener {
 	private static final int MIN_FLING_TIME = 250; // 250
 	private int touchSlopSquare;
 
-	//private Bitmap img;
 
-	
 	private Model model;
 	private MapView scheme;
 	private RenderProgram renderer;
+	
+	/// SAMSUNG GALAXY S bug workaround
+	private int overrenderCount;
+	private static final int MAX_OVERRENDER_COUNT = 5;
 
 }
