@@ -111,11 +111,32 @@ public class MapView2 extends ScrollView {
 		float width;
 		float height;
 		
+		//ProgressDialog dialog;
+		
 		protected void onPreExecute() {
 			super.onPreExecute();
 			scale = currentScale;
 			width = currentWidth;
 			height = currentHeight;
+			//dialog = ProgressDialog.show(MapView2.this.getContext(),"Wait","map rendering...");
+			//dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			//dialog.show();
+			boolean execGC = false;
+			if(cacheOld!=null){
+				Bitmap img = cacheOld.Image;
+				cacheOld = null;
+				img.recycle();
+				execGC = true;
+			}
+			if(cache!=null && cache.IsEntireMapCached){
+				Bitmap img = cache.Image;
+				cache = null;
+				img.recycle();
+				execGC = true;
+			}
+			if(execGC){
+				System.gc();
+			}
 		}
 		
 		protected DrawingCache doInBackground(Void... params) {
@@ -133,7 +154,6 @@ public class MapView2 extends ScrollView {
 					renderer.draw(c);
 					return cache;
 				}catch(Throwable th){
-					Log.e(TAG, "Failed to create entire map cache", th);
 					return null;
 				}
 			}
@@ -141,16 +161,15 @@ public class MapView2 extends ScrollView {
 		}
 
 		protected void onPostExecute(DrawingCache result) {
+			//dialog.dismiss();
 			if(result!=null && currentScale == scale && currentWidth == width && currentHeight == height){
 				dispatcher.removeCallbacks(updateCache);
 				cache = result;
-				Log.w(TAG, "Entire map cache created");
+				cacheOld = null;
 				invalidate();
 			}
 			super.onPostExecute(result);
 		}
-			
-	
 	};
 	
 	Runnable updateCache = new Runnable() {
@@ -209,14 +228,18 @@ public class MapView2 extends ScrollView {
 				
 				/// SAMSUNG GALAXY S bug workaround
 				if(!isHitCache || overrenderCount<MAX_OVERRENDER_COUNT){
-					Log.w(TAG, "Cache miss");
 					dispatcher.post(updateCache);
-
 					/// SAMSUNG GALAXY S bug workaround
 					if(isHitCache){
 						 overrenderCount++;
 					}else{
 						overrenderCount = 0;
+					}
+				}
+				if(cache.IsEntireMapCached){
+					try {
+						Thread.sleep(25);
+					} catch (InterruptedException e) {
 					}
 				}
 			}
