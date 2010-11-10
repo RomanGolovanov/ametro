@@ -36,7 +36,6 @@ import org.ametro.model.TransportStation;
 import org.ametro.model.TransportTransfer;
 import org.ametro.model.ext.ModelSpline;
 
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -77,7 +76,6 @@ public class RenderProgram {
 	private MapView mMapView;
 	
 	private ArrayList<RenderElement> mElements;
-	private ArrayList<RenderElement> mClippedElements;
 	private ClippingTreeNode mClippingTree;
 
 	HashMap<SegmentView, RenderElement> segmentIndex = new HashMap<SegmentView, RenderElement>();
@@ -99,7 +97,6 @@ public class RenderProgram {
 	public RenderProgram(MapView map) {
 		mMapView = map;
 		mElements = new ArrayList<RenderElement>();
-		mClippedElements = new ArrayList<RenderElement>();
 		drawLines(map, mElements);
 		drawTransfers(map, mElements);
 		drawStations(map, mElements);
@@ -307,11 +304,11 @@ public class RenderProgram {
 		}
 	}
 
-	public void setVisibilityAll() {
-		mClippedElements = mElements;
+	public ArrayList<RenderElement> setVisibilityAll() {
+		return mElements;
 	}
 
-	public void setVisibility(RectF viewport) {
+	public ArrayList<RenderElement> setVisibility(RectF viewport) {
 		final Rect v = new Rect(
 				(int) (viewport.left - CLIPPING_OFFSET),
 				(int) (viewport.top - CLIPPING_OFFSET),
@@ -320,10 +317,10 @@ public class RenderProgram {
 		ArrayList<RenderElement> clipping = new ArrayList<RenderElement>(100);
 		appendClipping(v,clipping, mClippingTree);
 		Collections.sort(clipping);
-		mClippedElements = clipping;
+		return clipping;
 	}
 
-	public void setVisibilityTwice(RectF viewport1, RectF viewport2) {
+	public ArrayList<RenderElement> setVisibilityTwice(RectF viewport1, RectF viewport2) {
 		final Rect v1 = new Rect(
 				(int) (viewport1.left - CLIPPING_OFFSET),
 				(int) (viewport1.top - CLIPPING_OFFSET),
@@ -338,16 +335,7 @@ public class RenderProgram {
 		ArrayList<RenderElement> clipping = new ArrayList<RenderElement>(100);
 		appendDoubleClipping(v1, v2, clipping, mClippingTree);
 		Collections.sort(clipping);
-		mClippedElements = clipping;
-	}
-
-	public void draw(Canvas canvas) {
-		canvas.save();
-		canvas.drawColor(Color.WHITE);
-		for (RenderElement elem : mClippedElements) {
-			elem.draw(canvas);
-		}
-		canvas.restore();
+		return clipping;
 	}
 
 	public static int getGrayedColor(int color) {
