@@ -1,7 +1,10 @@
 package org.ametro.widget;
 
+import java.util.ArrayList;
+
 import org.ametro.model.MapView;
 import org.ametro.model.Model;
+import org.ametro.render.RenderElement;
 import org.ametro.render.RenderProgram;
 
 import android.content.Context;
@@ -14,11 +17,9 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Bitmap.Config;
+import android.graphics.PorterDuff.Mode;
 import android.os.AsyncTask;
 import android.os.Handler;
-import android.util.AttributeSet;
-import android.util.FloatMath;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
@@ -26,7 +27,7 @@ import android.view.ViewConfiguration;
 import android.widget.ScrollView;
 import android.widget.Scroller;
 
-public class MapView2 extends ScrollView {
+public class MapViewBasic extends ScrollView {
 
 	public static class DrawingCache
 	{
@@ -72,7 +73,7 @@ public class MapView2 extends ScrollView {
 		}
 	}
 	
-	public MapView2(Context context, Model model, MapView scheme) {
+	public MapViewBasic(Context context, Model model, MapView scheme) {
 		super(context);
 		this.model = model;
 		this.scheme = scheme;
@@ -80,21 +81,6 @@ public class MapView2 extends ScrollView {
 		renderer.setRenderFilter(RenderProgram.ALL);
 		renderer.setAntiAlias(true);
 		renderer.updateSelection(null, null, null);
-		init(context);
-	}
-
-	public MapView2(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
-		init(context);
-	}
-
-	public MapView2(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		init(context);
-	}
-
-	public MapView2(Context context) {
-		super(context);
 		init(context);
 	}
 
@@ -111,31 +97,34 @@ public class MapView2 extends ScrollView {
 		float width;
 		float height;
 		
-		//ProgressDialog dialog;
-		
 		protected void onPreExecute() {
 			super.onPreExecute();
 			scale = currentScale;
 			width = currentWidth;
 			height = currentHeight;
-			//dialog = ProgressDialog.show(MapView2.this.getContext(),"Wait","map rendering...");
-			//dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			//dialog.show();
-			boolean execGC = false;
 			if(cacheOld!=null){
 				Bitmap img = cacheOld.Image;
 				cacheOld = null;
 				img.recycle();
-				execGC = true;
 			}
 			if(cache!=null && cache.IsEntireMapCached){
+
+				Rect screen = new Rect(0,0,getWidth(),getHeight());
+				RectF viewport = getModelVisibleRect();
+				
+				Bitmap bmp = Bitmap.createBitmap(getWidth(), getHeight(), Config.RGB_565);
+				Canvas canvas = new Canvas(bmp);
+				float scale = currentScale / cache.Scale;
+				canvas.save();
+				canvas.scale(scale, scale, mid.x, mid.y);
+				canvas.drawBitmap(cache.Image, -zoomX, -zoomY, cachePaint);
+				canvas.restore();
+				
 				Bitmap img = cache.Image;
 				cache = null;
 				img.recycle();
-				execGC = true;
-			}
-			if(execGC){
-				System.gc();
+				
+				cache = new DrawingCache(bmp, viewport, screen, currentScale, currentX, currentY, currentWidth, currentHeight, false);
 			}
 		}
 		
@@ -148,10 +137,13 @@ public class MapView2 extends ScrollView {
 					Bitmap bmp = Bitmap.createBitmap(imageWidth, imageHeight, Config.RGB_565);
 					DrawingCache cache = new DrawingCache(bmp, null, null, scale, 0, 0, width, height, true);
 					Canvas c = new Canvas(cache.Image);
-					//c.setMatrix(currentMatrix);
 					c.scale(scale, scale);
-					renderer.setVisibilityAll();
-					renderer.draw(c);
+					ArrayList<RenderElement> elements = renderer.setVisibilityAll();
+					c.drawColor(Color.WHITE);
+					for (RenderElement elem : elements) {
+						elem.draw(c);
+					}
+					
 					return cache;
 				}catch(Throwable th){
 					return null;
@@ -161,13 +153,18 @@ public class MapView2 extends ScrollView {
 		}
 
 		protected void onPostExecute(DrawingCache result) {
-			//dialog.dismiss();
-			if(result!=null && currentScale == scale && currentWidth == width && currentHeight == height){
-				dispatcher.removeCallbacks(updateCache);
+			mode = TOUCH_DONE_MODE;
+			if(result!=null){
+				if(cache!=null){
+					Bitmap img = cache.Image;
+					cache = null;
+					img.recycle();
+				}
 				cache = result;
 				cacheOld = null;
-				invalidate();
 			}
+			overrenderCount = 0;
+			invalidate();
 			super.onPostExecute(result);
 		}
 	};
@@ -208,7 +205,7 @@ public class MapView2 extends ScrollView {
 				EntireMapRenderTask task = new EntireMapRenderTask();
 				task.execute();
 			}
-			if(mode == TOUCH_ZOOM_MODE){
+			if(mode == TOUCH_ZOOM_MODE || mode == TOUCH_AFTER_ZOOM_MODE){
 				float scale = currentScale / cache.Scale;
 				canvas.save();
 				canvas.scale(scale, scale, mid.x, mid.y);
@@ -216,6 +213,9 @@ public class MapView2 extends ScrollView {
 					canvas.drawBitmap(cache.Image, -zoomX, -zoomY, cachePaint);
 				}else{
 					canvas.drawBitmap(cache.Image, 0, 0, cachePaint);
+				}
+				if(mode == TOUCH_AFTER_ZOOM_MODE){
+					canvas.drawColor(0x80000000, Mode.DST_ATOP);
 				}
 				canvas.restore();
 			}else{
@@ -247,7 +247,7 @@ public class MapView2 extends ScrollView {
 		super.onDraw(canvas);
 	}
 	
-	private void drawPartial() {
+	protected void drawPartial() {
 		RectF viewport = getModelVisibleRect();
 		Rect screen = new Rect(0,0,getWidth(), getHeight());
 		DrawingCache cacheNew;
@@ -286,8 +286,11 @@ public class MapView2 extends ScrollView {
 		c.setMatrix(currentMatrix);
 		c.clipRect(viewport);
 		
-		renderer.setVisibilityTwice(h,v);
-		renderer.draw(c);
+		ArrayList<RenderElement> elements = renderer.setVisibilityTwice(h,v);
+		c.drawColor(Color.WHITE);
+		for (RenderElement elem : elements) {
+			elem.draw(c);
+		}
 
 		c.restore();
 
@@ -299,7 +302,7 @@ public class MapView2 extends ScrollView {
 		cache = cacheNew;
 	}
 
-	private void drawEntire() {
+	protected void drawEntire() {
 		RectF viewport = getModelVisibleRect();
 		Rect screen = new Rect(0,0,getWidth(), getHeight());
 		DrawingCache cacheNew;
@@ -313,14 +316,17 @@ public class MapView2 extends ScrollView {
 		
 		Canvas c = new Canvas(cacheNew.Image);
 		c.setMatrix(currentMatrix);
-		renderer.setVisibility(viewport);
-		renderer.draw(c);
+		ArrayList<RenderElement> elements = renderer.setVisibility(viewport);
+		c.drawColor(Color.WHITE);
+		for (RenderElement elem : elements) {
+			elem.draw(c);
+		}
 		
 		cacheOld = cache;
 		cache = cacheNew;
 	}
 
-	private RectF getModelVisibleRect() {
+	protected RectF getModelVisibleRect() {
 		RectF rect = new RectF(0, 0, getWidth(), getHeight());
 		reversedMatrix.mapRect(rect);
 		return rect;
@@ -342,7 +348,7 @@ public class MapView2 extends ScrollView {
 		return (int) currentWidth;
 	}
 
-	private void init(Context context) {
+	protected void init(Context context) {
 		//img = BitmapFactory.decodeResource(context.getResources(), R.drawable.map);
 		maxZoom = 4;
 		minZoom = 0.25f;
@@ -373,12 +379,13 @@ public class MapView2 extends ScrollView {
 	
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch (keyCode) {
-    	case KeyEvent.KEYCODE_VOLUME_UP:
+    	case KeyEvent.KEYCODE_ENDCALL:
     		savedMatrix.set(matrix);
     		doZoom(currentScale*1.5f);
-    		
     		return true;
-    	case KeyEvent.KEYCODE_VOLUME_DOWN:
+    	case KeyEvent.KEYCODE_CALL:
+    		savedMatrix.set(matrix);
+    		doZoom(currentScale/1.5f);
     		return true;
         case KeyEvent.KEYCODE_DPAD_UP:
         case KeyEvent.KEYCODE_DPAD_DOWN:
@@ -428,11 +435,11 @@ public class MapView2 extends ScrollView {
     }
     
 	public boolean onTouchEvent(MotionEvent event) {
-		// Dump touch event to log
-		//dumpEvent(event);
-
+		if(mode == TOUCH_AFTER_ZOOM_MODE){
+			return false;
+		}
 		// Handle touch events here...
-		switch (event.getAction() & MotionEvent.ACTION_MASK) {
+		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
 			if (!scroller.isFinished()) {
 				scroller.abortAnimation();
@@ -449,30 +456,14 @@ public class MapView2 extends ScrollView {
 			setTouchStart(event);
 			velocityTracker = VelocityTracker.obtain();
 			break;
-		case MotionEvent.ACTION_POINTER_DOWN:
-			oldDist = spacing(event);
-			//Log.d(TAG, "oldDist=" + oldDist);
-			if (oldDist > 10f) {
-				if (!scroller.isFinished()) {
-					scroller.abortAnimation();
-				}
-				savedMatrix.set(matrix);
-				midPoint(mid, event);
-				zoomX = currentX;
-				zoomY = currentY;
-				mode = TOUCH_ZOOM_MODE;
-			}
-			break;
-
 		case MotionEvent.ACTION_MOVE:
 			if (mode == TOUCH_DONE_MODE) {
 				break; // no dragging during scroll zoom animation
 			} else if (mode == TOUCH_ZOOM_MODE) {
-				doZoom(event);
+				// do nothing at non-multitouch devices
 				break;
 			}
 			velocityTracker.addMovement(event);
-
 			if (mode != TOUCH_DRAG_MODE) {
 
 				float x = event.getX();
@@ -494,7 +485,6 @@ public class MapView2 extends ScrollView {
 			return doDrag(event);
 			
 		case MotionEvent.ACTION_UP:
-		case MotionEvent.ACTION_POINTER_UP:
 			switch (mode) {
 			case TOUCH_INIT_MODE: // tap
 				// case TOUCH_SHORTPRESS_START_MODE:
@@ -518,6 +508,8 @@ public class MapView2 extends ScrollView {
 				EntireMapRenderTask task = new EntireMapRenderTask();
 				task.execute();
 				invalidate();
+				mode = TOUCH_AFTER_ZOOM_MODE;
+				return true;
 			case TOUCH_DONE_MODE:
 				// do nothing
 				break;
@@ -534,22 +526,13 @@ public class MapView2 extends ScrollView {
 		return true; // indicate event was handled
 	}
 
-	private void setTouchStart(MotionEvent event) {
+	protected void setTouchStart(MotionEvent event) {
 		savedMatrix.set(matrix);
 		startTouchPoint.set(event.getX(), event.getY());
 		startTouchTime = event.getEventTime();
 	}
-	
 
-	private void doZoom(MotionEvent event) {
-		float newDist = spacing(event);
-		//Log.d(TAG, "newDist=" + newDist);
-		if (newDist > 10f) {
-			doZoom(newDist / oldDist);
-		}
-	}
-
-	private void doZoom(float scale){
+	protected void doZoom(float scale){
 		matrix.set(savedMatrix);
 		matrix.getValues(matrixValues);
 		float currentScale = matrixValues[Matrix.MSCALE_X];
@@ -566,7 +549,7 @@ public class MapView2 extends ScrollView {
 	}
 	
 
-	private boolean doDrag(MotionEvent event) {
+	protected boolean doDrag(MotionEvent event) {
 		float dx = event.getX() - startTouchPoint.x;
 		float dy = event.getY() - startTouchPoint.y;
 		if(doDrag(dx, dy)){
@@ -576,7 +559,7 @@ public class MapView2 extends ScrollView {
 		return false;
 	}
 	
-	private boolean doDrag(float dx, float dy){
+	protected boolean doDrag(float dx, float dy){
 		matrix.set(savedMatrix);
 		int height = getContentHeight();
 		int width = getContentWidth();
@@ -591,16 +574,12 @@ public class MapView2 extends ScrollView {
 		float newX = currentX0 + dx;
 		float newY = currentY0 + dy;
 
-		RectF drawingRect = new RectF(newX, newY, newX + currentWidth, newY
-				+ currentHeight);
-		float diffUp = Math.min(viewRect.bottom - drawingRect.bottom,
-				viewRect.top - drawingRect.top);
-		float diffDown = Math.max(viewRect.bottom - drawingRect.bottom,
-				viewRect.top - drawingRect.top);
-		float diffLeft = Math.min(viewRect.left - drawingRect.left,
-				viewRect.right - drawingRect.right);
-		float diffRight = Math.max(viewRect.left - drawingRect.left,
-				viewRect.right - drawingRect.right);
+		RectF drawingRect = new RectF(newX, newY, newX + currentWidth, newY + currentHeight);
+		float diffUp = Math.min(viewRect.bottom - drawingRect.bottom, viewRect.top - drawingRect.top);
+		float diffDown = Math.max(viewRect.bottom - drawingRect.bottom, viewRect.top - drawingRect.top);
+		float diffLeft = Math.min(viewRect.left - drawingRect.left, viewRect.right - drawingRect.right);
+		float diffRight = Math.max(viewRect.left - drawingRect.left, viewRect.right - drawingRect.right);
+		
 		if (diffUp > 0) {
 			dy += diffUp;
 		}
@@ -622,7 +601,7 @@ public class MapView2 extends ScrollView {
 		return false;
 	}
 
-	private void updateMatrix() {
+	protected void updateMatrix() {
 		synchronized (mutex) {
 			currentMatrix = matrix;
 			matrix.getValues(matrixValues);
@@ -653,7 +632,7 @@ public class MapView2 extends ScrollView {
 		}
 	}
 
-	private void doFling() {
+	protected void doFling() {
 		if (velocityTracker == null) {
 			return;
 		}
@@ -666,49 +645,6 @@ public class MapView2 extends ScrollView {
 		//Log.w(TAG, "Fling " + vx + ", " + vy);
 	}
 	
-
-	@SuppressWarnings("unused")
-	private void dumpEvent(MotionEvent event) {
-		String names[] = { "DOWN", "UP", "MOVE", "CANCEL", "OUTSIDE",
-				"POINTER_DOWN", "POINTER_UP", "7?", "8?", "9?" };
-		StringBuilder sb = new StringBuilder();
-		int action = event.getAction();
-		int actionCode = action & MotionEvent.ACTION_MASK;
-		sb.append("event ACTION_").append(names[actionCode]);
-		if (actionCode == MotionEvent.ACTION_POINTER_DOWN
-				|| actionCode == MotionEvent.ACTION_POINTER_UP) {
-			sb.append("(pid ").append(
-					action >> MotionEvent.ACTION_POINTER_ID_SHIFT);
-			sb.append(")");
-		}
-		sb.append("[");
-		for (int i = 0; i < event.getPointerCount(); i++) {
-			sb.append("#").append(i);
-			sb.append("(pid ").append(event.getPointerId(i));
-			sb.append(")=").append((int) event.getX(i));
-			sb.append(",").append((int) event.getY(i));
-			if (i + 1 < event.getPointerCount())
-				sb.append(";");
-		}
-		sb.append("]");
-		Log.d(TAG, sb.toString());
-	}
-
-	/** Determine the space between the first two fingers */
-	private float spacing(MotionEvent event) {
-		float x = event.getX(0) - event.getX(1);
-		float y = event.getY(0) - event.getY(1);
-		return FloatMath.sqrt(x * x + y * y);
-	}
-
-	/** Calculate the mid point of the first two fingers */
-	private void midPoint(PointF point, MotionEvent event) {
-		float x = event.getX(0) + event.getX(1);
-		float y = event.getY(0) + event.getY(1);
-		point.set(x / 2, y / 2);
-	}
-	
-
 	protected int getViewWidth() {
 		if (!isVerticalScrollBarEnabled()) {
 			return getWidth();
@@ -725,18 +661,18 @@ public class MapView2 extends ScrollView {
 		}
 	}
 
-	private static final String TAG = "Touch";
+	protected static final String TAG = "Touch";
 	// These matrices will be used to move and zoom image
 	Matrix matrix = new Matrix();
 	Matrix savedMatrix = new Matrix();
 	Matrix currentMatrix = new Matrix();
 	Matrix reversedMatrix = new Matrix();
 
-	private float currentX;
-	private float currentY;
-	private float currentScale;
-	private float currentWidth;
-	private float currentHeight;
+	protected float currentX;
+	protected float currentY;
+	protected float currentScale;
+	protected float currentWidth;
+	protected float currentHeight;
 
 	// We can be in one of these 3 states
 	static final int TOUCH_DONE_MODE = 0;
@@ -744,6 +680,7 @@ public class MapView2 extends ScrollView {
 	static final int TOUCH_DRAG_START_MODE = 2;
 	static final int TOUCH_DRAG_MODE = 3;
 	static final int TOUCH_ZOOM_MODE = 4;
+	static final int TOUCH_AFTER_ZOOM_MODE = 5;
 	int mode = TOUCH_DONE_MODE;
 
 	// Remember some things for zooming
@@ -753,40 +690,40 @@ public class MapView2 extends ScrollView {
 	long startTouchTime;
 
 	// Limit zoomable/pannable image
-	private float[] matrixValues = new float[9];
-	private float maxZoom;
-	private float minZoom;
+	protected float[] matrixValues = new float[9];
+	protected float maxZoom;
+	protected float minZoom;
 
-	private Scroller scroller;
-	private VelocityTracker velocityTracker;
+	protected Scroller scroller;
+	protected VelocityTracker velocityTracker;
 
-	private static final int MIN_FLING_TIME = 250; // 250
-	private int touchSlopSquare;
+	protected static final int MIN_FLING_TIME = 250; // 250
+	protected int touchSlopSquare;
 
 
-	private float zoomX;
-	private float zoomY;
+	protected float zoomX;
+	protected float zoomY;
 	
-	private Model model;
-	private MapView scheme;
-	private RenderProgram renderer;
-	private RectF modelVisibleRect;
-	private Rect screenRect;
+	protected Model model;
+	protected MapView scheme;
+	protected RenderProgram renderer;
+	protected RectF modelVisibleRect;
+	protected Rect screenRect;
 	
 	/// SAMSUNG GALAXY S bug workaround
-	private int overrenderCount;
-	private static final int MAX_OVERRENDER_COUNT = 5;
+	protected int overrenderCount;
+	protected static final int MAX_OVERRENDER_COUNT = 5;
 
 
-    private int mKeyScrollSpeed = KEY_SCROLL_MIN_SPEED;
-    private long mKeyScrollLastSpeedTime;
-    private int mKeyScrollMode = KEY_SCROLL_MODE_DONE;
+    protected int mKeyScrollSpeed = KEY_SCROLL_MIN_SPEED;
+    protected long mKeyScrollLastSpeedTime;
+    protected int mKeyScrollMode = KEY_SCROLL_MODE_DONE;
 
-    private static final int KEY_SCROLL_MIN_SPEED = 2;
-    private static final int KEY_SCROLL_MAX_SPEED = 20;
-    private static final int KEY_SCROLL_ACCELERATION_DELAY = 100;
-    private static final int KEY_SCROLL_ACCELERATION_STEP = 2;
+    protected static final int KEY_SCROLL_MIN_SPEED = 2;
+    protected static final int KEY_SCROLL_MAX_SPEED = 20;
+    protected static final int KEY_SCROLL_ACCELERATION_DELAY = 100;
+    protected static final int KEY_SCROLL_ACCELERATION_STEP = 2;
 
-    private static final int KEY_SCROLL_MODE_DONE = 0;
-    private static final int KEY_SCROLL_MODE_DRAG = 1;	
+    protected static final int KEY_SCROLL_MODE_DONE = 0;
+    protected static final int KEY_SCROLL_MODE_DRAG = 1;	
 }

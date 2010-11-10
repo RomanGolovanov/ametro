@@ -20,6 +20,7 @@
 
 package org.ametro.widget;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.ametro.Constants;
@@ -27,6 +28,7 @@ import org.ametro.model.MapView;
 import org.ametro.model.SegmentView;
 import org.ametro.model.StationView;
 import org.ametro.model.TransferView;
+import org.ametro.render.RenderElement;
 import org.ametro.render.RenderProgram;
 
 import android.content.Context;
@@ -371,12 +373,13 @@ public class VectorMapView extends BaseMapView{
 			canvas.translate(-modelOuter.left, -modelOuter.top);
 			if(screenCoords != mUpdateTileCacheRect) return;
 	
-			mRenderProgram.setVisibilityTwice(horizontalSpanInModel, verticalSpanInModel);
-			if(screenCoords != mUpdateTileCacheRect) return;
-	
-			mRenderProgram.draw(canvas);
-			if(screenCoords != mUpdateTileCacheRect) return;
-	
+			ArrayList<RenderElement> elements = mRenderProgram.setVisibilityTwice(horizontalSpanInModel, verticalSpanInModel);
+			canvas.drawColor(Color.WHITE);
+			for (RenderElement elem : elements) {
+				if(screenCoords != mUpdateTileCacheRect) return;
+				elem.draw(canvas);
+			}
+			
 			canvas.restore();
 	
 			canvas.save();
@@ -425,8 +428,12 @@ public class VectorMapView extends BaseMapView{
 						mUpdatedAntiAlias = true;
 						mRenderProgram.setAntiAlias(mAntiAlias);
 					}
-					mRenderProgram.setVisibilityAll();
-					mRenderProgram.draw(canvas);
+					
+					ArrayList<RenderElement> elements = mRenderProgram.setVisibilityAll();
+					canvas.drawColor(Color.WHITE);
+					for (RenderElement elem : elements) {
+						elem.draw(canvas);
+					}
 
 					synchronized(sync){
 						mTileCacheRect = new Rect(0,0,width, height);
@@ -469,8 +476,12 @@ public class VectorMapView extends BaseMapView{
 
 			canvas.scale(mScale, mScale);
 			canvas.translate(-modelOuter.left, -modelOuter.top);
-			mRenderProgram.setVisibility(modelOuter);
-			mRenderProgram.draw(canvas);
+			
+			ArrayList<RenderElement> elements = mRenderProgram.setVisibility(modelOuter);
+			canvas.drawColor(Color.WHITE);
+			for (RenderElement elem : elements) {
+				elem.draw(canvas);
+			}
 
 			synchronized(sync){
 				mTileCacheRect = tileOuter;
