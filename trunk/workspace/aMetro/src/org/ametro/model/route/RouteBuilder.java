@@ -81,7 +81,7 @@ public class RouteBuilder {
 		for (TransportSegment seg : model.segments) {
 			if(checkedTransports.contains(seg.mapId)){
 				Integer delay = seg.delay;
-				if (delay != null) {
+				if (delay != null && delay != 0) {
 					g.addEdge(seg.stationFromId,seg.stationToId, (int)delay);
 				}
 			}
