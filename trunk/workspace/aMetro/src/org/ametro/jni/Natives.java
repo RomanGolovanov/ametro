@@ -35,7 +35,7 @@ public class Natives {
 		boolean ini = false;
 		try {
 			System.loadLibrary("ametro");
-			//ini = true; //  <- Do not use natives now, for performance issues
+			ini = true; //  <- Do not use natives now, for performance issues
     		if(Log.isLoggable(Constants.LOG_TAG_MAIN, Log.INFO)){
     			Log.i(Constants.LOG_TAG_MAIN,"Native library initialized");
     		}
