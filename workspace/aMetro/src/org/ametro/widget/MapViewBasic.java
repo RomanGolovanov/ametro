@@ -191,6 +191,7 @@ public class MapViewBasic extends ScrollView {
 					if(invalidateOnly) return;
 					if(mode != TOUCH_DONE_MODE || !scroller.isFinished() ){
 						drawPartial();
+						return;
 					}
 				}
 			}
