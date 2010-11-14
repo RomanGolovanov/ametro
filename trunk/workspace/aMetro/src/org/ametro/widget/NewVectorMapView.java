@@ -220,6 +220,8 @@ public class NewVectorMapView extends ScrollView {
 		int viewWidth = getWidth();
 		int viewHeight = getHeight();
 		canvas.save();
+		
+		
 		zero.x = Math.max(viewWidth - currentWidth, 0);
 		zero.y = Math.max(viewHeight - currentHeight, 0);
 		canvas.save();
@@ -228,6 +230,11 @@ public class NewVectorMapView extends ScrollView {
 		}
 		canvas.clipRect(0, 0, zero.x==0 ? viewWidth : currentWidth , zero.y==0 ? viewHeight : currentHeight);
 		canvas.drawColor(Color.BLACK);
+		
+		if((mode==TOUCH_AFTER_ZOOM_MODE || mode == TOUCH_AFTER_ZOOM_MODE || mode == TOUCH_AFTER_ZOOM_RENDER_MODE) && !zeroOld.equals(zero)){
+			mid.offset(zero.x-zeroOld.x, zero.y-zeroOld.y);
+		}
+		zeroOld.set(zero);
 		
 		if(renderer!=null){
 			if(cache == null){
@@ -579,10 +586,10 @@ public class NewVectorMapView extends ScrollView {
 			case TOUCH_ZOOM_MODE:
 				// limit zoom pan
 				limitPan();
+				mode = TOUCH_AFTER_ZOOM_MODE;
 				EntireMapRenderTask task = new EntireMapRenderTask();
 				task.execute();
 				invalidate();
-				mode = TOUCH_AFTER_ZOOM_MODE;
 				break;
 			case TOUCH_DONE_MODE:
 				// do nothing
@@ -679,7 +686,7 @@ public class NewVectorMapView extends ScrollView {
 
 	protected boolean doDrag(MotionEvent event) {
 		float dx = (event.getX() - zero.x) - start.x;
-		float dy = (event.getY() - zero.x) - start.y;
+		float dy = (event.getY() - zero.y) - start.y;
 		doDrag(dx, dy);
 		setTouchStart(event);
 		return true;
@@ -787,6 +794,7 @@ public class NewVectorMapView extends ScrollView {
 	// Remember some things for zooming
 	PointF start = new PointF();
 	PointF zero = new PointF();
+	PointF zeroOld = new PointF();
 	PointF mid = new PointF();
 	float oldDist = 1f;
 	long startTouchTime;
