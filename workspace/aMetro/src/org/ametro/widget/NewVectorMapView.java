@@ -221,20 +221,21 @@ public class NewVectorMapView extends ScrollView {
 		int viewHeight = getHeight();
 		canvas.save();
 		
-		
-		zero.x = Math.max(viewWidth - currentWidth, 0);
-		zero.y = Math.max(viewHeight - currentHeight, 0);
-		canvas.save();
-		if (zero.x != 0 || zero.y != 0) {
-			canvas.translate(zero.x / 2, zero.y / 2);
+		zero.x = Math.max(viewWidth - currentWidth, 0)/2;
+		zero.y = Math.max(viewHeight - currentHeight, 0)/2;
+		if((mode == TOUCH_ZOOM_MODE || mode == TOUCH_AFTER_ZOOM_MODE || mode == TOUCH_AFTER_ZOOM_RENDER_MODE)){
+			if (zoomZero.x != 0 || zoomZero.y != 0) {
+				canvas.translate(zoomZero.x, zoomZero.y);
+			}
+			canvas.clipRect(0, 0, zoomZero.x==0 ? viewWidth : currentWidth , zoomZero.y==0 ? viewHeight : currentHeight);
+			canvas.drawColor(Color.BLACK);
+		}else{
+			if (zero.x != 0 || zero.y != 0) {
+				canvas.translate(zero.x, zero.y);
+			}
+			canvas.clipRect(0, 0, zero.x==0 ? viewWidth : currentWidth , zero.y==0 ? viewHeight : currentHeight);
+			canvas.drawColor(Color.BLACK);
 		}
-		canvas.clipRect(0, 0, zero.x==0 ? viewWidth : currentWidth , zero.y==0 ? viewHeight : currentHeight);
-		canvas.drawColor(Color.BLACK);
-		
-		if((mode==TOUCH_AFTER_ZOOM_MODE || mode == TOUCH_AFTER_ZOOM_MODE || mode == TOUCH_AFTER_ZOOM_RENDER_MODE) && !zeroOld.equals(zero)){
-			mid.offset(zero.x-zeroOld.x, zero.y-zeroOld.y);
-		}
-		zeroOld.set(zero);
 		
 		if(renderer!=null){
 			if(cache == null){
@@ -246,7 +247,7 @@ public class NewVectorMapView extends ScrollView {
 				canvas.save();
 				canvas.scale(scale, scale, mid.x, mid.y);
 				if(cache.IsEntireMapCached){
-					canvas.drawBitmap(cache.Image, -zoomX , -zoomY , cachePaint);
+					canvas.drawBitmap(cache.Image, -zoomX, -zoomY, cachePaint);
 				}else{
 					canvas.drawBitmap(cache.Image, 0, 0, cachePaint);
 				}
@@ -432,7 +433,14 @@ public class NewVectorMapView extends ScrollView {
 	}
 
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-		screenRect = new Rect(0, 0, w, h);
+		if(screenRect == null){
+			screenRect = new Rect(0,0,w, h);
+		}else{
+			screenRect.set(0, 0, w, h);
+			savedMatrix.set(matrix);
+			doDrag((w-oldw)/2, (h-oldh)/2);
+			limitPan();			
+		}
 		super.onSizeChanged(w, h, oldw, oldh);
 	}
 	
@@ -529,6 +537,7 @@ public class NewVectorMapView extends ScrollView {
 				midPoint(mid, event);
 				zoomX = currentX;
 				zoomY = currentY;
+				zoomZero.set(zero);
 				mode = TOUCH_ZOOM_MODE;
 			}
 			break;
@@ -612,8 +621,8 @@ public class NewVectorMapView extends ScrollView {
 
 	private void limitPan() {
 		float dx=0, dy=0;
-		int width = getViewWidth();
-		int height = getViewHeight();
+		int width = getWidth();
+		int height = getHeight();
 		if(currentX<0 || width >= currentWidth){
 			dx = currentX;
 		}else if( (currentX+width)>currentWidth ){
@@ -661,7 +670,7 @@ public class NewVectorMapView extends ScrollView {
 
 	protected void doZoom(float scale){
 		float maxZoom = 2.0f;
-		float minZoom = Math.min((float)getViewWidth()/getContentWidth(), (float)getViewHeight()/getContentHeight()) ;
+		float minZoom = Math.min((float)getWidth()/getContentWidth(), (float)getHeight()/getContentHeight()) ;
 		matrix.set(savedMatrix);
 		matrix.getValues(matrixValues);
 		float currentScale = matrixValues[Matrix.MSCALE_X];
@@ -751,21 +760,21 @@ public class NewVectorMapView extends ScrollView {
 		postInvalidate();
 	}
 	
-	protected int getViewWidth() {
-		if (!isVerticalScrollBarEnabled()) {
-			return getWidth();
-		} else {
-			return Math.max(0, getWidth() - getVerticalScrollbarWidth());
-		}
-	}
-
-	protected int getViewHeight() {
-		if (!isHorizontalScrollBarEnabled()) {
-			return getHeight();
-		} else {
-			return Math.max(0, getHeight() - getHorizontalScrollbarHeight());
-		}
-	}
+//	protected int getViewWidth() {
+//		if (!isVerticalScrollBarEnabled()) {
+//			return getWidth();
+//		} else {
+//			return Math.max(0, getWidth() - getVerticalScrollbarWidth());
+//		}
+//	}
+//
+//	protected int getViewHeight() {
+//		if (!isHorizontalScrollBarEnabled()) {
+//			return getHeight();
+//		} else {
+//			return Math.max(0, getHeight() - getHorizontalScrollbarHeight());
+//		}
+//	}
 
 	protected static final String TAG = "Touch";
 	// These matrices will be used to move and zoom image
@@ -794,7 +803,7 @@ public class NewVectorMapView extends ScrollView {
 	// Remember some things for zooming
 	PointF start = new PointF();
 	PointF zero = new PointF();
-	PointF zeroOld = new PointF();
+	PointF zoomZero = new PointF();
 	PointF mid = new PointF();
 	float oldDist = 1f;
 	long startTouchTime;
