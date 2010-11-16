@@ -388,6 +388,7 @@ public class NewVectorMapView extends ScrollView {
 		cache = cacheNew;
 	}
 
+	
 	protected RectF getModelVisibleRect() {
 		RectF rect = new RectF(0, 0, getWidth(), getHeight());
 		reversedMatrix.mapRect(rect);

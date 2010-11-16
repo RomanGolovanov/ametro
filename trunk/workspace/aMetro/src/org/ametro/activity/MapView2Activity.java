@@ -4,6 +4,7 @@ import org.ametro.GlobalSettings;
 import org.ametro.model.MapView;
 import org.ametro.model.Model;
 import org.ametro.model.storage.ModelBuilder;
+import org.ametro.multitouch.MultiTouchMapView;
 import org.ametro.widget.NewVectorMapView;
 
 import android.app.Activity;
@@ -37,8 +38,10 @@ public class MapView2Activity extends Activity {
 		protected void onPostExecute(Model model) {
 			dialog.hide();
 			if(model!=null){
-				NewVectorMapView view = new NewVectorMapView(MapView2Activity.this, model, mapView);
+				MultiTouchMapView view = new MultiTouchMapView(MapView2Activity.this, mapView);
 				mContent.addView(view);
+				//NewVectorMapView view = new NewVectorMapView(MapView2Activity.this, model, mapView);
+				//mContent.addView(view);
 			}else{
 				Toast.makeText(MapView2Activity.this, "Cannot load map", Toast.LENGTH_SHORT).show();
 			}
