@@ -61,11 +61,13 @@ public class MultiTouchController<T> {
 	private VelocityTracker velocityTracker;
 	
     private Handler handler = new Handler();
+    private final  float density;
 	
 	public MultiTouchController(Context context, MultiTouchListener<T> multiTouchListener) {
 		listener = multiTouchListener;
 		scroller = new Scroller(context);
 		final int slop = ViewConfiguration.get(context).getScaledTouchSlop();
+		density = context.getResources().getDisplayMetrics().density;
 		touchSlopSquare = slop * slop;
 		velocityTracker = null;
 	}
@@ -81,7 +83,7 @@ public class MultiTouchController<T> {
 		
 		displayRect = newDisplayRect;
 		// calculate zoom bounds
-		maxZoom = 2.0f;
+		maxZoom = 2.0f * density;
 		minZoom = Math.min(displayRect.width()/contentWidth, displayRect.height()/contentHeight);
 		
 		adjustZoom();
