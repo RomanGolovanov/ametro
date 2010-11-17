@@ -6,6 +6,8 @@ import org.ametro.model.MapView;
 import org.ametro.render.RenderElement;
 import org.ametro.render.RenderProgram;
 
+import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -24,16 +26,18 @@ public class VectorMapView extends View {
 
 	RenderProgram renderer;
 	MapView scheme;
-	
-	Matrix matrix = new Matrix();
-	Matrix invertedMatrix = new Matrix();
-	
+
 	MapCache cache;
 	MapCache oldCache;
-	Matrix renderMatrix = new Matrix();
+	
+	final Matrix matrix = new Matrix();
+	final Matrix invertedMatrix = new Matrix();
+	final Matrix renderMatrix = new Matrix();
 
-	RectF screenRect = new RectF();
-	RectF viewRect = new RectF();
+	final RectF screenRect = new RectF();
+	final RectF viewRect = new RectF();
+	
+	final int memoryClass;
 	
 	float scale;
 	float x;
@@ -45,7 +49,7 @@ public class VectorMapView extends View {
 	
 	private boolean updatesEnabled;
 	private boolean entireMapCached;
-	private Handler handler = new Handler();
+	private final Handler handler = new Handler();
 	
 	public void enableUpdates(boolean enabled){
 		updatesEnabled = enabled;
@@ -54,6 +58,8 @@ public class VectorMapView extends View {
 	public VectorMapView(Context context, MapView scheme) {
 		super(context);
 		this.scheme = scheme;
+		
+		memoryClass = ((ActivityManager)getContext().getSystemService(Activity.ACTIVITY_SERVICE)).getMemoryClass();
 		
 		renderer = new RenderProgram(scheme);
 		renderer.setRenderFilter(RenderProgram.ALL);
@@ -65,6 +71,11 @@ public class VectorMapView extends View {
 		setMatrix(m, false);
 	}
 
+	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+		updateViewRect();
+		super.onSizeChanged(w, h, oldw, oldh);
+	}
+	
 	public void draw(Canvas canvas) {
 		if(cache==null){ // render immediately at first run
 			rebuildCache();
@@ -105,7 +116,7 @@ public class VectorMapView extends View {
 
 	/** set transformation matrix for content **/
 	public void setMatrix(Matrix newMatrix, boolean invalidate) {
-		matrix = newMatrix;
+		matrix.set(newMatrix);
 		matrix.invert(invertedMatrix);
 		matrix.getValues(values);
 		scale = values[Matrix.MSCALE_X];
@@ -114,15 +125,19 @@ public class VectorMapView extends View {
 		scaledWidth = getContentWidth() * scale;
 		scaledHeight = getContentHeight() * scale;
 		
+		updateViewRect();
+		
+		if(invalidate){
+			invalidate();
+		}
+	}
+
+	private void updateViewRect() {
 		viewRect.set(0, 0, getWidth(), getHeight());
 		invertedMatrix.mapRect(viewRect);
 		
 		screenRect.set(viewRect);
 		matrix.mapRect(screenRect);
-		
-		if(invalidate){
-			invalidate();
-		}
 	}
 
 	/** get current transformation matrix**/
@@ -141,16 +156,22 @@ public class VectorMapView extends View {
 	public void rebuildCache() {
 		recycleCache();
 		try{
-			renderEntireCache();
-			entireMapCached = true;
+			int memoryLimit = 4 * 1024 * 1024 * memoryClass / 16;
+			int bitmapSize = (int)scaledWidth * (int)scaledHeight * 2; 
+			if( bitmapSize <= memoryLimit ){
+				renderEntireCache();
+				entireMapCached = true;
+				return;
+			}
 		}catch(OutOfMemoryError ex){
-			renderPartialCache();
-			entireMapCached = false;
+			// eat out-of-memory exception 
 		}
+		renderPartialCache();
+		entireMapCached = false;
 	}
 
 	private void renderEntireCache() {
-		Log.w(TAG,"render entire");
+		//Log.w(TAG,"render entire");
 		final MapCache newCache = new MapCache();
 		final RectF viewRect = new RectF(0,0,scaledWidth,scaledHeight);
 		
@@ -181,7 +202,7 @@ public class VectorMapView extends View {
 	}
 
 	private void renderPartialCache() {
-		Log.w(TAG,"render partial");
+		//Log.w(TAG,"render partial");
 		final int width = getWidth();
 		final int height = getHeight();
 		final MapCache newCache = new MapCache();
@@ -198,6 +219,11 @@ public class VectorMapView extends View {
 		
 		if(oldCache!=null && oldCache.equals(width, height)){
 			newCache.Image = oldCache.Image;
+		}else if(oldCache!=null){
+			oldCache.Image.recycle();
+			oldCache.Image = null;
+			oldCache = null;
+			System.gc();
 		}
 		if(newCache.Image==null){
 			newCache.Image = Bitmap.createBitmap(width, height, Config.RGB_565);
@@ -217,7 +243,7 @@ public class VectorMapView extends View {
 	}
 
 	private void updatePartialCache() {
-		Log.w(TAG,"update partial");
+		//Log.w(TAG,"update partial");
 		final int width = getWidth();
 		final int height = getHeight();
 		final MapCache newCache = new MapCache();
@@ -234,6 +260,11 @@ public class VectorMapView extends View {
 		
 		if(oldCache!=null && oldCache.equals(width, height)){
 			newCache.Image = oldCache.Image;
+		}else if(oldCache!=null){
+			oldCache.Image.recycle();
+			oldCache.Image = null;
+			oldCache = null;
+			System.gc();
 		}
 		if(newCache.Image==null){
 			newCache.Image = Bitmap.createBitmap(width, height, Config.RGB_565);
@@ -311,12 +342,15 @@ public class VectorMapView extends View {
 	public void recycleCache(){
 		if(cache!=null){
 			cache.Image.recycle();
+			cache.Image = null;
 			cache = null;
 		}
 		if(oldCache!=null){
 			oldCache.Image.recycle();
+			oldCache.Image = null;
 			oldCache = null;
 		}
+		System.gc();
 	}
 
 	private static class MapCache
@@ -331,7 +365,7 @@ public class VectorMapView extends View {
 		Bitmap Image;
 		
 		public boolean validate(int width, int height) {
-			return Image.getWidth() >= width && Image.getHeight() >= height;
+			return Image.getWidth() == width && Image.getHeight() == height;
 		}
 
 		public boolean equals(int width, int height) {
@@ -342,6 +376,14 @@ public class VectorMapView extends View {
 			return ViewRect.contains(viewRect);
 		}
 		
+	}
+
+	public int getPositionY() {
+		return (int)x;
+	}
+
+	public int getPositionX() {
+		return (int)y;
 	}
 	
 }
