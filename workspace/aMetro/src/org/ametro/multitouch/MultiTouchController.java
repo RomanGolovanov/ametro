@@ -262,7 +262,11 @@ public class MultiTouchController<T> {
 	
 	/** adjust map position to prevent zoom to outside of map **/
 	private void adjustZoom() {
-		// TODO Auto-generated method stub
+		matrix.getValues(matrixValues);
+		float currentScale = matrixValues[Matrix.MSCALE_X];
+		if(currentScale<minZoom){
+			matrix.setScale(minZoom, minZoom);
+		}
 	}
 	
 	/** adjust map position to prevent pan to outside of map **/

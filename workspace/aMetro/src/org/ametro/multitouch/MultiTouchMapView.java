@@ -8,6 +8,7 @@ import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.view.MotionEvent;
 import android.widget.FrameLayout;
+import android.widget.ScrollView;
 
 public class MultiTouchMapView extends FrameLayout implements MultiTouchListener<VectorMapView> {
 
@@ -24,6 +25,7 @@ public class MultiTouchMapView extends FrameLayout implements MultiTouchListener
 		addView(mMapView);
 		// create controller
 		mController = new MultiTouchController<VectorMapView>(getContext(),this);
+
 	}
 
 	private void updateViewRect() {
