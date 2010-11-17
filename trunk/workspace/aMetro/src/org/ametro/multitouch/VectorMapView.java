@@ -1,5 +1,6 @@
 package org.ametro.multitouch;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import org.ametro.model.MapView;
@@ -8,6 +9,7 @@ import org.ametro.render.RenderProgram;
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.ActivityManager.MemoryInfo;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -55,11 +57,22 @@ public class VectorMapView extends View {
 		updatesEnabled = enabled;
 	}
 	
+	private int getMemoryClass(Context context){
+		try{
+			Method getMemoryClassMethod = ActivityManager.class.getMethod("getMemoryClass");
+			ActivityManager ac = (ActivityManager)context.getSystemService(Activity.ACTIVITY_SERVICE);
+			return (Integer)getMemoryClassMethod.invoke(ac, new Object[]{});
+		}catch(Exception ex){
+			return 16;
+		}
+	}
+	
 	public VectorMapView(Context context, MapView scheme) {
 		super(context);
 		this.scheme = scheme;
 		
-		memoryClass = ((ActivityManager)getContext().getSystemService(Activity.ACTIVITY_SERVICE)).getMemoryClass();
+		
+		memoryClass = getMemoryClass(context);
 		
 		renderer = new RenderProgram(scheme);
 		renderer.setRenderFilter(RenderProgram.ALL);
