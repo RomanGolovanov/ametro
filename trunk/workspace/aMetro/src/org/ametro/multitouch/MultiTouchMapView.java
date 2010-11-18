@@ -5,18 +5,19 @@ import org.ametro.multitouch.MultiTouchController.MultiTouchListener;
 
 import android.content.Context;
 import android.graphics.Matrix;
+import android.graphics.PointF;
 import android.graphics.RectF;
 import android.view.MotionEvent;
 import android.widget.FrameLayout;
-import android.widget.ScrollView;
+import android.widget.Toast;
 
 public class MultiTouchMapView extends FrameLayout implements MultiTouchListener<VectorMapView> {
 
-	@SuppressWarnings("unused")
-	private static final String TAG = "MultiTouchMapView";
+	protected  static final String TAG = "MultiTouchMapView";
 	
 	private MultiTouchController<VectorMapView> mController;
 	private VectorMapView mMapView;
+	private int mTouchMode;
 	
 	public MultiTouchMapView(Context context, MapView scheme) {
 		super(context);
@@ -64,14 +65,23 @@ public class MultiTouchMapView extends FrameLayout implements MultiTouchListener
 		mMapView.setMatrix(matrix,true);
 	}
 
-	private int mode;
 	
 	public void onTouchModeChanged(int mode) {
-		boolean isUserInteractionFinished = (mode == MultiTouchController.MODE_NONE && this.mode!= MultiTouchController.MODE_NONE);
-		if(isUserInteractionFinished && this.mode == MultiTouchController.MODE_ZOOM){
+		if(this.mTouchMode == MultiTouchController.MODE_ZOOM || this.mTouchMode == MultiTouchController.MODE_ZOOM_ANIMATION){
 			mMapView.rebuildCache();
 		}
-		mMapView.enableUpdates(mode != MultiTouchController.MODE_ZOOM);
-		this.mode = mode;
+		mMapView.enableUpdates(mode != MultiTouchController.MODE_ZOOM && mode!= MultiTouchController.MODE_ZOOM_ANIMATION );
+		this.mTouchMode = mode;
 	}
+
+	public void onPerformClick(PointF position) {
+		Toast.makeText(getContext(), "click in " + position.x + "," + position.y, Toast.LENGTH_SHORT).show();
+		mController.zoomIn();
+	}
+
+	public void onPerformLongClick(PointF position) {
+		Toast.makeText(getContext(), "long click in " + position.x + "," + position.y, Toast.LENGTH_SHORT).show();
+		mController.zoomOut();
+	}
+
 }

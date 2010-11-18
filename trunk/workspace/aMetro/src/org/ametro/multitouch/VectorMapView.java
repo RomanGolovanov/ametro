@@ -9,7 +9,6 @@ import org.ametro.render.RenderProgram;
 
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.ActivityManager.MemoryInfo;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -18,7 +17,6 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 
 
