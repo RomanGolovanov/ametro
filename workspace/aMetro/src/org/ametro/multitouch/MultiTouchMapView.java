@@ -7,12 +7,15 @@ import org.ametro.model.SegmentView;
 import org.ametro.model.StationView;
 import org.ametro.model.TransferView;
 import org.ametro.multitouch.MultiTouchController.MultiTouchListener;
+import org.ametro.util.MathUtil;
 
 import android.content.Context;
 import android.graphics.Matrix;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import android.os.Handler;
 import android.view.MotionEvent;
+import android.view.ViewConfiguration;
 import android.widget.FrameLayout;
 import android.widget.ZoomControls;
 
@@ -25,6 +28,11 @@ public class MultiTouchMapView extends FrameLayout implements MultiTouchListener
 	private int mTouchMode;
 	private ZoomController<VectorMapView> mZoomController;
 	
+	private PointF mLastClickPosition;
+	private float mDblClickSlop;
+	
+	private Handler mPrivateHandler = new Handler();
+	
 	public MultiTouchMapView(Context context, SchemeView scheme) {
 		super(context);
 		// create map image
@@ -33,35 +41,9 @@ public class MultiTouchMapView extends FrameLayout implements MultiTouchListener
 		addView(mMapView);
 		// create controller
 		mController = new MultiTouchController<VectorMapView>(getContext(),this);
+		mDblClickSlop = ViewConfiguration.get(context).getScaledDoubleTapSlop();
 	}
 
-	private void updateViewRect() {
-		float height = mMapView.getContentHeight();
-		float width = mMapView.getContentWidth();
-		mController.setViewRect(width, height, new RectF(0, 0, getWidth(), getHeight()));
-	}
-	
-	protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-		updateViewRect();
-		super.onLayout(changed, left, top, right, bottom);
-	}
-	
-	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-		updateViewRect();
-		super.onSizeChanged(w, h, oldw, oldh);
-	}
-	
-	public void onWindowFocusChanged(boolean hasFocus) {
-		super.onWindowFocusChanged(hasFocus);
-		if (hasFocus) {
-			updateViewRect();
-		}
-	}	
-
-	public boolean onTouchEvent(MotionEvent event) {
-		return mController.onMultiTouchEvent(event);
-	}
-	
 	public Matrix getPositionAndScaleMatrix() {
 		return mMapView.getMatrix();
 	}
@@ -85,9 +67,26 @@ public class MultiTouchMapView extends FrameLayout implements MultiTouchListener
 		if(mZoomController!=null){
 			mZoomController.showZoom();
 		}
-	}
 
+		if(mLastClickPosition!=null){
+			PointF p = mController.getScreenTouchPoint();
+			float distance = MathUtil.distance(mLastClickPosition, p);
+			mPrivateHandler.removeCallbacks(performClickRunnable);
+			mLastClickPosition = null;
+			if(distance <= mDblClickSlop){
+				mController.doZoomAnimation(1.5f, p);
+			}else{
+				performClick();
+			}
+		}else{
+			mLastClickPosition = mController.getScreenTouchPoint();
+			mPrivateHandler.removeCallbacks(performClickRunnable);
+			mPrivateHandler.postDelayed(performClickRunnable, ViewConfiguration.getDoubleTapTimeout());
+		}
+	}
+	
 	public void onPerformLongClick(PointF position) {
+		performLongClick();
 	}
 
 	
@@ -137,5 +136,39 @@ public class MultiTouchMapView extends FrameLayout implements MultiTouchListener
 		return mController.getScale();
 	}
 
+	public void onWindowFocusChanged(boolean hasFocus) {
+		super.onWindowFocusChanged(hasFocus);
+		if (hasFocus) {
+			updateViewRect();
+		}
+	}	
+
+	public boolean onTouchEvent(MotionEvent event) {
+		return mController.onMultiTouchEvent(event);
+	}
+	
+	protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+		updateViewRect();
+		super.onLayout(changed, left, top, right, bottom);
+	}
+	
+	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+		updateViewRect();
+		super.onSizeChanged(w, h, oldw, oldh);
+	}
+	
+	private void updateViewRect() {
+		float height = mMapView.getContentHeight();
+		float width = mMapView.getContentWidth();
+		mController.setViewRect(width, height, new RectF(0, 0, getWidth(), getHeight()));
+	}
+	
+	private Runnable performClickRunnable = new Runnable() {
+		public void run() {
+			mLastClickPosition = null;
+			performClick();
+		}
+	};
+	
 
 }
