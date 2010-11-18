@@ -74,6 +74,7 @@ public class MultiTouchController<T> {
 	private float targetScale;
 	private float scaleDelta;
 	private long scaleDoneTime;
+	private PointF scaleCenter;
 	
 	private float contentHeight;
 	private float contentWidth;
@@ -404,13 +405,21 @@ public class MultiTouchController<T> {
 			float k = (float)(scaleDoneTime - now) / ZOOM_ANIMATION_TIME;
 			float scale = (targetScale - k * scaleDelta) / getScale();
 	
-			matrix.postScale(scale, scale, displayRect.width()/2, displayRect.height()/2);
+			if(scaleCenter==null){
+				matrix.postScale(scale, scale, displayRect.width()/2, displayRect.height()/2);
+			}else{
+				matrix.postScale(scale, scale, scaleCenter.x, scaleCenter.y);
+			}
 			adjustPan();
 			
 			listener.setPositionAndScaleMatrix(matrix);
 			return now < scaleDoneTime;
 		}
 		return false;
+	}
+	
+	public PointF getScreenTouchPoint(){
+		return new PointF(touchStartPoint.x, touchStartPoint.y);
 	}
 	
 	public PointF getTouchPoint(){
@@ -453,12 +462,17 @@ public class MultiTouchController<T> {
 		listener.onPerformClick(getTouchPoint());
 	}
 	
-	public void doZoomAnimation(float scaleFactor) {
+	public void doZoomAnimation(float scaleFactor){
+		doZoomAnimation(scaleFactor, null);
+	}
+	
+	public void doZoomAnimation(float scaleFactor, PointF center) {
 		if(mode==MODE_NONE || mode==MODE_LONGPRESS_START){
 			float scale = getScale();
 			targetScale = Math.min( Math.max(minScale, scaleFactor * getScale()), maxScale );
 			if(targetScale!=scale){
 				setControllerMode(MODE_ZOOM_ANIMATION);
+				scaleCenter = center;
 				scaleDelta = targetScale - scale;
 				scaleDoneTime = System.currentTimeMillis() + ZOOM_ANIMATION_TIME;
 				privateHandler.sendEmptyMessage(MSG_PROCESS_ZOOM);
