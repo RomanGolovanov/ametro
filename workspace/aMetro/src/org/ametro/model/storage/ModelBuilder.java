@@ -23,7 +23,7 @@ package org.ametro.model.storage;
 import java.util.Locale;
 
 import org.ametro.Constants;
-import org.ametro.model.MapView;
+import org.ametro.model.SchemeView;
 import org.ametro.model.Model;
 import org.ametro.util.StringUtil;
 
@@ -136,13 +136,13 @@ public class ModelBuilder {
 		}
 	}
 
-	public static MapView loadModelView(String fileName,
+	public static SchemeView loadModelView(String fileName,
 			Model model, String name) {
 		IModelStorage storage = getStorage(fileName);
 		if (storage != null) {
 			try {
 				long startTime = System.currentTimeMillis();
-				MapView view = storage.loadModelView(fileName, model,
+				SchemeView view = storage.loadModelView(fileName, model,
 						name);
 				if (view != null) {
 					if (Log.isLoggable(Constants.LOG_TAG_MAIN, Log.DEBUG)) {

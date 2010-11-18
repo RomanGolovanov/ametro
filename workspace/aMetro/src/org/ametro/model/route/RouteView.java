@@ -23,7 +23,7 @@ package org.ametro.model.route;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.ametro.model.MapView;
+import org.ametro.model.SchemeView;
 import org.ametro.model.SegmentView;
 import org.ametro.model.StationView;
 import org.ametro.model.TransferView;
@@ -33,7 +33,7 @@ import android.graphics.Rect;
 
 public class RouteView {
 
-	private MapView mMapView;
+	private SchemeView mMapView;
 	private int mFrom;
 	private int mTo;
 
@@ -54,7 +54,7 @@ public class RouteView {
 		return mRect;
 	}
 	
-	public RouteView(MapView map, TransportRoute route) {
+	public RouteView(SchemeView map, TransportRoute route) {
 		mMapView = map;
 		mFrom = route.from;
 		mTo = route.to;
@@ -114,7 +114,7 @@ public class RouteView {
 		return mMapView.stations[mTo];
 	}
 
-	private static ArrayList<SegmentView> findSegmentViews(MapView map, int[] segments) {
+	private static ArrayList<SegmentView> findSegmentViews(SchemeView map, int[] segments) {
 		ArrayList<SegmentView> res = new ArrayList<SegmentView>();
 		for(Integer id : segments) {
 			SegmentView view = map.findViewBySegmentId(id);
@@ -125,7 +125,7 @@ public class RouteView {
 		return res;
 	}
 
-	private static ArrayList<StationView> findStationViews(MapView map, int[] stations) {
+	private static ArrayList<StationView> findStationViews(SchemeView map, int[] stations) {
 		ArrayList<StationView> res = new ArrayList<StationView>();
 		for(Integer id : stations) {
 			StationView view = map.findViewByStationId(id);
@@ -136,7 +136,7 @@ public class RouteView {
 		return res;
 	}
 
-	private static ArrayList<TransferView> findTransferViews(MapView map, int[] transfers) {
+	private static ArrayList<TransferView> findTransferViews(SchemeView map, int[] transfers) {
 		ArrayList<TransferView> res = new ArrayList<TransferView>();
 		for(Integer id : transfers) {
 			TransferView view = map.findViewByTransferId(id);

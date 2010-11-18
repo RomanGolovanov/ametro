@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.ametro.Constants;
-import org.ametro.model.MapView;
+import org.ametro.model.SchemeView;
 import org.ametro.model.SegmentView;
 import org.ametro.model.StationView;
 import org.ametro.model.TransferView;
@@ -47,6 +47,7 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.ZoomControls;
 
+@Deprecated
 public class VectorMapView extends BaseMapView{
 
 	public static final float[] ZOOMS = new float[]{2.0f, 1.5f, 1.0f, 0.8f, 0.6f, 0.4f, 0.3f, 0.2f, 0.1f};
@@ -209,7 +210,7 @@ public class VectorMapView extends BaseMapView{
 		mRenderProgram.setRenderFilter(renderFilter);
 	}    
 
-	public void setModel(MapView map) {
+	public void setModel(SchemeView map) {
 		if (map != null) {
 			mMapView = map;
 			mRenderProgram = new RenderProgram(map);
@@ -229,7 +230,7 @@ public class VectorMapView extends BaseMapView{
 	}
 
 	public void setModelSelection(List<StationView> stations, List<SegmentView> segments, List<TransferView> transfers){
-		mRenderProgram.updateSelection(stations, segments, transfers);
+		mRenderProgram.setSelection(stations, segments, transfers);
 		destroyTileCache();
 	}
 
@@ -557,7 +558,7 @@ public class VectorMapView extends BaseMapView{
 		mContentHeight = (int) Math.ceil(mMapView.height * mScale);
 	}
 
-	private MapView mMapView;
+	private SchemeView mMapView;
 	private RenderProgram mRenderProgram;
 
 	private Object sync = new Object();

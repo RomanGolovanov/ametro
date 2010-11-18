@@ -26,6 +26,7 @@ import org.ametro.model.ext.ModelRect;
 import org.ametro.util.StringUtil;
 
 import android.graphics.Point;
+import android.graphics.PointF;
 import android.graphics.Rect;
 
 
@@ -198,6 +199,10 @@ public class ModelUtil {
 
 	public static Point toPoint(ModelPoint p) {
 		return new Point(p.x,p.y);
+	}
+
+	public static PointF toPointF(ModelPoint p) {
+		return new PointF(p.x,p.y);
 	}
 
 

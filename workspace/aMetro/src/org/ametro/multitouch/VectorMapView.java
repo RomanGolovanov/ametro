@@ -3,7 +3,10 @@ package org.ametro.multitouch;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
-import org.ametro.model.MapView;
+import org.ametro.model.SchemeView;
+import org.ametro.model.SegmentView;
+import org.ametro.model.StationView;
+import org.ametro.model.TransferView;
 import org.ametro.render.RenderElement;
 import org.ametro.render.RenderProgram;
 
@@ -19,13 +22,12 @@ import android.graphics.RectF;
 import android.os.Handler;
 import android.view.View;
 
-
 public class VectorMapView extends View {
 
 	protected static final String TAG = "VectorMapView";
 
 	RenderProgram renderer;
-	MapView scheme;
+	SchemeView scheme;
 
 	MapCache cache;
 	MapCache oldCache;
@@ -65,21 +67,14 @@ public class VectorMapView extends View {
 		}
 	}
 	
-	public VectorMapView(Context context, MapView scheme) {
+	public VectorMapView(Context context, SchemeView scheme) {
 		super(context);
 		this.scheme = scheme;
 		
 		
 		memoryClass = getMemoryClass(context);
-		
-		renderer = new RenderProgram(scheme);
-		renderer.setRenderFilter(RenderProgram.ALL);
-		renderer.setAntiAlias(true);
-		renderer.updateSelection(null, null, null);
-		
-		Matrix m = new Matrix();
-		m.setTranslate(1.0f, 1.0f);
-		setMatrix(m, false);
+
+		setScheme(scheme);
 	}
 
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -110,16 +105,12 @@ public class VectorMapView extends View {
 		if(updatesEnabled && !entireMapCached){
 			//if updated enabled (not zoom) 
 			if(!cache.validate(getWidth(), getHeight())){
-				handler.removeCallbacks(rebuildCacheRunnable);
-				handler.removeCallbacks(updateCacheRunnable);
-				handler.post(rebuildCacheRunnable);
+				postRebuildCache();
 			}else if(!cache.hit(viewRect)){
 				// and not entire map cached and we aren't in cache viewport
 				// or if cache size is invalid
 				// request cache update
-				handler.removeCallbacks(rebuildCacheRunnable);
-				handler.removeCallbacks(updateCacheRunnable);
-				handler.post(updateCacheRunnable);
+				postUpdateCache();
 			}
 		}
 		
@@ -389,12 +380,38 @@ public class VectorMapView extends View {
 		
 	}
 
-	public int getPositionY() {
-		return (int)x;
+	public void setSchemeSelection(ArrayList<StationView> stations, ArrayList<SegmentView> segments, ArrayList<TransferView> transfers) {
+		renderer.setSelection(stations, segments, transfers);
+		postRebuildCache();
 	}
 
-	public int getPositionX() {
-		return (int)y;
+	private void postRebuildCache(){
+		handler.removeCallbacks(rebuildCacheRunnable);
+		handler.removeCallbacks(renderPartialCacheRunnable);
+		handler.removeCallbacks(updateCacheRunnable);
+		handler.post(rebuildCacheRunnable);
 	}
+
+	private void postUpdateCache() {
+		handler.removeCallbacks(rebuildCacheRunnable);
+		handler.removeCallbacks(renderPartialCacheRunnable);
+		handler.removeCallbacks(updateCacheRunnable);
+		handler.post(updateCacheRunnable);
+	}
+
 	
+	public void setScheme(SchemeView scheme) {
+		renderer = new RenderProgram(scheme);
+		renderer.setRenderFilter(RenderProgram.ALL);
+		renderer.setAntiAlias(true);
+		renderer.setSelection(null, null, null);
+		
+		Matrix m = new Matrix();
+		m.setTranslate(1.0f, 1.0f);
+		setMatrix(m, false);
+		
+		postRebuildCache();
+	}
+
+
 }

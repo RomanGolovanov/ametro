@@ -26,7 +26,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 
 import org.ametro.R;
-import org.ametro.model.MapView;
+import org.ametro.model.SchemeView;
 import org.ametro.model.Model;
 import org.ametro.model.TransportType;
 
@@ -156,7 +156,7 @@ public class SchemeListDialog implements OnClickListener, OnKeyListener {
 		mCurrent = data;
 	}
 	
-	public SchemeListDialog(final Context context, Model model, MapView current) {
+	public SchemeListDialog(final Context context, Model model, SchemeView current) {
 		mContext = context;
 		mTransportLineNames = mContext.getResources().getStringArray(R.array.transport_type_lines);
 		mRoot = parseModel(model);

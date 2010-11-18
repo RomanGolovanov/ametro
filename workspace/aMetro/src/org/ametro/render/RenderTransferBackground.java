@@ -23,7 +23,7 @@ package org.ametro.render;
 
 import android.graphics.*;
 import android.graphics.Paint.Style;
-import org.ametro.model.MapView;
+import org.ametro.model.SchemeView;
 import org.ametro.model.StationView;
 import org.ametro.model.TransferView;
 import org.ametro.model.TransportTransfer;
@@ -41,7 +41,7 @@ public class RenderTransferBackground extends RenderElement {
     private int colorNormal;
     private int colorGrayed;
     
-    public RenderTransferBackground(MapView map, TransferView view, TransportTransfer transfer) {
+    public RenderTransferBackground(SchemeView map, TransferView view, TransportTransfer transfer) {
         super();
         final StationView fromStation = map.stations[view.stationViewFromId];
         final ModelPoint from = fromStation.stationPoint;

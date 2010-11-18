@@ -26,7 +26,7 @@ import java.util.Comparator;
 
 import org.ametro.R;
 import org.ametro.adapter.StationListAdapter;
-import org.ametro.model.MapView;
+import org.ametro.model.SchemeView;
 import org.ametro.model.StationView;
 import org.ametro.util.StringUtil;
 
@@ -74,7 +74,7 @@ public class StationSearchActivity extends ListActivity {
 	}
 
 	private void bindData() {
-		MapView map = MapViewActivity.Instance.getMapView();
+		SchemeView map = MapViewActivity.Instance.getMapView();
 		if(mStationList.size()>0){
 			if(mStationList.size()>1){
 				ArrayList<String> stationNamesList = new ArrayList<String>();
@@ -94,8 +94,8 @@ public class StationSearchActivity extends ListActivity {
 		}
 	}
 
-	private MapView doSearchKeywords(String searchKeywords) {
-		MapView map = MapViewActivity.Instance.getMapView();
+	private SchemeView doSearchKeywords(String searchKeywords) {
+		SchemeView map = MapViewActivity.Instance.getMapView();
 		mStationList = new ArrayList<StationView>();
 		final ArrayList<StationView> stations = new ArrayList<StationView>();
 		for(StationView station : map.stations){

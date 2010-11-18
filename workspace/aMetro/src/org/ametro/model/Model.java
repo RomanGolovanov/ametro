@@ -64,7 +64,7 @@ public class Model {
 	public int[] viewNames;
 	public long[] viewTransportTypes;
 	public boolean[] viewIsMain;
-	public MapView[] views;
+	public SchemeView[] views;
 
 	public String[] layerNames;
 	public MapLayerContainer[] layers;
@@ -233,7 +233,7 @@ public class Model {
 	}
 	
 	
-	public MapView getView(String name) {
+	public SchemeView getView(String name) {
 		final Integer id = getViewId(name);
 		if(id!=null){
 			return views[id];
@@ -241,10 +241,10 @@ public class Model {
 		return null;
 	}
 	
-	public MapView loadView(String name) {
+	public SchemeView loadView(String name) {
 		final Integer id = getViewId(name);
 		if(id!=null){
-			MapView v = views[id];
+			SchemeView v = views[id];
 			if(v==null){
 				v = ModelBuilder.loadModelView(fileSystemName, this, name);
 			}
@@ -263,7 +263,7 @@ public class Model {
 		return null;
 	}
 
-	public MapView getDefaultView() {
+	public SchemeView getDefaultView() {
 		return views[0];
 	}
 

@@ -430,6 +430,21 @@ public class MultiTouchController<T> {
 		return touchSlopSquare;
 	}
 	
+	public PointF getCenterPosition() {
+		PointF p = new PointF();
+		p.set(displayRect.width()/2,displayRect.height()/2);
+		unmapPoint(p);
+		return p;
+	}
+
+	public float getMaxScale() {
+		return maxScale;
+	}
+   
+	public float getMinScale() {
+		return minScale;
+	}
+	
 	public void performLongClick() {
 		listener.onPerformLongClick(getTouchPoint());
 	}
@@ -438,15 +453,7 @@ public class MultiTouchController<T> {
 		listener.onPerformClick(getTouchPoint());
 	}
 	
-	public void zoomIn(){
-		doZoomAnimation(0.55f);
-	}
-	
-	public void zoomOut(){
-		doZoomAnimation(1.45f);
-	}
-	
-	private void doZoomAnimation(float scaleFactor) {
+	public void doZoomAnimation(float scaleFactor) {
 		if(mode==MODE_NONE || mode==MODE_LONGPRESS_START){
 			float scale = getScale();
 			targetScale = Math.min( Math.max(minScale, scaleFactor * getScale()), maxScale );
@@ -499,7 +506,5 @@ public class MultiTouchController<T> {
 			}
 		}
 	}
-
-
-    
+   
 }

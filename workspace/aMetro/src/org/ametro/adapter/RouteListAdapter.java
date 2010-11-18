@@ -20,7 +20,7 @@
  */
 package org.ametro.adapter;
 
-import org.ametro.model.MapView;
+import org.ametro.model.SchemeView;
 import org.ametro.model.route.RouteView;
 
 import android.content.Context;
@@ -32,7 +32,7 @@ public class RouteListAdapter extends StationListAdapter {
 	private static final int HEIGHT = 54; // in DIP
 	private final int mHalfHeight;
 	
-	public RouteListAdapter(Context context, RouteView route, MapView map) {
+	public RouteListAdapter(Context context, RouteView route, SchemeView map) {
 		super(context, route.getStations(), route.getDelays(), map);
 		final float scale = context.getResources().getDisplayMetrics().density;
 		mHalfHeight = (int) (HEIGHT * scale + 0.5f)/2;

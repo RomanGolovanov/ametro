@@ -1,11 +1,10 @@
 package org.ametro.activity;
 
 import org.ametro.GlobalSettings;
-import org.ametro.model.MapView;
+import org.ametro.model.SchemeView;
 import org.ametro.model.Model;
 import org.ametro.model.storage.ModelBuilder;
 import org.ametro.multitouch.MultiTouchMapView;
-import org.ametro.widget.NewVectorMapView;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -20,7 +19,7 @@ public class MapView2Activity extends Activity {
 	{
 
 		private ProgressDialog dialog;
-		private MapView mapView;
+		private SchemeView mapView;
 		
 		protected void onPreExecute() {
 			dialog = ProgressDialog.show(MapView2Activity.this, "Map Loading", "Please wait for a moment....", true);

@@ -3,7 +3,7 @@ package org.ametro.widget;
 import java.util.ArrayList;
 
 import org.ametro.GlobalSettings;
-import org.ametro.model.MapView;
+import org.ametro.model.SchemeView;
 import org.ametro.model.Model;
 import org.ametro.render.RenderElement;
 import org.ametro.render.RenderProgram;
@@ -77,14 +77,14 @@ public class NewVectorMapView extends ScrollView {
 		}
 	}
 	
-	public NewVectorMapView(Context context, Model model, MapView scheme) {
+	public NewVectorMapView(Context context, Model model, SchemeView scheme) {
 		super(context);
 		this.model = model;
 		this.scheme = scheme;
 		this.renderer = new RenderProgram(scheme);
 		renderer.setRenderFilter(RenderProgram.ALL);
 		renderer.setAntiAlias(true);
-		renderer.updateSelection(null, null, null);
+		renderer.setSelection(null, null, null);
 		init(context);
 	}
 
@@ -822,7 +822,7 @@ public class NewVectorMapView extends ScrollView {
 	protected float zoomY;
 	
 	protected Model model;
-	protected MapView scheme;
+	protected SchemeView scheme;
 	protected RenderProgram renderer;
 	protected RectF modelVisibleRect;
 	protected Rect screenRect;

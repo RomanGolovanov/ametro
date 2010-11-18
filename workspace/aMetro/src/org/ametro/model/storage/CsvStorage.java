@@ -40,7 +40,7 @@ import java.util.zip.ZipOutputStream;
 import org.ametro.Constants;
 import org.ametro.model.LineView;
 import org.ametro.model.MapLayerContainer;
-import org.ametro.model.MapView;
+import org.ametro.model.SchemeView;
 import org.ametro.model.Model;
 import org.ametro.model.SegmentView;
 import org.ametro.model.StationView;
@@ -72,7 +72,7 @@ public class CsvStorage implements IModelStorage {
 		return null;
 	}
 
-	public MapView loadModelView(String fileName, Model model, String viewName) throws IOException {
+	public SchemeView loadModelView(String fileName, Model model, String viewName) throws IOException {
 		final ZipInputStream zip = new ZipInputStream(new BufferedInputStream(new FileInputStream(fileName), BUFFER_SIZE));
 		final String viewEntryName = String.format(MAP_ENTRY_NAME, viewName);
 		final int id = model.getViewId(viewName);
@@ -80,7 +80,7 @@ public class CsvStorage implements IModelStorage {
 		while( (zipEntry = zip.getNextEntry()) != null) { 
 			final String name = zipEntry.getName();
 			if(viewEntryName.equals(name)){
-				MapView view = deserializeMapView(zip, model);
+				SchemeView view = deserializeMapView(zip, model);
 				model.views[id] = view;
 				return view;
 			}
@@ -104,7 +104,7 @@ public class CsvStorage implements IModelStorage {
 		boolean isIndexLoaded = false;
 		final Model model = new Model();
 
-		HashMap<String,MapView> views = new HashMap<String, MapView>();
+		HashMap<String,SchemeView> views = new HashMap<String, SchemeView>();
 		HashMap<String,String[]> locales = new HashMap<String, String[]>();
 		HashMap<String,MapLayerContainer> layers = new HashMap<String, MapLayerContainer>();
 
@@ -136,7 +136,7 @@ public class CsvStorage implements IModelStorage {
 			}else if(!descriptionOnly && name.startsWith("maps\\")){
 				String viewName = FileUtil.getFileName(name);
 				if(!defaultViewLoaded){
-					MapView view = deserializeMapView(zip,model);
+					SchemeView view = deserializeMapView(zip,model);
 					views.put(viewName, view);
 					defaultViewLoaded = true;
 				}else{
@@ -173,7 +173,7 @@ public class CsvStorage implements IModelStorage {
 			}
 
 			len = model.viewSystemNames.length;
-			model.views = new MapView[len];
+			model.views = new SchemeView[len];
 			for(int i = 0; i < len; i++){
 				String viewName = model.viewSystemNames[i];
 				model.views[i] = views.get(viewName);
@@ -198,9 +198,9 @@ public class CsvStorage implements IModelStorage {
 		zipOut.close();
 	}
 
-	private MapView deserializeMapView(ZipInputStream zip, Model model) throws IOException {
+	private SchemeView deserializeMapView(ZipInputStream zip, Model model) throws IOException {
 		final CsvReader reader = new CsvReader(new BufferedReader( new InputStreamReader(zip, ENCODING), BUFFER_SIZE ));
-		final MapView view = new MapView();
+		final SchemeView view = new SchemeView();
 		view.owner = model;
 
 		reader.next();
@@ -470,7 +470,7 @@ public class CsvStorage implements IModelStorage {
 	}
 
 	private void serializeMaps(Model model, ZipOutputStream zip, CsvWriter writer) throws IOException {
-		for(MapView obj : model.views){
+		for(SchemeView obj : model.views){
 			String entryName = String.format(MAP_ENTRY_NAME, obj.systemName);
 			ZipEntry zipEntry = new ZipEntry(entryName);
 			zip.putNextEntry(zipEntry);

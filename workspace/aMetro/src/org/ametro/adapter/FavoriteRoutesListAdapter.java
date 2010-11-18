@@ -24,7 +24,7 @@ import java.util.HashMap;
 
 import org.ametro.R;
 import org.ametro.model.LineView;
-import org.ametro.model.MapView;
+import org.ametro.model.SchemeView;
 import org.ametro.model.StationView;
 
 import android.app.Activity;
@@ -64,7 +64,7 @@ public class FavoriteRoutesListAdapter extends BaseAdapter implements OnClickLis
 		}
 	}	
 
-	public FavoriteRoutesListAdapter(Activity activity, Point[] routes, MapView map){
+	public FavoriteRoutesListAdapter(Activity activity, Point[] routes, SchemeView map){
 		mLineDrawabled = new HashMap<LineView, Drawable>();
 		mLines = map.lines;
 		mStations = map.stations;
@@ -86,7 +86,7 @@ public class FavoriteRoutesListAdapter extends BaseAdapter implements OnClickLis
 	protected static final int ICON_HEIGHT = 20;
 	protected static final int ICON_DIAMETER = 7;
 	
-	protected final MapView mMapView;
+	protected final SchemeView mMapView;
 	protected final Activity mContextActivity;
 	protected final HashMap<LineView, Drawable> mLineDrawabled;
 	protected final LineView[] mLines;
@@ -119,7 +119,7 @@ public class FavoriteRoutesListAdapter extends BaseAdapter implements OnClickLis
 		mTextColor = color;
 	}
 	
-	public static String getStationName(MapView map, StationView station){
+	public static String getStationName(SchemeView map, StationView station){
 		return station.getName() + " (" + map.lines[station.lineViewId].getName() + ")";
 	}
 	
