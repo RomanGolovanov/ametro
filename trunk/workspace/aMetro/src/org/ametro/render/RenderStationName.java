@@ -21,7 +21,7 @@
 
 package org.ametro.render;
 
-import org.ametro.model.MapView;
+import org.ametro.model.SchemeView;
 import org.ametro.model.StationView;
 import org.ametro.model.TransportStation;
 import org.ametro.model.util.ModelUtil;
@@ -54,7 +54,7 @@ public class RenderStationName extends RenderElement {
     private int colorBackgroundNormal;
     private int colorBackgroundGrayed;
 	
-	public RenderStationName(MapView map, StationView view, TransportStation station) {
+	public RenderStationName(SchemeView map, StationView view, TransportStation station) {
 		final boolean isUpperCase = map.isUpperCase;
 		final boolean isWordWrap = map.isWordWrap;
 

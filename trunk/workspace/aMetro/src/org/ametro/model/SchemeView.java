@@ -30,7 +30,7 @@ import org.ametro.util.CollectionUtil;
 
 import android.content.Context;
 
-public class MapView {
+public class SchemeView {
 
 	public int id;
 	public String systemName;
@@ -73,7 +73,7 @@ public class MapView {
 	}
 
 	public boolean equals(Object o) {
-		return this == o || o != null && getClass() == o.getClass() && id == ((MapView) o).id;
+		return this == o || o != null && getClass() == o.getClass() && id == ((SchemeView) o).id;
 	}
 
 	public int hashCode() {
@@ -221,7 +221,7 @@ public class MapView {
 			checks = src.checks.clone();
 		}
 		
-		public TransportCollection(MapView view, Context context) {
+		public TransportCollection(SchemeView view, Context context) {
 			//final HashSet<Integer> checkedSet = CollectionUtil.toHashSet(view.getCheckedTransports());
 			final String[] transportNames = context.getResources().getStringArray(R.array.transport_types);
 			final int[] transports = view.getTransports();

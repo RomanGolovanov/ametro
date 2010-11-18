@@ -44,6 +44,7 @@ import android.widget.ScrollView;
 import android.widget.Scroller;
 import android.widget.Toast;
 
+@Deprecated
 public abstract class BaseMapView extends ScrollView {
 
     private Runnable mShowRenderFailedRunnable = new Runnable() {

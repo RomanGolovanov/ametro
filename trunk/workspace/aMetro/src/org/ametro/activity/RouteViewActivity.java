@@ -27,7 +27,7 @@ import java.util.Date;
 import org.ametro.R;
 import org.ametro.adapter.RouteListAdapter;
 import org.ametro.adapter.StationListAdapter;
-import org.ametro.model.MapView;
+import org.ametro.model.SchemeView;
 import org.ametro.model.StationView;
 import org.ametro.model.route.RouteView;
 import org.ametro.util.DateUtil;
@@ -52,7 +52,7 @@ public class RouteViewActivity extends Activity implements OnClickListener,
 	private ListView mStationList;
 	private TextView mTextTime;
 
-	private MapView mMapView;
+	private SchemeView mMapView;
 	private RouteView mRoute;
 
 	private int mFromId;

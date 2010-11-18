@@ -25,7 +25,7 @@ import static org.ametro.Constants.STATION_TO_ID;
 
 import org.ametro.R;
 import org.ametro.adapter.FavoriteRoutesListAdapter;
-import org.ametro.model.MapView;
+import org.ametro.model.SchemeView;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -48,7 +48,7 @@ import android.widget.AdapterView.OnItemClickListener;
 public class FavoriteRouteListActivity extends Activity implements OnClickListener, OnItemClickListener {
 
 	private Point[] mRoutes;
-	private MapView mMapView;
+	private SchemeView mMapView;
 	
 	private ListView mList;
 	private View mDeletePanel;

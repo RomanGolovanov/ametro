@@ -43,8 +43,8 @@ import org.ametro.dialog.ChangeLogDialog;
 import org.ametro.dialog.EULADialog;
 import org.ametro.dialog.LocationSearchDialog;
 import org.ametro.dialog.SchemeListDialog;
-import org.ametro.model.MapView;
 import org.ametro.model.Model;
+import org.ametro.model.SchemeView;
 import org.ametro.model.SegmentView;
 import org.ametro.model.StationView;
 import org.ametro.model.TransferView;
@@ -56,18 +56,18 @@ import org.ametro.model.route.RouteParameters;
 import org.ametro.model.route.RouteView;
 import org.ametro.model.storage.ModelBuilder;
 import org.ametro.model.util.ModelUtil;
+import org.ametro.multitouch.MultiTouchMapView;
 import org.ametro.util.DateUtil;
 import org.ametro.util.StringUtil;
-import org.ametro.widget.VectorMapView;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.DialogInterface.OnDismissListener;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.location.Location;
@@ -81,6 +81,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -140,7 +141,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if(keyCode == KeyEvent.KEYCODE_BACK){
-			MapView view = getMapView();
+			SchemeView view = getMapView();
 			if(view!=null){
 				if(isNavigationActive()){
 					clearNavigation(true);
@@ -162,10 +163,10 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			int to = mEndStationView.stationId;
 			int[] include = new int[0];
 			int[] exclude = new int[0];
-			int[] transports = mMapView.getCheckedTransports();
+			int[] transports = mScheme.getCheckedTransports();
 			
 			RouteParameters routeParameters = new RouteParameters(from, to, include, exclude, RouteBuilder.ROUTE_OPTION_ALL, transports, 0);
-			return RouteBuilder.createRoutes(mMapView.owner, routeParameters);
+			return RouteBuilder.createRoutes(mScheme.owner, routeParameters);
 		}
 
 		protected void onPostExecute(RouteContainer result) {
@@ -203,9 +204,10 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			startActivity(new Intent(this, StationSearchActivity.class));
 		}
 		if(src == mVectorMapView){
-			int x = mVectorMapView.getModelClickPositionX();
-			int y = mVectorMapView.getModelClickPositionY();
-			StationView station = mMapView.findStation(x,y);
+			PointF pos = mVectorMapView.getTouchPoint();
+			int x = (int)pos.x;
+			int y = (int)pos.y;
+			StationView station = mScheme.findStation(x,y);
 			switch(mSelectionMode){
 			case SELECTION_MODE_BEGIN:
 				if(station!=null){
@@ -250,13 +252,13 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			mModel = Instance.mModel;
 			mModelTimestamp = Instance.mModelTimestamp;
 			mModelLastModified = Instance.mModelLastModified;
-			mMapView = Instance.mMapView;
+			mScheme = Instance.mScheme;
 			mRouteContainer = Instance.mRouteContainer;
 			mModelFileName = Instance.mModelFileName;
 			mMapViewName = Instance.mMapViewName;
 			if(mModel!=null && isUpdateNeeded()){
 				mModel = null;
-				mMapView = null;
+				mScheme = null;
 			}
 		}
 		Instance = this;
@@ -267,7 +269,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		setContentView(R.layout.operation_wait_full_screen);
 
 		if(mModel!=null){
-			onShowMap(mModel, mMapView);
+			onShowMap(mModel, mScheme);
 		}else{
 			Intent intent = getIntent();
 			String systemMapName = intent!=null ? intent.getStringExtra(Constants.EXTRA_SYSTEM_MAP_NAME) : null;
@@ -531,7 +533,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		GlobalSettings.clearCurrentMap(this);
 		mModelFileName = null;
 		mModel = null;
-		mMapView = null;
+		mScheme = null;
 	}
 
 	public void addFavoriteRoute(int fromId, int toId)
@@ -625,21 +627,21 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		}
 	}
 
-	public void saveZoom(int zoomLevel) {
+	public void saveZoom(float zoom) {
 		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
 		SharedPreferences.Editor editor = preferences.edit();
-		editor.putString(PREFERENCE_ZOOM_LEVEL + "_" + mModelFileName + "_" + mMapViewName, Integer.toString(zoomLevel));
+		editor.putString(PREFERENCE_ZOOM_LEVEL + "_" + mModelFileName + "_" + mMapViewName, Float.toString(zoom));
 		editor.commit();
 		if (Log.isLoggable(LOG_TAG_MAIN, Log.DEBUG)){
-			Log.d(LOG_TAG_MAIN, getString(R.string.log_save_map_zoom) + zoomLevel);
+			Log.d(LOG_TAG_MAIN, getString(R.string.log_save_map_zoom) + zoom);
 		}
 	}
 
-	public Integer loadZoom() {
+	public Float loadZoom() {
 		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
 		String pref = preferences.getString(PREFERENCE_ZOOM_LEVEL + "_" + mModelFileName + "_" + mMapViewName, null);
 		if (pref != null) {
-			return StringUtil.parseNullableInteger(pref);
+			return StringUtil.parseNullableFloat(pref);
 		} else {
 			return null;
 		}
@@ -654,8 +656,8 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		}
 	}
 
-	public MapView getMapView() {
-		return mMapView;
+	public SchemeView getMapView() {
+		return mScheme;
 	}
 
 	public String getMapName() {
@@ -756,7 +758,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 				mNavigationTransfers = null;
 				mCurrentStation = null;
 			}
-			mVectorMapView.setModelSelection(stations, null, null);
+			mVectorMapView.setSchemeSelection(stations, null, null);
 			mVectorMapView.postInvalidate();
 		}
 	}
@@ -774,7 +776,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		boolean refreshNeeded = (result != mRouteContainer) || (result == null && mRouteContainer!=null) || (result!=null && mRouteContainer == null);
 		if(refreshNeeded){
 			mRouteContainer = result;
-			mCurrentRouteView = new RouteView(mMapView, mRouteContainer.getDefaultRoute());
+			mCurrentRouteView = new RouteView(mScheme, mRouteContainer.getDefaultRoute());
 			if(result!=null){
 				mNavigationSegments = mCurrentRouteView.getSegments();
 				mNavigationStations = mCurrentRouteView.getStations();
@@ -789,7 +791,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 				setCurrentStation(null);
 			}
 			mSelectionMode = SELECTION_MODE_DONE;
-			mVectorMapView.setModelSelection(mNavigationStations, mNavigationSegments,mNavigationTransfers);
+			mVectorMapView.setSchemeSelection(mNavigationStations, mNavigationSegments,mNavigationTransfers);
 			mVectorMapView.postInvalidate();
 		}
 	}
@@ -810,51 +812,25 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		mNavigationTransfers = null;
 		if(changeUI){
 			setCurrentStation(null);
-			mVectorMapView.setModelSelection(mNavigationStations, mNavigationSegments,mNavigationTransfers);
+			mVectorMapView.setSchemeSelection(mNavigationStations, mNavigationSegments,mNavigationTransfers);
 			mVectorMapView.postInvalidate();
 		}
 	}
 
 	private void onSaveMapState() {
-		if (mMapView != null && mVectorMapView != null && mModelFileName != null) {
-			PointF pos = mVectorMapView.getModelScrollCenter();
-			int zoom = mVectorMapView.getModelZoom();;
-			saveScrollPosition(pos);
+		if (mScheme != null && mVectorMapView != null && mModelFileName != null) {
+			PointF pos = new PointF();
+			float zoom =  mVectorMapView.getPositionAndScale(pos);
 			saveZoom(zoom);
+			saveScrollPosition(pos);
 		}
 	}
 
 	private void onRestoreMapState() {
-		if (mMapView != null && mVectorMapView != null
-				&& mModelFileName != null) {
-			Integer zoom = loadZoom();
-			if (zoom != null) {
-				if (Log.isLoggable(LOG_TAG_MAIN, Log.DEBUG)){ 
-					Log.d(LOG_TAG_MAIN, getString(R.string.log_restore_map_zoom) + zoom);
-				}
-				mVectorMapView.setZoom(zoom);
-			} else {
-				zoom = VectorMapView.DEFAULT_ZOOM_LEVEL+1;
-				if (Log.isLoggable(LOG_TAG_MAIN, Log.DEBUG)){
-					Log.d(LOG_TAG_MAIN, getString(R.string.log_default_map_zoom) + zoom);
-				}
-			 	mVectorMapView.setZoom(zoom);
-			}
+		if (mScheme != null && mVectorMapView != null && mModelFileName != null) {
+			Float zoom = loadZoom();
 			PointF pos = loadScrollPosition();
-			if (pos != null) {
-				if (Log.isLoggable(LOG_TAG_MAIN, Log.DEBUG)){
-					Log.d(LOG_TAG_MAIN, getString(R.string.log_restore_map_position) + pos.x + "x" + pos.y);
-				}
-				mVectorMapView.setModelScrollCenter(pos);
-			} else {
-				int x = mMapView.width / 2;
-				int y = mMapView.height / 2;
-				if (Log.isLoggable(LOG_TAG_MAIN, Log.DEBUG))
-					Log.d(LOG_TAG_MAIN, getString(R.string.log_default_map_position) + x
-							+ "x" + y);
-				mVectorMapView.setModelScrollCenter(new PointF(x, y));
-			}
-
+			mVectorMapView.setCenterPositionAndScale(pos,zoom);
 		}
 	}
 	
@@ -881,7 +857,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		}
 		if(!force && mModel!=null && mMapViewName!=null){
 			String mapNameLoaded = mModel.fileSystemName;
-			String schemeNameLoaded = mMapView.systemName;
+			String schemeNameLoaded = mScheme.systemName;
 			if(mapNameLoaded.equals(mapName) ){
 				if(schemeNameLoaded.equals(viewName)){
 					// map and view is similar
@@ -892,7 +868,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 				}else{
 					// load new view
 					//clearNavigation(true);
-					MapView v = mModel.loadView(viewName);
+					SchemeView v = mModel.loadView(viewName);
 					if(v!=null){
 						onShowMap(mModel, v);
 					}else{
@@ -912,9 +888,9 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	}
 
 
-	private void onShowMap(Model model, MapView view) {
+	private void onShowMap(Model model, SchemeView view) {
 
-		if(mModel!=null && mMapView!=null){
+		if(mModel!=null && mScheme!=null){
 			onSaveMapState();
 		}
 
@@ -922,7 +898,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		mModel = model;
 		mModelTimestamp = model.timestamp;
 		mModelLastModified = (new File(model.fileSystemName)).lastModified();
-		mMapView = view;
+		mScheme = view;
 
 		clearNavigation(false);
 		
@@ -965,19 +941,19 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 //		}
 
 		if (Log.isLoggable(LOG_TAG_MAIN, Log.DEBUG))
-			Log.d(LOG_TAG_MAIN, getString(R.string.log_loaded_subway_map) + mMapView.systemName
-					+ getString(R.string.log_with_size) + mMapView.width + "x"
-					+ mMapView.height);
+			Log.d(LOG_TAG_MAIN, getString(R.string.log_loaded_subway_map) + mScheme.systemName
+					+ getString(R.string.log_with_size) + mScheme.width + "x"
+					+ mScheme.height);
 
 		setContentView(R.layout.map_view);
 
 		mMapFrame = (FrameLayout)findViewById(R.id.map_frame);
 		
-		mVectorMapView = (VectorMapView) findViewById(R.id.browse_vector_map_view);
+		mVectorMapView = new MultiTouchMapView(this, mScheme);
+		mMapFrame.addView(mVectorMapView, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
 		updateAntiAliasingState();
 
-		mVectorMapView.setModel(mMapView);
-		mVectorMapView.setModelSelection(mNavigationStations, mNavigationSegments, mNavigationTransfers);
+		mVectorMapView.setSchemeSelection(mNavigationStations, mNavigationSegments, mNavigationTransfers);
 		mVectorMapView.setZoomControls((ZoomControls) findViewById(R.id.browse_vector_map_zoom));
 
 		mNavigationPanelTop = (View)findViewById(R.id.browse_vector_map_panel_top);
@@ -1001,7 +977,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			hideNavigationControls();
 		} 
 
-		mModelFileName = mMapView.owner.fileSystemName;
+		mModelFileName = mScheme.owner.fileSystemName;
 		mMapViewName = view.systemName;
 
 		onRestoreMapState();
@@ -1069,13 +1045,13 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 
 		protected Void doInBackground(Locale... params) {
 			mModel.setLocale(params[0]);
-			mVectorMapView.updateModel();
+			mVectorMapView.setScheme(mScheme);
 			return null;
 		}
 
 		protected void onPostExecute(Void result) {
 			mProgressDialog.dismiss();
-			mVectorMapView.setModelSelection(mNavigationStations, mNavigationSegments, mNavigationTransfers);
+			mVectorMapView.setSchemeSelection(mNavigationStations, mNavigationSegments, mNavigationTransfers);
 			mVectorMapView.postInvalidate();
 			super.onPostExecute(result);
 		}
@@ -1138,8 +1114,8 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 
 	private final Runnable mUpdateUI = new Runnable() {
 		public void run() {
-			final Point point = ModelUtil.toPoint( mCurrentStation.stationPoint );
-			mVectorMapView.scrollModelCenterTo(point.x, point.y);
+			final PointF point = ModelUtil.toPointF( mCurrentStation.stationPoint );
+			mVectorMapView.setCenterPositionAndScale(point, mVectorMapView.getScale(), true);
 			mVectorMapView.postInvalidate();
 		}
 	};
@@ -1157,7 +1133,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			final Model model = mModel; 
 			final float[] distances = new float[3];
 			final TreeMap<Integer,StationView> map = new TreeMap<Integer, StationView>();
-			for (StationView view : mMapView.stations) {
+			for (StationView view : mScheme.stations) {
 				if (isCancelled()) {
 					return null;
 				}
@@ -1195,8 +1171,8 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 								view.getName(),
 								view.getLineName()),
 								Toast.LENGTH_SHORT).show();
-				final Point point = ModelUtil.toPoint( view.stationPoint );
-				mVectorMapView.scrollModelCenterTo(point.x, point.y);
+				final PointF point = ModelUtil.toPointF( view.stationPoint );
+				mVectorMapView.setCenterPositionAndScale(point, null, true);
 				mVectorMapView.postInvalidate();
 			} else {
 				Toast.makeText(MapViewActivity.this, R.string.msg_location_unknown, Toast.LENGTH_SHORT).show();
@@ -1222,15 +1198,14 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	private static final int MAIN_MENU_LOCATION = 9;
 	private static final int MAIN_MENU_EXPERIMENTAL = 10;
 
-
 	private String mModelFileName;
 	private String mMapViewName;
-	private MapView mMapView;
+	private SchemeView mScheme;
 	private Model mModel;
 	private long mModelTimestamp;
 	private long mModelLastModified;
 
-	private VectorMapView mVectorMapView;
+	private MultiTouchMapView mVectorMapView;
 	
 	private View mNavigationPanelTop;
 	private View mNavigationPanelBottom;

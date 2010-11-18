@@ -1,6 +1,11 @@
 package org.ametro.multitouch;
 
-import org.ametro.model.MapView;
+import java.util.ArrayList;
+
+import org.ametro.model.SchemeView;
+import org.ametro.model.SegmentView;
+import org.ametro.model.StationView;
+import org.ametro.model.TransferView;
 import org.ametro.multitouch.MultiTouchController.MultiTouchListener;
 
 import android.content.Context;
@@ -9,7 +14,7 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 import android.view.MotionEvent;
 import android.widget.FrameLayout;
-import android.widget.Toast;
+import android.widget.ZoomControls;
 
 public class MultiTouchMapView extends FrameLayout implements MultiTouchListener<VectorMapView> {
 
@@ -18,15 +23,16 @@ public class MultiTouchMapView extends FrameLayout implements MultiTouchListener
 	private MultiTouchController<VectorMapView> mController;
 	private VectorMapView mMapView;
 	private int mTouchMode;
+	private ZoomController<VectorMapView> mZoomController;
 	
-	public MultiTouchMapView(Context context, MapView scheme) {
+	public MultiTouchMapView(Context context, SchemeView scheme) {
 		super(context);
 		// create map image
 		mMapView = new VectorMapView(getContext(), scheme);
+		//mZoomControls
 		addView(mMapView);
 		// create controller
 		mController = new MultiTouchController<VectorMapView>(getContext(),this);
-
 	}
 
 	private void updateViewRect() {
@@ -61,10 +67,11 @@ public class MultiTouchMapView extends FrameLayout implements MultiTouchListener
 	}
 
 	public void setPositionAndScaleMatrix(Matrix matrix) {
-		matrix.set(matrix);
+		if(mZoomController!=null){
+			mZoomController.showZoom();
+		}
 		mMapView.setMatrix(matrix,true);
 	}
-
 	
 	public void onTouchModeChanged(int mode) {
 		if(this.mTouchMode == MultiTouchController.MODE_ZOOM || this.mTouchMode == MultiTouchController.MODE_ZOOM_ANIMATION){
@@ -75,13 +82,60 @@ public class MultiTouchMapView extends FrameLayout implements MultiTouchListener
 	}
 
 	public void onPerformClick(PointF position) {
-		Toast.makeText(getContext(), "click in " + position.x + "," + position.y, Toast.LENGTH_SHORT).show();
-		mController.zoomIn();
+		if(mZoomController!=null){
+			mZoomController.showZoom();
+		}
 	}
 
 	public void onPerformLongClick(PointF position) {
-		Toast.makeText(getContext(), "long click in " + position.x + "," + position.y, Toast.LENGTH_SHORT).show();
-		mController.zoomOut();
 	}
+
+	
+	public PointF getTouchPoint() {
+		return mController.getTouchPoint();
+	}
+
+	
+	
+	public void setAntiAliasingDisableOnScroll(boolean antiAliasingDisableOnScroll) {
+		// TODO Auto-generated method stub
+	}
+
+	public void setAntiAliasingEnabled(boolean antiAliasingEnabled) {
+		// TODO Auto-generated method stub
+	}
+
+
+	public void setCenterPositionAndScale(PointF position, Float zoom) {
+		setCenterPositionAndScale(position, zoom, false);
+	}
+	
+	public float getPositionAndScale(PointF position) {
+		position.set(mController.getCenterPosition());
+		return mController.getScale();
+	}
+
+	public void setScheme(SchemeView scheme) {
+		mMapView.setScheme(scheme);
+	}
+
+	public void setSchemeSelection(ArrayList<StationView> stations,
+			ArrayList<SegmentView> segments,
+			ArrayList<TransferView> transfers) {
+		mMapView.setSchemeSelection(stations,segments,transfers);
+	}
+	
+	public void setZoomControls(ZoomControls zoomControls) {
+		mZoomController = new ZoomController<VectorMapView>(getContext(), mController, zoomControls);
+	}	
+	
+	public void setCenterPositionAndScale(PointF position, Float zoom, boolean animated) {
+		// TODO Auto-generated method stub
+	}
+
+	public float getScale() {
+		return mController.getScale();
+	}
+
 
 }

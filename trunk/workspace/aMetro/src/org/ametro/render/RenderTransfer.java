@@ -21,7 +21,7 @@
 
 package org.ametro.render;
 
-import org.ametro.model.MapView;
+import org.ametro.model.SchemeView;
 import org.ametro.model.StationView;
 import org.ametro.model.TransferView;
 import org.ametro.model.TransportTransfer;
@@ -45,7 +45,7 @@ public class RenderTransfer extends RenderElement {
     private Paint Paint;
 
 
-    public RenderTransfer(MapView map, TransferView view, TransportTransfer transfer) {
+    public RenderTransfer(SchemeView map, TransferView view, TransportTransfer transfer) {
         super();
         final StationView fromStation = map.stations[view.stationViewFromId];
         final ModelPoint from = fromStation.stationPoint;

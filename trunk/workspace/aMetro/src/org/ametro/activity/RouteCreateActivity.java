@@ -29,10 +29,10 @@ import java.util.Date;
 import org.ametro.Constants;
 import org.ametro.R;
 import org.ametro.adapter.StationListAdapter;
-import org.ametro.model.MapView;
+import org.ametro.model.SchemeView;
 import org.ametro.model.Model;
 import org.ametro.model.StationView;
-import org.ametro.model.MapView.TransportCollection;
+import org.ametro.model.SchemeView.TransportCollection;
 import org.ametro.model.route.RouteBuilder;
 import org.ametro.model.route.RouteContainer;
 import org.ametro.model.route.RouteParameters;
@@ -66,7 +66,7 @@ public class RouteCreateActivity extends Activity implements OnClickListener,
 		AnimationListener {
 
 	private Model mModel;
-	private MapView mMapView;
+	private SchemeView mMapView;
 
 	private int mDelayMode = 0;
 	private TransportCollection mTransports;

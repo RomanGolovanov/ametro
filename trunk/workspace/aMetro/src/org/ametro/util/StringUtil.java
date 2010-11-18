@@ -595,6 +595,17 @@ public class StringUtil {
 		return null;
 	}
 
+	public static Float parseNullableFloat(String text) {
+		if (text != null && !text.equals("")) {
+			try {
+				return Float.parseFloat(text);
+			} catch (NumberFormatException ignored) {
+			}
+		}
+		return null;
+	}
+
+	
 	public static String formatModelPoint(ModelPoint point) {
 		return point.x + "," + point.y;
 	}

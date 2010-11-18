@@ -50,7 +50,7 @@ import org.ametro.directory.ImportMapDirectory.ImportMapEntity;
 import org.ametro.directory.ImportTransportDirectory.TransportMapEntity;
 import org.ametro.model.LineView;
 import org.ametro.model.MapLayerContainer;
-import org.ametro.model.MapView;
+import org.ametro.model.SchemeView;
 import org.ametro.model.Model;
 import org.ametro.model.SegmentView;
 import org.ametro.model.StationView;
@@ -114,7 +114,7 @@ public class PmzStorage implements IModelStorage {
 		throw new NotImplementedException();
 	}
 
-	public MapView loadModelView(String fileName, Model model, String name) throws IOException {
+	public SchemeView loadModelView(String fileName, Model model, String name) throws IOException {
 		throw new NotImplementedException();
 	}
 
@@ -142,7 +142,7 @@ public class PmzStorage implements IModelStorage {
 		private ArrayList<TransportSegment> mTransportSegments = new ArrayList<TransportSegment>();
 		private ArrayList<TransportTransfer> mTransportTransfers = new ArrayList<TransportTransfer>();
 
-		private ArrayList<MapView> mMapViews = new ArrayList<MapView>();
+		private ArrayList<SchemeView> mMapViews = new ArrayList<SchemeView>();
 		private ArrayList<String> mMapViewSystemNames = new ArrayList<String>();
 
 		private ArrayList<MapLayerContainer> mMapLayers = new ArrayList<MapLayerContainer>();
@@ -389,7 +389,7 @@ public class PmzStorage implements IModelStorage {
 				InputStream stream = mZipFile.getInputStream(mZipFile.getEntry(fileName));
 				IniStreamReader ini = new IniStreamReader(new InputStreamReader(stream, mCharset)); // access as INI file
 
-				MapView view = new MapView();
+				SchemeView view = new SchemeView();
 				view.id = mMapViews.size();
 				view.systemName = fileName;
 				view.stationDiameter = 11;
@@ -548,7 +548,7 @@ public class PmzStorage implements IModelStorage {
 		}
 
 
-		private SegmentView[] makeSegmentViews(MapView view, HashMap<Integer,Integer> lineViewIndex, HashMap<Integer,Integer> stationViewIndex, HashMap<Long,ModelSpline> additionalNodes) {
+		private SegmentView[] makeSegmentViews(SchemeView view, HashMap<Integer,Integer> lineViewIndex, HashMap<Integer,Integer> stationViewIndex, HashMap<Long,ModelSpline> additionalNodes) {
 			final Model model = mModel;
 			final ArrayList<SegmentView> segments = new ArrayList<SegmentView>();
 			int base = 0;
@@ -589,7 +589,7 @@ public class PmzStorage implements IModelStorage {
 			return (SegmentView[]) segments.toArray(new SegmentView[segments.size()]);
 		}
 
-		private void fixViewDimensions(MapView view) {
+		private void fixViewDimensions(SchemeView view) {
 			ModelRect mapRect = ModelUtil.getDimensions(view.stations);
 
 			int xmin = mapRect.left;
@@ -624,7 +624,7 @@ public class PmzStorage implements IModelStorage {
 			view.height = ymax - ymin + 160;
 		}
 
-		private TransferView[] makeTransferViews(MapView view, HashMap<Integer,Integer> stationViewIndex) {
+		private TransferView[] makeTransferViews(SchemeView view, HashMap<Integer,Integer> stationViewIndex) {
 			final Model model = mModel;
 			final ArrayList<TransferView> transfers = new ArrayList<TransferView>();
 			int base = 0;
@@ -853,7 +853,7 @@ public class PmzStorage implements IModelStorage {
 			model.segments = (TransportSegment[]) mTransportSegments.toArray(new TransportSegment[mTransportSegments.size()]);
 			model.transfers = (TransportTransfer[]) mTransportTransfers.toArray(new TransportTransfer[mTransportTransfers.size()]);
 
-			model.views = (MapView[]) mMapViews.toArray(new MapView[mMapViews.size()]);
+			model.views = (SchemeView[]) mMapViews.toArray(new SchemeView[mMapViews.size()]);
 			model.viewSystemNames = (String[]) mMapViewSystemNames.toArray(new String[mMapViewSystemNames.size()]);
 
 			model.layers = (MapLayerContainer[]) mMapLayers.toArray(new MapLayerContainer[mMapLayers.size()]);
@@ -903,7 +903,7 @@ public class PmzStorage implements IModelStorage {
 				
 			}
 			model.transportTypes = transports;
-			for(MapView view : model.views){
+			for(SchemeView view : model.views){
 				if(view.transportTypes == 0){
 					view.transportTypes = extractViewTransportType(model, transportIndex, view);
 				}
@@ -916,14 +916,14 @@ public class PmzStorage implements IModelStorage {
 			model.viewIsMain = new boolean[len];
 			model.viewTransportTypes = new long[len];
 			for(int i=0; i<len; i++){
-				final MapView view = model.views[i];
+				final SchemeView view = model.views[i];
 				model.viewNames[i] = view.name;
 				model.viewIsMain[i] = view.isMain;
 				model.viewTransportTypes[i] = view.transportTypes;
 			}
 		}
 
-		private long extractViewTransportType(final Model model, final HashMap<TransportMap, Long> transportIndex, MapView view){
+		private long extractViewTransportType(final Model model, final HashMap<TransportMap, Long> transportIndex, SchemeView view){
 			if(view.transports!=null){
 				long transports = 0;
 				for(int mapId : view.transports){

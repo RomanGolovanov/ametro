@@ -23,7 +23,7 @@ package org.ametro.render;
 
 import org.ametro.graphics.ExtendedPath;
 import org.ametro.model.LineView;
-import org.ametro.model.MapView;
+import org.ametro.model.SchemeView;
 import org.ametro.model.SegmentView;
 import org.ametro.model.StationView;
 import org.ametro.model.TransportSegment;
@@ -48,7 +48,7 @@ public class RenderSegment extends RenderElement {
     public Paint paint;
     public ExtendedPath path;
 
-    public RenderSegment(MapView map, SegmentView view, TransportSegment segment) {
+    public RenderSegment(SchemeView map, SegmentView view, TransportSegment segment) {
         super();
         final LineView lineView = map.lines[ view.lineViewId ];
         final StationView from = map.stations[view.stationViewFromId];
@@ -98,7 +98,7 @@ public class RenderSegment extends RenderElement {
         setProperties(lineWorking ? RenderProgram.TYPE_LINE + view.id : RenderProgram.TYPE_LINE_DASHED + view.id, box);
     }
     
-    private void drawSegmentPath(MapView map, SegmentView view, TransportSegment segment, StationView from, StationView to, ExtendedPath path) {
+    private void drawSegmentPath(SchemeView map, SegmentView view, TransportSegment segment, StationView from, StationView to, ExtendedPath path) {
         final ModelPoint pointFrom = from.stationPoint;
         final ModelPoint pointTo = to.stationPoint;
         final ModelPoint[] modelPoints = view.spline!=null ? view.spline.points : null;

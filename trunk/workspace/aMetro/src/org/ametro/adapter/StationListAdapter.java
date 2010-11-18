@@ -25,7 +25,7 @@ import java.util.HashMap;
 
 import org.ametro.R;
 import org.ametro.model.LineView;
-import org.ametro.model.MapView;
+import org.ametro.model.SchemeView;
 import org.ametro.model.StationView;
 import org.ametro.util.DateUtil;
 import org.ametro.util.StringUtil;
@@ -145,22 +145,22 @@ public class StationListAdapter extends BaseAdapter implements Filterable {
 		}
 	}	
 
-	public StationListAdapter(Context activity, ArrayList<StationView> stations,MapView map){
+	public StationListAdapter(Context activity, ArrayList<StationView> stations,SchemeView map){
 		this(activity, stations,null,map);
 	}
 
-	public StationListAdapter(Context context, ArrayList<StationView> stations, ArrayList<Long> delays, MapView map){
+	public StationListAdapter(Context context, ArrayList<StationView> stations, ArrayList<Long> delays, SchemeView map){
 		this(context
 			, (StationView[]) stations.toArray(new StationView[stations.size()])
 			, delays==null ? null : (Long[]) delays.toArray(new Long[delays.size()])
 			, map);
 	}
 
-	public StationListAdapter(Context context, StationView[] stations, MapView map){
+	public StationListAdapter(Context context, StationView[] stations, SchemeView map){
 		this(context, stations, null, map);
 	}
 
-	public StationListAdapter(Context context, StationView[] stations, Long[] delays, MapView map){
+	public StationListAdapter(Context context, StationView[] stations, Long[] delays, SchemeView map){
 		mInflater = LayoutInflater.from(context);
 		mLineDrawabled = new HashMap<LineView, Drawable>();
 		mLines = map.lines;
@@ -173,7 +173,7 @@ public class StationListAdapter extends BaseAdapter implements Filterable {
 		mMapView = map;
 	}
 	
-	protected final MapView mMapView;
+	protected final SchemeView mMapView;
 	protected final Context mContext;
 	protected LayoutInflater mInflater;
 	protected final HashMap<LineView, Drawable> mLineDrawabled;
@@ -195,7 +195,7 @@ public class StationListAdapter extends BaseAdapter implements Filterable {
 		mTextColor = color;
 	}
 	
-	public static String getStationName(MapView map, StationView station){
+	public static String getStationName(SchemeView map, StationView station){
 		return station.getName() + " (" + map.lines[station.lineViewId].getName() + ")";
 	}
 	

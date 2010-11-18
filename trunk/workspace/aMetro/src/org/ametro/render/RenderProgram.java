@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-import org.ametro.model.MapView;
+import org.ametro.model.SchemeView;
 import org.ametro.model.SegmentView;
 import org.ametro.model.StationView;
 import org.ametro.model.TransferView;
@@ -73,7 +73,7 @@ public class RenderProgram {
 	
 	private int mRenderFilter;
 
-	private MapView mMapView;
+	private SchemeView mMapView;
 	
 	private ArrayList<RenderElement> mElements;
 	private ClippingTreeNode mClippingTree;
@@ -94,7 +94,7 @@ public class RenderProgram {
 		}
 	}
 
-	public RenderProgram(MapView map) {
+	public RenderProgram(SchemeView map) {
 		mMapView = map;
 		mElements = new ArrayList<RenderElement>();
 		drawLines(map, mElements);
@@ -190,7 +190,7 @@ public class RenderProgram {
 		makeClippingTreeNodes(root.Right);
 	}
 
-	public void updateSelection(List<StationView> stations, List<SegmentView> segments, List<TransferView> transfers){
+	public void setSelection(List<StationView> stations, List<SegmentView> segments, List<TransferView> transfers){
 		if(stations!=null || segments!=null){
 			for(RenderElement elem : mElements){
 				elem.setSelection(false);
@@ -242,7 +242,7 @@ public class RenderProgram {
 		updateRenderQueue();
 	}
 
-	private void drawStations(MapView map, ArrayList<RenderElement> renderQueue) {
+	private void drawStations(SchemeView map, ArrayList<RenderElement> renderQueue) {
 		final TransportStation[] stations = map.owner.stations; 
 		for (StationView station : map.stations) {
 			TransportStation s = stations[station.stationId];
@@ -259,7 +259,7 @@ public class RenderProgram {
 		}
 	}
 
-	private void drawTransfers(MapView map, ArrayList<RenderElement> renderQueue) {
+	private void drawTransfers(SchemeView map, ArrayList<RenderElement> renderQueue) {
 		final TransportTransfer[] transfers = map.owner.transfers; 
 		for (TransferView transfer : map.transfers) {
 			final TransportTransfer t = transfers[transfer.transferId];
@@ -275,7 +275,7 @@ public class RenderProgram {
 		}
 	}
 
-	private void drawLines(MapView map, ArrayList<RenderElement> renderQueue) {
+	private void drawLines(SchemeView map, ArrayList<RenderElement> renderQueue) {
 		final TransportSegment[] segments = map.owner.segments; 
 		HashSet<Integer> exclusions = new HashSet<Integer>();
 		for (SegmentView segment : map.segments) {

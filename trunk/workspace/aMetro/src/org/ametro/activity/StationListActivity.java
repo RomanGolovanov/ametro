@@ -28,7 +28,7 @@ import java.util.Comparator;
 import org.ametro.Constants;
 import org.ametro.R;
 import org.ametro.adapter.StationListAdapter;
-import org.ametro.model.MapView;
+import org.ametro.model.SchemeView;
 import org.ametro.model.StationView;
 import org.ametro.util.StringUtil;
 
@@ -45,7 +45,7 @@ public class StationListActivity extends ListActivity {
 	private final int MAIN_MENU_BY_NAME = 1;
 	private final int MAIN_MENU_BY_LINE = 2;
 	
-	private MapView mMap;
+	private SchemeView mMap;
 	private ArrayList<StationView> mStations;
 	private StationListAdapter mAdapter;
 	

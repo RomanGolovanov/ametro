@@ -21,7 +21,7 @@
 
 package org.ametro.render;
 
-import org.ametro.model.MapView;
+import org.ametro.model.SchemeView;
 import org.ametro.model.StationView;
 import org.ametro.model.TransportStation;
 
@@ -44,7 +44,7 @@ public class RenderStation extends RenderElement {
     private int colorNormal;
     private int colorGrayed;
     
-    public RenderStation(MapView map, StationView view, TransportStation station) {
+    public RenderStation(SchemeView map, StationView view, TransportStation station) {
         super();
         final boolean hasConnections = map.hasConnections(view);
 
