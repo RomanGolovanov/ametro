@@ -206,6 +206,7 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener<
 			mController.setPositionAndScale(mChangeCenterPoint, mChangeScale);
 			mChangeCenterPoint = null;
 			mChangeScale = null;
+			mMapView.postRebuildCache();
 		}
 		//mMapView.postRebuildCache();
 	}
