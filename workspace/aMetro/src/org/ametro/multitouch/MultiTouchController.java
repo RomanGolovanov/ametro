@@ -605,6 +605,16 @@ public class MultiTouchController<T> {
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch (keyCode) {
+        case KeyEvent.KEYCODE_VOLUME_UP:
+        	if(mode == MODE_NONE){
+        		doZoomAnimation(1.5f);
+        	}
+        	return true;
+        case KeyEvent.KEYCODE_VOLUME_DOWN:
+        	if(mode == MODE_NONE){
+        		doZoomAnimation(1/1.5f);
+        	}
+        	return true;
         case KeyEvent.KEYCODE_DPAD_UP:
         case KeyEvent.KEYCODE_DPAD_DOWN:
         case KeyEvent.KEYCODE_DPAD_LEFT:
@@ -641,6 +651,8 @@ public class MultiTouchController<T> {
 
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         switch (keyCode) {
+        case KeyEvent.KEYCODE_VOLUME_UP:
+        case KeyEvent.KEYCODE_VOLUME_DOWN:
         case KeyEvent.KEYCODE_DPAD_UP:
         case KeyEvent.KEYCODE_DPAD_DOWN:
         case KeyEvent.KEYCODE_DPAD_LEFT:
