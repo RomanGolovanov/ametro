@@ -53,6 +53,9 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener<
         setVerticalScrollBarEnabled(true);
         setHorizontalScrollBarEnabled(true);
 
+        setFocusable(true);
+        setFocusableInTouchMode(true);
+        
 		mScheme = scheme;
 		mMapView = new VectorMapRenderer(this, scheme);
 		mController = new MultiTouchController<VectorMapRenderer>(getContext(),this);
@@ -184,17 +187,11 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener<
 	}	
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if(mController.onKeyDown(keyCode, event)){
-			return true;
-		}
-		return super.onKeyDown(keyCode, event);
+		return mController.onKeyDown(keyCode, event);
 	}
 	
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
-		if(mController.onKeyUp(keyCode, event)){
-			return true;
-		}
-		return super.onKeyUp(keyCode, event);
+		return mController.onKeyUp(keyCode, event);
 	}
 	
 	public boolean onTrackballEvent(MotionEvent event) {
