@@ -10,13 +10,6 @@
         android:icon="@drawable/appicon"
         android:label="@string/app_name" android:name="org.ametro.ApplicationEx">
         <activity android:label="@string/app_name"
-            android:launchMode="singleTop"  
-            android:name=".activity.MapView2Activity" android:configChanges="keyboardHidden|orientation"
-            android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan">
-            <meta-data android:name="android.app.default_searchable" android:value=".activity.StationSearchActivity"/>
-        </activity>
-        
-        <activity android:label="@string/app_name"
             android:launchMode="singleTop" android:configChanges="keyboardHidden|orientation" 
             android:name=".activity.MapViewActivity"
             android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan">

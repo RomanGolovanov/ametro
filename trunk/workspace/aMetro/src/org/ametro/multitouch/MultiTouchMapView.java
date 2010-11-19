@@ -15,7 +15,6 @@ import android.graphics.Matrix;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.os.Handler;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 import android.widget.ScrollView;
@@ -44,6 +43,9 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener<
 	
 	private Handler mPrivateHandler = new Handler();
 	
+	private PointF mChangeCenterPoint;
+	private Float mChangeScale;
+	
 	public MultiTouchMapView(Context context, SchemeView scheme) {
 		super(context);
 		setFadingEdgeLength(0);
@@ -57,7 +59,6 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener<
 		mDblClickSlop = ViewConfiguration.get(context).getScaledDoubleTapSlop();
 	}
 	
-
     protected int computeVerticalScrollOffset() {
         return mVerticalScrollOffset;
     }
@@ -89,29 +90,7 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener<
 		if(mZoomController!=null){
 			mZoomController.showZoom();
 		}
-		
-		matrix.getValues(values);
-		float x = values[Matrix.MTRANS_X];
-		float y = values[Matrix.MTRANS_Y];
-		float scale = values[Matrix.MSCALE_X];
-		float contentWidth = mScheme.width * scale;
-		float contentHeight = mScheme.height * scale;
-		float displayWidth = getWidth();
-		float displayHeight = getHeight();
-		
-		mHorizontalScrollRange = (int)(contentWidth - displayWidth);
-		mVerticalScrollRange = (int)(contentHeight - displayHeight);
-		
-		int dx = (int)-x;
-		int dy = (int)-y;
-		
-		mHorizontalScrollOffset = dx;
-		mVerticalScrollOffset = dy;
-
-        awakenScrollBars();
-		
-		Log.w(TAG,"Scroll offsets:" + mVerticalScrollOffset + "," + mHorizontalScrollOffset + ", ranges:" + mVerticalScrollRange + "," + mHorizontalScrollRange);
-		
+		updateScrollBars(matrix);
 		mMapView.setMatrix(matrix,true);
 	}
 	
@@ -148,30 +127,17 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener<
 	public void onPerformLongClick(PointF position) {
 		performLongClick();
 	}
-
 	
 	public PointF getTouchPoint() {
 		return mController.getTouchPoint();
 	}
 
-	
-	
 	public void setAntiAliasingDisableOnScroll(boolean antiAliasingDisableOnScroll) {
 		// TODO Auto-generated method stub
 	}
 
 	public void setAntiAliasingEnabled(boolean antiAliasingEnabled) {
 		// TODO Auto-generated method stub
-	}
-
-
-	public void setCenterPositionAndScale(PointF position, Float zoom) {
-		setCenterPositionAndScale(position, zoom, false);
-	}
-	
-	public float getPositionAndScale(PointF position) {
-		position.set(mController.getCenterPosition());
-		return mController.getScale();
 	}
 
 	public void setScheme(SchemeView scheme) {
@@ -189,8 +155,25 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener<
 		mZoomController = new ZoomController<VectorMapRenderer>(getContext(), mController, zoomControls);
 	}	
 	
+	public float getCenterPositionAndScale(PointF position) {
+		float scale = mController.getPositionAndScale(position);
+		float width = getWidth() / scale;
+		float height = getHeight() / scale;
+		position.offset(width/2,height/2);
+		return scale;
+	}
+	
+	public void setCenterPositionAndScale(PointF position, Float zoom) {
+		mChangeCenterPoint = position;
+		mChangeScale = zoom;
+	}
+	
 	public void setCenterPositionAndScale(PointF position, Float zoom, boolean animated) {
-		// TODO Auto-generated method stub
+		if(!animated){
+			setCenterPositionAndScale(position, zoom);
+		}else{
+			
+		}
 	}
 
 	public float getScale() {
@@ -208,28 +191,49 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener<
 		return mController.onMultiTouchEvent(event);
 	}
 	
-	protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-		updateViewRect();
-		super.onLayout(changed, left, top, right, bottom);
-	}
-	
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 		updateViewRect();
 		super.onSizeChanged(w, h, oldw, oldh);
 	}
 	
 	private void updateViewRect() {
-		float height = mMapView.getContentHeight();
-		float width = mMapView.getContentWidth();
-		mController.setViewRect(width, height, new RectF(0, 0, getWidth(), getHeight()));
+		boolean changePositionAndScale= mChangeCenterPoint!=null || mChangeScale!=null;
+		mController.setViewRect(mMapView.getContentWidth(), mMapView.getContentHeight(), new RectF(0, 0, getWidth(), getHeight()), !changePositionAndScale);
+		if(mChangeCenterPoint!=null || mChangeScale!=null){
+			float width = getWidth() / mChangeScale;
+			float height = getHeight() / mChangeScale;
+			mChangeCenterPoint.offset( -width/2, -height/2 );
+			mController.setPositionAndScale(mChangeCenterPoint, mChangeScale);
+			mChangeCenterPoint = null;
+			mChangeScale = null;
+		}
+		//mMapView.postRebuildCache();
 	}
-	
+
+	private void updateScrollBars(Matrix matrix) {
+		matrix.getValues(values);
+		float scale = values[Matrix.MSCALE_X];
+		float x = -values[Matrix.MTRANS_X];
+		float y = -values[Matrix.MTRANS_Y];
+		float contentWidth = mScheme.width * scale;
+		float contentHeight = mScheme.height * scale;
+		
+		mHorizontalScrollRange = (int)(contentWidth);
+		mVerticalScrollRange = (int)(contentHeight);
+
+		
+		mHorizontalScrollOffset = (int)x;
+		mVerticalScrollOffset = (int)y;
+
+        awakenScrollBars();
+	}
+
 	private Runnable performClickRunnable = new Runnable() {
 		public void run() {
 			mLastClickPosition = null;
 			performClick();
 		}
 	};
-	
+
 
 }

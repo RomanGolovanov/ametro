@@ -20,7 +20,6 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 
 public class VectorMapRenderer {
@@ -92,7 +91,8 @@ public class VectorMapRenderer {
 	
 	public void draw(Canvas canvas) {
 		if(cache==null){ // render immediately at first run
-			rebuildCache();
+			postRebuildCache();
+			return;
 		}
 		// prepare transform matrix
 		final Matrix m = renderMatrix;
@@ -124,7 +124,7 @@ public class VectorMapRenderer {
 	}
 
 	/** set transformation matrix for content **/
-	public void setMatrix(Matrix newMatrix, boolean invalidate) {
+	public synchronized void setMatrix(Matrix newMatrix, boolean invalidate) {
 		matrix.set(newMatrix);
 		matrix.invert(invertedMatrix);
 		matrix.getValues(values);
@@ -161,8 +161,8 @@ public class VectorMapRenderer {
 		return scheme.height;
 	}
 
-	public void rebuildCache() {
-		Log.w(TAG, "rebuild cache");
+	public synchronized void rebuildCache() {
+		//Log.w(TAG, "rebuild cache");
 		recycleCache();
 		try{
 			int memoryLimit = 4 * 1024 * 1024 * memoryClass / 16;
@@ -179,9 +179,10 @@ public class VectorMapRenderer {
 		entireMapCached = false;
 	}
 
-	private void renderEntireCache() {
-		Log.w(TAG,"render entire");
+	private synchronized void renderEntireCache() {
+		//Log.w(TAG,"render entire");
 		final MapCache newCache = new MapCache();
+		
 		final RectF viewRect = new RectF(0,0,scaledWidth,scaledHeight);
 		
 		Matrix m = new Matrix(matrix);
@@ -210,8 +211,8 @@ public class VectorMapRenderer {
 		cache = newCache;
 	}
 
-	private void renderPartialCache() {
-		Log.w(TAG,"render partial");
+	private synchronized void renderPartialCache() {
+		//Log.w(TAG,"render partial");
 		final int width = getWidth();
 		final int height = getHeight();
 		final MapCache newCache = new MapCache();
@@ -251,8 +252,8 @@ public class VectorMapRenderer {
 		cache = newCache;
 	}
 
-	private void updatePartialCache() {
-		Log.w(TAG,"update partial");
+	private synchronized void updatePartialCache() {
+		//Log.w(TAG,"update partial");
 		final int width = getWidth();
 		final int height = getHeight();
 		final MapCache newCache = new MapCache();
