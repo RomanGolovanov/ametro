@@ -309,7 +309,7 @@ public class MultiTouchController<T> {
 		return true;
 	}
 	
-	private void setControllerMode(int newMode){
+	/*package*/ void setControllerMode(int newMode){
 		boolean fireUpdate = mode != newMode;
 		mode = newMode;
 		if(fireUpdate){

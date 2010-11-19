@@ -10,40 +10,77 @@ import org.ametro.multitouch.MultiTouchController.MultiTouchListener;
 import org.ametro.util.MathUtil;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
-import android.widget.FrameLayout;
+import android.widget.ScrollView;
 import android.widget.ZoomControls;
 
-public class MultiTouchMapView extends FrameLayout implements MultiTouchListener<VectorMapView> {
+public class MultiTouchMapView extends ScrollView implements MultiTouchListener<VectorMapRenderer> {
 
 	protected  static final String TAG = "MultiTouchMapView";
 	
-	private MultiTouchController<VectorMapView> mController;
-	private VectorMapView mMapView;
+	private MultiTouchController<VectorMapRenderer> mController;
+	private ZoomController<VectorMapRenderer> mZoomController;
+
+	private SchemeView mScheme;
+	private VectorMapRenderer mMapView;
 	private int mTouchMode;
-	private ZoomController<VectorMapView> mZoomController;
 	
 	private PointF mLastClickPosition;
 	private float mDblClickSlop;
+	
+	private float[] values = new float[9];
+	
+	private int mVerticalScrollOffset;
+	private int mHorizontalScrollOffset;
+	private int mVerticalScrollRange;
+	private int mHorizontalScrollRange;
 	
 	private Handler mPrivateHandler = new Handler();
 	
 	public MultiTouchMapView(Context context, SchemeView scheme) {
 		super(context);
-		// create map image
-		mMapView = new VectorMapView(getContext(), scheme);
-		//mZoomControls
-		addView(mMapView);
-		// create controller
-		mController = new MultiTouchController<VectorMapView>(getContext(),this);
+		setFadingEdgeLength(0);
+		setScrollbarFadingEnabled(true);
+        setVerticalScrollBarEnabled(true);
+        setHorizontalScrollBarEnabled(true);
+
+		mScheme = scheme;
+		mMapView = new VectorMapRenderer(this, scheme);
+		mController = new MultiTouchController<VectorMapRenderer>(getContext(),this);
 		mDblClickSlop = ViewConfiguration.get(context).getScaledDoubleTapSlop();
 	}
+	
 
+    protected int computeVerticalScrollOffset() {
+        return mVerticalScrollOffset;
+    }
+
+    protected int computeVerticalScrollRange() {
+        return mVerticalScrollRange;
+    }
+
+    protected int computeHorizontalScrollOffset() {
+        return mHorizontalScrollOffset;
+    }
+
+    protected int computeHorizontalScrollRange() {
+        return mHorizontalScrollRange;
+    }
+    
+	protected void onDraw(Canvas canvas) {
+		canvas.save();
+		mMapView.draw(canvas);
+		canvas.restore();
+		super.onDraw(canvas);
+	}
+	
 	public Matrix getPositionAndScaleMatrix() {
 		return mMapView.getMatrix();
 	}
@@ -52,12 +89,35 @@ public class MultiTouchMapView extends FrameLayout implements MultiTouchListener
 		if(mZoomController!=null){
 			mZoomController.showZoom();
 		}
+		
+		matrix.getValues(values);
+		float x = values[Matrix.MTRANS_X];
+		float y = values[Matrix.MTRANS_Y];
+		float scale = values[Matrix.MSCALE_X];
+		float contentWidth = mScheme.width * scale;
+		float contentHeight = mScheme.height * scale;
+		float displayWidth = getWidth();
+		float displayHeight = getHeight();
+		
+		mHorizontalScrollRange = (int)(contentWidth - displayWidth);
+		mVerticalScrollRange = (int)(contentHeight - displayHeight);
+		
+		int dx = (int)-x;
+		int dy = (int)-y;
+		
+		mHorizontalScrollOffset = dx;
+		mVerticalScrollOffset = dy;
+
+        awakenScrollBars();
+		
+		Log.w(TAG,"Scroll offsets:" + mVerticalScrollOffset + "," + mHorizontalScrollOffset + ", ranges:" + mVerticalScrollRange + "," + mHorizontalScrollRange);
+		
 		mMapView.setMatrix(matrix,true);
 	}
 	
 	public void onTouchModeChanged(int mode) {
 		if(this.mTouchMode == MultiTouchController.MODE_ZOOM || this.mTouchMode == MultiTouchController.MODE_ZOOM_ANIMATION){
-			mMapView.rebuildCache();
+			mMapView.postRebuildCache();
 		}
 		mMapView.enableUpdates(mode != MultiTouchController.MODE_ZOOM && mode!= MultiTouchController.MODE_ZOOM_ANIMATION );
 		this.mTouchMode = mode;
@@ -115,6 +175,7 @@ public class MultiTouchMapView extends FrameLayout implements MultiTouchListener
 	}
 
 	public void setScheme(SchemeView scheme) {
+		mScheme = scheme;
 		mMapView.setScheme(scheme);
 	}
 
@@ -125,7 +186,7 @@ public class MultiTouchMapView extends FrameLayout implements MultiTouchListener
 	}
 	
 	public void setZoomControls(ZoomControls zoomControls) {
-		mZoomController = new ZoomController<VectorMapView>(getContext(), mController, zoomControls);
+		mZoomController = new ZoomController<VectorMapRenderer>(getContext(), mController, zoomControls);
 	}	
 	
 	public void setCenterPositionAndScale(PointF position, Float zoom, boolean animated) {

@@ -20,9 +20,10 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 
-public class VectorMapView extends View {
+public class VectorMapRenderer {
 
 	protected static final String TAG = "VectorMapView";
 
@@ -47,6 +48,8 @@ public class VectorMapView extends View {
 	float scaledWidth;
 	float scaledHeight;
 	
+	View container;
+	
 	float[] values = new float[9];
 	
 	private boolean updatesEnabled;
@@ -67,26 +70,30 @@ public class VectorMapView extends View {
 		}
 	}
 	
-	public VectorMapView(Context context, SchemeView scheme) {
-		super(context);
+	public int getWidth(){
+		return container.getWidth();
+	}
+	
+	public int getHeight(){
+		return container.getHeight();
+	}
+	
+	private void invalidate(){
+		container.invalidate();
+	}
+	
+	public VectorMapRenderer(View container, SchemeView scheme) {
+		this.container = container;
 		this.scheme = scheme;
-		
-		
-		memoryClass = getMemoryClass(context);
-
+		memoryClass = getMemoryClass(container.getContext());
 		setScheme(scheme);
 	}
 
-	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-		updateViewRect();
-		super.onSizeChanged(w, h, oldw, oldh);
-	}
 	
 	public void draw(Canvas canvas) {
 		if(cache==null){ // render immediately at first run
 			rebuildCache();
 		}
-		
 		// prepare transform matrix
 		final Matrix m = renderMatrix;
 		if(cache.Scale!=scale){
@@ -134,10 +141,9 @@ public class VectorMapView extends View {
 		}
 	}
 
-	private void updateViewRect() {
+	public void updateViewRect() {
 		viewRect.set(0, 0, getWidth(), getHeight());
 		invertedMatrix.mapRect(viewRect);
-		
 		screenRect.set(viewRect);
 		matrix.mapRect(screenRect);
 	}
@@ -156,6 +162,7 @@ public class VectorMapView extends View {
 	}
 
 	public void rebuildCache() {
+		Log.w(TAG, "rebuild cache");
 		recycleCache();
 		try{
 			int memoryLimit = 4 * 1024 * 1024 * memoryClass / 16;
@@ -173,7 +180,7 @@ public class VectorMapView extends View {
 	}
 
 	private void renderEntireCache() {
-		//Log.w(TAG,"render entire");
+		Log.w(TAG,"render entire");
 		final MapCache newCache = new MapCache();
 		final RectF viewRect = new RectF(0,0,scaledWidth,scaledHeight);
 		
@@ -204,7 +211,7 @@ public class VectorMapView extends View {
 	}
 
 	private void renderPartialCache() {
-		//Log.w(TAG,"render partial");
+		Log.w(TAG,"render partial");
 		final int width = getWidth();
 		final int height = getHeight();
 		final MapCache newCache = new MapCache();
@@ -245,7 +252,7 @@ public class VectorMapView extends View {
 	}
 
 	private void updatePartialCache() {
-		//Log.w(TAG,"update partial");
+		Log.w(TAG,"update partial");
 		final int width = getWidth();
 		final int height = getHeight();
 		final MapCache newCache = new MapCache();
@@ -385,14 +392,14 @@ public class VectorMapView extends View {
 		postRebuildCache();
 	}
 
-	private void postRebuildCache(){
+	public void postRebuildCache(){
 		handler.removeCallbacks(rebuildCacheRunnable);
 		handler.removeCallbacks(renderPartialCacheRunnable);
 		handler.removeCallbacks(updateCacheRunnable);
 		handler.post(rebuildCacheRunnable);
 	}
 
-	private void postUpdateCache() {
+	public void postUpdateCache() {
 		handler.removeCallbacks(rebuildCacheRunnable);
 		handler.removeCallbacks(renderPartialCacheRunnable);
 		handler.removeCallbacks(updateCacheRunnable);
