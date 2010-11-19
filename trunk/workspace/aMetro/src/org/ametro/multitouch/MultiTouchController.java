@@ -126,7 +126,7 @@ public class MultiTouchController<T> {
 
 	/** Setup view rect and content size 
 	 * @param updateMatrix **/
-	public void setViewRect(float newContentWidth, float newContentHeight, RectF newDisplayRect, boolean updateMatrix){
+	public void setViewRect(float newContentWidth, float newContentHeight, RectF newDisplayRect){
 		contentWidth = newContentWidth;
 		contentHeight = newContentHeight;
 		if(displayRect!=null){
@@ -138,9 +138,7 @@ public class MultiTouchController<T> {
 		minScale = Math.min(displayRect.width()/contentWidth, displayRect.height()/contentHeight);
 		adjustScale();
 		adjustPan();
-		if(updateMatrix){
-			listener.setPositionAndScaleMatrix(matrix);
-		}
+		listener.setPositionAndScaleMatrix(matrix);
 	}
 	
 	public boolean onMultiTouchEvent(MotionEvent rawEvent) {
@@ -488,9 +486,9 @@ public class MultiTouchController<T> {
 				// fix target zoom to snap to zoom limits
 				
 				float nextScale = Math.min( Math.max(minScale, scaleFactor * targetScale), maxScale );
-				if(nextScale == maxScale && ( nextScale / targetScale ) < scaleFactor ){
+				if(nextScale == maxScale && ( nextScale / targetScale ) < scaleFactor*0.8f ){
 					targetScale = maxScale;
-				}else if(nextScale == minScale && ( targetScale / nextScale ) < scaleFactor  ){
+				}else if(nextScale == minScale && ( targetScale / nextScale ) < scaleFactor*0.8f  ){
 					targetScale = minScale;
 				}
 				
@@ -513,6 +511,7 @@ public class MultiTouchController<T> {
 					if(more){
 						privateHandler.sendEmptyMessage(MSG_PROCESS_ZOOM);
 					}else{
+						scaleCenter = null;
 						setControllerMode(MODE_NONE);
 					}
 				}

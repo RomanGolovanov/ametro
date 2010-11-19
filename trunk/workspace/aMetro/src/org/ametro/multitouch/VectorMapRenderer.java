@@ -20,43 +20,45 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 
 public class VectorMapRenderer {
 
 	protected static final String TAG = "VectorMapView";
 
-	RenderProgram renderer;
-	SchemeView scheme;
+	RenderProgram mRenderer;
+	SchemeView mScheme;
 
-	MapCache cache;
-	MapCache oldCache;
+	MapCache mCache;
+	MapCache mOldCache;
 	
-	final Matrix matrix = new Matrix();
-	final Matrix invertedMatrix = new Matrix();
-	final Matrix renderMatrix = new Matrix();
+	final Matrix mMatrix = new Matrix();
+	final Matrix mInvertedMatrix = new Matrix();
+	final Matrix mRenderMatrix = new Matrix();
 
-	final RectF screenRect = new RectF();
-	final RectF viewRect = new RectF();
+	final RectF mScreenRect = new RectF();
+	final RectF mSchemeRect = new RectF();
 	
-	final int memoryClass;
+	final int mMemoryClass;
 	
-	float scale;
-	float x;
-	float y;
-	float scaledWidth;
-	float scaledHeight;
+	float mScale;
+	float mCurrX;
+	float mCurrY;
+	float mCurrWidth;
+	float mCurrHeight;
 	
-	View container;
+	View mCanvas;
 	
-	float[] values = new float[9];
+	float[] mMatrixValues = new float[9];
 	
-	private boolean updatesEnabled;
-	private boolean entireMapCached;
-	private final Handler handler = new Handler();
+	private boolean isUpdatesEnabled;
+	private boolean isEntireMapCached;
 	
-	public void enableUpdates(boolean enabled){
-		updatesEnabled = enabled;
+	private final Handler mPrivateHandler = new Handler();
+	
+	public void setUpdatesEnabled(boolean enabled){
+		isUpdatesEnabled = enabled;
 	}
 	
 	private int getMemoryClass(Context context){
@@ -70,145 +72,136 @@ public class VectorMapRenderer {
 	}
 	
 	public int getWidth(){
-		return container.getWidth();
+		return mCanvas.getWidth();
 	}
 	
 	public int getHeight(){
-		return container.getHeight();
-	}
-	
-	private void invalidate(){
-		container.invalidate();
+		return mCanvas.getHeight();
 	}
 	
 	public VectorMapRenderer(View container, SchemeView scheme) {
-		this.container = container;
-		this.scheme = scheme;
-		memoryClass = getMemoryClass(container.getContext());
+		this.mCanvas = container;
+		this.mScheme = scheme;
+		mMemoryClass = getMemoryClass(container.getContext());
 		setScheme(scheme);
 	}
 
 	
 	public void draw(Canvas canvas) {
-		if(cache==null){ // render immediately at first run
-			postRebuildCache();
-			return;
+		if(mCache==null){ 
+			// render at first run
+			rebuildCache();
 		}
 		// prepare transform matrix
-		final Matrix m = renderMatrix;
-		if(cache.Scale!=scale){
+		final Matrix m = mRenderMatrix;
+		if(mCache.Scale!=mScale){
 			// if we're zooming - at first "roll-back" previous cache transform
-			m.set(cache.InvertedMatrix);
+			m.set(mCache.InvertedMatrix);
 			// next apply current transformation
-			m.postConcat(matrix);
+			m.postConcat(mMatrix);
+
 		}else{
 			// if we're using cache - simple translate origin 
-			m.setTranslate(x - cache.X, y - cache.Y);
+			m.setTranslate(mCurrX - mCache.X, mCurrY - mCache.Y);
 		}
-		canvas.clipRect(screenRect);
+		canvas.clipRect(mScreenRect);
 		canvas.drawColor(Color.WHITE);
-		canvas.drawBitmap(cache.Image, m, null);
+		canvas.drawBitmap(mCache.Image, m, null);
 		
-		if(updatesEnabled && !entireMapCached){
-			//if updated enabled (not zoom) 
-			if(!cache.validate(getWidth(), getHeight())){
+		if(isUpdatesEnabled){
+			if(mCache.Scale!=mScale){
 				postRebuildCache();
-			}else if(!cache.hit(viewRect)){
-				// and not entire map cached and we aren't in cache viewport
-				// or if cache size is invalid
-				// request cache update
+			}else if(!isEntireMapCached && !mCache.hit(mSchemeRect)){
 				postUpdateCache();
 			}
 		}
-		
 	}
 
 	/** set transformation matrix for content **/
-	public synchronized void setMatrix(Matrix newMatrix, boolean invalidate) {
-		matrix.set(newMatrix);
-		matrix.invert(invertedMatrix);
-		matrix.getValues(values);
-		scale = values[Matrix.MSCALE_X];
-		x = values[Matrix.MTRANS_X];
-		y = values[Matrix.MTRANS_Y];
-		scaledWidth = getContentWidth() * scale;
-		scaledHeight = getContentHeight() * scale;
+	public synchronized void setMatrix(Matrix newMatrix) {
+		mMatrix.set(newMatrix);
+		mMatrix.invert(mInvertedMatrix);
+		mMatrix.getValues(mMatrixValues);
+		mScale = mMatrixValues[Matrix.MSCALE_X];
+		mCurrX = mMatrixValues[Matrix.MTRANS_X];
+		mCurrY = mMatrixValues[Matrix.MTRANS_Y];
+		mCurrWidth = getContentWidth() * mScale;
+		mCurrHeight = getContentHeight() * mScale;
 		
 		updateViewRect();
-		
-		if(invalidate){
-			invalidate();
-		}
 	}
 
 	public void updateViewRect() {
-		viewRect.set(0, 0, getWidth(), getHeight());
-		invertedMatrix.mapRect(viewRect);
-		screenRect.set(viewRect);
-		matrix.mapRect(screenRect);
+		mSchemeRect.set(0, 0, getWidth(), getHeight());
+		mInvertedMatrix.mapRect(mSchemeRect);
+		mScreenRect.set(mSchemeRect);
+		mMatrix.mapRect(mScreenRect);
 	}
 
 	/** get current transformation matrix**/
 	public Matrix getMatrix(){
-		return this.matrix;
+		return this.mMatrix;
 	}
 	
 	public float getContentWidth() {
-		return scheme.width;
+		return mScheme.width;
 	}
 
 	public float getContentHeight() {
-		return scheme.height;
+		return mScheme.height;
 	}
 
 	public synchronized void rebuildCache() {
 		//Log.w(TAG, "rebuild cache");
 		recycleCache();
 		try{
-			int memoryLimit = 4 * 1024 * 1024 * memoryClass / 16;
-			int bitmapSize = (int)scaledWidth * (int)scaledHeight * 2; 
+			int memoryLimit = 4 * 1024 * 1024 * mMemoryClass / 16;
+			int bitmapSize = (int)mCurrWidth * (int)mCurrHeight * 2; 
 			if( bitmapSize <= memoryLimit ){
 				renderEntireCache();
-				entireMapCached = true;
+				isEntireMapCached = true;
 				return;
+			}else{
+				Log.w(TAG,"Not enough memory to make image: memoryLimit = " + memoryLimit + ", bitmapSize=" + bitmapSize );
 			}
 		}catch(OutOfMemoryError ex){
-			// eat out-of-memory exception 
+			// eat out-of-memory exception
+			Log.w(TAG,"Not enough memory to make image", ex);
 		}
 		renderPartialCache();
-		entireMapCached = false;
+		isEntireMapCached = false;
 	}
 
 	private synchronized void renderEntireCache() {
 		//Log.w(TAG,"render entire");
 		final MapCache newCache = new MapCache();
 		
-		final RectF viewRect = new RectF(0,0,scaledWidth,scaledHeight);
+		final RectF viewRect = new RectF(0,0,mCurrWidth,mCurrHeight);
 		
-		Matrix m = new Matrix(matrix);
-		m.postTranslate(-x, -y);
+		Matrix m = new Matrix(mMatrix);
+		m.postTranslate(-mCurrX, -mCurrY);
 		Matrix i = new Matrix();
 		m.invert(i);
 		
 		newCache.InvertedMatrix = i;
 		newCache.X = 0;
 		newCache.Y = 0;
-		newCache.Scale = scale;
+		newCache.Scale = mScale;
 		newCache.ViewRect = viewRect;
 		
 		newCache.Image = Bitmap.createBitmap((int)viewRect.width(), (int)viewRect.height(), Config.RGB_565);
 		
 		Canvas c = new Canvas(newCache.Image);
 		c.drawColor(Color.MAGENTA);
-		c.scale(scale, scale);
+		c.scale(mScale, mScale);
 		
-		ArrayList<RenderElement> elements = renderer.setVisibilityAll();
+		ArrayList<RenderElement> elements = mRenderer.setVisibilityAll();
 		c.drawColor(Color.WHITE);
 		for (RenderElement elem : elements) {
 			elem.draw(c);
 		}
 		
-		cache = newCache;
+		mCache = newCache;
 	}
 
 	private synchronized void renderPartialCache() {
@@ -218,21 +211,21 @@ public class VectorMapRenderer {
 		final MapCache newCache = new MapCache();
 		final RectF viewRect = new RectF(0, 0, width, height);
 		
-		Matrix i = new Matrix(invertedMatrix);
+		Matrix i = new Matrix(mInvertedMatrix);
 		i.mapRect(viewRect);
 		
 		newCache.InvertedMatrix = i;
-		newCache.X = x;
-		newCache.Y = y;
-		newCache.Scale = scale;
+		newCache.X = mCurrX;
+		newCache.Y = mCurrY;
+		newCache.Scale = mScale;
 		newCache.ViewRect = viewRect;
 		
-		if(oldCache!=null && oldCache.equals(width, height)){
-			newCache.Image = oldCache.Image;
-		}else if(oldCache!=null){
-			oldCache.Image.recycle();
-			oldCache.Image = null;
-			oldCache = null;
+		if(mOldCache!=null && mOldCache.equals(width, height)){
+			newCache.Image = mOldCache.Image;
+		}else if(mOldCache!=null){
+			mOldCache.Image.recycle();
+			mOldCache.Image = null;
+			mOldCache = null;
 			System.gc();
 		}
 		if(newCache.Image==null){
@@ -240,16 +233,16 @@ public class VectorMapRenderer {
 		}
 		
 		Canvas c = new Canvas(newCache.Image);
-		c.setMatrix(matrix);
+		c.setMatrix(mMatrix);
 		c.clipRect(viewRect);
-		ArrayList<RenderElement> elements = renderer.setVisibility(viewRect);
+		ArrayList<RenderElement> elements = mRenderer.setVisibility(viewRect);
 		c.drawColor(Color.WHITE);
 		for (RenderElement elem : elements) {
 			elem.draw(c);
 		}
 		
-		oldCache = cache;
-		cache = newCache;
+		mOldCache = mCache;
+		mCache = newCache;
 	}
 
 	private synchronized void updatePartialCache() {
@@ -259,21 +252,21 @@ public class VectorMapRenderer {
 		final MapCache newCache = new MapCache();
 		final RectF viewRect = new RectF(0, 0, width, height);
 		
-		Matrix im = new Matrix(invertedMatrix);
+		Matrix im = new Matrix(mInvertedMatrix);
 		im.mapRect(viewRect);
 		
 		newCache.InvertedMatrix = im;
-		newCache.X = x;
-		newCache.Y = y;
-		newCache.Scale = scale;
+		newCache.X = mCurrX;
+		newCache.Y = mCurrY;
+		newCache.Scale = mScale;
 		newCache.ViewRect = viewRect;
 		
-		if(oldCache!=null && oldCache.equals(width, height)){
-			newCache.Image = oldCache.Image;
-		}else if(oldCache!=null){
-			oldCache.Image.recycle();
-			oldCache.Image = null;
-			oldCache = null;
+		if(mOldCache!=null && mOldCache.equals(width, height)){
+			newCache.Image = mOldCache.Image;
+		}else if(mOldCache!=null){
+			mOldCache.Image.recycle();
+			mOldCache.Image = null;
+			mOldCache = null;
 			System.gc();
 		}
 		if(newCache.Image==null){
@@ -286,7 +279,7 @@ public class VectorMapRenderer {
 		final RectF v = new RectF(viewport);
 		final RectF h = new RectF(viewport);
 		final RectF i = new RectF(viewport);
-		i.intersect(cache.ViewRect);
+		i.intersect(mCache.ViewRect);
 
 		if (viewport.right == i.right && viewport.bottom == i.bottom) {
 			h.bottom = i.top;
@@ -305,60 +298,60 @@ public class VectorMapRenderer {
 		}
 
 		c.save();
-		c.setMatrix(matrix);
+		c.setMatrix(mMatrix);
 		c.clipRect(viewport);
-		ArrayList<RenderElement> elements = renderer.setVisibilityTwice(h,v);
+		ArrayList<RenderElement> elements = mRenderer.setVisibilityTwice(h,v);
 		c.drawColor(Color.WHITE);
 		for (RenderElement elem : elements) {
 			elem.draw(c);
 		}
 		c.restore();
 
-		c.drawBitmap(cache.Image,newCache.X - cache.X, newCache.Y - cache.Y, null);
+		c.drawBitmap(mCache.Image,newCache.X - mCache.X, newCache.Y - mCache.Y, null);
 
-		oldCache = cache;
-		cache = newCache;
+		mOldCache = mCache;
+		mCache = newCache;
 		
-		handler.removeCallbacks(renderPartialCacheRunnable);
-		handler.postDelayed(renderPartialCacheRunnable, 300);
+		mPrivateHandler.removeCallbacks(renderPartialCacheRunnable);
+		mPrivateHandler.postDelayed(renderPartialCacheRunnable, 300);
 	}
 
 	
 	private Runnable renderPartialCacheRunnable = new Runnable() {
 		public void run() {
 			renderPartialCache();
-			invalidate();
+			mCanvas.invalidate();
 		}
 	};
 	
 	private Runnable rebuildCacheRunnable = new Runnable() {
 		public void run() {
 			rebuildCache();
-			invalidate();
+			mCanvas.invalidate();
 		}
 	};
 	
 	private Runnable updateCacheRunnable = new Runnable() {
 		public void run() {
-			if(oldCache!=null && oldCache.Scale == scale){
+			if(mOldCache!=null && mOldCache.Scale == mScale){
 				updatePartialCache();
 			}else{
 				renderPartialCache();
 			}
-			invalidate();
+			mCanvas.invalidate();
 		}
 	};
 	
 	public void recycleCache(){
-		if(cache!=null){
-			cache.Image.recycle();
-			cache.Image = null;
-			cache = null;
+		if(mCache!=null){
+			mCache.Image.recycle();
+			mCache.Image = null;
+			mCache = null;
 		}
-		if(oldCache!=null){
-			oldCache.Image.recycle();
-			oldCache.Image = null;
-			oldCache = null;
+		if(mOldCache!=null){
+			mOldCache.Image.recycle();
+			mOldCache.Image = null;
+			mOldCache = null;
 		}
 		System.gc();
 	}
@@ -373,10 +366,6 @@ public class VectorMapRenderer {
 		
 		RectF ViewRect;
 		Bitmap Image;
-		
-		public boolean validate(int width, int height) {
-			return Image.getWidth() == width && Image.getHeight() == height;
-		}
 
 		public boolean equals(int width, int height) {
 			return Image.getWidth() == width && Image.getHeight() == height;
@@ -388,37 +377,38 @@ public class VectorMapRenderer {
 		
 	}
 
-	public void setSchemeSelection(ArrayList<StationView> stations, ArrayList<SegmentView> segments, ArrayList<TransferView> transfers) {
-		renderer.setSelection(stations, segments, transfers);
-		postRebuildCache();
+	private void postRebuildCache(){
+		mPrivateHandler.removeCallbacks(rebuildCacheRunnable);
+		mPrivateHandler.removeCallbacks(renderPartialCacheRunnable);
+		mPrivateHandler.removeCallbacks(updateCacheRunnable);
+		mPrivateHandler.post(rebuildCacheRunnable);
 	}
 
-	public void postRebuildCache(){
-		handler.removeCallbacks(rebuildCacheRunnable);
-		handler.removeCallbacks(renderPartialCacheRunnable);
-		handler.removeCallbacks(updateCacheRunnable);
-		handler.post(rebuildCacheRunnable);
-	}
-
-	public void postUpdateCache() {
-		handler.removeCallbacks(rebuildCacheRunnable);
-		handler.removeCallbacks(renderPartialCacheRunnable);
-		handler.removeCallbacks(updateCacheRunnable);
-		handler.post(updateCacheRunnable);
+	private void postUpdateCache() {
+		mPrivateHandler.removeCallbacks(rebuildCacheRunnable);
+		mPrivateHandler.removeCallbacks(renderPartialCacheRunnable);
+		mPrivateHandler.removeCallbacks(updateCacheRunnable);
+		mPrivateHandler.post(updateCacheRunnable);
 	}
 
 	
 	public void setScheme(SchemeView scheme) {
-		renderer = new RenderProgram(scheme);
-		renderer.setRenderFilter(RenderProgram.ALL);
-		renderer.setAntiAlias(true);
-		renderer.setSelection(null, null, null);
+		mRenderer = new RenderProgram(scheme);
+		mRenderer.setRenderFilter(RenderProgram.ALL);
+		mRenderer.setAntiAlias(true);
+		mRenderer.setSelection(null, null, null);
 		
 		Matrix m = new Matrix();
 		m.setTranslate(1.0f, 1.0f);
-		setMatrix(m, false);
+		setMatrix(m);
+
+		recycleCache();
+	}
+
+	public void setSchemeSelection(ArrayList<StationView> stations, ArrayList<SegmentView> segments, ArrayList<TransferView> transfers) {
+		mRenderer.setSelection(stations, segments, transfers);
 		
-		postRebuildCache();
+		recycleCache();
 	}
 
 

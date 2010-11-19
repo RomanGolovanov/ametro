@@ -29,7 +29,6 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener<
 
 	private SchemeView mScheme;
 	private VectorMapRenderer mMapView;
-	private int mTouchMode;
 	
 	private PointF mLastClickPosition;
 	private float mDblClickSlop;
@@ -91,15 +90,11 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener<
 			mZoomController.showZoom();
 		}
 		updateScrollBars(matrix);
-		mMapView.setMatrix(matrix,true);
+		mMapView.setMatrix(matrix);
 	}
 	
 	public void onTouchModeChanged(int mode) {
-		if(this.mTouchMode == MultiTouchController.MODE_ZOOM || this.mTouchMode == MultiTouchController.MODE_ZOOM_ANIMATION){
-			mMapView.postRebuildCache();
-		}
-		mMapView.enableUpdates(mode != MultiTouchController.MODE_ZOOM && mode!= MultiTouchController.MODE_ZOOM_ANIMATION );
-		this.mTouchMode = mode;
+		mMapView.setUpdatesEnabled(mode != MultiTouchController.MODE_ZOOM && mode!= MultiTouchController.MODE_ZOOM_ANIMATION );
 	}
 
 	public void onPerformClick(PointF position) {
@@ -197,8 +192,7 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener<
 	}
 	
 	private void updateViewRect() {
-		boolean changePositionAndScale= mChangeCenterPoint!=null || mChangeScale!=null;
-		mController.setViewRect(mMapView.getContentWidth(), mMapView.getContentHeight(), new RectF(0, 0, getWidth(), getHeight()), !changePositionAndScale);
+		mController.setViewRect(mMapView.getContentWidth(), mMapView.getContentHeight(), new RectF(0, 0, getWidth(), getHeight()));
 		if(mChangeCenterPoint!=null || mChangeScale!=null){
 			float width = getWidth() / mChangeScale;
 			float height = getHeight() / mChangeScale;
@@ -206,9 +200,7 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener<
 			mController.setPositionAndScale(mChangeCenterPoint, mChangeScale);
 			mChangeCenterPoint = null;
 			mChangeScale = null;
-			mMapView.postRebuildCache();
 		}
-		//mMapView.postRebuildCache();
 	}
 
 	private void updateScrollBars(Matrix matrix) {
