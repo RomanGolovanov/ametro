@@ -469,7 +469,6 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			startActivityForResult(new Intent(this, LocationSearchDialog.class), REQUEST_LOCATION);
 			return true;
 		case MAIN_MENU_EXPERIMENTAL:
-			startActivity(new Intent(this, MapView2Activity.class));
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -820,7 +819,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	private void onSaveMapState() {
 		if (mScheme != null && mVectorMapView != null && mModelFileName != null) {
 			PointF pos = new PointF();
-			float zoom =  mVectorMapView.getPositionAndScale(pos);
+			float zoom =  mVectorMapView.getCenterPositionAndScale(pos);
 			saveZoom(zoom);
 			saveScrollPosition(pos);
 		}
@@ -830,7 +829,9 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		if (mScheme != null && mVectorMapView != null && mModelFileName != null) {
 			Float zoom = loadZoom();
 			PointF pos = loadScrollPosition();
-			mVectorMapView.setCenterPositionAndScale(pos,zoom);
+			if(pos!=null && zoom!=null){
+				mVectorMapView.setCenterPositionAndScale(pos,zoom);
+			}
 		}
 	}
 	

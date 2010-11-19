@@ -27,7 +27,7 @@ public class ZoomController<T> {
 		});
 		mZoomControls.setOnZoomOutClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				mController.doZoomAnimation(0.5f);
+				mController.doZoomAnimation(1/1.5f);
 			}
 		});
 		
