@@ -15,6 +15,7 @@ import android.graphics.Matrix;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.os.Handler;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 import android.widget.ScrollView;
@@ -182,6 +183,24 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener<
 		}
 	}	
 
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(mController.onKeyDown(keyCode, event)){
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+	
+	public boolean onKeyUp(int keyCode, KeyEvent event) {
+		if(mController.onKeyUp(keyCode, event)){
+			return true;
+		}
+		return super.onKeyUp(keyCode, event);
+	}
+	
+	public boolean onTrackballEvent(MotionEvent event) {
+		return mController.onTrackballEvent(event);
+	}
+	
 	public boolean onTouchEvent(MotionEvent event) {
 		return mController.onMultiTouchEvent(event);
 	}
