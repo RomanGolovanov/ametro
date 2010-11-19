@@ -475,28 +475,10 @@ public class MultiTouchController<T> {
 		doZoomAnimation(scaleFactor, null);
 	}
 	
-//	public void doScrollAnimation(PointF center){
-//		if(mode==MODE_NONE || mode==MODE_LONGPRESS_START){
-//			
-//			if(targetScale!=currentScale){
-//				setControllerMode(MODE_SCROLL_ANIMATION);
-//				// fix target zoom to snap to zoom limits
-//				
-//				float nextScale = Math.min( Math.max(minScale, scaleFactor * targetScale), maxScale );
-//				if(nextScale == maxScale && ( nextScale / targetScale ) < scaleFactor*0.8f ){
-//					targetScale = maxScale;
-//				}else if(nextScale == minScale && ( targetScale / nextScale ) < scaleFactor*0.8f  ){
-//					targetScale = minScale;
-//				}
-//				
-//				
-//				scaleCenter = center;
-//				scaleDelta = targetScale - currentScale;
-//				scaleDoneTime = System.currentTimeMillis() + SCROLL_ANIMATION_TIME;
-//				privateHandler.sendEmptyMessage(MSG_PROCESS_SCROLL);
-//			}
-//		}		
-//	}
+	public void doScrollAnimation(PointF center){
+		if(mode==MODE_NONE || mode==MODE_LONGPRESS_START){
+		}
+	}
 	
 	public void doZoomAnimation(float scaleFactor, PointF center) {
 		if(mode==MODE_NONE || mode==MODE_LONGPRESS_START){
@@ -512,6 +494,7 @@ public class MultiTouchController<T> {
 					targetScale = minScale;
 				}
 				
+				scaleCenter = center;
 				scaleInterpolator = new LinearInterpolator(currentScale, targetScale, ZOOM_ANIMATION_TIME);
 				privateHandler.sendEmptyMessage(MSG_PROCESS_ZOOM);
 				setControllerMode(MODE_ZOOM_ANIMATION);
