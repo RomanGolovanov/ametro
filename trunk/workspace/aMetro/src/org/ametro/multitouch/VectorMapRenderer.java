@@ -411,5 +411,9 @@ public class VectorMapRenderer {
 		recycleCache();
 	}
 
+	public boolean isUpdatesEnabled() {
+		return isUpdatesEnabled;
+	}
+
 
 }

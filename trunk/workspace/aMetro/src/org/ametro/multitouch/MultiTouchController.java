@@ -35,8 +35,11 @@ public class MultiTouchController<T> {
 	private Matrix invertedMatrix = new Matrix();
 	private Matrix savedMatrix = new Matrix();
 
+	private LinearInterpolator scaleInterpolator;
+	
 	private static final int MIN_FLING_TIME = 250;
 	private static final int ZOOM_ANIMATION_TIME = 250;
+	private static final int SCROLL_ANIMATION_TIME = 250;
 
 	/** controller states **/
 	private int mode = MODE_NONE;
@@ -49,12 +52,14 @@ public class MultiTouchController<T> {
     public static final int MODE_SHORTPRESS_MODE = 7;
     public static final int MODE_LONGPRESS_START = 8;
     
-    public static final int MODE_ZOOM_ANIMATION = 99;
+    public static final int MODE_ZOOM_ANIMATION = 100;
+    public static final int MODE_SCROLL_ANIMATION = 101;
 
 	private static final int MSG_SWITCH_TO_SHORTPRESS = 1;
 	private static final int MSG_SWITCH_TO_LONGPRESS = 2;
 	private static final int MSG_PROCESS_FLING = 3;
 	private static final int MSG_PROCESS_ZOOM = 4;
+	public static final int MSG_PROCESS_SCROLL = 5;
 
     
 	/** point of first touch **/ 
@@ -71,9 +76,6 @@ public class MultiTouchController<T> {
 	private float maxScale;
 	private float minScale;
 	
-	private float targetScale;
-	private float scaleDelta;
-	private long scaleDoneTime;
 	private PointF scaleCenter;
 	
 	private float contentHeight;
@@ -142,7 +144,7 @@ public class MultiTouchController<T> {
 	}
 	
 	public boolean onMultiTouchEvent(MotionEvent rawEvent) {
-		if(mode == MODE_ZOOM_ANIMATION){
+		if(mode == MODE_ZOOM_ANIMATION || mode == MODE_SCROLL_ANIMATION){
 			return false;
 		}
 		MotionEventWrapper event = MotionEventWrapper.create(rawEvent);
@@ -402,19 +404,15 @@ public class MultiTouchController<T> {
 	
 	boolean computeZoom(){
 		if(mode == MODE_ZOOM_ANIMATION){
-			long now = System.currentTimeMillis();
-			float k = (float)(scaleDoneTime - now) / ZOOM_ANIMATION_TIME;
-			float scale = (targetScale - k * scaleDelta) / getScale();
-	
+			float scale = scaleInterpolator.get() / getScale();
 			if(scaleCenter==null){
 				matrix.postScale(scale, scale, displayRect.width()/2, displayRect.height()/2);
 			}else{
 				matrix.postScale(scale, scale, scaleCenter.x, scaleCenter.y);
 			}
 			adjustPan();
-			
 			listener.setPositionAndScaleMatrix(matrix);
-			return now < scaleDoneTime;
+			return scaleInterpolator.more();
 		}
 		return false;
 	}
@@ -477,12 +475,34 @@ public class MultiTouchController<T> {
 		doZoomAnimation(scaleFactor, null);
 	}
 	
+//	public void doScrollAnimation(PointF center){
+//		if(mode==MODE_NONE || mode==MODE_LONGPRESS_START){
+//			
+//			if(targetScale!=currentScale){
+//				setControllerMode(MODE_SCROLL_ANIMATION);
+//				// fix target zoom to snap to zoom limits
+//				
+//				float nextScale = Math.min( Math.max(minScale, scaleFactor * targetScale), maxScale );
+//				if(nextScale == maxScale && ( nextScale / targetScale ) < scaleFactor*0.8f ){
+//					targetScale = maxScale;
+//				}else if(nextScale == minScale && ( targetScale / nextScale ) < scaleFactor*0.8f  ){
+//					targetScale = minScale;
+//				}
+//				
+//				
+//				scaleCenter = center;
+//				scaleDelta = targetScale - currentScale;
+//				scaleDoneTime = System.currentTimeMillis() + SCROLL_ANIMATION_TIME;
+//				privateHandler.sendEmptyMessage(MSG_PROCESS_SCROLL);
+//			}
+//		}		
+//	}
+	
 	public void doZoomAnimation(float scaleFactor, PointF center) {
 		if(mode==MODE_NONE || mode==MODE_LONGPRESS_START){
 			float currentScale = getScale();
-			targetScale = Math.min( Math.max(minScale, scaleFactor * currentScale), maxScale );
+			float targetScale = Math.min( Math.max(minScale, scaleFactor * currentScale), maxScale );
 			if(targetScale!=currentScale){
-				setControllerMode(MODE_ZOOM_ANIMATION);
 				// fix target zoom to snap to zoom limits
 				
 				float nextScale = Math.min( Math.max(minScale, scaleFactor * targetScale), maxScale );
@@ -492,11 +512,9 @@ public class MultiTouchController<T> {
 					targetScale = minScale;
 				}
 				
-				
-				scaleCenter = center;
-				scaleDelta = targetScale - currentScale;
-				scaleDoneTime = System.currentTimeMillis() + ZOOM_ANIMATION_TIME;
+				scaleInterpolator = new LinearInterpolator(currentScale, targetScale, ZOOM_ANIMATION_TIME);
 				privateHandler.sendEmptyMessage(MSG_PROCESS_ZOOM);
+				setControllerMode(MODE_ZOOM_ANIMATION);
 			}
 		}
 	}
@@ -505,6 +523,16 @@ public class MultiTouchController<T> {
 
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
+			case MSG_PROCESS_SCROLL: {
+				if(mode == MODE_SCROLL_ANIMATION){
+					boolean more = computeScroll();
+					if(more){
+						privateHandler.sendEmptyMessage(MSG_PROCESS_SCROLL);
+					}else{
+						setControllerMode(MODE_NONE);
+					}
+				}
+			}
 			case MSG_PROCESS_ZOOM: {
 				if(mode == MODE_ZOOM_ANIMATION){
 					boolean more = computeZoom();
@@ -543,5 +571,36 @@ public class MultiTouchController<T> {
 		}
 	}
 
+	private static class LinearInterpolator{
+
+		private float from;
+		private float to;
+		private long time;
+		private long end;
+		private long now;
+		
+		public LinearInterpolator(float from, float to, long time){
+			this.now = System.currentTimeMillis();
+			this.end = now + time;
+			this.time = time;
+			this.from = from;
+			this.to = to;
+		}
+		
+		public boolean more(){
+			return now < end; 
+		}
+		
+		public float get(){
+			now = System.currentTimeMillis();
+			if(now < end){
+				float k = (float)(end - now) / time;
+				return (to - k * (to - from));
+			}else{
+				return to;
+			}
+		}
+		
+	}
 	
 }
