@@ -831,6 +831,8 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			PointF pos = loadScrollPosition();
 			if(pos!=null && zoom!=null){
 				mVectorMapView.setCenterPositionAndScale(pos,zoom);
+			}else{
+				mVectorMapView.setCenterPositionAndScale(new PointF(), 0.001f);
 			}
 		}
 	}
