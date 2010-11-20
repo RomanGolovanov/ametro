@@ -1118,7 +1118,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	private final Runnable mUpdateUI = new Runnable() {
 		public void run() {
 			final PointF point = ModelUtil.toPointF( mCurrentStation.stationPoint );
-			mVectorMapView.setCenterPositionAndScale(point, mVectorMapView.getScale(), true);
+			mVectorMapView.setCenterPositionAndScale(point, null, true);
 			mVectorMapView.postInvalidate();
 		}
 	};

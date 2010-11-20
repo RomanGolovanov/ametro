@@ -78,8 +78,6 @@ public class MultiTouchController {
 	private float maxScale;
 	private float minScale;
 	
-	private PointF animationScaleCenter;
-	
 	private float contentHeight;
 	private float contentWidth;
 	private RectF displayRect;
@@ -89,6 +87,9 @@ public class MultiTouchController {
 	
     final Handler privateHandler = new PrivateHandler();
     private final  float density;
+
+	private PointF animationEndPoint = new PointF();
+	private PointF animationStartPoint = new PointF();
 	
 	public MultiTouchController(Context context, MultiTouchListener multiTouchListener) {
 		listener = multiTouchListener;
@@ -413,13 +414,17 @@ public class MultiTouchController {
 			animationInterpolator.next();
 			if(animationInterpolator.hasScale()){
 				float scale = animationInterpolator.getScale() / getScale();
-				if(animationScaleCenter==null){
-					matrix.postScale(scale, scale, displayRect.width()/2, displayRect.height()/2);
-				}else{
-					matrix.postScale(scale, scale, animationScaleCenter.x, animationScaleCenter.y);
-				}
-				adjustPan();
+				matrix.postScale(scale, scale);
 			}
+			if(animationInterpolator.hasScroll()){
+				PointF newCenter = animationInterpolator.getPoint();
+				mapPoint(newCenter);
+				float dx = newCenter.x - displayRect.width()/2;
+				float dy = newCenter.y - displayRect.height()/2;
+				matrix.postTranslate(-dx, -dy);
+			}
+			adjustScale();
+			adjustPan();
 			listener.setPositionAndScaleMatrix(matrix);
 			return animationInterpolator.more();
 		}
@@ -498,13 +503,35 @@ public class MultiTouchController {
 			}else if(nextScale == minScale && ( targetScale / nextScale ) < scaleFactor*0.8f  ){
 				targetScale = minScale;
 			}
-			doAnimation(targetScale, null);
+			doZoomAnimation(targetScale, scaleCenter);
 		}
 	}
-	private void doAnimation(float scale, PointF scaleCenter) {
+	
+	public void doScrollAnimation(PointF center){
 		if(mode==MODE_NONE || mode==MODE_LONGPRESS_START){
-			animationScaleCenter = scaleCenter;
-			animationInterpolator.begin(getScale(), scale, ANIMATION_TIME);
+			animationStartPoint.set(displayRect.width()/2, displayRect.height()/2);
+			unmapPoint(animationStartPoint);
+			animationEndPoint.set(center);
+			float scale = getScale();
+			animationInterpolator.begin(animationStartPoint, animationEndPoint, scale, scale, ANIMATION_TIME);
+			privateHandler.sendEmptyMessage(MSG_PROCESS_ANIMATION);
+			setControllerMode(MODE_ANIMATION);
+		}
+	}
+	
+	private void doZoomAnimation(float scale, PointF scaleCenter) {
+		if(mode==MODE_NONE || mode==MODE_LONGPRESS_START){
+			if(scaleCenter==null){
+				animationEndPoint.set(displayRect.width()/2, displayRect.height()/2);
+			}else{
+				animationEndPoint.set(scaleCenter);
+			}
+			unmapPoint(animationEndPoint);
+			
+			animationStartPoint.set(displayRect.width()/2, displayRect.height()/2);
+			unmapPoint(animationStartPoint);
+			
+			animationInterpolator.begin(animationStartPoint, animationEndPoint, getScale(), scale, ANIMATION_TIME);
 			privateHandler.sendEmptyMessage(MSG_PROCESS_ANIMATION);
 			setControllerMode(MODE_ANIMATION);
 		}
@@ -520,7 +547,6 @@ public class MultiTouchController {
 					if(more){
 						privateHandler.sendEmptyMessage(MSG_PROCESS_ANIMATION);
 					}else{
-						animationScaleCenter = null;
 						setControllerMode(MODE_NONE);
 					}
 				}
