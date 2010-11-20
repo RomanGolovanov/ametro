@@ -211,10 +211,10 @@ public class VectorMapRenderer {
 		final MapCache newCache = new MapCache();
 		final RectF viewRect = new RectF(0, 0, width, height);
 		
-		Matrix i = new Matrix(mInvertedMatrix);
-		i.mapRect(viewRect);
+		Matrix im = new Matrix(mInvertedMatrix);
+		im.mapRect(viewRect);
 		
-		newCache.InvertedMatrix = i;
+		newCache.InvertedMatrix = im;
 		newCache.X = mCurrX;
 		newCache.Y = mCurrY;
 		newCache.Scale = mScale;
@@ -280,6 +280,7 @@ public class VectorMapRenderer {
 		final RectF h = new RectF(viewport);
 		final RectF i = new RectF(viewport);
 		i.intersect(mCache.ViewRect);
+		boolean renderAll = false;
 
 		if (viewport.right == i.right && viewport.bottom == i.bottom) {
 			h.bottom = i.top;
@@ -294,26 +295,38 @@ public class VectorMapRenderer {
 			h.top = i.bottom;
 			v.left = i.right;
 		} else {
-			throw new RuntimeException("Invalid viewport splitting algorithm");
+			renderAll = true;
 		}
 
-		c.save();
-		c.setMatrix(mMatrix);
-		c.clipRect(viewport);
-		ArrayList<RenderElement> elements = mRenderer.setVisibilityTwice(h,v);
-		c.drawColor(Color.WHITE);
-		for (RenderElement elem : elements) {
-			elem.draw(c);
+		if(renderAll){
+			c.setMatrix(mMatrix);
+			c.clipRect(viewRect);
+			ArrayList<RenderElement> elements = mRenderer.setVisibility(viewRect);
+			c.drawColor(Color.WHITE);
+			for (RenderElement elem : elements) {
+				elem.draw(c);
+			}			
+		}else{
+			c.save();
+			c.setMatrix(mMatrix);
+			c.clipRect(viewport);
+			ArrayList<RenderElement> elements = mRenderer.setVisibilityTwice(h,v);
+			c.drawColor(Color.WHITE);
+			for (RenderElement elem : elements) {
+				elem.draw(c);
+			}
+			c.restore();
+			c.drawBitmap(mCache.Image,newCache.X - mCache.X, newCache.Y - mCache.Y, null);
 		}
-		c.restore();
-
-		c.drawBitmap(mCache.Image,newCache.X - mCache.X, newCache.Y - mCache.Y, null);
+		
 
 		mOldCache = mCache;
 		mCache = newCache;
 		
-		mPrivateHandler.removeCallbacks(renderPartialCacheRunnable);
-		mPrivateHandler.postDelayed(renderPartialCacheRunnable, 300);
+		if(!renderAll){
+			mPrivateHandler.removeCallbacks(renderPartialCacheRunnable);
+			mPrivateHandler.postDelayed(renderPartialCacheRunnable, 300);
+		}
 	}
 
 	
