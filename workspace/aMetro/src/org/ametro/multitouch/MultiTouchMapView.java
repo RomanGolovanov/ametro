@@ -174,7 +174,7 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 		if(!animated){
 			setCenterPositionAndScale(position, zoom);
 		}else{
-			
+			mController.doScrollAnimation(position);
 		}
 	}
 
