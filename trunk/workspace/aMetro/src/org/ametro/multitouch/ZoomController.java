@@ -7,15 +7,14 @@ import android.view.ViewConfiguration;
 import android.view.animation.AlphaAnimation;
 import android.widget.ZoomControls;
 
-public class ZoomController<T> {
+public class ZoomController {
 
 	Context mContext;
-	MultiTouchController<T> mController;
+	MultiTouchController mController;
 	ZoomControls mZoomControls;
 	Handler mPrivateHandler = new Handler();
 
-	public ZoomController(Context context, MultiTouchController<T> controller,
-			ZoomControls controls) {
+	public ZoomController(Context context, MultiTouchController controller, ZoomControls controls) {
 		mContext = context;
 		mController = controller;
 		mZoomControls = controls;
@@ -23,15 +22,14 @@ public class ZoomController<T> {
 		mZoomControls.setVisibility(View.INVISIBLE);
 		mZoomControls.setOnZoomInClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				mController.doZoomAnimation(1.5f);
+				mController.doZoomAnimation(MultiTouchController.ZOOM_IN);
 			}
 		});
 		mZoomControls.setOnZoomOutClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				mController.doZoomAnimation(1 / 1.5f);
+				mController.doZoomAnimation(MultiTouchController.ZOOM_OUT);
 			}
 		});
-
 	}
 
 	private Runnable mZoomControlRunnable = new Runnable() {

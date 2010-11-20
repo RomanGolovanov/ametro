@@ -21,12 +21,13 @@ import android.view.ViewConfiguration;
 import android.widget.ScrollView;
 import android.widget.ZoomControls;
 
-public class MultiTouchMapView extends ScrollView implements MultiTouchListener<VectorMapRenderer> {
+public class MultiTouchMapView extends ScrollView implements MultiTouchListener {
 
 	protected  static final String TAG = "MultiTouchMapView";
 	
-	private MultiTouchController<VectorMapRenderer> mController;
-	private ZoomController<VectorMapRenderer> mZoomController;
+	private MultiTouchController mController;
+	private ZoomController mZoomController;
+	private KeyEventController mKeyEventController;
 
 	private SchemeView mScheme;
 	private VectorMapRenderer mMapView;
@@ -58,7 +59,8 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener<
         
 		mScheme = scheme;
 		mMapView = new VectorMapRenderer(this, scheme);
-		mController = new MultiTouchController<VectorMapRenderer>(getContext(),this);
+		mController = new MultiTouchController(getContext(),this);
+		mKeyEventController = new KeyEventController(mController);
 		mDblClickSlop = ViewConfiguration.get(context).getScaledDoubleTapSlop();
 	}
 	
@@ -98,7 +100,7 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener<
 	}
 	
 	public void onTouchModeChanged(int mode) {
-		mMapView.setUpdatesEnabled(mode != MultiTouchController.MODE_ZOOM && mode!= MultiTouchController.MODE_ZOOM_ANIMATION );
+		mMapView.setUpdatesEnabled(mode != MultiTouchController.MODE_ZOOM && mode!= MultiTouchController.MODE_ANIMATION );
 	}
 
 	public void onPerformClick(PointF position) {
@@ -112,7 +114,7 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener<
 			mPrivateHandler.removeCallbacks(performClickRunnable);
 			mLastClickPosition = null;
 			if(distance <= mDblClickSlop){
-				mController.doZoomAnimation(1.5f, p);
+				mController.doZoomAnimation(MultiTouchController.ZOOM_IN, p);
 			}else{
 				performClick();
 			}
@@ -151,7 +153,7 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener<
 	}
 	
 	public void setZoomControls(ZoomControls zoomControls) {
-		mZoomController = new ZoomController<VectorMapRenderer>(getContext(), mController, zoomControls);
+		mZoomController = new ZoomController(getContext(), mController, zoomControls);
 	}	
 	
 	public float getCenterPositionAndScale(PointF position) {
@@ -165,6 +167,7 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener<
 	public void setCenterPositionAndScale(PointF position, Float zoom) {
 		mChangeCenterPoint = position;
 		mChangeScale = zoom;
+		invalidate();
 	}
 	
 	public void setCenterPositionAndScale(PointF position, Float zoom, boolean animated) {
@@ -187,15 +190,15 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener<
 	}	
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		return mController.onKeyDown(keyCode, event);
+		return mKeyEventController.onKeyDown(keyCode, event);
 	}
 	
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
-		return mController.onKeyUp(keyCode, event);
+		return mKeyEventController.onKeyUp(keyCode, event);
 	}
 	
 	public boolean onTrackballEvent(MotionEvent event) {
-		return mController.onTrackballEvent(event);
+		return mKeyEventController.onTrackballEvent(event);
 	}
 	
 	public boolean onTouchEvent(MotionEvent event) {

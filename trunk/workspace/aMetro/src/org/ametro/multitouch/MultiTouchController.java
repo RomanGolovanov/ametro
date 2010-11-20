@@ -8,17 +8,16 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.FloatMath;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.ViewConfiguration;
 import android.widget.Scroller;
 
-public class MultiTouchController<T> {
+public class MultiTouchController {
 
 	protected static final String TAG = "MultiTouchController";
 
-	public static interface MultiTouchListener<T>{
+	public static interface MultiTouchListener{
 		public Matrix getPositionAndScaleMatrix();
 		public void setPositionAndScaleMatrix(Matrix matrix);
 		public void onTouchModeChanged(int mode);
@@ -26,7 +25,7 @@ public class MultiTouchController<T> {
 		public void onPerformLongClick(PointF position);
 	}
 
-	private MultiTouchListener<T> listener;
+	private MultiTouchListener listener;
 
 	private boolean initialized = false;
 	
@@ -36,27 +35,10 @@ public class MultiTouchController<T> {
 	private Matrix invertedMatrix = new Matrix();
 	private Matrix savedMatrix = new Matrix();
 
-	private LinearInterpolator scaleInterpolator;
+	private AnimationInterpolator animationInterpolator = new AnimationInterpolator();
 	
 	private static final int MIN_FLING_TIME = 250;
-	private static final int ZOOM_ANIMATION_TIME = 250;
-	private static final int SCROLL_ANIMATION_TIME = 250;
-
-	/** key-handled scroll constants and state **/
-    private int mKeyScrollSpeed = KEY_SCROLL_MIN_SPEED;
-    private long mKeyScrollLastSpeedTime;
-    private int mKeyScrollMode = KEY_SCROLL_MODE_DONE;
-
-    private static final int KEY_SCROLL_MIN_SPEED = 2;
-    private static final int KEY_SCROLL_MAX_SPEED = 20;
-    private static final int KEY_SCROLL_ACCELERATION_DELAY = 100;
-    private static final int KEY_SCROLL_ACCELERATION_STEP = 2;
-
-    private static final int KEY_SCROLL_MODE_DONE = 0;
-    private static final int KEY_SCROLL_MODE_DRAG = 1;
-
-    private static final int TRACKBALL_SCROLL_SPEED = 10;
-	
+	private static final int ANIMATION_TIME = 250;
 	
 	/** controller states **/
 	private int mode = MODE_NONE;
@@ -69,16 +51,19 @@ public class MultiTouchController<T> {
     public static final int MODE_SHORTPRESS_MODE = 7;
     public static final int MODE_LONGPRESS_START = 8;
     
-    public static final int MODE_ZOOM_ANIMATION = 100;
-    public static final int MODE_SCROLL_ANIMATION = 101;
+    public static final int MODE_ANIMATION = 100;
 
 	private static final int MSG_SWITCH_TO_SHORTPRESS = 1;
 	private static final int MSG_SWITCH_TO_LONGPRESS = 2;
 	private static final int MSG_PROCESS_FLING = 3;
-	private static final int MSG_PROCESS_ZOOM = 4;
-	public static final int MSG_PROCESS_SCROLL = 5;
+	private static final int MSG_PROCESS_ANIMATION = 4;
 
-    
+	public static final int ZOOM_IN = 1;
+	public static final int ZOOM_OUT = 2;
+
+	private static final float ZOOM_LEVEL_DISTANCE = 1.5f;
+
+	
 	/** point of first touch **/ 
 	private PointF touchStartPoint = new PointF();
 	/** first touch time **/
@@ -93,7 +78,7 @@ public class MultiTouchController<T> {
 	private float maxScale;
 	private float minScale;
 	
-	private PointF scaleCenter;
+	private PointF animationScaleCenter;
 	
 	private float contentHeight;
 	private float contentWidth;
@@ -105,7 +90,7 @@ public class MultiTouchController<T> {
     final Handler privateHandler = new PrivateHandler();
     private final  float density;
 	
-	public MultiTouchController(Context context, MultiTouchListener<T> multiTouchListener) {
+	public MultiTouchController(Context context, MultiTouchListener multiTouchListener) {
 		listener = multiTouchListener;
 		scroller = new Scroller(context);
 		ViewConfiguration vc = ViewConfiguration.get(context);
@@ -115,6 +100,7 @@ public class MultiTouchController<T> {
 		velocityTracker = null;
 	}
 
+	/** Map point from model to screen coordinates **/
 	public void mapPoint(PointF point){
 		float[] pts = new float[2];
 		pts[0] = point.x;
@@ -124,6 +110,7 @@ public class MultiTouchController<T> {
 		point.y = pts[1];
 	}
 	
+	/** Map point from screen to model coordinates **/
 	public void unmapPoint(PointF point){
 		matrix.invert(invertedMatrix);
 		float[] pts = new float[2];
@@ -134,10 +121,12 @@ public class MultiTouchController<T> {
 		point.y = pts[1];
 	}
 
+	/** Map rectangle from model to screen coordinates **/
 	public void mapRect(RectF rect){
 		matrix.mapRect(rect);
 	}
 	
+	/** Map rectangle from screen to model coordinates **/
 	public void unmapRect(RectF rect){
 		matrix.invert(invertedMatrix);
 		invertedMatrix.mapRect(rect);
@@ -161,7 +150,7 @@ public class MultiTouchController<T> {
 	}
 	
 	public boolean onMultiTouchEvent(MotionEvent rawEvent) {
-		if(mode == MODE_ZOOM_ANIMATION || mode == MODE_SCROLL_ANIMATION){
+		if(mode == MODE_ANIMATION){
 			return false;
 		}
 		MotionEventWrapper event = MotionEventWrapper.create(rawEvent);
@@ -419,17 +408,20 @@ public class MultiTouchController<T> {
 		return more;
 	}
 	
-	boolean computeZoom(){
-		if(mode == MODE_ZOOM_ANIMATION){
-			float scale = scaleInterpolator.get() / getScale();
-			if(scaleCenter==null){
-				matrix.postScale(scale, scale, displayRect.width()/2, displayRect.height()/2);
-			}else{
-				matrix.postScale(scale, scale, scaleCenter.x, scaleCenter.y);
+	boolean computeAnimation(){
+		if(mode == MODE_ANIMATION){
+			animationInterpolator.next();
+			if(animationInterpolator.hasScale()){
+				float scale = animationInterpolator.getScale() / getScale();
+				if(animationScaleCenter==null){
+					matrix.postScale(scale, scale, displayRect.width()/2, displayRect.height()/2);
+				}else{
+					matrix.postScale(scale, scale, animationScaleCenter.x, animationScaleCenter.y);
+				}
+				adjustPan();
 			}
-			adjustPan();
 			listener.setPositionAndScaleMatrix(matrix);
-			return scaleInterpolator.more();
+			return animationInterpolator.more();
 		}
 		return false;
 	}
@@ -438,6 +430,7 @@ public class MultiTouchController<T> {
 		return new PointF(touchStartPoint.x, touchStartPoint.y);
 	}
 	
+	/** Return last touch point in model coordinates **/
 	public PointF getTouchPoint(){
 		PointF p = new PointF();
 		p.set(touchStartPoint);
@@ -488,34 +481,32 @@ public class MultiTouchController<T> {
 		listener.onPerformClick(getTouchPoint());
 	}
 	
-	public void doZoomAnimation(float scaleFactor){
-		doZoomAnimation(scaleFactor, null);
+	public void doZoomAnimation(int scaleMode){
+		doZoomAnimation(scaleMode, null);
 	}
 	
-	public void doScrollAnimation(PointF center){
-		if(mode==MODE_NONE || mode==MODE_LONGPRESS_START){
+	public void doZoomAnimation(int scaleMode, PointF scaleCenter){
+		float scaleFactor = scaleMode == ZOOM_IN ? ZOOM_LEVEL_DISTANCE : 1/ZOOM_LEVEL_DISTANCE;
+		float currentScale = getScale();
+		float targetScale = Math.min( Math.max(minScale, scaleFactor * currentScale), maxScale );
+		// do nothing is we're on ends of zoom range
+		if(targetScale!=currentScale){
+			// fix target zoom to snap to zoom limits
+			float nextScale = Math.min( Math.max(minScale, scaleFactor * targetScale), maxScale );
+			if(nextScale == maxScale && ( nextScale / targetScale ) < scaleFactor*0.8f ){
+				targetScale = maxScale;
+			}else if(nextScale == minScale && ( targetScale / nextScale ) < scaleFactor*0.8f  ){
+				targetScale = minScale;
+			}
+			doAnimation(targetScale, null);
 		}
 	}
-	
-	public void doZoomAnimation(float scaleFactor, PointF center) {
+	private void doAnimation(float scale, PointF scaleCenter) {
 		if(mode==MODE_NONE || mode==MODE_LONGPRESS_START){
-			float currentScale = getScale();
-			float targetScale = Math.min( Math.max(minScale, scaleFactor * currentScale), maxScale );
-			if(targetScale!=currentScale){
-				// fix target zoom to snap to zoom limits
-				
-				float nextScale = Math.min( Math.max(minScale, scaleFactor * targetScale), maxScale );
-				if(nextScale == maxScale && ( nextScale / targetScale ) < scaleFactor*0.8f ){
-					targetScale = maxScale;
-				}else if(nextScale == minScale && ( targetScale / nextScale ) < scaleFactor*0.8f  ){
-					targetScale = minScale;
-				}
-				
-				scaleCenter = center;
-				scaleInterpolator = new LinearInterpolator(currentScale, targetScale, ZOOM_ANIMATION_TIME);
-				privateHandler.sendEmptyMessage(MSG_PROCESS_ZOOM);
-				setControllerMode(MODE_ZOOM_ANIMATION);
-			}
+			animationScaleCenter = scaleCenter;
+			animationInterpolator.begin(getScale(), scale, ANIMATION_TIME);
+			privateHandler.sendEmptyMessage(MSG_PROCESS_ANIMATION);
+			setControllerMode(MODE_ANIMATION);
 		}
 	}
 
@@ -523,23 +514,13 @@ public class MultiTouchController<T> {
 
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
-			case MSG_PROCESS_SCROLL: {
-				if(mode == MODE_SCROLL_ANIMATION){
-					boolean more = computeScroll();
+			case MSG_PROCESS_ANIMATION: {
+				if(mode == MODE_ANIMATION){
+					boolean more = computeAnimation();
 					if(more){
-						privateHandler.sendEmptyMessage(MSG_PROCESS_SCROLL);
+						privateHandler.sendEmptyMessage(MSG_PROCESS_ANIMATION);
 					}else{
-						setControllerMode(MODE_NONE);
-					}
-				}
-			}
-			case MSG_PROCESS_ZOOM: {
-				if(mode == MODE_ZOOM_ANIMATION){
-					boolean more = computeZoom();
-					if(more){
-						privateHandler.sendEmptyMessage(MSG_PROCESS_ZOOM);
-					}else{
-						scaleCenter = null;
+						animationScaleCenter = null;
 						setControllerMode(MODE_NONE);
 					}
 				}
@@ -571,109 +552,10 @@ public class MultiTouchController<T> {
 		}
 	}
 
-	private static class LinearInterpolator{
-
-		private float from;
-		private float to;
-		private long time;
-		private long end;
-		private long now;
-		
-		public LinearInterpolator(float from, float to, long time){
-			this.now = System.currentTimeMillis();
-			this.end = now + time;
-			this.time = time;
-			this.from = from;
-			this.to = to;
-		}
-		
-		public boolean more(){
-			return now < end; 
-		}
-		
-		public float get(){
-			now = System.currentTimeMillis();
-			if(now < end){
-				float k = (float)(end - now) / time;
-				return (to - k * (to - from));
-			}else{
-				return to;
-			}
-		}
-		
+	public void doScroll(float dx, float dy) {
+        matrix.postTranslate(-dx, -dy);
+        adjustPan();
+        listener.setPositionAndScaleMatrix(matrix);
 	}
-
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-        switch (keyCode) {
-        case KeyEvent.KEYCODE_VOLUME_UP:
-        	if(mode == MODE_NONE){
-        		doZoomAnimation(1.5f);
-        	}
-        	return true;
-        case KeyEvent.KEYCODE_VOLUME_DOWN:
-        	if(mode == MODE_NONE){
-        		doZoomAnimation(1/1.5f);
-        	}
-        	return true;
-        case KeyEvent.KEYCODE_DPAD_UP:
-        case KeyEvent.KEYCODE_DPAD_DOWN:
-        case KeyEvent.KEYCODE_DPAD_LEFT:
-        case KeyEvent.KEYCODE_DPAD_RIGHT:
-            long eventTime = System.currentTimeMillis();
-            if (mKeyScrollMode == KEY_SCROLL_MODE_DONE) {
-                mKeyScrollMode = KEY_SCROLL_MODE_DRAG;
-                mKeyScrollSpeed = KEY_SCROLL_MIN_SPEED;
-                mKeyScrollLastSpeedTime = eventTime;
-            }
-            if (mKeyScrollSpeed < KEY_SCROLL_MAX_SPEED
-                    && (mKeyScrollLastSpeedTime + KEY_SCROLL_ACCELERATION_DELAY) < eventTime) {
-                mKeyScrollSpeed = Math.min(mKeyScrollSpeed
-                        + KEY_SCROLL_ACCELERATION_STEP, KEY_SCROLL_MAX_SPEED);
-                mKeyScrollLastSpeedTime = eventTime;
-            }
-            int dx = 0;
-            int dy = 0;
-            if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT)
-                dx = -mKeyScrollSpeed;
-            if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT)
-                dx = mKeyScrollSpeed;
-            if (keyCode == KeyEvent.KEYCODE_DPAD_UP)
-                dy = -mKeyScrollSpeed;
-            if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN)
-                dy = mKeyScrollSpeed;
-            matrix.postTranslate(-dx, -dy);
-            adjustPan();
-            listener.setPositionAndScaleMatrix(matrix);
-            return true;
-        }
-		return false;
-	}
-
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        switch (keyCode) {
-        case KeyEvent.KEYCODE_VOLUME_UP:
-        case KeyEvent.KEYCODE_VOLUME_DOWN:
-        case KeyEvent.KEYCODE_DPAD_UP:
-        case KeyEvent.KEYCODE_DPAD_DOWN:
-        case KeyEvent.KEYCODE_DPAD_LEFT:
-        case KeyEvent.KEYCODE_DPAD_RIGHT:
-            mKeyScrollMode = KEY_SCROLL_MODE_DONE;
-            return true;
-        }
-        return false;
-    }
-    
-    public boolean onTrackballEvent(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_MOVE:
-	            float dx = event.getX() * event.getXPrecision() * TRACKBALL_SCROLL_SPEED;
-	            float dy = event.getY() * event.getYPrecision() * TRACKBALL_SCROLL_SPEED;
-	            matrix.postTranslate(-dx, -dy);
-	            adjustPan();
-	            listener.setPositionAndScaleMatrix(matrix);
-	            return true;
-        }
-        return false;
-    }
 
 }
