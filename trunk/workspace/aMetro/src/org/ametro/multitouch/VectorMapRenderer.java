@@ -33,6 +33,8 @@ public class VectorMapRenderer {
 	MapCache mCache;
 	MapCache mOldCache;
 	
+	//protected static final int BORDER = 0;
+	
 	final Matrix mMatrix = new Matrix();
 	final Matrix mInvertedMatrix = new Matrix();
 	final Matrix mRenderMatrix = new Matrix();
@@ -109,6 +111,7 @@ public class VectorMapRenderer {
 		canvas.drawBitmap(mCache.Image, m, null);
 		
 		if(isUpdatesEnabled){
+			//Log.w(TAG, "cache: " + StringUtil.formatRectF(mCache.ViewRect) + " vs. screen: " + StringUtil.formatRectF(mSchemeRect) + ", hit = "+ mCache.hit(mSchemeRect) );
 			if(mCache.Scale!=mScale){
 				postRebuildCache();
 			}else if(!isEntireMapCached && !mCache.hit(mSchemeRect)){
@@ -206,76 +209,26 @@ public class VectorMapRenderer {
 
 	private synchronized void renderPartialCache() {
 		//Log.w(TAG,"render partial");
-		final int width = getWidth();
-		final int height = getHeight();
-		final MapCache newCache = new MapCache();
-		final RectF viewRect = new RectF(0, 0, width, height);
-		
-		Matrix im = new Matrix(mInvertedMatrix);
-		im.mapRect(viewRect);
-		
-		newCache.InvertedMatrix = im;
-		newCache.X = mCurrX;
-		newCache.Y = mCurrY;
-		newCache.Scale = mScale;
-		newCache.ViewRect = viewRect;
-		
-		if(mOldCache!=null && mOldCache.equals(width, height)){
-			newCache.Image = mOldCache.Image;
-		}else if(mOldCache!=null){
-			mOldCache.Image.recycle();
-			mOldCache.Image = null;
-			mOldCache = null;
-			System.gc();
-		}
-		if(newCache.Image==null){
-			newCache.Image = Bitmap.createBitmap(width, height, Config.RGB_565);
-		}
+		final MapCache newCache = MapCache.reuse(mOldCache, getWidth(),getHeight(), mInvertedMatrix, mCurrX, mCurrY, mScale, mSchemeRect);
 		
 		Canvas c = new Canvas(newCache.Image);
 		c.setMatrix(mMatrix);
-		c.clipRect(viewRect);
-		ArrayList<RenderElement> elements = mRenderer.setVisibility(viewRect);
+		c.clipRect(mSchemeRect);
+		ArrayList<RenderElement> elements = mRenderer.setVisibility(mSchemeRect);
 		c.drawColor(Color.WHITE);
 		for (RenderElement elem : elements) {
 			elem.draw(c);
 		}
-		
 		mOldCache = mCache;
 		mCache = newCache;
 	}
 
 	private synchronized void updatePartialCache() {
 		//Log.w(TAG,"update partial");
-		final int width = getWidth();
-		final int height = getHeight();
-		final MapCache newCache = new MapCache();
-		final RectF viewRect = new RectF(0, 0, width, height);
-		
-		Matrix im = new Matrix(mInvertedMatrix);
-		im.mapRect(viewRect);
-		
-		newCache.InvertedMatrix = im;
-		newCache.X = mCurrX;
-		newCache.Y = mCurrY;
-		newCache.Scale = mScale;
-		newCache.ViewRect = viewRect;
-		
-		if(mOldCache!=null && mOldCache.equals(width, height)){
-			newCache.Image = mOldCache.Image;
-		}else if(mOldCache!=null){
-			mOldCache.Image.recycle();
-			mOldCache.Image = null;
-			mOldCache = null;
-			System.gc();
-		}
-		if(newCache.Image==null){
-			newCache.Image = Bitmap.createBitmap(width, height, Config.RGB_565);
-		}
+		MapCache newCache = MapCache.reuse(mOldCache, getWidth(), getHeight(), mInvertedMatrix, mCurrX, mCurrY, mScale, mSchemeRect);
 		
 		Canvas c = new Canvas(newCache.Image);
-
-		RectF viewport = new RectF(viewRect);
+		RectF viewport = new RectF(mSchemeRect);
 		final RectF v = new RectF(viewport);
 		final RectF h = new RectF(viewport);
 		final RectF i = new RectF(viewport);
@@ -300,8 +253,8 @@ public class VectorMapRenderer {
 
 		if(renderAll){
 			c.setMatrix(mMatrix);
-			c.clipRect(viewRect);
-			ArrayList<RenderElement> elements = mRenderer.setVisibility(viewRect);
+			c.clipRect(mSchemeRect);
+			ArrayList<RenderElement> elements = mRenderer.setVisibility(mSchemeRect);
 			c.drawColor(Color.WHITE);
 			for (RenderElement elem : elements) {
 				elem.draw(c);
@@ -333,7 +286,7 @@ public class VectorMapRenderer {
 	private Runnable renderPartialCacheRunnable = new Runnable() {
 		public void run() {
 			renderPartialCache();
-			mCanvas.invalidate();
+			//mCanvas.invalidate();
 		}
 	};
 	
@@ -348,10 +301,11 @@ public class VectorMapRenderer {
 		public void run() {
 			if(mOldCache!=null && mOldCache.Scale == mScale){
 				updatePartialCache();
+				//mCanvas.invalidate();
 			}else{
 				renderPartialCache();
+				mCanvas.invalidate();
 			}
-			mCanvas.invalidate();
 		}
 	};
 	
@@ -371,17 +325,43 @@ public class VectorMapRenderer {
 
 	private static class MapCache
 	{
-		Matrix InvertedMatrix;
+		Matrix InvertedMatrix = new Matrix();
 		
 		float Scale;
 		float X;
 		float Y;
 		
-		RectF ViewRect;
+		RectF ViewRect = new RectF();
 		Bitmap Image;
 
 		public boolean equals(int width, int height) {
 			return Image.getWidth() == width && Image.getHeight() == height;
+		}
+
+		public static MapCache reuse(MapCache oldCache, int width, int height, Matrix matrix, float x, float y, float scale, RectF schemeRect) {
+			MapCache newCache;
+			
+			if(oldCache!=null){
+				newCache = oldCache;
+				if(!newCache.equals(width, height)){
+					newCache.Image.recycle();
+					newCache.Image = null;
+					System.gc();
+				}
+			}else{
+				newCache = new MapCache();
+			}
+			if(newCache.Image==null){
+				newCache.Image = Bitmap.createBitmap(width, height, Config.RGB_565);
+			}
+
+			newCache.InvertedMatrix.set(matrix);
+			newCache.X = x;
+			newCache.Y = y;
+			newCache.Scale = scale;
+			newCache.ViewRect.set(schemeRect);
+			
+			return newCache;
 		}
 
 		public boolean hit(RectF viewRect) {
@@ -426,6 +406,10 @@ public class VectorMapRenderer {
 
 	public boolean isUpdatesEnabled() {
 		return isUpdatesEnabled;
+	}
+
+	public void setAntiAlias(boolean enabled) {
+		mRenderer.setAntiAlias(enabled);
 	}
 
 

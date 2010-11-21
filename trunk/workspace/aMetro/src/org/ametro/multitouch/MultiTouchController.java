@@ -548,6 +548,7 @@ public class MultiTouchController {
 						privateHandler.sendEmptyMessage(MSG_PROCESS_ANIMATION);
 					}else{
 						setControllerMode(MODE_NONE);
+						listener.setPositionAndScaleMatrix(matrix);
 					}
 				}
 				break;
