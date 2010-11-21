@@ -39,12 +39,14 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceManager;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
+import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
 
-public class SettingsActivity extends PreferenceActivity implements OnPreferenceChangeListener, OnPreferenceClickListener {
+public class SettingsActivity extends PreferenceActivity implements
+		OnPreferenceChangeListener, OnPreferenceClickListener {
+
 
 	private Preference mDonate;
 	private Preference mLicense;
@@ -53,17 +55,18 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 
 	private Preference mAutoUpdatePeriod;
 	private Preference mAutoUpdateNetworks;
-	
+
 	private boolean mEnableAutoUpdateBeforeChange;
 	private long mAutoUpdatePeriodValue;
-	
+
 	private CheckBoxPreference mLocationSearchEnabled;
-	
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mEnableAutoUpdateBeforeChange = GlobalSettings.isAutoUpdateIndexEnabled(this);
+		mEnableAutoUpdateBeforeChange = GlobalSettings
+				.isAutoUpdateIndexEnabled(this);
 		mAutoUpdatePeriodValue = GlobalSettings.getUpdatePeriod(this);
-		
+
 		addPreferencesFromResource(R.xml.settings);
 		mDonate = findPreference(getString(R.string.pref_section_donate_key));
 		mLicense = findPreference(getString(R.string.pref_section_license_key));
@@ -72,65 +75,71 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		mAutoUpdatePeriod = findPreference(getString(R.string.pref_auto_update_period_key));
 		mAutoUpdateNetworks = findPreference(getString(R.string.pref_auto_update_networks_key));
 
-		mLocationSearchEnabled = (CheckBoxPreference)findPreference(getString(R.string.pref_auto_locate_key));
-		
+		mLocationSearchEnabled = (CheckBoxPreference) findPreference(getString(R.string.pref_auto_locate_key));
+
 		mDonate.setOnPreferenceClickListener(this);
 		mLicense.setOnPreferenceClickListener(this);
 		mRefreshIconPack.setOnPreferenceClickListener(this);
-		
+
 		mLocationSearchEnabled.setOnPreferenceChangeListener(this);
 		mAutoUpdatePeriod.setOnPreferenceChangeListener(this);
 		mAutoUpdateNetworks.setOnPreferenceChangeListener(this);
-		
-		if(mEnableAutoUpdateBeforeChange){
-			mAutoUpdateEnabled.setSummary(getString(R.string.msg_last_update) + " " + DateUtil.getDateTime(new Date( GlobalSettings.getUpdateDate(this) )));
+
+		if (mEnableAutoUpdateBeforeChange) {
+			mAutoUpdateEnabled.setSummary(getString(R.string.msg_last_update)
+					+ " "
+					+ DateUtil.getDateTime(new Date(GlobalSettings
+							.getUpdateDate(this))));
 		}
 
-		
-		updateDescription(mAutoUpdatePeriod, 
-				R.string.pref_auto_update_period_key, 
+		updateDescription(mAutoUpdatePeriod,
+				R.string.pref_auto_update_period_key,
 				R.string.pref_auto_update_period_description,
-				R.array.pref_auto_update_period_texts, 
-				R.array.pref_auto_update_period_values,
-				null);
-		
-		updateDescription(mAutoUpdateNetworks, 
-				R.string.pref_auto_update_networks_key, 
+				R.array.pref_auto_update_period_texts,
+				R.array.pref_auto_update_period_values, null);
+
+		updateDescription(mAutoUpdateNetworks,
+				R.string.pref_auto_update_networks_key,
 				R.string.pref_auto_update_networks_description,
-				R.array.pref_auto_update_networks_texts, 
-				R.array.pref_auto_update_networks_values,
-				null);		
+				R.array.pref_auto_update_networks_texts,
+				R.array.pref_auto_update_networks_values, null);
 	}
 
-	private void updateDescription(Preference pref, int prefId, int prefSummaryId, int textsId, int valuesId, String value) {
+	private void updateDescription(Preference pref, int prefId,
+			int prefSummaryId, int textsId, int valuesId, String value) {
 		final Resources res = getResources();
 		String[] names = res.getStringArray(textsId);
 		String[] keys = res.getStringArray(valuesId);
-		if(value == null){
-			value = PreferenceManager.getDefaultSharedPreferences(this).getString(res.getString(prefId), null);
+		if (value == null) {
+			value = PreferenceManager.getDefaultSharedPreferences(this)
+					.getString(res.getString(prefId), null);
 		}
 		int index = CollectionUtil.indexOf(keys, value);
-		if(index!=-1){
+		if (index != -1) {
 			String baseSummary = getString(prefSummaryId);
-			pref.setSummary( (StringUtil.isNullOrEmpty(baseSummary) ? "" : baseSummary + ", ") + names[index]);
+			pref.setSummary((StringUtil.isNullOrEmpty(baseSummary) ? ""
+					: baseSummary + ", ") + names[index]);
 		}
-		
+
 	}
 
 	protected void onStop() {
 		super.onStop();
 	}
-	
+
 	protected void onPause() {
-		if(mEnableAutoUpdateBeforeChange!=GlobalSettings.isAutoUpdateIndexEnabled(this) || mAutoUpdatePeriodValue!=GlobalSettings.getUpdatePeriod(this)){
+		if (mEnableAutoUpdateBeforeChange != GlobalSettings
+				.isAutoUpdateIndexEnabled(this)
+				|| mAutoUpdatePeriodValue != GlobalSettings
+						.getUpdatePeriod(this)) {
 			ApplicationEx.getInstance().invalidateAutoUpdate();
 		}
 		super.onPause();
 	}
-	
+
 	public boolean onPreferenceClick(Preference preference) {
-		if (preference == mRefreshIconPack){
-			DownloadIconsDialog dialog = new DownloadIconsDialog(this,false);
+		if (preference == mRefreshIconPack) {
+			DownloadIconsDialog dialog = new DownloadIconsDialog(this, false);
 			dialog.show();
 		}
 		if (preference == mDonate) {
@@ -143,35 +152,36 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	}
 
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		if(preference == mLocationSearchEnabled){
-			boolean value = (Boolean)newValue;
-			if(value){
+		if (preference == mLocationSearchEnabled) {
+			boolean value = (Boolean) newValue;
+			if (value) {
 				try {
-					String text = FileUtil.writeToString(getResources().openRawResource(R.raw.location_warning));
-					InfoDialog.showInfoDialog(this, getString(R.string.title_info), text, android.R.drawable.ic_dialog_info);
+					String text = FileUtil.writeToString(getResources()
+							.openRawResource(R.raw.location_warning));
+					InfoDialog.showInfoDialog(this,
+							getString(R.string.title_info), text,
+							android.R.drawable.ic_dialog_info);
 				} catch (Exception e) {
-				} 
+				}
 			}
 		}
-		if(preference == mAutoUpdatePeriod){
-			String value = (String)newValue;
-			updateDescription(mAutoUpdatePeriod, 
-					R.string.pref_auto_update_period_key, 
+		if (preference == mAutoUpdatePeriod) {
+			String value = (String) newValue;
+			updateDescription(mAutoUpdatePeriod,
+					R.string.pref_auto_update_period_key,
 					R.string.pref_auto_update_period_description,
-					R.array.pref_auto_update_period_texts, 
-					R.array.pref_auto_update_period_values,
-					value);
+					R.array.pref_auto_update_period_texts,
+					R.array.pref_auto_update_period_values, value);
 		}
-		if(preference == mAutoUpdateNetworks){
-			String value = (String)newValue;
-			updateDescription(mAutoUpdateNetworks, 
-					R.string.pref_auto_update_networks_key, 
+		if (preference == mAutoUpdateNetworks) {
+			String value = (String) newValue;
+			updateDescription(mAutoUpdateNetworks,
+					R.string.pref_auto_update_networks_key,
 					R.string.pref_auto_update_networks_description,
-					R.array.pref_auto_update_networks_texts, 
-					R.array.pref_auto_update_networks_values,
-					value);				
+					R.array.pref_auto_update_networks_texts,
+					R.array.pref_auto_update_networks_values, value);
 		}
 		return true;
 	}
-	
+
 }

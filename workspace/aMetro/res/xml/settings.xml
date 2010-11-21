@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 	<Preference android:title="@string/pref_section_donate" android:summary="@string/pref_section_donate_description" android:key="@string/pref_section_donate_key" />
-	<PreferenceScreen android:title="@string/pref_section_graphic" android:summary="@string/pref_section_graphic_description">
+	<PreferenceScreen android:title="@string/pref_section_map_view" android:summary="@string/pref_section_map_view_description">
         <CheckBoxPreference android:title="@string/pref_anti_alias"
                            android:key="@string/pref_anti_alias_key"
                            android:summary="@string/pref_anti_alias_description"
@@ -11,6 +11,24 @@
                             android:summary="@string/pref_anti_alias_disable_on_scroll_description"
                             android:dependency="@string/pref_anti_alias_key"
                             android:defaultValue="true"/>
+
+        <CheckBoxPreference android:title="@string/pref_enable_zoom_controls"
+                           android:key="@string/pref_enable_zoom_controls_key"
+                           android:summary="@string/pref_enable_zoom_controls_description"
+                           android:defaultValue="true"/>
+                           
+        <CheckBoxPreference android:title="@string/pref_enable_zoom_volume_controls"
+                           android:key="@string/pref_enable_zoom_volume_controls_key"
+                           android:summary="@string/pref_enable_zoom_volume_controls_description"
+                           android:defaultValue="true"/>
+		
+		<org.ametro.util.BarPreference android:title="@string/pref_trackball_scroll_speed"
+                           android:key="@string/pref_trackball_scroll_speed_key"
+                           android:summary="@string/pref_trackball_scroll_speed_description"
+                           android:max="100"
+                           android:defaultValue="50"/> 
+
+	                            
 	</PreferenceScreen>
 	<PreferenceScreen android:title="@string/pref_section_maplist" android:summary="@string/pref_section_maplist_description">
         <CheckBoxPreference android:title="@string/pref_enable_country_icons"

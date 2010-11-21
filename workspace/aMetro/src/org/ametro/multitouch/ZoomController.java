@@ -9,13 +9,13 @@ import android.widget.ZoomControls;
 
 public class ZoomController {
 
-	Context mContext;
-	MultiTouchController mController;
-	ZoomControls mZoomControls;
-	Handler mPrivateHandler = new Handler();
+	private MultiTouchController mController;
+	private ZoomControls mZoomControls;
+	private Handler mPrivateHandler = new Handler();
+	private boolean mEnabled;
 
 	public ZoomController(Context context, MultiTouchController controller, ZoomControls controls) {
-		mContext = context;
+		mEnabled = true;
 		mController = controller;
 		mZoomControls = controls;
 
@@ -72,11 +72,21 @@ public class ZoomController {
 	}
 
 	public void showZoom() {
+		if(!mEnabled){
+			return;
+		}
 		invalidate();
 		if (mZoomControls.getVisibility() != View.VISIBLE) {
 			show();
 		}
 		delay();
+	}
+
+	public void setEnabled(boolean enabled) {
+		mEnabled = enabled;
+		if(!enabled){
+			hide();
+		}
 	}
 
 }

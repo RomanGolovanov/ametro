@@ -22,6 +22,7 @@
 package org.ametro;
 
 import static org.ametro.Constants.DOWNLOAD_FILE_TYPE;
+
 import static org.ametro.Constants.IMPORT_FILE_TYPE;
 import static org.ametro.Constants.LOCAL_CATALOG_PATH;
 import static org.ametro.Constants.MAP_FILE_TYPE;
@@ -38,6 +39,11 @@ import static org.ametro.Constants.PREFERENCE_PACKAGE_FILE_NAME;
 import static org.ametro.Constants.PREFERENCE_CHANGE_LOW_SHOWED;
 import static org.ametro.Constants.PREFERENCE_PMZ_IMPORT;
 import static org.ametro.Constants.TEMP_CATALOG_PATH;
+import static org.ametro.Constants.PREFERENCE_ENABLE_ZOOM_CONTROLS;
+import static org.ametro.Constants.PREFERENCE_ENABLE_ZOOM_VOLUME_CONTROLS;
+import static org.ametro.Constants.PREFERENCE_TRACKBALL_SCROLL_SPEED;
+import static org.ametro.Constants.PREFERENCE_ENABLE_ANTI_ALIAS;
+import static org.ametro.Constants.PREFERENCE_DISABLE_ANTI_ALIAS_ON_SCROLL;
 
 import java.io.File;
 import java.util.Locale;
@@ -90,10 +96,36 @@ public class GlobalSettings {
 		editor.commit();
 	}
 
+	public static boolean isZoomControlsEnabled(Context context){
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+		return preferences.getBoolean(PREFERENCE_ENABLE_ZOOM_CONTROLS, true);
+	}
+	
+	public static boolean isZoomUsingVolumeEnabled(Context context){
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+		return preferences.getBoolean(PREFERENCE_ENABLE_ZOOM_VOLUME_CONTROLS, true);
+	}
+	
+	public static int getTrackballScroll(Context context){
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+		return preferences.getInt(PREFERENCE_TRACKBALL_SCROLL_SPEED, 50);
+	}
+	
 	public static MapPath getCurrentMap(Context context){
 		SharedPreferences preferences = context.getSharedPreferences(Constants.PREFERENCE_NAME, 0);
 		return new MapPath(preferences.getString(PREFERENCE_PACKAGE_FILE_NAME, null));
 	}
+	
+	public static boolean isAntiAliasingEnabled(Context context){
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+		return preferences.getBoolean(PREFERENCE_ENABLE_ANTI_ALIAS, true);
+	}
+
+	public static boolean isAntiAliasingDisableOnScroll(Context context){
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+		return preferences.getBoolean(PREFERENCE_DISABLE_ANTI_ALIAS_ON_SCROLL, true);
+	}
+
 	
 	public static String getLanguage(Context context){
 		String code = PreferenceManager.getDefaultSharedPreferences(context).getString(PREFERENCE_LOCALE, "auto");

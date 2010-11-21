@@ -21,8 +21,28 @@
     <string name="pref_anti_alias_disable_on_scroll_key">ANTI_ALIAS_DISABLE_ON_SCROLL</string>
     <string name="pref_anti_alias_disable_on_scroll_description">Disable Anti-aliasing while map scrolling on slow devices</string>
 
-    <string name="pref_section_graphic">Rendering</string>
-    <string name="pref_section_graphic_description">Map rendering options</string>
+	<string name="pref_enable_zoom_controls">Show zoom buttons</string>
+	<string name="pref_enable_zoom_controls_key">ZOOM_WITH_BUTTONS</string>
+	<string name="pref_enable_zoom_controls_description">Show zoom control buttons on map view</string>
+	
+	<string name="pref_enable_zoom_volume_controls">Zoom with volume controls</string>
+	<string name="pref_enable_zoom_volume_controls_key">ZOOM_WITH_VOLUME</string>
+	<string name="pref_enable_zoom_volume_controls_description">Enable to zoom using volume controls</string>
+
+	<string name="pref_trackball_scroll_speed">Change scroll speed</string>
+	<string name="pref_trackball_scroll_speed_key">TRACKBALL_SCROLL_SPEED</string>
+	<string name="pref_trackball_scroll_speed_description">Change if trackball/buttons scroll is too slow or fast.</string>
+	
+	<!-- 
+	<string name="pref_"></string>
+	<string name="pref__key"></string>
+	<string name="pref__description"></string>
+	<string name="pref_"></string>
+	<string name="pref__key"></string>
+	<string name="pref__description"></string>
+	 -->
+    <string name="pref_section_map_view">Map</string>
+    <string name="pref_section_map_view_description">Map view options</string>
 
     <string name="pref_section_auto_update">Online maps catalog</string>
     <string name="pref_section_auto_update_description">Online maps catalog access options</string>
