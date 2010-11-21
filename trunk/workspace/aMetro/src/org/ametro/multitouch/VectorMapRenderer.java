@@ -286,7 +286,7 @@ public class VectorMapRenderer {
 	private Runnable renderPartialCacheRunnable = new Runnable() {
 		public void run() {
 			renderPartialCache();
-			//mCanvas.invalidate();
+			mCanvas.invalidate();
 		}
 	};
 	
@@ -409,7 +409,7 @@ public class VectorMapRenderer {
 	}
 
 	public void setAntiAlias(boolean enabled) {
-		mRenderer.setAntiAlias(enabled);
+		//mRenderer.setAntiAlias(enabled);
 	}
 
 
