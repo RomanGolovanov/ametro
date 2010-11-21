@@ -72,6 +72,11 @@ public class Constants {
     public static final String PREFERENCE_IS_EULA_ACCEPTED = "EULA_ACCEPTED";
     public static final String PREFERENCE_ENABLE_LOCATION = "AUTO_LOCATION";
     public static final String PREFERENCE_CHANGE_LOW_SHOWED = "CHANGE_LOW_SHOWED";
+    public static final String PREFERENCE_ENABLE_ZOOM_CONTROLS = "ZOOM_WITH_BUTTONS";
+    public static final String PREFERENCE_ENABLE_ZOOM_VOLUME_CONTROLS = "ZOOM_WITH_VOLUME";
+    public static final String PREFERENCE_TRACKBALL_SCROLL_SPEED = "TRACKBALL_SCROLL_SPEED";
+    public static final String PREFERENCE_ENABLE_ANTI_ALIAS = "ANTI_ALIAS";
+    public static final String PREFERENCE_DISABLE_ANTI_ALIAS_ON_SCROLL = "ANTI_ALIAS_DISABLE_ON_SCROLL";
 
     public static final String DEFAULT_MAP = "metro";
 

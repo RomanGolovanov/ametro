@@ -351,7 +351,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			}
 			break; 
 		case REQUEST_SETTINGS:
-			updateAntiAliasingState();
+			applySettings();
 			if(isConfigurationChanged()){
 				setupLocale();
 				if (mModelFileName != null) {
@@ -474,10 +474,13 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		return super.onOptionsItemSelected(item);
 	}
 
-	public void updateAntiAliasingState(){
+	public void applySettings(){
 		if(mVectorMapView!=null){
-			mVectorMapView.setAntiAliasingDisableOnScroll(isAntiAliasingDisableOnScroll());
-			mVectorMapView.setAntiAliasingEnabled(isAntiAliasingEnabled());
+
+			mVectorMapView.setAntiAliasingDisableOnScroll(GlobalSettings.isAntiAliasingDisableOnScroll(this));
+			mVectorMapView.setAntiAliasingEnabled(GlobalSettings.isAntiAliasingEnabled(this));
+			mVectorMapView.setZoomControlsEnabled(GlobalSettings.isZoomControlsEnabled(this));
+			mVectorMapView.setZoomUsingVolumeEnabled(GlobalSettings.isZoomUsingVolumeEnabled(this));
 			mVectorMapView.postInvalidate();
 		}
 	}
@@ -492,16 +495,6 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 
 	public void setupLocale() {
 		Locale.setDefault(getLocale());
-	}
-
-	public boolean isAntiAliasingEnabled(){
-		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
-		return settings.getBoolean(getString(R.string.pref_anti_alias_key), true);
-	}
-
-	public boolean isAntiAliasingDisableOnScroll(){
-		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
-		return settings.getBoolean(getString(R.string.pref_anti_alias_disable_on_scroll_key), true);
 	}
 
 	public boolean isEnabledAddonsImport() {
@@ -954,10 +947,10 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		
 		mVectorMapView = new MultiTouchMapView(this, mScheme);
 		mMapFrame.addView(mVectorMapView, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
-		updateAntiAliasingState();
-
 		mVectorMapView.setSchemeSelection(mNavigationStations, mNavigationSegments, mNavigationTransfers);
 		mVectorMapView.setZoomControls((ZoomControls) findViewById(R.id.browse_vector_map_zoom));
+		applySettings();
+
 
 		mNavigationPanelTop = (View)findViewById(R.id.browse_vector_map_panel_top);
 		mNavigationPanelBottom = (View)findViewById(R.id.browse_vector_map_panel_bottom);

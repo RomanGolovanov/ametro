@@ -247,5 +247,13 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 		}
 	};
 
+	public void setZoomControlsEnabled(boolean enabled) {
+		mZoomController.setEnabled(enabled);
+	}
+
+	public void setZoomUsingVolumeEnabled(boolean enabled) {
+		mKeyEventController.setEnabledVolumeZoom(enabled);
+	}
+
 
 }

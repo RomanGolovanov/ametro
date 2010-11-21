@@ -7,6 +7,8 @@ public class KeyEventController {
 
 	private MultiTouchController mController; 
 	
+	private boolean mEnabledVolumeZoom;
+	
 	/** key-handled scroll constants and state **/
     private int mKeyScrollSpeed = KEY_SCROLL_MIN_SPEED;
     private long mKeyScrollLastSpeedTime;
@@ -24,6 +26,7 @@ public class KeyEventController {
     
 		
 	public KeyEventController(MultiTouchController controller) {
+		mEnabledVolumeZoom = true;
 		mController = controller;
 	}
 
@@ -31,11 +34,17 @@ public class KeyEventController {
 		int mode = mController.getControllerMode();
         switch (keyCode) {
         case KeyEvent.KEYCODE_VOLUME_UP:
+        	if(!mEnabledVolumeZoom){
+        		break;
+        	}
         	if(mode == MultiTouchController.MODE_NONE){
         		mController.doZoomAnimation(MultiTouchController.ZOOM_IN);
         	}
         	return true;
         case KeyEvent.KEYCODE_VOLUME_DOWN:
+        	if(!mEnabledVolumeZoom){
+        		break;
+        	}
         	if(mode == MultiTouchController.MODE_NONE){
         		mController.doZoomAnimation(MultiTouchController.ZOOM_OUT);
         	}
@@ -75,7 +84,15 @@ public class KeyEventController {
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         switch (keyCode) {
         case KeyEvent.KEYCODE_VOLUME_UP:
+        	if(!mEnabledVolumeZoom){
+        		break;
+        	}
+        	return true;
         case KeyEvent.KEYCODE_VOLUME_DOWN:
+        	if(!mEnabledVolumeZoom){
+        		break;
+        	}
+        	return true;
         case KeyEvent.KEYCODE_DPAD_UP:
         case KeyEvent.KEYCODE_DPAD_DOWN:
         case KeyEvent.KEYCODE_DPAD_LEFT:
@@ -96,6 +113,10 @@ public class KeyEventController {
         }
         return false;
     }
+
+	public void setEnabledVolumeZoom(boolean enabled) {
+		mEnabledVolumeZoom = enabled;
+	}
 	
 	
 }
