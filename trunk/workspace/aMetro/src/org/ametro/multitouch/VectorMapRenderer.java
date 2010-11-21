@@ -27,59 +27,45 @@ public class VectorMapRenderer {
 
 	protected static final String TAG = "VectorMapView";
 
-	RenderProgram mRenderer;
-	SchemeView mScheme;
+	private RenderProgram mRenderer;
+	private SchemeView mScheme;
 
-	MapCache mCache;
-	MapCache mOldCache;
+	private MapCache mCache;
+	private MapCache mOldCache;
 	
-	//protected static final int BORDER = 0;
-	
-	final Matrix mMatrix = new Matrix();
-	final Matrix mInvertedMatrix = new Matrix();
-	final Matrix mRenderMatrix = new Matrix();
+	private final Matrix mMatrix = new Matrix();
+	private final Matrix mInvertedMatrix = new Matrix();
+	private final Matrix mRenderMatrix = new Matrix();
 
-	final RectF mScreenRect = new RectF();
-	final RectF mSchemeRect = new RectF();
+	private final RectF mScreenRect = new RectF();
+	private final RectF mSchemeRect = new RectF();
 	
-	final int mMemoryClass;
+	private final RectF mRenderViewPort = new RectF();
+	private final RectF mRenderViewPortVertical = new RectF();
+	private final RectF mRenderViewPortHorizontal = new RectF();
+	private final RectF mRenderViewPortIntersection = new RectF();
 	
-	float mScale;
-	float mCurrX;
-	float mCurrY;
-	float mCurrWidth;
-	float mCurrHeight;
+	private final int mMemoryClass;
 	
-	View mCanvas;
+	private float mScale;
+	private float mCurrX;
+	private float mCurrY;
+	private float mCurrWidth;
+	private float mCurrHeight;
 	
-	float[] mMatrixValues = new float[9];
+	private View mCanvas;
+	
+	private boolean mAntiAliasEnabled;
+	private boolean mAntiAliasDisabledOnChanges;
+	private boolean mAntiAliasCurrentState;
+	
+	private final float[] mMatrixValues = new float[9];
 	
 	private boolean isUpdatesEnabled;
 	private boolean isEntireMapCached;
 	
 	private final Handler mPrivateHandler = new Handler();
-	
-	public void setUpdatesEnabled(boolean enabled){
-		isUpdatesEnabled = enabled;
-	}
-	
-	private int getMemoryClass(Context context){
-		try{
-			Method getMemoryClassMethod = ActivityManager.class.getMethod("getMemoryClass");
-			ActivityManager ac = (ActivityManager)context.getSystemService(Activity.ACTIVITY_SERVICE);
-			return (Integer)getMemoryClassMethod.invoke(ac, new Object[]{});
-		}catch(Exception ex){
-			return 16;
-		}
-	}
-	
-	public int getWidth(){
-		return mCanvas.getWidth();
-	}
-	
-	public int getHeight(){
-		return mCanvas.getHeight();
-	}
+
 	
 	public VectorMapRenderer(View container, SchemeView scheme) {
 		this.mCanvas = container;
@@ -88,6 +74,40 @@ public class VectorMapRenderer {
 		setScheme(scheme);
 	}
 
+	public void setScheme(SchemeView scheme) {
+		mRenderer = new RenderProgram(scheme);
+		mRenderer.setRenderFilter(RenderProgram.ALL);
+		mRenderer.setAntiAlias(mAntiAliasEnabled);
+		mAntiAliasCurrentState = mAntiAliasEnabled;
+		mRenderer.setSelection(null, null, null);
+		
+		Matrix m = new Matrix();
+		m.setTranslate(1.0f, 1.0f);
+		setMatrix(m);
+
+		recycleCache();
+	}
+
+	public void setSchemeSelection(ArrayList<StationView> stations, ArrayList<SegmentView> segments, ArrayList<TransferView> transfers) {
+		mRenderer.setSelection(stations, segments, transfers);
+		recycleCache();
+	}
+
+	public void setUpdatesEnabled(boolean enabled){
+		isUpdatesEnabled = enabled;
+	}	
+	
+	public boolean isUpdatesEnabled() {
+		return isUpdatesEnabled;
+	}
+
+	public void setAntiAliasEnabled(boolean enabled) {
+		mAntiAliasEnabled = enabled;
+	}
+
+	public void setAntiAliasDisabledOnChanges(boolean disabled){
+		mAntiAliasDisabledOnChanges = disabled;
+	}
 	
 	public void draw(Canvas canvas) {
 		if(mCache==null){ 
@@ -128,14 +148,14 @@ public class VectorMapRenderer {
 		mScale = mMatrixValues[Matrix.MSCALE_X];
 		mCurrX = mMatrixValues[Matrix.MTRANS_X];
 		mCurrY = mMatrixValues[Matrix.MTRANS_Y];
-		mCurrWidth = getContentWidth() * mScale;
-		mCurrHeight = getContentHeight() * mScale;
+		mCurrWidth = mScheme.width * mScale;
+		mCurrHeight = mScheme.height * mScale;
 		
 		updateViewRect();
 	}
 
 	public void updateViewRect() {
-		mSchemeRect.set(0, 0, getWidth(), getHeight());
+		mSchemeRect.set(0, 0, mCanvas.getWidth(), mCanvas.getHeight());
 		mInvertedMatrix.mapRect(mSchemeRect);
 		mScreenRect.set(mSchemeRect);
 		mMatrix.mapRect(mScreenRect);
@@ -146,14 +166,6 @@ public class VectorMapRenderer {
 		return this.mMatrix;
 	}
 	
-	public float getContentWidth() {
-		return mScheme.width;
-	}
-
-	public float getContentHeight() {
-		return mScheme.height;
-	}
-
 	public synchronized void rebuildCache() {
 		//Log.w(TAG, "rebuild cache");
 		recycleCache();
@@ -177,22 +189,18 @@ public class VectorMapRenderer {
 
 	private synchronized void renderEntireCache() {
 		//Log.w(TAG,"render entire");
-		final MapCache newCache = new MapCache();
-		
 		final RectF viewRect = new RectF(0,0,mCurrWidth,mCurrHeight);
-		
 		Matrix m = new Matrix(mMatrix);
 		m.postTranslate(-mCurrX, -mCurrY);
 		Matrix i = new Matrix();
 		m.invert(i);
 		
-		newCache.InvertedMatrix = i;
-		newCache.X = 0;
-		newCache.Y = 0;
-		newCache.Scale = mScale;
-		newCache.ViewRect = viewRect;
+		final MapCache newCache = MapCache.reuse(mOldCache, (int)mCurrWidth, (int)mCurrHeight, i, 0, 0, mScale, viewRect);
 		
-		newCache.Image = Bitmap.createBitmap((int)viewRect.width(), (int)viewRect.height(), Config.RGB_565);
+		if( !mAntiAliasCurrentState && mAntiAliasEnabled ){
+			mRenderer.setAntiAlias(true);
+			mAntiAliasCurrentState = true;
+		}
 		
 		Canvas c = new Canvas(newCache.Image);
 		c.drawColor(Color.MAGENTA);
@@ -209,7 +217,12 @@ public class VectorMapRenderer {
 
 	private synchronized void renderPartialCache() {
 		//Log.w(TAG,"render partial");
-		final MapCache newCache = MapCache.reuse(mOldCache, getWidth(),getHeight(), mInvertedMatrix, mCurrX, mCurrY, mScale, mSchemeRect);
+		final MapCache newCache = MapCache.reuse(mOldCache, mCanvas.getWidth(), mCanvas.getHeight(), mInvertedMatrix, mCurrX, mCurrY, mScale, mSchemeRect);
+		
+		if( !mAntiAliasCurrentState && mAntiAliasEnabled ){
+			mRenderer.setAntiAlias(true);
+			mAntiAliasCurrentState = true;
+		}
 		
 		Canvas c = new Canvas(newCache.Image);
 		c.setMatrix(mMatrix);
@@ -225,33 +238,18 @@ public class VectorMapRenderer {
 
 	private synchronized void updatePartialCache() {
 		//Log.w(TAG,"update partial");
-		MapCache newCache = MapCache.reuse(mOldCache, getWidth(), getHeight(), mInvertedMatrix, mCurrX, mCurrY, mScale, mSchemeRect);
+		
+		MapCache newCache = MapCache.reuse(mOldCache, mCanvas.getWidth(), mCanvas.getHeight(), mInvertedMatrix, mCurrX, mCurrY, mScale, mSchemeRect);
 		
 		Canvas c = new Canvas(newCache.Image);
-		RectF viewport = new RectF(mSchemeRect);
-		final RectF v = new RectF(viewport);
-		final RectF h = new RectF(viewport);
-		final RectF i = new RectF(viewport);
-		i.intersect(mCache.ViewRect);
-		boolean renderAll = false;
-
-		if (viewport.right == i.right && viewport.bottom == i.bottom) {
-			h.bottom = i.top;
-			v.right = i.left;
-		} else if (viewport.right == i.right && viewport.top == i.top) {
-			h.top = i.bottom;
-			v.right = i.left;
-		} else if (viewport.left == i.left && viewport.bottom == i.bottom) {
-			h.bottom = i.top;
-			v.left = i.right;
-		} else if (viewport.left == i.left && viewport.top == i.top) {
-			h.top = i.bottom;
-			v.left = i.right;
-		} else {
-			renderAll = true;
-		}
-
+		
+		boolean renderAll = splitRenderViewPort();
 		if(renderAll){
+			if( !mAntiAliasCurrentState && mAntiAliasEnabled ){
+				mRenderer.setAntiAlias(true);
+				mAntiAliasCurrentState = true;
+			}
+			
 			c.setMatrix(mMatrix);
 			c.clipRect(mSchemeRect);
 			ArrayList<RenderElement> elements = mRenderer.setVisibility(mSchemeRect);
@@ -260,10 +258,15 @@ public class VectorMapRenderer {
 				elem.draw(c);
 			}			
 		}else{
+			if( mAntiAliasCurrentState && (mAntiAliasDisabledOnChanges || !mAntiAliasEnabled) ){
+				mRenderer.setAntiAlias(false);
+				mAntiAliasCurrentState = false;
+			}
+			
 			c.save();
 			c.setMatrix(mMatrix);
-			c.clipRect(viewport);
-			ArrayList<RenderElement> elements = mRenderer.setVisibilityTwice(h,v);
+			c.clipRect(mRenderViewPort);
+			ArrayList<RenderElement> elements = mRenderer.setVisibilityTwice(mRenderViewPortHorizontal,mRenderViewPortVertical);
 			c.drawColor(Color.WHITE);
 			for (RenderElement elem : elements) {
 				elem.draw(c);
@@ -280,6 +283,36 @@ public class VectorMapRenderer {
 			mPrivateHandler.removeCallbacks(renderPartialCacheRunnable);
 			mPrivateHandler.postDelayed(renderPartialCacheRunnable, 300);
 		}
+	}
+
+	private boolean splitRenderViewPort() {
+		final RectF vp = mRenderViewPort;
+		final RectF v = mRenderViewPortVertical;
+		final RectF h = mRenderViewPortHorizontal;
+		final RectF i = mRenderViewPortIntersection;
+		vp.set(mSchemeRect);
+		mRenderViewPortVertical.set(vp);
+		mRenderViewPortHorizontal.set(vp);
+		mRenderViewPortIntersection.set(vp);
+		mRenderViewPortIntersection.intersect(mCache.ViewRect);
+		boolean renderAll = false;
+
+		if (vp.right == i.right && vp.bottom == i.bottom) {
+			h.bottom = i.top;
+			v.right = i.left;
+		} else if (vp.right == i.right && vp.top == i.top) {
+			h.top = i.bottom;
+			v.right = i.left;
+		} else if (vp.left == i.left && vp.bottom == i.bottom) {
+			h.bottom = i.top;
+			v.left = i.right;
+		} else if (vp.left == i.left && vp.top == i.top) {
+			h.top = i.bottom;
+			v.left = i.right;
+		} else {
+			renderAll = true;
+		}
+		return renderAll;
 	}
 
 	
@@ -383,34 +416,14 @@ public class VectorMapRenderer {
 		mPrivateHandler.removeCallbacks(updateCacheRunnable);
 		mPrivateHandler.post(updateCacheRunnable);
 	}
-
 	
-	public void setScheme(SchemeView scheme) {
-		mRenderer = new RenderProgram(scheme);
-		mRenderer.setRenderFilter(RenderProgram.ALL);
-		mRenderer.setAntiAlias(true);
-		mRenderer.setSelection(null, null, null);
-		
-		Matrix m = new Matrix();
-		m.setTranslate(1.0f, 1.0f);
-		setMatrix(m);
-
-		recycleCache();
-	}
-
-	public void setSchemeSelection(ArrayList<StationView> stations, ArrayList<SegmentView> segments, ArrayList<TransferView> transfers) {
-		mRenderer.setSelection(stations, segments, transfers);
-		
-		recycleCache();
-	}
-
-	public boolean isUpdatesEnabled() {
-		return isUpdatesEnabled;
-	}
-
-	public void setAntiAlias(boolean enabled) {
-		//mRenderer.setAntiAlias(enabled);
-	}
-
-
+	private int getMemoryClass(Context context){
+		try{
+			Method getMemoryClassMethod = ActivityManager.class.getMethod("getMemoryClass");
+			ActivityManager ac = (ActivityManager)context.getSystemService(Activity.ACTIVITY_SERVICE);
+			return (Integer)getMemoryClassMethod.invoke(ac, new Object[]{});
+		}catch(Exception ex){
+			return 16;
+		}
+	}	
 }

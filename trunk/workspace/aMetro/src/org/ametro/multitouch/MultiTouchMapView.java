@@ -101,7 +101,6 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 	
 	public void onTouchModeChanged(int mode) {
 		mMapView.setUpdatesEnabled(mode != MultiTouchController.MODE_ZOOM && mode!= MultiTouchController.MODE_ANIMATION );
-		mMapView.setAntiAlias(mode == MultiTouchController.MODE_NONE);
 	}
 
 	public void onPerformClick(PointF position) {
@@ -134,12 +133,12 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 		return mController.getTouchPoint();
 	}
 
-	public void setAntiAliasingDisableOnScroll(boolean antiAliasingDisableOnScroll) {
-		// TODO Auto-generated method stub
+	public void setAntiAliasingDisableOnScroll(boolean disableOnScroll) {
+		mMapView.setAntiAliasDisabledOnChanges(disableOnScroll);
 	}
 
-	public void setAntiAliasingEnabled(boolean antiAliasingEnabled) {
-		// TODO Auto-generated method stub
+	public void setAntiAliasingEnabled(boolean enabled) {
+		mMapView.setAntiAliasEnabled(enabled);
 	}
 
 	public void setScheme(SchemeView scheme) {
@@ -212,7 +211,7 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 	}
 	
 	private void updateViewRect() {
-		mController.setViewRect(mMapView.getContentWidth(), mMapView.getContentHeight(), new RectF(0, 0, getWidth(), getHeight()));
+		mController.setViewRect(mScheme.width, mScheme.height, new RectF(0, 0, getWidth(), getHeight()));
 		if(mChangeCenterPoint!=null || mChangeScale!=null){
 			float width = getWidth() / mChangeScale;
 			float height = getHeight() / mChangeScale;
