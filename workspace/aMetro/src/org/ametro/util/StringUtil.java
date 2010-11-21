@@ -45,6 +45,7 @@ import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
+import android.graphics.RectF;
 
 /**
  * @author Vlad Vinichenko (akerigan@gmail.com)
@@ -284,6 +285,11 @@ public class StringUtil {
 		return rect.left + "," + rect.top + "," + rect.right + "," + rect.bottom;
 	}
 
+	public static String formatRectF(RectF rect) {
+		return rect.left + "," + rect.top + "," + rect.right + "," + rect.bottom;
+	}
+
+	
 	public static String formatPoint(Point point) {
 		return point.x + "," + point.y;
 	}
