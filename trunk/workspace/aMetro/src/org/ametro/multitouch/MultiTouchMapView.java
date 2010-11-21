@@ -24,7 +24,9 @@ import android.widget.ZoomControls;
 public class MultiTouchMapView extends ScrollView implements MultiTouchListener {
 
 	protected  static final String TAG = "MultiTouchMapView";
-	
+
+	private static final long SCROLLBAR_TIMEOUT = 1000;
+
 	private MultiTouchController mController;
 	private ZoomController mZoomController;
 	private KeyEventController mKeyEventController;
@@ -49,14 +51,15 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 	
 	public MultiTouchMapView(Context context, SchemeView scheme) {
 		super(context);
-		setFadingEdgeLength(0);
-		setScrollbarFadingEnabled(true);
-        setVerticalScrollBarEnabled(true);
-        setHorizontalScrollBarEnabled(true);
-
+		
         setFocusable(true);
         setFocusableInTouchMode(true);
-        
+
+		setVerticalScrollBarEnabled(true);
+		setHorizontalScrollBarEnabled(true);
+
+		awakeScrollBars();
+		
 		mScheme = scheme;
 		mMapView = new VectorMapRenderer(this, scheme);
 		mController = new MultiTouchController(getContext(),this);
@@ -123,6 +126,18 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 			mPrivateHandler.removeCallbacks(performClickRunnable);
 			mPrivateHandler.postDelayed(performClickRunnable, ViewConfiguration.getDoubleTapTimeout());
 		}
+	}
+	
+	public void setZoomControlsEnabled(boolean enabled) {
+		mZoomController.setEnabled(enabled);
+	}
+
+	public void setZoomUsingVolumeEnabled(boolean enabled) {
+		mKeyEventController.setEnabledVolumeZoom(enabled);
+	}
+
+	public void setTrackballScrollSpeed(int trackballScrollSpeed) {
+		mKeyEventController.setTrackballScrollSpeed(trackballScrollSpeed);
 	}
 	
 	public void onPerformLongClick(PointF position) {
@@ -237,23 +252,34 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 		mHorizontalScrollOffset = (int)x;
 		mVerticalScrollOffset = (int)y;
 
-        awakenScrollBars();
+        awakeScrollBars();
 	}
-
+	
+	private void awakeScrollBars(){
+		setVerticalScrollBarEnabled(true);
+		setHorizontalScrollBarEnabled(true);
+        mPrivateHandler.removeCallbacks(hideScrollbarsRunnable);
+        mPrivateHandler.postDelayed(hideScrollbarsRunnable, SCROLLBAR_TIMEOUT);
+		invalidate();
+	}
+	
+	private void fadeScrollBars(){
+		setVerticalScrollBarEnabled(false);
+		setHorizontalScrollBarEnabled(false);
+		invalidate();
+	}
+	
 	private Runnable performClickRunnable = new Runnable() {
 		public void run() {
 			mLastClickPosition = null;
 			performClick();
 		}
 	};
-
-	public void setZoomControlsEnabled(boolean enabled) {
-		mZoomController.setEnabled(enabled);
-	}
-
-	public void setZoomUsingVolumeEnabled(boolean enabled) {
-		mKeyEventController.setEnabledVolumeZoom(enabled);
-	}
-
+	
+	private Runnable hideScrollbarsRunnable = new Runnable() {
+		public void run() {
+			fadeScrollBars();
+		}
+	};
 
 }

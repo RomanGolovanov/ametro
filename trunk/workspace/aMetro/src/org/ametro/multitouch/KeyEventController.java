@@ -8,6 +8,7 @@ public class KeyEventController {
 	private MultiTouchController mController; 
 	
 	private boolean mEnabledVolumeZoom;
+	private float mTrackballScrollSpeed;
 	
 	/** key-handled scroll constants and state **/
     private int mKeyScrollSpeed = KEY_SCROLL_MIN_SPEED;
@@ -106,8 +107,8 @@ public class KeyEventController {
     public boolean onTrackballEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_MOVE:
-	            float dx = event.getX() * event.getXPrecision() * TRACKBALL_SCROLL_SPEED;
-	            float dy = event.getY() * event.getYPrecision() * TRACKBALL_SCROLL_SPEED;
+	            float dx = event.getX() * event.getXPrecision() * mTrackballScrollSpeed;
+	            float dy = event.getY() * event.getYPrecision() * mTrackballScrollSpeed;
 	            mController.doScroll(dx, dy);
 	            return true;
         }
@@ -116,6 +117,11 @@ public class KeyEventController {
 
 	public void setEnabledVolumeZoom(boolean enabled) {
 		mEnabledVolumeZoom = enabled;
+	}
+
+	public void setTrackballScrollSpeed(int trackballScrollSpeed) {
+		float k = (float)trackballScrollSpeed / 100.0f;
+		mTrackballScrollSpeed = 10 * TRACKBALL_SCROLL_SPEED * k + TRACKBALL_SCROLL_SPEED / 2;
 	}
 	
 	

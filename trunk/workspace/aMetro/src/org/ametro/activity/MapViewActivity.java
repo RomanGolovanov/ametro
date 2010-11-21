@@ -481,6 +481,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			mVectorMapView.setAntiAliasingEnabled(GlobalSettings.isAntiAliasingEnabled(this));
 			mVectorMapView.setZoomControlsEnabled(GlobalSettings.isZoomControlsEnabled(this));
 			mVectorMapView.setZoomUsingVolumeEnabled(GlobalSettings.isZoomUsingVolumeEnabled(this));
+			mVectorMapView.setTrackballScrollSpeed(GlobalSettings.getTrackballScrollSpeed(this));
 			mVectorMapView.postInvalidate();
 		}
 	}

@@ -106,7 +106,7 @@ public class GlobalSettings {
 		return preferences.getBoolean(PREFERENCE_ENABLE_ZOOM_VOLUME_CONTROLS, true);
 	}
 	
-	public static int getTrackballScroll(Context context){
+	public static int getTrackballScrollSpeed(Context context){
 		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 		return preferences.getInt(PREFERENCE_TRACKBALL_SCROLL_SPEED, 50);
 	}
