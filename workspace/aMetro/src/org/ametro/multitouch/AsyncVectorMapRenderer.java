@@ -78,21 +78,18 @@ public class AsyncVectorMapRenderer {
 
 	public void setScheme(SchemeView scheme) {
 		synchronized (this) {
-			Log.i(TAG, "Set scheme.");
+			//Log.i(TAG, "Set scheme.");
 			mRenderer = new RenderProgram(scheme);
 			mRenderer.setRenderFilter(RenderProgram.ALL);
 			mRenderer.setAntiAlias(mAntiAliasEnabled);
 			mAntiAliasCurrentState = mAntiAliasEnabled;
 			mRenderer.setSelection(null, null, null);
-//			Matrix m = new Matrix();
-//			m.setTranslate(1.0f, 1.0f);
-//			setMatrix(m);
 		}
 	}
 
 	public void setSchemeSelection(ArrayList<StationView> stations, ArrayList<SegmentView> segments, ArrayList<TransferView> transfers) {
 		synchronized (this) {
-			Log.i(TAG, "Set scheme selection.");
+			//Log.i(TAG, "Set scheme selection.");
 			mRenderer.setSelection(stations, segments, transfers);
 			if(mRenderThread!=null){
 				mRenderThread.postRebuildCache();
@@ -100,6 +97,17 @@ public class AsyncVectorMapRenderer {
 		}
 	}
 
+	public void onAttachedToWindow() {
+		//Log.i(TAG,"Renderer attached.");
+		mRenderThread = new RenderThread(mCanvas);
+		mRenderThread.start();
+	}
+
+	public void onDetachedFromWindow() {
+		//Log.i(TAG,"Renderer dettached.");
+		mRenderThread.shutdown();
+	}
+		
 	public void setUpdatesEnabled(boolean enabled){
 		isUpdatesEnabled = enabled;
 	}	
@@ -455,34 +463,7 @@ public class AsyncVectorMapRenderer {
 			mMode = MODE_SHUTDOWN;
 			awake();
 		}
-		
-		private void setMode(int newMode){
-			synchronized (this) {
-				mMode = newMode;
-			};
-		}
-		
-		private void awake(){
-			synchronized (this) {
-				this.notify();
-			}
-		}
-		
-		private View mCanvas;
-		
-		private Object sync = new Object();
-		
-		private final String TAG = "RenderThread";
-		private final String[] MODES = {"WAIT","SHUTDOWN","REBUILD","RENDER","UPDATE"};
-		
-		private int mMode = MODE_WAIT;
-		
-		private static final int MODE_WAIT = 0;
-		private static final int MODE_SHUTDOWN = 1;
-		private static final int MODE_REBUILD = 2;
-		private static final int MODE_RENDER_PARTIAL = 3;
-		private static final int MODE_UPDATE_PARTIAL = 4;
-		
+
 		public void run()  {
 			mMode = MODE_WAIT;
 			while(true){
@@ -491,7 +472,7 @@ public class AsyncVectorMapRenderer {
 					mode = mMode;
 					mMode = MODE_WAIT;
 				}
-				Log.i(TAG, "Render begin execute command: " + MODES[mode]);
+				//Log.i(TAG, "Render begin execute command: " + MODES[mode]);
 				switch(mode){
 				case MODE_WAIT:
 					synchronized (this) {
@@ -518,7 +499,7 @@ public class AsyncVectorMapRenderer {
 					mCanvas.postInvalidate();
 					break;
 				case MODE_SHUTDOWN:
-					Log.i(TAG,"Renderer shutdown completed.");
+					//Log.i(TAG,"Renderer shutdown completed.");
 					return; // shutdown render thread
 				}
 				synchronized (sync) {
@@ -532,19 +513,36 @@ public class AsyncVectorMapRenderer {
 				postRenderCache();
 			}
 		};
+		
+		private void setMode(int newMode){
+			synchronized (this) {
+				mMode = newMode;
+			};
+		}
+		
+		private void awake(){
+			synchronized (this) {
+				this.notify();
+			}
+		}
+		
+		private View mCanvas;
+		
+		private Object sync = new Object();
+		
+		//private final String TAG = "RenderThread";
+		//private final String[] MODES = {"WAIT","SHUTDOWN","REBUILD","RENDER","UPDATE"};
+		
+		private int mMode = MODE_WAIT;
+		
+		private static final int MODE_WAIT = 0;
+		private static final int MODE_SHUTDOWN = 1;
+		private static final int MODE_REBUILD = 2;
+		private static final int MODE_RENDER_PARTIAL = 3;
+		private static final int MODE_UPDATE_PARTIAL = 4;
+		
 
 		
 	}
 
-	public void attach() {
-		Log.i(TAG,"Renderer attached.");
-		mRenderThread = new RenderThread(mCanvas);
-		mRenderThread.start();
-	}
-
-	public void detach() {
-		Log.i(TAG,"Renderer dettached.");
-		mRenderThread.shutdown();
-	}
-	
 }

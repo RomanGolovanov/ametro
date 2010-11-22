@@ -84,12 +84,12 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
     }
     
     protected void onAttachedToWindow() {
-    	mMapView.attach();
+    	mMapView.onAttachedToWindow();
     	super.onAttachedToWindow();
     }
     
     protected void onDetachedFromWindow() {
-    	mMapView.detach();
+    	mMapView.onDetachedFromWindow();
     	super.onDetachedFromWindow();
     }
     
