@@ -947,11 +947,11 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		mMapFrame = (FrameLayout)findViewById(R.id.map_frame);
 		
 		mVectorMapView = new MultiTouchMapView(this, mScheme);
-		mMapFrame.addView(mVectorMapView, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
 		mVectorMapView.setSchemeSelection(mNavigationStations, mNavigationSegments, mNavigationTransfers);
 		mVectorMapView.setZoomControls((ZoomControls) findViewById(R.id.browse_vector_map_zoom));
 		applySettings();
 
+		mMapFrame.addView(mVectorMapView, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
 
 		mNavigationPanelTop = (View)findViewById(R.id.browse_vector_map_panel_top);
 		mNavigationPanelBottom = (View)findViewById(R.id.browse_vector_map_panel_bottom);
