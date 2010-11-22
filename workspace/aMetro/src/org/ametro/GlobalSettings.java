@@ -108,7 +108,7 @@ public class GlobalSettings {
 	
 	public static int getTrackballScrollSpeed(Context context){
 		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-		return preferences.getInt(PREFERENCE_TRACKBALL_SCROLL_SPEED, 50);
+		return preferences.getInt(PREFERENCE_TRACKBALL_SCROLL_SPEED, 10);
 	}
 	
 	public static MapPath getCurrentMap(Context context){
