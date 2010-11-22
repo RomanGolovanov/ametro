@@ -32,7 +32,7 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 	private KeyEventController mKeyEventController;
 
 	private SchemeView mScheme;
-	private VectorMapRenderer mMapView;
+	private AsyncVectorMapRenderer mMapView;
 	
 	private PointF mLastClickPosition;
 	private float mDblClickSlop;
@@ -61,7 +61,7 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 		awakeScrollBars();
 		
 		mScheme = scheme;
-		mMapView = new VectorMapRenderer(this, scheme);
+		mMapView = new AsyncVectorMapRenderer(this, scheme);
 		mController = new MultiTouchController(getContext(),this);
 		mKeyEventController = new KeyEventController(mController);
 		mDblClickSlop = ViewConfiguration.get(context).getScaledDoubleTapSlop();
@@ -81,6 +81,16 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 
     protected int computeHorizontalScrollRange() {
         return mHorizontalScrollRange;
+    }
+    
+    protected void onAttachedToWindow() {
+    	mMapView.attach();
+    	super.onAttachedToWindow();
+    }
+    
+    protected void onDetachedFromWindow() {
+    	mMapView.detach();
+    	super.onDetachedFromWindow();
     }
     
 	protected void onDraw(Canvas canvas) {
