@@ -69,7 +69,7 @@ public class RenderProgram {
 	public static final int ALL = ONLY_TRANSPORT | TYPE_STATION_NAME;
 
 	private static final int CLIPPING_OFFSET = 10;
-	private static final int CLIPPING_TREE_GRANULARITY = 50;
+	private static final int CLIPPING_TREE_GRANULARITY = 100;
 	
 	private int mRenderFilter;
 

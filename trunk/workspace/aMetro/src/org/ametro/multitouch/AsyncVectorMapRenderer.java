@@ -232,6 +232,7 @@ public class AsyncVectorMapRenderer {
 		c.drawColor(Color.MAGENTA);
 		c.setMatrix(newCache.CacheMatrix);
 		
+		//mRenderer.setRenderFilter(RenderProgram.ALL);
 		ArrayList<RenderElement> elements = mRenderer.setVisibilityAll();
 		c.drawColor(Color.WHITE);
 		for (RenderElement elem : elements) {
@@ -268,6 +269,7 @@ public class AsyncVectorMapRenderer {
 		Canvas c = new Canvas(newCache.Image);
 		c.setMatrix(newCache.CacheMatrix);
 		c.clipRect(newCache.SchemeRect);
+		//mRenderer.setRenderFilter(RenderProgram.ALL);
 		ArrayList<RenderElement> elements = mRenderer.setVisibility(newCache.SchemeRect);
 		c.drawColor(Color.WHITE);
 		for (RenderElement elem : elements) {
@@ -296,6 +298,7 @@ public class AsyncVectorMapRenderer {
 				mSchemeRect);
 		}
 	
+		
 		boolean renderAll = splitRenderViewPort(newCache.SchemeRect, mCache.SchemeRect);
 		Canvas c = new Canvas(newCache.Image);
 		if(renderAll){
@@ -306,12 +309,22 @@ public class AsyncVectorMapRenderer {
 			
 			c.setMatrix(newCache.CacheMatrix);
 			c.clipRect(newCache.SchemeRect);
+			//long start = System.currentTimeMillis();
+			//mRenderer.setRenderFilter(RenderProgram.ALL);
 			ArrayList<RenderElement> elements = mRenderer.setVisibility(newCache.SchemeRect);
+			//long clip = System.currentTimeMillis();
+			
 			c.drawColor(Color.WHITE);
 			for (RenderElement elem : elements) {
 				elem.draw(c);
 			}			
+			//long draw = System.currentTimeMillis();
+			//Log.w(TAG, "A: objects = " + elements.size() + ",clip = " + (clip-start) + ", draw = " + (draw-clip) );
+			
+			
+			
 		}else{
+			//long start = System.currentTimeMillis();
 			if( mAntiAliasCurrentState && (mAntiAliasDisabledOnChanges || !mAntiAliasEnabled) ){
 				mRenderer.setAntiAlias(false);
 				mAntiAliasCurrentState = false;
@@ -319,13 +332,19 @@ public class AsyncVectorMapRenderer {
 			c.save();
 			c.setMatrix(newCache.CacheMatrix);
 			c.clipRect(newCache.SchemeRect);
+			//long prepare = System.currentTimeMillis();
+			//mRenderer.setRenderFilter(RenderProgram.TYPE_LINE | RenderProgram.TYPE_LINE_DASHED);
 			ArrayList<RenderElement> elements = mRenderer.setVisibilityTwice(mRenderViewPortHorizontal,mRenderViewPortVertical);
+			//long clip = System.currentTimeMillis();
 			c.drawColor(Color.WHITE);
 			for (RenderElement elem : elements) {
 				elem.draw(c);
 			}
+			//long draw = System.currentTimeMillis();
 			c.restore();
 			c.drawBitmap(mCache.Image,newCache.X - mCache.X, newCache.Y - mCache.Y, null);
+			//long update = System.currentTimeMillis();
+			//Log.w(TAG, "P: objects = " + elements.size() + ".prepare = " + (prepare-start) + ",clip = " + (clip-prepare) + ", draw = " + (draw-clip) + ", update = " + (update-draw) );
 		}
 
 		synchronized (this) {

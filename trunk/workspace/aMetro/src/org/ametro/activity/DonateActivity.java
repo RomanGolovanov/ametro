@@ -41,7 +41,7 @@ public class DonateActivity extends PreferenceActivity implements OnPreferenceCl
 	private static final int REQUEST_DONATE_DETAILS = 1;
 	
 	private Preference mDonateYandex;
-	private Preference mDonateWebMoney;
+	//private Preference mDonateWebMoney;
 	private Preference mDonateMoneyBookers;
 	private Preference mDonateAlertPay;
 	private Preference mDonateQiwi;
@@ -52,13 +52,13 @@ public class DonateActivity extends PreferenceActivity implements OnPreferenceCl
  
 		mDonateAlertPay = findPreference(getString(R.string.pref_donate_alertpay_key));
 		mDonateYandex = findPreference(getString(R.string.pref_donate_yandex_key));
-		mDonateWebMoney = findPreference(getString(R.string.pref_donate_wm_key));
+		//mDonateWebMoney = findPreference(getString(R.string.pref_donate_wm_key));
 		mDonateMoneyBookers = findPreference(getString(R.string.pref_donate_mb_key));
 		mDonateQiwi = findPreference(getString(R.string.pref_donate_qiwi_key));
 
 		mDonateAlertPay.setOnPreferenceClickListener(this);
 		mDonateYandex.setOnPreferenceClickListener(this);
-		mDonateWebMoney.setOnPreferenceClickListener(this);
+		//mDonateWebMoney.setOnPreferenceClickListener(this);
 		mDonateMoneyBookers.setOnPreferenceClickListener(this);
 		mDonateQiwi.setOnPreferenceClickListener(this);
 	}
@@ -90,29 +90,29 @@ public class DonateActivity extends PreferenceActivity implements OnPreferenceCl
 			
 			invokePaymentDialog(url, codes, names, 1.0f);
 		}
-		if (preference == mDonateWebMoney) {
-			String language = Locale.getDefault().getLanguage();
-			
-			StringBuilder url = new StringBuilder();
-			if(language.equalsIgnoreCase("ru")){
-				url.append("https://light.webmoney.ru/pci.aspx");
-				url.append("?url="); url.append("http%3A//www.ametro.org/thanks");
-				url.append("&desc="); url.append("%D0%9F%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%83%20aMetro%20");
-			}else{
-				url.append("https://light.wmtransfer.com/pci.aspx");
-				url.append("?url="); url.append("http%3A//www.ametro.org/thanks");
-				url.append("&desc="); url.append("aMetro%20Project%20Support");
-			}
-			url.append("&purse="); url.append("%%CURRENCY%%");
-			url.append("&amount="); url.append("%%AMOUNT%%");
-			url.append("&method="); url.append("GET");
-			url.append("&mode="); url.append("test");
-			
-			String[] codes = res.getStringArray(R.array.webmoney_currency_codes);
-			String[] names = res.getStringArray(R.array.webmoney_currency_names);
-			
-			invokePaymentDialog(url.toString(), codes, names, 1.0f);
-		}
+//		if (preference == mDonateWebMoney) {
+//			String language = Locale.getDefault().getLanguage();
+//			
+//			StringBuilder url = new StringBuilder();
+//			if(language.equalsIgnoreCase("ru")){
+//				url.append("https://light.webmoney.ru/pci.aspx");
+//				url.append("?url="); url.append("http%3A//www.ametro.org/thanks");
+//				url.append("&desc="); url.append("%D0%9F%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%83%20aMetro%20");
+//			}else{
+//				url.append("https://light.wmtransfer.com/pci.aspx");
+//				url.append("?url="); url.append("http%3A//www.ametro.org/thanks");
+//				url.append("&desc="); url.append("aMetro%20Project%20Support");
+//			}
+//			url.append("&purse="); url.append("%%CURRENCY%%");
+//			url.append("&amount="); url.append("%%AMOUNT%%");
+//			url.append("&method="); url.append("GET");
+//			url.append("&mode="); url.append("test");
+//			
+//			String[] codes = res.getStringArray(R.array.webmoney_currency_codes);
+//			String[] names = res.getStringArray(R.array.webmoney_currency_names);
+//			
+//			invokePaymentDialog(url.toString(), codes, names, 1.0f);
+//		}
 		if (preference == mDonateMoneyBookers) {
 			
 			String language = Locale.getDefault().getLanguage();
