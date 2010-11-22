@@ -195,7 +195,16 @@ public class VectorMapRenderer {
 		Matrix i = new Matrix();
 		m.invert(i);
 		
-		final MapCache newCache = MapCache.reuse(mOldCache, (int)mCurrWidth, (int)mCurrHeight, i, 0, 0, mScale, viewRect);
+		final MapCache newCache = MapCache.reuse(
+				mOldCache, 
+				(int)mCurrWidth, 
+				(int)mCurrHeight, 
+				m, 
+				i, 
+				0, 
+				0, 
+				mScale, 
+				viewRect);
 		
 		if( !mAntiAliasCurrentState && mAntiAliasEnabled ){
 			mRenderer.setAntiAlias(true);
@@ -204,7 +213,7 @@ public class VectorMapRenderer {
 		
 		Canvas c = new Canvas(newCache.Image);
 		c.drawColor(Color.MAGENTA);
-		c.scale(mScale, mScale);
+		c.setMatrix(newCache.CacheMatrix);
 		
 		ArrayList<RenderElement> elements = mRenderer.setVisibilityAll();
 		c.drawColor(Color.WHITE);
@@ -217,7 +226,16 @@ public class VectorMapRenderer {
 
 	private synchronized void renderPartialCache() {
 		//Log.w(TAG,"render partial");
-		final MapCache newCache = MapCache.reuse(mOldCache, mCanvas.getWidth(), mCanvas.getHeight(), mInvertedMatrix, mCurrX, mCurrY, mScale, mSchemeRect);
+		final MapCache newCache = MapCache.reuse(
+				mOldCache, 
+				mCanvas.getWidth(), 
+				mCanvas.getHeight(), 
+				mMatrix, 
+				mInvertedMatrix, 
+				mCurrX, 
+				mCurrY, 
+				mScale, 
+				mSchemeRect);
 		
 		if( !mAntiAliasCurrentState && mAntiAliasEnabled ){
 			mRenderer.setAntiAlias(true);
@@ -225,9 +243,9 @@ public class VectorMapRenderer {
 		}
 		
 		Canvas c = new Canvas(newCache.Image);
-		c.setMatrix(mMatrix);
-		c.clipRect(mSchemeRect);
-		ArrayList<RenderElement> elements = mRenderer.setVisibility(mSchemeRect);
+		c.setMatrix(newCache.CacheMatrix);
+		c.clipRect(newCache.SchemeRect);
+		ArrayList<RenderElement> elements = mRenderer.setVisibility(newCache.SchemeRect);
 		c.drawColor(Color.WHITE);
 		for (RenderElement elem : elements) {
 			elem.draw(c);
@@ -239,20 +257,29 @@ public class VectorMapRenderer {
 	private synchronized void updatePartialCache() {
 		//Log.w(TAG,"update partial");
 		
-		MapCache newCache = MapCache.reuse(mOldCache, mCanvas.getWidth(), mCanvas.getHeight(), mInvertedMatrix, mCurrX, mCurrY, mScale, mSchemeRect);
+		MapCache newCache = MapCache.reuse(
+				mOldCache, 
+				mCanvas.getWidth(), 
+				mCanvas.getHeight(), 
+				mMatrix, 
+				mInvertedMatrix, 
+				mCurrX, 
+				mCurrY, 
+				mScale, 
+				mSchemeRect);
 		
 		Canvas c = new Canvas(newCache.Image);
 		
-		boolean renderAll = splitRenderViewPort();
+		boolean renderAll = splitRenderViewPort(newCache.SchemeRect, mCache.SchemeRect);
 		if(renderAll){
 			if( !mAntiAliasCurrentState && mAntiAliasEnabled ){
 				mRenderer.setAntiAlias(true);
 				mAntiAliasCurrentState = true;
 			}
 			
-			c.setMatrix(mMatrix);
-			c.clipRect(mSchemeRect);
-			ArrayList<RenderElement> elements = mRenderer.setVisibility(mSchemeRect);
+			c.setMatrix(newCache.CacheMatrix);
+			c.clipRect(newCache.SchemeRect);
+			ArrayList<RenderElement> elements = mRenderer.setVisibility(newCache.SchemeRect);
 			c.drawColor(Color.WHITE);
 			for (RenderElement elem : elements) {
 				elem.draw(c);
@@ -262,10 +289,9 @@ public class VectorMapRenderer {
 				mRenderer.setAntiAlias(false);
 				mAntiAliasCurrentState = false;
 			}
-			
 			c.save();
-			c.setMatrix(mMatrix);
-			c.clipRect(mRenderViewPort);
+			c.setMatrix(newCache.CacheMatrix);
+			c.clipRect(newCache.SchemeRect);
 			ArrayList<RenderElement> elements = mRenderer.setVisibilityTwice(mRenderViewPortHorizontal,mRenderViewPortVertical);
 			c.drawColor(Color.WHITE);
 			for (RenderElement elem : elements) {
@@ -274,7 +300,6 @@ public class VectorMapRenderer {
 			c.restore();
 			c.drawBitmap(mCache.Image,newCache.X - mCache.X, newCache.Y - mCache.Y, null);
 		}
-		
 
 		mOldCache = mCache;
 		mCache = newCache;
@@ -285,16 +310,16 @@ public class VectorMapRenderer {
 		}
 	}
 
-	private boolean splitRenderViewPort() {
+	private boolean splitRenderViewPort(RectF schemeRect, RectF cacheRect) {
 		final RectF vp = mRenderViewPort;
 		final RectF v = mRenderViewPortVertical;
 		final RectF h = mRenderViewPortHorizontal;
 		final RectF i = mRenderViewPortIntersection;
-		vp.set(mSchemeRect);
+		vp.set(schemeRect);
 		mRenderViewPortVertical.set(vp);
 		mRenderViewPortHorizontal.set(vp);
 		mRenderViewPortIntersection.set(vp);
-		mRenderViewPortIntersection.intersect(mCache.ViewRect);
+		mRenderViewPortIntersection.intersect(cacheRect);
 		boolean renderAll = false;
 
 		if (vp.right == i.right && vp.bottom == i.bottom) {
@@ -358,20 +383,21 @@ public class VectorMapRenderer {
 
 	private static class MapCache
 	{
+		Matrix CacheMatrix = new Matrix();
 		Matrix InvertedMatrix = new Matrix();
 		
 		float Scale;
 		float X;
 		float Y;
 		
-		RectF ViewRect = new RectF();
+		RectF SchemeRect = new RectF();
 		Bitmap Image;
 
 		public boolean equals(int width, int height) {
 			return Image.getWidth() == width && Image.getHeight() == height;
 		}
 
-		public static MapCache reuse(MapCache oldCache, int width, int height, Matrix matrix, float x, float y, float scale, RectF schemeRect) {
+		public static MapCache reuse(MapCache oldCache, int width, int height, Matrix matrix, Matrix invertedMatrix, float x, float y, float scale, RectF schemeRect) {
 			MapCache newCache;
 			
 			if(oldCache!=null){
@@ -388,17 +414,18 @@ public class VectorMapRenderer {
 				newCache.Image = Bitmap.createBitmap(width, height, Config.RGB_565);
 			}
 
-			newCache.InvertedMatrix.set(matrix);
+			newCache.CacheMatrix.set(matrix);
+			newCache.InvertedMatrix.set(invertedMatrix);
 			newCache.X = x;
 			newCache.Y = y;
 			newCache.Scale = scale;
-			newCache.ViewRect.set(schemeRect);
+			newCache.SchemeRect.set(schemeRect);
 			
 			return newCache;
 		}
 
 		public boolean hit(RectF viewRect) {
-			return ViewRect.contains(viewRect);
+			return SchemeRect.contains(viewRect);
 		}
 		
 	}
