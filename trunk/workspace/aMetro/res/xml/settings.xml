@@ -26,7 +26,7 @@
                            android:key="@string/pref_trackball_scroll_speed_key"
                            android:summary="@string/pref_trackball_scroll_speed_description"
                            android:max="100"
-                           android:defaultValue="20"/> 
+                           android:defaultValue="10"/> 
 
 	                            
 	</PreferenceScreen>
