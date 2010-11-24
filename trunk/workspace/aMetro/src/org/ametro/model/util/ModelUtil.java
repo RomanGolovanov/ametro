@@ -20,6 +20,8 @@
  */
 package org.ametro.model.util;
 
+import java.util.ArrayList;
+
 import org.ametro.model.StationView;
 import org.ametro.model.ext.ModelPoint;
 import org.ametro.model.ext.ModelRect;
@@ -28,6 +30,7 @@ import org.ametro.util.StringUtil;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
+import android.graphics.RectF;
 
 
 public class ModelUtil {
@@ -194,15 +197,49 @@ public class ModelUtil {
 	}
 
 	public static Rect toRect(ModelRect r) {
+		if(r==null) return null;
 		return new Rect(r.left,r.top,r.right,r.bottom);
 	}
 
+	public static RectF toRectF(ModelRect r) {
+		if(r==null) return null;
+		return new RectF(r.left,r.top,r.right,r.bottom);
+	}
+
 	public static Point toPoint(ModelPoint p) {
+		if(p==null) return null;
 		return new Point(p.x,p.y);
 	}
 
 	public static PointF toPointF(ModelPoint p) {
+		if(p==null) return null;
 		return new PointF(p.x,p.y);
+	}
+
+	public static Rect computeBoundingBox(final ArrayList<StationView> stations){ 
+        Rect box = null;
+        for(StationView station : stations){
+        	final Point p = toPoint(station.stationPoint);
+        	final Rect r = toRect(station.stationNameRect);
+        	if(p==null && r==null){
+        		continue;
+        	}
+        	if(box==null){
+        		if(r!=null){
+        			box = r;
+        		}else{
+        			box = new Rect(p.x, p.y, p.x, p.y);
+        		}
+        	}
+        	if(p!=null){
+        		box.union(p.x, p.y);
+        	}
+        	if(r!=null){
+        		box.union(r);
+        	}
+        	
+        }
+        return box;
 	}
 
 

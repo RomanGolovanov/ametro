@@ -489,6 +489,11 @@ public class MultiTouchController {
 	public void doZoomAnimation(int scaleMode){
 		doZoomAnimation(scaleMode, null);
 	}
+
+	
+	public void doScrollAnimation(PointF center){
+		doScrollAndZoomAnimation(center, null);
+	}
 	
 	public void doZoomAnimation(int scaleMode, PointF scaleCenter){
 		float scaleFactor = scaleMode == ZOOM_IN ? ZOOM_LEVEL_DISTANCE : 1/ZOOM_LEVEL_DISTANCE;
@@ -503,35 +508,21 @@ public class MultiTouchController {
 			}else if(nextScale == minScale && ( targetScale / nextScale ) < scaleFactor*0.8f  ){
 				targetScale = minScale;
 			}
-			doZoomAnimation(targetScale, scaleCenter);
+			doScrollAndZoomAnimation(scaleCenter, targetScale);
 		}
 	}
 	
-	public void doScrollAnimation(PointF center){
+	public void doScrollAndZoomAnimation(PointF center, Float scale){
 		if(mode==MODE_NONE || mode==MODE_LONGPRESS_START){
 			animationStartPoint.set(displayRect.width()/2, displayRect.height()/2);
 			unmapPoint(animationStartPoint);
-			animationEndPoint.set(center);
-			float scale = getScale();
-			animationInterpolator.begin(animationStartPoint, animationEndPoint, scale, scale, ANIMATION_TIME);
-			privateHandler.sendEmptyMessage(MSG_PROCESS_ANIMATION);
-			setControllerMode(MODE_ANIMATION);
-		}
-	}
-	
-	private void doZoomAnimation(float scale, PointF scaleCenter) {
-		if(mode==MODE_NONE || mode==MODE_LONGPRESS_START){
-			if(scaleCenter==null){
-				animationEndPoint.set(displayRect.width()/2, displayRect.height()/2);
+			if(center!=null){
+				animationEndPoint.set(center);
 			}else{
-				animationEndPoint.set(scaleCenter);
+				animationEndPoint.set(animationStartPoint);
 			}
-			unmapPoint(animationEndPoint);
-			
-			animationStartPoint.set(displayRect.width()/2, displayRect.height()/2);
-			unmapPoint(animationStartPoint);
-			
-			animationInterpolator.begin(animationStartPoint, animationEndPoint, getScale(), scale, ANIMATION_TIME);
+			float currentScale = getScale();
+			animationInterpolator.begin(animationStartPoint, animationEndPoint, currentScale, scale!=null ? scale : currentScale, ANIMATION_TIME);
 			privateHandler.sendEmptyMessage(MSG_PROCESS_ANIMATION);
 			setControllerMode(MODE_ANIMATION);
 		}

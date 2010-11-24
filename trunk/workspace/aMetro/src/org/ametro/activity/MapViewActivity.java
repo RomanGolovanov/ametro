@@ -70,6 +70,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.graphics.PointF;
+import android.graphics.RectF;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -188,15 +189,6 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	}
 	
 	public void onClick(View src) {
-		if(src == mNavigatePreviousButton){
-			navigatePreviuosStation();
-		} 
-		if(src == mNavigateNextButton){
-			navigateNextStation();
-		}
-		if(src == mNavigateClearButton){
-			clearNavigation(true);
-		}
 		if(src == mNavigateListButton && mCurrentRouteView!=null){
 			startActivity(new Intent(this, RouteViewActivity.class));
 		}
@@ -210,29 +202,28 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			StationView station = mScheme.findStation(x,y);
 			switch(mSelectionMode){
 			case SELECTION_MODE_BEGIN:
-				if(station!=null){
+				if(station!=null && GlobalSettings.isDebugMessagesEnabled(this)){
 					mSelectionMode = SELECTION_MODE_FIRST;
 					mStartStationView = station;
 					Toast.makeText(this, "start from " + station.getName(), Toast.LENGTH_SHORT).show();
 				}else{
-					Toast.makeText(this, "no stations", Toast.LENGTH_SHORT).show();
+					//Toast.makeText(this, "no stations", Toast.LENGTH_SHORT).show();
 				}
 				break;
 			case SELECTION_MODE_FIRST:
-				if(station!=null){
+				if(station!=null && GlobalSettings.isDebugMessagesEnabled(this)){
 					mSelectionMode = SELECTION_MODE_SECOND;
 					mEndStationView = station;
 					Toast.makeText(this, "end at " + station.getName() , Toast.LENGTH_SHORT).show();
 					SearchRouteTask task = new SearchRouteTask();
 					task.execute();
 				}else{
-					Toast.makeText(this, "no stations", Toast.LENGTH_SHORT).show();
+					//Toast.makeText(this, "no stations", Toast.LENGTH_SHORT).show();
 				}
 				break;
 			case SELECTION_MODE_DONE:
 				clearNavigation(true);
-				mSelectionMode = SELECTION_MODE_BEGIN;
-				Toast.makeText(this, "clear selection", Toast.LENGTH_SHORT).show();
+				//Toast.makeText(this, "clear selection", Toast.LENGTH_SHORT).show();
 				break;
 			}
 			
@@ -397,6 +388,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
+		menu.add(0, MAIN_MENU_CLEAR_SELECTION, 0, R.string.menu_clear_selection).setIcon(android.R.drawable.ic_menu_close_clear_cancel);
 		menu.add(0, MAIN_MENU_FIND, 0, R.string.menu_search).setIcon(android.R.drawable.ic_menu_search);
 		menu.add(0, MAIN_MENU_INFO, 1, R.string.menu_info).setIcon(android.R.drawable.ic_menu_info_details);
 		menu.add(0, MAIN_MENU_ROUTES, 2, R.string.menu_routes).setIcon(android.R.drawable.ic_menu_directions);
@@ -412,6 +404,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	}
 
 	public boolean onPrepareOptionsMenu(Menu menu) {
+		menu.findItem(MAIN_MENU_CLEAR_SELECTION).setVisible(isNavigationActive());
 		menu.findItem(MAIN_MENU_INFO).setEnabled(mCurrentStation!=null);
 
 		menu.findItem(MAIN_MENU_FIND).setEnabled(mModel!=null);
@@ -426,6 +419,9 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
+		case MAIN_MENU_CLEAR_SELECTION:
+			clearNavigation(true);
+			return true;
 		case MAIN_MENU_FIND:
 			onSearchRequested();
 			return true;
@@ -601,9 +597,9 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		}
 	}
 
-	public PointF loadScrollPosition() {
+	public PointF loadScrollPosition(String fileSystemName) {
 		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
-		String pref = preferences.getString(PREFERENCE_SCROLL_POSITION + "_" + mModelFileName + "_" + mMapViewName, null);
+		String pref = preferences.getString(PREFERENCE_SCROLL_POSITION + "_" + fileSystemName + "_" + mMapViewName, null);
 		if (pref != null) {
 			return StringUtil.parsePointF(pref);
 		} else {
@@ -630,9 +626,9 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		}
 	}
 
-	public Float loadZoom() {
+	public Float loadZoom(String fileSystemName) {
 		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
-		String pref = preferences.getString(PREFERENCE_ZOOM_LEVEL + "_" + mModelFileName + "_" + mMapViewName, null);
+		String pref = preferences.getString(PREFERENCE_ZOOM_LEVEL + "_" + fileSystemName + "_" + mMapViewName, null);
 		if (pref != null) {
 			return StringUtil.parseNullableFloat(pref);
 		} else {
@@ -663,7 +659,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 
 	public void onCatalogMapChanged(String systemName) {
 		final String name = systemName;
-		mUIDispatcher.post(new Runnable() {
+		mPrivateHandler.post(new Runnable() {
 			public void run() {
 				String mapPath = GlobalSettings.getLocalCatalogMapFileName(name);
 				if(mModelFileName!=null && mModelFileName.equalsIgnoreCase(mapPath)){
@@ -710,19 +706,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	/*package*/ void setCurrentStation(StationView station){
 		if(station!=null && mNavigationStations.contains(station)){
 			mCurrentStation = station;
-			int idx = mNavigationStations.indexOf(mCurrentStation);
-			mNavigatePreviousButton.setEnabled( idx != 0 );
-			mNavigateNextButton.setEnabled( idx != (mNavigationStations.size()-1) );
-			if(mNavigationStations.size()>1){
-				mNavigateListButton.setVisibility(View.VISIBLE);
-				mNavigatePreviousButton.setVisibility(View.VISIBLE);
-				mNavigateNextButton.setVisibility(View.VISIBLE);
-			}else{
-				mNavigateListButton.setVisibility(View.GONE);
-				mNavigatePreviousButton.setVisibility(View.INVISIBLE);
-				mNavigateNextButton.setVisibility(View.INVISIBLE);
-			}
-			mUIDispatcher.post(mUpdateUI);
+			mPrivateHandler.post(mCenterAreaRunnable);
 		}else{
 			mCurrentStation = null;
 		}
@@ -737,6 +721,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		boolean refreshNeeded = (stations != mNavigationStations) || (stations == null && mNavigationStations!=null);
 		if(refreshNeeded){
 			if(stations!=null){
+				mSelectionMode = SELECTION_MODE_DONE;
 				mCurrentRouteView = null;
 				mNavigationSegments = null;
 				mNavigationTransfers = null;
@@ -819,14 +804,20 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		}
 	}
 
-	private void onRestoreMapState() {
-		if (mScheme != null && mVectorMapView != null && mModelFileName != null) {
-			Float zoom = loadZoom();
-			PointF pos = loadScrollPosition();
+	private void onRestoreMapState(String fileSystemName) {
+		if (mScheme != null && mVectorMapView != null && fileSystemName != null) {
+			Float zoom = loadZoom(fileSystemName);
+			PointF pos = loadScrollPosition(fileSystemName);
 			if(pos!=null && zoom!=null){
-				mVectorMapView.setCenterPositionAndScale(pos,zoom);
+				mVectorMapView.setCenterPositionAndScale(pos,zoom!=null ? zoom : 0.001f, false);
 			}else{
-				mVectorMapView.setCenterPositionAndScale(new PointF(), 0.001f);
+				final RectF area = new RectF(0,0,mScheme.width,mScheme.height);
+				final float scaleX = mVectorMapView.getWidth() / area.width(); 
+				final float scaleY = mVectorMapView.getHeight() / area.height();
+				final float targetScale = Math.min(scaleX, scaleY);
+				final float currentScale = mVectorMapView.getScale();
+				final float scale = targetScale > currentScale ? currentScale : targetScale;
+				mVectorMapView.setCenterPositionAndScale(new PointF( area.centerX(), area.centerY() ), scale, false);
 			}
 		}
 	}
@@ -949,6 +940,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		mVectorMapView = new MultiTouchMapView(this, mScheme);
 		mVectorMapView.setSchemeSelection(mNavigationStations, mNavigationSegments, mNavigationTransfers);
 		mVectorMapView.setZoomControls((ZoomControls) findViewById(R.id.browse_vector_map_zoom));
+		mVectorMapView.setOnClickListener(this);
 		applySettings();
 
 		mMapFrame.addView(mVectorMapView, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
@@ -956,31 +948,20 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		mNavigationPanelTop = (View)findViewById(R.id.browse_vector_map_panel_top);
 		mNavigationPanelBottom = (View)findViewById(R.id.browse_vector_map_panel_bottom);
 
-		mNavigatePreviousButton = (ImageButton)findViewById(R.id.browse_vector_map_button_prev);
-		mNavigateNextButton = (ImageButton)findViewById(R.id.browse_vector_map_button_next);
-		mNavigateClearButton = (ImageButton)findViewById(R.id.browse_vector_map_button_clear);
 		mNavigateListButton = (ImageButton)findViewById(R.id.browse_vector_map_button_list);
+		mNavigateListButton.setOnClickListener(this);
 
 		mNavigateTimeText = (TextView)findViewById(R.id.browse_vector_map_time);
 
-		mNavigatePreviousButton.setOnClickListener(this);
-		mNavigateNextButton.setOnClickListener(this);
-		mNavigateClearButton.setOnClickListener(this);
-		mNavigateListButton.setOnClickListener(this);
-
-		mVectorMapView.setOnClickListener(this);
-		
 		if(mCurrentRouteView==null && mCurrentStation == null){
 			hideNavigationControls();
 		} 
 
-		mModelFileName = mScheme.owner.fileSystemName;
-		mMapViewName = view.systemName;
-
-		onRestoreMapState();
-
+		onRestoreMapState(mScheme.owner.fileSystemName);
 		mVectorMapView.requestFocus();
 
+		mModelFileName = mScheme.owner.fileSystemName;
+		mMapViewName = view.systemName;
 		saveDefaultMapName();
 	}
 
@@ -1003,32 +984,6 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			mNavigateTimeText.setVisibility(View.INVISIBLE);
 		}
 
-	}
-
-	private void navigateNextStation(){
-		if(mNavigationStations!=null && mNavigationStations.size()>0){
-			if(mCurrentStation == null){
-				setCurrentStation(mNavigationStations.get(0));
-			}else{
-				int idx = mNavigationStations.indexOf(mCurrentStation) + 1;
-				if(idx < mNavigationStations.size()){
-					setCurrentStation(mNavigationStations.get(idx));
-				}
-			}
-		}
-	}
-
-	private void navigatePreviuosStation(){
-		if(mNavigationStations!=null && mNavigationStations.size()>0){
-			if(mCurrentStation == null){
-				setCurrentStation(mNavigationStations.get(mNavigationStations.size()-1));
-			}else{
-				int idx = mNavigationStations.indexOf(mCurrentStation) - 1;
-				if(idx >= 0){
-					setCurrentStation(mNavigationStations.get(idx));
-				}
-			}
-		}
 	}
 
 	private class LoadLocaleTask extends AsyncTask<Locale, Void, Void>
@@ -1109,14 +1064,18 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		}
 	}
 
-	private final Runnable mUpdateUI = new Runnable() {
+	private final Runnable mCenterAreaRunnable = new Runnable() {
 		public void run() {
-			final PointF point = ModelUtil.toPointF( mCurrentStation.stationPoint );
-			mVectorMapView.setCenterPositionAndScale(point, null, true);
+			final RectF area = new RectF(ModelUtil.computeBoundingBox( mNavigationStations ));
+			final float scaleX = mVectorMapView.getWidth() / area.width() * 0.85f; 
+			final float scaleY = mVectorMapView.getHeight() / area.height() * 0.85f;
+			final float targetScale = Math.min(scaleX, scaleY);
+			final float currentScale = mVectorMapView.getScale();
+			final float scale = targetScale > currentScale ? currentScale : targetScale;
+			mVectorMapView.setCenterPositionAndScale(new PointF( area.centerX(), area.centerY() ), scale, true);
 			mVectorMapView.postInvalidate();
 		}
 	};
-
 
 	private class LocationSearchTask extends AsyncTask<Location, Void, StationView> {
 		private ProgressDialog dialog;
@@ -1184,16 +1143,17 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	private static final int DIALOG_EULA = 1;
 	private static final int DIALOG_RELOAD_MAP = 2;
 	
-	private static final int MAIN_MENU_FIND = 1;
-	private static final int MAIN_MENU_LIBRARY = 2;
-	private static final int MAIN_MENU_ROUTES = 3;
-	private static final int MAIN_MENU_LAYERS = 4;
-	private static final int MAIN_MENU_SCHEMES = 5;
-	private static final int MAIN_MENU_INFO = 6;
-	private static final int MAIN_MENU_SETTINGS = 7;
-	private static final int MAIN_MENU_ABOUT = 8;
-	private static final int MAIN_MENU_LOCATION = 9;
-	private static final int MAIN_MENU_EXPERIMENTAL = 10;
+	private static final int MAIN_MENU_CLEAR_SELECTION = 1;
+	private static final int MAIN_MENU_FIND = 2;
+	private static final int MAIN_MENU_LIBRARY = 3;
+	private static final int MAIN_MENU_ROUTES = 4;
+	private static final int MAIN_MENU_LAYERS = 5;
+	private static final int MAIN_MENU_SCHEMES = 6;
+	private static final int MAIN_MENU_INFO = 7;
+	private static final int MAIN_MENU_SETTINGS = 8;
+	private static final int MAIN_MENU_ABOUT = 9;
+	private static final int MAIN_MENU_LOCATION = 10;
+	private static final int MAIN_MENU_EXPERIMENTAL = 11;
 
 	private String mModelFileName;
 	private String mMapViewName;
@@ -1206,16 +1166,13 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	
 	private View mNavigationPanelTop;
 	private View mNavigationPanelBottom;
-	private ImageButton mNavigatePreviousButton;
-	private ImageButton mNavigateNextButton;
-	private ImageButton mNavigateClearButton;
 	private ImageButton mNavigateListButton;
 	private TextView mNavigateTimeText;
 
 	private RouteView mCurrentRouteView;
 	private RouteContainer mRouteContainer;
 
-	private Handler mUIDispatcher = new Handler();
+	private Handler mPrivateHandler = new Handler();
 
 	private InitTask mInitTask;
 	private LoadLocaleTask mLoadLocaleTask;

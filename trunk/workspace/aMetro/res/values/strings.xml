@@ -40,7 +40,7 @@
     <string name="locate_station_wait_title">Search station</string>
     <string name="locate_wait_text">Please wait...</string>
     
-    
+    <string name="menu_clear_selection">Back</string>
     <string name="menu_search">Search</string>
     <string name="menu_library">Maps</string>
     <string name="menu_routes">Routes</string>
@@ -125,9 +125,9 @@
     <string name="msg_no_maps_in_local_header">No installed maps</string>
     <string name="msg_no_maps_in_local">Use Online or Import catalog to install new maps, or see detailed instructions on site http://www.ametro.org</string>
     <string name="msg_no_maps_in_online_header">Online catalog is empty</string>
-    <string name="msg_no_maps_in_online">Use need to be connected to Internet to download Online catalog map list. Press Refresh to begin download</string>
+    <string name="msg_no_maps_in_online">You need to be connected to Internet to download Online catalog map list. Press Refresh to begin download</string>
     <string name="msg_no_maps_in_import_header">No PMZ maps for import</string>
-    <string name="msg_no_maps_in_import">Use need to copy .PMZ files into /sdcard/ametro/import and detach your smartphone from PC. Press Refresh to refresh</string>
+    <string name="msg_no_maps_in_import">You need to copy .PMZ files into /sdcard/ametro/import and detach your smartphone from PC. Press Refresh to refresh</string>
     <string name="msg_delete_local_map_confirmation">Remove map %s, %s from my maps?</string>
     <string name="msg_delete_import_map_confirmation">Remove PMZ map %s, %s from import?</string>
     <string name="msg_enter_amount">Enter amount, in USD</string>
