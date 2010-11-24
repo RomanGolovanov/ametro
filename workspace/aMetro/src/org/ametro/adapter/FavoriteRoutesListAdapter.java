@@ -166,7 +166,6 @@ public class FavoriteRoutesListAdapter extends BaseAdapter implements OnClickLis
 		wrapper.ImageFrom.setColorFilter(0xFF000000 | lineFrom.lineColor, Mode.SRC);
 		wrapper.ImageTo.setColorFilter(0xFF000000 | lineTo.lineColor, Mode.SRC);
 		
-		
 		//wrapper.ImageFrom.setImageDrawable(getItemIcon(lineFrom));
 		//wrapper.ImageTo.setImageDrawable(getItemIcon(lineTo));
 		

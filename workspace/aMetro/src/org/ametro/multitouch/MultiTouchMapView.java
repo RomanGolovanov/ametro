@@ -1,5 +1,6 @@
 package org.ametro.multitouch;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import org.ametro.model.SchemeView;
@@ -17,6 +18,7 @@ import android.graphics.RectF;
 import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.ScrollView;
 import android.widget.ZoomControls;
@@ -52,12 +54,19 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 	public MultiTouchMapView(Context context, SchemeView scheme) {
 		super(context);
 		
+		try{
+			Method method = View.class.getMethod("setScrollbarFadingEnabled",new Class[]{ boolean.class });
+			method.invoke(this, new Object[]{ false });
+		}catch(Exception ex){
+		}
+		//setScrollbarFadingEnabled(fadeScrollbars)
+		
         setFocusable(true);
         setFocusableInTouchMode(true);
 
-		setVerticalScrollBarEnabled(true);
-		setHorizontalScrollBarEnabled(true);
-
+        setHorizontalScrollBarEnabled(true);
+        setVerticalScrollBarEnabled(true);
+        
 		awakeScrollBars();
 		
 		mScheme = scheme;
@@ -123,11 +132,12 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 
 		if(mLastClickPosition!=null){
 			PointF p = mController.getScreenTouchPoint();
+			
 			float distance = MathUtil.distance(mLastClickPosition, p);
 			mPrivateHandler.removeCallbacks(performClickRunnable);
 			mLastClickPosition = null;
 			if(distance <= mDblClickSlop){
-				mController.doZoomAnimation(MultiTouchController.ZOOM_IN, p);
+				mController.doZoomAnimation(MultiTouchController.ZOOM_IN, mController.getTouchPoint());
 			}else{
 				performClick();
 			}
@@ -189,17 +199,13 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 		return scale;
 	}
 	
-	public void setCenterPositionAndScale(PointF position, Float zoom) {
-		mChangeCenterPoint = position;
-		mChangeScale = zoom;
-		invalidate();
-	}
-	
 	public void setCenterPositionAndScale(PointF position, Float zoom, boolean animated) {
 		if(!animated){
-			setCenterPositionAndScale(position, zoom);
+			mChangeCenterPoint = position;
+			mChangeScale = zoom;
+			invalidate();
 		}else{
-			mController.doScrollAnimation(position);
+			mController.doScrollAndZoomAnimation(position, zoom);
 		}
 	}
 
@@ -262,10 +268,14 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 		mHorizontalScrollOffset = (int)x;
 		mVerticalScrollOffset = (int)y;
 
+		//Log.d(TAG,"Scroll ranges: H=" + mHorizontalScrollOffset + "/" + mHorizontalScrollRange + ", V=" + mVerticalScrollOffset + "/" + mVerticalScrollRange);
+		
+		
         awakeScrollBars();
 	}
 	
 	private void awakeScrollBars(){
+		//Log.d(TAG,"Awake scrollbars.");
 		setVerticalScrollBarEnabled(true);
 		setHorizontalScrollBarEnabled(true);
         mPrivateHandler.removeCallbacks(hideScrollbarsRunnable);
@@ -274,6 +284,7 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 	}
 	
 	private void fadeScrollBars(){
+		//Log.d(TAG,"Fade scrollbars.");
 		setVerticalScrollBarEnabled(false);
 		setHorizontalScrollBarEnabled(false);
 		invalidate();
