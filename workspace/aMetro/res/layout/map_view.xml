@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent" android:layout_height="fill_parent">
-	<FrameLayout android:id="@+id/map_frame" 
+	<FrameLayout android:id="@+id/map_frame"
 		android:layout_width="fill_parent" android:layout_height="fill_parent">
 	</FrameLayout>
 	<LinearLayout android:id="@+id/browse_vector_map_panel_top"
@@ -15,23 +15,21 @@
 			android:layout_width="70dip" android:layout_height="30dip"
 			android:gravity="center" />
 	</LinearLayout>
-	<LinearLayout android:id="@+id/browse_vector_map_panel_bottom"
-		android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:layout_alignParentLeft="true"
-		android:layout_alignParentBottom="true" android:layout_marginBottom="10dip"
-		android:layout_marginLeft="10dip" android:orientation="horizontal">
+	<FrameLayout android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:layout_alignParentBottom="true"
+		android:layout_marginLeft="10dip"
+		android:layout_marginRight="10dip"
+		>
+
 		<ImageButton android:id="@+id/browse_vector_map_button_list"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:paddingLeft="5dip" android:paddingTop="0dip"
-			android:paddingRight="5dip" android:paddingBottom="2dip"
-			style="?android:attr/buttonStyleSmall"
+			android:layout_gravity="left|center_vertical" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" style="?android:attr/buttonStyleSmall"
+			android:paddingLeft="5dip"
+			android:paddingRight="5dip"
 			android:src="@drawable/icon_btn_details" />
-	</LinearLayout>
-	<FrameLayout android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:layout_alignParentRight="true"
-		android:layout_alignParentBottom="true" android:layout_marginBottom="5dip"
-		android:layout_marginRight="10dip">
+
 		<ZoomControls android:id="@+id/browse_vector_map_zoom"
-			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+			android:layout_gravity="right|center_vertical" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
 	</FrameLayout>
 </RelativeLayout>

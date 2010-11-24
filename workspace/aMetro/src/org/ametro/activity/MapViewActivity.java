@@ -947,7 +947,6 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		mMapFrame.addView(mVectorMapView, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
 
 		mNavigationPanelTop = (View)findViewById(R.id.browse_vector_map_panel_top);
-		mNavigationPanelBottom = (View)findViewById(R.id.browse_vector_map_panel_bottom);
 
 		mNavigateListButton = (ImageButton)findViewById(R.id.browse_vector_map_button_list);
 		mNavigateListButton.setOnClickListener(this);
@@ -967,12 +966,12 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	}
 
 	private void hideNavigationControls() {
-		mNavigationPanelBottom.setVisibility(View.INVISIBLE);
+		mNavigateListButton.setVisibility(View.INVISIBLE);
 		mNavigationPanelTop.setVisibility(View.INVISIBLE);
 	}
 
 	private void showNavigationControls() {
-		mNavigationPanelBottom.setVisibility(View.VISIBLE);
+		mNavigateListButton.setVisibility(View.VISIBLE);
 		mNavigationPanelTop.setVisibility(View.VISIBLE);
 		if(mCurrentRouteView!=null){
 			long secs = mCurrentRouteView.getStationDelay(mNavigationStations.get(mNavigationStations.size()-1));
@@ -1166,7 +1165,6 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	private MultiTouchMapView mVectorMapView;
 	
 	private View mNavigationPanelTop;
-	private View mNavigationPanelBottom;
 	private ImageButton mNavigateListButton;
 	private TextView mNavigateTimeText;
 
