@@ -174,11 +174,11 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			if (result.hasRoutes()) {
 				mSelectionMode = SELECTION_MODE_DONE;
 				setNavigationRoute(result);
-				long secs = result.getDefaultRoute().getLength();
-				secs = ( secs/60 + (secs%60 == 0 ? 0 : 1) ) * 60;
-				Date date = new Date(secs * 1000);
-				String msg = getString(R.string.msg_route_time) + " " + String.format(getString(R.string.route_time_format), DateUtil.getDateUTC(date, "HH"), DateUtil.getDateUTC(date, "mm"));
-				Toast.makeText(MapViewActivity.Instance, msg, Toast.LENGTH_LONG).show();
+//				long secs = result.getDefaultRoute().getLength();
+//				secs = ( secs/60 + (secs%60 == 0 ? 0 : 1) ) * 60;
+//				Date date = new Date(secs * 1000);
+//				String msg = getString(R.string.msg_route_time) + " " + String.format(getString(R.string.route_time_format), DateUtil.getDateUTC(date, "HH"), DateUtil.getDateUTC(date, "mm"));
+//				Toast.makeText(MapViewActivity.Instance, msg, Toast.LENGTH_LONG).show();
 			} else {
 				mSelectionMode = SELECTION_MODE_FIRST;
 				Toast.makeText(MapViewActivity.Instance, getString(R.string.msg_route_not_found), Toast.LENGTH_SHORT).show();

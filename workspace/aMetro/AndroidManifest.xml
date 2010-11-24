@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<manifest android:versionCode="11" android:versionName="1.1.0" android:installLocation="auto"
+<manifest android:versionCode="11" android:versionName="1.1.0" android:installLocation="auto" 
     package="org.ametro" xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-sdk android:minSdkVersion="3" android:targetSdkVersion="8"/>
 	<supports-screens android:anyDensity="true" />
-    <application android:debuggable="true"
+    <application android:debuggable="true" android:theme="@android:style/Theme.Black" 
         android:icon="@drawable/appicon"
         android:label="@string/app_name" android:name="org.ametro.ApplicationEx">
         <activity android:label="@string/app_name"
