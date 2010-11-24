@@ -23,7 +23,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 
-public class VectorMapRenderer {
+public class VectorMapRenderer implements IVectorMapRenderer {
 
 	protected static final String TAG = "VectorMapView";
 
@@ -56,7 +56,7 @@ public class VectorMapRenderer {
 	private View mCanvas;
 	
 	private boolean mAntiAliasEnabled;
-	private boolean mAntiAliasDisabledOnChanges;
+//	private boolean mAntiAliasDisabledOnChanges;
 	private boolean mAntiAliasCurrentState;
 	
 	private final float[] mMatrixValues = new float[9];
@@ -67,15 +67,15 @@ public class VectorMapRenderer {
 	private final Handler mPrivateHandler = new Handler();
 
 	
-	public VectorMapRenderer(View container, SchemeView scheme) {
+	public VectorMapRenderer(View container, SchemeView scheme, RenderProgram renderProgram) {
 		this.mCanvas = container;
 		this.mScheme = scheme;
 		mMemoryClass = getMemoryClass(container.getContext());
-		setScheme(scheme);
+		setScheme(scheme, renderProgram);
 	}
 
-	public void setScheme(SchemeView scheme) {
-		mRenderer = new RenderProgram(scheme);
+	public void setScheme(SchemeView scheme, RenderProgram renderProgram) {
+		mRenderer = renderProgram;
 		mRenderer.setRenderFilter(RenderProgram.ALL);
 		mRenderer.setAntiAlias(mAntiAliasEnabled);
 		mAntiAliasCurrentState = mAntiAliasEnabled;
@@ -105,9 +105,9 @@ public class VectorMapRenderer {
 		mAntiAliasEnabled = enabled;
 	}
 
-	public void setAntiAliasDisabledOnChanges(boolean disabled){
-		mAntiAliasDisabledOnChanges = disabled;
-	}
+//	public void setAntiAliasDisabledOnChanges(boolean disabled){
+//		mAntiAliasDisabledOnChanges = disabled;
+//	}
 	
 	public void draw(Canvas canvas) {
 		if(mCache==null){ 
@@ -285,10 +285,10 @@ public class VectorMapRenderer {
 				elem.draw(c);
 			}			
 		}else{
-			if( mAntiAliasCurrentState && (mAntiAliasDisabledOnChanges || !mAntiAliasEnabled) ){
-				mRenderer.setAntiAlias(false);
-				mAntiAliasCurrentState = false;
-			}
+//			if( mAntiAliasCurrentState && (mAntiAliasDisabledOnChanges || !mAntiAliasEnabled) ){
+//				mRenderer.setAntiAlias(false);
+//				mAntiAliasCurrentState = false;
+//			}
 			c.save();
 			c.setMatrix(newCache.CacheMatrix);
 			c.clipRect(newCache.SchemeRect);
@@ -452,5 +452,13 @@ public class VectorMapRenderer {
 		}catch(Exception ex){
 			return 16;
 		}
+	}
+
+	public void onAttachedToWindow() {
+		// do nothing
+	}
+
+	public void onDetachedFromWindow() {
+		// do nothing
 	}	
 }

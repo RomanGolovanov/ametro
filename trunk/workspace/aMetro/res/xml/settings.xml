@@ -6,12 +6,13 @@
                            android:key="@string/pref_anti_alias_key"
                            android:summary="@string/pref_anti_alias_description"
                            android:defaultValue="true"/>
+		<!--                            
         <CheckBoxPreference android:title="@string/pref_anti_alias_disable_on_scroll"
                             android:key="@string/pref_anti_alias_disable_on_scroll_key"
                             android:summary="@string/pref_anti_alias_disable_on_scroll_description"
                             android:dependency="@string/pref_anti_alias_key"
                             android:defaultValue="true"/>
-
+		 -->
         <CheckBoxPreference android:title="@string/pref_enable_zoom_controls"
                            android:key="@string/pref_enable_zoom_controls_key"
                            android:summary="@string/pref_enable_zoom_controls_description"
@@ -28,6 +29,12 @@
                            android:max="100"
                            android:defaultValue="10"/> 
 
+        <ListPreference android:key="@string/pref_renderer_type_key"
+                        android:title="@string/pref_renderer_type"
+                        android:entryValues="@array/pref_renderer_type_values"
+                        android:entries="@array/pref_renderer_type_texts"
+                        android:summary="@string/pref_renderer_type_description"
+                        android:defaultValue="1"/>
 	                            
 	</PreferenceScreen>
 	<PreferenceScreen android:title="@string/pref_section_maplist" android:summary="@string/pref_section_maplist_description">

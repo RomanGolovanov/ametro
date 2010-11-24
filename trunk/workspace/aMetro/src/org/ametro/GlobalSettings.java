@@ -232,6 +232,11 @@ public class GlobalSettings {
 		return 86400;
 	}		
 
+	public static int getRendererType(Context context) {
+		return PreferenceManager.getDefaultSharedPreferences(context).getInt(context.getString(R.string.pref_renderer_type), 1);
+	}
+
+	
 	public static boolean isUpdateOnlyByWifi(Context context) {
 		String value = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getString(R.string.pref_auto_update_networks_key), null);
 		if("any".equalsIgnoreCase(value)){
