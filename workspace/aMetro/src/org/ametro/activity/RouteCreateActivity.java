@@ -24,20 +24,17 @@ package org.ametro.activity;
 import static org.ametro.Constants.STATION_FROM_ID;
 import static org.ametro.Constants.STATION_TO_ID;
 
-import java.util.Date;
-
 import org.ametro.Constants;
 import org.ametro.R;
 import org.ametro.adapter.StationListAdapter;
-import org.ametro.model.SchemeView;
 import org.ametro.model.Model;
-import org.ametro.model.StationView;
+import org.ametro.model.SchemeView;
 import org.ametro.model.SchemeView.TransportCollection;
+import org.ametro.model.StationView;
 import org.ametro.model.route.RouteBuilder;
 import org.ametro.model.route.RouteContainer;
 import org.ametro.model.route.RouteParameters;
 import org.ametro.util.CollectionUtil;
-import org.ametro.util.DateUtil;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -55,8 +52,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.view.animation.Animation.AnimationListener;
+import android.view.animation.TranslateAnimation;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -381,11 +378,11 @@ public class RouteCreateActivity extends Activity implements OnClickListener,
 			mWaitDialog.dismiss();
 			if (result.hasRoutes()) {
 				MapViewActivity.Instance.setNavigationRoute(result);
-				long secs = result.getDefaultRoute().getLength();
-				secs = ( secs/60 + (secs%60 == 0 ? 0 : 1) ) * 60;
-				Date date = new Date(secs * 1000);
-				String msg = getString(R.string.msg_route_time) + " " + String.format(getString(R.string.route_time_format), DateUtil.getDateUTC(date, "HH"), DateUtil.getDateUTC(date, "mm"));
-				Toast.makeText(MapViewActivity.Instance, msg, Toast.LENGTH_LONG).show();
+//				long secs = result.getDefaultRoute().getLength();
+//				secs = ( secs/60 + (secs%60 == 0 ? 0 : 1) ) * 60;
+//				Date date = new Date(secs * 1000);
+//				String msg = getString(R.string.msg_route_time) + " " + String.format(getString(R.string.route_time_format), DateUtil.getDateUTC(date, "HH"), DateUtil.getDateUTC(date, "mm"));
+//				Toast.makeText(MapViewActivity.Instance, msg, Toast.LENGTH_LONG).show();
 			} else {
 				Toast.makeText(MapViewActivity.Instance, getString(R.string.msg_route_not_found), Toast.LENGTH_SHORT).show();
 				MapViewActivity.Instance.setNavigationRoute(null);
