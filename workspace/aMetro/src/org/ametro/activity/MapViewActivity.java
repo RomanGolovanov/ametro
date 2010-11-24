@@ -478,6 +478,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			mVectorMapView.setZoomControlsEnabled(GlobalSettings.isZoomControlsEnabled(this));
 			mVectorMapView.setZoomUsingVolumeEnabled(GlobalSettings.isZoomUsingVolumeEnabled(this));
 			mVectorMapView.setTrackballScrollSpeed(GlobalSettings.getTrackballScrollSpeed(this));
+			mVectorMapView.setMapRenderer(GlobalSettings.getRendererType(this));
 			mVectorMapView.postInvalidate();
 		}
 	}
@@ -937,7 +938,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 
 		mMapFrame = (FrameLayout)findViewById(R.id.map_frame);
 		
-		mVectorMapView = new MultiTouchMapView(this, mScheme);
+		mVectorMapView = new MultiTouchMapView(this, mScheme, GlobalSettings.getRendererType(this));
 		mVectorMapView.setSchemeSelection(mNavigationStations, mNavigationSegments, mNavigationTransfers);
 		mVectorMapView.setZoomControls((ZoomControls) findViewById(R.id.browse_vector_map_zoom));
 		mVectorMapView.setOnClickListener(this);

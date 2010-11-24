@@ -23,7 +23,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 
-public class AsyncVectorMapRenderer {
+public class AsyncVectorMapRenderer implements IVectorMapRenderer {
 
 	protected static final String TAG = "VectorMapView";
 
@@ -58,7 +58,7 @@ public class AsyncVectorMapRenderer {
 	private View mCanvas;
 	
 	private boolean mAntiAliasEnabled = true;
-	private boolean mAntiAliasDisabledOnChanges = false;
+	//private boolean mAntiAliasDisabledOnChanges = false;
 	private boolean mAntiAliasCurrentState = false;
 	
 	private final float[] mMatrixValues = new float[9];
@@ -69,17 +69,17 @@ public class AsyncVectorMapRenderer {
 	private final Handler mPrivateHandler = new Handler();
 
 	
-	public AsyncVectorMapRenderer(View container, SchemeView scheme) {
+	public AsyncVectorMapRenderer(View container, SchemeView scheme, RenderProgram renderProgram) {
 		this.mCanvas = container;
 		this.mScheme = scheme;
 		mMemoryClass = getMemoryClass(container.getContext());
-		setScheme(scheme);
+		setScheme(scheme, renderProgram);
 	}
 
-	public void setScheme(SchemeView scheme) {
+	public void setScheme(SchemeView scheme, RenderProgram renderProgram) {
 		synchronized (this) {
 			//Log.i(TAG, "Set scheme.");
-			mRenderer = new RenderProgram(scheme);
+			mRenderer = renderProgram;
 			mRenderer.setRenderFilter(RenderProgram.ALL);
 			mRenderer.setAntiAlias(mAntiAliasEnabled);
 			mAntiAliasCurrentState = mAntiAliasEnabled;
@@ -120,9 +120,9 @@ public class AsyncVectorMapRenderer {
 		mAntiAliasEnabled = enabled;
 	}
 
-	public void setAntiAliasDisabledOnChanges(boolean disabled){
-		mAntiAliasDisabledOnChanges = disabled;
-	}
+//	public void setAntiAliasDisabledOnChanges(boolean disabled){
+//		mAntiAliasDisabledOnChanges = disabled;
+//	}
 	
 	public void draw(Canvas canvas) {
 		if(mCache==null){
@@ -157,7 +157,6 @@ public class AsyncVectorMapRenderer {
 		}
 	}
 
-	/** set transformation matrix for content **/
 	public void setMatrix(Matrix newMatrix) {
 		synchronized (this) {
 			mMatrix.set(newMatrix);
@@ -176,7 +175,6 @@ public class AsyncVectorMapRenderer {
 		}
 	}
 
-	/** get current transformation matrix**/
 	public Matrix getMatrix(){
 		return this.mMatrix;
 	}
@@ -325,10 +323,10 @@ public class AsyncVectorMapRenderer {
 			
 		}else{
 			//long start = System.currentTimeMillis();
-			if( mAntiAliasCurrentState && (mAntiAliasDisabledOnChanges || !mAntiAliasEnabled) ){
-				mRenderer.setAntiAlias(false);
-				mAntiAliasCurrentState = false;
-			}
+//			if( mAntiAliasCurrentState && (mAntiAliasDisabledOnChanges || !mAntiAliasEnabled) ){
+//				mRenderer.setAntiAlias(false);
+//				mAntiAliasCurrentState = false;
+//			}
 			c.save();
 			c.setMatrix(newCache.CacheMatrix);
 			c.clipRect(newCache.SchemeRect);

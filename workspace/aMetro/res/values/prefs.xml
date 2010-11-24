@@ -32,15 +32,11 @@
 	<string name="pref_trackball_scroll_speed">Change scroll speed</string>
 	<string name="pref_trackball_scroll_speed_key">TRACKBALL_SCROLL_SPEED</string>
 	<string name="pref_trackball_scroll_speed_description">Change if trackball scroll is too slow or fast</string>
+
+	<string name="pref_renderer_type">Renderer type</string>
+	<string name="pref_renderer_type_key">RENDERER_TYPE</string>
+	<string name="pref_renderer_type_description">Using Synchronous on slow device could improve usability</string>
 	
-	<!-- 
-	<string name="pref_"></string>
-	<string name="pref__key"></string>
-	<string name="pref__description"></string>
-	<string name="pref_"></string>
-	<string name="pref__key"></string>
-	<string name="pref__description"></string>
-	 -->
     <string name="pref_section_map_view">Map</string>
     <string name="pref_section_map_view_description">Map view options</string>
 

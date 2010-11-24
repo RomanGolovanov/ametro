@@ -8,6 +8,7 @@ import org.ametro.model.SegmentView;
 import org.ametro.model.StationView;
 import org.ametro.model.TransferView;
 import org.ametro.multitouch.MultiTouchController.MultiTouchListener;
+import org.ametro.render.RenderProgram;
 import org.ametro.util.MathUtil;
 
 import android.content.Context;
@@ -27,6 +28,9 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 
 	protected  static final String TAG = "MultiTouchMapView";
 
+	public static final int RENDERER_TYPE_SYNC = 0;
+	public static final int RENDERER_TYPE_ASYNC = 1;
+	
 	private static final long SCROLLBAR_TIMEOUT = 1000;
 
 	private MultiTouchController mController;
@@ -34,7 +38,8 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 	private KeyEventController mKeyEventController;
 
 	private SchemeView mScheme;
-	private AsyncVectorMapRenderer mMapView;
+	private RenderProgram mRenderProgram;
+	private IVectorMapRenderer mMapView;
 	
 	private PointF mLastClickPosition;
 	private float mDblClickSlop;
@@ -51,7 +56,7 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 	private PointF mChangeCenterPoint;
 	private Float mChangeScale;
 	
-	public MultiTouchMapView(Context context, SchemeView scheme) {
+	public MultiTouchMapView(Context context, SchemeView scheme, int rendererType) {
 		super(context);
 		
 		try{
@@ -70,10 +75,28 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 		awakeScrollBars();
 		
 		mScheme = scheme;
-		mMapView = new AsyncVectorMapRenderer(this, scheme);
+		mRenderProgram = new RenderProgram(mScheme);
+
+		setMapRenderer(rendererType);
 		mController = new MultiTouchController(getContext(),this);
 		mKeyEventController = new KeyEventController(mController);
 		mDblClickSlop = ViewConfiguration.get(context).getScaledDoubleTapSlop();
+	}
+	
+	public boolean setMapRenderer(int rendererType){
+		switch(rendererType){
+		case RENDERER_TYPE_SYNC:
+			if(mMapView==null && !(mMapView instanceof VectorMapRenderer)){
+				mMapView = new VectorMapRenderer(this, mScheme, mRenderProgram);
+			}
+			return true;
+		case RENDERER_TYPE_ASYNC:
+			if(mMapView==null || !(mMapView instanceof AsyncVectorMapRenderer)){
+				mMapView = new AsyncVectorMapRenderer(this, mScheme, mRenderProgram);
+			}
+			return true;
+		}
+		return false;
 	}
 	
     protected int computeVerticalScrollOffset() {
@@ -169,7 +192,7 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 	}
 
 	public void setAntiAliasingDisableOnScroll(boolean disableOnScroll) {
-		mMapView.setAntiAliasDisabledOnChanges(disableOnScroll);
+		//mMapView.setAntiAliasDisabledOnChanges(disableOnScroll);
 	}
 
 	public void setAntiAliasingEnabled(boolean enabled) {
@@ -178,7 +201,8 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 
 	public void setScheme(SchemeView scheme) {
 		mScheme = scheme;
-		mMapView.setScheme(scheme);
+		mRenderProgram = new RenderProgram(mScheme);
+		mMapView.setScheme(mScheme, mRenderProgram);
 	}
 
 	public void setSchemeSelection(ArrayList<StationView> stations,
