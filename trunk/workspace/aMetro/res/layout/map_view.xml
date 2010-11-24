@@ -18,10 +18,13 @@
 	<LinearLayout android:id="@+id/browse_vector_map_panel_bottom"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"
 		android:layout_alignParentLeft="true"
-		android:layout_alignParentBottom="true" android:layout_marginBottom="5dip"
-		android:layout_marginLeft="5dip" android:orientation="horizontal">
+		android:layout_alignParentBottom="true" android:layout_marginBottom="10dip"
+		android:layout_marginLeft="10dip" android:orientation="horizontal">
 		<ImageButton android:id="@+id/browse_vector_map_button_list"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:paddingLeft="5dip" android:paddingTop="0dip"
+			android:paddingRight="5dip" android:paddingBottom="2dip"
+			style="?android:attr/buttonStyleSmall"
 			android:src="@drawable/icon_btn_details" />
 	</LinearLayout>
 	<FrameLayout android:layout_width="wrap_content"
