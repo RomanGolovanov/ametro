@@ -1067,8 +1067,8 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	private final Runnable mCenterAreaRunnable = new Runnable() {
 		public void run() {
 			final RectF area = new RectF(ModelUtil.computeBoundingBox( mNavigationStations ));
-			final float scaleX = mVectorMapView.getWidth() / area.width() * 0.85f; 
-			final float scaleY = mVectorMapView.getHeight() / area.height() * 0.85f;
+			final float scaleX = mVectorMapView.getWidth() / area.width() * 0.90f; 
+			final float scaleY = mVectorMapView.getHeight() / area.height() * 0.90f;
 			final float targetScale = Math.min(scaleX, scaleY);
 			final float currentScale = mVectorMapView.getScale();
 			final float scale = targetScale > currentScale ? currentScale : targetScale;
