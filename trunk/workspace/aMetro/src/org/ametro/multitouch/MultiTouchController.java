@@ -576,4 +576,8 @@ public class MultiTouchController {
         listener.setPositionAndScaleMatrix(matrix);
 	}
 
+	public Matrix getPositionAndScale() {
+		return new Matrix(matrix);
+	}
+
 }

@@ -3,6 +3,7 @@ package org.ametro.multitouch;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
+import org.ametro.R;
 import org.ametro.model.SchemeView;
 import org.ametro.model.SegmentView;
 import org.ametro.model.StationView;
@@ -13,9 +14,12 @@ import org.ametro.util.MathUtil;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import android.graphics.Paint.Align;
 import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -45,6 +49,7 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 	private float mDblClickSlop;
 	
 	private float[] values = new float[9];
+	private boolean mAttached;
 	
 	private int mVerticalScrollOffset;
 	private int mHorizontalScrollOffset;
@@ -55,6 +60,14 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 	
 	private PointF mChangeCenterPoint;
 	private Float mChangeScale;
+
+	private boolean mAntiAliasingEnabled;
+
+	private ArrayList<StationView> mStations;
+	private ArrayList<SegmentView> mSegment;
+	private ArrayList<TransferView> mTransfers;
+	
+    private String mRenderFailedErrorText;
 	
 	public MultiTouchMapView(Context context, SchemeView scheme, int rendererType) {
 		super(context);
@@ -65,6 +78,8 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 		}catch(Exception ex){
 		}
 		//setScrollbarFadingEnabled(fadeScrollbars)
+		
+    	mRenderFailedErrorText = getContext().getString(R.string.msg_render_failed);
 		
         setFocusable(true);
         setFocusableInTouchMode(true);
@@ -77,6 +92,7 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 		mScheme = scheme;
 		mRenderProgram = new RenderProgram(mScheme);
 
+		mAttached = false;
 		setMapRenderer(rendererType);
 		mController = new MultiTouchController(getContext(),this);
 		mKeyEventController = new KeyEventController(mController);
@@ -86,13 +102,31 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 	public boolean setMapRenderer(int rendererType){
 		switch(rendererType){
 		case RENDERER_TYPE_SYNC:
-			if(mMapView==null && !(mMapView instanceof VectorMapRenderer)){
+			if(mMapView==null || mMapView instanceof AsyncVectorMapRenderer){
+				if(mAttached && mMapView!=null){
+					mMapView.onDetachedFromWindow();
+				}
 				mMapView = new VectorMapRenderer(this, mScheme, mRenderProgram);
+				if(mAttached){
+					mMapView.setMatrix(mController.getPositionAndScale());
+					mMapView.setAntiAliasEnabled(mAntiAliasingEnabled);
+					mMapView.setSchemeSelection(mStations, mSegment, mTransfers);
+					mMapView.onAttachedToWindow();
+				}
 			}
 			return true;
 		case RENDERER_TYPE_ASYNC:
-			if(mMapView==null || !(mMapView instanceof AsyncVectorMapRenderer)){
+			if(mMapView==null || mMapView instanceof VectorMapRenderer){
+				if(mAttached && mMapView!=null){
+					mMapView.onDetachedFromWindow();
+				}
 				mMapView = new AsyncVectorMapRenderer(this, mScheme, mRenderProgram);
+				if(mAttached){
+					mMapView.setMatrix(mController.getPositionAndScale());
+					mMapView.setAntiAliasEnabled(mAntiAliasingEnabled);
+					mMapView.setSchemeSelection(mStations, mSegment, mTransfers);
+					mMapView.onAttachedToWindow();
+				}
 			}
 			return true;
 		}
@@ -116,11 +150,13 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
     }
     
     protected void onAttachedToWindow() {
+    	mAttached = true;
     	mMapView.onAttachedToWindow();
     	super.onAttachedToWindow();
     }
     
     protected void onDetachedFromWindow() {
+    	mAttached = true;
     	mMapView.onDetachedFromWindow();
     	super.onDetachedFromWindow();
     }
@@ -128,12 +164,18 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 	protected void onDraw(Canvas canvas) {
 		canvas.save();
 		mMapView.draw(canvas);
+		if(mMapView.isRenderFailed()){
+			Paint p = new Paint();
+			p.setColor(Color.WHITE);
+			p.setTextAlign(Align.CENTER);
+			canvas.drawText(mRenderFailedErrorText, getWidth()/2, getHeight()/2, p);
+		}
 		canvas.restore();
 		super.onDraw(canvas);
 	}
 	
 	public Matrix getPositionAndScaleMatrix() {
-		return mMapView.getMatrix();
+		return mController.getPositionAndScale();
 	}
 
 	public void setPositionAndScaleMatrix(Matrix matrix) {
@@ -196,6 +238,7 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 	}
 
 	public void setAntiAliasingEnabled(boolean enabled) {
+		mAntiAliasingEnabled = enabled;
 		mMapView.setAntiAliasEnabled(enabled);
 	}
 
@@ -208,6 +251,9 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 	public void setSchemeSelection(ArrayList<StationView> stations,
 			ArrayList<SegmentView> segments,
 			ArrayList<TransferView> transfers) {
+		mStations = stations;
+		mSegment = segments;
+		mTransfers = transfers;
 		mMapView.setSchemeSelection(stations,segments,transfers);
 	}
 	

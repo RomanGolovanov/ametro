@@ -472,8 +472,6 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 
 	public void applySettings(){
 		if(mVectorMapView!=null){
-
-			mVectorMapView.setAntiAliasingDisableOnScroll(GlobalSettings.isAntiAliasingDisableOnScroll(this));
 			mVectorMapView.setAntiAliasingEnabled(GlobalSettings.isAntiAliasingEnabled(this));
 			mVectorMapView.setZoomControlsEnabled(GlobalSettings.isZoomControlsEnabled(this));
 			mVectorMapView.setZoomUsingVolumeEnabled(GlobalSettings.isZoomUsingVolumeEnabled(this));
@@ -598,9 +596,9 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		}
 	}
 
-	public PointF loadScrollPosition(String fileSystemName) {
+	public PointF loadScrollPosition(String fileSystemName, String viewSystemName) {
 		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
-		String pref = preferences.getString(PREFERENCE_SCROLL_POSITION + "_" + fileSystemName + "_" + mMapViewName, null);
+		String pref = preferences.getString(PREFERENCE_SCROLL_POSITION + "_" + fileSystemName + "_" + viewSystemName, null);
 		if (pref != null) {
 			return StringUtil.parsePointF(pref);
 		} else {
@@ -627,9 +625,9 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		}
 	}
 
-	public Float loadZoom(String fileSystemName) {
+	public Float loadZoom(String fileSystemName, String viewSystemName) {
 		SharedPreferences preferences = getSharedPreferences(Constants.PREFERENCE_NAME, 0);
-		String pref = preferences.getString(PREFERENCE_ZOOM_LEVEL + "_" + fileSystemName + "_" + mMapViewName, null);
+		String pref = preferences.getString(PREFERENCE_ZOOM_LEVEL + "_" + fileSystemName + "_" + viewSystemName, null);
 		if (pref != null) {
 			return StringUtil.parseNullableFloat(pref);
 		} else {
@@ -786,6 +784,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		mSelectionMode = SELECTION_MODE_BEGIN;
 		mRouteContainer = null;
 		mCurrentRouteView = null;
+		mCurrentStation = null;
 		mNavigationStations = null;
 		mNavigationSegments = null;
 		mNavigationTransfers = null;
@@ -805,10 +804,10 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		}
 	}
 
-	private void onRestoreMapState(String fileSystemName) {
+	private void onRestoreMapState(String fileSystemName, String viewSystemName) {
 		if (mScheme != null && mVectorMapView != null && fileSystemName != null) {
-			Float zoom = loadZoom(fileSystemName);
-			PointF pos = loadScrollPosition(fileSystemName);
+			Float zoom = loadZoom(fileSystemName, viewSystemName);
+			PointF pos = loadScrollPosition(fileSystemName, viewSystemName);
 			if(pos!=null && zoom!=null){
 				mVectorMapView.setCenterPositionAndScale(pos,zoom!=null ? zoom : 0.001f, false);
 			}else{
@@ -875,7 +874,6 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		}
 		
 	}
-
 
 	private void onShowMap(Model model, SchemeView view) {
 
@@ -957,7 +955,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			hideNavigationControls();
 		} 
 
-		onRestoreMapState(mScheme.owner.fileSystemName);
+		onRestoreMapState(mScheme.owner.fileSystemName, view.systemName);
 		mVectorMapView.requestFocus();
 
 		mModelFileName = mScheme.owner.fileSystemName;

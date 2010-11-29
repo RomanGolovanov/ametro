@@ -61,6 +61,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 
 public class ApplicationEx extends Application {
@@ -198,9 +199,15 @@ public class ApplicationEx extends Application {
 	}
 
 	public boolean isNetworkAvailable(){
-		boolean isWifiConnected =  mConnectionManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected();
-		boolean isMobileConnected = mConnectionManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnected();
-		return isWifiConnected || isMobileConnected;
+		NetworkInfo[] infs = mConnectionManager.getAllNetworkInfo();
+		if(infs!=null && infs.length>0){
+			for(NetworkInfo inf : infs){
+				if(inf.isConnected()){
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 	public boolean isAutoUpdateNetworkAvailable(){
@@ -209,8 +216,10 @@ public class ApplicationEx extends Application {
 		boolean isConnected = false;
 		if(GlobalSettings.isUpdateOnlyByWifi(this)){
 			isConnected = isWifiConnected;
-		}else{
+		}else if(!GlobalSettings.isUpdateByAnyNetwork(this)){
 			isConnected = isWifiConnected || isMobileConnected;
+		}else{
+			isConnected = isNetworkAvailable();
 		}
 		return isConnected;
 	}
