@@ -25,7 +25,7 @@ import android.view.View;
 
 public class AsyncVectorMapRenderer implements IVectorMapRenderer {
 
-	protected static final String TAG = "VectorMapView";
+	protected static final String TAG = "AsyncVectorMapView";
 
 	private RenderProgram mRenderer;
 	private SchemeView mScheme;
@@ -56,9 +56,9 @@ public class AsyncVectorMapRenderer implements IVectorMapRenderer {
 	private float mCurrHeight;
 	
 	private View mCanvas;
-	
+
+	private boolean mIsRenderFailed = false;
 	private boolean mAntiAliasEnabled = true;
-	//private boolean mAntiAliasDisabledOnChanges = false;
 	private boolean mAntiAliasCurrentState = false;
 	
 	private final float[] mMatrixValues = new float[9];
@@ -68,7 +68,6 @@ public class AsyncVectorMapRenderer implements IVectorMapRenderer {
 	
 	private final Handler mPrivateHandler = new Handler();
 
-	
 	public AsyncVectorMapRenderer(View container, SchemeView scheme, RenderProgram renderProgram) {
 		this.mCanvas = container;
 		this.mScheme = scheme;
@@ -76,6 +75,12 @@ public class AsyncVectorMapRenderer implements IVectorMapRenderer {
 		setScheme(scheme, renderProgram);
 	}
 
+	public boolean isRenderFailed(){
+		synchronized (this) {
+			return mIsRenderFailed;
+		}
+	}
+	
 	public void setScheme(SchemeView scheme, RenderProgram renderProgram) {
 		synchronized (this) {
 			//Log.i(TAG, "Set scheme.");
@@ -119,17 +124,17 @@ public class AsyncVectorMapRenderer implements IVectorMapRenderer {
 	public void setAntiAliasEnabled(boolean enabled) {
 		mAntiAliasEnabled = enabled;
 	}
-
-//	public void setAntiAliasDisabledOnChanges(boolean disabled){
-//		mAntiAliasDisabledOnChanges = disabled;
-//	}
 	
 	public void draw(Canvas canvas) {
+		//Log.d(TAG,"draw map");
 		if(mCache==null){
 			mRenderThread.postRebuildCache();
 			mRenderThread.waitComplete();
 		}
 		synchronized (this) {
+			if(mIsRenderFailed){
+				return;
+			}
 			// prepare transform matrix
 			final Matrix m = mRenderMatrix;
 			if(mCache.Scale!=mScale){
@@ -172,11 +177,9 @@ public class AsyncVectorMapRenderer implements IVectorMapRenderer {
 			mInvertedMatrix.mapRect(mSchemeRect);
 			mScreenRect.set(mSchemeRect);
 			mMatrix.mapRect(mScreenRect);
+			
+			mIsRenderFailed = false;
 		}
-	}
-
-	public Matrix getMatrix(){
-		return this.mMatrix;
 	}
 	
 	void rebuildCache() {
@@ -200,157 +203,159 @@ public class AsyncVectorMapRenderer implements IVectorMapRenderer {
 	}
 
 	void renderEntireCache() {
-		//Log.i(TAG,"Render entire");
-		MapCache newCache;
-		synchronized (this) {
-			final RectF viewRect = new RectF(0,0,mCurrWidth,mCurrHeight);
-			Matrix m = new Matrix(mMatrix);
-			m.postTranslate(-mCurrX, -mCurrY);
-			Matrix i = new Matrix();
-			m.invert(i);
-		
-			newCache = MapCache.reuse(
-					mOldCache, 
-					(int)mCurrWidth, 
-					(int)mCurrHeight, 
-					m, 
-					i, 
-					0, 
-					0, 
-					mScale, 
-					viewRect);
-		}
-		
-		if( !mAntiAliasCurrentState && mAntiAliasEnabled ){
-			mRenderer.setAntiAlias(true);
-			mAntiAliasCurrentState = true;
-		}
-		
-		Canvas c = new Canvas(newCache.Image);
-		c.drawColor(Color.MAGENTA);
-		c.setMatrix(newCache.CacheMatrix);
-		
-		//mRenderer.setRenderFilter(RenderProgram.ALL);
-		ArrayList<RenderElement> elements = mRenderer.setVisibilityAll();
-		c.drawColor(Color.WHITE);
-		for (RenderElement elem : elements) {
-			elem.draw(c);
-		}
-		
-		synchronized (this) {
-			mOldCache = mCache;
-			mCache = newCache;
-		}
-	}
-
-	void renderPartialCache() {
-		//Log.i(TAG,"Render partial");
-		MapCache newCache;
-		synchronized (this) {
-			newCache = MapCache.reuse(
-				mOldCache, 
-				mCanvas.getWidth(), 
-				mCanvas.getHeight(), 
-				mMatrix, 
-				mInvertedMatrix, 
-				mCurrX, 
-				mCurrY, 
-				mScale, 
-				mSchemeRect);
-		}
+		try{
+			//Log.i(TAG,"Render entire");
+			MapCache newCache;
+			synchronized (this) {
+				final RectF viewRect = new RectF(0,0,mCurrWidth,mCurrHeight);
+				Matrix m = new Matrix(mMatrix);
+				m.postTranslate(-mCurrX, -mCurrY);
+				Matrix i = new Matrix();
+				m.invert(i);
 			
-		if( !mAntiAliasCurrentState && mAntiAliasEnabled ){
-			mRenderer.setAntiAlias(true);
-			mAntiAliasCurrentState = true;
-		}
-		
-		Canvas c = new Canvas(newCache.Image);
-		c.setMatrix(newCache.CacheMatrix);
-		c.clipRect(newCache.SchemeRect);
-		//mRenderer.setRenderFilter(RenderProgram.ALL);
-		ArrayList<RenderElement> elements = mRenderer.setVisibility(newCache.SchemeRect);
-		c.drawColor(Color.WHITE);
-		for (RenderElement elem : elements) {
-			elem.draw(c);
-		}
-		
-		synchronized (this) {
-			mOldCache = mCache;
-			mCache = newCache;
-		}
-	}
-
-	boolean updatePartialCache() {
-		//Log.i(TAG,"update partial");
-		MapCache newCache;
-		synchronized (this) {
-			newCache = MapCache.reuse(
-				mOldCache, 
-				mCanvas.getWidth(), 
-				mCanvas.getHeight(), 
-				mMatrix, 
-				mInvertedMatrix, 
-				mCurrX, 
-				mCurrY, 
-				mScale, 
-				mSchemeRect);
-		}
-	
-		
-		boolean renderAll = splitRenderViewPort(newCache.SchemeRect, mCache.SchemeRect);
-		Canvas c = new Canvas(newCache.Image);
-		if(renderAll){
+				newCache = MapCache.reuse(
+						mOldCache, 
+						(int)mCurrWidth, 
+						(int)mCurrHeight, 
+						m, 
+						i, 
+						0, 
+						0, 
+						mScale, 
+						viewRect);
+			}
+			
 			if( !mAntiAliasCurrentState && mAntiAliasEnabled ){
 				mRenderer.setAntiAlias(true);
 				mAntiAliasCurrentState = true;
 			}
 			
+			Canvas c = new Canvas(newCache.Image);
+			c.drawColor(Color.MAGENTA);
 			c.setMatrix(newCache.CacheMatrix);
-			c.clipRect(newCache.SchemeRect);
-			//long start = System.currentTimeMillis();
+			
 			//mRenderer.setRenderFilter(RenderProgram.ALL);
-			ArrayList<RenderElement> elements = mRenderer.setVisibility(newCache.SchemeRect);
-			//long clip = System.currentTimeMillis();
-			
-			c.drawColor(Color.WHITE);
-			for (RenderElement elem : elements) {
-				elem.draw(c);
-			}			
-			//long draw = System.currentTimeMillis();
-			//Log.w(TAG, "A: objects = " + elements.size() + ",clip = " + (clip-start) + ", draw = " + (draw-clip) );
-			
-			
-			
-		}else{
-			//long start = System.currentTimeMillis();
-//			if( mAntiAliasCurrentState && (mAntiAliasDisabledOnChanges || !mAntiAliasEnabled) ){
-//				mRenderer.setAntiAlias(false);
-//				mAntiAliasCurrentState = false;
-//			}
-			c.save();
-			c.setMatrix(newCache.CacheMatrix);
-			c.clipRect(newCache.SchemeRect);
-			//long prepare = System.currentTimeMillis();
-			//mRenderer.setRenderFilter(RenderProgram.TYPE_LINE | RenderProgram.TYPE_LINE_DASHED);
-			ArrayList<RenderElement> elements = mRenderer.setVisibilityTwice(mRenderViewPortHorizontal,mRenderViewPortVertical);
-			//long clip = System.currentTimeMillis();
+			ArrayList<RenderElement> elements = mRenderer.setVisibilityAll();
 			c.drawColor(Color.WHITE);
 			for (RenderElement elem : elements) {
 				elem.draw(c);
 			}
-			//long draw = System.currentTimeMillis();
-			c.restore();
-			c.drawBitmap(mCache.Image,newCache.X - mCache.X, newCache.Y - mCache.Y, null);
-			//long update = System.currentTimeMillis();
-			//Log.w(TAG, "P: objects = " + elements.size() + ".prepare = " + (prepare-start) + ",clip = " + (clip-prepare) + ", draw = " + (draw-clip) + ", update = " + (update-draw) );
+			
+			synchronized (this) {
+				mOldCache = mCache;
+				mCache = newCache;
+				mIsRenderFailed = false;
+			}
+		}catch(Exception ex){
+			synchronized (this) {
+				mIsRenderFailed = true;
+			}
 		}
+	}
 
-		synchronized (this) {
-			mOldCache = mCache;
-			mCache = newCache;
+	void renderPartialCache() {
+		try{
+			//Log.i(TAG,"Render partial");
+			MapCache newCache;
+			synchronized (this) {
+				newCache = MapCache.reuse(
+					mOldCache, 
+					mCanvas.getWidth(), 
+					mCanvas.getHeight(), 
+					mMatrix, 
+					mInvertedMatrix, 
+					mCurrX, 
+					mCurrY, 
+					mScale, 
+					mSchemeRect);
+			}
+				
+			if( !mAntiAliasCurrentState && mAntiAliasEnabled ){
+				mRenderer.setAntiAlias(true);
+				mAntiAliasCurrentState = true;
+			}
+			
+			Canvas c = new Canvas(newCache.Image);
+			c.setMatrix(newCache.CacheMatrix);
+			c.clipRect(newCache.SchemeRect);
+			//mRenderer.setRenderFilter(RenderProgram.ALL);
+			ArrayList<RenderElement> elements = mRenderer.setVisibility(newCache.SchemeRect);
+			c.drawColor(Color.WHITE);
+			for (RenderElement elem : elements) {
+				elem.draw(c);
+			}
+			
+			synchronized (this) {
+				mOldCache = mCache;
+				mCache = newCache;
+				mIsRenderFailed = false;
+			}			
+		}catch(Exception ex){
+			synchronized (this) {
+				mIsRenderFailed = true;
+			}
 		}
+	}
+
+	boolean updatePartialCache() {
+		try{
+			//Log.i(TAG,"update partial");
+			MapCache newCache;
+			synchronized (this) {
+				newCache = MapCache.reuse(
+					mOldCache, 
+					mCanvas.getWidth(), 
+					mCanvas.getHeight(), 
+					mMatrix, 
+					mInvertedMatrix, 
+					mCurrX, 
+					mCurrY, 
+					mScale, 
+					mSchemeRect);
+			}
 		
-		return renderAll;
+			
+			boolean renderAll = splitRenderViewPort(newCache.SchemeRect, mCache.SchemeRect);
+			Canvas c = new Canvas(newCache.Image);
+			if(renderAll){
+				if( !mAntiAliasCurrentState && mAntiAliasEnabled ){
+					mRenderer.setAntiAlias(true);
+					mAntiAliasCurrentState = true;
+				}
+				
+				c.setMatrix(newCache.CacheMatrix);
+				c.clipRect(newCache.SchemeRect);
+				ArrayList<RenderElement> elements = mRenderer.setVisibility(newCache.SchemeRect);
+				c.drawColor(Color.WHITE);
+				for (RenderElement elem : elements) {
+					elem.draw(c);
+				}			
+			}else{
+				c.save();
+				c.setMatrix(newCache.CacheMatrix);
+				c.clipRect(newCache.SchemeRect);
+				ArrayList<RenderElement> elements = mRenderer.setVisibilityTwice(mRenderViewPortHorizontal,mRenderViewPortVertical);
+				c.drawColor(Color.WHITE);
+				for (RenderElement elem : elements) {
+					elem.draw(c);
+				}
+				c.restore();
+				c.drawBitmap(mCache.Image,newCache.X - mCache.X, newCache.Y - mCache.Y, null);
+			}
+
+			synchronized (this) {
+				mOldCache = mCache;
+				mCache = newCache;
+				mIsRenderFailed = false;
+			}
+			
+			return renderAll;			
+		}catch(Exception ex){
+			synchronized (this) {
+				mIsRenderFailed = true;
+			}
+		}
+		return false;
 	}
 
 	private boolean splitRenderViewPort(RectF schemeRect, RectF cacheRect) {

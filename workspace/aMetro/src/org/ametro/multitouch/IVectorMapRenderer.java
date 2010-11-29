@@ -27,14 +27,10 @@ public interface IVectorMapRenderer {
 
 	public abstract void setAntiAliasEnabled(boolean enabled);
 
-	//public abstract void setAntiAliasDisabledOnChanges(boolean disabled);
-
 	public abstract void draw(Canvas canvas);
 
-	/** set transformation matrix for content **/
 	public abstract void setMatrix(Matrix newMatrix);
 
-	/** get current transformation matrix**/
-	public abstract Matrix getMatrix();
+	public abstract boolean isRenderFailed();
 
 }

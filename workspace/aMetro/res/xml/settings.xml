@@ -34,7 +34,7 @@
                         android:entryValues="@array/pref_renderer_type_values"
                         android:entries="@array/pref_renderer_type_texts"
                         android:summary="@string/pref_renderer_type_description"
-                        android:defaultValue="1"/>
+                        android:defaultValue="async"/>
 	                            
 	</PreferenceScreen>
 	<PreferenceScreen android:title="@string/pref_section_maplist" android:summary="@string/pref_section_maplist_description">

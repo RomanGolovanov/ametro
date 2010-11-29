@@ -233,17 +233,24 @@ public class GlobalSettings {
 	}		
 
 	public static int getRendererType(Context context) {
-		return PreferenceManager.getDefaultSharedPreferences(context).getInt(context.getString(R.string.pref_renderer_type), 1);
+		String value = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getString(R.string.pref_renderer_type_key), "1");
+		if("async".equalsIgnoreCase(value)){
+			return 1;
+		}else{
+			return 0;
+		}
 	}
 
 	
 	public static boolean isUpdateOnlyByWifi(Context context) {
-		String value = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getString(R.string.pref_auto_update_networks_key), null);
-		if("any".equalsIgnoreCase(value)){
-			return false;
-		}
-		return true;
-	}		
+		String value = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getString(R.string.pref_auto_update_networks_key), "wifi");
+		return "wifi".equalsIgnoreCase(value);
+	}
+	
+	public static boolean isUpdateByAnyNetwork(Context context){
+		String value = PreferenceManager.getDefaultSharedPreferences(context).getString(context.getString(R.string.pref_auto_update_networks_key), "wifi");
+		return "any_other".equalsIgnoreCase(value);
+	}
 		
 	public static boolean isDebugMessagesEnabled(Context context) {
 		return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(PREFERENCE_DEBUG, false);
