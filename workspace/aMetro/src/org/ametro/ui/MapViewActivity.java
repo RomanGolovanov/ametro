@@ -164,7 +164,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			int to = mEndStationView.stationId;
 			int[] include = new int[0];
 			int[] exclude = new int[0];
-			int[] transports = mScheme.getCheckedTransports();
+			int[] transports = mScheme.transports;// mScheme.getCheckedTransports();
 			
 			RouteParameters routeParameters = new RouteParameters(from, to, include, exclude, RouteBuilder.ROUTE_OPTION_ALL, transports, 0);
 			return RouteBuilder.createRoutes(mScheme.owner, routeParameters);
