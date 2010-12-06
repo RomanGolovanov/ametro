@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="catalog_names">
+        <item>My Maps</item>
+        <item>Import</item>
+        <item>Online</item>
+    </string-array>   
+    <string-array name="pref_renderer_type_texts">
+        <item>Asynchronous</item>
+        <item>Synchronous</item>
+    </string-array>
+    <string-array name="pref_locale_texts">
+        <item>Auto</item>
+        <item>Russian</item>
+        <item>English</item>
+    </string-array>
+    <string-array name="pref_auto_update_period_texts">
+        <item>Daily</item>
+        <item>Weekly</item>
+        <item>Monthly</item>
+        <!-- <item>Every 15 minutes</item> -->
+    </string-array>
+	<string-array name="pref_auto_update_networks_texts">
+        <item>WiFi only</item>
+        <item>WiFi or Mobile</item>
+        <item>Any</item>
+    </string-array>
+    <string-array name="transport_types">
+	    <item>Unknown</item>
+		<item>Metro</item>
+	    <item>Tram</item>
+	    <item>Bus</item>
+	    <item>Train</item>
+	    <item>Water Bus</item>
+	    <item>Trolleybus</item>
+	    <item>Cableway</item>
+    </string-array>
+    <string-array name="transport_type_lines">
+	    <item>Unknown lines...</item>
+		<item>Metro lines...</item>
+	    <item>Tram lines...</item>
+	    <item>Bus lines...</item>
+	    <item>Train lines...</item>
+	    <item>Water Bus lines...</item>
+	    <item>Trolleybus lines...</item>
+	    <item>Cableway lines...</item>
+    </string-array>
+    <string-array name="catalog_map_states">
+	    <item>Offline</item>
+	    <item>Not supported</item>
+	    <item>Corrupted</item>
+	    <item>Update Available</item>
+	    <item>Installed</item>
+	    <item>Import Available</item>
+	    <item>Download Available</item>
+	    <item>Update Not Supported</item>
+	    <item>Update Needed</item>
+	    <item>Download Pending...</item>
+	    <item>Import Pending...</item>
+	    <item>Downloading...</item>
+	    <item>Importing...</item>
+	    <item>Calculating...</item>
+	    <item>Update</item>
+	    <item>Update Needed</item>
+    </string-array>
+    <string-array name="create_route_modes">
+        <item>Minimal Time</item>
+        <item>Minimal Transfers</item>
+    </string-array>
+    <string-array name="create_route_times">
+        <item>Day</item>
+        <item>Night</item>
+        <item>Rush</item>
+    </string-array>
+    <string-array name="sort_modes">
+    	<item>By City</item>
+    	<item>By Country</item>
+    </string-array>
+    <string-array name="about_list">
+    	<item>About</item>
+    	<item>Updates</item>
+    	<item>Terms and Conditions</item>
+    	<item>Support us</item>
+    </string-array>
+</resources>

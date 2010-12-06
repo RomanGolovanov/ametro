@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+    <string name="pref_section_general">Autres</string>
+    <string name="pref_section_debug">Debug</string>
+    <string name="pref_locale_key">LOCALE</string>
+    <string name="pref_locale">Langage</string>
+    <string name="pref_auto_locate">Trouver un lieu</string>
+    <string name="pref_auto_locate_key">AUTO_LOCATION</string>
+    <string name="pref_locale_description">Langage à utiliser pour l\'affichage interface utilisateur et données</string>
+    <string name="pref_auto_locate_description">Utiliser la localisation par GPS/GSM pour vous géolocaliser</string>
+    <string name="pref_debug">Mode Développement activé</string>
+    <string name="pref_debug_key">DEBUG</string>
+    <string name="pref_debug_description">Fonction en développement: le choix de la station sur la carte</string>
+    <string name="pref_auto_import_addons">Importer des Addons</string>
+    <string name="pref_auto_import_addons_description">Importer des informations texte depuis les cartes PMZ</string>
+    <string name="pref_auto_import_addons_key">IMPORT_ADDONS</string>
+    <string name="pref_anti_alias">Activer l\'anti-alias</string>
+    <string name="pref_anti_alias_key">ANTI_ALIAS</string>
+    <string name="pref_anti_alias_description">Anti-alias graphiques des cartes</string>
+    <string name="pref_anti_alias_disable_on_scroll">Désactiver l\'anti-alias</string>
+    <string name="pref_anti_alias_disable_on_scroll_key">ANTI_ALIAS_DISABLE_ON_SCROLL</string>
+    <string name="pref_anti_alias_disable_on_scroll_description">Désact. anti-alias défilement</string>
+
+    <string name="pref_section_map_view">Cartes</string>
+    <string name="pref_section_map_view_description">Option d\'affichage des cartes</string>
+
+    <string name="pref_section_auto_update">Catalogue cartes en ligne</string>
+    <string name="pref_section_auto_update_description">Options d\'accès du catalogue des cartes en ligne</string>
+
+    <string name="pref_auto_update_map_index_on_show">Affichage des MAJ</string>
+    <string name="pref_auto_update_map_index_on_show_key">AUTO_UPDATE_INDEX_ON_SHOW</string>
+    <string name="pref_auto_update_map_index_on_show_description">Télécharger les cartes en ligne lors de l\'affichage, mais pas à la fréquence d\'une fois par heure</string>
+
+    <string name="pref_auto_update_map_index">Vérifier MAJ des cartes</string>
+    <string name="pref_auto_update_map_index_key">AUTO_UPDATE_INDEX</string>
+    <string name="pref_auto_update_map_index_description">Mise à jour des cartes en ligne lorsqu\'une connexion Internet est disponible</string>
+    
+    <string name="pref_auto_update_maps">MAJ automatique</string>
+    <string name="pref_auto_update_maps_key">AUTO_UPDATE_MAPS</string>
+    <string name="pref_auto_update_maps_description">Mise à jour des cartes lorsqu\'une connexion Internet est disponible</string>
+    
+    <string name="pref_auto_update_url">Catalogue URL en ligne</string>
+    <string name="pref_auto_update_url_key">ONLINE_CATALOG_URL</string>
+    <string name="pref_auto_update_url_description">Liste web des URL de cartes en ligne. Laisser vide par défaut.</string>
+    <string name="pref_auto_update_url_message">Laisser vide par défaut</string>
+
+    <string name="pref_auto_update_period">Périodicité des MAJ</string>
+    <string name="pref_auto_update_period_key">AUTO_UPDATE_PERIOD</string>
+    <string name="pref_auto_update_period_description">Périodicité de mise à jour</string>
+
+    <string name="pref_auto_update_networks">Utilisation réseau</string>
+    <string name="pref_auto_update_networks_key">AUTO_UPDATE_NETWORKS</string>
+    <string name="pref_auto_update_networks_description">Réseau à utiliser pour mise à jour</string>
+
+    <string name="pref_section_maplist">Liste des cartes</string>
+    <string name="pref_section_maplist_description">Réglages de l\'affichage de la liste des cartes</string>
+
+    <string name="pref_refresh_country_icons">Raffraîchir drapeaux pays</string>
+    <string name="pref_refresh_country_icons_key">REFRESH_COUNTRY_ICONS</string>
+    <string name="pref_refresh_country_icons_description">Forcer la mise à jour des drapeaux des pays depuis le serveur</string>
+    <string name="pref_enable_country_icons">Activer drapeaux pays</string>
+    <string name="pref_enable_country_icons_key">ENABLE_COUNTRY_ICONS</string>
+    <string name="pref_enable_country_icons_description">Afficher les drapeaux des pays dans la liste des cartes</string>
+
+    <string name="pref_import">Activer l\'import PMZ</string>
+    <string name="pref_import_key">PMZ_IMPORT</string>
+    <string name="pref_import_description">Cocher pour autoriser l\'import des cartes au format PMZ</string>
+
+    <string name="pref_section_license">License</string>
+    <string name="pref_section_license_key">LICENSE</string>
+    <string name="pref_section_license_description">Voir les informations à propos de la license de ce programme</string>
+ 
+    <string name="pref_section_donate">Aider les Dévelopeurs</string>
+    <string name="pref_section_donate_key">Faire un Don</string>
+    <string name="pref_section_donate_description">Vous pouvez faire un Don aux développeurs sur cette page</string>
+ 
+    <string name="pref_donate_paypal_mpl">par PayPal</string>
+    <string name="pref_donate_paypal_mpl_key">DONATE_PAYPAL_LIBRARY</string>
+    <string name="pref_donate_paypal_mpl_description">Utiliser la plateforme officielle PayPal</string>
+    
+    <string name="pref_donate_paypal">par PayPal</string>
+    <string name="pref_donate_paypal_key">DONATE_PAYPAL</string>
+    <string name="pref_donate_paypal_description">désactivé</string>
+    
+    <string name="pref_donate_yandex">par Yandex.Money</string>
+    <string name="pref_donate_yandex_key">DONATE_YANDEX</string>
+    <string name="pref_donate_yandex_description">41001667593841, ouvrir le formulaire de Don sur money.yandex.ru</string>
+    
+    <string name="pref_donate_wm">par WebMoney</string>
+    <string name="pref_donate_wm_key">DONATE_WM</string>
+    <string name="pref_donate_wm_description">R191907383552, Z422979142707, ouvrir WMKeeper Light</string>
+    
+    <string name="pref_donate_qiwi">par QIWI</string>
+    <string name="pref_donate_qiwi_key">DONATE_QIWI</string>
+    <string name="pref_donate_qiwi_description">Compte 9261788045</string>
+    
+    <string name="pref_donate_mb">par MoneyBookers</string>
+    <string name="pref_donate_mb_key">DONATE_MB</string>
+    <string name="pref_donate_mb_description">Ouvrir le formulaire de Don sur www.moneybookers.com</string>
+    
+    <string name="pref_donate_alertpay">par AlertPay</string>
+    <string name="pref_donate_alertpay_key">DONATE_ALERTPAY</string>
+    <string name="pref_donate_alertpay_description">Ouvrir le formulaire de Don sur www.alertpay.com</string>
+</resources>

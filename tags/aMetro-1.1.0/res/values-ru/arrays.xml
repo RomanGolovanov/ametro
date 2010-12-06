@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="catalog_names">
+        <item>Мои карты</item>
+        <item>Импорт</item>
+        <item>Каталог</item>
+    </string-array>   
+    <string-array name="pref_renderer_type_texts">
+        <item>Асинхронный</item>
+        <item>Синхронный</item>
+    </string-array>
+    <string-array name="pref_locale_texts">
+        <item>Автоматически</item>
+        <item>Русский</item>
+        <item>Английский</item>
+    </string-array>
+    <string-array name="pref_auto_update_period_texts">
+        <item>Ежедневно</item>
+        <item>Еженедельно</item>
+        <item>Ежемесячно</item>
+        <!-- <item>Каждые 15 минут</item>  -->
+    </string-array>
+	<string-array name="pref_auto_update_networks_texts">
+        <item>Только WiFi </item>
+        <item>Мобильная или WiFi</item>
+        <item>Любая сеть</item>
+    </string-array>
+    <string-array name="transport_types">
+	    <item>Неизвестный</item>
+		<item>Метро</item>
+	    <item>Трамвай</item>
+	    <item>Автобус</item>
+	    <item>Электричка</item>
+	    <item>Речной трамвай</item>
+	    <item>Троллейбус</item>
+	    <item>Фуникулер</item>
+    </string-array>       
+    <string-array name="transport_type_lines">
+	    <item>Неизвестные линии...</item>
+		<item>Ветки метро...</item>
+	    <item>Маршруты трамваев...</item>
+	    <item>Маршруты автобусов...</item>
+	    <item>Линии электропоездов...</item>
+	    <item>Маршруты речных трамваев...</item>
+	    <item>Маршруты троллейбусов...</item>
+	    <item>Ветки фуникулера</item>
+    </string-array>       
+    <string-array name="catalog_map_states">
+	    <item>Автономная</item>
+	    <item>Не поддерживается</item>
+	    <item>Повреждена</item>
+	    <item>Есть обновление</item>
+	    <item>Установлена</item>
+	    <item>Доступна для импорта</item>
+	    <item>Доступна для загрузки</item>
+	    <item>Обновление не поддерживается</item>
+	    <item>Необходимо обновить</item>
+	    <item>В очереди на загрузку...</item>
+	    <item>В очереди на импорт...</item>
+	    <item>Загружается...</item>
+	    <item>Импортируется...</item>
+	    <item>Вычисляется...</item>
+	    <item>Есть обновление</item>
+	    <item>Необходимо обновить</item>
+    </string-array>
+    <string-array name="create_route_modes">
+        <item>Минимальное время</item>
+        <item>Минимум переходов</item>
+    </string-array>
+    <string-array name="create_route_times">
+        <item>День</item>
+        <item>Ночь</item>
+        <item>Час пик</item>
+    </string-array>
+    <string-array name="sort_modes">
+    	<item>По Городу</item>
+    	<item>По Стране</item>
+    </string-array>
+    <string-array name="about_list">
+    	<item>О программе</item>
+    	<item>Обновления</item>
+    	<item>Условия использования</item>
+    	<item>Поддержать</item>
+    </string-array>
+</resources>

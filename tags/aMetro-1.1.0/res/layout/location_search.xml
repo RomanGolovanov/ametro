@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:gravity="center"
+	android:layout_width="fill_parent" android:layout_height="wrap_content"
+	android:padding="10sp">
+	<TextView android:text="@string/locate_wait_title" android:id="@+id/title"
+		android:gravity="center" android:textStyle="bold" android:textSize="20sp"
+		android:layout_width="wrap_content" android:layout_height="wrap_content" />
+		
+	<TextView android:text="@string/locate_wait_text" android:id="@+id/text"
+		android:gravity="center" android:textSize="14sp"
+		android:layout_marginTop="6sp"
+		android:layout_width="wrap_content" android:layout_height="wrap_content" />
+		
+	<ProgressBar style="?android:attr/progressBarStyleHorizontal"
+		android:layout_marginTop="6sp" android:id="@+id/progressbar"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:keepScreenOn="true" android:indeterminate="true" />
+	<LinearLayout android:orientation="horizontal" android:gravity="center"
+		android:layout_marginTop="6sp"
+		android:layout_width="fill_parent" android:layout_height="wrap_content">
+		
+		<Button android:id="@+id/btn_settings" android:layout_width="wrap_content"
+			android:paddingLeft="20sp"
+			android:paddingRight="20sp"
+			android:layout_height="wrap_content" android:text="@string/btn_settings" />
+			
+		<Button android:id="@+id/btn_cancel" android:layout_width="wrap_content"
+			android:paddingLeft="20sp"
+			android:paddingRight="20sp"
+			android:layout_height="wrap_content" android:text="@android:string/cancel" />
+	
+	</LinearLayout>
+</LinearLayout>

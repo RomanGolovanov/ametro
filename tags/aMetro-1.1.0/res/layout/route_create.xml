@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:layoutAnimation="@anim/layout_top_to_bottom"
+	android:orientation="vertical" android:background="#80808080">
+	<LinearLayout android:layout_width="fill_parent"
+		android:id="@+id/create_route_panel" 
+		android:layout_height="wrap_content"
+		android:orientation="vertical" 
+		android:background="#ff303030">
+		<LinearLayout android:orientation="horizontal"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:paddingLeft="5dip" android:paddingTop="5dip" android:gravity="center"
+			android:paddingRight="5dip" android:background="#00000000">
+			<AutoCompleteTextView android:id="@+id/create_route_from_text"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:hint="@string/create_route_from" android:layout_weight="1" />
+			<ImageButton android:id="@+id/create_route_from_button"
+				android:src="@android:drawable/ic_input_get" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:padding="5dip"
+				android:layout_weight="0" />
+		</LinearLayout>
+		<LinearLayout android:orientation="horizontal"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:paddingLeft="5dip" android:paddingBottom="5dip" android:gravity="center"
+			android:paddingRight="5dip"  android:background="#00000000">
+			<AutoCompleteTextView android:id="@+id/create_route_to_text"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:hint="@string/create_route_to" android:layout_weight="1" />
+			<ImageButton android:id="@+id/create_route_to_button"
+				android:src="@android:drawable/ic_input_get" android:completionHint="to station"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:padding="5dip" android:layout_weight="0" />
+		</LinearLayout>
+		<LinearLayout android:orientation="horizontal"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:paddingLeft="5dip" android:paddingBottom="5dip"
+			android:gravity="center" android:paddingRight="5dip"
+			 android:background="#00000000">
+
+			<Button android:id="@+id/create_route_favorites_button"
+				android:drawableLeft="@android:drawable/star_big_on" android:text="@string/create_route_favorites_button"
+				android:paddingRight="10dip" 
+				android:paddingLeft="10dip"
+				android:paddingTop="0dip" 
+				android:paddingBottom="0dip"
+				android:layout_weight="1"
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content" />
+				
+			<Button android:id="@+id/create_route_create_button"
+				android:drawableLeft="@android:drawable/ic_menu_view" 
+				android:text="@string/create_route_create_button"
+				android:paddingRight="10dip" 
+				android:paddingLeft="10dip"
+				android:paddingTop="0dip" 
+				android:paddingBottom="0dip"
+				android:layout_weight="1"
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content" />
+		</LinearLayout>
+	</LinearLayout>
+</LinearLayout>

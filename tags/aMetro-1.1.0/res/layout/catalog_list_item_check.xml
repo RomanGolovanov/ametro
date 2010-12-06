@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<org.ametro.ui.view.CheckedLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:orientation="horizontal" android:id="@+id/content"
+	android:gravity="center_vertical" android:layout_height="?android:attr/listPreferredItemHeight">
+	<LinearLayout android:layout_width="wrap_content"
+		android:id="@+id/country_flag_panel"
+		android:layout_height="wrap_content" android:orientation="vertical"
+		android:gravity="center">
+		<ImageView android:id="@+id/iso_icon" android:layout_width="wrap_content"
+			android:layout_margin="0px"
+			android:layout_height="wrap_content" android:src="@drawable/no_country" />
+		<TextView android:id="@+id/country_iso" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:textSize="14sp"
+			android:layout_margin="0px"
+			android:text="RUS" android:gravity="top" />
+	</LinearLayout>
+	<RelativeLayout android:gravity="center_vertical"
+		android:layout_width="fill_parent" android:padding="6sp"
+		android:layout_height="?android:attr/listPreferredItemHeight">
+		<LinearLayout android:id="@+id/icons" android:layout_alignParentTop="true"
+			android:layout_alignParentRight="true"
+			android:layout_marginRight="44sp"
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" />
+		<TextView android:id="@+id/state" 
+			android:layout_alignParentBottom="true" 
+			android:layout_alignParentRight="true" 
+			android:layout_width="wrap_content" 
+			android:layout_marginRight="44sp" 
+			android:layout_height="wrap_content" android:text="256 KB" />
+		<CheckedTextView android:id="@android:id/text1" 
+			android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+			android:gravity="left|top"
+			android:textColor="@android:color/white"
+			android:layout_alignParentTop="true" 
+			android:layout_alignParentLeft="true" 
+			android:layout_alignParentRight="true" 
+			android:layout_marginLeft="4sp"
+			android:lines="1"
+			android:ellipsize="marquee"
+			android:marqueeRepeatLimit="marquee_forever"
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content"
+			android:textSize="20sp" android:text="Moscow" />
+		<TextView android:id="@+id/country"
+			android:layout_alignParentBottom="true" android:layout_marginLeft="4sp"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:textSize="14sp" android:text="Installed" />
+	</RelativeLayout>
+</org.ametro.ui.view.CheckedLinearLayout>

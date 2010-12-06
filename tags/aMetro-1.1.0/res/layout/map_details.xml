@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent">
+
+	<RelativeLayout android:id="@+id/top_panel"
+		android:layout_width="fill_parent" android:layout_alignParentTop="true"
+		android:layout_height="?android:attr/listPreferredItemHeight"
+		android:background="#ff808080" android:padding="4dip">
+		<ImageView android:id="@+id/iso_icon" android:layout_width="wrap_content"
+			android:layout_height="fill_parent" android:layout_alignParentTop="true"
+			android:layout_alignParentBottom="true" android:layout_marginRight="6sp"
+			android:src="@drawable/appicon" />
+		<TextView android:id="@+id/secondLine" android:layout_width="wrap_content"
+			android:textColor="#ffffffff" android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/iso_icon"
+			android:layout_alignParentBottom="true"
+			android:layout_alignParentRight="true" android:singleLine="true"
+			android:layout_alignWithParentIfMissing="true"
+			android:textSize="14sp" android:ellipsize="marquee"
+			android:marqueeRepeatLimit="marquee_forever" android:text="Transport types" />
+		<TextView android:layout_width="wrap_content" android:id="@+id/firstLine"
+			android:textColor="#ffffffff" android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/iso_icon"
+			android:layout_alignParentRight="true" android:layout_alignParentTop="true"
+			android:layout_above="@id/secondLine" android:textSize="20sp"
+			android:layout_alignWithParentIfMissing="true" android:gravity="center_vertical" />
+
+		<TextView android:id="@+id/version" android:layout_above="@id/version"
+			android:layout_alignParentRight="true" android:layout_marginTop="12sp"
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+
+	</RelativeLayout>
+	<TextView android:id="@+id/top_panel_splitter"
+		android:layout_below="@id/top_panel" android:background="@drawable/white_splitter"
+		android:layout_width="fill_parent" android:layout_height="1sp" />
+
+	<LinearLayout android:background="#ff808080"
+		android:gravity="center" android:id="@+id/bottom_panel"
+		android:layout_alignParentBottom="true" 
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content" 
+		android:paddingTop="2sp"
+		android:orientation="horizontal">
+		<Button android:id="@+id/btn_open" android:layout_width="wrap_content"
+			android:layout_weight="1" android:layout_height="wrap_content"
+			android:text="@string/btn_open" />
+		<Button android:id="@+id/btn_close" android:layout_width="wrap_content"
+			android:layout_weight="1" android:layout_height="wrap_content"
+			android:text="@string/btn_close" />
+	</LinearLayout>
+	<TextView android:id="@+id/bottom_panel_splitter"
+		android:layout_above="@id/bottom_panel" android:background="@drawable/white_splitter"
+		android:layout_width="fill_parent" android:layout_height="1sp" />
+
+	<ScrollView android:layout_above="@id/bottom_panel_splitter"
+		android:layout_below="@id/top_panel_splitter" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:layout_marginTop="2sp"
+		android:layout_marginBottom="2sp">
+		<org.ametro.ui.view.TextStripView
+			android:layout_alignParentTop="true" android:id="@+id/content"
+			android:layout_width="fill_parent" android:layout_height="wrap_content" />
+	</ScrollView>
+</RelativeLayout>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+    <string name="pref_section_general">Другое</string>
+    <string name="pref_section_debug">Отладка</string>
+    <string name="pref_locale">Язык</string>
+    <string name="pref_auto_locate">Определение положения</string>
+    <string name="pref_locale_description">Язык используемый при отображении карт</string>
+    <string name="pref_auto_locate_description">Использовать GPS/GSM для определения местоположения</string>
+    <string name="pref_debug">Функции в разработке</string>
+    <string name="pref_debug_key">DEBUG</string>
+    <string name="pref_debug_description">Включить функции в разработке: выделение станций на карте</string>
+    <string name="pref_auto_import_addons">Импорт доп.информации</string>
+    <string name="pref_auto_import_addons_description">Импортировать дополнительные тексты из PMZ карт</string>
+    <string name="pref_anti_alias">Включить сглаживание</string>
+    <string name="pref_anti_alias_description">Сглаживать изображение карты</string>
+    <string name="pref_anti_alias_disable_on_scroll">Без сглаживания при прокрутке</string>
+    <string name="pref_anti_alias_disable_on_scroll_description">Увеличит скорость работы на медленных устройствах</string>
+
+	<string name="pref_enable_zoom_controls">Маштабирование кнопками</string>
+	<string name="pref_enable_zoom_controls_description">Включает отображение кнопок маштабирования на карте</string>
+	
+	<string name="pref_enable_zoom_volume_controls">Маштабирование громкостью</string>
+	<string name="pref_enable_zoom_volume_controls_description">Включает маштабирование кнопками громкости</string>
+
+	<string name="pref_trackball_scroll_speed">Скорость трекбола</string>
+	<string name="pref_trackball_scroll_speed_description">Настройка скорости прокрутки трекболом.</string>
+
+	<string name="pref_renderer_type">Тип рендеринга</string>
+	<string name="pref_renderer_type_description">Синхронный рендеринг может улучшить визуализацию на медленных устройствах</string>
+
+    <string name="pref_section_map_view">Карта</string>
+    <string name="pref_section_map_view_description">Настройки отображения карт</string>
+
+    <string name="pref_section_auto_update">Онлайн каталог карт</string>
+    <string name="pref_section_auto_update_description">Доступ к онлайн каталогу карт</string>
+    
+    <string name="pref_auto_update_map_index_on_show">Обновление при открытии</string>
+    <string name="pref_auto_update_map_index_on_show_description">Обновлять список карт при открытии, но не чаще раза в час</string>
+    
+    <string name="pref_auto_update_map_index">Проверка обновлений карт</string>
+    <string name="pref_auto_update_map_index_description">Автоматически проверять обновления карт с сервера при наличии сети</string>
+    
+    <string name="pref_auto_update_maps">Загрузка обновлений</string>
+    <string name="pref_auto_update_maps_description">Автоматически обновлять карты с сервера при наличии сети</string>
+    
+	<string name="pref_auto_update_url">Адрес сервера карт</string>
+    <string name="pref_auto_update_url_description">Web адрес каталога карт. Оставьте пустым для значения по умолчанию</string>
+    <string name="pref_auto_update_url_message">Оставьте пустым для значения по умолчанию</string>
+    
+    <string name="pref_auto_update_period">Период обновлений</string>
+    <string name="pref_auto_update_period_description"></string>
+    
+    <string name="pref_auto_update_networks">Используемая сеть</string>
+    <string name="pref_auto_update_networks_description">Какие сети использовать для получения обновлений</string>
+    
+    <string name="pref_section_maplist">Списки Карт</string>
+    <string name="pref_section_maplist_description">Режимы отбражения списков карт</string>
+
+    <string name="pref_refresh_country_icons">Загрузить флаги</string>
+    <string name="pref_refresh_country_icons_description">Загрузить флаги стран с сервера</string>
+    <string name="pref_enable_country_icons">Отображать флаги</string>
+    <string name="pref_enable_country_icons_description">Отображать флаги стран в списках карт</string>
+
+    <string name="pref_import">Импорт PMZ карт</string>
+    <string name="pref_import_key">PMZ_IMPORT</string>
+    <string name="pref_import_description">Включите при необходимости импорта карт из PMZ формата</string>
+
+    <string name="pref_section_license">Лицензия</string>
+    <string name="pref_section_license_description">Посмотреть информацию о пользовательском соглашении</string>
+
+	<string name="pref_section_donate">Поддержать разработчиков</string>
+    <string name="pref_section_donate_description">Здесь вы можете материально выразить свои чувства</string>
+    
+    <string name="pref_donate_paypal_mpl">Клиент PayPal</string>
+    <string name="pref_donate_paypal_mpl_description">используя официальный клиент PayPal Mobile Platform Library</string>
+    
+    <string name="pref_donate_paypal">PayPal</string>
+    <string name="pref_donate_paypal_description">отключено</string>
+    
+    <string name="pref_donate_yandex">Яндекс.Деньги</string>
+    <string name="pref_donate_yandex_description">41001667593841, открыть форму перевода на сайте money.yandex.ru</string>
+    
+    <string name="pref_donate_wm">WebMoney</string>
+    <string name="pref_donate_wm_description">R191907383552, Z422979142707, открыть WMKeeper Light</string>
+    
+    <string name="pref_donate_qiwi">QIWI</string>
+    <string name="pref_donate_qiwi_description">Кошелек №9261788045</string>
+    
+    <string name="pref_donate_mb">MoneyBookers</string>
+    <string name="pref_donate_mb_description">открыть форму перевода на сайте www.moneybookers.com</string>
+    
+    <string name="pref_donate_alertpay">AlertPay</string>
+    <string name="pref_donate_alertpay_description">открыть форму перевода на сайте www.alertpay.com</string>
+
+
+</resources>

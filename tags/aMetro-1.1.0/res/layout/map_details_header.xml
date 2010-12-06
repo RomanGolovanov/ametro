@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:background="#ff505050"
+	android:textColor="#ffc0c0c0" android:layout_height="32sp"
+	android:textSize="14sp" android:paddingTop="4sp" android:paddingBottom="4sp"
+	android:orientation="horizontal">
+	<TextView android:layout_width="wrap_content" android:paddingLeft="10sp"
+		android:layout_height="wrap_content" android:id="@+id/text_left"
+		android:layout_weight="1" />
+	<TextView android:layout_width="wrap_content" android:paddingRight="10sp"
+		android:layout_height="wrap_content" android:id="@+id/text_right"
+		android:layout_weight="0" />
+</LinearLayout>

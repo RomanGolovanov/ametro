@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content">
+	<TextView android:id="@+id/text" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:padding="6sp"
+		android:layout_marginRight="2sp"
+		android:textColor="@color/dialog_text_color"
+		android:textColorLink="@color/links_color"
+		 />
+	<ImageView android:layout_alignParentTop="true"
+		android:layout_width="fill_parent" android:layout_height="1sp"
+		android:src="@drawable/grey_splitter" />
+</RelativeLayout>	

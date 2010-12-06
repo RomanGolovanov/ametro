@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+	<Preference android:title="@string/pref_donate_alertpay"
+                          android:key="@string/pref_donate_alertpay_key"
+                          android:summary="@string/pref_donate_alertpay_description" />
+	<Preference android:title="@string/pref_donate_mb"
+                          android:key="@string/pref_donate_mb_key"
+                          android:summary="@string/pref_donate_mb_description" />
+	<Preference android:title="@string/pref_donate_yandex"
+                          android:key="@string/pref_donate_yandex_key"
+                          android:summary="@string/pref_donate_yandex_description" />
+ 
+	<!--<Preference android:title="@string/pref_donate_wm"
+                          android:key="@string/pref_donate_wm_key"
+                          android:summary="@string/pref_donate_wm_description" /> -->
+	<Preference android:title="@string/pref_donate_qiwi"
+                          android:key="@string/pref_donate_qiwi_key"
+                          android:summary="@string/pref_donate_qiwi_description" />
+</PreferenceScreen>

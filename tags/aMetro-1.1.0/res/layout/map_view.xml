@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent">
+	<FrameLayout android:id="@+id/map_frame"
+		android:layout_width="fill_parent" android:layout_height="fill_parent">
+	</FrameLayout>
+	<LinearLayout android:id="@+id/browse_vector_map_panel_top"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:layout_alignParentLeft="true" android:layout_alignParentTop="true"
+		android:layout_marginTop="10dip" android:layout_marginLeft="5dip"
+		android:layout_marginRight="10dip" android:orientation="vertical"
+		android:gravity="center_vertical">
+		<TextView android:id="@+id/browse_vector_map_time"
+			android:background="#ffffffff" android:textColor="#ff000000"
+			android:layout_width="70dip" android:layout_height="30dip"
+			android:gravity="center" />
+	</LinearLayout>
+	<FrameLayout android:layout_width="fill_parent"
+		android:layout_height="50dip" android:layout_alignParentBottom="true"
+		android:gravity="center_vertical"
+		android:paddingLeft="10dip"
+		android:paddingRight="10dip"
+		android:orientation="horizontal"
+		>
+
+		<ImageButton android:id="@+id/browse_vector_map_button_list"
+			android:layout_gravity="left" android:layout_width="38dip"
+			android:layout_height="38dip"
+			android:layout_marginTop="5dip"
+			android:src="@drawable/icon_btn_details" />
+
+		<ZoomControls android:id="@+id/browse_vector_map_zoom"
+			android:layout_gravity="right" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+	</FrameLayout>
+</RelativeLayout>

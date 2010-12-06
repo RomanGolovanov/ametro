@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:gravity="top"
+	android:fadingEdge="none"
+	>
+	
+	<!-- android:background="#ff808080" -->
+	<LinearLayout android:fadingEdge="none"
+		android:id="@+id/actionbar"
+		android:layout_height="46sp" android:layout_width="fill_parent" 
+ 		android:layout_alignParentTop="true"
+ 		android:background="@drawable/grey_3point_gradient"
+		android:visibility="gone"
+		android:gravity="center_vertical"
+		android:paddingTop="4sp"
+		>
+		
+		<EditText android:id="@+id/actionbar_text" android:layout_weight="1"
+			android:inputType="textFilter"
+			android:layout_width="wrap_content" android:layout_height="40sp"
+			android:textSize="14sp"
+			android:layout_marginLeft="4sp"
+			 />
+			
+		<ImageButton android:id="@+id/actionbar_hide"
+			android:src="@drawable/icon_btn_delete" 
+			android:layout_width="wrap_content" android:layout_height="40sp"
+			android:paddingLeft="6sp"
+			android:paddingRight="6sp"
+			/>
+	</LinearLayout>
+	
+	<ExpandableListView android:id="@+id/list" android:fadingEdge="none"
+		android:layout_below="@id/actionbar"
+		android:layout_alignParentBottom="true"
+		android:groupIndicator="@drawable/grey_group_indicator"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:layout_alignWithParentIfMissing="true"		
+		/>
+	<!-- android:groupIndicator="@drawable/grey_group_indicator" -->
+</RelativeLayout>
