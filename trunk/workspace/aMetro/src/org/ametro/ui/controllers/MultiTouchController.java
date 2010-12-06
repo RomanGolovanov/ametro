@@ -9,7 +9,6 @@ import android.graphics.RectF;
 import android.os.Handler;
 import android.os.Message;
 import android.util.FloatMath;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.ViewConfiguration;
@@ -197,7 +196,7 @@ public class MultiTouchController {
 	
 	private boolean doActionPointerDown(MotionEventWrapper event){
 		zoomBase = distance(event);
-		Log.d(TAG, "oldDist=" + zoomBase);
+		//Log.d(TAG, "oldDist=" + zoomBase);
 		if (zoomBase > 10f) {
 			if (!scroller.isFinished()) {
 				scroller.abortAnimation();
@@ -442,7 +441,7 @@ public class MultiTouchController {
 		PointF p = new PointF();
 		p.set(touchStartPoint);
 		unmapPoint(p);
-		Log.w(TAG,"point=" + touchStartPoint.x + "," + touchStartPoint.y);
+		//Log.w(TAG,"point=" + touchStartPoint.x + "," + touchStartPoint.y);
 		return p;
 	}
 	
