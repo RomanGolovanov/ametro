@@ -22,7 +22,7 @@ package org.ametro.directory;
 
 import java.io.File;
 
-import org.ametro.ApplicationEx;
+import org.ametro.app.ApplicationEx;
 import org.ametro.model.TransportType;
 
 import android.content.Context;

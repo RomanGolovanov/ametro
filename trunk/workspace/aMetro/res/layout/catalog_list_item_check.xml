@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<org.ametro.widget.CheckedLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<org.ametro.ui.view.CheckedLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent" android:orientation="horizontal" android:id="@+id/content"
 	android:gravity="center_vertical" android:layout_height="?android:attr/listPreferredItemHeight">
 	<LinearLayout android:layout_width="wrap_content"
@@ -47,4 +47,4 @@
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:textSize="14sp" android:text="Installed" />
 	</RelativeLayout>
-</org.ametro.widget.CheckedLinearLayout>
+</org.ametro.ui.view.CheckedLinearLayout>

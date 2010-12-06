@@ -23,10 +23,10 @@ package org.ametro.catalog.storage.tasks;
 import java.io.File;
 import java.net.URI;
 
-import org.ametro.Constants;
-import org.ametro.GlobalSettings;
 import org.ametro.R;
-import org.ametro.activity.CatalogTabHostActivity;
+import org.ametro.app.Constants;
+import org.ametro.app.GlobalSettings;
+import org.ametro.ui.CatalogTabHostActivity;
 import org.ametro.util.FileUtil;
 import org.ametro.util.IDownloadListener;
 import org.ametro.util.WebUtil;
@@ -42,7 +42,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
-import static org.ametro.Notifications.DOWNLOAD_ICONS_ID;
+import static org.ametro.app.Notifications.DOWNLOAD_ICONS_ID;
 
 public class DownloadIconsTask extends BaseTask implements IDownloadListener {
 

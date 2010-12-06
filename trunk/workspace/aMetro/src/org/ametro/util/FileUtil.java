@@ -21,7 +21,7 @@
 
 package org.ametro.util;
 
-import static org.ametro.Constants.LOG_TAG_MAIN;
+import static org.ametro.app.Constants.LOG_TAG_MAIN;
 
 import java.io.BufferedReader;
 import java.io.File;

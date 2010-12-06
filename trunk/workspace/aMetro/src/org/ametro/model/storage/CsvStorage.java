@@ -37,7 +37,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
-import org.ametro.Constants;
+import org.ametro.app.Constants;
 import org.ametro.model.LineView;
 import org.ametro.model.MapLayerContainer;
 import org.ametro.model.SchemeView;

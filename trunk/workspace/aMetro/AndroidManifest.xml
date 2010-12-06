@@ -7,50 +7,50 @@
 	
     <application android:debuggable="false" android:theme="@android:style/Theme.Black" 
         android:icon="@drawable/appicon"
-        android:label="@string/app_name" android:name="org.ametro.ApplicationEx">
+        android:label="@string/app_name" android:name="org.ametro.app.ApplicationEx">
         <activity android:label="@string/app_name"
             android:launchMode="singleTop" android:configChanges="keyboardHidden|orientation" 
-            android:name=".activity.MapViewActivity"
+            android:name=".ui.MapViewActivity"
             android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan">
-            <meta-data android:name="android.app.default_searchable" android:value=".activity.StationSearchActivity"/>
+            <meta-data android:name="android.app.default_searchable" android:value=".ui.StationSearchActivity"/>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MediaUnmountedActivity"/>
-        <activity android:name=".activity.MapDetailsActivity" android:theme="@android:style/Theme.NoTitleBar"/>
-        <activity android:name=".activity.RouteViewActivity"/>
+        <activity android:name=".ui.MediaUnmountedActivity"/>
+        <activity android:name=".ui.MapDetailsActivity" android:theme="@android:style/Theme.NoTitleBar"/>
+        <activity android:name=".ui.RouteViewActivity"/>
         <activity android:launchMode="singleTop"
-            android:name=".activity.RouteCreateActivity"
+            android:name=".ui.RouteCreateActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".activity.DonateActivity"/>
-        <activity android:name=".activity.SettingsActivity"/>
-        <activity android:name=".activity.StationViewActivity"/>
-        <activity android:name=".activity.StationListActivity"/>
-        <activity android:name=".activity.FavoriteRouteListActivity"/>
-        <activity android:name=".activity.CatalogTabHostActivity" android:configChanges="keyboardHidden|orientation" 
+        <activity android:name=".ui.DonateActivity"/>
+        <activity android:name=".ui.SettingsActivity"/>
+        <activity android:name=".ui.StationViewActivity"/>
+        <activity android:name=".ui.StationListActivity"/>
+        <activity android:name=".ui.FavoriteRouteListActivity"/>
+        <activity android:name=".ui.CatalogTabHostActivity" android:configChanges="keyboardHidden|orientation" 
             android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
         <activity android:label="@string/title_catalog_local"
-            android:name=".activity.CatalogLocalListActivity" android:configChanges="keyboardHidden|orientation" 
+            android:name=".ui.CatalogLocalListActivity" android:configChanges="keyboardHidden|orientation" 
             android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
         <activity android:label="@string/title_catalog_online"
-            android:name=".activity.CatalogOnlineListActivity" android:configChanges="keyboardHidden|orientation" 
+            android:name=".ui.CatalogOnlineListActivity" android:configChanges="keyboardHidden|orientation" 
             android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
         <activity android:label="@string/title_catalog_import"
-            android:name=".activity.CatalogImportListActivity" android:configChanges="keyboardHidden|orientation" 
+            android:name=".ui.CatalogImportListActivity" android:configChanges="keyboardHidden|orientation" 
             android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".activity.CatalogMapSelectionActivity"/>
-        <activity android:name=".activity.TaskQueuedList"/>
-        <activity android:name=".activity.TaskFailedList"/>
+        <activity android:name=".ui.CatalogMapSelectionActivity"/>
+        <activity android:name=".ui.TaskQueuedList"/>
+        <activity android:name=".ui.TaskFailedList"/>
         <!-- DIALOGS -->
         <activity android:label="@string/msg_donate_title"
-            android:name=".dialog.PaymentDetailsDialog" android:theme="@android:style/Theme.Dialog"/>
+            android:name=".ui.dialog.PaymentDetailsDialog" android:theme="@android:style/Theme.Dialog"/>
         <activity android:label="@string/msg_detect_location"
-            android:name=".dialog.LocationSearchDialog" android:theme="@android:style/Theme.Dialog"/>
+            android:name=".ui.dialog.LocationSearchDialog" android:theme="@android:style/Theme.Dialog"/>
         <!-- SEARCHS -->
         <activity android:label="@string/search_station"
-            android:launchMode="singleTop" android:name=".activity.StationSearchActivity">
+            android:launchMode="singleTop" android:name=".ui.StationSearchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH"/>
             </intent-filter>

@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeMap;
 
-import org.ametro.Constants;
+import org.ametro.app.Constants;
 import org.ametro.model.ext.ModelLocation;
 import org.ametro.util.csv.CsvReader;
 

@@ -56,7 +56,7 @@
 		android:layout_below="@id/top_panel_splitter" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:layout_marginTop="2sp"
 		android:layout_marginBottom="2sp">
-		<org.ametro.widget.TextStripView
+		<org.ametro.ui.view.TextStripView
 			android:layout_alignParentTop="true" android:id="@+id/content"
 			android:layout_width="fill_parent" android:layout_height="wrap_content" />
 	</ScrollView>

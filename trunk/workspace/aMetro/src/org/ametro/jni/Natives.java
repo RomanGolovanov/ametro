@@ -20,7 +20,7 @@
  */
 package org.ametro.jni;
 
-import org.ametro.Constants;
+import org.ametro.app.Constants;
 import org.ametro.render.RenderElement;
 
 import android.graphics.RectF;

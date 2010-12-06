@@ -20,7 +20,7 @@
  */
 package org.ametro.receiver;
 
-import org.ametro.ApplicationEx;
+import org.ametro.app.ApplicationEx;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

@@ -28,9 +28,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import org.ametro.ApplicationEx;
-import org.ametro.Constants;
 import org.ametro.R;
+import org.ametro.app.ApplicationEx;
+import org.ametro.app.Constants;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.storage.CatalogDeserializer;
