@@ -27,7 +27,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.ametro.Constants;
+import org.ametro.app.Constants;
 import org.ametro.util.csv.CsvReader;
 
 import android.content.Context;

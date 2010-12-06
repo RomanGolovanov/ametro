@@ -28,7 +28,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URI;
 
-import org.ametro.ApplicationEx;
+import org.ametro.app.ApplicationEx;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;

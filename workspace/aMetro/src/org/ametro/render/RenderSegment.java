@@ -21,7 +21,6 @@
 
 package org.ametro.render;
 
-import org.ametro.graphics.ExtendedPath;
 import org.ametro.model.LineView;
 import org.ametro.model.SchemeView;
 import org.ametro.model.SegmentView;
@@ -29,6 +28,7 @@ import org.ametro.model.StationView;
 import org.ametro.model.TransportSegment;
 import org.ametro.model.ext.ModelPoint;
 import org.ametro.model.util.ModelUtil;
+import org.ametro.util.ExtendedPath;
 
 import android.graphics.Canvas;
 import android.graphics.ComposePathEffect;

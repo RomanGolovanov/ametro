@@ -23,7 +23,7 @@ package org.ametro.catalog.storage.tasks;
 import java.io.File;
 import java.util.ArrayList;
 
-import org.ametro.Constants;
+import org.ametro.app.Constants;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.storage.CatalogStorage;

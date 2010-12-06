@@ -28,8 +28,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeSet;
 
-import org.ametro.ApplicationEx;
-import org.ametro.Constants;
+import org.ametro.app.ApplicationEx;
+import org.ametro.app.Constants;
 import org.ametro.catalog.storage.CatalogSerializer;
 import org.ametro.directory.CatalogMapSuggestion;
 import org.ametro.directory.CityDirectory;

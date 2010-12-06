@@ -20,8 +20,8 @@
  */
 package org.ametro.catalog.storage;
 
-import static org.ametro.Notifications.TASK_FAILED_ID;
-import static org.ametro.Notifications.TASK_PROGRESS_ID;
+import static org.ametro.app.Notifications.TASK_FAILED_ID;
+import static org.ametro.app.Notifications.TASK_PROGRESS_ID;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,13 +30,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import org.ametro.ApplicationEx;
-import org.ametro.Constants;
-import org.ametro.GlobalSettings;
 import org.ametro.R;
-import org.ametro.activity.MapDetailsActivity;
-import org.ametro.activity.TaskFailedList;
-import org.ametro.activity.TaskQueuedList;
+import org.ametro.app.ApplicationEx;
+import org.ametro.app.Constants;
+import org.ametro.app.GlobalSettings;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.storage.tasks.BaseTask;
@@ -49,6 +46,9 @@ import org.ametro.catalog.storage.tasks.LoadFileCatalogTask;
 import org.ametro.catalog.storage.tasks.LoadWebCatalogTask;
 import org.ametro.catalog.storage.tasks.UpdateMapTask;
 import org.ametro.service.CatalogTaskQueueService;
+import org.ametro.ui.MapDetailsActivity;
+import org.ametro.ui.TaskFailedList;
+import org.ametro.ui.TaskQueuedList;
 import org.ametro.util.FileUtil;
 
 import android.app.Notification;

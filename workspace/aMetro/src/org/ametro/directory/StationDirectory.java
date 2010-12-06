@@ -28,7 +28,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.ametro.Constants;
+import org.ametro.app.Constants;
 import org.ametro.directory.CityStationDictionary.Entity;
 import org.ametro.model.ext.ModelLocation;
 import org.ametro.util.DateUtil;

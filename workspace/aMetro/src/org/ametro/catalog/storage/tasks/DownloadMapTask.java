@@ -24,9 +24,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 
-import org.ametro.ApplicationEx;
-import org.ametro.Constants;
-import org.ametro.GlobalSettings;
+import org.ametro.app.ApplicationEx;
+import org.ametro.app.Constants;
+import org.ametro.app.GlobalSettings;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.storage.CatalogStorage;

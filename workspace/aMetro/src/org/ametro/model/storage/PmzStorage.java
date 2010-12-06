@@ -19,8 +19,8 @@
  */
 package org.ametro.model.storage;
 
-import static org.ametro.Constants.LOCALE_EN;
-import static org.ametro.Constants.LOCALE_RU;
+import static org.ametro.app.Constants.LOCALE_EN;
+import static org.ametro.app.Constants.LOCALE_RU;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,8 +36,8 @@ import java.util.TreeMap;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import org.ametro.ApplicationEx;
-import org.ametro.Constants;
+import org.ametro.app.ApplicationEx;
+import org.ametro.app.Constants;
 import org.ametro.directory.CatalogMapSuggestion;
 import org.ametro.directory.CityDirectory;
 import org.ametro.directory.CityStationDictionary;

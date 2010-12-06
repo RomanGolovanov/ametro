@@ -21,14 +21,14 @@
 package org.ametro.service;
 
 
-import static org.ametro.Notifications.TASK_QUEUE_ID;
+import static org.ametro.app.Notifications.TASK_QUEUE_ID;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import org.ametro.Constants;
 import org.ametro.R;
-import org.ametro.activity.TaskQueuedList;
+import org.ametro.app.Constants;
+import org.ametro.ui.TaskQueuedList;
 
 import android.app.Notification;
 import android.app.NotificationManager;

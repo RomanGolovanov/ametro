@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 
-import org.ametro.algorithm.DijkstraHeap;
 import org.ametro.model.SchemeView;
 import org.ametro.model.Model;
 import org.ametro.model.TransportLine;
@@ -32,6 +31,7 @@ import org.ametro.model.TransportSegment;
 import org.ametro.model.TransportStation;
 import org.ametro.model.TransportTransfer;
 import org.ametro.util.CollectionUtil;
+import org.ametro.util.DijkstraHeap;
 
 public class RouteBuilder {
 

@@ -22,7 +22,7 @@ package org.ametro.model.storage;
 
 import java.util.Locale;
 
-import org.ametro.Constants;
+import org.ametro.app.Constants;
 import org.ametro.model.SchemeView;
 import org.ametro.model.Model;
 import org.ametro.util.StringUtil;

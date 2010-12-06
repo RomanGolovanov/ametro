@@ -22,9 +22,9 @@ package org.ametro.catalog.storage.tasks;
 
 import java.io.File;
 
-import org.ametro.ApplicationEx;
-import org.ametro.Constants;
-import org.ametro.GlobalSettings;
+import org.ametro.app.ApplicationEx;
+import org.ametro.app.Constants;
+import org.ametro.app.GlobalSettings;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.storage.CatalogStorage;

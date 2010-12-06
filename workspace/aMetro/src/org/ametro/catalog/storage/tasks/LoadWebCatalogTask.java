@@ -28,10 +28,10 @@ import java.net.URI;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import org.ametro.ApplicationEx;
-import org.ametro.Constants;
-import org.ametro.GlobalSettings;
 import org.ametro.R;
+import org.ametro.app.ApplicationEx;
+import org.ametro.app.Constants;
+import org.ametro.app.GlobalSettings;
 import org.ametro.catalog.storage.CatalogDeserializer;
 import org.ametro.util.FileUtil;
 import org.ametro.util.IDownloadListener;
@@ -41,7 +41,7 @@ import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
-import static org.ametro.Constants.ONLINE_CATALOG_DEPRECATED_TIMEOUT;
+import static org.ametro.app.Constants.ONLINE_CATALOG_DEPRECATED_TIMEOUT;
 
 public class LoadWebCatalogTask extends LoadBaseCatalogTask implements IDownloadListener {
 	

@@ -20,6 +20,8 @@
  */
 package org.ametro.service;
 
+import static org.ametro.app.Notifications.AUTO_UPDATE_ID;
+import static org.ametro.app.Notifications.AUTO_UPDATE_RESULT_ID;
 import static org.ametro.catalog.storage.CatalogStorage.LOCAL;
 import static org.ametro.catalog.storage.CatalogStorage.ONLINE;
 
@@ -28,13 +30,10 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-import org.ametro.ApplicationEx;
-import org.ametro.Constants;
-import org.ametro.GlobalSettings;
 import org.ametro.R;
-import org.ametro.activity.CatalogLocalListActivity;
-import org.ametro.activity.CatalogTabHostActivity;
-import org.ametro.activity.TaskQueuedList;
+import org.ametro.app.ApplicationEx;
+import org.ametro.app.Constants;
+import org.ametro.app.GlobalSettings;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.CatalogMap;
 import org.ametro.catalog.CatalogMapPair;
@@ -42,6 +41,9 @@ import org.ametro.catalog.CatalogMapState;
 import org.ametro.catalog.storage.CatalogStorage;
 import org.ametro.catalog.storage.CatalogStorageStateProvider;
 import org.ametro.catalog.storage.ICatalogStorageListener;
+import org.ametro.ui.CatalogLocalListActivity;
+import org.ametro.ui.CatalogTabHostActivity;
+import org.ametro.ui.TaskQueuedList;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -51,8 +53,6 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 
-import static org.ametro.Notifications.AUTO_UPDATE_ID;
-import static org.ametro.Notifications.AUTO_UPDATE_RESULT_ID;
 
 public class AutoUpdateService extends Service implements ICatalogStorageListener, Runnable {
 
