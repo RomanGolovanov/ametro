@@ -101,9 +101,10 @@ public class Constants {
 	};
 	
 	public static final String[] ONLINE_CATALOG_BASE_URLS = {
-		//"http://192.168.172.1/ametro/test/",
-		//"http://192.168.172.1/ametro/test/",
+		//"http://192.168.172.3/ametro/0.0.0/",
+		//"http://192.168.172.3/ametro/0.0.0/",
 		"http://dl.dropbox.com/u/8171021/0.4.0/",
+		//"http://ametro-project.narod.ru/0.4.0/",
 		"http://ametro-project.narod.ru/0.4.0/"
 	};
 	

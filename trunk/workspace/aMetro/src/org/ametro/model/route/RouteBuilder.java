@@ -71,15 +71,18 @@ public class RouteBuilder {
 //		final int flags = parameters.flags;
 		final int count = model.stations.length;
 		
-		final HashSet<Integer> checkedTransports = new HashSet<Integer>();
-		for(int transportId : parameters.transports){
-			checkedTransports.add(transportId);
+		HashSet<Integer> checkedTransports = null;
+		if(parameters.transports!=null){
+			checkedTransports = new HashSet<Integer>();
+			for(int transportId : parameters.transports){
+				checkedTransports.add(transportId);
+			}
 		}
 		
 		DijkstraHeap.Graph g = new DijkstraHeap.Graph(count);
 		
 		for (TransportSegment seg : model.segments) {
-			if(checkedTransports.contains(seg.mapId)){
+			if(checkedTransports==null || checkedTransports.contains(seg.mapId)){
 				Integer delay = seg.delay;
 				if (delay != null && delay != 0) {
 					g.addEdge(seg.stationFromId,seg.stationToId, (int)delay);
@@ -88,7 +91,7 @@ public class RouteBuilder {
 		}
 		
 		for(TransportTransfer tr : model.transfers){
-			if(checkedTransports.contains(tr.mapFromId) && checkedTransports.contains(tr.mapToId)){
+			if(checkedTransports==null || (checkedTransports.contains(tr.mapFromId) && checkedTransports.contains(tr.mapToId))){
 				Integer delay = tr.delay;
 				if (delay != null && delay != 0) {
 					if(delayMode!=-1 ){
