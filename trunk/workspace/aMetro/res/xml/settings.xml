@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-	<Preference android:title="@string/pref_section_donate" android:summary="@string/pref_section_donate_description" android:key="@string/pref_section_donate_key" />
+	<!-- Preference android:title="@string/pref_section_donate" android:summary="@string/pref_section_donate_description" android:key="@string/pref_section_donate_key" / -->
 	<PreferenceScreen android:title="@string/pref_section_map_view" android:summary="@string/pref_section_map_view_description">
         <CheckBoxPreference android:title="@string/pref_anti_alias"
                            android:key="@string/pref_anti_alias_key"

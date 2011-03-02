@@ -142,7 +142,11 @@ public class TextStripView extends LinearLayout {
 		public void setVisibility(int state) {
 			mDownloadButton.setVisibility(state == CatalogMapState.DOWNLOAD ? View.VISIBLE : View.GONE);
 			mUpdateButton.setVisibility(state == CatalogMapState.UPDATE || state == CatalogMapState.NEED_TO_UPDATE ? View.VISIBLE : View.GONE);
-			mCancelButton.setVisibility(state == CatalogMapState.DOWNLOADING || state == CatalogMapState.DOWNLOAD_PENDING ? View.VISIBLE : View.GONE);
+			mCancelButton.setVisibility(
+					/*state == CatalogMapState.DOWNLOADING ||*/ 
+					state == CatalogMapState.DOWNLOAD_PENDING ? View.VISIBLE : 
+						(state == CatalogMapState.DOWNLOADING ? View.INVISIBLE : View.GONE)
+				);
 			mCancelButton.setEnabled(state == CatalogMapState.DOWNLOAD_PENDING);
 			mProgressBar.setVisibility(state == CatalogMapState.DOWNLOADING ? View.VISIBLE : View.GONE);
 			if(state == CatalogMapState.DOWNLOADING){

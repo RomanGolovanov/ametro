@@ -48,7 +48,7 @@ public class SettingsActivity extends PreferenceActivity implements
 		OnPreferenceChangeListener, OnPreferenceClickListener {
 
 
-	private Preference mDonate;
+	//private Preference mDonate;
 	private Preference mLicense;
 	private Preference mRefreshIconPack;
 	private Preference mAutoUpdateEnabled;
@@ -68,7 +68,7 @@ public class SettingsActivity extends PreferenceActivity implements
 		mAutoUpdatePeriodValue = GlobalSettings.getUpdatePeriod(this);
 
 		addPreferencesFromResource(R.xml.settings);
-		mDonate = findPreference(getString(R.string.pref_section_donate_key));
+		//mDonate = findPreference(getString(R.string.pref_section_donate_key));
 		mLicense = findPreference(getString(R.string.pref_section_license_key));
 		mRefreshIconPack = findPreference(getString(R.string.pref_refresh_country_icons_key));
 		mAutoUpdateEnabled = findPreference(getString(R.string.pref_auto_update_map_index_key));
@@ -77,7 +77,7 @@ public class SettingsActivity extends PreferenceActivity implements
 
 		mLocationSearchEnabled = (CheckBoxPreference) findPreference(getString(R.string.pref_auto_locate_key));
 
-		mDonate.setOnPreferenceClickListener(this);
+		//mDonate.setOnPreferenceClickListener(this);
 		mLicense.setOnPreferenceClickListener(this);
 		mRefreshIconPack.setOnPreferenceClickListener(this);
 
@@ -142,9 +142,9 @@ public class SettingsActivity extends PreferenceActivity implements
 			DownloadIconsDialog dialog = new DownloadIconsDialog(this, false);
 			dialog.show();
 		}
-		if (preference == mDonate) {
-			startActivity(new Intent(this, DonateActivity.class));
-		}
+		//if (preference == mDonate) {
+		//	startActivity(new Intent(this, DonateActivity.class));
+		//}
 		if (preference == mLicense) {
 			EULADialog.show(this);
 		}

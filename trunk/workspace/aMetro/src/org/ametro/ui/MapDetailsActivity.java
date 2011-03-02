@@ -418,9 +418,13 @@ public class MapDetailsActivity extends Activity implements OnClickListener, ICa
 
 		String description = preffered().getDescription(code);
 		if(description!=null){
-			description = description.replaceAll("\n", "<br/>").replaceAll("\\\\n", "<br/>");
+			if(Constants.LOCALE_RU.equals(code)){
+				description = description.replaceAll("\n", "<br/>").replaceAll("\\\\n", "<br/>");
+			}else{
+				description = getString(R.string.msg_no_description);
+			}
 		}else{
-			description = getString(R.string.msg_no_desription);
+			description = getString(R.string.msg_no_description);
 		}
 		mContent.createHeader().setTextLeft(getString(R.string.msg_description));
 		TextBlockView text = mContent.createText();
