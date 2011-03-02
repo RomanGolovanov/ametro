@@ -122,9 +122,9 @@
     <string name="msg_no_maps_in_local_header">Нет установленных карт</string>
     <string name="msg_no_maps_in_local">Импользуйте Каталог или Импорт для установки новых карт. Подробную инструкцию смотрите на сайте проекта http://www.ametro.org</string>
     <string name="msg_no_maps_in_online_header">Онлайн каталог пуст</string>
-    <string name="msg_no_maps_in_online">Необходим доступ к сети. Нажмите Меню->Обновить для начала загрузки каталога карт.</string>
+    <string name="msg_no_maps_in_online">Необходим доступ к сети. Нажмите Меню-&amp;gt;Обновить для начала загрузки каталога карт.</string>
     <string name="msg_no_maps_in_import_header">Нет PMZ карт для импорта</string>
-    <string name="msg_no_maps_in_import">Для импорта необходимо скопировать файлы .PMZ в каталог /sdcard/ametro/import и отключить ваш коммуникатор от компьютера. Нажмите Меню->Обновить для обновления списка.</string>
+    <string name="msg_no_maps_in_import">Для импорта необходимо скопировать файлы .PMZ в каталог /sdcard/ametro/import и отключить ваш коммуникатор от компьютера. Нажмите Меню-&amp;gt;Обновить для обновления списка.</string>
     
     <string name="msg_delete_local_map_confirmation">Удалить карту %s, %s из моих карт?</string>
     <string name="msg_delete_import_map_confirmation">Удалить PMZ карту %s, %s из импорта?</string>
@@ -135,7 +135,7 @@
 	<string name="msg_donate_title">Настройка платежа</string>    
     <string name="msg_donate_currency">Валюта:</string>
     <string name="msg_donate_amount">Сумма:</string>
-    <string name="msg_no_desription">Описание</string>
+    
     <string name="msg_transports">Виды транспорта</string>
     <string name="msg_time_of_day">Время суток</string>
     <string name="msg_import">Импорт</string>
@@ -218,4 +218,9 @@
     <string name="title_info">Информация</string>
     
     <string name="toast_render_failed">Ошибка отображения. Пожалуйста, выберите другую карту (схему) или попробуйте сменить масштаб. Приносим извинения за неудобства.</string>
+<string name="msg_no_description">Описания для выбранного языка карт отсутствует. Если вы можете помочь с составлением описания карты - пожалуйста свяжитесь с разработчиками
+</string>
+<string name="title_catalog_import">Импорт</string>
+    <string name="title_catalog_online">Каталог</string>
+    <string name="title_catalog_local">Мои карты</string>
 </resources>
