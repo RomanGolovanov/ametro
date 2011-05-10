@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="catalog_names">
+        <item>Le mie mappe</item>
+        <item>Importa</item>
+        <item>Online</item>
+    </string-array>   
+    <string-array name="pref_renderer_type_texts">
+        <item>Asincrono</item>
+        <item>Sincrono</item>
+    </string-array>
+    <string-array name="pref_locale_texts">
+        <item>Auto</item>
+        <item>Russo</item>
+        <item>Inglese</item>
+    </string-array>
+    <string-array name="pref_auto_update_period_texts">
+        <item>Giornalmente</item>
+        <item>Settimanalmente</item>
+        <item>Mensilmente</item>
+        <!-- <item>Ogni 15 minuti</item> -->
+    </string-array>
+	<string-array name="pref_auto_update_networks_texts">
+        <item>Solo wifi</item>
+        <item>Wifi o mobile</item>
+        <item>Qualunque</item>
+    </string-array>
+    <string-array name="transport_types">
+	    <item>Sconosciuto</item>
+		<item>Metropolitana</item>
+	    <item>Tram</item>
+	    <item>Autobus</item>
+	    <item>Treno</item>
+	    <item>Vaporetto</item>
+	    <item>Filobus</item>
+	    <item>Funivia</item>
+    </string-array>
+    <string-array name="transport_type_lines">
+	    <item>Linee sconosciute...</item>
+		<item>Linee metropolitane...</item>
+	    <item>Linee tram...</item>
+	    <item>Linee autobus...</item>
+	    <item>Linee treno...</item>
+	    <item>Linee vaporetto...</item>
+	    <item>Linee filobus...</item>
+	    <item>Linee funivia...</item>
+    </string-array>
+    <string-array name="catalog_map_states">
+	    <item>Offline</item>
+	    <item>Non supportato</item>
+	    <item>Corrotto</item>
+	    <item>Aggiornamento disponibile</item>
+	    <item>Installato</item>
+	    <item>Importazione disponibile</item>
+	    <item>Download disponibile</item>
+	    <item>Aggiornamento non supportato</item>
+	    <item>Aggiornamento richiesto</item>
+	    <item>Download in attesa...</item>
+	    <item>Importazione in attesa...</item>
+	    <item>Scaricamento...</item>
+	    <item>Importazione...</item>
+	    <item>Elaborazione...</item>
+	    <item>Aggiornamento</item>
+	    <item>Aggiornamento richiesto</item>
+    </string-array>
+    <string-array name="create_route_modes">
+        <item>Tempo minimo</item>
+        <item>Trasferimenti minimi</item>
+    </string-array>
+    <string-array name="create_route_times">
+        <item>Giorno</item>
+        <item>Notte</item>
+        <item>Corsa</item>
+    </string-array>
+    <string-array name="sort_modes">
+    	<item>Per città</item>
+    	<item>Per paese</item>
+    </string-array>
+    <string-array name="about_list">
+    	<item>About</item>
+    	<item>Aggiornamenti</item>
+    	<item>Termini e condizioni</item>
+    	<!-- <item>Support us</item>  -->
+    </string-array>
+</resources>

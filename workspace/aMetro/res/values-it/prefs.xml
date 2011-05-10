@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+    <string name="pref_section_general">Altro</string>
+    <string name="pref_section_debug">Debug</string>
+    <string name="pref_locale_key">LOCALE</string>
+    <string name="pref_locale">Lingua</string>
+    <string name="pref_auto_locate">Trova posizione</string>
+    <string name="pref_auto_locate_key">AUTO_LOCATION</string>
+    <string name="pref_locale_description">Utilizzato per visualizzare i nomi sulla carta e sui cataloghi</string>
+    <string name="pref_auto_locate_description">Utilizza il GPS/GSM per trovare la tua posizione</string>
+    <string name="pref_debug">Modalità sviluppo</string>
+    <string name="pref_debug_key">DEBUG</string>
+    <string name="pref_debug_description">Attiva funzione di sviluppo: selezione stazioni sulla mappa</string>
+    <string name="pref_auto_import_addons">Importa Addons</string>
+    <string name="pref_auto_import_addons_description">importa informazioni testuali dalle mappe PMZ</string>
+    <string name="pref_auto_import_addons_key">IMPORT_ADDONS</string>
+    <string name="pref_anti_alias">Attiva anti-aliasing</string>
+    <string name="pref_anti_alias_key">ANTI_ALIAS</string>
+    <string name="pref_anti_alias_description">Grafiche mappa anti-aliase</string>
+    <string name="pref_anti_alias_disable_on_scroll">Disattiva anti-aliasing su scorrimento</string>
+    <string name="pref_anti_alias_disable_on_scroll_key">ANTI_ALIAS_DISABLE_ON_SCROLL</string>
+    <string name="pref_anti_alias_disable_on_scroll_description">Disattiva anti-aliasing mentre si scorre la mappa su dispositivi lenti</string>
+
+	<string name="pref_enable_zoom_controls">Mosta pulsanti zoom</string>
+	<string name="pref_enable_zoom_controls_key">ZOOM_WITH_BUTTONS</string>
+	<string name="pref_enable_zoom_controls_description">Mostra i pulsanti di controllo zoom sulla mappa</string>
+	
+	<string name="pref_enable_zoom_volume_controls">Zoom con pulsanti volume</string>
+	<string name="pref_enable_zoom_volume_controls_key">ZOOM_WITH_VOLUME</string>
+	<string name="pref_enable_zoom_volume_controls_description">Attiva lo zoom utilizzando i tasti volume</string>
+
+	<string name="pref_trackball_scroll_speed">Modifica velocità scorrimento</string>
+	<string name="pref_trackball_scroll_speed_key">TRACKBALL_SCROLL_SPEED</string>
+	<string name="pref_trackball_scroll_speed_description">Modifica se lo scorrimento della trackball è troppo lento o veloce</string>
+
+	<string name="pref_renderer_type">Tipo render</string>
+	<string name="pref_renderer_type_key">RENDERER_TYPE</string>
+	<string name="pref_renderer_type_description">Utilizzando sincrono su dispositivi lenti si potrebbe migliorare l\' usabilità</string>
+	
+    <string name="pref_section_map_view">Mappa</string>
+    <string name="pref_section_map_view_description">Opzioni visualizzazione mappa</string>
+
+    <string name="pref_section_auto_update">Catalogo mappe online</string>
+    <string name="pref_section_auto_update_description">Opzioni di accesso al catalogo mappe online</string>
+
+    <string name="pref_auto_update_map_index_on_show">Agg. su visualizzazione</string>
+    <string name="pref_auto_update_map_index_on_show_key">AUTO_UPDATE_INDEX_ON_SHOW</string>
+    <string name="pref_auto_update_map_index_on_show_description">Scarica l\' elenco delle mappe online quando visualizzate, ma solo una volta ogni ora</string>
+
+    <string name="pref_auto_update_map_index">Controlla agg. mappe</string>
+    <string name="pref_auto_update_map_index_key">AUTO_UPDATE_INDEX</string>
+    <string name="pref_auto_update_map_index_description">Aggiorna l\' elenco delle mappe online quando internet è disponibile</string>
+    
+    <string name="pref_auto_update_maps">Agg. auto mappe</string>
+    <string name="pref_auto_update_maps_key">AUTO_UPDATE_MAPS</string>
+    <string name="pref_auto_update_maps_description">Aggiorna le mappe quando internet è disponibile</string>
+    
+    <string name="pref_auto_update_url">URL catalogo online</string>
+    <string name="pref_auto_update_url_key">ONLINE_CATALOG_URL</string>
+    <string name="pref_auto_update_url_description">URL web per l\' elenco del catalogo mappe. Lasciare vuoto per utilizzare quello predefinito.</string>
+    <string name="pref_auto_update_url_message">Lasciare vuoto per predefinito</string>
+
+    <string name="pref_auto_update_period">Intervallo agg.</string>
+    <string name="pref_auto_update_period_key">AUTO_UPDATE_PERIOD</string>
+    <string name="pref_auto_update_period_description">Intervallo di aggiornamento</string>
+
+    <string name="pref_auto_update_networks">Utilizzo rete</string>
+    <string name="pref_auto_update_networks_key">AUTO_UPDATE_NETWORKS</string>
+    <string name="pref_auto_update_networks_description">Quale rete utilizzare per gli aggiornamenti</string>
+
+    <string name="pref_section_maplist">Elenco mappe</string>
+    <string name="pref_section_maplist_description">Impostazioni elenco mappe visualizzato</string>
+
+    <string name="pref_refresh_country_icons">Aggiorna icone paese</string>
+    <string name="pref_refresh_country_icons_key">REFRESH_COUNTRY_ICONS</string>
+    <string name="pref_refresh_country_icons_description">Forza aggiornamento del pacchetto icone paese dal server</string>
+    <string name="pref_enable_country_icons">Attiva icone paese</string>
+    <string name="pref_enable_country_icons_key">ENABLE_COUNTRY_ICONS</string>
+    <string name="pref_enable_country_icons_description">Mostra icone paese nell\' elenco mappe</string>
+
+    <string name="pref_import">Attiva importazione PMZ</string>
+    <string name="pref_import_key">PMZ_IMPORT</string>
+    <string name="pref_import_description">Spunta per consentire l\' importazione di mappe in formato PMZ</string>
+
+    <string name="pref_section_license">Licenza</string>
+    <string name="pref_section_license_key">LICENSE</string>
+    <string name="pref_section_license_description">Informazioni riguardo la licenza del programma</string>
+ 
+    <string name="pref_section_donate">Supporta sviluppatori</string>
+    <string name="pref_section_donate_key">DONATE</string>
+    <string name="pref_section_donate_description">Qui è possibile effettuare una donazione agli sviluppatori</string>
+ 
+    <string name="pref_donate_paypal_mpl">via PayPal</string>
+    <string name="pref_donate_paypal_mpl_key">DONATE_PAYPAL_LIBRARY</string>
+    <string name="pref_donate_paypal_mpl_description">utilizzando l\' ufficiale PayPal Mobile Platform Library</string>
+    
+    <string name="pref_donate_paypal">via PayPal</string>
+    <string name="pref_donate_paypal_key">DONATE_PAYPAL</string>
+    <string name="pref_donate_paypal_description">disabilitato</string>
+    
+    <string name="pref_donate_yandex">via Yandex.Money</string>
+    <string name="pref_donate_yandex_key">DONATE_YANDEX</string>
+    <string name="pref_donate_yandex_description">41001667593841, open donate web form on money.yandex.ru</string>
+    
+    <string name="pref_donate_wm">via WebMoney</string>
+    <string name="pref_donate_wm_key">DONATE_WM</string>
+    <string name="pref_donate_wm_description">R191907383552, Z422979142707, open WMKeeper Light</string>
+    
+    <string name="pref_donate_qiwi">via QIWI</string>
+    <string name="pref_donate_qiwi_key">DONATE_QIWI</string>
+    <string name="pref_donate_qiwi_description">account 9261788045</string>
+    
+    <string name="pref_donate_mb">via MoneyBookers</string>
+    <string name="pref_donate_mb_key">DONATE_MB</string>
+    <string name="pref_donate_mb_description">open donate web form on www.moneybookers.com</string>
+    
+    <string name="pref_donate_alertpay">via AlertPay</string>
+    <string name="pref_donate_alertpay_key">DONATE_ALERTPAY</string>
+    <string name="pref_donate_alertpay_description">open donate web form on www.alertpay.com</string>
+</resources>
