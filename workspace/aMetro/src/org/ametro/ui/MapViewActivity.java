@@ -38,6 +38,7 @@ import org.ametro.app.Constants;
 import org.ametro.app.GlobalSettings;
 import org.ametro.catalog.Catalog;
 import org.ametro.catalog.storage.ICatalogStorageListener;
+import org.ametro.model.LineView;
 import org.ametro.model.Model;
 import org.ametro.model.SchemeView;
 import org.ametro.model.SegmentView;
@@ -470,20 +471,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			startActivityForResult(new Intent(this, LocationSearchDialog.class), REQUEST_LOCATION);
 			return true;
 		case MAIN_MENU_LEGEND:
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setTitle(R.string.menu_legend);
-			builder.setNegativeButton(R.string.btn_close, new Dialog.OnClickListener() {
-				public void onClick(DialogInterface dialog, int which) {
-					dialog.dismiss();
-				}
-			});
-			builder.setAdapter(new LinesListAdapter(this, getMapView()), new Dialog.OnClickListener() {
-				public void onClick(DialogInterface dialog, int which) {
-					dialog.dismiss();
-				}
-			});
-			AlertDialog alertDialog = builder.create();
-			alertDialog.show();
+			showLegendDialog();
 			return true;
 		case MAIN_MENU_EXPERIMENTAL:
 			return true;
@@ -491,7 +479,37 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		return super.onOptionsItemSelected(item);
 	}
 
+	private void showLegendDialog() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.menu_legend);
+		builder.setNegativeButton(R.string.btn_close, new Dialog.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
+		final LinesListAdapter adapter = new LinesListAdapter(this, getMapView());
+		builder.setAdapter(adapter, new Dialog.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				showStations(((LineView)adapter.getItem(which)).getStations(getMapView()), false);
+				dialog.dismiss();
+			}
+		});
+		AlertDialog alertDialog = builder.create();
+		alertDialog.show();
+	}
 
+	public void showStations(ArrayList<StationView> stations, boolean limitScale) {
+		final RectF area = new RectF(ModelUtil.computeBoundingBox( stations ));
+		final float scaleX = mVectorMapView.getWidth() / area.width() * 0.90f; 
+		final float scaleY = mVectorMapView.getHeight() / area.height() * 0.90f;
+		float targetScale = Math.min(scaleX, scaleY);
+		final float currentScale = mVectorMapView.getScale();
+		if(limitScale){
+			targetScale = targetScale > currentScale ? currentScale : targetScale;
+		}
+		mVectorMapView.setCenterPositionAndScale(new PointF( area.centerX(), area.centerY() ), targetScale, true);
+		mVectorMapView.postInvalidate();
+	}
 	
 	public void applySettings(){
 		if(mVectorMapView!=null){
@@ -1087,14 +1105,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 
 	private final Runnable mCenterAreaRunnable = new Runnable() {
 		public void run() {
-			final RectF area = new RectF(ModelUtil.computeBoundingBox( mNavigationStations ));
-			final float scaleX = mVectorMapView.getWidth() / area.width() * 0.90f; 
-			final float scaleY = mVectorMapView.getHeight() / area.height() * 0.90f;
-			final float targetScale = Math.min(scaleX, scaleY);
-			final float currentScale = mVectorMapView.getScale();
-			final float scale = targetScale > currentScale ? currentScale : targetScale;
-			mVectorMapView.setCenterPositionAndScale(new PointF( area.centerX(), area.centerY() ), scale, true);
-			mVectorMapView.postInvalidate();
+			showStations(mNavigationStations, true);
 		}
 	};
 
