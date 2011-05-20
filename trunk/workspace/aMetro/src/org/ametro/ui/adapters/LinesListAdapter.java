@@ -26,6 +26,7 @@ import java.util.Collections;
 import org.ametro.R;
 import org.ametro.model.LineView;
 import org.ametro.model.SchemeView;
+import org.ametro.model.StationView;
 
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
@@ -82,15 +83,18 @@ public class LinesListAdapter extends BaseAdapter {
 	
 	public LinesListAdapter(Context context, SchemeView map){
 		mInflater = LayoutInflater.from(context);
-		mLines = createListItems(map);
 		mContext = context;
 		mMapView = map;
+		mLines = createListItems(map);
 	}
 	
 	private ListItem[] createListItems(SchemeView map) {
 		ArrayList<ListItem> items = new ArrayList<LinesListAdapter.ListItem>();
 		for(LineView line : map.lines){
-			items.add(new ListItem(line));
+			ArrayList<StationView> stations = line.getStations(mMapView);
+			if(stations!=null && stations.size()>1){
+				items.add(new ListItem(line));
+			}
 		}
 		Collections.sort(items);
 		return (ListItem[]) items.toArray(new ListItem[items.size()]);
