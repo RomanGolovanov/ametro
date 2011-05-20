@@ -19,6 +19,8 @@
  *  
  */package org.ametro.model;
 
+import java.util.ArrayList;
+
 import org.ametro.model.ext.ModelRect;
 
 public class LineView {
@@ -36,6 +38,16 @@ public class LineView {
 
 	public String getName() {
 		return owner.lines[lineId].getName();
+	}
+
+	public ArrayList<StationView> getStations(SchemeView scheme) {
+		ArrayList<StationView> stations = new ArrayList<StationView>();
+		for(StationView station : scheme.stations){
+			if(station.lineViewId == id){
+				stations.add(station);
+			}
+		}
+		return stations;
 	}
 	
 }

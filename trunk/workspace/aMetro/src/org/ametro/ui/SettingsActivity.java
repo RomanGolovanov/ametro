@@ -34,7 +34,6 @@ import org.ametro.util.DateUtil;
 import org.ametro.util.FileUtil;
 import org.ametro.util.StringUtil;
 
-import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;

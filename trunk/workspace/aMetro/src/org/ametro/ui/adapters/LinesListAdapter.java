@@ -52,31 +52,31 @@ public class LinesListAdapter extends BaseAdapter {
 	}	
 
 	private static class ListItem implements Comparable<ListItem> {
-		private final int mId;
-		private final String mName;
-		private final int mColor;
+		private LineView mLineView;
 		
 		public int getId() {
-			return mId;
+			return mLineView.id;
 		}
 		
 		public int getColor() {
-			return mColor;
+			return mLineView.lineColor;
 		}
 		
 		public String getName() {
-			return mName;
+			return mLineView.getName();
 		}
 		
-		public ListItem(int id, String name, int color) {
+		public LineView getLineView() {
+			return mLineView;
+		}
+		
+		public ListItem(LineView lineView) {
 			super();
-			mId = id;
-			mName = name;
-			mColor = color;
+			mLineView = lineView;
 		}
 
 		public int compareTo(ListItem another) {
-			return mName.compareTo(another.mName);
+			return getName().compareTo(another.getName());
 		}
 	}
 	
@@ -90,7 +90,7 @@ public class LinesListAdapter extends BaseAdapter {
 	private ListItem[] createListItems(SchemeView map) {
 		ArrayList<ListItem> items = new ArrayList<LinesListAdapter.ListItem>();
 		for(LineView line : map.lines){
-			items.add(new ListItem(line.id, line.getName(), line.labelColor));
+			items.add(new ListItem(line));
 		}
 		Collections.sort(items);
 		return (ListItem[]) items.toArray(new ListItem[items.size()]);
@@ -107,7 +107,7 @@ public class LinesListAdapter extends BaseAdapter {
 	}
 
 	public Object getItem(int position) {
-		return mLines[position].getName();
+		return mLines[position].getLineView();
 	}
 
 	public long getItemId(int position) {
