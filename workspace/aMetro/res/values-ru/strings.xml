@@ -7,7 +7,7 @@
     <string name="import_status_not_imported">не импортирована</string>
     <string name="import_status_deprecated">новая версия</string>
     <string name="import_status_uptodate">уже импортирована</string>
-    <string name="import_status_override">имя карты конфликтует с %s - %s</string>
+    <string name="import_status_override">имя карты конфликтует с %1$s - %2$s</string>
     <string name="import_status_invalid">ошибка в .pmz файле</string>
     <string name="import_title_confirm">Импорт</string>
     <string name="import_title_indexing">Импорт</string>
@@ -15,7 +15,7 @@
     <string name="import_status_old_version">старая версия</string>
     <string name="import_title_importing">Импорт</string>
     <string name="import_title_empty">Импорт</string>
-    <string name="template_progress_count">%s из %s</string>
+    <string name="template_progress_count">%1$s из %2$s</string>
     <string name="template_progress_percent">%s%%</string>
     <string name="search_label">метка</string>
     <string name="search_hint">поиск станции...</string>
@@ -35,7 +35,7 @@
     <string name="locate_wait_title">Поиск местоположения</string>
     <string name="locate_station_wait_title">Поиск станции</string>
     <string name="locate_wait_text">Пожалуйста, подождите...</string>
-    <string name="route_time_format">%sч %sм</string>
+    <string name="route_time_format">%1$sч %2$sм</string>
 
     <string name="menu_legend">Легенда</string>
     <string name="menu_clear_selection">Назад</string>
@@ -93,7 +93,7 @@
     <string name="msg_press_menu_import">нажмите menu и импортируйте новые карты</string>
     <string name="msg_no_map_loaded">Нет карты</string>
     <string name="msg_press_menu_maps">нажмите menu и выберите карту</string>
-    <string name="msg_import_pmz_progress">"Импортируется карта %s/%s"</string>
+    <string name="msg_import_pmz_progress">"Импортируется карта %1$s/%2$s"</string>
     <string name="msg_copy_files_to_import">Скопируйте PMZ файлы на карту памяти в каталог</string>
     <string name="msg_import_path">/sdcard/ametro/import</string>
     <string name="msg_loading_maps">Загрузка карт...</string>
@@ -111,8 +111,8 @@
     <string name="msg_route_added_to_favorites">Добавлен в Избранное</string>
     <string name="msg_route_removed_from_favorites">Удален из Избранного</string>
     <string name="msg_no_favorites">Избранное пусто</string>
-    <string name="msg_location_found">Вы находитесь в городе %s, %s</string>
-    <string name="msg_location_station_found">Вы ближе всего к станции %s на линии %s</string>
+    <string name="msg_location_found">Вы находитесь в городе %1$s, %2$s</string>
+    <string name="msg_location_station_found">Вы ближе всего к станции %1$s на линии %2$s</string>
     <string name="msg_location_unknown">Ваше местоположение неизвестно</string>
     <string name="msg_detect_location">Определение координат</string>
     <string name="msg_select_transports">Выберите транспорт</string>
@@ -127,8 +127,8 @@
     <string name="msg_no_maps_in_import_header">Нет PMZ карт для импорта</string>
     <string name="msg_no_maps_in_import">Для импорта необходимо скопировать файлы .PMZ в каталог /sdcard/ametro/import и отключить ваш коммуникатор от компьютера. Нажмите Меню-&amp;gt;Обновить для обновления списка.</string>
     
-    <string name="msg_delete_local_map_confirmation">Удалить карту %s, %s из моих карт?</string>
-    <string name="msg_delete_import_map_confirmation">Удалить PMZ карту %s, %s из импорта?</string>
+    <string name="msg_delete_local_map_confirmation">Удалить карту %1$s, %2$s из моих карт?</string>
+    <string name="msg_delete_import_map_confirmation">Удалить PMZ карту %1$s, %2$s из импорта?</string>
     <string name="msg_enter_amount">Введите сумму, в USD</string>
     <string name="msg_payment_success">Платеж выполнен</string>
     <string name="msg_payment_failed">Ошибка платежа</string>

@@ -10,7 +10,7 @@
     <string name="import_status_not_imported">Non importée</string>
     <string name="import_status_deprecated">Nouvelle version</string>
     <string name="import_status_uptodate">Déjà importée</string>
-    <string name="import_status_override">Conflit de nom de fichier avec %s - %s</string>
+    <string name="import_status_override">Conflit de nom de fichier avec %1$s - %2$s</string>
     <string name="import_status_invalid">Fichier .pmz invalide</string>
     <string name="import_title_confirm">Import</string>
     <string name="import_title_indexing">Import</string>
@@ -18,7 +18,7 @@
     <string name="import_status_old_version">Ancienne version</string>
     <string name="import_title_importing">Import</string>
     <string name="import_title_empty">Import - vide</string>
-    <string name="template_progress_count">%s de %s</string>
+    <string name="template_progress_count">%1$s de %2$s</string>
     <string name="template_progress_percent">%s%%</string>
     <string name="search_label">Etiquette</string>
     <string name="search_hint">Recherche station...</string>
@@ -35,7 +35,7 @@
     <string name="create_route_favorites_button">Favoris</string>
     <string name="favorite_route_delete">Supprimer</string>
     <string name="favorite_route_cancel">Annuler</string>
-    <string name="route_time_format">%sh %sm</string>
+    <string name="route_time_format">%1$sh %2$sm</string>
     <string name="locate_wait_title">Rechercher un lieu</string>
     <string name="locate_station_wait_title">Rechercher une station</string>
     <string name="locate_wait_text">Veuillez patienter svp...</string>
@@ -96,7 +96,7 @@
     <string name="msg_press_menu_import">Appuyez sur le menu et importez de nouvelles cartes</string>
     <string name="msg_no_map_loaded">Aucune carte chargée</string>
     <string name="msg_press_menu_maps">Appuyez sur menu et sélectionner une carte</string>
-    <string name="msg_import_pmz_progress">"Importation de carte %s/%s"</string>
+    <string name="msg_import_pmz_progress">"Importation de carte %1$s/%2$s"</string>
     <string name="msg_copy_files_to_import">Copier les fichiers PMZ du catalogue sur la carte mémoire</string>
     <string name="msg_import_path">/sdcard/ametro/import</string>
     <string name="msg_loading_maps">Chargement des cartes...</string>
@@ -114,8 +114,8 @@
     <string name="msg_route_added_to_favorites">Ajouté aux favoris</string>
     <string name="msg_route_removed_from_favorites">Retiré des favoris</string>
     <string name="msg_no_favorites">Vos favoris sont vides</string>
-    <string name="msg_location_found">Vous êtes proche de %s dans %s</string>
-    <string name="msg_location_station_found">Vous êtes proche de la station %s sur la ligne %s</string>
+    <string name="msg_location_found">Vous êtes proche de %1$s dans %2$s</string>
+    <string name="msg_location_station_found">Vous êtes proche de la station %1$s sur la ligne %2$s</string>
     <string name="msg_location_unknown">localisation inconnue</string>
     <string name="msg_detect_location">Recherche de coordonnées</string>
     <string name="msg_select_transports">Sélectionner les transports</string>
@@ -129,8 +129,8 @@
     <string name="msg_no_maps_in_online">Utilisation nécessaire pour se connecter à Internet pour télécharger le catalogue en ligne de la liste des cartes. Appuyer sur Raffraîchir pour démarrer le téléchargement</string>
     <string name="msg_no_maps_in_import_header">Aucune carte PMZ à importer</string>
     <string name="msg_no_maps_in_import">Utilisation : copiez vos fichiers PMZ dans /sdcard/ametro/import puis déconnectez votre mobile de votre ordinateur. Appuyez ensuite sur Menu / Raffraîchir</string>
-    <string name="msg_delete_local_map_confirmation">Retirer la carte %s, %s de mes cartes ?</string>
-    <string name="msg_delete_import_map_confirmation">Retirer la carte PMZ %s, %s de mes imports ?</string>
+    <string name="msg_delete_local_map_confirmation">Retirer la carte %1$s, %2$s de mes cartes ?</string>
+    <string name="msg_delete_import_map_confirmation">Retirer la carte PMZ %1$s, %2$s de mes imports ?</string>
     <string name="msg_enter_amount">Entrer un montant, en USD</string>
     <string name="msg_payment_success">Paiement effectué</string>
     <string name="msg_payment_failed">Echec de paiement</string>
