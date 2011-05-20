@@ -10,7 +10,7 @@
     <string name="import_status_not_imported">not imported</string>
     <string name="import_status_deprecated">new version</string>
     <string name="import_status_uptodate">already imported</string>
-    <string name="import_status_override">file name conflict with %s - %s</string>
+    <string name="import_status_override">file name conflict with %1$s - %2$s</string>
     <string name="import_status_invalid">invalid .pmz file</string>
     <string name="import_title_confirm">Import</string>
     <string name="import_title_indexing">Import</string>
@@ -18,7 +18,7 @@
     <string name="import_status_old_version">old version</string>
     <string name="import_title_importing">Import</string>
     <string name="import_title_empty">Import - empty</string>
-    <string name="template_progress_count">%s of %s</string>
+    <string name="template_progress_count">%1$s of %2$s</string>
     <string name="template_progress_percent">%s%%</string>
     <string name="search_label">label</string>
     <string name="search_hint">search stations...</string>
@@ -35,7 +35,7 @@
     <string name="create_route_favorites_button">Favorites</string>
     <string name="favorite_route_delete">Delete</string>
     <string name="favorite_route_cancel">Cancel</string>
-    <string name="route_time_format">%sh %sm</string>
+    <string name="route_time_format">%1$sh %2$sm</string>
     <string name="locate_wait_title">Search location</string>
     <string name="locate_station_wait_title">Search station</string>
     <string name="locate_wait_text">Please wait...</string>
@@ -96,7 +96,7 @@
     <string name="msg_press_menu_import">press menu and import new maps</string>
     <string name="msg_no_map_loaded">No map loaded</string>
     <string name="msg_press_menu_maps">press menu and select map</string>
-    <string name="msg_import_pmz_progress">"Importing map %s/%s"</string>
+    <string name="msg_import_pmz_progress">"Importing map %1$s/%2$s"</string>
     <string name="msg_copy_files_to_import">copy PMZ files to SD card catalog</string>
     <string name="msg_import_path">/sdcard/ametro/import</string>
     <string name="msg_loading_maps">Loading maps...</string>
@@ -114,8 +114,8 @@
     <string name="msg_route_added_to_favorites">Added to Favorites</string>
     <string name="msg_route_removed_from_favorites">Removed from Favorites</string>
     <string name="msg_no_favorites">Favorites is empty</string>
-    <string name="msg_location_found">You are near %s in %s</string>
-    <string name="msg_location_station_found">You are near %s station on %s line</string>
+    <string name="msg_location_found">You are near %1$s in %2$s</string>
+    <string name="msg_location_station_found">You are near %1$s station on %2$s line</string>
     <string name="msg_location_unknown">Unknown location</string>
     <string name="msg_detect_location">Search coordinates</string>
     <string name="msg_select_transports">Select transports</string>
@@ -129,8 +129,8 @@
     <string name="msg_no_maps_in_online">You need to be connected to Internet to download Online catalog map list. Press Refresh to begin download</string>
     <string name="msg_no_maps_in_import_header">No PMZ maps for import</string>
     <string name="msg_no_maps_in_import">You need to copy .PMZ files into /sdcard/ametro/import and detach your smartphone from PC. Press Refresh to refresh</string>
-    <string name="msg_delete_local_map_confirmation">Remove map %s, %s from my maps?</string>
-    <string name="msg_delete_import_map_confirmation">Remove PMZ map %s, %s from import?</string>
+    <string name="msg_delete_local_map_confirmation">Remove map %1$s, %2$s from my maps?</string>
+    <string name="msg_delete_import_map_confirmation">Remove PMZ map %1$s, %2$s from import?</string>
     <string name="msg_enter_amount">Enter amount, in USD</string>
     <string name="msg_payment_success">Payment success</string>
     <string name="msg_payment_failed">Payment failed</string>

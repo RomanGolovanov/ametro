@@ -10,7 +10,7 @@
     <string name="import_status_not_imported">non importato</string>
     <string name="import_status_deprecated">nuova versione</string>
     <string name="import_status_uptodate">già importato</string>
-    <string name="import_status_override">il nome del file è in conflitto con %s - %s</string>
+    <string name="import_status_override">il nome del file è in conflitto con %1$s - %2$s</string>
     <string name="import_status_invalid">file .pmz non valido</string>
     <string name="import_title_confirm">Importa</string>
     <string name="import_title_indexing">Importa</string>
@@ -18,7 +18,7 @@
     <string name="import_status_old_version">vecchia versione</string>
     <string name="import_title_importing">Importa</string>
     <string name="import_title_empty">Importa - vuoto</string>
-    <string name="template_progress_count">%s di %s</string>
+    <string name="template_progress_count">%1$s di %2$s</string>
     <string name="template_progress_percent">%s%%</string>
     <string name="search_label">etichetta</string>
     <string name="search_hint">ricerca stazioni...</string>
@@ -35,7 +35,7 @@
     <string name="create_route_favorites_button">Preferiti</string>
     <string name="favorite_route_delete">Elimina</string>
     <string name="favorite_route_cancel">Annulla</string>
-    <string name="route_time_format">%sh %sm</string>
+    <string name="route_time_format">%1$sh %2$sm</string>
     <string name="locate_wait_title">Cerca posizione</string>
     <string name="locate_station_wait_title">Cerca stazione</string>
     <string name="locate_wait_text">Atendere prego...</string>
@@ -96,7 +96,7 @@
     <string name="msg_press_menu_import">premi menù e importa nuove mappe</string>
     <string name="msg_no_map_loaded">Nessuna mappa caricata</string>
     <string name="msg_press_menu_maps">premi menù e seleziona la mappa</string>
-    <string name="msg_import_pmz_progress">"Importazione mappa %s/%s"</string>
+    <string name="msg_import_pmz_progress">"Importazione mappa %1$s/%2$s"</string>
     <string name="msg_copy_files_to_import">copia i file PMZ nel catalogo della scheda SD</string>
     <string name="msg_import_path">/sdcard/ametro/import</string>
     <string name="msg_loading_maps">Caricamento mappe...</string>
@@ -114,8 +114,8 @@
     <string name="msg_route_added_to_favorites">Aggiunto ai preferiti</string>
     <string name="msg_route_removed_from_favorites">Rimosso dai preferiti</string>
     <string name="msg_no_favorites">Preferiti vuoto</string>
-    <string name="msg_location_found">Sei vicino a %s in %s</string>
-    <string name="msg_location_station_found">Sei vicino alla stazione %s sulla linea %s</string>
+    <string name="msg_location_found">Sei vicino a %1$s in %2$s</string>
+    <string name="msg_location_station_found">Sei vicino alla stazione %1$s sulla linea %2$s</string>
     <string name="msg_location_unknown">Posizione sconosciuta</string>
     <string name="msg_detect_location">Cerca coordinate</string>
     <string name="msg_select_transports">Seleziona trasporti</string>
@@ -129,8 +129,8 @@
     <string name="msg_no_maps_in_online">E\' necessario essere connessi a internet per scaricare l\' elenco online del catalogo mappe. Premi Aggiorna per iniziare il download</string>
     <string name="msg_no_maps_in_import_header">Non ci sono mappe PMZ da importare</string>
     <string name="msg_no_maps_in_import">E\' necessario copiare i file .PMZ in /sdcard/ametro/import e staccare lo smartphone dal PC. Premi Aggiorna per aggiornare</string>
-    <string name="msg_delete_local_map_confirmation">Rimuovere mappa %s, %s dalle mie mappe?</string>
-    <string name="msg_delete_import_map_confirmation">Rimuovere mappa PMZ %s, %s da importare?</string>
+    <string name="msg_delete_local_map_confirmation">Rimuovere mappa %1$s, %2$s dalle mie mappe?</string>
+    <string name="msg_delete_import_map_confirmation">Rimuovere mappa PMZ %1$s, %2$s da importare?</string>
     <string name="msg_enter_amount">Inserisci somma, in USD</string>
     <string name="msg_payment_success">Pagamento riuscito</string>
     <string name="msg_payment_failed">Pagamento non riuscito</string>
