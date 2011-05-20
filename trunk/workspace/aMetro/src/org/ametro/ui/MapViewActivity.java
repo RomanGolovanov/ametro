@@ -51,6 +51,7 @@ import org.ametro.model.route.RouteParameters;
 import org.ametro.model.route.RouteView;
 import org.ametro.model.storage.ModelBuilder;
 import org.ametro.model.util.ModelUtil;
+import org.ametro.ui.adapters.LinesListAdapter;
 import org.ametro.ui.dialog.AboutDialog;
 import org.ametro.ui.dialog.ChangeLogDialog;
 import org.ametro.ui.dialog.EULADialog;
@@ -394,10 +395,13 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		menu.add(0, MAIN_MENU_ROUTES, 2, R.string.menu_routes).setIcon(android.R.drawable.ic_menu_directions);
 		menu.add(0, MAIN_MENU_LAYERS, 3, R.string.menu_layers).setIcon(android.R.drawable.ic_menu_agenda);
 		menu.add(0, MAIN_MENU_SCHEMES, 4, R.string.menu_schemes).setIcon(android.R.drawable.ic_menu_sort_by_size);
-		menu.add(0, MAIN_MENU_LIBRARY, 5, R.string.menu_library).setIcon(android.R.drawable.ic_menu_mapmode);
-		menu.add(0, MAIN_MENU_SETTINGS, 6, R.string.menu_settings).setIcon(android.R.drawable.ic_menu_preferences);
-		menu.add(0, MAIN_MENU_ABOUT, 7, R.string.menu_about).setIcon(android.R.drawable.ic_menu_help);
-		menu.add(0, MAIN_MENU_LOCATION, 8, R.string.menu_location).setIcon(android.R.drawable.ic_menu_mylocation);
+
+		menu.add(0, MAIN_MENU_LEGEND, 5, R.string.menu_legend).setIcon(android.R.drawable.ic_menu_agenda);
+		
+		menu.add(0, MAIN_MENU_LIBRARY, 6, R.string.menu_library).setIcon(android.R.drawable.ic_menu_mapmode);
+		menu.add(0, MAIN_MENU_SETTINGS, 7, R.string.menu_settings).setIcon(android.R.drawable.ic_menu_preferences);
+		menu.add(0, MAIN_MENU_ABOUT, 8, R.string.menu_about).setIcon(android.R.drawable.ic_menu_help);
+		menu.add(0, MAIN_MENU_LOCATION, 9, R.string.menu_location).setIcon(android.R.drawable.ic_menu_mylocation);
 		//menu.add(0, MAIN_MENU_EXPERIMENTAL, 9,R.string.menu_experimental);
 
 		return true;
@@ -410,6 +414,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		menu.findItem(MAIN_MENU_FIND).setEnabled(mModel!=null);
 		menu.findItem(MAIN_MENU_INFO).setEnabled(mModel!=null);
 		menu.findItem(MAIN_MENU_ROUTES).setEnabled(mModel!=null);
+		menu.findItem(MAIN_MENU_LEGEND).setEnabled(mModel!=null);
 		menu.findItem(MAIN_MENU_LAYERS).setVisible(false); //menu.findItem(MAIN_MENU_LAYERS).setEnabled(false);//mModel!=null);
 		menu.findItem(MAIN_MENU_SCHEMES).setEnabled(mModel!=null);
 		menu.findItem(MAIN_MENU_LOCATION).setVisible(mModel!=null && GlobalSettings.isLocateUserEnabled(this));
@@ -440,7 +445,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		case MAIN_MENU_LAYERS:
 			return true;
 		case MAIN_MENU_SCHEMES:
-			SchemeListDialog dialog = new SchemeListDialog(this, mModel, getMapView()){
+			SchemeListDialog schemeListDialog = new SchemeListDialog(this, mModel, getMapView()){
 				public void onMapViewSelected(String mapViewSystemName) {
 					if(mapViewSystemName!=getMapView().systemName){
 						clearNavigation(true);
@@ -449,7 +454,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 					super.onMapViewSelected(mapViewSystemName);
 				}
 			};
-			dialog.show();
+			schemeListDialog.show();
 			return true;
 		case MAIN_MENU_INFO:
 			String systemName = getSystemMapName();
@@ -464,12 +469,30 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		case MAIN_MENU_LOCATION:
 			startActivityForResult(new Intent(this, LocationSearchDialog.class), REQUEST_LOCATION);
 			return true;
+		case MAIN_MENU_LEGEND:
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setTitle(R.string.menu_legend);
+			builder.setNegativeButton(R.string.btn_close, new Dialog.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+				}
+			});
+			builder.setAdapter(new LinesListAdapter(this, getMapView()), new Dialog.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+				}
+			});
+			AlertDialog alertDialog = builder.create();
+			alertDialog.show();
+			return true;
 		case MAIN_MENU_EXPERIMENTAL:
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
 
+
+	
 	public void applySettings(){
 		if(mVectorMapView!=null){
 			mVectorMapView.setAntiAliasingEnabled(GlobalSettings.isAntiAliasingEnabled(this));
@@ -1152,6 +1175,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	private static final int MAIN_MENU_ABOUT = 9;
 	private static final int MAIN_MENU_LOCATION = 10;
 	private static final int MAIN_MENU_EXPERIMENTAL = 11;
+	private static final int MAIN_MENU_LEGEND = 12;
 
 	private String mModelFileName;
 	private String mMapViewName;
