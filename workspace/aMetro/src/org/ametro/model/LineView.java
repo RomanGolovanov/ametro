@@ -43,7 +43,7 @@ public class LineView {
 	public ArrayList<StationView> getStations(SchemeView scheme) {
 		ArrayList<StationView> stations = new ArrayList<StationView>();
 		for(StationView station : scheme.stations){
-			if(station.lineViewId == id){
+			if(station.lineViewId == id && station.stationPoint!=null && station.stationNameRect!=null){
 				stations.add(station);
 			}
 		}
