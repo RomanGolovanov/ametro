@@ -26,7 +26,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import org.ametro.jni.Natives;
 import org.ametro.model.ext.ModelLocation;
 import org.ametro.model.ext.ModelPoint;
 import org.ametro.model.ext.ModelRect;
@@ -78,30 +77,25 @@ public class CsvReader {
 		} 
 		if (line != null) {
 			mEntireRecord = line;
-			if(Natives.INITIALIZED){ 
-				return Natives.SplitCsvString(line, mSeparator);
-			}else
-			{
-				final ArrayList<String> parts = mLineParts;
-				final StringBuilder sb = mLineBuilder;
-				final int length = line.length(); 
-				int position = 0;
-				char ch;
-				parts.clear(); 
-				sb.setLength(0);
-				while( position < length ){
-					ch = (char)line.charAt(position);
-					if(ch == mSeparator){
-						parts.add(sb.toString()); 
-						sb.setLength(0);
-					}else{
-						sb.append(ch);
-					}
-					position++;
+			final ArrayList<String> parts = mLineParts;
+			final StringBuilder sb = mLineBuilder;
+			final int length = line.length(); 
+			int position = 0;
+			char ch;
+			parts.clear(); 
+			sb.setLength(0);
+			while( position < length ){
+				ch = (char)line.charAt(position);
+				if(ch == mSeparator){
+					parts.add(sb.toString()); 
+					sb.setLength(0);
+				}else{
+					sb.append(ch);
 				}
-				parts.add(sb.toString());
-				return (String[]) parts.toArray(new String[parts.size()]);
+				position++;
 			}
+			parts.add(sb.toString());
+			return (String[]) parts.toArray(new String[parts.size()]);
 		} else {
 			mEntireRecord = null;
 			return null;
