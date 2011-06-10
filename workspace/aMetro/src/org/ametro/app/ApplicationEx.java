@@ -32,7 +32,6 @@ import org.ametro.directory.ImportDirectory;
 import org.ametro.directory.ImportMapDirectory;
 import org.ametro.directory.ImportTransportDirectory;
 import org.ametro.directory.StationDirectory;
-import org.ametro.jni.Natives;
 import org.ametro.receiver.AlarmReceiver;
 import org.ametro.receiver.BootCompletedReceiver;
 import org.ametro.receiver.NetworkStateReceiver;
@@ -163,7 +162,6 @@ public class ApplicationEx extends Application {
 		}
 		mInstance = this;
 		mConnectionManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-		Natives.Initialize();
 
 		FileUtil.touchDirectory(Constants.ROOT_PATH);
 		FileUtil.touchDirectory(Constants.LOCAL_CATALOG_PATH);
