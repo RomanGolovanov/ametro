@@ -53,6 +53,7 @@ import org.ametro.model.route.RouteView;
 import org.ametro.model.storage.ModelBuilder;
 import org.ametro.model.util.ModelUtil;
 import org.ametro.ui.adapters.LinesListAdapter;
+import org.ametro.ui.controllers.MapObjectSelectionController;
 import org.ametro.ui.dialog.AboutDialog;
 import org.ametro.ui.dialog.ChangeLogDialog;
 import org.ametro.ui.dialog.EULADialog;
@@ -91,17 +92,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ZoomControls;
 
-public class MapViewActivity extends Activity implements OnClickListener, OnDismissListener, ICatalogStorageListener {
+public class MapViewActivity extends Activity implements OnClickListener, OnDismissListener, ICatalogStorageListener, MapObjectSelectionController.IMapObjectSelectionListener {
 
-	private int mSelectionMode = SELECTION_MODE_BEGIN;
-	private StationView mStartStationView;
-	private StationView mEndStationView;
-	
-	private static final int SELECTION_MODE_BEGIN = 0;
-	private static final int SELECTION_MODE_FIRST = 1;
-	private static final int SELECTION_MODE_SECOND = 2;
-	private static final int SELECTION_MODE_DONE = 3;
-	
+	private MapObjectSelectionController mMapObjectSelection; 
+
 	protected Dialog onCreateDialog(int id) {
 		switch (id) {
 		case DIALOG_EULA:
@@ -148,6 +142,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			if(view!=null){
 				if(isNavigationActive()){
 					clearNavigation(true);
+					mMapObjectSelection.clearSelection();
 					return true;
 				}
 				if(!view.systemName.equalsIgnoreCase(mModel.viewSystemNames[0])){
@@ -162,8 +157,8 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	private class SearchRouteTask extends AsyncTask<Void, Void, RouteContainer>{
 
 		protected RouteContainer doInBackground(Void... arg0) {
-			int from = mStartStationView.stationId;
-			int to = mEndStationView.stationId;
+			int from = mMapObjectSelection.getStartStationView().stationId;
+			int to = mMapObjectSelection.getEndStationView().stationId;
 			int[] include = new int[0];
 			int[] exclude = new int[0];
 			int[] transports = mScheme.transports;// mScheme.getCheckedTransports();
@@ -174,20 +169,37 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 
 		protected void onPostExecute(RouteContainer result) {
 			if (result.hasRoutes()) {
-				mSelectionMode = SELECTION_MODE_DONE;
 				setNavigationRoute(result);
-//				long secs = result.getDefaultRoute().getLength();
-//				secs = ( secs/60 + (secs%60 == 0 ? 0 : 1) ) * 60;
-//				Date date = new Date(secs * 1000);
-//				String msg = getString(R.string.msg_route_time) + " " + String.format(getString(R.string.route_time_format), DateUtil.getDateUTC(date, "HH"), DateUtil.getDateUTC(date, "mm"));
-//				Toast.makeText(MapViewActivity.Instance, msg, Toast.LENGTH_LONG).show();
 			} else {
-				mSelectionMode = SELECTION_MODE_FIRST;
+				mMapObjectSelection.rollbackSelection();
 				Toast.makeText(MapViewActivity.Instance, getString(R.string.msg_route_not_found), Toast.LENGTH_SHORT).show();
 			}
 			super.onPostExecute(result);
 		}
-		
+	}
+	
+	public void onMapObjectSelectionChanged(int oldMode, int newMode) {
+		if(oldMode == MapObjectSelectionController.SELECTION_MODE_BEGIN && newMode==MapObjectSelectionController.SELECTION_MODE_FIRST)
+		{
+			clearNavigation(true);
+			if(mLastClickedStation!=null){
+				Toast.makeText(this, String.format(getString(R.string.msg_route_start), mLastClickedStation.getName()), Toast.LENGTH_SHORT).show();
+			}
+		}
+		if(oldMode == MapObjectSelectionController.SELECTION_MODE_FIRST && newMode==MapObjectSelectionController.SELECTION_MODE_SECOND)
+		{
+			clearNavigation(true);
+			if(mLastClickedStation!=null){
+				Toast.makeText(this, String.format(getString(R.string.msg_route_end), mLastClickedStation.getName()), Toast.LENGTH_SHORT).show();
+				SearchRouteTask task = new SearchRouteTask();
+				task.execute();
+			}
+		}
+		if(oldMode == MapObjectSelectionController.SELECTION_MODE_DONE && newMode==MapObjectSelectionController.SELECTION_MODE_BEGIN)
+		{
+			clearNavigation(true);
+		}
+		mVectorMapView.setSchemeMarkers(mMapObjectSelection.getStartStationView(), mMapObjectSelection.getEndStationView());
 	}
 	
 	public void onClick(View src) {
@@ -201,40 +213,8 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 			PointF pos = mVectorMapView.getTouchPoint();
 			int x = (int)pos.x;
 			int y = (int)pos.y;
-			StationView station = mScheme.findStation(x,y);
-			switch(mSelectionMode){
-			case SELECTION_MODE_BEGIN:
-				if(station!=null && GlobalSettings.isDebugMessagesEnabled(this)){
-					mSelectionMode = SELECTION_MODE_FIRST;
-					mStartStationView = station;
-					Toast.makeText(this, "start from " + station.getName(), Toast.LENGTH_SHORT).show();
-				}else{
-					//Toast.makeText(this, "no stations", Toast.LENGTH_SHORT).show();
-				}
-				break;
-			case SELECTION_MODE_FIRST:
-				if(station!=null && GlobalSettings.isDebugMessagesEnabled(this)){
-					mSelectionMode = SELECTION_MODE_SECOND;
-					mEndStationView = station;
-					Toast.makeText(this, "end at " + station.getName() , Toast.LENGTH_SHORT).show();
-					SearchRouteTask task = new SearchRouteTask();
-					task.execute();
-				}else{
-					//Toast.makeText(this, "no stations", Toast.LENGTH_SHORT).show();
-				}
-				break;
-			case SELECTION_MODE_DONE:
-				clearNavigation(true);
-				//Toast.makeText(this, "clear selection", Toast.LENGTH_SHORT).show();
-				break;
-			}
-			
-//			if(station == null){
-//				Toast.makeText(this, "no stations", Toast.LENGTH_SHORT).show();
-//			}else{
-//				Toast.makeText(this, "clicked at " + station.getName(), Toast.LENGTH_SHORT).show();				
-//			}
-			
+			mLastClickedStation = mScheme.findStation(x,y);
+			mMapObjectSelection.onClickEvent(mLastClickedStation);
 		}
 	}
 
@@ -261,6 +241,9 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL); 
 		setContentView(R.layout.operation_wait_full_screen);
 
+		mMapObjectSelection = new MapObjectSelectionController();
+		mMapObjectSelection.addMapObjectSelectionListener(this);
+		
 		if(mModel!=null){
 			onShowMap(mModel, mScheme);
 		}else{
@@ -278,6 +261,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 				}
 			}
 		}
+		
 	}
 
 	protected void onNewIntent(Intent intent) {
@@ -427,6 +411,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		switch (item.getItemId()) {
 		case MAIN_MENU_CLEAR_SELECTION:
 			clearNavigation(true);
+			mMapObjectSelection.clearSelection();
 			return true;
 		case MAIN_MENU_FIND:
 			onSearchRequested();
@@ -450,6 +435,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 				public void onMapViewSelected(String mapViewSystemName) {
 					if(mapViewSystemName!=getMapView().systemName){
 						clearNavigation(true);
+						mMapObjectSelection.clearSelection();
 						onInitializeMapView(mModelFileName, mapViewSystemName, false);
 					}
 					super.onMapViewSelected(mapViewSystemName);
@@ -740,7 +726,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	
 	/*package*/ StationView getCurrentStation()
 	{
-		return mCurrentStation;	
+		return mCurrentStation == null ? mMapObjectSelection.getStartStationView() : mCurrentStation;	
 	}
 
 	/*package*/ void setCurrentStation(StationView station){
@@ -761,7 +747,6 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		boolean refreshNeeded = (stations != mNavigationStations) || (stations == null && mNavigationStations!=null);
 		if(refreshNeeded){
 			if(stations!=null){
-				mSelectionMode = SELECTION_MODE_DONE;
 				mCurrentRouteView = null;
 				mNavigationSegments = null;
 				mNavigationTransfers = null;
@@ -776,6 +761,8 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 				mNavigationTransfers = null;
 				mCurrentStation = null;
 			}
+			mMapObjectSelection.clearSelection();
+			mVectorMapView.setSchemeMarkers(null,null);
 			mVectorMapView.setSchemeSelection(stations, null, null);
 			mVectorMapView.postInvalidate();
 		}
@@ -801,14 +788,16 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 				mNavigationTransfers = mCurrentRouteView.getTransfers();
 				setCurrentStation( mNavigationStations.get(0) );
 				showNavigationControls();
+				mVectorMapView.setSchemeMarkers(mCurrentRouteView.getStationFrom(), mCurrentRouteView.getStationTo());
+				mMapObjectSelection.setSelection(mCurrentRouteView.getStationFrom(), mCurrentRouteView.getStationTo()); 
 			}else{
 				hideNavigationControls();
 				mNavigationStations = null;
 				mNavigationSegments = null;
 				mNavigationTransfers = null;
 				setCurrentStation(null);
+				mVectorMapView.setSchemeMarkers(null,null);
 			}
-			mSelectionMode = SELECTION_MODE_DONE;
 			mVectorMapView.setSchemeSelection(mNavigationStations, mNavigationSegments,mNavigationTransfers);
 			mVectorMapView.postInvalidate();
 		}
@@ -822,7 +811,6 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		if(changeUI){
 			hideNavigationControls();
 		}
-		mSelectionMode = SELECTION_MODE_BEGIN;
 		mRouteContainer = null;
 		mCurrentRouteView = null;
 		mCurrentStation = null;
@@ -831,6 +819,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		mNavigationTransfers = null;
 		if(changeUI){
 			setCurrentStation(null);
+			mVectorMapView.setSchemeMarkers(null,null);
 			mVectorMapView.setSchemeSelection(mNavigationStations, mNavigationSegments,mNavigationTransfers);
 			mVectorMapView.postInvalidate();
 		}
@@ -929,6 +918,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 		mScheme = view;
 
 		clearNavigation(false);
+		mMapObjectSelection.clearSelection();
 		
 // 		TODO: resolve errors with map/view reloading.
 //		Model previousModel = mModel;
@@ -1218,6 +1208,7 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	private ArrayList<SegmentView> mNavigationSegments;
 	private ArrayList<TransferView> mNavigationTransfers;
 	private StationView mCurrentStation;
+	private StationView mLastClickedStation;
 
 	private Locale mDefaultLocale;
 	private boolean mDisableEulaDialog;
@@ -1225,4 +1216,5 @@ public class MapViewActivity extends Activity implements OnClickListener, OnDism
 	private boolean mDisableMapReload;
 
 	private FrameLayout mMapFrame;
+
 }

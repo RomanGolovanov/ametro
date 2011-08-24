@@ -39,7 +39,6 @@
     <string name="locate_wait_title">Search location</string>
     <string name="locate_station_wait_title">Search station</string>
     <string name="locate_wait_text">Please wait...</string>
-    
     <string name="menu_legend">Legend</string>
     <string name="menu_clear_selection">Back</string>
     <string name="menu_search">Search</string>
@@ -89,7 +88,6 @@
     <string name="context_menu_delete">Delete</string>
     <string name="context_menu_delete_pmz">Delete PMZ</string>
     <string name="context_menu_catalog_header">Map</string>
-    <string name="menu_"/>
     <string name="msg_loading">Loading...</string>
     <string name="msg_caching">Caching map...</string>
     <string name="msg_no_maps_in_library">No maps in library</string>
@@ -109,7 +107,7 @@
     <string name="msg_read_pmz_files">Read PMZ files...</string>
     <string name="msg_import_pmz_files">Importing PMZ files...</string>
     <string name="msg_import_failed">Import failed</string>
-	<string name="msg_download_failed">Download failed</string>
+    <string name="msg_download_failed">Download failed</string>
     <string name="msg_station_not_found">Not Found</string>
     <string name="msg_route_added_to_favorites">Added to Favorites</string>
     <string name="msg_route_removed_from_favorites">Removed from Favorites</string>
@@ -135,7 +133,7 @@
     <string name="msg_payment_success">Payment success</string>
     <string name="msg_payment_failed">Payment failed</string>
     <string name="msg_payment_canceled">Payment canceled</string>
-	<string name="msg_donate_title">Donate details</string>    
+    <string name="msg_donate_title">Donate details</string>
     <string name="msg_donate_currency">Currency:</string>
     <string name="msg_donate_amount">Amount:</string>
     <string name="msg_no_description">No description available for selected map language. If you could help with translation - please contact developer via email support@ametro.org</string>
@@ -182,12 +180,10 @@
     <string name="msg_map_updates_count">updated %s maps</string>
     <string name="msg_update_online_catalog">update online catalog...</string>
     <string name="msg_last_update">Last update:</string>
-	    
     <string name="tab_maps_favorited">Favorites</string>
     <string name="tab_maps_local">My maps</string>
     <string name="tab_maps_online">Catalog</string>
     <string name="tab_maps_import">Import</string>
-    
     <string name="log_map_indexing_failed">Map indexing failed for </string>
     <string name="log_save_map_zoom">Save map zoom </string>
     <string name="log_save_map_position">Save map position </string>
@@ -200,29 +196,27 @@
     <string name="log_failed_map_loading">Failed map loading</string>
     <string name="log_pmz_indexing_error">PMZ indexing error</string>
     <string name="log_import_failed">Import failed</string>
-
-	<string name="btn_update">Update</string>
-	<string name="btn_import">Import</string>
-	<string name="btn_download">Download</string>
-	<string name="btn_open">Open</string>
-	<string name="btn_delete">Delete</string>
-	<string name="btn_close">Close</string>
-	<string name="btn_cancel">Cancel</string>
-	<string name="btn_delete_pmz">Delete PMZ</string>
-	<string name="btn_changelog">Changes</string>
-	<string name="btn_donate">Donate</string>
-	<string name="btn_ok">Ok</string>
-	<string name="btn_accept">Accept</string>
-	<string name="btn_reject">Reject</string>
-	<string name="btn_gpl">GPL</string>
-	<string name="btn_settings">Settings</string>
-	<string name="btn_apply">Apply</string>
-	<string name="btn_later">Later</string>
-	
+    <string name="btn_update">Update</string>
+    <string name="btn_import">Import</string>
+    <string name="btn_download">Download</string>
+    <string name="btn_open">Open</string>
+    <string name="btn_delete">Delete</string>
+    <string name="btn_close">Close</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_delete_pmz">Delete PMZ</string>
+    <string name="btn_changelog">Changes</string>
+    <string name="btn_donate">Donate</string>
+    <string name="btn_ok">Ok</string>
+    <string name="btn_accept">Accept</string>
+    <string name="btn_reject">Reject</string>
+    <string name="btn_gpl">GPL</string>
+    <string name="btn_settings">Settings</string>
+    <string name="btn_apply">Apply</string>
+    <string name="btn_later">Later</string>
     <string name="title_eula">EULA</string>
     <string name="title_info">Information</string>
-    
     <string name="toast_render_failed">Render failed. Please, select another map/scheme or try to change current zoom. Sorry for the inconvenience</string>
-    
-<string name="log_"/>
+    <string name="msg_route_start">Route from %1$s</string>
+    <string name="newStringKey0"/>
+    <string name="msg_route_end">Route to %1$s</string>
 </resources>

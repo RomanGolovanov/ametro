@@ -101,10 +101,12 @@
                             android:defaultValue="false"/> -->
 		<Preference android:title="@string/pref_section_license" android:summary="@string/pref_section_license_description" android:key="@string/pref_section_license_key" />
     </PreferenceCategory>
-	<PreferenceCategory android:title="@string/pref_section_debug">
+	<!-- 
+	<PreferenceCategory android:title="@string/pref_section_debug" >
 		<CheckBoxPreference android:title="@string/pref_debug"
 		                    android:key="@string/pref_debug_key"
 		                    android:summary="@string/pref_debug_description"
 		                    android:defaultValue="false"/>
-	  </PreferenceCategory>
+	</PreferenceCategory>
+	 -->
 </PreferenceScreen>
