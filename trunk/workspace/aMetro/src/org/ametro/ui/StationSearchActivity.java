@@ -63,6 +63,20 @@ public class StationSearchActivity extends ListActivity {
 			String searchKeywords = queryIntent.getStringExtra(SearchManager.QUERY).toLowerCase();
 			doSearchKeywords(searchKeywords);
 			bindData();
+			
+			if(mStationList.size()>0){
+				if(mStationList.size()>1){
+					bindData();
+				}else{
+					MapViewActivity.Instance.setNavigationStations(mStationList);
+					MapViewActivity.Instance.setCurrentStation(mStationList.get(0));
+					finish();
+				}
+			}else{
+				MapViewActivity.Instance.setNavigationStations(null);
+				Toast.makeText(this, getString(R.string.msg_station_not_found), Toast.LENGTH_SHORT).show();
+				finish();
+			}
 		}else{
 			mStationList = MapViewActivity.Instance.getNavigationStations();
 			bindData();
@@ -75,23 +89,11 @@ public class StationSearchActivity extends ListActivity {
 
 	private void bindData() {
 		SchemeView map = MapViewActivity.Instance.getMapView();
-		if(mStationList.size()>0){
-			if(mStationList.size()>1){
-				ArrayList<String> stationNamesList = new ArrayList<String>();
-				for(StationView station : mStationList){
-						stationNamesList.add(station.getName() + " (" + map.lines[station.lineViewId].getName() + ")");
-				}
-				this.setListAdapter(new StationListAdapter(this, mStationList, map));
-			}else{
-				MapViewActivity.Instance.setNavigationStations(mStationList);
-				MapViewActivity.Instance.setCurrentStation(mStationList.get(0));
-				finish();
-			}
-		}else{
-			MapViewActivity.Instance.setNavigationStations(null);
-			Toast.makeText(this, getString(R.string.msg_station_not_found), Toast.LENGTH_SHORT).show();
-			finish();
+		ArrayList<String> stationNamesList = new ArrayList<String>();
+		for(StationView station : mStationList){
+				stationNamesList.add(station.getName() + " (" + map.lines[station.lineViewId].getName() + ")");
 		}
+		this.setListAdapter(new StationListAdapter(this, mStationList, map));
 	}
 
 	private SchemeView doSearchKeywords(String searchKeywords) {
