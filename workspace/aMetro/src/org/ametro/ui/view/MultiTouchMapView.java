@@ -10,6 +10,7 @@ import org.ametro.model.StationView;
 import org.ametro.model.TransferView;
 import org.ametro.render.AsyncVectorMapRenderer;
 import org.ametro.render.IVectorMapRenderer;
+import org.ametro.render.MapMarkerRenderer;
 import org.ametro.render.RenderProgram;
 import org.ametro.render.VectorMapRenderer;
 import org.ametro.ui.controllers.KeyEventController;
@@ -50,6 +51,7 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 	private SchemeView mScheme;
 	private RenderProgram mRenderProgram;
 	private IVectorMapRenderer mMapView;
+	private MapMarkerRenderer mMapMarkerRenderer;
 	
 	private PointF mLastClickPosition;
 	private float mDblClickSlop;
@@ -72,6 +74,9 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 	private ArrayList<StationView> mStations;
 	private ArrayList<SegmentView> mSegment;
 	private ArrayList<TransferView> mTransfers;
+	
+	private StationView mStartMarker;
+	private StationView mEndMarker;
 	
     private String mRenderFailedErrorText;
 	
@@ -97,6 +102,7 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 		
 		mScheme = scheme;
 		mRenderProgram = new RenderProgram(mScheme);
+		mMapMarkerRenderer = new MapMarkerRenderer(context);
 
 		mAttached = false;
 		setMapRenderer(rendererType);
@@ -170,6 +176,15 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 	protected void onDraw(Canvas canvas) {
 		canvas.save();
 		mMapView.draw(canvas);
+		if(mStartMarker!=null || mEndMarker!=null){
+			Matrix matrix = mController.getPositionAndScale();
+			if(mStartMarker!=null){
+				mMapMarkerRenderer.drawStartMarker(canvas, matrix, mStartMarker.stationPoint.x, mStartMarker.stationPoint.y, MapMarkerRenderer.MARKER_TYPE_START);
+			}
+			if(mEndMarker!=null){
+				mMapMarkerRenderer.drawStartMarker(canvas, matrix, mEndMarker.stationPoint.x, mEndMarker.stationPoint.y, MapMarkerRenderer.MARKER_TYPE_END);
+			}
+		}
 		if(mMapView.isRenderFailed()){
 			Paint p = new Paint();
 			p.setColor(Color.WHITE);
@@ -261,6 +276,12 @@ public class MultiTouchMapView extends ScrollView implements MultiTouchListener 
 		mSegment = segments;
 		mTransfers = transfers;
 		mMapView.setSchemeSelection(stations,segments,transfers);
+	}
+	
+	public void setSchemeMarkers(StationView startMarker, StationView endMarker)
+	{
+		mStartMarker = startMarker;
+		mEndMarker = endMarker;
 	}
 	
 	public void setZoomControls(ZoomControls zoomControls) {

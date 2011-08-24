@@ -36,7 +36,6 @@
     <string name="locate_station_wait_title">Поиск станции</string>
     <string name="locate_wait_text">Пожалуйста, подождите...</string>
     <string name="route_time_format">%1$sч %2$sм</string>
-
     <string name="menu_legend">Легенда</string>
     <string name="menu_clear_selection">Назад</string>
     <string name="menu_search">Поиск</string>
@@ -86,7 +85,6 @@
     <string name="context_menu_delete">Удалить</string>
     <string name="context_menu_delete_pmz">Удалить PMZ</string>
     <string name="context_menu_catalog_header">Карта</string>
-    <string name="menu_"/>
     <string name="msg_loading">Загрузка...</string>
     <string name="msg_caching">Кеширование карты...</string>
     <string name="msg_no_maps_in_library">Нет карт в каталоге</string>
@@ -106,7 +104,7 @@
     <string name="msg_read_pmz_files">Чтение PMZ файлов...</string>
     <string name="msg_import_pmz_files">Импорт PMZ файлов...</string>
     <string name="msg_import_failed">Ошибка импорта</string>
-	<string name="msg_download_failed">Ошибка загрузки</string>
+    <string name="msg_download_failed">Ошибка загрузки</string>
     <string name="msg_station_not_found">Станция не найдена</string>
     <string name="msg_route_added_to_favorites">Добавлен в Избранное</string>
     <string name="msg_route_removed_from_favorites">Удален из Избранного</string>
@@ -126,17 +124,15 @@
     <string name="msg_no_maps_in_online">Необходим доступ к сети. Нажмите Меню-&amp;gt;Обновить для начала загрузки каталога карт.</string>
     <string name="msg_no_maps_in_import_header">Нет PMZ карт для импорта</string>
     <string name="msg_no_maps_in_import">Для импорта необходимо скопировать файлы .PMZ в каталог /sdcard/ametro/import и отключить ваш коммуникатор от компьютера. Нажмите Меню-&amp;gt;Обновить для обновления списка.</string>
-    
     <string name="msg_delete_local_map_confirmation">Удалить карту %1$s, %2$s из моих карт?</string>
     <string name="msg_delete_import_map_confirmation">Удалить PMZ карту %1$s, %2$s из импорта?</string>
     <string name="msg_enter_amount">Введите сумму, в USD</string>
     <string name="msg_payment_success">Платеж выполнен</string>
     <string name="msg_payment_failed">Ошибка платежа</string>
     <string name="msg_payment_canceled">Платеж отменен</string>
-	<string name="msg_donate_title">Настройка платежа</string>    
+    <string name="msg_donate_title">Настройка платежа</string>
     <string name="msg_donate_currency">Валюта:</string>
     <string name="msg_donate_amount">Сумма:</string>
-    
     <string name="msg_transports">Виды транспорта</string>
     <string name="msg_time_of_day">Время суток</string>
     <string name="msg_import">Импорт</string>
@@ -169,7 +165,7 @@
     <string name="msg_try_download_catalog">Загрузка </string>
     <string name="msg_please_wait">Пожалуйста, подождите...</string>
     <string name="msg_description">Информация</string>
-	<string name="msg_task_queue_loading">Загрузка</string>
+    <string name="msg_task_queue_loading">Загрузка</string>
     <string name="msg_media_unmounted">Карта памяти недоступна. Пожалуйста, вставьте карту памяти или отключите коммуникатор от компьютера.</string>
     <string name="msg_render_failed">Ошибка отображения.</string>
     <string name="msg_locale_loading">Загрузка локали...</string>
@@ -180,7 +176,6 @@
     <string name="msg_map_updates_count">обновлено карт: %s</string>
     <string name="msg_update_online_catalog">обновление каталога карт...</string>
     <string name="msg_last_update">Последнее обновление:</string>
-    
     <string name="tab_maps_favorited">Избранное</string>
     <string name="tab_maps_local">Мои карты</string>
     <string name="tab_maps_online">Каталог</string>
@@ -197,31 +192,30 @@
     <string name="log_failed_map_loading">Failed map loading</string>
     <string name="log_pmz_indexing_error">PMZ indexing error</string>
     <string name="log_import_failed">Import failed</string>
-    <string name="log_"/>
-	<string name="btn_update">Обновить</string>
-	<string name="btn_import">Импортировать</string>
-	<string name="btn_download">Загрузить</string>
-	<string name="btn_open">Открыть</string>
-	<string name="btn_delete">Удалить</string>
-	<string name="btn_close">Закрыть</string>
-	<string name="btn_cancel">Отменить</string>
-	<string name="btn_delete_pmz">Удалить PMZ</string>
-	<string name="btn_changelog">Новое</string>
-	<string name="btn_donate">Помочь</string>
-	<string name="btn_ok">Ok</string>
-	<string name="btn_accept">Принять</string>
-	<string name="btn_reject">Отказать</string>
-	<string name="btn_settings">Настройки</string>
-	<string name="btn_apply">Применить</string>
-	<string name="btn_later">Позже</string>
-	
+    <string name="btn_update">Обновить</string>
+    <string name="btn_import">Импортировать</string>
+    <string name="btn_download">Загрузить</string>
+    <string name="btn_open">Открыть</string>
+    <string name="btn_delete">Удалить</string>
+    <string name="btn_close">Закрыть</string>
+    <string name="btn_cancel">Отменить</string>
+    <string name="btn_delete_pmz">Удалить PMZ</string>
+    <string name="btn_changelog">Новое</string>
+    <string name="btn_donate">Помочь</string>
+    <string name="btn_ok">Ok</string>
+    <string name="btn_accept">Принять</string>
+    <string name="btn_reject">Отказать</string>
+    <string name="btn_settings">Настройки</string>
+    <string name="btn_apply">Применить</string>
+    <string name="btn_later">Позже</string>
     <string name="title_eula">Соглашение</string>
     <string name="title_info">Информация</string>
-    
     <string name="toast_render_failed">Ошибка отображения. Пожалуйста, выберите другую карту (схему) или попробуйте сменить масштаб. Приносим извинения за неудобства.</string>
-<string name="msg_no_description">Описания для выбранного языка карт отсутствует. Если вы можете помочь с составлением описания карты - пожалуйста свяжитесь с разработчиками
+    <string name="msg_no_description">Описания для выбранного языка карт отсутствует. Если вы можете помочь с составлением описания карты - пожалуйста свяжитесь с разработчиками
 </string>
-<string name="title_catalog_import">Импорт</string>
+    <string name="title_catalog_import">Импорт</string>
     <string name="title_catalog_online">Каталог</string>
     <string name="title_catalog_local">Мои карты</string>
+    <string name="msg_route_start">Маршрут от %1$s</string>
+    <string name="msg_route_end">Маршрут к %1$s</string>
 </resources>
