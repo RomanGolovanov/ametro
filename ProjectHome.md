@@ -1,0 +1,1 @@
+Project aims to create open source applications for Android platform for finding the shortest path in public transport (metro, subway, trains and other modes of transport), with maps that are compatible with the project from pMetro.
