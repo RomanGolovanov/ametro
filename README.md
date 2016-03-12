@@ -10,4 +10,4 @@ Home: http://www.ametro.org/
 
 # License
 
-aMetro distributed under the GNU General Public License - see the accompanying LICENSE file for more details. 
+aMetro distributed under the [GNU General Public License](https://raw.githubusercontent.com/RomanGolovanov/ametro/master/LICENSE) - see the accompanying LICENSE file for more details. 
