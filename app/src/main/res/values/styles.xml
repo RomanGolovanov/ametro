@@ -1,0 +1,75 @@
+<resources>
+    <color name="primary">#4CAF50</color>
+    <color name="primary_dark">#388E3C</color>
+    <color name="primary_light">#C8E6C9</color>
+    <color name="accent">#FF5722</color>
+    <color name="primary_text">#212121</color>
+    <color name="activated_color">#9bff5526</color>
+
+    <color name="secondary_text">#727272</color>
+    <color name="secondary_disabled_text">#89727272</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#B6B6B6</color>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="android:activatedBackgroundIndicator">@drawable/item_background</item>
+    </style>
+
+    <style name="primaryText" parent="@style/TextAppearance.AppCompat.Medium">
+        <item name="android:textSize">16sp</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="secondaryText" parent="@style/TextAppearance.AppCompat.Medium">
+        <item name="android:textSize">14sp</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="secondaryAlarmText" parent="@style/TextAppearance.AppCompat.Medium">
+        <item name="android:textSize">14sp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textColor">@color/accent</item>
+    </style>
+
+    <style name="disabledSecondaryText" parent="@style/TextAppearance.AppCompat.Medium">
+        <item name="android:textSize">14sp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textColor">@color/secondary_disabled_text</item>
+    </style>
+
+    <style name="drawerItemText" parent="@style/TextAppearance.AppCompat.Medium">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#DC000000</item>
+    </style>
+
+    <style name="drawerSubHeaderText" parent="@style/TextAppearance.AppCompat.Medium">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#89000000</item>
+    </style>
+
+    <style name="NavDrawer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginRight">@dimen/nav_drawer_margin_offset</item>
+    </style>
+
+    <style name="MapList">
+        <item name="android:background">@android:color/background_light</item>
+        <item name="android:divider">@android:color/transparent</item>
+        <item name="android:dividerHeight">0dp</item>
+    </style>
+
+    <style name="CityList">
+        <item name="android:background">@android:color/background_light</item>
+        <item name="android:divider">@android:color/transparent</item>
+        <item name="android:dividerHeight">0dp</item>
+    </style>
+
+    <style name="ListContainer">
+        <item name="android:background">@android:color/background_light</item>
+    </style>
+
+</resources>

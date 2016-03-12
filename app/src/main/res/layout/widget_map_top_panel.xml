@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/map_top_panel"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:orientation="vertical"
+    android:visibility="invisible"
+    tools:visibility="visible">
+
+    <TextView
+        android:id="@+id/message"
+        style="@style/secondaryText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/background_light"
+        android:gravity="center"
+        android:padding="@dimen/panel_padding"
+        tools:text="Some messages can be displayed here" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:contentDescription="@string/empty"
+        android:src="@drawable/white_gradient_bottom" />
+
+</LinearLayout>

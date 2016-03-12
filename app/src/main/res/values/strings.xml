@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">aMetro</string>
+
+    <string name="title_activity_map_view">aMetro</string>
+    <string name="title_activity_map_list_view">Maps</string>
+    <string name="title_activity_city_list_view">Add map</string>
+    <string name="title_activity_map_details_view">Map details</string>
+    <string name="title_activity_settings_list_view">Settings</string>
+    <string name="title_activity_station_scheme_view">Station Scheme</string>
+    <string name="title_activity_about">About</string>
+
+    <string name="msg_country_flag">country flag</string>
+    <string name="msg_map_list_downloading">Downloading…</string>
+
+    <string name="msg_city_list_empty">No cities.</string>
+    <string name="msg_city_list_no_available_cities">No available cities.</string>
+    <string name="msg_city_list_no_connection">Check internet connection or try again later.</string>
+
+    <string name="msg_map_list_empty">No maps.</string>
+    <string name="msg_map_list_no_installed_maps">No installed maps.</string>
+    <string name="msg_map_list_tap_to_add_new_maps">Tap screen to show available maps.</string>
+
+    <string name="msg_no_maps_loaded">No map selected</string>
+    <string name="msg_press_to_add_map">tap screen to show map list</string>
+    <string name="msg_operation_interrupted">Operaiton canceled</string>
+    <string name="msg_download_progress">Downloaded %s bytes</string>
+    <string name="msg_error">Error: %s</string>
+    <string name="msg_some_maps_out_of_date">Some maps are out-of-date.</string>
+
+    <string name="btn_open">Open</string>
+    <string name="btn_close">Close</string>
+    <string name="btn_download">Download</string>
+    <string name="btn_cancel">Cancel</string>
+
+    <string name="drawer_open">Navigation opened</string>
+    <string name="drawer_close">Navigation closed</string>
+
+
+    <string name="action_add">Add</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_update">Update</string>
+    <string name="action_search">Search</string>
+    <string name="action_select_all">Select All</string>
+    <string name="action_test_outdated">Test Outdated</string>
+    <string name="action_settings">Settings</string>
+    <string name="btn_flat_begin">BEGIN</string>
+    <string name="btn_flat_end">END</string>
+    <string name="btn_flat_station_details">INFO</string>
+    <string name="btn_flat_close">CLOSE</string>
+    <string name="msg_no_scheme_available_for_station">No map available for station</string>
+    <string name="tab_map">Map</string>
+    <string name="tab_about">About</string>
+    <string name="empty"></string>
+    <string name="msg_selected" >Selected</string>
+    <string name="nav_select_map">Change map</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_about">About</string>
+    <string name="nav_options">Options:</string>
+    <string name="nav_using">Using transport:</string>
+    <string name="nav_schemes">Schemes:</string>
+    <string name="nav_no_city">No city map loaded</string>
+    <string name="msg_from_to" formatted="false">%s - %s: %s</string>
+    <string name="msg_no_route_found" formatted="false">Not found route from %s to %s</string>
+    <string name="msg_map_loaded">Map loaded, %s ms</string>
+    <string name="msg_map_loading_failed">Map load failed due exception: %s</string>
+    <string name="msg_no_maps_selected">No maps selected</string>
+    <string name="msg_maps_deleted">Maps deleted</string>
+    <string name="msg_maps_updated">%s maps updated.</string>
+    <string name="msg_maps_all_updated">All maps is up-to-date</string>
+    <string name="msg_maps_updating">Updating maps…</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="msg_downloading">Downloading…</string>
+    <string name="msg_map_loading_progress">Loading map %s …</string>
+    <string name="msg_map_list_failed_to_download">Failed to download map list</string>
+    <string name="nav_delays">Time of day:</string>
+    <string name="delay_type_not_defined"></string>
+    <string name="delay_type_custom" >Custom</string>
+    <string name="delay_type_day" >Day</string>
+    <string name="delay_type_night" >Night</string>
+    <string name="delay_type_evening" >Evening</string>
+    <string name="delay_type_morning" >Mourning</string>
+    <string name="delay_type_rush" >Rush Hours</string>
+    <string name="delay_type_direct" >Direct</string>
+    <string name="delay_type_west_north" >West - North</string>
+    <string name="delay_type_west_south" >West - South</string>
+    <string name="delay_type_west_east" >West - East</string>
+    <string name="delay_type_east_north" >East - North</string>
+    <string name="delay_type_east_south" >East - South</string>
+    <string name="delay_type_east_west" >East - West</string>
+    <string name="delay_type_north_east" >North - East</string>
+    <string name="delay_type_north_west" >North - West</string>
+    <string name="delay_type_north_south" >North - South</string>
+    <string name="delay_type_south_east" >South - East</string>
+    <string name="delay_type_south_west" >South - West</string>
+    <string name="delay_type_south_north" >South - North</string>
+    <string name="delay_weekdays_type_not_defined" ></string>
+    <string name="delay_weekdays_type_monday" >Mo.</string>
+    <string name="delay_weekdays_type_tuesday" >Tu.</string>
+    <string name="delay_weekdays_type_wednesday" >We.</string>
+    <string name="delay_weekdays_type_thursday" >Th.</string>
+    <string name="delay_weekdays_type_friday" >Fr.</string>
+    <string name="delay_weekdays_type_saturday" >Sa.</string>
+    <string name="delay_weekdays_type_sunday" >Su.</string>
+    <string name="delay_weekdays_type_workdays" >Mo.Fr.</string>
+    <string name="delay_weekdays_type_weekend" >Sa.Su.</string>
+</resources>

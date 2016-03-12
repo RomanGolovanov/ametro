@@ -1,0 +1,20 @@
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="org.ametro.ui.activities.Map">
+
+    <item android:id="@+id/action_search"
+        android:title="@string/action_search"
+        android:icon="@drawable/ic_search_black_24dp"
+        app:showAsAction="ifRoom|collapseActionView"
+        app:actionViewClass="android.support.v7.widget.SearchView" />
+
+    <item android:id="@+id/action_test_outdated"
+        android:title="@string/action_test_outdated"
+        android:icon="@android:drawable/ic_menu_crop"
+        app:showAsAction="never|collapseActionView"
+        android:visible="false"
+        app:actionViewClass="android.support.v7.widget.SearchView" />
+
+</menu>

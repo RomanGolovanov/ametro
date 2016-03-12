@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/widget_toolbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/message"
+            style="@style/secondaryAlarmText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/background_light"
+            android:gravity="center"
+            android:padding="@dimen/panel_padding"
+            android:text="@string/msg_some_maps_out_of_date"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <fragment
+            android:id="@+id/list"
+            android:name="org.ametro.ui.fragments.MapListFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/message"
+            tools:layout="@layout/fragment_map_list_view" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_below="@id/message"
+            android:contentDescription="@string/empty"
+            android:src="@drawable/white_gradient_bottom" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/map_bottom_panel"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_marginEnd="@dimen/panel_margin_left_right"
+    android:layout_marginLeft="@dimen/panel_margin_left_right"
+    android:layout_marginRight="@dimen/panel_margin_left_right"
+    android:layout_marginStart="@dimen/panel_margin_left_right"
+    android:orientation="vertical"
+    android:visibility="invisible"
+    tools:visibility="visible">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:contentDescription="@string/empty"
+        android:src="@drawable/white_gradient_top" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/background_light"
+        android:padding="@dimen/panel_padding">
+
+        <TextView
+            android:id="@+id/station"
+            style="@style/primaryText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Station name" />
+
+        <TextView
+            android:id="@+id/line"
+            style="@style/secondaryText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/station"
+            tools:text="Line name" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/line"
+            android:gravity="end"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_details"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_flat_station_details" />
+
+            <Button
+                android:id="@+id/button_begin"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_flat_begin" />
+
+            <Button
+                android:id="@+id/button_end"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_flat_end" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

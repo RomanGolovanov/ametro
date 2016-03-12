@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/drawer_item_height"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/drawer_item_padding_top_bottom"
+    android:paddingLeft="@dimen/drawer_item_padding_left_right"
+    android:paddingRight="@dimen/drawer_item_padding_left_right"
+    android:paddingTop="@dimen/drawer_item_padding_top_bottom"
+    android:background="?android:attr/activatedBackgroundIndicator">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="@dimen/drawer_item_image_width"
+        android:layout_height="@dimen/drawer_item_image_height"
+        android:padding="@dimen/drawer_item_image_padding"
+        android:scaleType="fitCenter"
+        tools:src="@drawable/ic_public_black_18dp"
+        />
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:ellipsize="end"
+        android:paddingLeft="@dimen/drawer_item_text_padding_left"
+        android:paddingRight="@dimen/drawer_item_text_padding_left"
+        android:singleLine="true"
+        style="@style/drawerItemText"
+        tools:text="Text Content String"
+        />
+
+</LinearLayout>

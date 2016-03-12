@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="map_states">
+        <item>Installed</item>
+        <item>Outdated</item>
+        <item>Unknown</item>
+        <item>Fetching…</item>
+    </string-array>
+
+    <string-array name="transport_type_names">
+        <item>Metro</item>
+        <item>Tram</item>
+        <item>Bus</item>
+        <item>Train</item>
+        <item>Ferry</item>
+        <item>Trolleybus</item>
+        <item>Funicular</item>
+    </string-array>
+
+    <string-array name="transport_types">
+        <item>Метро</item>
+        <item>Трамвай</item>
+        <item>Автобус</item>
+        <item>Электричка</item>
+        <item>Речной Трамвай</item>
+        <item>Троллейбус</item>
+        <item>Фуникулер</item>
+    </string-array>
+
+</resources>

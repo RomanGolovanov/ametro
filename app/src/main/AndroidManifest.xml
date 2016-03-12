@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.ametro" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application
+        android:supportsRtl="false"
+        android:name="org.ametro.app.ApplicationEx"
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="org.ametro.ui.activities.Map"
+            android:label="@string/title_activity_map_view"
+            android:windowSoftInputMode="adjustPan"
+            android:launchMode="singleTop" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="org.ametro.ui.activities.MapList"
+            android:label="@string/title_activity_map_list_view"
+            android:launchMode="singleTop">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.ametro.ui.activities.Map" />
+        </activity>
+        <activity
+            android:name="org.ametro.ui.activities.SettingsList"
+            android:label="@string/title_activity_settings_list_view"
+            android:launchMode="singleTop">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.ametro.ui.activities.Map" />
+        </activity>
+        <activity
+            android:name="org.ametro.ui.activities.CityList"
+            android:label="@string/title_activity_city_list_view"
+            android:launchMode="singleTop">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.ametro.ui.activities.MapList" />
+        </activity>
+        <activity
+            android:name=".ui.activities.StationDetails"
+            android:label="@string/title_activity_station_scheme_view"
+            android:launchMode="singleTop">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.ametro.ui.activities.Map" />
+        </activity>
+        <activity
+            android:name="org.ametro.ui.activities.About"
+            android:label="@string/title_activity_about"
+            android:launchMode="singleTop">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.ametro.ui.activities.Map" />
+        </activity>
+    </application>
+
+</manifest>

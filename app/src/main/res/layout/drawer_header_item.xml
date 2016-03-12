@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:background="@drawable/side_nav_bar"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/list_item_padding_left_right"
+        android:paddingRight="@dimen/list_item_padding_left_right"
+        >
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="@dimen/list_item_icon_width"
+            android:layout_height="@dimen/list_item_icon_height"
+            android:layout_gravity="center_vertical"
+            android:elevation="@dimen/list_item_icon_elevation"
+            android:background="@drawable/no_country" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/list_item_text_padding_top"
+        android:layout_marginRight="@dimen/list_item_padding_left_right"
+        android:layout_marginEnd="@dimen/list_item_padding_left_right"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            style="@style/primaryText"
+            tools:text="Saints Petersburg" />
+
+        <TextView
+            android:id="@+id/country"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            style="@style/secondaryText"
+            tools:text="Russian Federation" />
+
+        <LinearLayout
+            android:id="@+id/icons"
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:gravity="end"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_b_metro"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_b_train"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_b_trolleybus"/>
+            </LinearLayout>
+
+        <TextView
+            android:id="@+id/comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:ellipsize="end"
+            android:singleLine="true"
+            style="@style/secondaryText"
+            tools:text="bla bla bla 1 bla bla bla 2 bla bla bla 3 bla bla bla 4" />
+
+    </LinearLayout>
+</LinearLayout>

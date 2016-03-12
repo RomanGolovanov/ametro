@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="?android:attr/activatedBackgroundIndicator"
+    >
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/list_item_padding_left_right"
+        android:paddingRight="@dimen/list_item_padding_left_right"
+        >
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="@dimen/list_item_icon_width"
+            android:layout_height="@dimen/list_item_icon_height"
+            android:elevation="@dimen/list_item_icon_elevation"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/no_country" />
+    </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/list_padding_top_bottom"
+        android:layout_marginRight="@dimen/list_item_padding_left_right"
+        android:layout_marginEnd="@dimen/list_item_padding_left_right"
+        android:layout_marginBottom="@dimen/list_padding_top_bottom"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:singleLine="true"
+            style="@style/primaryText"
+            tools:text="Saints Petersburg" />
+
+        <TextView
+            android:id="@+id/country"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/city"
+            android:singleLine="true"
+            style="@style/secondaryText"
+            tools:text="Russian Federation" />
+
+        <LinearLayout
+            android:id="@+id/icons"
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:layout_below="@id/country"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:orientation="horizontal"
+            />
+
+
+        <TextView
+            android:id="@+id/comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/country"
+            android:layout_toLeftOf="@id/icons"
+            android:layout_toStartOf="@id/icons"
+            android:ellipsize="end"
+            android:singleLine="true"
+            style="@style/disabledSecondaryText"
+            tools:text="bla bla bla 1 bla bla bla 2 bla bla bla 3" />
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:ellipsize="end"
+            android:singleLine="true"
+            style="@style/secondaryText"
+            tools:text="Status" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>
