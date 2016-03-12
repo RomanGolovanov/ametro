@@ -6,7 +6,7 @@ Used maps from pMetro project: http://pmetro.su/Maps.html
 
 Google Play: https://play.google.com/store/apps/details?id=org.ametro
 
-Home: https://www.ametro.org/
+Home: http://www.ametro.org/
 
 # License
 
