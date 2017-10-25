@@ -9,8 +9,8 @@ android {
         minSdkVersion 15
         targetSdkVersion 23
 
-        versionCode 40
-        versionName "2.0.1.5"
+        versionCode 41
+        versionName "2.0.1.6"
 
         setProperty("archivesBaseName", "aMetro-$versionName")
 
@@ -24,6 +24,10 @@ android {
     packagingOptions {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
+    }
+
+    lintOptions {
+        abortOnError true
     }
 }
 

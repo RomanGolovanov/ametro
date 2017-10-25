@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">aMetro</string>
+
+    <string name="title_activity_map_view">aMetro</string>
+    <string name="title_activity_map_list_view">Cartes</string>
+    <string name="title_activity_city_list_view">Ajouter une carte</string>
+    <string name="title_activity_map_details_view">Détails de la carte</string>
+    <string name="title_activity_settings_list_view">Paramètres</string>
+    <string name="title_activity_station_scheme_view">Schéma de station</string>
+    <string name="title_activity_about">A propos</string>
+
+    <string name="msg_country_flag">drapeau du pays</string>
+    <string name="msg_map_list_downloading">Téléchargement…</string>
+
+    <string name="msg_city_list_empty">Pas de villes.</string>
+    <string name="msg_city_list_no_available_cities">Pas de villes disponibles.</string>
+    <string name="msg_city_list_no_connection">Vérifier la connexion internet ou réessayer plus tard.</string>
+
+    <string name="msg_map_list_empty">Pas de carte.</string>
+    <string name="msg_map_list_no_installed_maps">Pas de carte installé.</string>
+    <string name="msg_map_list_tap_to_add_new_maps">Touchez l\'écran pour afficher les cartes disponibles.</string>
+
+    <string name="msg_no_maps_loaded">Pas de carte sélectionnée</string>
+    <string name="msg_press_to_add_map">Toucher l\'écran pour afficher la liste des cartes</string>
+    <string name="msg_operation_interrupted">Opération annulée</string>
+    <string name="msg_download_progress">Téléchargé %s octets</string>
+    <string name="msg_error">Erreur: %s</string>
+    <string name="msg_some_maps_out_of_date">Certaines cartes sont obsolètes.</string>
+
+    <string name="btn_open">Ouvrir</string>
+    <string name="btn_close">Fermer</string>
+    <string name="btn_download">Télécharger</string>
+    <string name="btn_cancel">Annuler</string>
+
+    <string name="drawer_open">Navigation ouverte</string>
+    <string name="drawer_close">Navigation fermée</string>
+
+
+    <string name="action_add">Ajouter</string>
+    <string name="action_delete">Supprimer</string>
+    <string name="action_update">Mettre à jour</string>
+    <string name="action_search">Rechercher</string>
+    <string name="action_select_all">Sélectionner tout</string>
+    <string name="action_test_outdated">Test obsolète</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="btn_flat_begin">DEBUT</string>
+    <string name="btn_flat_end">FIN</string>
+    <string name="btn_flat_station_details">INFO</string>
+    <string name="btn_flat_close">FERMER</string>
+    <string name="msg_no_scheme_available_for_station">Pas de carte disponible pour cette station</string>
+    <string name="tab_map">Carte</string>
+    <string name="tab_about">A propos</string>
+    <string name="msg_selected" >Sélectionné</string>
+    <string name="nav_select_map">Changer la carte</string>
+    <string name="nav_settings">Paramètres</string>
+    <string name="nav_about">A propos</string>
+    <string name="nav_options">Options:</string>
+    <string name="nav_using">Moyen de transport:</string>
+    <string name="nav_schemes">Schémas:</string>
+    <string name="nav_no_city">Pas de plan de ville chargé</string>
+    <string name="msg_from_to" formatted="false">%s - %s: %s</string>
+    <string name="msg_no_route_found" formatted="false">Pas de chemin trouvé de %s à %s</string>
+    <string name="msg_map_loaded">Carte chargée, %s ms</string>
+    <string name="msg_map_loading_failed">Chargement de carte échoué à cause de l\'exception: %s</string>
+    <string name="msg_no_maps_selected">Pas de carte sélectionnée</string>
+    <string name="msg_maps_deleted">Carte supprimée</string>
+    <string name="msg_maps_updated">carte %s mise à jour.</string>
+    <string name="msg_maps_all_updated">Toutes les cartes sont à jour</string>
+    <string name="msg_maps_updating">Mise à jour des cartes…</string>
+    <string name="title_activity_settings">Paramètres</string>
+    <string name="msg_downloading">Téléchargement…</string>
+    <string name="msg_map_loading_progress">Chargement de la carte %s …</string>
+    <string name="msg_map_list_failed_to_download">Le téléchargement de la liste de carte a échoué</string>
+    <string name="nav_delays">Période du jour:</string>
+    <string name="delay_type_custom" >Personnalisé</string>
+    <string name="delay_type_day" >Jour</string>
+    <string name="delay_type_night" >Nuit</string>
+    <string name="delay_type_evening" >Soir</string>
+    <string name="delay_type_morning" >Matin</string>
+    <string name="delay_type_rush" >Heures de pointe</string>
+    <string name="delay_type_direct" >Direct</string>
+    <string name="delay_type_west_north" >Ouest - Nord</string>
+    <string name="delay_type_west_south" >Ouest - Sud</string>
+    <string name="delay_type_west_east" >Ouest - Est</string>
+    <string name="delay_type_east_north" >Est - Nord</string>
+    <string name="delay_type_east_south" >Est - Sud</string>
+    <string name="delay_type_east_west" >Est - Ouest</string>
+    <string name="delay_type_north_east" >Nord - Est</string>
+    <string name="delay_type_north_west" >Nord - Ouest</string>
+    <string name="delay_type_north_south" >Nord - Sud</string>
+    <string name="delay_type_south_east" >Sud - Est</string>
+    <string name="delay_type_south_west" >Sud - Ouest</string>
+    <string name="delay_type_south_north" >Sud - Nord</string>
+    <string name="delay_weekdays_type_monday" >Lun.</string>
+    <string name="delay_weekdays_type_tuesday" >Mar.</string>
+    <string name="delay_weekdays_type_wednesday" >Mer.</string>
+    <string name="delay_weekdays_type_thursday" >Jeu.</string>
+    <string name="delay_weekdays_type_friday" >Vend.</string>
+    <string name="delay_weekdays_type_saturday" >Mar.</string>
+    <string name="delay_weekdays_type_sunday" >Dim.</string>
+    <string name="delay_weekdays_type_workdays" >Lun.Vend.</string>
+    <string name="delay_weekdays_type_weekend" >Sam.Dim.</string>
+</resources>
