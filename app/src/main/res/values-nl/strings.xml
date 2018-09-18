@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">aMetro</string>
+
+    <string name="title_activity_map_view">aMetro</string>
+    <string name="title_activity_map_list_view">Kaarten</string>
+    <string name="title_activity_city_list_view">Kaart toevoegen</string>
+    <string name="title_activity_map_details_view">Kaartdetails</string>
+    <string name="title_activity_settings_list_view">Instellingen</string>
+    <string name="title_activity_station_scheme_view">Halte-overzicht</string>
+    <string name="title_activity_about">Over</string>
+
+    <string name="msg_country_flag">landsvlag</string>
+    <string name="msg_map_list_downloading">Bezig met downloaden…</string>
+
+    <string name="msg_city_list_empty">Geen steden.</string>
+    <string name="msg_city_list_no_available_cities">Geen steden beschikbaar.</string>
+    <string name="msg_city_list_no_connection">Controleer je internetverbinding en probeer het opnieuw.</string>
+
+    <string name="msg_map_list_empty">Geen kaarten.</string>
+    <string name="msg_map_list_no_installed_maps">Geen geïnstalleerde kaarten.</string>
+    <string name="msg_map_list_tap_to_add_new_maps">Raak het scherm aan om de beschikbare kaarten te tonen.</string>
+
+    <string name="msg_no_maps_loaded">Geen kaart geselecteerd</string>
+    <string name="msg_press_to_add_map">Raak het scherm aan om de kaartenlijst te tonen.</string>
+    <string name="msg_operation_interrupted">Operatie geannuleerd</string>
+    <string name="msg_download_progress">%s bytes gedownload</string>
+    <string name="msg_error">Fout: %s</string>
+    <string name="msg_some_maps_out_of_date">Sommige kaarten zijn verouderd.</string>
+
+    <string name="btn_open">Openen</string>
+    <string name="btn_close">Sluiten</string>
+    <string name="btn_download">Downloaden</string>
+    <string name="btn_cancel">Annuleren</string>
+
+    <string name="drawer_open">Navigation geopend</string>
+    <string name="drawer_close">Navigatie gesloten</string>
+
+
+    <string name="action_add">Toevoegen</string>
+    <string name="action_delete">Verwijderen</string>
+    <string name="action_update">Bijwerken</string>
+    <string name="action_search">Zoeken</string>
+    <string name="action_select_all">Alles selecteren</string>
+    <string name="action_test_outdated">Test verouderd</string>
+    <string name="action_settings">Instellingen</string>
+    <string name="btn_flat_begin">BEGINNEN</string>
+    <string name="btn_flat_end">EINDIGEN</string>
+    <string name="btn_flat_station_details">INFORMATIE</string>
+    <string name="btn_flat_close">SLUITEN</string>
+    <string name="msg_no_scheme_available_for_station">Geen haltekaart beschikbaar</string>
+    <string name="tab_map">Kaart</string>
+    <string name="tab_about">Over</string>
+    <string name="empty"></string>
+    <string name="msg_selected" >Geselecteerd</string>
+    <string name="nav_select_map">Kaart wijzigen</string>
+    <string name="nav_settings">Instellingen</string>
+    <string name="nav_about">Over</string>
+    <string name="nav_options">Opties:</string>
+    <string name="nav_using">Gebruikmakend van vervoer:</string>
+    <string name="nav_schemes">Overzichten:</string>
+    <string name="nav_no_city">Geen stadskaart gedownload</string>
+    <string name="msg_from_to" formatted="false">%s - %s: %s</string>
+    <string name="msg_no_route_found" formatted="false">Geen route gevonden van %s naar %s</string>
+    <string name="msg_map_loaded">Kaart geladen in %s ms</string>
+    <string name="msg_map_loading_failed">Het laden is mislukt vanwege: %s</string>
+    <string name="msg_no_maps_selected">Geen kaarten geselecteerd</string>
+    <string name="msg_maps_deleted">Kaarten verwijderd</string>
+    <string name="msg_maps_updated">%s kaarten verwijderd.</string>
+    <string name="msg_maps_all_updated">Alle kaarten zijn bijgewerkt</string>
+    <string name="msg_maps_updating">Bezig met bijwerken van kaarten…</string>
+    <string name="title_activity_settings">Instellingen</string>
+    <string name="msg_downloading">Bezig met downloaden…</string>
+    <string name="msg_map_loading_progress">Bezig met laden van kaart %s…</string>
+    <string name="msg_map_list_failed_to_download">Het downloaden van de kaartenlijst is mislukt.</string>
+    <string name="nav_delays">Tijd:</string>
+    <string name="delay_type_not_defined"></string>
+    <string name="delay_type_custom" >Aangepast</string>
+    <string name="delay_type_day" >Dag</string>
+    <string name="delay_type_night" >Nacht</string>
+    <string name="delay_type_evening" >Avond</string>
+    <string name="delay_type_morning" >Ochtend</string>
+    <string name="delay_type_rush" >Spitsuren</string>
+    <string name="delay_type_direct" >Direct</string>
+    <string name="delay_type_west_north" >West - Noord</string>
+    <string name="delay_type_west_south" >West - Zuid</string>
+    <string name="delay_type_west_east" >West - Oost</string>
+    <string name="delay_type_east_north" >Oost - Noord</string>
+    <string name="delay_type_east_south" >Oost - Zuid</string>
+    <string name="delay_type_east_west" >Oost - West</string>
+    <string name="delay_type_north_east" >Noord - Oost</string>
+    <string name="delay_type_north_west" >Noord - West</string>
+    <string name="delay_type_north_south" >Noord - Zuid</string>
+    <string name="delay_type_south_east" >Zuid - Oost</string>
+    <string name="delay_type_south_west" >Zuid - West</string>
+    <string name="delay_type_south_north" >Zuid - Noord</string>
+    <string name="delay_weekdays_type_not_defined" ></string>
+    <string name="delay_weekdays_type_monday" >ma</string>
+    <string name="delay_weekdays_type_tuesday" >di</string>
+    <string name="delay_weekdays_type_wednesday" >woe</string>
+    <string name="delay_weekdays_type_thursday" >do</string>
+    <string name="delay_weekdays_type_friday" >vrij</string>
+    <string name="delay_weekdays_type_saturday" >za</string>
+    <string name="delay_weekdays_type_sunday" >zo</string>
+    <string name="delay_weekdays_type_workdays" >ma-vrij</string>
+    <string name="delay_weekdays_type_weekend" >za-zo</string>
+</resources>
