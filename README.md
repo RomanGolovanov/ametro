@@ -6,8 +6,6 @@ Used maps from pMetro project: http://pmetro.su/Maps.html
 
 Google Play: https://play.google.com/store/apps/details?id=org.ametro
 
-Home: http://www.ametro.org/
-
 # License
 
 aMetro distributed under the [GNU General Public License](https://raw.githubusercontent.com/RomanGolovanov/ametro/master/LICENSE) - see the accompanying LICENSE file for more details. 
