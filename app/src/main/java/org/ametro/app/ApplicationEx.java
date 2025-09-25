@@ -11,11 +11,7 @@ import androidx.loader.content.AsyncTaskLoader;
 
 import org.ametro.R;
 import org.ametro.catalog.MapCatalogManager;
-import org.ametro.catalog.RemoteMapCatalogProvider;
 import org.ametro.catalog.localization.MapInfoLocalizationProvider;
-import org.ametro.catalog.service.IMapServiceCache;
-import org.ametro.catalog.service.MapServiceCache;
-import org.ametro.catalog.service.ServiceTransport;
 import org.ametro.model.MapContainer;
 import org.ametro.providers.IconProvider;
 import org.ametro.utils.Lazy;
@@ -24,8 +20,6 @@ public class ApplicationEx extends Application {
 
     private Lazy<ApplicationSettingsProvider> appSettingsProvider;
     private Lazy<IconProvider> countryFlagProvider;
-    private Lazy<RemoteMapCatalogProvider> remoteMapCatalogProvider;
-    private Lazy<IMapServiceCache> mapServiceCache;
     private Lazy<MapCatalogManager> localMapCatalogManager;
     private Lazy<MapInfoLocalizationProvider> localizedMapInfoProvider;
 
@@ -50,13 +44,6 @@ public class ApplicationEx extends Application {
     public void onCreate() {
         super.onCreate();
 
-        appSettingsProvider = new Lazy<>(new Lazy.IFactory<ApplicationSettingsProvider>() {
-            @Override
-            public ApplicationSettingsProvider create() {
-                return new ApplicationSettingsProvider(ApplicationEx.this);
-            }
-        });
-
         countryFlagProvider = new Lazy<>(new Lazy.IFactory<IconProvider>() {
             @Override
             public IconProvider create() {
@@ -67,39 +54,24 @@ public class ApplicationEx extends Application {
             }
         });
 
-        mapServiceCache = new Lazy<>(new Lazy.IFactory<IMapServiceCache>() {
-            @Override
-            public IMapServiceCache create() {
-                return new MapServiceCache(
-                        new ServiceTransport(),
-                        Constants.MAP_SERVICE_URI,
-                        getFilesDir(),
-                        getApplicationSettingsProvider().getDefaultLanguage(),
-                        Constants.MAP_EXPIRATION_PERIOD_MILLISECONDS);
-            }
-        });
-
         localizedMapInfoProvider = new Lazy<>(new Lazy.IFactory<MapInfoLocalizationProvider>() {
             @Override
             public MapInfoLocalizationProvider create() {
-                return new MapInfoLocalizationProvider(mapServiceCache.getInstance());
-            }
-        });
-
-        remoteMapCatalogProvider = new Lazy<>(new Lazy.IFactory<RemoteMapCatalogProvider>() {
-            @Override
-            public RemoteMapCatalogProvider create() {
-                return new RemoteMapCatalogProvider(
-                        Constants.MAP_SERVICE_URI,
-                        mapServiceCache.getInstance(),
-                        localizedMapInfoProvider.getInstance());
+                return new MapInfoLocalizationProvider(getApplicationContext(), "en");
             }
         });
 
         localMapCatalogManager = new Lazy<>(new Lazy.IFactory<MapCatalogManager>() {
             @Override
             public MapCatalogManager create() {
-                return new MapCatalogManager(getFilesDir(), getLocalizedMapInfoProvider());
+                return new MapCatalogManager(getApplicationContext(), getLocalizedMapInfoProvider());
+            }
+        });
+
+        appSettingsProvider = new Lazy<>(new Lazy.IFactory<ApplicationSettingsProvider>() {
+            @Override
+            public ApplicationSettingsProvider create() {
+                return new ApplicationSettingsProvider(ApplicationEx.this, localMapCatalogManager.getInstance());
             }
         });
 
@@ -115,10 +87,6 @@ public class ApplicationEx extends Application {
 
     public IconProvider getCountryFlagProvider() {
         return countryFlagProvider.getInstance();
-    }
-
-    public RemoteMapCatalogProvider getRemoteMapCatalogProvider() {
-        return remoteMapCatalogProvider.getInstance();
     }
 
     public MapCatalogManager getLocalMapCatalogManager() {

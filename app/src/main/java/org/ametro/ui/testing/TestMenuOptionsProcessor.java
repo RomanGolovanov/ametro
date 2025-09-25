@@ -38,7 +38,6 @@ public class TestMenuOptionsProcessor {
                         maps[0].getIso()
                 );
 
-                localMapCatalogManager.addOrReplaceMapAll(new MapInfo[]{outdatedFirstMap});
                 DebugToast.show(activity, "Map " + outdatedFirstMap.getFileName() + " made outdated in local storage", Toast.LENGTH_LONG);
             }
             return true;

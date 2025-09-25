@@ -134,10 +134,13 @@ public class Map extends AppCompatActivity implements
             mapView.setCenterPositionAndScale(data.first, data.second, false);
         }
         if (mapView == null) {
-            File currentMapFile = settingsProvider.getCurrentMap();
-            if (currentMapFile != null) {
+            var currentMap = settingsProvider.getCurrentMap();
+            if (currentMap != null) {
+                var localMapCatalogManager = app.getLocalMapCatalogManager();
+
                 new MapLoadAsyncTask(this, this, new MapContainer(
-                        currentMapFile,
+                        localMapCatalogManager,
+                        currentMap,
                         settingsProvider.getPreferredMapLanguage())
                 ).execute();
             }
@@ -249,13 +252,10 @@ public class Map extends AppCompatActivity implements
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == OPEN_MAPS_ACTION) {
             if (resultCode == RESULT_OK) {
-                MapCatalogManager localMapCatalogManager = app.getLocalMapCatalogManager();
-                new MapLoadAsyncTask(this, this, new MapContainer(
-                        localMapCatalogManager.getMapFile(
-                                localMapCatalogManager.findMapByName(
-                                        data.getStringExtra(Constants.MAP_PATH))),
-                        settingsProvider.getPreferredMapLanguage())
-                ).execute();
+                var localMapCatalogManager = app.getLocalMapCatalogManager();
+                var mapInfo = localMapCatalogManager.findMapByName(data.getStringExtra(Constants.MAP_PATH));
+                var mapContainer = new MapContainer(localMapCatalogManager, mapInfo, settingsProvider.getPreferredMapLanguage());
+                new MapLoadAsyncTask(this, this,  mapContainer).execute();
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -288,11 +288,11 @@ public class Map extends AppCompatActivity implements
         DebugToast.show(this, getString(R.string.msg_map_loaded, time), Toast.LENGTH_LONG);
         this.app.setCurrentMapViewState(container, schemeName, enabledTransports);
         initMapViewState();
-        settingsProvider.setCurrentMap(container.getMapFile());
+        settingsProvider.setCurrentMap(container.getMapInfo());
     }
 
     private void initMapViewState() {
-        if (app.getContainer() == null || !app.getContainer().getMapFile().exists()) {
+        if (app.getContainer() == null || app.getContainer().getMapInfo() == null) {
             app.clearCurrentMapViewState();
             navigationController.setNavigation(null, null, null, null);
             mapPanelView.setVisibility(View.GONE);

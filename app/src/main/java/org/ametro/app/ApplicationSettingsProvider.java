@@ -1,10 +1,12 @@
 package org.ametro.app;
 
-
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import java.io.File;
+import org.ametro.catalog.MapCatalogManager;
+import org.ametro.catalog.entities.MapCatalog;
+import org.ametro.catalog.entities.MapInfo;
+
 import java.util.Locale;
 
 public class ApplicationSettingsProvider {
@@ -15,36 +17,45 @@ public class ApplicationSettingsProvider {
     private static final String PREFERRED_LANGUAGE = "preferredLanguage";
 
     private final SharedPreferences settings;
+    private final MapCatalogManager catalog;
 
-    public ApplicationSettingsProvider(Context context){
-        settings = context.getSharedPreferences(PREFS_NAME, 0);
+
+    public ApplicationSettingsProvider(Context context, MapCatalogManager catalog) {
+        this.settings = context.getSharedPreferences(PREFS_NAME, 0);
+        this.catalog = catalog;
     }
 
-    public File getCurrentMap() {
-        String mapFilePath = settings.getString(SELECTED_MAP, null);
-        if(mapFilePath==null){
+    /**
+     * Returns the currently selected map, or null if none is set or not found in the catalog.
+     */
+    public MapInfo getCurrentMap() {
+        var mapFileName = settings.getString(SELECTED_MAP, null);
+        if (mapFileName == null) {
             return null;
         }
-        File mapFile = new File(mapFilePath);
-        if(!mapFile.exists()){
+        MapInfo map = catalog.findMapByName(mapFileName);
+        if (map == null) {
             setCurrentMap(null);
             return null;
         }
-        return mapFile;
+        return map;
     }
 
-    public void setCurrentMap(File mapFile){
+    /**
+     * Save the currently selected map (by file name).
+     */
+    public void setCurrentMap(MapInfo map) {
         SharedPreferences.Editor editor = settings.edit();
-        editor.putString(SELECTED_MAP, mapFile!=null ? mapFile.getAbsolutePath() : null);
+        editor.putString(SELECTED_MAP, map != null ? map.getFileName() : null);
         editor.apply();
     }
 
-    public String getDefaultLanguage(){
+    public String getDefaultLanguage() {
         return Locale.getDefault().getLanguage().toLowerCase();
     }
 
-    public String getPreferredMapLanguage(){
+    public String getPreferredMapLanguage() {
         String languageCode = settings.getString(PREFERRED_LANGUAGE, null);
-        return languageCode!=null ? languageCode : getDefaultLanguage();
+        return languageCode != null ? languageCode : getDefaultLanguage();
     }
 }

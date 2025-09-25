@@ -106,32 +106,7 @@ public class CityListFragment extends Fragment
 
     @Override
     public Loader<MapInfo[]> onCreateLoader(int id, Bundle args) {
-        return new AsyncTaskLoader<MapInfo[]>(requireContext()) {
-            @Override
-            public MapInfo[] loadInBackground() {
-                ApplicationEx app = ApplicationEx.getInstance(this);
-                final Set<String> loadedMaps = new HashSet<>();
-                for (MapInfo m : app.getLocalMapCatalogManager().getMapCatalog().getMaps()) {
-                    loadedMaps.add(m.getFileName());
-                }
-                MapCatalog remoteMapCatalog = app.getRemoteMapCatalogProvider()
-                        .getMapCatalog(false);
-
-                if (remoteMapCatalog == null) {
-                    return null;
-                }
-
-                Collection<MapInfo> remoteMaps =
-                        ListUtils.filter(Arrays.asList(remoteMapCatalog.getMaps()),
-                                new ListUtils.IPredicate<MapInfo>() {
-                                    @Override
-                                    public boolean apply(MapInfo map) {
-                                        return !loadedMaps.contains(map.getFileName());
-                                    }
-                                });
-                return remoteMaps.toArray(new MapInfo[0]);
-            }
-        };
+        return new MapInfoAsyncTaskLoader();
     }
 
     @Override
@@ -204,5 +179,22 @@ public class CityListFragment extends Fragment
 
     public interface ICitySelectionListener {
         void onCitySelected(MapInfo[] maps);
+    }
+
+    private class MapInfoAsyncTaskLoader extends AsyncTaskLoader<MapInfo[]> {
+        public MapInfoAsyncTaskLoader() {
+            super(CityListFragment.this.requireContext());
+        }
+
+        @Override
+        public MapInfo[] loadInBackground() {
+            ApplicationEx app = ApplicationEx.getInstance(this);
+            final Set<String> loadedMaps = new HashSet<>();
+            for (MapInfo m : app.getLocalMapCatalogManager().getMapCatalog().getMaps()) {
+                loadedMaps.add(m.getFileName());
+            }
+
+            return null;
+        }
     }
 }

@@ -1,5 +1,6 @@
 package org.ametro.ui.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
@@ -53,27 +54,15 @@ public class MapListFragment extends Fragment implements
     private String filterValue;
 
     private MapCatalog localMapCatalog;
-    private MapCatalog remoteMapCatalog;
-
     private ListView list;
-    private ActionMode actionMode;
-    private Set<String> actionModeSelection = new HashSet<>();
-
     private static final int LOCAL_CATALOG_LOADER = 1;
-    private static final int REMOTE_CATALOG_LOADER = 2;
 
     private IMapListEventListener listener = new IMapListEventListener() {
         @Override
         public void onOpenMap(MapInfo map) { }
 
         @Override
-        public void onDeleteMaps(MapInfo[] map) { }
-
-        @Override
         public void onLoadedMaps(ExtendedMapInfo[] maps) { }
-
-        @Override
-        public void onAddMap() { }
     };
 
     @Override
@@ -105,33 +94,8 @@ public class MapListFragment extends Fragment implements
         forceUpdate();
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putBoolean(STATE_ACTION_MODE, actionMode != null);
-        outState.putStringArrayList(STATE_SELECTION, MapInfoHelpers.toFileNameArray(adapter.getSelection()));
-    }
-
-    @Override
-    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
-        if (savedInstanceState == null) {
-            return;
-        }
-        if (savedInstanceState.getBoolean(STATE_ACTION_MODE)) {
-            actionMode = list.startActionMode(new ContextualActionModeCallback());
-        }
-        actionModeSelection.clear();
-        actionModeSelection.addAll(savedInstanceState.getStringArrayList(STATE_SELECTION));
-    }
-
     public void forceUpdate() {
         LoaderManager.getInstance(this).initLoader(LOCAL_CATALOG_LOADER, null, this).forceLoad();
-        LoaderManager.getInstance(this).initLoader(REMOTE_CATALOG_LOADER, null, this).forceLoad();
-    }
-
-    public void startContextActionMode() {
-        actionMode = list.startActionMode(new ContextualActionModeCallback());
     }
 
     public void setMapListEventListener(IMapListEventListener newListener) {
@@ -140,35 +104,13 @@ public class MapListFragment extends Fragment implements
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (actionMode != null) {
-            final int checkedCount = list.getCheckedItemCount();
-            actionMode.setTitle(checkedCount + " Selected");
-            adapter.toggleSelection(position);
-            return;
-        }
         listener.onOpenMap(adapter.getItem(position));
     }
 
     @Override
     public Loader<MapCatalog> onCreateLoader(int id, Bundle args) {
-        final ApplicationEx app = ApplicationEx.getInstance(requireActivity());
-        switch (id) {
-            case LOCAL_CATALOG_LOADER:
-                return new AsyncTaskLoader<MapCatalog>(requireActivity()) {
-                    @Override
-                    public MapCatalog loadInBackground() {
-                        return app.getLocalMapCatalogManager().getMapCatalog();
-                    }
-                };
-            case REMOTE_CATALOG_LOADER:
-                return new AsyncTaskLoader<MapCatalog>(requireActivity()) {
-                    @Override
-                    public MapCatalog loadInBackground() {
-                        return app.getRemoteMapCatalogProvider().getMapCatalog(false);
-                    }
-                };
-        }
-        return null;
+        ApplicationEx app = ApplicationEx.getInstance(requireActivity());
+        return new MapCatalogAsyncTaskLoader(requireContext(), app);
     }
 
     @Override
@@ -176,14 +118,7 @@ public class MapListFragment extends Fragment implements
         if (data == null) {
             return;
         }
-        switch (loader.getId()) {
-            case LOCAL_CATALOG_LOADER:
-                localMapCatalog = data;
-                break;
-            case REMOTE_CATALOG_LOADER:
-                remoteMapCatalog = data;
-                break;
-        }
+        localMapCatalog = data;
         resetAdapter();
     }
 
@@ -237,6 +172,11 @@ public class MapListFragment extends Fragment implements
     }
 
     @Override
+    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+        return false;
+    }
+
+    @Override
     public boolean onCreateActionMode(ActionMode mode, Menu menu) {
         MenuInflater inflater = mode.getMenuInflater();
         inflater.inflate(R.menu.map_list_context_menu, menu);
@@ -249,31 +189,18 @@ public class MapListFragment extends Fragment implements
     }
 
     @Override
-    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-        if (item.getItemId() == R.id.action_delete) {
-            listener.onDeleteMaps(adapter.getSelection());
-            mode.finish();
-            return true;
-        }
-        return false;
-    }
-
-    @Override
     public void onDestroyActionMode(ActionMode mode) {
         adapter.clearSelection();
-        actionModeSelection.clear();
     }
 
     @Override
     public void onClick(View v) {
-        listener.onAddMap();
+        // do nothing
     }
 
     public interface IMapListEventListener {
         void onOpenMap(MapInfo map);
-        void onDeleteMaps(MapInfo[] map);
         void onLoadedMaps(ExtendedMapInfo[] maps);
-        void onAddMap();
     }
 
     private void resetAdapter() {
@@ -287,18 +214,7 @@ public class MapListFragment extends Fragment implements
         MapInfo[] localMaps = localMapCatalog.getMaps();
         ExtendedMapInfo[] maps = new ExtendedMapInfo[localMaps.length];
         for (int i = 0; i < maps.length; i++) {
-            maps[i] = new ExtendedMapInfo(localMaps[i],
-                    remoteMapCatalog == null
-                            ? ExtendedMapStatus.Fetching
-                            : getMapStatus(localMaps[i], remoteMapCatalog));
-        }
-
-        if (!actionModeSelection.isEmpty()) {
-            for (ExtendedMapInfo map : maps) {
-                if (actionModeSelection.contains(map.getFileName())) {
-                    map.setSelected(true);
-                }
-            }
+            maps[i] = new ExtendedMapInfo(localMaps[i],ExtendedMapStatus.Installed);
         }
 
         adapter.clear();
@@ -309,46 +225,18 @@ public class MapListFragment extends Fragment implements
         listener.onLoadedMaps(maps);
     }
 
-    private ExtendedMapStatus getMapStatus(MapInfo map, MapCatalog catalog) {
-        MapInfo remoteMap = catalog.findMap(map.getFileName());
-        if (remoteMap == null) {
-            return ExtendedMapStatus.Unknown;
+    private static class MapCatalogAsyncTaskLoader extends AsyncTaskLoader<MapCatalog> {
+        private final ApplicationEx app;
+
+        public MapCatalogAsyncTaskLoader(Context context, ApplicationEx app) {
+            super(context);
+            this.app = app;
         }
-        return (remoteMap.getTimestamp() == map.getTimestamp())
-                ? ExtendedMapStatus.Installed
-                : ExtendedMapStatus.Outdated;
+
+        @Override
+        public MapCatalog loadInBackground() {
+            return app.getLocalMapCatalogManager().getMapCatalog();
+        }
     }
 
-    private class ContextualActionModeCallback implements ActionMode.Callback {
-        @Override
-        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-            list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-            MenuInflater inflater = mode.getMenuInflater();
-            inflater.inflate(R.menu.map_list_context_menu, menu);
-            return true;
-        }
-
-        @Override
-        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-            return true;
-        }
-
-        @Override
-        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-            if (item.getItemId() == R.id.action_delete) {
-                listener.onDeleteMaps(adapter.getSelection());
-                mode.finish();
-                return true;
-            }
-            return false;
-        }
-
-        @Override
-        public void onDestroyActionMode(ActionMode mode) {
-            list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
-            adapter.clearSelection();
-            actionModeSelection.clear();
-            actionMode = null;
-        }
-    }
 }

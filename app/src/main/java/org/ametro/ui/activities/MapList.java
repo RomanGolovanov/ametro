@@ -1,13 +1,10 @@
 package org.ametro.ui.activities;
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;          // AndroidX
 import androidx.appcompat.app.AppCompatActivity; // AndroidX
@@ -17,30 +14,15 @@ import androidx.core.app.NavUtils;               // AndroidX
 import androidx.core.view.MenuItemCompat;        // AndroidX
 
 import org.ametro.R;
-import org.ametro.app.ApplicationEx;
 import org.ametro.app.Constants;
 import org.ametro.catalog.entities.MapInfo;
 import org.ametro.ui.fragments.MapListFragment;
 import org.ametro.ui.loaders.ExtendedMapInfo;
-import org.ametro.ui.loaders.ExtendedMapStatus;
-import org.ametro.ui.tasks.MapInstallerAsyncTask;
-import org.ametro.ui.tasks.TaskHelpers;
-import org.ametro.utils.StringUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class MapList extends AppCompatActivity implements
-        MapListFragment.IMapListEventListener,
-        MapInstallerAsyncTask.IMapInstallerEventListener {
-
-    private static final int ADD_ACTION = 1;
+public class MapList extends AppCompatActivity implements MapListFragment.IMapListEventListener{
 
     private MapListFragment listFragment;
     private ProgressDialog progressDialog;
-
-    private MapInfo[] outdatedMaps;
-    private View messagePanel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +38,6 @@ public class MapList extends AppCompatActivity implements
 
         listFragment = (MapListFragment) getSupportFragmentManager().findFragmentById(R.id.list);
         listFragment.setMapListEventListener(this);
-        messagePanel = findViewById(R.id.message);
     }
 
     @Override
@@ -68,31 +49,8 @@ public class MapList extends AppCompatActivity implements
     }
 
     @Override
-    public void onDeleteMaps(MapInfo[] maps) {
-        if (maps.length == 0) {
-            Toast.makeText(this, getString(R.string.msg_no_maps_selected), Toast.LENGTH_LONG).show();
-            return;
-        }
-        ApplicationEx.getInstance(this).getLocalMapCatalogManager().deleteMapAll(maps);
-        listFragment.forceUpdate();
-        Toast.makeText(this, getString(R.string.msg_maps_deleted), Toast.LENGTH_LONG).show();
-    }
-
-    @Override
     public void onLoadedMaps(ExtendedMapInfo[] maps) {
-        List<MapInfo> outdated = new ArrayList<>();
-        for (ExtendedMapInfo map : maps) {
-            if (map.getStatus() == ExtendedMapStatus.Outdated) {
-                outdated.add(new MapInfo(map));
-            }
-        }
-        outdatedMaps = outdated.toArray(new MapInfo[0]);
-        messagePanel.setVisibility(outdatedMaps.length > 0 ? View.VISIBLE : View.GONE);
-    }
 
-    @Override
-    public void onAddMap() {
-        startActivityForResult(new Intent(this, CityList.class), ADD_ACTION);
     }
 
     @Override
@@ -110,74 +68,7 @@ public class MapList extends AppCompatActivity implements
         if (itemId == android.R.id.home) {
             NavUtils.navigateUpFromSameTask(this);
             return true;
-        } else if (itemId == R.id.action_add) {
-            onAddMap();
-            return true;
-        } else if (itemId == R.id.action_update) {
-            updateMaps();
-            return true;
-        } else if (itemId == R.id.action_delete) {
-            listFragment.startContextActionMode();
-            return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == ADD_ACTION) {
-            listFragment.forceUpdate();
-            return;
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    public void updateMaps() {
-        if (outdatedMaps == null || outdatedMaps.length == 0) {
-            Toast.makeText(this, getString(R.string.msg_maps_all_updated), Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        final MapInstallerAsyncTask downloadTask = new MapInstallerAsyncTask(this, this, outdatedMaps);
-
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage(getString(R.string.msg_maps_updating));
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDialog.setCancelable(true);
-        progressDialog.setIndeterminate(false);
-        progressDialog.setMax(100);
-        progressDialog.setProgress(0);
-        progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                downloadTask.cancel(true);
-            }
-        });
-        progressDialog.show();
-        downloadTask.execute();
-    }
-
-    @Override
-    public void onMapDownloadingProgress(long currentSize, long totalSize, MapInfo downloadingMap) {
-        progressDialog.setProgress((int) (currentSize * 100 / totalSize));
-        progressDialog.setMessage(String.format(
-                getString(R.string.msg_download_progress),
-                downloadingMap.getFileName() + ": " +
-                        String.format("%s / %s",
-                                StringUtils.humanReadableByteCount(currentSize, false),
-                                StringUtils.humanReadableByteCount(totalSize, false))));
-    }
-
-    @Override
-    public void onMapDownloadingComplete(MapInfo[] maps) {
-        progressDialog.dismiss();
-        Toast.makeText(this, getString(R.string.msg_maps_updated, maps.length), Toast.LENGTH_LONG).show();
-        listFragment.forceUpdate();
-    }
-
-    @Override
-    public void onMapDownloadingFailed(MapInfo[] maps, Throwable reason) {
-        progressDialog.dismiss();
-        TaskHelpers.displayFailReason(this, reason);
     }
 }

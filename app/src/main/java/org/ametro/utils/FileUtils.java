@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 
 public class FileUtils {
 
+
     public static void writeAllText(File file, String content) throws IOException {
         PrintWriter writer = new PrintWriter(file);
         try{

@@ -1,72 +1,80 @@
 package org.ametro.catalog.localization;
 
+import android.content.Context;
+
 import org.ametro.catalog.entities.MapCatalog;
 import org.ametro.catalog.entities.MapInfo;
 import org.ametro.catalog.entities.MapInfoEntity;
 import org.ametro.catalog.entities.MapInfoEntityName;
 import org.ametro.catalog.serialization.MapCatalogSerializer;
-import org.ametro.catalog.serialization.SerializationException;
-import org.ametro.catalog.service.IMapServiceCache;
 import org.ametro.utils.FileUtils;
 
-import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 
 public class MapInfoLocalizationProvider {
 
-    private final IMapServiceCache cache;
+    private final Context context;
+    private final String languageCode;
     private HashMap<Integer, MapInfoEntityName> localizationMap;
 
-    public MapInfoLocalizationProvider(IMapServiceCache cache){
-        this.cache = cache;
+    public MapInfoLocalizationProvider(Context context, String languageCode) {
+        this.context = context;
+        this.languageCode = languageCode;
     }
 
-    public String getCityName(int cityId){
+    public String getCityName(int cityId) {
         return getLocalizationMap().get(cityId).getCityName();
     }
 
-    public String getCountryName(int cityId){
+    public String getCountryName(int cityId) {
         return getLocalizationMap().get(cityId).getCountryName();
     }
 
-    public String getCountryIsoCode(int cityId){
+    public String getCountryIsoCode(int cityId) {
         return getLocalizationMap().get(cityId).getCountryIsoCode();
     }
 
     public MapCatalog createCatalog(MapInfoEntity[] maps) {
         HashMap<Integer, MapInfoEntityName> localizations = getLocalizationMap();
         MapInfo[] localizedMaps = new MapInfo[maps.length];
-        for(int i=0; i<maps.length; i++){
-            MapInfoEntityName localization = localizations.get(maps[i].getCityId());
+        for (int i = 0; i < maps.length; i++) {
+            MapInfoEntityName loc = localizations.get(maps[i].getCityId());
             localizedMaps[i] = new MapInfo(
                     maps[i],
-                    localization.getCityName(),
-                    localization.getCountryName(),
-                    localization.getCountryIsoCode());
+                    loc != null ? loc.getCityName() : "Unknown",
+                    loc != null ? loc.getCountryName() : "Unknown",
+                    loc != null ? loc.getCountryIsoCode() : ""
+            );
         }
         return new MapCatalog(localizedMaps);
     }
 
     private HashMap<Integer, MapInfoEntityName> getLocalizationMap() {
-        if(localizationMap !=null)
-        {
+        if (localizationMap != null) {
             return localizationMap;
         }
 
         try {
-            HashMap<Integer, MapInfoEntityName> newLocalizationMap = new HashMap<>();
-            MapInfoEntityName[] entities = MapCatalogSerializer.deserializeLocalization(
-                    FileUtils.readAllText(cache.getLocalizationFile()));
-
-            for (MapInfoEntityName entity : entities) {
-                newLocalizationMap.put(entity.getCityId(), entity);
+            String fileName = String.format("map_files/locales/cities.%s.json", languageCode);
+            String json;
+            try (InputStream is = context.getAssets().open(fileName)) {
+                json = FileUtils.readAllText(is);
+            } catch (Exception e) {
+                try (InputStream is = context.getAssets().open("map_files/cities.default.json")) {
+                    json = FileUtils.readAllText(is);
+                }
             }
-            localizationMap = newLocalizationMap;
-            return localizationMap;
-        }catch (SerializationException ex){
-            throw new RuntimeException("Localization data has an invalid format", ex);
-        }catch(IOException ex){
-            throw new RuntimeException("Localization cannot be read", ex);
+
+            MapInfoEntityName[] entities = MapCatalogSerializer.deserializeLocalization(json);
+            HashMap<Integer, MapInfoEntityName> map = new HashMap<>();
+            for (MapInfoEntityName entity : entities) {
+                map.put(entity.getCityId(), entity);
+            }
+            localizationMap = map;
+            return map;
+        } catch (Exception e) {
+            throw new RuntimeException("Localization cannot be read", e);
         }
     }
 }

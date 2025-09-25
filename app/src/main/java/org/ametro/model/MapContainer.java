@@ -1,37 +1,25 @@
 package org.ametro.model;
 
-
 import android.util.Log;
 
 import org.ametro.app.Constants;
-import org.ametro.model.entities.MapLocale;
-import org.ametro.model.entities.MapMetadata;
-import org.ametro.model.entities.MapScheme;
-import org.ametro.model.entities.MapSchemeLine;
-import org.ametro.model.entities.MapSchemeSegment;
-import org.ametro.model.entities.MapSchemeStation;
-import org.ametro.model.entities.MapSchemeTransfer;
-import org.ametro.model.entities.MapStationInformation;
-import org.ametro.model.entities.MapTransportLine;
-import org.ametro.model.entities.MapTransportScheme;
-import org.ametro.model.entities.MapTransportSegment;
-import org.ametro.model.entities.MapTransportTransfer;
+import org.ametro.catalog.MapCatalogManager;
+import org.ametro.catalog.entities.MapInfo;
+import org.ametro.model.entities.*;
 import org.ametro.model.serialization.GlobalIdentifierProvider;
 import org.ametro.model.serialization.MapSerializationException;
 import org.ametro.model.serialization.ZipArchiveMapProvider;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
+import java.io.InputStream;
+import java.util.*;
 
 public class MapContainer {
 
-    private final File mapFile;
+    private final MapCatalogManager catalogManager;
+    private final MapInfo mapInfo;
     private final GlobalIdentifierProvider identifierProvider = new GlobalIdentifierProvider();
+
     private MapLocale locale;
     private MapMetadata metadata;
     private MapStationInformation[] stations;
@@ -40,8 +28,9 @@ public class MapContainer {
 
     private final String preferredLanguage;
 
-    public MapContainer(File mapFile, String preferredLanguage) {
-        this.mapFile = mapFile;
+    public MapContainer(MapCatalogManager catalogManager, MapInfo mapInfo, String preferredLanguage) {
+        this.catalogManager = catalogManager;
+        this.mapInfo = mapInfo;
         this.preferredLanguage = preferredLanguage;
     }
 
@@ -65,16 +54,12 @@ public class MapContainer {
     }
 
     public void loadSchemeWithTransports(String schemeName, String[] enabledTransports) throws MapSerializationException {
-        try {
-            ZipArchiveMapProvider mapProvider = new ZipArchiveMapProvider(identifierProvider, mapFile);
+        try (InputStream is = catalogManager.openMapAssetStream(mapInfo)) {
+            ZipArchiveMapProvider mapProvider = new ZipArchiveMapProvider(identifierProvider, is);
             try {
                 if (metadata == null) {
-
                     locale = new MapLocale(mapProvider.getTextsMap(
-                            suggestLanguage(
-                                    mapProvider.getSupportedLocales(),
-                                    preferredLanguage)));
-
+                            suggestLanguage(mapProvider.getSupportedLocales(), preferredLanguage)));
                     metadata = mapProvider.getMetadata(locale);
                     stations = mapProvider.getStationInformation();
                     schemes = new HashMap<>();
@@ -94,8 +79,8 @@ public class MapContainer {
         }
     }
 
-    public File getMapFile(){
-        return mapFile;
+    public MapInfo getMapInfo() {
+        return mapInfo;
     }
 
     public MapMetadata getMetadata() {
@@ -115,7 +100,7 @@ public class MapContainer {
             }
             result.add(transport);
         }
-        return result.toArray(new MapTransportScheme[result.size()]);
+        return result.toArray(new MapTransportScheme[0]);
     }
 
     public MapStationInformation findStationInformation(String lineName, String stationName) {
@@ -129,7 +114,7 @@ public class MapContainer {
 
     public MapSchemeStation findSchemeStation(String schemeName, String lineName, String stationName) {
         for (final MapSchemeLine line : getScheme(schemeName).getLines()) {
-            if(!line.getName().equals(lineName)){
+            if (!line.getName().equals(lineName)) {
                 continue;
             }
             for (final MapSchemeStation stationScheme : line.getStations()) {
@@ -142,8 +127,8 @@ public class MapContainer {
     }
 
     public String loadStationMap(String mapFilePath) throws IOException {
-        try {
-            ZipArchiveMapProvider mapProvider = new ZipArchiveMapProvider(identifierProvider, mapFile);
+        try (InputStream is = catalogManager.openMapAssetStream(mapInfo)) {
+            ZipArchiveMapProvider mapProvider = new ZipArchiveMapProvider(identifierProvider, is);
             try {
                 return mapProvider.getFileContent(mapFilePath);
             } finally {
@@ -157,39 +142,39 @@ public class MapContainer {
 
     public int getMaxStationUid() {
         int max = 0;
-        for(MapTransportScheme transport: transports.values()){
-            for(MapTransportLine line: transport.getLines()){
-                for(MapTransportSegment segment: line.getSegments()){
+        for (MapTransportScheme transport : transports.values()) {
+            for (MapTransportLine line : transport.getLines()) {
+                for (MapTransportSegment segment : line.getSegments()) {
                     max = Math.max(max, Math.max(segment.getFrom(), segment.getTo()));
                 }
             }
-            for(MapTransportTransfer transfer: transport.getTransfers()){
+            for (MapTransportTransfer transfer : transport.getTransfers()) {
                 max = Math.max(max, Math.max(transfer.getFrom(), transfer.getTo()));
             }
         }
-        for(MapScheme scheme : schemes.values()){
-            for(MapSchemeLine line: scheme.getLines()){
-                for(MapSchemeSegment segment: line.getSegments()){
+        for (MapScheme scheme : schemes.values()) {
+            for (MapSchemeLine line : scheme.getLines()) {
+                for (MapSchemeSegment segment : line.getSegments()) {
                     max = Math.max(max, Math.max(segment.getFrom(), segment.getTo()));
                 }
-
             }
-            for(MapSchemeTransfer transfer: scheme.getTransfers()){
+            for (MapSchemeTransfer transfer : scheme.getTransfers()) {
                 max = Math.max(max, Math.max(transfer.getFrom(), transfer.getTo()));
             }
         }
         return max;
     }
 
-    private static String suggestLanguage(String[] supportedLanguages, String preferredLanguage) throws IOException {
+    private static String suggestLanguage(String[] supportedLanguages, String preferredLanguage) {
         List<String> locales = Arrays.asList(supportedLanguages);
-        if(!locales.contains(preferredLanguage)){
+        if (!locales.contains(preferredLanguage)) {
             return locales.get(0);
         }
         return preferredLanguage;
     }
 
-    private MapScheme loadSchemeFile(ZipArchiveMapProvider mapProvider, String schemeName, MapLocale locale) throws IOException, MapSerializationException {
+    private MapScheme loadSchemeFile(ZipArchiveMapProvider mapProvider, String schemeName, MapLocale locale)
+            throws IOException, MapSerializationException {
         MapScheme scheme = schemes.get(schemeName);
         if (scheme == null) {
             scheme = mapProvider.getScheme(metadata.getScheme(schemeName).getFileName(), locale);
@@ -198,13 +183,15 @@ public class MapContainer {
         return scheme;
     }
 
-    private void loadTransportFiles(ZipArchiveMapProvider mapProvider, String[] enabledTransports) throws IOException, MapSerializationException {
+    private void loadTransportFiles(ZipArchiveMapProvider mapProvider, String[] enabledTransports)
+            throws IOException, MapSerializationException {
         for (String transportName : enabledTransports) {
             loadTransport(mapProvider, transportName);
         }
     }
 
-    private MapTransportScheme loadTransport(ZipArchiveMapProvider mapProvider, String transportName) throws IOException, MapSerializationException {
+    private MapTransportScheme loadTransport(ZipArchiveMapProvider mapProvider, String transportName)
+            throws IOException, MapSerializationException {
         MapTransportScheme transport = transports.get(transportName);
         if (transport == null) {
             transport = mapProvider.getTransportScheme(metadata.getTransport(transportName).getFileName());
