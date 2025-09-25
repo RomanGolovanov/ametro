@@ -1,8 +1,8 @@
 package org.ametro.ui.toolbar;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import androidx.fragment.app.Fragment;          // AndroidX Fragment
+import androidx.fragment.app.FragmentManager;  // AndroidX FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter; // AndroidX PagerAdapter
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ public class FragmentPagerArrayAdapter extends FragmentPagerAdapter {
     private final List<FragmentPagerTabInfo> tabs;
 
     public FragmentPagerArrayAdapter(FragmentManager fm, List<FragmentPagerTabInfo> tabs) {
-        super(fm);
+        super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT); // ✅ use modern behavior
         this.tabs = tabs;
     }
 

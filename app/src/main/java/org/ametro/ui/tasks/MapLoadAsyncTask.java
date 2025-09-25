@@ -3,7 +3,8 @@ package org.ametro.ui.tasks;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.PowerManager;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;   // AndroidX
 
 import org.ametro.model.MapContainer;
 
@@ -22,11 +23,17 @@ public class MapLoadAsyncTask extends AsyncTask<Void, String, Throwable> {
     private long start;
     private long end;
 
-    public MapLoadAsyncTask(AppCompatActivity activity, IMapLoadingEventListener listener, MapContainer container) {
+    public MapLoadAsyncTask(AppCompatActivity activity,
+                            IMapLoadingEventListener listener,
+                            MapContainer container) {
         this(activity, listener, container, DEFAULT_SCHEME, DEFAULT_TRANSPORTS);
     }
 
-    public MapLoadAsyncTask(Context context, IMapLoadingEventListener listener, MapContainer container, String schemeName, String[] enabledTransports) {
+    public MapLoadAsyncTask(Context context,
+                            IMapLoadingEventListener listener,
+                            MapContainer container,
+                            String schemeName,
+                            String[] enabledTransports) {
         this.listener = listener;
         this.container = container;
         this.schemeName = schemeName;

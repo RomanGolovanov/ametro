@@ -1,12 +1,6 @@
 package org.ametro.ui.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.AsyncTaskLoader;
-import android.support.v4.content.Loader;
-import android.support.v7.widget.SearchView;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,6 +13,13 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.AsyncTaskLoader;
+import androidx.loader.content.Loader;
+import androidx.appcompat.widget.SearchView;
 
 import org.ametro.R;
 import org.ametro.app.ApplicationEx;
@@ -37,7 +38,8 @@ public class MapListFragment extends Fragment implements
         SearchView.OnCloseListener,
         LoaderManager.LoaderCallbacks<MapCatalog>,
         AdapterView.OnItemClickListener,
-        AbsListView.MultiChoiceModeListener, View.OnClickListener {
+        AbsListView.MultiChoiceModeListener,
+        View.OnClickListener {
 
     private static final String STATE_ACTION_MODE = "STATE_ACTION_MODE";
     private static final String STATE_SELECTION = "STATE_SELECTION";
@@ -57,41 +59,36 @@ public class MapListFragment extends Fragment implements
     private ActionMode actionMode;
     private Set<String> actionModeSelection = new HashSet<>();
 
-    private final static int LOCAL_CATALOG_LOADER = 1;
-    private final static int REMOTE_CATALOG_LOADER = 2;
+    private static final int LOCAL_CATALOG_LOADER = 1;
+    private static final int REMOTE_CATALOG_LOADER = 2;
 
     private IMapListEventListener listener = new IMapListEventListener() {
         @Override
-        public void onOpenMap(MapInfo map) {
-        }
+        public void onOpenMap(MapInfo map) { }
 
         @Override
-        public void onDeleteMaps(MapInfo[] map) {
-        }
+        public void onDeleteMaps(MapInfo[] map) { }
 
         @Override
-        public void onLoadedMaps(ExtendedMapInfo[] maps) {
-        }
+        public void onLoadedMaps(ExtendedMapInfo[] maps) { }
 
         @Override
-        public void onAddMap() {
-
-        }
+        public void onAddMap() { }
     };
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_map_list_view, container, false);
 
-        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
-        progressText = (TextView) view.findViewById(R.id.progressText);
+        progressBar = view.findViewById(R.id.progressBar);
+        progressText = view.findViewById(R.id.progressText);
 
         noMapsView = view.findViewById(R.id.no_maps);
         noMapsView.setOnClickListener(this);
 
         emptyView = view.findViewById(R.id.empty);
 
-        list = (ListView) view.findViewById(R.id.list);
+        list = view.findViewById(R.id.list);
         list.setOnItemClickListener(this);
         list.setLongClickable(true);
         list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
@@ -129,8 +126,8 @@ public class MapListFragment extends Fragment implements
     }
 
     public void forceUpdate() {
-        getLoaderManager().initLoader(LOCAL_CATALOG_LOADER, null, this).forceLoad();
-        getLoaderManager().initLoader(REMOTE_CATALOG_LOADER, null, this).forceLoad();
+        LoaderManager.getInstance(this).initLoader(LOCAL_CATALOG_LOADER, null, this).forceLoad();
+        LoaderManager.getInstance(this).initLoader(REMOTE_CATALOG_LOADER, null, this).forceLoad();
     }
 
     public void startContextActionMode() {
@@ -154,17 +151,17 @@ public class MapListFragment extends Fragment implements
 
     @Override
     public Loader<MapCatalog> onCreateLoader(int id, Bundle args) {
-        final ApplicationEx app = ApplicationEx.getInstance(MapListFragment.this.getActivity());
-        switch(id){
+        final ApplicationEx app = ApplicationEx.getInstance(requireActivity());
+        switch (id) {
             case LOCAL_CATALOG_LOADER:
-                return new AsyncTaskLoader<MapCatalog>(getActivity()) {
+                return new AsyncTaskLoader<MapCatalog>(requireActivity()) {
                     @Override
                     public MapCatalog loadInBackground() {
                         return app.getLocalMapCatalogManager().getMapCatalog();
                     }
                 };
             case REMOTE_CATALOG_LOADER:
-                return new AsyncTaskLoader<MapCatalog>(getActivity()) {
+                return new AsyncTaskLoader<MapCatalog>(requireActivity()) {
                     @Override
                     public MapCatalog loadInBackground() {
                         return app.getRemoteMapCatalogProvider().getMapCatalog(false);
@@ -176,22 +173,22 @@ public class MapListFragment extends Fragment implements
 
     @Override
     public void onLoadFinished(Loader<MapCatalog> loader, MapCatalog data) {
-        if(data == null){
+        if (data == null) {
             return;
         }
-        switch(loader.getId()){
+        switch (loader.getId()) {
             case LOCAL_CATALOG_LOADER:
                 localMapCatalog = data;
                 break;
             case REMOTE_CATALOG_LOADER:
                 remoteMapCatalog = data;
+                break;
         }
         resetAdapter();
     }
 
     @Override
-    public void onLoaderReset(Loader<MapCatalog> loader) {
-    }
+    public void onLoaderReset(Loader<MapCatalog> loader) { }
 
     @Override
     public boolean onClose() {
@@ -233,38 +230,36 @@ public class MapListFragment extends Fragment implements
     }
 
     @Override
-    public void onItemCheckedStateChanged(android.view.ActionMode mode, int position, long id, boolean checked) {
+    public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
         final int checkedCount = list.getCheckedItemCount();
         mode.setTitle(checkedCount + " " + getText(R.string.msg_selected));
         adapter.toggleSelection(position);
     }
 
     @Override
-    public boolean onCreateActionMode(android.view.ActionMode mode, Menu menu) {
+    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
         MenuInflater inflater = mode.getMenuInflater();
         inflater.inflate(R.menu.map_list_context_menu, menu);
         return true;
     }
 
     @Override
-    public boolean onPrepareActionMode(android.view.ActionMode mode, Menu menu) {
+    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
         return true;
     }
 
     @Override
-    public boolean onActionItemClicked(android.view.ActionMode mode, MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_delete:
-                listener.onDeleteMaps(adapter.getSelection());
-                mode.finish();
-                return true;
-            default:
-                return false;
+    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+        if (item.getItemId() == R.id.action_delete) {
+            listener.onDeleteMaps(adapter.getSelection());
+            mode.finish();
+            return true;
         }
+        return false;
     }
 
     @Override
-    public void onDestroyActionMode(android.view.ActionMode mode) {
+    public void onDestroyActionMode(ActionMode mode) {
         adapter.clearSelection();
         actionModeSelection.clear();
     }
@@ -276,16 +271,13 @@ public class MapListFragment extends Fragment implements
 
     public interface IMapListEventListener {
         void onOpenMap(MapInfo map);
-
         void onDeleteMaps(MapInfo[] map);
-
         void onLoadedMaps(ExtendedMapInfo[] maps);
-
         void onAddMap();
     }
 
     private void resetAdapter() {
-        if(localMapCatalog == null || localMapCatalog.getMaps().length == 0){
+        if (localMapCatalog == null || localMapCatalog.getMaps().length == 0) {
             adapter.clear();
             adapter.getFilter().filter(filterValue);
             setNoMapsShown();
@@ -293,22 +285,22 @@ public class MapListFragment extends Fragment implements
         }
 
         MapInfo[] localMaps = localMapCatalog.getMaps();
-
         ExtendedMapInfo[] maps = new ExtendedMapInfo[localMaps.length];
-        for(int i=0;i< maps.length;i++){
-            maps[i] = new ExtendedMapInfo(localMaps[i], remoteMapCatalog==null
-                    ? ExtendedMapStatus.Fetching
-                    : getMapStatus(localMaps[i], remoteMapCatalog)
-            );
+        for (int i = 0; i < maps.length; i++) {
+            maps[i] = new ExtendedMapInfo(localMaps[i],
+                    remoteMapCatalog == null
+                            ? ExtendedMapStatus.Fetching
+                            : getMapStatus(localMaps[i], remoteMapCatalog));
         }
 
-        if (actionModeSelection.size() > 0) {
+        if (!actionModeSelection.isEmpty()) {
             for (ExtendedMapInfo map : maps) {
                 if (actionModeSelection.contains(map.getFileName())) {
                     map.setSelected(true);
                 }
             }
         }
+
         adapter.clear();
         adapter.addAll(maps);
         adapter.getFilter().filter(filterValue);
@@ -319,17 +311,15 @@ public class MapListFragment extends Fragment implements
 
     private ExtendedMapStatus getMapStatus(MapInfo map, MapCatalog catalog) {
         MapInfo remoteMap = catalog.findMap(map.getFileName());
-        if(remoteMap == null){
+        if (remoteMap == null) {
             return ExtendedMapStatus.Unknown;
         }
-        if(remoteMap.getTimestamp() == map.getTimestamp()){
-            return ExtendedMapStatus.Installed;
-        }
-        return ExtendedMapStatus.Outdated;
+        return (remoteMap.getTimestamp() == map.getTimestamp())
+                ? ExtendedMapStatus.Installed
+                : ExtendedMapStatus.Outdated;
     }
 
     private class ContextualActionModeCallback implements ActionMode.Callback {
-
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
             list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
@@ -345,14 +335,12 @@ public class MapListFragment extends Fragment implements
 
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.action_delete:
-                    listener.onDeleteMaps(adapter.getSelection());
-                    mode.finish();
-                    return true;
-                default:
-                    return false;
+            if (item.getItemId() == R.id.action_delete) {
+                listener.onDeleteMaps(adapter.getSelection());
+                mode.finish();
+                return true;
             }
+            return false;
         }
 
         @Override
@@ -363,6 +351,4 @@ public class MapListFragment extends Fragment implements
             actionMode = null;
         }
     }
-
-
 }

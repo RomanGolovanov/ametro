@@ -1,12 +1,13 @@
 package org.ametro.ui.fragments;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+
+import androidx.fragment.app.Fragment;  // ✅ AndroidX
 
 import org.ametro.R;
 import org.ametro.app.ApplicationEx;
@@ -15,7 +16,6 @@ import org.ametro.model.MapContainer;
 import org.ametro.model.entities.MapStationInformation;
 
 public class StationAboutFragment extends Fragment {
-
 
     public StationAboutFragment() {
     }
@@ -30,23 +30,25 @@ public class StationAboutFragment extends Fragment {
         return rootView;
     }
 
-
     public void setupWebView(WebView webView, String lineName, String stationName) {
-        ApplicationEx application = ApplicationEx.getInstance(getActivity());
+        ApplicationEx application = ApplicationEx.getInstance(requireActivity()); // ✅ safer
         MapContainer container = application.getContainer();
         MapStationInformation station = container.findStationInformation(lineName, stationName);
+
         webView.setInitialScale(1);
         WebSettings settings = webView.getSettings();
         settings.setSupportZoom(true);
         settings.setDisplayZoomControls(false);
         settings.setBuiltInZoomControls(true);
         settings.setUseWideViewPort(true);
+
         webView.loadDataWithBaseURL(
                 "not_defined",
                 station.getAbout(),
                 "text/html",
                 "utf-8",
                 "not_defined");
+
         webView.setVisibility(View.VISIBLE);
     }
 }

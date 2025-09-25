@@ -1,6 +1,6 @@
 package org.ametro.ui.toolbar;
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;  // AndroidX
 
 public class FragmentPagerTabInfo {
     private final CharSequence title;
@@ -19,4 +19,3 @@ public class FragmentPagerTabInfo {
         return fragment;
     }
 }
-

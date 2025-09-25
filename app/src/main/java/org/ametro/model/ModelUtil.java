@@ -1,7 +1,7 @@
 package org.ametro.model;
 
 
-import android.support.v4.util.Pair;
+import android.util.Pair;
 
 import org.ametro.model.entities.MapPoint;
 import org.ametro.model.entities.MapRect;

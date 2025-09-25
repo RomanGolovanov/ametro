@@ -7,15 +7,16 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.PointF;
 import android.os.Bundle;
-import android.support.v4.util.Pair;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.util.Pair; // keep android.util.Pair
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;       // AndroidX
+import androidx.appcompat.widget.SearchView;          // AndroidX
 
 import org.ametro.R;
 import org.ametro.app.ApplicationEx;
@@ -52,7 +53,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-
 public class Map extends AppCompatActivity implements
         MapLoadAsyncTask.IMapLoadingEventListener,
         INavigationControllerListener,
@@ -87,7 +87,7 @@ public class Map extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_view);
-        mapContainerView = (ViewGroup) findViewById(R.id.map_container);
+        mapContainerView = findViewById(R.id.map_container);
         mapPanelView = findViewById(R.id.map_panel);
         mapTopPanel = new MapTopPanelWidget((ViewGroup) findViewById(R.id.map_top_panel));
         mapBottomPanel = new MapBottomPanelWidget((ViewGroup) findViewById(R.id.map_bottom_panel), this);
@@ -120,7 +120,7 @@ public class Map extends AppCompatActivity implements
     @Override
     protected void onPause() {
         super.onPause();
-        if(mapView!=null){
+        if (mapView != null) {
             app.setCenterPositionAndScale(mapView.getCenterPositionAndScale());
         }
     }
@@ -129,11 +129,11 @@ public class Map extends AppCompatActivity implements
     protected void onResume() {
         super.onResume();
         initMapViewState();
-        if(mapView!=null && app.getCenterPositionAndScale()!=null){
-            android.util.Pair<PointF, Float> data = app.getCenterPositionAndScale();
+        if (mapView != null && app.getCenterPositionAndScale() != null) {
+            Pair<PointF, Float> data = app.getCenterPositionAndScale();
             mapView.setCenterPositionAndScale(data.first, data.second, false);
         }
-        if(mapView==null){
+        if (mapView == null) {
             File currentMapFile = settingsProvider.getCurrentMap();
             if (currentMapFile != null) {
                 new MapLoadAsyncTask(this, this, new MapContainer(
@@ -170,7 +170,7 @@ public class Map extends AppCompatActivity implements
         SearchManager manager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
 
         final MenuItem searchMenuItem = menu.findItem(R.id.action_search);
-        final SearchView searchView = (SearchView)searchMenuItem.getActionView();
+        final SearchView searchView = (SearchView) searchMenuItem.getActionView();
         final MapSchemeStation[] selectedStation = new MapSchemeStation[1];
 
         searchView.setSubmitButtonEnabled(false);
@@ -187,9 +187,10 @@ public class Map extends AppCompatActivity implements
             public boolean onSuggestionSelect(int position) {
                 return true;
             }
+
             @Override
             public boolean onSuggestionClick(int position) {
-                selectedStation[0] = ((StationSearchAdapter)searchView.getSuggestionsAdapter()).getStation(position);
+                selectedStation[0] = ((StationSearchAdapter) searchView.getSuggestionsAdapter()).getStation(position);
                 searchView.setQuery(selectedStation[0].getDisplayName(), true);
                 return true;
             }
@@ -214,7 +215,6 @@ public class Map extends AppCompatActivity implements
                                 stationInformation != null && stationInformation.getMapFilePath() != null);
                         searchMenuItem.collapseActionView();
                     }
-
                 }
                 return true;
             }
@@ -227,7 +227,6 @@ public class Map extends AppCompatActivity implements
                 searchView.setSuggestionsAdapter(
                         StationSearchAdapter.createFromMapScheme(Map.this, scheme, query));
                 return true;
-
             }
         });
         return true;
@@ -248,18 +247,16 @@ public class Map extends AppCompatActivity implements
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case OPEN_MAPS_ACTION:
-                if (resultCode == RESULT_OK) {
-                    MapCatalogManager localMapCatalogManager = app.getLocalMapCatalogManager();
-                    new MapLoadAsyncTask(this, this, new MapContainer(
+        if (requestCode == OPEN_MAPS_ACTION) {
+            if (resultCode == RESULT_OK) {
+                MapCatalogManager localMapCatalogManager = app.getLocalMapCatalogManager();
+                new MapLoadAsyncTask(this, this, new MapContainer(
                         localMapCatalogManager.getMapFile(
-                            localMapCatalogManager.findMapByName(
-                                data.getStringExtra(Constants.MAP_PATH))),
+                                localMapCatalogManager.findMapByName(
+                                        data.getStringExtra(Constants.MAP_PATH))),
                         settingsProvider.getPreferredMapLanguage())
-                    ).execute();
-                }
-                break;
+                ).execute();
+            }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -294,10 +291,8 @@ public class Map extends AppCompatActivity implements
         settingsProvider.setCurrentMap(container.getMapFile());
     }
 
-
-
-    private void initMapViewState(){
-        if(app.getContainer()==null || !app.getContainer().getMapFile().exists()){
+    private void initMapViewState() {
+        if (app.getContainer() == null || !app.getContainer().getMapFile().exists()) {
             app.clearCurrentMapViewState();
             navigationController.setNavigation(null, null, null, null);
             mapPanelView.setVisibility(View.GONE);
@@ -326,10 +321,8 @@ public class Map extends AppCompatActivity implements
                 Pair<MapSchemeLine, MapSchemeStation> stationInfo =
                         ModelUtil.findTouchedStation(scheme, mapView.getTouchPoint());
                 if (stationInfo != null) {
-
                     MapStationInformation stationInformation = container
                             .findStationInformation(stationInfo.first.getName(), stationInfo.second.getName());
-
                     mapBottomPanel.show(
                             stationInfo.first,
                             stationInfo.second,
@@ -344,7 +337,6 @@ public class Map extends AppCompatActivity implements
         mapContainerView.addView(mapView);
         mapView.requestFocus();
     }
-
 
     @Override
     public void onMapLoadFailed(MapContainer container, String schemeName, String[] enabledTransports, Throwable reason) {
@@ -376,11 +368,11 @@ public class Map extends AppCompatActivity implements
         return false;
     }
 
-
     @Override
     public boolean onChangeScheme(String schemeName) {
         mapBottomPanel.hide();
-        new MapLoadAsyncTask(this, this, container, schemeName, enabledTransportsSet.toArray(new String[enabledTransportsSet.size()])).execute();
+        new MapLoadAsyncTask(this, this, container, schemeName,
+                enabledTransportsSet.toArray(new String[0])).execute();
         return true;
     }
 
@@ -391,7 +383,7 @@ public class Map extends AppCompatActivity implements
                 enabledTransportsSet.add(transportName);
                 container.loadSchemeWithTransports(
                         schemeName,
-                        enabledTransportsSet.toArray(new String[enabledTransportsSet.size()]));
+                        enabledTransportsSet.toArray(new String[0]));
             } else {
                 enabledTransportsSet.remove(transportName);
             }
@@ -430,21 +422,20 @@ public class Map extends AppCompatActivity implements
 
     @Override
     public void onRouteSelectionComplete(MapSchemeStation begin, MapSchemeStation end) {
-
         MapRoute[] routes = MapRouteProvider.findRoutes(
-            new MapRouteQueryParameters(
-                container,
-                enabledTransportsSet,
-                getCurrentDelayIndex(),
-                mapSelectionIndicators.getBeginStation().getUid(),
-                mapSelectionIndicators.getEndStation().getUid()));
+                new MapRouteQueryParameters(
+                        container,
+                        enabledTransportsSet,
+                        getCurrentDelayIndex(),
+                        mapSelectionIndicators.getBeginStation().getUid(),
+                        mapSelectionIndicators.getEndStation().getUid()));
 
         if (routes.length == 0) {
             mapView.highlightsElements(null);
             mapTopPanel.hide();
             Toast.makeText(this,
-                String.format(getString(R.string.msg_no_route_found), begin.getDisplayName(), end.getDisplayName()),
-                Toast.LENGTH_LONG).show();
+                    String.format(getString(R.string.msg_no_route_found), begin.getDisplayName(), end.getDisplayName()),
+                    Toast.LENGTH_LONG).show();
             return;
         }
         mapView.highlightsElements(RouteUtils.convertRouteToSchemeObjectIds(routes[0], scheme));
@@ -454,7 +445,6 @@ public class Map extends AppCompatActivity implements
                 begin.getDisplayName(),
                 end.getDisplayName(),
                 StringUtils.humanReadableTime(routes[0].getDelay())));
-
     }
 
     public void onRouteSelectionCleared() {
@@ -466,12 +456,12 @@ public class Map extends AppCompatActivity implements
 
     public Integer getCurrentDelayIndex() {
         final MapDelay[] delays = container.getMetadata().getDelays();
-        if(delays.length == 0){
+        if (delays.length == 0) {
             return null;
         }
         int index = 0;
-        for(MapDelay delay : delays){
-            if(delay == currentDelay){
+        for (MapDelay delay : delays) {
+            if (delay == currentDelay) {
                 return index;
             }
             index++;

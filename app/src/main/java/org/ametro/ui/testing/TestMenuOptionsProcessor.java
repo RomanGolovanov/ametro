@@ -20,29 +20,28 @@ public class TestMenuOptionsProcessor {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_test_outdated:
-                MapCatalogManager localMapCatalogManager = app.getLocalMapCatalogManager();
-                MapInfo[] maps = localMapCatalogManager.getMapCatalog().getMaps();
-                if (maps.length != 0) {
-                    MapInfo outdatedFirstMap = new MapInfo(
-                            maps[0].getCityId(),
-                            maps[0].getFileName(),
-                            maps[0].getLatitude(),
-                            maps[0].getLongitude(),
-                            maps[0].getSize(),
-                            maps[0].getTimestamp() - 100,
-                            maps[0].getTypes(),
-                            maps[0].getUid(),
-                            maps[0].getCity(),
-                            maps[0].getCountry(),
-                            maps[0].getIso()
-                    );
+        if (item.getItemId() == R.id.action_test_outdated) {
+            MapCatalogManager localMapCatalogManager = app.getLocalMapCatalogManager();
+            MapInfo[] maps = localMapCatalogManager.getMapCatalog().getMaps();
+            if (maps.length != 0) {
+                MapInfo outdatedFirstMap = new MapInfo(
+                        maps[0].getCityId(),
+                        maps[0].getFileName(),
+                        maps[0].getLatitude(),
+                        maps[0].getLongitude(),
+                        maps[0].getSize(),
+                        maps[0].getTimestamp() - 100,
+                        maps[0].getTypes(),
+                        maps[0].getUid(),
+                        maps[0].getCity(),
+                        maps[0].getCountry(),
+                        maps[0].getIso()
+                );
 
-                    localMapCatalogManager.addOrReplaceMapAll(new MapInfo[]{outdatedFirstMap});
-                    DebugToast.show(activity, "Map " + outdatedFirstMap.getFileName() + " made outdated in local storage", Toast.LENGTH_LONG);
-                }
-                return true;
+                localMapCatalogManager.addOrReplaceMapAll(new MapInfo[]{outdatedFirstMap});
+                DebugToast.show(activity, "Map " + outdatedFirstMap.getFileName() + " made outdated in local storage", Toast.LENGTH_LONG);
+            }
+            return true;
         }
         return false;
     }

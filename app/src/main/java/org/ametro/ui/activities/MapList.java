@@ -4,16 +4,17 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.ActionBar;          // AndroidX
+import androidx.appcompat.app.AppCompatActivity; // AndroidX
+import androidx.appcompat.widget.SearchView;     // AndroidX
+import androidx.appcompat.widget.Toolbar;        // AndroidX
+import androidx.core.app.NavUtils;               // AndroidX
+import androidx.core.view.MenuItemCompat;        // AndroidX
 
 import org.ametro.R;
 import org.ametro.app.ApplicationEx;
@@ -33,7 +34,7 @@ public class MapList extends AppCompatActivity implements
         MapListFragment.IMapListEventListener,
         MapInstallerAsyncTask.IMapInstallerEventListener {
 
-    private final static int ADD_ACTION = 1;
+    private static final int ADD_ACTION = 1;
 
     private MapListFragment listFragment;
     private ProgressDialog progressDialog;
@@ -48,7 +49,7 @@ public class MapList extends AppCompatActivity implements
 
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         ActionBar actionBar = getSupportActionBar();
-        if(actionBar!=null) {
+        if (actionBar != null) {
             actionBar.setDefaultDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
@@ -85,7 +86,7 @@ public class MapList extends AppCompatActivity implements
                 outdated.add(new MapInfo(map));
             }
         }
-        outdatedMaps = outdated.toArray(new MapInfo[outdated.size()]);
+        outdatedMaps = outdated.toArray(new MapInfo[0]);
         messagePanel.setVisibility(outdatedMaps.length > 0 ? View.VISIBLE : View.GONE);
     }
 
@@ -105,29 +106,28 @@ public class MapList extends AppCompatActivity implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
-            case R.id.action_add:
-                onAddMap();
-                return true;
-            case R.id.action_update:
-                updateMaps();
-                return true;
-            case R.id.action_delete:
-                listFragment.startContextActionMode();
-                return true;
+        int itemId = item.getItemId();
+        if (itemId == android.R.id.home) {
+            NavUtils.navigateUpFromSameTask(this);
+            return true;
+        } else if (itemId == R.id.action_add) {
+            onAddMap();
+            return true;
+        } else if (itemId == R.id.action_update) {
+            updateMaps();
+            return true;
+        } else if (itemId == R.id.action_delete) {
+            listFragment.startContextActionMode();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case ADD_ACTION:
-                listFragment.forceUpdate();
-                return;
+        if (requestCode == ADD_ACTION) {
+            listFragment.forceUpdate();
+            return;
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -180,5 +180,4 @@ public class MapList extends AppCompatActivity implements
         progressDialog.dismiss();
         TaskHelpers.displayFailReason(this, reason);
     }
-
 }

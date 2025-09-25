@@ -4,9 +4,10 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.graphics.PointF;
-import android.support.v4.content.AsyncTaskLoader;
-import android.support.v4.content.ContextCompat;
 import android.util.Pair;
+
+import androidx.core.content.ContextCompat;
+import androidx.loader.content.AsyncTaskLoader;
 
 import org.ametro.R;
 import org.ametro.catalog.MapCatalogManager;

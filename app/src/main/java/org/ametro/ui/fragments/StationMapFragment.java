@@ -1,12 +1,13 @@
 package org.ametro.ui.fragments;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+
+import androidx.fragment.app.Fragment;  // ✅ AndroidX
 
 import org.ametro.R;
 import org.ametro.app.ApplicationEx;
@@ -19,19 +20,20 @@ public class StationMapFragment extends Fragment {
     public StationMapFragment() {
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_station_map_view, container, false);
         Bundle arguments = getArguments();
-        setupWebView((WebView) rootView.findViewById(R.id.web),
+        setupWebView(
+                rootView.findViewById(R.id.web),
                 arguments.getString(Constants.LINE_NAME),
-                arguments.getString(Constants.STATION_NAME));
+                arguments.getString(Constants.STATION_NAME)
+        );
         return rootView;
     }
 
     public void setupWebView(WebView webView, String lineName, String stationName) {
-        ApplicationEx application = ApplicationEx.getInstance(getActivity());
+        ApplicationEx application = ApplicationEx.getInstance(requireActivity()); // ✅ safer
         try {
             MapContainer container = application.getContainer();
 
@@ -44,12 +46,14 @@ public class StationMapFragment extends Fragment {
 
             MapStationInformation station = container.findStationInformation(lineName, stationName);
             String mapInSvgFormat = container.loadStationMap(station.getMapFilePath());
+
             webView.loadDataWithBaseURL(
                     "not_defined",
                     mapInSvgFormat,
-                    "image/svg+xml",
+                    "image/svg+xml", // ✅ correct MIME for inline SVG
                     "utf-8",
-                    "not_defined");
+                    "not_defined"
+            );
 
             webView.setVisibility(View.VISIBLE);
         } catch (Exception e) {

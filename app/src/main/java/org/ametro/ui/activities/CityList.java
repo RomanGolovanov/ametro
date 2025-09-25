@@ -3,14 +3,15 @@ package org.ametro.ui.activities;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import androidx.appcompat.app.ActionBar;            // AndroidX
+import androidx.appcompat.app.AppCompatActivity;   // AndroidX
+import androidx.appcompat.widget.SearchView;       // AndroidX
+import androidx.appcompat.widget.Toolbar;          // AndroidX
+import androidx.core.app.NavUtils;                 // AndroidX
+import androidx.core.view.MenuItemCompat;          // AndroidX
 
 import org.ametro.R;
 import org.ametro.catalog.entities.MapInfo;
@@ -19,7 +20,9 @@ import org.ametro.ui.tasks.MapInstallerAsyncTask;
 import org.ametro.ui.tasks.TaskHelpers;
 import org.ametro.utils.StringUtils;
 
-public class CityList extends AppCompatActivity implements CityListFragment.ICitySelectionListener, MapInstallerAsyncTask.IMapInstallerEventListener {
+public class CityList extends AppCompatActivity
+        implements CityListFragment.ICitySelectionListener,
+        MapInstallerAsyncTask.IMapInstallerEventListener {
 
     private CityListFragment cityListFragment;
     private ProgressDialog loadingProgressDialog;
@@ -31,7 +34,7 @@ public class CityList extends AppCompatActivity implements CityListFragment.ICit
 
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         ActionBar actionBar = getSupportActionBar();
-        if(actionBar!=null) {
+        if (actionBar != null) {
             actionBar.setDefaultDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
@@ -55,18 +58,17 @@ public class CityList extends AppCompatActivity implements CityListFragment.ICit
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            NavUtils.navigateUpFromSameTask(this);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onCitySelected(MapInfo[] maps) {
-
-        final MapInstallerAsyncTask downloadTask = new MapInstallerAsyncTask(this, this, maps);
+        final MapInstallerAsyncTask downloadTask =
+                new MapInstallerAsyncTask(this, this, maps);
 
         loadingProgressDialog = new ProgressDialog(this);
         loadingProgressDialog.setMessage(getString(R.string.msg_downloading));
@@ -99,9 +101,9 @@ public class CityList extends AppCompatActivity implements CityListFragment.ICit
         loadingProgressDialog.setMessage(String.format(
                 getString(R.string.msg_download_progress),
                 downloadingMap.getFileName() + ": " +
-                String.format("%s / %s",
-                        StringUtils.humanReadableByteCount(currentSize, false),
-                        StringUtils.humanReadableByteCount(totalSize, false))));
+                        String.format("%s / %s",
+                                StringUtils.humanReadableByteCount(currentSize, false),
+                                StringUtils.humanReadableByteCount(totalSize, false))));
     }
 
     @Override

@@ -2,13 +2,14 @@ package org.ametro.ui.adapters;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;   // AndroidX
 
 import org.ametro.R;
 import org.ametro.catalog.entities.MapInfo;
@@ -47,7 +48,7 @@ public class MapListAdapter extends ArrayAdapter<ExtendedMapInfo> {
     }
 
     public void clearSelection() {
-        for(int i=0; i<getCount();i++){
+        for (int i = 0; i < getCount(); i++) {
             getItem(i).setSelected(false);
         }
         notifyDataSetChanged();
@@ -61,9 +62,9 @@ public class MapListAdapter extends ArrayAdapter<ExtendedMapInfo> {
 
     public MapInfo[] getSelection() {
         ArrayList<MapInfo> maps = new ArrayList<>();
-        for(int i=0; i<getCount();i++){
+        for (int i = 0; i < getCount(); i++) {
             ExtendedMapInfo map = getItem(i);
-            if(map.isSelected()){
+            if (map.isSelected()) {
                 maps.add(new MapInfo(map));
             }
         }
@@ -88,12 +89,12 @@ public class MapListAdapter extends ArrayAdapter<ExtendedMapInfo> {
         public MapViewHolder(View view, IconProvider countryFlagProvider, TransportIconsProvider transportIconsProvider) {
             this.countryFlagProvider = countryFlagProvider;
             this.transportIconsProvider = transportIconsProvider;
-            icon = (ImageView) view.findViewById(R.id.icon);
-            city = (TextView) view.findViewById(R.id.city);
-            country = (TextView) view.findViewById(R.id.country);
-            transportsContainer = (ViewGroup) view.findViewById(R.id.icons);
-            comment = (TextView) view.findViewById(R.id.comment);
-            status = (TextView) view.findViewById(R.id.status);
+            icon = view.findViewById(R.id.icon);
+            city = view.findViewById(R.id.city);
+            country = view.findViewById(R.id.country);
+            transportsContainer = view.findViewById(R.id.icons);
+            comment = view.findViewById(R.id.comment);
+            status = view.findViewById(R.id.status);
             container = view;
 
             defaultStatusColor = status.getCurrentTextColor();

@@ -3,18 +3,14 @@ package org.ametro.ui.adapters;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.MatrixCursor;
-import android.graphics.ColorFilter;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.OvalShape;
-import android.graphics.drawable.shapes.Shape;
-import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.cursoradapter.widget.CursorAdapter;  // ✅ AndroidX CursorAdapter
 
 import org.ametro.R;
 import org.ametro.model.entities.MapScheme;
@@ -26,9 +22,9 @@ import java.util.List;
 
 public class StationSearchAdapter extends CursorAdapter {
 
-    private List<StationInfo> stations;
+    private final List<StationInfo> stations;
 
-    public static StationSearchAdapter createFromMapScheme(Context context, MapScheme scheme, String query){
+    public static StationSearchAdapter createFromMapScheme(Context context, MapScheme scheme, String query) {
         List<StationInfo> items = getStations(scheme, query);
         return new StationSearchAdapter(context, createStationNameCursor(items), items);
     }
@@ -40,7 +36,7 @@ public class StationSearchAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        ((StationInfoHolder)view.getTag()).Update(stations.get(cursor.getPosition()));
+        ((StationInfoHolder) view.getTag()).update(stations.get(cursor.getPosition()));
     }
 
     @Override
@@ -75,23 +71,25 @@ public class StationSearchAdapter extends CursorAdapter {
 
     private static List<StationInfo> getStations(MapScheme scheme, String query) {
         List<StationInfo> stationNames = new ArrayList<>();
-        for(MapSchemeLine line: scheme.getLines()){
-            for(MapSchemeStation station: line.getStations()){
-                if(station.getPosition() == null){
+        for (MapSchemeLine line : scheme.getLines()) {
+            for (MapSchemeStation station : line.getStations()) {
+                if (station.getPosition() == null) {
                     continue;
                 }
-                if(station.getDisplayName()!=null && station.getDisplayName().toLowerCase().startsWith(query.toLowerCase()))
+                if (station.getDisplayName() != null &&
+                        station.getDisplayName().toLowerCase().startsWith(query.toLowerCase())) {
                     stationNames.add(new StationInfo(station, line));
+                }
             }
         }
         return stationNames;
     }
 
     private static MatrixCursor createStationNameCursor(List<StationInfo> items) {
-        Object[] temp = new Object[] { 0, "default" };
-        MatrixCursor cursor = new MatrixCursor(new String[] { "_id", "text" });
-        for(int i = 0; i < items.size(); i++) {
-            final MapSchemeStation station = items.get(i).getStation();
+        Object[] temp = new Object[]{0, "default"};
+        MatrixCursor cursor = new MatrixCursor(new String[]{"_id", "text"});
+        for (StationInfo item : items) {
+            final MapSchemeStation station = item.getStation();
             temp[0] = station.getUid();
             temp[1] = station.getDisplayName();
             cursor.addRow(temp);
@@ -99,22 +97,22 @@ public class StationSearchAdapter extends CursorAdapter {
         return cursor;
     }
 
-    private static class StationInfoHolder{
+    private static class StationInfoHolder {
 
         private final TextView stationView;
         private final TextView lineView;
         private final ImageView iconView;
 
-        public StationInfoHolder(View v){
-            stationView = (TextView)v.findViewById(R.id.station);
-            lineView = (TextView)v.findViewById(R.id.line);
-            iconView = (ImageView)v.findViewById(R.id.icon);
+        public StationInfoHolder(View v) {
+            stationView = v.findViewById(R.id.station);
+            lineView = v.findViewById(R.id.line);
+            iconView = v.findViewById(R.id.icon);
         }
 
-        public void Update(StationInfo station){
+        public void update(StationInfo station) {
             stationView.setText(station.getStation().getDisplayName());
             lineView.setText(station.getLine().getDisplayName());
-            GradientDrawable drawable = (GradientDrawable)iconView.getBackground();
+            GradientDrawable drawable = (GradientDrawable) iconView.getBackground();
             drawable.setColor(station.getLine().getLineColor());
         }
     }

@@ -2,12 +2,13 @@ package org.ametro.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+
+import androidx.appcompat.app.ActionBar;          // AndroidX
+import androidx.appcompat.app.AppCompatActivity; // AndroidX
+import androidx.appcompat.widget.Toolbar;        // AndroidX
+import androidx.core.content.ContextCompat;      // AndroidX
+import androidx.fragment.app.Fragment;           // AndroidX
+import androidx.viewpager.widget.ViewPager;      // AndroidX
 
 import org.ametro.R;
 import org.ametro.app.ApplicationEx;
@@ -27,10 +28,10 @@ public class StationDetails extends AppCompatActivity implements SlidingTabLayou
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_station_details_view);
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        ViewPager viewPager = findViewById(R.id.viewpager);
         viewPager.setAdapter(new FragmentPagerArrayAdapter(getSupportFragmentManager(), getTabs()));
 
-        SlidingTabLayout slidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
+        SlidingTabLayout slidingTabLayout = findViewById(R.id.sliding_tabs);
         slidingTabLayout.setDistributeEvenly(true);
         slidingTabLayout.setViewPager(viewPager);
         slidingTabLayout.setCustomTabColorizer(this);
@@ -42,9 +43,9 @@ public class StationDetails extends AppCompatActivity implements SlidingTabLayou
                 intent.getStringExtra(Constants.LINE_NAME),
                 intent.getStringExtra(Constants.STATION_NAME));
 
-        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        setSupportActionBar(findViewById(R.id.toolbar));
         ActionBar actionBar = getSupportActionBar();
-        if(actionBar!=null) {
+        if (actionBar != null) {
             actionBar.setDefaultDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle(station.getDisplayName());
@@ -58,9 +59,10 @@ public class StationDetails extends AppCompatActivity implements SlidingTabLayou
         mapFragment.setArguments(getIntent().getExtras());
         tabs.add(new FragmentPagerTabInfo(getString(R.string.tab_map), mapFragment));
 
-//        Fragment aboutFragment = new StationAboutFragment();
-//        aboutFragment.setArguments(getIntent().getExtras());
-//        tabs.add(new FragmentPagerTabInfo(getString(R.string.tab_about), aboutFragment));
+        // If you want to enable "About" tab later, just uncomment:
+        // Fragment aboutFragment = new StationAboutFragment();
+        // aboutFragment.setArguments(getIntent().getExtras());
+        // tabs.add(new FragmentPagerTabInfo(getString(R.string.tab_about), aboutFragment));
 
         return tabs;
     }
@@ -70,4 +72,3 @@ public class StationDetails extends AppCompatActivity implements SlidingTabLayou
         return ContextCompat.getColor(this, R.color.accent);
     }
 }
-

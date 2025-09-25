@@ -1,6 +1,6 @@
 package org.ametro.routes;
 
-import android.support.v4.util.Pair;
+import android.util.Pair;
 
 import org.ametro.model.entities.MapScheme;
 import org.ametro.model.entities.MapSchemeLine;

@@ -2,10 +2,10 @@ package org.ametro.model.serialization;
 
 import android.graphics.BitmapFactory;
 
+import com.caverock.androidsvg.SVGParseException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
-import com.larvalabs.svgandroid.SVG;
-import com.larvalabs.svgandroid.SVGBuilder;
+import com.caverock.androidsvg.SVG;
 
 import org.ametro.model.entities.MapLocale;
 import org.ametro.model.entities.MapMetadata;
@@ -81,13 +81,15 @@ public class ZipArchiveMapProvider extends ZipFile {
         InputStream stream = getInputStream(name);
         try {
             if (name.endsWith(".svg")) {
-                SVG svg = new SVGBuilder().readFromString(FileUtils.readAllText(stream)).build();
-                return svg.getPicture();
+                SVG svg = SVG.getFromInputStream(stream);
+                return svg.renderToPicture();
             } else if (name.endsWith(".png")) {
                 return BitmapFactory.decodeStream(stream);
             }else {
                 throw new IOException("Unsupported type of image file " + name);
             }
+        } catch (SVGParseException e) {
+            throw new RuntimeException(e);
         } finally {
             stream.close();
         }

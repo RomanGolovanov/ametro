@@ -1,18 +1,18 @@
 package org.ametro.ui.fragments;
 
-
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.AsyncTaskLoader;
-import android.support.v4.content.Loader;
-import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.appcompat.widget.SearchView;           // AndroidX
+import androidx.fragment.app.Fragment;                // AndroidX
+import androidx.loader.app.LoaderManager;             // AndroidX
+import androidx.loader.content.AsyncTaskLoader;       // AndroidX
+import androidx.loader.content.Loader;                // AndroidX
 
 import org.ametro.R;
 import org.ametro.app.ApplicationEx;
@@ -30,8 +30,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class CityListFragment extends Fragment implements ExpandableListView.OnChildClickListener,
-        LoaderManager.LoaderCallbacks<MapInfo[]>, SearchView.OnQueryTextListener {
+public class CityListFragment extends Fragment
+        implements ExpandableListView.OnChildClickListener,
+        LoaderManager.LoaderCallbacks<MapInfo[]>,
+        SearchView.OnQueryTextListener {
 
     private ICitySelectionListener citySelectionListener = new ICitySelectionListener() {
         @Override
@@ -57,13 +59,13 @@ public class CityListFragment extends Fragment implements ExpandableListView.OnC
             country = savedInstanceState.getString(Constants.MAP_COUNTRY);
             city = savedInstanceState.getString(Constants.MAP_CITY);
         }
-        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
-        progressText = (TextView) view.findViewById(R.id.progressText);
+        progressBar = view.findViewById(R.id.progressBar);
+        progressText = view.findViewById(R.id.progressText);
 
         noConnectionView = view.findViewById(R.id.no_connection);
         emptyView = view.findViewById(R.id.empty);
 
-        list = (ExpandableListView) view.findViewById(R.id.list);
+        list = view.findViewById(R.id.list);
         list.setOnChildClickListener(this);
 
         return view;
@@ -72,13 +74,13 @@ public class CityListFragment extends Fragment implements ExpandableListView.OnC
     @Override
     public void onResume() {
         super.onResume();
-        getLoaderManager().initLoader(0, null, this).forceLoad();
+        LoaderManager.getInstance(this).initLoader(0, null, this).forceLoad();
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(Constants.MAP_CITY, country);
+        outState.putString(Constants.MAP_COUNTRY, country);
         outState.putString(Constants.MAP_CITY, city);
     }
 
@@ -94,7 +96,7 @@ public class CityListFragment extends Fragment implements ExpandableListView.OnC
             }
         }
 
-        citySelectionListener.onCitySelected(result.toArray(new MapInfo[result.size()]));
+        citySelectionListener.onCitySelected(result.toArray(new MapInfo[0]));
         return true;
     }
 
@@ -104,7 +106,7 @@ public class CityListFragment extends Fragment implements ExpandableListView.OnC
 
     @Override
     public Loader<MapInfo[]> onCreateLoader(int id, Bundle args) {
-        return new AsyncTaskLoader<MapInfo[]>(getActivity()) {
+        return new AsyncTaskLoader<MapInfo[]>(requireContext()) {
             @Override
             public MapInfo[] loadInBackground() {
                 ApplicationEx app = ApplicationEx.getInstance(this);
@@ -115,7 +117,7 @@ public class CityListFragment extends Fragment implements ExpandableListView.OnC
                 MapCatalog remoteMapCatalog = app.getRemoteMapCatalogProvider()
                         .getMapCatalog(false);
 
-                if(remoteMapCatalog == null){
+                if (remoteMapCatalog == null) {
                     return null;
                 }
 
@@ -127,7 +129,7 @@ public class CityListFragment extends Fragment implements ExpandableListView.OnC
                                         return !loadedMaps.contains(map.getFileName());
                                     }
                                 });
-                return remoteMaps.toArray(new MapInfo[remoteMaps.size()]);
+                return remoteMaps.toArray(new MapInfo[0]);
             }
         };
     }
@@ -140,9 +142,9 @@ public class CityListFragment extends Fragment implements ExpandableListView.OnC
             maps = data;
             geographyProvider = new FilteringMapGeographyProvider(data);
             adapter = new CityListAdapter(
-                    getActivity(),
+                    requireContext(),
                     geographyProvider,
-                    ApplicationEx.getInstance(getActivity()).getCountryFlagProvider());
+                    ApplicationEx.getInstance(requireContext()).getCountryFlagProvider());
             list.setAdapter(adapter);
         } else {
             setNoConnectionShown();
@@ -151,14 +153,14 @@ public class CityListFragment extends Fragment implements ExpandableListView.OnC
 
     @Override
     public void onLoaderReset(Loader<MapInfo[]> loader) {
-        if(geographyProvider!=null) {
+        if (geographyProvider != null) {
             geographyProvider.setData(new MapInfo[0]);
         }
     }
 
     @Override
     public boolean onQueryTextSubmit(String s) {
-        if(adapter == null){
+        if (adapter == null) {
             return true;
         }
 
@@ -172,7 +174,7 @@ public class CityListFragment extends Fragment implements ExpandableListView.OnC
 
     @Override
     public boolean onQueryTextChange(String s) {
-        if(adapter == null){
+        if (adapter == null) {
             return true;
         }
 
@@ -203,6 +205,4 @@ public class CityListFragment extends Fragment implements ExpandableListView.OnC
     public interface ICitySelectionListener {
         void onCitySelected(MapInfo[] maps);
     }
-
-
 }
