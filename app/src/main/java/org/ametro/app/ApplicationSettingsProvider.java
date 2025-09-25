@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import org.ametro.catalog.MapCatalogManager;
-import org.ametro.catalog.entities.MapCatalog;
 import org.ametro.catalog.entities.MapInfo;
 
 import java.util.Locale;

@@ -47,15 +47,6 @@
                 android:value="org.ametro.ui.activities.Map" />
         </activity>
         <activity
-            android:name="org.ametro.ui.activities.CityList"
-            android:label="@string/title_activity_city_list_view"
-            android:exported="false"
-            android:launchMode="singleTop">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.ametro.ui.activities.MapList" />
-        </activity>
-        <activity
             android:name=".ui.activities.StationDetails"
             android:label="@string/title_activity_station_scheme_view"
             android:exported="false"

@@ -11,7 +11,6 @@ import org.ametro.catalog.localization.MapInfoLocalizationProvider;
 import org.ametro.catalog.serialization.MapCatalogSerializer;
 import org.ametro.utils.FileUtils;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
