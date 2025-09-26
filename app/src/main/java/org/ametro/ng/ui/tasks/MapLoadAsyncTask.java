@@ -47,7 +47,6 @@ public class MapLoadAsyncTask extends AsyncTask<Void, String, Throwable> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        listener.onBeforeMapLoading(container, schemeName, enabledTransports);
     }
 
     @Override
@@ -60,8 +59,6 @@ public class MapLoadAsyncTask extends AsyncTask<Void, String, Throwable> {
     }
 
     public interface IMapLoadingEventListener {
-        void onBeforeMapLoading(MapContainer container, String schemeName, String[] enabledTransports);
-
         void onMapLoadComplete(MapContainer container, String schemeName, String[] enabledTransports, long time);
 
         void onMapLoadFailed(MapContainer container, String schemeName, String[] enabledTransports, Throwable reason);

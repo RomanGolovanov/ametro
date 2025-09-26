@@ -1,6 +1,5 @@
 package org.ametro.ng.ui.activities;
 
-import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -61,7 +60,6 @@ public class Map extends AppCompatActivity implements
     private static final int OPEN_STATION_DETAILS = 3;
 
     private NavigationController navigationController;
-    private ProgressDialog loadingProgressDialog;
     private MapContainer container;
     private TestMenuOptionsProcessor testMenuOptionsProcessor;
     private Set<String> enabledTransportsSet;
@@ -281,36 +279,14 @@ public class Map extends AppCompatActivity implements
                 var localMapCatalogManager = app.getMapCatalogProvider();
                 var mapInfo = localMapCatalogManager.findMapByName(data.getStringExtra(Constants.MAP_PATH));
                 var mapContainer = new MapContainer(localMapCatalogManager, mapInfo, settingsProvider.getPreferredMapLanguage());
-                new MapLoadAsyncTask(this,  mapContainer).execute();
+                new MapLoadAsyncTask(this,  mapContainer).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
-    public void onBeforeMapLoading(MapContainer container, String schemeName, String[] enabledTransports) {
-        if (!container.isLoaded(schemeName, enabledTransports)) {
-
-            if (loadingProgressDialog != null) {
-                loadingProgressDialog.dismiss();
-                loadingProgressDialog = null;
-            }
-
-            loadingProgressDialog = new ProgressDialog(this);
-            loadingProgressDialog.setIndeterminate(true);
-            loadingProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            loadingProgressDialog.setCancelable(false);
-            loadingProgressDialog.setMessage(getResources().getString(R.string.msg_map_loading_progress, schemeName));
-            loadingProgressDialog.show();
-        }
-    }
-
-    @Override
     public void onMapLoadComplete(final MapContainer container, final String schemeName, String[] enabledTransports, long time) {
-        if (loadingProgressDialog != null) {
-            loadingProgressDialog.dismiss();
-            loadingProgressDialog = null;
-        }
         this.app.setCurrentMapViewState(container, schemeName, enabledTransports);
         initMapViewState();
         settingsProvider.setCurrentMap(container.getMapInfo().getFileName());
@@ -362,10 +338,6 @@ public class Map extends AppCompatActivity implements
 
     @Override
     public void onMapLoadFailed(MapContainer container, String schemeName, String[] enabledTransports, Throwable reason) {
-        if (loadingProgressDialog != null) {
-            loadingProgressDialog.dismiss();
-            loadingProgressDialog = null;
-        }
         Toast.makeText(this, getString(R.string.msg_map_loading_failed, reason.getMessage()), Toast.LENGTH_LONG).show();
         Log.e(Constants.LOG, "Map load failed due exception: " + reason.getMessage(), reason);
     }
@@ -394,7 +366,7 @@ public class Map extends AppCompatActivity implements
     public boolean onChangeScheme(String schemeName) {
         mapBottomPanel.hide();
         new MapLoadAsyncTask(this, container, schemeName,
-                enabledTransportsSet.toArray(new String[0])).execute();
+                enabledTransportsSet.toArray(new String[0])).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         return true;
     }
 
