@@ -6,20 +6,6 @@ import java.util.Set;
 
 public class TransportTypeHelper {
 
-    public static String formatTransportTypeName(TransportType transportType)
-    {
-        switch (transportType){
-            case Subway : return "Метро";
-            case Tram : return "Трамвай";
-            case Bus : return "Автобус";
-            case Train : return "Электричка";
-            case WaterBus : return "Речной трамвай";
-            case TrolleyBus : return "Троллейбус";
-            case CableWay : return "Фуникулер";
-            default: return "Unknown";
-        }
-    }
-    
     public static TransportType parseTransportType(String transportTypeName)
     {
         switch (transportTypeName){
@@ -39,6 +25,6 @@ public class TransportTypeHelper {
         for(String name : names){
             types.add(parseTransportType(name));
         }
-        return types.toArray(new TransportType[types.size()]);
+        return types.toArray(new TransportType[0]);
     }
 }

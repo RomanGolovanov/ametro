@@ -1,5 +1,7 @@
 package org.ametro.ng.model.entities;
 
+import androidx.annotation.NonNull;
+
 import java.util.Arrays;
 
 public class MapDelay {
@@ -37,6 +39,7 @@ public class MapDelay {
         return ranges;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "MapDelay{" +

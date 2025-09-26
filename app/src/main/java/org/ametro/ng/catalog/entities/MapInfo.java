@@ -1,5 +1,7 @@
 package org.ametro.ng.catalog.entities;
 
+import androidx.annotation.NonNull;
+
 public class MapInfo extends MapInfoEntity {
 
     private final String city;
@@ -41,6 +43,7 @@ public class MapInfo extends MapInfoEntity {
         return iso;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return String.format("%s, %s", city, country);

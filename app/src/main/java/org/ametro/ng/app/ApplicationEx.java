@@ -2,12 +2,10 @@ package org.ametro.ng.app;
 
 import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
 import android.graphics.PointF;
 import android.util.Pair;
 
 import androidx.core.content.ContextCompat;
-import androidx.loader.content.AsyncTaskLoader;
 
 import org.ametro.ng.R;
 import org.ametro.ng.catalog.MapCatalogProvider;
@@ -36,48 +34,20 @@ public class ApplicationEx extends Application {
         return (ApplicationEx) activity.getApplication();
     }
 
-    public static ApplicationEx getInstance(Context applicationContext) {
-        return (ApplicationEx) applicationContext;
-    }
-
-    public static ApplicationEx getInstance(AsyncTaskLoader<?> loader) {
-        return getInstance(loader.getContext().getApplicationContext());
-    }
-
     @Override
     public void onCreate() {
         super.onCreate();
 
-        countryFlagProvider = new Lazy<>(new Lazy.IFactory<IconProvider>() {
-            @Override
-            public IconProvider create() {
-                return new IconProvider(
-                        ApplicationEx.this,
-                        ContextCompat.getDrawable(getApplicationContext(), R.drawable.no_country),
-                        "country_icons");
-            }
-        });
+        countryFlagProvider = new Lazy<>(() -> new IconProvider(
+                ApplicationEx.this,
+                ContextCompat.getDrawable(getApplicationContext(), R.drawable.no_country),
+                "country_icons"));
 
-        localizedMapInfoProvider = new Lazy<>(new Lazy.IFactory<MapInfoLocalizationProvider>() {
-            @Override
-            public MapInfoLocalizationProvider create() {
-                return new MapInfoLocalizationProvider(getApplicationContext(),getApplicationSettingsProvider());
-            }
-        });
+        localizedMapInfoProvider = new Lazy<>(() -> new MapInfoLocalizationProvider(getApplicationContext(),getApplicationSettingsProvider()));
 
-        appSettingsProvider = new Lazy<>(new Lazy.IFactory<ApplicationSettingsProvider>() {
-            @Override
-            public ApplicationSettingsProvider create() {
-                return new ApplicationSettingsProvider(ApplicationEx.this);
-            }
-        });
+        appSettingsProvider = new Lazy<>(() -> new ApplicationSettingsProvider(ApplicationEx.this));
 
-        mapCatalogProvider = new Lazy<>(new Lazy.IFactory<MapCatalogProvider>() {
-            @Override
-            public MapCatalogProvider create() {
-                return new MapCatalogProvider(getApplicationContext(), getLocalizedMapInfoProvider());
-            }
-        });
+        mapCatalogProvider = new Lazy<>(() -> new MapCatalogProvider(getApplicationContext(), getLocalizedMapInfoProvider()));
 
     }
 

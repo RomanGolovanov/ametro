@@ -1,25 +1,24 @@
 package org.ametro.ng.ui.navigation;
 
-import androidx.core.content.ContextCompat;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import org.ametro.ng.R;
-import org.ametro.ng.catalog.entities.TransportTypeHelper;
 import org.ametro.ng.catalog.MapInfoLocalizationProvider;
+import org.ametro.ng.catalog.entities.TransportTypeHelper;
 import org.ametro.ng.model.MapContainer;
 import org.ametro.ng.model.entities.MapDelay;
 import org.ametro.ng.model.entities.MapDelayTimeRange;
@@ -84,7 +83,7 @@ public class NavigationController implements AdapterView.OnItemClickListener {
         this.countryIconProvider = countryIconProvider;
         this.localizationProvider = localizationProvider;
 
-        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        Toolbar toolbar = activity.findViewById(R.id.toolbar);
         activity.setSupportActionBar(toolbar);
 
         context = activity;
@@ -94,12 +93,12 @@ public class NavigationController implements AdapterView.OnItemClickListener {
 
         drawerMenuAdapter = new NavigationDrawerAdapter(activity, createNavigationItems(null, null, null, null));
 
-        ListView drawerMenuList = (ListView) activity.findViewById(R.id.drawer);
+        ListView drawerMenuList = activity.findViewById(R.id.drawer);
         drawerMenuList.setAdapter(drawerMenuAdapter);
         drawerMenuList.setOnItemClickListener(this);
         drawerMenuList.setChoiceMode(ListView.CHOICE_MODE_NONE);
 
-        drawerLayout = (DrawerLayout) activity.findViewById(R.id.drawer_layout);
+        drawerLayout = activity.findViewById(R.id.drawer_layout);
         drawerToggle = new ActionBarDrawerToggle(
                 activity,
                 drawerLayout,
@@ -172,11 +171,7 @@ public class NavigationController implements AdapterView.OnItemClickListener {
                 break;
             case CHANGE_DELAY_ACTION:
                 for(NavigationItem delayItem : delayItems){
-                    if(delayItem == item){
-                        delayItem.setSelected(true);
-                    }else{
-                        delayItem.setSelected(false);
-                    }
+                    delayItem.setSelected(delayItem == item);
                 }
                 drawerMenuAdapter.notifyDataSetChanged();
                 complete = listener.onDelayChanged((MapDelay) item.getSource());
@@ -189,8 +184,7 @@ public class NavigationController implements AdapterView.OnItemClickListener {
 
     private NavigationItem[] createNavigationItems(MapContainer container, String schemeName, String[] enabledTransports, MapDelay currentDelay) {
 
-        ArrayList<NavigationItem> items = new ArrayList<>();
-        items.addAll(Collections.singletonList(createHeaderNavigationItem(container)));
+        ArrayList<NavigationItem> items = new ArrayList<>(Collections.singletonList(createHeaderNavigationItem(container)));
 
         items.add(new NavigationSubHeader(resources.getString(R.string.nav_options), new NavigationItem[]{
                 new NavigationTextItem(OPEN_MAPS_ACTION, ContextCompat.getDrawable(context, R.drawable.ic_public_black_18dp), resources.getString(R.string.nav_select_map)),
@@ -217,7 +211,7 @@ public class NavigationController implements AdapterView.OnItemClickListener {
             items.add(new NavigationSplitter());
         }
 
-        return items.toArray(new NavigationItem[items.size()]);
+        return items.toArray(new NavigationItem[0]);
     }
 
     private NavigationItem createHeaderNavigationItem(MapContainer container) {
@@ -243,13 +237,8 @@ public class NavigationController implements AdapterView.OnItemClickListener {
 
         ArrayList<MapMetadata.Scheme> schemeMetadataList =
                 new ArrayList<>(ListUtils.filter(meta.getSchemes().values(),
-                        new ListUtils.IPredicate<MapMetadata.Scheme>() {
-                            @Override
-                            public boolean apply(MapMetadata.Scheme type) {
-                                return !type.getTypeName().equals(SCHEME_TYPE_OTHER);
-                            }
-                        }));
-        Collections.sort(schemeMetadataList, new SchemeNavigationListComparator());
+                        type -> !type.getTypeName().equals(SCHEME_TYPE_OTHER)));
+        schemeMetadataList.sort(new SchemeNavigationListComparator());
 
         List<NavigationItem> schemes = new ArrayList<>();
         for (MapMetadata.Scheme schemeMeta : schemeMetadataList) {
@@ -285,7 +274,7 @@ public class NavigationController implements AdapterView.OnItemClickListener {
 
             schemes.add(item);
         }
-        return schemes.toArray(new NavigationItem[schemes.size()]);
+        return schemes.toArray(new NavigationItem[0]);
     }
 
     private NavigationItem[] createTransportNavigationItems(MapContainer container, String schemeName, String[] enabledTransports) {
@@ -312,7 +301,7 @@ public class NavigationController implements AdapterView.OnItemClickListener {
                     enabledTransportsSet.contains(name),
                     transportSchemeMeta.getName()));
         }
-        return transports.toArray(new NavigationItem[transports.size()]);
+        return transports.toArray(new NavigationItem[0]);
     }
 
     private NavigationItem[] createDelayNavigationItems(MapContainer container, MapDelay currentDelay) {
@@ -340,11 +329,11 @@ public class NavigationController implements AdapterView.OnItemClickListener {
             delays.add(item);
         }
 
-        if(delays.size()>0 && !defaultDelayWasSet){
+        if(!delays.isEmpty() && !defaultDelayWasSet){
             delays.get(0).setSelected(true);
         }
 
-        return delays.toArray(new NavigationItem[delays.size()]);
+        return delays.toArray(new NavigationItem[0]);
     }
 
 
@@ -384,7 +373,6 @@ public class NavigationController implements AdapterView.OnItemClickListener {
         return sb.toString().trim();
     }
 
-    @Deprecated
     private void createTransportsLocalizationTable() {
         transportNameLocalizations = new HashMap<>();
         String[] transportTypes = resources.getStringArray(R.array.transport_types);

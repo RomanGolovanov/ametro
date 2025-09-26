@@ -1,5 +1,9 @@
 package org.ametro.ng.model.entities;
 
+import android.annotation.SuppressLint;
+
+import androidx.annotation.NonNull;
+
 public class MapDelayTimeRange
 {
     private final int fromHour;
@@ -14,6 +18,8 @@ public class MapDelayTimeRange
         this.toMinute = toMinute;
     }
 
+    @SuppressLint("DefaultLocale")
+    @NonNull
     @Override
     public String toString() {
         return String.format("%1$02d:%2$02d - %3$02d:%4$02d", fromHour, fromMinute, toHour, toMinute);
