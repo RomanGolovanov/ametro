@@ -28,6 +28,10 @@ public class ApplicationEx extends Application {
     private String[] enabledTransports;
     private Pair<PointF, Float> centerPositionAndScale;
 
+    private Integer selectedBeginStationUid;
+
+    private Integer selectedEndStationUid;
+
     public static ApplicationEx getInstance(Activity activity) {
         return (ApplicationEx) activity.getApplication();
     }
@@ -123,5 +127,18 @@ public class ApplicationEx extends Application {
 
     public Pair<PointF, Float> getCenterPositionAndScale() {
         return centerPositionAndScale;
+    }
+
+    public void setSelectedStations(Integer beginUid, Integer endUid) {
+        this.selectedBeginStationUid = beginUid;
+        this.selectedEndStationUid = endUid;
+    }
+
+    public Integer getSelectedBeginUid() {
+        return selectedBeginStationUid;
+    }
+
+    public Integer getSelectedEndUid() {
+        return selectedEndStationUid;
     }
 }

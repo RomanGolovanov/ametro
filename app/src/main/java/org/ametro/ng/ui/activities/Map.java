@@ -130,6 +130,11 @@ public class Map extends AppCompatActivity implements
     @Override
     protected void onPause() {
         super.onPause();
+        if (mapSelectionIndicators != null) {
+            MapSchemeStation begin = mapSelectionIndicators.getBeginStation();
+            MapSchemeStation end = mapSelectionIndicators.getEndStation();
+            app.setSelectedStations(begin != null ? begin.getUid() : null, end != null ? end.getUid() : null);
+        }
         if (mapView != null) {
             app.setCenterPositionAndScale(mapView.getCenterPositionAndScale());
         }
@@ -142,6 +147,29 @@ public class Map extends AppCompatActivity implements
         if (mapView != null && app.getCenterPositionAndScale() != null) {
             var data = app.getCenterPositionAndScale();
             mapView.setCenterPositionAndScale(data.first, data.second, false);
+
+            var beginUid = app.getSelectedBeginUid();
+            var endUid = app.getSelectedEndUid();
+            if (beginUid != null) {
+                var beginInfo = ModelUtil.findStationByUid(scheme, beginUid);
+                if (beginInfo != null) {
+                    mapSelectionIndicators.setBeginStation(beginInfo.second);
+                }
+            }
+            if (endUid != null) {
+                var endInfo = ModelUtil.findStationByUid(scheme, endUid);
+                if (endInfo != null) {
+                    mapSelectionIndicators.setEndStation(endInfo.second);
+                }
+            }
+
+            if (mapSelectionIndicators.hasSelection()) {
+                onRouteSelectionComplete(
+                        mapSelectionIndicators.getBeginStation(),
+                        mapSelectionIndicators.getEndStation());
+            }
+
+
         }
         if (mapView == null) {
             var currentMapFileName = settingsProvider.getCurrentMapFileName();
