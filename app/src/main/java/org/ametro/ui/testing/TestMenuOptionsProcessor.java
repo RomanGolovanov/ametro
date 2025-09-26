@@ -6,7 +6,7 @@ import android.widget.Toast;
 
 import org.ametro.R;
 import org.ametro.app.ApplicationEx;
-import org.ametro.catalog.MapCatalogManager;
+import org.ametro.catalog.MapCatalogProvider;
 import org.ametro.catalog.entities.MapInfo;
 
 public class TestMenuOptionsProcessor {
@@ -21,8 +21,8 @@ public class TestMenuOptionsProcessor {
 
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_test_outdated) {
-            MapCatalogManager localMapCatalogManager = app.getLocalMapCatalogManager();
-            MapInfo[] maps = localMapCatalogManager.getMapCatalog().getMaps();
+            MapCatalogProvider localMapCatalogProvider = app.getMapCatalogProvider();
+            MapInfo[] maps = localMapCatalogProvider.getMapCatalog().getMaps();
             if (maps.length != 0) {
                 MapInfo outdatedFirstMap = new MapInfo(
                         maps[0].getCityId(),

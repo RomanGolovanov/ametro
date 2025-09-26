@@ -2,9 +2,8 @@ package org.ametro.ui.tasks;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.PowerManager;
 
-import androidx.appcompat.app.AppCompatActivity;   // AndroidX
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.ametro.model.MapContainer;
 
@@ -17,7 +16,6 @@ public class MapLoadAsyncTask extends AsyncTask<Void, String, Throwable> {
     private final String schemeName;
     private final String[] enabledTransports;
 
-    private final PowerManager.WakeLock wakeLock;
     private final IMapLoadingEventListener listener;
 
     private long start;
@@ -38,21 +36,16 @@ public class MapLoadAsyncTask extends AsyncTask<Void, String, Throwable> {
         this.container = container;
         this.schemeName = schemeName;
         this.enabledTransports = enabledTransports;
-        this.wakeLock = ((PowerManager) context.getSystemService(Context.POWER_SERVICE))
-                .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, getClass().getName());
     }
 
     @Override
     protected Throwable doInBackground(Void... params) {
-        wakeLock.acquire();
         try {
             start = System.currentTimeMillis();
             container.loadSchemeWithTransports(schemeName, null);
             end = System.currentTimeMillis();
         } catch (Exception e) {
             return e;
-        } finally {
-            wakeLock.release();
         }
         return null;
     }

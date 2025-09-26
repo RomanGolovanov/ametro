@@ -1,4 +1,4 @@
-package org.ametro.catalog.serialization;
+package org.ametro.catalog;
 
 public class SerializationException extends Exception {
     public SerializationException(Exception ex)  {

@@ -1,12 +1,9 @@
-package org.ametro.catalog.localization;
+package org.ametro.catalog;
 
 import android.content.Context;
 
-import org.ametro.catalog.entities.MapCatalog;
-import org.ametro.catalog.entities.MapInfo;
-import org.ametro.catalog.entities.MapInfoEntity;
+import org.ametro.app.ApplicationSettingsProvider;
 import org.ametro.catalog.entities.MapInfoEntityName;
-import org.ametro.catalog.serialization.MapCatalogSerializer;
 import org.ametro.utils.FileUtils;
 
 import java.io.InputStream;
@@ -15,19 +12,18 @@ import java.util.HashMap;
 public class MapInfoLocalizationProvider {
 
     private final Context context;
-    private final String languageCode;
+    private final ApplicationSettingsProvider applicationSettingsProvider;
     private HashMap<Integer, MapInfoEntityName> localizationMap;
 
-    public MapInfoLocalizationProvider(Context context, String languageCode) {
+    public MapInfoLocalizationProvider(Context context, ApplicationSettingsProvider applicationSettingsProvider) {
         this.context = context;
-        this.languageCode = languageCode;
+        this.applicationSettingsProvider = applicationSettingsProvider;
     }
-
-    public String getCityName(int cityId) {
+    public String getCityName( int cityId) {
         return getLocalizationMap().get(cityId).getCityName();
     }
 
-    public String getCountryName(int cityId) {
+    public String getCountryName( int cityId) {
         return getLocalizationMap().get(cityId).getCountryName();
     }
 
@@ -35,33 +31,18 @@ public class MapInfoLocalizationProvider {
         return getLocalizationMap().get(cityId).getCountryIsoCode();
     }
 
-    public MapCatalog createCatalog(MapInfoEntity[] maps) {
-        HashMap<Integer, MapInfoEntityName> localizations = getLocalizationMap();
-        MapInfo[] localizedMaps = new MapInfo[maps.length];
-        for (int i = 0; i < maps.length; i++) {
-            MapInfoEntityName loc = localizations.get(maps[i].getCityId());
-            localizedMaps[i] = new MapInfo(
-                    maps[i],
-                    loc != null ? loc.getCityName() : "Unknown",
-                    loc != null ? loc.getCountryName() : "Unknown",
-                    loc != null ? loc.getCountryIsoCode() : ""
-            );
-        }
-        return new MapCatalog(localizedMaps);
-    }
-
-    private HashMap<Integer, MapInfoEntityName> getLocalizationMap() {
+    public HashMap<Integer, MapInfoEntityName> getLocalizationMap() {
         if (localizationMap != null) {
             return localizationMap;
         }
 
         try {
-            String fileName = String.format("map_files/locales/cities.%s.json", languageCode);
+            String fileName = String.format("map_files/locales/cities.%s.json", applicationSettingsProvider.getPreferredMapLanguage());
             String json;
             try (InputStream is = context.getAssets().open(fileName)) {
                 json = FileUtils.readAllText(is);
             } catch (Exception e) {
-                try (InputStream is = context.getAssets().open("map_files/cities.default.json")) {
+                try (InputStream is = context.getAssets().open("map_files/locales/cities.default.json")) {
                     json = FileUtils.readAllText(is);
                 }
             }

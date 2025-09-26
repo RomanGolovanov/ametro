@@ -3,49 +3,33 @@ package org.ametro.app;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import org.ametro.catalog.MapCatalogManager;
-import org.ametro.catalog.entities.MapInfo;
-
 import java.util.Locale;
 
 public class ApplicationSettingsProvider {
 
     private static final String PREFS_NAME = "aMetroPreferences";
-
     private static final String SELECTED_MAP = "selectedMap";
     private static final String PREFERRED_LANGUAGE = "preferredLanguage";
 
     private final SharedPreferences settings;
-    private final MapCatalogManager catalog;
 
-
-    public ApplicationSettingsProvider(Context context, MapCatalogManager catalog) {
+    public ApplicationSettingsProvider(Context context) {
         this.settings = context.getSharedPreferences(PREFS_NAME, 0);
-        this.catalog = catalog;
     }
 
     /**
      * Returns the currently selected map, or null if none is set or not found in the catalog.
      */
-    public MapInfo getCurrentMap() {
-        var mapFileName = settings.getString(SELECTED_MAP, null);
-        if (mapFileName == null) {
-            return null;
-        }
-        MapInfo map = catalog.findMapByName(mapFileName);
-        if (map == null) {
-            setCurrentMap(null);
-            return null;
-        }
-        return map;
+    public String getCurrentMapFileName() {
+        return settings.getString(SELECTED_MAP, null);
     }
 
     /**
      * Save the currently selected map (by file name).
      */
-    public void setCurrentMap(MapInfo map) {
+    public void setCurrentMap(String mapFileName) {
         SharedPreferences.Editor editor = settings.edit();
-        editor.putString(SELECTED_MAP, map != null ? map.getFileName() : null);
+        editor.putString(SELECTED_MAP, mapFileName);
         editor.apply();
     }
 

@@ -6,41 +6,39 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.PointF;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Pair; // keep android.util.Pair
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;       // AndroidX
-import androidx.appcompat.widget.SearchView;          // AndroidX
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 
 import org.ametro.R;
 import org.ametro.app.ApplicationEx;
 import org.ametro.app.ApplicationSettingsProvider;
 import org.ametro.app.Constants;
-import org.ametro.catalog.MapCatalogManager;
 import org.ametro.model.MapContainer;
 import org.ametro.model.ModelUtil;
 import org.ametro.model.entities.MapDelay;
 import org.ametro.model.entities.MapScheme;
 import org.ametro.model.entities.MapSchemeLine;
 import org.ametro.model.entities.MapSchemeStation;
-import org.ametro.model.entities.MapStationInformation;
 import org.ametro.model.serialization.MapSerializationException;
 import org.ametro.providers.TransportIconsProvider;
 import org.ametro.routes.MapRouteProvider;
 import org.ametro.routes.RouteUtils;
-import org.ametro.routes.entities.MapRoute;
 import org.ametro.routes.entities.MapRouteQueryParameters;
 import org.ametro.ui.adapters.StationSearchAdapter;
 import org.ametro.ui.navigation.INavigationControllerListener;
 import org.ametro.ui.navigation.NavigationController;
 import org.ametro.ui.tasks.MapLoadAsyncTask;
-import org.ametro.ui.testing.DebugToast;
 import org.ametro.ui.testing.TestMenuOptionsProcessor;
 import org.ametro.ui.views.MultiTouchMapView;
 import org.ametro.ui.widgets.MapBottomPanelWidget;
@@ -48,7 +46,6 @@ import org.ametro.ui.widgets.MapSelectionIndicatorsWidget;
 import org.ametro.ui.widgets.MapTopPanelWidget;
 import org.ametro.utils.StringUtils;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -89,8 +86,8 @@ public class Map extends AppCompatActivity implements
         setContentView(R.layout.activity_map_view);
         mapContainerView = findViewById(R.id.map_container);
         mapPanelView = findViewById(R.id.map_panel);
-        mapTopPanel = new MapTopPanelWidget((ViewGroup) findViewById(R.id.map_top_panel));
-        mapBottomPanel = new MapBottomPanelWidget((ViewGroup) findViewById(R.id.map_bottom_panel), this);
+        mapTopPanel = new MapTopPanelWidget(findViewById(R.id.map_top_panel));
+        mapBottomPanel = new MapBottomPanelWidget(findViewById(R.id.map_bottom_panel), this);
         mapSelectionIndicators = new MapSelectionIndicatorsWidget(
                 this,
                 findViewById(R.id.begin_indicator),
@@ -100,12 +97,7 @@ public class Map extends AppCompatActivity implements
         app = ApplicationEx.getInstance(this);
         settingsProvider = app.getApplicationSettingsProvider();
 
-        findViewById(R.id.map_empty_panel).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onOpenMaps();
-            }
-        });
+        findViewById(R.id.map_empty_panel).setOnClickListener(v -> onOpenMaps());
 
         testMenuOptionsProcessor = new TestMenuOptionsProcessor(this);
         navigationController = new NavigationController(
@@ -115,6 +107,24 @@ public class Map extends AppCompatActivity implements
                 ApplicationEx.getInstance(this).getCountryFlagProvider(),
                 ApplicationEx.getInstance(this).getLocalizedMapInfoProvider()
         );
+
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (navigationController.isDrawerOpen()) {
+                    navigationController.closeDrawer();
+                } else if (mapBottomPanel.isOpened()) {
+                    mapBottomPanel.hide();
+                } else if (mapSelectionIndicators.hasSelection()) {
+                    mapSelectionIndicators.clearSelection();
+                } else {
+                    setEnabled(false);
+                    getOnBackPressedDispatcher().onBackPressed();
+                    setEnabled(true);
+                }
+            }
+        });
     }
 
     @Override
@@ -130,19 +140,21 @@ public class Map extends AppCompatActivity implements
         super.onResume();
         initMapViewState();
         if (mapView != null && app.getCenterPositionAndScale() != null) {
-            Pair<PointF, Float> data = app.getCenterPositionAndScale();
+            var data = app.getCenterPositionAndScale();
             mapView.setCenterPositionAndScale(data.first, data.second, false);
         }
         if (mapView == null) {
-            var currentMap = settingsProvider.getCurrentMap();
-            if (currentMap != null) {
-                var localMapCatalogManager = app.getLocalMapCatalogManager();
-
-                new MapLoadAsyncTask(this, this, new MapContainer(
-                        localMapCatalogManager,
-                        currentMap,
-                        settingsProvider.getPreferredMapLanguage())
-                ).execute();
+            var currentMapFileName = settingsProvider.getCurrentMapFileName();
+            if (currentMapFileName != null) {
+                var mapCatalogProvider = app.getMapCatalogProvider();
+                var currentMap = mapCatalogProvider.getMapCatalog().findMap(currentMapFileName);
+                if(currentMap!=null){
+                    new MapLoadAsyncTask(this, this, new MapContainer(
+                            mapCatalogProvider,
+                            currentMap,
+                            settingsProvider.getPreferredMapLanguage())
+                    ).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                }
             }
         }
     }
@@ -154,13 +166,13 @@ public class Map extends AppCompatActivity implements
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         navigationController.onConfigurationChanged(newConfig);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         return navigationController.onOptionsItemSelected(item)
                 || testMenuOptionsProcessor.onOptionsItemSelected(item)
                 || super.onOptionsItemSelected(item);
@@ -170,20 +182,19 @@ public class Map extends AppCompatActivity implements
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_map, menu);
 
-        SearchManager manager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        var manager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
 
-        final MenuItem searchMenuItem = menu.findItem(R.id.action_search);
-        final SearchView searchView = (SearchView) searchMenuItem.getActionView();
-        final MapSchemeStation[] selectedStation = new MapSchemeStation[1];
+        final var searchMenuItem = menu.findItem(R.id.action_search);
+        final var searchView = (SearchView) searchMenuItem.getActionView();
+        final var selectedStation = new MapSchemeStation[1];
+
+        assert searchView != null;
 
         searchView.setSubmitButtonEnabled(false);
         searchView.setSearchableInfo(manager.getSearchableInfo(getComponentName()));
-        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
-            @Override
-            public boolean onClose() {
-                selectedStation[0] = null;
-                return true;
-            }
+        searchView.setOnCloseListener(() -> {
+            selectedStation[0] = null;
+            return true;
         });
         searchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
             @Override
@@ -205,12 +216,12 @@ public class Map extends AppCompatActivity implements
                     return true;
                 }
                 if (selectedStation[0] != null) {
-                    Pair<MapSchemeLine, MapSchemeStation> stationInfo =
+                    var stationInfo =
                             ModelUtil.findStationByUid(scheme, selectedStation[0].getUid());
                     if (stationInfo != null) {
-                        MapStationInformation stationInformation = container
+                        var stationInformation = container
                                 .findStationInformation(stationInfo.first.getName(), stationInfo.second.getName());
-                        PointF p = new PointF(selectedStation[0].getPosition().x, selectedStation[0].getPosition().y);
+                        var p = new PointF(selectedStation[0].getPosition().x, selectedStation[0].getPosition().y);
                         mapView.setCenterPositionAndScale(p, mapView.getScale(), true);
                         mapBottomPanel.show(
                                 stationInfo.first,
@@ -236,23 +247,10 @@ public class Map extends AppCompatActivity implements
     }
 
     @Override
-    public void onBackPressed() {
-        if (navigationController.isDrawerOpen()) {
-            navigationController.closeDrawer();
-        } else if (mapBottomPanel.isOpened()) {
-            mapBottomPanel.hide();
-        } else if (mapSelectionIndicators.hasSelection()) {
-            mapSelectionIndicators.clearSelection();
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == OPEN_MAPS_ACTION) {
             if (resultCode == RESULT_OK) {
-                var localMapCatalogManager = app.getLocalMapCatalogManager();
+                var localMapCatalogManager = app.getMapCatalogProvider();
                 var mapInfo = localMapCatalogManager.findMapByName(data.getStringExtra(Constants.MAP_PATH));
                 var mapContainer = new MapContainer(localMapCatalogManager, mapInfo, settingsProvider.getPreferredMapLanguage());
                 new MapLoadAsyncTask(this, this,  mapContainer).execute();
@@ -285,10 +283,9 @@ public class Map extends AppCompatActivity implements
             loadingProgressDialog.dismiss();
             loadingProgressDialog = null;
         }
-        DebugToast.show(this, getString(R.string.msg_map_loaded, time), Toast.LENGTH_LONG);
         this.app.setCurrentMapViewState(container, schemeName, enabledTransports);
         initMapViewState();
-        settingsProvider.setCurrentMap(container.getMapInfo());
+        settingsProvider.setCurrentMap(container.getMapInfo().getFileName());
     }
 
     private void initMapViewState() {
@@ -315,21 +312,18 @@ public class Map extends AppCompatActivity implements
         mapSelectionIndicators.clearSelection();
         mapView = new MultiTouchMapView(this, container, schemeName, mapSelectionIndicators);
 
-        mapView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Pair<MapSchemeLine, MapSchemeStation> stationInfo =
-                        ModelUtil.findTouchedStation(scheme, mapView.getTouchPoint());
-                if (stationInfo != null) {
-                    MapStationInformation stationInformation = container
-                            .findStationInformation(stationInfo.first.getName(), stationInfo.second.getName());
-                    mapBottomPanel.show(
-                            stationInfo.first,
-                            stationInfo.second,
-                            stationInformation != null && stationInformation.getMapFilePath() != null);
-                } else {
-                    mapBottomPanel.hide();
-                }
+        mapView.setOnClickListener(v -> {
+            var stationInfo = ModelUtil.findTouchedStation(scheme, mapView.getTouchPoint());
+            if (stationInfo != null) {
+                var stationInformation = container.findStationInformation(stationInfo.first.getName(), stationInfo.second.getName());
+                mapBottomPanel.show(
+                        stationInfo.first,
+                        stationInfo.second,
+                        stationInformation != null && stationInformation.getMapFilePath() != null);
+            } else {
+                mapBottomPanel.hide();
+                mapSelectionIndicators.clearSelection();
+                onRouteSelectionCleared();
             }
         });
 
@@ -401,7 +395,7 @@ public class Map extends AppCompatActivity implements
 
     @Override
     public void onShowMapDetail(MapSchemeLine line, MapSchemeStation station) {
-        Intent intent = new Intent(this, StationDetails.class);
+        var intent = new Intent(this, StationDetails.class);
         intent.putExtra(Constants.LINE_NAME, line.getName());
         intent.putExtra(Constants.STATION_NAME, station.getName());
         intent.putExtra(Constants.STATION_UID, station.getUid());
@@ -422,7 +416,7 @@ public class Map extends AppCompatActivity implements
 
     @Override
     public void onRouteSelectionComplete(MapSchemeStation begin, MapSchemeStation end) {
-        MapRoute[] routes = MapRouteProvider.findRoutes(
+        var routes = MapRouteProvider.findRoutes(
                 new MapRouteQueryParameters(
                         container,
                         enabledTransportsSet,
@@ -455,12 +449,12 @@ public class Map extends AppCompatActivity implements
     }
 
     public Integer getCurrentDelayIndex() {
-        final MapDelay[] delays = container.getMetadata().getDelays();
+        final var delays = container.getMetadata().getDelays();
         if (delays.length == 0) {
             return null;
         }
-        int index = 0;
-        for (MapDelay delay : delays) {
+        var index = 0;
+        for (var delay : delays) {
             if (delay == currentDelay) {
                 return index;
             }

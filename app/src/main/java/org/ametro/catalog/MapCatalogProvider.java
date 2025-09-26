@@ -7,20 +7,18 @@ import android.util.Log;
 import org.ametro.app.Constants;
 import org.ametro.catalog.entities.MapCatalog;
 import org.ametro.catalog.entities.MapInfo;
-import org.ametro.catalog.localization.MapInfoLocalizationProvider;
-import org.ametro.catalog.serialization.MapCatalogSerializer;
 import org.ametro.utils.FileUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-public class MapCatalogManager {
+public class MapCatalogProvider {
 
     private final Context context;
     private final MapInfoLocalizationProvider localizationProvider;
     private MapCatalog catalog;
 
-    public MapCatalogManager(Context context, MapInfoLocalizationProvider localizationProvider) {
+    public MapCatalogProvider(Context context, MapInfoLocalizationProvider localizationProvider) {
         this.context = context;
         this.localizationProvider = localizationProvider;
     }
@@ -33,7 +31,7 @@ public class MapCatalogManager {
     }
 
     public MapInfo findMapByName(String mapFileName) {
-        for (MapInfo map : getMapCatalog().getMaps()) {
+        for (var map : getMapCatalog().getMaps()) {
             if (map.getFileName().equals(mapFileName)) {
                 return map;
             }
@@ -42,15 +40,29 @@ public class MapCatalogManager {
     }
 
     private MapCatalog loadCatalog() {
-        try (InputStream is = context.getAssets().open("map_files/index.json")) {
-            String json = FileUtils.readAllText(is);
-            return localizationProvider.createCatalog(
-                    MapCatalogSerializer.deserializeMapInfoArray(json));
+        try (var is = context.getAssets().open("map_files/index.json")) {
+            var json = FileUtils.readAllText(is);
+
+            var maps = MapCatalogSerializer.deserializeMapInfoArray(json);
+            var localizations = localizationProvider.getLocalizationMap();
+            var localizedMaps = new MapInfo[maps.length];
+            for (var i = 0; i < maps.length; i++) {
+                var loc = localizations.get(maps[i].getCityId());
+                localizedMaps[i] = new MapInfo(
+                        maps[i],
+                        loc != null ? loc.getCityName() : "Unknown",
+                        loc != null ? loc.getCountryName() : "Unknown",
+                        loc != null ? loc.getCountryIsoCode() : ""
+                );
+            }
+            return new MapCatalog(localizedMaps);
+
         } catch (Exception ex) {
             Log.e(Constants.LOG, "Cannot read map catalog from assets", ex);
             return new MapCatalog(new MapInfo[0]);
         }
     }
+
 
     public InputStream openMapAssetStream(MapInfo map)  {
         try {

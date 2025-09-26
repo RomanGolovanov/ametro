@@ -19,12 +19,11 @@ import android.widget.ListView;
 
 import org.ametro.R;
 import org.ametro.catalog.entities.TransportTypeHelper;
-import org.ametro.catalog.localization.MapInfoLocalizationProvider;
+import org.ametro.catalog.MapInfoLocalizationProvider;
 import org.ametro.model.MapContainer;
 import org.ametro.model.entities.MapDelay;
 import org.ametro.model.entities.MapDelayTimeRange;
 import org.ametro.model.entities.MapDelayType;
-import org.ametro.model.entities.MapDelayWeekdayType;
 import org.ametro.model.entities.MapMetadata;
 import org.ametro.providers.IconProvider;
 import org.ametro.providers.TransportIconsProvider;

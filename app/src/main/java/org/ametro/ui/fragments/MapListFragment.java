@@ -26,13 +26,9 @@ import org.ametro.R;
 import org.ametro.app.ApplicationEx;
 import org.ametro.catalog.entities.MapCatalog;
 import org.ametro.catalog.entities.MapInfo;
-import org.ametro.catalog.entities.MapInfoHelpers;
 import org.ametro.ui.adapters.MapListAdapter;
 import org.ametro.ui.loaders.ExtendedMapInfo;
 import org.ametro.ui.loaders.ExtendedMapStatus;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class MapListFragment extends Fragment implements
         SearchView.OnQueryTextListener,
@@ -235,7 +231,7 @@ public class MapListFragment extends Fragment implements
 
         @Override
         public MapCatalog loadInBackground() {
-            return app.getLocalMapCatalogManager().getMapCatalog();
+            return app.getMapCatalogProvider().getMapCatalog();
         }
     }
 

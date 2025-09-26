@@ -10,8 +10,8 @@ import androidx.core.content.ContextCompat;
 import androidx.loader.content.AsyncTaskLoader;
 
 import org.ametro.R;
-import org.ametro.catalog.MapCatalogManager;
-import org.ametro.catalog.localization.MapInfoLocalizationProvider;
+import org.ametro.catalog.MapCatalogProvider;
+import org.ametro.catalog.MapInfoLocalizationProvider;
 import org.ametro.model.MapContainer;
 import org.ametro.providers.IconProvider;
 import org.ametro.utils.Lazy;
@@ -20,7 +20,7 @@ public class ApplicationEx extends Application {
 
     private Lazy<ApplicationSettingsProvider> appSettingsProvider;
     private Lazy<IconProvider> countryFlagProvider;
-    private Lazy<MapCatalogManager> localMapCatalogManager;
+    private Lazy<MapCatalogProvider> mapCatalogProvider;
     private Lazy<MapInfoLocalizationProvider> localizedMapInfoProvider;
 
     private MapContainer container;
@@ -57,21 +57,21 @@ public class ApplicationEx extends Application {
         localizedMapInfoProvider = new Lazy<>(new Lazy.IFactory<MapInfoLocalizationProvider>() {
             @Override
             public MapInfoLocalizationProvider create() {
-                return new MapInfoLocalizationProvider(getApplicationContext(), "en");
-            }
-        });
-
-        localMapCatalogManager = new Lazy<>(new Lazy.IFactory<MapCatalogManager>() {
-            @Override
-            public MapCatalogManager create() {
-                return new MapCatalogManager(getApplicationContext(), getLocalizedMapInfoProvider());
+                return new MapInfoLocalizationProvider(getApplicationContext(),getApplicationSettingsProvider());
             }
         });
 
         appSettingsProvider = new Lazy<>(new Lazy.IFactory<ApplicationSettingsProvider>() {
             @Override
             public ApplicationSettingsProvider create() {
-                return new ApplicationSettingsProvider(ApplicationEx.this, localMapCatalogManager.getInstance());
+                return new ApplicationSettingsProvider(ApplicationEx.this);
+            }
+        });
+
+        mapCatalogProvider = new Lazy<>(new Lazy.IFactory<MapCatalogProvider>() {
+            @Override
+            public MapCatalogProvider create() {
+                return new MapCatalogProvider(getApplicationContext(), getLocalizedMapInfoProvider());
             }
         });
 
@@ -89,8 +89,8 @@ public class ApplicationEx extends Application {
         return countryFlagProvider.getInstance();
     }
 
-    public MapCatalogManager getLocalMapCatalogManager() {
-        return localMapCatalogManager.getInstance();
+    public MapCatalogProvider getMapCatalogProvider() {
+        return mapCatalogProvider.getInstance();
     }
 
     public void setCurrentMapViewState(MapContainer container, String schemeName, String[] enabledTransports) {

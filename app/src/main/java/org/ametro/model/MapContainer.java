@@ -3,7 +3,7 @@ package org.ametro.model;
 import android.util.Log;
 
 import org.ametro.app.Constants;
-import org.ametro.catalog.MapCatalogManager;
+import org.ametro.catalog.MapCatalogProvider;
 import org.ametro.catalog.entities.MapInfo;
 import org.ametro.model.entities.*;
 import org.ametro.model.serialization.GlobalIdentifierProvider;
@@ -16,7 +16,7 @@ import java.util.*;
 
 public class MapContainer {
 
-    private final MapCatalogManager catalogManager;
+    private final MapCatalogProvider catalogManager;
     private final MapInfo mapInfo;
     private final GlobalIdentifierProvider identifierProvider = new GlobalIdentifierProvider();
 
@@ -28,7 +28,7 @@ public class MapContainer {
 
     private final String preferredLanguage;
 
-    public MapContainer(MapCatalogManager catalogManager, MapInfo mapInfo, String preferredLanguage) {
+    public MapContainer(MapCatalogProvider catalogManager, MapInfo mapInfo, String preferredLanguage) {
         this.catalogManager = catalogManager;
         this.mapInfo = mapInfo;
         this.preferredLanguage = preferredLanguage;
