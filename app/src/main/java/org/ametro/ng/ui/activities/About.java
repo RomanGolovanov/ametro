@@ -8,12 +8,12 @@ import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 
 import org.ametro.ng.R;
 import org.ametro.ng.utils.FileUtils;
@@ -22,15 +22,16 @@ import java.io.IOException;
 
 public class About extends AppCompatActivity {
 
+    private ScrollView scrollView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_view);
 
-        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        setSupportActionBar(findViewById(R.id.toolbar));
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setDefaultDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
@@ -40,6 +41,22 @@ public class About extends AppCompatActivity {
             aboutTextView.setMovementMethod(LinkMovementMethod.getInstance());
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+
+        scrollView = findViewById(R.id.scrollView);
+        if (savedInstanceState != null) {
+            final int y = savedInstanceState.getInt("scrollY", 0);
+            scrollView.post(() -> scrollView.scrollTo(0, y));
+        }
+
+    }
+
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (scrollView != null) {
+            outState.putInt("scrollY", scrollView.getScrollY());
         }
     }
 

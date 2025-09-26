@@ -8,8 +8,10 @@
     <include layout="@layout/widget_toolbar"/>
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:saveEnabled="true">
 
         <TextView
             android:id="@+id/text"
