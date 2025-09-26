@@ -1,17 +1,15 @@
 package org.ametro.ng.ui.activities;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import androidx.appcompat.app.ActionBar;          // AndroidX
-import androidx.appcompat.app.AppCompatActivity; // AndroidX
-import androidx.appcompat.widget.SearchView;     // AndroidX
-import androidx.appcompat.widget.Toolbar;        // AndroidX
-import androidx.core.app.NavUtils;               // AndroidX
-import androidx.core.view.MenuItemCompat;        // AndroidX
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.core.app.NavUtils;
+import androidx.core.view.MenuItemCompat;
 
 import org.ametro.ng.R;
 import org.ametro.ng.app.Constants;
@@ -22,14 +20,13 @@ import org.ametro.ng.ui.loaders.ExtendedMapInfo;
 public class MapList extends AppCompatActivity implements MapListFragment.IMapListEventListener{
 
     private MapListFragment listFragment;
-    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_list_view);
 
-        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        setSupportActionBar(findViewById(R.id.toolbar));
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDefaultDisplayHomeAsUpEnabled(true);
@@ -37,6 +34,7 @@ public class MapList extends AppCompatActivity implements MapListFragment.IMapLi
         }
 
         listFragment = (MapListFragment) getSupportFragmentManager().findFragmentById(R.id.list);
+        assert listFragment != null;
         listFragment.setMapListEventListener(this);
     }
 

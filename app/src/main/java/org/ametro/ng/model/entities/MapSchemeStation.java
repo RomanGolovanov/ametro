@@ -1,5 +1,7 @@
 package org.ametro.ng.model.entities;
 
+import java.util.List;
+
 public class MapSchemeStation {
     private final MapLocale locale;
     private final int uid;
@@ -25,6 +27,10 @@ public class MapSchemeStation {
 
     public String getDisplayName() {
         return locale.getText(nameTextId);
+    }
+
+    public List<String> getAllDisplayNames() {
+        return locale.getAllTexts(nameTextId);
     }
 
     public MapRect getLabelPosition() {

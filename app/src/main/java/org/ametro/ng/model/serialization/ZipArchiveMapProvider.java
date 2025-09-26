@@ -18,7 +18,10 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
@@ -35,15 +38,6 @@ public class ZipArchiveMapProvider implements AutoCloseable {
     private final ZipFile zipFile;         // used if constructed with File
     private final HashMap<String, byte[]> entryCache; // used if constructed with InputStream
 
-    /** Construct from a File (old path). */
-    public ZipArchiveMapProvider(GlobalIdentifierProvider identifierProvider, java.io.File mapFile) throws IOException {
-        this.identifierProvider = identifierProvider;
-        this.reader = new ObjectMapper().reader();
-        this.zipFile = new ZipFile(mapFile);
-        this.entryCache = null;
-    }
-
-    /** Construct from an InputStream (assets path). */
     public ZipArchiveMapProvider(GlobalIdentifierProvider identifierProvider, InputStream inputStream) throws IOException {
         this.identifierProvider = identifierProvider;
         this.reader = new ObjectMapper().reader();
@@ -75,6 +69,25 @@ public class ZipArchiveMapProvider implements AutoCloseable {
             return MetadataTypes.asTextMap(reader.readTree(stream));
         }
     }
+
+    public HashMap<Integer, List<String>> getAllTextsMap() throws IOException {
+        var locales = getSupportedLocales();
+        var map = new HashMap<Integer, List<String>>();
+        for (String locale : locales) {
+            var localeTexts = getTextsMap(locale);
+            for(int textId : localeTexts.keySet()){
+                if(map.containsKey(textId)){
+                    Objects.requireNonNull(map.get(textId)).add(localeTexts.get(textId));
+                }else{
+                    var list = new ArrayList<String>();
+                    list.add(localeTexts.get(textId));
+                    map.put(textId, list);
+                }
+            }
+        }
+        return map;
+    }
+
 
     public MapMetadata getMetadata(MapLocale locale) throws IOException {
         try (InputStream stream = getInputStream("index.json")) {

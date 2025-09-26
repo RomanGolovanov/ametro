@@ -34,32 +34,13 @@ public class MapContainer {
         this.preferredLanguage = preferredLanguage;
     }
 
-    public boolean isLoaded(String schemeName, String[] enabledTransports) {
-        if (metadata == null || stations == null) {
-            return false;
-        }
-        MapScheme scheme = schemes.get(schemeName);
-        if (scheme == null) {
-            return false;
-        }
-        if (enabledTransports == null) {
-            enabledTransports = scheme.getDefaultTransports();
-        }
-        for (String transportName : enabledTransports) {
-            if (transports.get(transportName) == null) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     public void loadSchemeWithTransports(String schemeName, String[] enabledTransports) throws MapSerializationException {
         try (InputStream is = catalogManager.openMapAssetStream(mapInfo)) {
-            ZipArchiveMapProvider mapProvider = new ZipArchiveMapProvider(identifierProvider, is);
-            try {
+            try (ZipArchiveMapProvider mapProvider = new ZipArchiveMapProvider(identifierProvider, is)) {
                 if (metadata == null) {
-                    locale = new MapLocale(mapProvider.getTextsMap(
-                            suggestLanguage(mapProvider.getSupportedLocales(), preferredLanguage)));
+                    var texts = mapProvider.getTextsMap(suggestLanguage(mapProvider.getSupportedLocales(), preferredLanguage));
+                    var allTexts = mapProvider.getAllTextsMap();
+                    locale = new MapLocale(texts, allTexts);
                     metadata = mapProvider.getMetadata(locale);
                     stations = mapProvider.getStationInformation();
                     schemes = new HashMap<>();
@@ -67,8 +48,6 @@ public class MapContainer {
                 }
                 MapScheme scheme = loadSchemeFile(mapProvider, schemeName, locale);
                 loadTransportFiles(mapProvider, enabledTransports != null ? enabledTransports : scheme.getDefaultTransports());
-            } finally {
-                mapProvider.close();
             }
         } catch (MapSerializationException e) {
             Log.e(Constants.LOG, "Map unpacking failed", e);
@@ -128,11 +107,8 @@ public class MapContainer {
 
     public String loadStationMap(String mapFilePath) throws IOException {
         try (InputStream is = catalogManager.openMapAssetStream(mapInfo)) {
-            ZipArchiveMapProvider mapProvider = new ZipArchiveMapProvider(identifierProvider, is);
-            try {
+            try (ZipArchiveMapProvider mapProvider = new ZipArchiveMapProvider(identifierProvider, is)) {
                 return mapProvider.getFileContent(mapFilePath);
-            } finally {
-                mapProvider.close();
             }
         } catch (Exception e) {
             Log.e(Constants.LOG, "Map station scheme file loading failed", e);
@@ -190,13 +166,12 @@ public class MapContainer {
         }
     }
 
-    private MapTransportScheme loadTransport(ZipArchiveMapProvider mapProvider, String transportName)
-            throws IOException, MapSerializationException {
+    private void loadTransport(ZipArchiveMapProvider mapProvider, String transportName)
+            throws IOException {
         MapTransportScheme transport = transports.get(transportName);
         if (transport == null) {
             transport = mapProvider.getTransportScheme(metadata.getTransport(transportName).getFileName());
             transports.put(transport.getName(), transport);
         }
-        return transport;
     }
 }

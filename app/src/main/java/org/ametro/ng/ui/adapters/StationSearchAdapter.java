@@ -51,7 +51,7 @@ public class StationSearchAdapter extends CursorAdapter {
         return stations.get(position).getStation();
     }
 
-    private static class StationInfo {
+    protected static class StationInfo {
         private final MapSchemeStation station;
         private final MapSchemeLine line;
 
@@ -70,19 +70,30 @@ public class StationSearchAdapter extends CursorAdapter {
     }
 
     private static List<StationInfo> getStations(MapScheme scheme, String query) {
-        List<StationInfo> stationNames = new ArrayList<>();
+        List<StationInfo> stationNamesStartsWith = new ArrayList<>();
+        List<StationInfo> stationNamesContains = new ArrayList<>();
         for (MapSchemeLine line : scheme.getLines()) {
             for (MapSchemeStation station : line.getStations()) {
                 if (station.getPosition() == null) {
                     continue;
                 }
-                if (station.getDisplayName() != null &&
-                        station.getDisplayName().toLowerCase().startsWith(query.toLowerCase())) {
-                    stationNames.add(new StationInfo(station, line));
+
+                var queryLowerCase = query.toLowerCase();
+                var allNames = station.getAllDisplayNames();
+
+                if (allNames.stream().anyMatch(s -> s.toLowerCase().startsWith(queryLowerCase))) {
+                    stationNamesStartsWith.add(new StationInfo(station, line));
+                    stationNamesContains.add(new StationInfo(station, line));
+                    continue;
+                }
+
+                if (allNames.stream().anyMatch(s -> s.toLowerCase().contains(queryLowerCase))) {
+                    stationNamesContains.add(new StationInfo(station, line));
                 }
             }
         }
-        return stationNames;
+
+        return !stationNamesStartsWith.isEmpty() ? stationNamesStartsWith : stationNamesContains;
     }
 
     private static MatrixCursor createStationNameCursor(List<StationInfo> items) {
