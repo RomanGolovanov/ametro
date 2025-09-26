@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.loader.app.LoaderManager;
@@ -37,9 +38,6 @@ public class MapListFragment extends Fragment implements
         AdapterView.OnItemClickListener,
         AbsListView.MultiChoiceModeListener,
         View.OnClickListener {
-
-    private static final String STATE_ACTION_MODE = "STATE_ACTION_MODE";
-    private static final String STATE_SELECTION = "STATE_SELECTION";
 
     private MapListAdapter adapter;
     private ProgressBar progressBar;
@@ -75,9 +73,6 @@ public class MapListFragment extends Fragment implements
 
         list = view.findViewById(R.id.list);
         list.setOnItemClickListener(this);
-        list.setLongClickable(true);
-        list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
-        list.setMultiChoiceModeListener(this);
 
         adapter = new MapListAdapter(getActivity(), ApplicationEx.getInstance(getActivity()).getCountryFlagProvider());
         list.setAdapter(adapter);
@@ -87,10 +82,6 @@ public class MapListFragment extends Fragment implements
     @Override
     public void onResume() {
         super.onResume();
-        forceUpdate();
-    }
-
-    public void forceUpdate() {
         LoaderManager.getInstance(this).initLoader(LOCAL_CATALOG_LOADER, null, this).forceLoad();
     }
 
@@ -103,6 +94,7 @@ public class MapListFragment extends Fragment implements
         listener.onOpenMap(adapter.getItem(position));
     }
 
+    @NonNull
     @Override
     public Loader<MapCatalog> onCreateLoader(int id, Bundle args) {
         ApplicationEx app = ApplicationEx.getInstance(requireActivity());
@@ -110,7 +102,7 @@ public class MapListFragment extends Fragment implements
     }
 
     @Override
-    public void onLoadFinished(Loader<MapCatalog> loader, MapCatalog data) {
+    public void onLoadFinished(@NonNull Loader<MapCatalog> loader, MapCatalog data) {
         if (data == null) {
             return;
         }
@@ -119,7 +111,7 @@ public class MapListFragment extends Fragment implements
     }
 
     @Override
-    public void onLoaderReset(Loader<MapCatalog> loader) { }
+    public void onLoaderReset(@NonNull Loader<MapCatalog> loader) { }
 
     @Override
     public boolean onClose() {

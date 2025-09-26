@@ -29,7 +29,6 @@ public class MapList extends AppCompatActivity implements MapListFragment.IMapLi
         setSupportActionBar(findViewById(R.id.toolbar));
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setDefaultDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
@@ -48,7 +47,6 @@ public class MapList extends AppCompatActivity implements MapListFragment.IMapLi
 
     @Override
     public void onLoadedMaps(ExtendedMapInfo[] maps) {
-
     }
 
     @Override
