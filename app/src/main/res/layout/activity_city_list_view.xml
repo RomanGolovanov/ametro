@@ -13,7 +13,7 @@
 
         <fragment
             android:id="@+id/geography_list_fragment"
-            android:name="org.ametro.ui.fragments.CityListFragment"
+            android:name="org.ametro.ng.ui.fragments.CityListFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:layout="@layout/fragment_city_list_view" />

@@ -7,7 +7,7 @@
     <include layout="@layout/widget_toolbar"/>
     <fragment
         android:id="@+id/list"
-        android:name="org.ametro.ui.fragments.SettingsListFragment"
+        android:name="org.ametro.ng.ui.fragments.SettingsListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </LinearLayout>

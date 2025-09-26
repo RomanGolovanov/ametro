@@ -3,15 +3,15 @@ plugins {
 }
 
 android {
-    namespace = "org.ametro"
+    namespace = "org.ametro.ng"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "org.ametro"
+        applicationId = "org.ametro.ng"
         minSdk = 24
         targetSdk = 36
-        versionCode = 50
-        versionName = "3.0.0"
+        versionCode = 51
+        versionName = "3.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

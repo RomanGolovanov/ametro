@@ -13,7 +13,7 @@
 
         <fragment
             android:id="@+id/list"
-            android:name="org.ametro.ui.fragments.MapListFragment"
+            android:name="org.ametro.ng.ui.fragments.MapListFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/message"
