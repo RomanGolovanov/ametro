@@ -1,7 +1,5 @@
 package org.ametro.app;
 
-import java.net.URI;
-
 public class Constants {
     public static final String LINE_NAME = "LINE_NAME";
 

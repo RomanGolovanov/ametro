@@ -149,7 +149,7 @@ public class Map extends AppCompatActivity implements
                 var mapCatalogProvider = app.getMapCatalogProvider();
                 var currentMap = mapCatalogProvider.getMapCatalog().findMap(currentMapFileName);
                 if(currentMap!=null){
-                    new MapLoadAsyncTask(this, this, new MapContainer(
+                    new MapLoadAsyncTask(this, new MapContainer(
                             mapCatalogProvider,
                             currentMap,
                             settingsProvider.getPreferredMapLanguage())
@@ -253,7 +253,7 @@ public class Map extends AppCompatActivity implements
                 var localMapCatalogManager = app.getMapCatalogProvider();
                 var mapInfo = localMapCatalogManager.findMapByName(data.getStringExtra(Constants.MAP_PATH));
                 var mapContainer = new MapContainer(localMapCatalogManager, mapInfo, settingsProvider.getPreferredMapLanguage());
-                new MapLoadAsyncTask(this, this,  mapContainer).execute();
+                new MapLoadAsyncTask(this,  mapContainer).execute();
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -365,7 +365,7 @@ public class Map extends AppCompatActivity implements
     @Override
     public boolean onChangeScheme(String schemeName) {
         mapBottomPanel.hide();
-        new MapLoadAsyncTask(this, this, container, schemeName,
+        new MapLoadAsyncTask(this, container, schemeName,
                 enabledTransportsSet.toArray(new String[0])).execute();
         return true;
     }

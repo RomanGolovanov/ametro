@@ -8,6 +8,7 @@ import org.ametro.utils.FileUtils;
 
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class MapInfoLocalizationProvider {
 
@@ -20,15 +21,15 @@ public class MapInfoLocalizationProvider {
         this.applicationSettingsProvider = applicationSettingsProvider;
     }
     public String getCityName( int cityId) {
-        return getLocalizationMap().get(cityId).getCityName();
+        return Objects.requireNonNull(getLocalizationMap().get(cityId)).getCityName();
     }
 
     public String getCountryName( int cityId) {
-        return getLocalizationMap().get(cityId).getCountryName();
+        return Objects.requireNonNull(getLocalizationMap().get(cityId)).getCountryName();
     }
 
     public String getCountryIsoCode(int cityId) {
-        return getLocalizationMap().get(cityId).getCountryIsoCode();
+        return Objects.requireNonNull(getLocalizationMap().get(cityId)).getCountryIsoCode();
     }
 
     public HashMap<Integer, MapInfoEntityName> getLocalizationMap() {
