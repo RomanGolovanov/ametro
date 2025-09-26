@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:fitsSystemWindows="true">
 
     <include layout="@layout/widget_toolbar" />
 
@@ -11,21 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/message"
-            style="@style/secondaryAlarmText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/background_light"
-            android:gravity="center"
-            android:padding="@dimen/panel_padding"
-            android:text="@string/msg_some_maps_out_of_date"
-            android:visibility="gone"
-            tools:visibility="visible" />
-
         <fragment
             android:id="@+id/list"
-            android:name="org.ametro.ui.fragments.MapListFragment"
+            android:name="org.ametro.ng.ui.fragments.MapListFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/message"
