@@ -22,7 +22,7 @@ aMetro includes **236 hand-made transit maps**, bundled inside the app.
 No downloads are required — everything works offline straight away.
 
 The maps cover metros, subways, and light rail systems from every continent.  
-If you find a map that’s outdated, you can patch it (see [Map Editing](/ametro/maps-editing/)).
+If you find a map that’s outdated, you can patch it (see [Map Editing](maps-editing.md).
 
 ---
 
@@ -57,7 +57,7 @@ Adana, Alexandria, Algiers, Almati (Almaty), Bangalore, Bangkok, Beijing, Bursa,
 
 If you notice missing stations or outdated lines:
 
-1. Follow the [Map Editing guide](/ametro/maps-editing/).  
+1. Follow the [Map Editing guide](maps-editing.md).  
 2. Submit your corrected map either by:  
    - Opening a [GitHub Issue](https://github.com/RomanGolovanov/ametro/issues), or  
    - Emailing it to **Boris@pMetro.su** (original pMetro author).  

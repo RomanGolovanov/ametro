@@ -30,19 +30,19 @@ No. aMetro is **privacy-friendly**:
 - No tracking  
 - No analytics SDKs  
 
-See the [Privacy Policy](/privacy/) for details.
+See the [Privacy Policy](privacy.md) for details.
 
 ---
 
 ### 🌐 What languages are supported?
 - **User interface (UI):** English, Dutch (NL), French (FR), Russian (RU)  
 - **City names:** 24 languages  
-- **Maps:** usually English only (but can be patched manually, see [Map Editing](/ametro/maps-editing/))  
+- **Maps:** usually English only (but can be patched manually, see [Map Editing](maps-editing.md)  
 
 ---
 
 ### 🗺️ How can I update a map?
-- Extract and edit the `.pmz` file (see [Map Editing](/ametro/maps-editing/))  
+- Extract and edit the `.pmz` file (see [Map Editing](maps-editing.md)  
 - Submit it via a GitHub Issue or email it to **Boris@pMetro.su**  
 
 ---
@@ -58,4 +58,4 @@ See the [Privacy Policy](/privacy/) for details.
 ---
 
 ### 🧑‍💻 Can I build the app myself?
-Yes. See the [Install guide](/ametro/install/) for source build instructions.  
+Yes. See the [Install guide](install.md) for source build instructions.  

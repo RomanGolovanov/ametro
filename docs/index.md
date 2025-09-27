@@ -22,7 +22,7 @@ permalink: /
 # 🚇 aMetro — Offline Metro & Subway Maps
 
 Welcome to **aMetro**, an open-source Android app that brings **236 hand-crafted transit maps** from around the world directly to your device.  
-No ads. No tracking. No internet required. Just clean, reliable maps and route planning.
+Unlike Google Maps, aMetro works 100% offline, with no ads or tracking.
 
 ## ✨ Key Features
 
@@ -31,21 +31,21 @@ No ads. No tracking. No internet required. Just clean, reliable maps and route p
 - **📐 Route planning** — calculate the shortest journey between stations  
 - **🗺️ Station maps** — available for some cities (e.g., Moscow)  
 - **🔄 Multilingual** — map names in 24 languages; UI accessible globally  
-- **🚫 Privacy-first & offline** — no analytics or tracking; see the [Privacy Policy](/privacy/)  
+- **🚫 Privacy-first & offline** — no analytics or tracking; see the [Privacy Policy](privacy.md)  
 - **🎨 Hand-crafted accuracy** — based on the **pMetro** map library (PMZ format)  
 - **💾 Lightweight** — ~15 MB app download  
 - **🛠️ Community-driven** — help fix maps or translate the UI
 
 ## 📲 Get the App
-- **Google Play:** *(coming soon — under review)* (package: `org.ametro.ng`). :contentReference[oaicite:0]{index=0}  
-- **Source code:** <https://github.com/RomanGolovanov/ametro> :contentReference[oaicite:1]{index=1}  
+- **Google Play:** *(coming soon — under review)* (package: `org.ametro.ng`).
+- **Source code:** <https://github.com/RomanGolovanov/ametro>
 - **Releases & APKs:** <https://github.com/RomanGolovanov/ametro/releases>
 
 ## 🔗 Related projects & format
 
-- **pMetro (Windows)** — the original project and **map library** used by aMetro; see the official maps page (city list). :contentReference[oaicite:2]{index=2}  
-- **PMZ map format** — pMetro’s map packages are **ZIP archives with INI-like files** (useful when editing). :contentReference[oaicite:3]{index=3}  
-- **qMetro (cross-platform)** — open-source PMZ-compatible viewer (Windows/Linux/macOS, etc.). :contentReference[oaicite:4]{index=4}
+- **pMetro (Windows)** — the original project and **map library** used by aMetro; see the official maps page (city list).
+- **PMZ map format** — pMetro’s map packages are **ZIP archives with INI-like files** (useful when editing).
+- **qMetro (cross-platform)** — open-source PMZ-compatible viewer (Windows/Linux/macOS, etc.).
 
 ---
 
@@ -76,7 +76,7 @@ aMetro is designed to be **100% privacy-friendly**:
 
 - [pMetro Project (Windows)](http://pmetro.su/)  
 - [aMetro GitHub Issues](https://github.com/RomanGolovanov/ametro/issues)  
-- [Contribution Guide](contributing.md) *(coming soon)*  
+- [Contribution Guide](contributing.md)
 
 ---
 

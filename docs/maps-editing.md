@@ -27,8 +27,9 @@ PMZ files are just ZIP archives with configuration and graphics, so they’re ed
 - **Editor package:** [pMetro Editor (zip)](http://pmetro.su/download/pMetroEditor.zip)  
 - Includes: `pMetroEditor.exe`, helper tools (e.g. `pVecEditor.exe`), minimal configs.
 
-### Where to get `pMetro.ini`
-Some editor bundles may not include a fresh `pMetro.ini`. Install **pMetro** for Windows and copy it from there:
+### Where to get pMetro.ini
+
+Some editor bundles may not include a fresh pMetro.ini file. Install **pMetro** for Windows and copy it from there:
 - **Windows installer:** [pMetro Setup](http://pmetro.su/download/pMetroSetup.exe)  
 - After installing, you’ll find `pMetro.ini` in the pMetro installation folder.
 
@@ -59,12 +60,12 @@ If you want to **patch an existing city map**, install pMetro and look inside it
 
 ## 🖼️ File Structure Highlights
 
-- **`metro.ini`** — main map metadata (city names, authors, version requirements).  
-- **`metro.cty`** — city-level settings (names, localisation, delays).  
-- **`*.trp`** — line definitions (stations, aliases, timings, transfers).  
-- **`*.map`** — visual layout, colours, coordinates.  
+- **metro.ini** — main map metadata (city names, authors, version requirements).  
+- **metro.cty** — city-level settings (names, localisation, delays).  
+- ***.trp** — line definitions (stations, aliases, timings, transfers).  
+- ***.map** — visual layout, colours, coordinates.  
 - **Images** — background graphics (BMP, GIF, PNG, or VEC).  
-- **Optional `.txt` files** — extra station information.
+- **Optional .txt files** — extra station information.
 ---
 
 ## 🖼️ File Types in a PMZ Archive
@@ -199,9 +200,3 @@ When you’ve created or corrected a map:
   - Please mention “pMetro” in the subject line.  
 - Optionally, also open a **GitHub Issue** in the aMetro repo describing the change and attach the `.pmz`, so it can be reviewed and (if accepted) bundled with aMetro.
 
----
-
-## 📬 Contact
-
-- pMetro site: <http://pMetro.su>  
-- aMetro issues: <https://github.com/RomanGolovanov/ametro/issues>
