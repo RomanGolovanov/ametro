@@ -1,34 +1,49 @@
+---
 layout: default
 title: Home
-permalink: /index
+permalink: /
+---
+
+<p align="center">
+  <a href="/">Home</a> •
+  <a href="/privacy/">Privacy</a> •
+  <a href="/install/">Install</a> •
+  <a href="/maps/">Maps</a> •
+  <a href="/contributing/">Contribute</a> •
+  <a href="/faq/">FAQ</a> •
+</p>
+
+<p align="center">
+  <img src="assets/branding.png" alt="aMetro branding" width="420">
+</p>
 
 # 🚇 aMetro — Offline Metro & Subway Maps
 
 Welcome to **aMetro**, an open-source Android app that brings **236 hand-crafted transit maps** from around the world directly to your device.  
 No ads. No tracking. No internet required. Just clean, reliable maps and route planning.
 
----
-
 ## ✨ Key Features
 
 - **🌍 Global coverage** — 236 maps from major cities and smaller networks worldwide  
-- **📦 All maps bundled** — no sync/download problems, everything works out of the box  
-- **📐 Route planning** — calculate the shortest journey between stations quickly and easily  
+- **📦 All maps bundled** — no sync/download problems; everything works out of the box  
+- **📐 Route planning** — calculate the shortest journey between stations  
 - **🗺️ Station maps** — available for some cities (e.g., Moscow)  
-- **🔄 Multilingual** — map names in 24 languages, UI accessible globally  
-- **🚫 Privacy-first & offline** — no analytics or tracking; see the [Privacy Policy](privacy.md)  
-- **🎨 Hand-crafted accuracy** — based on the trusted **pMetro** maps by Boris Muradov  
+- **🔄 Multilingual** — map names in 24 languages; UI accessible globally  
+- **🚫 Privacy-first & offline** — no analytics or tracking; see the [Privacy Policy](/privacy/)  
+- **🎨 Hand-crafted accuracy** — based on the **pMetro** map library (PMZ format)  
 - **💾 Lightweight** — ~15 MB app download  
 - **🛠️ Community-driven** — help fix maps or translate the UI
 
----
-
 ## 📲 Get the App
+- **Google Play:** *(coming soon — under review)* (package: `org.ametro.ng`). :contentReference[oaicite:0]{index=0}  
+- **Source code:** <https://github.com/RomanGolovanov/ametro> :contentReference[oaicite:1]{index=1}  
+- **Releases & APKs:** <https://github.com/RomanGolovanov/ametro/releases>
 
-- **Google Play**: *(link coming soon — currently under review)*  
-- **Source code**: [GitHub Repository](https://github.com/RomanGolovanov/ametro)  
-- **Releases & APKs**: [GitHub Releases](https://github.com/RomanGolovanov/ametro/releases)  
-- **Privacy Policy**: [privacy.md](privacy.md)
+## 🔗 Related projects & format
+
+- **pMetro (Windows)** — the original project and **map library** used by aMetro; see the official maps page (city list). :contentReference[oaicite:2]{index=2}  
+- **PMZ map format** — pMetro’s map packages are **ZIP archives with INI-like files** (useful when editing). :contentReference[oaicite:3]{index=3}  
+- **qMetro (cross-platform)** — open-source PMZ-compatible viewer (Windows/Linux/macOS, etc.). :contentReference[oaicite:4]{index=4}
 
 ---
 
@@ -46,16 +61,6 @@ Recent work includes:
 
 ---
 
-## 🛠️ Contributing
-
-We welcome community involvement! You can help by:  
-- 🗺️ **Updating maps** — instructions for editing PMZ maps are in the [Wiki](https://github.com/RomanGolovanov/ametro/wiki)  
-- 🌐 **Translating the UI** — add or improve your language  
-- 🐞 **Reporting issues** — found a bug? Open an [Issue](https://github.com/RomanGolovanov/ametro/issues)  
-- 💡 **Suggesting features** — join the [Discussions](https://github.com/RomanGolovanov/ametro/discussions) or open an [Issue](https://github.com/RomanGolovanov/ametro/issues)  
-
----
-
 ## 🔒 Privacy
 
 aMetro is designed to be **100% privacy-friendly**:  
@@ -67,7 +72,7 @@ aMetro is designed to be **100% privacy-friendly**:
 
 ## 📚 Learn More
 
-- [pMetro Project (Windows)](http://metro.ridne.net/)  
+- [pMetro Project (Windows)](http://pmetro.su/)  
 - [aMetro GitHub Issues](https://github.com/RomanGolovanov/ametro/issues)  
 - [Contribution Guide](contributing.md) *(coming soon)*  
 
