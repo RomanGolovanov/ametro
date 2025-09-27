@@ -1,0 +1,102 @@
+<resources>
+    <string name="app_name">aMetro</string>
+
+    <string name="title_activity_map_view">aMetro</string>
+    <string name="title_activity_map_list_view">Карти</string>
+    <string name="title_activity_city_list_view">Добави карта</string>
+    <string name="title_activity_map_details_view">Детайли на картата</string>
+    <string name="title_activity_settings_list_view">Настройки</string>
+    <string name="title_activity_station_scheme_view">Схема на станцията</string>
+    <string name="title_activity_about">Относно</string>
+
+    <string name="msg_country_flag">знаме на държавата</string>
+    <string name="msg_map_list_downloading">Изтегляне…</string>
+
+    <string name="msg_city_list_empty">Няма градове.</string>
+    <string name="msg_city_list_no_available_cities">Няма налични градове.</string>
+    <string name="msg_city_list_no_connection">Проверете интернет връзката или опитайте отново по-късно.</string>
+
+    <string name="msg_map_list_empty">Няма карти.</string>
+    <string name="msg_map_list_no_installed_maps">Няма инсталирани карти.</string>
+    <string name="msg_map_list_tap_to_add_new_maps">Докоснете екрана, за да покажете наличните карти.</string>
+
+    <string name="msg_no_maps_loaded">Няма избрана карта</string>
+    <string name="msg_press_to_add_map">Докоснете екрана, за да покажете списъка с карти</string>
+    <string name="msg_operation_interrupted">Операцията е отменена</string>
+    <string name="msg_download_progress">Изтеглени %s байта</string>
+    <string name="msg_error">Грешка: %s</string>
+    <string name="msg_some_maps_out_of_date">Някои карти са остарели.</string>
+
+    <string name="btn_open">Отвори</string>
+    <string name="btn_close">Затвори</string>
+    <string name="btn_download">Изтегли</string>
+    <string name="btn_cancel">Отказ</string>
+
+    <string name="drawer_open">Навигацията е отворена</string>
+    <string name="drawer_close">Навигацията е затворена</string>
+
+    <string name="action_add">Добави</string>
+    <string name="action_delete">Изтрий</string>
+    <string name="action_update">Обнови</string>
+    <string name="action_search">Търси</string>
+    <string name="action_select_all">Избери всички</string>
+    <string name="action_test_outdated">Тест за остарели</string>
+    <string name="action_settings">Настройки</string>
+    <string name="btn_flat_begin">НАЧАЛО</string>
+    <string name="btn_flat_end">КРАЙ</string>
+    <string name="btn_flat_station_details">ИНФО</string>
+    <string name="btn_flat_close">ЗАТВОРИ</string>
+    <string name="msg_no_scheme_available_for_station">Няма налична схема за станцията</string>
+    <string name="tab_map">Карта</string>
+    <string name="tab_about">Относно</string>
+    <string name="msg_selected">Избрано</string>
+    <string name="nav_select_map">Смени картата</string>
+    <string name="nav_settings">Настройки</string>
+    <string name="nav_about">Относно</string>
+    <string name="nav_options">Опции:</string>
+    <string name="nav_using">Използван транспорт:</string>
+    <string name="nav_schemes">Схеми:</string>
+    <string name="nav_no_city">Няма заредена карта на град</string>
+    <string name="msg_from_to" formatted="false">%s - %s: %s</string>
+    <string name="msg_no_route_found" formatted="false">Не е намерен маршрут от %s до %s</string>
+    <string name="msg_map_loaded">Картата е заредена, %s ms</string>
+    <string name="msg_map_loading_failed">Зареждането на картата се провали: %s</string>
+    <string name="msg_no_maps_selected">Няма избрани карти</string>
+    <string name="msg_maps_deleted">Картите са изтрити</string>
+    <string name="msg_maps_updated">Обновени %s карти.</string>
+    <string name="msg_maps_all_updated">Всички карти са актуални</string>
+    <string name="msg_maps_updating">Обновяване на картите…</string>
+    <string name="title_activity_settings">Настройки</string>
+    <string name="msg_downloading">Изтегляне…</string>
+    <string name="msg_map_loading_progress">Зареждане на карта %s…</string>
+    <string name="msg_map_list_failed_to_download">Неуспешно изтегляне на списък с карти</string>
+    <string name="nav_delays">Час от деня:</string>
+    <string name="delay_type_custom">Персонализиран</string>
+    <string name="delay_type_day">Ден</string>
+    <string name="delay_type_night">Нощ</string>
+    <string name="delay_type_evening">Вечер</string>
+    <string name="delay_type_morning">Сутрин</string>
+    <string name="delay_type_rush">Час пик</string>
+    <string name="delay_type_direct">Директен</string>
+    <string name="delay_type_west_north">Запад - Север</string>
+    <string name="delay_type_west_south">Запад - Юг</string>
+    <string name="delay_type_west_east">Запад - Изток</string>
+    <string name="delay_type_east_north">Изток - Север</string>
+    <string name="delay_type_east_south">Изток - Юг</string>
+    <string name="delay_type_east_west">Изток - Запад</string>
+    <string name="delay_type_north_east">Север - Изток</string>
+    <string name="delay_type_north_west">Север - Запад</string>
+    <string name="delay_type_north_south">Север - Юг</string>
+    <string name="delay_type_south_east">Юг - Изток</string>
+    <string name="delay_type_south_west">Юг - Запад</string>
+    <string name="delay_type_south_north">Юг - Север</string>
+    <string name="delay_weekdays_type_monday">Пон.</string>
+    <string name="delay_weekdays_type_tuesday">Вт.</string>
+    <string name="delay_weekdays_type_wednesday">Ср.</string>
+    <string name="delay_weekdays_type_thursday">Чет.</string>
+    <string name="delay_weekdays_type_friday">Пет.</string>
+    <string name="delay_weekdays_type_saturday">Съб.</string>
+    <string name="delay_weekdays_type_sunday">Нед.</string>
+    <string name="delay_weekdays_type_workdays">Пон.-Пет.</string>
+    <string name="delay_weekdays_type_weekend">Съб.-Нед.</string>
+</resources>

@@ -1,0 +1,102 @@
+<resources>
+    <string name="app_name">aMetro</string>
+
+    <string name="title_activity_map_view">aMetro</string>
+    <string name="title_activity_map_list_view">Hărți</string>
+    <string name="title_activity_city_list_view">Adaugă hartă</string>
+    <string name="title_activity_map_details_view">Detalii hartă</string>
+    <string name="title_activity_settings_list_view">Setări</string>
+    <string name="title_activity_station_scheme_view">Schița stației</string>
+    <string name="title_activity_about">Despre</string>
+
+    <string name="msg_country_flag">steagul țării</string>
+    <string name="msg_map_list_downloading">Se descarcă…</string>
+
+    <string name="msg_city_list_empty">Nu există orașe.</string>
+    <string name="msg_city_list_no_available_cities">Nu sunt orașe disponibile.</string>
+    <string name="msg_city_list_no_connection">Verifică conexiunea la internet sau încearcă din nou mai târziu.</string>
+
+    <string name="msg_map_list_empty">Nu există hărți.</string>
+    <string name="msg_map_list_no_installed_maps">Nu există hărți instalate.</string>
+    <string name="msg_map_list_tap_to_add_new_maps">Atinge ecranul pentru a afișa hărțile disponibile.</string>
+
+    <string name="msg_no_maps_loaded">Nicio hartă selectată</string>
+    <string name="msg_press_to_add_map">Atinge ecranul pentru a afișa lista de hărți</string>
+    <string name="msg_operation_interrupted">Operațiune anulată</string>
+    <string name="msg_download_progress">%s octeți descărcați</string>
+    <string name="msg_error">Eroare: %s</string>
+    <string name="msg_some_maps_out_of_date">Unele hărți sunt învechite.</string>
+
+    <string name="btn_open">Deschide</string>
+    <string name="btn_close">Închide</string>
+    <string name="btn_download">Descarcă</string>
+    <string name="btn_cancel">Anulează</string>
+
+    <string name="drawer_open">Navigare deschisă</string>
+    <string name="drawer_close">Navigare închisă</string>
+
+    <string name="action_add">Adaugă</string>
+    <string name="action_delete">Șterge</string>
+    <string name="action_update">Actualizează</string>
+    <string name="action_search">Caută</string>
+    <string name="action_select_all">Selectează tot</string>
+    <string name="action_test_outdated">Testează învechite</string>
+    <string name="action_settings">Setări</string>
+    <string name="btn_flat_begin">START</string>
+    <string name="btn_flat_end">SFÂRȘIT</string>
+    <string name="btn_flat_station_details">INFO</string>
+    <string name="btn_flat_close">ÎNCHIDE</string>
+    <string name="msg_no_scheme_available_for_station">Nu există schiță disponibilă pentru stație</string>
+    <string name="tab_map">Hartă</string>
+    <string name="tab_about">Despre</string>
+    <string name="msg_selected">Selectat</string>
+    <string name="nav_select_map">Schimbă harta</string>
+    <string name="nav_settings">Setări</string>
+    <string name="nav_about">Despre</string>
+    <string name="nav_options">Opțiuni:</string>
+    <string name="nav_using">Folosind transport:</string>
+    <string name="nav_schemes">Schițe:</string>
+    <string name="nav_no_city">Nicio hartă a orașului încărcată</string>
+    <string name="msg_from_to" formatted="false">%s - %s: %s</string>
+    <string name="msg_no_route_found" formatted="false">Nu s-a găsit rută de la %s la %s</string>
+    <string name="msg_map_loaded">Hartă încărcată, %s ms</string>
+    <string name="msg_map_loading_failed">Încărcarea hărții a eșuat: %s</string>
+    <string name="msg_no_maps_selected">Nicio hartă selectată</string>
+    <string name="msg_maps_deleted">Hărți șterse</string>
+    <string name="msg_maps_updated">%s hărți actualizate.</string>
+    <string name="msg_maps_all_updated">Toate hărțile sunt actualizate</string>
+    <string name="msg_maps_updating">Se actualizează hărțile…</string>
+    <string name="title_activity_settings">Setări</string>
+    <string name="msg_downloading">Se descarcă…</string>
+    <string name="msg_map_loading_progress">Se încarcă harta %s…</string>
+    <string name="msg_map_list_failed_to_download">Lista de hărți nu a putut fi descărcată</string>
+    <string name="nav_delays">Momentul zilei:</string>
+    <string name="delay_type_custom">Personalizat</string>
+    <string name="delay_type_day">Zi</string>
+    <string name="delay_type_night">Noapte</string>
+    <string name="delay_type_evening">Seară</string>
+    <string name="delay_type_morning">Dimineață</string>
+    <string name="delay_type_rush">Ore de vârf</string>
+    <string name="delay_type_direct">Direct</string>
+    <string name="delay_type_west_north">Vest - Nord</string>
+    <string name="delay_type_west_south">Vest - Sud</string>
+    <string name="delay_type_west_east">Vest - Est</string>
+    <string name="delay_type_east_north">Est - Nord</string>
+    <string name="delay_type_east_south">Est - Sud</string>
+    <string name="delay_type_east_west">Est - Vest</string>
+    <string name="delay_type_north_east">Nord - Est</string>
+    <string name="delay_type_north_west">Nord - Vest</string>
+    <string name="delay_type_north_south">Nord - Sud</string>
+    <string name="delay_type_south_east">Sud - Est</string>
+    <string name="delay_type_south_west">Sud - Vest</string>
+    <string name="delay_type_south_north">Sud - Nord</string>
+    <string name="delay_weekdays_type_monday">Lu.</string>
+    <string name="delay_weekdays_type_tuesday">Ma.</string>
+    <string name="delay_weekdays_type_wednesday">Mi.</string>
+    <string name="delay_weekdays_type_thursday">Jo.</string>
+    <string name="delay_weekdays_type_friday">Vi.</string>
+    <string name="delay_weekdays_type_saturday">Sâ.</string>
+    <string name="delay_weekdays_type_sunday">Du.</string>
+    <string name="delay_weekdays_type_workdays">Lu.-Vi.</string>
+    <string name="delay_weekdays_type_weekend">Sâ.-Du.</string>
+</resources>

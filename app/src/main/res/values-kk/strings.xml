@@ -1,0 +1,102 @@
+<resources>
+    <string name="app_name">aMetro</string>
+
+    <string name="title_activity_map_view">aMetro</string>
+    <string name="title_activity_map_list_view">Карталар</string>
+    <string name="title_activity_city_list_view">Карта қосу</string>
+    <string name="title_activity_map_details_view">Карта мәліметтері</string>
+    <string name="title_activity_settings_list_view">Баптаулар</string>
+    <string name="title_activity_station_scheme_view">Станция сызбасы</string>
+    <string name="title_activity_about">Туралы</string>
+
+    <string name="msg_country_flag">елдің туы</string>
+    <string name="msg_map_list_downloading">Жүктелуде…</string>
+
+    <string name="msg_city_list_empty">Қалалар жоқ.</string>
+    <string name="msg_city_list_no_available_cities">Қол жетімді қалалар жоқ.</string>
+    <string name="msg_city_list_no_connection">Интернет байланысын тексеріп, кейінірек қайталап көріңіз.</string>
+
+    <string name="msg_map_list_empty">Карталар жоқ.</string>
+    <string name="msg_map_list_no_installed_maps">Орнатылған карталар жоқ.</string>
+    <string name="msg_map_list_tap_to_add_new_maps">Қолжетімді карталарды көру үшін экранды түртіңіз.</string>
+
+    <string name="msg_no_maps_loaded">Карта таңдалмаған</string>
+    <string name="msg_press_to_add_map">Карталар тізімін көру үшін экранды түртіңіз</string>
+    <string name="msg_operation_interrupted">Операция тоқтатылды</string>
+    <string name="msg_download_progress">%s байт жүктелді</string>
+    <string name="msg_error">Қате: %s</string>
+    <string name="msg_some_maps_out_of_date">Кейбір карталар ескірген.</string>
+
+    <string name="btn_open">Ашу</string>
+    <string name="btn_close">Жабу</string>
+    <string name="btn_download">Жүктеу</string>
+    <string name="btn_cancel">Бас тарту</string>
+
+    <string name="drawer_open">Навигация ашылды</string>
+    <string name="drawer_close">Навигация жабылды</string>
+
+    <string name="action_add">Қосу</string>
+    <string name="action_delete">Жою</string>
+    <string name="action_update">Жаңарту</string>
+    <string name="action_search">Іздеу</string>
+    <string name="action_select_all">Барлығын таңдау</string>
+    <string name="action_test_outdated">Ескіргенді тексеру</string>
+    <string name="action_settings">Баптаулар</string>
+    <string name="btn_flat_begin">БАСТАУ</string>
+    <string name="btn_flat_end">АЯҚТАУ</string>
+    <string name="btn_flat_station_details">АҚПАРАТ</string>
+    <string name="btn_flat_close">ЖАБУ</string>
+    <string name="msg_no_scheme_available_for_station">Бұл станцияға сызба жоқ</string>
+    <string name="tab_map">Карта</string>
+    <string name="tab_about">Туралы</string>
+    <string name="msg_selected">Таңдалды</string>
+    <string name="nav_select_map">Картаны ауыстыру</string>
+    <string name="nav_settings">Баптаулар</string>
+    <string name="nav_about">Туралы</string>
+    <string name="nav_options">Параметрлер:</string>
+    <string name="nav_using">Көлік түрі:</string>
+    <string name="nav_schemes">Сызбалар:</string>
+    <string name="nav_no_city">Қаланың картасы жүктелмеген</string>
+    <string name="msg_from_to" formatted="false">%s - %s: %s</string>
+    <string name="msg_no_route_found" formatted="false">%s бастап %s дейін маршрут табылмады</string>
+    <string name="msg_map_loaded">Карта жүктелді, %s мс</string>
+    <string name="msg_map_loading_failed">Картаны жүктеу сәтсіз аяқталды: %s</string>
+    <string name="msg_no_maps_selected">Карталар таңдалмаған</string>
+    <string name="msg_maps_deleted">Карталар жойылды</string>
+    <string name="msg_maps_updated">%s карта жаңартылды.</string>
+    <string name="msg_maps_all_updated">Барлық карталар жаңартылған</string>
+    <string name="msg_maps_updating">Карталар жаңартылуда…</string>
+    <string name="title_activity_settings">Баптаулар</string>
+    <string name="msg_downloading">Жүктелуде…</string>
+    <string name="msg_map_loading_progress">Карта жүктелуде %s…</string>
+    <string name="msg_map_list_failed_to_download">Карталар тізімін жүктеу сәтсіз аяқталды</string>
+    <string name="nav_delays">Күн уақыты:</string>
+    <string name="delay_type_custom">Реттелген</string>
+    <string name="delay_type_day">Күн</string>
+    <string name="delay_type_night">Түн</string>
+    <string name="delay_type_evening">Кеш</string>
+    <string name="delay_type_morning">Таң</string>
+    <string name="delay_type_rush">Қызу уақыт</string>
+    <string name="delay_type_direct">Тікелей</string>
+    <string name="delay_type_west_north">Батыс - Солтүстік</string>
+    <string name="delay_type_west_south">Батыс - Оңтүстік</string>
+    <string name="delay_type_west_east">Батыс - Шығыс</string>
+    <string name="delay_type_east_north">Шығыс - Солтүстік</string>
+    <string name="delay_type_east_south">Шығыс - Оңтүстік</string>
+    <string name="delay_type_east_west">Шығыс - Батыс</string>
+    <string name="delay_type_north_east">Солтүстік - Шығыс</string>
+    <string name="delay_type_north_west">Солтүстік - Батыс</string>
+    <string name="delay_type_north_south">Солтүстік - Оңтүстік</string>
+    <string name="delay_type_south_east">Оңтүстік - Шығыс</string>
+    <string name="delay_type_south_west">Оңтүстік - Батыс</string>
+    <string name="delay_type_south_north">Оңтүстік - Солтүстік</string>
+    <string name="delay_weekdays_type_monday">Дс</string>
+    <string name="delay_weekdays_type_tuesday">Сс</string>
+    <string name="delay_weekdays_type_wednesday">Ср</string>
+    <string name="delay_weekdays_type_thursday">Бс</string>
+    <string name="delay_weekdays_type_friday">Жм</string>
+    <string name="delay_weekdays_type_saturday">Сб</string>
+    <string name="delay_weekdays_type_sunday">Жс</string>
+    <string name="delay_weekdays_type_workdays">Дс-Жм</string>
+    <string name="delay_weekdays_type_weekend">Сб-Жс</string>
+</resources>

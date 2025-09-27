@@ -1,0 +1,102 @@
+<resources>
+    <string name="app_name">aMetro</string>
+
+    <string name="title_activity_map_view">aMetro</string>
+    <string name="title_activity_map_list_view">Kaardid</string>
+    <string name="title_activity_city_list_view">Lisa kaart</string>
+    <string name="title_activity_map_details_view">Kaardi üksikasjad</string>
+    <string name="title_activity_settings_list_view">Seaded</string>
+    <string name="title_activity_station_scheme_view">Jaama skeem</string>
+    <string name="title_activity_about">Teave</string>
+
+    <string name="msg_country_flag">riigilipp</string>
+    <string name="msg_map_list_downloading">Allalaadimine…</string>
+
+    <string name="msg_city_list_empty">Ühtegi linna pole.</string>
+    <string name="msg_city_list_no_available_cities">Saadaolevaid linnu pole.</string>
+    <string name="msg_city_list_no_connection">Kontrolli internetiühendust või proovi hiljem uuesti.</string>
+
+    <string name="msg_map_list_empty">Ühtegi kaarti pole.</string>
+    <string name="msg_map_list_no_installed_maps">Ühtegi kaarti pole installitud.</string>
+    <string name="msg_map_list_tap_to_add_new_maps">Puuduta ekraani, et näha saadaolevaid kaarte.</string>
+
+    <string name="msg_no_maps_loaded">Kaarti pole valitud</string>
+    <string name="msg_press_to_add_map">Puuduta ekraani, et näha kaartide loendit</string>
+    <string name="msg_operation_interrupted">Tegevus katkestatud</string>
+    <string name="msg_download_progress">%s baiti allalaaditud</string>
+    <string name="msg_error">Viga: %s</string>
+    <string name="msg_some_maps_out_of_date">Mõned kaardid on vananenud.</string>
+
+    <string name="btn_open">Ava</string>
+    <string name="btn_close">Sulge</string>
+    <string name="btn_download">Laadi alla</string>
+    <string name="btn_cancel">Tühista</string>
+
+    <string name="drawer_open">Navigatsioon avatud</string>
+    <string name="drawer_close">Navigatsioon suletud</string>
+
+    <string name="action_add">Lisa</string>
+    <string name="action_delete">Kustuta</string>
+    <string name="action_update">Uuenda</string>
+    <string name="action_search">Otsi</string>
+    <string name="action_select_all">Vali kõik</string>
+    <string name="action_test_outdated">Testi vananenud</string>
+    <string name="action_settings">Seaded</string>
+    <string name="btn_flat_begin">ALGUS</string>
+    <string name="btn_flat_end">LÕPP</string>
+    <string name="btn_flat_station_details">INFO</string>
+    <string name="btn_flat_close">SULGE</string>
+    <string name="msg_no_scheme_available_for_station">Selle jaama jaoks pole skeemi saadaval</string>
+    <string name="tab_map">Kaart</string>
+    <string name="tab_about">Teave</string>
+    <string name="msg_selected">Valitud</string>
+    <string name="nav_select_map">Vaheta kaart</string>
+    <string name="nav_settings">Seaded</string>
+    <string name="nav_about">Teave</string>
+    <string name="nav_options">Valikud:</string>
+    <string name="nav_using">Kasutatav transport:</string>
+    <string name="nav_schemes">Skeemid:</string>
+    <string name="nav_no_city">Ühtegi linnakaarti pole laaditud</string>
+    <string name="msg_from_to" formatted="false">%s - %s: %s</string>
+    <string name="msg_no_route_found" formatted="false">Marsruuti %s-st %s-ni ei leitud</string>
+    <string name="msg_map_loaded">Kaart laaditud, %s ms</string>
+    <string name="msg_map_loading_failed">Kaardi laadimine ebaõnnestus: %s</string>
+    <string name="msg_no_maps_selected">Kaardid pole valitud</string>
+    <string name="msg_maps_deleted">Kaardid kustutatud</string>
+    <string name="msg_maps_updated">%s kaarti uuendatud.</string>
+    <string name="msg_maps_all_updated">Kõik kaardid on ajakohased</string>
+    <string name="msg_maps_updating">Kaartide uuendamine…</string>
+    <string name="title_activity_settings">Seaded</string>
+    <string name="msg_downloading">Allalaadimine…</string>
+    <string name="msg_map_loading_progress">Laadin kaarti %s…</string>
+    <string name="msg_map_list_failed_to_download">Kaartide loendi allalaadimine ebaõnnestus</string>
+    <string name="nav_delays">Päevaaeg:</string>
+    <string name="delay_type_custom">Kohandatud</string>
+    <string name="delay_type_day">Päev</string>
+    <string name="delay_type_night">Öö</string>
+    <string name="delay_type_evening">Õhtu</string>
+    <string name="delay_type_morning">Hommik</string>
+    <string name="delay_type_rush">Tipptund</string>
+    <string name="delay_type_direct">Otsene</string>
+    <string name="delay_type_west_north">Lääs - Põhi</string>
+    <string name="delay_type_west_south">Lääs - Lõuna</string>
+    <string name="delay_type_west_east">Lääs - Ida</string>
+    <string name="delay_type_east_north">Ida - Põhi</string>
+    <string name="delay_type_east_south">Ida - Lõuna</string>
+    <string name="delay_type_east_west">Ida - Lääs</string>
+    <string name="delay_type_north_east">Põhi - Ida</string>
+    <string name="delay_type_north_west">Põhi - Lääs</string>
+    <string name="delay_type_north_south">Põhi - Lõuna</string>
+    <string name="delay_type_south_east">Lõuna - Ida</string>
+    <string name="delay_type_south_west">Lõuna - Lääs</string>
+    <string name="delay_type_south_north">Lõuna - Põhi</string>
+    <string name="delay_weekdays_type_monday">E</string>
+    <string name="delay_weekdays_type_tuesday">T</string>
+    <string name="delay_weekdays_type_wednesday">K</string>
+    <string name="delay_weekdays_type_thursday">N</string>
+    <string name="delay_weekdays_type_friday">R</string>
+    <string name="delay_weekdays_type_saturday">L</string>
+    <string name="delay_weekdays_type_sunday">P</string>
+    <string name="delay_weekdays_type_workdays">E-R</string>
+    <string name="delay_weekdays_type_weekend">L-P</string>
+</resources>

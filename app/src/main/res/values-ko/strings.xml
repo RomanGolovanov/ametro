@@ -1,0 +1,102 @@
+<resources>
+    <string name="app_name">aMetro</string>
+
+    <string name="title_activity_map_view">aMetro</string>
+    <string name="title_activity_map_list_view">지도</string>
+    <string name="title_activity_city_list_view">지도 추가</string>
+    <string name="title_activity_map_details_view">지도 세부정보</string>
+    <string name="title_activity_settings_list_view">설정</string>
+    <string name="title_activity_station_scheme_view">역 도식도</string>
+    <string name="title_activity_about">정보</string>
+
+    <string name="msg_country_flag">국기</string>
+    <string name="msg_map_list_downloading">다운로드 중…</string>
+
+    <string name="msg_city_list_empty">도시가 없습니다.</string>
+    <string name="msg_city_list_no_available_cities">사용 가능한 도시가 없습니다.</string>
+    <string name="msg_city_list_no_connection">인터넷 연결을 확인하거나 나중에 다시 시도하세요.</string>
+
+    <string name="msg_map_list_empty">지도가 없습니다.</string>
+    <string name="msg_map_list_no_installed_maps">설치된 지도가 없습니다.</string>
+    <string name="msg_map_list_tap_to_add_new_maps">화면을 눌러 사용 가능한 지도를 표시하세요.</string>
+
+    <string name="msg_no_maps_loaded">선택된 지도 없음</string>
+    <string name="msg_press_to_add_map">화면을 눌러 지도 목록 표시</string>
+    <string name="msg_operation_interrupted">작업이 취소되었습니다</string>
+    <string name="msg_download_progress">%s 바이트 다운로드됨</string>
+    <string name="msg_error">오류: %s</string>
+    <string name="msg_some_maps_out_of_date">일부 지도는 오래되었습니다.</string>
+
+    <string name="btn_open">열기</string>
+    <string name="btn_close">닫기</string>
+    <string name="btn_download">다운로드</string>
+    <string name="btn_cancel">취소</string>
+
+    <string name="drawer_open">탐색 열림</string>
+    <string name="drawer_close">탐색 닫힘</string>
+
+    <string name="action_add">추가</string>
+    <string name="action_delete">삭제</string>
+    <string name="action_update">업데이트</string>
+    <string name="action_search">검색</string>
+    <string name="action_select_all">모두 선택</string>
+    <string name="action_test_outdated">오래된 항목 테스트</string>
+    <string name="action_settings">설정</string>
+    <string name="btn_flat_begin">시작</string>
+    <string name="btn_flat_end">끝</string>
+    <string name="btn_flat_station_details">정보</string>
+    <string name="btn_flat_close">닫기</string>
+    <string name="msg_no_scheme_available_for_station">이 역에는 사용할 수 있는 도식도가 없습니다</string>
+    <string name="tab_map">지도</string>
+    <string name="tab_about">정보</string>
+    <string name="msg_selected">선택됨</string>
+    <string name="nav_select_map">지도 변경</string>
+    <string name="nav_settings">설정</string>
+    <string name="nav_about">정보</string>
+    <string name="nav_options">옵션:</string>
+    <string name="nav_using">교통수단:</string>
+    <string name="nav_schemes">도식도:</string>
+    <string name="nav_no_city">도시 지도가 로드되지 않았습니다</string>
+    <string name="msg_from_to" formatted="false">%s - %s: %s</string>
+    <string name="msg_no_route_found" formatted="false">%s에서 %s까지 경로를 찾을 수 없습니다</string>
+    <string name="msg_map_loaded">지도 로드됨, %s ms</string>
+    <string name="msg_map_loading_failed">지도 로드 실패: %s</string>
+    <string name="msg_no_maps_selected">선택된 지도 없음</string>
+    <string name="msg_maps_deleted">지도 삭제됨</string>
+    <string name="msg_maps_updated">%s개의 지도 업데이트됨.</string>
+    <string name="msg_maps_all_updated">모든 지도가 최신 상태입니다</string>
+    <string name="msg_maps_updating">지도 업데이트 중…</string>
+    <string name="title_activity_settings">설정</string>
+    <string name="msg_downloading">다운로드 중…</string>
+    <string name="msg_map_loading_progress">지도 %s 로드 중…</string>
+    <string name="msg_map_list_failed_to_download">지도 목록 다운로드 실패</string>
+    <string name="nav_delays">시간대:</string>
+    <string name="delay_type_custom">사용자 정의</string>
+    <string name="delay_type_day">낮</string>
+    <string name="delay_type_night">밤</string>
+    <string name="delay_type_evening">저녁</string>
+    <string name="delay_type_morning">아침</string>
+    <string name="delay_type_rush">혼잡 시간</string>
+    <string name="delay_type_direct">직행</string>
+    <string name="delay_type_west_north">서 - 북</string>
+    <string name="delay_type_west_south">서 - 남</string>
+    <string name="delay_type_west_east">서 - 동</string>
+    <string name="delay_type_east_north">동 - 북</string>
+    <string name="delay_type_east_south">동 - 남</string>
+    <string name="delay_type_east_west">동 - 서</string>
+    <string name="delay_type_north_east">북 - 동</string>
+    <string name="delay_type_north_west">북 - 서</string>
+    <string name="delay_type_north_south">북 - 남</string>
+    <string name="delay_type_south_east">남 - 동</string>
+    <string name="delay_type_south_west">남 - 서</string>
+    <string name="delay_type_south_north">남 - 북</string>
+    <string name="delay_weekdays_type_monday">월</string>
+    <string name="delay_weekdays_type_tuesday">화</string>
+    <string name="delay_weekdays_type_wednesday">수</string>
+    <string name="delay_weekdays_type_thursday">목</string>
+    <string name="delay_weekdays_type_friday">금</string>
+    <string name="delay_weekdays_type_saturday">토</string>
+    <string name="delay_weekdays_type_sunday">일</string>
+    <string name="delay_weekdays_type_workdays">월-금</string>
+    <string name="delay_weekdays_type_weekend">토-일</string>
+</resources>

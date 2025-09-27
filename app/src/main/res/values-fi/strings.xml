@@ -1,0 +1,102 @@
+<resources>
+    <string name="app_name">aMetro</string>
+
+    <string name="title_activity_map_view">aMetro</string>
+    <string name="title_activity_map_list_view">Kartat</string>
+    <string name="title_activity_city_list_view">Lisää kartta</string>
+    <string name="title_activity_map_details_view">Kartan tiedot</string>
+    <string name="title_activity_settings_list_view">Asetukset</string>
+    <string name="title_activity_station_scheme_view">Aseman kaavio</string>
+    <string name="title_activity_about">Tietoja</string>
+
+    <string name="msg_country_flag">maan lippu</string>
+    <string name="msg_map_list_downloading">Ladataan…</string>
+
+    <string name="msg_city_list_empty">Ei kaupunkeja.</string>
+    <string name="msg_city_list_no_available_cities">Ei saatavilla olevia kaupunkeja.</string>
+    <string name="msg_city_list_no_connection">Tarkista internet-yhteys tai yritä myöhemmin uudelleen.</string>
+
+    <string name="msg_map_list_empty">Ei karttoja.</string>
+    <string name="msg_map_list_no_installed_maps">Ei asennettuja karttoja.</string>
+    <string name="msg_map_list_tap_to_add_new_maps">Napauta näyttöä nähdäksesi saatavilla olevat kartat.</string>
+
+    <string name="msg_no_maps_loaded">Karttaa ei ole valittu</string>
+    <string name="msg_press_to_add_map">Napauta näyttöä nähdäksesi karttaluettelon</string>
+    <string name="msg_operation_interrupted">Toiminto peruutettu</string>
+    <string name="msg_download_progress">%s tavua ladattu</string>
+    <string name="msg_error">Virhe: %s</string>
+    <string name="msg_some_maps_out_of_date">Jotkin kartat ovat vanhentuneita.</string>
+
+    <string name="btn_open">Avaa</string>
+    <string name="btn_close">Sulje</string>
+    <string name="btn_download">Lataa</string>
+    <string name="btn_cancel">Peruuta</string>
+
+    <string name="drawer_open">Navigointi avattu</string>
+    <string name="drawer_close">Navigointi suljettu</string>
+
+    <string name="action_add">Lisää</string>
+    <string name="action_delete">Poista</string>
+    <string name="action_update">Päivitä</string>
+    <string name="action_search">Haku</string>
+    <string name="action_select_all">Valitse kaikki</string>
+    <string name="action_test_outdated">Testaa vanhentuneet</string>
+    <string name="action_settings">Asetukset</string>
+    <string name="btn_flat_begin">ALKU</string>
+    <string name="btn_flat_end">LOPPU</string>
+    <string name="btn_flat_station_details">INFO</string>
+    <string name="btn_flat_close">SULJE</string>
+    <string name="msg_no_scheme_available_for_station">Asemalle ei ole kaaviota saatavilla</string>
+    <string name="tab_map">Kartta</string>
+    <string name="tab_about">Tietoja</string>
+    <string name="msg_selected">Valittu</string>
+    <string name="nav_select_map">Vaihda karttaa</string>
+    <string name="nav_settings">Asetukset</string>
+    <string name="nav_about">Tietoja</string>
+    <string name="nav_options">Vaihtoehdot:</string>
+    <string name="nav_using">Käytössä oleva liikenne:</string>
+    <string name="nav_schemes">Kaaviot:</string>
+    <string name="nav_no_city">Kaupunkikarttaa ei ladattu</string>
+    <string name="msg_from_to" formatted="false">%s - %s: %s</string>
+    <string name="msg_no_route_found" formatted="false">Reittiä %s → %s ei löytynyt</string>
+    <string name="msg_map_loaded">Kartta ladattu, %s ms</string>
+    <string name="msg_map_loading_failed">Kartan lataus epäonnistui: %s</string>
+    <string name="msg_no_maps_selected">Ei valittuja karttoja</string>
+    <string name="msg_maps_deleted">Kartat poistettu</string>
+    <string name="msg_maps_updated">%s karttaa päivitetty.</string>
+    <string name="msg_maps_all_updated">Kaikki kartat ovat ajan tasalla</string>
+    <string name="msg_maps_updating">Karttoja päivitetään…</string>
+    <string name="title_activity_settings">Asetukset</string>
+    <string name="msg_downloading">Ladataan…</string>
+    <string name="msg_map_loading_progress">Ladataan karttaa %s…</string>
+    <string name="msg_map_list_failed_to_download">Karttaluettelon lataus epäonnistui</string>
+    <string name="nav_delays">Vuorokaudenaika:</string>
+    <string name="delay_type_custom">Mukautettu</string>
+    <string name="delay_type_day">Päivä</string>
+    <string name="delay_type_night">Yö</string>
+    <string name="delay_type_evening">Ilta</string>
+    <string name="delay_type_morning">Aamu</string>
+    <string name="delay_type_rush">Ruuhka-aika</string>
+    <string name="delay_type_direct">Suora</string>
+    <string name="delay_type_west_north">Länsi - Pohjoinen</string>
+    <string name="delay_type_west_south">Länsi - Etelä</string>
+    <string name="delay_type_west_east">Länsi - Itä</string>
+    <string name="delay_type_east_north">Itä - Pohjoinen</string>
+    <string name="delay_type_east_south">Itä - Etelä</string>
+    <string name="delay_type_east_west">Itä - Länsi</string>
+    <string name="delay_type_north_east">Pohjoinen - Itä</string>
+    <string name="delay_type_north_west">Pohjoinen - Länsi</string>
+    <string name="delay_type_north_south">Pohjoinen - Etelä</string>
+    <string name="delay_type_south_east">Etelä - Itä</string>
+    <string name="delay_type_south_west">Etelä - Länsi</string>
+    <string name="delay_type_south_north">Etelä - Pohjoinen</string>
+    <string name="delay_weekdays_type_monday">Ma</string>
+    <string name="delay_weekdays_type_tuesday">Ti</string>
+    <string name="delay_weekdays_type_wednesday">Ke</string>
+    <string name="delay_weekdays_type_thursday">To</string>
+    <string name="delay_weekdays_type_friday">Pe</string>
+    <string name="delay_weekdays_type_saturday">La</string>
+    <string name="delay_weekdays_type_sunday">Su</string>
+    <string name="delay_weekdays_type_workdays">Ma-Pe</string>
+    <string name="delay_weekdays_type_weekend">La-Su</string>
+</resources>

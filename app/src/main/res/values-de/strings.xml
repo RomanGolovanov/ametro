@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">aMetro</string>
+
+    <string name="title_activity_map_view">aMetro</string>
+    <string name="title_activity_map_list_view">Karten</string>
+    <string name="title_activity_city_list_view">Karte hinzufügen</string>
+    <string name="title_activity_map_details_view">Kartendetails</string>
+    <string name="title_activity_settings_list_view">Einstellungen</string>
+    <string name="title_activity_station_scheme_view">Stationsschema</string>
+    <string name="title_activity_about">Über</string>
+
+    <string name="msg_country_flag">Landesflagge</string>
+    <string name="msg_map_list_downloading">Wird heruntergeladen…</string>
+
+    <string name="msg_city_list_empty">Keine Städte.</string>
+    <string name="msg_city_list_no_available_cities">Keine verfügbaren Städte.</string>
+    <string name="msg_city_list_no_connection">Internetverbindung prüfen oder später erneut versuchen.</string>
+
+    <string name="msg_map_list_empty">Keine Karten.</string>
+    <string name="msg_map_list_no_installed_maps">Keine installierten Karten.</string>
+    <string name="msg_map_list_tap_to_add_new_maps">Tippen, um verfügbare Karten anzuzeigen.</string>
+
+    <string name="msg_no_maps_loaded">Keine Karte ausgewählt</string>
+    <string name="msg_press_to_add_map">Tippen, um Kartenliste anzuzeigen</string>
+    <string name="msg_operation_interrupted">Vorgang abgebrochen</string>
+    <string name="msg_download_progress">%s Bytes heruntergeladen</string>
+    <string name="msg_error">Fehler: %s</string>
+    <string name="msg_some_maps_out_of_date">Einige Karten sind veraltet.</string>
+
+    <string name="btn_open">Öffnen</string>
+    <string name="btn_close">Schließen</string>
+    <string name="btn_download">Herunterladen</string>
+    <string name="btn_cancel">Abbrechen</string>
+
+    <string name="drawer_open">Navigation geöffnet</string>
+    <string name="drawer_close">Navigation geschlossen</string>
+
+    <string name="action_add">Hinzufügen</string>
+    <string name="action_delete">Löschen</string>
+    <string name="action_update">Aktualisieren</string>
+    <string name="action_search">Suchen</string>
+    <string name="action_select_all">Alles auswählen</string>
+    <string name="action_test_outdated">Veraltet testen</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="btn_flat_begin">START</string>
+    <string name="btn_flat_end">ENDE</string>
+    <string name="btn_flat_station_details">INFO</string>
+    <string name="btn_flat_close">SCHLIESSEN</string>
+    <string name="msg_no_scheme_available_for_station">Kein Schema für diese Station verfügbar</string>
+    <string name="tab_map">Karte</string>
+    <string name="tab_about">Über</string>
+    <string name="empty"></string>
+    <string name="msg_selected">Ausgewählt</string>
+    <string name="nav_select_map">Karte wechseln</string>
+    <string name="nav_settings">Einstellungen</string>
+    <string name="nav_about">Über</string>
+    <string name="nav_options">Optionen:</string>
+    <string name="nav_using">Verwendetes Transportmittel:</string>
+    <string name="nav_schemes">Schemata:</string>
+    <string name="nav_no_city">Keine Stadtkarten geladen</string>
+    <string name="msg_from_to" formatted="false">%s - %s: %s</string>
+    <string name="msg_no_route_found" formatted="false">Keine Route gefunden von %s nach %s</string>
+    <string name="msg_map_loaded">Karte geladen, %s ms</string>
+    <string name="msg_map_loading_failed">Karte konnte nicht geladen werden: %s</string>
+    <string name="msg_no_maps_selected">Keine Karten ausgewählt</string>
+    <string name="msg_maps_deleted">Karten gelöscht</string>
+    <string name="msg_maps_updated">%s Karten aktualisiert.</string>
+    <string name="msg_maps_all_updated">Alle Karten sind aktuell</string>
+    <string name="msg_maps_updating">Karten werden aktualisiert…</string>
+    <string name="title_activity_settings">Einstellungen</string>
+    <string name="msg_downloading">Wird heruntergeladen…</string>
+    <string name="msg_map_loading_progress">Karte %s wird geladen…</string>
+    <string name="msg_map_list_failed_to_download">Kartenliste konnte nicht heruntergeladen werden</string>
+    <string name="nav_delays">Tageszeit:</string>
+    <string name="delay_type_not_defined"></string>
+    <string name="delay_type_custom">Benutzerdefiniert</string>
+    <string name="delay_type_day">Tag</string>
+    <string name="delay_type_night">Nacht</string>
+    <string name="delay_type_evening">Abend</string>
+    <string name="delay_type_morning">Morgen</string>
+    <string name="delay_type_rush">Stoßzeiten</string>
+    <string name="delay_type_direct">Direkt</string>
+    <string name="delay_type_west_north">West - Nord</string>
+    <string name="delay_type_west_south">West - Süd</string>
+    <string name="delay_type_west_east">West - Ost</string>
+    <string name="delay_type_east_north">Ost - Nord</string>
+    <string name="delay_type_east_south">Ost - Süd</string>
+    <string name="delay_type_east_west">Ost - West</string>
+    <string name="delay_type_north_east">Nord - Ost</string>
+    <string name="delay_type_north_west">Nord - West</string>
+    <string name="delay_type_north_south">Nord - Süd</string>
+    <string name="delay_type_south_east">Süd - Ost</string>
+    <string name="delay_type_south_west">Süd - West</string>
+    <string name="delay_type_south_north">Süd - Nord</string>
+    <string name="delay_weekdays_type_not_defined"></string>
+    <string name="delay_weekdays_type_monday">Mo.</string>
+    <string name="delay_weekdays_type_tuesday">Di.</string>
+    <string name="delay_weekdays_type_wednesday">Mi.</string>
+    <string name="delay_weekdays_type_thursday">Do.</string>
+    <string name="delay_weekdays_type_friday">Fr.</string>
+    <string name="delay_weekdays_type_saturday">Sa.</string>
+    <string name="delay_weekdays_type_sunday">So.</string>
+    <string name="delay_weekdays_type_workdays">Mo.-Fr.</string>
+    <string name="delay_weekdays_type_weekend">Sa.-So.</string>
+</resources>

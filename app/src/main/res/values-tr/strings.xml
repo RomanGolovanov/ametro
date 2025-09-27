@@ -1,0 +1,102 @@
+<resources>
+    <string name="app_name">aMetro</string>
+
+    <string name="title_activity_map_view">aMetro</string>
+    <string name="title_activity_map_list_view">Haritalar</string>
+    <string name="title_activity_city_list_view">Harita ekle</string>
+    <string name="title_activity_map_details_view">Harita ayrıntıları</string>
+    <string name="title_activity_settings_list_view">Ayarlar</string>
+    <string name="title_activity_station_scheme_view">İstasyon şeması</string>
+    <string name="title_activity_about">Hakkında</string>
+
+    <string name="msg_country_flag">ülke bayrağı</string>
+    <string name="msg_map_list_downloading">İndiriliyor…</string>
+
+    <string name="msg_city_list_empty">Şehir yok.</string>
+    <string name="msg_city_list_no_available_cities">Kullanılabilir şehir yok.</string>
+    <string name="msg_city_list_no_connection">İnternet bağlantısını kontrol edin veya daha sonra tekrar deneyin.</string>
+
+    <string name="msg_map_list_empty">Harita yok.</string>
+    <string name="msg_map_list_no_installed_maps">Yüklü harita yok.</string>
+    <string name="msg_map_list_tap_to_add_new_maps">Mevcut haritaları görmek için ekrana dokunun.</string>
+
+    <string name="msg_no_maps_loaded">Harita seçilmedi</string>
+    <string name="msg_press_to_add_map">Harita listesini görmek için ekrana dokunun</string>
+    <string name="msg_operation_interrupted">İşlem iptal edildi</string>
+    <string name="msg_download_progress">%s bayt indirildi</string>
+    <string name="msg_error">Hata: %s</string>
+    <string name="msg_some_maps_out_of_date">Bazı haritalar güncel değil.</string>
+
+    <string name="btn_open">Aç</string>
+    <string name="btn_close">Kapat</string>
+    <string name="btn_download">İndir</string>
+    <string name="btn_cancel">İptal</string>
+
+    <string name="drawer_open">Gezinti açıldı</string>
+    <string name="drawer_close">Gezinti kapatıldı</string>
+
+    <string name="action_add">Ekle</string>
+    <string name="action_delete">Sil</string>
+    <string name="action_update">Güncelle</string>
+    <string name="action_search">Ara</string>
+    <string name="action_select_all">Tümünü seç</string>
+    <string name="action_test_outdated">Eskiyi test et</string>
+    <string name="action_settings">Ayarlar</string>
+    <string name="btn_flat_begin">BAŞLA</string>
+    <string name="btn_flat_end">BİTİR</string>
+    <string name="btn_flat_station_details">BİLGİ</string>
+    <string name="btn_flat_close">KAPAT</string>
+    <string name="msg_no_scheme_available_for_station">Bu istasyon için şema mevcut değil</string>
+    <string name="tab_map">Harita</string>
+    <string name="tab_about">Hakkında</string>
+    <string name="msg_selected">Seçildi</string>
+    <string name="nav_select_map">Harita değiştir</string>
+    <string name="nav_settings">Ayarlar</string>
+    <string name="nav_about">Hakkında</string>
+    <string name="nav_options">Seçenekler:</string>
+    <string name="nav_using">Ulaşım:</string>
+    <string name="nav_schemes">Şemalar:</string>
+    <string name="nav_no_city">Şehir haritası yüklenmedi</string>
+    <string name="msg_from_to" formatted="false">%s - %s: %s</string>
+    <string name="msg_no_route_found" formatted="false">%s ile %s arasında rota bulunamadı</string>
+    <string name="msg_map_loaded">Harita yüklendi, %s ms</string>
+    <string name="msg_map_loading_failed">Harita yüklenemedi: %s</string>
+    <string name="msg_no_maps_selected">Hiçbir harita seçilmedi</string>
+    <string name="msg_maps_deleted">Haritalar silindi</string>
+    <string name="msg_maps_updated">%s harita güncellendi.</string>
+    <string name="msg_maps_all_updated">Tüm haritalar güncel</string>
+    <string name="msg_maps_updating">Haritalar güncelleniyor…</string>
+    <string name="title_activity_settings">Ayarlar</string>
+    <string name="msg_downloading">İndiriliyor…</string>
+    <string name="msg_map_loading_progress">%s haritası yükleniyor…</string>
+    <string name="msg_map_list_failed_to_download">Harita listesi indirilemedi</string>
+    <string name="nav_delays">Günün saati:</string>
+    <string name="delay_type_custom">Özel</string>
+    <string name="delay_type_day">Gündüz</string>
+    <string name="delay_type_night">Gece</string>
+    <string name="delay_type_evening">Akşam</string>
+    <string name="delay_type_morning">Sabah</string>
+    <string name="delay_type_rush">Yoğun saatler</string>
+    <string name="delay_type_direct">Direkt</string>
+    <string name="delay_type_west_north">Batı - Kuzey</string>
+    <string name="delay_type_west_south">Batı - Güney</string>
+    <string name="delay_type_west_east">Batı - Doğu</string>
+    <string name="delay_type_east_north">Doğu - Kuzey</string>
+    <string name="delay_type_east_south">Doğu - Güney</string>
+    <string name="delay_type_east_west">Doğu - Batı</string>
+    <string name="delay_type_north_east">Kuzey - Doğu</string>
+    <string name="delay_type_north_west">Kuzey - Batı</string>
+    <string name="delay_type_north_south">Kuzey - Güney</string>
+    <string name="delay_type_south_east">Güney - Doğu</string>
+    <string name="delay_type_south_west">Güney - Batı</string>
+    <string name="delay_type_south_north">Güney - Kuzey</string>
+    <string name="delay_weekdays_type_monday">Pzt</string>
+    <string name="delay_weekdays_type_tuesday">Sal</string>
+    <string name="delay_weekdays_type_wednesday">Çar</string>
+    <string name="delay_weekdays_type_thursday">Per</string>
+    <string name="delay_weekdays_type_friday">Cum</string>
+    <string name="delay_weekdays_type_saturday">Cmt</string>
+    <string name="delay_weekdays_type_sunday">Paz</string>
+    <string name="delay_weekdays_type_workdays">Pzt-Cum</string>
+    <string name="delay_weekdays_type_weekend">Cmt-Paz</string>
+</resources>

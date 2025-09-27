@@ -1,0 +1,102 @@
+<resources>
+    <string name="app_name">aMetro</string>
+
+    <string name="title_activity_map_view">aMetro</string>
+    <string name="title_activity_map_list_view">Karte</string>
+    <string name="title_activity_city_list_view">Dodaj kartu</string>
+    <string name="title_activity_map_details_view">Detalji karte</string>
+    <string name="title_activity_settings_list_view">Postavke</string>
+    <string name="title_activity_station_scheme_view">Shema stanice</string>
+    <string name="title_activity_about">O aplikaciji</string>
+
+    <string name="msg_country_flag">zastava države</string>
+    <string name="msg_map_list_downloading">Preuzimanje…</string>
+
+    <string name="msg_city_list_empty">Nema gradova.</string>
+    <string name="msg_city_list_no_available_cities">Nema dostupnih gradova.</string>
+    <string name="msg_city_list_no_connection">Provjerite internetsku vezu ili pokušajte kasnije.</string>
+
+    <string name="msg_map_list_empty">Nema karata.</string>
+    <string name="msg_map_list_no_installed_maps">Nema instaliranih karata.</string>
+    <string name="msg_map_list_tap_to_add_new_maps">Dodirnite zaslon da biste prikazali dostupne karte.</string>
+
+    <string name="msg_no_maps_loaded">Nije odabrana karta</string>
+    <string name="msg_press_to_add_map">Dodirnite zaslon da biste prikazali popis karata</string>
+    <string name="msg_operation_interrupted">Operacija otkazana</string>
+    <string name="msg_download_progress">%s bajtova preuzeto</string>
+    <string name="msg_error">Greška: %s</string>
+    <string name="msg_some_maps_out_of_date">Neke karte su zastarjele.</string>
+
+    <string name="btn_open">Otvori</string>
+    <string name="btn_close">Zatvori</string>
+    <string name="btn_download">Preuzmi</string>
+    <string name="btn_cancel">Otkaži</string>
+
+    <string name="drawer_open">Navigacija otvorena</string>
+    <string name="drawer_close">Navigacija zatvorena</string>
+
+    <string name="action_add">Dodaj</string>
+    <string name="action_delete">Izbriši</string>
+    <string name="action_update">Ažuriraj</string>
+    <string name="action_search">Pretraži</string>
+    <string name="action_select_all">Odaberi sve</string>
+    <string name="action_test_outdated">Test zastarjelih</string>
+    <string name="action_settings">Postavke</string>
+    <string name="btn_flat_begin">POČETAK</string>
+    <string name="btn_flat_end">KRAJ</string>
+    <string name="btn_flat_station_details">INFO</string>
+    <string name="btn_flat_close">ZATVORI</string>
+    <string name="msg_no_scheme_available_for_station">Nema dostupne sheme za ovu stanicu</string>
+    <string name="tab_map">Karta</string>
+    <string name="tab_about">O aplikaciji</string>
+    <string name="msg_selected">Odabrano</string>
+    <string name="nav_select_map">Promijeni kartu</string>
+    <string name="nav_settings">Postavke</string>
+    <string name="nav_about">O aplikaciji</string>
+    <string name="nav_options">Opcije:</string>
+    <string name="nav_using">Korištenje prijevoza:</string>
+    <string name="nav_schemes">Sheme:</string>
+    <string name="nav_no_city">Nema učitane karte grada</string>
+    <string name="msg_from_to" formatted="false">%s - %s: %s</string>
+    <string name="msg_no_route_found" formatted="false">Nije pronađena ruta od %s do %s</string>
+    <string name="msg_map_loaded">Karta učitana, %s ms</string>
+    <string name="msg_map_loading_failed">Neuspjelo učitavanje karte: %s</string>
+    <string name="msg_no_maps_selected">Nema odabranih karata</string>
+    <string name="msg_maps_deleted">Karte izbrisane</string>
+    <string name="msg_maps_updated">%s karata ažurirano.</string>
+    <string name="msg_maps_all_updated">Sve karte su ažurne</string>
+    <string name="msg_maps_updating">Ažuriranje karata…</string>
+    <string name="title_activity_settings">Postavke</string>
+    <string name="msg_downloading">Preuzimanje…</string>
+    <string name="msg_map_loading_progress">Učitavanje karte %s…</string>
+    <string name="msg_map_list_failed_to_download">Neuspjelo preuzimanje popisa karata</string>
+    <string name="nav_delays">Doba dana:</string>
+    <string name="delay_type_custom">Prilagođeno</string>
+    <string name="delay_type_day">Dan</string>
+    <string name="delay_type_night">Noć</string>
+    <string name="delay_type_evening">Večer</string>
+    <string name="delay_type_morning">Jutro</string>
+    <string name="delay_type_rush">Špica</string>
+    <string name="delay_type_direct">Izravno</string>
+    <string name="delay_type_west_north">Zapad - Sjever</string>
+    <string name="delay_type_west_south">Zapad - Jug</string>
+    <string name="delay_type_west_east">Zapad - Istok</string>
+    <string name="delay_type_east_north">Istok - Sjever</string>
+    <string name="delay_type_east_south">Istok - Jug</string>
+    <string name="delay_type_east_west">Istok - Zapad</string>
+    <string name="delay_type_north_east">Sjever - Istok</string>
+    <string name="delay_type_north_west">Sjever - Zapad</string>
+    <string name="delay_type_north_south">Sjever - Jug</string>
+    <string name="delay_type_south_east">Jug - Istok</string>
+    <string name="delay_type_south_west">Jug - Zapad</string>
+    <string name="delay_type_south_north">Jug - Sjever</string>
+    <string name="delay_weekdays_type_monday">Pon</string>
+    <string name="delay_weekdays_type_tuesday">Uto</string>
+    <string name="delay_weekdays_type_wednesday">Sri</string>
+    <string name="delay_weekdays_type_thursday">Čet</string>
+    <string name="delay_weekdays_type_friday">Pet</string>
+    <string name="delay_weekdays_type_saturday">Sub</string>
+    <string name="delay_weekdays_type_sunday">Ned</string>
+    <string name="delay_weekdays_type_workdays">Pon-Pet</string>
+    <string name="delay_weekdays_type_weekend">Sub-Ned</string>
+</resources>
