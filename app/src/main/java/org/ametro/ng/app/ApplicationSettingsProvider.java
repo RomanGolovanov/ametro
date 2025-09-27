@@ -28,7 +28,7 @@ public class ApplicationSettingsProvider {
      * Save the currently selected map (by file name).
      */
     public void setCurrentMap(String mapFileName) {
-        SharedPreferences.Editor editor = settings.edit();
+        var editor = settings.edit();
         editor.putString(SELECTED_MAP, mapFileName);
         editor.apply();
     }
@@ -38,7 +38,7 @@ public class ApplicationSettingsProvider {
     }
 
     public String getPreferredMapLanguage() {
-        String languageCode = settings.getString(PREFERRED_LANGUAGE, null);
+        var languageCode = settings.getString(PREFERRED_LANGUAGE, null);
         return languageCode != null ? languageCode : getDefaultLanguage();
     }
 }
