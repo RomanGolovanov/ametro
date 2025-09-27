@@ -5,14 +5,15 @@ permalink: /contributing/
 ---
 
 <p align="center">
-  <a href="/">Home</a> •
-  <a href="/privacy/">Privacy</a> •
-  <a href="/install/">Install</a> •
-  <a href="/maps/">Maps</a> •
-  <a href="/maps-editing/">Map Editing</a> •
-  <a href="/contributing/">Contribute</a> •
-  <a href="/faq/">FAQ</a> •
+  <a href="/ametro">Home</a> •
+  <a href="/ametro/privacy/">Privacy</a> •
+  <a href="/ametro/install/">Install</a> •
+  <a href="/ametro/maps/">Maps</a> •
+  <a href="/ametro/maps-editing/">Map Editing</a> •
+  <a href="/ametro/contributing/">Contribute</a> •
+  <a href="/ametro/faq/">FAQ</a> •
 </p>
+
 
 # 🤝 Contributing to aMetro
 
@@ -25,7 +26,7 @@ There are several ways you can help improve the app.
 
 - aMetro uses **PMZ map files**, originally from the pMetro project.  
 - If you find an outdated or incorrect map, you can:  
-  1. Extract and edit the `.pmz` file (see [Map Editing](/maps-editing/)).  
+  1. Extract and edit the `.pmz` file (see [Map Editing](/ametro/maps-editing/)).  
   2. Send your updated map:  
      - Email it to **Boris@pMetro.su** (original pMetro author).  
      - Or open a [GitHub Issue](https://github.com/RomanGolovanov/ametro/issues) with the corrected file attached.
@@ -36,7 +37,7 @@ There are several ways you can help improve the app.
 
 - The **user interface** currently supports **English, Dutch (NL), French (FR), and Russian (RU)**.  
 - **City names** are available in **24 languages**, so the app is globally accessible.  
-- **Maps themselves** are usually in English only — if you want to adapt a map to another language, you can patch it manually (see [Map Editing](/maps-editing/)).  
+- **Maps themselves** are usually in English only — if you want to adapt a map to another language, you can patch it manually (see [Map Editing](/ametro/maps-editing/)).  
 
 If you’d like to add or improve translations:  
 - Open a pull request with updated string files, or  
@@ -58,7 +59,7 @@ If you’d like to add or improve translations:
 
 - Clone the repo:  
    git clone https://github.com/RomanGolovanov/ametro.git
-- Open it in Android Studio and build (see [Install](/install/)).  
+- Open it in Android Studio and build (see [Install](/ametro/install/)).  
 - Follow standard GitHub workflow: fork, branch, commit, and open a pull request.  
 - Code is licensed under **GPL-3.0**.
 

@@ -5,14 +5,15 @@ permalink: /privacy/
 ---
 
 <p align="center">
-  <a href="/">Home</a> •
-  <a href="/privacy/">Privacy</a> •
-  <a href="/install/">Install</a> •
-  <a href="/maps/">Maps</a> •
-  <a href="/maps-editing/">Map Editing</a> •
-  <a href="/contributing/">Contribute</a> •
-  <a href="/faq/">FAQ</a> •
+  <a href="/ametro">Home</a> •
+  <a href="/ametro/privacy/">Privacy</a> •
+  <a href="/ametro/install/">Install</a> •
+  <a href="/ametro/maps/">Maps</a> •
+  <a href="/ametro/maps-editing/">Map Editing</a> •
+  <a href="/ametro/contributing/">Contribute</a> •
+  <a href="/ametro/faq/">FAQ</a> •
 </p>
+
 
 # 🔒 Privacy Policy
 

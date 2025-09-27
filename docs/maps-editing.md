@@ -5,14 +5,15 @@ permalink: /maps-editing/
 ---
 
 <p align="center">
-  <a href="/">Home</a> •
-  <a href="/privacy/">Privacy</a> •
-  <a href="/install/">Install</a> •
-  <a href="/maps/">Maps</a> •
-  <a href="/maps-editing/">Map Editing</a> •
-  <a href="/contributing/">Contribute</a> •
-  <a href="/faq/">FAQ</a> •
+  <a href="/ametro">Home</a> •
+  <a href="/ametro/privacy/">Privacy</a> •
+  <a href="/ametro/install/">Install</a> •
+  <a href="/ametro/maps/">Maps</a> •
+  <a href="/ametro/maps-editing/">Map Editing</a> •
+  <a href="/ametro/contributing/">Contribute</a> •
+  <a href="/ametro/faq/">FAQ</a> •
 </p>
+
 
 # Editing PMZ Maps for aMetro
 
@@ -59,11 +60,106 @@ If you want to **patch an existing city map**, install pMetro and look inside it
 ## 🖼️ File Structure Highlights
 
 - **`metro.ini`** — main map metadata (city names, authors, version requirements).  
+- **`metro.cty`** — city-level settings (names, localisation, delays).  
 - **`*.trp`** — line definitions (stations, aliases, timings, transfers).  
 - **`*.map`** — visual layout, colours, coordinates.  
 - **Images** — background graphics (BMP, GIF, PNG, or VEC).  
-- **`metro.cty`** — city-level settings (names, localisation, delays).  
 - **Optional `.txt` files** — extra station information.
+---
+
+## 🖼️ File Types in a PMZ Archive
+
+Every PMZ archive is a collection of different file types. Each type plays a role in how the map is displayed, localized, and simulated inside aMetro.  
+
+### metro.cty  
+A city-level configuration file.  
+How to fill:  
+- Name: short name of the city.  
+- CityName: same as above, or localized form.  
+- Country: country name.  
+- RusName: Russian version of the city name.  
+- NeedVersion: minimal version required.  
+- MapAuthors: free text, can include multiple lines.  
+Optionally include localization, default delays, or language-specific information.  
+
+Example:  
+```
+[Options]  
+Name=Berlin  
+CityName=Berlin  
+Country=Germany  
+RusName=Берлин  
+NeedVersion=1.26.4  
+MapAuthors=Scheme from 2008, based on UrbanRail.net  
+```
+
+### *.trp (line definitions)  
+Each .trp file describes a type of network, such as U-bahn or S-bahn.  
+Structure:  
+- Options section at top, with Type=U-bahn or Type=S-bahn.  
+- Then [LineX] sections for each line.  
+- Inside a line section:  
+  - Name: the line name (for example U1 or Ring).  
+  - Stations: comma-separated list of stations, in travel order.  
+  - Driving: list of travel times between stations. Must have one fewer number than the number of stations. Values can be integers for minutes or decimal values like 1.45 for 1 minute 45 seconds. Parentheses can be used for branches.  
+  - DelayDay: typical waiting time at stations during the day.  
+  - DelayNight: waiting time at night.  
+  - Aliases: optional, list of alternative station names to unify duplicates.  
+
+Example:  
+```
+[Options]  
+Type=U-bahn  
+
+[Line1]  
+Name=U1  
+Stations=Station A,Station B,Station C,Station D  
+Driving=2,3,2  
+DelayDay=4  
+DelayNight=12  
+
+[Line2]  
+Name=U2  
+Stations=North End,Midtown,South End  
+Driving=5,6  
+DelayDay=5  
+DelayNight=15  
+```
+
+### *.map (graphical layout)  
+A coordinate-based description of map graphics, typically used when bitmap backgrounds are present.  
+How to fill:  
+- Define station positions with coordinates.  
+- Assign line colours.  
+- Connect stations with line segments.  
+- Reference optional image files for background.  
+This file is usually produced with the pMetro Editor rather than by hand, but manual editing is possible if you know the syntax.  
+
+### *.vec (vector schematic)  
+A script-style file for vector drawing.  
+How to fill:  
+- size: define the canvas size in pixels, for example size 2000x1500.  
+- PenColor: set the current pen colour, in hex like 00FF00.  
+- TextOut: write text labels. Parameters include font, size, coordinates, text, and style flag.  
+- Line: draw straight lines between coordinates.  
+- Spline: draw curved connections.  
+- Polygon and Ellipse: draw shapes.  
+- Opaque: toggle transparency on or off.  
+
+Example:  
+```
+size 1200x800  
+PenColor FF0000  
+TextOut Arial,20,100,200, U1,1  
+Line 100,200,300,200  
+```
+
+### Images (bmp, gif, png)  
+Bitmap backgrounds. Place the file in the archive and reference it in metro.ini or the .map file.  
+How to fill:  
+- Save the image in one of the supported formats.  
+- Keep resolution close to the intended map canvas size.  
+- Use clear lines and contrasting colours so stations and labels remain visible.  
 
 ---
 

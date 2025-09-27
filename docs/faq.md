@@ -5,14 +5,15 @@ permalink: /faq/
 ---
 
 <p align="center">
-  <a href="/">Home</a> •
-  <a href="/privacy/">Privacy</a> •
-  <a href="/install/">Install</a> •
-  <a href="/maps/">Maps</a> •
-  <a href="/maps-editing/">Map Editing</a> •
-  <a href="/contributing/">Contribute</a> •
-  <a href="/faq/">FAQ</a> •
+  <a href="/ametro">Home</a> •
+  <a href="/ametro/privacy/">Privacy</a> •
+  <a href="/ametro/install/">Install</a> •
+  <a href="/ametro/maps/">Maps</a> •
+  <a href="/ametro/maps-editing/">Map Editing</a> •
+  <a href="/ametro/contributing/">Contribute</a> •
+  <a href="/ametro/faq/">FAQ</a> •
 </p>
+
 
 # ❓ Frequently Asked Questions
 
@@ -36,12 +37,12 @@ See the [Privacy Policy](/privacy/) for details.
 ### 🌐 What languages are supported?
 - **User interface (UI):** English, Dutch (NL), French (FR), Russian (RU)  
 - **City names:** 24 languages  
-- **Maps:** usually English only (but can be patched manually, see [Map Editing](/maps-editing/))  
+- **Maps:** usually English only (but can be patched manually, see [Map Editing](/ametro/maps-editing/))  
 
 ---
 
 ### 🗺️ How can I update a map?
-- Extract and edit the `.pmz` file (see [Map Editing](/maps-editing/))  
+- Extract and edit the `.pmz` file (see [Map Editing](/ametro/maps-editing/))  
 - Submit it via a GitHub Issue or email it to **Boris@pMetro.su**  
 
 ---
@@ -57,4 +58,4 @@ See the [Privacy Policy](/privacy/) for details.
 ---
 
 ### 🧑‍💻 Can I build the app myself?
-Yes. See the [Install guide](/install/) for source build instructions.  
+Yes. See the [Install guide](/ametro/install/) for source build instructions.  

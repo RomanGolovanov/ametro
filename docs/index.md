@@ -5,16 +5,18 @@ permalink: /
 ---
 
 <p align="center">
-  <a href="/">Home</a> •
-  <a href="/privacy/">Privacy</a> •
-  <a href="/install/">Install</a> •
-  <a href="/maps/">Maps</a> •
-  <a href="/contributing/">Contribute</a> •
-  <a href="/faq/">FAQ</a> •
+  <a href="/ametro">Home</a> •
+  <a href="/ametro/privacy/">Privacy</a> •
+  <a href="/ametro/install/">Install</a> •
+  <a href="/ametro/maps/">Maps</a> •
+  <a href="/ametro/maps-editing/">Map Editing</a> •
+  <a href="/ametro/contributing/">Contribute</a> •
+  <a href="/ametro/faq/">FAQ</a> •
 </p>
 
+
 <p align="center">
-  <img src="assets/branding.png" alt="aMetro branding" width="420">
+  <img src="assets/logo.png" alt="aMetro branding" width="1024">
 </p>
 
 # 🚇 aMetro — Offline Metro & Subway Maps

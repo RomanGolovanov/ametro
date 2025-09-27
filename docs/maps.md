@@ -5,14 +5,16 @@ permalink: /maps/
 ---
 
 <p align="center">
-  <a href="/">Home</a> •
-  <a href="/privacy/">Privacy</a> •
-  <a href="/install/">Install</a> •
-  <a href="/maps/">Maps</a> •
-  <a href="/maps-editing/">Map Editing</a> •
-  <a href="/contributing/">Contribute</a> •
-  <a href="/faq/">FAQ</a> •
+  <a href="/ametro">Home</a> •
+  <a href="/ametro/privacy/">Privacy</a> •
+  <a href="/ametro/install/">Install</a> •
+  <a href="/ametro/maps/">Maps</a> •
+  <a href="/ametro/maps-editing/">Map Editing</a> •
+  <a href="/ametro/contributing/">Contribute</a> •
+  <a href="/ametro/faq/">FAQ</a> •
 </p>
+
+
 
 # 🌍 Maps in aMetro
 
@@ -20,7 +22,7 @@ aMetro includes **236 hand-made transit maps**, bundled inside the app.
 No downloads are required — everything works offline straight away.
 
 The maps cover metros, subways, and light rail systems from every continent.  
-If you find a map that’s outdated, you can patch it (see [Map Editing](/maps-editing/)).
+If you find a map that’s outdated, you can patch it (see [Map Editing](/ametro/maps-editing/)).
 
 ---
 
@@ -55,7 +57,7 @@ Adana, Alexandria, Algiers, Almati (Almaty), Bangalore, Bangkok, Beijing, Bursa,
 
 If you notice missing stations or outdated lines:
 
-1. Follow the [Map Editing guide](/maps-editing/).  
+1. Follow the [Map Editing guide](/ametro/maps-editing/).  
 2. Submit your corrected map either by:  
    - Opening a [GitHub Issue](https://github.com/RomanGolovanov/ametro/issues), or  
    - Emailing it to **Boris@pMetro.su** (original pMetro author).  
