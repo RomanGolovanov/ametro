@@ -69,7 +69,7 @@ If you’d like to add or improve translations:
 
 - Share aMetro with friends, travellers, or metro enthusiasts.  
 - Star the [GitHub repo](https://github.com/RomanGolovanov/ametro) to show support.  
-- Help test new releases when they land on [Google Play](https://play.google.com/store/apps/details?id=org.ametro.ng) or GitHub.
+- Help test new releases when they land on [Google Play](https://play.google.com/store/apps/details?id=io.github.romangolovanov.apps.ametro) or GitHub.
 
 ---
 

@@ -23,8 +23,8 @@ You can get aMetro in one of three ways:
 
 ## ✅ 1) Google Play (recommended)
 
-- The app is published under the package ID: `org.ametro.ng`  
-- [Google Play link](https://play.google.com/store/apps/details?id=org.ametro.ng) *(currently under review — will be live soon)*  
+- The app is published under the package ID: `io.github.romangolovanov.apps.ametro`  
+- [Google Play link](https://play.google.com/store/apps/details?id=io.github.romangolovanov.apps.ametro) *(currently under review — will be live soon)*  
 
 ---
 
