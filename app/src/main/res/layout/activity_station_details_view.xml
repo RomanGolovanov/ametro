@@ -8,7 +8,7 @@
 
     <include layout="@layout/widget_toolbar" />
 
-    <org.ametro.ng.ui.views.SlidingTabLayout
+    <io.github.romangolovanov.apps.ametro.ui.views.SlidingTabLayout
         android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "org.ametro.ng"
+    namespace = "io.github.romangolovanov.apps.ametro"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "org.ametro.ng"
+        applicationId = "io.github.romangolovanov.apps.ametro"
         minSdk = 24
         targetSdk = 36
         versionCode = 52

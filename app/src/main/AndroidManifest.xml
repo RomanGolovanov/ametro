@@ -7,14 +7,14 @@
         android:fullBackupContent="@xml/backup_rules"
 
         android:supportsRtl="false"
-        android:name=".app.ApplicationEx"
+        android:name="io.github.romangolovanov.apps.ametro.app.ApplicationEx"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".ui.activities.Map"
+            android:name="io.github.romangolovanov.apps.ametro.ui.activities.Map"
             android:label="@string/title_activity_map_view"
             android:windowSoftInputMode="adjustPan"
             android:exported="true"
@@ -25,40 +25,40 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activities.MapList"
+            android:name="io.github.romangolovanov.apps.ametro.ui.activities.MapList"
             android:label="@string/title_activity_map_list_view"
             android:exported="false"
             android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activities.Map" />
+                android:value="io.github.romangolovanov.apps.ametro.ui.activities.Map" />
         </activity>
         <activity
-            android:name=".ui.activities.SettingsList"
+            android:name="io.github.romangolovanov.apps.ametro.ui.activities.SettingsList"
             android:label="@string/title_activity_settings_list_view"
             android:exported="false"
             android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activities.Map" />
+                android:value="io.github.romangolovanov.apps.ametro.ui.activities.Map" />
         </activity>
         <activity
-            android:name=".ui.activities.StationDetails"
+            android:name="io.github.romangolovanov.apps.ametro.ui.activities.StationDetails"
             android:label="@string/title_activity_station_scheme_view"
             android:exported="false"
             android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activities.Map" />
+                android:value="io.github.romangolovanov.apps.ametro.ui.activities.Map" />
         </activity>
         <activity
-            android:name=".ui.activities.About"
+            android:name="io.github.romangolovanov.apps.ametro.ui.activities.About"
             android:label="@string/title_activity_about"
             android:exported="false"
             android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activities.Map" />
+                android:value="io.github.romangolovanov.apps.ametro.ui.activities.Map" />
         </activity>
     </application>
 
