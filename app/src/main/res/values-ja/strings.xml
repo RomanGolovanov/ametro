@@ -1,0 +1,102 @@
+<resources>
+    <string name="app_name">aMetro</string>
+
+    <string name="title_activity_map_view">aMetro</string>
+    <string name="title_activity_map_list_view">地図</string>
+    <string name="title_activity_city_list_view">地図を追加</string>
+    <string name="title_activity_map_details_view">地図の詳細</string>
+    <string name="title_activity_settings_list_view">設定</string>
+    <string name="title_activity_station_scheme_view">駅の図</string>
+    <string name="title_activity_about">概要</string>
+
+    <string name="msg_country_flag">国旗</string>
+    <string name="msg_map_list_downloading">ダウンロード中…</string>
+
+    <string name="msg_city_list_empty">都市がありません。</string>
+    <string name="msg_city_list_no_available_cities">利用可能な都市がありません。</string>
+    <string name="msg_city_list_no_connection">インターネット接続を確認するか、後でもう一度試してください。</string>
+
+    <string name="msg_map_list_empty">地図がありません。</string>
+    <string name="msg_map_list_no_installed_maps">インストールされた地図がありません。</string>
+    <string name="msg_map_list_tap_to_add_new_maps">画面をタップして利用可能な地図を表示。</string>
+
+    <string name="msg_no_maps_loaded">地図が選択されていません</string>
+    <string name="msg_press_to_add_map">画面をタップして地図一覧を表示</string>
+    <string name="msg_operation_interrupted">操作がキャンセルされました</string>
+    <string name="msg_download_progress">%s バイトをダウンロードしました</string>
+    <string name="msg_error">エラー: %s</string>
+    <string name="msg_some_maps_out_of_date">一部の地図は古くなっています。</string>
+
+    <string name="btn_open">開く</string>
+    <string name="btn_close">閉じる</string>
+    <string name="btn_download">ダウンロード</string>
+    <string name="btn_cancel">キャンセル</string>
+
+    <string name="drawer_open">ナビゲーションを開きました</string>
+    <string name="drawer_close">ナビゲーションを閉じました</string>
+
+    <string name="action_add">追加</string>
+    <string name="action_delete">削除</string>
+    <string name="action_update">更新</string>
+    <string name="action_search">検索</string>
+    <string name="action_select_all">すべて選択</string>
+    <string name="action_test_outdated">古いデータを確認</string>
+    <string name="action_settings">設定</string>
+    <string name="btn_flat_begin">開始</string>
+    <string name="btn_flat_end">終了</string>
+    <string name="btn_flat_station_details">情報</string>
+    <string name="btn_flat_close">閉じる</string>
+    <string name="msg_no_scheme_available_for_station">この駅には利用可能な図がありません</string>
+    <string name="tab_map">地図</string>
+    <string name="tab_about">概要</string>
+    <string name="msg_selected">選択済み</string>
+    <string name="nav_select_map">地図を変更</string>
+    <string name="nav_settings">設定</string>
+    <string name="nav_about">概要</string>
+    <string name="nav_options">オプション:</string>
+    <string name="nav_using">使用する交通機関:</string>
+    <string name="nav_schemes">図:</string>
+    <string name="nav_no_city">都市地図が読み込まれていません</string>
+    <string name="msg_from_to" formatted="false">%s - %s: %s</string>
+    <string name="msg_no_route_found" formatted="false">%s から %s への経路が見つかりません</string>
+    <string name="msg_map_loaded">地図を読み込みました: %s ミリ秒</string>
+    <string name="msg_map_loading_failed">地図の読み込みに失敗しました: %s</string>
+    <string name="msg_no_maps_selected">地図が選択されていません</string>
+    <string name="msg_maps_deleted">地図を削除しました</string>
+    <string name="msg_maps_updated">%s 件の地図を更新しました。</string>
+    <string name="msg_maps_all_updated">すべての地図は最新です</string>
+    <string name="msg_maps_updating">地図を更新中…</string>
+    <string name="title_activity_settings">設定</string>
+    <string name="msg_downloading">ダウンロード中…</string>
+    <string name="msg_map_loading_progress">地図 %s を読み込み中…</string>
+    <string name="msg_map_list_failed_to_download">地図リストのダウンロードに失敗しました</string>
+    <string name="nav_delays">時間帯:</string>
+    <string name="delay_type_custom">カスタム</string>
+    <string name="delay_type_day">昼</string>
+    <string name="delay_type_night">夜</string>
+    <string name="delay_type_evening">夕方</string>
+    <string name="delay_type_morning">朝</string>
+    <string name="delay_type_rush">ラッシュ時</string>
+    <string name="delay_type_direct">直通</string>
+    <string name="delay_type_west_north">西 - 北</string>
+    <string name="delay_type_west_south">西 - 南</string>
+    <string name="delay_type_west_east">西 - 東</string>
+    <string name="delay_type_east_north">東 - 北</string>
+    <string name="delay_type_east_south">東 - 南</string>
+    <string name="delay_type_east_west">東 - 西</string>
+    <string name="delay_type_north_east">北 - 東</string>
+    <string name="delay_type_north_west">北 - 西</string>
+    <string name="delay_type_north_south">北 - 南</string>
+    <string name="delay_type_south_east">南 - 東</string>
+    <string name="delay_type_south_west">南 - 西</string>
+    <string name="delay_type_south_north">南 - 北</string>
+    <string name="delay_weekdays_type_monday">月</string>
+    <string name="delay_weekdays_type_tuesday">火</string>
+    <string name="delay_weekdays_type_wednesday">水</string>
+    <string name="delay_weekdays_type_thursday">木</string>
+    <string name="delay_weekdays_type_friday">金</string>
+    <string name="delay_weekdays_type_saturday">土</string>
+    <string name="delay_weekdays_type_sunday">日</string>
+    <string name="delay_weekdays_type_workdays">月-金</string>
+    <string name="delay_weekdays_type_weekend">土-日</string>
+</resources>

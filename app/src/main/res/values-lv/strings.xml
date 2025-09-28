@@ -1,0 +1,102 @@
+<resources>
+    <string name="app_name">aMetro</string>
+
+    <string name="title_activity_map_view">aMetro</string>
+    <string name="title_activity_map_list_view">Kartes</string>
+    <string name="title_activity_city_list_view">Pievienot karti</string>
+    <string name="title_activity_map_details_view">Kartes detaļas</string>
+    <string name="title_activity_settings_list_view">Iestatījumi</string>
+    <string name="title_activity_station_scheme_view">Stacijas shēma</string>
+    <string name="title_activity_about">Par</string>
+
+    <string name="msg_country_flag">valsts karogs</string>
+    <string name="msg_map_list_downloading">Lejupielādē…</string>
+
+    <string name="msg_city_list_empty">Nav pilsētu.</string>
+    <string name="msg_city_list_no_available_cities">Nav pieejamu pilsētu.</string>
+    <string name="msg_city_list_no_connection">Pārbaudiet interneta savienojumu vai mēģiniet vēlreiz vēlāk.</string>
+
+    <string name="msg_map_list_empty">Nav kartes.</string>
+    <string name="msg_map_list_no_installed_maps">Nav instalētu karšu.</string>
+    <string name="msg_map_list_tap_to_add_new_maps">Pieskarieties ekrānam, lai skatītu pieejamās kartes.</string>
+
+    <string name="msg_no_maps_loaded">Karte nav atlasīta</string>
+    <string name="msg_press_to_add_map">Pieskarieties ekrānam, lai skatītu karšu sarakstu</string>
+    <string name="msg_operation_interrupted">Darbība atcelta</string>
+    <string name="msg_download_progress">Lejupielādēti %s baiti</string>
+    <string name="msg_error">Kļūda: %s</string>
+    <string name="msg_some_maps_out_of_date">Dažas kartes ir novecojušas.</string>
+
+    <string name="btn_open">Atvērt</string>
+    <string name="btn_close">Aizvērt</string>
+    <string name="btn_download">Lejupielādēt</string>
+    <string name="btn_cancel">Atcelt</string>
+
+    <string name="drawer_open">Navigācija atvērta</string>
+    <string name="drawer_close">Navigācija aizvērta</string>
+
+    <string name="action_add">Pievienot</string>
+    <string name="action_delete">Dzēst</string>
+    <string name="action_update">Atjaunināt</string>
+    <string name="action_search">Meklēt</string>
+    <string name="action_select_all">Atlasīt visu</string>
+    <string name="action_test_outdated">Testēt novecojušās</string>
+    <string name="action_settings">Iestatījumi</string>
+    <string name="btn_flat_begin">SĀKT</string>
+    <string name="btn_flat_end">BEIGAS</string>
+    <string name="btn_flat_station_details">INFO</string>
+    <string name="btn_flat_close">AIZVĒRT</string>
+    <string name="msg_no_scheme_available_for_station">Šai stacijai nav pieejama shēma</string>
+    <string name="tab_map">Karte</string>
+    <string name="tab_about">Par</string>
+    <string name="msg_selected">Atlasīts</string>
+    <string name="nav_select_map">Mainīt karti</string>
+    <string name="nav_settings">Iestatījumi</string>
+    <string name="nav_about">Par</string>
+    <string name="nav_options">Opcijas:</string>
+    <string name="nav_using">Izmanto transportu:</string>
+    <string name="nav_schemes">Shēmas:</string>
+    <string name="nav_no_city">Nav ielādēta pilsētas karte</string>
+    <string name="msg_from_to" formatted="false">%s - %s: %s</string>
+    <string name="msg_no_route_found" formatted="false">Nav atrasts maršruts no %s uz %s</string>
+    <string name="msg_map_loaded">Karte ielādēta, %s ms</string>
+    <string name="msg_map_loading_failed">Karti neizdevās ielādēt: %s</string>
+    <string name="msg_no_maps_selected">Nav atlasītas kartes</string>
+    <string name="msg_maps_deleted">Kartes izdzēstas</string>
+    <string name="msg_maps_updated">Atjauninātas %s kartes.</string>
+    <string name="msg_maps_all_updated">Visas kartes ir atjauninātas</string>
+    <string name="msg_maps_updating">Atjaunina kartes…</string>
+    <string name="title_activity_settings">Iestatījumi</string>
+    <string name="msg_downloading">Lejupielādē…</string>
+    <string name="msg_map_loading_progress">Ielādē karti %s…</string>
+    <string name="msg_map_list_failed_to_download">Neizdevās lejupielādēt karšu sarakstu</string>
+    <string name="nav_delays">Diennakts laiks:</string>
+    <string name="delay_type_custom">Pielāgots</string>
+    <string name="delay_type_day">Diena</string>
+    <string name="delay_type_night">Nakts</string>
+    <string name="delay_type_evening">Vakars</string>
+    <string name="delay_type_morning">Rīts</string>
+    <string name="delay_type_rush">Sastrēguma stundas</string>
+    <string name="delay_type_direct">Tiešs</string>
+    <string name="delay_type_west_north">Rietumi - Ziemeļi</string>
+    <string name="delay_type_west_south">Rietumi - Dienvidi</string>
+    <string name="delay_type_west_east">Rietumi - Austrumi</string>
+    <string name="delay_type_east_north">Austrumi - Ziemeļi</string>
+    <string name="delay_type_east_south">Austrumi - Dienvidi</string>
+    <string name="delay_type_east_west">Austrumi - Rietumi</string>
+    <string name="delay_type_north_east">Ziemeļi - Austrumi</string>
+    <string name="delay_type_north_west">Ziemeļi - Rietumi</string>
+    <string name="delay_type_north_south">Ziemeļi - Dienvidi</string>
+    <string name="delay_type_south_east">Dienvidi - Austrumi</string>
+    <string name="delay_type_south_west">Dienvidi - Rietumi</string>
+    <string name="delay_type_south_north">Dienvidi - Ziemeļi</string>
+    <string name="delay_weekdays_type_monday">Pirmd.</string>
+    <string name="delay_weekdays_type_tuesday">Otrd.</string>
+    <string name="delay_weekdays_type_wednesday">Trešd.</string>
+    <string name="delay_weekdays_type_thursday">Ceturtd.</string>
+    <string name="delay_weekdays_type_friday">Piektd.</string>
+    <string name="delay_weekdays_type_saturday">Sestd.</string>
+    <string name="delay_weekdays_type_sunday">Svētd.</string>
+    <string name="delay_weekdays_type_workdays">Pirmd.-Piektd.</string>
+    <string name="delay_weekdays_type_weekend">Sestd.-Svētd.</string>
+</resources>

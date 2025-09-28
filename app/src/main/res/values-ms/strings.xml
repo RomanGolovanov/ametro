@@ -1,0 +1,102 @@
+<resources>
+    <string name="app_name">aMetro</string>
+
+    <string name="title_activity_map_view">aMetro</string>
+    <string name="title_activity_map_list_view">Peta</string>
+    <string name="title_activity_city_list_view">Tambah peta</string>
+    <string name="title_activity_map_details_view">Butiran peta</string>
+    <string name="title_activity_settings_list_view">Tetapan</string>
+    <string name="title_activity_station_scheme_view">Skema stesen</string>
+    <string name="title_activity_about">Perihal</string>
+
+    <string name="msg_country_flag">bendera negara</string>
+    <string name="msg_map_list_downloading">Sedang memuat turun…</string>
+
+    <string name="msg_city_list_empty">Tiada bandar.</string>
+    <string name="msg_city_list_no_available_cities">Tiada bandar tersedia.</string>
+    <string name="msg_city_list_no_connection">Sila semak sambungan internet atau cuba lagi kemudian.</string>
+
+    <string name="msg_map_list_empty">Tiada peta.</string>
+    <string name="msg_map_list_no_installed_maps">Tiada peta dipasang.</string>
+    <string name="msg_map_list_tap_to_add_new_maps">Ketuk skrin untuk memaparkan peta yang tersedia.</string>
+
+    <string name="msg_no_maps_loaded">Tiada peta dipilih</string>
+    <string name="msg_press_to_add_map">Ketuk skrin untuk memaparkan senarai peta</string>
+    <string name="msg_operation_interrupted">Operasi dibatalkan</string>
+    <string name="msg_download_progress">%s bait dimuat turun</string>
+    <string name="msg_error">Ralat: %s</string>
+    <string name="msg_some_maps_out_of_date">Beberapa peta sudah lapuk.</string>
+
+    <string name="btn_open">Buka</string>
+    <string name="btn_close">Tutup</string>
+    <string name="btn_download">Muat turun</string>
+    <string name="btn_cancel">Batal</string>
+
+    <string name="drawer_open">Navigasi dibuka</string>
+    <string name="drawer_close">Navigasi ditutup</string>
+
+    <string name="action_add">Tambah</string>
+    <string name="action_delete">Padam</string>
+    <string name="action_update">Kemas kini</string>
+    <string name="action_search">Cari</string>
+    <string name="action_select_all">Pilih semua</string>
+    <string name="action_test_outdated">Uji lapuk</string>
+    <string name="action_settings">Tetapan</string>
+    <string name="btn_flat_begin">MULA</string>
+    <string name="btn_flat_end">TAMAT</string>
+    <string name="btn_flat_station_details">INFO</string>
+    <string name="btn_flat_close">TUTUP</string>
+    <string name="msg_no_scheme_available_for_station">Tiada skema tersedia untuk stesen ini</string>
+    <string name="tab_map">Peta</string>
+    <string name="tab_about">Perihal</string>
+    <string name="msg_selected">Dipilih</string>
+    <string name="nav_select_map">Tukar peta</string>
+    <string name="nav_settings">Tetapan</string>
+    <string name="nav_about">Perihal</string>
+    <string name="nav_options">Pilihan:</string>
+    <string name="nav_using">Menggunakan pengangkutan:</string>
+    <string name="nav_schemes">Skema:</string>
+    <string name="nav_no_city">Tiada peta bandar dimuatkan</string>
+    <string name="msg_from_to" formatted="false">%s - %s: %s</string>
+    <string name="msg_no_route_found" formatted="false">Tiada laluan ditemui dari %s ke %s</string>
+    <string name="msg_map_loaded">Peta dimuatkan, %s ms</string>
+    <string name="msg_map_loading_failed">Pemuatan peta gagal: %s</string>
+    <string name="msg_no_maps_selected">Tiada peta dipilih</string>
+    <string name="msg_maps_deleted">Peta dipadam</string>
+    <string name="msg_maps_updated">%s peta dikemas kini.</string>
+    <string name="msg_maps_all_updated">Semua peta adalah terkini</string>
+    <string name="msg_maps_updating">Mengemas kini peta…</string>
+    <string name="title_activity_settings">Tetapan</string>
+    <string name="msg_downloading">Sedang memuat turun…</string>
+    <string name="msg_map_loading_progress">Memuatkan peta %s…</string>
+    <string name="msg_map_list_failed_to_download">Senarai peta gagal dimuat turun</string>
+    <string name="nav_delays">Waktu dalam sehari:</string>
+    <string name="delay_type_custom">Tersuai</string>
+    <string name="delay_type_day">Siang</string>
+    <string name="delay_type_night">Malam</string>
+    <string name="delay_type_evening">Petang</string>
+    <string name="delay_type_morning">Pagi</string>
+    <string name="delay_type_rush">Waktu puncak</string>
+    <string name="delay_type_direct">Terus</string>
+    <string name="delay_type_west_north">Barat - Utara</string>
+    <string name="delay_type_west_south">Barat - Selatan</string>
+    <string name="delay_type_west_east">Barat - Timur</string>
+    <string name="delay_type_east_north">Timur - Utara</string>
+    <string name="delay_type_east_south">Timur - Selatan</string>
+    <string name="delay_type_east_west">Timur - Barat</string>
+    <string name="delay_type_north_east">Utara - Timur</string>
+    <string name="delay_type_north_west">Utara - Barat</string>
+    <string name="delay_type_north_south">Utara - Selatan</string>
+    <string name="delay_type_south_east">Selatan - Timur</string>
+    <string name="delay_type_south_west">Selatan - Barat</string>
+    <string name="delay_type_south_north">Selatan - Utara</string>
+    <string name="delay_weekdays_type_monday">Isn</string>
+    <string name="delay_weekdays_type_tuesday">Sel</string>
+    <string name="delay_weekdays_type_wednesday">Rab</string>
+    <string name="delay_weekdays_type_thursday">Kha</string>
+    <string name="delay_weekdays_type_friday">Jum</string>
+    <string name="delay_weekdays_type_saturday">Sab</string>
+    <string name="delay_weekdays_type_sunday">Ahd</string>
+    <string name="delay_weekdays_type_workdays">Isn-Jum</string>
+    <string name="delay_weekdays_type_weekend">Sab-Ahd</string>
+</resources>

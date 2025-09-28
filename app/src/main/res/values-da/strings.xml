@@ -1,0 +1,102 @@
+<resources>
+    <string name="app_name">aMetro</string>
+
+    <string name="title_activity_map_view">aMetro</string>
+    <string name="title_activity_map_list_view">Kort</string>
+    <string name="title_activity_city_list_view">Tilføj kort</string>
+    <string name="title_activity_map_details_view">Kortdetaljer</string>
+    <string name="title_activity_settings_list_view">Indstillinger</string>
+    <string name="title_activity_station_scheme_view">Stationsskema</string>
+    <string name="title_activity_about">Om</string>
+
+    <string name="msg_country_flag">landeflag</string>
+    <string name="msg_map_list_downloading">Downloader…</string>
+
+    <string name="msg_city_list_empty">Ingen byer.</string>
+    <string name="msg_city_list_no_available_cities">Ingen tilgængelige byer.</string>
+    <string name="msg_city_list_no_connection">Kontrollér internetforbindelsen eller prøv igen senere.</string>
+
+    <string name="msg_map_list_empty">Ingen kort.</string>
+    <string name="msg_map_list_no_installed_maps">Ingen installerede kort.</string>
+    <string name="msg_map_list_tap_to_add_new_maps">Tryk på skærmen for at vise tilgængelige kort.</string>
+
+    <string name="msg_no_maps_loaded">Intet kort valgt</string>
+    <string name="msg_press_to_add_map">Tryk på skærmen for at vise kortlisten</string>
+    <string name="msg_operation_interrupted">Handling annulleret</string>
+    <string name="msg_download_progress">%s byte hentet</string>
+    <string name="msg_error">Fejl: %s</string>
+    <string name="msg_some_maps_out_of_date">Nogle kort er forældede.</string>
+
+    <string name="btn_open">Åbn</string>
+    <string name="btn_close">Luk</string>
+    <string name="btn_download">Hent</string>
+    <string name="btn_cancel">Annuller</string>
+
+    <string name="drawer_open">Navigation åbnet</string>
+    <string name="drawer_close">Navigation lukket</string>
+
+    <string name="action_add">Tilføj</string>
+    <string name="action_delete">Slet</string>
+    <string name="action_update">Opdater</string>
+    <string name="action_search">Søg</string>
+    <string name="action_select_all">Vælg alle</string>
+    <string name="action_test_outdated">Test forældede</string>
+    <string name="action_settings">Indstillinger</string>
+    <string name="btn_flat_begin">START</string>
+    <string name="btn_flat_end">SLUT</string>
+    <string name="btn_flat_station_details">INFO</string>
+    <string name="btn_flat_close">LUK</string>
+    <string name="msg_no_scheme_available_for_station">Intet skema tilgængeligt for stationen</string>
+    <string name="tab_map">Kort</string>
+    <string name="tab_about">Om</string>
+    <string name="msg_selected">Valgt</string>
+    <string name="nav_select_map">Skift kort</string>
+    <string name="nav_settings">Indstillinger</string>
+    <string name="nav_about">Om</string>
+    <string name="nav_options">Muligheder:</string>
+    <string name="nav_using">Bruger transport:</string>
+    <string name="nav_schemes">Skemaer:</string>
+    <string name="nav_no_city">Intet bykort indlæst</string>
+    <string name="msg_from_to" formatted="false">%s - %s: %s</string>
+    <string name="msg_no_route_found" formatted="false">Ingen rute fundet fra %s til %s</string>
+    <string name="msg_map_loaded">Kort indlæst, %s ms</string>
+    <string name="msg_map_loading_failed">Kortindlæsning mislykkedes: %s</string>
+    <string name="msg_no_maps_selected">Ingen kort valgt</string>
+    <string name="msg_maps_deleted">Kort slettet</string>
+    <string name="msg_maps_updated">%s kort opdateret.</string>
+    <string name="msg_maps_all_updated">Alle kort er opdateret</string>
+    <string name="msg_maps_updating">Opdaterer kort…</string>
+    <string name="title_activity_settings">Indstillinger</string>
+    <string name="msg_downloading">Downloader…</string>
+    <string name="msg_map_loading_progress">Indlæser kort %s…</string>
+    <string name="msg_map_list_failed_to_download">Kunne ikke hente kortlisten</string>
+    <string name="nav_delays">Tid på dagen:</string>
+    <string name="delay_type_custom">Brugerdefineret</string>
+    <string name="delay_type_day">Dag</string>
+    <string name="delay_type_night">Nat</string>
+    <string name="delay_type_evening">Aften</string>
+    <string name="delay_type_morning">Morgen</string>
+    <string name="delay_type_rush">Myldretid</string>
+    <string name="delay_type_direct">Direkte</string>
+    <string name="delay_type_west_north">Vest - Nord</string>
+    <string name="delay_type_west_south">Vest - Syd</string>
+    <string name="delay_type_west_east">Vest - Øst</string>
+    <string name="delay_type_east_north">Øst - Nord</string>
+    <string name="delay_type_east_south">Øst - Syd</string>
+    <string name="delay_type_east_west">Øst - Vest</string>
+    <string name="delay_type_north_east">Nord - Øst</string>
+    <string name="delay_type_north_west">Nord - Vest</string>
+    <string name="delay_type_north_south">Nord - Syd</string>
+    <string name="delay_type_south_east">Syd - Øst</string>
+    <string name="delay_type_south_west">Syd - Vest</string>
+    <string name="delay_type_south_north">Syd - Nord</string>
+    <string name="delay_weekdays_type_monday">Man</string>
+    <string name="delay_weekdays_type_tuesday">Tir</string>
+    <string name="delay_weekdays_type_wednesday">Ons</string>
+    <string name="delay_weekdays_type_thursday">Tor</string>
+    <string name="delay_weekdays_type_friday">Fre</string>
+    <string name="delay_weekdays_type_saturday">Lør</string>
+    <string name="delay_weekdays_type_sunday">Søn</string>
+    <string name="delay_weekdays_type_workdays">Man-Fre</string>
+    <string name="delay_weekdays_type_weekend">Lør-Søn</string>
+</resources>

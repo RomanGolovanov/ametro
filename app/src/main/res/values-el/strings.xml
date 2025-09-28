@@ -1,0 +1,102 @@
+<resources>
+    <string name="app_name">aMetro</string>
+
+    <string name="title_activity_map_view">aMetro</string>
+    <string name="title_activity_map_list_view">Χάρτες</string>
+    <string name="title_activity_city_list_view">Προσθήκη χάρτη</string>
+    <string name="title_activity_map_details_view">Λεπτομέρειες χάρτη</string>
+    <string name="title_activity_settings_list_view">Ρυθμίσεις</string>
+    <string name="title_activity_station_scheme_view">Σχέδιο σταθμού</string>
+    <string name="title_activity_about">Σχετικά</string>
+
+    <string name="msg_country_flag">σημαία χώρας</string>
+    <string name="msg_map_list_downloading">Γίνεται λήψη…</string>
+
+    <string name="msg_city_list_empty">Δεν υπάρχουν πόλεις.</string>
+    <string name="msg_city_list_no_available_cities">Δεν υπάρχουν διαθέσιμες πόλεις.</string>
+    <string name="msg_city_list_no_connection">Ελέγξτε τη σύνδεση στο διαδίκτυο ή δοκιμάστε αργότερα.</string>
+
+    <string name="msg_map_list_empty">Δεν υπάρχουν χάρτες.</string>
+    <string name="msg_map_list_no_installed_maps">Δεν υπάρχουν εγκατεστημένοι χάρτες.</string>
+    <string name="msg_map_list_tap_to_add_new_maps">Πατήστε την οθόνη για να δείτε διαθέσιμους χάρτες.</string>
+
+    <string name="msg_no_maps_loaded">Δεν επιλέχθηκε χάρτης</string>
+    <string name="msg_press_to_add_map">Πατήστε την οθόνη για να δείτε τη λίστα χαρτών</string>
+    <string name="msg_operation_interrupted">Η λειτουργία ακυρώθηκε</string>
+    <string name="msg_download_progress">Λήφθηκαν %s byte</string>
+    <string name="msg_error">Σφάλμα: %s</string>
+    <string name="msg_some_maps_out_of_date">Μερικοί χάρτες είναι παλιοί.</string>
+
+    <string name="btn_open">Άνοιγμα</string>
+    <string name="btn_close">Κλείσιμο</string>
+    <string name="btn_download">Λήψη</string>
+    <string name="btn_cancel">Ακύρωση</string>
+
+    <string name="drawer_open">Η πλοήγηση άνοιξε</string>
+    <string name="drawer_close">Η πλοήγηση έκλεισε</string>
+
+    <string name="action_add">Προσθήκη</string>
+    <string name="action_delete">Διαγραφή</string>
+    <string name="action_update">Ενημέρωση</string>
+    <string name="action_search">Αναζήτηση</string>
+    <string name="action_select_all">Επιλογή όλων</string>
+    <string name="action_test_outdated">Έλεγχος παλιών</string>
+    <string name="action_settings">Ρυθμίσεις</string>
+    <string name="btn_flat_begin">ΑΡΧΗ</string>
+    <string name="btn_flat_end">ΤΕΛΟΣ</string>
+    <string name="btn_flat_station_details">ΠΛΗΡΟΦ.</string>
+    <string name="btn_flat_close">ΚΛΕΙΣΙΜΟ</string>
+    <string name="msg_no_scheme_available_for_station">Δεν υπάρχει διαθέσιμο σχέδιο για τον σταθμό</string>
+    <string name="tab_map">Χάρτης</string>
+    <string name="tab_about">Σχετικά</string>
+    <string name="msg_selected">Επιλέχθηκε</string>
+    <string name="nav_select_map">Αλλαγή χάρτη</string>
+    <string name="nav_settings">Ρυθμίσεις</string>
+    <string name="nav_about">Σχετικά</string>
+    <string name="nav_options">Επιλογές:</string>
+    <string name="nav_using">Μέσο μεταφοράς:</string>
+    <string name="nav_schemes">Σχέδια:</string>
+    <string name="nav_no_city">Δεν φορτώθηκε χάρτης πόλης</string>
+    <string name="msg_from_to" formatted="false">%s - %s: %s</string>
+    <string name="msg_no_route_found" formatted="false">Δεν βρέθηκε διαδρομή από %s σε %s</string>
+    <string name="msg_map_loaded">Ο χάρτης φορτώθηκε, %s ms</string>
+    <string name="msg_map_loading_failed">Αποτυχία φόρτωσης χάρτη: %s</string>
+    <string name="msg_no_maps_selected">Δεν επιλέχθηκαν χάρτες</string>
+    <string name="msg_maps_deleted">Οι χάρτες διαγράφηκαν</string>
+    <string name="msg_maps_updated">%s χάρτες ενημερώθηκαν.</string>
+    <string name="msg_maps_all_updated">Όλοι οι χάρτες είναι ενημερωμένοι</string>
+    <string name="msg_maps_updating">Γίνεται ενημέρωση χαρτών…</string>
+    <string name="title_activity_settings">Ρυθμίσεις</string>
+    <string name="msg_downloading">Γίνεται λήψη…</string>
+    <string name="msg_map_loading_progress">Φόρτωση χάρτη %s…</string>
+    <string name="msg_map_list_failed_to_download">Αποτυχία λήψης λίστας χαρτών</string>
+    <string name="nav_delays">Ώρα της ημέρας:</string>
+    <string name="delay_type_custom">Προσαρμοσμένο</string>
+    <string name="delay_type_day">Ημέρα</string>
+    <string name="delay_type_night">Νύχτα</string>
+    <string name="delay_type_evening">Βράδυ</string>
+    <string name="delay_type_morning">Πρωί</string>
+    <string name="delay_type_rush">Ώρες αιχμής</string>
+    <string name="delay_type_direct">Άμεσο</string>
+    <string name="delay_type_west_north">Δύση - Βορράς</string>
+    <string name="delay_type_west_south">Δύση - Νότος</string>
+    <string name="delay_type_west_east">Δύση - Ανατολή</string>
+    <string name="delay_type_east_north">Ανατολή - Βορράς</string>
+    <string name="delay_type_east_south">Ανατολή - Νότος</string>
+    <string name="delay_type_east_west">Ανατολή - Δύση</string>
+    <string name="delay_type_north_east">Βορράς - Ανατολή</string>
+    <string name="delay_type_north_west">Βορράς - Δύση</string>
+    <string name="delay_type_north_south">Βορράς - Νότος</string>
+    <string name="delay_type_south_east">Νότος - Ανατολή</string>
+    <string name="delay_type_south_west">Νότος - Δύση</string>
+    <string name="delay_type_south_north">Νότος - Βορράς</string>
+    <string name="delay_weekdays_type_monday">Δευ</string>
+    <string name="delay_weekdays_type_tuesday">Τρι</string>
+    <string name="delay_weekdays_type_wednesday">Τετ</string>
+    <string name="delay_weekdays_type_thursday">Πεμ</string>
+    <string name="delay_weekdays_type_friday">Παρ</string>
+    <string name="delay_weekdays_type_saturday">Σαβ</string>
+    <string name="delay_weekdays_type_sunday">Κυρ</string>
+    <string name="delay_weekdays_type_workdays">Δευ-Παρ</string>
+    <string name="delay_weekdays_type_weekend">Σαβ-Κυρ</string>
+</resources>

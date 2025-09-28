@@ -1,0 +1,102 @@
+<resources>
+    <string name="app_name">aMetro</string>
+
+    <string name="title_activity_map_view">aMetro</string>
+    <string name="title_activity_map_list_view">Mapy</string>
+    <string name="title_activity_city_list_view">Přidat mapu</string>
+    <string name="title_activity_map_details_view">Podrobnosti mapy</string>
+    <string name="title_activity_settings_list_view">Nastavení</string>
+    <string name="title_activity_station_scheme_view">Schéma stanice</string>
+    <string name="title_activity_about">O aplikaci</string>
+
+    <string name="msg_country_flag">vlajka státu</string>
+    <string name="msg_map_list_downloading">Stahování…</string>
+
+    <string name="msg_city_list_empty">Žádná města.</string>
+    <string name="msg_city_list_no_available_cities">Žádná dostupná města.</string>
+    <string name="msg_city_list_no_connection">Zkontrolujte připojení k internetu nebo to zkuste později.</string>
+
+    <string name="msg_map_list_empty">Žádné mapy.</string>
+    <string name="msg_map_list_no_installed_maps">Žádné nainstalované mapy.</string>
+    <string name="msg_map_list_tap_to_add_new_maps">Klepněte na obrazovku pro zobrazení dostupných map.</string>
+
+    <string name="msg_no_maps_loaded">Nebyla vybrána žádná mapa</string>
+    <string name="msg_press_to_add_map">Klepněte na obrazovku pro zobrazení seznamu map</string>
+    <string name="msg_operation_interrupted">Operace zrušena</string>
+    <string name="msg_download_progress">Staženo %s bajtů</string>
+    <string name="msg_error">Chyba: %s</string>
+    <string name="msg_some_maps_out_of_date">Některé mapy jsou zastaralé.</string>
+
+    <string name="btn_open">Otevřít</string>
+    <string name="btn_close">Zavřít</string>
+    <string name="btn_download">Stáhnout</string>
+    <string name="btn_cancel">Zrušit</string>
+
+    <string name="drawer_open">Navigace otevřena</string>
+    <string name="drawer_close">Navigace zavřena</string>
+
+    <string name="action_add">Přidat</string>
+    <string name="action_delete">Smazat</string>
+    <string name="action_update">Aktualizovat</string>
+    <string name="action_search">Hledat</string>
+    <string name="action_select_all">Vybrat vše</string>
+    <string name="action_test_outdated">Test zastaralých</string>
+    <string name="action_settings">Nastavení</string>
+    <string name="btn_flat_begin">ZAČÁTEK</string>
+    <string name="btn_flat_end">KONEC</string>
+    <string name="btn_flat_station_details">INFO</string>
+    <string name="btn_flat_close">ZAVŘÍT</string>
+    <string name="msg_no_scheme_available_for_station">Pro tuto stanici není dostupné schéma</string>
+    <string name="tab_map">Mapa</string>
+    <string name="tab_about">O aplikaci</string>
+    <string name="msg_selected">Vybráno</string>
+    <string name="nav_select_map">Změnit mapu</string>
+    <string name="nav_settings">Nastavení</string>
+    <string name="nav_about">O aplikaci</string>
+    <string name="nav_options">Možnosti:</string>
+    <string name="nav_using">Používá dopravu:</string>
+    <string name="nav_schemes">Schémata:</string>
+    <string name="nav_no_city">Nebyla načtena žádná mapa města</string>
+    <string name="msg_from_to" formatted="false">%s - %s: %s</string>
+    <string name="msg_no_route_found" formatted="false">Nenalezena trasa z %s do %s</string>
+    <string name="msg_map_loaded">Mapa načtena, %s ms</string>
+    <string name="msg_map_loading_failed">Načtení mapy selhalo: %s</string>
+    <string name="msg_no_maps_selected">Nebyly vybrány žádné mapy</string>
+    <string name="msg_maps_deleted">Mapy smazány</string>
+    <string name="msg_maps_updated">Aktualizováno map: %s</string>
+    <string name="msg_maps_all_updated">Všechny mapy jsou aktuální</string>
+    <string name="msg_maps_updating">Aktualizace map…</string>
+    <string name="title_activity_settings">Nastavení</string>
+    <string name="msg_downloading">Stahování…</string>
+    <string name="msg_map_loading_progress">Načítání mapy %s…</string>
+    <string name="msg_map_list_failed_to_download">Nepodařilo se stáhnout seznam map</string>
+    <string name="nav_delays">Denní doba:</string>
+    <string name="delay_type_custom">Vlastní</string>
+    <string name="delay_type_day">Den</string>
+    <string name="delay_type_night">Noc</string>
+    <string name="delay_type_evening">Večer</string>
+    <string name="delay_type_morning">Ráno</string>
+    <string name="delay_type_rush">Špička</string>
+    <string name="delay_type_direct">Přímý</string>
+    <string name="delay_type_west_north">Západ - Sever</string>
+    <string name="delay_type_west_south">Západ - Jih</string>
+    <string name="delay_type_west_east">Západ - Východ</string>
+    <string name="delay_type_east_north">Východ - Sever</string>
+    <string name="delay_type_east_south">Východ - Jih</string>
+    <string name="delay_type_east_west">Východ - Západ</string>
+    <string name="delay_type_north_east">Sever - Východ</string>
+    <string name="delay_type_north_west">Sever - Západ</string>
+    <string name="delay_type_north_south">Sever - Jih</string>
+    <string name="delay_type_south_east">Jih - Východ</string>
+    <string name="delay_type_south_west">Jih - Západ</string>
+    <string name="delay_type_south_north">Jih - Sever</string>
+    <string name="delay_weekdays_type_monday">Po</string>
+    <string name="delay_weekdays_type_tuesday">Út</string>
+    <string name="delay_weekdays_type_wednesday">St</string>
+    <string name="delay_weekdays_type_thursday">Čt</string>
+    <string name="delay_weekdays_type_friday">Pá</string>
+    <string name="delay_weekdays_type_saturday">So</string>
+    <string name="delay_weekdays_type_sunday">Ne</string>
+    <string name="delay_weekdays_type_workdays">Po-Pá</string>
+    <string name="delay_weekdays_type_weekend">So-Ne</string>
+</resources>

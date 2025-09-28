@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">aMetro</string>
+
+    <string name="title_activity_map_view">aMetro</string>
+    <string name="title_activity_map_list_view">Mapas</string>
+    <string name="title_activity_city_list_view">Adicionar mapa</string>
+    <string name="title_activity_map_details_view">Detalhes do mapa</string>
+    <string name="title_activity_settings_list_view">Configurações</string>
+    <string name="title_activity_station_scheme_view">Esquema da estação</string>
+    <string name="title_activity_about">Sobre</string>
+
+    <string name="msg_country_flag">bandeira do país</string>
+    <string name="msg_map_list_downloading">Baixando…</string>
+
+    <string name="msg_city_list_empty">Nenhuma cidade.</string>
+    <string name="msg_city_list_no_available_cities">Nenhuma cidade disponível.</string>
+    <string name="msg_city_list_no_connection">Verifique a conexão com a Internet ou tente novamente mais tarde.</string>
+
+    <string name="msg_map_list_empty">Nenhum mapa.</string>
+    <string name="msg_map_list_no_installed_maps">Nenhum mapa instalado.</string>
+    <string name="msg_map_list_tap_to_add_new_maps">Toque na tela para mostrar os mapas disponíveis.</string>
+
+    <string name="msg_no_maps_loaded">Nenhum mapa selecionado</string>
+    <string name="msg_press_to_add_map">Toque na tela para mostrar a lista de mapas</string>
+    <string name="msg_operation_interrupted">Operação cancelada</string>
+    <string name="msg_download_progress">%s bytes baixados</string>
+    <string name="msg_error">Erro: %s</string>
+    <string name="msg_some_maps_out_of_date">Alguns mapas estão desatualizados.</string>
+
+    <string name="btn_open">Abrir</string>
+    <string name="btn_close">Fechar</string>
+    <string name="btn_download">Baixar</string>
+    <string name="btn_cancel">Cancelar</string>
+
+    <string name="drawer_open">Navegação aberta</string>
+    <string name="drawer_close">Navegação fechada</string>
+
+    <string name="action_add">Adicionar</string>
+    <string name="action_delete">Excluir</string>
+    <string name="action_update">Atualizar</string>
+    <string name="action_search">Pesquisar</string>
+    <string name="action_select_all">Selecionar tudo</string>
+    <string name="action_test_outdated">Testar desatualizado</string>
+    <string name="action_settings">Configurações</string>
+    <string name="btn_flat_begin">INÍCIO</string>
+    <string name="btn_flat_end">FIM</string>
+    <string name="btn_flat_station_details">INFO</string>
+    <string name="btn_flat_close">FECHAR</string>
+    <string name="msg_no_scheme_available_for_station">Nenhum esquema disponível para esta estação</string>
+    <string name="tab_map">Mapa</string>
+    <string name="tab_about">Sobre</string>
+    <string name="msg_selected">Selecionado</string>
+    <string name="nav_select_map">Trocar mapa</string>
+    <string name="nav_settings">Configurações</string>
+    <string name="nav_about">Sobre</string>
+    <string name="nav_options">Opções:</string>
+    <string name="nav_using">Usando transporte:</string>
+    <string name="nav_schemes">Esquemas:</string>
+    <string name="nav_no_city">Nenhum mapa da cidade carregado</string>
+    <string name="msg_from_to" formatted="false">%s - %s: %s</string>
+    <string name="msg_no_route_found" formatted="false">Nenhuma rota encontrada de %s para %s</string>
+    <string name="msg_map_loaded">Mapa carregado, %s ms</string>
+    <string name="msg_map_loading_failed">Falha ao carregar mapa: %s</string>
+    <string name="msg_no_maps_selected">Nenhum mapa selecionado</string>
+    <string name="msg_maps_deleted">Mapas excluídos</string>
+    <string name="msg_maps_updated">%s mapas atualizados.</string>
+    <string name="msg_maps_all_updated">Todos os mapas estão atualizados</string>
+    <string name="msg_maps_updating">Atualizando mapas…</string>
+    <string name="title_activity_settings">Configurações</string>
+    <string name="msg_downloading">Baixando…</string>
+    <string name="msg_map_loading_progress">Carregando mapa %s…</string>
+    <string name="msg_map_list_failed_to_download">Falha ao baixar a lista de mapas</string>
+    <string name="nav_delays">Hora do dia:</string>
+    <string name="delay_type_custom">Personalizado</string>
+    <string name="delay_type_day">Dia</string>
+    <string name="delay_type_night">Noite</string>
+    <string name="delay_type_evening">Noite</string>
+    <string name="delay_type_morning">Manhã</string>
+    <string name="delay_type_rush">Horário de pico</string>
+    <string name="delay_type_direct">Direto</string>
+    <string name="delay_type_west_north">Oeste - Norte</string>
+    <string name="delay_type_west_south">Oeste - Sul</string>
+    <string name="delay_type_west_east">Oeste - Leste</string>
+    <string name="delay_type_east_north">Leste - Norte</string>
+    <string name="delay_type_east_south">Leste - Sul</string>
+    <string name="delay_type_east_west">Leste - Oeste</string>
+    <string name="delay_type_north_east">Norte - Leste</string>
+    <string name="delay_type_north_west">Norte - Oeste</string>
+    <string name="delay_type_north_south">Norte - Sul</string>
+    <string name="delay_type_south_east">Sul - Leste</string>
+    <string name="delay_type_south_west">Sul - Oeste</string>
+    <string name="delay_type_south_north">Sul - Norte</string>
+    <string name="delay_weekdays_type_monday">Seg.</string>
+    <string name="delay_weekdays_type_tuesday">Ter.</string>
+    <string name="delay_weekdays_type_wednesday">Qua.</string>
+    <string name="delay_weekdays_type_thursday">Qui.</string>
+    <string name="delay_weekdays_type_friday">Sex.</string>
+    <string name="delay_weekdays_type_saturday">Sáb.</string>
+    <string name="delay_weekdays_type_sunday">Dom.</string>
+    <string name="delay_weekdays_type_workdays">Seg.-Sex.</string>
+    <string name="delay_weekdays_type_weekend">Sáb.-Dom.</string>
+</resources>

@@ -1,0 +1,102 @@
+<resources>
+    <string name="app_name">aMetro</string>
+
+    <string name="title_activity_map_view">aMetro</string>
+    <string name="title_activity_map_list_view">Žemėlapiai</string>
+    <string name="title_activity_city_list_view">Pridėti žemėlapį</string>
+    <string name="title_activity_map_details_view">Žemėlapio informacija</string>
+    <string name="title_activity_settings_list_view">Nustatymai</string>
+    <string name="title_activity_station_scheme_view">Stoties schema</string>
+    <string name="title_activity_about">Apie</string>
+
+    <string name="msg_country_flag">valstybės vėliava</string>
+    <string name="msg_map_list_downloading">Atsisiunčiama…</string>
+
+    <string name="msg_city_list_empty">Nėra miestų.</string>
+    <string name="msg_city_list_no_available_cities">Nėra galimų miestų.</string>
+    <string name="msg_city_list_no_connection">Patikrinkite interneto ryšį arba bandykite dar kartą vėliau.</string>
+
+    <string name="msg_map_list_empty">Nėra žemėlapių.</string>
+    <string name="msg_map_list_no_installed_maps">Nėra įdiegtų žemėlapių.</string>
+    <string name="msg_map_list_tap_to_add_new_maps">Bakstelėkite ekraną, kad pamatytumėte galimus žemėlapius.</string>
+
+    <string name="msg_no_maps_loaded">Nepasirinktas joks žemėlapis</string>
+    <string name="msg_press_to_add_map">Bakstelėkite ekraną, kad pamatytumėte žemėlapių sąrašą</string>
+    <string name="msg_operation_interrupted">Veiksmas nutrauktas</string>
+    <string name="msg_download_progress">%s baitų atsisiųsta</string>
+    <string name="msg_error">Klaida: %s</string>
+    <string name="msg_some_maps_out_of_date">Kai kurie žemėlapiai pasenę.</string>
+
+    <string name="btn_open">Atidaryti</string>
+    <string name="btn_close">Uždaryti</string>
+    <string name="btn_download">Atsisiųsti</string>
+    <string name="btn_cancel">Atšaukti</string>
+
+    <string name="drawer_open">Navigacija atidaryta</string>
+    <string name="drawer_close">Navigacija uždaryta</string>
+
+    <string name="action_add">Pridėti</string>
+    <string name="action_delete">Ištrinti</string>
+    <string name="action_update">Atnaujinti</string>
+    <string name="action_search">Ieškoti</string>
+    <string name="action_select_all">Pažymėti viską</string>
+    <string name="action_test_outdated">Patikrinti pasenusius</string>
+    <string name="action_settings">Nustatymai</string>
+    <string name="btn_flat_begin">PRADŽIA</string>
+    <string name="btn_flat_end">PABAIGA</string>
+    <string name="btn_flat_station_details">INFO</string>
+    <string name="btn_flat_close">UŽDARYTI</string>
+    <string name="msg_no_scheme_available_for_station">Šiai stočiai schema neprieinama</string>
+    <string name="tab_map">Žemėlapis</string>
+    <string name="tab_about">Apie</string>
+    <string name="msg_selected">Pasirinkta</string>
+    <string name="nav_select_map">Keisti žemėlapį</string>
+    <string name="nav_settings">Nustatymai</string>
+    <string name="nav_about">Apie</string>
+    <string name="nav_options">Parinktys:</string>
+    <string name="nav_using">Naudojant transportą:</string>
+    <string name="nav_schemes">Schemos:</string>
+    <string name="nav_no_city">Nėra įkelto miesto žemėlapio</string>
+    <string name="msg_from_to" formatted="false">%s - %s: %s</string>
+    <string name="msg_no_route_found" formatted="false">Nerasta maršruto iš %s į %s</string>
+    <string name="msg_map_loaded">Žemėlapis įkeltas, %s ms</string>
+    <string name="msg_map_loading_failed">Nepavyko įkelti žemėlapio: %s</string>
+    <string name="msg_no_maps_selected">Nepasirinkti jokie žemėlapiai</string>
+    <string name="msg_maps_deleted">Žemėlapiai ištrinti</string>
+    <string name="msg_maps_updated">Atnaujinta žemėlapių: %s</string>
+    <string name="msg_maps_all_updated">Visi žemėlapiai yra naujausi</string>
+    <string name="msg_maps_updating">Atnaujinami žemėlapiai…</string>
+    <string name="title_activity_settings">Nustatymai</string>
+    <string name="msg_downloading">Atsisiunčiama…</string>
+    <string name="msg_map_loading_progress">Įkeliamas žemėlapis %s…</string>
+    <string name="msg_map_list_failed_to_download">Nepavyko atsisiųsti žemėlapių sąrašo</string>
+    <string name="nav_delays">Dienos laikas:</string>
+    <string name="delay_type_custom">Pasirinktinis</string>
+    <string name="delay_type_day">Diena</string>
+    <string name="delay_type_night">Naktis</string>
+    <string name="delay_type_evening">Vakare</string>
+    <string name="delay_type_morning">Rytas</string>
+    <string name="delay_type_rush">Piko valandos</string>
+    <string name="delay_type_direct">Tiesioginis</string>
+    <string name="delay_type_west_north">Vakarai - Šiaurė</string>
+    <string name="delay_type_west_south">Vakarai - Pietūs</string>
+    <string name="delay_type_west_east">Vakarai - Rytai</string>
+    <string name="delay_type_east_north">Rytai - Šiaurė</string>
+    <string name="delay_type_east_south">Rytai - Pietūs</string>
+    <string name="delay_type_east_west">Rytai - Vakarai</string>
+    <string name="delay_type_north_east">Šiaurė - Rytai</string>
+    <string name="delay_type_north_west">Šiaurė - Vakarai</string>
+    <string name="delay_type_north_south">Šiaurė - Pietūs</string>
+    <string name="delay_type_south_east">Pietūs - Rytai</string>
+    <string name="delay_type_south_west">Pietūs - Vakarai</string>
+    <string name="delay_type_south_north">Pietūs - Šiaurė</string>
+    <string name="delay_weekdays_type_monday">Pr.</string>
+    <string name="delay_weekdays_type_tuesday">An.</string>
+    <string name="delay_weekdays_type_wednesday">Tr.</string>
+    <string name="delay_weekdays_type_thursday">Kt.</string>
+    <string name="delay_weekdays_type_friday">Pn.</string>
+    <string name="delay_weekdays_type_saturday">Št.</string>
+    <string name="delay_weekdays_type_sunday">Sk.</string>
+    <string name="delay_weekdays_type_workdays">Pr.-Pn.</string>
+    <string name="delay_weekdays_type_weekend">Št.-Sk.</string>
+</resources>

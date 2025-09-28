@@ -1,0 +1,102 @@
+<resources>
+    <string name="app_name">aMetro</string>
+
+    <string name="title_activity_map_view">aMetro</string>
+    <string name="title_activity_map_list_view">Kartor</string>
+    <string name="title_activity_city_list_view">Lägg till karta</string>
+    <string name="title_activity_map_details_view">Kartdetaljer</string>
+    <string name="title_activity_settings_list_view">Inställningar</string>
+    <string name="title_activity_station_scheme_view">Stationsschema</string>
+    <string name="title_activity_about">Om</string>
+
+    <string name="msg_country_flag">landsflagga</string>
+    <string name="msg_map_list_downloading">Laddar ner…</string>
+
+    <string name="msg_city_list_empty">Inga städer.</string>
+    <string name="msg_city_list_no_available_cities">Inga tillgängliga städer.</string>
+    <string name="msg_city_list_no_connection">Kontrollera internetanslutningen eller försök igen senare.</string>
+
+    <string name="msg_map_list_empty">Inga kartor.</string>
+    <string name="msg_map_list_no_installed_maps">Inga installerade kartor.</string>
+    <string name="msg_map_list_tap_to_add_new_maps">Tryck på skärmen för att visa tillgängliga kartor.</string>
+
+    <string name="msg_no_maps_loaded">Ingen karta vald</string>
+    <string name="msg_press_to_add_map">Tryck på skärmen för att visa kartlistan</string>
+    <string name="msg_operation_interrupted">Åtgärden avbröts</string>
+    <string name="msg_download_progress">%s byte nedladdade</string>
+    <string name="msg_error">Fel: %s</string>
+    <string name="msg_some_maps_out_of_date">Vissa kartor är föråldrade.</string>
+
+    <string name="btn_open">Öppna</string>
+    <string name="btn_close">Stäng</string>
+    <string name="btn_download">Ladda ner</string>
+    <string name="btn_cancel">Avbryt</string>
+
+    <string name="drawer_open">Navigation öppnad</string>
+    <string name="drawer_close">Navigation stängd</string>
+
+    <string name="action_add">Lägg till</string>
+    <string name="action_delete">Ta bort</string>
+    <string name="action_update">Uppdatera</string>
+    <string name="action_search">Sök</string>
+    <string name="action_select_all">Markera alla</string>
+    <string name="action_test_outdated">Testa föråldrade</string>
+    <string name="action_settings">Inställningar</string>
+    <string name="btn_flat_begin">START</string>
+    <string name="btn_flat_end">SLUT</string>
+    <string name="btn_flat_station_details">INFO</string>
+    <string name="btn_flat_close">STÄNG</string>
+    <string name="msg_no_scheme_available_for_station">Inget schema tillgängligt för stationen</string>
+    <string name="tab_map">Karta</string>
+    <string name="tab_about">Om</string>
+    <string name="msg_selected">Markerad</string>
+    <string name="nav_select_map">Byt karta</string>
+    <string name="nav_settings">Inställningar</string>
+    <string name="nav_about">Om</string>
+    <string name="nav_options">Alternativ:</string>
+    <string name="nav_using">Använder transport:</string>
+    <string name="nav_schemes">Scheman:</string>
+    <string name="nav_no_city">Ingen stadskarta inläst</string>
+    <string name="msg_from_to" formatted="false">%s - %s: %s</string>
+    <string name="msg_no_route_found" formatted="false">Ingen rutt hittades från %s till %s</string>
+    <string name="msg_map_loaded">Karta inläst, %s ms</string>
+    <string name="msg_map_loading_failed">Misslyckades att ladda karta: %s</string>
+    <string name="msg_no_maps_selected">Inga kartor valda</string>
+    <string name="msg_maps_deleted">Kartor borttagna</string>
+    <string name="msg_maps_updated">%s kartor uppdaterade.</string>
+    <string name="msg_maps_all_updated">Alla kartor är uppdaterade</string>
+    <string name="msg_maps_updating">Uppdaterar kartor…</string>
+    <string name="title_activity_settings">Inställningar</string>
+    <string name="msg_downloading">Laddar ner…</string>
+    <string name="msg_map_loading_progress">Laddar karta %s…</string>
+    <string name="msg_map_list_failed_to_download">Misslyckades att ladda ner kartlistan</string>
+    <string name="nav_delays">Tid på dagen:</string>
+    <string name="delay_type_custom">Anpassad</string>
+    <string name="delay_type_day">Dag</string>
+    <string name="delay_type_night">Natt</string>
+    <string name="delay_type_evening">Kväll</string>
+    <string name="delay_type_morning">Morgon</string>
+    <string name="delay_type_rush">Rusningstid</string>
+    <string name="delay_type_direct">Direkt</string>
+    <string name="delay_type_west_north">Väst - Nord</string>
+    <string name="delay_type_west_south">Väst - Syd</string>
+    <string name="delay_type_west_east">Väst - Öst</string>
+    <string name="delay_type_east_north">Öst - Nord</string>
+    <string name="delay_type_east_south">Öst - Syd</string>
+    <string name="delay_type_east_west">Öst - Väst</string>
+    <string name="delay_type_north_east">Nord - Öst</string>
+    <string name="delay_type_north_west">Nord - Väst</string>
+    <string name="delay_type_north_south">Nord - Syd</string>
+    <string name="delay_type_south_east">Syd - Öst</string>
+    <string name="delay_type_south_west">Syd - Väst</string>
+    <string name="delay_type_south_north">Syd - Nord</string>
+    <string name="delay_weekdays_type_monday">Mån</string>
+    <string name="delay_weekdays_type_tuesday">Tis</string>
+    <string name="delay_weekdays_type_wednesday">Ons</string>
+    <string name="delay_weekdays_type_thursday">Tors</string>
+    <string name="delay_weekdays_type_friday">Fre</string>
+    <string name="delay_weekdays_type_saturday">Lör</string>
+    <string name="delay_weekdays_type_sunday">Sön</string>
+    <string name="delay_weekdays_type_workdays">Mån-Fre</string>
+    <string name="delay_weekdays_type_weekend">Lör-Sön</string>
+</resources>

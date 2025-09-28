@@ -51,7 +51,7 @@
     <string name="msg_no_scheme_available_for_station">No map available for station</string>
     <string name="tab_map">Map</string>
     <string name="tab_about">About</string>
-    <string name="empty"></string>
+    <string name="empty" translatable="false"></string>
     <string name="msg_selected" >Selected</string>
     <string name="nav_select_map">Change map</string>
     <string name="nav_settings">Settings</string>
@@ -74,7 +74,7 @@
     <string name="msg_map_loading_progress">Loading map %s …</string>
     <string name="msg_map_list_failed_to_download">Failed to download map list</string>
     <string name="nav_delays">Time of day:</string>
-    <string name="delay_type_not_defined"></string>
+    <string name="delay_type_not_defined" translatable="false"></string>
     <string name="delay_type_custom" >Custom</string>
     <string name="delay_type_day" >Day</string>
     <string name="delay_type_night" >Night</string>
@@ -94,7 +94,7 @@
     <string name="delay_type_south_east" >South - East</string>
     <string name="delay_type_south_west" >South - West</string>
     <string name="delay_type_south_north" >South - North</string>
-    <string name="delay_weekdays_type_not_defined" ></string>
+    <string name="delay_weekdays_type_not_defined" translatable="false"></string>
     <string name="delay_weekdays_type_monday" >Mo.</string>
     <string name="delay_weekdays_type_tuesday" >Tu.</string>
     <string name="delay_weekdays_type_wednesday" >We.</string>

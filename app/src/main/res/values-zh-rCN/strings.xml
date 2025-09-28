@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">aMetro</string>
+
+    <string name="title_activity_map_view">aMetro</string>
+    <string name="title_activity_map_list_view">地图</string>
+    <string name="title_activity_city_list_view">添加地图</string>
+    <string name="title_activity_map_details_view">地图详情</string>
+    <string name="title_activity_settings_list_view">设置</string>
+    <string name="title_activity_station_scheme_view">车站示意图</string>
+    <string name="title_activity_about">关于</string>
+
+    <string name="msg_country_flag">国旗</string>
+    <string name="msg_map_list_downloading">正在下载…</string>
+
+    <string name="msg_city_list_empty">没有城市。</string>
+    <string name="msg_city_list_no_available_cities">没有可用的城市。</string>
+    <string name="msg_city_list_no_connection">请检查网络连接或稍后再试。</string>
+
+    <string name="msg_map_list_empty">没有地图。</string>
+    <string name="msg_map_list_no_installed_maps">没有已安装的地图。</string>
+    <string name="msg_map_list_tap_to_add_new_maps">点击屏幕以显示可用地图。</string>
+
+    <string name="msg_no_maps_loaded">未选择地图</string>
+    <string name="msg_press_to_add_map">点击屏幕显示地图列表</string>
+    <string name="msg_operation_interrupted">操作已取消</string>
+    <string name="msg_download_progress">已下载 %s 字节</string>
+    <string name="msg_error">错误: %s</string>
+    <string name="msg_some_maps_out_of_date">部分地图已过期。</string>
+
+    <string name="btn_open">打开</string>
+    <string name="btn_close">关闭</string>
+    <string name="btn_download">下载</string>
+    <string name="btn_cancel">取消</string>
+
+    <string name="drawer_open">导航已打开</string>
+    <string name="drawer_close">导航已关闭</string>
+
+    <string name="action_add">添加</string>
+    <string name="action_delete">删除</string>
+    <string name="action_update">更新</string>
+    <string name="action_search">搜索</string>
+    <string name="action_select_all">全选</string>
+    <string name="action_test_outdated">测试过期</string>
+    <string name="action_settings">设置</string>
+    <string name="btn_flat_begin">开始</string>
+    <string name="btn_flat_end">结束</string>
+    <string name="btn_flat_station_details">信息</string>
+    <string name="btn_flat_close">关闭</string>
+    <string name="msg_no_scheme_available_for_station">该站没有可用示意图</string>
+    <string name="tab_map">地图</string>
+    <string name="tab_about">关于</string>
+    <string name="msg_selected">已选择</string>
+    <string name="nav_select_map">更换地图</string>
+    <string name="nav_settings">设置</string>
+    <string name="nav_about">关于</string>
+    <string name="nav_options">选项:</string>
+    <string name="nav_using">使用交通工具:</string>
+    <string name="nav_schemes">示意图:</string>
+    <string name="nav_no_city">未加载城市地图</string>
+    <string name="msg_from_to" formatted="false">%s - %s: %s</string>
+    <string name="msg_no_route_found" formatted="false">未找到从 %s 到 %s 的路线</string>
+    <string name="msg_map_loaded">地图已加载, %s 毫秒</string>
+    <string name="msg_map_loading_failed">地图加载失败: %s</string>
+    <string name="msg_no_maps_selected">未选择地图</string>
+    <string name="msg_maps_deleted">地图已删除</string>
+    <string name="msg_maps_updated">已更新 %s 张地图。</string>
+    <string name="msg_maps_all_updated">所有地图已是最新</string>
+    <string name="msg_maps_updating">正在更新地图…</string>
+    <string name="title_activity_settings">设置</string>
+    <string name="msg_downloading">正在下载…</string>
+    <string name="msg_map_loading_progress">正在加载地图 %s…</string>
+    <string name="msg_map_list_failed_to_download">下载地图列表失败</string>
+    <string name="nav_delays">时间段:</string>
+    <string name="delay_type_custom">自定义</string>
+    <string name="delay_type_day">白天</string>
+    <string name="delay_type_night">夜间</string>
+    <string name="delay_type_evening">傍晚</string>
+    <string name="delay_type_morning">早晨</string>
+    <string name="delay_type_rush">高峰时段</string>
+    <string name="delay_type_direct">直达</string>
+    <string name="delay_type_west_north">西 - 北</string>
+    <string name="delay_type_west_south">西 - 南</string>
+    <string name="delay_type_west_east">西 - 东</string>
+    <string name="delay_type_east_north">东 - 北</string>
+    <string name="delay_type_east_south">东 - 南</string>
+    <string name="delay_type_east_west">东 - 西</string>
+    <string name="delay_type_north_east">北 - 东</string>
+    <string name="delay_type_north_west">北 - 西</string>
+    <string name="delay_type_north_south">北 - 南</string>
+    <string name="delay_type_south_east">南 - 东</string>
+    <string name="delay_type_south_west">南 - 西</string>
+    <string name="delay_type_south_north">南 - 北</string>
+    <string name="delay_weekdays_type_monday">周一</string>
+    <string name="delay_weekdays_type_tuesday">周二</string>
+    <string name="delay_weekdays_type_wednesday">周三</string>
+    <string name="delay_weekdays_type_thursday">周四</string>
+    <string name="delay_weekdays_type_friday">周五</string>
+    <string name="delay_weekdays_type_saturday">周六</string>
+    <string name="delay_weekdays_type_sunday">周日</string>
+    <string name="delay_weekdays_type_workdays">周一-周五</string>
+    <string name="delay_weekdays_type_weekend">周六-周日</string>
+</resources>

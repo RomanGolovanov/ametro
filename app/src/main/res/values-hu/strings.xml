@@ -1,0 +1,102 @@
+<resources>
+    <string name="app_name">aMetro</string>
+
+    <string name="title_activity_map_view">aMetro</string>
+    <string name="title_activity_map_list_view">Térképek</string>
+    <string name="title_activity_city_list_view">Térkép hozzáadása</string>
+    <string name="title_activity_map_details_view">Térkép részletei</string>
+    <string name="title_activity_settings_list_view">Beállítások</string>
+    <string name="title_activity_station_scheme_view">Állomás vázlat</string>
+    <string name="title_activity_about">Névjegy</string>
+
+    <string name="msg_country_flag">ország zászlaja</string>
+    <string name="msg_map_list_downloading">Letöltés…</string>
+
+    <string name="msg_city_list_empty">Nincsenek városok.</string>
+    <string name="msg_city_list_no_available_cities">Nincsenek elérhető városok.</string>
+    <string name="msg_city_list_no_connection">Ellenőrizze az internetkapcsolatot, vagy próbálja újra később.</string>
+
+    <string name="msg_map_list_empty">Nincsenek térképek.</string>
+    <string name="msg_map_list_no_installed_maps">Nincsenek telepített térképek.</string>
+    <string name="msg_map_list_tap_to_add_new_maps">Érintse meg a képernyőt az elérhető térképek megjelenítéséhez.</string>
+
+    <string name="msg_no_maps_loaded">Nincs kiválasztott térkép</string>
+    <string name="msg_press_to_add_map">Érintse meg a képernyőt a térképlista megjelenítéséhez</string>
+    <string name="msg_operation_interrupted">Művelet megszakítva</string>
+    <string name="msg_download_progress">%s bájt letöltve</string>
+    <string name="msg_error">Hiba: %s</string>
+    <string name="msg_some_maps_out_of_date">Néhány térkép elavult.</string>
+
+    <string name="btn_open">Megnyitás</string>
+    <string name="btn_close">Bezárás</string>
+    <string name="btn_download">Letöltés</string>
+    <string name="btn_cancel">Mégse</string>
+
+    <string name="drawer_open">Navigáció megnyitva</string>
+    <string name="drawer_close">Navigáció bezárva</string>
+
+    <string name="action_add">Hozzáadás</string>
+    <string name="action_delete">Törlés</string>
+    <string name="action_update">Frissítés</string>
+    <string name="action_search">Keresés</string>
+    <string name="action_select_all">Összes kijelölése</string>
+    <string name="action_test_outdated">Elavult tesztelése</string>
+    <string name="action_settings">Beállítások</string>
+    <string name="btn_flat_begin">KEZDÉS</string>
+    <string name="btn_flat_end">VÉGE</string>
+    <string name="btn_flat_station_details">INFÓ</string>
+    <string name="btn_flat_close">BEZÁRÁS</string>
+    <string name="msg_no_scheme_available_for_station">Nincs elérhető vázlat ehhez az állomáshoz</string>
+    <string name="tab_map">Térkép</string>
+    <string name="tab_about">Névjegy</string>
+    <string name="msg_selected">Kiválasztva</string>
+    <string name="nav_select_map">Térkép cseréje</string>
+    <string name="nav_settings">Beállítások</string>
+    <string name="nav_about">Névjegy</string>
+    <string name="nav_options">Opciók:</string>
+    <string name="nav_using">Használt közlekedés:</string>
+    <string name="nav_schemes">Vázlatok:</string>
+    <string name="nav_no_city">Nincs várostérkép betöltve</string>
+    <string name="msg_from_to" formatted="false">%s - %s: %s</string>
+    <string name="msg_no_route_found" formatted="false">Nem található útvonal %s-ból %s-ba</string>
+    <string name="msg_map_loaded">Térkép betöltve, %s ms</string>
+    <string name="msg_map_loading_failed">Térkép betöltése sikertelen: %s</string>
+    <string name="msg_no_maps_selected">Nincs kiválasztott térkép</string>
+    <string name="msg_maps_deleted">Térképek törölve</string>
+    <string name="msg_maps_updated">%s térkép frissítve.</string>
+    <string name="msg_maps_all_updated">Minden térkép naprakész</string>
+    <string name="msg_maps_updating">Térképek frissítése…</string>
+    <string name="title_activity_settings">Beállítások</string>
+    <string name="msg_downloading">Letöltés…</string>
+    <string name="msg_map_loading_progress">Térkép betöltése %s…</string>
+    <string name="msg_map_list_failed_to_download">A térképlista letöltése nem sikerült</string>
+    <string name="nav_delays">Napszak:</string>
+    <string name="delay_type_custom">Egyéni</string>
+    <string name="delay_type_day">Nappal</string>
+    <string name="delay_type_night">Éjszaka</string>
+    <string name="delay_type_evening">Este</string>
+    <string name="delay_type_morning">Reggel</string>
+    <string name="delay_type_rush">Csúcsidő</string>
+    <string name="delay_type_direct">Közvetlen</string>
+    <string name="delay_type_west_north">Nyugat - Észak</string>
+    <string name="delay_type_west_south">Nyugat - Dél</string>
+    <string name="delay_type_west_east">Nyugat - Kelet</string>
+    <string name="delay_type_east_north">Kelet - Észak</string>
+    <string name="delay_type_east_south">Kelet - Dél</string>
+    <string name="delay_type_east_west">Kelet - Nyugat</string>
+    <string name="delay_type_north_east">Észak - Kelet</string>
+    <string name="delay_type_north_west">Észak - Nyugat</string>
+    <string name="delay_type_north_south">Észak - Dél</string>
+    <string name="delay_type_south_east">Dél - Kelet</string>
+    <string name="delay_type_south_west">Dél - Nyugat</string>
+    <string name="delay_type_south_north">Dél - Észak</string>
+    <string name="delay_weekdays_type_monday">Hétf.</string>
+    <string name="delay_weekdays_type_tuesday">Kedd</string>
+    <string name="delay_weekdays_type_wednesday">Szer.</string>
+    <string name="delay_weekdays_type_thursday">Csüt.</string>
+    <string name="delay_weekdays_type_friday">Pén.</string>
+    <string name="delay_weekdays_type_saturday">Szom.</string>
+    <string name="delay_weekdays_type_sunday">Vas.</string>
+    <string name="delay_weekdays_type_workdays">Hétf.-Pén.</string>
+    <string name="delay_weekdays_type_weekend">Szom.-Vas.</string>
+</resources>
