@@ -10,10 +10,11 @@ android {
         applicationId = "org.ametro.ng"
         minSdk = 24
         targetSdk = 36
-        versionCode = 51
-        versionName = "3.0.1"
+        versionCode = 52
+        versionName = "3.0.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        setProperty("archivesBaseName", "$applicationId-$versionName")
     }
 
     buildTypes {
