@@ -19,7 +19,7 @@ permalink: /privacy/
 
 **Effective date:** 26 September 2025  
 
-This Privacy Policy describes how the mobile application **aMetro – World Subway Maps** (“App”) handles personal data.  
+This Privacy Policy describes how the mobile application **aMetro** (“App”) handles personal data.  
 
 **Author / Data Controller:** Roman Golovanov (<roman.golovanov@gmail.com>)
 
