@@ -5,6 +5,7 @@ Unlike Google Maps, aMetro works 100% offline, with no ads or tracking.
 
 
 Google Play: https://play.google.com/store/apps/details?id=io.github.romangolovanov.apps.ametro
+RuStore: https://www.rustore.ru/catalog/app/io.github.romangolovanov.apps.ametro
 
 ## ✨ Key Features
 
