@@ -4,8 +4,8 @@ Welcome to **aMetro**, an open-source Android app that brings **236 hand-crafted
 Unlike Google Maps, aMetro works 100% offline, with no ads or tracking.
 
 
-Google Play: https://play.google.com/store/apps/details?id=io.github.romangolovanov.apps.ametro
-RuStore: https://www.rustore.ru/catalog/app/io.github.romangolovanov.apps.ametro
+* Google Play: https://play.google.com/store/apps/details?id=io.github.romangolovanov.apps.ametro
+* RuStore: https://www.rustore.ru/catalog/app/io.github.romangolovanov.apps.ametro
 
 ## ✨ Key Features
 
