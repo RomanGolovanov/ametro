@@ -24,7 +24,7 @@ You can get aMetro in one of three ways:
 ## ✅ 1) Google Play (recommended)
 
 - The app is published under the package ID: `io.github.romangolovanov.apps.ametro`  
-- [Google Play link](https://play.google.com/store/apps/details?id=io.github.romangolovanov.apps.ametro) *(currently under review — will be live soon)*  
+- [Google Play link](https://play.google.com/store/apps/details?id=io.github.romangolovanov.apps.ametro) 
 - [RuStore link](https://www.rustore.ru/catalog/app/io.github.romangolovanov.apps.ametro)
 
 ---
