@@ -1,0 +1,282 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 373,
+    "images": [
+        "res/schemes/dzerdzhinskaja.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "FB0505",
+            "line_width": 9,
+            "name": "Ленинская",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Заельцовская",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Гагаринская",
+                    "rect": null,
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        179,
+                        103
+                    ],
+                    "is_working": true,
+                    "name": "Красный проспект",
+                    "rect": [
+                        70,
+                        90,
+                        94,
+                        27
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Площадь Ленина",
+                    "rect": null,
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Октябрьская",
+                    "rect": null,
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Речной Вокзал",
+                    "rect": null,
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Студенческая",
+                    "rect": null,
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Площадь Маркса",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Площадь Станиславского",
+                    "rect": null,
+                    "text_id": 8,
+                    "uid": 8
+                }
+            ],
+            "text_id": 9
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "0DA303",
+            "line_width": 9,
+            "name": "Дзержинская",
+            "segments": [
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            199,
+                            103
+                        ],
+                        [
+                            199,
+                            63
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            199,
+                            143
+                        ],
+                        [
+                            199,
+                            103
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            199,
+                            183
+                        ],
+                        [
+                            199,
+                            143
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            199,
+                            223
+                        ],
+                        [
+                            199,
+                            183
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        199,
+                        63
+                    ],
+                    "is_working": true,
+                    "name": "Площадь Гарина-Михайловского",
+                    "rect": [
+                        215,
+                        50,
+                        186,
+                        28
+                    ],
+                    "text_id": 10,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        199,
+                        103
+                    ],
+                    "is_working": true,
+                    "name": "Сибирская",
+                    "rect": [
+                        215,
+                        93,
+                        76,
+                        19
+                    ],
+                    "text_id": 11,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        199,
+                        143
+                    ],
+                    "is_working": true,
+                    "name": "Маршала Покрышкина",
+                    "rect": [
+                        215,
+                        130,
+                        99,
+                        30
+                    ],
+                    "text_id": 12,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        199,
+                        183
+                    ],
+                    "is_working": true,
+                    "name": "Березовая Роща",
+                    "rect": [
+                        215,
+                        170,
+                        100,
+                        31
+                    ],
+                    "text_id": 13,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        199,
+                        223
+                    ],
+                    "is_working": true,
+                    "name": "Золотая нива",
+                    "rect": [
+                        215,
+                        210,
+                        100,
+                        31
+                    ],
+                    "text_id": 14,
+                    "uid": 13
+                }
+            ],
+            "text_id": 15
+        }
+    ],
+    "lines_width": 9,
+    "name": "dzerdzhinskaja",
+    "name_text_id": 15,
+    "stations_diameter": 16.0,
+    "transfers": [
+        [
+            2,
+            10,
+            [
+                179,
+                103
+            ],
+            [
+                199,
+                103
+            ]
+        ]
+    ],
+    "transports": [
+        "metro",
+        "train"
+    ],
+    "type_name": "Метро",
+    "type_text_id": 149,
+    "upper_case": true,
+    "width": 349,
+    "word_wrap": true
+}

@@ -1,0 +1,1302 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 800,
+    "images": [
+        "res/schemes/2.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "ff4105",
+            "line_width": 7,
+            "name": "1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            135,
+                            110
+                        ],
+                        [
+                            135,
+                            80
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            135,
+                            140
+                        ],
+                        [
+                            135,
+                            110
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            135,
+                            170
+                        ],
+                        [
+                            135,
+                            140
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            135,
+                            200
+                        ],
+                        [
+                            135,
+                            170
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            135,
+                            230
+                        ],
+                        [
+                            135,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            135,
+                            260
+                        ],
+                        [
+                            135,
+                            230
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            135,
+                            290
+                        ],
+                        [
+                            135,
+                            260
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            135,
+                            320
+                        ],
+                        [
+                            135,
+                            290
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            135,
+                            350
+                        ],
+                        [
+                            135,
+                            320
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            135,
+                            380
+                        ],
+                        [
+                            135,
+                            350
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            135,
+                            410
+                        ],
+                        [
+                            135,
+                            380
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        135,
+                        80
+                    ],
+                    "is_working": true,
+                    "name": "Etxebarri",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        135,
+                        110
+                    ],
+                    "is_working": true,
+                    "name": "Bolueta",
+                    "rect": null,
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        135,
+                        140
+                    ],
+                    "is_working": true,
+                    "name": "Basarrate",
+                    "rect": null,
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        135,
+                        170
+                    ],
+                    "is_working": true,
+                    "name": "Santutxu",
+                    "rect": null,
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        135,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Casco Viejo",
+                    "rect": null,
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        135,
+                        230
+                    ],
+                    "is_working": true,
+                    "name": "Abando",
+                    "rect": null,
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        135,
+                        260
+                    ],
+                    "is_working": true,
+                    "name": "Moyua",
+                    "rect": null,
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        135,
+                        290
+                    ],
+                    "is_working": true,
+                    "name": "Indautxu",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        135,
+                        320
+                    ],
+                    "is_working": true,
+                    "name": "San Mames",
+                    "rect": null,
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        135,
+                        350
+                    ],
+                    "is_working": true,
+                    "name": "Deusto",
+                    "rect": null,
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        135,
+                        380
+                    ],
+                    "is_working": true,
+                    "name": "Sarriko",
+                    "rect": null,
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        135,
+                        410
+                    ],
+                    "is_working": true,
+                    "name": "San Inazio",
+                    "rect": null,
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Lutxana",
+                    "rect": null,
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Erandio",
+                    "rect": null,
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Astrabudua",
+                    "rect": null,
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Leioa",
+                    "rect": null,
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Lamiako",
+                    "rect": null,
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Areeta",
+                    "rect": null,
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Gobela",
+                    "rect": null,
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Neguri",
+                    "rect": null,
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Aiboa",
+                    "rect": null,
+                    "text_id": 20,
+                    "uid": 20
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Algorta",
+                    "rect": null,
+                    "text_id": 21,
+                    "uid": 21
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Bidezabal",
+                    "rect": null,
+                    "text_id": 22,
+                    "uid": 22
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Berango",
+                    "rect": null,
+                    "text_id": 23,
+                    "uid": 23
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Larrabasterra",
+                    "rect": null,
+                    "text_id": 24,
+                    "uid": 24
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sopelana",
+                    "rect": null,
+                    "text_id": 25,
+                    "uid": 25
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Urduliz",
+                    "rect": null,
+                    "text_id": 26,
+                    "uid": 26
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Plentzia",
+                    "rect": null,
+                    "text_id": 27,
+                    "uid": 27
+                }
+            ],
+            "text_id": 28
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "000000",
+            "line_width": 7,
+            "name": "2",
+            "segments": [
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            150,
+                            51
+                        ],
+                        [
+                            150,
+                            21
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    29,
+                    30,
+                    [
+                        [
+                            150,
+                            80
+                        ],
+                        [
+                            150,
+                            51
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    30,
+                    31,
+                    [
+                        [
+                            150,
+                            110
+                        ],
+                        [
+                            150,
+                            80
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    31,
+                    32,
+                    [
+                        [
+                            150,
+                            140
+                        ],
+                        [
+                            150,
+                            110
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    32,
+                    33,
+                    [
+                        [
+                            150,
+                            170
+                        ],
+                        [
+                            150,
+                            140
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    33,
+                    34,
+                    [
+                        [
+                            150,
+                            200
+                        ],
+                        [
+                            150,
+                            170
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    34,
+                    35,
+                    [
+                        [
+                            150,
+                            230
+                        ],
+                        [
+                            150,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    35,
+                    36,
+                    [
+                        [
+                            150,
+                            260
+                        ],
+                        [
+                            150,
+                            230
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    36,
+                    37,
+                    [
+                        [
+                            150,
+                            290
+                        ],
+                        [
+                            150,
+                            260
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    37,
+                    38,
+                    [
+                        [
+                            150,
+                            320
+                        ],
+                        [
+                            150,
+                            290
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    38,
+                    39,
+                    [
+                        [
+                            150,
+                            350
+                        ],
+                        [
+                            150,
+                            320
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    39,
+                    40,
+                    [
+                        [
+                            150,
+                            380
+                        ],
+                        [
+                            150,
+                            350
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    40,
+                    41,
+                    [
+                        [
+                            150,
+                            410
+                        ],
+                        [
+                            150,
+                            380
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    41,
+                    42,
+                    [
+                        [
+                            150,
+                            440
+                        ],
+                        [
+                            150,
+                            410
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    42,
+                    43,
+                    [
+                        [
+                            150,
+                            470
+                        ],
+                        [
+                            150,
+                            440
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    43,
+                    44,
+                    [
+                        [
+                            150,
+                            500
+                        ],
+                        [
+                            150,
+                            470
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    44,
+                    45,
+                    [
+                        [
+                            150,
+                            530
+                        ],
+                        [
+                            150,
+                            500
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    45,
+                    46,
+                    [
+                        [
+                            150,
+                            560
+                        ],
+                        [
+                            150,
+                            530
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    46,
+                    47,
+                    [
+                        [
+                            150,
+                            590
+                        ],
+                        [
+                            150,
+                            560
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    47,
+                    48,
+                    [
+                        [
+                            150,
+                            621
+                        ],
+                        [
+                            150,
+                            590
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    48,
+                    49,
+                    [
+                        [
+                            150,
+                            650
+                        ],
+                        [
+                            150,
+                            621
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        150,
+                        21
+                    ],
+                    "is_working": true,
+                    "name": "Basauri",
+                    "rect": [
+                        170,
+                        14,
+                        41,
+                        15
+                    ],
+                    "text_id": 29,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        150,
+                        51
+                    ],
+                    "is_working": true,
+                    "name": "Ariz",
+                    "rect": [
+                        170,
+                        44,
+                        22,
+                        15
+                    ],
+                    "text_id": 30,
+                    "uid": 29
+                },
+                {
+                    "coord": [
+                        150,
+                        80
+                    ],
+                    "is_working": true,
+                    "name": "Etxebarri",
+                    "rect": [
+                        170,
+                        70,
+                        47,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 30
+                },
+                {
+                    "coord": [
+                        150,
+                        110
+                    ],
+                    "is_working": true,
+                    "name": "Bolueta",
+                    "rect": [
+                        170,
+                        100,
+                        40,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 31
+                },
+                {
+                    "coord": [
+                        150,
+                        140
+                    ],
+                    "is_working": true,
+                    "name": "Basarrate",
+                    "rect": [
+                        170,
+                        130,
+                        51,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 32
+                },
+                {
+                    "coord": [
+                        150,
+                        170
+                    ],
+                    "is_working": true,
+                    "name": "Santutxu",
+                    "rect": [
+                        170,
+                        160,
+                        45,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 33
+                },
+                {
+                    "coord": [
+                        150,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Casco Viejo",
+                    "rect": [
+                        170,
+                        190,
+                        62,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 34
+                },
+                {
+                    "coord": [
+                        150,
+                        230
+                    ],
+                    "is_working": true,
+                    "name": "Abando",
+                    "rect": [
+                        170,
+                        220,
+                        40,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 35
+                },
+                {
+                    "coord": [
+                        150,
+                        260
+                    ],
+                    "is_working": true,
+                    "name": "Moyua",
+                    "rect": [
+                        170,
+                        250,
+                        35,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 36
+                },
+                {
+                    "coord": [
+                        150,
+                        290
+                    ],
+                    "is_working": true,
+                    "name": "Indautxu",
+                    "rect": [
+                        170,
+                        280,
+                        44,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 37
+                },
+                {
+                    "coord": [
+                        150,
+                        320
+                    ],
+                    "is_working": true,
+                    "name": "San Mames",
+                    "rect": [
+                        170,
+                        310,
+                        60,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 38
+                },
+                {
+                    "coord": [
+                        150,
+                        350
+                    ],
+                    "is_working": true,
+                    "name": "Deusto",
+                    "rect": [
+                        170,
+                        340,
+                        37,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 39
+                },
+                {
+                    "coord": [
+                        150,
+                        380
+                    ],
+                    "is_working": true,
+                    "name": "Sarriko",
+                    "rect": [
+                        170,
+                        370,
+                        38,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 40
+                },
+                {
+                    "coord": [
+                        150,
+                        410
+                    ],
+                    "is_working": true,
+                    "name": "San Inazio",
+                    "rect": [
+                        170,
+                        400,
+                        53,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 41
+                },
+                {
+                    "coord": [
+                        150,
+                        440
+                    ],
+                    "is_working": true,
+                    "name": "Gurutzeta/Cruces",
+                    "rect": [
+                        170,
+                        430,
+                        88,
+                        15
+                    ],
+                    "text_id": 31,
+                    "uid": 42
+                },
+                {
+                    "coord": [
+                        150,
+                        470
+                    ],
+                    "is_working": true,
+                    "name": "Ansio",
+                    "rect": [
+                        170,
+                        460,
+                        31,
+                        15
+                    ],
+                    "text_id": 32,
+                    "uid": 43
+                },
+                {
+                    "coord": [
+                        150,
+                        500
+                    ],
+                    "is_working": true,
+                    "name": "Barakaldo",
+                    "rect": [
+                        170,
+                        490,
+                        53,
+                        15
+                    ],
+                    "text_id": 33,
+                    "uid": 44
+                },
+                {
+                    "coord": [
+                        150,
+                        530
+                    ],
+                    "is_working": true,
+                    "name": "Bagatza",
+                    "rect": [
+                        170,
+                        520,
+                        42,
+                        15
+                    ],
+                    "text_id": 34,
+                    "uid": 45
+                },
+                {
+                    "coord": [
+                        150,
+                        560
+                    ],
+                    "is_working": true,
+                    "name": "Urbinaga",
+                    "rect": [
+                        170,
+                        550,
+                        47,
+                        15
+                    ],
+                    "text_id": 35,
+                    "uid": 46
+                },
+                {
+                    "coord": [
+                        150,
+                        590
+                    ],
+                    "is_working": true,
+                    "name": "Sestao",
+                    "rect": [
+                        170,
+                        580,
+                        36,
+                        15
+                    ],
+                    "text_id": 36,
+                    "uid": 47
+                },
+                {
+                    "coord": [
+                        150,
+                        621
+                    ],
+                    "is_working": true,
+                    "name": "Abatxolo",
+                    "rect": [
+                        170,
+                        614,
+                        46,
+                        15
+                    ],
+                    "text_id": 37,
+                    "uid": 48
+                },
+                {
+                    "coord": [
+                        150,
+                        650
+                    ],
+                    "is_working": true,
+                    "name": "Portugalete",
+                    "rect": [
+                        170,
+                        643,
+                        58,
+                        15
+                    ],
+                    "text_id": 38,
+                    "uid": 49
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Penota",
+                    "rect": null,
+                    "text_id": 39,
+                    "uid": 50
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Santurtzi",
+                    "rect": null,
+                    "text_id": 40,
+                    "uid": 51
+                }
+            ],
+            "text_id": 41
+        }
+    ],
+    "lines_width": 7,
+    "name": "2",
+    "name_text_id": 41,
+    "stations_diameter": 13.0,
+    "transfers": [
+        [
+            0,
+            30,
+            [
+                135,
+                80
+            ],
+            [
+                150,
+                80
+            ]
+        ],
+        [
+            9,
+            39,
+            [
+                135,
+                350
+            ],
+            [
+                150,
+                350
+            ]
+        ],
+        [
+            10,
+            40,
+            [
+                135,
+                380
+            ],
+            [
+                150,
+                380
+            ]
+        ],
+        [
+            11,
+            41,
+            [
+                135,
+                410
+            ],
+            [
+                150,
+                410
+            ]
+        ],
+        [
+            1,
+            31,
+            [
+                135,
+                110
+            ],
+            [
+                150,
+                110
+            ]
+        ],
+        [
+            2,
+            32,
+            [
+                135,
+                140
+            ],
+            [
+                150,
+                140
+            ]
+        ],
+        [
+            3,
+            33,
+            [
+                135,
+                170
+            ],
+            [
+                150,
+                170
+            ]
+        ],
+        [
+            4,
+            34,
+            [
+                135,
+                200
+            ],
+            [
+                150,
+                200
+            ]
+        ],
+        [
+            5,
+            35,
+            [
+                135,
+                230
+            ],
+            [
+                150,
+                230
+            ]
+        ],
+        [
+            6,
+            36,
+            [
+                135,
+                260
+            ],
+            [
+                150,
+                260
+            ]
+        ],
+        [
+            7,
+            37,
+            [
+                135,
+                290
+            ],
+            [
+                150,
+                290
+            ]
+        ],
+        [
+            8,
+            38,
+            [
+                135,
+                320
+            ],
+            [
+                150,
+                320
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "Метро",
+    "type_text_id": 44,
+    "upper_case": false,
+    "width": 300,
+    "word_wrap": false
+}

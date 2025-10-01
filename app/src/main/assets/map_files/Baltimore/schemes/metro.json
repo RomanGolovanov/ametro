@@ -1,0 +1,2921 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 880,
+    "images": [
+        "res/schemes/baltimore.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "62BF29",
+            "line_color": "62BF29",
+            "line_width": 10,
+            "name": "Metro Subway",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            71,
+                            211
+                        ],
+                        [
+                            54.0,
+                            200.0
+                        ],
+                        [
+                            41.0,
+                            150.0
+                        ],
+                        [
+                            16,
+                            135
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            127,
+                            245
+                        ],
+                        [
+                            114.0,
+                            226.0
+                        ],
+                        [
+                            71,
+                            211
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            172,
+                            275
+                        ],
+                        [
+                            127,
+                            245
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            198,
+                            292
+                        ],
+                        [
+                            172,
+                            275
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            242,
+                            326
+                        ],
+                        [
+                            198,
+                            292
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            282,
+                            367
+                        ],
+                        [
+                            263.0,
+                            352.0
+                        ],
+                        [
+                            242,
+                            326
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            302,
+                            384
+                        ],
+                        [
+                            282,
+                            367
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            319,
+                            398
+                        ],
+                        [
+                            302,
+                            384
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            350,
+                            408
+                        ],
+                        [
+                            319,
+                            398
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            352,
+                            443
+                        ],
+                        [
+                            350,
+                            408
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            385,
+                            449
+                        ],
+                        [
+                            352,
+                            443
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            409,
+                            438
+                        ],
+                        [
+                            385,
+                            449
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            420,
+                            389
+                        ],
+                        [
+                            409,
+                            438
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        16,
+                        135
+                    ],
+                    "is_working": true,
+                    "name": "Owings Mills",
+                    "rect": [
+                        15,
+                        112,
+                        66,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        71,
+                        211
+                    ],
+                    "is_working": true,
+                    "name": "Old Court",
+                    "rect": [
+                        14,
+                        210,
+                        49,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        127,
+                        245
+                    ],
+                    "is_working": true,
+                    "name": "Milford Mill",
+                    "rect": [
+                        62,
+                        242,
+                        57,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        172,
+                        275
+                    ],
+                    "is_working": true,
+                    "name": "Reisterstown Plaza",
+                    "rect": [
+                        67,
+                        271,
+                        97,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        198,
+                        292
+                    ],
+                    "is_working": true,
+                    "name": "Rogers Avenue",
+                    "rect": [
+                        111,
+                        290,
+                        79,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        242,
+                        326
+                    ],
+                    "is_working": true,
+                    "name": "West Cold Spring",
+                    "rect": [
+                        146,
+                        325,
+                        88,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        282,
+                        367
+                    ],
+                    "is_working": true,
+                    "name": "Mondawmin",
+                    "rect": [
+                        213,
+                        363,
+                        61,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        302,
+                        384
+                    ],
+                    "is_working": true,
+                    "name": "Penn North",
+                    "rect": [
+                        237,
+                        379,
+                        57,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        319,
+                        398
+                    ],
+                    "is_working": true,
+                    "name": "Upton",
+                    "rect": [
+                        280,
+                        395,
+                        31,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        350,
+                        408
+                    ],
+                    "is_working": true,
+                    "name": "State Center",
+                    "rect": [
+                        279,
+                        410,
+                        63,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        352,
+                        443
+                    ],
+                    "is_working": true,
+                    "name": "Lexington Market",
+                    "rect": [
+                        254,
+                        436,
+                        87,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        385,
+                        449
+                    ],
+                    "is_working": true,
+                    "name": "Charles Center",
+                    "rect": [
+                        386,
+                        454,
+                        77,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        409,
+                        438
+                    ],
+                    "is_working": true,
+                    "name": "Shot Tower",
+                    "rect": [
+                        417,
+                        433,
+                        57,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        420,
+                        389
+                    ],
+                    "is_working": true,
+                    "name": "Hopkins Hospital",
+                    "rect": [
+                        428,
+                        382,
+                        87,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                }
+            ],
+            "text_id": 14
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "F49E01",
+            "line_color": "FCCC04",
+            "line_width": 6,
+            "name": "Timonium-Cromwell Station/Glen Burnie",
+            "segments": [
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            389,
+                            187
+                        ],
+                        [
+                            389,
+                            166
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            389,
+                            212
+                        ],
+                        [
+                            389,
+                            187
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            389,
+                            236
+                        ],
+                        [
+                            389,
+                            212
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            386,
+                            259
+                        ],
+                        [
+                            389.0,
+                            249.0
+                        ],
+                        [
+                            389,
+                            236
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            378,
+                            278
+                        ],
+                        [
+                            386,
+                            259
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            368,
+                            302
+                        ],
+                        [
+                            378,
+                            278
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            360,
+                            327
+                        ],
+                        [
+                            368,
+                            302
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            360,
+                            368
+                        ],
+                        [
+                            360,
+                            327
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            360,
+                            399
+                        ],
+                        [
+                            360,
+                            368
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    23,
+                    24,
+                    [
+                        [
+                            360,
+                            422
+                        ],
+                        [
+                            360,
+                            399
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            360,
+                            441
+                        ],
+                        [
+                            360,
+                            422
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    25,
+                    26,
+                    [
+                        [
+                            360,
+                            458
+                        ],
+                        [
+                            360,
+                            441
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    26,
+                    27,
+                    [
+                        [
+                            360,
+                            485
+                        ],
+                        [
+                            360,
+                            458
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    27,
+                    28,
+                    [
+                        [
+                            360,
+                            505
+                        ],
+                        [
+                            360,
+                            485
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            360,
+                            526
+                        ],
+                        [
+                            360,
+                            505
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    29,
+                    30,
+                    [
+                        [
+                            360,
+                            544
+                        ],
+                        [
+                            360,
+                            526
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    30,
+                    31,
+                    [
+                        [
+                            360,
+                            564
+                        ],
+                        [
+                            360,
+                            544
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    31,
+                    32,
+                    [
+                        [
+                            365,
+                            585
+                        ],
+                        [
+                            360.0,
+                            577.0
+                        ],
+                        [
+                            360,
+                            564
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    32,
+                    33,
+                    [
+                        [
+                            379,
+                            609
+                        ],
+                        [
+                            365,
+                            585
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    33,
+                    34,
+                    [
+                        [
+                            391,
+                            630
+                        ],
+                        [
+                            379,
+                            609
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    34,
+                    35,
+                    [
+                        [
+                            394,
+                            652
+                        ],
+                        [
+                            394.0,
+                            638.0
+                        ],
+                        [
+                            391,
+                            630
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    35,
+                    36,
+                    [
+                        [
+                            394,
+                            673
+                        ],
+                        [
+                            394,
+                            652
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    36,
+                    37,
+                    [
+                        [
+                            401,
+                            694
+                        ],
+                        [
+                            394,
+                            673
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    37,
+                    38,
+                    [
+                        [
+                            401,
+                            718
+                        ],
+                        [
+                            401,
+                            694
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        389,
+                        166
+                    ],
+                    "is_working": true,
+                    "name": "Timonium",
+                    "rect": [
+                        407,
+                        159,
+                        50,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        389,
+                        187
+                    ],
+                    "is_working": true,
+                    "name": "Timonium Business Park",
+                    "rect": [
+                        407,
+                        179,
+                        126,
+                        15
+                    ],
+                    "text_id": 16,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        389,
+                        212
+                    ],
+                    "is_working": true,
+                    "name": "Lutherville",
+                    "rect": [
+                        407,
+                        206,
+                        54,
+                        15
+                    ],
+                    "text_id": 17,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        389,
+                        236
+                    ],
+                    "is_working": true,
+                    "name": "Falls Road",
+                    "rect": [
+                        407,
+                        230,
+                        55,
+                        15
+                    ],
+                    "text_id": 18,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        386,
+                        259
+                    ],
+                    "is_working": true,
+                    "name": "Mt. Washington",
+                    "rect": [
+                        404,
+                        252,
+                        78,
+                        15
+                    ],
+                    "text_id": 19,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        378,
+                        278
+                    ],
+                    "is_working": true,
+                    "name": "Cold Spring Lane",
+                    "rect": [
+                        396,
+                        272,
+                        87,
+                        15
+                    ],
+                    "text_id": 20,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        368,
+                        302
+                    ],
+                    "is_working": true,
+                    "name": "Woodberry",
+                    "rect": [
+                        386,
+                        296,
+                        56,
+                        15
+                    ],
+                    "text_id": 21,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        360,
+                        327
+                    ],
+                    "is_working": true,
+                    "name": "North Avenue",
+                    "rect": [
+                        378,
+                        320,
+                        70,
+                        15
+                    ],
+                    "text_id": 22,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        360,
+                        368
+                    ],
+                    "is_working": true,
+                    "name": "University of Baltimore/Mt. Royal",
+                    "rect": [
+                        383,
+                        362,
+                        166,
+                        15
+                    ],
+                    "text_id": 23,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        360,
+                        399
+                    ],
+                    "is_working": true,
+                    "name": "Cultural Center",
+                    "rect": [
+                        383,
+                        396,
+                        77,
+                        15
+                    ],
+                    "text_id": 24,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        360,
+                        422
+                    ],
+                    "is_working": true,
+                    "name": "Centre Street",
+                    "rect": [
+                        383,
+                        416,
+                        67,
+                        15
+                    ],
+                    "text_id": 25,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        360,
+                        441
+                    ],
+                    "is_working": true,
+                    "name": "Lexington Market",
+                    "rect": [
+                        254,
+                        436,
+                        87,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 25
+                },
+                {
+                    "coord": [
+                        360,
+                        458
+                    ],
+                    "is_working": true,
+                    "name": "University Center/Baltimore Street",
+                    "rect": [
+                        177,
+                        454,
+                        172,
+                        15
+                    ],
+                    "text_id": 26,
+                    "uid": 26
+                },
+                {
+                    "coord": [
+                        360,
+                        485
+                    ],
+                    "is_working": true,
+                    "name": "Convention Center",
+                    "rect": [
+                        383,
+                        478,
+                        94,
+                        15
+                    ],
+                    "text_id": 27,
+                    "uid": 27
+                },
+                {
+                    "coord": [
+                        360,
+                        505
+                    ],
+                    "is_working": true,
+                    "name": "Camden Yards",
+                    "rect": [
+                        383,
+                        498,
+                        75,
+                        15
+                    ],
+                    "text_id": 28,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        360,
+                        526
+                    ],
+                    "is_working": true,
+                    "name": "Hamburg Street",
+                    "rect": [
+                        378,
+                        519,
+                        79,
+                        15
+                    ],
+                    "text_id": 29,
+                    "uid": 29
+                },
+                {
+                    "coord": [
+                        360,
+                        544
+                    ],
+                    "is_working": true,
+                    "name": "Westport",
+                    "rect": [
+                        378,
+                        537,
+                        46,
+                        15
+                    ],
+                    "text_id": 30,
+                    "uid": 30
+                },
+                {
+                    "coord": [
+                        360,
+                        564
+                    ],
+                    "is_working": true,
+                    "name": "Cherry Hill",
+                    "rect": [
+                        378,
+                        556,
+                        56,
+                        15
+                    ],
+                    "text_id": 31,
+                    "uid": 31
+                },
+                {
+                    "coord": [
+                        365,
+                        585
+                    ],
+                    "is_working": true,
+                    "name": "Patapsco",
+                    "rect": [
+                        382,
+                        577,
+                        48,
+                        15
+                    ],
+                    "text_id": 32,
+                    "uid": 32
+                },
+                {
+                    "coord": [
+                        379,
+                        609
+                    ],
+                    "is_working": true,
+                    "name": "Baltimore Highlands",
+                    "rect": [
+                        396,
+                        601,
+                        103,
+                        15
+                    ],
+                    "text_id": 33,
+                    "uid": 33
+                },
+                {
+                    "coord": [
+                        391,
+                        630
+                    ],
+                    "is_working": true,
+                    "name": "Nursery Road",
+                    "rect": [
+                        408,
+                        622,
+                        71,
+                        15
+                    ],
+                    "text_id": 34,
+                    "uid": 34
+                },
+                {
+                    "coord": [
+                        394,
+                        652
+                    ],
+                    "is_working": true,
+                    "name": "North Linthicum",
+                    "rect": [
+                        412,
+                        645,
+                        80,
+                        15
+                    ],
+                    "text_id": 35,
+                    "uid": 35
+                },
+                {
+                    "coord": [
+                        394,
+                        673
+                    ],
+                    "is_working": true,
+                    "name": "Linthicum",
+                    "rect": [
+                        412,
+                        666,
+                        50,
+                        15
+                    ],
+                    "text_id": 36,
+                    "uid": 36
+                },
+                {
+                    "coord": [
+                        401,
+                        694
+                    ],
+                    "is_working": true,
+                    "name": "Ferndale",
+                    "rect": [
+                        409,
+                        687,
+                        45,
+                        15
+                    ],
+                    "text_id": 37,
+                    "uid": 37
+                },
+                {
+                    "coord": [
+                        401,
+                        718
+                    ],
+                    "is_working": true,
+                    "name": "Cromwell Station/Glen Burnie",
+                    "rect": [
+                        409,
+                        712,
+                        148,
+                        15
+                    ],
+                    "text_id": 38,
+                    "uid": 38
+                }
+            ],
+            "text_id": 39
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "0055A4",
+            "line_color": "0055A4",
+            "line_width": 6,
+            "name": "Hunt Valley-BWI Airport",
+            "segments": [
+                [
+                    39,
+                    40,
+                    [
+                        [
+                            396,
+                            73
+                        ],
+                        [
+                            396,
+                            51
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    40,
+                    41,
+                    [
+                        [
+                            396,
+                            98
+                        ],
+                        [
+                            396,
+                            73
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    41,
+                    42,
+                    [
+                        [
+                            396,
+                            120
+                        ],
+                        [
+                            396,
+                            98
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    42,
+                    43,
+                    [
+                        [
+                            396,
+                            144
+                        ],
+                        [
+                            396,
+                            120
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    43,
+                    44,
+                    [
+                        [
+                            396,
+                            166
+                        ],
+                        [
+                            396,
+                            144
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    44,
+                    45,
+                    [
+                        [
+                            396,
+                            187
+                        ],
+                        [
+                            396,
+                            166
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    45,
+                    46,
+                    [
+                        [
+                            396,
+                            212
+                        ],
+                        [
+                            396,
+                            187
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    46,
+                    47,
+                    [
+                        [
+                            396,
+                            236
+                        ],
+                        [
+                            396,
+                            212
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    47,
+                    48,
+                    [
+                        [
+                            393,
+                            259
+                        ],
+                        [
+                            396.0,
+                            249.0
+                        ],
+                        [
+                            396,
+                            236
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    48,
+                    49,
+                    [
+                        [
+                            385,
+                            278
+                        ],
+                        [
+                            393,
+                            259
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    49,
+                    50,
+                    [
+                        [
+                            375,
+                            302
+                        ],
+                        [
+                            385,
+                            278
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    50,
+                    51,
+                    [
+                        [
+                            367,
+                            327
+                        ],
+                        [
+                            375,
+                            302
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    51,
+                    52,
+                    [
+                        [
+                            367,
+                            368
+                        ],
+                        [
+                            367,
+                            327
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    52,
+                    53,
+                    [
+                        [
+                            367,
+                            399
+                        ],
+                        [
+                            367,
+                            368
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    53,
+                    54,
+                    [
+                        [
+                            367,
+                            422
+                        ],
+                        [
+                            367,
+                            399
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    54,
+                    55,
+                    [
+                        [
+                            367,
+                            441
+                        ],
+                        [
+                            367,
+                            422
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    55,
+                    56,
+                    [
+                        [
+                            367,
+                            458
+                        ],
+                        [
+                            367,
+                            441
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    56,
+                    57,
+                    [
+                        [
+                            367,
+                            485
+                        ],
+                        [
+                            367,
+                            458
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    57,
+                    58,
+                    [
+                        [
+                            367,
+                            505
+                        ],
+                        [
+                            367,
+                            485
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    58,
+                    59,
+                    [
+                        [
+                            367,
+                            526
+                        ],
+                        [
+                            367,
+                            505
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    59,
+                    60,
+                    [
+                        [
+                            367,
+                            544
+                        ],
+                        [
+                            367,
+                            526
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    60,
+                    61,
+                    [
+                        [
+                            367,
+                            564
+                        ],
+                        [
+                            367,
+                            544
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    61,
+                    62,
+                    [
+                        [
+                            371,
+                            585
+                        ],
+                        [
+                            367.0,
+                            577.0
+                        ],
+                        [
+                            367,
+                            564
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    62,
+                    63,
+                    [
+                        [
+                            385,
+                            609
+                        ],
+                        [
+                            371,
+                            585
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    63,
+                    64,
+                    [
+                        [
+                            397,
+                            630
+                        ],
+                        [
+                            385,
+                            609
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    64,
+                    65,
+                    [
+                        [
+                            401,
+                            652
+                        ],
+                        [
+                            401.0,
+                            638.0
+                        ],
+                        [
+                            397,
+                            630
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    65,
+                    66,
+                    [
+                        [
+                            401,
+                            673
+                        ],
+                        [
+                            401,
+                            652
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    66,
+                    67,
+                    [
+                        [
+                            364,
+                            707
+                        ],
+                        [
+                            401,
+                            673
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    67,
+                    68,
+                    [
+                        [
+                            364,
+                            730
+                        ],
+                        [
+                            364,
+                            707
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        396,
+                        51
+                    ],
+                    "is_working": true,
+                    "name": "Hunt Valley",
+                    "rect": [
+                        404,
+                        43,
+                        59,
+                        15
+                    ],
+                    "text_id": 40,
+                    "uid": 39
+                },
+                {
+                    "coord": [
+                        396,
+                        73
+                    ],
+                    "is_working": true,
+                    "name": "Pepper Road",
+                    "rect": [
+                        404,
+                        67,
+                        66,
+                        15
+                    ],
+                    "text_id": 41,
+                    "uid": 40
+                },
+                {
+                    "coord": [
+                        396,
+                        98
+                    ],
+                    "is_working": true,
+                    "name": "McCormick Road",
+                    "rect": [
+                        404,
+                        91,
+                        88,
+                        15
+                    ],
+                    "text_id": 42,
+                    "uid": 41
+                },
+                {
+                    "coord": [
+                        396,
+                        120
+                    ],
+                    "is_working": true,
+                    "name": "Gilroy Road",
+                    "rect": [
+                        404,
+                        113,
+                        61,
+                        15
+                    ],
+                    "text_id": 43,
+                    "uid": 42
+                },
+                {
+                    "coord": [
+                        396,
+                        144
+                    ],
+                    "is_working": true,
+                    "name": "Warren Road",
+                    "rect": [
+                        404,
+                        137,
+                        67,
+                        15
+                    ],
+                    "text_id": 44,
+                    "uid": 43
+                },
+                {
+                    "coord": [
+                        396,
+                        166
+                    ],
+                    "is_working": true,
+                    "name": "Timonium",
+                    "rect": [
+                        407,
+                        159,
+                        50,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 44
+                },
+                {
+                    "coord": [
+                        396,
+                        187
+                    ],
+                    "is_working": true,
+                    "name": "Timonium Business Park",
+                    "rect": [
+                        407,
+                        179,
+                        126,
+                        15
+                    ],
+                    "text_id": 16,
+                    "uid": 45
+                },
+                {
+                    "coord": [
+                        396,
+                        212
+                    ],
+                    "is_working": true,
+                    "name": "Lutherville",
+                    "rect": [
+                        407,
+                        206,
+                        54,
+                        15
+                    ],
+                    "text_id": 17,
+                    "uid": 46
+                },
+                {
+                    "coord": [
+                        396,
+                        236
+                    ],
+                    "is_working": true,
+                    "name": "Falls Road",
+                    "rect": [
+                        407,
+                        230,
+                        55,
+                        15
+                    ],
+                    "text_id": 18,
+                    "uid": 47
+                },
+                {
+                    "coord": [
+                        393,
+                        259
+                    ],
+                    "is_working": true,
+                    "name": "Mt. Washington",
+                    "rect": [
+                        404,
+                        252,
+                        78,
+                        15
+                    ],
+                    "text_id": 19,
+                    "uid": 48
+                },
+                {
+                    "coord": [
+                        385,
+                        278
+                    ],
+                    "is_working": true,
+                    "name": "Cold Spring Lane",
+                    "rect": [
+                        396,
+                        272,
+                        87,
+                        15
+                    ],
+                    "text_id": 20,
+                    "uid": 49
+                },
+                {
+                    "coord": [
+                        375,
+                        302
+                    ],
+                    "is_working": true,
+                    "name": "Woodberry",
+                    "rect": [
+                        386,
+                        296,
+                        56,
+                        15
+                    ],
+                    "text_id": 21,
+                    "uid": 50
+                },
+                {
+                    "coord": [
+                        367,
+                        327
+                    ],
+                    "is_working": true,
+                    "name": "North Avenue",
+                    "rect": [
+                        378,
+                        320,
+                        70,
+                        15
+                    ],
+                    "text_id": 22,
+                    "uid": 51
+                },
+                {
+                    "coord": [
+                        367,
+                        368
+                    ],
+                    "is_working": true,
+                    "name": "University of Baltimore/Mt. Royal",
+                    "rect": [
+                        383,
+                        362,
+                        166,
+                        15
+                    ],
+                    "text_id": 23,
+                    "uid": 52
+                },
+                {
+                    "coord": [
+                        367,
+                        399
+                    ],
+                    "is_working": true,
+                    "name": "Cultural Center",
+                    "rect": [
+                        383,
+                        396,
+                        77,
+                        15
+                    ],
+                    "text_id": 24,
+                    "uid": 53
+                },
+                {
+                    "coord": [
+                        367,
+                        422
+                    ],
+                    "is_working": true,
+                    "name": "Centre Street",
+                    "rect": [
+                        383,
+                        416,
+                        67,
+                        15
+                    ],
+                    "text_id": 25,
+                    "uid": 54
+                },
+                {
+                    "coord": [
+                        367,
+                        441
+                    ],
+                    "is_working": true,
+                    "name": "Lexington Market",
+                    "rect": [
+                        254,
+                        436,
+                        87,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 55
+                },
+                {
+                    "coord": [
+                        367,
+                        458
+                    ],
+                    "is_working": true,
+                    "name": "University Center/Baltimore Street",
+                    "rect": [
+                        177,
+                        454,
+                        172,
+                        15
+                    ],
+                    "text_id": 26,
+                    "uid": 56
+                },
+                {
+                    "coord": [
+                        367,
+                        485
+                    ],
+                    "is_working": true,
+                    "name": "Convention Center",
+                    "rect": [
+                        383,
+                        478,
+                        94,
+                        15
+                    ],
+                    "text_id": 27,
+                    "uid": 57
+                },
+                {
+                    "coord": [
+                        367,
+                        505
+                    ],
+                    "is_working": true,
+                    "name": "Camden Yards",
+                    "rect": [
+                        383,
+                        498,
+                        75,
+                        15
+                    ],
+                    "text_id": 28,
+                    "uid": 58
+                },
+                {
+                    "coord": [
+                        367,
+                        526
+                    ],
+                    "is_working": true,
+                    "name": "Hamburg Street",
+                    "rect": [
+                        378,
+                        519,
+                        79,
+                        15
+                    ],
+                    "text_id": 29,
+                    "uid": 59
+                },
+                {
+                    "coord": [
+                        367,
+                        544
+                    ],
+                    "is_working": true,
+                    "name": "Westport",
+                    "rect": [
+                        378,
+                        537,
+                        46,
+                        15
+                    ],
+                    "text_id": 30,
+                    "uid": 60
+                },
+                {
+                    "coord": [
+                        367,
+                        564
+                    ],
+                    "is_working": true,
+                    "name": "Cherry Hill",
+                    "rect": [
+                        378,
+                        556,
+                        56,
+                        15
+                    ],
+                    "text_id": 31,
+                    "uid": 61
+                },
+                {
+                    "coord": [
+                        371,
+                        585
+                    ],
+                    "is_working": true,
+                    "name": "Patapsco",
+                    "rect": [
+                        382,
+                        577,
+                        48,
+                        15
+                    ],
+                    "text_id": 32,
+                    "uid": 62
+                },
+                {
+                    "coord": [
+                        385,
+                        609
+                    ],
+                    "is_working": true,
+                    "name": "Baltimore Highlands",
+                    "rect": [
+                        396,
+                        601,
+                        103,
+                        15
+                    ],
+                    "text_id": 33,
+                    "uid": 63
+                },
+                {
+                    "coord": [
+                        397,
+                        630
+                    ],
+                    "is_working": true,
+                    "name": "Nursery Road",
+                    "rect": [
+                        408,
+                        622,
+                        71,
+                        15
+                    ],
+                    "text_id": 34,
+                    "uid": 64
+                },
+                {
+                    "coord": [
+                        401,
+                        652
+                    ],
+                    "is_working": true,
+                    "name": "North Linthicum",
+                    "rect": [
+                        412,
+                        645,
+                        80,
+                        15
+                    ],
+                    "text_id": 35,
+                    "uid": 65
+                },
+                {
+                    "coord": [
+                        401,
+                        673
+                    ],
+                    "is_working": true,
+                    "name": "Linthicum",
+                    "rect": [
+                        412,
+                        666,
+                        50,
+                        15
+                    ],
+                    "text_id": 36,
+                    "uid": 66
+                },
+                {
+                    "coord": [
+                        364,
+                        707
+                    ],
+                    "is_working": true,
+                    "name": "BWI Business District",
+                    "rect": [
+                        244,
+                        700,
+                        112,
+                        15
+                    ],
+                    "text_id": 45,
+                    "uid": 67
+                },
+                {
+                    "coord": [
+                        364,
+                        730
+                    ],
+                    "is_working": true,
+                    "name": "BWI Airport",
+                    "rect": [
+                        296,
+                        723,
+                        60,
+                        15
+                    ],
+                    "text_id": 46,
+                    "uid": 68
+                }
+            ],
+            "text_id": 47
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "F41C2B",
+            "line_color": "F41C2B",
+            "line_width": 6,
+            "name": "Penn Station-Camden Yards",
+            "segments": [
+                [
+                    69,
+                    70,
+                    [
+                        [
+                            372,
+                            368
+                        ],
+                        [
+                            389,
+                            344
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    70,
+                    71,
+                    [
+                        [
+                            372,
+                            399
+                        ],
+                        [
+                            372,
+                            368
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    71,
+                    72,
+                    [
+                        [
+                            372,
+                            422
+                        ],
+                        [
+                            372,
+                            399
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    72,
+                    73,
+                    [
+                        [
+                            372,
+                            441
+                        ],
+                        [
+                            372,
+                            422
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    73,
+                    74,
+                    [
+                        [
+                            372,
+                            458
+                        ],
+                        [
+                            372,
+                            441
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    74,
+                    75,
+                    [
+                        [
+                            372,
+                            485
+                        ],
+                        [
+                            372,
+                            458
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    75,
+                    76,
+                    [
+                        [
+                            372,
+                            505
+                        ],
+                        [
+                            372,
+                            485
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        389,
+                        344
+                    ],
+                    "is_working": true,
+                    "name": "Penn Station",
+                    "rect": [
+                        397,
+                        336,
+                        64,
+                        15
+                    ],
+                    "text_id": 48,
+                    "uid": 69
+                },
+                {
+                    "coord": [
+                        372,
+                        368
+                    ],
+                    "is_working": true,
+                    "name": "University of Baltimore/Mt. Royal",
+                    "rect": [
+                        383,
+                        362,
+                        166,
+                        15
+                    ],
+                    "text_id": 23,
+                    "uid": 70
+                },
+                {
+                    "coord": [
+                        372,
+                        399
+                    ],
+                    "is_working": true,
+                    "name": "Cultural Center",
+                    "rect": [
+                        383,
+                        396,
+                        77,
+                        15
+                    ],
+                    "text_id": 24,
+                    "uid": 71
+                },
+                {
+                    "coord": [
+                        372,
+                        422
+                    ],
+                    "is_working": true,
+                    "name": "Centre Street",
+                    "rect": [
+                        383,
+                        416,
+                        67,
+                        15
+                    ],
+                    "text_id": 25,
+                    "uid": 72
+                },
+                {
+                    "coord": [
+                        372,
+                        441
+                    ],
+                    "is_working": true,
+                    "name": "Lexington Market",
+                    "rect": [
+                        254,
+                        436,
+                        87,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 73
+                },
+                {
+                    "coord": [
+                        372,
+                        458
+                    ],
+                    "is_working": true,
+                    "name": "University Center/Baltimore Street",
+                    "rect": [
+                        177,
+                        454,
+                        172,
+                        15
+                    ],
+                    "text_id": 26,
+                    "uid": 74
+                },
+                {
+                    "coord": [
+                        372,
+                        485
+                    ],
+                    "is_working": true,
+                    "name": "Convention Center",
+                    "rect": [
+                        383,
+                        478,
+                        94,
+                        15
+                    ],
+                    "text_id": 27,
+                    "uid": 75
+                },
+                {
+                    "coord": [
+                        372,
+                        505
+                    ],
+                    "is_working": true,
+                    "name": "Camden Yards",
+                    "rect": [
+                        383,
+                        498,
+                        75,
+                        15
+                    ],
+                    "text_id": 28,
+                    "uid": 76
+                }
+            ],
+            "text_id": 49
+        }
+    ],
+    "lines_width": 6,
+    "name": "metro",
+    "name_text_id": 50,
+    "stations_diameter": 12.0,
+    "transfers": [
+        [
+            10,
+            25,
+            [
+                352,
+                443
+            ],
+            [
+                360,
+                441
+            ]
+        ],
+        [
+            20,
+            50,
+            [
+                368,
+                302
+            ],
+            [
+                375,
+                302
+            ]
+        ],
+        [
+            21,
+            51,
+            [
+                360,
+                327
+            ],
+            [
+                367,
+                327
+            ]
+        ],
+        [
+            22,
+            52,
+            [
+                360,
+                368
+            ],
+            [
+                367,
+                368
+            ]
+        ],
+        [
+            23,
+            53,
+            [
+                360,
+                399
+            ],
+            [
+                367,
+                399
+            ]
+        ],
+        [
+            24,
+            54,
+            [
+                360,
+                422
+            ],
+            [
+                367,
+                422
+            ]
+        ],
+        [
+            25,
+            55,
+            [
+                360,
+                441
+            ],
+            [
+                367,
+                441
+            ]
+        ],
+        [
+            26,
+            56,
+            [
+                360,
+                458
+            ],
+            [
+                367,
+                458
+            ]
+        ],
+        [
+            27,
+            57,
+            [
+                360,
+                485
+            ],
+            [
+                367,
+                485
+            ]
+        ],
+        [
+            28,
+            58,
+            [
+                360,
+                505
+            ],
+            [
+                367,
+                505
+            ]
+        ],
+        [
+            29,
+            59,
+            [
+                360,
+                526
+            ],
+            [
+                367,
+                526
+            ]
+        ],
+        [
+            10,
+            73,
+            [
+                352,
+                443
+            ],
+            [
+                372,
+                441
+            ]
+        ],
+        [
+            30,
+            60,
+            [
+                360,
+                544
+            ],
+            [
+                367,
+                544
+            ]
+        ],
+        [
+            31,
+            61,
+            [
+                360,
+                564
+            ],
+            [
+                367,
+                564
+            ]
+        ],
+        [
+            32,
+            62,
+            [
+                365,
+                585
+            ],
+            [
+                371,
+                585
+            ]
+        ],
+        [
+            33,
+            63,
+            [
+                379,
+                609
+            ],
+            [
+                385,
+                609
+            ]
+        ],
+        [
+            34,
+            64,
+            [
+                391,
+                630
+            ],
+            [
+                397,
+                630
+            ]
+        ],
+        [
+            35,
+            65,
+            [
+                394,
+                652
+            ],
+            [
+                401,
+                652
+            ]
+        ],
+        [
+            36,
+            66,
+            [
+                394,
+                673
+            ],
+            [
+                401,
+                673
+            ]
+        ],
+        [
+            22,
+            70,
+            [
+                360,
+                368
+            ],
+            [
+                372,
+                368
+            ]
+        ],
+        [
+            23,
+            71,
+            [
+                360,
+                399
+            ],
+            [
+                372,
+                399
+            ]
+        ],
+        [
+            24,
+            72,
+            [
+                360,
+                422
+            ],
+            [
+                372,
+                422
+            ]
+        ],
+        [
+            10,
+            55,
+            [
+                352,
+                443
+            ],
+            [
+                367,
+                441
+            ]
+        ],
+        [
+            25,
+            73,
+            [
+                360,
+                441
+            ],
+            [
+                372,
+                441
+            ]
+        ],
+        [
+            26,
+            74,
+            [
+                360,
+                458
+            ],
+            [
+                372,
+                458
+            ]
+        ],
+        [
+            27,
+            75,
+            [
+                360,
+                485
+            ],
+            [
+                372,
+                485
+            ]
+        ],
+        [
+            28,
+            76,
+            [
+                360,
+                505
+            ],
+            [
+                372,
+                505
+            ]
+        ],
+        [
+            52,
+            70,
+            [
+                367,
+                368
+            ],
+            [
+                372,
+                368
+            ]
+        ],
+        [
+            53,
+            71,
+            [
+                367,
+                399
+            ],
+            [
+                372,
+                399
+            ]
+        ],
+        [
+            54,
+            72,
+            [
+                367,
+                422
+            ],
+            [
+                372,
+                422
+            ]
+        ],
+        [
+            55,
+            73,
+            [
+                367,
+                441
+            ],
+            [
+                372,
+                441
+            ]
+        ],
+        [
+            56,
+            74,
+            [
+                367,
+                458
+            ],
+            [
+                372,
+                458
+            ]
+        ],
+        [
+            57,
+            75,
+            [
+                367,
+                485
+            ],
+            [
+                372,
+                485
+            ]
+        ],
+        [
+            14,
+            44,
+            [
+                389,
+                166
+            ],
+            [
+                396,
+                166
+            ]
+        ],
+        [
+            58,
+            76,
+            [
+                367,
+                505
+            ],
+            [
+                372,
+                505
+            ]
+        ],
+        [
+            15,
+            45,
+            [
+                389,
+                187
+            ],
+            [
+                396,
+                187
+            ]
+        ],
+        [
+            16,
+            46,
+            [
+                389,
+                212
+            ],
+            [
+                396,
+                212
+            ]
+        ],
+        [
+            17,
+            47,
+            [
+                389,
+                236
+            ],
+            [
+                396,
+                236
+            ]
+        ],
+        [
+            18,
+            48,
+            [
+                386,
+                259
+            ],
+            [
+                393,
+                259
+            ]
+        ],
+        [
+            19,
+            49,
+            [
+                378,
+                278
+            ],
+            [
+                385,
+                278
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 51,
+    "upper_case": false,
+    "width": 570,
+    "word_wrap": false
+}

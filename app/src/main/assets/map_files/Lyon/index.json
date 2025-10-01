@@ -1,0 +1,82 @@
+{
+    "city_id": 2996944,
+    "comments_text_id": 148,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 147,
+    "file": "Lyon.zip",
+    "latitude": 45.74906,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": 4.84789,
+    "map_id": "Lyon.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro",
+                "trolleybus",
+                "tram",
+                "funicular"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 145,
+            "root": true,
+            "transports": [
+                "metro",
+                "trolleybus",
+                "tram",
+                "funicular"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 146
+        }
+    ],
+    "timestamp": 1754434800.0,
+    "transport_types": [
+        "Трамвай",
+        "Метро",
+        "Фуникулер",
+        "Троллейбус"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Метро"
+        },
+        {
+            "file": "transports/funicular.json",
+            "name": "funicular",
+            "type": "Фуникулер"
+        },
+        {
+            "file": "transports/tram.json",
+            "name": "tram",
+            "type": "Трамвай"
+        },
+        {
+            "file": "transports/trolleybus.json",
+            "name": "trolleybus",
+            "type": "Троллейбус"
+        }
+    ]
+}

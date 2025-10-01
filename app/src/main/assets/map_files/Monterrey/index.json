@@ -1,0 +1,58 @@
+{
+    "city_id": 3522993,
+    "comments_text_id": 36,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 35,
+    "file": "Monterrey.zip",
+    "latitude": 16.06191,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": -93.36928,
+    "map_id": "Monterrey.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 33,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 34
+        }
+    ],
+    "timestamp": 1754434800.0,
+    "transport_types": [
+        "Метро"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Метро"
+        }
+    ]
+}

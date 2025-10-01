@@ -1,0 +1,507 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 445,
+    "images": [
+        "res/schemes/rennes.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "7f0000",
+            "line_color": "bf0000",
+            "line_width": 7,
+            "name": "1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            105,
+                            80
+                        ],
+                        [
+                            75,
+                            80
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            135,
+                            80
+                        ],
+                        [
+                            105,
+                            80
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            170,
+                            105
+                        ],
+                        [
+                            145.0,
+                            80.0
+                        ],
+                        [
+                            135,
+                            80
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            195,
+                            130
+                        ],
+                        [
+                            170,
+                            105
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            195,
+                            150
+                        ],
+                        [
+                            195,
+                            130
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            205,
+                            180
+                        ],
+                        [
+                            195.0,
+                            170.0
+                        ],
+                        [
+                            195,
+                            150
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            220,
+                            195
+                        ],
+                        [
+                            205,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            205,
+                            230
+                        ],
+                        [
+                            205.0,
+                            210.0
+                        ],
+                        [
+                            220,
+                            195
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            205,
+                            255
+                        ],
+                        [
+                            205,
+                            230
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            205,
+                            285
+                        ],
+                        [
+                            205,
+                            255
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            235,
+                            295
+                        ],
+                        [
+                            215.0,
+                            295.0
+                        ],
+                        [
+                            205,
+                            285
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            275,
+                            295
+                        ],
+                        [
+                            235,
+                            295
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            300,
+                            285
+                        ],
+                        [
+                            285.0,
+                            285.0
+                        ],
+                        [
+                            275,
+                            295
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            325,
+                            285
+                        ],
+                        [
+                            300,
+                            285
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        75,
+                        80
+                    ],
+                    "is_working": true,
+                    "name": "J. F. Kennedy",
+                    "rect": [
+                        16,
+                        55,
+                        70,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        105,
+                        80
+                    ],
+                    "is_working": true,
+                    "name": "Villejean Universite",
+                    "rect": [
+                        40,
+                        92,
+                        99,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        135,
+                        80
+                    ],
+                    "is_working": true,
+                    "name": "Pontchaillou",
+                    "rect": [
+                        126,
+                        55,
+                        63,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        170,
+                        105
+                    ],
+                    "is_working": true,
+                    "name": "Anatole France",
+                    "rect": [
+                        180,
+                        90,
+                        77,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        195,
+                        130
+                    ],
+                    "is_working": true,
+                    "name": "Sainte Anne",
+                    "rect": [
+                        206,
+                        122,
+                        62,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        195,
+                        150
+                    ],
+                    "is_working": true,
+                    "name": "Republique",
+                    "rect": [
+                        206,
+                        144,
+                        58,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        205,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Charles de Gaulle",
+                    "rect": [
+                        217,
+                        166,
+                        91,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        220,
+                        195
+                    ],
+                    "is_working": true,
+                    "name": "Gares",
+                    "rect": [
+                        230,
+                        186,
+                        32,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        205,
+                        230
+                    ],
+                    "is_working": true,
+                    "name": "Jacques Cartier",
+                    "rect": [
+                        216,
+                        223,
+                        81,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        205,
+                        255
+                    ],
+                    "is_working": true,
+                    "name": "Clemenceau",
+                    "rect": [
+                        216,
+                        246,
+                        64,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        205,
+                        285
+                    ],
+                    "is_working": true,
+                    "name": "Henri Freville",
+                    "rect": [
+                        127,
+                        278,
+                        69,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        235,
+                        295
+                    ],
+                    "is_working": true,
+                    "name": "Italie",
+                    "rect": [
+                        228,
+                        270,
+                        26,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        275,
+                        295
+                    ],
+                    "is_working": true,
+                    "name": "Triangle",
+                    "rect": [
+                        249,
+                        304,
+                        42,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        300,
+                        285
+                    ],
+                    "is_working": true,
+                    "name": "Le Blosne",
+                    "rect": [
+                        290,
+                        261,
+                        52,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        325,
+                        285
+                    ],
+                    "is_working": true,
+                    "name": "La Poterie",
+                    "rect": [
+                        318,
+                        296,
+                        52,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                }
+            ],
+            "text_id": 15
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 16,
+    "stations_diameter": 13.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 17,
+    "upper_case": false,
+    "width": 475,
+    "word_wrap": false
+}

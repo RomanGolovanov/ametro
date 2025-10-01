@@ -1,0 +1,114 @@
+{
+    "city_id": 706483,
+    "comments_text_id": 51,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 50,
+    "file": "KharkovV.zip",
+    "latitude": 49.98177,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": 36.25475,
+    "map_id": "KharkovV.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 47,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 48
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/alekseevskaja.json",
+            "name": "alekseevskaja",
+            "name_text_id": 41,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 49
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/holod-zav.json",
+            "name": "holod-zav",
+            "name_text_id": 17,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 49
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/saltovskaja.json",
+            "name": "saltovskaja",
+            "name_text_id": 29,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 49
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/saltovske-otv.json",
+            "name": "saltovske-otv",
+            "name_text_id": 46,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 49
+        }
+    ],
+    "timestamp": 1754434800.0,
+    "transport_types": [
+        "Метро"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Метро"
+        }
+    ]
+}

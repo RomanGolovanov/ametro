@@ -1,0 +1,1229 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 737,
+    "images": [
+        "res/schemes/fukuoka.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "DC4410",
+            "line_color": "DC4410",
+            "line_width": 7,
+            "name": "Kuko",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            137,
+                            340
+                        ],
+                        [
+                            73,
+                            340
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            191,
+                            340
+                        ],
+                        [
+                            137,
+                            340
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            253,
+                            340
+                        ],
+                        [
+                            191,
+                            340
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            303,
+                            307
+                        ],
+                        [
+                            286.0,
+                            307.0
+                        ],
+                        [
+                            253,
+                            340
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            357,
+                            307
+                        ],
+                        [
+                            303,
+                            307
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            423,
+                            307
+                        ],
+                        [
+                            357,
+                            307
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            467,
+                            297
+                        ],
+                        [
+                            457.0,
+                            307.0
+                        ],
+                        [
+                            423,
+                            307
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            504,
+                            260
+                        ],
+                        [
+                            467,
+                            297
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            543,
+                            263
+                        ],
+                        [
+                            533.0,
+                            253.0
+                        ],
+                        [
+                            511.0,
+                            253.0
+                        ],
+                        [
+                            504,
+                            260
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            583,
+                            293
+                        ],
+                        [
+                            573.0,
+                            293.0
+                        ],
+                        [
+                            543,
+                            263
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            637,
+                            290
+                        ],
+                        [
+                            634.0,
+                            293.0
+                        ],
+                        [
+                            583,
+                            293
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            727,
+                            247
+                        ],
+                        [
+                            680.0,
+                            247.0
+                        ],
+                        [
+                            637,
+                            290
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        73,
+                        340
+                    ],
+                    "is_working": true,
+                    "name": "Meinohama",
+                    "rect": [
+                        46,
+                        318,
+                        59,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        137,
+                        340
+                    ],
+                    "is_working": true,
+                    "name": "Muromi",
+                    "rect": [
+                        120,
+                        347,
+                        39,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        191,
+                        340
+                    ],
+                    "is_working": true,
+                    "name": "Fujisaki",
+                    "rect": [
+                        171,
+                        318,
+                        41,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        253,
+                        340
+                    ],
+                    "is_working": true,
+                    "name": "Nishijin",
+                    "rect": [
+                        234,
+                        347,
+                        40,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        303,
+                        307
+                    ],
+                    "is_working": true,
+                    "name": "Tojinmachi",
+                    "rect": [
+                        278,
+                        285,
+                        56,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        357,
+                        307
+                    ],
+                    "is_working": true,
+                    "name": "Ohorikoen",
+                    "rect": [
+                        331,
+                        315,
+                        53,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        423,
+                        307
+                    ],
+                    "is_working": true,
+                    "name": "Akasaka",
+                    "rect": [
+                        402,
+                        315,
+                        46,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        467,
+                        297
+                    ],
+                    "is_working": true,
+                    "name": "Tenjin",
+                    "rect": [
+                        428,
+                        275,
+                        32,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        504,
+                        260
+                    ],
+                    "is_working": true,
+                    "name": "Nakasu-Kawabata",
+                    "rect": [
+                        392,
+                        243,
+                        92,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        543,
+                        263
+                    ],
+                    "is_working": true,
+                    "name": "Gion",
+                    "rect": [
+                        552,
+                        252,
+                        25,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        583,
+                        293
+                    ],
+                    "is_working": true,
+                    "name": "Hakata",
+                    "rect": [
+                        575,
+                        271,
+                        37,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        637,
+                        290
+                    ],
+                    "is_working": true,
+                    "name": "Higashi-Hie",
+                    "rect": [
+                        646,
+                        288,
+                        60,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        727,
+                        247
+                    ],
+                    "is_working": true,
+                    "name": "Fukuokakuko",
+                    "rect": [
+                        678,
+                        224,
+                        68,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                }
+            ],
+            "text_id": 13
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "0066AA",
+            "line_color": "0066AA",
+            "line_width": 7,
+            "name": "Hakozaki",
+            "segments": [
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            520,
+                            226
+                        ],
+                        [
+                            495,
+                            251
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            547,
+                            199
+                        ],
+                        [
+                            520,
+                            226
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            577,
+                            169
+                        ],
+                        [
+                            547,
+                            199
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            577,
+                            130
+                        ],
+                        [
+                            577,
+                            169
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            597,
+                            77
+                        ],
+                        [
+                            577.0,
+                            97.0
+                        ],
+                        [
+                            577,
+                            130
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            607,
+                            30
+                        ],
+                        [
+                            607.0,
+                            67.0
+                        ],
+                        [
+                            597,
+                            77
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        495,
+                        251
+                    ],
+                    "is_working": true,
+                    "name": "Nakasu-Kawabata",
+                    "rect": [
+                        392,
+                        243,
+                        92,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        520,
+                        226
+                    ],
+                    "is_working": true,
+                    "name": "Gofukumachi",
+                    "rect": [
+                        529,
+                        222,
+                        67,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        547,
+                        199
+                    ],
+                    "is_working": true,
+                    "name": "Chiyo-Kenchoguchi",
+                    "rect": [
+                        556,
+                        195,
+                        99,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        577,
+                        169
+                    ],
+                    "is_working": true,
+                    "name": "Maidashi-Kyudai-byoin-mae",
+                    "rect": [
+                        586,
+                        162,
+                        139,
+                        15
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        577,
+                        130
+                    ],
+                    "is_working": true,
+                    "name": "Hakozaki-Miyamae",
+                    "rect": [
+                        586,
+                        123,
+                        96,
+                        15
+                    ],
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        597,
+                        77
+                    ],
+                    "is_working": true,
+                    "name": "Hakozaki-Kyudai-mae",
+                    "rect": [
+                        606,
+                        73,
+                        110,
+                        15
+                    ],
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        607,
+                        30
+                    ],
+                    "is_working": true,
+                    "name": "Kaizuka",
+                    "rect": [
+                        616,
+                        23,
+                        42,
+                        15
+                    ],
+                    "text_id": 19,
+                    "uid": 19
+                }
+            ],
+            "text_id": 20
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "008832",
+            "line_color": "008832",
+            "line_width": 7,
+            "name": "Nanakuma",
+            "segments": [
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            80,
+                            537
+                        ],
+                        [
+                            44.0,
+                            537.0
+                        ],
+                        [
+                            30,
+                            523
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            123,
+                            537
+                        ],
+                        [
+                            80,
+                            537
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            163,
+                            577
+                        ],
+                        [
+                            123,
+                            537
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    23,
+                    24,
+                    [
+                        [
+                            217,
+                            587
+                        ],
+                        [
+                            173.0,
+                            587.0
+                        ],
+                        [
+                            163,
+                            577
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            260,
+                            573
+                        ],
+                        [
+                            246.0,
+                            587.0
+                        ],
+                        [
+                            217,
+                            587
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    25,
+                    26,
+                    [
+                        [
+                            267,
+                            533
+                        ],
+                        [
+                            267.0,
+                            566.0
+                        ],
+                        [
+                            260,
+                            573
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    26,
+                    27,
+                    [
+                        [
+                            267,
+                            497
+                        ],
+                        [
+                            267,
+                            533
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    27,
+                    28,
+                    [
+                        [
+                            267,
+                            460
+                        ],
+                        [
+                            267,
+                            497
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            297,
+                            413
+                        ],
+                        [
+                            267.0,
+                            443.0
+                        ],
+                        [
+                            267,
+                            460
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    29,
+                    30,
+                    [
+                        [
+                            347,
+                            380
+                        ],
+                        [
+                            330.0,
+                            380.0
+                        ],
+                        [
+                            297,
+                            413
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    30,
+                    31,
+                    [
+                        [
+                            400,
+                            380
+                        ],
+                        [
+                            347,
+                            380
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    31,
+                    32,
+                    [
+                        [
+                            440,
+                            350
+                        ],
+                        [
+                            410.0,
+                            380.0
+                        ],
+                        [
+                            400,
+                            380
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    32,
+                    33,
+                    [
+                        [
+                            477,
+                            350
+                        ],
+                        [
+                            440,
+                            350
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    33,
+                    34,
+                    [
+                        [
+                            500,
+                            330
+                        ],
+                        [
+                            500.0,
+                            340.0
+                        ],
+                        [
+                            490.0,
+                            350.0
+                        ],
+                        [
+                            477,
+                            350
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    34,
+                    35,
+                    [
+                        [
+                            476,
+                            306
+                        ],
+                        [
+                            500,
+                            330
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        30,
+                        523
+                    ],
+                    "is_working": true,
+                    "name": "Hashimoto",
+                    "rect": [
+                        21,
+                        501,
+                        55,
+                        15
+                    ],
+                    "text_id": 21,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        80,
+                        537
+                    ],
+                    "is_working": true,
+                    "name": "Jiromaru",
+                    "rect": [
+                        57,
+                        544,
+                        46,
+                        15
+                    ],
+                    "text_id": 22,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        123,
+                        537
+                    ],
+                    "is_working": true,
+                    "name": "Kamo",
+                    "rect": [
+                        110,
+                        515,
+                        31,
+                        15
+                    ],
+                    "text_id": 23,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        163,
+                        577
+                    ],
+                    "is_working": true,
+                    "name": "Noke",
+                    "rect": [
+                        127,
+                        574,
+                        28,
+                        15
+                    ],
+                    "text_id": 24,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        217,
+                        587
+                    ],
+                    "is_working": true,
+                    "name": "Umebayashi",
+                    "rect": [
+                        182,
+                        565,
+                        64,
+                        15
+                    ],
+                    "text_id": 25,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        260,
+                        573
+                    ],
+                    "is_working": true,
+                    "name": "Fukudaimae",
+                    "rect": [
+                        269,
+                        569,
+                        62,
+                        15
+                    ],
+                    "text_id": 26,
+                    "uid": 25
+                },
+                {
+                    "coord": [
+                        267,
+                        533
+                    ],
+                    "is_working": true,
+                    "name": "Nanakuma",
+                    "rect": [
+                        276,
+                        526,
+                        55,
+                        15
+                    ],
+                    "text_id": 27,
+                    "uid": 26
+                },
+                {
+                    "coord": [
+                        267,
+                        497
+                    ],
+                    "is_working": true,
+                    "name": "Kanayama",
+                    "rect": [
+                        276,
+                        490,
+                        55,
+                        15
+                    ],
+                    "text_id": 28,
+                    "uid": 27
+                },
+                {
+                    "coord": [
+                        267,
+                        460
+                    ],
+                    "is_working": true,
+                    "name": "Chayama",
+                    "rect": [
+                        276,
+                        454,
+                        49,
+                        15
+                    ],
+                    "text_id": 29,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        297,
+                        413
+                    ],
+                    "is_working": true,
+                    "name": "Befu",
+                    "rect": [
+                        263,
+                        402,
+                        25,
+                        15
+                    ],
+                    "text_id": 30,
+                    "uid": 29
+                },
+                {
+                    "coord": [
+                        347,
+                        380
+                    ],
+                    "is_working": true,
+                    "name": "Ropponmatsu",
+                    "rect": [
+                        321,
+                        358,
+                        70,
+                        15
+                    ],
+                    "text_id": 31,
+                    "uid": 30
+                },
+                {
+                    "coord": [
+                        400,
+                        380
+                    ],
+                    "is_working": true,
+                    "name": "Sakurazaka",
+                    "rect": [
+                        376,
+                        387,
+                        60,
+                        15
+                    ],
+                    "text_id": 32,
+                    "uid": 31
+                },
+                {
+                    "coord": [
+                        440,
+                        350
+                    ],
+                    "is_working": true,
+                    "name": "Yakuin-odori",
+                    "rect": [
+                        399,
+                        328,
+                        64,
+                        15
+                    ],
+                    "text_id": 33,
+                    "uid": 32
+                },
+                {
+                    "coord": [
+                        477,
+                        350
+                    ],
+                    "is_working": true,
+                    "name": "Yakuin",
+                    "rect": [
+                        465,
+                        357,
+                        36,
+                        15
+                    ],
+                    "text_id": 34,
+                    "uid": 33
+                },
+                {
+                    "coord": [
+                        500,
+                        330
+                    ],
+                    "is_working": true,
+                    "name": "Watanabe-dori",
+                    "rect": [
+                        509,
+                        323,
+                        73,
+                        15
+                    ],
+                    "text_id": 35,
+                    "uid": 34
+                },
+                {
+                    "coord": [
+                        476,
+                        306
+                    ],
+                    "is_working": true,
+                    "name": "Tenjin-Minami",
+                    "rect": [
+                        487,
+                        296,
+                        71,
+                        15
+                    ],
+                    "text_id": 36,
+                    "uid": 35
+                }
+            ],
+            "text_id": 27
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 37,
+    "stations_diameter": 13.0,
+    "transfers": [
+        [
+            8,
+            13,
+            [
+                504,
+                260
+            ],
+            [
+                495,
+                251
+            ]
+        ],
+        [
+            7,
+            35,
+            [
+                467,
+                297
+            ],
+            [
+                476,
+                306
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 38,
+    "upper_case": false,
+    "width": 877,
+    "word_wrap": false
+}

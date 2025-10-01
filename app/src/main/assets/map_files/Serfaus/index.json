@@ -1,0 +1,58 @@
+{
+    "city_id": 2765150,
+    "comments_text_id": 8,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 7,
+    "file": "Serfaus.zip",
+    "latitude": 47.04018,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": 10.60339,
+    "map_id": "Serfaus.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 5,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 6
+        }
+    ],
+    "timestamp": 1207954800.0,
+    "transport_types": [
+        "Фуникулер"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Фуникулер"
+        }
+    ]
+}

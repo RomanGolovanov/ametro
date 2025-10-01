@@ -1,0 +1,449 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 403,
+    "images": [
+        "res/schemes/adana.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "af0000",
+            "line_color": "cf0000",
+            "line_width": 7,
+            "name": "1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            78,
+                            27
+                        ],
+                        [
+                            65.0,
+                            14.0
+                        ],
+                        [
+                            23,
+                            14
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            96,
+                            45
+                        ],
+                        [
+                            78,
+                            27
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            114,
+                            63
+                        ],
+                        [
+                            96,
+                            45
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            142,
+                            91
+                        ],
+                        [
+                            114,
+                            63
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            154,
+                            116
+                        ],
+                        [
+                            154.0,
+                            103.0
+                        ],
+                        [
+                            142,
+                            91
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            154,
+                            140
+                        ],
+                        [
+                            154,
+                            116
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            189,
+                            185
+                        ],
+                        [
+                            154.0,
+                            150.0
+                        ],
+                        [
+                            154,
+                            140
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            199,
+                            207
+                        ],
+                        [
+                            199.0,
+                            195.0
+                        ],
+                        [
+                            189,
+                            185
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            199,
+                            231
+                        ],
+                        [
+                            199,
+                            207
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            242,
+                            253
+                        ],
+                        [
+                            221.0,
+                            253.0
+                        ],
+                        [
+                            199,
+                            231
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            274,
+                            253
+                        ],
+                        [
+                            242,
+                            253
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            303,
+                            231
+                        ],
+                        [
+                            281.0,
+                            253.0
+                        ],
+                        [
+                            274,
+                            253
+                        ]
+                    ],
+                    false
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        23,
+                        14
+                    ],
+                    "is_working": true,
+                    "name": "Hastana",
+                    "rect": [
+                        8,
+                        22,
+                        43,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        78,
+                        27
+                    ],
+                    "is_working": true,
+                    "name": "Anadolu Lisesi",
+                    "rect": [
+                        86,
+                        11,
+                        76,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        96,
+                        45
+                    ],
+                    "is_working": true,
+                    "name": "Huzurevi",
+                    "rect": [
+                        104,
+                        31,
+                        46,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        114,
+                        63
+                    ],
+                    "is_working": true,
+                    "name": "Mavi Bulvar",
+                    "rect": [
+                        44,
+                        64,
+                        62,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        142,
+                        91
+                    ],
+                    "is_working": true,
+                    "name": "Yurt",
+                    "rect": [
+                        151,
+                        75,
+                        22,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        154,
+                        116
+                    ],
+                    "is_working": true,
+                    "name": "YesiLyurt",
+                    "rect": [
+                        162,
+                        109,
+                        49,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        154,
+                        140
+                    ],
+                    "is_working": true,
+                    "name": "Fatih",
+                    "rect": [
+                        119,
+                        133,
+                        26,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        189,
+                        185
+                    ],
+                    "is_working": true,
+                    "name": "Vilayet",
+                    "rect": [
+                        196,
+                        166,
+                        36,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        199,
+                        207
+                    ],
+                    "is_working": false,
+                    "name": "Istiklal",
+                    "rect": [
+                        208,
+                        200,
+                        35,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        199,
+                        231
+                    ],
+                    "is_working": false,
+                    "name": "Kocavezir",
+                    "rect": [
+                        138,
+                        226,
+                        52,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        242,
+                        253
+                    ],
+                    "is_working": false,
+                    "name": "Hurriet",
+                    "rect": [
+                        215,
+                        262,
+                        36,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        274,
+                        253
+                    ],
+                    "is_working": false,
+                    "name": "Cumhuriyet",
+                    "rect": [
+                        272,
+                        261,
+                        59,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        303,
+                        231
+                    ],
+                    "is_working": false,
+                    "name": "Akincilar",
+                    "rect": [
+                        281,
+                        207,
+                        47,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                }
+            ],
+            "text_id": 13
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 14,
+    "stations_diameter": 13.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 15,
+    "upper_case": false,
+    "width": 453,
+    "word_wrap": false
+}

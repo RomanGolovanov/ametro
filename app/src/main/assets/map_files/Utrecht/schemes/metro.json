@@ -1,0 +1,837 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 655,
+    "images": [
+        "res/schemes/utrecht.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "a5de52",
+            "line_width": 4,
+            "name": "Sneltram",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            355,
+                            70
+                        ],
+                        [
+                            370,
+                            80
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            340,
+                            70
+                        ],
+                        [
+                            355,
+                            70
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            320,
+                            90
+                        ],
+                        [
+                            340,
+                            70
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            295,
+                            125
+                        ],
+                        [
+                            295.0,
+                            115.0
+                        ],
+                        [
+                            320,
+                            90
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            325,
+                            155
+                        ],
+                        [
+                            295,
+                            125
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            350,
+                            180
+                        ],
+                        [
+                            325,
+                            155
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            350,
+                            215
+                        ],
+                        [
+                            350,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            350,
+                            250
+                        ],
+                        [
+                            350,
+                            215
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            300,
+                            300
+                        ],
+                        [
+                            350,
+                            250
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            260,
+                            320
+                        ],
+                        [
+                            280.0,
+                            300.0
+                        ],
+                        [
+                            300,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            245,
+                            365
+                        ],
+                        [
+                            245.0,
+                            335.0
+                        ],
+                        [
+                            260,
+                            320
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            260,
+                            405
+                        ],
+                        [
+                            245.0,
+                            390.0
+                        ],
+                        [
+                            245,
+                            365
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            275,
+                            420
+                        ],
+                        [
+                            260,
+                            405
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    17,
+                    [
+                        [
+                            260,
+                            425
+                        ],
+                        [
+                            260,
+                            405
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            290,
+                            435
+                        ],
+                        [
+                            275,
+                            420
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            290,
+                            470
+                        ],
+                        [
+                            290,
+                            435
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            290,
+                            505
+                        ],
+                        [
+                            290,
+                            470
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            240,
+                            445
+                        ],
+                        [
+                            260,
+                            425
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            175,
+                            420
+                        ],
+                        [
+                            201.0,
+                            445.0
+                        ],
+                        [
+                            240,
+                            445
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            150,
+                            395
+                        ],
+                        [
+                            175,
+                            420
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            125,
+                            410
+                        ],
+                        [
+                            140.0,
+                            395.0
+                        ],
+                        [
+                            150,
+                            395
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            103,
+                            432
+                        ],
+                        [
+                            125,
+                            410
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            135,
+                            455
+                        ],
+                        [
+                            115.0,
+                            455.0
+                        ],
+                        [
+                            103.0,
+                            444.0
+                        ],
+                        [
+                            103,
+                            432
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    23,
+                    24,
+                    [
+                        [
+                            135,
+                            500
+                        ],
+                        [
+                            150.0,
+                            490.0
+                        ],
+                        [
+                            150.0,
+                            465.0
+                        ],
+                        [
+                            135,
+                            455
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        370,
+                        80
+                    ],
+                    "is_working": true,
+                    "name": "Moreelse Park",
+                    "rect": [
+                        382,
+                        78,
+                        74,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        355,
+                        70
+                    ],
+                    "is_working": true,
+                    "name": "Utrecht Centraal Station",
+                    "rect": [
+                        365,
+                        53,
+                        120,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        340,
+                        70
+                    ],
+                    "is_working": true,
+                    "name": "Westplein",
+                    "rect": [
+                        278,
+                        54,
+                        51,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        320,
+                        90
+                    ],
+                    "is_working": true,
+                    "name": "Graadt van Roggenweg",
+                    "rect": [
+                        190,
+                        78,
+                        117,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        295,
+                        125
+                    ],
+                    "is_working": true,
+                    "name": "24 Oktoberplein-Zuid",
+                    "rect": [
+                        192,
+                        135,
+                        104,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        325,
+                        155
+                    ],
+                    "is_working": true,
+                    "name": "5 Mei Plein",
+                    "rect": [
+                        256,
+                        155,
+                        57,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        350,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Vasco da Gamalaan",
+                    "rect": [
+                        238,
+                        178,
+                        101,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        350,
+                        215
+                    ],
+                    "is_working": true,
+                    "name": "Kanaleneiland Zuid",
+                    "rect": [
+                        244,
+                        207,
+                        97,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        350,
+                        250
+                    ],
+                    "is_working": true,
+                    "name": "Transferium Westraven",
+                    "rect": [
+                        219,
+                        240,
+                        117,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        300,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Zuilenstein",
+                    "rect": [
+                        308,
+                        306,
+                        56,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        260,
+                        320
+                    ],
+                    "is_working": true,
+                    "name": "Batau-Noord",
+                    "rect": [
+                        268,
+                        326,
+                        64,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        245,
+                        365
+                    ],
+                    "is_working": true,
+                    "name": "Wijkersloot",
+                    "rect": [
+                        258,
+                        357,
+                        58,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        260,
+                        405
+                    ],
+                    "is_working": true,
+                    "name": "Nieuwegein Stadscentrum",
+                    "rect": [
+                        266,
+                        388,
+                        131,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        275,
+                        420
+                    ],
+                    "is_working": true,
+                    "name": "Merwestein",
+                    "rect": [
+                        289,
+                        406,
+                        59,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        290,
+                        435
+                    ],
+                    "is_working": true,
+                    "name": "Fokkesteeg",
+                    "rect": [
+                        299,
+                        430,
+                        59,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        290,
+                        470
+                    ],
+                    "is_working": true,
+                    "name": "Wiersdijk",
+                    "rect": [
+                        300,
+                        464,
+                        49,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        290,
+                        505
+                    ],
+                    "is_working": true,
+                    "name": "Nieuwegein-Zuid",
+                    "rect": [
+                        299,
+                        494,
+                        84,
+                        15
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        260,
+                        425
+                    ],
+                    "is_working": true,
+                    "name": "St.Antonius Ziekenhuis",
+                    "rect": [
+                        136,
+                        426,
+                        116,
+                        15
+                    ],
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        240,
+                        445
+                    ],
+                    "is_working": true,
+                    "name": "Doorslag",
+                    "rect": [
+                        226,
+                        452,
+                        47,
+                        15
+                    ],
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        175,
+                        420
+                    ],
+                    "is_working": true,
+                    "name": "Hooghe Waerd",
+                    "rect": [
+                        171,
+                        333,
+                        15,
+                        75
+                    ],
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        150,
+                        395
+                    ],
+                    "is_working": true,
+                    "name": "Clinckhoeff",
+                    "rect": [
+                        143,
+                        330,
+                        15,
+                        58
+                    ],
+                    "text_id": 20,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        125,
+                        410
+                    ],
+                    "is_working": true,
+                    "name": "Eiteren",
+                    "rect": [
+                        81,
+                        393,
+                        37,
+                        15
+                    ],
+                    "text_id": 21,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        103,
+                        432
+                    ],
+                    "is_working": true,
+                    "name": "Achterveld",
+                    "rect": [
+                        35,
+                        415,
+                        56,
+                        15
+                    ],
+                    "text_id": 22,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        135,
+                        455
+                    ],
+                    "is_working": true,
+                    "name": "Ijsselstein Binnenstad",
+                    "rect": [
+                        30,
+                        465,
+                        112,
+                        15
+                    ],
+                    "text_id": 23,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        135,
+                        500
+                    ],
+                    "is_working": true,
+                    "name": "Ijsselstein-Zuid",
+                    "rect": [
+                        47,
+                        495,
+                        77,
+                        15
+                    ],
+                    "text_id": 24,
+                    "uid": 24
+                }
+            ],
+            "text_id": 25
+        }
+    ],
+    "lines_width": 4,
+    "name": "metro",
+    "name_text_id": 26,
+    "stations_diameter": 11.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 27,
+    "upper_case": false,
+    "width": 520,
+    "word_wrap": false
+}

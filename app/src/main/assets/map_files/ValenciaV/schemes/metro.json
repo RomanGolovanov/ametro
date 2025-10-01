@@ -1,0 +1,301 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 380,
+    "images": [
+        "res/schemes/valenciav.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "0000af",
+            "line_color": "0000cf",
+            "line_width": 7,
+            "name": "1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            50,
+                            210
+                        ],
+                        [
+                            30,
+                            230
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            70,
+                            190
+                        ],
+                        [
+                            50,
+                            210
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            90,
+                            170
+                        ],
+                        [
+                            70,
+                            190
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            110,
+                            150
+                        ],
+                        [
+                            90,
+                            170
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            130,
+                            130
+                        ],
+                        [
+                            110,
+                            150
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            150,
+                            110
+                        ],
+                        [
+                            130,
+                            130
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            170,
+                            90
+                        ],
+                        [
+                            150,
+                            110
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            190,
+                            70
+                        ],
+                        [
+                            170,
+                            90
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        30,
+                        230
+                    ],
+                    "is_working": true,
+                    "name": "Monumental",
+                    "rect": [
+                        45,
+                        224,
+                        62,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        50,
+                        210
+                    ],
+                    "is_working": true,
+                    "name": "Las Ferias",
+                    "rect": [
+                        64,
+                        205,
+                        54,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        70,
+                        190
+                    ],
+                    "is_working": true,
+                    "name": "Palotal",
+                    "rect": [
+                        85,
+                        184,
+                        36,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        90,
+                        170
+                    ],
+                    "is_working": true,
+                    "name": "Santa Rosa",
+                    "rect": [
+                        104,
+                        166,
+                        59,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        110,
+                        150
+                    ],
+                    "is_working": true,
+                    "name": "Michelena",
+                    "rect": [
+                        123,
+                        146,
+                        53,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        130,
+                        130
+                    ],
+                    "is_working": true,
+                    "name": "Lara",
+                    "rect": [
+                        146,
+                        125,
+                        24,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        150,
+                        110
+                    ],
+                    "is_working": true,
+                    "name": "Cedeno",
+                    "rect": [
+                        165,
+                        103,
+                        40,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        170,
+                        90
+                    ],
+                    "is_working": true,
+                    "name": "Rafael Urdaneta",
+                    "rect": [
+                        185,
+                        83,
+                        82,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        190,
+                        70
+                    ],
+                    "is_working": true,
+                    "name": "Francisco de Miranda",
+                    "rect": [
+                        205,
+                        63,
+                        109,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                }
+            ],
+            "text_id": 9
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 10,
+    "stations_diameter": 13.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 11,
+    "upper_case": false,
+    "width": 340,
+    "word_wrap": false
+}

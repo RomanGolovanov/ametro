@@ -1,0 +1,114 @@
+{
+    "city_id": 6167865,
+    "comments_text_id": 77,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 76,
+    "file": "Toronto.zip",
+    "latitude": 43.70643,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": -79.39864,
+    "map_id": "Toronto.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 73,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 74
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/bloor.json",
+            "name": "bloor",
+            "name_text_id": 61,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 75
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/rt.json",
+            "name": "rt",
+            "name_text_id": 67,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 75
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/sheppard.json",
+            "name": "sheppard",
+            "name_text_id": 72,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 75
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/yonge.json",
+            "name": "yonge",
+            "name_text_id": 32,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 75
+        }
+    ],
+    "timestamp": 1754434800.0,
+    "transport_types": [
+        "Метро"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Метро"
+        }
+    ]
+}

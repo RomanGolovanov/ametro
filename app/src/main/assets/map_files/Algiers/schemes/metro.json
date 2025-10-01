@@ -1,0 +1,425 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 456,
+    "images": [
+        "res/schemes/algiers.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "2399D9",
+            "line_color": "2399D9",
+            "line_width": 7,
+            "name": "1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            125,
+                            52
+                        ],
+                        [
+                            154,
+                            23
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            125,
+                            93
+                        ],
+                        [
+                            125,
+                            52
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            153,
+                            121
+                        ],
+                        [
+                            125,
+                            93
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            182,
+                            150
+                        ],
+                        [
+                            153,
+                            121
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            213,
+                            181
+                        ],
+                        [
+                            182,
+                            150
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            245,
+                            213
+                        ],
+                        [
+                            213,
+                            181
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            274,
+                            242
+                        ],
+                        [
+                            245,
+                            213
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            274,
+                            279
+                        ],
+                        [
+                            274,
+                            242
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            301,
+                            306
+                        ],
+                        [
+                            274,
+                            279
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            337,
+                            306
+                        ],
+                        [
+                            301,
+                            306
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            363,
+                            280
+                        ],
+                        [
+                            337,
+                            306
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            403,
+                            280
+                        ],
+                        [
+                            363,
+                            280
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        154,
+                        23
+                    ],
+                    "is_working": true,
+                    "name": "Tafourah - Grande Poste",
+                    "rect": [
+                        24,
+                        11,
+                        121,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        125,
+                        52
+                    ],
+                    "is_working": true,
+                    "name": "Khalifa Boukhalfa",
+                    "rect": [
+                        26,
+                        45,
+                        90,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        125,
+                        93
+                    ],
+                    "is_working": true,
+                    "name": "1er Mai",
+                    "rect": [
+                        77,
+                        86,
+                        39,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        153,
+                        121
+                    ],
+                    "is_working": true,
+                    "name": "Aissat Idir",
+                    "rect": [
+                        91,
+                        118,
+                        53,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        182,
+                        150
+                    ],
+                    "is_working": true,
+                    "name": "Jardin d'Essai",
+                    "rect": [
+                        101,
+                        147,
+                        72,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        213,
+                        181
+                    ],
+                    "is_working": true,
+                    "name": "Les Fusilles",
+                    "rect": [
+                        142,
+                        178,
+                        62,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        245,
+                        213
+                    ],
+                    "is_working": true,
+                    "name": "Cite Amirouche",
+                    "rect": [
+                        157,
+                        211,
+                        79,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        274,
+                        242
+                    ],
+                    "is_working": true,
+                    "name": "Cite Mer",
+                    "rect": [
+                        221,
+                        239,
+                        44,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        274,
+                        279
+                    ],
+                    "is_working": true,
+                    "name": "Hai el Badr",
+                    "rect": [
+                        208,
+                        271,
+                        58,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        301,
+                        306
+                    ],
+                    "is_working": true,
+                    "name": "Bachdjarah - Tennis",
+                    "rect": [
+                        192,
+                        303,
+                        101,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        337,
+                        306
+                    ],
+                    "is_working": true,
+                    "name": "Bachdjarah",
+                    "rect": [
+                        312,
+                        314,
+                        59,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        363,
+                        280
+                    ],
+                    "is_working": true,
+                    "name": "El Harrach Gare",
+                    "rect": [
+                        328,
+                        257,
+                        82,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        403,
+                        280
+                    ],
+                    "is_working": true,
+                    "name": "El Harrach Centre",
+                    "rect": [
+                        372,
+                        288,
+                        91,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                }
+            ],
+            "text_id": 13
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 14,
+    "stations_diameter": 13.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 15,
+    "upper_case": false,
+    "width": 553,
+    "word_wrap": false
+}

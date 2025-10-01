@@ -1,0 +1,58 @@
+{
+    "city_id": 1808926,
+    "comments_text_id": 59,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 58,
+    "file": "Hangzhou.zip",
+    "latitude": 30.29365,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": 120.16142,
+    "map_id": "Hangzhou.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 56,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 57
+        }
+    ],
+    "timestamp": 1754434800.0,
+    "transport_types": [
+        "Метро"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Метро"
+        }
+    ]
+}

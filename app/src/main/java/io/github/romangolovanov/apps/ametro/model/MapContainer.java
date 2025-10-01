@@ -2,24 +2,35 @@ package io.github.romangolovanov.apps.ametro.model;
 
 import android.util.Log;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+
 import io.github.romangolovanov.apps.ametro.app.Constants;
 import io.github.romangolovanov.apps.ametro.catalog.MapCatalogProvider;
 import io.github.romangolovanov.apps.ametro.catalog.entities.MapInfo;
-import io.github.romangolovanov.apps.ametro.model.entities.*;
-import io.github.romangolovanov.apps.ametro.model.serialization.GlobalIdentifierProvider;
+import io.github.romangolovanov.apps.ametro.model.entities.MapLocale;
+import io.github.romangolovanov.apps.ametro.model.entities.MapMetadata;
+import io.github.romangolovanov.apps.ametro.model.entities.MapScheme;
+import io.github.romangolovanov.apps.ametro.model.entities.MapSchemeLine;
+import io.github.romangolovanov.apps.ametro.model.entities.MapSchemeSegment;
+import io.github.romangolovanov.apps.ametro.model.entities.MapSchemeStation;
+import io.github.romangolovanov.apps.ametro.model.entities.MapSchemeTransfer;
+import io.github.romangolovanov.apps.ametro.model.entities.MapStationInformation;
+import io.github.romangolovanov.apps.ametro.model.entities.MapTransportLine;
+import io.github.romangolovanov.apps.ametro.model.entities.MapTransportScheme;
+import io.github.romangolovanov.apps.ametro.model.entities.MapTransportSegment;
+import io.github.romangolovanov.apps.ametro.model.entities.MapTransportTransfer;
+import io.github.romangolovanov.apps.ametro.model.serialization.MapProvider;
 import io.github.romangolovanov.apps.ametro.model.serialization.MapSerializationException;
-import io.github.romangolovanov.apps.ametro.model.serialization.ZipArchiveMapProvider;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.*;
 
 public class MapContainer {
 
     private final MapCatalogProvider catalogManager;
     private final MapInfo mapInfo;
-    private final GlobalIdentifierProvider identifierProvider = new GlobalIdentifierProvider();
-
     private MapLocale locale;
     private MapMetadata metadata;
     private MapStationInformation[] stations;
@@ -35,20 +46,18 @@ public class MapContainer {
     }
 
     public void loadSchemeWithTransports(String schemeName, String[] enabledTransports) throws MapSerializationException {
-        try (InputStream is = catalogManager.openMapAssetStream(mapInfo)) {
-            try (ZipArchiveMapProvider mapProvider = new ZipArchiveMapProvider(identifierProvider, is)) {
-                if (metadata == null) {
-                    var texts = mapProvider.getTextsMap(suggestLanguage(mapProvider.getSupportedLocales(), preferredLanguage));
-                    var allTexts = mapProvider.getAllTextsMap();
-                    locale = new MapLocale(texts, allTexts);
-                    metadata = mapProvider.getMetadata(locale);
-                    stations = mapProvider.getStationInformation();
-                    schemes = new HashMap<>();
-                    transports = new HashMap<>();
-                }
-                MapScheme scheme = loadSchemeFile(mapProvider, schemeName, locale);
-                loadTransportFiles(mapProvider, enabledTransports != null ? enabledTransports : scheme.getDefaultTransports());
+        try (var mapProvider = catalogManager.getMapProvider(mapInfo)) {
+            if (metadata == null) {
+                var texts = mapProvider.getTextsMap(suggestLanguage(mapProvider.getSupportedLocales(), preferredLanguage));
+                var allTexts = mapProvider.getAllTextsMap();
+                locale = new MapLocale(texts, allTexts);
+                metadata = mapProvider.getMetadata(locale);
+                stations = mapProvider.getStationInformation();
+                schemes = new HashMap<>();
+                transports = new HashMap<>();
             }
+            MapScheme scheme = loadSchemeFile(mapProvider, schemeName, locale);
+            loadTransportFiles(mapProvider, enabledTransports != null ? enabledTransports : scheme.getDefaultTransports());
         } catch (MapSerializationException e) {
             Log.e(Constants.LOG, "Map unpacking failed", e);
             throw e;
@@ -106,10 +115,8 @@ public class MapContainer {
     }
 
     public String loadStationMap(String mapFilePath) throws IOException {
-        try (InputStream is = catalogManager.openMapAssetStream(mapInfo)) {
-            try (ZipArchiveMapProvider mapProvider = new ZipArchiveMapProvider(identifierProvider, is)) {
-                return mapProvider.getFileContent(mapFilePath);
-            }
+        try (var mapProvider = catalogManager.getMapProvider(mapInfo)) {
+            return mapProvider.getFileContent(mapFilePath);
         } catch (Exception e) {
             Log.e(Constants.LOG, "Map station scheme file loading failed", e);
             throw e;
@@ -149,7 +156,7 @@ public class MapContainer {
         return preferredLanguage;
     }
 
-    private MapScheme loadSchemeFile(ZipArchiveMapProvider mapProvider, String schemeName, MapLocale locale)
+    private MapScheme loadSchemeFile(MapProvider mapProvider, String schemeName, MapLocale locale)
             throws IOException, MapSerializationException {
         MapScheme scheme = schemes.get(schemeName);
         if (scheme == null) {
@@ -159,14 +166,14 @@ public class MapContainer {
         return scheme;
     }
 
-    private void loadTransportFiles(ZipArchiveMapProvider mapProvider, String[] enabledTransports)
+    private void loadTransportFiles(MapProvider mapProvider, String[] enabledTransports)
             throws IOException, MapSerializationException {
         for (String transportName : enabledTransports) {
             loadTransport(mapProvider, transportName);
         }
     }
 
-    private void loadTransport(ZipArchiveMapProvider mapProvider, String transportName)
+    private void loadTransport(MapProvider mapProvider, String transportName)
             throws IOException {
         MapTransportScheme transport = transports.get(transportName);
         if (transport == null) {

@@ -1,0 +1,1403 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 458,
+    "images": [
+        "res/schemes/jersey-city.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "1c99c4",
+            "line_color": "1c99c4",
+            "line_width": 14,
+            "name": "22nd Street - Hoboken Terminal",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            862,
+                            181
+                        ],
+                        [
+                            907,
+                            181
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            813,
+                            181
+                        ],
+                        [
+                            862,
+                            181
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            765,
+                            181
+                        ],
+                        [
+                            813,
+                            181
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            720,
+                            181
+                        ],
+                        [
+                            765,
+                            181
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            674,
+                            181
+                        ],
+                        [
+                            720,
+                            181
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            627,
+                            181
+                        ],
+                        [
+                            674,
+                            181
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            588,
+                            181
+                        ],
+                        [
+                            627,
+                            181
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            547,
+                            181
+                        ],
+                        [
+                            588,
+                            181
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            507,
+                            181
+                        ],
+                        [
+                            547,
+                            181
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            467,
+                            181
+                        ],
+                        [
+                            507,
+                            181
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            426,
+                            181
+                        ],
+                        [
+                            467,
+                            181
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            385,
+                            181
+                        ],
+                        [
+                            426,
+                            181
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            347,
+                            135
+                        ],
+                        [
+                            347.0,
+                            181.0
+                        ],
+                        [
+                            385,
+                            181
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        907,
+                        181
+                    ],
+                    "is_working": true,
+                    "name": "22nd Street",
+                    "rect": [
+                        900,
+                        111,
+                        15,
+                        58
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        862,
+                        181
+                    ],
+                    "is_working": true,
+                    "name": "34th Street",
+                    "rect": [
+                        855,
+                        114,
+                        15,
+                        55
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        813,
+                        181
+                    ],
+                    "is_working": true,
+                    "name": "45th Street",
+                    "rect": [
+                        806,
+                        114,
+                        15,
+                        55
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        765,
+                        181
+                    ],
+                    "is_working": true,
+                    "name": "Danforth Avenue",
+                    "rect": [
+                        757,
+                        84,
+                        15,
+                        85
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        720,
+                        181
+                    ],
+                    "is_working": true,
+                    "name": "Richard Street",
+                    "rect": [
+                        712,
+                        96,
+                        15,
+                        73
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        674,
+                        181
+                    ],
+                    "is_working": true,
+                    "name": "Liberty State Park",
+                    "rect": [
+                        667,
+                        79,
+                        15,
+                        90
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        627,
+                        181
+                    ],
+                    "is_working": true,
+                    "name": "Jersey Avenue",
+                    "rect": [
+                        620,
+                        92,
+                        15,
+                        77
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        588,
+                        181
+                    ],
+                    "is_working": true,
+                    "name": "Marin Boulevard",
+                    "rect": [
+                        581,
+                        85,
+                        15,
+                        84
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        547,
+                        181
+                    ],
+                    "is_working": true,
+                    "name": "Essex Street",
+                    "rect": [
+                        540,
+                        104,
+                        15,
+                        65
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        507,
+                        181
+                    ],
+                    "is_working": true,
+                    "name": "Exchange Place",
+                    "rect": [
+                        500,
+                        87,
+                        15,
+                        82
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        467,
+                        181
+                    ],
+                    "is_working": true,
+                    "name": "Harborside Financial Center",
+                    "rect": [
+                        459,
+                        28,
+                        15,
+                        141
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        426,
+                        181
+                    ],
+                    "is_working": true,
+                    "name": "Harsimus Cove",
+                    "rect": [
+                        420,
+                        90,
+                        15,
+                        79
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        385,
+                        181
+                    ],
+                    "is_working": true,
+                    "name": "Pavonia/Newport",
+                    "rect": [
+                        378,
+                        83,
+                        15,
+                        86
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        347,
+                        135
+                    ],
+                    "is_working": true,
+                    "name": "Hoboken Terminal",
+                    "rect": [
+                        281,
+                        108,
+                        92,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                }
+            ],
+            "text_id": 14
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "F49E01",
+            "line_color": "f2db13",
+            "line_width": 14,
+            "name": "West Side Avenue - Tonnelle Avenue",
+            "segments": [
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            779,
+                            241
+                        ],
+                        [
+                            822,
+                            261
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            734,
+                            220
+                        ],
+                        [
+                            779,
+                            241
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            674,
+                            200
+                        ],
+                        [
+                            691.0,
+                            200.0
+                        ],
+                        [
+                            734,
+                            220
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            627,
+                            200
+                        ],
+                        [
+                            674,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            588,
+                            200
+                        ],
+                        [
+                            627,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            547,
+                            200
+                        ],
+                        [
+                            588,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            507,
+                            200
+                        ],
+                        [
+                            547,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            467,
+                            200
+                        ],
+                        [
+                            507,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            426,
+                            200
+                        ],
+                        [
+                            467,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    23,
+                    24,
+                    [
+                        [
+                            385,
+                            200
+                        ],
+                        [
+                            426,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            280,
+                            239
+                        ],
+                        [
+                            347.0,
+                            239.0
+                        ],
+                        [
+                            347.0,
+                            200.0
+                        ],
+                        [
+                            385,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    25,
+                    26,
+                    [
+                        [
+                            219,
+                            239
+                        ],
+                        [
+                            280,
+                            239
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    26,
+                    27,
+                    [
+                        [
+                            164,
+                            239
+                        ],
+                        [
+                            219,
+                            239
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    27,
+                    28,
+                    [
+                        [
+                            111,
+                            239
+                        ],
+                        [
+                            164,
+                            239
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            87,
+                            270
+                        ],
+                        [
+                            87.0,
+                            239.0
+                        ],
+                        [
+                            111,
+                            239
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    29,
+                    30,
+                    [
+                        [
+                            87,
+                            308
+                        ],
+                        [
+                            87,
+                            270
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        822,
+                        261
+                    ],
+                    "is_working": true,
+                    "name": "West Side Avenue",
+                    "rect": [
+                        714,
+                        263,
+                        93,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        779,
+                        241
+                    ],
+                    "is_working": true,
+                    "name": "Martin Luther King Drive",
+                    "rect": [
+                        641,
+                        241,
+                        123,
+                        15
+                    ],
+                    "text_id": 16,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        734,
+                        220
+                    ],
+                    "is_working": true,
+                    "name": "Garfield Avenue",
+                    "rect": [
+                        635,
+                        220,
+                        82,
+                        15
+                    ],
+                    "text_id": 17,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        674,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Liberty State Park",
+                    "rect": [
+                        667,
+                        79,
+                        15,
+                        90
+                    ],
+                    "text_id": 5,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        627,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Jersey Avenue",
+                    "rect": [
+                        620,
+                        92,
+                        15,
+                        77
+                    ],
+                    "text_id": 6,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        588,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Marin Boulevard",
+                    "rect": [
+                        581,
+                        85,
+                        15,
+                        84
+                    ],
+                    "text_id": 7,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        547,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Essex Street",
+                    "rect": [
+                        540,
+                        104,
+                        15,
+                        65
+                    ],
+                    "text_id": 8,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        507,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Exchange Place",
+                    "rect": [
+                        500,
+                        87,
+                        15,
+                        82
+                    ],
+                    "text_id": 9,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        467,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Harborside Financial Center",
+                    "rect": [
+                        459,
+                        28,
+                        15,
+                        141
+                    ],
+                    "text_id": 10,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        426,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Harsimus Cove",
+                    "rect": [
+                        420,
+                        90,
+                        15,
+                        79
+                    ],
+                    "text_id": 11,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        385,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Pavonia/Newport",
+                    "rect": [
+                        378,
+                        83,
+                        15,
+                        86
+                    ],
+                    "text_id": 12,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        280,
+                        239
+                    ],
+                    "is_working": true,
+                    "name": "2nd Street",
+                    "rect": [
+                        272,
+                        158,
+                        15,
+                        52
+                    ],
+                    "text_id": 18,
+                    "uid": 25
+                },
+                {
+                    "coord": [
+                        219,
+                        239
+                    ],
+                    "is_working": true,
+                    "name": "9th Street",
+                    "rect": [
+                        212,
+                        161,
+                        15,
+                        49
+                    ],
+                    "text_id": 19,
+                    "uid": 26
+                },
+                {
+                    "coord": [
+                        164,
+                        239
+                    ],
+                    "is_working": true,
+                    "name": "Lincoln Harbor",
+                    "rect": [
+                        156,
+                        135,
+                        15,
+                        75
+                    ],
+                    "text_id": 20,
+                    "uid": 27
+                },
+                {
+                    "coord": [
+                        111,
+                        239
+                    ],
+                    "is_working": true,
+                    "name": "Port Imperial",
+                    "rect": [
+                        103,
+                        145,
+                        15,
+                        65
+                    ],
+                    "text_id": 21,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        87,
+                        270
+                    ],
+                    "is_working": true,
+                    "name": "Bergenline Avenue",
+                    "rect": [
+                        99,
+                        263,
+                        97,
+                        15
+                    ],
+                    "text_id": 22,
+                    "uid": 29
+                },
+                {
+                    "coord": [
+                        87,
+                        308
+                    ],
+                    "is_working": true,
+                    "name": "Tonnelle Avenue",
+                    "rect": [
+                        35,
+                        319,
+                        85,
+                        15
+                    ],
+                    "text_id": 23,
+                    "uid": 30
+                }
+            ],
+            "text_id": 24
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "148a4d",
+            "line_color": "148a4d",
+            "line_width": 14,
+            "name": "Hoboken Terminal - Tonnelle Avenue",
+            "segments": [
+                [
+                    31,
+                    32,
+                    [
+                        [
+                            280,
+                            221
+                        ],
+                        [
+                            328.0,
+                            221.0
+                        ],
+                        [
+                            328,
+                            135
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    32,
+                    33,
+                    [
+                        [
+                            219,
+                            221
+                        ],
+                        [
+                            280,
+                            221
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    33,
+                    34,
+                    [
+                        [
+                            164,
+                            221
+                        ],
+                        [
+                            219,
+                            221
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    34,
+                    35,
+                    [
+                        [
+                            111,
+                            221
+                        ],
+                        [
+                            164,
+                            221
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    35,
+                    36,
+                    [
+                        [
+                            68,
+                            270
+                        ],
+                        [
+                            68.0,
+                            221.0
+                        ],
+                        [
+                            111,
+                            221
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    36,
+                    37,
+                    [
+                        [
+                            68,
+                            308
+                        ],
+                        [
+                            68,
+                            270
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        328,
+                        135
+                    ],
+                    "is_working": true,
+                    "name": "Hoboken Terminal",
+                    "rect": [
+                        281,
+                        108,
+                        92,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 31
+                },
+                {
+                    "coord": [
+                        280,
+                        221
+                    ],
+                    "is_working": true,
+                    "name": "2nd Street",
+                    "rect": [
+                        272,
+                        158,
+                        15,
+                        52
+                    ],
+                    "text_id": 18,
+                    "uid": 32
+                },
+                {
+                    "coord": [
+                        219,
+                        221
+                    ],
+                    "is_working": true,
+                    "name": "9th Street",
+                    "rect": [
+                        212,
+                        161,
+                        15,
+                        49
+                    ],
+                    "text_id": 19,
+                    "uid": 33
+                },
+                {
+                    "coord": [
+                        164,
+                        221
+                    ],
+                    "is_working": true,
+                    "name": "Lincoln Harbor",
+                    "rect": [
+                        156,
+                        135,
+                        15,
+                        75
+                    ],
+                    "text_id": 20,
+                    "uid": 34
+                },
+                {
+                    "coord": [
+                        111,
+                        221
+                    ],
+                    "is_working": true,
+                    "name": "Port Imperial",
+                    "rect": [
+                        103,
+                        145,
+                        15,
+                        65
+                    ],
+                    "text_id": 21,
+                    "uid": 35
+                },
+                {
+                    "coord": [
+                        68,
+                        270
+                    ],
+                    "is_working": true,
+                    "name": "Bergenline Avenue",
+                    "rect": [
+                        99,
+                        263,
+                        97,
+                        15
+                    ],
+                    "text_id": 22,
+                    "uid": 36
+                },
+                {
+                    "coord": [
+                        68,
+                        308
+                    ],
+                    "is_working": true,
+                    "name": "Tonnelle Avenue",
+                    "rect": [
+                        35,
+                        319,
+                        85,
+                        15
+                    ],
+                    "text_id": 23,
+                    "uid": 37
+                }
+            ],
+            "text_id": 25
+        }
+    ],
+    "lines_width": 14,
+    "name": "metro",
+    "name_text_id": 26,
+    "stations_diameter": 14.0,
+    "transfers": [
+        [
+            17,
+            5,
+            [
+                674,
+                200
+            ],
+            [
+                674,
+                181
+            ]
+        ],
+        [
+            25,
+            32,
+            [
+                280,
+                239
+            ],
+            [
+                280,
+                221
+            ]
+        ],
+        [
+            26,
+            33,
+            [
+                219,
+                239
+            ],
+            [
+                219,
+                221
+            ]
+        ],
+        [
+            27,
+            34,
+            [
+                164,
+                239
+            ],
+            [
+                164,
+                221
+            ]
+        ],
+        [
+            28,
+            35,
+            [
+                111,
+                239
+            ],
+            [
+                111,
+                221
+            ]
+        ],
+        [
+            29,
+            36,
+            [
+                87,
+                270
+            ],
+            [
+                68,
+                270
+            ]
+        ],
+        [
+            30,
+            37,
+            [
+                87,
+                308
+            ],
+            [
+                68,
+                308
+            ]
+        ],
+        [
+            18,
+            6,
+            [
+                627,
+                200
+            ],
+            [
+                627,
+                181
+            ]
+        ],
+        [
+            19,
+            7,
+            [
+                588,
+                200
+            ],
+            [
+                588,
+                181
+            ]
+        ],
+        [
+            20,
+            8,
+            [
+                547,
+                200
+            ],
+            [
+                547,
+                181
+            ]
+        ],
+        [
+            21,
+            9,
+            [
+                507,
+                200
+            ],
+            [
+                507,
+                181
+            ]
+        ],
+        [
+            22,
+            10,
+            [
+                467,
+                200
+            ],
+            [
+                467,
+                181
+            ]
+        ],
+        [
+            23,
+            11,
+            [
+                426,
+                200
+            ],
+            [
+                426,
+                181
+            ]
+        ],
+        [
+            24,
+            12,
+            [
+                385,
+                200
+            ],
+            [
+                385,
+                181
+            ]
+        ],
+        [
+            13,
+            31,
+            [
+                347,
+                135
+            ],
+            [
+                328,
+                135
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 27,
+    "upper_case": false,
+    "width": 1057,
+    "word_wrap": false
+}

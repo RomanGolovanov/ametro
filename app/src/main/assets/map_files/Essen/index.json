@@ -1,0 +1,58 @@
+{
+    "city_id": 2928810,
+    "comments_text_id": 49,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 48,
+    "file": "Essen.zip",
+    "latitude": 51.45657,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": 7.01228,
+    "map_id": "Essen.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 46,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 47
+        }
+    ],
+    "timestamp": 1754434800.0,
+    "transport_types": [
+        "Электричка"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Электричка"
+        }
+    ]
+}

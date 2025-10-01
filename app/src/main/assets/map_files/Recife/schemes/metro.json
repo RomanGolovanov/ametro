@@ -1,0 +1,1046 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 889,
+    "images": [
+        "res/schemes/recife.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "af0000",
+            "line_color": "cf0000",
+            "line_width": 7,
+            "name": "Linha Centro",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            636,
+                            250
+                        ],
+                        [
+                            675.0,
+                            250.0
+                        ],
+                        [
+                            686,
+                            240
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            591,
+                            250
+                        ],
+                        [
+                            636,
+                            250
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            561,
+                            250
+                        ],
+                        [
+                            591,
+                            250
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            521,
+                            250
+                        ],
+                        [
+                            561,
+                            250
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            476,
+                            285
+                        ],
+                        [
+                            511.0,
+                            250.0
+                        ],
+                        [
+                            521,
+                            250
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            416,
+                            320
+                        ],
+                        [
+                            441.0,
+                            320.0
+                        ],
+                        [
+                            476,
+                            285
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            356,
+                            320
+                        ],
+                        [
+                            416,
+                            320
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            296,
+                            345
+                        ],
+                        [
+                            311.0,
+                            345.0
+                        ],
+                        [
+                            336.0,
+                            320.0
+                        ],
+                        [
+                            356,
+                            320
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            246,
+                            345
+                        ],
+                        [
+                            296,
+                            345
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            226,
+                            365
+                        ],
+                        [
+                            246,
+                            345
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    14,
+                    [
+                        [
+                            226,
+                            325
+                        ],
+                        [
+                            246,
+                            345
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            146,
+                            425
+                        ],
+                        [
+                            166.0,
+                            405.0
+                        ],
+                        [
+                            166.0,
+                            395.0
+                        ],
+                        [
+                            191.0,
+                            370.0
+                        ],
+                        [
+                            221.0,
+                            370.0
+                        ],
+                        [
+                            226,
+                            365
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            96,
+                            425
+                        ],
+                        [
+                            146,
+                            425
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            41,
+                            435
+                        ],
+                        [
+                            73.0,
+                            435.0
+                        ],
+                        [
+                            83.0,
+                            425.0
+                        ],
+                        [
+                            96,
+                            425
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            216,
+                            255
+                        ],
+                        [
+                            216.0,
+                            315.0
+                        ],
+                        [
+                            226,
+                            325
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            216,
+                            210
+                        ],
+                        [
+                            216,
+                            255
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            121,
+                            30
+                        ],
+                        [
+                            151.0,
+                            60.0
+                        ],
+                        [
+                            151.0,
+                            145.0
+                        ],
+                        [
+                            216,
+                            210
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        686,
+                        240
+                    ],
+                    "is_working": true,
+                    "name": "Recife",
+                    "rect": [
+                        689,
+                        214,
+                        34,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        636,
+                        250
+                    ],
+                    "is_working": true,
+                    "name": "Joana Bezerra",
+                    "rect": [
+                        600,
+                        208,
+                        74,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        591,
+                        250
+                    ],
+                    "is_working": true,
+                    "name": "Afogados",
+                    "rect": [
+                        570,
+                        226,
+                        49,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        561,
+                        250
+                    ],
+                    "is_working": true,
+                    "name": "Ipiranga",
+                    "rect": [
+                        542,
+                        261,
+                        42,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        521,
+                        250
+                    ],
+                    "is_working": true,
+                    "name": "Mangueira",
+                    "rect": [
+                        472,
+                        226,
+                        54,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        476,
+                        285
+                    ],
+                    "is_working": true,
+                    "name": "Santa Luzia",
+                    "rect": [
+                        407,
+                        272,
+                        59,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        416,
+                        320
+                    ],
+                    "is_working": true,
+                    "name": "Werneck",
+                    "rect": [
+                        400,
+                        330,
+                        46,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        356,
+                        320
+                    ],
+                    "is_working": true,
+                    "name": "Barro",
+                    "rect": [
+                        340,
+                        297,
+                        30,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        296,
+                        345
+                    ],
+                    "is_working": true,
+                    "name": "Tejipio",
+                    "rect": [
+                        286,
+                        354,
+                        35,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        246,
+                        345
+                    ],
+                    "is_working": true,
+                    "name": "Coqueiral",
+                    "rect": [
+                        180,
+                        339,
+                        50,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        226,
+                        365
+                    ],
+                    "is_working": true,
+                    "name": "Cavaleiro",
+                    "rect": [
+                        227,
+                        373,
+                        50,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        146,
+                        425
+                    ],
+                    "is_working": true,
+                    "name": "Floriano",
+                    "rect": [
+                        149,
+                        432,
+                        42,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        96,
+                        425
+                    ],
+                    "is_working": true,
+                    "name": "Engenho Velho",
+                    "rect": [
+                        53,
+                        402,
+                        76,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        41,
+                        435
+                    ],
+                    "is_working": true,
+                    "name": "Jaboatao",
+                    "rect": [
+                        25,
+                        445,
+                        47,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        226,
+                        325
+                    ],
+                    "is_working": true,
+                    "name": "Alto do Ceu",
+                    "rect": [
+                        229,
+                        301,
+                        60,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        216,
+                        255
+                    ],
+                    "is_working": true,
+                    "name": "Curado",
+                    "rect": [
+                        227,
+                        248,
+                        38,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        216,
+                        210
+                    ],
+                    "is_working": true,
+                    "name": "Rodoviaria",
+                    "rect": [
+                        226,
+                        204,
+                        56,
+                        15
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        121,
+                        30
+                    ],
+                    "is_working": true,
+                    "name": "Camaragibe",
+                    "rect": [
+                        51,
+                        23,
+                        62,
+                        15
+                    ],
+                    "text_id": 17,
+                    "uid": 17
+                }
+            ],
+            "text_id": 18
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "0000af",
+            "line_color": "0000cf",
+            "line_width": 7,
+            "name": "Linha Sul",
+            "segments": [
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            636,
+                            265
+                        ],
+                        [
+                            681.0,
+                            265.0
+                        ],
+                        [
+                            696,
+                            250
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            581,
+                            290
+                        ],
+                        [
+                            606.0,
+                            265.0
+                        ],
+                        [
+                            636,
+                            265
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            561,
+                            350
+                        ],
+                        [
+                            561.0,
+                            310.0
+                        ],
+                        [
+                            581,
+                            290
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            561,
+                            437
+                        ],
+                        [
+                            561,
+                            350
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            561,
+                            469
+                        ],
+                        [
+                            561,
+                            437
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    23,
+                    24,
+                    [
+                        [
+                            561,
+                            504
+                        ],
+                        [
+                            561,
+                            469
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            561,
+                            553
+                        ],
+                        [
+                            561,
+                            504
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    25,
+                    26,
+                    [
+                        [
+                            552,
+                            630
+                        ],
+                        [
+                            561.0,
+                            621.0
+                        ],
+                        [
+                            561,
+                            553
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    26,
+                    27,
+                    [
+                        [
+                            511,
+                            671
+                        ],
+                        [
+                            552,
+                            630
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    27,
+                    28,
+                    [
+                        [
+                            475,
+                            707
+                        ],
+                        [
+                            511,
+                            671
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            443,
+                            739
+                        ],
+                        [
+                            475,
+                            707
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        696,
+                        250
+                    ],
+                    "is_working": true,
+                    "name": "Recife",
+                    "rect": [
+                        699,
+                        260,
+                        34,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        636,
+                        265
+                    ],
+                    "is_working": true,
+                    "name": "Joana Bezerra",
+                    "rect": [
+                        615,
+                        276,
+                        74,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        581,
+                        290
+                    ],
+                    "is_working": true,
+                    "name": "Largo da Paz",
+                    "rect": [
+                        589,
+                        293,
+                        66,
+                        15
+                    ],
+                    "text_id": 19,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        561,
+                        350
+                    ],
+                    "is_working": true,
+                    "name": "Imbiribeira",
+                    "rect": [
+                        572,
+                        341,
+                        55,
+                        15
+                    ],
+                    "text_id": 20,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        561,
+                        437
+                    ],
+                    "is_working": true,
+                    "name": "Antonio Falcao",
+                    "rect": [
+                        474,
+                        430,
+                        76,
+                        15
+                    ],
+                    "text_id": 21,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        561,
+                        469
+                    ],
+                    "is_working": true,
+                    "name": "Shopping",
+                    "rect": [
+                        502,
+                        463,
+                        48,
+                        15
+                    ],
+                    "text_id": 22,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        561,
+                        504
+                    ],
+                    "is_working": true,
+                    "name": "Tancredo Neves",
+                    "rect": [
+                        467,
+                        498,
+                        83,
+                        15
+                    ],
+                    "text_id": 23,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        561,
+                        553
+                    ],
+                    "is_working": true,
+                    "name": "Aeroporto",
+                    "rect": [
+                        499,
+                        546,
+                        51,
+                        15
+                    ],
+                    "text_id": 24,
+                    "uid": 25
+                },
+                {
+                    "coord": [
+                        552,
+                        630
+                    ],
+                    "is_working": true,
+                    "name": "Porta Larga",
+                    "rect": [
+                        484,
+                        611,
+                        59,
+                        15
+                    ],
+                    "text_id": 25,
+                    "uid": 26
+                },
+                {
+                    "coord": [
+                        511,
+                        671
+                    ],
+                    "is_working": true,
+                    "name": "Monte dos Guararapes",
+                    "rect": [
+                        386,
+                        652,
+                        114,
+                        15
+                    ],
+                    "text_id": 26,
+                    "uid": 27
+                },
+                {
+                    "coord": [
+                        475,
+                        707
+                    ],
+                    "is_working": true,
+                    "name": "Prazeres",
+                    "rect": [
+                        419,
+                        690,
+                        46,
+                        15
+                    ],
+                    "text_id": 27,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        443,
+                        739
+                    ],
+                    "is_working": true,
+                    "name": "Cajueiro Seco",
+                    "rect": [
+                        454,
+                        741,
+                        72,
+                        15
+                    ],
+                    "text_id": 28,
+                    "uid": 29
+                }
+            ],
+            "text_id": 29
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 30,
+    "stations_diameter": 13.0,
+    "transfers": [
+        [
+            1,
+            19,
+            [
+                636,
+                250
+            ],
+            [
+                636,
+                265
+            ]
+        ],
+        [
+            0,
+            18,
+            [
+                686,
+                240
+            ],
+            [
+                696,
+                250
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 31,
+    "upper_case": false,
+    "width": 846,
+    "word_wrap": false
+}

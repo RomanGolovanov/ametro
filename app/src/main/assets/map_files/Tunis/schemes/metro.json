@@ -1,0 +1,1965 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 715,
+    "images": [
+        "res/schemes/tunis.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "f7ad10",
+            "line_color": "f7ad10",
+            "line_width": 7,
+            "name": "1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            293,
+                            335
+                        ],
+                        [
+                            313,
+                            335
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            270,
+                            335
+                        ],
+                        [
+                            293,
+                            335
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            270,
+                            359
+                        ],
+                        [
+                            270,
+                            335
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            270,
+                            382
+                        ],
+                        [
+                            270,
+                            359
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            270,
+                            405
+                        ],
+                        [
+                            270,
+                            382
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            270,
+                            429
+                        ],
+                        [
+                            270,
+                            405
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            270,
+                            452
+                        ],
+                        [
+                            270,
+                            429
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            270,
+                            479
+                        ],
+                        [
+                            270,
+                            452
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            270,
+                            502
+                        ],
+                        [
+                            270,
+                            479
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            270,
+                            522
+                        ],
+                        [
+                            270,
+                            502
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            270,
+                            545
+                        ],
+                        [
+                            270,
+                            522
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            270,
+                            565
+                        ],
+                        [
+                            270,
+                            545
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        313,
+                        335
+                    ],
+                    "is_working": true,
+                    "name": "Tunis Marine",
+                    "rect": [
+                        325,
+                        324,
+                        66,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        293,
+                        335
+                    ],
+                    "is_working": true,
+                    "name": "Farhat Hached",
+                    "rect": [
+                        287,
+                        347,
+                        15,
+                        74
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        270,
+                        335
+                    ],
+                    "is_working": true,
+                    "name": "Place de Barcelone",
+                    "rect": [
+                        161,
+                        328,
+                        99,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        270,
+                        359
+                    ],
+                    "is_working": true,
+                    "name": "Bab Aleoua",
+                    "rect": [
+                        201,
+                        351,
+                        60,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        270,
+                        382
+                    ],
+                    "is_working": true,
+                    "name": "Mohamed Manachou",
+                    "rect": [
+                        157,
+                        376,
+                        104,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        270,
+                        405
+                    ],
+                    "is_working": true,
+                    "name": "13 Aout",
+                    "rect": [
+                        221,
+                        398,
+                        40,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        270,
+                        429
+                    ],
+                    "is_working": true,
+                    "name": "Mohamed Ali",
+                    "rect": [
+                        194,
+                        423,
+                        67,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        270,
+                        452
+                    ],
+                    "is_working": true,
+                    "name": "Kabaria",
+                    "rect": [
+                        220,
+                        446,
+                        41,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        270,
+                        479
+                    ],
+                    "is_working": true,
+                    "name": "Ibn Sina",
+                    "rect": [
+                        219,
+                        472,
+                        42,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        270,
+                        502
+                    ],
+                    "is_working": true,
+                    "name": "Oueridia",
+                    "rect": [
+                        217,
+                        496,
+                        44,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        270,
+                        522
+                    ],
+                    "is_working": true,
+                    "name": "Cite Ennour",
+                    "rect": [
+                        201,
+                        515,
+                        60,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        270,
+                        545
+                    ],
+                    "is_working": true,
+                    "name": "A.Chabbi",
+                    "rect": [
+                        213,
+                        538,
+                        48,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        270,
+                        565
+                    ],
+                    "is_working": true,
+                    "name": "Ben Arous",
+                    "rect": [
+                        206,
+                        559,
+                        55,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                }
+            ],
+            "text_id": 13
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "ff0000",
+            "line_color": "ff0000",
+            "line_width": 7,
+            "name": "2",
+            "segments": [
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            270,
+                            302
+                        ],
+                        [
+                            237,
+                            269
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    15,
+                    [
+                        [
+                            303,
+                            269
+                        ],
+                        [
+                            270,
+                            302
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    16,
+                    [
+                        [
+                            237,
+                            269
+                        ],
+                        [
+                            270,
+                            236
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            270,
+                            236
+                        ],
+                        [
+                            303,
+                            269
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            270,
+                            212
+                        ],
+                        [
+                            270,
+                            236
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            270,
+                            192
+                        ],
+                        [
+                            270,
+                            212
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            270,
+                            172
+                        ],
+                        [
+                            270,
+                            192
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            270,
+                            152
+                        ],
+                        [
+                            270,
+                            172
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            270,
+                            132
+                        ],
+                        [
+                            270,
+                            152
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            270,
+                            112
+                        ],
+                        [
+                            270,
+                            132
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            270,
+                            92
+                        ],
+                        [
+                            270,
+                            112
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    23,
+                    24,
+                    [
+                        [
+                            270,
+                            72
+                        ],
+                        [
+                            270,
+                            92
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            270,
+                            52
+                        ],
+                        [
+                            270,
+                            72
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    25,
+                    26,
+                    [
+                        [
+                            270,
+                            32
+                        ],
+                        [
+                            270,
+                            52
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    26,
+                    27,
+                    [
+                        [
+                            270,
+                            16
+                        ],
+                        [
+                            270,
+                            32
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        270,
+                        302
+                    ],
+                    "is_working": true,
+                    "name": "Place de Barcelone",
+                    "rect": null,
+                    "text_id": 2,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        237,
+                        269
+                    ],
+                    "is_working": true,
+                    "name": "Habib Thameur",
+                    "rect": [
+                        152,
+                        276,
+                        77,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        303,
+                        269
+                    ],
+                    "is_working": true,
+                    "name": "Ibn Rachiq",
+                    "rect": [
+                        314,
+                        273,
+                        55,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        270,
+                        236
+                    ],
+                    "is_working": true,
+                    "name": "Place de la Republique",
+                    "rect": [
+                        282,
+                        227,
+                        116,
+                        15
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        270,
+                        212
+                    ],
+                    "is_working": true,
+                    "name": "Nelson Mandela",
+                    "rect": [
+                        281,
+                        206,
+                        82,
+                        15
+                    ],
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        270,
+                        192
+                    ],
+                    "is_working": true,
+                    "name": "Mohamed V",
+                    "rect": [
+                        281,
+                        186,
+                        60,
+                        15
+                    ],
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        270,
+                        172
+                    ],
+                    "is_working": true,
+                    "name": "Palestine",
+                    "rect": [
+                        281,
+                        166,
+                        48,
+                        15
+                    ],
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        270,
+                        152
+                    ],
+                    "is_working": true,
+                    "name": "Cite Jardins",
+                    "rect": [
+                        281,
+                        146,
+                        62,
+                        15
+                    ],
+                    "text_id": 20,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        270,
+                        132
+                    ],
+                    "is_working": true,
+                    "name": "El Khadra",
+                    "rect": [
+                        280,
+                        126,
+                        51,
+                        15
+                    ],
+                    "text_id": 21,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        270,
+                        112
+                    ],
+                    "is_working": true,
+                    "name": "La Jeunesse",
+                    "rect": [
+                        280,
+                        106,
+                        65,
+                        15
+                    ],
+                    "text_id": 22,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        270,
+                        92
+                    ],
+                    "is_working": true,
+                    "name": "Cite Sportive",
+                    "rect": [
+                        281,
+                        87,
+                        66,
+                        15
+                    ],
+                    "text_id": 23,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        270,
+                        72
+                    ],
+                    "is_working": true,
+                    "name": "10 Decembre 1948",
+                    "rect": [
+                        280,
+                        66,
+                        95,
+                        15
+                    ],
+                    "text_id": 24,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        270,
+                        52
+                    ],
+                    "is_working": true,
+                    "name": "Fell",
+                    "rect": [
+                        280,
+                        47,
+                        20,
+                        15
+                    ],
+                    "text_id": 25,
+                    "uid": 25
+                },
+                {
+                    "coord": [
+                        270,
+                        32
+                    ],
+                    "is_working": true,
+                    "name": "L'Independance",
+                    "rect": [
+                        280,
+                        28,
+                        79,
+                        15
+                    ],
+                    "text_id": 26,
+                    "uid": 26
+                },
+                {
+                    "coord": [
+                        270,
+                        16
+                    ],
+                    "is_working": true,
+                    "name": "Ariana",
+                    "rect": [
+                        279,
+                        10,
+                        35,
+                        15
+                    ],
+                    "text_id": 27,
+                    "uid": 27
+                }
+            ],
+            "text_id": 28
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "008400",
+            "line_color": "008400",
+            "line_width": 7,
+            "name": "3",
+            "segments": [
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            270,
+                            313
+                        ],
+                        [
+                            237,
+                            280
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    28,
+                    30,
+                    [
+                        [
+                            303,
+                            280
+                        ],
+                        [
+                            270,
+                            313
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    29,
+                    31,
+                    [
+                        [
+                            237,
+                            280
+                        ],
+                        [
+                            270,
+                            247
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    30,
+                    31,
+                    [
+                        [
+                            270,
+                            247
+                        ],
+                        [
+                            303,
+                            280
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    31,
+                    32,
+                    [
+                        [
+                            210,
+                            247
+                        ],
+                        [
+                            270,
+                            247
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    32,
+                    33,
+                    [
+                        [
+                            183,
+                            247
+                        ],
+                        [
+                            210,
+                            247
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    33,
+                    34,
+                    [
+                        [
+                            160,
+                            247
+                        ],
+                        [
+                            183,
+                            247
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    34,
+                    35,
+                    [
+                        [
+                            143,
+                            230
+                        ],
+                        [
+                            160,
+                            247
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    35,
+                    36,
+                    [
+                        [
+                            127,
+                            214
+                        ],
+                        [
+                            143,
+                            230
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    36,
+                    37,
+                    [
+                        [
+                            110,
+                            197
+                        ],
+                        [
+                            127,
+                            214
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    37,
+                    38,
+                    [
+                        [
+                            93,
+                            180
+                        ],
+                        [
+                            110,
+                            197
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    38,
+                    39,
+                    [
+                        [
+                            77,
+                            164
+                        ],
+                        [
+                            93,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    39,
+                    40,
+                    [
+                        [
+                            60,
+                            147
+                        ],
+                        [
+                            77,
+                            164
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        270,
+                        313
+                    ],
+                    "is_working": true,
+                    "name": "Place de Barcelone",
+                    "rect": null,
+                    "text_id": 2,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        237,
+                        280
+                    ],
+                    "is_working": true,
+                    "name": "Habib Thameur",
+                    "rect": null,
+                    "text_id": 14,
+                    "uid": 29
+                },
+                {
+                    "coord": [
+                        303,
+                        280
+                    ],
+                    "is_working": true,
+                    "name": "Ibn Rachiq",
+                    "rect": null,
+                    "text_id": 15,
+                    "uid": 30
+                },
+                {
+                    "coord": [
+                        270,
+                        247
+                    ],
+                    "is_working": true,
+                    "name": "Place de la Republique",
+                    "rect": null,
+                    "text_id": 16,
+                    "uid": 31
+                },
+                {
+                    "coord": [
+                        210,
+                        247
+                    ],
+                    "is_working": true,
+                    "name": "Bab el Khadra",
+                    "rect": [
+                        203,
+                        164,
+                        15,
+                        73
+                    ],
+                    "text_id": 29,
+                    "uid": 32
+                },
+                {
+                    "coord": [
+                        183,
+                        247
+                    ],
+                    "is_working": true,
+                    "name": "Bab el Assel",
+                    "rect": [
+                        178,
+                        171,
+                        15,
+                        66
+                    ],
+                    "text_id": 30,
+                    "uid": 33
+                },
+                {
+                    "coord": [
+                        160,
+                        247
+                    ],
+                    "is_working": true,
+                    "name": "Bab Saadoune",
+                    "rect": [
+                        156,
+                        162,
+                        15,
+                        74
+                    ],
+                    "text_id": 31,
+                    "uid": 34
+                },
+                {
+                    "coord": [
+                        143,
+                        230
+                    ],
+                    "is_working": true,
+                    "name": "Meftah Saadallah",
+                    "rect": [
+                        47,
+                        227,
+                        87,
+                        15
+                    ],
+                    "text_id": 32,
+                    "uid": 35
+                },
+                {
+                    "coord": [
+                        127,
+                        214
+                    ],
+                    "is_working": true,
+                    "name": "Jebel Lahmar",
+                    "rect": [
+                        49,
+                        212,
+                        69,
+                        15
+                    ],
+                    "text_id": 33,
+                    "uid": 36
+                },
+                {
+                    "coord": [
+                        110,
+                        197
+                    ],
+                    "is_working": true,
+                    "name": "Campus",
+                    "rect": [
+                        58,
+                        194,
+                        43,
+                        15
+                    ],
+                    "text_id": 34,
+                    "uid": 37
+                },
+                {
+                    "coord": [
+                        93,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Cite Ettahrir",
+                    "rect": [
+                        22,
+                        177,
+                        61,
+                        15
+                    ],
+                    "text_id": 35,
+                    "uid": 38
+                },
+                {
+                    "coord": [
+                        77,
+                        164
+                    ],
+                    "is_working": true,
+                    "name": "Ettadhamen",
+                    "rect": [
+                        85,
+                        149,
+                        60,
+                        15
+                    ],
+                    "text_id": 36,
+                    "uid": 39
+                },
+                {
+                    "coord": [
+                        60,
+                        147
+                    ],
+                    "is_working": true,
+                    "name": "El Intilaka",
+                    "rect": [
+                        69,
+                        132,
+                        51,
+                        15
+                    ],
+                    "text_id": 37,
+                    "uid": 40
+                }
+            ],
+            "text_id": 38
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "c600c6",
+            "line_color": "c600c6",
+            "line_width": 7,
+            "name": "4",
+            "segments": [
+                [
+                    41,
+                    42,
+                    [
+                        [
+                            293,
+                            324
+                        ],
+                        [
+                            313,
+                            324
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    42,
+                    43,
+                    [
+                        [
+                            270,
+                            324
+                        ],
+                        [
+                            293,
+                            324
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    43,
+                    44,
+                    [
+                        [
+                            270,
+                            324
+                        ],
+                        [
+                            237,
+                            291
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    43,
+                    45,
+                    [
+                        [
+                            303,
+                            291
+                        ],
+                        [
+                            270,
+                            324
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    44,
+                    46,
+                    [
+                        [
+                            237,
+                            291
+                        ],
+                        [
+                            270,
+                            258
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    45,
+                    46,
+                    [
+                        [
+                            270,
+                            258
+                        ],
+                        [
+                            303,
+                            291
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    46,
+                    47,
+                    [
+                        [
+                            210,
+                            258
+                        ],
+                        [
+                            270,
+                            258
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    47,
+                    48,
+                    [
+                        [
+                            183,
+                            258
+                        ],
+                        [
+                            210,
+                            258
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    48,
+                    49,
+                    [
+                        [
+                            160,
+                            258
+                        ],
+                        [
+                            183,
+                            258
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    49,
+                    50,
+                    [
+                        [
+                            133,
+                            258
+                        ],
+                        [
+                            160,
+                            258
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    50,
+                    51,
+                    [
+                        [
+                            110,
+                            258
+                        ],
+                        [
+                            133,
+                            258
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    51,
+                    52,
+                    [
+                        [
+                            87,
+                            258
+                        ],
+                        [
+                            110,
+                            258
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    52,
+                    53,
+                    [
+                        [
+                            60,
+                            258
+                        ],
+                        [
+                            87,
+                            258
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    53,
+                    54,
+                    [
+                        [
+                            37,
+                            258
+                        ],
+                        [
+                            60,
+                            258
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    54,
+                    55,
+                    [
+                        [
+                            17,
+                            258
+                        ],
+                        [
+                            37,
+                            258
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        313,
+                        324
+                    ],
+                    "is_working": true,
+                    "name": "Tunis Marine",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 41
+                },
+                {
+                    "coord": [
+                        293,
+                        324
+                    ],
+                    "is_working": true,
+                    "name": "Farhat Hached",
+                    "rect": null,
+                    "text_id": 1,
+                    "uid": 42
+                },
+                {
+                    "coord": [
+                        270,
+                        324
+                    ],
+                    "is_working": true,
+                    "name": "Place de Barcelone",
+                    "rect": null,
+                    "text_id": 2,
+                    "uid": 43
+                },
+                {
+                    "coord": [
+                        237,
+                        291
+                    ],
+                    "is_working": true,
+                    "name": "Habib Thameur",
+                    "rect": null,
+                    "text_id": 14,
+                    "uid": 44
+                },
+                {
+                    "coord": [
+                        303,
+                        291
+                    ],
+                    "is_working": true,
+                    "name": "Ibn Rachiq",
+                    "rect": null,
+                    "text_id": 15,
+                    "uid": 45
+                },
+                {
+                    "coord": [
+                        270,
+                        258
+                    ],
+                    "is_working": true,
+                    "name": "Place de la Republique",
+                    "rect": null,
+                    "text_id": 16,
+                    "uid": 46
+                },
+                {
+                    "coord": [
+                        210,
+                        258
+                    ],
+                    "is_working": true,
+                    "name": "Bab el Khadra",
+                    "rect": null,
+                    "text_id": 29,
+                    "uid": 47
+                },
+                {
+                    "coord": [
+                        183,
+                        258
+                    ],
+                    "is_working": true,
+                    "name": "Bab el Assel",
+                    "rect": null,
+                    "text_id": 30,
+                    "uid": 48
+                },
+                {
+                    "coord": [
+                        160,
+                        258
+                    ],
+                    "is_working": true,
+                    "name": "Bab Saadoune",
+                    "rect": null,
+                    "text_id": 31,
+                    "uid": 49
+                },
+                {
+                    "coord": [
+                        133,
+                        258
+                    ],
+                    "is_working": true,
+                    "name": "Bouchoucha",
+                    "rect": [
+                        124,
+                        268,
+                        15,
+                        64
+                    ],
+                    "text_id": 39,
+                    "uid": 50
+                },
+                {
+                    "coord": [
+                        110,
+                        258
+                    ],
+                    "is_working": true,
+                    "name": "Blvd. 20 Mars",
+                    "rect": [
+                        103,
+                        268,
+                        15,
+                        71
+                    ],
+                    "text_id": 40,
+                    "uid": 51
+                },
+                {
+                    "coord": [
+                        87,
+                        258
+                    ],
+                    "is_working": true,
+                    "name": "Bardo",
+                    "rect": [
+                        80,
+                        268,
+                        15,
+                        32
+                    ],
+                    "text_id": 41,
+                    "uid": 52
+                },
+                {
+                    "coord": [
+                        60,
+                        258
+                    ],
+                    "is_working": true,
+                    "name": "Khasnadar",
+                    "rect": [
+                        53,
+                        268,
+                        15,
+                        56
+                    ],
+                    "text_id": 42,
+                    "uid": 53
+                },
+                {
+                    "coord": [
+                        37,
+                        258
+                    ],
+                    "is_working": true,
+                    "name": "L'Artisanat",
+                    "rect": [
+                        29,
+                        268,
+                        15,
+                        55
+                    ],
+                    "text_id": 43,
+                    "uid": 54
+                },
+                {
+                    "coord": [
+                        17,
+                        258
+                    ],
+                    "is_working": true,
+                    "name": "Den Den",
+                    "rect": [
+                        8,
+                        268,
+                        15,
+                        45
+                    ],
+                    "text_id": 44,
+                    "uid": 55
+                }
+            ],
+            "text_id": 45
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 46,
+    "stations_diameter": 13.0,
+    "transfers": [
+        [
+            34,
+            49,
+            [
+                160,
+                247
+            ],
+            [
+                160,
+                258
+            ]
+        ],
+        [
+            33,
+            48,
+            [
+                183,
+                247
+            ],
+            [
+                183,
+                258
+            ]
+        ],
+        [
+            32,
+            47,
+            [
+                210,
+                247
+            ],
+            [
+                210,
+                258
+            ]
+        ],
+        [
+            1,
+            42,
+            [
+                293,
+                335
+            ],
+            [
+                293,
+                324
+            ]
+        ],
+        [
+            14,
+            29,
+            [
+                237,
+                269
+            ],
+            [
+                237,
+                280
+            ]
+        ],
+        [
+            14,
+            44,
+            [
+                237,
+                269
+            ],
+            [
+                237,
+                291
+            ]
+        ],
+        [
+            29,
+            44,
+            [
+                237,
+                280
+            ],
+            [
+                237,
+                291
+            ]
+        ],
+        [
+            15,
+            30,
+            [
+                303,
+                269
+            ],
+            [
+                303,
+                280
+            ]
+        ],
+        [
+            15,
+            45,
+            [
+                303,
+                269
+            ],
+            [
+                303,
+                291
+            ]
+        ],
+        [
+            30,
+            45,
+            [
+                303,
+                280
+            ],
+            [
+                303,
+                291
+            ]
+        ],
+        [
+            2,
+            13,
+            [
+                270,
+                335
+            ],
+            [
+                270,
+                302
+            ]
+        ],
+        [
+            2,
+            28,
+            [
+                270,
+                335
+            ],
+            [
+                270,
+                313
+            ]
+        ],
+        [
+            2,
+            43,
+            [
+                270,
+                335
+            ],
+            [
+                270,
+                324
+            ]
+        ],
+        [
+            13,
+            28,
+            [
+                270,
+                302
+            ],
+            [
+                270,
+                313
+            ]
+        ],
+        [
+            13,
+            43,
+            [
+                270,
+                302
+            ],
+            [
+                270,
+                324
+            ]
+        ],
+        [
+            28,
+            43,
+            [
+                270,
+                313
+            ],
+            [
+                270,
+                324
+            ]
+        ],
+        [
+            16,
+            31,
+            [
+                270,
+                236
+            ],
+            [
+                270,
+                247
+            ]
+        ],
+        [
+            16,
+            46,
+            [
+                270,
+                236
+            ],
+            [
+                270,
+                258
+            ]
+        ],
+        [
+            31,
+            46,
+            [
+                270,
+                247
+            ],
+            [
+                270,
+                258
+            ]
+        ],
+        [
+            0,
+            41,
+            [
+                313,
+                335
+            ],
+            [
+                313,
+                324
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 47,
+    "upper_case": false,
+    "width": 463,
+    "word_wrap": false
+}

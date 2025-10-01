@@ -1,0 +1,184 @@
+{
+    "city_id": 703448,
+    "comments_text_id": 297,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 296,
+    "file": "KievUkr.zip",
+    "latitude": 50.45466,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": 30.5238,
+    "map_id": "KievUkr.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 292,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 293
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/kyr-kras.json",
+            "name": "kyr-kras",
+            "name_text_id": 31,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 294
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/railway.json",
+            "name": "railway",
+            "name_text_id": 295,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 293
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/railways_fastov.json",
+            "name": "railways_fastov",
+            "name_text_id": 189,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 294
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/railways_greben.json",
+            "name": "railways_greben",
+            "name_text_id": 265,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 294
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/railways_mironov.json",
+            "name": "railways_mironov",
+            "name_text_id": 233,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 294
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/railways_nejun.json",
+            "name": "railways_nejun",
+            "name_text_id": 291,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 294
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/railways_teterev.json",
+            "name": "railways_teterev",
+            "name_text_id": 92,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 294
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/sur-pech.json",
+            "name": "sur-pech",
+            "name_text_id": 48,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 294
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/svjat-brov.json",
+            "name": "svjat-brov",
+            "name_text_id": 18,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 294
+        }
+    ],
+    "timestamp": 1426464000.0,
+    "transport_types": [
+        "Метро"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Метро"
+        }
+    ]
+}

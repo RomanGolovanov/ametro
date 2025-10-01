@@ -1,0 +1,86 @@
+{
+    "city_id": 4005539,
+    "comments_text_id": 34,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 33,
+    "file": "Guadalajara.zip",
+    "latitude": 20.67738,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": -103.34749,
+    "map_id": "Guadalajara.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 30,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 31
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/1.json",
+            "name": "1",
+            "name_text_id": 19,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 32
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/2.json",
+            "name": "2",
+            "name_text_id": 29,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 32
+        }
+    ],
+    "timestamp": 1754434800.0,
+    "transport_types": [
+        "Метро"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Метро"
+        }
+    ]
+}

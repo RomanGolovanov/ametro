@@ -1,0 +1,146 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 282,
+    "images": [
+        "res/schemes/krasnoyarsk.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "E41c0c",
+            "line_color": "E41c0c",
+            "line_width": 7,
+            "name": "Линия 1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            132,
+                            132
+                        ],
+                        [
+                            61,
+                            61
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            204,
+                            132
+                        ],
+                        [
+                            132,
+                            132
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            265,
+                            132
+                        ],
+                        [
+                            204,
+                            132
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        61,
+                        61
+                    ],
+                    "is_working": true,
+                    "name": "Высотная",
+                    "rect": [
+                        70,
+                        51,
+                        54,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        132,
+                        132
+                    ],
+                    "is_working": true,
+                    "name": "Копылова",
+                    "rect": [
+                        71,
+                        135,
+                        54,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        204,
+                        132
+                    ],
+                    "is_working": true,
+                    "name": "Вокзальная",
+                    "rect": [
+                        173,
+                        141,
+                        63,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        265,
+                        132
+                    ],
+                    "is_working": true,
+                    "name": "Площадь Революции",
+                    "rect": [
+                        235,
+                        106,
+                        113,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                }
+            ],
+            "text_id": 4
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 5,
+    "stations_diameter": 12.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 6,
+    "upper_case": false,
+    "width": 415,
+    "word_wrap": false
+}

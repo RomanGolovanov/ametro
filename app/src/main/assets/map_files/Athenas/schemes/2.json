@@ -1,0 +1,1196 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 770,
+    "images": [
+        "res/schemes/2.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "007B39",
+            "line_width": 9,
+            "name": "Line 1",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Kifissia",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "KAT",
+                    "rect": null,
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Maroussi",
+                    "rect": null,
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Neratziotissa",
+                    "rect": null,
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Irini",
+                    "rect": null,
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Iraklio",
+                    "rect": null,
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Nea Ionia",
+                    "rect": null,
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Pefkakia",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Perissos",
+                    "rect": null,
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ano Patissia",
+                    "rect": null,
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Aghios Eleftherios",
+                    "rect": null,
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Kato Patissia",
+                    "rect": null,
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Aghios Nikolaos",
+                    "rect": null,
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        265,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Attiki",
+                    "rect": null,
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Victoria",
+                    "rect": null,
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        265,
+                        290
+                    ],
+                    "is_working": true,
+                    "name": "Omonia",
+                    "rect": null,
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Monastiraki",
+                    "rect": null,
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Thissio",
+                    "rect": null,
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Petralona",
+                    "rect": null,
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Tavros",
+                    "rect": null,
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Kalithea",
+                    "rect": null,
+                    "text_id": 20,
+                    "uid": 20
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Moschato",
+                    "rect": null,
+                    "text_id": 21,
+                    "uid": 21
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Faliro",
+                    "rect": null,
+                    "text_id": 22,
+                    "uid": 22
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Piraeus",
+                    "rect": null,
+                    "text_id": 23,
+                    "uid": 23
+                }
+            ],
+            "text_id": 24
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "FF0000",
+            "line_width": 9,
+            "name": "Line 2",
+            "segments": [
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            285,
+                            110
+                        ],
+                        [
+                            285,
+                            80
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    25,
+                    26,
+                    [
+                        [
+                            285,
+                            140
+                        ],
+                        [
+                            285,
+                            110
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    26,
+                    27,
+                    [
+                        [
+                            285,
+                            170
+                        ],
+                        [
+                            285,
+                            140
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    27,
+                    28,
+                    [
+                        [
+                            285,
+                            200
+                        ],
+                        [
+                            285,
+                            170
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            285,
+                            230
+                        ],
+                        [
+                            285,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    29,
+                    30,
+                    [
+                        [
+                            285,
+                            260
+                        ],
+                        [
+                            285,
+                            230
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    30,
+                    31,
+                    [
+                        [
+                            285,
+                            290
+                        ],
+                        [
+                            285,
+                            260
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    31,
+                    32,
+                    [
+                        [
+                            285,
+                            320
+                        ],
+                        [
+                            285,
+                            290
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    32,
+                    33,
+                    [
+                        [
+                            285,
+                            350
+                        ],
+                        [
+                            285,
+                            320
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    33,
+                    34,
+                    [
+                        [
+                            285,
+                            380
+                        ],
+                        [
+                            285,
+                            350
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    34,
+                    35,
+                    [
+                        [
+                            285,
+                            410
+                        ],
+                        [
+                            285,
+                            380
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    35,
+                    36,
+                    [
+                        [
+                            285,
+                            440
+                        ],
+                        [
+                            285,
+                            410
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    36,
+                    37,
+                    [
+                        [
+                            285,
+                            470
+                        ],
+                        [
+                            285,
+                            440
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    37,
+                    38,
+                    [
+                        [
+                            285,
+                            500
+                        ],
+                        [
+                            285,
+                            470
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    38,
+                    39,
+                    [
+                        [
+                            285,
+                            530
+                        ],
+                        [
+                            285,
+                            500
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    39,
+                    40,
+                    [
+                        [
+                            285,
+                            560
+                        ],
+                        [
+                            285,
+                            530
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    40,
+                    41,
+                    [
+                        [
+                            285,
+                            590
+                        ],
+                        [
+                            285,
+                            560
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    41,
+                    42,
+                    [
+                        [
+                            285,
+                            620
+                        ],
+                        [
+                            285,
+                            590
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        285,
+                        80
+                    ],
+                    "is_working": true,
+                    "name": "Anthoupoli",
+                    "rect": [
+                        300,
+                        70,
+                        100,
+                        20
+                    ],
+                    "text_id": 25,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        285,
+                        110
+                    ],
+                    "is_working": true,
+                    "name": "Peristeri",
+                    "rect": [
+                        300,
+                        100,
+                        100,
+                        20
+                    ],
+                    "text_id": 26,
+                    "uid": 25
+                },
+                {
+                    "coord": [
+                        285,
+                        140
+                    ],
+                    "is_working": true,
+                    "name": "Aghios Antonios",
+                    "rect": [
+                        300,
+                        130,
+                        100,
+                        20
+                    ],
+                    "text_id": 27,
+                    "uid": 26
+                },
+                {
+                    "coord": [
+                        285,
+                        170
+                    ],
+                    "is_working": true,
+                    "name": "Sepolia",
+                    "rect": [
+                        300,
+                        160,
+                        100,
+                        20
+                    ],
+                    "text_id": 28,
+                    "uid": 27
+                },
+                {
+                    "coord": [
+                        285,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Attiki",
+                    "rect": [
+                        300,
+                        190,
+                        100,
+                        20
+                    ],
+                    "text_id": 13,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        285,
+                        230
+                    ],
+                    "is_working": true,
+                    "name": "St. Larissis",
+                    "rect": [
+                        300,
+                        220,
+                        100,
+                        20
+                    ],
+                    "text_id": 29,
+                    "uid": 29
+                },
+                {
+                    "coord": [
+                        285,
+                        260
+                    ],
+                    "is_working": true,
+                    "name": "Metaxourghio",
+                    "rect": [
+                        300,
+                        250,
+                        100,
+                        20
+                    ],
+                    "text_id": 30,
+                    "uid": 30
+                },
+                {
+                    "coord": [
+                        285,
+                        290
+                    ],
+                    "is_working": true,
+                    "name": "Omonia",
+                    "rect": [
+                        300,
+                        280,
+                        100,
+                        20
+                    ],
+                    "text_id": 15,
+                    "uid": 31
+                },
+                {
+                    "coord": [
+                        285,
+                        320
+                    ],
+                    "is_working": true,
+                    "name": "Panepistimio",
+                    "rect": [
+                        300,
+                        310,
+                        100,
+                        20
+                    ],
+                    "text_id": 31,
+                    "uid": 32
+                },
+                {
+                    "coord": [
+                        285,
+                        350
+                    ],
+                    "is_working": true,
+                    "name": "Syntagma",
+                    "rect": [
+                        300,
+                        340,
+                        100,
+                        20
+                    ],
+                    "text_id": 32,
+                    "uid": 33
+                },
+                {
+                    "coord": [
+                        285,
+                        380
+                    ],
+                    "is_working": true,
+                    "name": "Akropoli",
+                    "rect": [
+                        300,
+                        370,
+                        100,
+                        20
+                    ],
+                    "text_id": 33,
+                    "uid": 34
+                },
+                {
+                    "coord": [
+                        285,
+                        410
+                    ],
+                    "is_working": true,
+                    "name": "Syngrou-Fix",
+                    "rect": [
+                        300,
+                        400,
+                        100,
+                        20
+                    ],
+                    "text_id": 34,
+                    "uid": 35
+                },
+                {
+                    "coord": [
+                        285,
+                        440
+                    ],
+                    "is_working": true,
+                    "name": "Neos Kosmos",
+                    "rect": [
+                        300,
+                        430,
+                        100,
+                        20
+                    ],
+                    "text_id": 35,
+                    "uid": 36
+                },
+                {
+                    "coord": [
+                        285,
+                        470
+                    ],
+                    "is_working": true,
+                    "name": "Aghios Ioannis",
+                    "rect": [
+                        300,
+                        460,
+                        100,
+                        20
+                    ],
+                    "text_id": 36,
+                    "uid": 37
+                },
+                {
+                    "coord": [
+                        285,
+                        500
+                    ],
+                    "is_working": true,
+                    "name": "Dafni",
+                    "rect": [
+                        300,
+                        490,
+                        100,
+                        20
+                    ],
+                    "text_id": 37,
+                    "uid": 38
+                },
+                {
+                    "coord": [
+                        285,
+                        530
+                    ],
+                    "is_working": true,
+                    "name": "Aghios Dimitrios/Alexandros Panagoulis",
+                    "rect": [
+                        300,
+                        520,
+                        100,
+                        20
+                    ],
+                    "text_id": 38,
+                    "uid": 39
+                },
+                {
+                    "coord": [
+                        285,
+                        560
+                    ],
+                    "is_working": true,
+                    "name": "Ilioupoli",
+                    "rect": [
+                        300,
+                        550,
+                        100,
+                        20
+                    ],
+                    "text_id": 39,
+                    "uid": 40
+                },
+                {
+                    "coord": [
+                        285,
+                        590
+                    ],
+                    "is_working": true,
+                    "name": "Alimos",
+                    "rect": [
+                        300,
+                        580,
+                        100,
+                        20
+                    ],
+                    "text_id": 40,
+                    "uid": 41
+                },
+                {
+                    "coord": [
+                        285,
+                        620
+                    ],
+                    "is_working": true,
+                    "name": "Argyroupoli",
+                    "rect": [
+                        300,
+                        610,
+                        100,
+                        20
+                    ],
+                    "text_id": 41,
+                    "uid": 42
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Elliniko",
+                    "rect": null,
+                    "text_id": 42,
+                    "uid": 43
+                }
+            ],
+            "text_id": 43
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "4369FD",
+            "line_width": 9,
+            "name": "Line 3",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Dimotiko Theatro",
+                    "rect": null,
+                    "text_id": 44,
+                    "uid": 44
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Piraeus",
+                    "rect": null,
+                    "text_id": 23,
+                    "uid": 45
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Maniatika",
+                    "rect": null,
+                    "text_id": 45,
+                    "uid": 46
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Nikea",
+                    "rect": null,
+                    "text_id": 46,
+                    "uid": 47
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Korydallos",
+                    "rect": null,
+                    "text_id": 47,
+                    "uid": 48
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Aghia Varvara",
+                    "rect": null,
+                    "text_id": 48,
+                    "uid": 49
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Aghia Marina",
+                    "rect": null,
+                    "text_id": 49,
+                    "uid": 50
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Egaleo",
+                    "rect": null,
+                    "text_id": 50,
+                    "uid": 51
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Eleonas",
+                    "rect": null,
+                    "text_id": 51,
+                    "uid": 52
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Kerameikos",
+                    "rect": null,
+                    "text_id": 52,
+                    "uid": 53
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Monastiraki",
+                    "rect": null,
+                    "text_id": 16,
+                    "uid": 54
+                },
+                {
+                    "coord": [
+                        265,
+                        350
+                    ],
+                    "is_working": true,
+                    "name": "Syntagma",
+                    "rect": null,
+                    "text_id": 32,
+                    "uid": 55
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Evangelismos",
+                    "rect": null,
+                    "text_id": 53,
+                    "uid": 56
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Megaro Moussikis",
+                    "rect": null,
+                    "text_id": 54,
+                    "uid": 57
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ambelokipi",
+                    "rect": null,
+                    "text_id": 55,
+                    "uid": 58
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Panormou",
+                    "rect": null,
+                    "text_id": 56,
+                    "uid": 59
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Katehaki",
+                    "rect": null,
+                    "text_id": 57,
+                    "uid": 60
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ethniki Amyna",
+                    "rect": null,
+                    "text_id": 58,
+                    "uid": 61
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Holargos",
+                    "rect": null,
+                    "text_id": 59,
+                    "uid": 62
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Nomismatokopio",
+                    "rect": null,
+                    "text_id": 60,
+                    "uid": 63
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Aghia Paraskevi",
+                    "rect": null,
+                    "text_id": 61,
+                    "uid": 64
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Halandri",
+                    "rect": null,
+                    "text_id": 62,
+                    "uid": 65
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Doukissis Plakentias",
+                    "rect": null,
+                    "text_id": 63,
+                    "uid": 66
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Pallini",
+                    "rect": null,
+                    "text_id": 64,
+                    "uid": 67
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Peania-Kantza",
+                    "rect": null,
+                    "text_id": 65,
+                    "uid": 68
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Koropi",
+                    "rect": null,
+                    "text_id": 66,
+                    "uid": 69
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Aerothromio",
+                    "rect": null,
+                    "text_id": 67,
+                    "uid": 70
+                }
+            ],
+            "text_id": 68
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "ff8800",
+            "line_color": "ff8800",
+            "line_width": 9,
+            "name": "Piraeus - A. Liosia",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Piraeus",
+                    "rect": null,
+                    "text_id": 23,
+                    "uid": 71
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Lefka",
+                    "rect": null,
+                    "text_id": 69,
+                    "uid": 72
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Pentis",
+                    "rect": null,
+                    "text_id": 70,
+                    "uid": 73
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Rouf",
+                    "rect": null,
+                    "text_id": 71,
+                    "uid": 74
+                },
+                {
+                    "coord": [
+                        265,
+                        230
+                    ],
+                    "is_working": true,
+                    "name": "Athina",
+                    "rect": null,
+                    "text_id": 72,
+                    "uid": 75
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ag. Anargyroi",
+                    "rect": null,
+                    "text_id": 73,
+                    "uid": 76
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ano Liosia",
+                    "rect": null,
+                    "text_id": 74,
+                    "uid": 77
+                }
+            ],
+            "text_id": 75
+        }
+    ],
+    "lines_width": 9,
+    "name": "2",
+    "name_text_id": 43,
+    "stations_diameter": 16.0,
+    "transfers": [
+        [
+            13,
+            28,
+            [
+                265,
+                200
+            ],
+            [
+                285,
+                200
+            ]
+        ],
+        [
+            16,
+            54,
+            null,
+            null
+        ],
+        [
+            55,
+            33,
+            [
+                265,
+                350
+            ],
+            [
+                285,
+                350
+            ]
+        ],
+        [
+            15,
+            31,
+            [
+                265,
+                290
+            ],
+            [
+                285,
+                290
+            ]
+        ],
+        [
+            23,
+            45,
+            null,
+            null
+        ],
+        [
+            71,
+            23,
+            null,
+            null
+        ],
+        [
+            75,
+            29,
+            [
+                265,
+                230
+            ],
+            [
+                285,
+                230
+            ]
+        ]
+    ],
+    "transports": [
+        "metro",
+        "proastiakos"
+    ],
+    "type_name": "Metro",
+    "type_text_id": 92,
+    "upper_case": false,
+    "width": 435,
+    "word_wrap": false
+}

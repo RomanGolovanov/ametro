@@ -1,0 +1,2294 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 1279,
+    "images": [
+        "res/schemes/kaohsiung.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "E30964",
+            "line_width": 13,
+            "name": "Red Line",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            620,
+                            1129
+                        ],
+                        [
+                            710,
+                            1129
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            528,
+                            1129
+                        ],
+                        [
+                            620,
+                            1129
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            479,
+                            1080
+                        ],
+                        [
+                            528,
+                            1129
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            407,
+                            1008
+                        ],
+                        [
+                            479,
+                            1080
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            368,
+                            969
+                        ],
+                        [
+                            407,
+                            1008
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            326,
+                            927
+                        ],
+                        [
+                            368,
+                            969
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            326,
+                            854
+                        ],
+                        [
+                            326,
+                            927
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            326,
+                            754
+                        ],
+                        [
+                            326,
+                            854
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            326,
+                            688
+                        ],
+                        [
+                            326,
+                            754
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            326,
+                            628
+                        ],
+                        [
+                            326,
+                            688
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            326,
+                            546
+                        ],
+                        [
+                            326,
+                            628
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            326,
+                            504
+                        ],
+                        [
+                            326,
+                            546
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            326,
+                            461
+                        ],
+                        [
+                            326,
+                            504
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            326,
+                            423
+                        ],
+                        [
+                            326,
+                            461
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            326,
+                            380
+                        ],
+                        [
+                            326,
+                            423
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            326,
+                            336
+                        ],
+                        [
+                            326,
+                            380
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            359,
+                            303
+                        ],
+                        [
+                            326,
+                            336
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            394,
+                            268
+                        ],
+                        [
+                            359,
+                            303
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            394,
+                            227
+                        ],
+                        [
+                            394,
+                            268
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            394,
+                            186
+                        ],
+                        [
+                            394,
+                            227
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            394,
+                            145
+                        ],
+                        [
+                            394,
+                            186
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            394,
+                            100
+                        ],
+                        [
+                            394,
+                            145
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            394,
+                            53
+                        ],
+                        [
+                            394,
+                            100
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        710,
+                        1129
+                    ],
+                    "is_working": true,
+                    "name": "Siaogang",
+                    "rect": [
+                        729,
+                        1122,
+                        48,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        620,
+                        1129
+                    ],
+                    "is_working": true,
+                    "name": "Kaohsiung International Airport",
+                    "rect": [
+                        548,
+                        1149,
+                        156,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        528,
+                        1129
+                    ],
+                    "is_working": true,
+                    "name": "Caoya",
+                    "rect": [
+                        528,
+                        1099,
+                        34,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        479,
+                        1080
+                    ],
+                    "is_working": true,
+                    "name": "Cianjhen Senior High School",
+                    "rect": [
+                        495,
+                        1069,
+                        144,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        407,
+                        1008
+                    ],
+                    "is_working": true,
+                    "name": "Kaisyuan",
+                    "rect": [
+                        338,
+                        1004,
+                        49,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        368,
+                        969
+                    ],
+                    "is_working": true,
+                    "name": "Shihjia",
+                    "rect": [
+                        383,
+                        957,
+                        36,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        326,
+                        927
+                    ],
+                    "is_working": true,
+                    "name": "Sanduo Shopping District",
+                    "rect": [
+                        341,
+                        911,
+                        127,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        326,
+                        854
+                    ],
+                    "is_working": true,
+                    "name": "Central Park",
+                    "rect": [
+                        341,
+                        848,
+                        64,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        326,
+                        754
+                    ],
+                    "is_working": true,
+                    "name": "Formosa Boulevard",
+                    "rect": [
+                        207,
+                        742,
+                        99,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        326,
+                        688
+                    ],
+                    "is_working": true,
+                    "name": "Kaohsiung Main Station",
+                    "rect": [
+                        191,
+                        681,
+                        119,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        326,
+                        628
+                    ],
+                    "is_working": true,
+                    "name": "Houyi",
+                    "rect": [
+                        278,
+                        619,
+                        31,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        326,
+                        546
+                    ],
+                    "is_working": true,
+                    "name": "Aozihdi",
+                    "rect": [
+                        267,
+                        536,
+                        39,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        326,
+                        504
+                    ],
+                    "is_working": true,
+                    "name": "Kaohsiung Arena",
+                    "rect": [
+                        221,
+                        495,
+                        88,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        326,
+                        461
+                    ],
+                    "is_working": true,
+                    "name": "Ecological District",
+                    "rect": [
+                        217,
+                        454,
+                        93,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        326,
+                        423
+                    ],
+                    "is_working": true,
+                    "name": "Zuoying",
+                    "rect": [
+                        269,
+                        416,
+                        41,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        326,
+                        380
+                    ],
+                    "is_working": true,
+                    "name": "World Games",
+                    "rect": [
+                        241,
+                        372,
+                        69,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        326,
+                        336
+                    ],
+                    "is_working": true,
+                    "name": "Oil Refinery Elementary School",
+                    "rect": [
+                        153,
+                        328,
+                        157,
+                        15
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        359,
+                        303
+                    ],
+                    "is_working": true,
+                    "name": "Nanzih Export Processing Zone",
+                    "rect": [
+                        184,
+                        290,
+                        157,
+                        15
+                    ],
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        394,
+                        268
+                    ],
+                    "is_working": true,
+                    "name": "Houjing",
+                    "rect": [
+                        337,
+                        254,
+                        40,
+                        15
+                    ],
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        394,
+                        227
+                    ],
+                    "is_working": true,
+                    "name": "Metropolitan Park",
+                    "rect": [
+                        289,
+                        219,
+                        89,
+                        15
+                    ],
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        394,
+                        186
+                    ],
+                    "is_working": true,
+                    "name": "Cingpu",
+                    "rect": [
+                        342,
+                        178,
+                        37,
+                        15
+                    ],
+                    "text_id": 20,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        394,
+                        145
+                    ],
+                    "is_working": true,
+                    "name": "Ciaotou Sugar Refinery",
+                    "rect": [
+                        262,
+                        137,
+                        117,
+                        15
+                    ],
+                    "text_id": 21,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        394,
+                        100
+                    ],
+                    "is_working": true,
+                    "name": "Ciaotou Station",
+                    "rect": [
+                        301,
+                        92,
+                        77,
+                        15
+                    ],
+                    "text_id": 22,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        394,
+                        53
+                    ],
+                    "is_working": true,
+                    "name": "Gangshan South",
+                    "rect": [
+                        296,
+                        46,
+                        83,
+                        15
+                    ],
+                    "text_id": 23,
+                    "uid": 23
+                }
+            ],
+            "text_id": 24
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "F89828",
+            "line_width": 13,
+            "name": "Orange Line",
+            "segments": [
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            238,
+                            865
+                        ],
+                        [
+                            73,
+                            865
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    25,
+                    26,
+                    [
+                        [
+                            279,
+                            824
+                        ],
+                        [
+                            238,
+                            865
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    26,
+                    27,
+                    [
+                        [
+                            326,
+                            777
+                        ],
+                        [
+                            279,
+                            824
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    27,
+                    28,
+                    [
+                        [
+                            392,
+                            777
+                        ],
+                        [
+                            326,
+                            777
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            452,
+                            777
+                        ],
+                        [
+                            392,
+                            777
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    29,
+                    30,
+                    [
+                        [
+                            573,
+                            777
+                        ],
+                        [
+                            452,
+                            777
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    30,
+                    31,
+                    [
+                        [
+                            615,
+                            777
+                        ],
+                        [
+                            573,
+                            777
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    31,
+                    32,
+                    [
+                        [
+                            656,
+                            777
+                        ],
+                        [
+                            615,
+                            777
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    32,
+                    33,
+                    [
+                        [
+                            698,
+                            777
+                        ],
+                        [
+                            656,
+                            777
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    33,
+                    34,
+                    [
+                        [
+                            743,
+                            777
+                        ],
+                        [
+                            698,
+                            777
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    34,
+                    35,
+                    [
+                        [
+                            782,
+                            777
+                        ],
+                        [
+                            743,
+                            777
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    35,
+                    36,
+                    [
+                        [
+                            825,
+                            777
+                        ],
+                        [
+                            782,
+                            777
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    36,
+                    37,
+                    [
+                        [
+                            868,
+                            820
+                        ],
+                        [
+                            825,
+                            777
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        73,
+                        865
+                    ],
+                    "is_working": true,
+                    "name": "Sizihwan",
+                    "rect": [
+                        49,
+                        830,
+                        46,
+                        15
+                    ],
+                    "text_id": 25,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        238,
+                        865
+                    ],
+                    "is_working": true,
+                    "name": "Yanchengpu",
+                    "rect": [
+                        169,
+                        835,
+                        63,
+                        15
+                    ],
+                    "text_id": 26,
+                    "uid": 25
+                },
+                {
+                    "coord": [
+                        279,
+                        824
+                    ],
+                    "is_working": true,
+                    "name": "City Council",
+                    "rect": [
+                        201,
+                        805,
+                        63,
+                        15
+                    ],
+                    "text_id": 27,
+                    "uid": 26
+                },
+                {
+                    "coord": [
+                        326,
+                        777
+                    ],
+                    "is_working": true,
+                    "name": "Formosa Boulevard",
+                    "rect": [
+                        207,
+                        766,
+                        99,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 27
+                },
+                {
+                    "coord": [
+                        392,
+                        777
+                    ],
+                    "is_working": true,
+                    "name": "Sinyi Elementary School",
+                    "rect": [
+                        384,
+                        636,
+                        15,
+                        123
+                    ],
+                    "text_id": 28,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        452,
+                        777
+                    ],
+                    "is_working": true,
+                    "name": "Cultural Center",
+                    "rect": [
+                        444,
+                        682,
+                        15,
+                        77
+                    ],
+                    "text_id": 29,
+                    "uid": 29
+                },
+                {
+                    "coord": [
+                        573,
+                        777
+                    ],
+                    "is_working": true,
+                    "name": "Wukuaicuo",
+                    "rect": [
+                        566,
+                        702,
+                        15,
+                        57
+                    ],
+                    "text_id": 30,
+                    "uid": 30
+                },
+                {
+                    "coord": [
+                        615,
+                        777
+                    ],
+                    "is_working": true,
+                    "name": "Martial Arts Stadium",
+                    "rect": [
+                        608,
+                        655,
+                        15,
+                        103
+                    ],
+                    "text_id": 31,
+                    "uid": 31
+                },
+                {
+                    "coord": [
+                        656,
+                        777
+                    ],
+                    "is_working": true,
+                    "name": "Weiwuying",
+                    "rect": [
+                        648,
+                        702,
+                        15,
+                        56
+                    ],
+                    "text_id": 32,
+                    "uid": 32
+                },
+                {
+                    "coord": [
+                        698,
+                        777
+                    ],
+                    "is_working": true,
+                    "name": "Fongshan West",
+                    "rect": [
+                        691,
+                        680,
+                        15,
+                        78
+                    ],
+                    "text_id": 33,
+                    "uid": 33
+                },
+                {
+                    "coord": [
+                        743,
+                        777
+                    ],
+                    "is_working": true,
+                    "name": "Fongshan",
+                    "rect": [
+                        735,
+                        708,
+                        15,
+                        50
+                    ],
+                    "text_id": 34,
+                    "uid": 34
+                },
+                {
+                    "coord": [
+                        782,
+                        777
+                    ],
+                    "is_working": true,
+                    "name": "Dadong",
+                    "rect": [
+                        776,
+                        716,
+                        15,
+                        40
+                    ],
+                    "text_id": 35,
+                    "uid": 35
+                },
+                {
+                    "coord": [
+                        825,
+                        777
+                    ],
+                    "is_working": true,
+                    "name": "Fongshan Junior High School",
+                    "rect": [
+                        817,
+                        608,
+                        15,
+                        147
+                    ],
+                    "text_id": 36,
+                    "uid": 36
+                },
+                {
+                    "coord": [
+                        868,
+                        820
+                    ],
+                    "is_working": true,
+                    "name": "Daliao",
+                    "rect": [
+                        857,
+                        841,
+                        34,
+                        15
+                    ],
+                    "text_id": 37,
+                    "uid": 37
+                }
+            ],
+            "text_id": 38
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "7CBD52",
+            "line_width": 13,
+            "name": "Circular light rail",
+            "segments": [
+                [
+                    38,
+                    39,
+                    [
+                        [
+                            460,
+                            1001
+                        ],
+                        [
+                            489,
+                            972
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    38,
+                    74,
+                    [
+                        [
+                            515,
+                            945
+                        ],
+                        [
+                            489,
+                            972
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    39,
+                    40,
+                    [
+                        [
+                            429,
+                            1032
+                        ],
+                        [
+                            460,
+                            1001
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    40,
+                    41,
+                    [
+                        [
+                            387,
+                            1074
+                        ],
+                        [
+                            429,
+                            1032
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    41,
+                    42,
+                    [
+                        [
+                            348,
+                            1113
+                        ],
+                        [
+                            387,
+                            1074
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    42,
+                    43,
+                    [
+                        [
+                            319,
+                            1084
+                        ],
+                        [
+                            348,
+                            1113
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    43,
+                    44,
+                    [
+                        [
+                            292,
+                            1057
+                        ],
+                        [
+                            319,
+                            1084
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    44,
+                    45,
+                    [
+                        [
+                            265,
+                            1030
+                        ],
+                        [
+                            292,
+                            1057
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    45,
+                    46,
+                    [
+                        [
+                            237,
+                            1002
+                        ],
+                        [
+                            265,
+                            1030
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    46,
+                    47,
+                    [
+                        [
+                            208,
+                            973
+                        ],
+                        [
+                            237,
+                            1002
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    47,
+                    48,
+                    [
+                        [
+                            160,
+                            973
+                        ],
+                        [
+                            208,
+                            973
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    48,
+                    49,
+                    [
+                        [
+                            112,
+                            973
+                        ],
+                        [
+                            160,
+                            973
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    49,
+                    50,
+                    [
+                        [
+                            112,
+                            932
+                        ],
+                        [
+                            112,
+                            973
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    50,
+                    51,
+                    [
+                        [
+                            112,
+                            865
+                        ],
+                        [
+                            112,
+                            932
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    51,
+                    52,
+                    [
+                        [
+                            112,
+                            801
+                        ],
+                        [
+                            112,
+                            865
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    52,
+                    53,
+                    [
+                        [
+                            112,
+                            766
+                        ],
+                        [
+                            112,
+                            801
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    53,
+                    54,
+                    [
+                        [
+                            112,
+                            725
+                        ],
+                        [
+                            112,
+                            766
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    54,
+                    55,
+                    [
+                        [
+                            112,
+                            678
+                        ],
+                        [
+                            112,
+                            725
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    55,
+                    56,
+                    [
+                        [
+                            112,
+                            641
+                        ],
+                        [
+                            112,
+                            678
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    56,
+                    57,
+                    [
+                        [
+                            112,
+                            597
+                        ],
+                        [
+                            112,
+                            641
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    57,
+                    58,
+                    [
+                        [
+                            158,
+                            580
+                        ],
+                        [
+                            112.0,
+                            580.0
+                        ],
+                        [
+                            112,
+                            597
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    58,
+                    59,
+                    [
+                        [
+                            203,
+                            580
+                        ],
+                        [
+                            158,
+                            580
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    59,
+                    60,
+                    [
+                        [
+                            250,
+                            580
+                        ],
+                        [
+                            203,
+                            580
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    60,
+                    61,
+                    [
+                        [
+                            326,
+                            580
+                        ],
+                        [
+                            250,
+                            580
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    61,
+                    62,
+                    [
+                        [
+                            371,
+                            580
+                        ],
+                        [
+                            326,
+                            580
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    62,
+                    63,
+                    [
+                        [
+                            415,
+                            580
+                        ],
+                        [
+                            371,
+                            580
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    63,
+                    64,
+                    [
+                        [
+                            452,
+                            580
+                        ],
+                        [
+                            415,
+                            580
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    64,
+                    65,
+                    [
+                        [
+                            484,
+                            612
+                        ],
+                        [
+                            452,
+                            580
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    65,
+                    66,
+                    [
+                        [
+                            515,
+                            644
+                        ],
+                        [
+                            484,
+                            612
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    66,
+                    67,
+                    [
+                        [
+                            515,
+                            690
+                        ],
+                        [
+                            515,
+                            644
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    67,
+                    68,
+                    [
+                        [
+                            515,
+                            734
+                        ],
+                        [
+                            515,
+                            690
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    68,
+                    69,
+                    [
+                        [
+                            515,
+                            777
+                        ],
+                        [
+                            515,
+                            734
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    69,
+                    70,
+                    [
+                        [
+                            515,
+                            811
+                        ],
+                        [
+                            515,
+                            777
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    70,
+                    71,
+                    [
+                        [
+                            515,
+                            845
+                        ],
+                        [
+                            515,
+                            811
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    71,
+                    72,
+                    [
+                        [
+                            515,
+                            881
+                        ],
+                        [
+                            515,
+                            845
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    72,
+                    73,
+                    [
+                        [
+                            515,
+                            914
+                        ],
+                        [
+                            515,
+                            881
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    73,
+                    74,
+                    [
+                        [
+                            515,
+                            945
+                        ],
+                        [
+                            515,
+                            914
+                        ]
+                    ],
+                    false
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        489,
+                        972
+                    ],
+                    "is_working": true,
+                    "name": "Lizihnei",
+                    "rect": [
+                        505,
+                        969,
+                        40,
+                        15
+                    ],
+                    "text_id": 39,
+                    "uid": 38
+                },
+                {
+                    "coord": [
+                        460,
+                        1001
+                    ],
+                    "is_working": true,
+                    "name": "Kaisyuan Rueitian",
+                    "rect": [
+                        476,
+                        1000,
+                        93,
+                        15
+                    ],
+                    "text_id": 40,
+                    "uid": 39
+                },
+                {
+                    "coord": [
+                        429,
+                        1032
+                    ],
+                    "is_working": true,
+                    "name": "Cianjhen Star",
+                    "rect": [
+                        450,
+                        1025,
+                        69,
+                        15
+                    ],
+                    "text_id": 41,
+                    "uid": 40
+                },
+                {
+                    "coord": [
+                        387,
+                        1074
+                    ],
+                    "is_working": true,
+                    "name": "Kaisyuan Jhonghua",
+                    "rect": [
+                        383,
+                        1101,
+                        100,
+                        15
+                    ],
+                    "text_id": 42,
+                    "uid": 41
+                },
+                {
+                    "coord": [
+                        348,
+                        1113
+                    ],
+                    "is_working": true,
+                    "name": "Dream Mall",
+                    "rect": [
+                        271,
+                        1108,
+                        59,
+                        15
+                    ],
+                    "text_id": 43,
+                    "uid": 42
+                },
+                {
+                    "coord": [
+                        319,
+                        1084
+                    ],
+                    "is_working": true,
+                    "name": "Commerce and Trade Park",
+                    "rect": [
+                        169,
+                        1083,
+                        134,
+                        15
+                    ],
+                    "text_id": 44,
+                    "uid": 43
+                },
+                {
+                    "coord": [
+                        292,
+                        1057
+                    ],
+                    "is_working": true,
+                    "name": "Software Technology Park",
+                    "rect": [
+                        146,
+                        1058,
+                        131,
+                        15
+                    ],
+                    "text_id": 45,
+                    "uid": 44
+                },
+                {
+                    "coord": [
+                        265,
+                        1030
+                    ],
+                    "is_working": true,
+                    "name": "Kaohsiung Exhibition Center",
+                    "rect": [
+                        106,
+                        1030,
+                        143,
+                        15
+                    ],
+                    "text_id": 46,
+                    "uid": 45
+                },
+                {
+                    "coord": [
+                        237,
+                        1002
+                    ],
+                    "is_working": true,
+                    "name": "Cruise Terminal",
+                    "rect": [
+                        139,
+                        999,
+                        81,
+                        15
+                    ],
+                    "text_id": 47,
+                    "uid": 46
+                },
+                {
+                    "coord": [
+                        208,
+                        973
+                    ],
+                    "is_working": true,
+                    "name": "Glory Pier",
+                    "rect": [
+                        198,
+                        903,
+                        15,
+                        52
+                    ],
+                    "text_id": 48,
+                    "uid": 47
+                },
+                {
+                    "coord": [
+                        160,
+                        973
+                    ],
+                    "is_working": true,
+                    "name": "Love Pier",
+                    "rect": [
+                        152,
+                        907,
+                        15,
+                        49
+                    ],
+                    "text_id": 49,
+                    "uid": 48
+                },
+                {
+                    "coord": [
+                        112,
+                        973
+                    ],
+                    "is_working": true,
+                    "name": "Dayi Pier-2",
+                    "rect": [
+                        40,
+                        964,
+                        57,
+                        15
+                    ],
+                    "text_id": 50,
+                    "uid": 49
+                },
+                {
+                    "coord": [
+                        112,
+                        932
+                    ],
+                    "is_working": true,
+                    "name": "Penglai Pier-2",
+                    "rect": [
+                        25,
+                        924,
+                        71,
+                        15
+                    ],
+                    "text_id": 51,
+                    "uid": 50
+                },
+                {
+                    "coord": [
+                        112,
+                        865
+                    ],
+                    "is_working": true,
+                    "name": "Hamasen",
+                    "rect": [
+                        126,
+                        879,
+                        49,
+                        15
+                    ],
+                    "text_id": 52,
+                    "uid": 51
+                },
+                {
+                    "coord": [
+                        112,
+                        801
+                    ],
+                    "is_working": false,
+                    "name": "Wufu 4th Rd.",
+                    "rect": null,
+                    "text_id": 53,
+                    "uid": 52
+                },
+                {
+                    "coord": [
+                        112,
+                        766
+                    ],
+                    "is_working": false,
+                    "name": "Dagong Rd.",
+                    "rect": null,
+                    "text_id": 54,
+                    "uid": 53
+                },
+                {
+                    "coord": [
+                        112,
+                        725
+                    ],
+                    "is_working": false,
+                    "name": "Singlong Rd.",
+                    "rect": null,
+                    "text_id": 55,
+                    "uid": 54
+                },
+                {
+                    "coord": [
+                        112,
+                        678
+                    ],
+                    "is_working": false,
+                    "name": "Gushan",
+                    "rect": null,
+                    "text_id": 56,
+                    "uid": 55
+                },
+                {
+                    "coord": [
+                        112,
+                        641
+                    ],
+                    "is_working": false,
+                    "name": "Jiouru 4th Rd.",
+                    "rect": null,
+                    "text_id": 57,
+                    "uid": 56
+                },
+                {
+                    "coord": [
+                        112,
+                        597
+                    ],
+                    "is_working": false,
+                    "name": "Museum of Fine Arts Station",
+                    "rect": null,
+                    "text_id": 58,
+                    "uid": 57
+                },
+                {
+                    "coord": [
+                        158,
+                        580
+                    ],
+                    "is_working": false,
+                    "name": "Art Park",
+                    "rect": null,
+                    "text_id": 59,
+                    "uid": 58
+                },
+                {
+                    "coord": [
+                        203,
+                        580
+                    ],
+                    "is_working": false,
+                    "name": "Kaohsiung Municipal United Hospital",
+                    "rect": null,
+                    "text_id": 60,
+                    "uid": 59
+                },
+                {
+                    "coord": [
+                        250,
+                        580
+                    ],
+                    "is_working": false,
+                    "name": "Longde Rd.",
+                    "rect": null,
+                    "text_id": 61,
+                    "uid": 60
+                },
+                {
+                    "coord": [
+                        326,
+                        580
+                    ],
+                    "is_working": false,
+                    "name": "Kaohsiung City Hall",
+                    "rect": null,
+                    "text_id": 62,
+                    "uid": 61
+                },
+                {
+                    "coord": [
+                        371,
+                        580
+                    ],
+                    "is_working": false,
+                    "name": "Longhua Junior High School",
+                    "rect": null,
+                    "text_id": 63,
+                    "uid": 62
+                },
+                {
+                    "coord": [
+                        415,
+                        580
+                    ],
+                    "is_working": false,
+                    "name": "Wanzihnei",
+                    "rect": null,
+                    "text_id": 64,
+                    "uid": 63
+                },
+                {
+                    "coord": [
+                        452,
+                        580
+                    ],
+                    "is_working": false,
+                    "name": "Dingshan",
+                    "rect": null,
+                    "text_id": 65,
+                    "uid": 64
+                },
+                {
+                    "coord": [
+                        484,
+                        612
+                    ],
+                    "is_working": false,
+                    "name": "Wanzihnei:X:1",
+                    "rect": null,
+                    "text_id": 64,
+                    "uid": 65
+                },
+                {
+                    "coord": [
+                        515,
+                        644
+                    ],
+                    "is_working": false,
+                    "name": "Jiansing Rd.",
+                    "rect": null,
+                    "text_id": 66,
+                    "uid": 66
+                },
+                {
+                    "coord": [
+                        515,
+                        690
+                    ],
+                    "is_working": false,
+                    "name": "Dashun Jiouru",
+                    "rect": null,
+                    "text_id": 67,
+                    "uid": 67
+                },
+                {
+                    "coord": [
+                        515,
+                        734
+                    ],
+                    "is_working": false,
+                    "name": "Universal Cinemas",
+                    "rect": null,
+                    "text_id": 68,
+                    "uid": 68
+                },
+                {
+                    "coord": [
+                        515,
+                        777
+                    ],
+                    "is_working": false,
+                    "name": "Rainbow Park",
+                    "rect": null,
+                    "text_id": 69,
+                    "uid": 69
+                },
+                {
+                    "coord": [
+                        515,
+                        811
+                    ],
+                    "is_working": false,
+                    "name": "Minsheng Hospital",
+                    "rect": null,
+                    "text_id": 70,
+                    "uid": 70
+                },
+                {
+                    "coord": [
+                        515,
+                        845
+                    ],
+                    "is_working": false,
+                    "name": "Kuochi Vocational High School",
+                    "rect": null,
+                    "text_id": 71,
+                    "uid": 71
+                },
+                {
+                    "coord": [
+                        515,
+                        881
+                    ],
+                    "is_working": false,
+                    "name": "Wuchang Rd.",
+                    "rect": null,
+                    "text_id": 72,
+                    "uid": 72
+                },
+                {
+                    "coord": [
+                        515,
+                        914
+                    ],
+                    "is_working": false,
+                    "name": "Ersheng Rd.",
+                    "rect": null,
+                    "text_id": 73,
+                    "uid": 73
+                },
+                {
+                    "coord": [
+                        515,
+                        945
+                    ],
+                    "is_working": false,
+                    "name": "Depot",
+                    "rect": null,
+                    "text_id": 74,
+                    "uid": 74
+                }
+            ],
+            "text_id": 75
+        }
+    ],
+    "lines_width": 13,
+    "name": "metro",
+    "name_text_id": 76,
+    "stations_diameter": 23.0,
+    "transfers": [
+        [
+            8,
+            27,
+            [
+                326,
+                754
+            ],
+            [
+                326,
+                777
+            ]
+        ],
+        [
+            24,
+            51,
+            [
+                73,
+                865
+            ],
+            [
+                112,
+                865
+            ]
+        ],
+        [
+            4,
+            40,
+            [
+                407,
+                1008
+            ],
+            [
+                429,
+                1032
+            ]
+        ],
+        [
+            11,
+            61,
+            [
+                326,
+                546
+            ],
+            [
+                326,
+                580
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 77,
+    "upper_case": false,
+    "width": 1018,
+    "word_wrap": false
+}

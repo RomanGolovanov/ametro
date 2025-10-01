@@ -1,0 +1,549 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 570,
+    "images": [
+        "res/schemes/xi'an.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "C61A00",
+            "line_color": "C61A00",
+            "line_width": 7,
+            "name": "1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            145,
+                            45
+                        ],
+                        [
+                            145,
+                            20
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            145,
+                            70
+                        ],
+                        [
+                            145,
+                            45
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            145,
+                            95
+                        ],
+                        [
+                            145,
+                            70
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            145,
+                            120
+                        ],
+                        [
+                            145,
+                            95
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            145,
+                            145
+                        ],
+                        [
+                            145,
+                            120
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            145,
+                            170
+                        ],
+                        [
+                            145,
+                            145
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            145,
+                            195
+                        ],
+                        [
+                            145,
+                            170
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            145,
+                            220
+                        ],
+                        [
+                            145,
+                            195
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            145,
+                            245
+                        ],
+                        [
+                            145,
+                            220
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            145,
+                            270
+                        ],
+                        [
+                            145,
+                            245
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            145,
+                            295
+                        ],
+                        [
+                            145,
+                            270
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            145,
+                            320
+                        ],
+                        [
+                            145,
+                            295
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            145,
+                            345
+                        ],
+                        [
+                            145,
+                            320
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            145,
+                            370
+                        ],
+                        [
+                            145,
+                            345
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            145,
+                            395
+                        ],
+                        [
+                            145,
+                            370
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            145,
+                            420
+                        ],
+                        [
+                            145,
+                            395
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        145,
+                        20
+                    ],
+                    "is_working": true,
+                    "name": "Bei Kezhan",
+                    "rect": [
+                        154,
+                        13,
+                        59,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        145,
+                        45
+                    ],
+                    "is_working": true,
+                    "name": "Beiyuan",
+                    "rect": [
+                        154,
+                        38,
+                        43,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        145,
+                        70
+                    ],
+                    "is_working": true,
+                    "name": "Yundong Gongyuan",
+                    "rect": [
+                        154,
+                        63,
+                        98,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        145,
+                        95
+                    ],
+                    "is_working": true,
+                    "name": "Xingzheng Zhongxin",
+                    "rect": [
+                        154,
+                        88,
+                        101,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        145,
+                        120
+                    ],
+                    "is_working": true,
+                    "name": "Fengcheng 5-lu",
+                    "rect": [
+                        154,
+                        113,
+                        77,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        145,
+                        145
+                    ],
+                    "is_working": true,
+                    "name": "Shi Tushuguan",
+                    "rect": [
+                        154,
+                        138,
+                        75,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        145,
+                        170
+                    ],
+                    "is_working": true,
+                    "name": "Daminggongxi",
+                    "rect": [
+                        154,
+                        163,
+                        73,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        145,
+                        195
+                    ],
+                    "is_working": true,
+                    "name": "Longshouyuan",
+                    "rect": [
+                        154,
+                        188,
+                        74,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        145,
+                        220
+                    ],
+                    "is_working": true,
+                    "name": "Anyuanmen",
+                    "rect": [
+                        154,
+                        213,
+                        61,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        145,
+                        245
+                    ],
+                    "is_working": true,
+                    "name": "Beidajie",
+                    "rect": [
+                        154,
+                        238,
+                        43,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        145,
+                        270
+                    ],
+                    "is_working": true,
+                    "name": "Zhonglou",
+                    "rect": [
+                        154,
+                        263,
+                        47,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        145,
+                        295
+                    ],
+                    "is_working": true,
+                    "name": "Yongningmen",
+                    "rect": [
+                        154,
+                        288,
+                        69,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        145,
+                        320
+                    ],
+                    "is_working": true,
+                    "name": "Nanshaomen",
+                    "rect": [
+                        154,
+                        313,
+                        67,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        145,
+                        345
+                    ],
+                    "is_working": true,
+                    "name": "Tiyuchang",
+                    "rect": [
+                        154,
+                        338,
+                        53,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        145,
+                        370
+                    ],
+                    "is_working": true,
+                    "name": "Xiaozhai",
+                    "rect": [
+                        154,
+                        363,
+                        44,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        145,
+                        395
+                    ],
+                    "is_working": true,
+                    "name": "Wei 1-jie",
+                    "rect": [
+                        154,
+                        388,
+                        45,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        145,
+                        420
+                    ],
+                    "is_working": true,
+                    "name": "Huizhan Zhongxin",
+                    "rect": [
+                        154,
+                        413,
+                        90,
+                        15
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                }
+            ],
+            "text_id": 17
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 18,
+    "stations_diameter": 13.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 19,
+    "upper_case": false,
+    "width": 295,
+    "word_wrap": false
+}

@@ -1,0 +1,67 @@
+{
+    "lines": [
+        {
+            "delays": [],
+            "name": "Dorfbahn",
+            "scheme": null,
+            "segments": [
+                [
+                    0,
+                    1,
+                    120
+                ],
+                [
+                    1,
+                    0,
+                    120
+                ],
+                [
+                    1,
+                    2,
+                    120
+                ],
+                [
+                    2,
+                    1,
+                    120
+                ],
+                [
+                    2,
+                    3,
+                    120
+                ],
+                [
+                    3,
+                    2,
+                    120
+                ]
+            ],
+            "stations": [
+                [
+                    0,
+                    "Parkplatz",
+                    0
+                ],
+                [
+                    1,
+                    "Kirche",
+                    1
+                ],
+                [
+                    2,
+                    "Raika",
+                    2
+                ],
+                [
+                    3,
+                    "Seilbahn",
+                    3
+                ]
+            ],
+            "text_id": 4
+        }
+    ],
+    "name": "metro",
+    "transfers": [],
+    "type_name": "Фуникулер"
+}

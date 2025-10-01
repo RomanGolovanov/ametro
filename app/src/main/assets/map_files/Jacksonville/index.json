@@ -1,0 +1,58 @@
+{
+    "city_id": 4069553,
+    "comments_text_id": 12,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 11,
+    "file": "Jacksonville.zip",
+    "latitude": 33.81382,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": -85.7613,
+    "map_id": "Jacksonville.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 9,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 10
+        }
+    ],
+    "timestamp": 1754434800.0,
+    "transport_types": [
+        "Электричка"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Электричка"
+        }
+    ]
+}

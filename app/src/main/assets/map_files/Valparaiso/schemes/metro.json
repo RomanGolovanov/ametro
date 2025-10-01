@@ -1,0 +1,694 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 435,
+    "images": [
+        "res/schemes/valparaiso.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "004000",
+            "line_color": "008000",
+            "line_width": 7,
+            "name": "1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            91,
+                            265
+                        ],
+                        [
+                            82.0,
+                            265.0
+                        ],
+                        [
+                            66,
+                            245
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            116,
+                            265
+                        ],
+                        [
+                            91,
+                            265
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            136,
+                            250
+                        ],
+                        [
+                            120.0,
+                            265.0
+                        ],
+                        [
+                            116,
+                            265
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            161,
+                            225
+                        ],
+                        [
+                            136,
+                            250
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            211,
+                            200
+                        ],
+                        [
+                            201.0,
+                            210.0
+                        ],
+                        [
+                            175.0,
+                            210.0
+                        ],
+                        [
+                            161,
+                            225
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            241,
+                            190
+                        ],
+                        [
+                            221.0,
+                            190.0
+                        ],
+                        [
+                            211,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            271,
+                            205
+                        ],
+                        [
+                            256.0,
+                            190.0
+                        ],
+                        [
+                            241,
+                            190
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            296,
+                            230
+                        ],
+                        [
+                            271,
+                            205
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            316,
+                            250
+                        ],
+                        [
+                            296,
+                            230
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            341,
+                            275
+                        ],
+                        [
+                            316,
+                            250
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            486,
+                            240
+                        ],
+                        [
+                            471.0,
+                            240.0
+                        ],
+                        [
+                            426.0,
+                            285.0
+                        ],
+                        [
+                            351.0,
+                            285.0
+                        ],
+                        [
+                            341,
+                            275
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            541,
+                            240
+                        ],
+                        [
+                            486,
+                            240
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            601,
+                            240
+                        ],
+                        [
+                            541,
+                            240
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            651,
+                            240
+                        ],
+                        [
+                            601,
+                            240
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            686,
+                            240
+                        ],
+                        [
+                            651,
+                            240
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            721,
+                            240
+                        ],
+                        [
+                            686,
+                            240
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            746,
+                            225
+                        ],
+                        [
+                            731.0,
+                            240.0
+                        ],
+                        [
+                            721,
+                            240
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            761,
+                            210
+                        ],
+                        [
+                            746,
+                            225
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            951,
+                            55
+                        ],
+                        [
+                            806.0,
+                            55.0
+                        ],
+                        [
+                            771.0,
+                            90.0
+                        ],
+                        [
+                            771.0,
+                            200.0
+                        ],
+                        [
+                            761,
+                            210
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        66,
+                        245
+                    ],
+                    "is_working": true,
+                    "name": "Puerto",
+                    "rect": [
+                        32,
+                        220,
+                        34,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        91,
+                        265
+                    ],
+                    "is_working": true,
+                    "name": "Bellavista",
+                    "rect": [
+                        36,
+                        274,
+                        52,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        116,
+                        265
+                    ],
+                    "is_working": true,
+                    "name": "Francia",
+                    "rect": [
+                        114,
+                        276,
+                        39,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        136,
+                        250
+                    ],
+                    "is_working": true,
+                    "name": "Baron",
+                    "rect": [
+                        141,
+                        250,
+                        32,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        161,
+                        225
+                    ],
+                    "is_working": true,
+                    "name": "Portales",
+                    "rect": [
+                        172,
+                        227,
+                        43,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        211,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Recreo",
+                    "rect": [
+                        218,
+                        205,
+                        38,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        241,
+                        190
+                    ],
+                    "is_working": true,
+                    "name": "Miramar",
+                    "rect": [
+                        234,
+                        164,
+                        43,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        271,
+                        205
+                    ],
+                    "is_working": true,
+                    "name": "Vina del Mar",
+                    "rect": [
+                        282,
+                        190,
+                        64,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        296,
+                        230
+                    ],
+                    "is_working": true,
+                    "name": "Hospital Gustavo Fricke",
+                    "rect": [
+                        304,
+                        213,
+                        121,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        316,
+                        250
+                    ],
+                    "is_working": true,
+                    "name": "Chorrillos",
+                    "rect": [
+                        256,
+                        252,
+                        51,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        341,
+                        275
+                    ],
+                    "is_working": true,
+                    "name": "El Salto",
+                    "rect": [
+                        290,
+                        273,
+                        40,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        486,
+                        240
+                    ],
+                    "is_working": true,
+                    "name": "Quilpue",
+                    "rect": [
+                        471,
+                        214,
+                        40,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        541,
+                        240
+                    ],
+                    "is_working": true,
+                    "name": "El Sol",
+                    "rect": [
+                        525,
+                        250,
+                        31,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        601,
+                        240
+                    ],
+                    "is_working": true,
+                    "name": "El Belloto",
+                    "rect": [
+                        567,
+                        214,
+                        50,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        651,
+                        240
+                    ],
+                    "is_working": true,
+                    "name": "Las Americas",
+                    "rect": [
+                        619,
+                        249,
+                        71,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        686,
+                        240
+                    ],
+                    "is_working": true,
+                    "name": "La Concepcion",
+                    "rect": [
+                        653,
+                        214,
+                        76,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        721,
+                        240
+                    ],
+                    "is_working": true,
+                    "name": "Villa Alemana",
+                    "rect": [
+                        717,
+                        250,
+                        71,
+                        15
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        746,
+                        225
+                    ],
+                    "is_working": true,
+                    "name": "Sargento Aldea",
+                    "rect": [
+                        754,
+                        227,
+                        78,
+                        15
+                    ],
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        761,
+                        210
+                    ],
+                    "is_working": true,
+                    "name": "Penablanca",
+                    "rect": [
+                        773,
+                        207,
+                        60,
+                        15
+                    ],
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        951,
+                        55
+                    ],
+                    "is_working": true,
+                    "name": "Limache",
+                    "rect": [
+                        909,
+                        29,
+                        50,
+                        15
+                    ],
+                    "text_id": 19,
+                    "uid": 19
+                }
+            ],
+            "text_id": 20
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 21,
+    "stations_diameter": 13.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 22,
+    "upper_case": false,
+    "width": 1101,
+    "word_wrap": false
+}

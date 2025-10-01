@@ -1,0 +1,862 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 730,
+    "images": [
+        "res/schemes/m 2.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "FDCD31",
+            "line_width": 9,
+            "name": "M 1",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Dristor",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Piata Muncii",
+                    "rect": null,
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Iancului",
+                    "rect": null,
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Obor",
+                    "rect": null,
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Stefan cel Mare",
+                    "rect": null,
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        181,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Piata Victoriei",
+                    "rect": null,
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Gara de Nord",
+                    "rect": null,
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Basarab",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Crangasi",
+                    "rect": null,
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Petrache Poenaru",
+                    "rect": null,
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Grozavesti",
+                    "rect": null,
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Eroilor",
+                    "rect": null,
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Izvor",
+                    "rect": null,
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        181,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Piata Unirii",
+                    "rect": null,
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Timpuri Noi",
+                    "rect": null,
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Mihai Bravu",
+                    "rect": null,
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Dristor2",
+                    "rect": null,
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Nicolae Grigorescu",
+                    "rect": null,
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Titan",
+                    "rect": null,
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Costin Georgian",
+                    "rect": null,
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Republica",
+                    "rect": null,
+                    "text_id": 20,
+                    "uid": 20
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Pantelimon",
+                    "rect": null,
+                    "text_id": 21,
+                    "uid": 21
+                }
+            ],
+            "text_id": 22
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "4369FD",
+            "line_width": 9,
+            "name": "M 2",
+            "segments": [
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            200,
+                            100
+                        ],
+                        [
+                            200,
+                            60
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    23,
+                    24,
+                    [
+                        [
+                            200,
+                            140
+                        ],
+                        [
+                            200,
+                            100
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            200,
+                            180
+                        ],
+                        [
+                            200,
+                            140
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    25,
+                    26,
+                    [
+                        [
+                            200,
+                            220
+                        ],
+                        [
+                            200,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    26,
+                    27,
+                    [
+                        [
+                            200,
+                            260
+                        ],
+                        [
+                            200,
+                            220
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    27,
+                    28,
+                    [
+                        [
+                            200,
+                            300
+                        ],
+                        [
+                            200,
+                            260
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            200,
+                            340
+                        ],
+                        [
+                            200,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    29,
+                    30,
+                    [
+                        [
+                            200,
+                            380
+                        ],
+                        [
+                            200,
+                            340
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    30,
+                    31,
+                    [
+                        [
+                            200,
+                            414
+                        ],
+                        [
+                            200,
+                            380
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    31,
+                    32,
+                    [
+                        [
+                            200,
+                            460
+                        ],
+                        [
+                            200,
+                            414
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    32,
+                    33,
+                    [
+                        [
+                            200,
+                            500
+                        ],
+                        [
+                            200,
+                            460
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    33,
+                    34,
+                    [
+                        [
+                            200,
+                            540
+                        ],
+                        [
+                            200,
+                            500
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    34,
+                    35,
+                    [
+                        [
+                            200,
+                            580
+                        ],
+                        [
+                            200,
+                            540
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        200,
+                        60
+                    ],
+                    "is_working": true,
+                    "name": "Pipera",
+                    "rect": [
+                        215,
+                        50,
+                        100,
+                        20
+                    ],
+                    "text_id": 23,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        200,
+                        100
+                    ],
+                    "is_working": true,
+                    "name": "Aurel Vlaicu",
+                    "rect": [
+                        215,
+                        90,
+                        100,
+                        20
+                    ],
+                    "text_id": 24,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        200,
+                        140
+                    ],
+                    "is_working": true,
+                    "name": "Aviatorilor",
+                    "rect": [
+                        215,
+                        130,
+                        100,
+                        20
+                    ],
+                    "text_id": 25,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        200,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Piata Victoriei",
+                    "rect": [
+                        215,
+                        170,
+                        100,
+                        20
+                    ],
+                    "text_id": 5,
+                    "uid": 25
+                },
+                {
+                    "coord": [
+                        200,
+                        220
+                    ],
+                    "is_working": true,
+                    "name": "Piata Romana",
+                    "rect": [
+                        215,
+                        210,
+                        100,
+                        20
+                    ],
+                    "text_id": 26,
+                    "uid": 26
+                },
+                {
+                    "coord": [
+                        200,
+                        260
+                    ],
+                    "is_working": true,
+                    "name": "Universitatii",
+                    "rect": [
+                        215,
+                        250,
+                        100,
+                        20
+                    ],
+                    "text_id": 27,
+                    "uid": 27
+                },
+                {
+                    "coord": [
+                        200,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Piata Unirii",
+                    "rect": [
+                        215,
+                        290,
+                        100,
+                        20
+                    ],
+                    "text_id": 13,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        200,
+                        340
+                    ],
+                    "is_working": true,
+                    "name": "Tineretului",
+                    "rect": [
+                        215,
+                        330,
+                        100,
+                        20
+                    ],
+                    "text_id": 28,
+                    "uid": 29
+                },
+                {
+                    "coord": [
+                        200,
+                        380
+                    ],
+                    "is_working": true,
+                    "name": "Eroii Revolutiei",
+                    "rect": [
+                        215,
+                        370,
+                        100,
+                        20
+                    ],
+                    "text_id": 29,
+                    "uid": 30
+                },
+                {
+                    "coord": [
+                        200,
+                        414
+                    ],
+                    "is_working": true,
+                    "name": "Constantin Brancoveanu",
+                    "rect": [
+                        215,
+                        410,
+                        100,
+                        20
+                    ],
+                    "text_id": 30,
+                    "uid": 31
+                },
+                {
+                    "coord": [
+                        200,
+                        460
+                    ],
+                    "is_working": true,
+                    "name": "Piata Sudului",
+                    "rect": [
+                        215,
+                        450,
+                        100,
+                        20
+                    ],
+                    "text_id": 31,
+                    "uid": 32
+                },
+                {
+                    "coord": [
+                        200,
+                        500
+                    ],
+                    "is_working": true,
+                    "name": "Aparatorii Patriei",
+                    "rect": [
+                        215,
+                        490,
+                        100,
+                        20
+                    ],
+                    "text_id": 32,
+                    "uid": 33
+                },
+                {
+                    "coord": [
+                        200,
+                        540
+                    ],
+                    "is_working": true,
+                    "name": "Dimitrie Leonida",
+                    "rect": [
+                        215,
+                        530,
+                        100,
+                        20
+                    ],
+                    "text_id": 33,
+                    "uid": 34
+                },
+                {
+                    "coord": [
+                        200,
+                        580
+                    ],
+                    "is_working": true,
+                    "name": "Berceni",
+                    "rect": [
+                        215,
+                        570,
+                        100,
+                        20
+                    ],
+                    "text_id": 34,
+                    "uid": 35
+                }
+            ],
+            "text_id": 35
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "FF0000",
+            "line_width": 9,
+            "name": "M 3",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Preciziei",
+                    "rect": null,
+                    "text_id": 36,
+                    "uid": 36
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Pacii",
+                    "rect": null,
+                    "text_id": 37,
+                    "uid": 37
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Gorjului",
+                    "rect": null,
+                    "text_id": 38,
+                    "uid": 38
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Lujerului",
+                    "rect": null,
+                    "text_id": 39,
+                    "uid": 39
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Politehnica",
+                    "rect": null,
+                    "text_id": 40,
+                    "uid": 40
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Eroilor",
+                    "rect": null,
+                    "text_id": 11,
+                    "uid": 41
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Izvor",
+                    "rect": null,
+                    "text_id": 12,
+                    "uid": 42
+                },
+                {
+                    "coord": [
+                        162,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Piata Unirii",
+                    "rect": null,
+                    "text_id": 13,
+                    "uid": 43
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Timpuri Noi",
+                    "rect": null,
+                    "text_id": 14,
+                    "uid": 44
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Mihai Bravu",
+                    "rect": null,
+                    "text_id": 15,
+                    "uid": 45
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Dristor2",
+                    "rect": null,
+                    "text_id": 16,
+                    "uid": 46
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Nicolae Grigorescu",
+                    "rect": null,
+                    "text_id": 17,
+                    "uid": 47
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "1 Dec 1918",
+                    "rect": null,
+                    "text_id": 41,
+                    "uid": 48
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Nicolae Teclu",
+                    "rect": null,
+                    "text_id": 42,
+                    "uid": 49
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Anghel Saligny",
+                    "rect": null,
+                    "text_id": 43,
+                    "uid": 50
+                }
+            ],
+            "text_id": 44
+        }
+    ],
+    "lines_width": 9,
+    "name": "m 2",
+    "name_text_id": 35,
+    "stations_diameter": 16.0,
+    "transfers": [
+        [
+            5,
+            25,
+            [
+                181,
+                180
+            ],
+            [
+                200,
+                180
+            ]
+        ],
+        [
+            15,
+            45,
+            null,
+            null
+        ],
+        [
+            16,
+            46,
+            null,
+            null
+        ],
+        [
+            17,
+            47,
+            null,
+            null
+        ],
+        [
+            11,
+            41,
+            null,
+            null
+        ],
+        [
+            13,
+            28,
+            [
+                181,
+                300
+            ],
+            [
+                200,
+                300
+            ]
+        ],
+        [
+            0,
+            16,
+            null,
+            null
+        ],
+        [
+            12,
+            42,
+            null,
+            null
+        ],
+        [
+            13,
+            43,
+            [
+                181,
+                300
+            ],
+            [
+                162,
+                300
+            ]
+        ],
+        [
+            14,
+            44,
+            null,
+            null
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "Метро",
+    "type_text_id": 54,
+    "upper_case": true,
+    "width": 350,
+    "word_wrap": true
+}

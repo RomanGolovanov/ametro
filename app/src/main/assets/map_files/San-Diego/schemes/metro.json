@@ -1,0 +1,2187 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 810,
+    "images": [
+        "res/schemes/san-diego.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "f7941d",
+            "line_color": "f7941d",
+            "line_width": 6,
+            "name": "Orange",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            556,
+                            100
+                        ],
+                        [
+                            556,
+                            70
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            556,
+                            130
+                        ],
+                        [
+                            556,
+                            100
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            556,
+                            155
+                        ],
+                        [
+                            556,
+                            130
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            556,
+                            180
+                        ],
+                        [
+                            556,
+                            155
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            534,
+                            212
+                        ],
+                        [
+                            556,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            513,
+                            242
+                        ],
+                        [
+                            534,
+                            212
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            490,
+                            275
+                        ],
+                        [
+                            513,
+                            242
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            469,
+                            305
+                        ],
+                        [
+                            490,
+                            275
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            448,
+                            335
+                        ],
+                        [
+                            469,
+                            305
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            416,
+                            355
+                        ],
+                        [
+                            434.0,
+                            355.0
+                        ],
+                        [
+                            448,
+                            335
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            386,
+                            355
+                        ],
+                        [
+                            416,
+                            355
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            356,
+                            355
+                        ],
+                        [
+                            386,
+                            355
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            326,
+                            355
+                        ],
+                        [
+                            356,
+                            355
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            306,
+                            355
+                        ],
+                        [
+                            326,
+                            355
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            306,
+                            327
+                        ],
+                        [
+                            306,
+                            355
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            306,
+                            285
+                        ],
+                        [
+                            306,
+                            327
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            271,
+                            285
+                        ],
+                        [
+                            306,
+                            285
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            251,
+                            285
+                        ],
+                        [
+                            271,
+                            285
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            231,
+                            285
+                        ],
+                        [
+                            251,
+                            285
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            221,
+                            355
+                        ],
+                        [
+                            221.0,
+                            285.0
+                        ],
+                        [
+                            231,
+                            285
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            238,
+                            355
+                        ],
+                        [
+                            221,
+                            355
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            254,
+                            355
+                        ],
+                        [
+                            238,
+                            355
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            271,
+                            355
+                        ],
+                        [
+                            254,
+                            355
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        556,
+                        70
+                    ],
+                    "is_working": true,
+                    "name": "Gillespie Field",
+                    "rect": [
+                        569,
+                        62,
+                        73,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        556,
+                        100
+                    ],
+                    "is_working": true,
+                    "name": "Arnele Avenue",
+                    "rect": [
+                        569,
+                        93,
+                        76,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        556,
+                        130
+                    ],
+                    "is_working": true,
+                    "name": "El Cajon Transit Center",
+                    "rect": [
+                        569,
+                        123,
+                        117,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        556,
+                        155
+                    ],
+                    "is_working": true,
+                    "name": "Amaya Drive",
+                    "rect": [
+                        569,
+                        148,
+                        67,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        556,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Grossmont Transit Center",
+                    "rect": [
+                        569,
+                        172,
+                        129,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        534,
+                        212
+                    ],
+                    "is_working": true,
+                    "name": "La Mesa Boulevard",
+                    "rect": [
+                        543,
+                        207,
+                        98,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        513,
+                        242
+                    ],
+                    "is_working": true,
+                    "name": "Spring Street",
+                    "rect": [
+                        522,
+                        236,
+                        66,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        490,
+                        275
+                    ],
+                    "is_working": true,
+                    "name": "Lemon Grove Depot",
+                    "rect": [
+                        499,
+                        269,
+                        100,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        469,
+                        305
+                    ],
+                    "is_working": true,
+                    "name": "Massachusetts Avenue",
+                    "rect": [
+                        478,
+                        299,
+                        118,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        448,
+                        335
+                    ],
+                    "is_working": true,
+                    "name": "Encanto/62nd Street",
+                    "rect": [
+                        457,
+                        330,
+                        101,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        416,
+                        355
+                    ],
+                    "is_working": true,
+                    "name": "Euclid Avenue",
+                    "rect": [
+                        409,
+                        270,
+                        15,
+                        74
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        386,
+                        355
+                    ],
+                    "is_working": true,
+                    "name": "47th Street",
+                    "rect": [
+                        378,
+                        290,
+                        15,
+                        55
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        356,
+                        355
+                    ],
+                    "is_working": true,
+                    "name": "32nd & Commercial",
+                    "rect": [
+                        350,
+                        243,
+                        15,
+                        100
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        326,
+                        355
+                    ],
+                    "is_working": true,
+                    "name": "25th & Commercial",
+                    "rect": [
+                        320,
+                        249,
+                        15,
+                        97
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        306,
+                        355
+                    ],
+                    "is_working": true,
+                    "name": "12th & Imperial Transit Center 1",
+                    "rect": [
+                        307,
+                        365,
+                        159,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        306,
+                        327
+                    ],
+                    "is_working": true,
+                    "name": "Park & Market",
+                    "rect": [
+                        206,
+                        319,
+                        73,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        306,
+                        285
+                    ],
+                    "is_working": true,
+                    "name": "City College",
+                    "rect": [
+                        299,
+                        209,
+                        15,
+                        63
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        271,
+                        285
+                    ],
+                    "is_working": true,
+                    "name": "Fifth Avenue",
+                    "rect": [
+                        264,
+                        208,
+                        15,
+                        64
+                    ],
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        251,
+                        285
+                    ],
+                    "is_working": true,
+                    "name": "Civic Center",
+                    "rect": [
+                        244,
+                        208,
+                        15,
+                        64
+                    ],
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        231,
+                        285
+                    ],
+                    "is_working": true,
+                    "name": "America Plaza",
+                    "rect": [
+                        224,
+                        198,
+                        15,
+                        74
+                    ],
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        221,
+                        355
+                    ],
+                    "is_working": true,
+                    "name": "Seaport Village",
+                    "rect": [
+                        213,
+                        364,
+                        15,
+                        77
+                    ],
+                    "text_id": 20,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        238,
+                        355
+                    ],
+                    "is_working": true,
+                    "name": "Convention Center",
+                    "rect": [
+                        230,
+                        364,
+                        15,
+                        94
+                    ],
+                    "text_id": 21,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        254,
+                        355
+                    ],
+                    "is_working": true,
+                    "name": "Gaslamp Quarter",
+                    "rect": [
+                        247,
+                        364,
+                        15,
+                        86
+                    ],
+                    "text_id": 22,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        271,
+                        355
+                    ],
+                    "is_working": true,
+                    "name": "12th & Imperial Transit Center 2",
+                    "rect": [
+                        265,
+                        367,
+                        15,
+                        159
+                    ],
+                    "text_id": 23,
+                    "uid": 23
+                }
+            ],
+            "text_id": 24
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "0063ae",
+            "line_color": "0063ae",
+            "line_width": 6,
+            "name": "Blue",
+            "segments": [
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            184,
+                            218
+                        ],
+                        [
+                            176,
+                            196
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    25,
+                    26,
+                    [
+                        [
+                            192,
+                            240
+                        ],
+                        [
+                            184,
+                            218
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    26,
+                    27,
+                    [
+                        [
+                            200,
+                            262
+                        ],
+                        [
+                            192,
+                            240
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    27,
+                    28,
+                    [
+                        [
+                            208,
+                            284
+                        ],
+                        [
+                            200,
+                            262
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            231,
+                            300
+                        ],
+                        [
+                            214.0,
+                            300.0
+                        ],
+                        [
+                            208,
+                            284
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    29,
+                    30,
+                    [
+                        [
+                            251,
+                            300
+                        ],
+                        [
+                            231,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    30,
+                    31,
+                    [
+                        [
+                            271,
+                            300
+                        ],
+                        [
+                            251,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    31,
+                    32,
+                    [
+                        [
+                            291,
+                            300
+                        ],
+                        [
+                            271,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    32,
+                    33,
+                    [
+                        [
+                            291,
+                            327
+                        ],
+                        [
+                            291,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    33,
+                    34,
+                    [
+                        [
+                            291,
+                            355
+                        ],
+                        [
+                            291,
+                            327
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    34,
+                    35,
+                    [
+                        [
+                            291,
+                            385
+                        ],
+                        [
+                            291,
+                            355
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    35,
+                    36,
+                    [
+                        [
+                            300,
+                            410
+                        ],
+                        [
+                            291,
+                            385
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    36,
+                    37,
+                    [
+                        [
+                            309,
+                            435
+                        ],
+                        [
+                            300,
+                            410
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    37,
+                    38,
+                    [
+                        [
+                            318,
+                            460
+                        ],
+                        [
+                            309,
+                            435
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    38,
+                    39,
+                    [
+                        [
+                            327,
+                            485
+                        ],
+                        [
+                            318,
+                            460
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    39,
+                    40,
+                    [
+                        [
+                            336,
+                            510
+                        ],
+                        [
+                            327,
+                            485
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    40,
+                    41,
+                    [
+                        [
+                            345,
+                            535
+                        ],
+                        [
+                            336,
+                            510
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    41,
+                    42,
+                    [
+                        [
+                            354,
+                            560
+                        ],
+                        [
+                            345,
+                            535
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    42,
+                    43,
+                    [
+                        [
+                            363,
+                            585
+                        ],
+                        [
+                            354,
+                            560
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    43,
+                    44,
+                    [
+                        [
+                            372,
+                            610
+                        ],
+                        [
+                            363,
+                            585
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    44,
+                    45,
+                    [
+                        [
+                            381,
+                            635
+                        ],
+                        [
+                            372,
+                            610
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    45,
+                    46,
+                    [
+                        [
+                            390,
+                            660
+                        ],
+                        [
+                            381,
+                            635
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        176,
+                        196
+                    ],
+                    "is_working": true,
+                    "name": "Old Town Transit Center",
+                    "rect": [
+                        43,
+                        187,
+                        121,
+                        15
+                    ],
+                    "text_id": 25,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        184,
+                        218
+                    ],
+                    "is_working": true,
+                    "name": "Washington Street",
+                    "rect": [
+                        83,
+                        211,
+                        92,
+                        15
+                    ],
+                    "text_id": 26,
+                    "uid": 25
+                },
+                {
+                    "coord": [
+                        192,
+                        240
+                    ],
+                    "is_working": true,
+                    "name": "Middletown",
+                    "rect": [
+                        125,
+                        233,
+                        58,
+                        15
+                    ],
+                    "text_id": 27,
+                    "uid": 26
+                },
+                {
+                    "coord": [
+                        200,
+                        262
+                    ],
+                    "is_working": true,
+                    "name": "County Center/Little Italy",
+                    "rect": [
+                        67,
+                        255,
+                        124,
+                        15
+                    ],
+                    "text_id": 28,
+                    "uid": 27
+                },
+                {
+                    "coord": [
+                        208,
+                        284
+                    ],
+                    "is_working": true,
+                    "name": "Santa Fe Depot",
+                    "rect": [
+                        122,
+                        277,
+                        77,
+                        15
+                    ],
+                    "text_id": 29,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        231,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "America Plaza",
+                    "rect": null,
+                    "text_id": 19,
+                    "uid": 29
+                },
+                {
+                    "coord": [
+                        251,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Civic Center",
+                    "rect": null,
+                    "text_id": 18,
+                    "uid": 30
+                },
+                {
+                    "coord": [
+                        271,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Fifth Avenue",
+                    "rect": null,
+                    "text_id": 17,
+                    "uid": 31
+                },
+                {
+                    "coord": [
+                        291,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "City College",
+                    "rect": null,
+                    "text_id": 16,
+                    "uid": 32
+                },
+                {
+                    "coord": [
+                        291,
+                        327
+                    ],
+                    "is_working": true,
+                    "name": "Park & Market",
+                    "rect": null,
+                    "text_id": 15,
+                    "uid": 33
+                },
+                {
+                    "coord": [
+                        291,
+                        355
+                    ],
+                    "is_working": true,
+                    "name": "12th & Imperial Transit Center 1",
+                    "rect": null,
+                    "text_id": 14,
+                    "uid": 34
+                },
+                {
+                    "coord": [
+                        291,
+                        385
+                    ],
+                    "is_working": true,
+                    "name": "Barrio Logan",
+                    "rect": [
+                        301,
+                        382,
+                        66,
+                        15
+                    ],
+                    "text_id": 30,
+                    "uid": 35
+                },
+                {
+                    "coord": [
+                        300,
+                        410
+                    ],
+                    "is_working": true,
+                    "name": "Harborside",
+                    "rect": [
+                        310,
+                        402,
+                        57,
+                        15
+                    ],
+                    "text_id": 31,
+                    "uid": 36
+                },
+                {
+                    "coord": [
+                        309,
+                        435
+                    ],
+                    "is_working": true,
+                    "name": "Pacific Fleet",
+                    "rect": [
+                        319,
+                        427,
+                        63,
+                        15
+                    ],
+                    "text_id": 32,
+                    "uid": 37
+                },
+                {
+                    "coord": [
+                        318,
+                        460
+                    ],
+                    "is_working": true,
+                    "name": "8th Street",
+                    "rect": [
+                        328,
+                        452,
+                        49,
+                        15
+                    ],
+                    "text_id": 33,
+                    "uid": 38
+                },
+                {
+                    "coord": [
+                        327,
+                        485
+                    ],
+                    "is_working": true,
+                    "name": "24th Street",
+                    "rect": [
+                        337,
+                        477,
+                        55,
+                        15
+                    ],
+                    "text_id": 34,
+                    "uid": 39
+                },
+                {
+                    "coord": [
+                        336,
+                        510
+                    ],
+                    "is_working": true,
+                    "name": "Bayfront/E Street",
+                    "rect": [
+                        346,
+                        502,
+                        86,
+                        15
+                    ],
+                    "text_id": 35,
+                    "uid": 40
+                },
+                {
+                    "coord": [
+                        345,
+                        535
+                    ],
+                    "is_working": true,
+                    "name": "H Street",
+                    "rect": [
+                        355,
+                        527,
+                        42,
+                        15
+                    ],
+                    "text_id": 36,
+                    "uid": 41
+                },
+                {
+                    "coord": [
+                        354,
+                        560
+                    ],
+                    "is_working": true,
+                    "name": "Palomar Street",
+                    "rect": [
+                        364,
+                        552,
+                        75,
+                        15
+                    ],
+                    "text_id": 37,
+                    "uid": 42
+                },
+                {
+                    "coord": [
+                        363,
+                        585
+                    ],
+                    "is_working": true,
+                    "name": "Palm Avenue",
+                    "rect": [
+                        373,
+                        577,
+                        68,
+                        15
+                    ],
+                    "text_id": 38,
+                    "uid": 43
+                },
+                {
+                    "coord": [
+                        372,
+                        610
+                    ],
+                    "is_working": true,
+                    "name": "Iris Avenue",
+                    "rect": [
+                        382,
+                        602,
+                        59,
+                        15
+                    ],
+                    "text_id": 39,
+                    "uid": 44
+                },
+                {
+                    "coord": [
+                        381,
+                        635
+                    ],
+                    "is_working": true,
+                    "name": "Beyer Boulevard",
+                    "rect": [
+                        391,
+                        627,
+                        86,
+                        15
+                    ],
+                    "text_id": 40,
+                    "uid": 45
+                },
+                {
+                    "coord": [
+                        390,
+                        660
+                    ],
+                    "is_working": true,
+                    "name": "San Ysidro Transit Center",
+                    "rect": [
+                        400,
+                        652,
+                        129,
+                        15
+                    ],
+                    "text_id": 41,
+                    "uid": 46
+                }
+            ],
+            "text_id": 42
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "00a764",
+            "line_color": "00a764",
+            "line_width": 6,
+            "name": "Green",
+            "segments": [
+                [
+                    47,
+                    48,
+                    [
+                        [
+                            541,
+                            70
+                        ],
+                        [
+                            541,
+                            45
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    48,
+                    49,
+                    [
+                        [
+                            541,
+                            100
+                        ],
+                        [
+                            541,
+                            70
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    49,
+                    50,
+                    [
+                        [
+                            541,
+                            130
+                        ],
+                        [
+                            541,
+                            100
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    50,
+                    51,
+                    [
+                        [
+                            541,
+                            155
+                        ],
+                        [
+                            541,
+                            130
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    51,
+                    52,
+                    [
+                        [
+                            541,
+                            180
+                        ],
+                        [
+                            541,
+                            155
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    52,
+                    53,
+                    [
+                        [
+                            506,
+                            180
+                        ],
+                        [
+                            541,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    53,
+                    54,
+                    [
+                        [
+                            476,
+                            180
+                        ],
+                        [
+                            506,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    54,
+                    55,
+                    [
+                        [
+                            451,
+                            180
+                        ],
+                        [
+                            476,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    55,
+                    56,
+                    [
+                        [
+                            421,
+                            180
+                        ],
+                        [
+                            451,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    56,
+                    57,
+                    [
+                        [
+                            391,
+                            180
+                        ],
+                        [
+                            421,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    57,
+                    58,
+                    [
+                        [
+                            361,
+                            180
+                        ],
+                        [
+                            391,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    58,
+                    59,
+                    [
+                        [
+                            336,
+                            180
+                        ],
+                        [
+                            361,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    59,
+                    60,
+                    [
+                        [
+                            306,
+                            180
+                        ],
+                        [
+                            336,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    60,
+                    61,
+                    [
+                        [
+                            275,
+                            180
+                        ],
+                        [
+                            306,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    61,
+                    62,
+                    [
+                        [
+                            251,
+                            180
+                        ],
+                        [
+                            275,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    62,
+                    63,
+                    [
+                        [
+                            221,
+                            180
+                        ],
+                        [
+                            251,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    63,
+                    64,
+                    [
+                        [
+                            196,
+                            180
+                        ],
+                        [
+                            221,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    64,
+                    65,
+                    [
+                        [
+                            191,
+                            196
+                        ],
+                        [
+                            185.0,
+                            180.0
+                        ],
+                        [
+                            196,
+                            180
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        541,
+                        45
+                    ],
+                    "is_working": true,
+                    "name": "Santee Town Center",
+                    "rect": [
+                        551,
+                        37,
+                        101,
+                        15
+                    ],
+                    "text_id": 43,
+                    "uid": 47
+                },
+                {
+                    "coord": [
+                        541,
+                        70
+                    ],
+                    "is_working": true,
+                    "name": "Gillespie Field",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 48
+                },
+                {
+                    "coord": [
+                        541,
+                        100
+                    ],
+                    "is_working": true,
+                    "name": "Arnele Avenue",
+                    "rect": null,
+                    "text_id": 1,
+                    "uid": 49
+                },
+                {
+                    "coord": [
+                        541,
+                        130
+                    ],
+                    "is_working": true,
+                    "name": "El Cajon Transit Center",
+                    "rect": null,
+                    "text_id": 2,
+                    "uid": 50
+                },
+                {
+                    "coord": [
+                        541,
+                        155
+                    ],
+                    "is_working": true,
+                    "name": "Amaya Drive",
+                    "rect": null,
+                    "text_id": 3,
+                    "uid": 51
+                },
+                {
+                    "coord": [
+                        541,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Grossmont Transit Center",
+                    "rect": null,
+                    "text_id": 4,
+                    "uid": 52
+                },
+                {
+                    "coord": [
+                        506,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "70th Street",
+                    "rect": [
+                        500,
+                        115,
+                        15,
+                        55
+                    ],
+                    "text_id": 44,
+                    "uid": 53
+                },
+                {
+                    "coord": [
+                        476,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Alvarado Medical Center",
+                    "rect": [
+                        469,
+                        45,
+                        15,
+                        125
+                    ],
+                    "text_id": 45,
+                    "uid": 54
+                },
+                {
+                    "coord": [
+                        451,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "SDSU Transit Center",
+                    "rect": [
+                        443,
+                        65,
+                        15,
+                        105
+                    ],
+                    "text_id": 46,
+                    "uid": 55
+                },
+                {
+                    "coord": [
+                        421,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Grantville",
+                    "rect": [
+                        413,
+                        120,
+                        15,
+                        50
+                    ],
+                    "text_id": 47,
+                    "uid": 56
+                },
+                {
+                    "coord": [
+                        391,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Mission San Diego",
+                    "rect": [
+                        384,
+                        75,
+                        15,
+                        95
+                    ],
+                    "text_id": 48,
+                    "uid": 57
+                },
+                {
+                    "coord": [
+                        361,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Qualcomm Stadium",
+                    "rect": [
+                        354,
+                        72,
+                        15,
+                        98
+                    ],
+                    "text_id": 49,
+                    "uid": 58
+                },
+                {
+                    "coord": [
+                        336,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Fenton Parkway",
+                    "rect": [
+                        328,
+                        89,
+                        15,
+                        81
+                    ],
+                    "text_id": 50,
+                    "uid": 59
+                },
+                {
+                    "coord": [
+                        306,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Rio Vista",
+                    "rect": [
+                        299,
+                        123,
+                        15,
+                        47
+                    ],
+                    "text_id": 51,
+                    "uid": 60
+                },
+                {
+                    "coord": [
+                        275,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Mission Valley Center",
+                    "rect": [
+                        267,
+                        59,
+                        15,
+                        111
+                    ],
+                    "text_id": 52,
+                    "uid": 61
+                },
+                {
+                    "coord": [
+                        251,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Hazard Center",
+                    "rect": [
+                        244,
+                        97,
+                        15,
+                        73
+                    ],
+                    "text_id": 53,
+                    "uid": 62
+                },
+                {
+                    "coord": [
+                        221,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Fashion Valley Transit Center",
+                    "rect": [
+                        214,
+                        22,
+                        15,
+                        148
+                    ],
+                    "text_id": 54,
+                    "uid": 63
+                },
+                {
+                    "coord": [
+                        196,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Morena/Linda Vista",
+                    "rect": [
+                        188,
+                        73,
+                        15,
+                        97
+                    ],
+                    "text_id": 55,
+                    "uid": 64
+                },
+                {
+                    "coord": [
+                        191,
+                        196
+                    ],
+                    "is_working": true,
+                    "name": "Old Town Transit Center",
+                    "rect": null,
+                    "text_id": 25,
+                    "uid": 65
+                }
+            ],
+            "text_id": 56
+        }
+    ],
+    "lines_width": 6,
+    "name": "metro",
+    "name_text_id": 57,
+    "stations_diameter": 13.0,
+    "transfers": [
+        [
+            2,
+            50,
+            [
+                556,
+                130
+            ],
+            [
+                541,
+                130
+            ]
+        ],
+        [
+            15,
+            33,
+            [
+                306,
+                327
+            ],
+            [
+                291,
+                327
+            ]
+        ],
+        [
+            16,
+            32,
+            [
+                306,
+                285
+            ],
+            [
+                291,
+                300
+            ]
+        ],
+        [
+            17,
+            31,
+            [
+                271,
+                285
+            ],
+            [
+                271,
+                300
+            ]
+        ],
+        [
+            18,
+            30,
+            [
+                251,
+                285
+            ],
+            [
+                251,
+                300
+            ]
+        ],
+        [
+            19,
+            29,
+            [
+                231,
+                285
+            ],
+            [
+                231,
+                300
+            ]
+        ],
+        [
+            4,
+            52,
+            [
+                556,
+                180
+            ],
+            [
+                541,
+                180
+            ]
+        ],
+        [
+            14,
+            34,
+            [
+                306,
+                355
+            ],
+            [
+                291,
+                355
+            ]
+        ],
+        [
+            14,
+            23,
+            [
+                306,
+                355
+            ],
+            [
+                271,
+                355
+            ]
+        ],
+        [
+            34,
+            23,
+            [
+                291,
+                355
+            ],
+            [
+                271,
+                355
+            ]
+        ],
+        [
+            24,
+            65,
+            [
+                176,
+                196
+            ],
+            [
+                191,
+                196
+            ]
+        ],
+        [
+            48,
+            0,
+            [
+                541,
+                70
+            ],
+            [
+                556,
+                70
+            ]
+        ],
+        [
+            49,
+            1,
+            [
+                541,
+                100
+            ],
+            [
+                556,
+                100
+            ]
+        ],
+        [
+            51,
+            3,
+            [
+                541,
+                155
+            ],
+            [
+                556,
+                155
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 58,
+    "upper_case": false,
+    "width": 706,
+    "word_wrap": false
+}

@@ -1,0 +1,294 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 340,
+    "images": [
+        "res/schemes/jacksonville.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "6495ed",
+            "line_color": "6495ed",
+            "line_width": 7,
+            "name": "Skyway",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            165,
+                            45
+                        ],
+                        [
+                            165,
+                            10
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            165,
+                            80
+                        ],
+                        [
+                            165,
+                            45
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            120,
+                            95
+                        ],
+                        [
+                            150.0,
+                            95.0
+                        ],
+                        [
+                            165,
+                            80
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    5,
+                    [
+                        [
+                            115,
+                            140
+                        ],
+                        [
+                            115.0,
+                            120.0
+                        ],
+                        [
+                            139.0,
+                            95.0
+                        ],
+                        [
+                            150.0,
+                            95.0
+                        ],
+                        [
+                            165,
+                            80
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            95,
+                            95
+                        ],
+                        [
+                            120,
+                            95
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            160,
+                            165
+                        ],
+                        [
+                            140.0,
+                            165.0
+                        ],
+                        [
+                            115,
+                            140
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            170,
+                            190
+                        ],
+                        [
+                            170.0,
+                            175.0
+                        ],
+                        [
+                            160,
+                            165
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        165,
+                        10
+                    ],
+                    "is_working": true,
+                    "name": "FCCJ",
+                    "rect": [
+                        176,
+                        5,
+                        30,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        165,
+                        45
+                    ],
+                    "is_working": true,
+                    "name": "Hemming Plaza",
+                    "rect": [
+                        177,
+                        38,
+                        79,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        165,
+                        80
+                    ],
+                    "is_working": true,
+                    "name": "Central",
+                    "rect": [
+                        176,
+                        73,
+                        38,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        120,
+                        95
+                    ],
+                    "is_working": true,
+                    "name": "Jefferson",
+                    "rect": [
+                        102,
+                        71,
+                        48,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        95,
+                        95
+                    ],
+                    "is_working": true,
+                    "name": "Terminal",
+                    "rect": [
+                        38,
+                        88,
+                        45,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        115,
+                        140
+                    ],
+                    "is_working": true,
+                    "name": "San Marco",
+                    "rect": [
+                        50,
+                        134,
+                        55,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        160,
+                        165
+                    ],
+                    "is_working": true,
+                    "name": "Riverplace",
+                    "rect": [
+                        153,
+                        141,
+                        56,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        170,
+                        190
+                    ],
+                    "is_working": true,
+                    "name": "Kings Avenue",
+                    "rect": [
+                        181,
+                        182,
+                        72,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                }
+            ],
+            "text_id": 8
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 9,
+    "stations_diameter": 13.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 10,
+    "upper_case": false,
+    "width": 320,
+    "word_wrap": false
+}

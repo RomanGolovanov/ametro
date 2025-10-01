@@ -1,0 +1,906 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 580,
+    "images": [
+        "res/schemes/2.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "046434",
+            "line_width": 9,
+            "name": "M 1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            232,
+                            79
+                        ],
+                        [
+                            232,
+                            55
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            232,
+                            105
+                        ],
+                        [
+                            232,
+                            79
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            232,
+                            131
+                        ],
+                        [
+                            232,
+                            105
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            232,
+                            156
+                        ],
+                        [
+                            232,
+                            131
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            232,
+                            180
+                        ],
+                        [
+                            232,
+                            156
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            232,
+                            202
+                        ],
+                        [
+                            232,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            232,
+                            226
+                        ],
+                        [
+                            232,
+                            202
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            232,
+                            253
+                        ],
+                        [
+                            232,
+                            226
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        232,
+                        55
+                    ],
+                    "is_working": true,
+                    "name": "Vanlose",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        232,
+                        79
+                    ],
+                    "is_working": true,
+                    "name": "Flinthom",
+                    "rect": null,
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        232,
+                        105
+                    ],
+                    "is_working": true,
+                    "name": "Lindevang",
+                    "rect": null,
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        232,
+                        131
+                    ],
+                    "is_working": true,
+                    "name": "Solbjerg",
+                    "rect": null,
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        232,
+                        156
+                    ],
+                    "is_working": true,
+                    "name": "Fredericksberg",
+                    "rect": null,
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        232,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Forum",
+                    "rect": null,
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        232,
+                        202
+                    ],
+                    "is_working": true,
+                    "name": "Norreport",
+                    "rect": null,
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        232,
+                        226
+                    ],
+                    "is_working": true,
+                    "name": "Kongens Nytorv",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        232,
+                        253
+                    ],
+                    "is_working": true,
+                    "name": "Cristianshavn",
+                    "rect": null,
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Islands Brygge",
+                    "rect": null,
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Universitetet",
+                    "rect": null,
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sundby",
+                    "rect": null,
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Bella Center",
+                    "rect": null,
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Orestad",
+                    "rect": null,
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Vestamager",
+                    "rect": null,
+                    "text_id": 14,
+                    "uid": 14
+                }
+            ],
+            "text_id": 15
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "FCCC04",
+            "line_width": 9,
+            "name": "M 2",
+            "segments": [
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            251,
+                            79
+                        ],
+                        [
+                            251,
+                            55
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            251,
+                            105
+                        ],
+                        [
+                            251,
+                            79
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            251,
+                            131
+                        ],
+                        [
+                            251,
+                            105
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            251,
+                            156
+                        ],
+                        [
+                            251,
+                            131
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            251,
+                            180
+                        ],
+                        [
+                            251,
+                            156
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            251,
+                            202
+                        ],
+                        [
+                            251,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            251,
+                            226
+                        ],
+                        [
+                            251,
+                            202
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            251,
+                            253
+                        ],
+                        [
+                            251,
+                            226
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    23,
+                    24,
+                    [
+                        [
+                            251,
+                            281
+                        ],
+                        [
+                            251,
+                            253
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            251,
+                            305
+                        ],
+                        [
+                            251,
+                            281
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    25,
+                    26,
+                    [
+                        [
+                            251,
+                            330
+                        ],
+                        [
+                            251,
+                            305
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    26,
+                    27,
+                    [
+                        [
+                            251,
+                            355
+                        ],
+                        [
+                            251,
+                            330
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    27,
+                    28,
+                    [
+                        [
+                            251,
+                            380
+                        ],
+                        [
+                            251,
+                            355
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            251,
+                            405
+                        ],
+                        [
+                            251,
+                            380
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    29,
+                    30,
+                    [
+                        [
+                            251,
+                            430
+                        ],
+                        [
+                            251,
+                            405
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        251,
+                        55
+                    ],
+                    "is_working": true,
+                    "name": "Vanlose",
+                    "rect": [
+                        266,
+                        43,
+                        100,
+                        20
+                    ],
+                    "text_id": 0,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        251,
+                        79
+                    ],
+                    "is_working": true,
+                    "name": "Flinthom",
+                    "rect": [
+                        266,
+                        69,
+                        100,
+                        20
+                    ],
+                    "text_id": 1,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        251,
+                        105
+                    ],
+                    "is_working": true,
+                    "name": "Lindevang",
+                    "rect": [
+                        266,
+                        95,
+                        100,
+                        20
+                    ],
+                    "text_id": 2,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        251,
+                        131
+                    ],
+                    "is_working": true,
+                    "name": "Solbjerg",
+                    "rect": [
+                        266,
+                        120,
+                        100,
+                        20
+                    ],
+                    "text_id": 3,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        251,
+                        156
+                    ],
+                    "is_working": true,
+                    "name": "Fredericksberg",
+                    "rect": [
+                        266,
+                        146,
+                        100,
+                        20
+                    ],
+                    "text_id": 4,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        251,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Forum",
+                    "rect": [
+                        266,
+                        170,
+                        100,
+                        20
+                    ],
+                    "text_id": 5,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        251,
+                        202
+                    ],
+                    "is_working": true,
+                    "name": "Norreport",
+                    "rect": [
+                        266,
+                        192,
+                        100,
+                        20
+                    ],
+                    "text_id": 6,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        251,
+                        226
+                    ],
+                    "is_working": true,
+                    "name": "Kongens Nytorv",
+                    "rect": [
+                        266,
+                        216,
+                        100,
+                        20
+                    ],
+                    "text_id": 7,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        251,
+                        253
+                    ],
+                    "is_working": true,
+                    "name": "Cristianshavn",
+                    "rect": [
+                        266,
+                        243,
+                        100,
+                        20
+                    ],
+                    "text_id": 8,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        251,
+                        281
+                    ],
+                    "is_working": true,
+                    "name": "Amagerbro",
+                    "rect": [
+                        266,
+                        271,
+                        100,
+                        20
+                    ],
+                    "text_id": 16,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        251,
+                        305
+                    ],
+                    "is_working": true,
+                    "name": "Lergravsparken",
+                    "rect": [
+                        266,
+                        395,
+                        100,
+                        20
+                    ],
+                    "text_id": 17,
+                    "uid": 25
+                },
+                {
+                    "coord": [
+                        251,
+                        330
+                    ],
+                    "is_working": true,
+                    "name": "Oresund",
+                    "rect": [
+                        266,
+                        320,
+                        100,
+                        20
+                    ],
+                    "text_id": 18,
+                    "uid": 26
+                },
+                {
+                    "coord": [
+                        251,
+                        355
+                    ],
+                    "is_working": true,
+                    "name": "Amager Strand",
+                    "rect": [
+                        266,
+                        345,
+                        100,
+                        20
+                    ],
+                    "text_id": 19,
+                    "uid": 27
+                },
+                {
+                    "coord": [
+                        251,
+                        380
+                    ],
+                    "is_working": true,
+                    "name": "Femoren",
+                    "rect": [
+                        266,
+                        370,
+                        100,
+                        20
+                    ],
+                    "text_id": 20,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        251,
+                        405
+                    ],
+                    "is_working": true,
+                    "name": "Kastrup",
+                    "rect": [
+                        266,
+                        395,
+                        100,
+                        20
+                    ],
+                    "text_id": 21,
+                    "uid": 29
+                },
+                {
+                    "coord": [
+                        251,
+                        430
+                    ],
+                    "is_working": true,
+                    "name": "Lufthavnen",
+                    "rect": [
+                        266,
+                        410,
+                        100,
+                        20
+                    ],
+                    "text_id": 22,
+                    "uid": 30
+                }
+            ],
+            "text_id": 23
+        }
+    ],
+    "lines_width": 9,
+    "name": "2",
+    "name_text_id": 23,
+    "stations_diameter": 16.0,
+    "transfers": [
+        [
+            0,
+            15,
+            [
+                232,
+                55
+            ],
+            [
+                251,
+                55
+            ]
+        ],
+        [
+            8,
+            23,
+            [
+                232,
+                253
+            ],
+            [
+                251,
+                253
+            ]
+        ],
+        [
+            1,
+            16,
+            [
+                232,
+                79
+            ],
+            [
+                251,
+                79
+            ]
+        ],
+        [
+            2,
+            17,
+            [
+                232,
+                105
+            ],
+            [
+                251,
+                105
+            ]
+        ],
+        [
+            3,
+            18,
+            [
+                232,
+                131
+            ],
+            [
+                251,
+                131
+            ]
+        ],
+        [
+            4,
+            19,
+            [
+                232,
+                156
+            ],
+            [
+                251,
+                156
+            ]
+        ],
+        [
+            5,
+            20,
+            [
+                232,
+                180
+            ],
+            [
+                251,
+                180
+            ]
+        ],
+        [
+            6,
+            21,
+            [
+                232,
+                202
+            ],
+            [
+                251,
+                202
+            ]
+        ],
+        [
+            7,
+            22,
+            [
+                232,
+                226
+            ],
+            [
+                251,
+                226
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "Метро",
+    "type_text_id": 26,
+    "upper_case": true,
+    "width": 401,
+    "word_wrap": true
+}

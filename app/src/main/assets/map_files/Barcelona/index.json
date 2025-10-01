@@ -1,0 +1,181 @@
+{
+    "city_id": 3128760,
+    "comments_text_id": 244,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 243,
+    "file": "Barcelona.zip",
+    "latitude": 41.38879,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": 2.15899,
+    "map_id": "Barcelona.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 237,
+            "root": true,
+            "transports": [
+                "metro",
+                "tram",
+                "fgc",
+                "rodalies"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 238
+        },
+        {
+            "default_transports": [
+                "fgc"
+            ],
+            "file": "schemes/fgc.json",
+            "name": "fgc",
+            "name_text_id": 239,
+            "root": true,
+            "transports": [
+                "metro",
+                "tram",
+                "fgc",
+                "rodalies"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 238
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/l1.json",
+            "name": "l1",
+            "name_text_id": 30,
+            "root": false,
+            "transports": [
+                "metro",
+                "tram",
+                "fgc",
+                "rodalies"
+            ],
+            "type_name": "TMB Metro",
+            "type_text_id": 240
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/l11.json",
+            "name": "l11",
+            "name_text_id": 127,
+            "root": false,
+            "transports": [
+                "metro",
+                "tram",
+                "fgc",
+                "rodalies"
+            ],
+            "type_name": "TMB Metro",
+            "type_text_id": 240
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/l2.json",
+            "name": "l2",
+            "name_text_id": 47,
+            "root": false,
+            "transports": [
+                "metro",
+                "tram",
+                "fgc",
+                "rodalies"
+            ],
+            "type_name": "TMB Metro",
+            "type_text_id": 240
+        },
+        {
+            "default_transports": [
+                "rodalies"
+            ],
+            "file": "schemes/rodalies.json",
+            "name": "rodalies",
+            "name_text_id": 241,
+            "root": true,
+            "transports": [
+                "metro",
+                "tram",
+                "fgc",
+                "rodalies"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 238
+        },
+        {
+            "default_transports": [
+                "tram"
+            ],
+            "file": "schemes/tram.json",
+            "name": "tram",
+            "name_text_id": 242,
+            "root": true,
+            "transports": [
+                "metro",
+                "tram",
+                "fgc",
+                "rodalies"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 238
+        }
+    ],
+    "timestamp": 1754434800.0,
+    "transport_types": [
+        "Rodalies",
+        "Tramvia",
+        "FGC",
+        "TMB Metro"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "TMB Metro"
+        },
+        {
+            "file": "transports/fgc.json",
+            "name": "fgc",
+            "type": "FGC"
+        },
+        {
+            "file": "transports/rodalies.json",
+            "name": "rodalies",
+            "type": "Rodalies"
+        },
+        {
+            "file": "transports/tram.json",
+            "name": "tram",
+            "type": "Tramvia"
+        }
+    ]
+}

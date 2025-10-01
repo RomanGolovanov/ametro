@@ -1,0 +1,530 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 475,
+    "images": [
+        "res/schemes/red.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "00AAA6",
+            "line_width": 9,
+            "name": "Green line",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Telheiras",
+                    "rect": null,
+                    "text_id": 31,
+                    "uid": 30
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Campo Grande",
+                    "rect": null,
+                    "text_id": 23,
+                    "uid": 31
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Alvalade",
+                    "rect": null,
+                    "text_id": 32,
+                    "uid": 32
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Roma",
+                    "rect": null,
+                    "text_id": 33,
+                    "uid": 33
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Areeiro",
+                    "rect": null,
+                    "text_id": 34,
+                    "uid": 34
+                },
+                {
+                    "coord": [
+                        85,
+                        100
+                    ],
+                    "is_working": true,
+                    "name": "Alameda",
+                    "rect": [
+                        24,
+                        93,
+                        46,
+                        15
+                    ],
+                    "text_id": 35,
+                    "uid": 35
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Arroios",
+                    "rect": null,
+                    "text_id": 36,
+                    "uid": 36
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Anjos",
+                    "rect": null,
+                    "text_id": 37,
+                    "uid": 37
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Intendente",
+                    "rect": null,
+                    "text_id": 38,
+                    "uid": 38
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Martim Moniz",
+                    "rect": null,
+                    "text_id": 39,
+                    "uid": 39
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Rossio",
+                    "rect": null,
+                    "text_id": 40,
+                    "uid": 40
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Baixa-Chiado",
+                    "rect": null,
+                    "text_id": 14,
+                    "uid": 41
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Cais do Sodre",
+                    "rect": null,
+                    "text_id": 41,
+                    "uid": 42
+                }
+            ],
+            "text_id": 42
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "EE2B74",
+            "line_width": 9,
+            "name": "Red line",
+            "segments": [
+                [
+                    43,
+                    44,
+                    [
+                        [
+                            100,
+                            75
+                        ],
+                        [
+                            100,
+                            50
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    44,
+                    45,
+                    [
+                        [
+                            100,
+                            100
+                        ],
+                        [
+                            100,
+                            75
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    45,
+                    46,
+                    [
+                        [
+                            100,
+                            125
+                        ],
+                        [
+                            100,
+                            100
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    46,
+                    47,
+                    [
+                        [
+                            100,
+                            150
+                        ],
+                        [
+                            100,
+                            125
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    47,
+                    48,
+                    [
+                        [
+                            100,
+                            175
+                        ],
+                        [
+                            100,
+                            150
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    48,
+                    49,
+                    [
+                        [
+                            100,
+                            200
+                        ],
+                        [
+                            100,
+                            175
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    49,
+                    50,
+                    [
+                        [
+                            100,
+                            225
+                        ],
+                        [
+                            100,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    50,
+                    51,
+                    [
+                        [
+                            100,
+                            250
+                        ],
+                        [
+                            100,
+                            225
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    51,
+                    52,
+                    [
+                        [
+                            100,
+                            275
+                        ],
+                        [
+                            100,
+                            250
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    52,
+                    53,
+                    [
+                        [
+                            100,
+                            300
+                        ],
+                        [
+                            100,
+                            275
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    53,
+                    54,
+                    [
+                        [
+                            100,
+                            325
+                        ],
+                        [
+                            100,
+                            300
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        100,
+                        50
+                    ],
+                    "is_working": true,
+                    "name": "S.Sebastiao",
+                    "rect": [
+                        115,
+                        43,
+                        61,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 43
+                },
+                {
+                    "coord": [
+                        100,
+                        75
+                    ],
+                    "is_working": true,
+                    "name": "Saldanha",
+                    "rect": [
+                        115,
+                        68,
+                        48,
+                        15
+                    ],
+                    "text_id": 27,
+                    "uid": 44
+                },
+                {
+                    "coord": [
+                        100,
+                        100
+                    ],
+                    "is_working": true,
+                    "name": "Alameda",
+                    "rect": [
+                        115,
+                        92,
+                        46,
+                        15
+                    ],
+                    "text_id": 35,
+                    "uid": 45
+                },
+                {
+                    "coord": [
+                        100,
+                        125
+                    ],
+                    "is_working": true,
+                    "name": "Olaias",
+                    "rect": [
+                        115,
+                        118,
+                        34,
+                        15
+                    ],
+                    "text_id": 43,
+                    "uid": 46
+                },
+                {
+                    "coord": [
+                        100,
+                        150
+                    ],
+                    "is_working": true,
+                    "name": "Bela Vista",
+                    "rect": [
+                        115,
+                        143,
+                        53,
+                        15
+                    ],
+                    "text_id": 44,
+                    "uid": 47
+                },
+                {
+                    "coord": [
+                        100,
+                        175
+                    ],
+                    "is_working": true,
+                    "name": "Chelas",
+                    "rect": [
+                        115,
+                        168,
+                        37,
+                        15
+                    ],
+                    "text_id": 45,
+                    "uid": 48
+                },
+                {
+                    "coord": [
+                        100,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Olivais",
+                    "rect": [
+                        115,
+                        193,
+                        37,
+                        15
+                    ],
+                    "text_id": 46,
+                    "uid": 49
+                },
+                {
+                    "coord": [
+                        100,
+                        225
+                    ],
+                    "is_working": true,
+                    "name": "Cabo Ruivo",
+                    "rect": [
+                        115,
+                        218,
+                        60,
+                        15
+                    ],
+                    "text_id": 47,
+                    "uid": 50
+                },
+                {
+                    "coord": [
+                        100,
+                        250
+                    ],
+                    "is_working": true,
+                    "name": "Oriente",
+                    "rect": [
+                        115,
+                        243,
+                        38,
+                        15
+                    ],
+                    "text_id": 48,
+                    "uid": 51
+                },
+                {
+                    "coord": [
+                        100,
+                        275
+                    ],
+                    "is_working": true,
+                    "name": "Moscavide",
+                    "rect": [
+                        115,
+                        268,
+                        56,
+                        15
+                    ],
+                    "text_id": 49,
+                    "uid": 52
+                },
+                {
+                    "coord": [
+                        100,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Escarnacao",
+                    "rect": [
+                        115,
+                        293,
+                        61,
+                        15
+                    ],
+                    "text_id": 50,
+                    "uid": 53
+                },
+                {
+                    "coord": [
+                        100,
+                        325
+                    ],
+                    "is_working": true,
+                    "name": "Aeroporto",
+                    "rect": [
+                        115,
+                        318,
+                        51,
+                        15
+                    ],
+                    "text_id": 51,
+                    "uid": 54
+                }
+            ],
+            "text_id": 52
+        }
+    ],
+    "lines_width": 9,
+    "name": "red",
+    "name_text_id": 52,
+    "stations_diameter": 16.0,
+    "transfers": [
+        [
+            35,
+            45,
+            [
+                85,
+                100
+            ],
+            [
+                100,
+                100
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "Метро",
+    "type_text_id": 55,
+    "upper_case": true,
+    "width": 250,
+    "word_wrap": false
+}

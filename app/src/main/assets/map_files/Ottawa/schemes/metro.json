@@ -1,0 +1,177 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 300,
+    "images": [
+        "res/schemes/ottawa.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "ff0000",
+            "line_width": 4,
+            "name": "O-Train",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            35,
+                            90
+                        ],
+                        [
+                            35,
+                            70
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            35,
+                            110
+                        ],
+                        [
+                            35,
+                            90
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            35,
+                            130
+                        ],
+                        [
+                            35,
+                            110
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            35,
+                            150
+                        ],
+                        [
+                            35,
+                            130
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        35,
+                        70
+                    ],
+                    "is_working": true,
+                    "name": "Bayview",
+                    "rect": [
+                        46,
+                        65,
+                        45,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        35,
+                        90
+                    ],
+                    "is_working": true,
+                    "name": "Carling",
+                    "rect": [
+                        47,
+                        84,
+                        38,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        35,
+                        110
+                    ],
+                    "is_working": true,
+                    "name": "Carleton",
+                    "rect": [
+                        48,
+                        104,
+                        44,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        35,
+                        130
+                    ],
+                    "is_working": true,
+                    "name": "Confederation",
+                    "rect": [
+                        48,
+                        124,
+                        71,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        35,
+                        150
+                    ],
+                    "is_working": true,
+                    "name": "Greenboro",
+                    "rect": [
+                        48,
+                        144,
+                        54,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                }
+            ],
+            "text_id": 5
+        }
+    ],
+    "lines_width": 4,
+    "name": "metro",
+    "name_text_id": 6,
+    "stations_diameter": 13.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 7,
+    "upper_case": false,
+    "width": 185,
+    "word_wrap": false
+}

@@ -1,0 +1,6541 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 1375,
+    "images": [
+        "res/schemes/mexico.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "D35590",
+            "line_color": "D35590",
+            "line_width": 10,
+            "name": "1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            150,
+                            644
+                        ],
+                        [
+                            112,
+                            682
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            188,
+                            606
+                        ],
+                        [
+                            150,
+                            644
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            221,
+                            573
+                        ],
+                        [
+                            188,
+                            606
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            256,
+                            538
+                        ],
+                        [
+                            221,
+                            573
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            296,
+                            508
+                        ],
+                        [
+                            286.0,
+                            508.0
+                        ],
+                        [
+                            256,
+                            538
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            335,
+                            508
+                        ],
+                        [
+                            296,
+                            508
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            378,
+                            508
+                        ],
+                        [
+                            335,
+                            508
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            457,
+                            508
+                        ],
+                        [
+                            378,
+                            508
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            509,
+                            508
+                        ],
+                        [
+                            457,
+                            508
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            559,
+                            508
+                        ],
+                        [
+                            509,
+                            508
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            598,
+                            493
+                        ],
+                        [
+                            583.0,
+                            508.0
+                        ],
+                        [
+                            559,
+                            508
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            673,
+                            418
+                        ],
+                        [
+                            598,
+                            493
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            711,
+                            418
+                        ],
+                        [
+                            673,
+                            418
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            752,
+                            459
+                        ],
+                        [
+                            711,
+                            418
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            782,
+                            489
+                        ],
+                        [
+                            752,
+                            459
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            792,
+                            530
+                        ],
+                        [
+                            792.0,
+                            499.0
+                        ],
+                        [
+                            782,
+                            489
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            801,
+                            569
+                        ],
+                        [
+                            792.0,
+                            560.0
+                        ],
+                        [
+                            792,
+                            530
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            825,
+                            593
+                        ],
+                        [
+                            801,
+                            569
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            877,
+                            604
+                        ],
+                        [
+                            836.0,
+                            604.0
+                        ],
+                        [
+                            825,
+                            593
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        112,
+                        682
+                    ],
+                    "is_working": true,
+                    "name": "Observatorio",
+                    "rect": [
+                        58,
+                        692,
+                        66,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        150,
+                        644
+                    ],
+                    "is_working": true,
+                    "name": "Tacubaya",
+                    "rect": [
+                        87,
+                        634,
+                        50,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        188,
+                        606
+                    ],
+                    "is_working": true,
+                    "name": "Juanacatlan",
+                    "rect": [
+                        198,
+                        604,
+                        62,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        221,
+                        573
+                    ],
+                    "is_working": true,
+                    "name": "Chapultepec",
+                    "rect": [
+                        231,
+                        571,
+                        64,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        256,
+                        538
+                    ],
+                    "is_working": true,
+                    "name": "Sevilla",
+                    "rect": [
+                        266,
+                        536,
+                        36,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        296,
+                        508
+                    ],
+                    "is_working": true,
+                    "name": "Insurgentes",
+                    "rect": [
+                        219,
+                        492,
+                        60,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        335,
+                        508
+                    ],
+                    "is_working": true,
+                    "name": "Cuauhtemoc",
+                    "rect": [
+                        302,
+                        482,
+                        64,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        378,
+                        508
+                    ],
+                    "is_working": true,
+                    "name": "Balderas",
+                    "rect": [
+                        385,
+                        517,
+                        47,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        457,
+                        508
+                    ],
+                    "is_working": true,
+                    "name": "Salto del Agua",
+                    "rect": [
+                        384,
+                        481,
+                        74,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        509,
+                        508
+                    ],
+                    "is_working": true,
+                    "name": "Isabel la Catolica",
+                    "rect": [
+                        471,
+                        483,
+                        88,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        559,
+                        508
+                    ],
+                    "is_working": true,
+                    "name": "Pino Suarez",
+                    "rect": [
+                        569,
+                        514,
+                        61,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        598,
+                        493
+                    ],
+                    "is_working": true,
+                    "name": "Merced",
+                    "rect": [
+                        607,
+                        492,
+                        39,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        673,
+                        418
+                    ],
+                    "is_working": true,
+                    "name": "Candelaria",
+                    "rect": [
+                        603,
+                        408,
+                        56,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        711,
+                        418
+                    ],
+                    "is_working": true,
+                    "name": "San Lazaro",
+                    "rect": [
+                        712,
+                        391,
+                        57,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        752,
+                        459
+                    ],
+                    "is_working": true,
+                    "name": "Moctezuma",
+                    "rect": [
+                        687,
+                        465,
+                        58,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        782,
+                        489
+                    ],
+                    "is_working": true,
+                    "name": "Balbuena",
+                    "rect": [
+                        722,
+                        487,
+                        49,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        792,
+                        530
+                    ],
+                    "is_working": true,
+                    "name": "Boulevard Puerto Aereo",
+                    "rect": [
+                        660,
+                        517,
+                        121,
+                        15
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        801,
+                        569
+                    ],
+                    "is_working": true,
+                    "name": "Gomez Farias",
+                    "rect": [
+                        721,
+                        567,
+                        70,
+                        15
+                    ],
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        825,
+                        593
+                    ],
+                    "is_working": true,
+                    "name": "Zaragoza",
+                    "rect": [
+                        768,
+                        591,
+                        47,
+                        15
+                    ],
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        877,
+                        604
+                    ],
+                    "is_working": true,
+                    "name": "Pantitlan",
+                    "rect": [
+                        890,
+                        594,
+                        45,
+                        15
+                    ],
+                    "text_id": 19,
+                    "uid": 19
+                }
+            ],
+            "text_id": 20
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "017CC0",
+            "line_color": "017CC0",
+            "line_width": 10,
+            "name": "2",
+            "segments": [
+                [
+                    71,
+                    72,
+                    [
+                        [
+                            100,
+                            317
+                        ],
+                        [
+                            42,
+                            317
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    72,
+                    73,
+                    [
+                        [
+                            150,
+                            317
+                        ],
+                        [
+                            100,
+                            317
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    73,
+                    74,
+                    [
+                        [
+                            173,
+                            340
+                        ],
+                        [
+                            150,
+                            317
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    74,
+                    75,
+                    [
+                        [
+                            196,
+                            363
+                        ],
+                        [
+                            173,
+                            340
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    75,
+                    76,
+                    [
+                        [
+                            224,
+                            385
+                        ],
+                        [
+                            218.0,
+                            385.0
+                        ],
+                        [
+                            196,
+                            363
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    76,
+                    77,
+                    [
+                        [
+                            254,
+                            385
+                        ],
+                        [
+                            224,
+                            385
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    77,
+                    78,
+                    [
+                        [
+                            296,
+                            385
+                        ],
+                        [
+                            254,
+                            385
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    78,
+                    79,
+                    [
+                        [
+                            339,
+                            385
+                        ],
+                        [
+                            296,
+                            385
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    79,
+                    80,
+                    [
+                        [
+                            378,
+                            385
+                        ],
+                        [
+                            339,
+                            385
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    80,
+                    81,
+                    [
+                        [
+                            457,
+                            385
+                        ],
+                        [
+                            378,
+                            385
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    81,
+                    82,
+                    [
+                        [
+                            531,
+                            400
+                        ],
+                        [
+                            516.0,
+                            385.0
+                        ],
+                        [
+                            457,
+                            385
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    82,
+                    83,
+                    [
+                        [
+                            559,
+                            445
+                        ],
+                        [
+                            559.0,
+                            428.0
+                        ],
+                        [
+                            531,
+                            400
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    83,
+                    84,
+                    [
+                        [
+                            559,
+                            508
+                        ],
+                        [
+                            559,
+                            445
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    84,
+                    85,
+                    [
+                        [
+                            559,
+                            593
+                        ],
+                        [
+                            559,
+                            508
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    85,
+                    86,
+                    [
+                        [
+                            559,
+                            644
+                        ],
+                        [
+                            559,
+                            593
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    86,
+                    87,
+                    [
+                        [
+                            559,
+                            690
+                        ],
+                        [
+                            559,
+                            644
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    87,
+                    88,
+                    [
+                        [
+                            559,
+                            724
+                        ],
+                        [
+                            559,
+                            690
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    88,
+                    89,
+                    [
+                        [
+                            559,
+                            759
+                        ],
+                        [
+                            559,
+                            724
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    89,
+                    90,
+                    [
+                        [
+                            559,
+                            794
+                        ],
+                        [
+                            559,
+                            759
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    90,
+                    91,
+                    [
+                        [
+                            559,
+                            828
+                        ],
+                        [
+                            559,
+                            794
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    91,
+                    92,
+                    [
+                        [
+                            559,
+                            864
+                        ],
+                        [
+                            559,
+                            828
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    92,
+                    93,
+                    [
+                        [
+                            559,
+                            897
+                        ],
+                        [
+                            559,
+                            864
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    93,
+                    94,
+                    [
+                        [
+                            559,
+                            931
+                        ],
+                        [
+                            559,
+                            897
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        42,
+                        317
+                    ],
+                    "is_working": true,
+                    "name": "Cuatro Caminos",
+                    "rect": [
+                        20,
+                        326,
+                        82,
+                        15
+                    ],
+                    "text_id": 73,
+                    "uid": 71
+                },
+                {
+                    "coord": [
+                        100,
+                        317
+                    ],
+                    "is_working": true,
+                    "name": "Panteones",
+                    "rect": [
+                        77,
+                        293,
+                        54,
+                        15
+                    ],
+                    "text_id": 74,
+                    "uid": 72
+                },
+                {
+                    "coord": [
+                        150,
+                        317
+                    ],
+                    "is_working": true,
+                    "name": "Tacuba",
+                    "rect": [
+                        163,
+                        307,
+                        38,
+                        15
+                    ],
+                    "text_id": 75,
+                    "uid": 73
+                },
+                {
+                    "coord": [
+                        173,
+                        340
+                    ],
+                    "is_working": true,
+                    "name": "Cuitlahuac",
+                    "rect": [
+                        183,
+                        327,
+                        55,
+                        15
+                    ],
+                    "text_id": 76,
+                    "uid": 74
+                },
+                {
+                    "coord": [
+                        196,
+                        363
+                    ],
+                    "is_working": true,
+                    "name": "Popotla",
+                    "rect": [
+                        205,
+                        347,
+                        39,
+                        15
+                    ],
+                    "text_id": 77,
+                    "uid": 75
+                },
+                {
+                    "coord": [
+                        224,
+                        385
+                    ],
+                    "is_working": true,
+                    "name": "Colegio Militar",
+                    "rect": [
+                        171,
+                        394,
+                        74,
+                        15
+                    ],
+                    "text_id": 78,
+                    "uid": 76
+                },
+                {
+                    "coord": [
+                        254,
+                        385
+                    ],
+                    "is_working": true,
+                    "name": "Normal",
+                    "rect": [
+                        238,
+                        361,
+                        38,
+                        15
+                    ],
+                    "text_id": 79,
+                    "uid": 77
+                },
+                {
+                    "coord": [
+                        296,
+                        385
+                    ],
+                    "is_working": true,
+                    "name": "San Cosme",
+                    "rect": [
+                        267,
+                        394,
+                        59,
+                        15
+                    ],
+                    "text_id": 80,
+                    "uid": 78
+                },
+                {
+                    "coord": [
+                        339,
+                        385
+                    ],
+                    "is_working": true,
+                    "name": "Revolucion",
+                    "rect": [
+                        310,
+                        361,
+                        58,
+                        15
+                    ],
+                    "text_id": 81,
+                    "uid": 79
+                },
+                {
+                    "coord": [
+                        378,
+                        385
+                    ],
+                    "is_working": true,
+                    "name": "Hidalgo",
+                    "rect": [
+                        332,
+                        395,
+                        40,
+                        15
+                    ],
+                    "text_id": 82,
+                    "uid": 80
+                },
+                {
+                    "coord": [
+                        457,
+                        385
+                    ],
+                    "is_working": true,
+                    "name": "Bellas Artes",
+                    "rect": [
+                        467,
+                        364,
+                        64,
+                        15
+                    ],
+                    "text_id": 83,
+                    "uid": 81
+                },
+                {
+                    "coord": [
+                        531,
+                        400
+                    ],
+                    "is_working": true,
+                    "name": "Allende",
+                    "rect": [
+                        481,
+                        398,
+                        40,
+                        15
+                    ],
+                    "text_id": 84,
+                    "uid": 82
+                },
+                {
+                    "coord": [
+                        559,
+                        445
+                    ],
+                    "is_working": true,
+                    "name": "Zocalo",
+                    "rect": [
+                        569,
+                        438,
+                        35,
+                        15
+                    ],
+                    "text_id": 85,
+                    "uid": 83
+                },
+                {
+                    "coord": [
+                        559,
+                        508
+                    ],
+                    "is_working": true,
+                    "name": "Pino Suarez",
+                    "rect": [
+                        569,
+                        514,
+                        61,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 84
+                },
+                {
+                    "coord": [
+                        559,
+                        593
+                    ],
+                    "is_working": true,
+                    "name": "San Antonio Abad",
+                    "rect": [
+                        569,
+                        586,
+                        91,
+                        15
+                    ],
+                    "text_id": 86,
+                    "uid": 85
+                },
+                {
+                    "coord": [
+                        559,
+                        644
+                    ],
+                    "is_working": true,
+                    "name": "Chabacano",
+                    "rect": [
+                        568,
+                        622,
+                        58,
+                        15
+                    ],
+                    "text_id": 87,
+                    "uid": 86
+                },
+                {
+                    "coord": [
+                        559,
+                        690
+                    ],
+                    "is_working": true,
+                    "name": "Viaducto",
+                    "rect": [
+                        504,
+                        683,
+                        45,
+                        15
+                    ],
+                    "text_id": 88,
+                    "uid": 87
+                },
+                {
+                    "coord": [
+                        559,
+                        724
+                    ],
+                    "is_working": true,
+                    "name": "Xola",
+                    "rect": [
+                        525,
+                        717,
+                        24,
+                        15
+                    ],
+                    "text_id": 89,
+                    "uid": 88
+                },
+                {
+                    "coord": [
+                        559,
+                        759
+                    ],
+                    "is_working": true,
+                    "name": "Villa de Cortes",
+                    "rect": [
+                        569,
+                        752,
+                        75,
+                        15
+                    ],
+                    "text_id": 90,
+                    "uid": 89
+                },
+                {
+                    "coord": [
+                        559,
+                        794
+                    ],
+                    "is_working": true,
+                    "name": "Nativitas",
+                    "rect": [
+                        569,
+                        787,
+                        46,
+                        15
+                    ],
+                    "text_id": 91,
+                    "uid": 90
+                },
+                {
+                    "coord": [
+                        559,
+                        828
+                    ],
+                    "is_working": true,
+                    "name": "Portales",
+                    "rect": [
+                        569,
+                        821,
+                        43,
+                        15
+                    ],
+                    "text_id": 92,
+                    "uid": 91
+                },
+                {
+                    "coord": [
+                        559,
+                        864
+                    ],
+                    "is_working": true,
+                    "name": "Ermita",
+                    "rect": [
+                        571,
+                        851,
+                        34,
+                        15
+                    ],
+                    "text_id": 58,
+                    "uid": 92
+                },
+                {
+                    "coord": [
+                        559,
+                        897
+                    ],
+                    "is_working": true,
+                    "name": "General Anaya",
+                    "rect": [
+                        473,
+                        890,
+                        76,
+                        15
+                    ],
+                    "text_id": 93,
+                    "uid": 93
+                },
+                {
+                    "coord": [
+                        559,
+                        931
+                    ],
+                    "is_working": true,
+                    "name": "Tasquena",
+                    "rect": [
+                        499,
+                        924,
+                        50,
+                        15
+                    ],
+                    "text_id": 94,
+                    "uid": 94
+                }
+            ],
+            "text_id": 95
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "9E9A3A",
+            "line_color": "9E9A3A",
+            "line_width": 10,
+            "name": "3",
+            "segments": [
+                [
+                    95,
+                    96,
+                    [
+                        [
+                            481,
+                            181
+                        ],
+                        [
+                            481,
+                            103
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    96,
+                    97,
+                    [
+                        [
+                            469,
+                            212
+                        ],
+                        [
+                            481.0,
+                            200.0
+                        ],
+                        [
+                            481,
+                            181
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    97,
+                    98,
+                    [
+                        [
+                            439,
+                            242
+                        ],
+                        [
+                            469,
+                            212
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    98,
+                    99,
+                    [
+                        [
+                            412,
+                            269
+                        ],
+                        [
+                            439,
+                            242
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    99,
+                    100,
+                    [
+                        [
+                            378,
+                            349
+                        ],
+                        [
+                            378.0,
+                            303.0
+                        ],
+                        [
+                            412,
+                            269
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    100,
+                    101,
+                    [
+                        [
+                            378,
+                            385
+                        ],
+                        [
+                            378,
+                            349
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    101,
+                    102,
+                    [
+                        [
+                            378,
+                            445
+                        ],
+                        [
+                            378,
+                            385
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    102,
+                    103,
+                    [
+                        [
+                            378,
+                            508
+                        ],
+                        [
+                            378,
+                            445
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    103,
+                    104,
+                    [
+                        [
+                            378,
+                            569
+                        ],
+                        [
+                            378,
+                            508
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    104,
+                    105,
+                    [
+                        [
+                            378,
+                            596
+                        ],
+                        [
+                            378,
+                            569
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    105,
+                    106,
+                    [
+                        [
+                            378,
+                            644
+                        ],
+                        [
+                            378,
+                            596
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    106,
+                    107,
+                    [
+                        [
+                            378,
+                            679
+                        ],
+                        [
+                            378,
+                            644
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    107,
+                    108,
+                    [
+                        [
+                            378,
+                            712
+                        ],
+                        [
+                            378,
+                            679
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    108,
+                    109,
+                    [
+                        [
+                            378,
+                            748
+                        ],
+                        [
+                            378,
+                            712
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    109,
+                    110,
+                    [
+                        [
+                            378,
+                            782
+                        ],
+                        [
+                            378,
+                            748
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    110,
+                    111,
+                    [
+                        [
+                            378,
+                            819
+                        ],
+                        [
+                            378,
+                            782
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    111,
+                    112,
+                    [
+                        [
+                            378,
+                            852
+                        ],
+                        [
+                            378,
+                            819
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    112,
+                    113,
+                    [
+                        [
+                            378,
+                            887
+                        ],
+                        [
+                            378,
+                            852
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    113,
+                    114,
+                    [
+                        [
+                            378,
+                            921
+                        ],
+                        [
+                            378,
+                            887
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    114,
+                    115,
+                    [
+                        [
+                            378,
+                            955
+                        ],
+                        [
+                            378,
+                            921
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        481,
+                        103
+                    ],
+                    "is_working": true,
+                    "name": "Indios Verdes",
+                    "rect": [
+                        491,
+                        96,
+                        70,
+                        15
+                    ],
+                    "text_id": 96,
+                    "uid": 95
+                },
+                {
+                    "coord": [
+                        481,
+                        181
+                    ],
+                    "is_working": true,
+                    "name": "Deportivo 18 de Marzo",
+                    "rect": [
+                        488,
+                        156,
+                        113,
+                        15
+                    ],
+                    "text_id": 97,
+                    "uid": 96
+                },
+                {
+                    "coord": [
+                        469,
+                        212
+                    ],
+                    "is_working": true,
+                    "name": "Potrero",
+                    "rect": [
+                        479,
+                        210,
+                        38,
+                        15
+                    ],
+                    "text_id": 98,
+                    "uid": 97
+                },
+                {
+                    "coord": [
+                        439,
+                        242
+                    ],
+                    "is_working": true,
+                    "name": "La Raza",
+                    "rect": [
+                        453,
+                        235,
+                        42,
+                        15
+                    ],
+                    "text_id": 99,
+                    "uid": 98
+                },
+                {
+                    "coord": [
+                        412,
+                        269
+                    ],
+                    "is_working": true,
+                    "name": "Tlatelolco",
+                    "rect": [
+                        352,
+                        256,
+                        50,
+                        15
+                    ],
+                    "text_id": 100,
+                    "uid": 99
+                },
+                {
+                    "coord": [
+                        378,
+                        349
+                    ],
+                    "is_working": true,
+                    "name": "Guerrero",
+                    "rect": [
+                        384,
+                        324,
+                        46,
+                        15
+                    ],
+                    "text_id": 49,
+                    "uid": 100
+                },
+                {
+                    "coord": [
+                        378,
+                        385
+                    ],
+                    "is_working": true,
+                    "name": "Hidalgo",
+                    "rect": [
+                        332,
+                        395,
+                        40,
+                        15
+                    ],
+                    "text_id": 82,
+                    "uid": 101
+                },
+                {
+                    "coord": [
+                        378,
+                        445
+                    ],
+                    "is_working": true,
+                    "name": "Juarez",
+                    "rect": [
+                        388,
+                        438,
+                        35,
+                        15
+                    ],
+                    "text_id": 101,
+                    "uid": 102
+                },
+                {
+                    "coord": [
+                        378,
+                        508
+                    ],
+                    "is_working": true,
+                    "name": "Balderas",
+                    "rect": [
+                        385,
+                        517,
+                        47,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 103
+                },
+                {
+                    "coord": [
+                        378,
+                        569
+                    ],
+                    "is_working": true,
+                    "name": "Ninos Heroes",
+                    "rect": [
+                        388,
+                        562,
+                        70,
+                        15
+                    ],
+                    "text_id": 102,
+                    "uid": 104
+                },
+                {
+                    "coord": [
+                        378,
+                        596
+                    ],
+                    "is_working": true,
+                    "name": "Hospital General",
+                    "rect": [
+                        388,
+                        589,
+                        85,
+                        15
+                    ],
+                    "text_id": 103,
+                    "uid": 105
+                },
+                {
+                    "coord": [
+                        378,
+                        644
+                    ],
+                    "is_working": true,
+                    "name": "Centro Medico",
+                    "rect": [
+                        385,
+                        619,
+                        74,
+                        15
+                    ],
+                    "text_id": 104,
+                    "uid": 106
+                },
+                {
+                    "coord": [
+                        378,
+                        679
+                    ],
+                    "is_working": true,
+                    "name": "Etiopia",
+                    "rect": [
+                        332,
+                        672,
+                        36,
+                        15
+                    ],
+                    "text_id": 105,
+                    "uid": 107
+                },
+                {
+                    "coord": [
+                        378,
+                        712
+                    ],
+                    "is_working": true,
+                    "name": "Eugenia",
+                    "rect": [
+                        388,
+                        705,
+                        42,
+                        15
+                    ],
+                    "text_id": 106,
+                    "uid": 108
+                },
+                {
+                    "coord": [
+                        378,
+                        748
+                    ],
+                    "is_working": true,
+                    "name": "Division del Norte",
+                    "rect": [
+                        388,
+                        741,
+                        91,
+                        15
+                    ],
+                    "text_id": 107,
+                    "uid": 109
+                },
+                {
+                    "coord": [
+                        378,
+                        782
+                    ],
+                    "is_working": true,
+                    "name": "Zapata",
+                    "rect": [
+                        388,
+                        788,
+                        35,
+                        15
+                    ],
+                    "text_id": 55,
+                    "uid": 110
+                },
+                {
+                    "coord": [
+                        378,
+                        819
+                    ],
+                    "is_working": true,
+                    "name": "Coyoacan",
+                    "rect": [
+                        388,
+                        811,
+                        52,
+                        15
+                    ],
+                    "text_id": 108,
+                    "uid": 111
+                },
+                {
+                    "coord": [
+                        378,
+                        852
+                    ],
+                    "is_working": true,
+                    "name": "Viveros",
+                    "rect": [
+                        388,
+                        845,
+                        40,
+                        15
+                    ],
+                    "text_id": 109,
+                    "uid": 112
+                },
+                {
+                    "coord": [
+                        378,
+                        887
+                    ],
+                    "is_working": true,
+                    "name": "Miguel Angel de Quevedo",
+                    "rect": [
+                        239,
+                        880,
+                        129,
+                        15
+                    ],
+                    "text_id": 110,
+                    "uid": 113
+                },
+                {
+                    "coord": [
+                        378,
+                        921
+                    ],
+                    "is_working": true,
+                    "name": "Copilco",
+                    "rect": [
+                        388,
+                        914,
+                        40,
+                        15
+                    ],
+                    "text_id": 111,
+                    "uid": 114
+                },
+                {
+                    "coord": [
+                        378,
+                        955
+                    ],
+                    "is_working": true,
+                    "name": "Universidad",
+                    "rect": [
+                        388,
+                        948,
+                        62,
+                        15
+                    ],
+                    "text_id": 112,
+                    "uid": 115
+                }
+            ],
+            "text_id": 113
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "96CFB8",
+            "line_color": "96CFB8",
+            "line_width": 10,
+            "name": "4",
+            "segments": [
+                [
+                    116,
+                    117,
+                    [
+                        [
+                            673,
+                            210
+                        ],
+                        [
+                            673,
+                            181
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    117,
+                    118,
+                    [
+                        [
+                            673,
+                            239
+                        ],
+                        [
+                            673,
+                            210
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    118,
+                    119,
+                    [
+                        [
+                            673,
+                            289
+                        ],
+                        [
+                            673,
+                            239
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    119,
+                    120,
+                    [
+                        [
+                            673,
+                            342
+                        ],
+                        [
+                            673,
+                            289
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    120,
+                    121,
+                    [
+                        [
+                            673,
+                            380
+                        ],
+                        [
+                            673,
+                            342
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    121,
+                    122,
+                    [
+                        [
+                            673,
+                            418
+                        ],
+                        [
+                            673,
+                            380
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    122,
+                    123,
+                    [
+                        [
+                            673,
+                            550
+                        ],
+                        [
+                            673,
+                            418
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    123,
+                    124,
+                    [
+                        [
+                            673,
+                            644
+                        ],
+                        [
+                            673,
+                            550
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    124,
+                    125,
+                    [
+                        [
+                            673,
+                            699
+                        ],
+                        [
+                            673,
+                            644
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        673,
+                        181
+                    ],
+                    "is_working": true,
+                    "name": "Martin Carrera",
+                    "rect": [
+                        686,
+                        174,
+                        74,
+                        15
+                    ],
+                    "text_id": 114,
+                    "uid": 116
+                },
+                {
+                    "coord": [
+                        673,
+                        210
+                    ],
+                    "is_working": true,
+                    "name": "Talisman",
+                    "rect": [
+                        683,
+                        203,
+                        47,
+                        15
+                    ],
+                    "text_id": 115,
+                    "uid": 117
+                },
+                {
+                    "coord": [
+                        673,
+                        239
+                    ],
+                    "is_working": true,
+                    "name": "Bondojito",
+                    "rect": [
+                        683,
+                        232,
+                        49,
+                        15
+                    ],
+                    "text_id": 116,
+                    "uid": 118
+                },
+                {
+                    "coord": [
+                        673,
+                        289
+                    ],
+                    "is_working": true,
+                    "name": "Consulado",
+                    "rect": [
+                        681,
+                        265,
+                        55,
+                        15
+                    ],
+                    "text_id": 117,
+                    "uid": 119
+                },
+                {
+                    "coord": [
+                        673,
+                        342
+                    ],
+                    "is_working": true,
+                    "name": "Canal del Norte",
+                    "rect": [
+                        683,
+                        335,
+                        79,
+                        15
+                    ],
+                    "text_id": 118,
+                    "uid": 120
+                },
+                {
+                    "coord": [
+                        673,
+                        380
+                    ],
+                    "is_working": true,
+                    "name": "Morelos",
+                    "rect": [
+                        618,
+                        375,
+                        42,
+                        15
+                    ],
+                    "text_id": 45,
+                    "uid": 121
+                },
+                {
+                    "coord": [
+                        673,
+                        418
+                    ],
+                    "is_working": true,
+                    "name": "Candelaria",
+                    "rect": [
+                        605,
+                        409,
+                        56,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 122
+                },
+                {
+                    "coord": [
+                        673,
+                        550
+                    ],
+                    "is_working": true,
+                    "name": "Fray Servando",
+                    "rect": [
+                        590,
+                        545,
+                        74,
+                        15
+                    ],
+                    "text_id": 119,
+                    "uid": 123
+                },
+                {
+                    "coord": [
+                        673,
+                        644
+                    ],
+                    "is_working": true,
+                    "name": "Jamaica",
+                    "rect": [
+                        680,
+                        619,
+                        44,
+                        15
+                    ],
+                    "text_id": 120,
+                    "uid": 124
+                },
+                {
+                    "coord": [
+                        673,
+                        699
+                    ],
+                    "is_working": true,
+                    "name": "Santa Anita",
+                    "rect": [
+                        638,
+                        711,
+                        59,
+                        15
+                    ],
+                    "text_id": 121,
+                    "uid": 125
+                }
+            ],
+            "text_id": 122
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "FAC303",
+            "line_color": "FAC303",
+            "line_width": 10,
+            "name": "5",
+            "segments": [
+                [
+                    126,
+                    127,
+                    [
+                        [
+                            378,
+                            181
+                        ],
+                        [
+                            336.0,
+                            139.0
+                        ],
+                        [
+                            336,
+                            118
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    127,
+                    128,
+                    [
+                        [
+                            409,
+                            212
+                        ],
+                        [
+                            378,
+                            181
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    128,
+                    129,
+                    [
+                        [
+                            439,
+                            242
+                        ],
+                        [
+                            409,
+                            212
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    129,
+                    130,
+                    [
+                        [
+                            465,
+                            268
+                        ],
+                        [
+                            439,
+                            242
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    130,
+                    131,
+                    [
+                        [
+                            576,
+                            289
+                        ],
+                        [
+                            486.0,
+                            289.0
+                        ],
+                        [
+                            465,
+                            268
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    131,
+                    132,
+                    [
+                        [
+                            673,
+                            289
+                        ],
+                        [
+                            576,
+                            289
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    132,
+                    133,
+                    [
+                        [
+                            742,
+                            297
+                        ],
+                        [
+                            734.0,
+                            289.0
+                        ],
+                        [
+                            673,
+                            289
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    133,
+                    134,
+                    [
+                        [
+                            770,
+                            325
+                        ],
+                        [
+                            742,
+                            297
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    134,
+                    135,
+                    [
+                        [
+                            817,
+                            372
+                        ],
+                        [
+                            770,
+                            325
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    135,
+                    136,
+                    [
+                        [
+                            877,
+                            465
+                        ],
+                        [
+                            877.0,
+                            432.0
+                        ],
+                        [
+                            817,
+                            372
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    136,
+                    137,
+                    [
+                        [
+                            877,
+                            529
+                        ],
+                        [
+                            877,
+                            465
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    137,
+                    138,
+                    [
+                        [
+                            877,
+                            604
+                        ],
+                        [
+                            877,
+                            529
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        336,
+                        118
+                    ],
+                    "is_working": true,
+                    "name": "Politecnico",
+                    "rect": [
+                        346,
+                        111,
+                        57,
+                        15
+                    ],
+                    "text_id": 123,
+                    "uid": 126
+                },
+                {
+                    "coord": [
+                        378,
+                        181
+                    ],
+                    "is_working": true,
+                    "name": "Instituto del Petroleo",
+                    "rect": [
+                        371,
+                        153,
+                        103,
+                        15
+                    ],
+                    "text_id": 124,
+                    "uid": 127
+                },
+                {
+                    "coord": [
+                        409,
+                        212
+                    ],
+                    "is_working": true,
+                    "name": "Autobuses del Norte",
+                    "rect": [
+                        296,
+                        210,
+                        103,
+                        15
+                    ],
+                    "text_id": 125,
+                    "uid": 128
+                },
+                {
+                    "coord": [
+                        439,
+                        242
+                    ],
+                    "is_working": true,
+                    "name": "La Raza",
+                    "rect": [
+                        453,
+                        235,
+                        42,
+                        15
+                    ],
+                    "text_id": 99,
+                    "uid": 129
+                },
+                {
+                    "coord": [
+                        465,
+                        268
+                    ],
+                    "is_working": true,
+                    "name": "Misterios",
+                    "rect": [
+                        475,
+                        255,
+                        48,
+                        15
+                    ],
+                    "text_id": 126,
+                    "uid": 130
+                },
+                {
+                    "coord": [
+                        576,
+                        289
+                    ],
+                    "is_working": true,
+                    "name": "Valle Gomez",
+                    "rect": [
+                        547,
+                        265,
+                        64,
+                        15
+                    ],
+                    "text_id": 127,
+                    "uid": 131
+                },
+                {
+                    "coord": [
+                        673,
+                        289
+                    ],
+                    "is_working": true,
+                    "name": "Consulado",
+                    "rect": [
+                        681,
+                        265,
+                        55,
+                        15
+                    ],
+                    "text_id": 117,
+                    "uid": 132
+                },
+                {
+                    "coord": [
+                        742,
+                        297
+                    ],
+                    "is_working": true,
+                    "name": "Eduardo Molina",
+                    "rect": [
+                        752,
+                        284,
+                        79,
+                        15
+                    ],
+                    "text_id": 128,
+                    "uid": 133
+                },
+                {
+                    "coord": [
+                        770,
+                        325
+                    ],
+                    "is_working": true,
+                    "name": "Aragon",
+                    "rect": [
+                        780,
+                        312,
+                        38,
+                        15
+                    ],
+                    "text_id": 129,
+                    "uid": 134
+                },
+                {
+                    "coord": [
+                        817,
+                        372
+                    ],
+                    "is_working": true,
+                    "name": "Oceania",
+                    "rect": [
+                        832,
+                        365,
+                        43,
+                        15
+                    ],
+                    "text_id": 42,
+                    "uid": 135
+                },
+                {
+                    "coord": [
+                        877,
+                        465
+                    ],
+                    "is_working": true,
+                    "name": "Terminal Aerea",
+                    "rect": [
+                        887,
+                        458,
+                        78,
+                        15
+                    ],
+                    "text_id": 130,
+                    "uid": 136
+                },
+                {
+                    "coord": [
+                        877,
+                        529
+                    ],
+                    "is_working": true,
+                    "name": "Hangares",
+                    "rect": [
+                        887,
+                        522,
+                        50,
+                        15
+                    ],
+                    "text_id": 131,
+                    "uid": 137
+                },
+                {
+                    "coord": [
+                        877,
+                        604
+                    ],
+                    "is_working": true,
+                    "name": "Pantitlan",
+                    "rect": [
+                        890,
+                        594,
+                        45,
+                        15
+                    ],
+                    "text_id": 19,
+                    "uid": 138
+                }
+            ],
+            "text_id": 132
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "D9261A",
+            "line_color": "D9261A",
+            "line_width": 10,
+            "name": "6",
+            "segments": [
+                [
+                    139,
+                    140,
+                    [
+                        [
+                            172,
+                            162
+                        ],
+                        [
+                            150,
+                            140
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    140,
+                    141,
+                    [
+                        [
+                            210,
+                            181
+                        ],
+                        [
+                            191.0,
+                            181.0
+                        ],
+                        [
+                            172,
+                            162
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    141,
+                    142,
+                    [
+                        [
+                            248,
+                            181
+                        ],
+                        [
+                            210,
+                            181
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    142,
+                    143,
+                    [
+                        [
+                            290,
+                            181
+                        ],
+                        [
+                            248,
+                            181
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    143,
+                    144,
+                    [
+                        [
+                            328,
+                            181
+                        ],
+                        [
+                            290,
+                            181
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    144,
+                    145,
+                    [
+                        [
+                            378,
+                            181
+                        ],
+                        [
+                            328,
+                            181
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    145,
+                    146,
+                    [
+                        [
+                            446,
+                            181
+                        ],
+                        [
+                            378,
+                            181
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    146,
+                    147,
+                    [
+                        [
+                            481,
+                            181
+                        ],
+                        [
+                            446,
+                            181
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    147,
+                    148,
+                    [
+                        [
+                            575,
+                            181
+                        ],
+                        [
+                            481,
+                            181
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    148,
+                    149,
+                    [
+                        [
+                            673,
+                            181
+                        ],
+                        [
+                            575,
+                            181
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        150,
+                        140
+                    ],
+                    "is_working": true,
+                    "name": "El Rosario",
+                    "rect": [
+                        122,
+                        113,
+                        54,
+                        15
+                    ],
+                    "text_id": 133,
+                    "uid": 139
+                },
+                {
+                    "coord": [
+                        172,
+                        162
+                    ],
+                    "is_working": true,
+                    "name": "Tezozomoc",
+                    "rect": [
+                        178,
+                        140,
+                        57,
+                        15
+                    ],
+                    "text_id": 134,
+                    "uid": 140
+                },
+                {
+                    "coord": [
+                        210,
+                        181
+                    ],
+                    "is_working": true,
+                    "name": "Azcapotzalco",
+                    "rect": [
+                        179,
+                        190,
+                        68,
+                        15
+                    ],
+                    "text_id": 135,
+                    "uid": 141
+                },
+                {
+                    "coord": [
+                        248,
+                        181
+                    ],
+                    "is_working": true,
+                    "name": "Ferreria",
+                    "rect": [
+                        230,
+                        157,
+                        41,
+                        15
+                    ],
+                    "text_id": 136,
+                    "uid": 142
+                },
+                {
+                    "coord": [
+                        290,
+                        181
+                    ],
+                    "is_working": true,
+                    "name": "Norte 45",
+                    "rect": [
+                        268,
+                        190,
+                        44,
+                        15
+                    ],
+                    "text_id": 137,
+                    "uid": 143
+                },
+                {
+                    "coord": [
+                        328,
+                        181
+                    ],
+                    "is_working": true,
+                    "name": "Vallejo",
+                    "rect": [
+                        311,
+                        157,
+                        36,
+                        15
+                    ],
+                    "text_id": 138,
+                    "uid": 144
+                },
+                {
+                    "coord": [
+                        378,
+                        181
+                    ],
+                    "is_working": true,
+                    "name": "Instituto del Petroleo",
+                    "rect": null,
+                    "text_id": 124,
+                    "uid": 145
+                },
+                {
+                    "coord": [
+                        446,
+                        181
+                    ],
+                    "is_working": true,
+                    "name": "Lindavista",
+                    "rect": [
+                        414,
+                        189,
+                        53,
+                        15
+                    ],
+                    "text_id": 139,
+                    "uid": 146
+                },
+                {
+                    "coord": [
+                        481,
+                        181
+                    ],
+                    "is_working": true,
+                    "name": "Deportivo 18 de Marzo",
+                    "rect": null,
+                    "text_id": 97,
+                    "uid": 147
+                },
+                {
+                    "coord": [
+                        575,
+                        181
+                    ],
+                    "is_working": true,
+                    "name": "La Villa-Basilica",
+                    "rect": [
+                        542,
+                        190,
+                        83,
+                        15
+                    ],
+                    "text_id": 140,
+                    "uid": 148
+                },
+                {
+                    "coord": [
+                        673,
+                        181
+                    ],
+                    "is_working": true,
+                    "name": "Martin Carrera",
+                    "rect": [
+                        686,
+                        174,
+                        74,
+                        15
+                    ],
+                    "text_id": 114,
+                    "uid": 149
+                }
+            ],
+            "text_id": 141
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "EE953A",
+            "line_color": "EE953A",
+            "line_width": 10,
+            "name": "7",
+            "segments": [
+                [
+                    150,
+                    151,
+                    [
+                        [
+                            150,
+                            186
+                        ],
+                        [
+                            150,
+                            140
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    151,
+                    152,
+                    [
+                        [
+                            150,
+                            217
+                        ],
+                        [
+                            150,
+                            186
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    152,
+                    153,
+                    [
+                        [
+                            150,
+                            274
+                        ],
+                        [
+                            150,
+                            217
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    153,
+                    154,
+                    [
+                        [
+                            150,
+                            317
+                        ],
+                        [
+                            150,
+                            274
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    154,
+                    155,
+                    [
+                        [
+                            150,
+                            392
+                        ],
+                        [
+                            150,
+                            317
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    155,
+                    156,
+                    [
+                        [
+                            150,
+                            455
+                        ],
+                        [
+                            150,
+                            392
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    156,
+                    157,
+                    [
+                        [
+                            150,
+                            521
+                        ],
+                        [
+                            150,
+                            455
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    157,
+                    158,
+                    [
+                        [
+                            150,
+                            583
+                        ],
+                        [
+                            150,
+                            521
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    158,
+                    159,
+                    [
+                        [
+                            150,
+                            644
+                        ],
+                        [
+                            150,
+                            583
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    159,
+                    160,
+                    [
+                        [
+                            150,
+                            698
+                        ],
+                        [
+                            150,
+                            644
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    160,
+                    161,
+                    [
+                        [
+                            150,
+                            737
+                        ],
+                        [
+                            150,
+                            698
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    161,
+                    162,
+                    [
+                        [
+                            150,
+                            782
+                        ],
+                        [
+                            150,
+                            737
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    162,
+                    163,
+                    [
+                        [
+                            150,
+                            841
+                        ],
+                        [
+                            150,
+                            782
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        150,
+                        140
+                    ],
+                    "is_working": true,
+                    "name": "El Rosario",
+                    "rect": [
+                        122,
+                        113,
+                        54,
+                        15
+                    ],
+                    "text_id": 133,
+                    "uid": 150
+                },
+                {
+                    "coord": [
+                        150,
+                        186
+                    ],
+                    "is_working": true,
+                    "name": "Aquiles Serdan",
+                    "rect": [
+                        62,
+                        179,
+                        78,
+                        15
+                    ],
+                    "text_id": 142,
+                    "uid": 151
+                },
+                {
+                    "coord": [
+                        150,
+                        217
+                    ],
+                    "is_working": true,
+                    "name": "Camarones",
+                    "rect": [
+                        81,
+                        210,
+                        59,
+                        15
+                    ],
+                    "text_id": 143,
+                    "uid": 152
+                },
+                {
+                    "coord": [
+                        150,
+                        274
+                    ],
+                    "is_working": true,
+                    "name": "Refineria",
+                    "rect": [
+                        160,
+                        267,
+                        47,
+                        15
+                    ],
+                    "text_id": 144,
+                    "uid": 153
+                },
+                {
+                    "coord": [
+                        150,
+                        317
+                    ],
+                    "is_working": true,
+                    "name": "Tacuba",
+                    "rect": [
+                        163,
+                        307,
+                        38,
+                        15
+                    ],
+                    "text_id": 75,
+                    "uid": 154
+                },
+                {
+                    "coord": [
+                        150,
+                        392
+                    ],
+                    "is_working": true,
+                    "name": "San Joaquin",
+                    "rect": [
+                        77,
+                        385,
+                        63,
+                        15
+                    ],
+                    "text_id": 145,
+                    "uid": 155
+                },
+                {
+                    "coord": [
+                        150,
+                        455
+                    ],
+                    "is_working": true,
+                    "name": "Polanco",
+                    "rect": [
+                        98,
+                        448,
+                        42,
+                        15
+                    ],
+                    "text_id": 146,
+                    "uid": 156
+                },
+                {
+                    "coord": [
+                        150,
+                        521
+                    ],
+                    "is_working": true,
+                    "name": "Auditorio",
+                    "rect": [
+                        93,
+                        514,
+                        47,
+                        15
+                    ],
+                    "text_id": 147,
+                    "uid": 157
+                },
+                {
+                    "coord": [
+                        150,
+                        583
+                    ],
+                    "is_working": true,
+                    "name": "Constituyentes",
+                    "rect": [
+                        64,
+                        576,
+                        76,
+                        15
+                    ],
+                    "text_id": 148,
+                    "uid": 158
+                },
+                {
+                    "coord": [
+                        150,
+                        644
+                    ],
+                    "is_working": true,
+                    "name": "Tacubaya",
+                    "rect": [
+                        87,
+                        634,
+                        50,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 159
+                },
+                {
+                    "coord": [
+                        150,
+                        698
+                    ],
+                    "is_working": true,
+                    "name": "San Pedro de los Pinos",
+                    "rect": [
+                        160,
+                        691,
+                        117,
+                        15
+                    ],
+                    "text_id": 149,
+                    "uid": 160
+                },
+                {
+                    "coord": [
+                        150,
+                        737
+                    ],
+                    "is_working": true,
+                    "name": "San Antonio",
+                    "rect": [
+                        78,
+                        730,
+                        62,
+                        15
+                    ],
+                    "text_id": 150,
+                    "uid": 161
+                },
+                {
+                    "coord": [
+                        150,
+                        782
+                    ],
+                    "is_working": true,
+                    "name": "Mixcoac",
+                    "rect": [
+                        93,
+                        775,
+                        44,
+                        15
+                    ],
+                    "text_id": 52,
+                    "uid": 162
+                },
+                {
+                    "coord": [
+                        150,
+                        841
+                    ],
+                    "is_working": true,
+                    "name": "Barranca del Muerto",
+                    "rect": [
+                        160,
+                        834,
+                        103,
+                        15
+                    ],
+                    "text_id": 151,
+                    "uid": 163
+                }
+            ],
+            "text_id": 152
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "03923F",
+            "line_color": "03923F",
+            "line_width": 10,
+            "name": "8",
+            "segments": [
+                [
+                    164,
+                    165,
+                    [
+                        [
+                            457,
+                            385
+                        ],
+                        [
+                            457,
+                            349
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    165,
+                    166,
+                    [
+                        [
+                            457,
+                            444
+                        ],
+                        [
+                            457,
+                            385
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    166,
+                    167,
+                    [
+                        [
+                            457,
+                            508
+                        ],
+                        [
+                            457,
+                            444
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    167,
+                    168,
+                    [
+                        [
+                            469,
+                            554
+                        ],
+                        [
+                            457.0,
+                            542.0
+                        ],
+                        [
+                            457,
+                            508
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    168,
+                    169,
+                    [
+                        [
+                            501,
+                            586
+                        ],
+                        [
+                            469,
+                            554
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    169,
+                    170,
+                    [
+                        [
+                            559,
+                            644
+                        ],
+                        [
+                            501,
+                            586
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    170,
+                    171,
+                    [
+                        [
+                            597,
+                            682
+                        ],
+                        [
+                            559,
+                            644
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    171,
+                    172,
+                    [
+                        [
+                            673,
+                            699
+                        ],
+                        [
+                            614.0,
+                            699.0
+                        ],
+                        [
+                            597,
+                            682
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    172,
+                    173,
+                    [
+                        [
+                            726,
+                            736
+                        ],
+                        [
+                            726.0,
+                            723.0
+                        ],
+                        [
+                            702.0,
+                            699.0
+                        ],
+                        [
+                            673,
+                            699
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    173,
+                    174,
+                    [
+                        [
+                            726,
+                            770
+                        ],
+                        [
+                            726,
+                            736
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    174,
+                    175,
+                    [
+                        [
+                            726,
+                            804
+                        ],
+                        [
+                            726,
+                            770
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    175,
+                    176,
+                    [
+                        [
+                            726,
+                            839
+                        ],
+                        [
+                            726,
+                            804
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    176,
+                    177,
+                    [
+                        [
+                            726,
+                            873
+                        ],
+                        [
+                            726,
+                            839
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    177,
+                    178,
+                    [
+                        [
+                            740,
+                            905
+                        ],
+                        [
+                            726.0,
+                            891.0
+                        ],
+                        [
+                            726,
+                            873
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    178,
+                    179,
+                    [
+                        [
+                            776,
+                            918
+                        ],
+                        [
+                            753.0,
+                            918.0
+                        ],
+                        [
+                            740,
+                            905
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    179,
+                    180,
+                    [
+                        [
+                            807,
+                            918
+                        ],
+                        [
+                            776,
+                            918
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    180,
+                    181,
+                    [
+                        [
+                            837,
+                            918
+                        ],
+                        [
+                            807,
+                            918
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    181,
+                    182,
+                    [
+                        [
+                            870,
+                            918
+                        ],
+                        [
+                            837,
+                            918
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        457,
+                        349
+                    ],
+                    "is_working": true,
+                    "name": "Garibaldi",
+                    "rect": [
+                        450,
+                        322,
+                        47,
+                        15
+                    ],
+                    "text_id": 48,
+                    "uid": 164
+                },
+                {
+                    "coord": [
+                        457,
+                        385
+                    ],
+                    "is_working": true,
+                    "name": "Bellas Artes",
+                    "rect": null,
+                    "text_id": 83,
+                    "uid": 165
+                },
+                {
+                    "coord": [
+                        457,
+                        444
+                    ],
+                    "is_working": true,
+                    "name": "San Juan de Letran",
+                    "rect": [
+                        434,
+                        454,
+                        97,
+                        15
+                    ],
+                    "text_id": 153,
+                    "uid": 166
+                },
+                {
+                    "coord": [
+                        457,
+                        508
+                    ],
+                    "is_working": true,
+                    "name": "Salto del Agua",
+                    "rect": [
+                        384,
+                        481,
+                        74,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 167
+                },
+                {
+                    "coord": [
+                        469,
+                        554
+                    ],
+                    "is_working": true,
+                    "name": "Doctores",
+                    "rect": [
+                        479,
+                        541,
+                        47,
+                        15
+                    ],
+                    "text_id": 154,
+                    "uid": 168
+                },
+                {
+                    "coord": [
+                        501,
+                        586
+                    ],
+                    "is_working": true,
+                    "name": "Obrera",
+                    "rect": [
+                        511,
+                        573,
+                        36,
+                        15
+                    ],
+                    "text_id": 155,
+                    "uid": 169
+                },
+                {
+                    "coord": [
+                        559,
+                        644
+                    ],
+                    "is_working": true,
+                    "name": "Chabacano",
+                    "rect": [
+                        568,
+                        622,
+                        58,
+                        15
+                    ],
+                    "text_id": 87,
+                    "uid": 170
+                },
+                {
+                    "coord": [
+                        597,
+                        682
+                    ],
+                    "is_working": true,
+                    "name": "La Viga",
+                    "rect": [
+                        607,
+                        669,
+                        39,
+                        15
+                    ],
+                    "text_id": 156,
+                    "uid": 171
+                },
+                {
+                    "coord": [
+                        673,
+                        699
+                    ],
+                    "is_working": true,
+                    "name": "Santa Anita",
+                    "rect": [
+                        638,
+                        711,
+                        59,
+                        15
+                    ],
+                    "text_id": 121,
+                    "uid": 172
+                },
+                {
+                    "coord": [
+                        726,
+                        736
+                    ],
+                    "is_working": true,
+                    "name": "Coyuya",
+                    "rect": [
+                        736,
+                        729,
+                        40,
+                        15
+                    ],
+                    "text_id": 157,
+                    "uid": 173
+                },
+                {
+                    "coord": [
+                        726,
+                        770
+                    ],
+                    "is_working": true,
+                    "name": "Iztacalco",
+                    "rect": [
+                        736,
+                        763,
+                        46,
+                        15
+                    ],
+                    "text_id": 158,
+                    "uid": 174
+                },
+                {
+                    "coord": [
+                        726,
+                        804
+                    ],
+                    "is_working": true,
+                    "name": "Apatlaco",
+                    "rect": [
+                        736,
+                        797,
+                        46,
+                        15
+                    ],
+                    "text_id": 159,
+                    "uid": 175
+                },
+                {
+                    "coord": [
+                        726,
+                        839
+                    ],
+                    "is_working": true,
+                    "name": "Aculco",
+                    "rect": [
+                        736,
+                        832,
+                        37,
+                        15
+                    ],
+                    "text_id": 160,
+                    "uid": 176
+                },
+                {
+                    "coord": [
+                        726,
+                        873
+                    ],
+                    "is_working": true,
+                    "name": "Escuadron 201",
+                    "rect": [
+                        736,
+                        866,
+                        76,
+                        15
+                    ],
+                    "text_id": 161,
+                    "uid": 177
+                },
+                {
+                    "coord": [
+                        740,
+                        905
+                    ],
+                    "is_working": true,
+                    "name": "Atlalilco",
+                    "rect": [
+                        689,
+                        913,
+                        43,
+                        15
+                    ],
+                    "text_id": 60,
+                    "uid": 178
+                },
+                {
+                    "coord": [
+                        776,
+                        918
+                    ],
+                    "is_working": true,
+                    "name": "Iztapalapa",
+                    "rect": [
+                        769,
+                        928,
+                        15,
+                        52
+                    ],
+                    "text_id": 162,
+                    "uid": 179
+                },
+                {
+                    "coord": [
+                        807,
+                        918
+                    ],
+                    "is_working": true,
+                    "name": "Cerro de la Estrella",
+                    "rect": [
+                        800,
+                        928,
+                        15,
+                        98
+                    ],
+                    "text_id": 163,
+                    "uid": 180
+                },
+                {
+                    "coord": [
+                        837,
+                        918
+                    ],
+                    "is_working": true,
+                    "name": "UAM-I",
+                    "rect": [
+                        830,
+                        928,
+                        15,
+                        33
+                    ],
+                    "text_id": 164,
+                    "uid": 181
+                },
+                {
+                    "coord": [
+                        870,
+                        918
+                    ],
+                    "is_working": true,
+                    "name": "Constitucion de 1917",
+                    "rect": [
+                        863,
+                        928,
+                        15,
+                        106
+                    ],
+                    "text_id": 165,
+                    "uid": 182
+                }
+            ],
+            "text_id": 166
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "8D5544",
+            "line_color": "8D5544",
+            "line_width": 10,
+            "name": "9",
+            "segments": [
+                [
+                    183,
+                    184,
+                    [
+                        [
+                            232,
+                            644
+                        ],
+                        [
+                            150,
+                            644
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    184,
+                    185,
+                    [
+                        [
+                            322,
+                            644
+                        ],
+                        [
+                            232,
+                            644
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    185,
+                    186,
+                    [
+                        [
+                            378,
+                            644
+                        ],
+                        [
+                            322,
+                            644
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    186,
+                    187,
+                    [
+                        [
+                            483,
+                            644
+                        ],
+                        [
+                            378,
+                            644
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    187,
+                    188,
+                    [
+                        [
+                            559,
+                            644
+                        ],
+                        [
+                            483,
+                            644
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    188,
+                    189,
+                    [
+                        [
+                            673,
+                            644
+                        ],
+                        [
+                            559,
+                            644
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    189,
+                    190,
+                    [
+                        [
+                            733,
+                            644
+                        ],
+                        [
+                            673,
+                            644
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    190,
+                    191,
+                    [
+                        [
+                            779,
+                            644
+                        ],
+                        [
+                            733,
+                            644
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    191,
+                    192,
+                    [
+                        [
+                            823,
+                            644
+                        ],
+                        [
+                            779,
+                            644
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    192,
+                    193,
+                    [
+                        [
+                            854,
+                            627
+                        ],
+                        [
+                            837.0,
+                            644.0
+                        ],
+                        [
+                            823,
+                            644
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    193,
+                    194,
+                    [
+                        [
+                            877,
+                            604
+                        ],
+                        [
+                            854,
+                            627
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        150,
+                        644
+                    ],
+                    "is_working": true,
+                    "name": "Tacubaya",
+                    "rect": [
+                        87,
+                        634,
+                        50,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 183
+                },
+                {
+                    "coord": [
+                        232,
+                        644
+                    ],
+                    "is_working": true,
+                    "name": "Patriotismo",
+                    "rect": [
+                        203,
+                        653,
+                        58,
+                        15
+                    ],
+                    "text_id": 167,
+                    "uid": 184
+                },
+                {
+                    "coord": [
+                        322,
+                        644
+                    ],
+                    "is_working": true,
+                    "name": "Chilpancingo",
+                    "rect": [
+                        290,
+                        620,
+                        67,
+                        15
+                    ],
+                    "text_id": 168,
+                    "uid": 185
+                },
+                {
+                    "coord": [
+                        378,
+                        644
+                    ],
+                    "is_working": true,
+                    "name": "Centro Medico",
+                    "rect": [
+                        385,
+                        619,
+                        74,
+                        15
+                    ],
+                    "text_id": 104,
+                    "uid": 186
+                },
+                {
+                    "coord": [
+                        483,
+                        644
+                    ],
+                    "is_working": true,
+                    "name": "Lazaro Cardenas",
+                    "rect": [
+                        444,
+                        653,
+                        86,
+                        15
+                    ],
+                    "text_id": 169,
+                    "uid": 187
+                },
+                {
+                    "coord": [
+                        559,
+                        644
+                    ],
+                    "is_working": true,
+                    "name": "Chabacano",
+                    "rect": [
+                        568,
+                        622,
+                        58,
+                        15
+                    ],
+                    "text_id": 87,
+                    "uid": 188
+                },
+                {
+                    "coord": [
+                        673,
+                        644
+                    ],
+                    "is_working": true,
+                    "name": "Jamaica",
+                    "rect": null,
+                    "text_id": 120,
+                    "uid": 189
+                },
+                {
+                    "coord": [
+                        733,
+                        644
+                    ],
+                    "is_working": true,
+                    "name": "Mixiuhca",
+                    "rect": [
+                        709,
+                        653,
+                        47,
+                        15
+                    ],
+                    "text_id": 170,
+                    "uid": 190
+                },
+                {
+                    "coord": [
+                        779,
+                        644
+                    ],
+                    "is_working": true,
+                    "name": "Velodromo",
+                    "rect": [
+                        749,
+                        620,
+                        55,
+                        15
+                    ],
+                    "text_id": 171,
+                    "uid": 191
+                },
+                {
+                    "coord": [
+                        823,
+                        644
+                    ],
+                    "is_working": true,
+                    "name": "Ciudad Deportiva",
+                    "rect": [
+                        811,
+                        653,
+                        88,
+                        15
+                    ],
+                    "text_id": 172,
+                    "uid": 192
+                },
+                {
+                    "coord": [
+                        854,
+                        627
+                    ],
+                    "is_working": true,
+                    "name": "Puebla",
+                    "rect": [
+                        809,
+                        612,
+                        36,
+                        15
+                    ],
+                    "text_id": 173,
+                    "uid": 193
+                },
+                {
+                    "coord": [
+                        877,
+                        604
+                    ],
+                    "is_working": true,
+                    "name": "Pantitlan",
+                    "rect": [
+                        890,
+                        594,
+                        45,
+                        15
+                    ],
+                    "text_id": 19,
+                    "uid": 194
+                }
+            ],
+            "text_id": 174
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "8F1E74",
+            "line_color": "8F1E74",
+            "line_width": 10,
+            "name": "A",
+            "segments": [
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            911,
+                            646
+                        ],
+                        [
+                            911.0,
+                            638.0
+                        ],
+                        [
+                            877,
+                            604
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            911,
+                            680
+                        ],
+                        [
+                            911,
+                            646
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            911,
+                            712
+                        ],
+                        [
+                            911,
+                            680
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    23,
+                    24,
+                    [
+                        [
+                            911,
+                            749
+                        ],
+                        [
+                            911,
+                            712
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            911,
+                            782
+                        ],
+                        [
+                            911,
+                            749
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    25,
+                    26,
+                    [
+                        [
+                            911,
+                            818
+                        ],
+                        [
+                            911,
+                            782
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    26,
+                    27,
+                    [
+                        [
+                            911,
+                            852
+                        ],
+                        [
+                            911,
+                            818
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    27,
+                    28,
+                    [
+                        [
+                            928,
+                            889
+                        ],
+                        [
+                            911.0,
+                            872.0
+                        ],
+                        [
+                            911,
+                            852
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            953,
+                            914
+                        ],
+                        [
+                            928,
+                            889
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        877,
+                        604
+                    ],
+                    "is_working": true,
+                    "name": "Pantitlan",
+                    "rect": [
+                        890,
+                        594,
+                        45,
+                        15
+                    ],
+                    "text_id": 19,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        911,
+                        646
+                    ],
+                    "is_working": true,
+                    "name": "Agricola Oriental",
+                    "rect": [
+                        921,
+                        639,
+                        86,
+                        15
+                    ],
+                    "text_id": 21,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        911,
+                        680
+                    ],
+                    "is_working": true,
+                    "name": "Canal de San Juan",
+                    "rect": [
+                        921,
+                        673,
+                        95,
+                        15
+                    ],
+                    "text_id": 22,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        911,
+                        712
+                    ],
+                    "is_working": true,
+                    "name": "Tepalcates",
+                    "rect": [
+                        921,
+                        705,
+                        56,
+                        15
+                    ],
+                    "text_id": 23,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        911,
+                        749
+                    ],
+                    "is_working": true,
+                    "name": "Guelatao",
+                    "rect": [
+                        921,
+                        742,
+                        46,
+                        15
+                    ],
+                    "text_id": 24,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        911,
+                        782
+                    ],
+                    "is_working": true,
+                    "name": "Penon Viejo",
+                    "rect": [
+                        921,
+                        775,
+                        61,
+                        15
+                    ],
+                    "text_id": 25,
+                    "uid": 25
+                },
+                {
+                    "coord": [
+                        911,
+                        818
+                    ],
+                    "is_working": true,
+                    "name": "Acatitla",
+                    "rect": [
+                        921,
+                        811,
+                        40,
+                        15
+                    ],
+                    "text_id": 26,
+                    "uid": 26
+                },
+                {
+                    "coord": [
+                        911,
+                        852
+                    ],
+                    "is_working": true,
+                    "name": "Santa Marta",
+                    "rect": [
+                        921,
+                        845,
+                        61,
+                        15
+                    ],
+                    "text_id": 27,
+                    "uid": 27
+                },
+                {
+                    "coord": [
+                        928,
+                        889
+                    ],
+                    "is_working": true,
+                    "name": "Los Reyes",
+                    "rect": [
+                        938,
+                        876,
+                        55,
+                        15
+                    ],
+                    "text_id": 28,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        953,
+                        914
+                    ],
+                    "is_working": true,
+                    "name": "La Paz",
+                    "rect": [
+                        963,
+                        907,
+                        35,
+                        15
+                    ],
+                    "text_id": 29,
+                    "uid": 29
+                }
+            ],
+            "text_id": 30
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "A9A9A9",
+            "line_color": "A9A9A9",
+            "line_width": 10,
+            "name": "B",
+            "segments": [
+                [
+                    30,
+                    31,
+                    [
+                        [
+                            860,
+                            63
+                        ],
+                        [
+                            860,
+                            32
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    31,
+                    32,
+                    [
+                        [
+                            860,
+                            96
+                        ],
+                        [
+                            860,
+                            63
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    32,
+                    33,
+                    [
+                        [
+                            860,
+                            128
+                        ],
+                        [
+                            860,
+                            96
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    33,
+                    34,
+                    [
+                        [
+                            860,
+                            159
+                        ],
+                        [
+                            860,
+                            128
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    34,
+                    35,
+                    [
+                        [
+                            860,
+                            190
+                        ],
+                        [
+                            860,
+                            159
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    35,
+                    36,
+                    [
+                        [
+                            860,
+                            221
+                        ],
+                        [
+                            860,
+                            190
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    36,
+                    37,
+                    [
+                        [
+                            860,
+                            251
+                        ],
+                        [
+                            860,
+                            221
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    37,
+                    38,
+                    [
+                        [
+                            860,
+                            284
+                        ],
+                        [
+                            860,
+                            251
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    38,
+                    39,
+                    [
+                        [
+                            860,
+                            316
+                        ],
+                        [
+                            860,
+                            284
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    39,
+                    40,
+                    [
+                        [
+                            847,
+                            342
+                        ],
+                        [
+                            860.0,
+                            329.0
+                        ],
+                        [
+                            860,
+                            316
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    40,
+                    41,
+                    [
+                        [
+                            817,
+                            372
+                        ],
+                        [
+                            847,
+                            342
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    41,
+                    42,
+                    [
+                        [
+                            792,
+                            397
+                        ],
+                        [
+                            817,
+                            372
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    42,
+                    43,
+                    [
+                        [
+                            749,
+                            418
+                        ],
+                        [
+                            771.0,
+                            418.0
+                        ],
+                        [
+                            792,
+                            397
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    43,
+                    44,
+                    [
+                        [
+                            711,
+                            418
+                        ],
+                        [
+                            749,
+                            418
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    44,
+                    45,
+                    [
+                        [
+                            673,
+                            380
+                        ],
+                        [
+                            711,
+                            418
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    45,
+                    46,
+                    [
+                        [
+                            612,
+                            349
+                        ],
+                        [
+                            642.0,
+                            349.0
+                        ],
+                        [
+                            673,
+                            380
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    46,
+                    47,
+                    [
+                        [
+                            552,
+                            349
+                        ],
+                        [
+                            612,
+                            349
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    47,
+                    48,
+                    [
+                        [
+                            457,
+                            349
+                        ],
+                        [
+                            552,
+                            349
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    48,
+                    49,
+                    [
+                        [
+                            378,
+                            349
+                        ],
+                        [
+                            457,
+                            349
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    49,
+                    50,
+                    [
+                        [
+                            330,
+                            349
+                        ],
+                        [
+                            378,
+                            349
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        860,
+                        32
+                    ],
+                    "is_working": true,
+                    "name": "Ciudad Azteca",
+                    "rect": [
+                        870,
+                        25,
+                        74,
+                        15
+                    ],
+                    "text_id": 31,
+                    "uid": 30
+                },
+                {
+                    "coord": [
+                        860,
+                        63
+                    ],
+                    "is_working": true,
+                    "name": "Plaza Aragon",
+                    "rect": [
+                        870,
+                        56,
+                        68,
+                        15
+                    ],
+                    "text_id": 32,
+                    "uid": 31
+                },
+                {
+                    "coord": [
+                        860,
+                        96
+                    ],
+                    "is_working": true,
+                    "name": "Olimpica",
+                    "rect": [
+                        870,
+                        89,
+                        46,
+                        15
+                    ],
+                    "text_id": 33,
+                    "uid": 32
+                },
+                {
+                    "coord": [
+                        860,
+                        128
+                    ],
+                    "is_working": true,
+                    "name": "Ecatepec",
+                    "rect": [
+                        870,
+                        121,
+                        48,
+                        15
+                    ],
+                    "text_id": 34,
+                    "uid": 33
+                },
+                {
+                    "coord": [
+                        860,
+                        159
+                    ],
+                    "is_working": true,
+                    "name": "Muzquiz",
+                    "rect": [
+                        870,
+                        152,
+                        42,
+                        15
+                    ],
+                    "text_id": 35,
+                    "uid": 34
+                },
+                {
+                    "coord": [
+                        860,
+                        190
+                    ],
+                    "is_working": true,
+                    "name": "Rio de los Remedios",
+                    "rect": [
+                        870,
+                        183,
+                        105,
+                        15
+                    ],
+                    "text_id": 36,
+                    "uid": 35
+                },
+                {
+                    "coord": [
+                        860,
+                        221
+                    ],
+                    "is_working": true,
+                    "name": "Impulsora",
+                    "rect": [
+                        870,
+                        214,
+                        51,
+                        15
+                    ],
+                    "text_id": 37,
+                    "uid": 36
+                },
+                {
+                    "coord": [
+                        860,
+                        251
+                    ],
+                    "is_working": true,
+                    "name": "Nezahualcoyotl",
+                    "rect": [
+                        870,
+                        244,
+                        78,
+                        15
+                    ],
+                    "text_id": 38,
+                    "uid": 37
+                },
+                {
+                    "coord": [
+                        860,
+                        284
+                    ],
+                    "is_working": true,
+                    "name": "Villa de Aragon",
+                    "rect": [
+                        870,
+                        277,
+                        78,
+                        15
+                    ],
+                    "text_id": 39,
+                    "uid": 38
+                },
+                {
+                    "coord": [
+                        860,
+                        316
+                    ],
+                    "is_working": true,
+                    "name": "Bosque de Aragon",
+                    "rect": [
+                        870,
+                        309,
+                        94,
+                        15
+                    ],
+                    "text_id": 40,
+                    "uid": 39
+                },
+                {
+                    "coord": [
+                        847,
+                        342
+                    ],
+                    "is_working": true,
+                    "name": "Deportivo Oceania",
+                    "rect": [
+                        857,
+                        340,
+                        94,
+                        15
+                    ],
+                    "text_id": 41,
+                    "uid": 40
+                },
+                {
+                    "coord": [
+                        817,
+                        372
+                    ],
+                    "is_working": true,
+                    "name": "Oceania",
+                    "rect": [
+                        832,
+                        365,
+                        43,
+                        15
+                    ],
+                    "text_id": 42,
+                    "uid": 41
+                },
+                {
+                    "coord": [
+                        792,
+                        397
+                    ],
+                    "is_working": true,
+                    "name": "Romero Rubio",
+                    "rect": [
+                        802,
+                        395,
+                        73,
+                        15
+                    ],
+                    "text_id": 43,
+                    "uid": 42
+                },
+                {
+                    "coord": [
+                        749,
+                        418
+                    ],
+                    "is_working": true,
+                    "name": "Ricardo Flores Magon",
+                    "rect": [
+                        748,
+                        427,
+                        111,
+                        15
+                    ],
+                    "text_id": 44,
+                    "uid": 43
+                },
+                {
+                    "coord": [
+                        711,
+                        418
+                    ],
+                    "is_working": true,
+                    "name": "San Lazaro",
+                    "rect": null,
+                    "text_id": 13,
+                    "uid": 44
+                },
+                {
+                    "coord": [
+                        673,
+                        380
+                    ],
+                    "is_working": true,
+                    "name": "Morelos",
+                    "rect": [
+                        618,
+                        375,
+                        42,
+                        15
+                    ],
+                    "text_id": 45,
+                    "uid": 45
+                },
+                {
+                    "coord": [
+                        612,
+                        349
+                    ],
+                    "is_working": true,
+                    "name": "Tepito",
+                    "rect": [
+                        598,
+                        358,
+                        32,
+                        15
+                    ],
+                    "text_id": 46,
+                    "uid": 46
+                },
+                {
+                    "coord": [
+                        552,
+                        349
+                    ],
+                    "is_working": true,
+                    "name": "Lagunilla",
+                    "rect": [
+                        529,
+                        325,
+                        47,
+                        15
+                    ],
+                    "text_id": 47,
+                    "uid": 47
+                },
+                {
+                    "coord": [
+                        457,
+                        349
+                    ],
+                    "is_working": true,
+                    "name": "Garibaldi",
+                    "rect": [
+                        450,
+                        322,
+                        47,
+                        15
+                    ],
+                    "text_id": 48,
+                    "uid": 48
+                },
+                {
+                    "coord": [
+                        378,
+                        349
+                    ],
+                    "is_working": true,
+                    "name": "Guerrero",
+                    "rect": null,
+                    "text_id": 49,
+                    "uid": 49
+                },
+                {
+                    "coord": [
+                        330,
+                        349
+                    ],
+                    "is_working": true,
+                    "name": "Buenavista",
+                    "rect": [
+                        298,
+                        325,
+                        58,
+                        15
+                    ],
+                    "text_id": 50,
+                    "uid": 50
+                }
+            ],
+            "text_id": 51
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "B89D4E",
+            "line_color": "B89D4E",
+            "line_width": 10,
+            "name": "12",
+            "segments": [
+                [
+                    51,
+                    52,
+                    [
+                        [
+                            215,
+                            782
+                        ],
+                        [
+                            150,
+                            782
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    52,
+                    53,
+                    [
+                        [
+                            291,
+                            782
+                        ],
+                        [
+                            215,
+                            782
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    53,
+                    54,
+                    [
+                        [
+                            378,
+                            782
+                        ],
+                        [
+                            291,
+                            782
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    54,
+                    55,
+                    [
+                        [
+                            436,
+                            782
+                        ],
+                        [
+                            378,
+                            782
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    55,
+                    56,
+                    [
+                        [
+                            518,
+                            864
+                        ],
+                        [
+                            436,
+                            782
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    56,
+                    57,
+                    [
+                        [
+                            559,
+                            864
+                        ],
+                        [
+                            518,
+                            864
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    57,
+                    58,
+                    [
+                        [
+                            666,
+                            905
+                        ],
+                        [
+                            600.0,
+                            905.0
+                        ],
+                        [
+                            559,
+                            864
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    58,
+                    59,
+                    [
+                        [
+                            740,
+                            905
+                        ],
+                        [
+                            666,
+                            905
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    59,
+                    60,
+                    [
+                        [
+                            740,
+                            942
+                        ],
+                        [
+                            740,
+                            905
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    60,
+                    61,
+                    [
+                        [
+                            740,
+                            978
+                        ],
+                        [
+                            740,
+                            942
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    61,
+                    62,
+                    [
+                        [
+                            740,
+                            1011
+                        ],
+                        [
+                            740,
+                            978
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    62,
+                    63,
+                    [
+                        [
+                            740,
+                            1048
+                        ],
+                        [
+                            740,
+                            1011
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    63,
+                    64,
+                    [
+                        [
+                            757,
+                            1083
+                        ],
+                        [
+                            740.0,
+                            1066.0
+                        ],
+                        [
+                            740,
+                            1048
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    64,
+                    65,
+                    [
+                        [
+                            782,
+                            1108
+                        ],
+                        [
+                            757,
+                            1083
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    65,
+                    66,
+                    [
+                        [
+                            804,
+                            1130
+                        ],
+                        [
+                            782,
+                            1108
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    66,
+                    67,
+                    [
+                        [
+                            827,
+                            1153
+                        ],
+                        [
+                            804,
+                            1130
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    67,
+                    68,
+                    [
+                        [
+                            852,
+                            1178
+                        ],
+                        [
+                            827,
+                            1153
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    68,
+                    69,
+                    [
+                        [
+                            876,
+                            1202
+                        ],
+                        [
+                            852,
+                            1178
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    69,
+                    70,
+                    [
+                        [
+                            899,
+                            1225
+                        ],
+                        [
+                            876,
+                            1202
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        150,
+                        782
+                    ],
+                    "is_working": true,
+                    "name": "Mixcoac",
+                    "rect": [
+                        93,
+                        775,
+                        44,
+                        15
+                    ],
+                    "text_id": 52,
+                    "uid": 51
+                },
+                {
+                    "coord": [
+                        215,
+                        782
+                    ],
+                    "is_working": true,
+                    "name": "Insurgentes Sur",
+                    "rect": [
+                        182,
+                        758,
+                        80,
+                        15
+                    ],
+                    "text_id": 53,
+                    "uid": 52
+                },
+                {
+                    "coord": [
+                        291,
+                        782
+                    ],
+                    "is_working": true,
+                    "name": "20 de Noviembre",
+                    "rect": [
+                        254,
+                        791,
+                        86,
+                        15
+                    ],
+                    "text_id": 54,
+                    "uid": 53
+                },
+                {
+                    "coord": [
+                        378,
+                        782
+                    ],
+                    "is_working": true,
+                    "name": "Zapata",
+                    "rect": [
+                        388,
+                        788,
+                        35,
+                        15
+                    ],
+                    "text_id": 55,
+                    "uid": 54
+                },
+                {
+                    "coord": [
+                        436,
+                        782
+                    ],
+                    "is_working": true,
+                    "name": "Parque de los Venados",
+                    "rect": [
+                        412,
+                        758,
+                        116,
+                        15
+                    ],
+                    "text_id": 56,
+                    "uid": 55
+                },
+                {
+                    "coord": [
+                        518,
+                        864
+                    ],
+                    "is_working": true,
+                    "name": "Eje Central",
+                    "rect": [
+                        483,
+                        873,
+                        57,
+                        15
+                    ],
+                    "text_id": 57,
+                    "uid": 56
+                },
+                {
+                    "coord": [
+                        559,
+                        864
+                    ],
+                    "is_working": true,
+                    "name": "Ermita",
+                    "rect": [
+                        571,
+                        851,
+                        34,
+                        15
+                    ],
+                    "text_id": 58,
+                    "uid": 57
+                },
+                {
+                    "coord": [
+                        666,
+                        905
+                    ],
+                    "is_working": true,
+                    "name": "Mexicaltzingo",
+                    "rect": [
+                        634,
+                        880,
+                        70,
+                        15
+                    ],
+                    "text_id": 59,
+                    "uid": 58
+                },
+                {
+                    "coord": [
+                        740,
+                        905
+                    ],
+                    "is_working": true,
+                    "name": "Atlalilco",
+                    "rect": [
+                        689,
+                        913,
+                        43,
+                        15
+                    ],
+                    "text_id": 60,
+                    "uid": 59
+                },
+                {
+                    "coord": [
+                        740,
+                        942
+                    ],
+                    "is_working": true,
+                    "name": "Culhuacan",
+                    "rect": [
+                        675,
+                        935,
+                        55,
+                        15
+                    ],
+                    "text_id": 61,
+                    "uid": 60
+                },
+                {
+                    "coord": [
+                        740,
+                        978
+                    ],
+                    "is_working": true,
+                    "name": "San Andres Tomatlan",
+                    "rect": [
+                        622,
+                        971,
+                        108,
+                        15
+                    ],
+                    "text_id": 62,
+                    "uid": 61
+                },
+                {
+                    "coord": [
+                        740,
+                        1011
+                    ],
+                    "is_working": true,
+                    "name": "Lomas Estrella",
+                    "rect": [
+                        654,
+                        1004,
+                        76,
+                        15
+                    ],
+                    "text_id": 63,
+                    "uid": 62
+                },
+                {
+                    "coord": [
+                        740,
+                        1048
+                    ],
+                    "is_working": true,
+                    "name": "Calle 11",
+                    "rect": [
+                        687,
+                        1040,
+                        43,
+                        15
+                    ],
+                    "text_id": 64,
+                    "uid": 63
+                },
+                {
+                    "coord": [
+                        757,
+                        1083
+                    ],
+                    "is_working": true,
+                    "name": "Periferico Oriente",
+                    "rect": [
+                        658,
+                        1081,
+                        89,
+                        15
+                    ],
+                    "text_id": 65,
+                    "uid": 64
+                },
+                {
+                    "coord": [
+                        782,
+                        1108
+                    ],
+                    "is_working": true,
+                    "name": "Tezonco",
+                    "rect": [
+                        729,
+                        1106,
+                        43,
+                        15
+                    ],
+                    "text_id": 66,
+                    "uid": 65
+                },
+                {
+                    "coord": [
+                        804,
+                        1130
+                    ],
+                    "is_working": true,
+                    "name": "Olivos",
+                    "rect": [
+                        760,
+                        1128,
+                        34,
+                        15
+                    ],
+                    "text_id": 67,
+                    "uid": 66
+                },
+                {
+                    "coord": [
+                        827,
+                        1153
+                    ],
+                    "is_working": true,
+                    "name": "Nopalera",
+                    "rect": [
+                        770,
+                        1151,
+                        47,
+                        15
+                    ],
+                    "text_id": 68,
+                    "uid": 67
+                },
+                {
+                    "coord": [
+                        852,
+                        1178
+                    ],
+                    "is_working": true,
+                    "name": "Zapotitlan",
+                    "rect": [
+                        792,
+                        1176,
+                        50,
+                        15
+                    ],
+                    "text_id": 69,
+                    "uid": 68
+                },
+                {
+                    "coord": [
+                        876,
+                        1202
+                    ],
+                    "is_working": true,
+                    "name": "Tlaltenco",
+                    "rect": [
+                        819,
+                        1200,
+                        47,
+                        15
+                    ],
+                    "text_id": 70,
+                    "uid": 69
+                },
+                {
+                    "coord": [
+                        899,
+                        1225
+                    ],
+                    "is_working": true,
+                    "name": "Tlahuac",
+                    "rect": [
+                        848,
+                        1223,
+                        41,
+                        15
+                    ],
+                    "text_id": 71,
+                    "uid": 70
+                }
+            ],
+            "text_id": 72
+        }
+    ],
+    "lines_width": 10,
+    "name": "metro",
+    "name_text_id": 175,
+    "stations_diameter": 15.0,
+    "transfers": [
+        [
+            150,
+            139,
+            [
+                150,
+                140
+            ],
+            [
+                150,
+                140
+            ]
+        ],
+        [
+            145,
+            127,
+            [
+                378,
+                181
+            ],
+            [
+                378,
+                181
+            ]
+        ],
+        [
+            147,
+            96,
+            [
+                481,
+                181
+            ],
+            [
+                481,
+                181
+            ]
+        ],
+        [
+            149,
+            116,
+            [
+                673,
+                181
+            ],
+            [
+                673,
+                181
+            ]
+        ],
+        [
+            98,
+            129,
+            [
+                439,
+                242
+            ],
+            [
+                439,
+                242
+            ]
+        ],
+        [
+            132,
+            119,
+            [
+                673,
+                289
+            ],
+            [
+                673,
+                289
+            ]
+        ],
+        [
+            154,
+            73,
+            [
+                150,
+                317
+            ],
+            [
+                150,
+                317
+            ]
+        ],
+        [
+            49,
+            100,
+            [
+                378,
+                349
+            ],
+            [
+                378,
+                349
+            ]
+        ],
+        [
+            164,
+            48,
+            [
+                457,
+                349
+            ],
+            [
+                457,
+                349
+            ]
+        ],
+        [
+            80,
+            101,
+            [
+                378,
+                385
+            ],
+            [
+                378,
+                385
+            ]
+        ],
+        [
+            81,
+            165,
+            [
+                457,
+                385
+            ],
+            [
+                457,
+                385
+            ]
+        ],
+        [
+            121,
+            45,
+            [
+                673,
+                380
+            ],
+            [
+                673,
+                380
+            ]
+        ],
+        [
+            122,
+            12,
+            [
+                673,
+                418
+            ],
+            [
+                673,
+                418
+            ]
+        ],
+        [
+            135,
+            41,
+            [
+                817,
+                372
+            ],
+            [
+                817,
+                372
+            ]
+        ],
+        [
+            44,
+            13,
+            [
+                711,
+                418
+            ],
+            [
+                711,
+                418
+            ]
+        ],
+        [
+            84,
+            10,
+            [
+                559,
+                508
+            ],
+            [
+                559,
+                508
+            ]
+        ],
+        [
+            8,
+            167,
+            [
+                457,
+                508
+            ],
+            [
+                457,
+                508
+            ]
+        ],
+        [
+            103,
+            7,
+            [
+                378,
+                508
+            ],
+            [
+                378,
+                508
+            ]
+        ],
+        [
+            138,
+            194,
+            [
+                877,
+                604
+            ],
+            [
+                877,
+                604
+            ]
+        ],
+        [
+            138,
+            20,
+            [
+                877,
+                604
+            ],
+            [
+                877,
+                604
+            ]
+        ],
+        [
+            19,
+            138,
+            [
+                877,
+                604
+            ],
+            [
+                877,
+                604
+            ]
+        ],
+        [
+            194,
+            20,
+            [
+                877,
+                604
+            ],
+            [
+                877,
+                604
+            ]
+        ],
+        [
+            194,
+            19,
+            [
+                877,
+                604
+            ],
+            [
+                877,
+                604
+            ]
+        ],
+        [
+            20,
+            19,
+            [
+                877,
+                604
+            ],
+            [
+                877,
+                604
+            ]
+        ],
+        [
+            189,
+            124,
+            [
+                673,
+                644
+            ],
+            [
+                673,
+                644
+            ]
+        ],
+        [
+            188,
+            170,
+            [
+                559,
+                644
+            ],
+            [
+                559,
+                644
+            ]
+        ],
+        [
+            186,
+            106,
+            [
+                378,
+                644
+            ],
+            [
+                378,
+                644
+            ]
+        ],
+        [
+            183,
+            1,
+            [
+                150,
+                644
+            ],
+            [
+                150,
+                644
+            ]
+        ],
+        [
+            183,
+            159,
+            [
+                150,
+                644
+            ],
+            [
+                150,
+                644
+            ]
+        ],
+        [
+            1,
+            159,
+            [
+                150,
+                644
+            ],
+            [
+                150,
+                644
+            ]
+        ],
+        [
+            162,
+            51,
+            [
+                150,
+                782
+            ],
+            [
+                150,
+                782
+            ]
+        ],
+        [
+            110,
+            54,
+            [
+                378,
+                782
+            ],
+            [
+                378,
+                782
+            ]
+        ],
+        [
+            57,
+            92,
+            [
+                559,
+                864
+            ],
+            [
+                559,
+                864
+            ]
+        ],
+        [
+            59,
+            178,
+            [
+                740,
+                905
+            ],
+            [
+                740,
+                905
+            ]
+        ],
+        [
+            172,
+            125,
+            [
+                673,
+                699
+            ],
+            [
+                673,
+                699
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 176,
+    "upper_case": false,
+    "width": 1103,
+    "word_wrap": false
+}

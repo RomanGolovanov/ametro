@@ -1,0 +1,72 @@
+{
+    "city_id": 615912,
+    "comments_text_id": 9,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 8,
+    "file": "NovyAfon.zip",
+    "latitude": 43.08056,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": 40.83833,
+    "map_id": "NovyAfon.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 4,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 5
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/novyafon-s.json",
+            "name": "novyafon-s",
+            "name_text_id": 6,
+            "root": true,
+            "transports": [
+                ""
+            ],
+            "type_name": "OTHER",
+            "type_text_id": 7
+        }
+    ],
+    "timestamp": 1257638400.0,
+    "transport_types": [
+        "Электричка"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Электричка"
+        }
+    ]
+}

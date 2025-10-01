@@ -1,0 +1,58 @@
+{
+    "city_id": 2772400,
+    "comments_text_id": 20,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 19,
+    "file": "Linz.zip",
+    "latitude": 48.30639,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": 14.28611,
+    "map_id": "Linz.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 17,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 18
+        }
+    ],
+    "timestamp": 1754434800.0,
+    "transport_types": [
+        "Трамвай"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Трамвай"
+        }
+    ]
+}

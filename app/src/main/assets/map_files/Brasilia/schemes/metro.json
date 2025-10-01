@@ -1,0 +1,1615 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 575,
+    "images": [
+        "res/schemes/brasilia.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "ffa500",
+            "line_width": 5,
+            "name": "Orange Line",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            940,
+                            100
+                        ],
+                        [
+                            965,
+                            75
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            915,
+                            125
+                        ],
+                        [
+                            940,
+                            100
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            890,
+                            150
+                        ],
+                        [
+                            915,
+                            125
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    2,
+                    5,
+                    [
+                        [
+                            840,
+                            200
+                        ],
+                        [
+                            915,
+                            125
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            865,
+                            175
+                        ],
+                        [
+                            890,
+                            150
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            840,
+                            200
+                        ],
+                        [
+                            865,
+                            175
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            815,
+                            225
+                        ],
+                        [
+                            840,
+                            200
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    5,
+                    7,
+                    [
+                        [
+                            790,
+                            250
+                        ],
+                        [
+                            840,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            790,
+                            250
+                        ],
+                        [
+                            815,
+                            225
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            765,
+                            275
+                        ],
+                        [
+                            790,
+                            250
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            725,
+                            295
+                        ],
+                        [
+                            745.0,
+                            295.0
+                        ],
+                        [
+                            765,
+                            275
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            685,
+                            275
+                        ],
+                        [
+                            705.0,
+                            295.0
+                        ],
+                        [
+                            725,
+                            295
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            655,
+                            260
+                        ],
+                        [
+                            670.0,
+                            260.0
+                        ],
+                        [
+                            685,
+                            275
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            625,
+                            275
+                        ],
+                        [
+                            640.0,
+                            260.0
+                        ],
+                        [
+                            655,
+                            260
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            600,
+                            300
+                        ],
+                        [
+                            625,
+                            275
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            575,
+                            325
+                        ],
+                        [
+                            600,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            550,
+                            350
+                        ],
+                        [
+                            575,
+                            325
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            525,
+                            375
+                        ],
+                        [
+                            550,
+                            350
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            500,
+                            400
+                        ],
+                        [
+                            525,
+                            375
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            475,
+                            425
+                        ],
+                        [
+                            500,
+                            400
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        965,
+                        75
+                    ],
+                    "is_working": true,
+                    "name": "Central",
+                    "rect": [
+                        902,
+                        56,
+                        38,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        940,
+                        100
+                    ],
+                    "is_working": true,
+                    "name": "Galeria",
+                    "rect": [
+                        876,
+                        81,
+                        38,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        915,
+                        125
+                    ],
+                    "is_working": true,
+                    "name": "102 Sul",
+                    "rect": [
+                        929,
+                        120,
+                        39,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        890,
+                        150
+                    ],
+                    "is_working": false,
+                    "name": "104 Sul",
+                    "rect": [
+                        903,
+                        147,
+                        39,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        865,
+                        175
+                    ],
+                    "is_working": false,
+                    "name": "106 Sul",
+                    "rect": [
+                        878,
+                        169,
+                        39,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        840,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "108 Sul",
+                    "rect": [
+                        856,
+                        194,
+                        39,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        815,
+                        225
+                    ],
+                    "is_working": false,
+                    "name": "110 Sul",
+                    "rect": [
+                        828,
+                        221,
+                        39,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        790,
+                        250
+                    ],
+                    "is_working": true,
+                    "name": "112 Sul",
+                    "rect": [
+                        804,
+                        246,
+                        39,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        765,
+                        275
+                    ],
+                    "is_working": true,
+                    "name": "114 Sul",
+                    "rect": [
+                        779,
+                        272,
+                        39,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        725,
+                        295
+                    ],
+                    "is_working": true,
+                    "name": "Asa Sul",
+                    "rect": [
+                        708,
+                        308,
+                        41,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        685,
+                        275
+                    ],
+                    "is_working": true,
+                    "name": "Shopping",
+                    "rect": [
+                        691,
+                        237,
+                        48,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        655,
+                        260
+                    ],
+                    "is_working": true,
+                    "name": "Feira do Guara",
+                    "rect": [
+                        621,
+                        215,
+                        75,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        625,
+                        275
+                    ],
+                    "is_working": true,
+                    "name": "Guara",
+                    "rect": [
+                        568,
+                        252,
+                        32,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        600,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Arniqueiras",
+                    "rect": [
+                        615,
+                        293,
+                        60,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        575,
+                        325
+                    ],
+                    "is_working": true,
+                    "name": "Aguas Claras",
+                    "rect": [
+                        590,
+                        318,
+                        70,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        550,
+                        350
+                    ],
+                    "is_working": true,
+                    "name": "Taguatinga Sul",
+                    "rect": [
+                        564,
+                        346,
+                        75,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        525,
+                        375
+                    ],
+                    "is_working": true,
+                    "name": "Furnas",
+                    "rect": [
+                        537,
+                        369,
+                        36,
+                        15
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        500,
+                        400
+                    ],
+                    "is_working": true,
+                    "name": "Samambaia Sul",
+                    "rect": [
+                        513,
+                        394,
+                        79,
+                        15
+                    ],
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        475,
+                        425
+                    ],
+                    "is_working": true,
+                    "name": "Terminal Samambaia",
+                    "rect": [
+                        490,
+                        417,
+                        106,
+                        15
+                    ],
+                    "text_id": 18,
+                    "uid": 18
+                }
+            ],
+            "text_id": 19
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "008000",
+            "line_width": 5,
+            "name": "Green Line",
+            "segments": [
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            930,
+                            90
+                        ],
+                        [
+                            955,
+                            65
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            905,
+                            115
+                        ],
+                        [
+                            930,
+                            90
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            880,
+                            140
+                        ],
+                        [
+                            905,
+                            115
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    21,
+                    24,
+                    [
+                        [
+                            830,
+                            190
+                        ],
+                        [
+                            905,
+                            115
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            855,
+                            165
+                        ],
+                        [
+                            880,
+                            140
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    23,
+                    24,
+                    [
+                        [
+                            830,
+                            190
+                        ],
+                        [
+                            855,
+                            165
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            805,
+                            215
+                        ],
+                        [
+                            830,
+                            190
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    24,
+                    26,
+                    [
+                        [
+                            780,
+                            240
+                        ],
+                        [
+                            830,
+                            190
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    25,
+                    26,
+                    [
+                        [
+                            780,
+                            240
+                        ],
+                        [
+                            805,
+                            215
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    26,
+                    27,
+                    [
+                        [
+                            755,
+                            265
+                        ],
+                        [
+                            780,
+                            240
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    27,
+                    28,
+                    [
+                        [
+                            725,
+                            280
+                        ],
+                        [
+                            740.0,
+                            280.0
+                        ],
+                        [
+                            755,
+                            265
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            695,
+                            265
+                        ],
+                        [
+                            710.0,
+                            280.0
+                        ],
+                        [
+                            725,
+                            280
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    29,
+                    30,
+                    [
+                        [
+                            655,
+                            245
+                        ],
+                        [
+                            675.0,
+                            245.0
+                        ],
+                        [
+                            695,
+                            265
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    30,
+                    31,
+                    [
+                        [
+                            615,
+                            265
+                        ],
+                        [
+                            635.0,
+                            245.0
+                        ],
+                        [
+                            655,
+                            245
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    31,
+                    32,
+                    [
+                        [
+                            590,
+                            290
+                        ],
+                        [
+                            615,
+                            265
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    32,
+                    33,
+                    [
+                        [
+                            565,
+                            315
+                        ],
+                        [
+                            590,
+                            290
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    33,
+                    34,
+                    [
+                        [
+                            515,
+                            315
+                        ],
+                        [
+                            565,
+                            315
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    34,
+                    35,
+                    [
+                        [
+                            465,
+                            315
+                        ],
+                        [
+                            515,
+                            315
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    34,
+                    36,
+                    [
+                        [
+                            415,
+                            315
+                        ],
+                        [
+                            515,
+                            315
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    35,
+                    36,
+                    [
+                        [
+                            415,
+                            315
+                        ],
+                        [
+                            465,
+                            315
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    36,
+                    37,
+                    [
+                        [
+                            365,
+                            315
+                        ],
+                        [
+                            415,
+                            315
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    36,
+                    38,
+                    [
+                        [
+                            315,
+                            315
+                        ],
+                        [
+                            415,
+                            315
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    37,
+                    38,
+                    [
+                        [
+                            315,
+                            315
+                        ],
+                        [
+                            365,
+                            315
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    38,
+                    39,
+                    [
+                        [
+                            265,
+                            315
+                        ],
+                        [
+                            315,
+                            315
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    39,
+                    40,
+                    [
+                        [
+                            205,
+                            300
+                        ],
+                        [
+                            220.0,
+                            315.0
+                        ],
+                        [
+                            265,
+                            315
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    40,
+                    41,
+                    [
+                        [
+                            180,
+                            275
+                        ],
+                        [
+                            205,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    41,
+                    42,
+                    [
+                        [
+                            155,
+                            250
+                        ],
+                        [
+                            180,
+                            275
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    42,
+                    43,
+                    [
+                        [
+                            130,
+                            225
+                        ],
+                        [
+                            155,
+                            250
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        955,
+                        65
+                    ],
+                    "is_working": true,
+                    "name": "Central",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        930,
+                        90
+                    ],
+                    "is_working": true,
+                    "name": "Galeria",
+                    "rect": null,
+                    "text_id": 1,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        905,
+                        115
+                    ],
+                    "is_working": true,
+                    "name": "102 Sul",
+                    "rect": null,
+                    "text_id": 2,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        880,
+                        140
+                    ],
+                    "is_working": false,
+                    "name": "104 Sul",
+                    "rect": null,
+                    "text_id": 3,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        855,
+                        165
+                    ],
+                    "is_working": false,
+                    "name": "106 Sul",
+                    "rect": null,
+                    "text_id": 4,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        830,
+                        190
+                    ],
+                    "is_working": true,
+                    "name": "108 Sul",
+                    "rect": null,
+                    "text_id": 5,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        805,
+                        215
+                    ],
+                    "is_working": false,
+                    "name": "110 Sul",
+                    "rect": null,
+                    "text_id": 6,
+                    "uid": 25
+                },
+                {
+                    "coord": [
+                        780,
+                        240
+                    ],
+                    "is_working": true,
+                    "name": "112 Sul",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 26
+                },
+                {
+                    "coord": [
+                        755,
+                        265
+                    ],
+                    "is_working": true,
+                    "name": "114 Sul",
+                    "rect": null,
+                    "text_id": 8,
+                    "uid": 27
+                },
+                {
+                    "coord": [
+                        725,
+                        280
+                    ],
+                    "is_working": true,
+                    "name": "Asa Sul",
+                    "rect": null,
+                    "text_id": 9,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        695,
+                        265
+                    ],
+                    "is_working": true,
+                    "name": "Shopping",
+                    "rect": null,
+                    "text_id": 10,
+                    "uid": 29
+                },
+                {
+                    "coord": [
+                        655,
+                        245
+                    ],
+                    "is_working": true,
+                    "name": "Feira do Guara",
+                    "rect": null,
+                    "text_id": 11,
+                    "uid": 30
+                },
+                {
+                    "coord": [
+                        615,
+                        265
+                    ],
+                    "is_working": true,
+                    "name": "Guara",
+                    "rect": null,
+                    "text_id": 12,
+                    "uid": 31
+                },
+                {
+                    "coord": [
+                        590,
+                        290
+                    ],
+                    "is_working": true,
+                    "name": "Arniqueiras",
+                    "rect": null,
+                    "text_id": 13,
+                    "uid": 32
+                },
+                {
+                    "coord": [
+                        565,
+                        315
+                    ],
+                    "is_working": true,
+                    "name": "Aguas Claras",
+                    "rect": null,
+                    "text_id": 14,
+                    "uid": 33
+                },
+                {
+                    "coord": [
+                        515,
+                        315
+                    ],
+                    "is_working": true,
+                    "name": "Concessionarias",
+                    "rect": [
+                        463,
+                        326,
+                        86,
+                        15
+                    ],
+                    "text_id": 20,
+                    "uid": 34
+                },
+                {
+                    "coord": [
+                        465,
+                        315
+                    ],
+                    "is_working": false,
+                    "name": "Estrada Parque",
+                    "rect": [
+                        433,
+                        289,
+                        78,
+                        15
+                    ],
+                    "text_id": 21,
+                    "uid": 35
+                },
+                {
+                    "coord": [
+                        415,
+                        315
+                    ],
+                    "is_working": true,
+                    "name": "Praca de Relogio",
+                    "rect": [
+                        383,
+                        348,
+                        87,
+                        15
+                    ],
+                    "text_id": 22,
+                    "uid": 36
+                },
+                {
+                    "coord": [
+                        365,
+                        315
+                    ],
+                    "is_working": false,
+                    "name": "Onoyama",
+                    "rect": [
+                        347,
+                        289,
+                        49,
+                        15
+                    ],
+                    "text_id": 23,
+                    "uid": 37
+                },
+                {
+                    "coord": [
+                        315,
+                        315
+                    ],
+                    "is_working": true,
+                    "name": "Centro Metropolitano",
+                    "rect": [
+                        271,
+                        326,
+                        105,
+                        15
+                    ],
+                    "text_id": 24,
+                    "uid": 38
+                },
+                {
+                    "coord": [
+                        265,
+                        315
+                    ],
+                    "is_working": true,
+                    "name": "Ceilandia Sul",
+                    "rect": [
+                        238,
+                        289,
+                        68,
+                        15
+                    ],
+                    "text_id": 25,
+                    "uid": 39
+                },
+                {
+                    "coord": [
+                        205,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Guariroba",
+                    "rect": [
+                        139,
+                        295,
+                        51,
+                        15
+                    ],
+                    "text_id": 26,
+                    "uid": 40
+                },
+                {
+                    "coord": [
+                        180,
+                        275
+                    ],
+                    "is_working": true,
+                    "name": "Ceilandia Centro",
+                    "rect": [
+                        84,
+                        271,
+                        85,
+                        15
+                    ],
+                    "text_id": 27,
+                    "uid": 41
+                },
+                {
+                    "coord": [
+                        155,
+                        250
+                    ],
+                    "is_working": true,
+                    "name": "Ceilandia Norte",
+                    "rect": [
+                        64,
+                        245,
+                        79,
+                        15
+                    ],
+                    "text_id": 28,
+                    "uid": 42
+                },
+                {
+                    "coord": [
+                        130,
+                        225
+                    ],
+                    "is_working": true,
+                    "name": "Terminal Ceilandia",
+                    "rect": [
+                        25,
+                        219,
+                        95,
+                        15
+                    ],
+                    "text_id": 29,
+                    "uid": 43
+                }
+            ],
+            "text_id": 30
+        }
+    ],
+    "lines_width": 5,
+    "name": "metro",
+    "name_text_id": 31,
+    "stations_diameter": 12.0,
+    "transfers": [
+        [
+            2,
+            21,
+            [
+                915,
+                125
+            ],
+            [
+                905,
+                115
+            ]
+        ],
+        [
+            3,
+            22,
+            [
+                890,
+                150
+            ],
+            [
+                880,
+                140
+            ]
+        ],
+        [
+            4,
+            23,
+            [
+                865,
+                175
+            ],
+            [
+                855,
+                165
+            ]
+        ],
+        [
+            5,
+            24,
+            [
+                840,
+                200
+            ],
+            [
+                830,
+                190
+            ]
+        ],
+        [
+            6,
+            25,
+            [
+                815,
+                225
+            ],
+            [
+                805,
+                215
+            ]
+        ],
+        [
+            7,
+            26,
+            [
+                790,
+                250
+            ],
+            [
+                780,
+                240
+            ]
+        ],
+        [
+            8,
+            27,
+            [
+                765,
+                275
+            ],
+            [
+                755,
+                265
+            ]
+        ],
+        [
+            14,
+            33,
+            [
+                575,
+                325
+            ],
+            [
+                565,
+                315
+            ]
+        ],
+        [
+            13,
+            32,
+            [
+                600,
+                300
+            ],
+            [
+                590,
+                290
+            ]
+        ],
+        [
+            9,
+            28,
+            [
+                725,
+                295
+            ],
+            [
+                725,
+                280
+            ]
+        ],
+        [
+            0,
+            19,
+            [
+                965,
+                75
+            ],
+            [
+                955,
+                65
+            ]
+        ],
+        [
+            11,
+            30,
+            [
+                655,
+                260
+            ],
+            [
+                655,
+                245
+            ]
+        ],
+        [
+            1,
+            20,
+            [
+                940,
+                100
+            ],
+            [
+                930,
+                90
+            ]
+        ],
+        [
+            12,
+            31,
+            [
+                625,
+                275
+            ],
+            [
+                615,
+                265
+            ]
+        ],
+        [
+            10,
+            29,
+            [
+                685,
+                275
+            ],
+            [
+                695,
+                265
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 32,
+    "upper_case": false,
+    "width": 1115,
+    "word_wrap": false
+}

@@ -1,0 +1,128 @@
+{
+    "city_id": 3871336,
+    "comments_text_id": 108,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 107,
+    "file": "Santiago.zip",
+    "latitude": -33.45694,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": -70.64827,
+    "map_id": "Santiago.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 104,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 105
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/1 linea.json",
+            "name": "1 linea",
+            "name_text_id": 27,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 106
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/2 linea.json",
+            "name": "2 linea",
+            "name_text_id": 49,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 106
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/3 linea.json",
+            "name": "3 linea",
+            "name_text_id": 77,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 106
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/4 linea.json",
+            "name": "4 linea",
+            "name_text_id": 98,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 106
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/5 linea.json",
+            "name": "5 linea",
+            "name_text_id": 103,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 106
+        }
+    ],
+    "timestamp": 1754434800.0,
+    "transport_types": [
+        "Метро"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Метро"
+        }
+    ]
+}

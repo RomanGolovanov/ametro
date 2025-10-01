@@ -1,0 +1,97 @@
+{
+    "lines": [
+        {
+            "delays": [],
+            "name": "Fast Tram",
+            "scheme": null,
+            "segments": [
+                [
+                    0,
+                    1,
+                    120
+                ],
+                [
+                    1,
+                    0,
+                    120
+                ],
+                [
+                    1,
+                    2,
+                    120
+                ],
+                [
+                    2,
+                    1,
+                    120
+                ],
+                [
+                    2,
+                    3,
+                    120
+                ],
+                [
+                    3,
+                    2,
+                    120
+                ],
+                [
+                    3,
+                    4,
+                    120
+                ],
+                [
+                    4,
+                    3,
+                    120
+                ],
+                [
+                    4,
+                    5,
+                    120
+                ],
+                [
+                    5,
+                    4,
+                    120
+                ]
+            ],
+            "stations": [
+                [
+                    0,
+                    "Osiedle Jana III Sobieskiego",
+                    0
+                ],
+                [
+                    1,
+                    "Szymanowskiego",
+                    1
+                ],
+                [
+                    2,
+                    "Kurpinskiego",
+                    2
+                ],
+                [
+                    3,
+                    "Lechicka/Poznan Plaza",
+                    3
+                ],
+                [
+                    4,
+                    "Al. Solidarnosci",
+                    4
+                ],
+                [
+                    5,
+                    "Slowianska",
+                    5
+                ]
+            ],
+            "text_id": 6
+        }
+    ],
+    "name": "metro",
+    "transfers": [],
+    "type_name": "Трамвай"
+}

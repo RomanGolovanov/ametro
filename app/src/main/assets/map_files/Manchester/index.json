@@ -1,0 +1,58 @@
+{
+    "city_id": 2643123,
+    "comments_text_id": 105,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 104,
+    "file": "Manchester.zip",
+    "latitude": 53.48095,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": -2.23743,
+    "map_id": "Manchester.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 102,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 103
+        }
+    ],
+    "timestamp": 1754434800.0,
+    "transport_types": [
+        "Трамвай"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Трамвай"
+        }
+    ]
+}

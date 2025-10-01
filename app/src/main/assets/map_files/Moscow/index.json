@@ -1,0 +1,649 @@
+{
+    "city_id": 524901,
+    "comments_text_id": 1554,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "08:00-10:00",
+                "17:00-19:00"
+            ],
+            "type": "rush",
+            "weekdays": "workdays"
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 1553,
+    "file": "Moscow.zip",
+    "latitude": 55.75204,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": 37.61781,
+    "map_id": "Moscow.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 1540,
+            "root": true,
+            "transports": [
+                "metro",
+                "trains",
+                "trams",
+                "tramsriver"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 1541
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/arbatskopokrovskayaline.json",
+            "name": "arbatskopokrovskayaline",
+            "name_text_id": 322,
+            "root": false,
+            "transports": [
+                "metro",
+                "trains",
+                "trams",
+                "tramsriver"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 1542
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/bkl.json",
+            "name": "bkl",
+            "name_text_id": 105,
+            "root": false,
+            "transports": [
+                "metro",
+                "trains",
+                "trams",
+                "tramsriver"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 1542
+        },
+        {
+            "default_transports": [
+                "trains"
+            ],
+            "file": "schemes/belorusskayazhd.json",
+            "name": "belorusskayazhd",
+            "name_text_id": 173,
+            "root": false,
+            "transports": [
+                "metro",
+                "trains",
+                "trams",
+                "tramsriver"
+            ],
+            "type_name": "Электричка",
+            "type_text_id": 1543
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/butovskayaline.json",
+            "name": "butovskayaline",
+            "name_text_id": 113,
+            "root": false,
+            "transports": [
+                "metro",
+                "trains",
+                "trams",
+                "tramsriver"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 1542
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/filevskayaline.json",
+            "name": "filevskayaline",
+            "name_text_id": 329,
+            "root": false,
+            "transports": [
+                "metro",
+                "trains",
+                "trams",
+                "tramsriver"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 1542
+        },
+        {
+            "default_transports": [
+                "trains"
+            ],
+            "file": "schemes/gorkovskayazhd.json",
+            "name": "gorkovskayazhd",
+            "name_text_id": 472,
+            "root": false,
+            "transports": [
+                "metro",
+                "trains",
+                "trams",
+                "tramsriver"
+            ],
+            "type_name": "Электричка",
+            "type_text_id": 1543
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/kalininskosolntsevskayaline.json",
+            "name": "kalininskosolntsevskayaline",
+            "name_text_id": 387,
+            "root": false,
+            "transports": [
+                "metro",
+                "trains",
+                "trams",
+                "tramsriver"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 1542
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/kaluzhskorizhskayaline.json",
+            "name": "kaluzhskorizhskayaline",
+            "name_text_id": 356,
+            "root": false,
+            "transports": [
+                "metro",
+                "trains",
+                "trams",
+                "tramsriver"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 1542
+        },
+        {
+            "default_transports": [
+                "trains"
+            ],
+            "file": "schemes/kievskayazhd.json",
+            "name": "kievskayazhd",
+            "name_text_id": 314,
+            "root": false,
+            "transports": [
+                "metro",
+                "trains",
+                "trams",
+                "tramsriver"
+            ],
+            "type_name": "Электричка",
+            "type_text_id": 1543
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/koltsevayaline.json",
+            "name": "koltsevayaline",
+            "name_text_id": 336,
+            "root": false,
+            "transports": [
+                "metro",
+                "trains",
+                "trams",
+                "tramsriver"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 1542
+        },
+        {
+            "default_transports": [
+                "trains"
+            ],
+            "file": "schemes/kurskayazhd.json",
+            "name": "kurskayazhd",
+            "name_text_id": 198,
+            "root": false,
+            "transports": [
+                "metro",
+                "trains",
+                "trams",
+                "tramsriver"
+            ],
+            "type_name": "Электричка",
+            "type_text_id": 1543
+        },
+        {
+            "default_transports": [
+                "trains"
+            ],
+            "file": "schemes/lening-bologoezhd.json",
+            "name": "lening-bologoezhd",
+            "name_text_id": 1544,
+            "root": true,
+            "transports": [
+                "metro",
+                "trains",
+                "trams",
+                "tramsriver"
+            ],
+            "type_name": "OTHER",
+            "type_text_id": 1545
+        },
+        {
+            "default_transports": [
+                "trains"
+            ],
+            "file": "schemes/leningradskayazhd.json",
+            "name": "leningradskayazhd",
+            "name_text_id": 726,
+            "root": false,
+            "transports": [
+                "metro",
+                "trains",
+                "trams",
+                "tramsriver"
+            ],
+            "type_name": "Электричка",
+            "type_text_id": 1543
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/lublinskayaline.json",
+            "name": "lublinskayaline",
+            "name_text_id": 79,
+            "root": false,
+            "transports": [
+                "metro",
+                "trains",
+                "trams",
+                "tramsriver"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 1542
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/nekrasovskayaline.json",
+            "name": "nekrasovskayaline",
+            "name_text_id": 148,
+            "root": false,
+            "transports": [
+                "metro",
+                "trains"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 1542
+        },
+        {
+            "default_transports": [
+                "trains"
+            ],
+            "file": "schemes/paveleckayazhd.json",
+            "name": "paveleckayazhd",
+            "name_text_id": 263,
+            "root": false,
+            "transports": [
+                "metro",
+                "trains",
+                "trams",
+                "tramsriver"
+            ],
+            "type_name": "Электричка",
+            "type_text_id": 1543
+        },
+        {
+            "default_transports": [
+                "trains"
+            ],
+            "file": "schemes/railway.json",
+            "name": "railway",
+            "name_text_id": 1546,
+            "root": true,
+            "transports": [
+                "metro",
+                "trains",
+                "trams",
+                "tramsriver"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 1541
+        },
+        {
+            "default_transports": [
+                "tramsriver"
+            ],
+            "file": "schemes/rechnoytramvay.json",
+            "name": "rechnoytramvay",
+            "name_text_id": 1404,
+            "root": false,
+            "transports": [
+                "metro",
+                "tramsriver"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 1541
+        },
+        {
+            "default_transports": [
+                "trains"
+            ],
+            "file": "schemes/rizhskayazhd.json",
+            "name": "rizhskayazhd",
+            "name_text_id": 103,
+            "root": false,
+            "transports": [
+                "metro",
+                "trains",
+                "trams",
+                "tramsriver"
+            ],
+            "type_name": "Электричка",
+            "type_text_id": 1543
+        },
+        {
+            "default_transports": [
+                "trains"
+            ],
+            "file": "schemes/ryazanskayazhd.json",
+            "name": "ryazanskayazhd",
+            "name_text_id": 575,
+            "root": false,
+            "transports": [
+                "metro",
+                "trains",
+                "trams",
+                "tramsriver"
+            ],
+            "type_name": "Электричка",
+            "type_text_id": 1543
+        },
+        {
+            "default_transports": [
+                "trains"
+            ],
+            "file": "schemes/savelovskayazhd.json",
+            "name": "savelovskayazhd",
+            "name_text_id": 35,
+            "root": false,
+            "transports": [
+                "metro",
+                "trains",
+                "trams",
+                "tramsriver"
+            ],
+            "type_name": "Электричка",
+            "type_text_id": 1543
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/serpuhovskotimiryazevskayaline.json",
+            "name": "serpuhovskotimiryazevskayaline",
+            "name_text_id": 53,
+            "root": false,
+            "transports": [
+                "metro",
+                "trains",
+                "trams",
+                "tramsriver"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 1542
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/sokolnicheskayaline.json",
+            "name": "sokolnicheskayaline",
+            "name_text_id": 27,
+            "root": false,
+            "transports": [
+                "metro",
+                "trains",
+                "trams",
+                "tramsriver"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 1542
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/taganskokrasnopresnenskayaline.json",
+            "name": "taganskokrasnopresnenskayaline",
+            "name_text_id": 373,
+            "root": false,
+            "transports": [
+                "metro",
+                "trains",
+                "trams",
+                "tramsriver"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 1542
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/troitskayaline.json",
+            "name": "troitskayaline",
+            "name_text_id": 162,
+            "root": false,
+            "transports": [
+                "metro",
+                "trains",
+                "trams",
+                "tramsriver"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 1542
+        },
+        {
+            "default_transports": [
+                "trains"
+            ],
+            "file": "schemes/yaroslavskayazhd.json",
+            "name": "yaroslavskayazhd",
+            "name_text_id": 657,
+            "root": false,
+            "transports": [
+                "metro",
+                "trains",
+                "trams",
+                "tramsriver"
+            ],
+            "type_name": "Электричка",
+            "type_text_id": 1543
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/zamoskvoreckayaline.json",
+            "name": "zamoskvoreckayaline",
+            "name_text_id": 271,
+            "root": false,
+            "transports": [
+                "metro",
+                "trains",
+                "trams",
+                "tramsriver"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 1542
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/buses_zel.json",
+            "name": "buses_zel",
+            "name_text_id": 1547,
+            "root": true,
+            "transports": [
+                "metro",
+                "trains",
+                "buses_zel"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 1541
+        },
+        {
+            "default_transports": [
+                "trams"
+            ],
+            "file": "schemes/tramways.json",
+            "name": "tramways",
+            "name_text_id": 1548,
+            "root": false,
+            "transports": [
+                "metro",
+                "trains",
+                "trams",
+                "tramsriver"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 1541
+        },
+        {
+            "default_transports": [
+                "trams"
+            ],
+            "file": "schemes/tramwayse.json",
+            "name": "tramwayse",
+            "name_text_id": 1549,
+            "root": true,
+            "transports": [
+                "metro",
+                "trains",
+                "trams",
+                "tramsriver"
+            ],
+            "type_name": "OTHER",
+            "type_text_id": 1545
+        },
+        {
+            "default_transports": [
+                "trams"
+            ],
+            "file": "schemes/tramwaysn.json",
+            "name": "tramwaysn",
+            "name_text_id": 1550,
+            "root": true,
+            "transports": [
+                "metro",
+                "trains",
+                "trams",
+                "tramsriver"
+            ],
+            "type_name": "OTHER",
+            "type_text_id": 1545
+        },
+        {
+            "default_transports": [
+                "trams"
+            ],
+            "file": "schemes/tramwaysnw.json",
+            "name": "tramwaysnw",
+            "name_text_id": 1551,
+            "root": true,
+            "transports": [
+                "metro",
+                "trains",
+                "trams",
+                "tramsriver"
+            ],
+            "type_name": "OTHER",
+            "type_text_id": 1545
+        },
+        {
+            "default_transports": [
+                "trams"
+            ],
+            "file": "schemes/tramwayss.json",
+            "name": "tramwayss",
+            "name_text_id": 1552,
+            "root": true,
+            "transports": [
+                "metro",
+                "trains",
+                "trams",
+                "tramsriver"
+            ],
+            "type_name": "OTHER",
+            "type_text_id": 1545
+        }
+    ],
+    "timestamp": 1758668400.0,
+    "transport_types": [
+        "Трамвай",
+        "Метро",
+        "Речной трамвай",
+        "Электричка",
+        "Автобус"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Метро"
+        },
+        {
+            "file": "transports/trains.json",
+            "name": "trains",
+            "type": "Электричка"
+        },
+        {
+            "file": "transports/trams.json",
+            "name": "trams",
+            "type": "Трамвай"
+        },
+        {
+            "file": "transports/tramsriver.json",
+            "name": "tramsriver",
+            "type": "Речной трамвай"
+        },
+        {
+            "file": "transports/buses_zel.json",
+            "name": "buses_zel",
+            "type": "Автобус"
+        }
+    ]
+}

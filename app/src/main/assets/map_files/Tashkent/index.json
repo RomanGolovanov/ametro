@@ -1,0 +1,100 @@
+{
+    "city_id": 1512569,
+    "comments_text_id": 55,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 54,
+    "file": "Tashkent.zip",
+    "latitude": 41.26465,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": 69.21627,
+    "map_id": "Tashkent.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 51,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 52
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/chilonzor.json",
+            "name": "chilonzor",
+            "name_text_id": 6,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 53
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/ozbekiston.json",
+            "name": "ozbekiston",
+            "name_text_id": 22,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 53
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/yunusobod.json",
+            "name": "yunusobod",
+            "name_text_id": 34,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 53
+        }
+    ],
+    "timestamp": 1754434800.0,
+    "transport_types": [
+        "Метро"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Метро"
+        }
+    ]
+}

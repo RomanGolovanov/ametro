@@ -1,0 +1,4317 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 929,
+    "images": [
+        "res/schemes/denver.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "FFAA00",
+            "line_color": "FFAA00",
+            "line_width": 7,
+            "name": "C",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            394,
+                            162
+                        ],
+                        [
+                            416,
+                            140
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            371,
+                            185
+                        ],
+                        [
+                            394,
+                            162
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            347,
+                            209
+                        ],
+                        [
+                            371,
+                            185
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            375,
+                            309
+                        ],
+                        [
+                            347.0,
+                            281.0
+                        ],
+                        [
+                            347,
+                            209
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            375,
+                            369
+                        ],
+                        [
+                            375,
+                            309
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            375,
+                            435
+                        ],
+                        [
+                            375,
+                            369
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            375,
+                            484
+                        ],
+                        [
+                            375,
+                            435
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            375,
+                            539
+                        ],
+                        [
+                            375,
+                            484
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            375,
+                            589
+                        ],
+                        [
+                            375,
+                            539
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            375,
+                            639
+                        ],
+                        [
+                            375,
+                            589
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            375,
+                            689
+                        ],
+                        [
+                            375,
+                            639
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        416,
+                        140
+                    ],
+                    "is_working": true,
+                    "name": "Union Station: LoDo / Coors Field/16th Street Mall",
+                    "rect": [
+                        147,
+                        122,
+                        246,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        394,
+                        162
+                    ],
+                    "is_working": true,
+                    "name": "Pepsi Center/Six Flags Elitch Gardens",
+                    "rect": [
+                        180,
+                        144,
+                        191,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        371,
+                        185
+                    ],
+                    "is_working": true,
+                    "name": "Invesco Field at Mile High",
+                    "rect": [
+                        218,
+                        167,
+                        130,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        347,
+                        209
+                    ],
+                    "is_working": true,
+                    "name": "Auraria West Campus",
+                    "rect": [
+                        213,
+                        191,
+                        111,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        375,
+                        309
+                    ],
+                    "is_working": true,
+                    "name": "10th & Osage",
+                    "rect": [
+                        427,
+                        312,
+                        69,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        375,
+                        369
+                    ],
+                    "is_working": true,
+                    "name": "Alameda",
+                    "rect": [
+                        316,
+                        362,
+                        46,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        375,
+                        435
+                    ],
+                    "is_working": true,
+                    "name": "I-25 & Broadway",
+                    "rect": [
+                        278,
+                        428,
+                        84,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        375,
+                        484
+                    ],
+                    "is_working": true,
+                    "name": "Evans",
+                    "rect": [
+                        329,
+                        476,
+                        33,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        375,
+                        539
+                    ],
+                    "is_working": true,
+                    "name": "Englewood",
+                    "rect": [
+                        306,
+                        531,
+                        56,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        375,
+                        589
+                    ],
+                    "is_working": true,
+                    "name": "Oxford",
+                    "rect": [
+                        327,
+                        582,
+                        35,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        375,
+                        639
+                    ],
+                    "is_working": true,
+                    "name": "Littleton/Downtown",
+                    "rect": [
+                        267,
+                        632,
+                        95,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        375,
+                        689
+                    ],
+                    "is_working": true,
+                    "name": "Littleton/Mineral",
+                    "rect": [
+                        281,
+                        682,
+                        81,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                }
+            ],
+            "text_id": 12
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "31B149",
+            "line_color": "31B149",
+            "line_width": 7,
+            "name": "D",
+            "segments": [
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            630,
+                            59
+                        ],
+                        [
+                            665,
+                            24
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            595,
+                            94
+                        ],
+                        [
+                            630,
+                            59
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            565,
+                            124
+                        ],
+                        [
+                            595,
+                            94
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            535,
+                            154
+                        ],
+                        [
+                            565,
+                            124
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            490,
+                            154
+                        ],
+                        [
+                            535,
+                            154
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    19,
+                    [
+                        [
+                            535,
+                            199
+                        ],
+                        [
+                            535,
+                            154
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            490,
+                            154
+                        ],
+                        [
+                            460,
+                            184
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    21,
+                    [
+                        [
+                            460,
+                            184
+                        ],
+                        [
+                            460,
+                            229
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            505,
+                            229
+                        ],
+                        [
+                            535,
+                            199
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            460,
+                            229
+                        ],
+                        [
+                            505,
+                            229
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            427,
+                            266
+                        ],
+                        [
+                            460,
+                            229
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            385,
+                            309
+                        ],
+                        [
+                            427,
+                            266
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    23,
+                    24,
+                    [
+                        [
+                            385,
+                            369
+                        ],
+                        [
+                            385,
+                            309
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            385,
+                            430
+                        ],
+                        [
+                            385,
+                            369
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    25,
+                    26,
+                    [
+                        [
+                            385,
+                            484
+                        ],
+                        [
+                            385,
+                            430
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    26,
+                    27,
+                    [
+                        [
+                            385,
+                            539
+                        ],
+                        [
+                            385,
+                            484
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    27,
+                    28,
+                    [
+                        [
+                            385,
+                            589
+                        ],
+                        [
+                            385,
+                            539
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            385,
+                            639
+                        ],
+                        [
+                            385,
+                            589
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    29,
+                    30,
+                    [
+                        [
+                            385,
+                            689
+                        ],
+                        [
+                            385,
+                            639
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        665,
+                        24
+                    ],
+                    "is_working": true,
+                    "name": "30th & Downing",
+                    "rect": [
+                        575,
+                        12,
+                        80,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        630,
+                        59
+                    ],
+                    "is_working": true,
+                    "name": "29th & Welton",
+                    "rect": [
+                        549,
+                        47,
+                        71,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        595,
+                        94
+                    ],
+                    "is_working": true,
+                    "name": "27th & Welton",
+                    "rect": [
+                        513,
+                        81,
+                        71,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        565,
+                        124
+                    ],
+                    "is_working": true,
+                    "name": "25th & Welton",
+                    "rect": [
+                        485,
+                        106,
+                        71,
+                        15
+                    ],
+                    "text_id": 16,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        535,
+                        154
+                    ],
+                    "is_working": true,
+                    "name": "20th & Welton",
+                    "rect": [
+                        548,
+                        151,
+                        71,
+                        15
+                    ],
+                    "text_id": 17,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        490,
+                        154
+                    ],
+                    "is_working": true,
+                    "name": "18th Street",
+                    "rect": [
+                        463,
+                        126,
+                        55,
+                        15
+                    ],
+                    "text_id": 18,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        460,
+                        184
+                    ],
+                    "is_working": true,
+                    "name": "16th Street",
+                    "rect": [
+                        400,
+                        194,
+                        55,
+                        15
+                    ],
+                    "text_id": 19,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        535,
+                        199
+                    ],
+                    "is_working": true,
+                    "name": "19th Street/California",
+                    "rect": [
+                        558,
+                        192,
+                        106,
+                        15
+                    ],
+                    "text_id": 20,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        505,
+                        229
+                    ],
+                    "is_working": true,
+                    "name": "16th Street/California",
+                    "rect": [
+                        544,
+                        242,
+                        106,
+                        15
+                    ],
+                    "text_id": 21,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        460,
+                        229
+                    ],
+                    "is_working": true,
+                    "name": "14th Street Convention Center/DPAC",
+                    "rect": [
+                        479,
+                        265,
+                        184,
+                        15
+                    ],
+                    "text_id": 22,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        427,
+                        266
+                    ],
+                    "is_working": true,
+                    "name": "Colfax at Auraria",
+                    "rect": [
+                        452,
+                        293,
+                        86,
+                        15
+                    ],
+                    "text_id": 23,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        385,
+                        309
+                    ],
+                    "is_working": true,
+                    "name": "10th & Osage",
+                    "rect": null,
+                    "text_id": 4,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        385,
+                        369
+                    ],
+                    "is_working": true,
+                    "name": "Alameda",
+                    "rect": null,
+                    "text_id": 5,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        385,
+                        430
+                    ],
+                    "is_working": true,
+                    "name": "I-25 & Broadway",
+                    "rect": null,
+                    "text_id": 6,
+                    "uid": 25
+                },
+                {
+                    "coord": [
+                        385,
+                        484
+                    ],
+                    "is_working": true,
+                    "name": "Evans",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 26
+                },
+                {
+                    "coord": [
+                        385,
+                        539
+                    ],
+                    "is_working": true,
+                    "name": "Englewood",
+                    "rect": null,
+                    "text_id": 8,
+                    "uid": 27
+                },
+                {
+                    "coord": [
+                        385,
+                        589
+                    ],
+                    "is_working": true,
+                    "name": "Oxford",
+                    "rect": null,
+                    "text_id": 9,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        385,
+                        639
+                    ],
+                    "is_working": true,
+                    "name": "Littleton/Downtown",
+                    "rect": null,
+                    "text_id": 10,
+                    "uid": 29
+                },
+                {
+                    "coord": [
+                        385,
+                        689
+                    ],
+                    "is_working": true,
+                    "name": "Littleton/Mineral",
+                    "rect": null,
+                    "text_id": 11,
+                    "uid": 30
+                }
+            ],
+            "text_id": 24
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "A02C89",
+            "line_color": "A02C89",
+            "line_width": 7,
+            "name": "E",
+            "segments": [
+                [
+                    31,
+                    32,
+                    [
+                        [
+                            403,
+                            170
+                        ],
+                        [
+                            425,
+                            148
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    32,
+                    33,
+                    [
+                        [
+                            380,
+                            193
+                        ],
+                        [
+                            403,
+                            170
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    33,
+                    34,
+                    [
+                        [
+                            356,
+                            217
+                        ],
+                        [
+                            380,
+                            193
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    34,
+                    35,
+                    [
+                        [
+                            395,
+                            309
+                        ],
+                        [
+                            356.0,
+                            270.0
+                        ],
+                        [
+                            356,
+                            217
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    35,
+                    36,
+                    [
+                        [
+                            395,
+                            369
+                        ],
+                        [
+                            395,
+                            309
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    36,
+                    37,
+                    [
+                        [
+                            395,
+                            425
+                        ],
+                        [
+                            395,
+                            369
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    37,
+                    38,
+                    [
+                        [
+                            424,
+                            454
+                        ],
+                        [
+                            395,
+                            425
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    38,
+                    39,
+                    [
+                        [
+                            454,
+                            484
+                        ],
+                        [
+                            424,
+                            454
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    39,
+                    40,
+                    [
+                        [
+                            520,
+                            484
+                        ],
+                        [
+                            454,
+                            484
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    40,
+                    41,
+                    [
+                        [
+                            547,
+                            511
+                        ],
+                        [
+                            520,
+                            484
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    41,
+                    42,
+                    [
+                        [
+                            582,
+                            546
+                        ],
+                        [
+                            547,
+                            511
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    42,
+                    43,
+                    [
+                        [
+                            622,
+                            586
+                        ],
+                        [
+                            582,
+                            546
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    43,
+                    44,
+                    [
+                        [
+                            652,
+                            616
+                        ],
+                        [
+                            622,
+                            586
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    44,
+                    45,
+                    [
+                        [
+                            682,
+                            646
+                        ],
+                        [
+                            652,
+                            616
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    45,
+                    46,
+                    [
+                        [
+                            709,
+                            673
+                        ],
+                        [
+                            682,
+                            646
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    46,
+                    47,
+                    [
+                        [
+                            709,
+                            724
+                        ],
+                        [
+                            709,
+                            673
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    47,
+                    48,
+                    [
+                        [
+                            709,
+                            779
+                        ],
+                        [
+                            709,
+                            724
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        425,
+                        148
+                    ],
+                    "is_working": true,
+                    "name": "Union Station: LoDo / Coors Field/16th Street Mall",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 31
+                },
+                {
+                    "coord": [
+                        403,
+                        170
+                    ],
+                    "is_working": true,
+                    "name": "Pepsi Center/Six Flags Elitch Gardens",
+                    "rect": null,
+                    "text_id": 1,
+                    "uid": 32
+                },
+                {
+                    "coord": [
+                        380,
+                        193
+                    ],
+                    "is_working": true,
+                    "name": "Invesco Field at Mile High",
+                    "rect": null,
+                    "text_id": 2,
+                    "uid": 33
+                },
+                {
+                    "coord": [
+                        356,
+                        217
+                    ],
+                    "is_working": true,
+                    "name": "Auraria West Campus",
+                    "rect": null,
+                    "text_id": 3,
+                    "uid": 34
+                },
+                {
+                    "coord": [
+                        395,
+                        309
+                    ],
+                    "is_working": true,
+                    "name": "10th & Osage",
+                    "rect": null,
+                    "text_id": 4,
+                    "uid": 35
+                },
+                {
+                    "coord": [
+                        395,
+                        369
+                    ],
+                    "is_working": true,
+                    "name": "Alameda",
+                    "rect": null,
+                    "text_id": 5,
+                    "uid": 36
+                },
+                {
+                    "coord": [
+                        395,
+                        425
+                    ],
+                    "is_working": true,
+                    "name": "I-25 & Broadway",
+                    "rect": null,
+                    "text_id": 6,
+                    "uid": 37
+                },
+                {
+                    "coord": [
+                        424,
+                        454
+                    ],
+                    "is_working": true,
+                    "name": "Loisiana - Pearl",
+                    "rect": [
+                        448,
+                        416,
+                        79,
+                        15
+                    ],
+                    "text_id": 25,
+                    "uid": 38
+                },
+                {
+                    "coord": [
+                        454,
+                        484
+                    ],
+                    "is_working": true,
+                    "name": "University of Denver",
+                    "rect": [
+                        403,
+                        497,
+                        104,
+                        15
+                    ],
+                    "text_id": 26,
+                    "uid": 39
+                },
+                {
+                    "coord": [
+                        520,
+                        484
+                    ],
+                    "is_working": true,
+                    "name": "Colorado",
+                    "rect": [
+                        538,
+                        438,
+                        47,
+                        15
+                    ],
+                    "text_id": 27,
+                    "uid": 40
+                },
+                {
+                    "coord": [
+                        547,
+                        511
+                    ],
+                    "is_working": true,
+                    "name": "Yale",
+                    "rect": [
+                        512,
+                        516,
+                        24,
+                        15
+                    ],
+                    "text_id": 28,
+                    "uid": 41
+                },
+                {
+                    "coord": [
+                        582,
+                        546
+                    ],
+                    "is_working": true,
+                    "name": "Southmoor",
+                    "rect": [
+                        513,
+                        541,
+                        55,
+                        15
+                    ],
+                    "text_id": 29,
+                    "uid": 42
+                },
+                {
+                    "coord": [
+                        622,
+                        586
+                    ],
+                    "is_working": true,
+                    "name": "Belleview",
+                    "rect": [
+                        558,
+                        580,
+                        51,
+                        15
+                    ],
+                    "text_id": 30,
+                    "uid": 43
+                },
+                {
+                    "coord": [
+                        652,
+                        616
+                    ],
+                    "is_working": true,
+                    "name": "Orchard",
+                    "rect": [
+                        597,
+                        610,
+                        42,
+                        15
+                    ],
+                    "text_id": 31,
+                    "uid": 44
+                },
+                {
+                    "coord": [
+                        682,
+                        646
+                    ],
+                    "is_working": true,
+                    "name": "Arapahoe at Village Center",
+                    "rect": [
+                        534,
+                        640,
+                        135,
+                        15
+                    ],
+                    "text_id": 32,
+                    "uid": 45
+                },
+                {
+                    "coord": [
+                        709,
+                        673
+                    ],
+                    "is_working": true,
+                    "name": "Dry Creek",
+                    "rect": [
+                        643,
+                        667,
+                        53,
+                        15
+                    ],
+                    "text_id": 33,
+                    "uid": 46
+                },
+                {
+                    "coord": [
+                        709,
+                        724
+                    ],
+                    "is_working": true,
+                    "name": "County Line",
+                    "rect": [
+                        635,
+                        716,
+                        61,
+                        15
+                    ],
+                    "text_id": 34,
+                    "uid": 47
+                },
+                {
+                    "coord": [
+                        709,
+                        779
+                    ],
+                    "is_working": true,
+                    "name": "Lincoln",
+                    "rect": [
+                        657,
+                        771,
+                        38,
+                        15
+                    ],
+                    "text_id": 35,
+                    "uid": 48
+                }
+            ],
+            "text_id": 36
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "FF3600",
+            "line_color": "FF3600",
+            "line_width": 7,
+            "name": "F",
+            "segments": [
+                [
+                    49,
+                    50,
+                    [
+                        [
+                            500,
+                            164
+                        ],
+                        [
+                            470,
+                            194
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    49,
+                    51,
+                    [
+                        [
+                            545,
+                            209
+                        ],
+                        [
+                            500,
+                            164
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    50,
+                    53,
+                    [
+                        [
+                            470,
+                            194
+                        ],
+                        [
+                            470,
+                            239
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    51,
+                    52,
+                    [
+                        [
+                            515,
+                            239
+                        ],
+                        [
+                            545,
+                            209
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    52,
+                    53,
+                    [
+                        [
+                            470,
+                            239
+                        ],
+                        [
+                            515,
+                            239
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    53,
+                    54,
+                    [
+                        [
+                            435,
+                            274
+                        ],
+                        [
+                            470,
+                            239
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    54,
+                    55,
+                    [
+                        [
+                            405,
+                            309
+                        ],
+                        [
+                            405.0,
+                            304.0
+                        ],
+                        [
+                            435,
+                            274
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    55,
+                    56,
+                    [
+                        [
+                            405,
+                            369
+                        ],
+                        [
+                            405,
+                            309
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    56,
+                    57,
+                    [
+                        [
+                            405,
+                            420
+                        ],
+                        [
+                            405,
+                            369
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    57,
+                    58,
+                    [
+                        [
+                            432,
+                            447
+                        ],
+                        [
+                            405,
+                            420
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    58,
+                    59,
+                    [
+                        [
+                            459,
+                            474
+                        ],
+                        [
+                            432,
+                            447
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    59,
+                    60,
+                    [
+                        [
+                            525,
+                            474
+                        ],
+                        [
+                            459,
+                            474
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    60,
+                    61,
+                    [
+                        [
+                            555,
+                            504
+                        ],
+                        [
+                            525,
+                            474
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    61,
+                    62,
+                    [
+                        [
+                            590,
+                            539
+                        ],
+                        [
+                            555,
+                            504
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    62,
+                    63,
+                    [
+                        [
+                            630,
+                            579
+                        ],
+                        [
+                            590,
+                            539
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    63,
+                    64,
+                    [
+                        [
+                            660,
+                            609
+                        ],
+                        [
+                            630,
+                            579
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    64,
+                    65,
+                    [
+                        [
+                            690,
+                            639
+                        ],
+                        [
+                            660,
+                            609
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    65,
+                    66,
+                    [
+                        [
+                            720,
+                            668
+                        ],
+                        [
+                            690,
+                            639
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    66,
+                    67,
+                    [
+                        [
+                            720,
+                            724
+                        ],
+                        [
+                            720,
+                            668
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    67,
+                    68,
+                    [
+                        [
+                            720,
+                            779
+                        ],
+                        [
+                            720,
+                            724
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        500,
+                        164
+                    ],
+                    "is_working": true,
+                    "name": "18th Street",
+                    "rect": null,
+                    "text_id": 18,
+                    "uid": 49
+                },
+                {
+                    "coord": [
+                        470,
+                        194
+                    ],
+                    "is_working": true,
+                    "name": "16th Street",
+                    "rect": null,
+                    "text_id": 19,
+                    "uid": 50
+                },
+                {
+                    "coord": [
+                        545,
+                        209
+                    ],
+                    "is_working": true,
+                    "name": "19th Street/California",
+                    "rect": null,
+                    "text_id": 20,
+                    "uid": 51
+                },
+                {
+                    "coord": [
+                        515,
+                        239
+                    ],
+                    "is_working": true,
+                    "name": "16th Street/California",
+                    "rect": null,
+                    "text_id": 21,
+                    "uid": 52
+                },
+                {
+                    "coord": [
+                        470,
+                        239
+                    ],
+                    "is_working": true,
+                    "name": "14th Street Convention Center/DPAC",
+                    "rect": null,
+                    "text_id": 22,
+                    "uid": 53
+                },
+                {
+                    "coord": [
+                        435,
+                        274
+                    ],
+                    "is_working": true,
+                    "name": "Colfax at Auraria",
+                    "rect": null,
+                    "text_id": 23,
+                    "uid": 54
+                },
+                {
+                    "coord": [
+                        405,
+                        309
+                    ],
+                    "is_working": true,
+                    "name": "10th & Osage",
+                    "rect": null,
+                    "text_id": 4,
+                    "uid": 55
+                },
+                {
+                    "coord": [
+                        405,
+                        369
+                    ],
+                    "is_working": true,
+                    "name": "Alameda",
+                    "rect": null,
+                    "text_id": 5,
+                    "uid": 56
+                },
+                {
+                    "coord": [
+                        405,
+                        420
+                    ],
+                    "is_working": true,
+                    "name": "I-25 & Broadway",
+                    "rect": null,
+                    "text_id": 6,
+                    "uid": 57
+                },
+                {
+                    "coord": [
+                        432,
+                        447
+                    ],
+                    "is_working": true,
+                    "name": "Loisiana - Pearl",
+                    "rect": null,
+                    "text_id": 25,
+                    "uid": 58
+                },
+                {
+                    "coord": [
+                        459,
+                        474
+                    ],
+                    "is_working": true,
+                    "name": "University of Denver",
+                    "rect": null,
+                    "text_id": 26,
+                    "uid": 59
+                },
+                {
+                    "coord": [
+                        525,
+                        474
+                    ],
+                    "is_working": true,
+                    "name": "Colorado",
+                    "rect": null,
+                    "text_id": 27,
+                    "uid": 60
+                },
+                {
+                    "coord": [
+                        555,
+                        504
+                    ],
+                    "is_working": true,
+                    "name": "Yale",
+                    "rect": null,
+                    "text_id": 28,
+                    "uid": 61
+                },
+                {
+                    "coord": [
+                        590,
+                        539
+                    ],
+                    "is_working": true,
+                    "name": "Southmoor",
+                    "rect": null,
+                    "text_id": 29,
+                    "uid": 62
+                },
+                {
+                    "coord": [
+                        630,
+                        579
+                    ],
+                    "is_working": true,
+                    "name": "Belleview",
+                    "rect": null,
+                    "text_id": 30,
+                    "uid": 63
+                },
+                {
+                    "coord": [
+                        660,
+                        609
+                    ],
+                    "is_working": true,
+                    "name": "Orchard",
+                    "rect": null,
+                    "text_id": 31,
+                    "uid": 64
+                },
+                {
+                    "coord": [
+                        690,
+                        639
+                    ],
+                    "is_working": true,
+                    "name": "Arapahoe at Village Center",
+                    "rect": null,
+                    "text_id": 32,
+                    "uid": 65
+                },
+                {
+                    "coord": [
+                        720,
+                        668
+                    ],
+                    "is_working": true,
+                    "name": "Dry Creek",
+                    "rect": null,
+                    "text_id": 33,
+                    "uid": 66
+                },
+                {
+                    "coord": [
+                        720,
+                        724
+                    ],
+                    "is_working": true,
+                    "name": "County Line",
+                    "rect": null,
+                    "text_id": 34,
+                    "uid": 67
+                },
+                {
+                    "coord": [
+                        720,
+                        779
+                    ],
+                    "is_working": true,
+                    "name": "Lincoln",
+                    "rect": null,
+                    "text_id": 35,
+                    "uid": 68
+                }
+            ],
+            "text_id": 37
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "a52a2a",
+            "line_color": "a52a2a",
+            "line_width": 7,
+            "name": "G",
+            "segments": [
+                [
+                    69,
+                    70,
+                    [
+                        [
+                            659,
+                            533
+                        ],
+                        [
+                            689,
+                            503
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    70,
+                    71,
+                    [
+                        [
+                            638,
+                            572
+                        ],
+                        [
+                            629.0,
+                            563.0
+                        ],
+                        [
+                            659,
+                            533
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    71,
+                    72,
+                    [
+                        [
+                            668,
+                            602
+                        ],
+                        [
+                            638,
+                            572
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    72,
+                    73,
+                    [
+                        [
+                            698,
+                            632
+                        ],
+                        [
+                            668,
+                            602
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    73,
+                    74,
+                    [
+                        [
+                            731,
+                            663
+                        ],
+                        [
+                            698,
+                            632
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    74,
+                    75,
+                    [
+                        [
+                            731,
+                            724
+                        ],
+                        [
+                            731,
+                            663
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    75,
+                    76,
+                    [
+                        [
+                            731,
+                            779
+                        ],
+                        [
+                            731,
+                            724
+                        ]
+                    ],
+                    false
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        689,
+                        503
+                    ],
+                    "is_working": false,
+                    "name": "Nine Mile",
+                    "rect": [
+                        692,
+                        476,
+                        49,
+                        15
+                    ],
+                    "text_id": 38,
+                    "uid": 69
+                },
+                {
+                    "coord": [
+                        659,
+                        533
+                    ],
+                    "is_working": false,
+                    "name": "Dayton",
+                    "rect": [
+                        673,
+                        528,
+                        37,
+                        15
+                    ],
+                    "text_id": 39,
+                    "uid": 70
+                },
+                {
+                    "coord": [
+                        638,
+                        572
+                    ],
+                    "is_working": false,
+                    "name": "Belleview",
+                    "rect": null,
+                    "text_id": 30,
+                    "uid": 71
+                },
+                {
+                    "coord": [
+                        668,
+                        602
+                    ],
+                    "is_working": false,
+                    "name": "Orchard",
+                    "rect": null,
+                    "text_id": 31,
+                    "uid": 72
+                },
+                {
+                    "coord": [
+                        698,
+                        632
+                    ],
+                    "is_working": false,
+                    "name": "Arapahoe at Village Center",
+                    "rect": null,
+                    "text_id": 32,
+                    "uid": 73
+                },
+                {
+                    "coord": [
+                        731,
+                        663
+                    ],
+                    "is_working": false,
+                    "name": "Dry Creek",
+                    "rect": null,
+                    "text_id": 33,
+                    "uid": 74
+                },
+                {
+                    "coord": [
+                        731,
+                        724
+                    ],
+                    "is_working": false,
+                    "name": "County Line",
+                    "rect": null,
+                    "text_id": 34,
+                    "uid": 75
+                },
+                {
+                    "coord": [
+                        731,
+                        779
+                    ],
+                    "is_working": false,
+                    "name": "Lincoln",
+                    "rect": null,
+                    "text_id": 35,
+                    "uid": 76
+                }
+            ],
+            "text_id": 40
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "289BFF",
+            "line_color": "289BFF",
+            "line_width": 7,
+            "name": "H",
+            "segments": [
+                [
+                    77,
+                    78,
+                    [
+                        [
+                            510,
+                            174
+                        ],
+                        [
+                            480,
+                            204
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    77,
+                    79,
+                    [
+                        [
+                            555,
+                            219
+                        ],
+                        [
+                            510,
+                            174
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    78,
+                    81,
+                    [
+                        [
+                            480,
+                            204
+                        ],
+                        [
+                            480,
+                            249
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    79,
+                    80,
+                    [
+                        [
+                            525,
+                            249
+                        ],
+                        [
+                            555,
+                            219
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    80,
+                    81,
+                    [
+                        [
+                            480,
+                            249
+                        ],
+                        [
+                            525,
+                            249
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    81,
+                    82,
+                    [
+                        [
+                            443,
+                            282
+                        ],
+                        [
+                            480,
+                            249
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    82,
+                    83,
+                    [
+                        [
+                            415,
+                            309
+                        ],
+                        [
+                            416.0,
+                            309.0
+                        ],
+                        [
+                            443,
+                            282
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    83,
+                    84,
+                    [
+                        [
+                            415,
+                            369
+                        ],
+                        [
+                            415,
+                            309
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    84,
+                    85,
+                    [
+                        [
+                            415,
+                            415
+                        ],
+                        [
+                            415,
+                            369
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    85,
+                    86,
+                    [
+                        [
+                            440,
+                            440
+                        ],
+                        [
+                            415,
+                            415
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    86,
+                    87,
+                    [
+                        [
+                            464,
+                            464
+                        ],
+                        [
+                            440,
+                            440
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    87,
+                    88,
+                    [
+                        [
+                            530,
+                            464
+                        ],
+                        [
+                            464,
+                            464
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    88,
+                    89,
+                    [
+                        [
+                            563,
+                            497
+                        ],
+                        [
+                            530,
+                            464
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    89,
+                    90,
+                    [
+                        [
+                            598,
+                            532
+                        ],
+                        [
+                            563,
+                            497
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    90,
+                    91,
+                    [
+                        [
+                            650,
+                            524
+                        ],
+                        [
+                            620.0,
+                            554.0
+                        ],
+                        [
+                            598,
+                            532
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    91,
+                    92,
+                    [
+                        [
+                            680,
+                            494
+                        ],
+                        [
+                            650,
+                            524
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        510,
+                        174
+                    ],
+                    "is_working": true,
+                    "name": "18th Street",
+                    "rect": null,
+                    "text_id": 18,
+                    "uid": 77
+                },
+                {
+                    "coord": [
+                        480,
+                        204
+                    ],
+                    "is_working": true,
+                    "name": "16th Street",
+                    "rect": null,
+                    "text_id": 19,
+                    "uid": 78
+                },
+                {
+                    "coord": [
+                        555,
+                        219
+                    ],
+                    "is_working": true,
+                    "name": "19th Street/California",
+                    "rect": null,
+                    "text_id": 20,
+                    "uid": 79
+                },
+                {
+                    "coord": [
+                        525,
+                        249
+                    ],
+                    "is_working": true,
+                    "name": "16th Street/California",
+                    "rect": null,
+                    "text_id": 21,
+                    "uid": 80
+                },
+                {
+                    "coord": [
+                        480,
+                        249
+                    ],
+                    "is_working": true,
+                    "name": "14th Street Convention Center/DPAC",
+                    "rect": null,
+                    "text_id": 22,
+                    "uid": 81
+                },
+                {
+                    "coord": [
+                        443,
+                        282
+                    ],
+                    "is_working": true,
+                    "name": "Colfax at Auraria",
+                    "rect": null,
+                    "text_id": 23,
+                    "uid": 82
+                },
+                {
+                    "coord": [
+                        415,
+                        309
+                    ],
+                    "is_working": true,
+                    "name": "10th & Osage",
+                    "rect": null,
+                    "text_id": 4,
+                    "uid": 83
+                },
+                {
+                    "coord": [
+                        415,
+                        369
+                    ],
+                    "is_working": true,
+                    "name": "Alameda",
+                    "rect": null,
+                    "text_id": 5,
+                    "uid": 84
+                },
+                {
+                    "coord": [
+                        415,
+                        415
+                    ],
+                    "is_working": true,
+                    "name": "I-25 & Broadway",
+                    "rect": null,
+                    "text_id": 6,
+                    "uid": 85
+                },
+                {
+                    "coord": [
+                        440,
+                        440
+                    ],
+                    "is_working": true,
+                    "name": "Loisiana - Pearl",
+                    "rect": null,
+                    "text_id": 25,
+                    "uid": 86
+                },
+                {
+                    "coord": [
+                        464,
+                        464
+                    ],
+                    "is_working": true,
+                    "name": "University of Denver",
+                    "rect": null,
+                    "text_id": 26,
+                    "uid": 87
+                },
+                {
+                    "coord": [
+                        530,
+                        464
+                    ],
+                    "is_working": true,
+                    "name": "Colorado",
+                    "rect": null,
+                    "text_id": 27,
+                    "uid": 88
+                },
+                {
+                    "coord": [
+                        563,
+                        497
+                    ],
+                    "is_working": true,
+                    "name": "Yale",
+                    "rect": null,
+                    "text_id": 28,
+                    "uid": 89
+                },
+                {
+                    "coord": [
+                        598,
+                        532
+                    ],
+                    "is_working": true,
+                    "name": "Southmoor",
+                    "rect": null,
+                    "text_id": 29,
+                    "uid": 90
+                },
+                {
+                    "coord": [
+                        650,
+                        524
+                    ],
+                    "is_working": true,
+                    "name": "Dayton",
+                    "rect": null,
+                    "text_id": 39,
+                    "uid": 91
+                },
+                {
+                    "coord": [
+                        680,
+                        494
+                    ],
+                    "is_working": true,
+                    "name": "Nine Mile",
+                    "rect": null,
+                    "text_id": 38,
+                    "uid": 92
+                }
+            ],
+            "text_id": 41
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "37B5A5",
+            "line_color": "37B5A5",
+            "line_width": 7,
+            "name": "W",
+            "segments": [
+                [
+                    93,
+                    94,
+                    [
+                        [
+                            385,
+                            154
+                        ],
+                        [
+                            407,
+                            132
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    94,
+                    95,
+                    [
+                        [
+                            362,
+                            177
+                        ],
+                        [
+                            385,
+                            154
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    95,
+                    96,
+                    [
+                        [
+                            338,
+                            201
+                        ],
+                        [
+                            362,
+                            177
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    96,
+                    97,
+                    [
+                        [
+                            302,
+                            237
+                        ],
+                        [
+                            338,
+                            201
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    97,
+                    98,
+                    [
+                        [
+                            274,
+                            237
+                        ],
+                        [
+                            302,
+                            237
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    98,
+                    99,
+                    [
+                        [
+                            246,
+                            237
+                        ],
+                        [
+                            274,
+                            237
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    99,
+                    100,
+                    [
+                        [
+                            219,
+                            237
+                        ],
+                        [
+                            246,
+                            237
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    100,
+                    101,
+                    [
+                        [
+                            191,
+                            237
+                        ],
+                        [
+                            219,
+                            237
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    101,
+                    102,
+                    [
+                        [
+                            164,
+                            237
+                        ],
+                        [
+                            191,
+                            237
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    102,
+                    103,
+                    [
+                        [
+                            137,
+                            237
+                        ],
+                        [
+                            164,
+                            237
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    103,
+                    104,
+                    [
+                        [
+                            111,
+                            237
+                        ],
+                        [
+                            137,
+                            237
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    104,
+                    105,
+                    [
+                        [
+                            84,
+                            237
+                        ],
+                        [
+                            111,
+                            237
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    105,
+                    106,
+                    [
+                        [
+                            56,
+                            237
+                        ],
+                        [
+                            84,
+                            237
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    106,
+                    107,
+                    [
+                        [
+                            29,
+                            237
+                        ],
+                        [
+                            56,
+                            237
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        407,
+                        132
+                    ],
+                    "is_working": true,
+                    "name": "Union Station: LoDo / Coors Field/16th Street Mall",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 93
+                },
+                {
+                    "coord": [
+                        385,
+                        154
+                    ],
+                    "is_working": true,
+                    "name": "Pepsi Center/Six Flags Elitch Gardens",
+                    "rect": null,
+                    "text_id": 1,
+                    "uid": 94
+                },
+                {
+                    "coord": [
+                        362,
+                        177
+                    ],
+                    "is_working": true,
+                    "name": "Invesco Field at Mile High",
+                    "rect": null,
+                    "text_id": 2,
+                    "uid": 95
+                },
+                {
+                    "coord": [
+                        338,
+                        201
+                    ],
+                    "is_working": true,
+                    "name": "Auraria West Campus",
+                    "rect": null,
+                    "text_id": 3,
+                    "uid": 96
+                },
+                {
+                    "coord": [
+                        302,
+                        237
+                    ],
+                    "is_working": true,
+                    "name": "Decatur/Federal",
+                    "rect": [
+                        295,
+                        248,
+                        15,
+                        81
+                    ],
+                    "text_id": 42,
+                    "uid": 97
+                },
+                {
+                    "coord": [
+                        274,
+                        237
+                    ],
+                    "is_working": true,
+                    "name": "Knox",
+                    "rect": [
+                        266,
+                        248,
+                        15,
+                        28
+                    ],
+                    "text_id": 43,
+                    "uid": 98
+                },
+                {
+                    "coord": [
+                        246,
+                        237
+                    ],
+                    "is_working": true,
+                    "name": "Perry",
+                    "rect": [
+                        238,
+                        248,
+                        15,
+                        29
+                    ],
+                    "text_id": 44,
+                    "uid": 99
+                },
+                {
+                    "coord": [
+                        219,
+                        237
+                    ],
+                    "is_working": true,
+                    "name": "Sheridan",
+                    "rect": [
+                        211,
+                        248,
+                        15,
+                        46
+                    ],
+                    "text_id": 45,
+                    "uid": 100
+                },
+                {
+                    "coord": [
+                        191,
+                        237
+                    ],
+                    "is_working": true,
+                    "name": "Lamar",
+                    "rect": [
+                        183,
+                        248,
+                        15,
+                        33
+                    ],
+                    "text_id": 46,
+                    "uid": 101
+                },
+                {
+                    "coord": [
+                        164,
+                        237
+                    ],
+                    "is_working": true,
+                    "name": "Lakewood/Wadsworth",
+                    "rect": [
+                        156,
+                        248,
+                        15,
+                        110
+                    ],
+                    "text_id": 47,
+                    "uid": 102
+                },
+                {
+                    "coord": [
+                        137,
+                        237
+                    ],
+                    "is_working": true,
+                    "name": "Garrison",
+                    "rect": [
+                        129,
+                        248,
+                        15,
+                        45
+                    ],
+                    "text_id": 48,
+                    "uid": 103
+                },
+                {
+                    "coord": [
+                        111,
+                        237
+                    ],
+                    "is_working": true,
+                    "name": "Oak",
+                    "rect": [
+                        103,
+                        248,
+                        15,
+                        22
+                    ],
+                    "text_id": 49,
+                    "uid": 104
+                },
+                {
+                    "coord": [
+                        84,
+                        237
+                    ],
+                    "is_working": true,
+                    "name": "Federal Center",
+                    "rect": [
+                        76,
+                        248,
+                        15,
+                        75
+                    ],
+                    "text_id": 50,
+                    "uid": 105
+                },
+                {
+                    "coord": [
+                        56,
+                        237
+                    ],
+                    "is_working": true,
+                    "name": "Red Rocks College",
+                    "rect": [
+                        48,
+                        248,
+                        15,
+                        98
+                    ],
+                    "text_id": 51,
+                    "uid": 106
+                },
+                {
+                    "coord": [
+                        29,
+                        237
+                    ],
+                    "is_working": true,
+                    "name": "Jeffco Government Center",
+                    "rect": [
+                        21,
+                        248,
+                        15,
+                        131
+                    ],
+                    "text_id": 52,
+                    "uid": 107
+                }
+            ],
+            "text_id": 53
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 54,
+    "stations_diameter": 15.0,
+    "transfers": [
+        [
+            0,
+            31,
+            [
+                416,
+                140
+            ],
+            [
+                425,
+                148
+            ]
+        ],
+        [
+            1,
+            32,
+            [
+                394,
+                162
+            ],
+            [
+                403,
+                170
+            ]
+        ],
+        [
+            2,
+            33,
+            [
+                371,
+                185
+            ],
+            [
+                380,
+                193
+            ]
+        ],
+        [
+            3,
+            34,
+            [
+                347,
+                209
+            ],
+            [
+                356,
+                217
+            ]
+        ],
+        [
+            4,
+            23,
+            [
+                375,
+                309
+            ],
+            [
+                385,
+                309
+            ]
+        ],
+        [
+            4,
+            35,
+            [
+                375,
+                309
+            ],
+            [
+                395,
+                309
+            ]
+        ],
+        [
+            4,
+            55,
+            [
+                375,
+                309
+            ],
+            [
+                405,
+                309
+            ]
+        ],
+        [
+            4,
+            83,
+            [
+                375,
+                309
+            ],
+            [
+                415,
+                309
+            ]
+        ],
+        [
+            5,
+            24,
+            [
+                375,
+                369
+            ],
+            [
+                385,
+                369
+            ]
+        ],
+        [
+            5,
+            36,
+            [
+                375,
+                369
+            ],
+            [
+                395,
+                369
+            ]
+        ],
+        [
+            96,
+            34,
+            [
+                338,
+                201
+            ],
+            [
+                356,
+                217
+            ]
+        ],
+        [
+            5,
+            56,
+            [
+                375,
+                369
+            ],
+            [
+                405,
+                369
+            ]
+        ],
+        [
+            5,
+            84,
+            [
+                375,
+                369
+            ],
+            [
+                415,
+                369
+            ]
+        ],
+        [
+            6,
+            25,
+            [
+                375,
+                435
+            ],
+            [
+                385,
+                430
+            ]
+        ],
+        [
+            6,
+            37,
+            [
+                375,
+                435
+            ],
+            [
+                395,
+                425
+            ]
+        ],
+        [
+            6,
+            57,
+            [
+                375,
+                435
+            ],
+            [
+                405,
+                420
+            ]
+        ],
+        [
+            6,
+            85,
+            [
+                375,
+                435
+            ],
+            [
+                415,
+                415
+            ]
+        ],
+        [
+            7,
+            26,
+            [
+                375,
+                484
+            ],
+            [
+                385,
+                484
+            ]
+        ],
+        [
+            8,
+            27,
+            [
+                375,
+                539
+            ],
+            [
+                385,
+                539
+            ]
+        ],
+        [
+            9,
+            28,
+            [
+                375,
+                589
+            ],
+            [
+                385,
+                589
+            ]
+        ],
+        [
+            10,
+            29,
+            [
+                375,
+                639
+            ],
+            [
+                385,
+                639
+            ]
+        ],
+        [
+            11,
+            30,
+            [
+                375,
+                689
+            ],
+            [
+                385,
+                689
+            ]
+        ],
+        [
+            17,
+            49,
+            [
+                490,
+                154
+            ],
+            [
+                500,
+                164
+            ]
+        ],
+        [
+            17,
+            77,
+            [
+                490,
+                154
+            ],
+            [
+                510,
+                174
+            ]
+        ],
+        [
+            18,
+            50,
+            [
+                460,
+                184
+            ],
+            [
+                470,
+                194
+            ]
+        ],
+        [
+            18,
+            78,
+            [
+                460,
+                184
+            ],
+            [
+                480,
+                204
+            ]
+        ],
+        [
+            19,
+            51,
+            [
+                535,
+                199
+            ],
+            [
+                545,
+                209
+            ]
+        ],
+        [
+            19,
+            79,
+            [
+                535,
+                199
+            ],
+            [
+                555,
+                219
+            ]
+        ],
+        [
+            20,
+            52,
+            [
+                505,
+                229
+            ],
+            [
+                515,
+                239
+            ]
+        ],
+        [
+            20,
+            80,
+            [
+                505,
+                229
+            ],
+            [
+                525,
+                249
+            ]
+        ],
+        [
+            21,
+            53,
+            [
+                460,
+                229
+            ],
+            [
+                470,
+                239
+            ]
+        ],
+        [
+            21,
+            81,
+            [
+                460,
+                229
+            ],
+            [
+                480,
+                249
+            ]
+        ],
+        [
+            22,
+            54,
+            [
+                427,
+                266
+            ],
+            [
+                435,
+                274
+            ]
+        ],
+        [
+            22,
+            82,
+            [
+                427,
+                266
+            ],
+            [
+                443,
+                282
+            ]
+        ],
+        [
+            23,
+            35,
+            [
+                385,
+                309
+            ],
+            [
+                395,
+                309
+            ]
+        ],
+        [
+            23,
+            55,
+            [
+                385,
+                309
+            ],
+            [
+                405,
+                309
+            ]
+        ],
+        [
+            23,
+            83,
+            [
+                385,
+                309
+            ],
+            [
+                415,
+                309
+            ]
+        ],
+        [
+            24,
+            36,
+            [
+                385,
+                369
+            ],
+            [
+                395,
+                369
+            ]
+        ],
+        [
+            24,
+            56,
+            [
+                385,
+                369
+            ],
+            [
+                405,
+                369
+            ]
+        ],
+        [
+            24,
+            84,
+            [
+                385,
+                369
+            ],
+            [
+                415,
+                369
+            ]
+        ],
+        [
+            25,
+            37,
+            [
+                385,
+                430
+            ],
+            [
+                395,
+                425
+            ]
+        ],
+        [
+            25,
+            57,
+            [
+                385,
+                430
+            ],
+            [
+                405,
+                420
+            ]
+        ],
+        [
+            25,
+            85,
+            [
+                385,
+                430
+            ],
+            [
+                415,
+                415
+            ]
+        ],
+        [
+            35,
+            55,
+            [
+                395,
+                309
+            ],
+            [
+                405,
+                309
+            ]
+        ],
+        [
+            35,
+            83,
+            [
+                395,
+                309
+            ],
+            [
+                415,
+                309
+            ]
+        ],
+        [
+            36,
+            56,
+            [
+                395,
+                369
+            ],
+            [
+                405,
+                369
+            ]
+        ],
+        [
+            36,
+            84,
+            [
+                395,
+                369
+            ],
+            [
+                415,
+                369
+            ]
+        ],
+        [
+            37,
+            57,
+            [
+                395,
+                425
+            ],
+            [
+                405,
+                420
+            ]
+        ],
+        [
+            37,
+            85,
+            [
+                395,
+                425
+            ],
+            [
+                415,
+                415
+            ]
+        ],
+        [
+            38,
+            58,
+            [
+                424,
+                454
+            ],
+            [
+                432,
+                447
+            ]
+        ],
+        [
+            38,
+            86,
+            [
+                424,
+                454
+            ],
+            [
+                440,
+                440
+            ]
+        ],
+        [
+            39,
+            59,
+            [
+                454,
+                484
+            ],
+            [
+                459,
+                474
+            ]
+        ],
+        [
+            39,
+            87,
+            [
+                454,
+                484
+            ],
+            [
+                464,
+                464
+            ]
+        ],
+        [
+            40,
+            60,
+            [
+                520,
+                484
+            ],
+            [
+                525,
+                474
+            ]
+        ],
+        [
+            40,
+            88,
+            [
+                520,
+                484
+            ],
+            [
+                530,
+                464
+            ]
+        ],
+        [
+            41,
+            61,
+            [
+                547,
+                511
+            ],
+            [
+                555,
+                504
+            ]
+        ],
+        [
+            41,
+            89,
+            [
+                547,
+                511
+            ],
+            [
+                563,
+                497
+            ]
+        ],
+        [
+            42,
+            62,
+            [
+                582,
+                546
+            ],
+            [
+                590,
+                539
+            ]
+        ],
+        [
+            42,
+            90,
+            [
+                582,
+                546
+            ],
+            [
+                598,
+                532
+            ]
+        ],
+        [
+            43,
+            63,
+            [
+                622,
+                586
+            ],
+            [
+                630,
+                579
+            ]
+        ],
+        [
+            43,
+            71,
+            [
+                622,
+                586
+            ],
+            [
+                638,
+                572
+            ]
+        ],
+        [
+            44,
+            64,
+            [
+                652,
+                616
+            ],
+            [
+                660,
+                609
+            ]
+        ],
+        [
+            44,
+            72,
+            [
+                652,
+                616
+            ],
+            [
+                668,
+                602
+            ]
+        ],
+        [
+            45,
+            65,
+            [
+                682,
+                646
+            ],
+            [
+                690,
+                639
+            ]
+        ],
+        [
+            45,
+            73,
+            [
+                682,
+                646
+            ],
+            [
+                698,
+                632
+            ]
+        ],
+        [
+            46,
+            66,
+            [
+                709,
+                673
+            ],
+            [
+                720,
+                668
+            ]
+        ],
+        [
+            46,
+            74,
+            [
+                709,
+                673
+            ],
+            [
+                731,
+                663
+            ]
+        ],
+        [
+            47,
+            67,
+            [
+                709,
+                724
+            ],
+            [
+                720,
+                724
+            ]
+        ],
+        [
+            47,
+            75,
+            [
+                709,
+                724
+            ],
+            [
+                731,
+                724
+            ]
+        ],
+        [
+            48,
+            68,
+            [
+                709,
+                779
+            ],
+            [
+                720,
+                779
+            ]
+        ],
+        [
+            48,
+            76,
+            [
+                709,
+                779
+            ],
+            [
+                731,
+                779
+            ]
+        ],
+        [
+            49,
+            77,
+            [
+                500,
+                164
+            ],
+            [
+                510,
+                174
+            ]
+        ],
+        [
+            50,
+            78,
+            [
+                470,
+                194
+            ],
+            [
+                480,
+                204
+            ]
+        ],
+        [
+            51,
+            79,
+            [
+                545,
+                209
+            ],
+            [
+                555,
+                219
+            ]
+        ],
+        [
+            52,
+            80,
+            [
+                515,
+                239
+            ],
+            [
+                525,
+                249
+            ]
+        ],
+        [
+            53,
+            81,
+            [
+                470,
+                239
+            ],
+            [
+                480,
+                249
+            ]
+        ],
+        [
+            54,
+            82,
+            [
+                435,
+                274
+            ],
+            [
+                443,
+                282
+            ]
+        ],
+        [
+            55,
+            83,
+            [
+                405,
+                309
+            ],
+            [
+                415,
+                309
+            ]
+        ],
+        [
+            56,
+            84,
+            [
+                405,
+                369
+            ],
+            [
+                415,
+                369
+            ]
+        ],
+        [
+            57,
+            85,
+            [
+                405,
+                420
+            ],
+            [
+                415,
+                415
+            ]
+        ],
+        [
+            58,
+            86,
+            [
+                432,
+                447
+            ],
+            [
+                440,
+                440
+            ]
+        ],
+        [
+            59,
+            87,
+            [
+                459,
+                474
+            ],
+            [
+                464,
+                464
+            ]
+        ],
+        [
+            60,
+            88,
+            [
+                525,
+                474
+            ],
+            [
+                530,
+                464
+            ]
+        ],
+        [
+            61,
+            89,
+            [
+                555,
+                504
+            ],
+            [
+                563,
+                497
+            ]
+        ],
+        [
+            62,
+            90,
+            [
+                590,
+                539
+            ],
+            [
+                598,
+                532
+            ]
+        ],
+        [
+            63,
+            71,
+            [
+                630,
+                579
+            ],
+            [
+                638,
+                572
+            ]
+        ],
+        [
+            64,
+            72,
+            [
+                660,
+                609
+            ],
+            [
+                668,
+                602
+            ]
+        ],
+        [
+            65,
+            73,
+            [
+                690,
+                639
+            ],
+            [
+                698,
+                632
+            ]
+        ],
+        [
+            66,
+            74,
+            [
+                720,
+                668
+            ],
+            [
+                731,
+                663
+            ]
+        ],
+        [
+            67,
+            75,
+            [
+                720,
+                724
+            ],
+            [
+                731,
+                724
+            ]
+        ],
+        [
+            68,
+            76,
+            [
+                720,
+                779
+            ],
+            [
+                731,
+                779
+            ]
+        ],
+        [
+            69,
+            92,
+            [
+                689,
+                503
+            ],
+            [
+                680,
+                494
+            ]
+        ],
+        [
+            70,
+            91,
+            [
+                659,
+                533
+            ],
+            [
+                650,
+                524
+            ]
+        ],
+        [
+            93,
+            0,
+            [
+                407,
+                132
+            ],
+            [
+                416,
+                140
+            ]
+        ],
+        [
+            93,
+            31,
+            [
+                407,
+                132
+            ],
+            [
+                425,
+                148
+            ]
+        ],
+        [
+            94,
+            1,
+            [
+                385,
+                154
+            ],
+            [
+                394,
+                162
+            ]
+        ],
+        [
+            94,
+            32,
+            [
+                385,
+                154
+            ],
+            [
+                403,
+                170
+            ]
+        ],
+        [
+            95,
+            2,
+            [
+                362,
+                177
+            ],
+            [
+                371,
+                185
+            ]
+        ],
+        [
+            95,
+            33,
+            [
+                362,
+                177
+            ],
+            [
+                380,
+                193
+            ]
+        ],
+        [
+            96,
+            3,
+            [
+                338,
+                201
+            ],
+            [
+                347,
+                209
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 55,
+    "upper_case": false,
+    "width": 881,
+    "word_wrap": false
+}

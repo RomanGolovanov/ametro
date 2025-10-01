@@ -1,0 +1,100 @@
+{
+    "city_id": 4055815,
+    "comments_text_id": 54,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 53,
+    "file": "Cleveland.zip",
+    "latitude": 33.99093,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": -86.57749,
+    "map_id": "Cleveland.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 50,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 51
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/1.json",
+            "name": "1",
+            "name_text_id": 18,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 52
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/2.json",
+            "name": "2",
+            "name_text_id": 36,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 52
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/3.json",
+            "name": "3",
+            "name_text_id": 49,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 52
+        }
+    ],
+    "timestamp": 1754434800.0,
+    "transport_types": [
+        "Метро"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Метро"
+        }
+    ]
+}

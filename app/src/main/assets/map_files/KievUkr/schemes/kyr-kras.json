@@ -1,0 +1,735 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 650,
+    "images": [
+        "res/schemes/kyr-kras.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "CC3333",
+            "line_width": 9,
+            "name": "Святошинсько-Броворська",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Академмістечко",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Житомирська",
+                    "rect": null,
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Святошин",
+                    "rect": null,
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Нивки",
+                    "rect": null,
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Берестейська",
+                    "rect": null,
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Шулявська",
+                    "rect": null,
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Політехнічний інститут",
+                    "rect": null,
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Вокзальна",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Університет",
+                    "rect": null,
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Театральна",
+                    "rect": null,
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        181,
+                        340
+                    ],
+                    "is_working": true,
+                    "name": "Хрещатик",
+                    "rect": [
+                        90,
+                        330,
+                        72,
+                        20
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Арсенальна",
+                    "rect": null,
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Дніпро",
+                    "rect": null,
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Гідропарк",
+                    "rect": null,
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Лівобережна",
+                    "rect": null,
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Дарниця",
+                    "rect": null,
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Чернігівська",
+                    "rect": null,
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Лісова",
+                    "rect": null,
+                    "text_id": 17,
+                    "uid": 17
+                }
+            ],
+            "text_id": 18
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "333399",
+            "line_width": 9,
+            "name": "Куренівська-Червоноармійська",
+            "segments": [
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            200,
+                            100
+                        ],
+                        [
+                            200,
+                            60
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            200,
+                            140
+                        ],
+                        [
+                            200,
+                            100
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            200,
+                            180
+                        ],
+                        [
+                            200,
+                            140
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            200,
+                            220
+                        ],
+                        [
+                            200,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            200,
+                            260
+                        ],
+                        [
+                            200,
+                            220
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    23,
+                    24,
+                    [
+                        [
+                            200,
+                            300
+                        ],
+                        [
+                            200,
+                            260
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            200,
+                            340
+                        ],
+                        [
+                            200,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    25,
+                    26,
+                    [
+                        [
+                            200,
+                            380
+                        ],
+                        [
+                            200,
+                            340
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    26,
+                    27,
+                    [
+                        [
+                            200,
+                            414
+                        ],
+                        [
+                            200,
+                            380
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    27,
+                    28,
+                    [
+                        [
+                            200,
+                            460
+                        ],
+                        [
+                            200,
+                            414
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            200,
+                            500
+                        ],
+                        [
+                            200,
+                            460
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        200,
+                        60
+                    ],
+                    "is_working": true,
+                    "name": "Героїв Дніпра",
+                    "rect": [
+                        215,
+                        50,
+                        100,
+                        20
+                    ],
+                    "text_id": 19,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        200,
+                        100
+                    ],
+                    "is_working": true,
+                    "name": "Мінська",
+                    "rect": [
+                        215,
+                        90,
+                        100,
+                        20
+                    ],
+                    "text_id": 20,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        200,
+                        140
+                    ],
+                    "is_working": true,
+                    "name": "Оболонь",
+                    "rect": [
+                        215,
+                        130,
+                        100,
+                        20
+                    ],
+                    "text_id": 21,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        200,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Петрівка",
+                    "rect": [
+                        215,
+                        170,
+                        100,
+                        20
+                    ],
+                    "text_id": 22,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        200,
+                        220
+                    ],
+                    "is_working": true,
+                    "name": "Тараса Шевченка",
+                    "rect": [
+                        215,
+                        210,
+                        100,
+                        20
+                    ],
+                    "text_id": 23,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        200,
+                        260
+                    ],
+                    "is_working": true,
+                    "name": "Контрактова площа",
+                    "rect": [
+                        215,
+                        250,
+                        100,
+                        20
+                    ],
+                    "text_id": 24,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        200,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Поштова площа",
+                    "rect": [
+                        215,
+                        290,
+                        100,
+                        20
+                    ],
+                    "text_id": 25,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        200,
+                        340
+                    ],
+                    "is_working": true,
+                    "name": "Майдан Незалежності",
+                    "rect": [
+                        215,
+                        330,
+                        100,
+                        20
+                    ],
+                    "text_id": 26,
+                    "uid": 25
+                },
+                {
+                    "coord": [
+                        200,
+                        380
+                    ],
+                    "is_working": true,
+                    "name": "Площа Льва Толстого",
+                    "rect": [
+                        215,
+                        370,
+                        100,
+                        20
+                    ],
+                    "text_id": 27,
+                    "uid": 26
+                },
+                {
+                    "coord": [
+                        200,
+                        414
+                    ],
+                    "is_working": true,
+                    "name": "Олімпійська",
+                    "rect": [
+                        215,
+                        410,
+                        100,
+                        20
+                    ],
+                    "text_id": 28,
+                    "uid": 27
+                },
+                {
+                    "coord": [
+                        200,
+                        460
+                    ],
+                    "is_working": true,
+                    "name": "Палац \"Україна\"",
+                    "rect": [
+                        215,
+                        450,
+                        100,
+                        20
+                    ],
+                    "text_id": 29,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        200,
+                        500
+                    ],
+                    "is_working": true,
+                    "name": "Либідська",
+                    "rect": [
+                        215,
+                        490,
+                        100,
+                        20
+                    ],
+                    "text_id": 30,
+                    "uid": 29
+                }
+            ],
+            "text_id": 31
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "339933",
+            "line_width": 9,
+            "name": "Сирецько-Печерська",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Сирець",
+                    "rect": null,
+                    "text_id": 32,
+                    "uid": 30
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Дорогожичі",
+                    "rect": null,
+                    "text_id": 33,
+                    "uid": 31
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Лук'янівська",
+                    "rect": null,
+                    "text_id": 34,
+                    "uid": 32
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Золоті ворота",
+                    "rect": null,
+                    "text_id": 35,
+                    "uid": 33
+                },
+                {
+                    "coord": [
+                        181,
+                        380
+                    ],
+                    "is_working": true,
+                    "name": "Палац спорту",
+                    "rect": [
+                        90,
+                        370,
+                        72,
+                        20
+                    ],
+                    "text_id": 36,
+                    "uid": 34
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Кловьска",
+                    "rect": null,
+                    "text_id": 37,
+                    "uid": 35
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Печерська",
+                    "rect": null,
+                    "text_id": 38,
+                    "uid": 36
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Дружби народів",
+                    "rect": null,
+                    "text_id": 39,
+                    "uid": 37
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Видубичі",
+                    "rect": null,
+                    "text_id": 40,
+                    "uid": 38
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Славутич",
+                    "rect": null,
+                    "text_id": 41,
+                    "uid": 39
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Осокорки",
+                    "rect": null,
+                    "text_id": 42,
+                    "uid": 40
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Позняки",
+                    "rect": null,
+                    "text_id": 43,
+                    "uid": 41
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Харківська",
+                    "rect": null,
+                    "text_id": 44,
+                    "uid": 42
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Вирлиця",
+                    "rect": null,
+                    "text_id": 45,
+                    "uid": 43
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Бориспільська",
+                    "rect": null,
+                    "text_id": 46,
+                    "uid": 44
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Червоний хутір",
+                    "rect": null,
+                    "text_id": 47,
+                    "uid": 45
+                }
+            ],
+            "text_id": 48
+        }
+    ],
+    "lines_width": 9,
+    "name": "kyr-kras",
+    "name_text_id": 31,
+    "stations_diameter": 16.0,
+    "transfers": [
+        [
+            10,
+            25,
+            [
+                181,
+                340
+            ],
+            [
+                200,
+                340
+            ]
+        ],
+        [
+            33,
+            9,
+            null,
+            null
+        ],
+        [
+            26,
+            34,
+            [
+                200,
+                380
+            ],
+            [
+                181,
+                380
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "Метро",
+    "type_text_id": 294,
+    "upper_case": true,
+    "width": 350,
+    "word_wrap": true
+}

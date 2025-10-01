@@ -1,0 +1,2022 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 690,
+    "images": [
+        "res/schemes/l3.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "E12734",
+            "line_width": 8,
+            "name": "L1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            65,
+                            510
+                        ],
+                        [
+                            65,
+                            540
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            65,
+                            480
+                        ],
+                        [
+                            65,
+                            510
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            65,
+                            450
+                        ],
+                        [
+                            65,
+                            480
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            65,
+                            420
+                        ],
+                        [
+                            65,
+                            450
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            65,
+                            360
+                        ],
+                        [
+                            65,
+                            420
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            65,
+                            60
+                        ],
+                        [
+                            65,
+                            360
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        65,
+                        540
+                    ],
+                    "is_working": true,
+                    "name": "Luceros",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        65,
+                        510
+                    ],
+                    "is_working": true,
+                    "name": "Mercado",
+                    "rect": null,
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        65,
+                        480
+                    ],
+                    "is_working": true,
+                    "name": "MARQ-CASTILLO",
+                    "rect": null,
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        65,
+                        450
+                    ],
+                    "is_working": true,
+                    "name": "Sangueta",
+                    "rect": null,
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        65,
+                        420
+                    ],
+                    "is_working": true,
+                    "name": "La Isleta",
+                    "rect": null,
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        65,
+                        360
+                    ],
+                    "is_working": true,
+                    "name": "Lucentum",
+                    "rect": null,
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        65,
+                        60
+                    ],
+                    "is_working": true,
+                    "name": "El Campello",
+                    "rect": null,
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Poble Espanyol",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Amerador",
+                    "rect": null,
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Coveta Fuma",
+                    "rect": null,
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Cala Piteres",
+                    "rect": null,
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Venta Lanuza",
+                    "rect": null,
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Paradis",
+                    "rect": null,
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "La Vila Joiosa",
+                    "rect": null,
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Creueta",
+                    "rect": null,
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Costera Pastor",
+                    "rect": null,
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Hospital Vila",
+                    "rect": null,
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "C.C La Marina-Finestrat",
+                    "rect": null,
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Terra Mitica",
+                    "rect": null,
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Benidorm",
+                    "rect": null,
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Benidorm Intermodal",
+                    "rect": null,
+                    "text_id": 20,
+                    "uid": 20
+                }
+            ],
+            "text_id": 21
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "11AB4B",
+            "line_width": 8,
+            "name": "L2",
+            "segments": [
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            25,
+                            510
+                        ],
+                        [
+                            25,
+                            540
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            25,
+                            480
+                        ],
+                        [
+                            25,
+                            510
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        25,
+                        540
+                    ],
+                    "is_working": true,
+                    "name": "Luceros",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        25,
+                        510
+                    ],
+                    "is_working": true,
+                    "name": "Mercado",
+                    "rect": null,
+                    "text_id": 1,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        25,
+                        480
+                    ],
+                    "is_working": true,
+                    "name": "MARQ-CASTILLO",
+                    "rect": null,
+                    "text_id": 2,
+                    "uid": 23
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "La Goteta-Plaza Mar 2",
+                    "rect": null,
+                    "text_id": 22,
+                    "uid": 24
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Bulevar del Pla",
+                    "rect": null,
+                    "text_id": 23,
+                    "uid": 25
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Garbinet",
+                    "rect": null,
+                    "text_id": 24,
+                    "uid": 26
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Hospital",
+                    "rect": null,
+                    "text_id": 25,
+                    "uid": 27
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Maestro Alonso",
+                    "rect": null,
+                    "text_id": 26,
+                    "uid": 28
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Pintor Gaston Castello",
+                    "rect": null,
+                    "text_id": 27,
+                    "uid": 29
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Virgen del Remedio",
+                    "rect": null,
+                    "text_id": 28,
+                    "uid": 30
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ciudad Jardin",
+                    "rect": null,
+                    "text_id": 29,
+                    "uid": 31
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Santa Isabel",
+                    "rect": null,
+                    "text_id": 30,
+                    "uid": 32
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Universitat",
+                    "rect": null,
+                    "text_id": 31,
+                    "uid": 33
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sant Vicent del Raspeig",
+                    "rect": null,
+                    "text_id": 32,
+                    "uid": 34
+                }
+            ],
+            "text_id": 33
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "FBC409",
+            "line_color": "FBC409",
+            "line_width": 8,
+            "name": "L3",
+            "segments": [
+                [
+                    35,
+                    36,
+                    [
+                        [
+                            85,
+                            510
+                        ],
+                        [
+                            85,
+                            540
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    36,
+                    37,
+                    [
+                        [
+                            85,
+                            480
+                        ],
+                        [
+                            85,
+                            510
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    37,
+                    38,
+                    [
+                        [
+                            85,
+                            450
+                        ],
+                        [
+                            85,
+                            480
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    38,
+                    39,
+                    [
+                        [
+                            85,
+                            420
+                        ],
+                        [
+                            85,
+                            450
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    39,
+                    40,
+                    [
+                        [
+                            85,
+                            390
+                        ],
+                        [
+                            85,
+                            420
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    40,
+                    41,
+                    [
+                        [
+                            85,
+                            360
+                        ],
+                        [
+                            85,
+                            390
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    41,
+                    42,
+                    [
+                        [
+                            85,
+                            330
+                        ],
+                        [
+                            85,
+                            360
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    42,
+                    43,
+                    [
+                        [
+                            85,
+                            300
+                        ],
+                        [
+                            85,
+                            330
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    43,
+                    44,
+                    [
+                        [
+                            85,
+                            270
+                        ],
+                        [
+                            85,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    44,
+                    45,
+                    [
+                        [
+                            85,
+                            240
+                        ],
+                        [
+                            85,
+                            270
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    45,
+                    46,
+                    [
+                        [
+                            85,
+                            210
+                        ],
+                        [
+                            85,
+                            240
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    46,
+                    47,
+                    [
+                        [
+                            85,
+                            180
+                        ],
+                        [
+                            85,
+                            210
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    47,
+                    48,
+                    [
+                        [
+                            85,
+                            150
+                        ],
+                        [
+                            85,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    48,
+                    49,
+                    [
+                        [
+                            85,
+                            120
+                        ],
+                        [
+                            85,
+                            150
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    49,
+                    50,
+                    [
+                        [
+                            85,
+                            90
+                        ],
+                        [
+                            85,
+                            120
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    50,
+                    51,
+                    [
+                        [
+                            85,
+                            60
+                        ],
+                        [
+                            85,
+                            90
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        85,
+                        540
+                    ],
+                    "is_working": true,
+                    "name": "Luceros",
+                    "rect": [
+                        100,
+                        533,
+                        42,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 35
+                },
+                {
+                    "coord": [
+                        85,
+                        510
+                    ],
+                    "is_working": true,
+                    "name": "Mercado",
+                    "rect": [
+                        100,
+                        503,
+                        45,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 36
+                },
+                {
+                    "coord": [
+                        85,
+                        480
+                    ],
+                    "is_working": true,
+                    "name": "MARQ-CASTILLO",
+                    "rect": [
+                        100,
+                        473,
+                        90,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 37
+                },
+                {
+                    "coord": [
+                        85,
+                        450
+                    ],
+                    "is_working": true,
+                    "name": "Sangueta",
+                    "rect": [
+                        100,
+                        443,
+                        48,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 38
+                },
+                {
+                    "coord": [
+                        85,
+                        420
+                    ],
+                    "is_working": true,
+                    "name": "La Isleta",
+                    "rect": [
+                        100,
+                        413,
+                        44,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 39
+                },
+                {
+                    "coord": [
+                        85,
+                        390
+                    ],
+                    "is_working": true,
+                    "name": "Albufereta",
+                    "rect": [
+                        100,
+                        383,
+                        53,
+                        15
+                    ],
+                    "text_id": 34,
+                    "uid": 40
+                },
+                {
+                    "coord": [
+                        85,
+                        360
+                    ],
+                    "is_working": true,
+                    "name": "Lucentum",
+                    "rect": [
+                        100,
+                        353,
+                        50,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 41
+                },
+                {
+                    "coord": [
+                        85,
+                        330
+                    ],
+                    "is_working": true,
+                    "name": "Condomina",
+                    "rect": [
+                        100,
+                        323,
+                        58,
+                        15
+                    ],
+                    "text_id": 35,
+                    "uid": 42
+                },
+                {
+                    "coord": [
+                        85,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Campo de Golf",
+                    "rect": [
+                        100,
+                        293,
+                        75,
+                        15
+                    ],
+                    "text_id": 36,
+                    "uid": 43
+                },
+                {
+                    "coord": [
+                        85,
+                        270
+                    ],
+                    "is_working": true,
+                    "name": "Costa Blanca",
+                    "rect": [
+                        100,
+                        263,
+                        69,
+                        15
+                    ],
+                    "text_id": 37,
+                    "uid": 44
+                },
+                {
+                    "coord": [
+                        85,
+                        240
+                    ],
+                    "is_working": true,
+                    "name": "Carrabiners",
+                    "rect": [
+                        100,
+                        233,
+                        61,
+                        15
+                    ],
+                    "text_id": 38,
+                    "uid": 45
+                },
+                {
+                    "coord": [
+                        85,
+                        210
+                    ],
+                    "is_working": true,
+                    "name": "Muchavista",
+                    "rect": [
+                        100,
+                        203,
+                        59,
+                        15
+                    ],
+                    "text_id": 39,
+                    "uid": 46
+                },
+                {
+                    "coord": [
+                        85,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Les Llances",
+                    "rect": [
+                        100,
+                        173,
+                        62,
+                        15
+                    ],
+                    "text_id": 40,
+                    "uid": 47
+                },
+                {
+                    "coord": [
+                        85,
+                        150
+                    ],
+                    "is_working": true,
+                    "name": "Fabraquer",
+                    "rect": [
+                        100,
+                        143,
+                        52,
+                        15
+                    ],
+                    "text_id": 41,
+                    "uid": 48
+                },
+                {
+                    "coord": [
+                        85,
+                        120
+                    ],
+                    "is_working": true,
+                    "name": "Salesians",
+                    "rect": [
+                        100,
+                        113,
+                        51,
+                        15
+                    ],
+                    "text_id": 42,
+                    "uid": 49
+                },
+                {
+                    "coord": [
+                        85,
+                        90
+                    ],
+                    "is_working": true,
+                    "name": "Pla Barraques",
+                    "rect": [
+                        100,
+                        83,
+                        73,
+                        15
+                    ],
+                    "text_id": 43,
+                    "uid": 50
+                },
+                {
+                    "coord": [
+                        85,
+                        60
+                    ],
+                    "is_working": true,
+                    "name": "El Campello",
+                    "rect": [
+                        100,
+                        53,
+                        62,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 51
+                }
+            ],
+            "text_id": 44
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "BC94C8",
+            "line_width": 8,
+            "name": "L4",
+            "segments": [
+                [
+                    52,
+                    53,
+                    [
+                        [
+                            45,
+                            510
+                        ],
+                        [
+                            45,
+                            540
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    53,
+                    54,
+                    [
+                        [
+                            45,
+                            480
+                        ],
+                        [
+                            45,
+                            510
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    54,
+                    55,
+                    [
+                        [
+                            45,
+                            450
+                        ],
+                        [
+                            45,
+                            480
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    55,
+                    56,
+                    [
+                        [
+                            45,
+                            420
+                        ],
+                        [
+                            45,
+                            450
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    56,
+                    57,
+                    [
+                        [
+                            45,
+                            390
+                        ],
+                        [
+                            45,
+                            420
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    57,
+                    58,
+                    [
+                        [
+                            45,
+                            360
+                        ],
+                        [
+                            45,
+                            390
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        45,
+                        540
+                    ],
+                    "is_working": true,
+                    "name": "Luceros",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 52
+                },
+                {
+                    "coord": [
+                        45,
+                        510
+                    ],
+                    "is_working": true,
+                    "name": "Mercado",
+                    "rect": null,
+                    "text_id": 1,
+                    "uid": 53
+                },
+                {
+                    "coord": [
+                        45,
+                        480
+                    ],
+                    "is_working": true,
+                    "name": "MARQ-CASTILLO",
+                    "rect": null,
+                    "text_id": 2,
+                    "uid": 54
+                },
+                {
+                    "coord": [
+                        45,
+                        450
+                    ],
+                    "is_working": true,
+                    "name": "Sangueta",
+                    "rect": null,
+                    "text_id": 3,
+                    "uid": 55
+                },
+                {
+                    "coord": [
+                        45,
+                        420
+                    ],
+                    "is_working": true,
+                    "name": "La Isleta",
+                    "rect": null,
+                    "text_id": 4,
+                    "uid": 56
+                },
+                {
+                    "coord": [
+                        45,
+                        390
+                    ],
+                    "is_working": true,
+                    "name": "Albufereta",
+                    "rect": null,
+                    "text_id": 34,
+                    "uid": 57
+                },
+                {
+                    "coord": [
+                        45,
+                        360
+                    ],
+                    "is_working": true,
+                    "name": "Lucentum",
+                    "rect": null,
+                    "text_id": 5,
+                    "uid": 58
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Miriam Blasco",
+                    "rect": null,
+                    "text_id": 45,
+                    "uid": 59
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sergio Cardell",
+                    "rect": null,
+                    "text_id": 46,
+                    "uid": 60
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Tridente",
+                    "rect": null,
+                    "text_id": 47,
+                    "uid": 61
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Av. Naciones",
+                    "rect": null,
+                    "text_id": 48,
+                    "uid": 62
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Cabo Huertas",
+                    "rect": null,
+                    "text_id": 49,
+                    "uid": 63
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Av. Benidorm",
+                    "rect": null,
+                    "text_id": 50,
+                    "uid": 64
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Londres",
+                    "rect": null,
+                    "text_id": 51,
+                    "uid": 65
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Pl. La Coruna",
+                    "rect": null,
+                    "text_id": 52,
+                    "uid": 66
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Instituto",
+                    "rect": null,
+                    "text_id": 53,
+                    "uid": 67
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "P. Escandinavos",
+                    "rect": null,
+                    "text_id": 54,
+                    "uid": 68
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Holanda",
+                    "rect": null,
+                    "text_id": 55,
+                    "uid": 69
+                }
+            ],
+            "text_id": 56
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "224F9B",
+            "line_width": 8,
+            "name": "L5",
+            "segments": [
+                [
+                    72,
+                    73,
+                    [
+                        [
+                            25,
+                            420
+                        ],
+                        [
+                            25,
+                            450
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    73,
+                    74,
+                    [
+                        [
+                            25,
+                            390
+                        ],
+                        [
+                            25,
+                            420
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    74,
+                    75,
+                    [
+                        [
+                            25,
+                            360
+                        ],
+                        [
+                            25,
+                            390
+                        ]
+                    ],
+                    false
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Porta Del Mar",
+                    "rect": null,
+                    "text_id": 57,
+                    "uid": 70
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "La Marina",
+                    "rect": null,
+                    "text_id": 58,
+                    "uid": 71
+                },
+                {
+                    "coord": [
+                        25,
+                        450
+                    ],
+                    "is_working": false,
+                    "name": "Sangueta",
+                    "rect": null,
+                    "text_id": 3,
+                    "uid": 72
+                },
+                {
+                    "coord": [
+                        25,
+                        420
+                    ],
+                    "is_working": false,
+                    "name": "La Isleta",
+                    "rect": null,
+                    "text_id": 4,
+                    "uid": 73
+                },
+                {
+                    "coord": [
+                        25,
+                        390
+                    ],
+                    "is_working": false,
+                    "name": "Albufereta",
+                    "rect": null,
+                    "text_id": 34,
+                    "uid": 74
+                },
+                {
+                    "coord": [
+                        25,
+                        360
+                    ],
+                    "is_working": false,
+                    "name": "Lucentum",
+                    "rect": null,
+                    "text_id": 5,
+                    "uid": 75
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Miriam Blasco",
+                    "rect": null,
+                    "text_id": 45,
+                    "uid": 76
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Sergio Cardell",
+                    "rect": null,
+                    "text_id": 46,
+                    "uid": 77
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Tridente",
+                    "rect": null,
+                    "text_id": 47,
+                    "uid": 78
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Av. Naciones",
+                    "rect": null,
+                    "text_id": 48,
+                    "uid": 79
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Cabo Huertas",
+                    "rect": null,
+                    "text_id": 49,
+                    "uid": 80
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Av. Benidorm",
+                    "rect": null,
+                    "text_id": 50,
+                    "uid": 81
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Londres",
+                    "rect": null,
+                    "text_id": 51,
+                    "uid": 82
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Pl. La Coruna",
+                    "rect": null,
+                    "text_id": 52,
+                    "uid": 83
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Instituto",
+                    "rect": null,
+                    "text_id": 53,
+                    "uid": 84
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "P. Escandinavos",
+                    "rect": null,
+                    "text_id": 54,
+                    "uid": 85
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Holanda",
+                    "rect": null,
+                    "text_id": 55,
+                    "uid": 86
+                }
+            ],
+            "text_id": 59
+        }
+    ],
+    "lines_width": 8,
+    "name": "l3",
+    "name_text_id": 44,
+    "stations_diameter": 12.0,
+    "transfers": [
+        [
+            40,
+            57,
+            [
+                85,
+                390
+            ],
+            [
+                45,
+                390
+            ]
+        ],
+        [
+            40,
+            74,
+            [
+                85,
+                390
+            ],
+            [
+                25,
+                390
+            ]
+        ],
+        [
+            57,
+            74,
+            [
+                45,
+                390
+            ],
+            [
+                25,
+                390
+            ]
+        ],
+        [
+            64,
+            81,
+            null,
+            null
+        ],
+        [
+            62,
+            79,
+            null,
+            null
+        ],
+        [
+            63,
+            80,
+            null,
+            null
+        ],
+        [
+            6,
+            51,
+            [
+                65,
+                60
+            ],
+            [
+                85,
+                60
+            ]
+        ],
+        [
+            69,
+            86,
+            null,
+            null
+        ],
+        [
+            67,
+            84,
+            null,
+            null
+        ],
+        [
+            4,
+            39,
+            [
+                65,
+                420
+            ],
+            [
+                85,
+                420
+            ]
+        ],
+        [
+            4,
+            56,
+            [
+                65,
+                420
+            ],
+            [
+                45,
+                420
+            ]
+        ],
+        [
+            4,
+            73,
+            [
+                65,
+                420
+            ],
+            [
+                25,
+                420
+            ]
+        ],
+        [
+            39,
+            56,
+            [
+                85,
+                420
+            ],
+            [
+                45,
+                420
+            ]
+        ],
+        [
+            39,
+            73,
+            [
+                85,
+                420
+            ],
+            [
+                25,
+                420
+            ]
+        ],
+        [
+            56,
+            73,
+            [
+                45,
+                420
+            ],
+            [
+                25,
+                420
+            ]
+        ],
+        [
+            65,
+            82,
+            null,
+            null
+        ],
+        [
+            5,
+            41,
+            [
+                65,
+                360
+            ],
+            [
+                85,
+                360
+            ]
+        ],
+        [
+            5,
+            58,
+            [
+                65,
+                360
+            ],
+            [
+                45,
+                360
+            ]
+        ],
+        [
+            5,
+            75,
+            [
+                65,
+                360
+            ],
+            [
+                25,
+                360
+            ]
+        ],
+        [
+            41,
+            58,
+            [
+                85,
+                360
+            ],
+            [
+                45,
+                360
+            ]
+        ],
+        [
+            41,
+            75,
+            [
+                85,
+                360
+            ],
+            [
+                25,
+                360
+            ]
+        ],
+        [
+            58,
+            75,
+            [
+                45,
+                360
+            ],
+            [
+                25,
+                360
+            ]
+        ],
+        [
+            0,
+            21,
+            [
+                65,
+                540
+            ],
+            [
+                25,
+                540
+            ]
+        ],
+        [
+            0,
+            35,
+            [
+                65,
+                540
+            ],
+            [
+                85,
+                540
+            ]
+        ],
+        [
+            0,
+            52,
+            [
+                65,
+                540
+            ],
+            [
+                45,
+                540
+            ]
+        ],
+        [
+            21,
+            35,
+            [
+                25,
+                540
+            ],
+            [
+                85,
+                540
+            ]
+        ],
+        [
+            21,
+            52,
+            [
+                25,
+                540
+            ],
+            [
+                45,
+                540
+            ]
+        ],
+        [
+            35,
+            52,
+            [
+                85,
+                540
+            ],
+            [
+                45,
+                540
+            ]
+        ],
+        [
+            2,
+            23,
+            [
+                65,
+                480
+            ],
+            [
+                25,
+                480
+            ]
+        ],
+        [
+            2,
+            37,
+            [
+                65,
+                480
+            ],
+            [
+                85,
+                480
+            ]
+        ],
+        [
+            2,
+            54,
+            [
+                65,
+                480
+            ],
+            [
+                45,
+                480
+            ]
+        ],
+        [
+            23,
+            37,
+            [
+                25,
+                480
+            ],
+            [
+                85,
+                480
+            ]
+        ],
+        [
+            23,
+            54,
+            [
+                25,
+                480
+            ],
+            [
+                45,
+                480
+            ]
+        ],
+        [
+            37,
+            54,
+            [
+                85,
+                480
+            ],
+            [
+                45,
+                480
+            ]
+        ],
+        [
+            1,
+            22,
+            [
+                65,
+                510
+            ],
+            [
+                25,
+                510
+            ]
+        ],
+        [
+            1,
+            36,
+            [
+                65,
+                510
+            ],
+            [
+                85,
+                510
+            ]
+        ],
+        [
+            1,
+            53,
+            [
+                65,
+                510
+            ],
+            [
+                45,
+                510
+            ]
+        ],
+        [
+            22,
+            36,
+            [
+                25,
+                510
+            ],
+            [
+                85,
+                510
+            ]
+        ],
+        [
+            22,
+            53,
+            [
+                25,
+                510
+            ],
+            [
+                45,
+                510
+            ]
+        ],
+        [
+            36,
+            53,
+            [
+                85,
+                510
+            ],
+            [
+                45,
+                510
+            ]
+        ],
+        [
+            59,
+            76,
+            null,
+            null
+        ],
+        [
+            68,
+            85,
+            null,
+            null
+        ],
+        [
+            66,
+            83,
+            null,
+            null
+        ],
+        [
+            3,
+            38,
+            [
+                65,
+                450
+            ],
+            [
+                85,
+                450
+            ]
+        ],
+        [
+            3,
+            55,
+            [
+                65,
+                450
+            ],
+            [
+                45,
+                450
+            ]
+        ],
+        [
+            3,
+            72,
+            [
+                65,
+                450
+            ],
+            [
+                25,
+                450
+            ]
+        ],
+        [
+            38,
+            55,
+            [
+                85,
+                450
+            ],
+            [
+                45,
+                450
+            ]
+        ],
+        [
+            38,
+            72,
+            [
+                85,
+                450
+            ],
+            [
+                25,
+                450
+            ]
+        ],
+        [
+            55,
+            72,
+            [
+                45,
+                450
+            ],
+            [
+                25,
+                450
+            ]
+        ],
+        [
+            60,
+            77,
+            null,
+            null
+        ],
+        [
+            61,
+            78,
+            null,
+            null
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "Трамвай",
+    "type_text_id": 79,
+    "upper_case": false,
+    "width": 235,
+    "word_wrap": false
+}

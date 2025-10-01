@@ -1,0 +1,927 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 945,
+    "images": [
+        "res/schemes/railways_symu.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "CC3300",
+            "line_width": 9,
+            "name": "Холодногорско-Заводская",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Холодная Гора",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        150,
+                        105
+                    ],
+                    "is_working": true,
+                    "name": "Южный Вокзал",
+                    "rect": [
+                        170,
+                        100,
+                        100,
+                        20
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Центральный рынок",
+                    "rect": null,
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Площадь Конституции",
+                    "rect": null,
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Проспект Гагарина",
+                    "rect": null,
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Спортивная",
+                    "rect": null,
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Завод им. Малышева",
+                    "rect": null,
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Турбоатом",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Дворец спорта",
+                    "rect": null,
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Армейская",
+                    "rect": null,
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Им. А.С.Масельского",
+                    "rect": null,
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Тракторный Завод",
+                    "rect": null,
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Индустриальная",
+                    "rect": null,
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Восточная",
+                    "rect": null,
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Роганская",
+                    "rect": null,
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Южная",
+                    "rect": null,
+                    "text_id": 15,
+                    "uid": 15
+                }
+            ],
+            "text_id": 16
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "AC24AC",
+            "line_width": 9,
+            "name": "Сумской дизель-поезд",
+            "segments": [
+                [
+                    338,
+                    339,
+                    [
+                        [
+                            130,
+                            135
+                        ],
+                        [
+                            130,
+                            105
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    339,
+                    340,
+                    [
+                        [
+                            130,
+                            165
+                        ],
+                        [
+                            130,
+                            135
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    340,
+                    341,
+                    [
+                        [
+                            130,
+                            195
+                        ],
+                        [
+                            130,
+                            165
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    341,
+                    342,
+                    [
+                        [
+                            130,
+                            225
+                        ],
+                        [
+                            130,
+                            195
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    342,
+                    343,
+                    [
+                        [
+                            130,
+                            255
+                        ],
+                        [
+                            130,
+                            225
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    343,
+                    344,
+                    [
+                        [
+                            130,
+                            285
+                        ],
+                        [
+                            130,
+                            255
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    344,
+                    345,
+                    [
+                        [
+                            130,
+                            315
+                        ],
+                        [
+                            130,
+                            285
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    345,
+                    346,
+                    [
+                        [
+                            130,
+                            345
+                        ],
+                        [
+                            130,
+                            315
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    346,
+                    347,
+                    [
+                        [
+                            130,
+                            375
+                        ],
+                        [
+                            130,
+                            345
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    347,
+                    348,
+                    [
+                        [
+                            130,
+                            405
+                        ],
+                        [
+                            130,
+                            375
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    348,
+                    349,
+                    [
+                        [
+                            130,
+                            435
+                        ],
+                        [
+                            130,
+                            405
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    349,
+                    350,
+                    [
+                        [
+                            130,
+                            465
+                        ],
+                        [
+                            130,
+                            435
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    350,
+                    351,
+                    [
+                        [
+                            130,
+                            495
+                        ],
+                        [
+                            130,
+                            465
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    351,
+                    352,
+                    [
+                        [
+                            130,
+                            525
+                        ],
+                        [
+                            130,
+                            495
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    352,
+                    353,
+                    [
+                        [
+                            130,
+                            555
+                        ],
+                        [
+                            130,
+                            525
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    353,
+                    354,
+                    [
+                        [
+                            130,
+                            585
+                        ],
+                        [
+                            130,
+                            555
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    354,
+                    355,
+                    [
+                        [
+                            130,
+                            615
+                        ],
+                        [
+                            130,
+                            585
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    355,
+                    356,
+                    [
+                        [
+                            130,
+                            645
+                        ],
+                        [
+                            130,
+                            615
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    356,
+                    357,
+                    [
+                        [
+                            130,
+                            675
+                        ],
+                        [
+                            130,
+                            645
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    357,
+                    358,
+                    [
+                        [
+                            130,
+                            705
+                        ],
+                        [
+                            130,
+                            675
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    358,
+                    359,
+                    [
+                        [
+                            130,
+                            735
+                        ],
+                        [
+                            130,
+                            705
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    359,
+                    360,
+                    [
+                        [
+                            130,
+                            765
+                        ],
+                        [
+                            130,
+                            735
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    360,
+                    361,
+                    [
+                        [
+                            130,
+                            795
+                        ],
+                        [
+                            130,
+                            765
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        130,
+                        105
+                    ],
+                    "is_working": true,
+                    "name": "Харьков-Пассажирский",
+                    "rect": [
+                        90,
+                        71,
+                        100,
+                        20
+                    ],
+                    "text_id": 38,
+                    "uid": 338
+                },
+                {
+                    "coord": [
+                        130,
+                        135
+                    ],
+                    "is_working": true,
+                    "name": "Парк \"Н\"",
+                    "rect": [
+                        154,
+                        124,
+                        100,
+                        20
+                    ],
+                    "text_id": 313,
+                    "uid": 339
+                },
+                {
+                    "coord": [
+                        130,
+                        165
+                    ],
+                    "is_working": true,
+                    "name": "Новая Бавария",
+                    "rect": [
+                        154,
+                        156,
+                        100,
+                        20
+                    ],
+                    "text_id": 261,
+                    "uid": 340
+                },
+                {
+                    "coord": [
+                        130,
+                        195
+                    ],
+                    "is_working": true,
+                    "name": "Коммунар",
+                    "rect": [
+                        154,
+                        190,
+                        100,
+                        20
+                    ],
+                    "text_id": 303,
+                    "uid": 341
+                },
+                {
+                    "coord": [
+                        130,
+                        225
+                    ],
+                    "is_working": true,
+                    "name": "Люботин",
+                    "rect": [
+                        154,
+                        220,
+                        100,
+                        20
+                    ],
+                    "text_id": 305,
+                    "uid": 342
+                },
+                {
+                    "coord": [
+                        130,
+                        255
+                    ],
+                    "is_working": true,
+                    "name": "Совнаркомовская",
+                    "rect": [
+                        154,
+                        250,
+                        100,
+                        20
+                    ],
+                    "text_id": 307,
+                    "uid": 343
+                },
+                {
+                    "coord": [
+                        130,
+                        285
+                    ],
+                    "is_working": true,
+                    "name": "Мерчик",
+                    "rect": [
+                        154,
+                        278,
+                        100,
+                        20
+                    ],
+                    "text_id": 311,
+                    "uid": 344
+                },
+                {
+                    "coord": [
+                        130,
+                        315
+                    ],
+                    "is_working": true,
+                    "name": "Максимовка",
+                    "rect": [
+                        154,
+                        310,
+                        100,
+                        20
+                    ],
+                    "text_id": 314,
+                    "uid": 345
+                },
+                {
+                    "coord": [
+                        130,
+                        345
+                    ],
+                    "is_working": true,
+                    "name": "Гавриши",
+                    "rect": [
+                        154,
+                        339,
+                        100,
+                        20
+                    ],
+                    "text_id": 315,
+                    "uid": 346
+                },
+                {
+                    "coord": [
+                        130,
+                        375
+                    ],
+                    "is_working": true,
+                    "name": "Богодухов",
+                    "rect": [
+                        154,
+                        367,
+                        100,
+                        20
+                    ],
+                    "text_id": 316,
+                    "uid": 347
+                },
+                {
+                    "coord": [
+                        130,
+                        405
+                    ],
+                    "is_working": true,
+                    "name": "Губаревка",
+                    "rect": [
+                        154,
+                        398,
+                        100,
+                        20
+                    ],
+                    "text_id": 317,
+                    "uid": 348
+                },
+                {
+                    "coord": [
+                        130,
+                        435
+                    ],
+                    "is_working": true,
+                    "name": "Купьеваха",
+                    "rect": [
+                        154,
+                        428,
+                        100,
+                        20
+                    ],
+                    "text_id": 318,
+                    "uid": 349
+                },
+                {
+                    "coord": [
+                        130,
+                        465
+                    ],
+                    "is_working": true,
+                    "name": "Спицын",
+                    "rect": [
+                        154,
+                        460,
+                        100,
+                        20
+                    ],
+                    "text_id": 319,
+                    "uid": 350
+                },
+                {
+                    "coord": [
+                        130,
+                        495
+                    ],
+                    "is_working": true,
+                    "name": "Кириковка",
+                    "rect": [
+                        154,
+                        489,
+                        100,
+                        20
+                    ],
+                    "text_id": 320,
+                    "uid": 351
+                },
+                {
+                    "coord": [
+                        130,
+                        525
+                    ],
+                    "is_working": true,
+                    "name": "Бакировка",
+                    "rect": [
+                        154,
+                        517,
+                        100,
+                        20
+                    ],
+                    "text_id": 321,
+                    "uid": 352
+                },
+                {
+                    "coord": [
+                        130,
+                        555
+                    ],
+                    "is_working": true,
+                    "name": "Смородино",
+                    "rect": [
+                        154,
+                        549,
+                        100,
+                        20
+                    ],
+                    "text_id": 322,
+                    "uid": 353
+                },
+                {
+                    "coord": [
+                        130,
+                        585
+                    ],
+                    "is_working": true,
+                    "name": "Скряговка",
+                    "rect": [
+                        154,
+                        578,
+                        100,
+                        20
+                    ],
+                    "text_id": 323,
+                    "uid": 354
+                },
+                {
+                    "coord": [
+                        130,
+                        615
+                    ],
+                    "is_working": true,
+                    "name": "оп. 98 км",
+                    "rect": [
+                        154,
+                        610,
+                        100,
+                        20
+                    ],
+                    "text_id": 324,
+                    "uid": 355
+                },
+                {
+                    "coord": [
+                        130,
+                        645
+                    ],
+                    "is_working": true,
+                    "name": "Боромля",
+                    "rect": [
+                        153,
+                        637,
+                        100,
+                        20
+                    ],
+                    "text_id": 325,
+                    "uid": 356
+                },
+                {
+                    "coord": [
+                        130,
+                        675
+                    ],
+                    "is_working": true,
+                    "name": "Гребенникова",
+                    "rect": [
+                        154,
+                        670,
+                        100,
+                        20
+                    ],
+                    "text_id": 326,
+                    "uid": 357
+                },
+                {
+                    "coord": [
+                        130,
+                        705
+                    ],
+                    "is_working": true,
+                    "name": "Сыроватка",
+                    "rect": [
+                        154,
+                        696,
+                        100,
+                        20
+                    ],
+                    "text_id": 327,
+                    "uid": 358
+                },
+                {
+                    "coord": [
+                        130,
+                        735
+                    ],
+                    "is_working": true,
+                    "name": "Басы",
+                    "rect": [
+                        154,
+                        724,
+                        100,
+                        20
+                    ],
+                    "text_id": 328,
+                    "uid": 359
+                },
+                {
+                    "coord": [
+                        130,
+                        765
+                    ],
+                    "is_working": true,
+                    "name": "Сумы-товарная",
+                    "rect": [
+                        154,
+                        756,
+                        100,
+                        20
+                    ],
+                    "text_id": 329,
+                    "uid": 360
+                },
+                {
+                    "coord": [
+                        130,
+                        795
+                    ],
+                    "is_working": true,
+                    "name": "Сумы",
+                    "rect": [
+                        154,
+                        787,
+                        100,
+                        20
+                    ],
+                    "text_id": 330,
+                    "uid": 361
+                }
+            ],
+            "text_id": 331
+        }
+    ],
+    "lines_width": 9,
+    "name": "railways_symu",
+    "name_text_id": 331,
+    "stations_diameter": 19.0,
+    "transfers": [
+        [
+            1,
+            338,
+            [
+                150,
+                105
+            ],
+            [
+                130,
+                105
+            ]
+        ]
+    ],
+    "transports": [
+        "metro",
+        "railway"
+    ],
+    "type_name": "Электричка",
+    "type_text_id": 364,
+    "upper_case": true,
+    "width": 300,
+    "word_wrap": false
+}

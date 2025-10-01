@@ -1,0 +1,86 @@
+{
+    "city_id": 1486209,
+    "comments_text_id": 35,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 34,
+    "file": "Ekaterinburg.zip",
+    "latitude": 56.85733,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": 60.61529,
+    "map_id": "Ekaterinburg.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 31,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 32
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/1.json",
+            "name": "1",
+            "name_text_id": 10,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 33
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/2.json",
+            "name": "2",
+            "name_text_id": 14,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 33
+        }
+    ],
+    "timestamp": 1754434800.0,
+    "transport_types": [
+        "Метро"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Метро"
+        }
+    ]
+}

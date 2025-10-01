@@ -1,0 +1,208 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 353,
+    "images": [
+        "res/schemes/tabriz.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "cf0000",
+            "line_color": "cf0000",
+            "line_width": 7,
+            "name": "1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            131,
+                            180
+                        ],
+                        [
+                            154,
+                            203
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            108,
+                            157
+                        ],
+                        [
+                            131,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            85,
+                            134
+                        ],
+                        [
+                            108,
+                            157
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            62,
+                            111
+                        ],
+                        [
+                            85,
+                            134
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            38,
+                            87
+                        ],
+                        [
+                            62,
+                            111
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        154,
+                        203
+                    ],
+                    "is_working": true,
+                    "name": "El Goli",
+                    "rect": [
+                        162,
+                        195,
+                        35,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        131,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Sahand",
+                    "rect": [
+                        140,
+                        168,
+                        39,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        108,
+                        157
+                    ],
+                    "is_working": true,
+                    "name": "Emam Reza",
+                    "rect": [
+                        117,
+                        145,
+                        61,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        85,
+                        134
+                    ],
+                    "is_working": true,
+                    "name": "Khayyam",
+                    "rect": [
+                        94,
+                        122,
+                        49,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        62,
+                        111
+                    ],
+                    "is_working": true,
+                    "name": "29 Bahman",
+                    "rect": [
+                        71,
+                        99,
+                        58,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        38,
+                        87
+                    ],
+                    "is_working": true,
+                    "name": "Ostad Shahriar",
+                    "rect": [
+                        47,
+                        75,
+                        76,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                }
+            ],
+            "text_id": 6
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 7,
+    "stations_diameter": 13.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 8,
+    "upper_case": false,
+    "width": 304,
+    "word_wrap": false
+}

@@ -1,0 +1,101 @@
+{
+    "lines": [
+        {
+            "delays": [],
+            "name": "F1",
+            "scheme": null,
+            "segments": [
+                [
+                    43,
+                    44,
+                    300
+                ],
+                [
+                    44,
+                    43,
+                    300
+                ]
+            ],
+            "stations": [
+                [
+                    43,
+                    "Vieux Lyon/Cathedrale St-Jean",
+                    32
+                ],
+                [
+                    44,
+                    "Fourviere",
+                    43
+                ]
+            ],
+            "text_id": 44
+        },
+        {
+            "delays": [],
+            "name": "F2",
+            "scheme": null,
+            "segments": [
+                [
+                    45,
+                    46,
+                    300
+                ],
+                [
+                    46,
+                    45,
+                    300
+                ],
+                [
+                    46,
+                    47,
+                    300
+                ],
+                [
+                    47,
+                    46,
+                    300
+                ]
+            ],
+            "stations": [
+                [
+                    45,
+                    "Vieux Lyon/Cathedrale St-Jean",
+                    32
+                ],
+                [
+                    46,
+                    "Minimes/Theatres Romains",
+                    45
+                ],
+                [
+                    47,
+                    "St Just",
+                    46
+                ]
+            ],
+            "text_id": 47
+        }
+    ],
+    "name": "funicular",
+    "transfers": [
+        [
+            31,
+            43,
+            120,
+            true
+        ],
+        [
+            31,
+            45,
+            120,
+            true
+        ],
+        [
+            43,
+            45,
+            120,
+            true
+        ]
+    ],
+    "type_name": "Фуникулер"
+}

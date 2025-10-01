@@ -1,0 +1,208 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 461,
+    "images": [
+        "res/schemes/haifa.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "A03036",
+            "line_color": "FD613C",
+            "line_width": 9,
+            "name": "1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            204,
+                            111
+                        ],
+                        [
+                            244,
+                            59
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            172,
+                            153
+                        ],
+                        [
+                            204,
+                            111
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            129,
+                            208
+                        ],
+                        [
+                            172,
+                            153
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            99,
+                            248
+                        ],
+                        [
+                            129,
+                            208
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            51,
+                            311
+                        ],
+                        [
+                            99,
+                            248
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        244,
+                        59
+                    ],
+                    "is_working": true,
+                    "name": "Kikar Paris",
+                    "rect": [
+                        156,
+                        49,
+                        73,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        204,
+                        111
+                    ],
+                    "is_working": true,
+                    "name": "Solel Boneh",
+                    "rect": [
+                        112,
+                        101,
+                        78,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        172,
+                        153
+                    ],
+                    "is_working": true,
+                    "name": "Hanevi'im",
+                    "rect": [
+                        100,
+                        144,
+                        57,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        129,
+                        208
+                    ],
+                    "is_working": true,
+                    "name": "Massada",
+                    "rect": [
+                        147,
+                        204,
+                        57,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        99,
+                        248
+                    ],
+                    "is_working": true,
+                    "name": "Golomb/Bnei Zion",
+                    "rect": [
+                        113,
+                        248,
+                        106,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        51,
+                        311
+                    ],
+                    "is_working": true,
+                    "name": "Gan Ha'em",
+                    "rect": [
+                        66,
+                        309,
+                        63,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                }
+            ],
+            "text_id": 6
+        }
+    ],
+    "lines_width": 9,
+    "name": "metro",
+    "name_text_id": 7,
+    "stations_diameter": 19.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 8,
+    "upper_case": false,
+    "width": 394,
+    "word_wrap": false
+}

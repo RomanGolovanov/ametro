@@ -1,0 +1,838 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 665,
+    "images": [
+        "res/schemes/tbilisi.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "E0044C",
+            "line_color": "E0044C",
+            "line_width": 9,
+            "name": "Akhmeteli-Varketili",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            421,
+                            66
+                        ],
+                        [
+                            440,
+                            99
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            403,
+                            35
+                        ],
+                        [
+                            421,
+                            66
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            354,
+                            35
+                        ],
+                        [
+                            403,
+                            35
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            321,
+                            92
+                        ],
+                        [
+                            354,
+                            35
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            290,
+                            146
+                        ],
+                        [
+                            321,
+                            92
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            260,
+                            198
+                        ],
+                        [
+                            290,
+                            146
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            290,
+                            250
+                        ],
+                        [
+                            260,
+                            198
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            319,
+                            300
+                        ],
+                        [
+                            290,
+                            250
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            319,
+                            344
+                        ],
+                        [
+                            319,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            319,
+                            398
+                        ],
+                        [
+                            319,
+                            344
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            284,
+                            433
+                        ],
+                        [
+                            319,
+                            398
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            326,
+                            475
+                        ],
+                        [
+                            284,
+                            433
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            377,
+                            475
+                        ],
+                        [
+                            326,
+                            475
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            417,
+                            515
+                        ],
+                        [
+                            377,
+                            475
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            478,
+                            515
+                        ],
+                        [
+                            417,
+                            515
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            532,
+                            515
+                        ],
+                        [
+                            478,
+                            515
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            561,
+                            486
+                        ],
+                        [
+                            532,
+                            515
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            600,
+                            447
+                        ],
+                        [
+                            561,
+                            486
+                        ]
+                    ],
+                    false
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        440,
+                        99
+                    ],
+                    "is_working": false,
+                    "name": "Tbilisskoe More",
+                    "rect": [
+                        450,
+                        91,
+                        81,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        421,
+                        66
+                    ],
+                    "is_working": false,
+                    "name": "Mukhiani",
+                    "rect": [
+                        431,
+                        57,
+                        47,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        403,
+                        35
+                    ],
+                    "is_working": true,
+                    "name": "Akhmetelis Teatri",
+                    "rect": [
+                        413,
+                        26,
+                        89,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        354,
+                        35
+                    ],
+                    "is_working": true,
+                    "name": "Sarajishvili",
+                    "rect": [
+                        286,
+                        26,
+                        58,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        321,
+                        92
+                    ],
+                    "is_working": true,
+                    "name": "Guramishvili",
+                    "rect": [
+                        331,
+                        87,
+                        65,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        290,
+                        146
+                    ],
+                    "is_working": true,
+                    "name": "Grmagele",
+                    "rect": [
+                        300,
+                        140,
+                        50,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        260,
+                        198
+                    ],
+                    "is_working": true,
+                    "name": "Didube",
+                    "rect": [
+                        270,
+                        191,
+                        37,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        290,
+                        250
+                    ],
+                    "is_working": true,
+                    "name": "Elektrodepo",
+                    "rect": [
+                        300,
+                        241,
+                        61,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        319,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Nadzaladevi",
+                    "rect": [
+                        329,
+                        293,
+                        63,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        319,
+                        344
+                    ],
+                    "is_working": true,
+                    "name": "Vagzlis Moedani",
+                    "rect": [
+                        332,
+                        337,
+                        83,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        319,
+                        398
+                    ],
+                    "is_working": true,
+                    "name": "Mardjanishvili",
+                    "rect": [
+                        329,
+                        391,
+                        72,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        284,
+                        433
+                    ],
+                    "is_working": true,
+                    "name": "Rustaveli",
+                    "rect": [
+                        225,
+                        426,
+                        49,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        326,
+                        475
+                    ],
+                    "is_working": true,
+                    "name": "Tavisuplebis Moedani",
+                    "rect": [
+                        228,
+                        484,
+                        110,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        377,
+                        475
+                    ],
+                    "is_working": true,
+                    "name": "Avlabari",
+                    "rect": [
+                        357,
+                        451,
+                        44,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        417,
+                        515
+                    ],
+                    "is_working": true,
+                    "name": "300 Aragveli",
+                    "rect": [
+                        386,
+                        524,
+                        65,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        478,
+                        515
+                    ],
+                    "is_working": true,
+                    "name": "Isani",
+                    "rect": [
+                        464,
+                        491,
+                        26,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        532,
+                        515
+                    ],
+                    "is_working": true,
+                    "name": "Samgori",
+                    "rect": [
+                        516,
+                        524,
+                        43,
+                        15
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        561,
+                        486
+                    ],
+                    "is_working": true,
+                    "name": "Varketili",
+                    "rect": [
+                        508,
+                        474,
+                        43,
+                        15
+                    ],
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        600,
+                        447
+                    ],
+                    "is_working": false,
+                    "name": "Vazisubani",
+                    "rect": [
+                        571,
+                        423,
+                        56,
+                        15
+                    ],
+                    "text_id": 18,
+                    "uid": 18
+                }
+            ],
+            "text_id": 19
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "008438",
+            "line_color": "008438",
+            "line_width": 9,
+            "name": "Saburtalo",
+            "segments": [
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            276,
+                            319
+                        ],
+                        [
+                            301,
+                            344
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            231,
+                            364
+                        ],
+                        [
+                            276,
+                            319
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            203,
+                            336
+                        ],
+                        [
+                            231,
+                            364
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            144,
+                            336
+                        ],
+                        [
+                            203,
+                            336
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    23,
+                    24,
+                    [
+                        [
+                            97,
+                            336
+                        ],
+                        [
+                            144,
+                            336
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            41,
+                            336
+                        ],
+                        [
+                            97,
+                            336
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        301,
+                        344
+                    ],
+                    "is_working": true,
+                    "name": "Vagzlis Moedani",
+                    "rect": [
+                        332,
+                        337,
+                        83,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        276,
+                        319
+                    ],
+                    "is_working": true,
+                    "name": "Tsereteli",
+                    "rect": [
+                        253,
+                        295,
+                        45,
+                        15
+                    ],
+                    "text_id": 20,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        231,
+                        364
+                    ],
+                    "is_working": true,
+                    "name": "Politektnikuri",
+                    "rect": [
+                        199,
+                        374,
+                        67,
+                        15
+                    ],
+                    "text_id": 21,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        203,
+                        336
+                    ],
+                    "is_working": true,
+                    "name": "Medikal Institut",
+                    "rect": [
+                        163,
+                        312,
+                        77,
+                        15
+                    ],
+                    "text_id": 22,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        144,
+                        336
+                    ],
+                    "is_working": true,
+                    "name": "Delisi",
+                    "rect": [
+                        129,
+                        349,
+                        31,
+                        15
+                    ],
+                    "text_id": 23,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        97,
+                        336
+                    ],
+                    "is_working": true,
+                    "name": "Vazha Pshavela",
+                    "rect": [
+                        52,
+                        312,
+                        81,
+                        15
+                    ],
+                    "text_id": 24,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        41,
+                        336
+                    ],
+                    "is_working": true,
+                    "name": "University",
+                    "rect": [
+                        15,
+                        345,
+                        53,
+                        15
+                    ],
+                    "text_id": 25,
+                    "uid": 25
+                }
+            ],
+            "text_id": 26
+        }
+    ],
+    "lines_width": 9,
+    "name": "metro",
+    "name_text_id": 27,
+    "stations_diameter": 15.0,
+    "transfers": [
+        [
+            9,
+            19,
+            [
+                319,
+                344
+            ],
+            [
+                301,
+                344
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 28,
+    "upper_case": false,
+    "width": 750,
+    "word_wrap": false
+}

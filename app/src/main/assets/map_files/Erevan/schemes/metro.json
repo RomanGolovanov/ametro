@@ -1,0 +1,358 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 485,
+    "images": [
+        "res/schemes/erevan.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "912610",
+            "line_color": "E1361E",
+            "line_width": 9,
+            "name": "1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            219,
+                            78
+                        ],
+                        [
+                            115,
+                            62
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            237,
+                            112
+                        ],
+                        [
+                            219,
+                            78
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            310,
+                            152
+                        ],
+                        [
+                            237,
+                            112
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            267,
+                            206
+                        ],
+                        [
+                            310,
+                            152
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            251,
+                            251
+                        ],
+                        [
+                            267,
+                            206
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            219,
+                            305
+                        ],
+                        [
+                            251,
+                            251
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            168,
+                            333
+                        ],
+                        [
+                            219,
+                            305
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            123,
+                            318
+                        ],
+                        [
+                            168,
+                            333
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            114,
+                            275
+                        ],
+                        [
+                            123,
+                            318
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    10,
+                    [
+                        [
+                            31,
+                            335
+                        ],
+                        [
+                            123,
+                            318
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        115,
+                        62
+                    ],
+                    "is_working": false,
+                    "name": "?",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        219,
+                        78
+                    ],
+                    "is_working": true,
+                    "name": "Барекамутюн",
+                    "rect": [
+                        228,
+                        59,
+                        116,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        237,
+                        112
+                    ],
+                    "is_working": true,
+                    "name": "Маршал Баграмян",
+                    "rect": [
+                        251,
+                        97,
+                        87,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        310,
+                        152
+                    ],
+                    "is_working": true,
+                    "name": "Еритасардакан",
+                    "rect": [
+                        321,
+                        144,
+                        98,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        267,
+                        206
+                    ],
+                    "is_working": true,
+                    "name": "Ханрапетутян Храпарак",
+                    "rect": [
+                        107,
+                        185,
+                        151,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        251,
+                        251
+                    ],
+                    "is_working": true,
+                    "name": "Зоравар Андраник",
+                    "rect": [
+                        265,
+                        245,
+                        118,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        219,
+                        305
+                    ],
+                    "is_working": true,
+                    "name": "Сасунци Давид",
+                    "rect": [
+                        232,
+                        301,
+                        97,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        168,
+                        333
+                    ],
+                    "is_working": true,
+                    "name": "Горцаранаин",
+                    "rect": [
+                        178,
+                        337,
+                        86,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        123,
+                        318
+                    ],
+                    "is_working": true,
+                    "name": "Шенгавит",
+                    "rect": [
+                        131,
+                        297,
+                        63,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        114,
+                        275
+                    ],
+                    "is_working": true,
+                    "name": "Гарегин Нждехи Храпарак",
+                    "rect": [
+                        29,
+                        249,
+                        164,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        31,
+                        335
+                    ],
+                    "is_working": true,
+                    "name": "Чарбах",
+                    "rect": [
+                        7,
+                        310,
+                        47,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                }
+            ],
+            "text_id": 11
+        }
+    ],
+    "lines_width": 9,
+    "name": "metro",
+    "name_text_id": 12,
+    "stations_diameter": 15.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 13,
+    "upper_case": true,
+    "width": 460,
+    "word_wrap": false
+}

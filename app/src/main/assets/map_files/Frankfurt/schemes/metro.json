@@ -1,0 +1,4757 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 959,
+    "images": [
+        "res/schemes/frankfurt.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "b8282e",
+            "line_color": "b8282e",
+            "line_width": 7,
+            "name": "U1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            486,
+                            781
+                        ],
+                        [
+                            514,
+                            809
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            447,
+                            742
+                        ],
+                        [
+                            486,
+                            781
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            402,
+                            571
+                        ],
+                        [
+                            402.0,
+                            697.0
+                        ],
+                        [
+                            447,
+                            742
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            402,
+                            529
+                        ],
+                        [
+                            402,
+                            571
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            402,
+                            508
+                        ],
+                        [
+                            402,
+                            529
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            402,
+                            487
+                        ],
+                        [
+                            402,
+                            508
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            402,
+                            459
+                        ],
+                        [
+                            402,
+                            487
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            402,
+                            434
+                        ],
+                        [
+                            402,
+                            459
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            402,
+                            413
+                        ],
+                        [
+                            402,
+                            434
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            402,
+                            392
+                        ],
+                        [
+                            402,
+                            413
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            402,
+                            368
+                        ],
+                        [
+                            402,
+                            392
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            402,
+                            340
+                        ],
+                        [
+                            402,
+                            368
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            363,
+                            301
+                        ],
+                        [
+                            402,
+                            340
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            339,
+                            277
+                        ],
+                        [
+                            363,
+                            301
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            311,
+                            291
+                        ],
+                        [
+                            311.0,
+                            277.0
+                        ],
+                        [
+                            339,
+                            277
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            311,
+                            315
+                        ],
+                        [
+                            311,
+                            291
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            311,
+                            347
+                        ],
+                        [
+                            311,
+                            315
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            311,
+                            371
+                        ],
+                        [
+                            311,
+                            347
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            311,
+                            441
+                        ],
+                        [
+                            311,
+                            371
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        514,
+                        809
+                    ],
+                    "is_working": true,
+                    "name": "Frankfurt Sud",
+                    "rect": [
+                        483,
+                        819,
+                        68,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        486,
+                        781
+                    ],
+                    "is_working": true,
+                    "name": "Schweizer Platz",
+                    "rect": [
+                        398,
+                        782,
+                        80,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        447,
+                        742
+                    ],
+                    "is_working": true,
+                    "name": "Willy-Brandt-Platz",
+                    "rect": [
+                        479,
+                        728,
+                        90,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        402,
+                        571
+                    ],
+                    "is_working": true,
+                    "name": "Hauptwache",
+                    "rect": [
+                        429,
+                        583,
+                        63,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        402,
+                        529
+                    ],
+                    "is_working": true,
+                    "name": "Eschenheimer Tor",
+                    "rect": [
+                        300,
+                        517,
+                        92,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        402,
+                        508
+                    ],
+                    "is_working": true,
+                    "name": "Gruneburgweg",
+                    "rect": [
+                        318,
+                        499,
+                        74,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        402,
+                        487
+                    ],
+                    "is_working": true,
+                    "name": "Holzhausenstrasse",
+                    "rect": [
+                        295,
+                        479,
+                        97,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        402,
+                        459
+                    ],
+                    "is_working": true,
+                    "name": "Miquel/Adickesallee",
+                    "rect": [
+                        289,
+                        454,
+                        103,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        402,
+                        434
+                    ],
+                    "is_working": true,
+                    "name": "Dornbusch",
+                    "rect": [
+                        336,
+                        428,
+                        56,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        402,
+                        413
+                    ],
+                    "is_working": true,
+                    "name": "Fritz-Tarnow-Strasse",
+                    "rect": [
+                        434,
+                        403,
+                        103,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        402,
+                        392
+                    ],
+                    "is_working": true,
+                    "name": "Hugelstrasse",
+                    "rect": [
+                        433,
+                        384,
+                        68,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        402,
+                        368
+                    ],
+                    "is_working": true,
+                    "name": "Lindenbaum",
+                    "rect": [
+                        433,
+                        361,
+                        62,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        402,
+                        340
+                    ],
+                    "is_working": true,
+                    "name": "Weisser Stein",
+                    "rect": [
+                        433,
+                        321,
+                        71,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        363,
+                        301
+                    ],
+                    "is_working": true,
+                    "name": "Heddernheim",
+                    "rect": [
+                        387,
+                        274,
+                        68,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        339,
+                        277
+                    ],
+                    "is_working": true,
+                    "name": "Zeilweg",
+                    "rect": [
+                        323,
+                        247,
+                        40,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        311,
+                        291
+                    ],
+                    "is_working": true,
+                    "name": "Heddernheimer Landstrasse",
+                    "rect": [
+                        163,
+                        287,
+                        142,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        311,
+                        315
+                    ],
+                    "is_working": true,
+                    "name": "Nordwestzentrum",
+                    "rect": [
+                        217,
+                        309,
+                        88,
+                        15
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        311,
+                        347
+                    ],
+                    "is_working": true,
+                    "name": "Romerstadt",
+                    "rect": [
+                        246,
+                        340,
+                        59,
+                        15
+                    ],
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        311,
+                        371
+                    ],
+                    "is_working": true,
+                    "name": "Niddapark",
+                    "rect": [
+                        252,
+                        364,
+                        53,
+                        15
+                    ],
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        311,
+                        441
+                    ],
+                    "is_working": true,
+                    "name": "Ginnheim",
+                    "rect": [
+                        255,
+                        433,
+                        49,
+                        15
+                    ],
+                    "text_id": 19,
+                    "uid": 19
+                }
+            ],
+            "text_id": 20
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "00a54f",
+            "line_color": "00a54f",
+            "line_width": 7,
+            "name": "U2",
+            "segments": [
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            500,
+                            767
+                        ],
+                        [
+                            528,
+                            795
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            461,
+                            728
+                        ],
+                        [
+                            500,
+                            767
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            423,
+                            571
+                        ],
+                        [
+                            423.0,
+                            690.0
+                        ],
+                        [
+                            461,
+                            728
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    23,
+                    24,
+                    [
+                        [
+                            423,
+                            529
+                        ],
+                        [
+                            423,
+                            571
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            423,
+                            508
+                        ],
+                        [
+                            423,
+                            529
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    25,
+                    26,
+                    [
+                        [
+                            423,
+                            487
+                        ],
+                        [
+                            423,
+                            508
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    26,
+                    27,
+                    [
+                        [
+                            423,
+                            459
+                        ],
+                        [
+                            423,
+                            487
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    27,
+                    28,
+                    [
+                        [
+                            423,
+                            434
+                        ],
+                        [
+                            423,
+                            459
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            423,
+                            413
+                        ],
+                        [
+                            423,
+                            434
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    29,
+                    30,
+                    [
+                        [
+                            423,
+                            392
+                        ],
+                        [
+                            423,
+                            413
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    30,
+                    31,
+                    [
+                        [
+                            423,
+                            368
+                        ],
+                        [
+                            423,
+                            392
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    31,
+                    32,
+                    [
+                        [
+                            423,
+                            333
+                        ],
+                        [
+                            423,
+                            368
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    32,
+                    33,
+                    [
+                        [
+                            377,
+                            287
+                        ],
+                        [
+                            423,
+                            333
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    33,
+                    34,
+                    [
+                        [
+                            377,
+                            214
+                        ],
+                        [
+                            377,
+                            287
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    34,
+                    35,
+                    [
+                        [
+                            377,
+                            189
+                        ],
+                        [
+                            377,
+                            214
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    35,
+                    36,
+                    [
+                        [
+                            377,
+                            165
+                        ],
+                        [
+                            377,
+                            189
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    36,
+                    37,
+                    [
+                        [
+                            377,
+                            144
+                        ],
+                        [
+                            377,
+                            165
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    37,
+                    38,
+                    [
+                        [
+                            377,
+                            119
+                        ],
+                        [
+                            377,
+                            144
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    38,
+                    39,
+                    [
+                        [
+                            377,
+                            95
+                        ],
+                        [
+                            377,
+                            119
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    39,
+                    40,
+                    [
+                        [
+                            377,
+                            74
+                        ],
+                        [
+                            377,
+                            95
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        528,
+                        795
+                    ],
+                    "is_working": true,
+                    "name": "Frankfurt Sud",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        500,
+                        767
+                    ],
+                    "is_working": true,
+                    "name": "Schweizer Platz",
+                    "rect": null,
+                    "text_id": 1,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        461,
+                        728
+                    ],
+                    "is_working": true,
+                    "name": "Willy-Brandt-Platz",
+                    "rect": null,
+                    "text_id": 2,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        423,
+                        571
+                    ],
+                    "is_working": true,
+                    "name": "Hauptwache",
+                    "rect": null,
+                    "text_id": 3,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        423,
+                        529
+                    ],
+                    "is_working": true,
+                    "name": "Eschenheimer Tor",
+                    "rect": null,
+                    "text_id": 4,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        423,
+                        508
+                    ],
+                    "is_working": true,
+                    "name": "Gruneburgweg",
+                    "rect": null,
+                    "text_id": 5,
+                    "uid": 25
+                },
+                {
+                    "coord": [
+                        423,
+                        487
+                    ],
+                    "is_working": true,
+                    "name": "Holzhausenstrasse",
+                    "rect": null,
+                    "text_id": 6,
+                    "uid": 26
+                },
+                {
+                    "coord": [
+                        423,
+                        459
+                    ],
+                    "is_working": true,
+                    "name": "Miquel/Adickesallee",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 27
+                },
+                {
+                    "coord": [
+                        423,
+                        434
+                    ],
+                    "is_working": true,
+                    "name": "Dornbusch",
+                    "rect": null,
+                    "text_id": 8,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        423,
+                        413
+                    ],
+                    "is_working": true,
+                    "name": "Fritz-Tarnow-Strasse",
+                    "rect": null,
+                    "text_id": 9,
+                    "uid": 29
+                },
+                {
+                    "coord": [
+                        423,
+                        392
+                    ],
+                    "is_working": true,
+                    "name": "Hugelstrasse",
+                    "rect": null,
+                    "text_id": 10,
+                    "uid": 30
+                },
+                {
+                    "coord": [
+                        423,
+                        368
+                    ],
+                    "is_working": true,
+                    "name": "Lindenbaum",
+                    "rect": null,
+                    "text_id": 11,
+                    "uid": 31
+                },
+                {
+                    "coord": [
+                        423,
+                        333
+                    ],
+                    "is_working": true,
+                    "name": "Weisser Stein",
+                    "rect": null,
+                    "text_id": 12,
+                    "uid": 32
+                },
+                {
+                    "coord": [
+                        377,
+                        287
+                    ],
+                    "is_working": true,
+                    "name": "Heddernheim",
+                    "rect": null,
+                    "text_id": 13,
+                    "uid": 33
+                },
+                {
+                    "coord": [
+                        377,
+                        214
+                    ],
+                    "is_working": true,
+                    "name": "Sandelmuhle",
+                    "rect": [
+                        305,
+                        208,
+                        66,
+                        15
+                    ],
+                    "text_id": 21,
+                    "uid": 34
+                },
+                {
+                    "coord": [
+                        377,
+                        189
+                    ],
+                    "is_working": true,
+                    "name": "Riedwiese/Mertonviertel",
+                    "rect": [
+                        249,
+                        182,
+                        122,
+                        15
+                    ],
+                    "text_id": 22,
+                    "uid": 35
+                },
+                {
+                    "coord": [
+                        377,
+                        165
+                    ],
+                    "is_working": true,
+                    "name": "Kalbach",
+                    "rect": [
+                        328,
+                        159,
+                        43,
+                        15
+                    ],
+                    "text_id": 23,
+                    "uid": 36
+                },
+                {
+                    "coord": [
+                        377,
+                        144
+                    ],
+                    "is_working": true,
+                    "name": "Bonames Mitte",
+                    "rect": [
+                        295,
+                        137,
+                        76,
+                        15
+                    ],
+                    "text_id": 24,
+                    "uid": 37
+                },
+                {
+                    "coord": [
+                        377,
+                        119
+                    ],
+                    "is_working": true,
+                    "name": "Nieder-Eschbach",
+                    "rect": [
+                        284,
+                        112,
+                        87,
+                        15
+                    ],
+                    "text_id": 25,
+                    "uid": 38
+                },
+                {
+                    "coord": [
+                        377,
+                        95
+                    ],
+                    "is_working": true,
+                    "name": "Ober-Eschbach",
+                    "rect": [
+                        293,
+                        88,
+                        78,
+                        15
+                    ],
+                    "text_id": 26,
+                    "uid": 39
+                },
+                {
+                    "coord": [
+                        377,
+                        74
+                    ],
+                    "is_working": true,
+                    "name": "Bad Homburg-Gonzenheim",
+                    "rect": [
+                        237,
+                        67,
+                        134,
+                        15
+                    ],
+                    "text_id": 27,
+                    "uid": 40
+                }
+            ],
+            "text_id": 28
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "4a5eaa",
+            "line_color": "4a5eaa",
+            "line_width": 7,
+            "name": "U3",
+            "segments": [
+                [
+                    41,
+                    42,
+                    [
+                        [
+                            493,
+                            774
+                        ],
+                        [
+                            521,
+                            802
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    42,
+                    43,
+                    [
+                        [
+                            454,
+                            735
+                        ],
+                        [
+                            493,
+                            774
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    43,
+                    44,
+                    [
+                        [
+                            412,
+                            571
+                        ],
+                        [
+                            412.0,
+                            693.0
+                        ],
+                        [
+                            454,
+                            735
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    44,
+                    45,
+                    [
+                        [
+                            412,
+                            529
+                        ],
+                        [
+                            412,
+                            571
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    45,
+                    46,
+                    [
+                        [
+                            412,
+                            508
+                        ],
+                        [
+                            412,
+                            529
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    46,
+                    47,
+                    [
+                        [
+                            412,
+                            487
+                        ],
+                        [
+                            412,
+                            508
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    47,
+                    48,
+                    [
+                        [
+                            412,
+                            459
+                        ],
+                        [
+                            412,
+                            487
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    48,
+                    49,
+                    [
+                        [
+                            412,
+                            434
+                        ],
+                        [
+                            412,
+                            459
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    49,
+                    50,
+                    [
+                        [
+                            412,
+                            413
+                        ],
+                        [
+                            412,
+                            434
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    50,
+                    51,
+                    [
+                        [
+                            412,
+                            392
+                        ],
+                        [
+                            412,
+                            413
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    51,
+                    52,
+                    [
+                        [
+                            412,
+                            368
+                        ],
+                        [
+                            412,
+                            392
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    52,
+                    53,
+                    [
+                        [
+                            412,
+                            336
+                        ],
+                        [
+                            412,
+                            368
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    53,
+                    54,
+                    [
+                        [
+                            370,
+                            294
+                        ],
+                        [
+                            412,
+                            336
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    54,
+                    55,
+                    [
+                        [
+                            346,
+                            270
+                        ],
+                        [
+                            370,
+                            294
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    55,
+                    56,
+                    [
+                        [
+                            251,
+                            252
+                        ],
+                        [
+                            269.0,
+                            270.0
+                        ],
+                        [
+                            346,
+                            270
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    56,
+                    57,
+                    [
+                        [
+                            230,
+                            231
+                        ],
+                        [
+                            251,
+                            252
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    57,
+                    58,
+                    [
+                        [
+                            213,
+                            214
+                        ],
+                        [
+                            230,
+                            231
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    58,
+                    59,
+                    [
+                        [
+                            195,
+                            196
+                        ],
+                        [
+                            213,
+                            214
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    59,
+                    60,
+                    [
+                        [
+                            171,
+                            172
+                        ],
+                        [
+                            195,
+                            196
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    60,
+                    61,
+                    [
+                        [
+                            150,
+                            151
+                        ],
+                        [
+                            171,
+                            172
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    61,
+                    62,
+                    [
+                        [
+                            136,
+                            137
+                        ],
+                        [
+                            150,
+                            151
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    62,
+                    63,
+                    [
+                        [
+                            118,
+                            119
+                        ],
+                        [
+                            136,
+                            137
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    63,
+                    64,
+                    [
+                        [
+                            101,
+                            102
+                        ],
+                        [
+                            118,
+                            119
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    64,
+                    65,
+                    [
+                        [
+                            83,
+                            84
+                        ],
+                        [
+                            101,
+                            102
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    65,
+                    66,
+                    [
+                        [
+                            66,
+                            67
+                        ],
+                        [
+                            83,
+                            84
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    66,
+                    67,
+                    [
+                        [
+                            48,
+                            49
+                        ],
+                        [
+                            66,
+                            67
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    67,
+                    68,
+                    [
+                        [
+                            31,
+                            32
+                        ],
+                        [
+                            48,
+                            49
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        521,
+                        802
+                    ],
+                    "is_working": true,
+                    "name": "Frankfurt Sud",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 41
+                },
+                {
+                    "coord": [
+                        493,
+                        774
+                    ],
+                    "is_working": true,
+                    "name": "Schweizer Platz",
+                    "rect": null,
+                    "text_id": 1,
+                    "uid": 42
+                },
+                {
+                    "coord": [
+                        454,
+                        735
+                    ],
+                    "is_working": true,
+                    "name": "Willy-Brandt-Platz",
+                    "rect": null,
+                    "text_id": 2,
+                    "uid": 43
+                },
+                {
+                    "coord": [
+                        412,
+                        571
+                    ],
+                    "is_working": true,
+                    "name": "Hauptwache",
+                    "rect": null,
+                    "text_id": 3,
+                    "uid": 44
+                },
+                {
+                    "coord": [
+                        412,
+                        529
+                    ],
+                    "is_working": true,
+                    "name": "Eschenheimer Tor",
+                    "rect": null,
+                    "text_id": 4,
+                    "uid": 45
+                },
+                {
+                    "coord": [
+                        412,
+                        508
+                    ],
+                    "is_working": true,
+                    "name": "Gruneburgweg",
+                    "rect": null,
+                    "text_id": 5,
+                    "uid": 46
+                },
+                {
+                    "coord": [
+                        412,
+                        487
+                    ],
+                    "is_working": true,
+                    "name": "Holzhausenstrasse",
+                    "rect": null,
+                    "text_id": 6,
+                    "uid": 47
+                },
+                {
+                    "coord": [
+                        412,
+                        459
+                    ],
+                    "is_working": true,
+                    "name": "Miquel/Adickesallee",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 48
+                },
+                {
+                    "coord": [
+                        412,
+                        434
+                    ],
+                    "is_working": true,
+                    "name": "Dornbusch",
+                    "rect": null,
+                    "text_id": 8,
+                    "uid": 49
+                },
+                {
+                    "coord": [
+                        412,
+                        413
+                    ],
+                    "is_working": true,
+                    "name": "Fritz-Tarnow-Strasse",
+                    "rect": null,
+                    "text_id": 9,
+                    "uid": 50
+                },
+                {
+                    "coord": [
+                        412,
+                        392
+                    ],
+                    "is_working": true,
+                    "name": "Hugelstrasse",
+                    "rect": null,
+                    "text_id": 10,
+                    "uid": 51
+                },
+                {
+                    "coord": [
+                        412,
+                        368
+                    ],
+                    "is_working": true,
+                    "name": "Lindenbaum",
+                    "rect": null,
+                    "text_id": 11,
+                    "uid": 52
+                },
+                {
+                    "coord": [
+                        412,
+                        336
+                    ],
+                    "is_working": true,
+                    "name": "Weisser Stein",
+                    "rect": null,
+                    "text_id": 12,
+                    "uid": 53
+                },
+                {
+                    "coord": [
+                        370,
+                        294
+                    ],
+                    "is_working": true,
+                    "name": "Heddernheim",
+                    "rect": null,
+                    "text_id": 13,
+                    "uid": 54
+                },
+                {
+                    "coord": [
+                        346,
+                        270
+                    ],
+                    "is_working": true,
+                    "name": "Zeilweg",
+                    "rect": null,
+                    "text_id": 14,
+                    "uid": 55
+                },
+                {
+                    "coord": [
+                        251,
+                        252
+                    ],
+                    "is_working": true,
+                    "name": "Wiesenau",
+                    "rect": [
+                        194,
+                        249,
+                        51,
+                        15
+                    ],
+                    "text_id": 29,
+                    "uid": 56
+                },
+                {
+                    "coord": [
+                        230,
+                        231
+                    ],
+                    "is_working": true,
+                    "name": "Niederursel",
+                    "rect": [
+                        163,
+                        229,
+                        60,
+                        15
+                    ],
+                    "text_id": 30,
+                    "uid": 57
+                },
+                {
+                    "coord": [
+                        213,
+                        214
+                    ],
+                    "is_working": true,
+                    "name": "Weisskirchen Ost",
+                    "rect": [
+                        117,
+                        212,
+                        90,
+                        15
+                    ],
+                    "text_id": 31,
+                    "uid": 58
+                },
+                {
+                    "coord": [
+                        195,
+                        196
+                    ],
+                    "is_working": true,
+                    "name": "Bommersheim",
+                    "rect": [
+                        115,
+                        194,
+                        74,
+                        15
+                    ],
+                    "text_id": 32,
+                    "uid": 59
+                },
+                {
+                    "coord": [
+                        171,
+                        172
+                    ],
+                    "is_working": true,
+                    "name": "Oberursel",
+                    "rect": [
+                        177,
+                        161,
+                        51,
+                        15
+                    ],
+                    "text_id": 33,
+                    "uid": 60
+                },
+                {
+                    "coord": [
+                        150,
+                        151
+                    ],
+                    "is_working": true,
+                    "name": "Oberursel Stadtmitte",
+                    "rect": [
+                        157,
+                        140,
+                        103,
+                        15
+                    ],
+                    "text_id": 34,
+                    "uid": 61
+                },
+                {
+                    "coord": [
+                        136,
+                        137
+                    ],
+                    "is_working": true,
+                    "name": "Portstrasse",
+                    "rect": [
+                        143,
+                        125,
+                        59,
+                        15
+                    ],
+                    "text_id": 35,
+                    "uid": 62
+                },
+                {
+                    "coord": [
+                        118,
+                        119
+                    ],
+                    "is_working": true,
+                    "name": "Lahnstrasse",
+                    "rect": [
+                        125,
+                        107,
+                        63,
+                        15
+                    ],
+                    "text_id": 36,
+                    "uid": 63
+                },
+                {
+                    "coord": [
+                        101,
+                        102
+                    ],
+                    "is_working": true,
+                    "name": "Glocknerwiese",
+                    "rect": [
+                        108,
+                        90,
+                        76,
+                        15
+                    ],
+                    "text_id": 37,
+                    "uid": 64
+                },
+                {
+                    "coord": [
+                        83,
+                        84
+                    ],
+                    "is_working": true,
+                    "name": "Kupferhammer",
+                    "rect": [
+                        90,
+                        71,
+                        75,
+                        15
+                    ],
+                    "text_id": 38,
+                    "uid": 65
+                },
+                {
+                    "coord": [
+                        66,
+                        67
+                    ],
+                    "is_working": true,
+                    "name": "Rosengartchen",
+                    "rect": [
+                        72,
+                        53,
+                        77,
+                        15
+                    ],
+                    "text_id": 39,
+                    "uid": 66
+                },
+                {
+                    "coord": [
+                        48,
+                        49
+                    ],
+                    "is_working": true,
+                    "name": "Waldlust",
+                    "rect": [
+                        55,
+                        36,
+                        45,
+                        15
+                    ],
+                    "text_id": 40,
+                    "uid": 67
+                },
+                {
+                    "coord": [
+                        31,
+                        32
+                    ],
+                    "is_working": true,
+                    "name": "Oberursel-Hohemark",
+                    "rect": [
+                        28,
+                        11,
+                        105,
+                        15
+                    ],
+                    "text_id": 41,
+                    "uid": 68
+                }
+            ],
+            "text_id": 42
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "f172ac",
+            "line_color": "f172ac",
+            "line_width": 7,
+            "name": "U4",
+            "segments": [
+                [
+                    69,
+                    70,
+                    [
+                        [
+                            223,
+                            606
+                        ],
+                        [
+                            269,
+                            560
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    70,
+                    71,
+                    [
+                        [
+                            384,
+                            767
+                        ],
+                        [
+                            223,
+                            606
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    71,
+                    72,
+                    [
+                        [
+                            461,
+                            742
+                        ],
+                        [
+                            437.0,
+                            767.0
+                        ],
+                        [
+                            384,
+                            767
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    72,
+                    73,
+                    [
+                        [
+                            517,
+                            686
+                        ],
+                        [
+                            461,
+                            742
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    73,
+                    74,
+                    [
+                        [
+                            552,
+                            564
+                        ],
+                        [
+                            552.0,
+                            651.0
+                        ],
+                        [
+                            517,
+                            686
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    74,
+                    75,
+                    [
+                        [
+                            619,
+                            525
+                        ],
+                        [
+                            587.0,
+                            557.0
+                        ],
+                        [
+                            552.0,
+                            557.0
+                        ],
+                        [
+                            552,
+                            564
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    75,
+                    76,
+                    [
+                        [
+                            643,
+                            501
+                        ],
+                        [
+                            619,
+                            525
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    76,
+                    77,
+                    [
+                        [
+                            692,
+                            452
+                        ],
+                        [
+                            643,
+                            501
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    77,
+                    78,
+                    [
+                        [
+                            727,
+                            417
+                        ],
+                        [
+                            692,
+                            452
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        269,
+                        560
+                    ],
+                    "is_working": true,
+                    "name": "Bockenheimer Warte",
+                    "rect": [
+                        154,
+                        549,
+                        106,
+                        15
+                    ],
+                    "text_id": 43,
+                    "uid": 69
+                },
+                {
+                    "coord": [
+                        223,
+                        606
+                    ],
+                    "is_working": true,
+                    "name": "Festhalle/Messe",
+                    "rect": [
+                        133,
+                        601,
+                        83,
+                        15
+                    ],
+                    "text_id": 44,
+                    "uid": 70
+                },
+                {
+                    "coord": [
+                        384,
+                        767
+                    ],
+                    "is_working": true,
+                    "name": "Frankfurt Hauptbahnhof",
+                    "rect": [
+                        256,
+                        761,
+                        117,
+                        15
+                    ],
+                    "text_id": 45,
+                    "uid": 71
+                },
+                {
+                    "coord": [
+                        461,
+                        742
+                    ],
+                    "is_working": true,
+                    "name": "Willy-Brandt-Platz",
+                    "rect": null,
+                    "text_id": 2,
+                    "uid": 72
+                },
+                {
+                    "coord": [
+                        517,
+                        686
+                    ],
+                    "is_working": true,
+                    "name": "Dom/Romer",
+                    "rect": [
+                        525,
+                        688,
+                        61,
+                        15
+                    ],
+                    "text_id": 46,
+                    "uid": 73
+                },
+                {
+                    "coord": [
+                        552,
+                        564
+                    ],
+                    "is_working": true,
+                    "name": "Konstablerwache",
+                    "rect": [
+                        445,
+                        541,
+                        88,
+                        15
+                    ],
+                    "text_id": 47,
+                    "uid": 74
+                },
+                {
+                    "coord": [
+                        619,
+                        525
+                    ],
+                    "is_working": true,
+                    "name": "Merianplatz",
+                    "rect": [
+                        627,
+                        525,
+                        59,
+                        15
+                    ],
+                    "text_id": 48,
+                    "uid": 75
+                },
+                {
+                    "coord": [
+                        643,
+                        501
+                    ],
+                    "is_working": true,
+                    "name": "Hohenstrasse",
+                    "rect": [
+                        650,
+                        498,
+                        71,
+                        15
+                    ],
+                    "text_id": 49,
+                    "uid": 76
+                },
+                {
+                    "coord": [
+                        692,
+                        452
+                    ],
+                    "is_working": true,
+                    "name": "Bornheim Mitte",
+                    "rect": [
+                        701,
+                        446,
+                        77,
+                        15
+                    ],
+                    "text_id": 50,
+                    "uid": 77
+                },
+                {
+                    "coord": [
+                        727,
+                        417
+                    ],
+                    "is_working": true,
+                    "name": "Bornheim Seckbacher Landstrasse",
+                    "rect": [
+                        665,
+                        394,
+                        176,
+                        15
+                    ],
+                    "text_id": 51,
+                    "uid": 78
+                }
+            ],
+            "text_id": 52
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "007942",
+            "line_color": "007942",
+            "line_width": 7,
+            "name": "U5",
+            "segments": [
+                [
+                    79,
+                    80,
+                    [
+                        [
+                            447,
+                            728
+                        ],
+                        [
+                            423.0,
+                            753.0
+                        ],
+                        [
+                            384,
+                            753
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    80,
+                    81,
+                    [
+                        [
+                            503,
+                            672
+                        ],
+                        [
+                            447,
+                            728
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    81,
+                    82,
+                    [
+                        [
+                            538,
+                            578
+                        ],
+                        [
+                            538.0,
+                            637.0
+                        ],
+                        [
+                            503,
+                            672
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    82,
+                    83,
+                    [
+                        [
+                            538,
+                            518
+                        ],
+                        [
+                            538,
+                            578
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    83,
+                    84,
+                    [
+                        [
+                            538,
+                            490
+                        ],
+                        [
+                            538,
+                            518
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    84,
+                    85,
+                    [
+                        [
+                            538,
+                            467
+                        ],
+                        [
+                            538,
+                            490
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    85,
+                    86,
+                    [
+                        [
+                            538,
+                            447
+                        ],
+                        [
+                            538,
+                            467
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    86,
+                    87,
+                    [
+                        [
+                            538,
+                            424
+                        ],
+                        [
+                            538,
+                            447
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    87,
+                    88,
+                    [
+                        [
+                            538,
+                            388
+                        ],
+                        [
+                            538,
+                            424
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    88,
+                    89,
+                    [
+                        [
+                            538,
+                            356
+                        ],
+                        [
+                            538,
+                            388
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    89,
+                    90,
+                    [
+                        [
+                            538,
+                            328
+                        ],
+                        [
+                            538,
+                            356
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    90,
+                    91,
+                    [
+                        [
+                            538,
+                            306
+                        ],
+                        [
+                            538,
+                            328
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    91,
+                    92,
+                    [
+                        [
+                            538,
+                            284
+                        ],
+                        [
+                            538,
+                            306
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    92,
+                    93,
+                    [
+                        [
+                            538,
+                            263
+                        ],
+                        [
+                            538,
+                            284
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    93,
+                    94,
+                    [
+                        [
+                            538,
+                            242
+                        ],
+                        [
+                            538,
+                            263
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        384,
+                        753
+                    ],
+                    "is_working": true,
+                    "name": "Frankfurt Hauptbahnhof",
+                    "rect": null,
+                    "text_id": 45,
+                    "uid": 79
+                },
+                {
+                    "coord": [
+                        447,
+                        728
+                    ],
+                    "is_working": true,
+                    "name": "Willy-Brandt-Platz",
+                    "rect": null,
+                    "text_id": 2,
+                    "uid": 80
+                },
+                {
+                    "coord": [
+                        503,
+                        672
+                    ],
+                    "is_working": true,
+                    "name": "Dom/Romer",
+                    "rect": null,
+                    "text_id": 46,
+                    "uid": 81
+                },
+                {
+                    "coord": [
+                        538,
+                        578
+                    ],
+                    "is_working": true,
+                    "name": "Konstablerwache",
+                    "rect": null,
+                    "text_id": 47,
+                    "uid": 82
+                },
+                {
+                    "coord": [
+                        538,
+                        518
+                    ],
+                    "is_working": true,
+                    "name": "Musterschule",
+                    "rect": [
+                        461,
+                        512,
+                        69,
+                        15
+                    ],
+                    "text_id": 53,
+                    "uid": 83
+                },
+                {
+                    "coord": [
+                        538,
+                        490
+                    ],
+                    "is_working": true,
+                    "name": "Glauburgstrasse",
+                    "rect": [
+                        547,
+                        480,
+                        84,
+                        15
+                    ],
+                    "text_id": 54,
+                    "uid": 84
+                },
+                {
+                    "coord": [
+                        538,
+                        467
+                    ],
+                    "is_working": true,
+                    "name": "Deutsche Nationalbibliothek",
+                    "rect": [
+                        547,
+                        461,
+                        141,
+                        15
+                    ],
+                    "text_id": 55,
+                    "uid": 85
+                },
+                {
+                    "coord": [
+                        538,
+                        447
+                    ],
+                    "is_working": true,
+                    "name": "Hauptfriedhof",
+                    "rect": [
+                        547,
+                        440,
+                        68,
+                        15
+                    ],
+                    "text_id": 56,
+                    "uid": 86
+                },
+                {
+                    "coord": [
+                        538,
+                        424
+                    ],
+                    "is_working": true,
+                    "name": "Versorgungsamt",
+                    "rect": [
+                        547,
+                        417,
+                        83,
+                        15
+                    ],
+                    "text_id": 57,
+                    "uid": 87
+                },
+                {
+                    "coord": [
+                        538,
+                        388
+                    ],
+                    "is_working": true,
+                    "name": "Eckenheimer Landstrasse/Marbachweg",
+                    "rect": [
+                        545,
+                        378,
+                        197,
+                        15
+                    ],
+                    "text_id": 58,
+                    "uid": 88
+                },
+                {
+                    "coord": [
+                        538,
+                        356
+                    ],
+                    "is_working": true,
+                    "name": "Marbachweg/Sozialzentrum",
+                    "rect": [
+                        546,
+                        348,
+                        137,
+                        15
+                    ],
+                    "text_id": 59,
+                    "uid": 89
+                },
+                {
+                    "coord": [
+                        538,
+                        328
+                    ],
+                    "is_working": true,
+                    "name": "Giessener Strasse",
+                    "rect": [
+                        546,
+                        322,
+                        94,
+                        15
+                    ],
+                    "text_id": 60,
+                    "uid": 90
+                },
+                {
+                    "coord": [
+                        538,
+                        306
+                    ],
+                    "is_working": true,
+                    "name": "Theobald-Ziegler-Strasse",
+                    "rect": [
+                        546,
+                        300,
+                        125,
+                        15
+                    ],
+                    "text_id": 61,
+                    "uid": 91
+                },
+                {
+                    "coord": [
+                        538,
+                        284
+                    ],
+                    "is_working": true,
+                    "name": "Ronneburgstrasse",
+                    "rect": [
+                        546,
+                        277,
+                        93,
+                        15
+                    ],
+                    "text_id": 62,
+                    "uid": 92
+                },
+                {
+                    "coord": [
+                        538,
+                        263
+                    ],
+                    "is_working": true,
+                    "name": "Sigmund-Freud-Strasse",
+                    "rect": [
+                        546,
+                        255,
+                        117,
+                        15
+                    ],
+                    "text_id": 63,
+                    "uid": 93
+                },
+                {
+                    "coord": [
+                        538,
+                        242
+                    ],
+                    "is_working": true,
+                    "name": "Preungesheim",
+                    "rect": [
+                        546,
+                        236,
+                        73,
+                        15
+                    ],
+                    "text_id": 64,
+                    "uid": 94
+                }
+            ],
+            "text_id": 65
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "007ec6",
+            "line_color": "007ec6",
+            "line_width": 7,
+            "name": "U6",
+            "segments": [
+                [
+                    95,
+                    96,
+                    [
+                        [
+                            160,
+                            326
+                        ],
+                        [
+                            160,
+                            280
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    96,
+                    97,
+                    [
+                        [
+                            160,
+                            368
+                        ],
+                        [
+                            160,
+                            326
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    97,
+                    98,
+                    [
+                        [
+                            160,
+                            413
+                        ],
+                        [
+                            160,
+                            368
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    98,
+                    99,
+                    [
+                        [
+                            174,
+                            445
+                        ],
+                        [
+                            160.0,
+                            431.0
+                        ],
+                        [
+                            160,
+                            413
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    99,
+                    100,
+                    [
+                        [
+                            199,
+                            469
+                        ],
+                        [
+                            174,
+                            445
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    100,
+                    101,
+                    [
+                        [
+                            241,
+                            511
+                        ],
+                        [
+                            199,
+                            469
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    101,
+                    102,
+                    [
+                        [
+                            262,
+                            532
+                        ],
+                        [
+                            241,
+                            511
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    102,
+                    103,
+                    [
+                        [
+                            279,
+                            550
+                        ],
+                        [
+                            262,
+                            532
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    103,
+                    104,
+                    [
+                        [
+                            321,
+                            578
+                        ],
+                        [
+                            307.0,
+                            578.0
+                        ],
+                        [
+                            279,
+                            550
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    104,
+                    105,
+                    [
+                        [
+                            356,
+                            578
+                        ],
+                        [
+                            321,
+                            578
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    105,
+                    106,
+                    [
+                        [
+                            412,
+                            578
+                        ],
+                        [
+                            356,
+                            578
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    106,
+                    107,
+                    [
+                        [
+                            552,
+                            578
+                        ],
+                        [
+                            412,
+                            578
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    107,
+                    108,
+                    [
+                        [
+                            615,
+                            578
+                        ],
+                        [
+                            552,
+                            578
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    108,
+                    109,
+                    [
+                        [
+                            682,
+                            644
+                        ],
+                        [
+                            615,
+                            578
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        160,
+                        280
+                    ],
+                    "is_working": true,
+                    "name": "Praunheim Heerstrasse",
+                    "rect": [
+                        35,
+                        272,
+                        119,
+                        15
+                    ],
+                    "text_id": 66,
+                    "uid": 95
+                },
+                {
+                    "coord": [
+                        160,
+                        326
+                    ],
+                    "is_working": true,
+                    "name": "Friedhof Westhausen",
+                    "rect": [
+                        48,
+                        319,
+                        106,
+                        15
+                    ],
+                    "text_id": 67,
+                    "uid": 96
+                },
+                {
+                    "coord": [
+                        160,
+                        368
+                    ],
+                    "is_working": true,
+                    "name": "Stephan-Heise-Strasse",
+                    "rect": [
+                        39,
+                        364,
+                        115,
+                        15
+                    ],
+                    "text_id": 68,
+                    "uid": 97
+                },
+                {
+                    "coord": [
+                        160,
+                        413
+                    ],
+                    "is_working": true,
+                    "name": "Hausener Weg",
+                    "rect": [
+                        79,
+                        410,
+                        75,
+                        15
+                    ],
+                    "text_id": 69,
+                    "uid": 98
+                },
+                {
+                    "coord": [
+                        174,
+                        445
+                    ],
+                    "is_working": true,
+                    "name": "Fischstein",
+                    "rect": [
+                        115,
+                        442,
+                        53,
+                        15
+                    ],
+                    "text_id": 70,
+                    "uid": 99
+                },
+                {
+                    "coord": [
+                        199,
+                        469
+                    ],
+                    "is_working": true,
+                    "name": "Industriehof/Neue Borse",
+                    "rect": [
+                        69,
+                        468,
+                        122,
+                        15
+                    ],
+                    "text_id": 71,
+                    "uid": 100
+                },
+                {
+                    "coord": [
+                        241,
+                        511
+                    ],
+                    "is_working": true,
+                    "name": "Kirchplatz",
+                    "rect": [
+                        181,
+                        510,
+                        52,
+                        15
+                    ],
+                    "text_id": 72,
+                    "uid": 101
+                },
+                {
+                    "coord": [
+                        262,
+                        532
+                    ],
+                    "is_working": true,
+                    "name": "Leipziger Strasse",
+                    "rect": [
+                        166,
+                        529,
+                        88,
+                        15
+                    ],
+                    "text_id": 73,
+                    "uid": 102
+                },
+                {
+                    "coord": [
+                        279,
+                        550
+                    ],
+                    "is_working": true,
+                    "name": "Bockenheimer Warte",
+                    "rect": null,
+                    "text_id": 43,
+                    "uid": 103
+                },
+                {
+                    "coord": [
+                        321,
+                        578
+                    ],
+                    "is_working": true,
+                    "name": "Westend",
+                    "rect": [
+                        302,
+                        588,
+                        45,
+                        15
+                    ],
+                    "text_id": 74,
+                    "uid": 104
+                },
+                {
+                    "coord": [
+                        356,
+                        578
+                    ],
+                    "is_working": true,
+                    "name": "Alte Oper",
+                    "rect": [
+                        337,
+                        540,
+                        49,
+                        15
+                    ],
+                    "text_id": 75,
+                    "uid": 105
+                },
+                {
+                    "coord": [
+                        412,
+                        578
+                    ],
+                    "is_working": true,
+                    "name": "Hauptwache",
+                    "rect": null,
+                    "text_id": 3,
+                    "uid": 106
+                },
+                {
+                    "coord": [
+                        552,
+                        578
+                    ],
+                    "is_working": true,
+                    "name": "Konstablerwache",
+                    "rect": null,
+                    "text_id": 47,
+                    "uid": 107
+                },
+                {
+                    "coord": [
+                        615,
+                        578
+                    ],
+                    "is_working": true,
+                    "name": "Zoo",
+                    "rect": [
+                        590,
+                        586,
+                        20,
+                        15
+                    ],
+                    "text_id": 76,
+                    "uid": 108
+                },
+                {
+                    "coord": [
+                        682,
+                        644
+                    ],
+                    "is_working": true,
+                    "name": "Frankfurt Ost",
+                    "rect": [
+                        611,
+                        646,
+                        66,
+                        15
+                    ],
+                    "text_id": 77,
+                    "uid": 109
+                }
+            ],
+            "text_id": 78
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "e4a023",
+            "line_color": "e4a023",
+            "line_width": 7,
+            "name": "U7",
+            "segments": [
+                [
+                    110,
+                    111,
+                    [
+                        [
+                            185,
+                            392
+                        ],
+                        [
+                            185,
+                            354
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    111,
+                    112,
+                    [
+                        [
+                            209,
+                            459
+                        ],
+                        [
+                            185.0,
+                            434.0
+                        ],
+                        [
+                            185,
+                            392
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    112,
+                    113,
+                    [
+                        [
+                            251,
+                            501
+                        ],
+                        [
+                            209,
+                            459
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    113,
+                    114,
+                    [
+                        [
+                            272,
+                            522
+                        ],
+                        [
+                            251,
+                            501
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    114,
+                    115,
+                    [
+                        [
+                            290,
+                            539
+                        ],
+                        [
+                            272,
+                            522
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    115,
+                    116,
+                    [
+                        [
+                            321,
+                            564
+                        ],
+                        [
+                            314.0,
+                            564.0
+                        ],
+                        [
+                            290,
+                            539
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    116,
+                    117,
+                    [
+                        [
+                            356,
+                            564
+                        ],
+                        [
+                            321,
+                            564
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    117,
+                    118,
+                    [
+                        [
+                            412,
+                            564
+                        ],
+                        [
+                            356,
+                            564
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    118,
+                    119,
+                    [
+                        [
+                            538,
+                            564
+                        ],
+                        [
+                            412,
+                            564
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    119,
+                    120,
+                    [
+                        [
+                            615,
+                            564
+                        ],
+                        [
+                            538,
+                            564
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    120,
+                    121,
+                    [
+                        [
+                            671,
+                            564
+                        ],
+                        [
+                            615,
+                            564
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    121,
+                    122,
+                    [
+                        [
+                            703,
+                            553
+                        ],
+                        [
+                            692.0,
+                            564.0
+                        ],
+                        [
+                            671,
+                            564
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    122,
+                    123,
+                    [
+                        [
+                            738,
+                            518
+                        ],
+                        [
+                            703,
+                            553
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    123,
+                    124,
+                    [
+                        [
+                            776,
+                            480
+                        ],
+                        [
+                            738,
+                            518
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    124,
+                    125,
+                    [
+                        [
+                            801,
+                            455
+                        ],
+                        [
+                            776,
+                            480
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    125,
+                    126,
+                    [
+                        [
+                            825,
+                            431
+                        ],
+                        [
+                            801,
+                            455
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    126,
+                    127,
+                    [
+                        [
+                            846,
+                            410
+                        ],
+                        [
+                            825,
+                            431
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    127,
+                    128,
+                    [
+                        [
+                            871,
+                            385
+                        ],
+                        [
+                            846,
+                            410
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    128,
+                    129,
+                    [
+                        [
+                            895,
+                            361
+                        ],
+                        [
+                            871,
+                            385
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        185,
+                        354
+                    ],
+                    "is_working": true,
+                    "name": "Hausen",
+                    "rect": [
+                        191,
+                        351,
+                        40,
+                        15
+                    ],
+                    "text_id": 79,
+                    "uid": 110
+                },
+                {
+                    "coord": [
+                        185,
+                        392
+                    ],
+                    "is_working": true,
+                    "name": "Grosse Nelkenstrasse",
+                    "rect": [
+                        191,
+                        388,
+                        113,
+                        15
+                    ],
+                    "text_id": 80,
+                    "uid": 111
+                },
+                {
+                    "coord": [
+                        209,
+                        459
+                    ],
+                    "is_working": true,
+                    "name": "Industriehof/Neue Borse",
+                    "rect": null,
+                    "text_id": 71,
+                    "uid": 112
+                },
+                {
+                    "coord": [
+                        251,
+                        501
+                    ],
+                    "is_working": true,
+                    "name": "Kirchplatz",
+                    "rect": null,
+                    "text_id": 72,
+                    "uid": 113
+                },
+                {
+                    "coord": [
+                        272,
+                        522
+                    ],
+                    "is_working": true,
+                    "name": "Leipziger Strasse",
+                    "rect": null,
+                    "text_id": 73,
+                    "uid": 114
+                },
+                {
+                    "coord": [
+                        290,
+                        539
+                    ],
+                    "is_working": true,
+                    "name": "Bockenheimer Warte",
+                    "rect": null,
+                    "text_id": 43,
+                    "uid": 115
+                },
+                {
+                    "coord": [
+                        321,
+                        564
+                    ],
+                    "is_working": true,
+                    "name": "Westend",
+                    "rect": null,
+                    "text_id": 74,
+                    "uid": 116
+                },
+                {
+                    "coord": [
+                        356,
+                        564
+                    ],
+                    "is_working": true,
+                    "name": "Alte Oper",
+                    "rect": null,
+                    "text_id": 75,
+                    "uid": 117
+                },
+                {
+                    "coord": [
+                        412,
+                        564
+                    ],
+                    "is_working": true,
+                    "name": "Hauptwache",
+                    "rect": null,
+                    "text_id": 3,
+                    "uid": 118
+                },
+                {
+                    "coord": [
+                        538,
+                        564
+                    ],
+                    "is_working": true,
+                    "name": "Konstablerwache",
+                    "rect": null,
+                    "text_id": 47,
+                    "uid": 119
+                },
+                {
+                    "coord": [
+                        615,
+                        564
+                    ],
+                    "is_working": true,
+                    "name": "Zoo",
+                    "rect": null,
+                    "text_id": 76,
+                    "uid": 120
+                },
+                {
+                    "coord": [
+                        671,
+                        564
+                    ],
+                    "is_working": true,
+                    "name": "Habsburgerallee",
+                    "rect": [
+                        650,
+                        570,
+                        84,
+                        15
+                    ],
+                    "text_id": 81,
+                    "uid": 121
+                },
+                {
+                    "coord": [
+                        703,
+                        553
+                    ],
+                    "is_working": true,
+                    "name": "Parlamentsplatz",
+                    "rect": [
+                        711,
+                        551,
+                        81,
+                        15
+                    ],
+                    "text_id": 82,
+                    "uid": 122
+                },
+                {
+                    "coord": [
+                        738,
+                        518
+                    ],
+                    "is_working": true,
+                    "name": "Eissporthalle/Festplatz",
+                    "rect": [
+                        747,
+                        516,
+                        114,
+                        15
+                    ],
+                    "text_id": 83,
+                    "uid": 123
+                },
+                {
+                    "coord": [
+                        776,
+                        480
+                    ],
+                    "is_working": true,
+                    "name": "Johanna-Tesch-Platz",
+                    "rect": [
+                        786,
+                        479,
+                        104,
+                        15
+                    ],
+                    "text_id": 84,
+                    "uid": 124
+                },
+                {
+                    "coord": [
+                        801,
+                        455
+                    ],
+                    "is_working": true,
+                    "name": "Schafflestrasse",
+                    "rect": [
+                        808,
+                        455,
+                        79,
+                        15
+                    ],
+                    "text_id": 85,
+                    "uid": 125
+                },
+                {
+                    "coord": [
+                        825,
+                        431
+                    ],
+                    "is_working": true,
+                    "name": "Gwinnerstrasse",
+                    "rect": [
+                        835,
+                        427,
+                        80,
+                        15
+                    ],
+                    "text_id": 86,
+                    "uid": 126
+                },
+                {
+                    "coord": [
+                        846,
+                        410
+                    ],
+                    "is_working": true,
+                    "name": "Kruppstrasse",
+                    "rect": [
+                        854,
+                        406,
+                        69,
+                        15
+                    ],
+                    "text_id": 87,
+                    "uid": 127
+                },
+                {
+                    "coord": [
+                        871,
+                        385
+                    ],
+                    "is_working": true,
+                    "name": "Hessen-Center",
+                    "rect": [
+                        879,
+                        380,
+                        76,
+                        15
+                    ],
+                    "text_id": 88,
+                    "uid": 128
+                },
+                {
+                    "coord": [
+                        895,
+                        361
+                    ],
+                    "is_working": true,
+                    "name": "Enkheim",
+                    "rect": [
+                        879,
+                        339,
+                        45,
+                        15
+                    ],
+                    "text_id": 89,
+                    "uid": 129
+                }
+            ],
+            "text_id": 90
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 91,
+    "stations_diameter": 13.0,
+    "transfers": [
+        [
+            105,
+            117,
+            [
+                356,
+                578
+            ],
+            [
+                356,
+                564
+            ]
+        ],
+        [
+            69,
+            103,
+            [
+                269,
+                560
+            ],
+            [
+                279,
+                550
+            ]
+        ],
+        [
+            69,
+            115,
+            [
+                269,
+                560
+            ],
+            [
+                290,
+                539
+            ]
+        ],
+        [
+            103,
+            115,
+            [
+                279,
+                550
+            ],
+            [
+                290,
+                539
+            ]
+        ],
+        [
+            73,
+            81,
+            [
+                517,
+                686
+            ],
+            [
+                503,
+                672
+            ]
+        ],
+        [
+            8,
+            28,
+            [
+                402,
+                434
+            ],
+            [
+                423,
+                434
+            ]
+        ],
+        [
+            8,
+            49,
+            [
+                402,
+                434
+            ],
+            [
+                412,
+                434
+            ]
+        ],
+        [
+            28,
+            49,
+            [
+                423,
+                434
+            ],
+            [
+                412,
+                434
+            ]
+        ],
+        [
+            4,
+            24,
+            [
+                402,
+                529
+            ],
+            [
+                423,
+                529
+            ]
+        ],
+        [
+            4,
+            45,
+            [
+                402,
+                529
+            ],
+            [
+                412,
+                529
+            ]
+        ],
+        [
+            24,
+            45,
+            [
+                423,
+                529
+            ],
+            [
+                412,
+                529
+            ]
+        ],
+        [
+            71,
+            79,
+            [
+                384,
+                767
+            ],
+            [
+                384,
+                753
+            ]
+        ],
+        [
+            0,
+            20,
+            [
+                514,
+                809
+            ],
+            [
+                528,
+                795
+            ]
+        ],
+        [
+            0,
+            41,
+            [
+                514,
+                809
+            ],
+            [
+                521,
+                802
+            ]
+        ],
+        [
+            20,
+            41,
+            [
+                528,
+                795
+            ],
+            [
+                521,
+                802
+            ]
+        ],
+        [
+            9,
+            29,
+            [
+                402,
+                413
+            ],
+            [
+                423,
+                413
+            ]
+        ],
+        [
+            9,
+            50,
+            [
+                402,
+                413
+            ],
+            [
+                412,
+                413
+            ]
+        ],
+        [
+            29,
+            50,
+            [
+                423,
+                413
+            ],
+            [
+                412,
+                413
+            ]
+        ],
+        [
+            5,
+            25,
+            [
+                402,
+                508
+            ],
+            [
+                423,
+                508
+            ]
+        ],
+        [
+            5,
+            46,
+            [
+                402,
+                508
+            ],
+            [
+                412,
+                508
+            ]
+        ],
+        [
+            25,
+            46,
+            [
+                423,
+                508
+            ],
+            [
+                412,
+                508
+            ]
+        ],
+        [
+            3,
+            23,
+            [
+                402,
+                571
+            ],
+            [
+                423,
+                571
+            ]
+        ],
+        [
+            3,
+            44,
+            [
+                402,
+                571
+            ],
+            [
+                412,
+                571
+            ]
+        ],
+        [
+            3,
+            106,
+            [
+                402,
+                571
+            ],
+            [
+                412,
+                578
+            ]
+        ],
+        [
+            3,
+            118,
+            [
+                402,
+                571
+            ],
+            [
+                412,
+                564
+            ]
+        ],
+        [
+            23,
+            44,
+            [
+                423,
+                571
+            ],
+            [
+                412,
+                571
+            ]
+        ],
+        [
+            23,
+            106,
+            [
+                423,
+                571
+            ],
+            [
+                412,
+                578
+            ]
+        ],
+        [
+            23,
+            118,
+            [
+                423,
+                571
+            ],
+            [
+                412,
+                564
+            ]
+        ],
+        [
+            44,
+            106,
+            [
+                412,
+                571
+            ],
+            [
+                412,
+                578
+            ]
+        ],
+        [
+            44,
+            118,
+            [
+                412,
+                571
+            ],
+            [
+                412,
+                564
+            ]
+        ],
+        [
+            106,
+            118,
+            [
+                412,
+                578
+            ],
+            [
+                412,
+                564
+            ]
+        ],
+        [
+            13,
+            33,
+            [
+                363,
+                301
+            ],
+            [
+                377,
+                287
+            ]
+        ],
+        [
+            13,
+            54,
+            [
+                363,
+                301
+            ],
+            [
+                370,
+                294
+            ]
+        ],
+        [
+            33,
+            54,
+            [
+                377,
+                287
+            ],
+            [
+                370,
+                294
+            ]
+        ],
+        [
+            6,
+            26,
+            [
+                402,
+                487
+            ],
+            [
+                423,
+                487
+            ]
+        ],
+        [
+            6,
+            47,
+            [
+                402,
+                487
+            ],
+            [
+                412,
+                487
+            ]
+        ],
+        [
+            26,
+            47,
+            [
+                423,
+                487
+            ],
+            [
+                412,
+                487
+            ]
+        ],
+        [
+            10,
+            30,
+            [
+                402,
+                392
+            ],
+            [
+                423,
+                392
+            ]
+        ],
+        [
+            10,
+            51,
+            [
+                402,
+                392
+            ],
+            [
+                412,
+                392
+            ]
+        ],
+        [
+            30,
+            51,
+            [
+                423,
+                392
+            ],
+            [
+                412,
+                392
+            ]
+        ],
+        [
+            100,
+            112,
+            [
+                199,
+                469
+            ],
+            [
+                209,
+                459
+            ]
+        ],
+        [
+            101,
+            113,
+            [
+                241,
+                511
+            ],
+            [
+                251,
+                501
+            ]
+        ],
+        [
+            74,
+            82,
+            [
+                552,
+                564
+            ],
+            [
+                538,
+                578
+            ]
+        ],
+        [
+            74,
+            107,
+            [
+                552,
+                564
+            ],
+            [
+                552,
+                578
+            ]
+        ],
+        [
+            74,
+            119,
+            [
+                552,
+                564
+            ],
+            [
+                538,
+                564
+            ]
+        ],
+        [
+            82,
+            107,
+            [
+                538,
+                578
+            ],
+            [
+                552,
+                578
+            ]
+        ],
+        [
+            82,
+            119,
+            [
+                538,
+                578
+            ],
+            [
+                538,
+                564
+            ]
+        ],
+        [
+            107,
+            119,
+            [
+                552,
+                578
+            ],
+            [
+                538,
+                564
+            ]
+        ],
+        [
+            102,
+            114,
+            [
+                262,
+                532
+            ],
+            [
+                272,
+                522
+            ]
+        ],
+        [
+            11,
+            31,
+            [
+                402,
+                368
+            ],
+            [
+                423,
+                368
+            ]
+        ],
+        [
+            11,
+            52,
+            [
+                402,
+                368
+            ],
+            [
+                412,
+                368
+            ]
+        ],
+        [
+            31,
+            52,
+            [
+                423,
+                368
+            ],
+            [
+                412,
+                368
+            ]
+        ],
+        [
+            7,
+            27,
+            [
+                402,
+                459
+            ],
+            [
+                423,
+                459
+            ]
+        ],
+        [
+            7,
+            48,
+            [
+                402,
+                459
+            ],
+            [
+                412,
+                459
+            ]
+        ],
+        [
+            27,
+            48,
+            [
+                423,
+                459
+            ],
+            [
+                412,
+                459
+            ]
+        ],
+        [
+            1,
+            21,
+            [
+                486,
+                781
+            ],
+            [
+                500,
+                767
+            ]
+        ],
+        [
+            1,
+            42,
+            [
+                486,
+                781
+            ],
+            [
+                493,
+                774
+            ]
+        ],
+        [
+            21,
+            42,
+            [
+                500,
+                767
+            ],
+            [
+                493,
+                774
+            ]
+        ],
+        [
+            12,
+            32,
+            [
+                402,
+                340
+            ],
+            [
+                423,
+                333
+            ]
+        ],
+        [
+            12,
+            53,
+            [
+                402,
+                340
+            ],
+            [
+                412,
+                336
+            ]
+        ],
+        [
+            32,
+            53,
+            [
+                423,
+                333
+            ],
+            [
+                412,
+                336
+            ]
+        ],
+        [
+            104,
+            116,
+            [
+                321,
+                578
+            ],
+            [
+                321,
+                564
+            ]
+        ],
+        [
+            2,
+            22,
+            [
+                447,
+                742
+            ],
+            [
+                461,
+                728
+            ]
+        ],
+        [
+            2,
+            43,
+            [
+                447,
+                742
+            ],
+            [
+                454,
+                735
+            ]
+        ],
+        [
+            2,
+            72,
+            [
+                447,
+                742
+            ],
+            [
+                461,
+                742
+            ]
+        ],
+        [
+            2,
+            80,
+            [
+                447,
+                742
+            ],
+            [
+                447,
+                728
+            ]
+        ],
+        [
+            22,
+            43,
+            [
+                461,
+                728
+            ],
+            [
+                454,
+                735
+            ]
+        ],
+        [
+            22,
+            72,
+            [
+                461,
+                728
+            ],
+            [
+                461,
+                742
+            ]
+        ],
+        [
+            22,
+            80,
+            [
+                461,
+                728
+            ],
+            [
+                447,
+                728
+            ]
+        ],
+        [
+            43,
+            72,
+            [
+                454,
+                735
+            ],
+            [
+                461,
+                742
+            ]
+        ],
+        [
+            43,
+            80,
+            [
+                454,
+                735
+            ],
+            [
+                447,
+                728
+            ]
+        ],
+        [
+            72,
+            80,
+            [
+                461,
+                742
+            ],
+            [
+                447,
+                728
+            ]
+        ],
+        [
+            14,
+            55,
+            [
+                339,
+                277
+            ],
+            [
+                346,
+                270
+            ]
+        ],
+        [
+            108,
+            120,
+            [
+                615,
+                578
+            ],
+            [
+                615,
+                564
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 92,
+    "upper_case": false,
+    "width": 1045,
+    "word_wrap": false
+}

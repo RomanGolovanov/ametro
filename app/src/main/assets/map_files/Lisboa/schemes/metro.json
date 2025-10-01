@@ -1,0 +1,1798 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 709,
+    "images": [
+        "res/schemes/lisboa.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "4E84C4",
+            "line_color": "4E84C4",
+            "line_width": 9,
+            "name": "Blue line",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            136,
+                            150
+                        ],
+                        [
+                            115,
+                            129
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            157,
+                            171
+                        ],
+                        [
+                            136,
+                            150
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            178,
+                            192
+                        ],
+                        [
+                            157,
+                            171
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            198,
+                            212
+                        ],
+                        [
+                            178,
+                            192
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            218,
+                            232
+                        ],
+                        [
+                            198,
+                            212
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            238,
+                            252
+                        ],
+                        [
+                            218,
+                            232
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            258,
+                            272
+                        ],
+                        [
+                            238,
+                            252
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            279,
+                            293
+                        ],
+                        [
+                            258,
+                            272
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            302,
+                            315
+                        ],
+                        [
+                            279,
+                            293
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            344,
+                            357
+                        ],
+                        [
+                            302,
+                            315
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            392,
+                            405
+                        ],
+                        [
+                            344,
+                            357
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            423,
+                            436
+                        ],
+                        [
+                            392,
+                            405
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            454,
+                            467
+                        ],
+                        [
+                            423,
+                            436
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            486,
+                            499
+                        ],
+                        [
+                            454,
+                            467
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            554,
+                            499
+                        ],
+                        [
+                            486,
+                            499
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            589,
+                            464
+                        ],
+                        [
+                            554,
+                            499
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        115,
+                        129
+                    ],
+                    "is_working": true,
+                    "name": "Amadora Este",
+                    "rect": [
+                        31,
+                        122,
+                        72,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        136,
+                        150
+                    ],
+                    "is_working": true,
+                    "name": "Alfornelos",
+                    "rect": [
+                        71,
+                        146,
+                        53,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        157,
+                        171
+                    ],
+                    "is_working": true,
+                    "name": "Pontinha",
+                    "rect": [
+                        100,
+                        168,
+                        45,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        178,
+                        192
+                    ],
+                    "is_working": true,
+                    "name": "Carnide",
+                    "rect": [
+                        124,
+                        188,
+                        41,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        198,
+                        212
+                    ],
+                    "is_working": true,
+                    "name": "Colegio Militar/Luz",
+                    "rect": [
+                        91,
+                        208,
+                        94,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        218,
+                        232
+                    ],
+                    "is_working": true,
+                    "name": "Alto dos Moinhos",
+                    "rect": [
+                        117,
+                        228,
+                        88,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        238,
+                        252
+                    ],
+                    "is_working": true,
+                    "name": "Laranjeiras",
+                    "rect": [
+                        167,
+                        248,
+                        58,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        258,
+                        272
+                    ],
+                    "is_working": true,
+                    "name": "Jardim Zoologico",
+                    "rect": [
+                        159,
+                        268,
+                        87,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        279,
+                        293
+                    ],
+                    "is_working": true,
+                    "name": "Praca de Espanha",
+                    "rect": [
+                        175,
+                        290,
+                        92,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        302,
+                        315
+                    ],
+                    "is_working": true,
+                    "name": "S.Sebastiao",
+                    "rect": [
+                        226,
+                        311,
+                        61,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        344,
+                        357
+                    ],
+                    "is_working": true,
+                    "name": "Parque",
+                    "rect": [
+                        296,
+                        354,
+                        37,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        392,
+                        405
+                    ],
+                    "is_working": true,
+                    "name": "Marques de Pombal",
+                    "rect": [
+                        265,
+                        390,
+                        100,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        423,
+                        436
+                    ],
+                    "is_working": true,
+                    "name": "Avenida",
+                    "rect": [
+                        426,
+                        411,
+                        43,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        454,
+                        467
+                    ],
+                    "is_working": true,
+                    "name": "Restauradores",
+                    "rect": [
+                        367,
+                        465,
+                        75,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        486,
+                        499
+                    ],
+                    "is_working": true,
+                    "name": "Baixa-Chiado",
+                    "rect": [
+                        400,
+                        500,
+                        69,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        554,
+                        499
+                    ],
+                    "is_working": true,
+                    "name": "Terreiro do Paco",
+                    "rect": [
+                        521,
+                        511,
+                        84,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        589,
+                        464
+                    ],
+                    "is_working": true,
+                    "name": "Santa Apolonia",
+                    "rect": [
+                        602,
+                        457,
+                        77,
+                        15
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                }
+            ],
+            "text_id": 17
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "FDB913",
+            "line_color": "FDB913",
+            "line_width": 9,
+            "name": "Yellow line",
+            "segments": [
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            381,
+                            51
+                        ],
+                        [
+                            381,
+                            23
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            381,
+                            79
+                        ],
+                        [
+                            381,
+                            51
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            381,
+                            107
+                        ],
+                        [
+                            381,
+                            79
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            381,
+                            136
+                        ],
+                        [
+                            381,
+                            107
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            381,
+                            168
+                        ],
+                        [
+                            381,
+                            136
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            381,
+                            216
+                        ],
+                        [
+                            381,
+                            168
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    23,
+                    24,
+                    [
+                        [
+                            381,
+                            244
+                        ],
+                        [
+                            381,
+                            216
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            381,
+                            274
+                        ],
+                        [
+                            381,
+                            244
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    25,
+                    26,
+                    [
+                        [
+                            381,
+                            315
+                        ],
+                        [
+                            381,
+                            274
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    26,
+                    27,
+                    [
+                        [
+                            381,
+                            363
+                        ],
+                        [
+                            381,
+                            315
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    27,
+                    28,
+                    [
+                        [
+                            381,
+                            394
+                        ],
+                        [
+                            381,
+                            363
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            381,
+                            434
+                        ],
+                        [
+                            381,
+                            394
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        381,
+                        23
+                    ],
+                    "is_working": true,
+                    "name": "Odivelas",
+                    "rect": [
+                        322,
+                        15,
+                        46,
+                        15
+                    ],
+                    "text_id": 18,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        381,
+                        51
+                    ],
+                    "is_working": true,
+                    "name": "Senhor Roubado",
+                    "rect": [
+                        284,
+                        44,
+                        84,
+                        15
+                    ],
+                    "text_id": 19,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        381,
+                        79
+                    ],
+                    "is_working": true,
+                    "name": "Ameixoiera",
+                    "rect": [
+                        309,
+                        72,
+                        59,
+                        15
+                    ],
+                    "text_id": 20,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        381,
+                        107
+                    ],
+                    "is_working": true,
+                    "name": "Lumiar",
+                    "rect": [
+                        332,
+                        99,
+                        36,
+                        15
+                    ],
+                    "text_id": 21,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        381,
+                        136
+                    ],
+                    "is_working": true,
+                    "name": "Quinta das Conchas",
+                    "rect": [
+                        266,
+                        129,
+                        102,
+                        15
+                    ],
+                    "text_id": 22,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        381,
+                        168
+                    ],
+                    "is_working": true,
+                    "name": "Campo Grande",
+                    "rect": [
+                        392,
+                        148,
+                        76,
+                        15
+                    ],
+                    "text_id": 23,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        381,
+                        216
+                    ],
+                    "is_working": true,
+                    "name": "Cicade Universitaria",
+                    "rect": [
+                        264,
+                        209,
+                        104,
+                        15
+                    ],
+                    "text_id": 24,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        381,
+                        244
+                    ],
+                    "is_working": true,
+                    "name": "Entre Campos",
+                    "rect": [
+                        296,
+                        236,
+                        72,
+                        15
+                    ],
+                    "text_id": 25,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        381,
+                        274
+                    ],
+                    "is_working": true,
+                    "name": "Campo Pequeno",
+                    "rect": [
+                        285,
+                        267,
+                        83,
+                        15
+                    ],
+                    "text_id": 26,
+                    "uid": 25
+                },
+                {
+                    "coord": [
+                        381,
+                        315
+                    ],
+                    "is_working": true,
+                    "name": "Saldanha",
+                    "rect": [
+                        398,
+                        328,
+                        48,
+                        15
+                    ],
+                    "text_id": 27,
+                    "uid": 26
+                },
+                {
+                    "coord": [
+                        381,
+                        363
+                    ],
+                    "is_working": true,
+                    "name": "Picoas",
+                    "rect": [
+                        394,
+                        355,
+                        36,
+                        15
+                    ],
+                    "text_id": 28,
+                    "uid": 27
+                },
+                {
+                    "coord": [
+                        381,
+                        394
+                    ],
+                    "is_working": true,
+                    "name": "Marques de Pombal",
+                    "rect": [
+                        265,
+                        390,
+                        100,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        381,
+                        434
+                    ],
+                    "is_working": true,
+                    "name": "Rato",
+                    "rect": [
+                        344,
+                        428,
+                        25,
+                        15
+                    ],
+                    "text_id": 29,
+                    "uid": 29
+                }
+            ],
+            "text_id": 30
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "00AAA6",
+            "line_color": "00AAA6",
+            "line_width": 9,
+            "name": "Green line",
+            "segments": [
+                [
+                    30,
+                    31,
+                    [
+                        [
+                            381,
+                            184
+                        ],
+                        [
+                            337,
+                            184
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    31,
+                    32,
+                    [
+                        [
+                            439,
+                            194
+                        ],
+                        [
+                            429.0,
+                            184.0
+                        ],
+                        [
+                            381,
+                            184
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    32,
+                    33,
+                    [
+                        [
+                            467,
+                            222
+                        ],
+                        [
+                            439,
+                            194
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    33,
+                    34,
+                    [
+                        [
+                            486,
+                            260
+                        ],
+                        [
+                            486.0,
+                            241.0
+                        ],
+                        [
+                            467,
+                            222
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    34,
+                    35,
+                    [
+                        [
+                            486,
+                            315
+                        ],
+                        [
+                            486,
+                            260
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    35,
+                    36,
+                    [
+                        [
+                            486,
+                            349
+                        ],
+                        [
+                            486,
+                            315
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    36,
+                    37,
+                    [
+                        [
+                            486,
+                            377
+                        ],
+                        [
+                            486,
+                            349
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    37,
+                    38,
+                    [
+                        [
+                            486,
+                            406
+                        ],
+                        [
+                            486,
+                            377
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    38,
+                    39,
+                    [
+                        [
+                            486,
+                            435
+                        ],
+                        [
+                            486,
+                            406
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    39,
+                    40,
+                    [
+                        [
+                            486,
+                            464
+                        ],
+                        [
+                            486,
+                            435
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    40,
+                    41,
+                    [
+                        [
+                            486,
+                            515
+                        ],
+                        [
+                            486,
+                            464
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    41,
+                    42,
+                    [
+                        [
+                            486,
+                            559
+                        ],
+                        [
+                            486,
+                            515
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        337,
+                        184
+                    ],
+                    "is_working": true,
+                    "name": "Telheiras",
+                    "rect": [
+                        278,
+                        177,
+                        48,
+                        15
+                    ],
+                    "text_id": 31,
+                    "uid": 30
+                },
+                {
+                    "coord": [
+                        381,
+                        184
+                    ],
+                    "is_working": true,
+                    "name": "Campo Grande",
+                    "rect": [
+                        392,
+                        148,
+                        76,
+                        15
+                    ],
+                    "text_id": 23,
+                    "uid": 31
+                },
+                {
+                    "coord": [
+                        439,
+                        194
+                    ],
+                    "is_working": true,
+                    "name": "Alvalade",
+                    "rect": [
+                        450,
+                        182,
+                        46,
+                        15
+                    ],
+                    "text_id": 32,
+                    "uid": 32
+                },
+                {
+                    "coord": [
+                        467,
+                        222
+                    ],
+                    "is_working": true,
+                    "name": "Roma",
+                    "rect": [
+                        478,
+                        209,
+                        31,
+                        15
+                    ],
+                    "text_id": 33,
+                    "uid": 33
+                },
+                {
+                    "coord": [
+                        486,
+                        260
+                    ],
+                    "is_working": true,
+                    "name": "Areeiro",
+                    "rect": [
+                        498,
+                        252,
+                        39,
+                        15
+                    ],
+                    "text_id": 34,
+                    "uid": 34
+                },
+                {
+                    "coord": [
+                        486,
+                        315
+                    ],
+                    "is_working": true,
+                    "name": "Alameda",
+                    "rect": [
+                        429,
+                        291,
+                        46,
+                        15
+                    ],
+                    "text_id": 35,
+                    "uid": 35
+                },
+                {
+                    "coord": [
+                        486,
+                        349
+                    ],
+                    "is_working": true,
+                    "name": "Arroios",
+                    "rect": [
+                        499,
+                        342,
+                        39,
+                        15
+                    ],
+                    "text_id": 36,
+                    "uid": 36
+                },
+                {
+                    "coord": [
+                        486,
+                        377
+                    ],
+                    "is_working": true,
+                    "name": "Anjos",
+                    "rect": [
+                        499,
+                        370,
+                        31,
+                        15
+                    ],
+                    "text_id": 37,
+                    "uid": 37
+                },
+                {
+                    "coord": [
+                        486,
+                        406
+                    ],
+                    "is_working": true,
+                    "name": "Intendente",
+                    "rect": [
+                        499,
+                        399,
+                        53,
+                        15
+                    ],
+                    "text_id": 38,
+                    "uid": 38
+                },
+                {
+                    "coord": [
+                        486,
+                        435
+                    ],
+                    "is_working": true,
+                    "name": "Martim Moniz",
+                    "rect": [
+                        499,
+                        428,
+                        68,
+                        15
+                    ],
+                    "text_id": 39,
+                    "uid": 39
+                },
+                {
+                    "coord": [
+                        486,
+                        464
+                    ],
+                    "is_working": true,
+                    "name": "Rossio",
+                    "rect": [
+                        499,
+                        457,
+                        37,
+                        15
+                    ],
+                    "text_id": 40,
+                    "uid": 40
+                },
+                {
+                    "coord": [
+                        486,
+                        515
+                    ],
+                    "is_working": true,
+                    "name": "Baixa-Chiado",
+                    "rect": [
+                        400,
+                        500,
+                        69,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 41
+                },
+                {
+                    "coord": [
+                        486,
+                        559
+                    ],
+                    "is_working": true,
+                    "name": "Cais do Sodre",
+                    "rect": [
+                        498,
+                        552,
+                        72,
+                        15
+                    ],
+                    "text_id": 41,
+                    "uid": 42
+                }
+            ],
+            "text_id": 42
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "EE2B74",
+            "line_color": "EE2B74",
+            "line_width": 9,
+            "name": "Red line",
+            "segments": [
+                [
+                    43,
+                    44,
+                    [
+                        [
+                            397,
+                            315
+                        ],
+                        [
+                            318,
+                            315
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    44,
+                    45,
+                    [
+                        [
+                            502,
+                            315
+                        ],
+                        [
+                            397,
+                            315
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    45,
+                    46,
+                    [
+                        [
+                            540,
+                            315
+                        ],
+                        [
+                            502,
+                            315
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    46,
+                    47,
+                    [
+                        [
+                            572,
+                            283
+                        ],
+                        [
+                            540,
+                            315
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    47,
+                    48,
+                    [
+                        [
+                            604,
+                            251
+                        ],
+                        [
+                            572,
+                            283
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    48,
+                    49,
+                    [
+                        [
+                            633,
+                            222
+                        ],
+                        [
+                            604,
+                            251
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    49,
+                    50,
+                    [
+                        [
+                            661,
+                            194
+                        ],
+                        [
+                            633,
+                            222
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    50,
+                    51,
+                    [
+                        [
+                            661,
+                            146
+                        ],
+                        [
+                            661,
+                            194
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    51,
+                    52,
+                    [
+                        [
+                            642,
+                            107
+                        ],
+                        [
+                            661.0,
+                            126.0
+                        ],
+                        [
+                            661,
+                            146
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    52,
+                    53,
+                    [
+                        [
+                            567,
+                            107
+                        ],
+                        [
+                            642,
+                            107
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    53,
+                    54,
+                    [
+                        [
+                            495,
+                            107
+                        ],
+                        [
+                            567,
+                            107
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        318,
+                        315
+                    ],
+                    "is_working": true,
+                    "name": "S.Sebastiao",
+                    "rect": null,
+                    "text_id": 9,
+                    "uid": 43
+                },
+                {
+                    "coord": [
+                        397,
+                        315
+                    ],
+                    "is_working": true,
+                    "name": "Saldanha",
+                    "rect": [
+                        398,
+                        328,
+                        48,
+                        15
+                    ],
+                    "text_id": 27,
+                    "uid": 44
+                },
+                {
+                    "coord": [
+                        502,
+                        315
+                    ],
+                    "is_working": true,
+                    "name": "Alameda",
+                    "rect": [
+                        429,
+                        291,
+                        46,
+                        15
+                    ],
+                    "text_id": 35,
+                    "uid": 45
+                },
+                {
+                    "coord": [
+                        540,
+                        315
+                    ],
+                    "is_working": true,
+                    "name": "Olaias",
+                    "rect": [
+                        527,
+                        326,
+                        34,
+                        15
+                    ],
+                    "text_id": 43,
+                    "uid": 46
+                },
+                {
+                    "coord": [
+                        572,
+                        283
+                    ],
+                    "is_working": true,
+                    "name": "Bela Vista",
+                    "rect": [
+                        584,
+                        278,
+                        53,
+                        15
+                    ],
+                    "text_id": 44,
+                    "uid": 47
+                },
+                {
+                    "coord": [
+                        604,
+                        251
+                    ],
+                    "is_working": true,
+                    "name": "Chelas",
+                    "rect": [
+                        616,
+                        247,
+                        37,
+                        15
+                    ],
+                    "text_id": 45,
+                    "uid": 48
+                },
+                {
+                    "coord": [
+                        633,
+                        222
+                    ],
+                    "is_working": true,
+                    "name": "Olivais",
+                    "rect": [
+                        645,
+                        218,
+                        37,
+                        15
+                    ],
+                    "text_id": 46,
+                    "uid": 49
+                },
+                {
+                    "coord": [
+                        661,
+                        194
+                    ],
+                    "is_working": true,
+                    "name": "Cabo Ruivo",
+                    "rect": [
+                        673,
+                        186,
+                        60,
+                        15
+                    ],
+                    "text_id": 47,
+                    "uid": 50
+                },
+                {
+                    "coord": [
+                        661,
+                        146
+                    ],
+                    "is_working": true,
+                    "name": "Oriente",
+                    "rect": [
+                        673,
+                        139,
+                        38,
+                        15
+                    ],
+                    "text_id": 48,
+                    "uid": 51
+                },
+                {
+                    "coord": [
+                        642,
+                        107
+                    ],
+                    "is_working": true,
+                    "name": "Moscavide",
+                    "rect": [
+                        617,
+                        80,
+                        56,
+                        15
+                    ],
+                    "text_id": 49,
+                    "uid": 52
+                },
+                {
+                    "coord": [
+                        567,
+                        107
+                    ],
+                    "is_working": true,
+                    "name": "Escarnacao",
+                    "rect": [
+                        538,
+                        119,
+                        61,
+                        15
+                    ],
+                    "text_id": 50,
+                    "uid": 53
+                },
+                {
+                    "coord": [
+                        495,
+                        107
+                    ],
+                    "is_working": true,
+                    "name": "Aeroporto",
+                    "rect": [
+                        471,
+                        81,
+                        51,
+                        15
+                    ],
+                    "text_id": 51,
+                    "uid": 54
+                }
+            ],
+            "text_id": 52
+        }
+    ],
+    "lines_width": 9,
+    "name": "metro",
+    "name_text_id": 53,
+    "stations_diameter": 17.0,
+    "transfers": [
+        [
+            11,
+            28,
+            [
+                392,
+                405
+            ],
+            [
+                381,
+                394
+            ]
+        ],
+        [
+            14,
+            41,
+            [
+                486,
+                499
+            ],
+            [
+                486,
+                515
+            ]
+        ],
+        [
+            31,
+            22,
+            [
+                381,
+                184
+            ],
+            [
+                381,
+                168
+            ]
+        ],
+        [
+            35,
+            45,
+            [
+                486,
+                315
+            ],
+            [
+                502,
+                315
+            ]
+        ],
+        [
+            9,
+            43,
+            [
+                302,
+                315
+            ],
+            [
+                318,
+                315
+            ]
+        ],
+        [
+            26,
+            44,
+            [
+                381,
+                315
+            ],
+            [
+                397,
+                315
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 54,
+    "upper_case": true,
+    "width": 811,
+    "word_wrap": false
+}

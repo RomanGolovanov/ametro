@@ -1,0 +1,146 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 215,
+    "images": [
+        "res/schemes/serfaus.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "af0000",
+            "line_color": "cf0000",
+            "line_width": 7,
+            "name": "Dorfbahn",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            111,
+                            65
+                        ],
+                        [
+                            31,
+                            65
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            191,
+                            65
+                        ],
+                        [
+                            111,
+                            65
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            271,
+                            65
+                        ],
+                        [
+                            191,
+                            65
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        31,
+                        65
+                    ],
+                    "is_working": true,
+                    "name": "Parkplatz",
+                    "rect": [
+                        16,
+                        75,
+                        48,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        111,
+                        65
+                    ],
+                    "is_working": true,
+                    "name": "Kirche",
+                    "rect": [
+                        94,
+                        75,
+                        35,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        191,
+                        65
+                    ],
+                    "is_working": true,
+                    "name": "Raika",
+                    "rect": [
+                        176,
+                        75,
+                        31,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        271,
+                        65
+                    ],
+                    "is_working": true,
+                    "name": "Seilbahn",
+                    "rect": [
+                        243,
+                        75,
+                        45,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                }
+            ],
+            "text_id": 4
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 5,
+    "stations_diameter": 13.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 6,
+    "upper_case": false,
+    "width": 421,
+    "word_wrap": false
+}

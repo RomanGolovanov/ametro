@@ -1,0 +1,766 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 676,
+    "images": [
+        "res/schemes/houston.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "af0000",
+            "line_color": "cf0000",
+            "line_width": 7,
+            "name": "1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            173,
+                            90
+                        ],
+                        [
+                            173,
+                            68
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            173,
+                            113
+                        ],
+                        [
+                            173,
+                            90
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            173,
+                            136
+                        ],
+                        [
+                            173,
+                            113
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            173,
+                            159
+                        ],
+                        [
+                            173,
+                            136
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            173,
+                            183
+                        ],
+                        [
+                            173,
+                            159
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            196,
+                            206
+                        ],
+                        [
+                            173,
+                            183
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            215,
+                            225
+                        ],
+                        [
+                            196,
+                            206
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            215,
+                            249
+                        ],
+                        [
+                            215,
+                            225
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            199,
+                            265
+                        ],
+                        [
+                            215,
+                            249
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            182,
+                            282
+                        ],
+                        [
+                            199,
+                            265
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            165,
+                            299
+                        ],
+                        [
+                            182,
+                            282
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            148,
+                            316
+                        ],
+                        [
+                            165,
+                            299
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            131,
+                            333
+                        ],
+                        [
+                            148,
+                            316
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            114,
+                            350
+                        ],
+                        [
+                            131,
+                            333
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            97,
+                            367
+                        ],
+                        [
+                            114,
+                            350
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            80,
+                            384
+                        ],
+                        [
+                            97,
+                            367
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            63,
+                            401
+                        ],
+                        [
+                            80,
+                            384
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            46,
+                            418
+                        ],
+                        [
+                            63,
+                            401
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            29,
+                            435
+                        ],
+                        [
+                            46,
+                            418
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            29,
+                            458
+                        ],
+                        [
+                            29,
+                            435
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            29,
+                            480
+                        ],
+                        [
+                            29,
+                            458
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            29,
+                            503
+                        ],
+                        [
+                            29,
+                            480
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            29,
+                            526
+                        ],
+                        [
+                            29,
+                            503
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        173,
+                        68
+                    ],
+                    "is_working": true,
+                    "name": "Northline Transit Center/HCC",
+                    "rect": [
+                        182,
+                        61,
+                        147,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        173,
+                        90
+                    ],
+                    "is_working": true,
+                    "name": "Melbourne/North Lindale",
+                    "rect": [
+                        182,
+                        83,
+                        123,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        173,
+                        113
+                    ],
+                    "is_working": true,
+                    "name": "Lindale Park",
+                    "rect": [
+                        182,
+                        106,
+                        64,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        173,
+                        136
+                    ],
+                    "is_working": true,
+                    "name": "Cavalcade",
+                    "rect": [
+                        182,
+                        129,
+                        55,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        173,
+                        159
+                    ],
+                    "is_working": true,
+                    "name": "Moody Park",
+                    "rect": [
+                        182,
+                        152,
+                        61,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        173,
+                        183
+                    ],
+                    "is_working": true,
+                    "name": "Fulton/North Central",
+                    "rect": [
+                        182,
+                        172,
+                        101,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        196,
+                        206
+                    ],
+                    "is_working": true,
+                    "name": "Quitman/Near Northside",
+                    "rect": [
+                        205,
+                        195,
+                        121,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        215,
+                        225
+                    ],
+                    "is_working": true,
+                    "name": "Burnett Transit Center/Casa de Amigos",
+                    "rect": [
+                        224,
+                        218,
+                        196,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        215,
+                        249
+                    ],
+                    "is_working": true,
+                    "name": "UH-Downtown",
+                    "rect": [
+                        224,
+                        242,
+                        72,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        199,
+                        265
+                    ],
+                    "is_working": true,
+                    "name": "Preston",
+                    "rect": [
+                        208,
+                        261,
+                        40,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        182,
+                        282
+                    ],
+                    "is_working": true,
+                    "name": "Main Street Square",
+                    "rect": [
+                        191,
+                        278,
+                        96,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        165,
+                        299
+                    ],
+                    "is_working": true,
+                    "name": "Bell",
+                    "rect": [
+                        174,
+                        295,
+                        22,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        148,
+                        316
+                    ],
+                    "is_working": true,
+                    "name": "Downtown Transit Center",
+                    "rect": [
+                        157,
+                        312,
+                        126,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        131,
+                        333
+                    ],
+                    "is_working": true,
+                    "name": "McGowen",
+                    "rect": [
+                        140,
+                        329,
+                        51,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        114,
+                        350
+                    ],
+                    "is_working": true,
+                    "name": "Ensemle/HCC",
+                    "rect": [
+                        123,
+                        346,
+                        72,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        97,
+                        367
+                    ],
+                    "is_working": true,
+                    "name": "Wheeler",
+                    "rect": [
+                        106,
+                        363,
+                        43,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        80,
+                        384
+                    ],
+                    "is_working": true,
+                    "name": "Museum District",
+                    "rect": [
+                        89,
+                        380,
+                        83,
+                        15
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        63,
+                        401
+                    ],
+                    "is_working": true,
+                    "name": "Hermann Park/Rice U",
+                    "rect": [
+                        72,
+                        397,
+                        110,
+                        15
+                    ],
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        46,
+                        418
+                    ],
+                    "is_working": true,
+                    "name": "Memorial Hermann Hospital/Houston Zoo",
+                    "rect": [
+                        55,
+                        414,
+                        205,
+                        15
+                    ],
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        29,
+                        435
+                    ],
+                    "is_working": true,
+                    "name": "Dryden/TMC",
+                    "rect": [
+                        38,
+                        431,
+                        64,
+                        15
+                    ],
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        29,
+                        458
+                    ],
+                    "is_working": true,
+                    "name": "TMC Transit Center",
+                    "rect": [
+                        38,
+                        451,
+                        98,
+                        15
+                    ],
+                    "text_id": 20,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        29,
+                        480
+                    ],
+                    "is_working": true,
+                    "name": "Smith Lands",
+                    "rect": [
+                        38,
+                        473,
+                        63,
+                        15
+                    ],
+                    "text_id": 21,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        29,
+                        503
+                    ],
+                    "is_working": true,
+                    "name": "Reliant Park",
+                    "rect": [
+                        38,
+                        497,
+                        63,
+                        15
+                    ],
+                    "text_id": 22,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        29,
+                        526
+                    ],
+                    "is_working": true,
+                    "name": "Fannin South",
+                    "rect": [
+                        38,
+                        519,
+                        66,
+                        15
+                    ],
+                    "text_id": 23,
+                    "uid": 23
+                }
+            ],
+            "text_id": 24
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 25,
+    "stations_diameter": 13.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 26,
+    "upper_case": false,
+    "width": 365,
+    "word_wrap": false
+}

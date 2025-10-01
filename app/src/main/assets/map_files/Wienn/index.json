@@ -1,0 +1,128 @@
+{
+    "city_id": 2761369,
+    "comments_text_id": 101,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 100,
+    "file": "Wienn.zip",
+    "latitude": 48.20849,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": 16.37208,
+    "map_id": "Wienn.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 97,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 98
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/u1.json",
+            "name": "u1",
+            "name_text_id": 19,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 99
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/u2.json",
+            "name": "u2",
+            "name_text_id": 35,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 99
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/u3.json",
+            "name": "u3",
+            "name_text_id": 56,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 99
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/u4.json",
+            "name": "u4",
+            "name_text_id": 74,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 99
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/u6.json",
+            "name": "u6",
+            "name_text_id": 96,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 99
+        }
+    ],
+    "timestamp": 1754434800.0,
+    "transport_types": [
+        "Метро"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Метро"
+        }
+    ]
+}

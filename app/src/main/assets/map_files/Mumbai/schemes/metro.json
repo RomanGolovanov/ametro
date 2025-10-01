@@ -1,0 +1,3046 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 916,
+    "images": [
+        "res/schemes/mumbai.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "E41c0c",
+            "line_color": "E41c0c",
+            "line_width": 9,
+            "name": "Western",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            141,
+                            736
+                        ],
+                        [
+                            141,
+                            766
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            141,
+                            706
+                        ],
+                        [
+                            141,
+                            736
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            141,
+                            676
+                        ],
+                        [
+                            141,
+                            706
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            141,
+                            646
+                        ],
+                        [
+                            141,
+                            676
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            141,
+                            616
+                        ],
+                        [
+                            141,
+                            646
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            141,
+                            586
+                        ],
+                        [
+                            141,
+                            616
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            141,
+                            556
+                        ],
+                        [
+                            141,
+                            586
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            141,
+                            526
+                        ],
+                        [
+                            141,
+                            556
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            141,
+                            496
+                        ],
+                        [
+                            141,
+                            526
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            141,
+                            466
+                        ],
+                        [
+                            141,
+                            496
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            141,
+                            436
+                        ],
+                        [
+                            141,
+                            466
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            141,
+                            406
+                        ],
+                        [
+                            141,
+                            436
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            141,
+                            376
+                        ],
+                        [
+                            141,
+                            406
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            141,
+                            346
+                        ],
+                        [
+                            141,
+                            376
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            141,
+                            316
+                        ],
+                        [
+                            141,
+                            346
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            141,
+                            286
+                        ],
+                        [
+                            141,
+                            316
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            141,
+                            256
+                        ],
+                        [
+                            141,
+                            286
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            141,
+                            226
+                        ],
+                        [
+                            141,
+                            256
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            141,
+                            196
+                        ],
+                        [
+                            141,
+                            226
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            141,
+                            166
+                        ],
+                        [
+                            141,
+                            196
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        141,
+                        766
+                    ],
+                    "is_working": true,
+                    "name": "Churchgate",
+                    "rect": [
+                        69,
+                        760,
+                        59,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        141,
+                        736
+                    ],
+                    "is_working": true,
+                    "name": "Marine Lines",
+                    "rect": [
+                        61,
+                        728,
+                        66,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        141,
+                        706
+                    ],
+                    "is_working": true,
+                    "name": "Charni Rd",
+                    "rect": [
+                        77,
+                        700,
+                        52,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        141,
+                        676
+                    ],
+                    "is_working": true,
+                    "name": "Grant Rd",
+                    "rect": [
+                        83,
+                        670,
+                        46,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        141,
+                        646
+                    ],
+                    "is_working": true,
+                    "name": "Mumbai Central",
+                    "rect": [
+                        48,
+                        638,
+                        80,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        141,
+                        616
+                    ],
+                    "is_working": true,
+                    "name": "Mahalaxmi",
+                    "rect": [
+                        73,
+                        608,
+                        56,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        141,
+                        586
+                    ],
+                    "is_working": true,
+                    "name": "Lower Parel",
+                    "rect": [
+                        67,
+                        581,
+                        61,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        141,
+                        556
+                    ],
+                    "is_working": true,
+                    "name": "Elphinstone Rd",
+                    "rect": [
+                        52,
+                        550,
+                        77,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        141,
+                        526
+                    ],
+                    "is_working": true,
+                    "name": "Dadar",
+                    "rect": [
+                        94,
+                        520,
+                        32,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        141,
+                        496
+                    ],
+                    "is_working": true,
+                    "name": "Matunga Rd",
+                    "rect": [
+                        67,
+                        491,
+                        61,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        141,
+                        466
+                    ],
+                    "is_working": true,
+                    "name": "Mahim Jn",
+                    "rect": [
+                        75,
+                        460,
+                        50,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        141,
+                        436
+                    ],
+                    "is_working": true,
+                    "name": "Bandra",
+                    "rect": [
+                        88,
+                        429,
+                        38,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        141,
+                        406
+                    ],
+                    "is_working": true,
+                    "name": "Khar Rd",
+                    "rect": [
+                        84,
+                        399,
+                        43,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        141,
+                        376
+                    ],
+                    "is_working": true,
+                    "name": "Santacruz",
+                    "rect": [
+                        76,
+                        368,
+                        51,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        141,
+                        346
+                    ],
+                    "is_working": true,
+                    "name": "Vile Parle",
+                    "rect": [
+                        78,
+                        337,
+                        50,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        141,
+                        316
+                    ],
+                    "is_working": true,
+                    "name": "Andheri",
+                    "rect": [
+                        87,
+                        308,
+                        41,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        141,
+                        286
+                    ],
+                    "is_working": true,
+                    "name": "Jogeshwari",
+                    "rect": [
+                        69,
+                        279,
+                        59,
+                        15
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        141,
+                        256
+                    ],
+                    "is_working": true,
+                    "name": "Goregaon",
+                    "rect": [
+                        77,
+                        251,
+                        50,
+                        15
+                    ],
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        141,
+                        226
+                    ],
+                    "is_working": true,
+                    "name": "Malad",
+                    "rect": [
+                        95,
+                        219,
+                        32,
+                        15
+                    ],
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        141,
+                        196
+                    ],
+                    "is_working": true,
+                    "name": "Kandivli",
+                    "rect": [
+                        85,
+                        189,
+                        43,
+                        15
+                    ],
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        141,
+                        166
+                    ],
+                    "is_working": true,
+                    "name": "Borivali",
+                    "rect": [
+                        87,
+                        160,
+                        41,
+                        15
+                    ],
+                    "text_id": 20,
+                    "uid": 20
+                }
+            ],
+            "text_id": 21
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "34349C",
+            "line_color": "34349C",
+            "line_width": 9,
+            "name": "Central",
+            "segments": [
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            216,
+                            706
+                        ],
+                        [
+                            216,
+                            736
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            216,
+                            676
+                        ],
+                        [
+                            216,
+                            706
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    23,
+                    24,
+                    [
+                        [
+                            216,
+                            646
+                        ],
+                        [
+                            216,
+                            676
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            216,
+                            616
+                        ],
+                        [
+                            216,
+                            646
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    25,
+                    26,
+                    [
+                        [
+                            216,
+                            586
+                        ],
+                        [
+                            216,
+                            616
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    26,
+                    27,
+                    [
+                        [
+                            186,
+                            556
+                        ],
+                        [
+                            216,
+                            586
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    27,
+                    28,
+                    [
+                        [
+                            156,
+                            526
+                        ],
+                        [
+                            186,
+                            556
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            186,
+                            496
+                        ],
+                        [
+                            156,
+                            526
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    29,
+                    30,
+                    [
+                        [
+                            261,
+                            421
+                        ],
+                        [
+                            186,
+                            496
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    30,
+                    31,
+                    [
+                        [
+                            306,
+                            376
+                        ],
+                        [
+                            261,
+                            421
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    31,
+                    32,
+                    [
+                        [
+                            341,
+                            341
+                        ],
+                        [
+                            306,
+                            376
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    32,
+                    33,
+                    [
+                        [
+                            366,
+                            316
+                        ],
+                        [
+                            341,
+                            341
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    33,
+                    34,
+                    [
+                        [
+                            396,
+                            286
+                        ],
+                        [
+                            366,
+                            316
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    34,
+                    35,
+                    [
+                        [
+                            421,
+                            261
+                        ],
+                        [
+                            396,
+                            286
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    35,
+                    36,
+                    [
+                        [
+                            451,
+                            231
+                        ],
+                        [
+                            421,
+                            261
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    36,
+                    37,
+                    [
+                        [
+                            481,
+                            201
+                        ],
+                        [
+                            451,
+                            231
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    37,
+                    38,
+                    [
+                        [
+                            516,
+                            166
+                        ],
+                        [
+                            481,
+                            201
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    38,
+                    39,
+                    [
+                        [
+                            536,
+                            146
+                        ],
+                        [
+                            516,
+                            166
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    39,
+                    40,
+                    [
+                        [
+                            556,
+                            126
+                        ],
+                        [
+                            536,
+                            146
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    40,
+                    41,
+                    [
+                        [
+                            576,
+                            106
+                        ],
+                        [
+                            556,
+                            126
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    41,
+                    42,
+                    [
+                        [
+                            596,
+                            86
+                        ],
+                        [
+                            576,
+                            106
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    42,
+                    43,
+                    [
+                        [
+                            616,
+                            66
+                        ],
+                        [
+                            596,
+                            86
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    43,
+                    44,
+                    [
+                        [
+                            636,
+                            46
+                        ],
+                        [
+                            616,
+                            66
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        216,
+                        736
+                    ],
+                    "is_working": true,
+                    "name": "Mumbai CST",
+                    "rect": [
+                        263,
+                        729,
+                        65,
+                        15
+                    ],
+                    "text_id": 22,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        216,
+                        706
+                    ],
+                    "is_working": true,
+                    "name": "Masjid",
+                    "rect": [
+                        264,
+                        699,
+                        35,
+                        15
+                    ],
+                    "text_id": 23,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        216,
+                        676
+                    ],
+                    "is_working": true,
+                    "name": "Sandhurst Rd",
+                    "rect": [
+                        264,
+                        668,
+                        69,
+                        15
+                    ],
+                    "text_id": 24,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        216,
+                        646
+                    ],
+                    "is_working": true,
+                    "name": "Byculla",
+                    "rect": [
+                        165,
+                        641,
+                        40,
+                        15
+                    ],
+                    "text_id": 25,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        216,
+                        616
+                    ],
+                    "is_working": true,
+                    "name": "Chinchpokli",
+                    "rect": [
+                        229,
+                        607,
+                        61,
+                        15
+                    ],
+                    "text_id": 26,
+                    "uid": 25
+                },
+                {
+                    "coord": [
+                        216,
+                        586
+                    ],
+                    "is_working": true,
+                    "name": "Curey Rd",
+                    "rect": [
+                        157,
+                        582,
+                        49,
+                        15
+                    ],
+                    "text_id": 27,
+                    "uid": 26
+                },
+                {
+                    "coord": [
+                        186,
+                        556
+                    ],
+                    "is_working": true,
+                    "name": "Parel",
+                    "rect": [
+                        199,
+                        539,
+                        28,
+                        15
+                    ],
+                    "text_id": 28,
+                    "uid": 27
+                },
+                {
+                    "coord": [
+                        156,
+                        526
+                    ],
+                    "is_working": true,
+                    "name": "Dadar",
+                    "rect": null,
+                    "text_id": 8,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        186,
+                        496
+                    ],
+                    "is_working": true,
+                    "name": "Matunga",
+                    "rect": [
+                        198,
+                        499,
+                        44,
+                        15
+                    ],
+                    "text_id": 29,
+                    "uid": 29
+                },
+                {
+                    "coord": [
+                        261,
+                        421
+                    ],
+                    "is_working": true,
+                    "name": "Sion",
+                    "rect": [
+                        222,
+                        408,
+                        24,
+                        15
+                    ],
+                    "text_id": 30,
+                    "uid": 30
+                },
+                {
+                    "coord": [
+                        306,
+                        376
+                    ],
+                    "is_working": true,
+                    "name": "Kurla",
+                    "rect": [
+                        261,
+                        366,
+                        29,
+                        15
+                    ],
+                    "text_id": 31,
+                    "uid": 31
+                },
+                {
+                    "coord": [
+                        341,
+                        341
+                    ],
+                    "is_working": true,
+                    "name": "Vidyavihar",
+                    "rect": [
+                        273,
+                        330,
+                        55,
+                        15
+                    ],
+                    "text_id": 32,
+                    "uid": 32
+                },
+                {
+                    "coord": [
+                        366,
+                        316
+                    ],
+                    "is_working": true,
+                    "name": "Ghatkopar",
+                    "rect": [
+                        302,
+                        302,
+                        53,
+                        15
+                    ],
+                    "text_id": 33,
+                    "uid": 33
+                },
+                {
+                    "coord": [
+                        396,
+                        286
+                    ],
+                    "is_working": true,
+                    "name": "Vikhroli",
+                    "rect": [
+                        345,
+                        272,
+                        40,
+                        15
+                    ],
+                    "text_id": 34,
+                    "uid": 34
+                },
+                {
+                    "coord": [
+                        421,
+                        261
+                    ],
+                    "is_working": true,
+                    "name": "Kanjur Marg",
+                    "rect": [
+                        346,
+                        244,
+                        63,
+                        15
+                    ],
+                    "text_id": 35,
+                    "uid": 35
+                },
+                {
+                    "coord": [
+                        451,
+                        231
+                    ],
+                    "is_working": true,
+                    "name": "Bhandup",
+                    "rect": [
+                        391,
+                        214,
+                        46,
+                        15
+                    ],
+                    "text_id": 36,
+                    "uid": 36
+                },
+                {
+                    "coord": [
+                        481,
+                        201
+                    ],
+                    "is_working": true,
+                    "name": "Mulund",
+                    "rect": [
+                        432,
+                        186,
+                        38,
+                        15
+                    ],
+                    "text_id": 37,
+                    "uid": 37
+                },
+                {
+                    "coord": [
+                        516,
+                        166
+                    ],
+                    "is_working": true,
+                    "name": "Thane",
+                    "rect": [
+                        469,
+                        150,
+                        32,
+                        15
+                    ],
+                    "text_id": 38,
+                    "uid": 38
+                },
+                {
+                    "coord": [
+                        536,
+                        146
+                    ],
+                    "is_working": true,
+                    "name": "Kalwa",
+                    "rect": [
+                        492,
+                        128,
+                        33,
+                        15
+                    ],
+                    "text_id": 39,
+                    "uid": 39
+                },
+                {
+                    "coord": [
+                        556,
+                        126
+                    ],
+                    "is_working": true,
+                    "name": "Mumbra",
+                    "rect": [
+                        505,
+                        107,
+                        42,
+                        15
+                    ],
+                    "text_id": 40,
+                    "uid": 40
+                },
+                {
+                    "coord": [
+                        576,
+                        106
+                    ],
+                    "is_working": true,
+                    "name": "Diva Jn",
+                    "rect": [
+                        526,
+                        87,
+                        40,
+                        15
+                    ],
+                    "text_id": 41,
+                    "uid": 41
+                },
+                {
+                    "coord": [
+                        596,
+                        86
+                    ],
+                    "is_working": true,
+                    "name": "Dombivli",
+                    "rect": [
+                        541,
+                        66,
+                        46,
+                        15
+                    ],
+                    "text_id": 42,
+                    "uid": 42
+                },
+                {
+                    "coord": [
+                        616,
+                        66
+                    ],
+                    "is_working": true,
+                    "name": "Thakruli",
+                    "rect": [
+                        567,
+                        45,
+                        42,
+                        15
+                    ],
+                    "text_id": 43,
+                    "uid": 43
+                },
+                {
+                    "coord": [
+                        636,
+                        46
+                    ],
+                    "is_working": true,
+                    "name": "Kalyan",
+                    "rect": [
+                        597,
+                        22,
+                        37,
+                        15
+                    ],
+                    "text_id": 44,
+                    "uid": 44
+                }
+            ],
+            "text_id": 45
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "cf00cf",
+            "line_color": "cf00cf",
+            "line_width": 9,
+            "name": "Harbour 1",
+            "segments": [
+                [
+                    45,
+                    46,
+                    [
+                        [
+                            231,
+                            706
+                        ],
+                        [
+                            231,
+                            736
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    46,
+                    47,
+                    [
+                        [
+                            231,
+                            676
+                        ],
+                        [
+                            231,
+                            706
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    47,
+                    48,
+                    [
+                        [
+                            321,
+                            586
+                        ],
+                        [
+                            231,
+                            676
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    48,
+                    49,
+                    [
+                        [
+                            321,
+                            556
+                        ],
+                        [
+                            321,
+                            586
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    49,
+                    50,
+                    [
+                        [
+                            321,
+                            526
+                        ],
+                        [
+                            321,
+                            556
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    50,
+                    51,
+                    [
+                        [
+                            321,
+                            496
+                        ],
+                        [
+                            321,
+                            526
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    51,
+                    52,
+                    [
+                        [
+                            321,
+                            466
+                        ],
+                        [
+                            321,
+                            496
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    52,
+                    53,
+                    [
+                        [
+                            241,
+                            466
+                        ],
+                        [
+                            321,
+                            466
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    53,
+                    54,
+                    [
+                        [
+                            156,
+                            466
+                        ],
+                        [
+                            241,
+                            466
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    54,
+                    55,
+                    [
+                        [
+                            156,
+                            436
+                        ],
+                        [
+                            156,
+                            466
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    55,
+                    56,
+                    [
+                        [
+                            156,
+                            406
+                        ],
+                        [
+                            156,
+                            436
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    56,
+                    57,
+                    [
+                        [
+                            156,
+                            376
+                        ],
+                        [
+                            156,
+                            406
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    57,
+                    58,
+                    [
+                        [
+                            156,
+                            346
+                        ],
+                        [
+                            156,
+                            376
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    58,
+                    59,
+                    [
+                        [
+                            156,
+                            316
+                        ],
+                        [
+                            156,
+                            346
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        231,
+                        736
+                    ],
+                    "is_working": true,
+                    "name": "Mumbai CST",
+                    "rect": null,
+                    "text_id": 22,
+                    "uid": 45
+                },
+                {
+                    "coord": [
+                        231,
+                        706
+                    ],
+                    "is_working": true,
+                    "name": "Masjid",
+                    "rect": null,
+                    "text_id": 23,
+                    "uid": 46
+                },
+                {
+                    "coord": [
+                        231,
+                        676
+                    ],
+                    "is_working": true,
+                    "name": "Sandhurst Rd",
+                    "rect": null,
+                    "text_id": 24,
+                    "uid": 47
+                },
+                {
+                    "coord": [
+                        321,
+                        586
+                    ],
+                    "is_working": true,
+                    "name": "Dockyard Rd",
+                    "rect": [
+                        350,
+                        578,
+                        67,
+                        15
+                    ],
+                    "text_id": 46,
+                    "uid": 48
+                },
+                {
+                    "coord": [
+                        321,
+                        556
+                    ],
+                    "is_working": true,
+                    "name": "Reay Rd",
+                    "rect": [
+                        351,
+                        549,
+                        45,
+                        15
+                    ],
+                    "text_id": 47,
+                    "uid": 49
+                },
+                {
+                    "coord": [
+                        321,
+                        526
+                    ],
+                    "is_working": true,
+                    "name": "Cotton Green",
+                    "rect": [
+                        351,
+                        519,
+                        67,
+                        15
+                    ],
+                    "text_id": 48,
+                    "uid": 50
+                },
+                {
+                    "coord": [
+                        321,
+                        496
+                    ],
+                    "is_working": true,
+                    "name": "Sewri",
+                    "rect": [
+                        350,
+                        487,
+                        30,
+                        15
+                    ],
+                    "text_id": 49,
+                    "uid": 51
+                },
+                {
+                    "coord": [
+                        321,
+                        466
+                    ],
+                    "is_working": true,
+                    "name": "Wadala Jn",
+                    "rect": [
+                        351,
+                        458,
+                        54,
+                        15
+                    ],
+                    "text_id": 50,
+                    "uid": 52
+                },
+                {
+                    "coord": [
+                        241,
+                        466
+                    ],
+                    "is_working": true,
+                    "name": "King Circle",
+                    "rect": [
+                        218,
+                        477,
+                        58,
+                        15
+                    ],
+                    "text_id": 51,
+                    "uid": 53
+                },
+                {
+                    "coord": [
+                        156,
+                        466
+                    ],
+                    "is_working": true,
+                    "name": "Mahim Jn",
+                    "rect": null,
+                    "text_id": 10,
+                    "uid": 54
+                },
+                {
+                    "coord": [
+                        156,
+                        436
+                    ],
+                    "is_working": true,
+                    "name": "Bandra",
+                    "rect": null,
+                    "text_id": 11,
+                    "uid": 55
+                },
+                {
+                    "coord": [
+                        156,
+                        406
+                    ],
+                    "is_working": true,
+                    "name": "Khar Rd",
+                    "rect": null,
+                    "text_id": 12,
+                    "uid": 56
+                },
+                {
+                    "coord": [
+                        156,
+                        376
+                    ],
+                    "is_working": true,
+                    "name": "Santacruz",
+                    "rect": null,
+                    "text_id": 13,
+                    "uid": 57
+                },
+                {
+                    "coord": [
+                        156,
+                        346
+                    ],
+                    "is_working": true,
+                    "name": "Vile Parle",
+                    "rect": null,
+                    "text_id": 14,
+                    "uid": 58
+                },
+                {
+                    "coord": [
+                        156,
+                        316
+                    ],
+                    "is_working": true,
+                    "name": "Andheri",
+                    "rect": null,
+                    "text_id": 15,
+                    "uid": 59
+                }
+            ],
+            "text_id": 52
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "046434",
+            "line_color": "046434",
+            "line_width": 9,
+            "name": "Harbour 2",
+            "segments": [
+                [
+                    60,
+                    61,
+                    [
+                        [
+                            246,
+                            706
+                        ],
+                        [
+                            246,
+                            736
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    61,
+                    62,
+                    [
+                        [
+                            246,
+                            676
+                        ],
+                        [
+                            246,
+                            706
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    62,
+                    63,
+                    [
+                        [
+                            336,
+                            586
+                        ],
+                        [
+                            246,
+                            676
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    63,
+                    64,
+                    [
+                        [
+                            336,
+                            556
+                        ],
+                        [
+                            336,
+                            586
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    64,
+                    65,
+                    [
+                        [
+                            336,
+                            526
+                        ],
+                        [
+                            336,
+                            556
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    65,
+                    66,
+                    [
+                        [
+                            336,
+                            496
+                        ],
+                        [
+                            336,
+                            526
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    66,
+                    67,
+                    [
+                        [
+                            336,
+                            466
+                        ],
+                        [
+                            336,
+                            496
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    67,
+                    68,
+                    [
+                        [
+                            336,
+                            436
+                        ],
+                        [
+                            336,
+                            466
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    68,
+                    69,
+                    [
+                        [
+                            336,
+                            406
+                        ],
+                        [
+                            336,
+                            436
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    69,
+                    70,
+                    [
+                        [
+                            336,
+                            376
+                        ],
+                        [
+                            336,
+                            406
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    70,
+                    71,
+                    [
+                        [
+                            386,
+                            376
+                        ],
+                        [
+                            336,
+                            376
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    71,
+                    72,
+                    [
+                        [
+                            431,
+                            376
+                        ],
+                        [
+                            386,
+                            376
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    72,
+                    73,
+                    [
+                        [
+                            476,
+                            376
+                        ],
+                        [
+                            431,
+                            376
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    73,
+                    74,
+                    [
+                        [
+                            546,
+                            376
+                        ],
+                        [
+                            476,
+                            376
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    74,
+                    75,
+                    [
+                        [
+                            566,
+                            396
+                        ],
+                        [
+                            546,
+                            376
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    75,
+                    76,
+                    [
+                        [
+                            586,
+                            416
+                        ],
+                        [
+                            566,
+                            396
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    76,
+                    77,
+                    [
+                        [
+                            606,
+                            436
+                        ],
+                        [
+                            586,
+                            416
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    77,
+                    78,
+                    [
+                        [
+                            627,
+                            456
+                        ],
+                        [
+                            606,
+                            436
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    78,
+                    79,
+                    [
+                        [
+                            646,
+                            476
+                        ],
+                        [
+                            627,
+                            456
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    79,
+                    80,
+                    [
+                        [
+                            666,
+                            496
+                        ],
+                        [
+                            646,
+                            476
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    80,
+                    81,
+                    [
+                        [
+                            686,
+                            516
+                        ],
+                        [
+                            666,
+                            496
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    81,
+                    82,
+                    [
+                        [
+                            706,
+                            536
+                        ],
+                        [
+                            686,
+                            516
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    82,
+                    83,
+                    [
+                        [
+                            726,
+                            556
+                        ],
+                        [
+                            706,
+                            536
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        246,
+                        736
+                    ],
+                    "is_working": true,
+                    "name": "Mumbai CST",
+                    "rect": null,
+                    "text_id": 22,
+                    "uid": 60
+                },
+                {
+                    "coord": [
+                        246,
+                        706
+                    ],
+                    "is_working": true,
+                    "name": "Masjid",
+                    "rect": null,
+                    "text_id": 23,
+                    "uid": 61
+                },
+                {
+                    "coord": [
+                        246,
+                        676
+                    ],
+                    "is_working": true,
+                    "name": "Sandhurst Rd",
+                    "rect": null,
+                    "text_id": 24,
+                    "uid": 62
+                },
+                {
+                    "coord": [
+                        336,
+                        586
+                    ],
+                    "is_working": true,
+                    "name": "Dockyard Rd",
+                    "rect": null,
+                    "text_id": 46,
+                    "uid": 63
+                },
+                {
+                    "coord": [
+                        336,
+                        556
+                    ],
+                    "is_working": true,
+                    "name": "Reay Rd",
+                    "rect": null,
+                    "text_id": 47,
+                    "uid": 64
+                },
+                {
+                    "coord": [
+                        336,
+                        526
+                    ],
+                    "is_working": true,
+                    "name": "Cotton Green",
+                    "rect": null,
+                    "text_id": 48,
+                    "uid": 65
+                },
+                {
+                    "coord": [
+                        336,
+                        496
+                    ],
+                    "is_working": true,
+                    "name": "Sewri",
+                    "rect": null,
+                    "text_id": 49,
+                    "uid": 66
+                },
+                {
+                    "coord": [
+                        336,
+                        466
+                    ],
+                    "is_working": true,
+                    "name": "Wadala Jn",
+                    "rect": null,
+                    "text_id": 50,
+                    "uid": 67
+                },
+                {
+                    "coord": [
+                        336,
+                        436
+                    ],
+                    "is_working": true,
+                    "name": "GTB Nagar",
+                    "rect": [
+                        270,
+                        430,
+                        57,
+                        15
+                    ],
+                    "text_id": 53,
+                    "uid": 68
+                },
+                {
+                    "coord": [
+                        336,
+                        406
+                    ],
+                    "is_working": true,
+                    "name": "Chunabhatti",
+                    "rect": [
+                        349,
+                        406,
+                        61,
+                        15
+                    ],
+                    "text_id": 54,
+                    "uid": 69
+                },
+                {
+                    "coord": [
+                        336,
+                        376
+                    ],
+                    "is_working": true,
+                    "name": "Kurla",
+                    "rect": null,
+                    "text_id": 31,
+                    "uid": 70
+                },
+                {
+                    "coord": [
+                        386,
+                        376
+                    ],
+                    "is_working": true,
+                    "name": "Tilak Nagar",
+                    "rect": [
+                        351,
+                        349,
+                        59,
+                        15
+                    ],
+                    "text_id": 55,
+                    "uid": 71
+                },
+                {
+                    "coord": [
+                        431,
+                        376
+                    ],
+                    "is_working": true,
+                    "name": "Chembur",
+                    "rect": [
+                        413,
+                        389,
+                        47,
+                        15
+                    ],
+                    "text_id": 56,
+                    "uid": 72
+                },
+                {
+                    "coord": [
+                        476,
+                        376
+                    ],
+                    "is_working": true,
+                    "name": "Mankhurd",
+                    "rect": [
+                        449,
+                        348,
+                        51,
+                        15
+                    ],
+                    "text_id": 57,
+                    "uid": 73
+                },
+                {
+                    "coord": [
+                        546,
+                        376
+                    ],
+                    "is_working": true,
+                    "name": "Vashi",
+                    "rect": [
+                        514,
+                        393,
+                        30,
+                        15
+                    ],
+                    "text_id": 58,
+                    "uid": 74
+                },
+                {
+                    "coord": [
+                        566,
+                        396
+                    ],
+                    "is_working": true,
+                    "name": "Sanpada",
+                    "rect": [
+                        573,
+                        376,
+                        45,
+                        15
+                    ],
+                    "text_id": 59,
+                    "uid": 75
+                },
+                {
+                    "coord": [
+                        586,
+                        416
+                    ],
+                    "is_working": true,
+                    "name": "Jui Nagar",
+                    "rect": [
+                        595,
+                        395,
+                        50,
+                        15
+                    ],
+                    "text_id": 60,
+                    "uid": 76
+                },
+                {
+                    "coord": [
+                        606,
+                        436
+                    ],
+                    "is_working": true,
+                    "name": "Nerul",
+                    "rect": [
+                        613,
+                        414,
+                        29,
+                        15
+                    ],
+                    "text_id": 61,
+                    "uid": 77
+                },
+                {
+                    "coord": [
+                        627,
+                        456
+                    ],
+                    "is_working": true,
+                    "name": "Seawood",
+                    "rect": [
+                        633,
+                        433,
+                        47,
+                        15
+                    ],
+                    "text_id": 62,
+                    "uid": 78
+                },
+                {
+                    "coord": [
+                        646,
+                        476
+                    ],
+                    "is_working": true,
+                    "name": "Belapur",
+                    "rect": [
+                        655,
+                        454,
+                        41,
+                        15
+                    ],
+                    "text_id": 63,
+                    "uid": 79
+                },
+                {
+                    "coord": [
+                        666,
+                        496
+                    ],
+                    "is_working": true,
+                    "name": "Kharghar",
+                    "rect": [
+                        675,
+                        477,
+                        48,
+                        15
+                    ],
+                    "text_id": 64,
+                    "uid": 80
+                },
+                {
+                    "coord": [
+                        686,
+                        516
+                    ],
+                    "is_working": true,
+                    "name": "Mansarovar",
+                    "rect": [
+                        613,
+                        512,
+                        61,
+                        15
+                    ],
+                    "text_id": 65,
+                    "uid": 81
+                },
+                {
+                    "coord": [
+                        706,
+                        536
+                    ],
+                    "is_working": true,
+                    "name": "Khandeshwar",
+                    "rect": [
+                        622,
+                        532,
+                        70,
+                        15
+                    ],
+                    "text_id": 66,
+                    "uid": 82
+                },
+                {
+                    "coord": [
+                        726,
+                        556
+                    ],
+                    "is_working": true,
+                    "name": "Panvel",
+                    "rect": [
+                        675,
+                        554,
+                        36,
+                        15
+                    ],
+                    "text_id": 67,
+                    "uid": 83
+                }
+            ],
+            "text_id": 68
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "F7782E",
+            "line_color": "FC9C54",
+            "line_width": 9,
+            "name": "Thane-Vashi",
+            "segments": [
+                [
+                    84,
+                    85,
+                    [
+                        [
+                            531,
+                            196
+                        ],
+                        [
+                            531,
+                            166
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    85,
+                    86,
+                    [
+                        [
+                            531,
+                            226
+                        ],
+                        [
+                            531,
+                            196
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    86,
+                    87,
+                    [
+                        [
+                            531,
+                            256
+                        ],
+                        [
+                            531,
+                            226
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    87,
+                    88,
+                    [
+                        [
+                            531,
+                            286
+                        ],
+                        [
+                            531,
+                            256
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    88,
+                    89,
+                    [
+                        [
+                            531,
+                            316
+                        ],
+                        [
+                            531,
+                            286
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    89,
+                    90,
+                    [
+                        [
+                            531,
+                            346
+                        ],
+                        [
+                            531,
+                            316
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    90,
+                    91,
+                    [
+                        [
+                            531,
+                            376
+                        ],
+                        [
+                            531,
+                            346
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        531,
+                        166
+                    ],
+                    "is_working": true,
+                    "name": "Thane",
+                    "rect": null,
+                    "text_id": 38,
+                    "uid": 84
+                },
+                {
+                    "coord": [
+                        531,
+                        196
+                    ],
+                    "is_working": true,
+                    "name": "Dighe",
+                    "rect": [
+                        542,
+                        189,
+                        31,
+                        15
+                    ],
+                    "text_id": 69,
+                    "uid": 85
+                },
+                {
+                    "coord": [
+                        531,
+                        226
+                    ],
+                    "is_working": true,
+                    "name": "Airoli",
+                    "rect": [
+                        543,
+                        220,
+                        29,
+                        15
+                    ],
+                    "text_id": 70,
+                    "uid": 86
+                },
+                {
+                    "coord": [
+                        531,
+                        256
+                    ],
+                    "is_working": true,
+                    "name": "Rabale",
+                    "rect": [
+                        542,
+                        250,
+                        37,
+                        15
+                    ],
+                    "text_id": 71,
+                    "uid": 87
+                },
+                {
+                    "coord": [
+                        531,
+                        286
+                    ],
+                    "is_working": true,
+                    "name": "Ghansoli",
+                    "rect": [
+                        542,
+                        280,
+                        46,
+                        15
+                    ],
+                    "text_id": 72,
+                    "uid": 88
+                },
+                {
+                    "coord": [
+                        531,
+                        316
+                    ],
+                    "is_working": true,
+                    "name": "Koparkhairane",
+                    "rect": [
+                        541,
+                        311,
+                        75,
+                        15
+                    ],
+                    "text_id": 73,
+                    "uid": 89
+                },
+                {
+                    "coord": [
+                        531,
+                        346
+                    ],
+                    "is_working": true,
+                    "name": "Turbhe",
+                    "rect": [
+                        543,
+                        339,
+                        36,
+                        15
+                    ],
+                    "text_id": 74,
+                    "uid": 90
+                },
+                {
+                    "coord": [
+                        531,
+                        376
+                    ],
+                    "is_working": true,
+                    "name": "Vashi",
+                    "rect": null,
+                    "text_id": 58,
+                    "uid": 91
+                }
+            ],
+            "text_id": 75
+        }
+    ],
+    "lines_width": 9,
+    "name": "metro",
+    "name_text_id": 76,
+    "stations_diameter": 15.0,
+    "transfers": [
+        [
+            15,
+            59,
+            [
+                141,
+                316
+            ],
+            [
+                156,
+                316
+            ]
+        ],
+        [
+            11,
+            55,
+            [
+                141,
+                436
+            ],
+            [
+                156,
+                436
+            ]
+        ],
+        [
+            50,
+            65,
+            [
+                321,
+                526
+            ],
+            [
+                336,
+                526
+            ]
+        ],
+        [
+            8,
+            28,
+            [
+                141,
+                526
+            ],
+            [
+                156,
+                526
+            ]
+        ],
+        [
+            48,
+            63,
+            [
+                321,
+                586
+            ],
+            [
+                336,
+                586
+            ]
+        ],
+        [
+            12,
+            56,
+            [
+                141,
+                406
+            ],
+            [
+                156,
+                406
+            ]
+        ],
+        [
+            31,
+            70,
+            [
+                306,
+                376
+            ],
+            [
+                336,
+                376
+            ]
+        ],
+        [
+            10,
+            54,
+            [
+                141,
+                466
+            ],
+            [
+                156,
+                466
+            ]
+        ],
+        [
+            46,
+            61,
+            [
+                231,
+                706
+            ],
+            [
+                246,
+                706
+            ]
+        ],
+        [
+            22,
+            46,
+            [
+                216,
+                706
+            ],
+            [
+                231,
+                706
+            ]
+        ],
+        [
+            22,
+            61,
+            [
+                216,
+                706
+            ],
+            [
+                246,
+                706
+            ]
+        ],
+        [
+            45,
+            60,
+            [
+                231,
+                736
+            ],
+            [
+                246,
+                736
+            ]
+        ],
+        [
+            21,
+            45,
+            [
+                216,
+                736
+            ],
+            [
+                231,
+                736
+            ]
+        ],
+        [
+            21,
+            60,
+            [
+                216,
+                736
+            ],
+            [
+                246,
+                736
+            ]
+        ],
+        [
+            49,
+            64,
+            [
+                321,
+                556
+            ],
+            [
+                336,
+                556
+            ]
+        ],
+        [
+            47,
+            62,
+            [
+                231,
+                676
+            ],
+            [
+                246,
+                676
+            ]
+        ],
+        [
+            23,
+            47,
+            [
+                216,
+                676
+            ],
+            [
+                231,
+                676
+            ]
+        ],
+        [
+            23,
+            62,
+            [
+                216,
+                676
+            ],
+            [
+                246,
+                676
+            ]
+        ],
+        [
+            13,
+            57,
+            [
+                141,
+                376
+            ],
+            [
+                156,
+                376
+            ]
+        ],
+        [
+            51,
+            66,
+            [
+                321,
+                496
+            ],
+            [
+                336,
+                496
+            ]
+        ],
+        [
+            38,
+            84,
+            [
+                516,
+                166
+            ],
+            [
+                531,
+                166
+            ]
+        ],
+        [
+            74,
+            91,
+            [
+                546,
+                376
+            ],
+            [
+                531,
+                376
+            ]
+        ],
+        [
+            14,
+            58,
+            [
+                141,
+                346
+            ],
+            [
+                156,
+                346
+            ]
+        ],
+        [
+            52,
+            67,
+            [
+                321,
+                466
+            ],
+            [
+                336,
+                466
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 77,
+    "upper_case": false,
+    "width": 876,
+    "word_wrap": false
+}

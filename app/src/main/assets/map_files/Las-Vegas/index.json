@@ -1,0 +1,58 @@
+{
+    "city_id": 5475433,
+    "comments_text_id": 11,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 10,
+    "file": "Las-Vegas.zip",
+    "latitude": 35.59393,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": -105.2239,
+    "map_id": "Las-Vegas.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 8,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 9
+        }
+    ],
+    "timestamp": 1754434800.0,
+    "transport_types": [
+        "Электричка"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Электричка"
+        }
+    ]
+}

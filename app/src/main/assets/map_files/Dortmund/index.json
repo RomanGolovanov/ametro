@@ -1,0 +1,58 @@
+{
+    "city_id": 2935517,
+    "comments_text_id": 135,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 134,
+    "file": "Dortmund.zip",
+    "latitude": 51.51494,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": 7.466,
+    "map_id": "Dortmund.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 132,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 133
+        }
+    ],
+    "timestamp": 1754434800.0,
+    "transport_types": [
+        "Электричка"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Электричка"
+        }
+    ]
+}

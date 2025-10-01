@@ -1,0 +1,332 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 564,
+    "images": [
+        "res/schemes/qingdao.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "3280B7",
+            "line_color": "3280B7",
+            "line_width": 9,
+            "name": "M3",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            116,
+                            56
+                        ],
+                        [
+                            45,
+                            56
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            184,
+                            56
+                        ],
+                        [
+                            116,
+                            56
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            229,
+                            101
+                        ],
+                        [
+                            184,
+                            56
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            275,
+                            147
+                        ],
+                        [
+                            229,
+                            101
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            275,
+                            208
+                        ],
+                        [
+                            275,
+                            147
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            275,
+                            269
+                        ],
+                        [
+                            275,
+                            208
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            224,
+                            320
+                        ],
+                        [
+                            275,
+                            269
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            179,
+                            365
+                        ],
+                        [
+                            224,
+                            320
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            130,
+                            414
+                        ],
+                        [
+                            179,
+                            365
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        45,
+                        56
+                    ],
+                    "is_working": true,
+                    "name": "Qingdao Beizhan",
+                    "rect": [
+                        22,
+                        19,
+                        45,
+                        28
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        116,
+                        56
+                    ],
+                    "is_working": true,
+                    "name": "Yongpinglu",
+                    "rect": [
+                        87,
+                        32,
+                        57,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        184,
+                        56
+                    ],
+                    "is_working": true,
+                    "name": "Zhenhualu",
+                    "rect": [
+                        239,
+                        89,
+                        53,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        229,
+                        101
+                    ],
+                    "is_working": true,
+                    "name": "Junfenglu",
+                    "rect": [
+                        162,
+                        32,
+                        50,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        275,
+                        147
+                    ],
+                    "is_working": true,
+                    "name": "Licun",
+                    "rect": [
+                        285,
+                        138,
+                        29,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        275,
+                        208
+                    ],
+                    "is_working": true,
+                    "name": "Wannianquanlu",
+                    "rect": [
+                        285,
+                        200,
+                        78,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        275,
+                        269
+                    ],
+                    "is_working": true,
+                    "name": "Hai'erlu",
+                    "rect": [
+                        285,
+                        262,
+                        40,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        224,
+                        320
+                    ],
+                    "is_working": true,
+                    "name": "Ditie Dasha",
+                    "rect": [
+                        234,
+                        317,
+                        34,
+                        28
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        179,
+                        365
+                    ],
+                    "is_working": true,
+                    "name": "Changshalu",
+                    "rect": [
+                        189,
+                        362,
+                        61,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        130,
+                        414
+                    ],
+                    "is_working": true,
+                    "name": "Shuangshan",
+                    "rect": [
+                        140,
+                        411,
+                        63,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                }
+            ],
+            "text_id": 10
+        }
+    ],
+    "lines_width": 9,
+    "name": "metro",
+    "name_text_id": 11,
+    "stations_diameter": 15.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 12,
+    "upper_case": false,
+    "width": 425,
+    "word_wrap": true
+}

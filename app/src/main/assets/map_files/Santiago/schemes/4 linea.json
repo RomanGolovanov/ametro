@@ -1,0 +1,1314 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 1040,
+    "images": [
+        "res/schemes/4 linea.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "DD0000",
+            "line_width": 9,
+            "name": "L1",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "San Pablo",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Neptuno",
+                    "rect": null,
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Pajaritos",
+                    "rect": null,
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Las Rejas",
+                    "rect": null,
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ecuador",
+                    "rect": null,
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "San Alberto Hurtado",
+                    "rect": null,
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "U. de Santiago",
+                    "rect": null,
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Estacion Central",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Union Latino - Americana",
+                    "rect": null,
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Republica",
+                    "rect": null,
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Los Heroes",
+                    "rect": null,
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "La Moneda",
+                    "rect": null,
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "U. de Chile",
+                    "rect": null,
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Santa Lucia",
+                    "rect": null,
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "U. Catolica",
+                    "rect": null,
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Baquedano",
+                    "rect": null,
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Salvador",
+                    "rect": null,
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Manuel Montt",
+                    "rect": null,
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Pedro de Valdivia",
+                    "rect": null,
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Los Leones",
+                    "rect": null,
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        160,
+                        50
+                    ],
+                    "is_working": true,
+                    "name": "Tobalaba",
+                    "rect": [
+                        67,
+                        45,
+                        70,
+                        12
+                    ],
+                    "text_id": 20,
+                    "uid": 20
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "El Golf",
+                    "rect": null,
+                    "text_id": 21,
+                    "uid": 21
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Alcantara",
+                    "rect": null,
+                    "text_id": 22,
+                    "uid": 22
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Escuela Militar",
+                    "rect": null,
+                    "text_id": 23,
+                    "uid": 23
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Manquehue",
+                    "rect": null,
+                    "text_id": 24,
+                    "uid": 24
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Hernando de Magallanes",
+                    "rect": null,
+                    "text_id": 25,
+                    "uid": 25
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Los Dominicos",
+                    "rect": null,
+                    "text_id": 26,
+                    "uid": 26
+                }
+            ],
+            "text_id": 27
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "019160",
+            "line_width": 9,
+            "name": "L5",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Plaza de Maipu",
+                    "rect": null,
+                    "text_id": 50,
+                    "uid": 49
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Santiago Bueras",
+                    "rect": null,
+                    "text_id": 51,
+                    "uid": 50
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Del Sol",
+                    "rect": null,
+                    "text_id": 52,
+                    "uid": 51
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Monte Tabor",
+                    "rect": null,
+                    "text_id": 53,
+                    "uid": 52
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Las Parcelas",
+                    "rect": null,
+                    "text_id": 54,
+                    "uid": 53
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Laguna Sur",
+                    "rect": null,
+                    "text_id": 55,
+                    "uid": 54
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Barrancas",
+                    "rect": null,
+                    "text_id": 56,
+                    "uid": 55
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Pudahuel",
+                    "rect": null,
+                    "text_id": 57,
+                    "uid": 56
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "San Pablo",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 57
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Lo Prado",
+                    "rect": null,
+                    "text_id": 58,
+                    "uid": 58
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Blanqueado",
+                    "rect": null,
+                    "text_id": 59,
+                    "uid": 59
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Gruta de Lourdes",
+                    "rect": null,
+                    "text_id": 60,
+                    "uid": 60
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Quinta Normal",
+                    "rect": null,
+                    "text_id": 61,
+                    "uid": 61
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Cumming",
+                    "rect": null,
+                    "text_id": 62,
+                    "uid": 62
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Santa Ana",
+                    "rect": null,
+                    "text_id": 40,
+                    "uid": 63
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Plaza de Armas",
+                    "rect": null,
+                    "text_id": 63,
+                    "uid": 64
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Bellas Artes",
+                    "rect": null,
+                    "text_id": 64,
+                    "uid": 65
+                },
+                {
+                    "coord": [
+                        160,
+                        570
+                    ],
+                    "is_working": true,
+                    "name": "Baquedano",
+                    "rect": [
+                        50,
+                        565,
+                        95,
+                        13
+                    ],
+                    "text_id": 15,
+                    "uid": 66
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "P. Bustamante",
+                    "rect": null,
+                    "text_id": 65,
+                    "uid": 67
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sta Isabel",
+                    "rect": null,
+                    "text_id": 66,
+                    "uid": 68
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Irarrazaval",
+                    "rect": null,
+                    "text_id": 67,
+                    "uid": 69
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Nuble",
+                    "rect": null,
+                    "text_id": 68,
+                    "uid": 70
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "R. de Araya",
+                    "rect": null,
+                    "text_id": 69,
+                    "uid": 71
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "C. Valdovinos",
+                    "rect": null,
+                    "text_id": 70,
+                    "uid": 72
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "C. Agricola",
+                    "rect": null,
+                    "text_id": 71,
+                    "uid": 73
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "San Joaquin",
+                    "rect": null,
+                    "text_id": 72,
+                    "uid": 74
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Pedrero",
+                    "rect": null,
+                    "text_id": 73,
+                    "uid": 75
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Mirador",
+                    "rect": null,
+                    "text_id": 74,
+                    "uid": 76
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Bellavista de la Florida",
+                    "rect": null,
+                    "text_id": 75,
+                    "uid": 77
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Vicente Valdes",
+                    "rect": null,
+                    "text_id": 76,
+                    "uid": 78
+                }
+            ],
+            "text_id": 77
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "34349C",
+            "line_width": 9,
+            "name": "L4",
+            "segments": [
+                [
+                    79,
+                    80,
+                    [
+                        [
+                            180,
+                            90
+                        ],
+                        [
+                            180,
+                            50
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    80,
+                    81,
+                    [
+                        [
+                            180,
+                            130
+                        ],
+                        [
+                            180,
+                            90
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    81,
+                    82,
+                    [
+                        [
+                            180,
+                            170
+                        ],
+                        [
+                            180,
+                            130
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    82,
+                    83,
+                    [
+                        [
+                            180,
+                            210
+                        ],
+                        [
+                            180,
+                            170
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    83,
+                    84,
+                    [
+                        [
+                            180,
+                            250
+                        ],
+                        [
+                            180,
+                            210
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    84,
+                    85,
+                    [
+                        [
+                            180,
+                            290
+                        ],
+                        [
+                            180,
+                            250
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    85,
+                    86,
+                    [
+                        [
+                            180,
+                            330
+                        ],
+                        [
+                            180,
+                            290
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    86,
+                    87,
+                    [
+                        [
+                            180,
+                            370
+                        ],
+                        [
+                            180,
+                            330
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    87,
+                    88,
+                    [
+                        [
+                            180,
+                            410
+                        ],
+                        [
+                            180,
+                            370
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    88,
+                    89,
+                    [
+                        [
+                            180,
+                            450
+                        ],
+                        [
+                            180,
+                            410
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    89,
+                    90,
+                    [
+                        [
+                            180,
+                            490
+                        ],
+                        [
+                            180,
+                            450
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    90,
+                    91,
+                    [
+                        [
+                            180,
+                            530
+                        ],
+                        [
+                            180,
+                            490
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    91,
+                    92,
+                    [
+                        [
+                            180,
+                            570
+                        ],
+                        [
+                            180,
+                            530
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    92,
+                    93,
+                    [
+                        [
+                            180,
+                            610
+                        ],
+                        [
+                            180,
+                            570
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    93,
+                    94,
+                    [
+                        [
+                            180,
+                            650
+                        ],
+                        [
+                            180,
+                            610
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    94,
+                    95,
+                    [
+                        [
+                            180,
+                            690
+                        ],
+                        [
+                            180,
+                            650
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    95,
+                    96,
+                    [
+                        [
+                            180,
+                            730
+                        ],
+                        [
+                            180,
+                            690
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    96,
+                    97,
+                    [
+                        [
+                            180,
+                            770
+                        ],
+                        [
+                            180,
+                            730
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    97,
+                    98,
+                    [
+                        [
+                            180,
+                            810
+                        ],
+                        [
+                            180,
+                            770
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    98,
+                    99,
+                    [
+                        [
+                            180,
+                            850
+                        ],
+                        [
+                            180,
+                            810
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    99,
+                    100,
+                    [
+                        [
+                            180,
+                            890
+                        ],
+                        [
+                            180,
+                            850
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        180,
+                        50
+                    ],
+                    "is_working": true,
+                    "name": "Tobalaba",
+                    "rect": [
+                        195,
+                        45,
+                        63,
+                        12
+                    ],
+                    "text_id": 20,
+                    "uid": 79
+                },
+                {
+                    "coord": [
+                        180,
+                        90
+                    ],
+                    "is_working": true,
+                    "name": "Cristobal Colon",
+                    "rect": [
+                        195,
+                        85,
+                        100,
+                        10
+                    ],
+                    "text_id": 78,
+                    "uid": 80
+                },
+                {
+                    "coord": [
+                        180,
+                        130
+                    ],
+                    "is_working": true,
+                    "name": "Francisco Bilbao",
+                    "rect": [
+                        195,
+                        125,
+                        100,
+                        10
+                    ],
+                    "text_id": 79,
+                    "uid": 81
+                },
+                {
+                    "coord": [
+                        180,
+                        170
+                    ],
+                    "is_working": true,
+                    "name": "Principe de Gales",
+                    "rect": [
+                        195,
+                        165,
+                        100,
+                        10
+                    ],
+                    "text_id": 80,
+                    "uid": 82
+                },
+                {
+                    "coord": [
+                        180,
+                        210
+                    ],
+                    "is_working": true,
+                    "name": "Simon Bolivar",
+                    "rect": [
+                        195,
+                        205,
+                        80,
+                        10
+                    ],
+                    "text_id": 81,
+                    "uid": 83
+                },
+                {
+                    "coord": [
+                        180,
+                        250
+                    ],
+                    "is_working": true,
+                    "name": "Plaza Egana",
+                    "rect": [
+                        195,
+                        245,
+                        80,
+                        10
+                    ],
+                    "text_id": 82,
+                    "uid": 84
+                },
+                {
+                    "coord": [
+                        180,
+                        290
+                    ],
+                    "is_working": true,
+                    "name": "Los Orientales",
+                    "rect": [
+                        195,
+                        285,
+                        90,
+                        10
+                    ],
+                    "text_id": 83,
+                    "uid": 85
+                },
+                {
+                    "coord": [
+                        180,
+                        330
+                    ],
+                    "is_working": true,
+                    "name": "Grecia",
+                    "rect": [
+                        195,
+                        325,
+                        100,
+                        10
+                    ],
+                    "text_id": 84,
+                    "uid": 86
+                },
+                {
+                    "coord": [
+                        180,
+                        370
+                    ],
+                    "is_working": true,
+                    "name": "Los Presidentes",
+                    "rect": [
+                        195,
+                        365,
+                        100,
+                        10
+                    ],
+                    "text_id": 85,
+                    "uid": 87
+                },
+                {
+                    "coord": [
+                        180,
+                        410
+                    ],
+                    "is_working": true,
+                    "name": "Quilin",
+                    "rect": [
+                        195,
+                        405,
+                        400,
+                        10
+                    ],
+                    "text_id": 86,
+                    "uid": 88
+                },
+                {
+                    "coord": [
+                        180,
+                        450
+                    ],
+                    "is_working": true,
+                    "name": "Las Torres",
+                    "rect": [
+                        195,
+                        445,
+                        100,
+                        10
+                    ],
+                    "text_id": 87,
+                    "uid": 89
+                },
+                {
+                    "coord": [
+                        180,
+                        490
+                    ],
+                    "is_working": true,
+                    "name": "Macul",
+                    "rect": [
+                        195,
+                        485,
+                        50,
+                        10
+                    ],
+                    "text_id": 88,
+                    "uid": 90
+                },
+                {
+                    "coord": [
+                        180,
+                        530
+                    ],
+                    "is_working": true,
+                    "name": "Vicuna Mackenna",
+                    "rect": [
+                        195,
+                        525,
+                        80,
+                        13
+                    ],
+                    "text_id": 89,
+                    "uid": 91
+                },
+                {
+                    "coord": [
+                        180,
+                        570
+                    ],
+                    "is_working": true,
+                    "name": "Vicente Valdes",
+                    "rect": [
+                        195,
+                        565,
+                        101,
+                        12
+                    ],
+                    "text_id": 76,
+                    "uid": 92
+                },
+                {
+                    "coord": [
+                        180,
+                        610
+                    ],
+                    "is_working": true,
+                    "name": "Rojas Magallanes",
+                    "rect": [
+                        195,
+                        605,
+                        98,
+                        10
+                    ],
+                    "text_id": 90,
+                    "uid": 93
+                },
+                {
+                    "coord": [
+                        180,
+                        650
+                    ],
+                    "is_working": true,
+                    "name": "Trinidad",
+                    "rect": [
+                        195,
+                        645,
+                        51,
+                        10
+                    ],
+                    "text_id": 91,
+                    "uid": 94
+                },
+                {
+                    "coord": [
+                        180,
+                        690
+                    ],
+                    "is_working": true,
+                    "name": "Los Quillayes",
+                    "rect": [
+                        195,
+                        685,
+                        90,
+                        10
+                    ],
+                    "text_id": 92,
+                    "uid": 95
+                },
+                {
+                    "coord": [
+                        180,
+                        730
+                    ],
+                    "is_working": true,
+                    "name": "Elisa Correa",
+                    "rect": [
+                        195,
+                        725,
+                        90,
+                        10
+                    ],
+                    "text_id": 93,
+                    "uid": 96
+                },
+                {
+                    "coord": [
+                        180,
+                        770
+                    ],
+                    "is_working": true,
+                    "name": "Hospital Sotero del Rio",
+                    "rect": [
+                        195,
+                        765,
+                        160,
+                        10
+                    ],
+                    "text_id": 94,
+                    "uid": 97
+                },
+                {
+                    "coord": [
+                        180,
+                        810
+                    ],
+                    "is_working": true,
+                    "name": "Protectora de la Infancia",
+                    "rect": [
+                        195,
+                        805,
+                        170,
+                        10
+                    ],
+                    "text_id": 95,
+                    "uid": 98
+                },
+                {
+                    "coord": [
+                        180,
+                        850
+                    ],
+                    "is_working": true,
+                    "name": "Las Mercedes",
+                    "rect": [
+                        195,
+                        845,
+                        78,
+                        10
+                    ],
+                    "text_id": 96,
+                    "uid": 99
+                },
+                {
+                    "coord": [
+                        180,
+                        890
+                    ],
+                    "is_working": true,
+                    "name": "Plaza de Puente Alto",
+                    "rect": [
+                        195,
+                        885,
+                        126,
+                        12
+                    ],
+                    "text_id": 97,
+                    "uid": 100
+                }
+            ],
+            "text_id": 98
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "1884BD",
+            "line_width": 9,
+            "name": "L4A",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": [
+                        165,
+                        530
+                    ],
+                    "is_working": true,
+                    "name": "Vicuna Mackenna",
+                    "rect": [
+                        30,
+                        525,
+                        120,
+                        10
+                    ],
+                    "text_id": 89,
+                    "uid": 101
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Santa Julia",
+                    "rect": null,
+                    "text_id": 99,
+                    "uid": 102
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "La Granja",
+                    "rect": null,
+                    "text_id": 100,
+                    "uid": 103
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Santa Rosa",
+                    "rect": null,
+                    "text_id": 101,
+                    "uid": 104
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "San Ramon",
+                    "rect": null,
+                    "text_id": 102,
+                    "uid": 105
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "La Cisterna",
+                    "rect": null,
+                    "text_id": 28,
+                    "uid": 106
+                }
+            ],
+            "text_id": 103
+        }
+    ],
+    "lines_width": 9,
+    "name": "4 linea",
+    "name_text_id": 98,
+    "stations_diameter": 16.0,
+    "transfers": [
+        [
+            15,
+            66,
+            null,
+            [
+                160,
+                570
+            ]
+        ],
+        [
+            20,
+            79,
+            [
+                160,
+                50
+            ],
+            [
+                180,
+                50
+            ]
+        ],
+        [
+            78,
+            92,
+            null,
+            [
+                180,
+                570
+            ]
+        ],
+        [
+            57,
+            0,
+            null,
+            null
+        ],
+        [
+            101,
+            91,
+            [
+                165,
+                530
+            ],
+            [
+                180,
+                530
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "Метро",
+    "type_text_id": 106,
+    "upper_case": true,
+    "width": 330,
+    "word_wrap": true
+}

@@ -10,8 +10,8 @@ android {
         applicationId = "io.github.romangolovanov.apps.ametro"
         minSdk = 24
         targetSdk = 36
-        versionCode = 52
-        versionName = "3.0.2"
+        versionCode = 53
+        versionName = "3.0.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         setProperty("archivesBaseName", "$applicationId-$versionName")
@@ -51,9 +51,9 @@ dependencies {
     implementation(libs.core)
     implementation(libs.loader)
 
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.17.2")
-    implementation("com.fasterxml.jackson.core:jackson-core:2.17.2")
-    implementation("com.fasterxml.jackson.core:jackson-annotations:2.17.2")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.20.0")
+    implementation("com.fasterxml.jackson.core:jackson-core:2.20.0")
+    implementation("com.fasterxml.jackson.core:jackson-annotations:2.20")
 
     implementation("com.caverock:androidsvg:1.4")
 }

@@ -1,0 +1,795 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 489,
+    "images": [
+        "res/schemes/salvador.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "00a2e8",
+            "line_color": "00a2e8",
+            "line_width": 9,
+            "name": "Linha 1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            113,
+                            316
+                        ],
+                        [
+                            98,
+                            338
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            147,
+                            323
+                        ],
+                        [
+                            113,
+                            316
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            194,
+                            338
+                        ],
+                        [
+                            173.0,
+                            339.0
+                        ],
+                        [
+                            147,
+                            323
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            227,
+                            289
+                        ],
+                        [
+                            194,
+                            338
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            248,
+                            235
+                        ],
+                        [
+                            226.0,
+                            266.0
+                        ],
+                        [
+                            227,
+                            289
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            251,
+                            193
+                        ],
+                        [
+                            248,
+                            235
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            267,
+                            152
+                        ],
+                        [
+                            253.0,
+                            171.0
+                        ],
+                        [
+                            251,
+                            193
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            306,
+                            99
+                        ],
+                        [
+                            267,
+                            152
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            339,
+                            68
+                        ],
+                        [
+                            306,
+                            99
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            378,
+                            42
+                        ],
+                        [
+                            339,
+                            68
+                        ]
+                    ],
+                    false
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        98,
+                        338
+                    ],
+                    "is_working": true,
+                    "name": "Lapa",
+                    "rect": [
+                        60,
+                        331,
+                        26,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        113,
+                        316
+                    ],
+                    "is_working": true,
+                    "name": "Campo da Polvora",
+                    "rect": [
+                        35,
+                        290,
+                        93,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        147,
+                        323
+                    ],
+                    "is_working": true,
+                    "name": "Brotas",
+                    "rect": [
+                        139,
+                        297,
+                        35,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        194,
+                        338
+                    ],
+                    "is_working": true,
+                    "name": "Bonoco",
+                    "rect": [
+                        157,
+                        349,
+                        40,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        227,
+                        289
+                    ],
+                    "is_working": true,
+                    "name": "Acesso Norte",
+                    "rect": [
+                        239,
+                        278,
+                        70,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        248,
+                        235
+                    ],
+                    "is_working": true,
+                    "name": "Retiro",
+                    "rect": [
+                        260,
+                        228,
+                        32,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        251,
+                        193
+                    ],
+                    "is_working": true,
+                    "name": "Bon Jua",
+                    "rect": [
+                        263,
+                        186,
+                        43,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        267,
+                        152
+                    ],
+                    "is_working": true,
+                    "name": "Piraja",
+                    "rect": [
+                        279,
+                        146,
+                        31,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        306,
+                        99
+                    ],
+                    "is_working": false,
+                    "name": "Mata Escura",
+                    "rect": [
+                        318,
+                        95,
+                        64,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        339,
+                        68
+                    ],
+                    "is_working": false,
+                    "name": "Pau de Lima",
+                    "rect": [
+                        351,
+                        65,
+                        63,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        378,
+                        42
+                    ],
+                    "is_working": false,
+                    "name": "Cajazeiras",
+                    "rect": [
+                        390,
+                        35,
+                        55,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                }
+            ],
+            "text_id": 11
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "ed1c24",
+            "line_color": "ed1c24",
+            "line_width": 7,
+            "name": "Linha 2",
+            "segments": [
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            240,
+                            314
+                        ],
+                        [
+                            227.0,
+                            312.0
+                        ],
+                        [
+                            210,
+                            338
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            270,
+                            319
+                        ],
+                        [
+                            240,
+                            314
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            316,
+                            303
+                        ],
+                        [
+                            290.0,
+                            302.0
+                        ],
+                        [
+                            270,
+                            319
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            368,
+                            270
+                        ],
+                        [
+                            316,
+                            303
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            395,
+                            236
+                        ],
+                        [
+                            368,
+                            270
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            428,
+                            199
+                        ],
+                        [
+                            395,
+                            236
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            456,
+                            182
+                        ],
+                        [
+                            440.0,
+                            185.0
+                        ],
+                        [
+                            428,
+                            199
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            506,
+                            175
+                        ],
+                        [
+                            456,
+                            182
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            539,
+                            143
+                        ],
+                        [
+                            506,
+                            175
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            570,
+                            139
+                        ],
+                        [
+                            539,
+                            143
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            635,
+                            126
+                        ],
+                        [
+                            570,
+                            139
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            658,
+                            73
+                        ],
+                        [
+                            648.0,
+                            92.0
+                        ],
+                        [
+                            685.0,
+                            123.0
+                        ],
+                        [
+                            635,
+                            126
+                        ]
+                    ],
+                    false
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        210,
+                        338
+                    ],
+                    "is_working": false,
+                    "name": "Bonoco",
+                    "rect": [
+                        211,
+                        349,
+                        40,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        240,
+                        314
+                    ],
+                    "is_working": false,
+                    "name": "Detran",
+                    "rect": [
+                        226,
+                        324,
+                        35,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        270,
+                        319
+                    ],
+                    "is_working": false,
+                    "name": "Rodoviaria",
+                    "rect": [
+                        282,
+                        321,
+                        56,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        316,
+                        303
+                    ],
+                    "is_working": false,
+                    "name": "Pernambues",
+                    "rect": [
+                        328,
+                        300,
+                        64,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        368,
+                        270
+                    ],
+                    "is_working": false,
+                    "name": "Imbui",
+                    "rect": [
+                        380,
+                        265,
+                        29,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        395,
+                        236
+                    ],
+                    "is_working": false,
+                    "name": "Centro Administrativo da Bahia",
+                    "rect": [
+                        407,
+                        229,
+                        157,
+                        15
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        428,
+                        199
+                    ],
+                    "is_working": false,
+                    "name": "Pituacu",
+                    "rect": [
+                        376,
+                        187,
+                        39,
+                        15
+                    ],
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        456,
+                        182
+                    ],
+                    "is_working": false,
+                    "name": "Flamboyant",
+                    "rect": [
+                        458,
+                        193,
+                        59,
+                        15
+                    ],
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        506,
+                        175
+                    ],
+                    "is_working": false,
+                    "name": "Tamburugy",
+                    "rect": [
+                        519,
+                        169,
+                        57,
+                        15
+                    ],
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        539,
+                        143
+                    ],
+                    "is_working": false,
+                    "name": "Bairro da Paz",
+                    "rect": [
+                        458,
+                        132,
+                        69,
+                        15
+                    ],
+                    "text_id": 20,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        570,
+                        139
+                    ],
+                    "is_working": false,
+                    "name": "Mussurunga",
+                    "rect": [
+                        562,
+                        150,
+                        63,
+                        15
+                    ],
+                    "text_id": 21,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        635,
+                        126
+                    ],
+                    "is_working": false,
+                    "name": "Aeroporto",
+                    "rect": [
+                        645,
+                        131,
+                        51,
+                        15
+                    ],
+                    "text_id": 22,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        658,
+                        73
+                    ],
+                    "is_working": false,
+                    "name": "Lauro de Freitas",
+                    "rect": [
+                        670,
+                        65,
+                        82,
+                        15
+                    ],
+                    "text_id": 23,
+                    "uid": 23
+                }
+            ],
+            "text_id": 24
+        }
+    ],
+    "lines_width": 9,
+    "name": "metro",
+    "name_text_id": 25,
+    "stations_diameter": 17.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 26,
+    "upper_case": true,
+    "width": 835,
+    "word_wrap": false
+}

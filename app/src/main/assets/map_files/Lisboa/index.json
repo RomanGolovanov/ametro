@@ -1,0 +1,114 @@
+{
+    "city_id": 2267057,
+    "comments_text_id": 57,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 56,
+    "file": "Lisboa.zip",
+    "latitude": 38.72509,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": -9.1498,
+    "map_id": "Lisboa.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 53,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 54
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/blue.json",
+            "name": "blue",
+            "name_text_id": 17,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 55
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/green.json",
+            "name": "green",
+            "name_text_id": 42,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 55
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/red.json",
+            "name": "red",
+            "name_text_id": 52,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 55
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/yellow.json",
+            "name": "yellow",
+            "name_text_id": 30,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 55
+        }
+    ],
+    "timestamp": 1754434800.0,
+    "transport_types": [
+        "Метро"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Метро"
+        }
+    ]
+}

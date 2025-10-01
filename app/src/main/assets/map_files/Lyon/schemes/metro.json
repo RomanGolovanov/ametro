@@ -1,0 +1,5133 @@
+{
+    "default_transports": [
+        "metro",
+        "trolleybus",
+        "tram",
+        "funicular"
+    ],
+    "height": 1440,
+    "images": [
+        "res/schemes/lyon.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "ee1c23",
+            "line_color": "ee1c23",
+            "line_width": 13,
+            "name": "A",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            385,
+                            755
+                        ],
+                        [
+                            385,
+                            845
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            385,
+                            665
+                        ],
+                        [
+                            385,
+                            755
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            385,
+                            540
+                        ],
+                        [
+                            385,
+                            665
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            385,
+                            410
+                        ],
+                        [
+                            385,
+                            540
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            540,
+                            355
+                        ],
+                        [
+                            385,
+                            410
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            630,
+                            320
+                        ],
+                        [
+                            540,
+                            355
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            745,
+                            280
+                        ],
+                        [
+                            630,
+                            320
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            810,
+                            305
+                        ],
+                        [
+                            745,
+                            280
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            870,
+                            325
+                        ],
+                        [
+                            810,
+                            305
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            935,
+                            350
+                        ],
+                        [
+                            870,
+                            325
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            1000,
+                            370
+                        ],
+                        [
+                            935,
+                            350
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            1065,
+                            395
+                        ],
+                        [
+                            1000,
+                            370
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            1130,
+                            495
+                        ],
+                        [
+                            1130.0,
+                            420.0
+                        ],
+                        [
+                            1065,
+                            395
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        385,
+                        845
+                    ],
+                    "is_working": true,
+                    "name": "Perrache",
+                    "rect": [
+                        322,
+                        837,
+                        47,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        385,
+                        755
+                    ],
+                    "is_working": true,
+                    "name": "Ampere/Victor Hugo",
+                    "rect": [
+                        266,
+                        746,
+                        102,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        385,
+                        665
+                    ],
+                    "is_working": true,
+                    "name": "Bellecour",
+                    "rect": [
+                        315,
+                        671,
+                        50,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        385,
+                        540
+                    ],
+                    "is_working": true,
+                    "name": "Cordeliers",
+                    "rect": [
+                        299,
+                        524,
+                        54,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        385,
+                        410
+                    ],
+                    "is_working": true,
+                    "name": "Hotel de Ville/Louis Pradel",
+                    "rect": [
+                        236,
+                        365,
+                        133,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        540,
+                        355
+                    ],
+                    "is_working": true,
+                    "name": "Foch",
+                    "rect": [
+                        503,
+                        327,
+                        26,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        630,
+                        320
+                    ],
+                    "is_working": true,
+                    "name": "Massena",
+                    "rect": [
+                        563,
+                        299,
+                        47,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        745,
+                        280
+                    ],
+                    "is_working": true,
+                    "name": "Charpennes/Charles Hernu",
+                    "rect": [
+                        755,
+                        253,
+                        137,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        810,
+                        305
+                    ],
+                    "is_working": true,
+                    "name": "Republique-Villeurbanne",
+                    "rect": [
+                        814,
+                        272,
+                        123,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        870,
+                        325
+                    ],
+                    "is_working": true,
+                    "name": "Gratte-Ciel",
+                    "rect": [
+                        875,
+                        295,
+                        55,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        935,
+                        350
+                    ],
+                    "is_working": true,
+                    "name": "Flachet",
+                    "rect": [
+                        942,
+                        320,
+                        38,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        1000,
+                        370
+                    ],
+                    "is_working": true,
+                    "name": "Cusset",
+                    "rect": [
+                        1008,
+                        344,
+                        37,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        1065,
+                        395
+                    ],
+                    "is_working": true,
+                    "name": "L. Bonnevay/Astroballe",
+                    "rect": [
+                        1073,
+                        369,
+                        118,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        1130,
+                        495
+                    ],
+                    "is_working": true,
+                    "name": "Vaulx-en Velin/La Soie",
+                    "rect": [
+                        1142,
+                        500,
+                        113,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                }
+            ],
+            "text_id": 14
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "00a1e4",
+            "line_color": "00a1e4",
+            "line_width": 13,
+            "name": "B",
+            "segments": [
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            685,
+                            390
+                        ],
+                        [
+                            685.0,
+                            320.0
+                        ],
+                        [
+                            745,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            685,
+                            555
+                        ],
+                        [
+                            685,
+                            390
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            600,
+                            640
+                        ],
+                        [
+                            685.0,
+                            610.0
+                        ],
+                        [
+                            685,
+                            555
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            600,
+                            745
+                        ],
+                        [
+                            600,
+                            640
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            600,
+                            950
+                        ],
+                        [
+                            600,
+                            745
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            600,
+                            1065
+                        ],
+                        [
+                            600,
+                            950
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            600,
+                            1175
+                        ],
+                        [
+                            600,
+                            1065
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            600,
+                            1290
+                        ],
+                        [
+                            600,
+                            1175
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        745,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Charpennes/Charles Hernu",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        685,
+                        390
+                    ],
+                    "is_working": true,
+                    "name": "Brotteaux",
+                    "rect": [
+                        600,
+                        380,
+                        50,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        685,
+                        555
+                    ],
+                    "is_working": true,
+                    "name": "Gare Part-Dieu/Vivier Merle",
+                    "rect": [
+                        513,
+                        542,
+                        138,
+                        15
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        600,
+                        640
+                    ],
+                    "is_working": true,
+                    "name": "Place Guichard/Bourse du Travail",
+                    "rect": [
+                        614,
+                        646,
+                        169,
+                        15
+                    ],
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        600,
+                        745
+                    ],
+                    "is_working": true,
+                    "name": "Saxe-Gambetta",
+                    "rect": [
+                        618,
+                        718,
+                        77,
+                        15
+                    ],
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        600,
+                        950
+                    ],
+                    "is_working": true,
+                    "name": "Jean Mace",
+                    "rect": [
+                        617,
+                        926,
+                        56,
+                        15
+                    ],
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        600,
+                        1065
+                    ],
+                    "is_working": true,
+                    "name": "Place Jean Jaures",
+                    "rect": [
+                        614,
+                        1057,
+                        94,
+                        15
+                    ],
+                    "text_id": 20,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        600,
+                        1175
+                    ],
+                    "is_working": true,
+                    "name": "Debourg",
+                    "rect": [
+                        617,
+                        1170,
+                        44,
+                        15
+                    ],
+                    "text_id": 21,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        600,
+                        1290
+                    ],
+                    "is_working": true,
+                    "name": "Stade de Gerland",
+                    "rect": [
+                        617,
+                        1271,
+                        87,
+                        15
+                    ],
+                    "text_id": 22,
+                    "uid": 22
+                }
+            ],
+            "text_id": 23
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "fdbb30",
+            "line_color": "fdbb30",
+            "line_width": 13,
+            "name": "C",
+            "segments": [
+                [
+                    23,
+                    24,
+                    [
+                        [
+                            385,
+                            280
+                        ],
+                        [
+                            385,
+                            385
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            385,
+                            175
+                        ],
+                        [
+                            385,
+                            280
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    25,
+                    26,
+                    [
+                        [
+                            385,
+                            70
+                        ],
+                        [
+                            385,
+                            175
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    26,
+                    27,
+                    [
+                        [
+                            490,
+                            30
+                        ],
+                        [
+                            385,
+                            70
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        385,
+                        385
+                    ],
+                    "is_working": true,
+                    "name": "Hotel de Ville/Louis Pradel",
+                    "rect": null,
+                    "text_id": 4,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        385,
+                        280
+                    ],
+                    "is_working": true,
+                    "name": "Croix-Paquet",
+                    "rect": [
+                        300,
+                        277,
+                        66,
+                        15
+                    ],
+                    "text_id": 24,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        385,
+                        175
+                    ],
+                    "is_working": true,
+                    "name": "Croix-Rousse",
+                    "rect": [
+                        294,
+                        171,
+                        70,
+                        15
+                    ],
+                    "text_id": 25,
+                    "uid": 25
+                },
+                {
+                    "coord": [
+                        385,
+                        70
+                    ],
+                    "is_working": true,
+                    "name": "Henon",
+                    "rect": [
+                        334,
+                        61,
+                        34,
+                        15
+                    ],
+                    "text_id": 26,
+                    "uid": 26
+                },
+                {
+                    "coord": [
+                        490,
+                        30
+                    ],
+                    "is_working": true,
+                    "name": "Cuire",
+                    "rect": [
+                        506,
+                        19,
+                        29,
+                        15
+                    ],
+                    "text_id": 27,
+                    "uid": 27
+                }
+            ],
+            "text_id": 28
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "00a54f",
+            "line_color": "00a54f",
+            "line_width": 13,
+            "name": "D",
+            "segments": [
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            145,
+                            345
+                        ],
+                        [
+                            145,
+                            220
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    29,
+                    30,
+                    [
+                        [
+                            145,
+                            450
+                        ],
+                        [
+                            145,
+                            345
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    30,
+                    31,
+                    [
+                        [
+                            210,
+                            600
+                        ],
+                        [
+                            145.0,
+                            575.0
+                        ],
+                        [
+                            145,
+                            450
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    31,
+                    32,
+                    [
+                        [
+                            385,
+                            665
+                        ],
+                        [
+                            210,
+                            600
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    32,
+                    33,
+                    [
+                        [
+                            535,
+                            720
+                        ],
+                        [
+                            385,
+                            665
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    33,
+                    34,
+                    [
+                        [
+                            600,
+                            745
+                        ],
+                        [
+                            535,
+                            720
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    34,
+                    35,
+                    [
+                        [
+                            670,
+                            770
+                        ],
+                        [
+                            600,
+                            745
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    35,
+                    36,
+                    [
+                        [
+                            735,
+                            795
+                        ],
+                        [
+                            670,
+                            770
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    36,
+                    37,
+                    [
+                        [
+                            805,
+                            820
+                        ],
+                        [
+                            735,
+                            795
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    37,
+                    38,
+                    [
+                        [
+                            880,
+                            860
+                        ],
+                        [
+                            870.0,
+                            845.0
+                        ],
+                        [
+                            805,
+                            820
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    38,
+                    39,
+                    [
+                        [
+                            925,
+                            945
+                        ],
+                        [
+                            925.0,
+                            920.0
+                        ],
+                        [
+                            880,
+                            860
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    39,
+                    40,
+                    [
+                        [
+                            925,
+                            1060
+                        ],
+                        [
+                            925,
+                            945
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    40,
+                    41,
+                    [
+                        [
+                            925,
+                            1180
+                        ],
+                        [
+                            925,
+                            1060
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    41,
+                    42,
+                    [
+                        [
+                            925,
+                            1290
+                        ],
+                        [
+                            925,
+                            1180
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        145,
+                        220
+                    ],
+                    "is_working": true,
+                    "name": "Gare de Vaise",
+                    "rect": [
+                        53,
+                        212,
+                        72,
+                        15
+                    ],
+                    "text_id": 29,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        145,
+                        345
+                    ],
+                    "is_working": true,
+                    "name": "Valmy",
+                    "rect": [
+                        94,
+                        340,
+                        33,
+                        15
+                    ],
+                    "text_id": 30,
+                    "uid": 29
+                },
+                {
+                    "coord": [
+                        145,
+                        450
+                    ],
+                    "is_working": true,
+                    "name": "Gorge de Loup",
+                    "rect": [
+                        52,
+                        437,
+                        74,
+                        15
+                    ],
+                    "text_id": 31,
+                    "uid": 30
+                },
+                {
+                    "coord": [
+                        210,
+                        600
+                    ],
+                    "is_working": true,
+                    "name": "Vieux Lyon/Cathedrale St-Jean",
+                    "rect": [
+                        39,
+                        608,
+                        154,
+                        15
+                    ],
+                    "text_id": 32,
+                    "uid": 31
+                },
+                {
+                    "coord": [
+                        385,
+                        665
+                    ],
+                    "is_working": true,
+                    "name": "Bellecour",
+                    "rect": null,
+                    "text_id": 2,
+                    "uid": 32
+                },
+                {
+                    "coord": [
+                        535,
+                        720
+                    ],
+                    "is_working": true,
+                    "name": "Guillotiere",
+                    "rect": [
+                        462,
+                        729,
+                        53,
+                        15
+                    ],
+                    "text_id": 33,
+                    "uid": 33
+                },
+                {
+                    "coord": [
+                        600,
+                        745
+                    ],
+                    "is_working": true,
+                    "name": "Saxe-Gambetta",
+                    "rect": null,
+                    "text_id": 18,
+                    "uid": 34
+                },
+                {
+                    "coord": [
+                        670,
+                        770
+                    ],
+                    "is_working": true,
+                    "name": "Garibaldi",
+                    "rect": [
+                        680,
+                        745,
+                        47,
+                        15
+                    ],
+                    "text_id": 34,
+                    "uid": 35
+                },
+                {
+                    "coord": [
+                        735,
+                        795
+                    ],
+                    "is_working": true,
+                    "name": "Sans-Souci",
+                    "rect": [
+                        737,
+                        766,
+                        58,
+                        15
+                    ],
+                    "text_id": 35,
+                    "uid": 36
+                },
+                {
+                    "coord": [
+                        805,
+                        820
+                    ],
+                    "is_working": true,
+                    "name": "Monplaisir-Lumiere",
+                    "rect": [
+                        807,
+                        790,
+                        97,
+                        15
+                    ],
+                    "text_id": 36,
+                    "uid": 37
+                },
+                {
+                    "coord": [
+                        880,
+                        860
+                    ],
+                    "is_working": true,
+                    "name": "Grange Blanche",
+                    "rect": [
+                        880,
+                        815,
+                        82,
+                        15
+                    ],
+                    "text_id": 37,
+                    "uid": 38
+                },
+                {
+                    "coord": [
+                        925,
+                        945
+                    ],
+                    "is_working": true,
+                    "name": "Laennec",
+                    "rect": [
+                        943,
+                        941,
+                        44,
+                        15
+                    ],
+                    "text_id": 38,
+                    "uid": 39
+                },
+                {
+                    "coord": [
+                        925,
+                        1060
+                    ],
+                    "is_working": true,
+                    "name": "Mermoz Pinel",
+                    "rect": [
+                        939,
+                        1051,
+                        69,
+                        15
+                    ],
+                    "text_id": 39,
+                    "uid": 40
+                },
+                {
+                    "coord": [
+                        925,
+                        1180
+                    ],
+                    "is_working": true,
+                    "name": "Parilly",
+                    "rect": [
+                        942,
+                        1173,
+                        34,
+                        15
+                    ],
+                    "text_id": 40,
+                    "uid": 41
+                },
+                {
+                    "coord": [
+                        925,
+                        1290
+                    ],
+                    "is_working": true,
+                    "name": "Gare de Venissieux",
+                    "rect": [
+                        806,
+                        1278,
+                        99,
+                        15
+                    ],
+                    "text_id": 41,
+                    "uid": 42
+                }
+            ],
+            "text_id": 42
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "45b969",
+            "line_color": "45b969",
+            "line_width": 13,
+            "name": "F1",
+            "segments": [
+                [
+                    43,
+                    44,
+                    [
+                        [
+                            210,
+                            505
+                        ],
+                        [
+                            210,
+                            580
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        210,
+                        580
+                    ],
+                    "is_working": true,
+                    "name": "Vieux Lyon/Cathedrale St-Jean",
+                    "rect": null,
+                    "text_id": 32,
+                    "uid": 43
+                },
+                {
+                    "coord": [
+                        210,
+                        505
+                    ],
+                    "is_working": true,
+                    "name": "Fourviere",
+                    "rect": [
+                        185,
+                        475,
+                        49,
+                        15
+                    ],
+                    "text_id": 43,
+                    "uid": 44
+                }
+            ],
+            "text_id": 44
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "45b969",
+            "line_color": "45b969",
+            "line_width": 13,
+            "name": "F2",
+            "segments": [
+                [
+                    45,
+                    46,
+                    [
+                        [
+                            210,
+                            685
+                        ],
+                        [
+                            210,
+                            620
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    46,
+                    47,
+                    [
+                        [
+                            210,
+                            740
+                        ],
+                        [
+                            210,
+                            685
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        210,
+                        620
+                    ],
+                    "is_working": true,
+                    "name": "Vieux Lyon/Cathedrale St-Jean",
+                    "rect": null,
+                    "text_id": 32,
+                    "uid": 45
+                },
+                {
+                    "coord": [
+                        210,
+                        685
+                    ],
+                    "is_working": true,
+                    "name": "Minimes/Theatres Romains",
+                    "rect": [
+                        53,
+                        675,
+                        137,
+                        15
+                    ],
+                    "text_id": 45,
+                    "uid": 46
+                },
+                {
+                    "coord": [
+                        210,
+                        740
+                    ],
+                    "is_working": true,
+                    "name": "St Just",
+                    "rect": [
+                        152,
+                        732,
+                        36,
+                        15
+                    ],
+                    "text_id": 46,
+                    "uid": 47
+                }
+            ],
+            "text_id": 47
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "006991",
+            "line_color": "006991",
+            "line_width": 6,
+            "name": "T1",
+            "segments": [
+                [
+                    48,
+                    49,
+                    [
+                        [
+                            940,
+                            65
+                        ],
+                        [
+                            1000,
+                            45
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    49,
+                    50,
+                    [
+                        [
+                            885,
+                            85
+                        ],
+                        [
+                            940,
+                            65
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    50,
+                    51,
+                    [
+                        [
+                            825,
+                            105
+                        ],
+                        [
+                            885,
+                            85
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    51,
+                    52,
+                    [
+                        [
+                            765,
+                            125
+                        ],
+                        [
+                            825,
+                            105
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    52,
+                    53,
+                    [
+                        [
+                            745,
+                            175
+                        ],
+                        [
+                            745.0,
+                            135.0
+                        ],
+                        [
+                            765,
+                            125
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    53,
+                    54,
+                    [
+                        [
+                            745,
+                            210
+                        ],
+                        [
+                            745,
+                            175
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    54,
+                    55,
+                    [
+                        [
+                            745,
+                            260
+                        ],
+                        [
+                            745,
+                            210
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    55,
+                    56,
+                    [
+                        [
+                            745,
+                            400
+                        ],
+                        [
+                            745,
+                            260
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    56,
+                    57,
+                    [
+                        [
+                            745,
+                            515
+                        ],
+                        [
+                            745,
+                            400
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    57,
+                    58,
+                    [
+                        [
+                            685,
+                            555
+                        ],
+                        [
+                            745.0,
+                            535.0
+                        ],
+                        [
+                            745,
+                            515
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    58,
+                    59,
+                    [
+                        [
+                            615,
+                            580
+                        ],
+                        [
+                            685,
+                            555
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    59,
+                    60,
+                    [
+                        [
+                            555,
+                            605
+                        ],
+                        [
+                            615,
+                            580
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    60,
+                    61,
+                    [
+                        [
+                            535,
+                            640
+                        ],
+                        [
+                            535.0,
+                            610.0
+                        ],
+                        [
+                            555,
+                            605
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    61,
+                    62,
+                    [
+                        [
+                            535,
+                            675
+                        ],
+                        [
+                            535,
+                            640
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    62,
+                    63,
+                    [
+                        [
+                            535,
+                            720
+                        ],
+                        [
+                            535,
+                            675
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    63,
+                    64,
+                    [
+                        [
+                            535,
+                            775
+                        ],
+                        [
+                            535,
+                            720
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    64,
+                    65,
+                    [
+                        [
+                            525,
+                            830
+                        ],
+                        [
+                            535.0,
+                            825.0
+                        ],
+                        [
+                            535,
+                            775
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    65,
+                    66,
+                    [
+                        [
+                            505,
+                            875
+                        ],
+                        [
+                            505.0,
+                            840.0
+                        ],
+                        [
+                            525,
+                            830
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    66,
+                    67,
+                    [
+                        [
+                            385,
+                            860
+                        ],
+                        [
+                            480.0,
+                            895.0
+                        ],
+                        [
+                            505.0,
+                            890.0
+                        ],
+                        [
+                            505,
+                            875
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    67,
+                    68,
+                    [
+                        [
+                            385,
+                            920
+                        ],
+                        [
+                            385,
+                            860
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    68,
+                    69,
+                    [
+                        [
+                            385,
+                            975
+                        ],
+                        [
+                            385,
+                            920
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    69,
+                    70,
+                    [
+                        [
+                            385,
+                            1035
+                        ],
+                        [
+                            385,
+                            975
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        1000,
+                        45
+                    ],
+                    "is_working": true,
+                    "name": "IUT-Feyssine",
+                    "rect": [
+                        1012,
+                        34,
+                        67,
+                        15
+                    ],
+                    "text_id": 48,
+                    "uid": 48
+                },
+                {
+                    "coord": [
+                        940,
+                        65
+                    ],
+                    "is_working": true,
+                    "name": "Croix-Luizet",
+                    "rect": [
+                        943,
+                        74,
+                        61,
+                        15
+                    ],
+                    "text_id": 49,
+                    "uid": 49
+                },
+                {
+                    "coord": [
+                        885,
+                        85
+                    ],
+                    "is_working": true,
+                    "name": "INSA-Einstein",
+                    "rect": [
+                        887,
+                        96,
+                        71,
+                        15
+                    ],
+                    "text_id": 50,
+                    "uid": 50
+                },
+                {
+                    "coord": [
+                        825,
+                        105
+                    ],
+                    "is_working": true,
+                    "name": "La Doua-Gaston Berger",
+                    "rect": [
+                        832,
+                        117,
+                        118,
+                        15
+                    ],
+                    "text_id": 51,
+                    "uid": 51
+                },
+                {
+                    "coord": [
+                        765,
+                        125
+                    ],
+                    "is_working": true,
+                    "name": "Universite Lyon 1",
+                    "rect": [
+                        767,
+                        136,
+                        89,
+                        15
+                    ],
+                    "text_id": 52,
+                    "uid": 52
+                },
+                {
+                    "coord": [
+                        745,
+                        175
+                    ],
+                    "is_working": true,
+                    "name": "Condorcet",
+                    "rect": [
+                        757,
+                        168,
+                        53,
+                        15
+                    ],
+                    "text_id": 53,
+                    "uid": 53
+                },
+                {
+                    "coord": [
+                        745,
+                        210
+                    ],
+                    "is_working": true,
+                    "name": "Le Tonkin",
+                    "rect": [
+                        757,
+                        206,
+                        50,
+                        15
+                    ],
+                    "text_id": 54,
+                    "uid": 54
+                },
+                {
+                    "coord": [
+                        745,
+                        260
+                    ],
+                    "is_working": true,
+                    "name": "Charpennes/Charles Hernu",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 55
+                },
+                {
+                    "coord": [
+                        745,
+                        400
+                    ],
+                    "is_working": true,
+                    "name": "College Bellecombe",
+                    "rect": [
+                        754,
+                        394,
+                        102,
+                        15
+                    ],
+                    "text_id": 55,
+                    "uid": 56
+                },
+                {
+                    "coord": [
+                        745,
+                        515
+                    ],
+                    "is_working": true,
+                    "name": "Thiers-Lafayette",
+                    "rect": [
+                        754,
+                        526,
+                        81,
+                        15
+                    ],
+                    "text_id": 56,
+                    "uid": 57
+                },
+                {
+                    "coord": [
+                        685,
+                        555
+                    ],
+                    "is_working": true,
+                    "name": "Gare Part-Dieu/Vivier Merle",
+                    "rect": null,
+                    "text_id": 16,
+                    "uid": 58
+                },
+                {
+                    "coord": [
+                        615,
+                        580
+                    ],
+                    "is_working": true,
+                    "name": "Part-Dieu - Servient",
+                    "rect": [
+                        498,
+                        565,
+                        98,
+                        15
+                    ],
+                    "text_id": 57,
+                    "uid": 59
+                },
+                {
+                    "coord": [
+                        555,
+                        605
+                    ],
+                    "is_working": true,
+                    "name": "Palais de Justice - Mairie du 3eme",
+                    "rect": [
+                        353,
+                        592,
+                        172,
+                        15
+                    ],
+                    "text_id": 58,
+                    "uid": 60
+                },
+                {
+                    "coord": [
+                        535,
+                        640
+                    ],
+                    "is_working": true,
+                    "name": "Saxe-Prefecture",
+                    "rect": [
+                        440,
+                        630,
+                        81,
+                        15
+                    ],
+                    "text_id": 59,
+                    "uid": 61
+                },
+                {
+                    "coord": [
+                        535,
+                        675
+                    ],
+                    "is_working": true,
+                    "name": "Liberte",
+                    "rect": [
+                        488,
+                        666,
+                        36,
+                        15
+                    ],
+                    "text_id": 60,
+                    "uid": 62
+                },
+                {
+                    "coord": [
+                        535,
+                        720
+                    ],
+                    "is_working": true,
+                    "name": "Guillotiere",
+                    "rect": null,
+                    "text_id": 33,
+                    "uid": 63
+                },
+                {
+                    "coord": [
+                        535,
+                        775
+                    ],
+                    "is_working": true,
+                    "name": "Saint-Andre",
+                    "rect": [
+                        464,
+                        770,
+                        60,
+                        15
+                    ],
+                    "text_id": 61,
+                    "uid": 64
+                },
+                {
+                    "coord": [
+                        525,
+                        830
+                    ],
+                    "is_working": true,
+                    "name": "Rue de l'Universite",
+                    "rect": [
+                        422,
+                        807,
+                        96,
+                        15
+                    ],
+                    "text_id": 62,
+                    "uid": 65
+                },
+                {
+                    "coord": [
+                        505,
+                        875
+                    ],
+                    "is_working": true,
+                    "name": "Quai Claude Bernard",
+                    "rect": [
+                        514,
+                        872,
+                        106,
+                        15
+                    ],
+                    "text_id": 63,
+                    "uid": 66
+                },
+                {
+                    "coord": [
+                        385,
+                        860
+                    ],
+                    "is_working": true,
+                    "name": "Perrache",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 67
+                },
+                {
+                    "coord": [
+                        385,
+                        920
+                    ],
+                    "is_working": true,
+                    "name": "Suchet",
+                    "rect": [
+                        395,
+                        914,
+                        36,
+                        15
+                    ],
+                    "text_id": 64,
+                    "uid": 68
+                },
+                {
+                    "coord": [
+                        385,
+                        975
+                    ],
+                    "is_working": true,
+                    "name": "Sainte-Blandine",
+                    "rect": [
+                        396,
+                        972,
+                        80,
+                        15
+                    ],
+                    "text_id": 65,
+                    "uid": 69
+                },
+                {
+                    "coord": [
+                        385,
+                        1035
+                    ],
+                    "is_working": true,
+                    "name": "Montrochet",
+                    "rect": [
+                        395,
+                        1028,
+                        57,
+                        15
+                    ],
+                    "text_id": 66,
+                    "uid": 70
+                }
+            ],
+            "text_id": 67
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "006834",
+            "line_color": "006834",
+            "line_width": 6,
+            "name": "T2",
+            "segments": [
+                [
+                    71,
+                    72,
+                    [
+                        [
+                            539,
+                            929
+                        ],
+                        [
+                            395,
+                            880
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    72,
+                    73,
+                    [
+                        [
+                            600,
+                            950
+                        ],
+                        [
+                            539,
+                            929
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    73,
+                    74,
+                    [
+                        [
+                            657,
+                            972
+                        ],
+                        [
+                            600,
+                            950
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    74,
+                    75,
+                    [
+                        [
+                            705,
+                            990
+                        ],
+                        [
+                            657,
+                            972
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    75,
+                    76,
+                    [
+                        [
+                            760,
+                            1010
+                        ],
+                        [
+                            705,
+                            990
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    76,
+                    77,
+                    [
+                        [
+                            814,
+                            1031
+                        ],
+                        [
+                            760,
+                            1010
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    77,
+                    78,
+                    [
+                        [
+                            855,
+                            1040
+                        ],
+                        [
+                            845.0,
+                            1045.0
+                        ],
+                        [
+                            814,
+                            1031
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    78,
+                    79,
+                    [
+                        [
+                            865,
+                            935
+                        ],
+                        [
+                            865.0,
+                            1035.0
+                        ],
+                        [
+                            855,
+                            1040
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    79,
+                    80,
+                    [
+                        [
+                            880,
+                            860
+                        ],
+                        [
+                            865.0,
+                            870.0
+                        ],
+                        [
+                            865,
+                            935
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    80,
+                    81,
+                    [
+                        [
+                            915,
+                            860
+                        ],
+                        [
+                            890.0,
+                            850.0
+                        ],
+                        [
+                            880,
+                            860
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    81,
+                    82,
+                    [
+                        [
+                            955,
+                            875
+                        ],
+                        [
+                            915,
+                            860
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    82,
+                    83,
+                    [
+                        [
+                            1000,
+                            890
+                        ],
+                        [
+                            955,
+                            875
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    83,
+                    84,
+                    [
+                        [
+                            1040,
+                            905
+                        ],
+                        [
+                            1000,
+                            890
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    84,
+                    85,
+                    [
+                        [
+                            1080,
+                            920
+                        ],
+                        [
+                            1040,
+                            905
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    85,
+                    86,
+                    [
+                        [
+                            1120,
+                            935
+                        ],
+                        [
+                            1080,
+                            920
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    86,
+                    87,
+                    [
+                        [
+                            1165,
+                            950
+                        ],
+                        [
+                            1120,
+                            935
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    87,
+                    88,
+                    [
+                        [
+                            1195,
+                            975
+                        ],
+                        [
+                            1195.0,
+                            960.0
+                        ],
+                        [
+                            1165,
+                            950
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    88,
+                    89,
+                    [
+                        [
+                            1195,
+                            1000
+                        ],
+                        [
+                            1195,
+                            975
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    89,
+                    90,
+                    [
+                        [
+                            1195,
+                            1030
+                        ],
+                        [
+                            1195,
+                            1000
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    90,
+                    91,
+                    [
+                        [
+                            1195,
+                            1055
+                        ],
+                        [
+                            1195,
+                            1030
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    91,
+                    92,
+                    [
+                        [
+                            1195,
+                            1085
+                        ],
+                        [
+                            1195,
+                            1055
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    92,
+                    93,
+                    [
+                        [
+                            1195,
+                            1115
+                        ],
+                        [
+                            1195,
+                            1085
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    93,
+                    94,
+                    [
+                        [
+                            1195,
+                            1140
+                        ],
+                        [
+                            1195,
+                            1115
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    94,
+                    95,
+                    [
+                        [
+                            1195,
+                            1165
+                        ],
+                        [
+                            1195,
+                            1140
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    95,
+                    96,
+                    [
+                        [
+                            1195,
+                            1195
+                        ],
+                        [
+                            1195,
+                            1165
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    96,
+                    97,
+                    [
+                        [
+                            1195,
+                            1225
+                        ],
+                        [
+                            1195,
+                            1195
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    97,
+                    98,
+                    [
+                        [
+                            1195,
+                            1250
+                        ],
+                        [
+                            1195,
+                            1225
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    98,
+                    99,
+                    [
+                        [
+                            1195,
+                            1290
+                        ],
+                        [
+                            1195,
+                            1250
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        395,
+                        880
+                    ],
+                    "is_working": true,
+                    "name": "Perrache",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 71
+                },
+                {
+                    "coord": [
+                        539,
+                        929
+                    ],
+                    "is_working": true,
+                    "name": "Centre Berthelot",
+                    "rect": [
+                        445,
+                        935,
+                        83,
+                        15
+                    ],
+                    "text_id": 68,
+                    "uid": 72
+                },
+                {
+                    "coord": [
+                        600,
+                        950
+                    ],
+                    "is_working": true,
+                    "name": "Jean Mace",
+                    "rect": null,
+                    "text_id": 19,
+                    "uid": 73
+                },
+                {
+                    "coord": [
+                        657,
+                        972
+                    ],
+                    "is_working": true,
+                    "name": "Garibaldi - Berthelot",
+                    "rect": [
+                        656,
+                        948,
+                        101,
+                        15
+                    ],
+                    "text_id": 69,
+                    "uid": 74
+                },
+                {
+                    "coord": [
+                        705,
+                        990
+                    ],
+                    "is_working": true,
+                    "name": "Route de Vienne",
+                    "rect": [
+                        707,
+                        967,
+                        83,
+                        15
+                    ],
+                    "text_id": 70,
+                    "uid": 75
+                },
+                {
+                    "coord": [
+                        760,
+                        1010
+                    ],
+                    "is_working": true,
+                    "name": "Jet d'eau Mendes France",
+                    "rect": [
+                        767,
+                        987,
+                        125,
+                        15
+                    ],
+                    "text_id": 71,
+                    "uid": 76
+                },
+                {
+                    "coord": [
+                        814,
+                        1031
+                    ],
+                    "is_working": true,
+                    "name": "Villon",
+                    "rect": [
+                        818,
+                        1006,
+                        30,
+                        15
+                    ],
+                    "text_id": 72,
+                    "uid": 77
+                },
+                {
+                    "coord": [
+                        855,
+                        1040
+                    ],
+                    "is_working": true,
+                    "name": "Bachut/Mairie du 8eme",
+                    "rect": [
+                        793,
+                        1051,
+                        116,
+                        15
+                    ],
+                    "text_id": 73,
+                    "uid": 78
+                },
+                {
+                    "coord": [
+                        865,
+                        935
+                    ],
+                    "is_working": true,
+                    "name": "Jean XXIII/Maryse Bastie",
+                    "rect": [
+                        726,
+                        926,
+                        127,
+                        15
+                    ],
+                    "text_id": 74,
+                    "uid": 79
+                },
+                {
+                    "coord": [
+                        880,
+                        860
+                    ],
+                    "is_working": true,
+                    "name": "Grange Blanche",
+                    "rect": null,
+                    "text_id": 37,
+                    "uid": 80
+                },
+                {
+                    "coord": [
+                        915,
+                        860
+                    ],
+                    "is_working": true,
+                    "name": "Ambroise Pare",
+                    "rect": [
+                        918,
+                        836,
+                        76,
+                        15
+                    ],
+                    "text_id": 75,
+                    "uid": 81
+                },
+                {
+                    "coord": [
+                        955,
+                        875
+                    ],
+                    "is_working": true,
+                    "name": "Vinatier",
+                    "rect": [
+                        959,
+                        853,
+                        40,
+                        15
+                    ],
+                    "text_id": 76,
+                    "uid": 82
+                },
+                {
+                    "coord": [
+                        1000,
+                        890
+                    ],
+                    "is_working": true,
+                    "name": "Essarts - Iris",
+                    "rect": [
+                        1002,
+                        867,
+                        65,
+                        15
+                    ],
+                    "text_id": 77,
+                    "uid": 83
+                },
+                {
+                    "coord": [
+                        1040,
+                        905
+                    ],
+                    "is_working": true,
+                    "name": "Boutasse - Camille Rousset",
+                    "rect": [
+                        1044,
+                        884,
+                        140,
+                        15
+                    ],
+                    "text_id": 78,
+                    "uid": 84
+                },
+                {
+                    "coord": [
+                        1080,
+                        920
+                    ],
+                    "is_working": true,
+                    "name": "Hotel de Ville - Bron",
+                    "rect": [
+                        1088,
+                        901,
+                        101,
+                        15
+                    ],
+                    "text_id": 79,
+                    "uid": 85
+                },
+                {
+                    "coord": [
+                        1120,
+                        935
+                    ],
+                    "is_working": true,
+                    "name": "Les Alizes",
+                    "rect": [
+                        1136,
+                        918,
+                        54,
+                        15
+                    ],
+                    "text_id": 80,
+                    "uid": 86
+                },
+                {
+                    "coord": [
+                        1165,
+                        950
+                    ],
+                    "is_working": true,
+                    "name": "Rebufer",
+                    "rect": [
+                        1177,
+                        935,
+                        41,
+                        15
+                    ],
+                    "text_id": 81,
+                    "uid": 87
+                },
+                {
+                    "coord": [
+                        1195,
+                        975
+                    ],
+                    "is_working": true,
+                    "name": "Parilly - Universite",
+                    "rect": [
+                        1082,
+                        968,
+                        94,
+                        15
+                    ],
+                    "text_id": 82,
+                    "uid": 88
+                },
+                {
+                    "coord": [
+                        1195,
+                        1000
+                    ],
+                    "is_working": true,
+                    "name": "Europe - Universite",
+                    "rect": [
+                        1086,
+                        995,
+                        97,
+                        15
+                    ],
+                    "text_id": 83,
+                    "uid": 89
+                },
+                {
+                    "coord": [
+                        1195,
+                        1030
+                    ],
+                    "is_working": true,
+                    "name": "Porte des Alpes",
+                    "rect": [
+                        1103,
+                        1020,
+                        81,
+                        15
+                    ],
+                    "text_id": 84,
+                    "uid": 90
+                },
+                {
+                    "coord": [
+                        1195,
+                        1055
+                    ],
+                    "is_working": true,
+                    "name": "Parc Technologique",
+                    "rect": [
+                        1084,
+                        1048,
+                        100,
+                        15
+                    ],
+                    "text_id": 85,
+                    "uid": 91
+                },
+                {
+                    "coord": [
+                        1195,
+                        1085
+                    ],
+                    "is_working": true,
+                    "name": "Hauts de Feuilly",
+                    "rect": [
+                        1102,
+                        1078,
+                        82,
+                        15
+                    ],
+                    "text_id": 86,
+                    "uid": 92
+                },
+                {
+                    "coord": [
+                        1195,
+                        1115
+                    ],
+                    "is_working": true,
+                    "name": "Salvador Allende",
+                    "rect": [
+                        1098,
+                        1106,
+                        87,
+                        15
+                    ],
+                    "text_id": 87,
+                    "uid": 93
+                },
+                {
+                    "coord": [
+                        1195,
+                        1140
+                    ],
+                    "is_working": true,
+                    "name": "Alfred de Vigny",
+                    "rect": [
+                        1105,
+                        1133,
+                        78,
+                        15
+                    ],
+                    "text_id": 88,
+                    "uid": 94
+                },
+                {
+                    "coord": [
+                        1195,
+                        1165
+                    ],
+                    "is_working": true,
+                    "name": "St-Priest-Hotel de Ville",
+                    "rect": [
+                        1072,
+                        1160,
+                        113,
+                        15
+                    ],
+                    "text_id": 89,
+                    "uid": 95
+                },
+                {
+                    "coord": [
+                        1195,
+                        1195
+                    ],
+                    "is_working": true,
+                    "name": "Esplanade des Arts",
+                    "rect": [
+                        1085,
+                        1187,
+                        99,
+                        15
+                    ],
+                    "text_id": 90,
+                    "uid": 96
+                },
+                {
+                    "coord": [
+                        1195,
+                        1225
+                    ],
+                    "is_working": true,
+                    "name": "Jules Ferry",
+                    "rect": [
+                        1124,
+                        1217,
+                        58,
+                        15
+                    ],
+                    "text_id": 91,
+                    "uid": 97
+                },
+                {
+                    "coord": [
+                        1195,
+                        1250
+                    ],
+                    "is_working": true,
+                    "name": "Cordiere",
+                    "rect": [
+                        1138,
+                        1243,
+                        45,
+                        15
+                    ],
+                    "text_id": 92,
+                    "uid": 98
+                },
+                {
+                    "coord": [
+                        1195,
+                        1290
+                    ],
+                    "is_working": true,
+                    "name": "St-Priest/Bel-Air",
+                    "rect": [
+                        1099,
+                        1281,
+                        82,
+                        15
+                    ],
+                    "text_id": 93,
+                    "uid": 99
+                }
+            ],
+            "text_id": 94
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "00a9a7",
+            "line_color": "00a9a7",
+            "line_width": 6,
+            "name": "T3",
+            "segments": [
+                [
+                    100,
+                    101,
+                    [
+                        [
+                            795,
+                            605
+                        ],
+                        [
+                            700,
+                            565
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    101,
+                    102,
+                    [
+                        [
+                            875,
+                            590
+                        ],
+                        [
+                            820.0,
+                            615.0
+                        ],
+                        [
+                            795,
+                            605
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    102,
+                    103,
+                    [
+                        [
+                            965,
+                            560
+                        ],
+                        [
+                            875,
+                            590
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    103,
+                    104,
+                    [
+                        [
+                            1055,
+                            525
+                        ],
+                        [
+                            965,
+                            560
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    104,
+                    105,
+                    [
+                        [
+                            1130,
+                            515
+                        ],
+                        [
+                            1110.0,
+                            505.0
+                        ],
+                        [
+                            1055,
+                            525
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    105,
+                    106,
+                    [
+                        [
+                            1130,
+                            565
+                        ],
+                        [
+                            1130,
+                            515
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    106,
+                    107,
+                    [
+                        [
+                            1130,
+                            625
+                        ],
+                        [
+                            1130,
+                            565
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    107,
+                    108,
+                    [
+                        [
+                            1130,
+                            685
+                        ],
+                        [
+                            1130,
+                            625
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    108,
+                    109,
+                    [
+                        [
+                            1130,
+                            735
+                        ],
+                        [
+                            1130,
+                            685
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        700,
+                        565
+                    ],
+                    "is_working": true,
+                    "name": "Gare Part-Dieu/Villette",
+                    "rect": [
+                        710,
+                        554,
+                        112,
+                        15
+                    ],
+                    "text_id": 95,
+                    "uid": 100
+                },
+                {
+                    "coord": [
+                        795,
+                        605
+                    ],
+                    "is_working": true,
+                    "name": "Dauphine Lacassagne",
+                    "rect": [
+                        745,
+                        578,
+                        112,
+                        15
+                    ],
+                    "text_id": 96,
+                    "uid": 101
+                },
+                {
+                    "coord": [
+                        875,
+                        590
+                    ],
+                    "is_working": true,
+                    "name": "Reconnaissance Balzac",
+                    "rect": [
+                        880,
+                        600,
+                        122,
+                        15
+                    ],
+                    "text_id": 97,
+                    "uid": 102
+                },
+                {
+                    "coord": [
+                        965,
+                        560
+                    ],
+                    "is_working": true,
+                    "name": "Gare de Villeurbanne",
+                    "rect": [
+                        968,
+                        568,
+                        106,
+                        15
+                    ],
+                    "text_id": 98,
+                    "uid": 103
+                },
+                {
+                    "coord": [
+                        1055,
+                        525
+                    ],
+                    "is_working": true,
+                    "name": "Bel Air - Les Brosses",
+                    "rect": [
+                        1060,
+                        532,
+                        109,
+                        15
+                    ],
+                    "text_id": 99,
+                    "uid": 104
+                },
+                {
+                    "coord": [
+                        1130,
+                        515
+                    ],
+                    "is_working": true,
+                    "name": "Vaulx-en Velin/La Soie",
+                    "rect": null,
+                    "text_id": 13,
+                    "uid": 105
+                },
+                {
+                    "coord": [
+                        1130,
+                        565
+                    ],
+                    "is_working": true,
+                    "name": "Decines Centre",
+                    "rect": [
+                        1140,
+                        556,
+                        79,
+                        15
+                    ],
+                    "text_id": 100,
+                    "uid": 106
+                },
+                {
+                    "coord": [
+                        1130,
+                        625
+                    ],
+                    "is_working": true,
+                    "name": "Decines/Grand Large",
+                    "rect": [
+                        1141,
+                        617,
+                        107,
+                        15
+                    ],
+                    "text_id": 101,
+                    "uid": 107
+                },
+                {
+                    "coord": [
+                        1130,
+                        685
+                    ],
+                    "is_working": true,
+                    "name": "Meyzieu Gare",
+                    "rect": [
+                        1140,
+                        677,
+                        70,
+                        15
+                    ],
+                    "text_id": 102,
+                    "uid": 108
+                },
+                {
+                    "coord": [
+                        1130,
+                        735
+                    ],
+                    "is_working": true,
+                    "name": "Meyzieu Z.I.",
+                    "rect": [
+                        1142,
+                        728,
+                        61,
+                        15
+                    ],
+                    "text_id": 103,
+                    "uid": 109
+                }
+            ],
+            "text_id": 104
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "e07a20",
+            "line_color": "e07a20",
+            "line_width": 4,
+            "name": "C1",
+            "segments": [
+                [
+                    110,
+                    111,
+                    [
+                        [
+                            615,
+                            150
+                        ],
+                        [
+                            665,
+                            130
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    111,
+                    112,
+                    [
+                        [
+                            560,
+                            170
+                        ],
+                        [
+                            615,
+                            150
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    112,
+                    113,
+                    [
+                        [
+                            560,
+                            215
+                        ],
+                        [
+                            560,
+                            170
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    113,
+                    114,
+                    [
+                        [
+                            605,
+                            230
+                        ],
+                        [
+                            560,
+                            215
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    114,
+                    115,
+                    [
+                        [
+                            645,
+                            245
+                        ],
+                        [
+                            605,
+                            230
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    115,
+                    116,
+                    [
+                        [
+                            665,
+                            285
+                        ],
+                        [
+                            665.0,
+                            255.0
+                        ],
+                        [
+                            645,
+                            245
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    116,
+                    117,
+                    [
+                        [
+                            665,
+                            390
+                        ],
+                        [
+                            665,
+                            285
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    117,
+                    118,
+                    [
+                        [
+                            665,
+                            490
+                        ],
+                        [
+                            665,
+                            390
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    118,
+                    119,
+                    [
+                        [
+                            665,
+                            550
+                        ],
+                        [
+                            665,
+                            490
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        665,
+                        130
+                    ],
+                    "is_working": true,
+                    "name": "Cite Internationale/Centre de Congres",
+                    "rect": [
+                        455,
+                        117,
+                        188,
+                        15
+                    ],
+                    "text_id": 105,
+                    "uid": 110
+                },
+                {
+                    "coord": [
+                        615,
+                        150
+                    ],
+                    "is_working": true,
+                    "name": "Musee d’Art Contemporain",
+                    "rect": [
+                        463,
+                        134,
+                        134,
+                        15
+                    ],
+                    "text_id": 106,
+                    "uid": 111
+                },
+                {
+                    "coord": [
+                        560,
+                        170
+                    ],
+                    "is_working": true,
+                    "name": "Interpol",
+                    "rect": [
+                        511,
+                        161,
+                        39,
+                        15
+                    ],
+                    "text_id": 107,
+                    "uid": 112
+                },
+                {
+                    "coord": [
+                        560,
+                        215
+                    ],
+                    "is_working": true,
+                    "name": "Parc Tete d’Or-Churchill",
+                    "rect": [
+                        428,
+                        208,
+                        121,
+                        15
+                    ],
+                    "text_id": 108,
+                    "uid": 113
+                },
+                {
+                    "coord": [
+                        605,
+                        230
+                    ],
+                    "is_working": true,
+                    "name": "Museum",
+                    "rect": [
+                        540,
+                        230,
+                        44,
+                        15
+                    ],
+                    "text_id": 109,
+                    "uid": 114
+                },
+                {
+                    "coord": [
+                        645,
+                        245
+                    ],
+                    "is_working": true,
+                    "name": "Parc Tete d’Or-Duquesne",
+                    "rect": [
+                        514,
+                        252,
+                        126,
+                        15
+                    ],
+                    "text_id": 110,
+                    "uid": 115
+                },
+                {
+                    "coord": [
+                        665,
+                        285
+                    ],
+                    "is_working": true,
+                    "name": "Vitton-Belges",
+                    "rect": [
+                        584,
+                        279,
+                        68,
+                        15
+                    ],
+                    "text_id": 111,
+                    "uid": 116
+                },
+                {
+                    "coord": [
+                        665,
+                        390
+                    ],
+                    "is_working": true,
+                    "name": "Brotteaux",
+                    "rect": null,
+                    "text_id": 15,
+                    "uid": 117
+                },
+                {
+                    "coord": [
+                        665,
+                        490
+                    ],
+                    "is_working": true,
+                    "name": "Part Dieu-Jules Favre",
+                    "rect": [
+                        650,
+                        462,
+                        109,
+                        15
+                    ],
+                    "text_id": 112,
+                    "uid": 118
+                },
+                {
+                    "coord": [
+                        665,
+                        550
+                    ],
+                    "is_working": true,
+                    "name": "Gare Part-Dieu/Vivier Merle",
+                    "rect": null,
+                    "text_id": 16,
+                    "uid": 119
+                }
+            ],
+            "text_id": 113
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "9b0059",
+            "line_color": "9b0059",
+            "line_width": 4,
+            "name": "C3",
+            "segments": [
+                [
+                    120,
+                    121,
+                    [
+                        [
+                            295,
+                            420
+                        ],
+                        [
+                            220,
+                            445
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    121,
+                    122,
+                    [
+                        [
+                            335,
+                            405
+                        ],
+                        [
+                            295,
+                            420
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    122,
+                    123,
+                    [
+                        [
+                            365,
+                            415
+                        ],
+                        [
+                            365.0,
+                            405.0
+                        ],
+                        [
+                            350.0,
+                            400.0
+                        ],
+                        [
+                            335,
+                            405
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    123,
+                    124,
+                    [
+                        [
+                            365,
+                            480
+                        ],
+                        [
+                            365,
+                            415
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    124,
+                    125,
+                    [
+                        [
+                            365,
+                            545
+                        ],
+                        [
+                            365,
+                            480
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    125,
+                    126,
+                    [
+                        [
+                            485,
+                            525
+                        ],
+                        [
+                            385.0,
+                            560.0
+                        ],
+                        [
+                            365.0,
+                            555.0
+                        ],
+                        [
+                            365,
+                            545
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    126,
+                    127,
+                    [
+                        [
+                            530,
+                            510
+                        ],
+                        [
+                            485,
+                            525
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    127,
+                    128,
+                    [
+                        [
+                            575,
+                            495
+                        ],
+                        [
+                            530,
+                            510
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    128,
+                    129,
+                    [
+                        [
+                            620,
+                            475
+                        ],
+                        [
+                            575,
+                            495
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    129,
+                    130,
+                    [
+                        [
+                            665,
+                            490
+                        ],
+                        [
+                            620,
+                            475
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    130,
+                    131,
+                    [
+                        [
+                            745,
+                            515
+                        ],
+                        [
+                            665,
+                            490
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    131,
+                    132,
+                    [
+                        [
+                            780,
+                            502
+                        ],
+                        [
+                            745,
+                            515
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    132,
+                    133,
+                    [
+                        [
+                            803,
+                            492
+                        ],
+                        [
+                            780,
+                            502
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    133,
+                    134,
+                    [
+                        [
+                            825,
+                            483
+                        ],
+                        [
+                            803,
+                            492
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    134,
+                    135,
+                    [
+                        [
+                            847,
+                            476
+                        ],
+                        [
+                            825,
+                            483
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    135,
+                    136,
+                    [
+                        [
+                            870,
+                            470
+                        ],
+                        [
+                            847,
+                            476
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    136,
+                    137,
+                    [
+                        [
+                            895,
+                            460
+                        ],
+                        [
+                            870,
+                            470
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    137,
+                    138,
+                    [
+                        [
+                            915,
+                            450
+                        ],
+                        [
+                            895,
+                            460
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    138,
+                    139,
+                    [
+                        [
+                            940,
+                            440
+                        ],
+                        [
+                            915,
+                            450
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    139,
+                    140,
+                    [
+                        [
+                            963,
+                            433
+                        ],
+                        [
+                            940,
+                            440
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    140,
+                    141,
+                    [
+                        [
+                            985,
+                            425
+                        ],
+                        [
+                            963,
+                            433
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    141,
+                    142,
+                    [
+                        [
+                            1008,
+                            419
+                        ],
+                        [
+                            985,
+                            425
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    142,
+                    143,
+                    [
+                        [
+                            1035,
+                            410
+                        ],
+                        [
+                            1008,
+                            419
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    143,
+                    144,
+                    [
+                        [
+                            1065,
+                            395
+                        ],
+                        [
+                            1035,
+                            410
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    144,
+                    145,
+                    [
+                        [
+                            1065,
+                            350
+                        ],
+                        [
+                            1065,
+                            395
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    145,
+                    146,
+                    [
+                        [
+                            1065,
+                            330
+                        ],
+                        [
+                            1065,
+                            350
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    146,
+                    147,
+                    [
+                        [
+                            1065,
+                            305
+                        ],
+                        [
+                            1065,
+                            330
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    147,
+                    148,
+                    [
+                        [
+                            1065,
+                            280
+                        ],
+                        [
+                            1065,
+                            305
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    148,
+                    149,
+                    [
+                        [
+                            1065,
+                            255
+                        ],
+                        [
+                            1065,
+                            280
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    149,
+                    150,
+                    [
+                        [
+                            1065,
+                            235
+                        ],
+                        [
+                            1065,
+                            255
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    150,
+                    151,
+                    [
+                        [
+                            1065,
+                            210
+                        ],
+                        [
+                            1065,
+                            235
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    151,
+                    152,
+                    [
+                        [
+                            1065,
+                            185
+                        ],
+                        [
+                            1065,
+                            210
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    152,
+                    153,
+                    [
+                        [
+                            1065,
+                            165
+                        ],
+                        [
+                            1065,
+                            185
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        220,
+                        445
+                    ],
+                    "is_working": true,
+                    "name": "Gare St Paul",
+                    "rect": [
+                        175,
+                        416,
+                        64,
+                        15
+                    ],
+                    "text_id": 114,
+                    "uid": 120
+                },
+                {
+                    "coord": [
+                        295,
+                        420
+                    ],
+                    "is_working": true,
+                    "name": "La Feuillee",
+                    "rect": [
+                        283,
+                        432,
+                        56,
+                        15
+                    ],
+                    "text_id": 115,
+                    "uid": 121
+                },
+                {
+                    "coord": [
+                        335,
+                        405
+                    ],
+                    "is_working": true,
+                    "name": "Terreaux",
+                    "rect": [
+                        281,
+                        385,
+                        46,
+                        15
+                    ],
+                    "text_id": 116,
+                    "uid": 122
+                },
+                {
+                    "coord": [
+                        365,
+                        415
+                    ],
+                    "is_working": true,
+                    "name": "Hotel de Ville/Louis Pradel",
+                    "rect": null,
+                    "text_id": 4,
+                    "uid": 123
+                },
+                {
+                    "coord": [
+                        365,
+                        480
+                    ],
+                    "is_working": true,
+                    "name": "Bat d’Argent",
+                    "rect": [
+                        290,
+                        473,
+                        64,
+                        15
+                    ],
+                    "text_id": 117,
+                    "uid": 124
+                },
+                {
+                    "coord": [
+                        365,
+                        545
+                    ],
+                    "is_working": true,
+                    "name": "Cordeliers/Bourse",
+                    "rect": [
+                        263,
+                        552,
+                        93,
+                        15
+                    ],
+                    "text_id": 118,
+                    "uid": 125
+                },
+                {
+                    "coord": [
+                        485,
+                        525
+                    ],
+                    "is_working": true,
+                    "name": "Moliere",
+                    "rect": [
+                        433,
+                        508,
+                        39,
+                        15
+                    ],
+                    "text_id": 119,
+                    "uid": 126
+                },
+                {
+                    "coord": [
+                        530,
+                        510
+                    ],
+                    "is_working": true,
+                    "name": "Saxe-Lafayette",
+                    "rect": [
+                        451,
+                        490,
+                        75,
+                        15
+                    ],
+                    "text_id": 120,
+                    "uid": 127
+                },
+                {
+                    "coord": [
+                        575,
+                        495
+                    ],
+                    "is_working": true,
+                    "name": "Les Halles/Paul Bocuse",
+                    "rect": [
+                        444,
+                        473,
+                        121,
+                        15
+                    ],
+                    "text_id": 121,
+                    "uid": 128
+                },
+                {
+                    "coord": [
+                        620,
+                        475
+                    ],
+                    "is_working": true,
+                    "name": "Garibaldi-Lafayette",
+                    "rect": [
+                        517,
+                        455,
+                        95,
+                        15
+                    ],
+                    "text_id": 122,
+                    "uid": 129
+                },
+                {
+                    "coord": [
+                        665,
+                        490
+                    ],
+                    "is_working": true,
+                    "name": "Part Dieu-Jules Favre",
+                    "rect": null,
+                    "text_id": 112,
+                    "uid": 130
+                },
+                {
+                    "coord": [
+                        745,
+                        515
+                    ],
+                    "is_working": true,
+                    "name": "Thiers-Lafayette",
+                    "rect": null,
+                    "text_id": 56,
+                    "uid": 131
+                },
+                {
+                    "coord": [
+                        780,
+                        502
+                    ],
+                    "is_working": true,
+                    "name": "Ste-Genevieve",
+                    "rect": [
+                        781,
+                        508,
+                        74,
+                        15
+                    ],
+                    "text_id": 123,
+                    "uid": 132
+                },
+                {
+                    "coord": [
+                        803,
+                        492
+                    ],
+                    "is_working": true,
+                    "name": "Alsace",
+                    "rect": [
+                        766,
+                        469,
+                        37,
+                        15
+                    ],
+                    "text_id": 124,
+                    "uid": 133
+                },
+                {
+                    "coord": [
+                        825,
+                        483
+                    ],
+                    "is_working": true,
+                    "name": "Institut d’Art Contemporain",
+                    "rect": [
+                        834,
+                        489,
+                        134,
+                        15
+                    ],
+                    "text_id": 125,
+                    "uid": 134
+                },
+                {
+                    "coord": [
+                        847,
+                        476
+                    ],
+                    "is_working": true,
+                    "name": "Verlaine",
+                    "rect": [
+                        807,
+                        455,
+                        43,
+                        15
+                    ],
+                    "text_id": 126,
+                    "uid": 135
+                },
+                {
+                    "coord": [
+                        870,
+                        470
+                    ],
+                    "is_working": true,
+                    "name": "L. Braille-Montaland",
+                    "rect": [
+                        882,
+                        470,
+                        101,
+                        15
+                    ],
+                    "text_id": 127,
+                    "uid": 136
+                },
+                {
+                    "coord": [
+                        895,
+                        460
+                    ],
+                    "is_working": true,
+                    "name": "Blanqui/Centre Memoires et Societe",
+                    "rect": [
+                        709,
+                        436,
+                        180,
+                        15
+                    ],
+                    "text_id": 128,
+                    "uid": 137
+                },
+                {
+                    "coord": [
+                        915,
+                        450
+                    ],
+                    "is_working": true,
+                    "name": "Grandclement",
+                    "rect": [
+                        926,
+                        453,
+                        71,
+                        15
+                    ],
+                    "text_id": 129,
+                    "uid": 138
+                },
+                {
+                    "coord": [
+                        940,
+                        440
+                    ],
+                    "is_working": true,
+                    "name": "Poizat",
+                    "rect": [
+                        899,
+                        422,
+                        32,
+                        15
+                    ],
+                    "text_id": 130,
+                    "uid": 139
+                },
+                {
+                    "coord": [
+                        963,
+                        433
+                    ],
+                    "is_working": true,
+                    "name": "Bernaix",
+                    "rect": [
+                        973,
+                        437,
+                        41,
+                        15
+                    ],
+                    "text_id": 131,
+                    "uid": 140
+                },
+                {
+                    "coord": [
+                        985,
+                        425
+                    ],
+                    "is_working": true,
+                    "name": "Cyprian Leon Blum",
+                    "rect": [
+                        880,
+                        404,
+                        97,
+                        15
+                    ],
+                    "text_id": 132,
+                    "uid": 141
+                },
+                {
+                    "coord": [
+                        1008,
+                        419
+                    ],
+                    "is_working": true,
+                    "name": "Bon Coin",
+                    "rect": [
+                        1020,
+                        423,
+                        48,
+                        15
+                    ],
+                    "text_id": 133,
+                    "uid": 142
+                },
+                {
+                    "coord": [
+                        1035,
+                        410
+                    ],
+                    "is_working": true,
+                    "name": "Leon Blum",
+                    "rect": [
+                        975,
+                        386,
+                        55,
+                        15
+                    ],
+                    "text_id": 134,
+                    "uid": 143
+                },
+                {
+                    "coord": [
+                        1065,
+                        395
+                    ],
+                    "is_working": true,
+                    "name": "L. Bonnevay/Astroballe",
+                    "rect": null,
+                    "text_id": 12,
+                    "uid": 144
+                },
+                {
+                    "coord": [
+                        1065,
+                        350
+                    ],
+                    "is_working": true,
+                    "name": "Pont des Planches",
+                    "rect": [
+                        1075,
+                        347,
+                        94,
+                        15
+                    ],
+                    "text_id": 135,
+                    "uid": 145
+                },
+                {
+                    "coord": [
+                        1065,
+                        330
+                    ],
+                    "is_working": true,
+                    "name": "Lefevre",
+                    "rect": [
+                        1075,
+                        324,
+                        39,
+                        15
+                    ],
+                    "text_id": 136,
+                    "uid": 146
+                },
+                {
+                    "coord": [
+                        1065,
+                        305
+                    ],
+                    "is_working": true,
+                    "name": "Cuzin Stalingrad",
+                    "rect": [
+                        1073,
+                        299,
+                        83,
+                        15
+                    ],
+                    "text_id": 137,
+                    "uid": 147
+                },
+                {
+                    "coord": [
+                        1065,
+                        280
+                    ],
+                    "is_working": true,
+                    "name": "Vaulx Hotel de Ville",
+                    "rect": [
+                        1073,
+                        275,
+                        99,
+                        15
+                    ],
+                    "text_id": 138,
+                    "uid": 148
+                },
+                {
+                    "coord": [
+                        1065,
+                        255
+                    ],
+                    "is_working": true,
+                    "name": "Grand Vire",
+                    "rect": [
+                        1074,
+                        251,
+                        55,
+                        15
+                    ],
+                    "text_id": 139,
+                    "uid": 149
+                },
+                {
+                    "coord": [
+                        1065,
+                        235
+                    ],
+                    "is_working": true,
+                    "name": "Lesire",
+                    "rect": [
+                        1074,
+                        228,
+                        33,
+                        15
+                    ],
+                    "text_id": 140,
+                    "uid": 150
+                },
+                {
+                    "coord": [
+                        1065,
+                        210
+                    ],
+                    "is_working": true,
+                    "name": "Mas du Taureau",
+                    "rect": [
+                        1074,
+                        203,
+                        81,
+                        15
+                    ],
+                    "text_id": 141,
+                    "uid": 151
+                },
+                {
+                    "coord": [
+                        1065,
+                        185
+                    ],
+                    "is_working": true,
+                    "name": "Vaulx les Grolieres",
+                    "rect": [
+                        1074,
+                        182,
+                        97,
+                        15
+                    ],
+                    "text_id": 142,
+                    "uid": 152
+                },
+                {
+                    "coord": [
+                        1065,
+                        165
+                    ],
+                    "is_working": true,
+                    "name": "Vaulx-en Velin/La Grappiniere",
+                    "rect": [
+                        1074,
+                        160,
+                        149,
+                        15
+                    ],
+                    "text_id": 143,
+                    "uid": 153
+                }
+            ],
+            "text_id": 144
+        }
+    ],
+    "lines_width": 6,
+    "name": "metro",
+    "name_text_id": 145,
+    "stations_diameter": 13.0,
+    "transfers": [
+        [
+            2,
+            32,
+            [
+                385,
+                665
+            ],
+            [
+                385,
+                665
+            ]
+        ],
+        [
+            4,
+            23,
+            [
+                385,
+                410
+            ],
+            [
+                385,
+                385
+            ]
+        ],
+        [
+            7,
+            14,
+            [
+                745,
+                280
+            ],
+            [
+                745,
+                300
+            ]
+        ],
+        [
+            18,
+            34,
+            [
+                600,
+                745
+            ],
+            [
+                600,
+                745
+            ]
+        ],
+        [
+            31,
+            43,
+            [
+                210,
+                600
+            ],
+            [
+                210,
+                580
+            ]
+        ],
+        [
+            31,
+            45,
+            [
+                210,
+                600
+            ],
+            [
+                210,
+                620
+            ]
+        ],
+        [
+            43,
+            45,
+            [
+                210,
+                580
+            ],
+            [
+                210,
+                620
+            ]
+        ],
+        [
+            7,
+            55,
+            [
+                745,
+                280
+            ],
+            [
+                745,
+                260
+            ]
+        ],
+        [
+            14,
+            55,
+            [
+                745,
+                300
+            ],
+            [
+                745,
+                260
+            ]
+        ],
+        [
+            13,
+            105,
+            [
+                1130,
+                495
+            ],
+            [
+                1130,
+                515
+            ]
+        ],
+        [
+            16,
+            58,
+            [
+                685,
+                555
+            ],
+            [
+                685,
+                555
+            ]
+        ],
+        [
+            16,
+            100,
+            [
+                685,
+                555
+            ],
+            [
+                700,
+                565
+            ]
+        ],
+        [
+            17,
+            60,
+            [
+                600,
+                640
+            ],
+            [
+                555,
+                605
+            ]
+        ],
+        [
+            19,
+            73,
+            [
+                600,
+                950
+            ],
+            [
+                600,
+                950
+            ]
+        ],
+        [
+            33,
+            63,
+            [
+                535,
+                720
+            ],
+            [
+                535,
+                720
+            ]
+        ],
+        [
+            38,
+            80,
+            [
+                880,
+                860
+            ],
+            [
+                880,
+                860
+            ]
+        ],
+        [
+            67,
+            71,
+            [
+                385,
+                860
+            ],
+            [
+                395,
+                880
+            ]
+        ],
+        [
+            58,
+            100,
+            [
+                685,
+                555
+            ],
+            [
+                700,
+                565
+            ]
+        ],
+        [
+            0,
+            67,
+            [
+                385,
+                845
+            ],
+            [
+                385,
+                860
+            ]
+        ],
+        [
+            0,
+            71,
+            [
+                385,
+                845
+            ],
+            [
+                395,
+                880
+            ]
+        ],
+        [
+            3,
+            125,
+            [
+                385,
+                540
+            ],
+            [
+                365,
+                545
+            ]
+        ],
+        [
+            4,
+            123,
+            [
+                385,
+                410
+            ],
+            [
+                365,
+                415
+            ]
+        ],
+        [
+            23,
+            123,
+            [
+                385,
+                385
+            ],
+            [
+                365,
+                415
+            ]
+        ],
+        [
+            12,
+            144,
+            [
+                1065,
+                395
+            ],
+            [
+                1065,
+                395
+            ]
+        ],
+        [
+            15,
+            117,
+            [
+                685,
+                390
+            ],
+            [
+                665,
+                390
+            ]
+        ],
+        [
+            16,
+            119,
+            [
+                685,
+                555
+            ],
+            [
+                665,
+                550
+            ]
+        ],
+        [
+            118,
+            130,
+            [
+                665,
+                490
+            ],
+            [
+                665,
+                490
+            ]
+        ],
+        [
+            58,
+            119,
+            [
+                685,
+                555
+            ],
+            [
+                665,
+                550
+            ]
+        ],
+        [
+            100,
+            119,
+            [
+                700,
+                565
+            ],
+            [
+                665,
+                550
+            ]
+        ],
+        [
+            57,
+            131,
+            [
+                745,
+                515
+            ],
+            [
+                745,
+                515
+            ]
+        ]
+    ],
+    "transports": [
+        "metro",
+        "trolleybus",
+        "tram",
+        "funicular"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 146,
+    "upper_case": false,
+    "width": 1345,
+    "word_wrap": false
+}

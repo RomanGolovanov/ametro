@@ -1,0 +1,86 @@
+{
+    "city_id": 2618425,
+    "comments_text_id": 28,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 27,
+    "file": "Copenhagen.zip",
+    "latitude": 55.67594,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": 12.56553,
+    "map_id": "Copenhagen.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 24,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 25
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/1.json",
+            "name": "1",
+            "name_text_id": 15,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 26
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/2.json",
+            "name": "2",
+            "name_text_id": 23,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 26
+        }
+    ],
+    "timestamp": 1754434800.0,
+    "transport_types": [
+        "Метро"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Метро"
+        }
+    ]
+}

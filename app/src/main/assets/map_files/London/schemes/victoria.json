@@ -1,0 +1,518 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 466,
+    "images": [
+        "res/schemes/victoria.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "1884BD",
+            "line_width": 9,
+            "name": "Victoria",
+            "segments": [
+                [
+                    78,
+                    79,
+                    [
+                        [
+                            223,
+                            316
+                        ],
+                        [
+                            66,
+                            316
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    79,
+                    80,
+                    [
+                        [
+                            379,
+                            316
+                        ],
+                        [
+                            223,
+                            316
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    80,
+                    81,
+                    [
+                        [
+                            535,
+                            316
+                        ],
+                        [
+                            379,
+                            316
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    81,
+                    82,
+                    [
+                        [
+                            690,
+                            316
+                        ],
+                        [
+                            535,
+                            316
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    82,
+                    83,
+                    [
+                        [
+                            842,
+                            316
+                        ],
+                        [
+                            690,
+                            316
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    83,
+                    84,
+                    [
+                        [
+                            1001,
+                            316
+                        ],
+                        [
+                            842,
+                            316
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    84,
+                    85,
+                    [
+                        [
+                            1157,
+                            316
+                        ],
+                        [
+                            1001,
+                            316
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    85,
+                    86,
+                    [
+                        [
+                            1314,
+                            316
+                        ],
+                        [
+                            1157,
+                            316
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    86,
+                    87,
+                    [
+                        [
+                            1472,
+                            316
+                        ],
+                        [
+                            1314,
+                            316
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    87,
+                    88,
+                    [
+                        [
+                            1629,
+                            316
+                        ],
+                        [
+                            1472,
+                            316
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    88,
+                    89,
+                    [
+                        [
+                            1786,
+                            316
+                        ],
+                        [
+                            1629,
+                            316
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    89,
+                    90,
+                    [
+                        [
+                            1939,
+                            316
+                        ],
+                        [
+                            1786,
+                            316
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    90,
+                    91,
+                    [
+                        [
+                            2096,
+                            316
+                        ],
+                        [
+                            1939,
+                            316
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    91,
+                    92,
+                    [
+                        [
+                            2250,
+                            316
+                        ],
+                        [
+                            2096,
+                            316
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    92,
+                    93,
+                    [
+                        [
+                            2408,
+                            316
+                        ],
+                        [
+                            2250,
+                            316
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        66,
+                        316
+                    ],
+                    "is_working": true,
+                    "name": "Walthamstow Central",
+                    "rect": [
+                        20,
+                        276,
+                        90,
+                        28
+                    ],
+                    "text_id": 79,
+                    "uid": 78
+                },
+                {
+                    "coord": [
+                        223,
+                        316
+                    ],
+                    "is_working": true,
+                    "name": "Blackhorse Road",
+                    "rect": [
+                        184,
+                        277,
+                        80,
+                        28
+                    ],
+                    "text_id": 80,
+                    "uid": 79
+                },
+                {
+                    "coord": [
+                        379,
+                        316
+                    ],
+                    "is_working": true,
+                    "name": "Tottenham Hale",
+                    "rect": [
+                        343,
+                        278,
+                        70,
+                        28
+                    ],
+                    "text_id": 81,
+                    "uid": 80
+                },
+                {
+                    "coord": [
+                        535,
+                        316
+                    ],
+                    "is_working": true,
+                    "name": "Seven Sisters",
+                    "rect": [
+                        513,
+                        280,
+                        47,
+                        28
+                    ],
+                    "text_id": 82,
+                    "uid": 81
+                },
+                {
+                    "coord": [
+                        690,
+                        316
+                    ],
+                    "is_working": true,
+                    "name": "Finsbury Park",
+                    "rect": [
+                        661,
+                        278,
+                        59,
+                        28
+                    ],
+                    "text_id": 34,
+                    "uid": 82
+                },
+                {
+                    "coord": [
+                        842,
+                        316
+                    ],
+                    "is_working": true,
+                    "name": "Highbury & Islington",
+                    "rect": [
+                        811,
+                        279,
+                        70,
+                        28
+                    ],
+                    "text_id": 83,
+                    "uid": 83
+                },
+                {
+                    "coord": [
+                        1001,
+                        316
+                    ],
+                    "is_working": true,
+                    "name": "King's Cross St.Pancras",
+                    "rect": [
+                        937,
+                        278,
+                        113,
+                        28
+                    ],
+                    "text_id": 38,
+                    "uid": 84
+                },
+                {
+                    "coord": [
+                        1157,
+                        316
+                    ],
+                    "is_working": true,
+                    "name": "Euston",
+                    "rect": [
+                        1137,
+                        292,
+                        46,
+                        15
+                    ],
+                    "text_id": 84,
+                    "uid": 85
+                },
+                {
+                    "coord": [
+                        1314,
+                        316
+                    ],
+                    "is_working": true,
+                    "name": "Warren Street",
+                    "rect": [
+                        1289,
+                        278,
+                        53,
+                        28
+                    ],
+                    "text_id": 85,
+                    "uid": 86
+                },
+                {
+                    "coord": [
+                        1472,
+                        316
+                    ],
+                    "is_working": true,
+                    "name": "Oxford Circus",
+                    "rect": [
+                        1446,
+                        280,
+                        49,
+                        28
+                    ],
+                    "text_id": 18,
+                    "uid": 87
+                },
+                {
+                    "coord": [
+                        1629,
+                        316
+                    ],
+                    "is_working": true,
+                    "name": "Green Park",
+                    "rect": [
+                        1607,
+                        280,
+                        42,
+                        28
+                    ],
+                    "text_id": 43,
+                    "uid": 88
+                },
+                {
+                    "coord": [
+                        1786,
+                        316
+                    ],
+                    "is_working": true,
+                    "name": "Victoria",
+                    "rect": [
+                        1762,
+                        292,
+                        53,
+                        15
+                    ],
+                    "text_id": 86,
+                    "uid": 89
+                },
+                {
+                    "coord": [
+                        1939,
+                        316
+                    ],
+                    "is_working": true,
+                    "name": "Pimlico",
+                    "rect": [
+                        1919,
+                        292,
+                        46,
+                        15
+                    ],
+                    "text_id": 87,
+                    "uid": 90
+                },
+                {
+                    "coord": [
+                        2096,
+                        316
+                    ],
+                    "is_working": true,
+                    "name": "Vauxhall",
+                    "rect": [
+                        2070,
+                        293,
+                        60,
+                        15
+                    ],
+                    "text_id": 88,
+                    "uid": 91
+                },
+                {
+                    "coord": [
+                        2250,
+                        316
+                    ],
+                    "is_working": true,
+                    "name": "Stockwell",
+                    "rect": [
+                        2224,
+                        290,
+                        68,
+                        15
+                    ],
+                    "text_id": 89,
+                    "uid": 92
+                },
+                {
+                    "coord": [
+                        2408,
+                        316
+                    ],
+                    "is_working": true,
+                    "name": "Brixton",
+                    "rect": [
+                        2384,
+                        291,
+                        50,
+                        15
+                    ],
+                    "text_id": 90,
+                    "uid": 93
+                }
+            ],
+            "text_id": 86
+        }
+    ],
+    "lines_width": 9,
+    "name": "victoria",
+    "name_text_id": 86,
+    "stations_diameter": 15.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "Метро",
+    "type_text_id": 321,
+    "upper_case": true,
+    "width": 2558,
+    "word_wrap": true
+}

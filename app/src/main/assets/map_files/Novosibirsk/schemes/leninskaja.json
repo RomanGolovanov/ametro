@@ -1,0 +1,374 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 530,
+    "images": [
+        "res/schemes/leninskaja.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "FB0505",
+            "line_width": 9,
+            "name": "Ленинская",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            200,
+                            100
+                        ],
+                        [
+                            200,
+                            60
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            200,
+                            140
+                        ],
+                        [
+                            200,
+                            100
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            200,
+                            180
+                        ],
+                        [
+                            200,
+                            140
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            200,
+                            220
+                        ],
+                        [
+                            200,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            200,
+                            260
+                        ],
+                        [
+                            200,
+                            220
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            200,
+                            300
+                        ],
+                        [
+                            200,
+                            260
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            200,
+                            340
+                        ],
+                        [
+                            200,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            200,
+                            380
+                        ],
+                        [
+                            200,
+                            340
+                        ]
+                    ],
+                    false
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        200,
+                        60
+                    ],
+                    "is_working": true,
+                    "name": "Заельцовская",
+                    "rect": [
+                        215,
+                        50,
+                        100,
+                        20
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        200,
+                        100
+                    ],
+                    "is_working": true,
+                    "name": "Гагаринская",
+                    "rect": [
+                        215,
+                        90,
+                        100,
+                        20
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        200,
+                        140
+                    ],
+                    "is_working": true,
+                    "name": "Красный проспект",
+                    "rect": [
+                        215,
+                        130,
+                        100,
+                        20
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        200,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Площадь Ленина",
+                    "rect": [
+                        215,
+                        170,
+                        100,
+                        20
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        200,
+                        220
+                    ],
+                    "is_working": true,
+                    "name": "Октябрьская",
+                    "rect": [
+                        215,
+                        210,
+                        100,
+                        20
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        200,
+                        260
+                    ],
+                    "is_working": true,
+                    "name": "Речной Вокзал",
+                    "rect": [
+                        215,
+                        250,
+                        100,
+                        20
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        200,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Студенческая",
+                    "rect": [
+                        215,
+                        290,
+                        100,
+                        20
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        200,
+                        340
+                    ],
+                    "is_working": true,
+                    "name": "Площадь Маркса",
+                    "rect": [
+                        215,
+                        330,
+                        100,
+                        20
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        200,
+                        380
+                    ],
+                    "is_working": false,
+                    "name": "Площадь Станиславского",
+                    "rect": [
+                        215,
+                        370,
+                        100,
+                        20
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                }
+            ],
+            "text_id": 9
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "0DA303",
+            "line_width": 9,
+            "name": "Дзержинская",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Площадь Гарина-Михайловского",
+                    "rect": null,
+                    "text_id": 10,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        181,
+                        140
+                    ],
+                    "is_working": true,
+                    "name": "Сибирская",
+                    "rect": [
+                        65,
+                        130,
+                        100,
+                        20
+                    ],
+                    "text_id": 11,
+                    "uid": 10
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Маршала Покрышкина",
+                    "rect": null,
+                    "text_id": 12,
+                    "uid": 11
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Березовая Роща",
+                    "rect": null,
+                    "text_id": 13,
+                    "uid": 12
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Золотая нива",
+                    "rect": null,
+                    "text_id": 14,
+                    "uid": 13
+                }
+            ],
+            "text_id": 15
+        }
+    ],
+    "lines_width": 9,
+    "name": "leninskaja",
+    "name_text_id": 9,
+    "stations_diameter": 16.0,
+    "transfers": [
+        [
+            2,
+            10,
+            [
+                200,
+                140
+            ],
+            [
+                181,
+                140
+            ]
+        ]
+    ],
+    "transports": [
+        "metro",
+        "train"
+    ],
+    "type_name": "Метро",
+    "type_text_id": 149,
+    "upper_case": true,
+    "width": 350,
+    "word_wrap": true
+}

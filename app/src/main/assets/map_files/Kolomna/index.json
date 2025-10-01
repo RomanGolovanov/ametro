@@ -1,0 +1,68 @@
+{
+    "city_id": 546230,
+    "comments_text_id": 56,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "name_id": 57,
+            "ranges": null,
+            "type": "custom",
+            "weekdays": null
+        },
+        {
+            "name_id": 58,
+            "ranges": null,
+            "type": "custom",
+            "weekdays": null
+        },
+        {
+            "name_id": 59,
+            "ranges": null,
+            "type": "custom",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "19:00-24:00"
+            ],
+            "type": "evening",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 55,
+    "file": "Kolomna.zip",
+    "latitude": 55.07108,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": 38.78399,
+    "map_id": "Kolomna.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 53,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 54
+        }
+    ],
+    "timestamp": 1754434800.0,
+    "transport_types": [
+        "Трамвай"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Трамвай"
+        }
+    ]
+}

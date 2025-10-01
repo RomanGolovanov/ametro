@@ -1,0 +1,84 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 393,
+    "images": [
+        "res/schemes/waterlooandcity.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "7BCEA5",
+            "line_width": 9,
+            "name": "Waterloo & City",
+            "segments": [
+                [
+                    94,
+                    95,
+                    [
+                        [
+                            671,
+                            243
+                        ],
+                        [
+                            51,
+                            243
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        51,
+                        243
+                    ],
+                    "is_working": true,
+                    "name": "Waterloo",
+                    "rect": [
+                        24,
+                        215,
+                        63,
+                        15
+                    ],
+                    "text_id": 22,
+                    "uid": 94
+                },
+                {
+                    "coord": [
+                        671,
+                        243
+                    ],
+                    "is_working": true,
+                    "name": "Bank",
+                    "rect": [
+                        654,
+                        216,
+                        34,
+                        15
+                    ],
+                    "text_id": 91,
+                    "uid": 95
+                }
+            ],
+            "text_id": 92
+        }
+    ],
+    "lines_width": 9,
+    "name": "waterlooandcity",
+    "name_text_id": 92,
+    "stations_diameter": 15.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "Метро",
+    "type_text_id": 321,
+    "upper_case": true,
+    "width": 821,
+    "word_wrap": true
+}

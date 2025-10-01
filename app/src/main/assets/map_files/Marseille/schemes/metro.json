@@ -1,0 +1,870 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 521,
+    "images": [
+        "res/schemes/marseille.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "0000AF",
+            "line_color": "0000CF",
+            "line_width": 7,
+            "name": "1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            371,
+                            80
+                        ],
+                        [
+                            392,
+                            59
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            353,
+                            98
+                        ],
+                        [
+                            371,
+                            80
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            332,
+                            119
+                        ],
+                        [
+                            353,
+                            98
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            312,
+                            139
+                        ],
+                        [
+                            332,
+                            119
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            293,
+                            158
+                        ],
+                        [
+                            312,
+                            139
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            275,
+                            176
+                        ],
+                        [
+                            293,
+                            158
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            216,
+                            208
+                        ],
+                        [
+                            252.0,
+                            199.0
+                        ],
+                        [
+                            275,
+                            176
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            167,
+                            220
+                        ],
+                        [
+                            216,
+                            208
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            167,
+                            250
+                        ],
+                        [
+                            167,
+                            220
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            167,
+                            302
+                        ],
+                        [
+                            167,
+                            250
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            204,
+                            302
+                        ],
+                        [
+                            167,
+                            302
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            253,
+                            302
+                        ],
+                        [
+                            204,
+                            302
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            280,
+                            302
+                        ],
+                        [
+                            253,
+                            302
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        392,
+                        59
+                    ],
+                    "is_working": true,
+                    "name": "La Rose",
+                    "rect": [
+                        382,
+                        38,
+                        43,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        371,
+                        80
+                    ],
+                    "is_working": true,
+                    "name": "Frais Vallon",
+                    "rect": [
+                        378,
+                        78,
+                        61,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        353,
+                        98
+                    ],
+                    "is_working": true,
+                    "name": "Malpasse",
+                    "rect": [
+                        363,
+                        96,
+                        50,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        332,
+                        119
+                    ],
+                    "is_working": true,
+                    "name": "Saint Just",
+                    "rect": [
+                        343,
+                        117,
+                        51,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        312,
+                        139
+                    ],
+                    "is_working": true,
+                    "name": "Chartreux",
+                    "rect": [
+                        320,
+                        137,
+                        51,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        293,
+                        158
+                    ],
+                    "is_working": true,
+                    "name": "Cinq Avenues/Longchamp",
+                    "rect": [
+                        302,
+                        160,
+                        132,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        275,
+                        176
+                    ],
+                    "is_working": true,
+                    "name": "Rйformйs/Canebiиre",
+                    "rect": [
+                        282,
+                        183,
+                        104,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        216,
+                        208
+                    ],
+                    "is_working": true,
+                    "name": "Gare Saint Charles",
+                    "rect": [
+                        227,
+                        212,
+                        96,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        167,
+                        220
+                    ],
+                    "is_working": true,
+                    "name": "Colbert/Hфtel de la Rйgion",
+                    "rect": [
+                        23,
+                        212,
+                        135,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        167,
+                        250
+                    ],
+                    "is_working": true,
+                    "name": "Vieux Port/Hфtel de Ville",
+                    "rect": [
+                        33,
+                        245,
+                        125,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        167,
+                        302
+                    ],
+                    "is_working": true,
+                    "name": "Estrangin/Prйfecture",
+                    "rect": [
+                        55,
+                        292,
+                        103,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        204,
+                        302
+                    ],
+                    "is_working": true,
+                    "name": "Castellane",
+                    "rect": [
+                        155,
+                        314,
+                        55,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        253,
+                        302
+                    ],
+                    "is_working": true,
+                    "name": "Baille",
+                    "rect": [
+                        243,
+                        309,
+                        31,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        280,
+                        302
+                    ],
+                    "is_working": true,
+                    "name": "La Timone",
+                    "rect": [
+                        285,
+                        284,
+                        53,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                }
+            ],
+            "text_id": 14
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "AF0000",
+            "line_color": "CF0000",
+            "line_width": 7,
+            "name": "2",
+            "segments": [
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            164,
+                            93
+                        ],
+                        [
+                            164,
+                            63
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            164,
+                            125
+                        ],
+                        [
+                            164,
+                            93
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            164,
+                            153
+                        ],
+                        [
+                            164,
+                            125
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            168,
+                            179
+                        ],
+                        [
+                            164.0,
+                            175.0
+                        ],
+                        [
+                            164,
+                            153
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            201,
+                            212
+                        ],
+                        [
+                            168,
+                            179
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            219,
+                            238
+                        ],
+                        [
+                            219.0,
+                            230.0
+                        ],
+                        [
+                            201,
+                            212
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            219,
+                            267
+                        ],
+                        [
+                            219,
+                            238
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            219,
+                            302
+                        ],
+                        [
+                            219,
+                            267
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            219,
+                            326
+                        ],
+                        [
+                            219,
+                            302
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    23,
+                    24,
+                    [
+                        [
+                            219,
+                            348
+                        ],
+                        [
+                            219,
+                            326
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            254,
+                            371
+                        ],
+                        [
+                            230.0,
+                            371.0
+                        ],
+                        [
+                            219.0,
+                            360.0
+                        ],
+                        [
+                            219,
+                            348
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        164,
+                        63
+                    ],
+                    "is_working": true,
+                    "name": "Bougainville",
+                    "rect": [
+                        176,
+                        60,
+                        64,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        164,
+                        93
+                    ],
+                    "is_working": true,
+                    "name": "National",
+                    "rect": [
+                        175,
+                        87,
+                        43,
+                        15
+                    ],
+                    "text_id": 16,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        164,
+                        125
+                    ],
+                    "is_working": true,
+                    "name": "Dйsirйe Clary",
+                    "rect": [
+                        175,
+                        119,
+                        71,
+                        15
+                    ],
+                    "text_id": 17,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        164,
+                        153
+                    ],
+                    "is_working": true,
+                    "name": "Joliette",
+                    "rect": [
+                        175,
+                        144,
+                        38,
+                        15
+                    ],
+                    "text_id": 18,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        168,
+                        179
+                    ],
+                    "is_working": true,
+                    "name": "Jules Guesde",
+                    "rect": [
+                        178,
+                        166,
+                        70,
+                        15
+                    ],
+                    "text_id": 19,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        201,
+                        212
+                    ],
+                    "is_working": true,
+                    "name": "Gare Saint Charles",
+                    "rect": [
+                        227,
+                        212,
+                        96,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        219,
+                        238
+                    ],
+                    "is_working": true,
+                    "name": "Noailles",
+                    "rect": [
+                        228,
+                        233,
+                        43,
+                        15
+                    ],
+                    "text_id": 20,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        219,
+                        267
+                    ],
+                    "is_working": true,
+                    "name": "Notre Dame du Mont/Cours Julien",
+                    "rect": [
+                        228,
+                        262,
+                        169,
+                        15
+                    ],
+                    "text_id": 21,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        219,
+                        302
+                    ],
+                    "is_working": true,
+                    "name": "Castellane",
+                    "rect": [
+                        155,
+                        314,
+                        55,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        219,
+                        326
+                    ],
+                    "is_working": true,
+                    "name": "Pйrier",
+                    "rect": [
+                        227,
+                        324,
+                        32,
+                        15
+                    ],
+                    "text_id": 22,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        219,
+                        348
+                    ],
+                    "is_working": true,
+                    "name": "Rond-Point du Prado",
+                    "rect": [
+                        229,
+                        342,
+                        103,
+                        15
+                    ],
+                    "text_id": 23,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        254,
+                        371
+                    ],
+                    "is_working": true,
+                    "name": "Sainte Marguerite/Dromel",
+                    "rect": [
+                        265,
+                        366,
+                        128,
+                        15
+                    ],
+                    "text_id": 24,
+                    "uid": 25
+                }
+            ],
+            "text_id": 25
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 26,
+    "stations_diameter": 13.0,
+    "transfers": [
+        [
+            7,
+            19,
+            [
+                216,
+                208
+            ],
+            [
+                201,
+                212
+            ]
+        ],
+        [
+            11,
+            22,
+            [
+                204,
+                302
+            ],
+            [
+                219,
+                302
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 27,
+    "upper_case": false,
+    "width": 542,
+    "word_wrap": false
+}

@@ -1,0 +1,99 @@
+{
+    "city_id": 703845,
+    "comments_text_id": 16,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "name_id": null,
+            "ranges": [
+                "05:30-07:00"
+            ],
+            "type": "custom",
+            "weekdays": null
+        },
+        {
+            "name_id": null,
+            "ranges": [
+                "07:00-09:00"
+            ],
+            "type": "custom",
+            "weekdays": null
+        },
+        {
+            "name_id": null,
+            "ranges": [
+                "09:00-16:00"
+            ],
+            "type": "custom",
+            "weekdays": null
+        },
+        {
+            "name_id": null,
+            "ranges": [
+                "16:00-19:00"
+            ],
+            "type": "custom",
+            "weekdays": null
+        },
+        {
+            "name_id": null,
+            "ranges": [
+                "19:00-22:00"
+            ],
+            "type": "custom",
+            "weekdays": null
+        },
+        {
+            "name_id": null,
+            "ranges": [
+                "22:00-23:00"
+            ],
+            "type": "custom",
+            "weekdays": null
+        },
+        {
+            "name_id": null,
+            "ranges": [
+                "23:00-01:30"
+            ],
+            "type": "custom",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 15,
+    "file": "KrivoyRog.zip",
+    "latitude": 47.90572,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": 33.39404,
+    "map_id": "KrivoyRog.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 13,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 14
+        }
+    ],
+    "timestamp": 1426982400.0,
+    "transport_types": [
+        "Метро"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Метро"
+        }
+    ]
+}

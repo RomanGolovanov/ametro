@@ -1,0 +1,797 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 431,
+    "images": [
+        "res/schemes/bakerloo.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "7B3900",
+            "line_width": 9,
+            "name": "Bakerloo",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            154,
+                            281
+                        ],
+                        [
+                            57,
+                            281
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            226,
+                            281
+                        ],
+                        [
+                            154,
+                            281
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            306,
+                            281
+                        ],
+                        [
+                            226,
+                            281
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            392,
+                            281
+                        ],
+                        [
+                            306,
+                            281
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            487,
+                            281
+                        ],
+                        [
+                            392,
+                            281
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            584,
+                            281
+                        ],
+                        [
+                            487,
+                            281
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            670,
+                            281
+                        ],
+                        [
+                            584,
+                            281
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            753,
+                            281
+                        ],
+                        [
+                            670,
+                            281
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            824,
+                            281
+                        ],
+                        [
+                            753,
+                            281
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            899,
+                            281
+                        ],
+                        [
+                            824,
+                            281
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            965,
+                            281
+                        ],
+                        [
+                            899,
+                            281
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            1038,
+                            281
+                        ],
+                        [
+                            965,
+                            281
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            1119,
+                            281
+                        ],
+                        [
+                            1038,
+                            281
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            1214,
+                            281
+                        ],
+                        [
+                            1119,
+                            281
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            1304,
+                            281
+                        ],
+                        [
+                            1214,
+                            281
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            1404,
+                            281
+                        ],
+                        [
+                            1304,
+                            281
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            1485,
+                            281
+                        ],
+                        [
+                            1404,
+                            281
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            1566,
+                            281
+                        ],
+                        [
+                            1485,
+                            281
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            1670,
+                            281
+                        ],
+                        [
+                            1566,
+                            281
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            1755,
+                            281
+                        ],
+                        [
+                            1670,
+                            281
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            1856,
+                            281
+                        ],
+                        [
+                            1755,
+                            281
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            1970,
+                            281
+                        ],
+                        [
+                            1856,
+                            281
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            2072,
+                            281
+                        ],
+                        [
+                            1970,
+                            281
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    23,
+                    24,
+                    [
+                        [
+                            2151,
+                            281
+                        ],
+                        [
+                            2072,
+                            281
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        57,
+                        281
+                    ],
+                    "is_working": true,
+                    "name": "Harrow & Wealdstone",
+                    "rect": [
+                        21,
+                        244,
+                        88,
+                        28
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        154,
+                        281
+                    ],
+                    "is_working": true,
+                    "name": "Kenton",
+                    "rect": [
+                        129,
+                        258,
+                        47,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        226,
+                        281
+                    ],
+                    "is_working": true,
+                    "name": "South Kenton",
+                    "rect": [
+                        202,
+                        241,
+                        47,
+                        28
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        306,
+                        281
+                    ],
+                    "is_working": true,
+                    "name": "North Wembley",
+                    "rect": [
+                        276,
+                        244,
+                        56,
+                        28
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        392,
+                        281
+                    ],
+                    "is_working": true,
+                    "name": "Wembley Central",
+                    "rect": [
+                        362,
+                        243,
+                        58,
+                        28
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        487,
+                        281
+                    ],
+                    "is_working": true,
+                    "name": "Stonebridge Park",
+                    "rect": [
+                        449,
+                        243,
+                        82,
+                        28
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        584,
+                        281
+                    ],
+                    "is_working": true,
+                    "name": "Harlesden",
+                    "rect": [
+                        552,
+                        255,
+                        69,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        670,
+                        281
+                    ],
+                    "is_working": true,
+                    "name": "Willesden Junction",
+                    "rect": [
+                        635,
+                        243,
+                        66,
+                        28
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        753,
+                        281
+                    ],
+                    "is_working": true,
+                    "name": "Kensal Green",
+                    "rect": [
+                        729,
+                        242,
+                        48,
+                        28
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        824,
+                        281
+                    ],
+                    "is_working": true,
+                    "name": "Queen's Park",
+                    "rect": [
+                        797,
+                        243,
+                        51,
+                        28
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        899,
+                        281
+                    ],
+                    "is_working": true,
+                    "name": "Kilburn Park",
+                    "rect": [
+                        870,
+                        243,
+                        53,
+                        28
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        965,
+                        281
+                    ],
+                    "is_working": true,
+                    "name": "Maida Vale",
+                    "rect": [
+                        943,
+                        244,
+                        40,
+                        28
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        1038,
+                        281
+                    ],
+                    "is_working": true,
+                    "name": "Warwick Avenue",
+                    "rect": [
+                        1009,
+                        244,
+                        59,
+                        28
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        1119,
+                        281
+                    ],
+                    "is_working": true,
+                    "name": "Paddington",
+                    "rect": [
+                        1084,
+                        257,
+                        74,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        1214,
+                        281
+                    ],
+                    "is_working": true,
+                    "name": "Edgware Road",
+                    "rect": [
+                        1185,
+                        243,
+                        60,
+                        28
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        1304,
+                        281
+                    ],
+                    "is_working": true,
+                    "name": "Marylebone",
+                    "rect": [
+                        1270,
+                        255,
+                        78,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        1404,
+                        281
+                    ],
+                    "is_working": true,
+                    "name": "Baker Street",
+                    "rect": [
+                        1384,
+                        241,
+                        43,
+                        28
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        1485,
+                        281
+                    ],
+                    "is_working": true,
+                    "name": "Regent's Park",
+                    "rect": [
+                        1456,
+                        242,
+                        57,
+                        28
+                    ],
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        1566,
+                        281
+                    ],
+                    "is_working": true,
+                    "name": "Oxford Circus",
+                    "rect": [
+                        1542,
+                        243,
+                        49,
+                        28
+                    ],
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        1670,
+                        281
+                    ],
+                    "is_working": true,
+                    "name": "Piccadilly Circus",
+                    "rect": [
+                        1636,
+                        242,
+                        68,
+                        28
+                    ],
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        1755,
+                        281
+                    ],
+                    "is_working": true,
+                    "name": "Charing Cross",
+                    "rect": [
+                        1730,
+                        242,
+                        55,
+                        28
+                    ],
+                    "text_id": 20,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        1856,
+                        281
+                    ],
+                    "is_working": true,
+                    "name": "Embankment",
+                    "rect": [
+                        1814,
+                        257,
+                        80,
+                        15
+                    ],
+                    "text_id": 21,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        1970,
+                        281
+                    ],
+                    "is_working": true,
+                    "name": "Waterloo",
+                    "rect": [
+                        1937,
+                        256,
+                        63,
+                        15
+                    ],
+                    "text_id": 22,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        2072,
+                        281
+                    ],
+                    "is_working": true,
+                    "name": "Lambeth North",
+                    "rect": [
+                        2043,
+                        242,
+                        56,
+                        28
+                    ],
+                    "text_id": 23,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        2151,
+                        281
+                    ],
+                    "is_working": true,
+                    "name": "Elephant & Castle",
+                    "rect": [
+                        2119,
+                        244,
+                        61,
+                        28
+                    ],
+                    "text_id": 24,
+                    "uid": 24
+                }
+            ],
+            "text_id": 25
+        }
+    ],
+    "lines_width": 9,
+    "name": "bakerloo",
+    "name_text_id": 25,
+    "stations_diameter": 15.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "Метро",
+    "type_text_id": 321,
+    "upper_case": true,
+    "width": 2301,
+    "word_wrap": true
+}

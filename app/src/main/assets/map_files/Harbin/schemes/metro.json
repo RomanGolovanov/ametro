@@ -1,0 +1,580 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 530,
+    "images": [
+        "res/schemes/harbin.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "C61A00",
+            "line_color": "C61A00",
+            "line_width": 7,
+            "name": "1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            270,
+                            30
+                        ],
+                        [
+                            300,
+                            30
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            240,
+                            30
+                        ],
+                        [
+                            270,
+                            30
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            220,
+                            50
+                        ],
+                        [
+                            240,
+                            30
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            200,
+                            70
+                        ],
+                        [
+                            220,
+                            50
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            180,
+                            90
+                        ],
+                        [
+                            200,
+                            70
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            160,
+                            110
+                        ],
+                        [
+                            180,
+                            90
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            140,
+                            130
+                        ],
+                        [
+                            160,
+                            110
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            120,
+                            150
+                        ],
+                        [
+                            140,
+                            130
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            100,
+                            170
+                        ],
+                        [
+                            120,
+                            150
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            80,
+                            190
+                        ],
+                        [
+                            100,
+                            170
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            60,
+                            210
+                        ],
+                        [
+                            80,
+                            190
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            40,
+                            230
+                        ],
+                        [
+                            60,
+                            210
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            40,
+                            260
+                        ],
+                        [
+                            40,
+                            230
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            40,
+                            290
+                        ],
+                        [
+                            40,
+                            260
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            40,
+                            320
+                        ],
+                        [
+                            40,
+                            290
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            40,
+                            350
+                        ],
+                        [
+                            40,
+                            320
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            40,
+                            380
+                        ],
+                        [
+                            40,
+                            350
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        300,
+                        30
+                    ],
+                    "is_working": true,
+                    "name": "Hadongzhan",
+                    "rect": [
+                        309,
+                        23,
+                        63,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        270,
+                        30
+                    ],
+                    "is_working": true,
+                    "name": "Huashujie",
+                    "rect": [
+                        249,
+                        6,
+                        52,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        240,
+                        30
+                    ],
+                    "is_working": true,
+                    "name": "Jiatongxueyuan",
+                    "rect": [
+                        151,
+                        18,
+                        80,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        220,
+                        50
+                    ],
+                    "is_working": true,
+                    "name": "Taipingqiao",
+                    "rect": [
+                        229,
+                        47,
+                        59,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        200,
+                        70
+                    ],
+                    "is_working": true,
+                    "name": "Gongchengdaxue",
+                    "rect": [
+                        209,
+                        67,
+                        88,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        180,
+                        90
+                    ],
+                    "is_working": true,
+                    "name": "Yanchang",
+                    "rect": [
+                        189,
+                        87,
+                        51,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        160,
+                        110
+                    ],
+                    "is_working": true,
+                    "name": "Yidayiyuan",
+                    "rect": [
+                        169,
+                        107,
+                        57,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        140,
+                        130
+                    ],
+                    "is_working": true,
+                    "name": "Bowuguan",
+                    "rect": [
+                        149,
+                        127,
+                        54,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        120,
+                        150
+                    ],
+                    "is_working": true,
+                    "name": "Tieluju",
+                    "rect": [
+                        129,
+                        147,
+                        35,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        100,
+                        170
+                    ],
+                    "is_working": true,
+                    "name": "Hagongda",
+                    "rect": [
+                        109,
+                        167,
+                        52,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        80,
+                        190
+                    ],
+                    "is_working": true,
+                    "name": "Xidaqiao",
+                    "rect": [
+                        89,
+                        187,
+                        45,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        60,
+                        210
+                    ],
+                    "is_working": true,
+                    "name": "Hexinglu",
+                    "rect": [
+                        69,
+                        207,
+                        46,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        40,
+                        230
+                    ],
+                    "is_working": true,
+                    "name": "Xuefulu",
+                    "rect": [
+                        49,
+                        227,
+                        39,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        40,
+                        260
+                    ],
+                    "is_working": true,
+                    "name": "Ligongdaxue",
+                    "rect": [
+                        49,
+                        253,
+                        65,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        40,
+                        290
+                    ],
+                    "is_working": true,
+                    "name": "Heilongjiangdaxue",
+                    "rect": [
+                        49,
+                        283,
+                        94,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        40,
+                        320
+                    ],
+                    "is_working": true,
+                    "name": "Yidaeryuan",
+                    "rect": [
+                        49,
+                        313,
+                        58,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        40,
+                        350
+                    ],
+                    "is_working": true,
+                    "name": "Hada",
+                    "rect": [
+                        49,
+                        343,
+                        28,
+                        15
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        40,
+                        380
+                    ],
+                    "is_working": true,
+                    "name": "Hananzhan",
+                    "rect": [
+                        49,
+                        373,
+                        57,
+                        15
+                    ],
+                    "text_id": 17,
+                    "uid": 17
+                }
+            ],
+            "text_id": 18
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 19,
+    "stations_diameter": 13.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 20,
+    "upper_case": false,
+    "width": 450,
+    "word_wrap": false
+}

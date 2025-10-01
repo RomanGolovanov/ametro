@@ -1,0 +1,766 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 548,
+    "images": [
+        "res/schemes/birmingham.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "0000cf",
+            "line_width": 7,
+            "name": "Midland Metro",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            75,
+                            40
+                        ],
+                        [
+                            75,
+                            15
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            75,
+                            68
+                        ],
+                        [
+                            75,
+                            40
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            75,
+                            92
+                        ],
+                        [
+                            75,
+                            68
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            75,
+                            115
+                        ],
+                        [
+                            75,
+                            92
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            100,
+                            140
+                        ],
+                        [
+                            75,
+                            115
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            120,
+                            160
+                        ],
+                        [
+                            100,
+                            140
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            139,
+                            179
+                        ],
+                        [
+                            120,
+                            160
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            155,
+                            195
+                        ],
+                        [
+                            139,
+                            179
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            175,
+                            215
+                        ],
+                        [
+                            155,
+                            195
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            195,
+                            235
+                        ],
+                        [
+                            175,
+                            215
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            215,
+                            255
+                        ],
+                        [
+                            195,
+                            235
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            235,
+                            275
+                        ],
+                        [
+                            215,
+                            255
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            260,
+                            300
+                        ],
+                        [
+                            235,
+                            275
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            290,
+                            300
+                        ],
+                        [
+                            260,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            322,
+                            300
+                        ],
+                        [
+                            290,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            358,
+                            300
+                        ],
+                        [
+                            322,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            398,
+                            300
+                        ],
+                        [
+                            358,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            440,
+                            300
+                        ],
+                        [
+                            398,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            480,
+                            300
+                        ],
+                        [
+                            440,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            507,
+                            327
+                        ],
+                        [
+                            480,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            533,
+                            353
+                        ],
+                        [
+                            507,
+                            327
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            556,
+                            376
+                        ],
+                        [
+                            533,
+                            353
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            578,
+                            398
+                        ],
+                        [
+                            556,
+                            376
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        75,
+                        15
+                    ],
+                    "is_working": true,
+                    "name": "Wolverhampton St.George's",
+                    "rect": [
+                        84,
+                        7,
+                        139,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        75,
+                        40
+                    ],
+                    "is_working": true,
+                    "name": "The Royal",
+                    "rect": [
+                        84,
+                        33,
+                        52,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        75,
+                        68
+                    ],
+                    "is_working": true,
+                    "name": "Priestfield",
+                    "rect": [
+                        84,
+                        61,
+                        52,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        75,
+                        92
+                    ],
+                    "is_working": true,
+                    "name": "The Crescent",
+                    "rect": [
+                        84,
+                        85,
+                        68,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        75,
+                        115
+                    ],
+                    "is_working": true,
+                    "name": "Bliston Central",
+                    "rect": [
+                        84,
+                        104,
+                        76,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        100,
+                        140
+                    ],
+                    "is_working": true,
+                    "name": "Loxdale",
+                    "rect": [
+                        109,
+                        129,
+                        41,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        120,
+                        160
+                    ],
+                    "is_working": true,
+                    "name": "Bradley Lane",
+                    "rect": [
+                        129,
+                        149,
+                        68,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        139,
+                        179
+                    ],
+                    "is_working": true,
+                    "name": "Wednesbury Parkway",
+                    "rect": [
+                        148,
+                        168,
+                        110,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        155,
+                        195
+                    ],
+                    "is_working": true,
+                    "name": "Wednesbury Great Western St",
+                    "rect": [
+                        164,
+                        184,
+                        151,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        175,
+                        215
+                    ],
+                    "is_working": true,
+                    "name": "Black Lake",
+                    "rect": [
+                        108,
+                        211,
+                        58,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        195,
+                        235
+                    ],
+                    "is_working": true,
+                    "name": "\"Dudley St, Guns Village\"",
+                    "rect": [
+                        67,
+                        231,
+                        119,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        215,
+                        255
+                    ],
+                    "is_working": true,
+                    "name": "Dartmouth St",
+                    "rect": [
+                        140,
+                        251,
+                        66,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        235,
+                        275
+                    ],
+                    "is_working": true,
+                    "name": "\"Lodge St, West Bromwich Town Hall\"",
+                    "rect": [
+                        45,
+                        271,
+                        181,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        260,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "West Bromwich Central",
+                    "rect": [
+                        132,
+                        296,
+                        119,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        290,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Trinity Way",
+                    "rect": [
+                        282,
+                        234,
+                        15,
+                        58
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        322,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Kenrick Park",
+                    "rect": [
+                        314,
+                        225,
+                        15,
+                        67
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        358,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "The Hawthorns",
+                    "rect": [
+                        350,
+                        216,
+                        15,
+                        76
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        398,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Handsworth Booth St",
+                    "rect": [
+                        390,
+                        186,
+                        15,
+                        106
+                    ],
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        440,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Winson Green Outer Circle",
+                    "rect": [
+                        432,
+                        157,
+                        15,
+                        135
+                    ],
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        480,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "\"Soho, Benson Rd\"",
+                    "rect": [
+                        468,
+                        277,
+                        88,
+                        15
+                    ],
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        507,
+                        327
+                    ],
+                    "is_working": true,
+                    "name": "Jewellery Quarter",
+                    "rect": [
+                        408,
+                        323,
+                        90,
+                        15
+                    ],
+                    "text_id": 20,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        533,
+                        353
+                    ],
+                    "is_working": true,
+                    "name": "St.Paul's",
+                    "rect": [
+                        479,
+                        349,
+                        45,
+                        15
+                    ],
+                    "text_id": 21,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        556,
+                        376
+                    ],
+                    "is_working": true,
+                    "name": "Birmingham Snow Hill",
+                    "rect": [
+                        435,
+                        372,
+                        112,
+                        15
+                    ],
+                    "text_id": 22,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        578,
+                        398
+                    ],
+                    "is_working": true,
+                    "name": "Bull St",
+                    "rect": [
+                        534,
+                        394,
+                        35,
+                        15
+                    ],
+                    "text_id": 23,
+                    "uid": 23
+                }
+            ],
+            "text_id": 24
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 25,
+    "stations_diameter": 13.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 26,
+    "upper_case": false,
+    "width": 728,
+    "word_wrap": false
+}

@@ -1,0 +1,301 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 390,
+    "images": [
+        "res/schemes/jaipur.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "F000F0",
+            "line_color": "F000F0",
+            "line_width": 7,
+            "name": "1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            130,
+                            220
+                        ],
+                        [
+                            110,
+                            240
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            150,
+                            200
+                        ],
+                        [
+                            130,
+                            220
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            170,
+                            180
+                        ],
+                        [
+                            150,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            190,
+                            160
+                        ],
+                        [
+                            170,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            210,
+                            140
+                        ],
+                        [
+                            190,
+                            160
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            230,
+                            120
+                        ],
+                        [
+                            210,
+                            140
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            250,
+                            100
+                        ],
+                        [
+                            230,
+                            120
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            270,
+                            80
+                        ],
+                        [
+                            250,
+                            100
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        110,
+                        240
+                    ],
+                    "is_working": true,
+                    "name": "Mansarovar",
+                    "rect": [
+                        40,
+                        232,
+                        61,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        130,
+                        220
+                    ],
+                    "is_working": true,
+                    "name": "New Aatish Market",
+                    "rect": [
+                        25,
+                        208,
+                        96,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        150,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Vivek Vihar",
+                    "rect": [
+                        82,
+                        188,
+                        59,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        170,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Shayam Nagar",
+                    "rect": [
+                        86,
+                        168,
+                        75,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        190,
+                        160
+                    ],
+                    "is_working": true,
+                    "name": "Ram Nagar",
+                    "rect": [
+                        123,
+                        148,
+                        58,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        210,
+                        140
+                    ],
+                    "is_working": true,
+                    "name": "Civil Line",
+                    "rect": [
+                        152,
+                        128,
+                        49,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        230,
+                        120
+                    ],
+                    "is_working": true,
+                    "name": "Railway Station",
+                    "rect": [
+                        142,
+                        108,
+                        79,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        250,
+                        100
+                    ],
+                    "is_working": true,
+                    "name": "Sindhi Camp",
+                    "rect": [
+                        176,
+                        88,
+                        65,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        270,
+                        80
+                    ],
+                    "is_working": true,
+                    "name": "Chandpole",
+                    "rect": [
+                        206,
+                        68,
+                        55,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                }
+            ],
+            "text_id": 9
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 10,
+    "stations_diameter": 13.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 11,
+    "upper_case": false,
+    "width": 420,
+    "word_wrap": false
+}

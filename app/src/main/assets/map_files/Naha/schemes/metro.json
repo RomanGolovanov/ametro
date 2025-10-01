@@ -1,0 +1,535 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 380,
+    "images": [
+        "res/schemes/naha.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "af0000",
+            "line_color": "cf0000",
+            "line_width": 7,
+            "name": "1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            107,
+                            230
+                        ],
+                        [
+                            95.0,
+                            230.0
+                        ],
+                        [
+                            46.0,
+                            181.0
+                        ],
+                        [
+                            46,
+                            131
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            162,
+                            188
+                        ],
+                        [
+                            120.0,
+                            230.0
+                        ],
+                        [
+                            107,
+                            230
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            197,
+                            176
+                        ],
+                        [
+                            174.0,
+                            176.0
+                        ],
+                        [
+                            162,
+                            188
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            245,
+                            156
+                        ],
+                        [
+                            245.0,
+                            165.0
+                        ],
+                        [
+                            234.0,
+                            176.0
+                        ],
+                        [
+                            197,
+                            176
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            245,
+                            113
+                        ],
+                        [
+                            245,
+                            156
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            258,
+                            93
+                        ],
+                        [
+                            245.0,
+                            106.0
+                        ],
+                        [
+                            245,
+                            113
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            298,
+                            85
+                        ],
+                        [
+                            266.0,
+                            85.0
+                        ],
+                        [
+                            258,
+                            93
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            343,
+                            85
+                        ],
+                        [
+                            298,
+                            85
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            366,
+                            75
+                        ],
+                        [
+                            356.0,
+                            85.0
+                        ],
+                        [
+                            343,
+                            85
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            386,
+                            55
+                        ],
+                        [
+                            366,
+                            75
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            436,
+                            39
+                        ],
+                        [
+                            402.0,
+                            39.0
+                        ],
+                        [
+                            386,
+                            55
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            478,
+                            39
+                        ],
+                        [
+                            436,
+                            39
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            525,
+                            63
+                        ],
+                        [
+                            501.0,
+                            39.0
+                        ],
+                        [
+                            478,
+                            39
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            581,
+                            78
+                        ],
+                        [
+                            540.0,
+                            78.0
+                        ],
+                        [
+                            525,
+                            63
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        46,
+                        131
+                    ],
+                    "is_working": true,
+                    "name": "Naha-kuko",
+                    "rect": [
+                        54,
+                        124,
+                        55,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        107,
+                        230
+                    ],
+                    "is_working": true,
+                    "name": "Akamine",
+                    "rect": [
+                        87,
+                        238,
+                        46,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        162,
+                        188
+                    ],
+                    "is_working": true,
+                    "name": "Oroku",
+                    "rect": [
+                        170,
+                        190,
+                        32,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        197,
+                        176
+                    ],
+                    "is_working": true,
+                    "name": "Onoyama-koen",
+                    "rect": [
+                        140,
+                        154,
+                        76,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        245,
+                        156
+                    ],
+                    "is_working": true,
+                    "name": "Tsubogawa",
+                    "rect": [
+                        253,
+                        148,
+                        58,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        245,
+                        113
+                    ],
+                    "is_working": true,
+                    "name": "Asahibashi",
+                    "rect": [
+                        179,
+                        107,
+                        58,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        258,
+                        93
+                    ],
+                    "is_working": true,
+                    "name": "Kencho-mae",
+                    "rect": [
+                        186,
+                        80,
+                        64,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        298,
+                        85
+                    ],
+                    "is_working": true,
+                    "name": "Miebashi",
+                    "rect": [
+                        275,
+                        63,
+                        47,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        343,
+                        85
+                    ],
+                    "is_working": true,
+                    "name": "Makishi",
+                    "rect": [
+                        322,
+                        93,
+                        41,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        366,
+                        75
+                    ],
+                    "is_working": true,
+                    "name": "Asato",
+                    "rect": [
+                        374,
+                        76,
+                        31,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        386,
+                        55
+                    ],
+                    "is_working": true,
+                    "name": "Omoromachi",
+                    "rect": [
+                        394,
+                        55,
+                        65,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        436,
+                        39
+                    ],
+                    "is_working": true,
+                    "name": "Furujima",
+                    "rect": [
+                        411,
+                        17,
+                        45,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        478,
+                        39
+                    ],
+                    "is_working": true,
+                    "name": "Shiritsu-byoin-mae",
+                    "rect": [
+                        469,
+                        17,
+                        111,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        525,
+                        63
+                    ],
+                    "is_working": true,
+                    "name": "Gibo",
+                    "rect": [
+                        492,
+                        63,
+                        25,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        581,
+                        78
+                    ],
+                    "is_working": true,
+                    "name": "Shuri",
+                    "rect": [
+                        568,
+                        56,
+                        28,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                }
+            ],
+            "text_id": 15
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 16,
+    "stations_diameter": 13.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 17,
+    "upper_case": false,
+    "width": 731,
+    "word_wrap": false
+}

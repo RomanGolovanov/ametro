@@ -26,6 +26,7 @@ public class MapCatalogSerializer {
             MapInfoEntity[] maps = new MapInfoEntity[json.size()];
             for (int i = 0; i < maps.length; i++) {
                 JsonNode jsonMap = json.get(i);
+                var mapFile = jsonMap.get("file").asText();
                 maps[i] = new MapInfoEntity(
                         jsonMap.get("city_id").asInt(),
                         jsonMap.get("file").asText(),

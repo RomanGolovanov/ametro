@@ -1,0 +1,1369 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 970,
+    "images": [
+        "res/schemes/2.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "ff0000",
+            "line_width": 9,
+            "name": "Red Line",
+            "segments": [
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            230,
+                            340
+                        ],
+                        [
+                            230,
+                            380
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            230,
+                            300
+                        ],
+                        [
+                            230,
+                            340
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Louis Stokes Station at Windermere",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Superior",
+                    "rect": null,
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Euclid - E. 120",
+                    "rect": null,
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "University Circle",
+                    "rect": null,
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "E. 105 - Quincy",
+                    "rect": null,
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "E. 97th",
+                    "rect": null,
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        230,
+                        380
+                    ],
+                    "is_working": true,
+                    "name": "E. 55th",
+                    "rect": null,
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        230,
+                        340
+                    ],
+                    "is_working": true,
+                    "name": "E.34 - Campus",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        230,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Tower City - Public Square",
+                    "rect": null,
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "W. 25 - Ohio City",
+                    "rect": null,
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "W. 65 - Madison",
+                    "rect": null,
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "West Blvd - Cudell",
+                    "rect": null,
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "W. 117 - Madison",
+                    "rect": null,
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Triskett",
+                    "rect": null,
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "West Park",
+                    "rect": null,
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Puritas",
+                    "rect": null,
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Brookpark",
+                    "rect": null,
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Cleveland Hopkins Int'l Airport",
+                    "rect": null,
+                    "text_id": 17,
+                    "uid": 17
+                }
+            ],
+            "text_id": 18
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "0000ff",
+            "line_width": 9,
+            "name": "Blue Line",
+            "segments": [
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            190,
+                            100
+                        ],
+                        [
+                            190,
+                            60
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            190,
+                            140
+                        ],
+                        [
+                            190,
+                            100
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            190,
+                            180
+                        ],
+                        [
+                            190,
+                            140
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            190,
+                            220
+                        ],
+                        [
+                            190,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            190,
+                            260
+                        ],
+                        [
+                            190,
+                            220
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    23,
+                    24,
+                    [
+                        [
+                            190,
+                            300
+                        ],
+                        [
+                            190,
+                            260
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            190,
+                            340
+                        ],
+                        [
+                            190,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    25,
+                    26,
+                    [
+                        [
+                            190,
+                            380
+                        ],
+                        [
+                            190,
+                            340
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    26,
+                    27,
+                    [
+                        [
+                            190,
+                            420
+                        ],
+                        [
+                            190,
+                            380
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    27,
+                    28,
+                    [
+                        [
+                            190,
+                            460
+                        ],
+                        [
+                            190,
+                            420
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            190,
+                            500
+                        ],
+                        [
+                            190,
+                            460
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    29,
+                    30,
+                    [
+                        [
+                            190,
+                            540
+                        ],
+                        [
+                            190,
+                            500
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    30,
+                    31,
+                    [
+                        [
+                            190,
+                            580
+                        ],
+                        [
+                            190,
+                            540
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    31,
+                    32,
+                    [
+                        [
+                            190,
+                            620
+                        ],
+                        [
+                            190,
+                            580
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    32,
+                    33,
+                    [
+                        [
+                            190,
+                            660
+                        ],
+                        [
+                            190,
+                            620
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    33,
+                    34,
+                    [
+                        [
+                            190,
+                            700
+                        ],
+                        [
+                            190,
+                            660
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    34,
+                    35,
+                    [
+                        [
+                            190,
+                            740
+                        ],
+                        [
+                            190,
+                            700
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    35,
+                    36,
+                    [
+                        [
+                            190,
+                            780
+                        ],
+                        [
+                            190,
+                            740
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    36,
+                    37,
+                    [
+                        [
+                            190,
+                            820
+                        ],
+                        [
+                            190,
+                            780
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        190,
+                        60
+                    ],
+                    "is_working": true,
+                    "name": "South Harbor",
+                    "rect": [
+                        122,
+                        46,
+                        50,
+                        28
+                    ],
+                    "text_id": 19,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        190,
+                        100
+                    ],
+                    "is_working": true,
+                    "name": "North Coast",
+                    "rect": [
+                        128,
+                        83,
+                        42,
+                        28
+                    ],
+                    "text_id": 20,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        190,
+                        140
+                    ],
+                    "is_working": true,
+                    "name": "Amtrak",
+                    "rect": [
+                        121,
+                        131,
+                        49,
+                        15
+                    ],
+                    "text_id": 21,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        190,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "West 3rd Street",
+                    "rect": [
+                        102,
+                        163,
+                        68,
+                        28
+                    ],
+                    "text_id": 22,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        190,
+                        220
+                    ],
+                    "is_working": true,
+                    "name": "Flats East Bank",
+                    "rect": [
+                        107,
+                        203,
+                        65,
+                        28
+                    ],
+                    "text_id": 23,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        190,
+                        260
+                    ],
+                    "is_working": true,
+                    "name": "Settlers Landing",
+                    "rect": [
+                        113,
+                        246,
+                        58,
+                        28
+                    ],
+                    "text_id": 24,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        190,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Tower City - Public Square",
+                    "rect": [
+                        46,
+                        287,
+                        124,
+                        28
+                    ],
+                    "text_id": 8,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        190,
+                        340
+                    ],
+                    "is_working": true,
+                    "name": "E.34 - Campus",
+                    "rect": [
+                        116,
+                        324,
+                        55,
+                        28
+                    ],
+                    "text_id": 7,
+                    "uid": 25
+                },
+                {
+                    "coord": [
+                        190,
+                        380
+                    ],
+                    "is_working": true,
+                    "name": "E. 55th",
+                    "rect": [
+                        141,
+                        363,
+                        30,
+                        28
+                    ],
+                    "text_id": 6,
+                    "uid": 26
+                },
+                {
+                    "coord": [
+                        190,
+                        420
+                    ],
+                    "is_working": true,
+                    "name": "Drexmore",
+                    "rect": [
+                        108,
+                        409,
+                        64,
+                        15
+                    ],
+                    "text_id": 25,
+                    "uid": 27
+                },
+                {
+                    "coord": [
+                        190,
+                        460
+                    ],
+                    "is_working": true,
+                    "name": "S. Woodland",
+                    "rect": [
+                        105,
+                        444,
+                        66,
+                        28
+                    ],
+                    "text_id": 26,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        190,
+                        500
+                    ],
+                    "is_working": true,
+                    "name": "Southington",
+                    "rect": [
+                        91,
+                        493,
+                        80,
+                        15
+                    ],
+                    "text_id": 27,
+                    "uid": 29
+                },
+                {
+                    "coord": [
+                        190,
+                        540
+                    ],
+                    "is_working": true,
+                    "name": "Onaway",
+                    "rect": [
+                        118,
+                        531,
+                        51,
+                        15
+                    ],
+                    "text_id": 28,
+                    "uid": 30
+                },
+                {
+                    "coord": [
+                        190,
+                        580
+                    ],
+                    "is_working": true,
+                    "name": "Ashby",
+                    "rect": [
+                        128,
+                        570,
+                        40,
+                        15
+                    ],
+                    "text_id": 29,
+                    "uid": 31
+                },
+                {
+                    "coord": [
+                        190,
+                        620
+                    ],
+                    "is_working": true,
+                    "name": "Lee",
+                    "rect": [
+                        146,
+                        612,
+                        22,
+                        15
+                    ],
+                    "text_id": 30,
+                    "uid": 32
+                },
+                {
+                    "coord": [
+                        190,
+                        660
+                    ],
+                    "is_working": true,
+                    "name": "Avalon",
+                    "rect": [
+                        123,
+                        652,
+                        47,
+                        15
+                    ],
+                    "text_id": 31,
+                    "uid": 33
+                },
+                {
+                    "coord": [
+                        190,
+                        700
+                    ],
+                    "is_working": true,
+                    "name": "Kenmore",
+                    "rect": [
+                        114,
+                        693,
+                        57,
+                        15
+                    ],
+                    "text_id": 32,
+                    "uid": 34
+                },
+                {
+                    "coord": [
+                        190,
+                        740
+                    ],
+                    "is_working": true,
+                    "name": "Lynnfield",
+                    "rect": [
+                        111,
+                        733,
+                        61,
+                        15
+                    ],
+                    "text_id": 33,
+                    "uid": 35
+                },
+                {
+                    "coord": [
+                        190,
+                        780
+                    ],
+                    "is_working": true,
+                    "name": "Farnsleigh",
+                    "rect": [
+                        101,
+                        770,
+                        71,
+                        15
+                    ],
+                    "text_id": 34,
+                    "uid": 36
+                },
+                {
+                    "coord": [
+                        190,
+                        820
+                    ],
+                    "is_working": true,
+                    "name": "Warrensville",
+                    "rect": [
+                        84,
+                        810,
+                        87,
+                        15
+                    ],
+                    "text_id": 35,
+                    "uid": 37
+                }
+            ],
+            "text_id": 36
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "008000",
+            "line_width": 9,
+            "name": "Green Line",
+            "segments": [
+                [
+                    38,
+                    39,
+                    [
+                        [
+                            210,
+                            100
+                        ],
+                        [
+                            210,
+                            60
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    39,
+                    40,
+                    [
+                        [
+                            210,
+                            140
+                        ],
+                        [
+                            210,
+                            100
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    40,
+                    41,
+                    [
+                        [
+                            210,
+                            180
+                        ],
+                        [
+                            210,
+                            140
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    41,
+                    42,
+                    [
+                        [
+                            210,
+                            220
+                        ],
+                        [
+                            210,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    42,
+                    43,
+                    [
+                        [
+                            210,
+                            260
+                        ],
+                        [
+                            210,
+                            220
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    43,
+                    44,
+                    [
+                        [
+                            210,
+                            300
+                        ],
+                        [
+                            210,
+                            260
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    44,
+                    45,
+                    [
+                        [
+                            210,
+                            340
+                        ],
+                        [
+                            210,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    45,
+                    46,
+                    [
+                        [
+                            210,
+                            380
+                        ],
+                        [
+                            210,
+                            340
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        210,
+                        60
+                    ],
+                    "is_working": true,
+                    "name": "South Harbor",
+                    "rect": null,
+                    "text_id": 19,
+                    "uid": 38
+                },
+                {
+                    "coord": [
+                        210,
+                        100
+                    ],
+                    "is_working": true,
+                    "name": "North Coast",
+                    "rect": null,
+                    "text_id": 20,
+                    "uid": 39
+                },
+                {
+                    "coord": [
+                        210,
+                        140
+                    ],
+                    "is_working": true,
+                    "name": "Amtrak",
+                    "rect": null,
+                    "text_id": 21,
+                    "uid": 40
+                },
+                {
+                    "coord": [
+                        210,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "West 3rd Street",
+                    "rect": null,
+                    "text_id": 22,
+                    "uid": 41
+                },
+                {
+                    "coord": [
+                        210,
+                        220
+                    ],
+                    "is_working": true,
+                    "name": "Flats East Bank",
+                    "rect": null,
+                    "text_id": 23,
+                    "uid": 42
+                },
+                {
+                    "coord": [
+                        210,
+                        260
+                    ],
+                    "is_working": true,
+                    "name": "Settlers Landing",
+                    "rect": null,
+                    "text_id": 24,
+                    "uid": 43
+                },
+                {
+                    "coord": [
+                        210,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Tower City - Public Square",
+                    "rect": null,
+                    "text_id": 8,
+                    "uid": 44
+                },
+                {
+                    "coord": [
+                        210,
+                        340
+                    ],
+                    "is_working": true,
+                    "name": "E.34 - Campus",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 45
+                },
+                {
+                    "coord": [
+                        210,
+                        380
+                    ],
+                    "is_working": true,
+                    "name": "E. 55th",
+                    "rect": null,
+                    "text_id": 6,
+                    "uid": 46
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "E. 79th",
+                    "rect": null,
+                    "text_id": 37,
+                    "uid": 47
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Woodhill",
+                    "rect": null,
+                    "text_id": 38,
+                    "uid": 48
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "E. 116th",
+                    "rect": null,
+                    "text_id": 39,
+                    "uid": 49
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Shaker Square",
+                    "rect": null,
+                    "text_id": 40,
+                    "uid": 50
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Coventry",
+                    "rect": null,
+                    "text_id": 41,
+                    "uid": 51
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Southington",
+                    "rect": null,
+                    "text_id": 27,
+                    "uid": 52
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "South Park",
+                    "rect": null,
+                    "text_id": 42,
+                    "uid": 53
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Lee",
+                    "rect": null,
+                    "text_id": 30,
+                    "uid": 54
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Attleboro",
+                    "rect": null,
+                    "text_id": 43,
+                    "uid": 55
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Eaton",
+                    "rect": null,
+                    "text_id": 44,
+                    "uid": 56
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Courtland",
+                    "rect": null,
+                    "text_id": 45,
+                    "uid": 57
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Warrensville",
+                    "rect": null,
+                    "text_id": 35,
+                    "uid": 58
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Bellvoir",
+                    "rect": null,
+                    "text_id": 46,
+                    "uid": 59
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "West Green",
+                    "rect": null,
+                    "text_id": 47,
+                    "uid": 60
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Green",
+                    "rect": null,
+                    "text_id": 48,
+                    "uid": 61
+                }
+            ],
+            "text_id": 49
+        }
+    ],
+    "lines_width": 9,
+    "name": "2",
+    "name_text_id": 36,
+    "stations_diameter": 15.0,
+    "transfers": [
+        [
+            18,
+            38,
+            [
+                190,
+                60
+            ],
+            [
+                210,
+                60
+            ]
+        ],
+        [
+            19,
+            39,
+            [
+                190,
+                100
+            ],
+            [
+                210,
+                100
+            ]
+        ],
+        [
+            20,
+            40,
+            [
+                190,
+                140
+            ],
+            [
+                210,
+                140
+            ]
+        ],
+        [
+            21,
+            41,
+            [
+                190,
+                180
+            ],
+            [
+                210,
+                180
+            ]
+        ],
+        [
+            22,
+            42,
+            [
+                190,
+                220
+            ],
+            [
+                210,
+                220
+            ]
+        ],
+        [
+            23,
+            43,
+            [
+                190,
+                260
+            ],
+            [
+                210,
+                260
+            ]
+        ],
+        [
+            24,
+            44,
+            [
+                190,
+                300
+            ],
+            [
+                210,
+                300
+            ]
+        ],
+        [
+            44,
+            8,
+            [
+                210,
+                300
+            ],
+            [
+                230,
+                300
+            ]
+        ],
+        [
+            8,
+            24,
+            [
+                230,
+                300
+            ],
+            [
+                190,
+                300
+            ]
+        ],
+        [
+            25,
+            45,
+            [
+                190,
+                340
+            ],
+            [
+                210,
+                340
+            ]
+        ],
+        [
+            45,
+            7,
+            [
+                210,
+                340
+            ],
+            [
+                230,
+                340
+            ]
+        ],
+        [
+            7,
+            25,
+            [
+                230,
+                340
+            ],
+            [
+                190,
+                340
+            ]
+        ],
+        [
+            26,
+            46,
+            [
+                190,
+                380
+            ],
+            [
+                210,
+                380
+            ]
+        ],
+        [
+            46,
+            6,
+            [
+                210,
+                380
+            ],
+            [
+                230,
+                380
+            ]
+        ],
+        [
+            6,
+            26,
+            [
+                230,
+                380
+            ],
+            [
+                190,
+                380
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "Метро",
+    "type_text_id": 52,
+    "upper_case": true,
+    "width": 380,
+    "word_wrap": true
+}

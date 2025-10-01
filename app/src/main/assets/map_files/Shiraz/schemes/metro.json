@@ -1,0 +1,289 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 346,
+    "images": [
+        "res/schemes/shiraz.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "BB0000",
+            "line_color": "BB0000",
+            "line_width": 7,
+            "name": "1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            95,
+                            129
+                        ],
+                        [
+                            57,
+                            167
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            126,
+                            98
+                        ],
+                        [
+                            95,
+                            129
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            157,
+                            129
+                        ],
+                        [
+                            126,
+                            98
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            189,
+                            161
+                        ],
+                        [
+                            157,
+                            129
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            231,
+                            161
+                        ],
+                        [
+                            189,
+                            161
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    4,
+                    7,
+                    [
+                        [
+                            306,
+                            196
+                        ],
+                        [
+                            271.0,
+                            161.0
+                        ],
+                        [
+                            189,
+                            161
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            271,
+                            161
+                        ],
+                        [
+                            231,
+                            161
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            306,
+                            196
+                        ],
+                        [
+                            271,
+                            161
+                        ]
+                    ],
+                    false
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        57,
+                        167
+                    ],
+                    "is_working": true,
+                    "name": "Ehsan",
+                    "rect": [
+                        15,
+                        160,
+                        33,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        95,
+                        129
+                    ],
+                    "is_working": true,
+                    "name": "Shariati",
+                    "rect": [
+                        46,
+                        117,
+                        40,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        126,
+                        98
+                    ],
+                    "is_working": true,
+                    "name": "Mirzaye Shiraze",
+                    "rect": [
+                        89,
+                        75,
+                        81,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        157,
+                        129
+                    ],
+                    "is_working": true,
+                    "name": "Shahed",
+                    "rect": [
+                        166,
+                        117,
+                        39,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        189,
+                        161
+                    ],
+                    "is_working": true,
+                    "name": "Ghasr-e Dasht",
+                    "rect": [
+                        142,
+                        169,
+                        73,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        231,
+                        161
+                    ],
+                    "is_working": false,
+                    "name": "Motahari",
+                    "rect": [
+                        211,
+                        138,
+                        45,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        271,
+                        161
+                    ],
+                    "is_working": false,
+                    "name": "Afif Abad",
+                    "rect": [
+                        280,
+                        149,
+                        48,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        306,
+                        196
+                    ],
+                    "is_working": true,
+                    "name": "Namazi",
+                    "rect": [
+                        289,
+                        204,
+                        39,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                }
+            ],
+            "text_id": 8
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 9,
+    "stations_diameter": 13.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 10,
+    "upper_case": false,
+    "width": 456,
+    "word_wrap": false
+}

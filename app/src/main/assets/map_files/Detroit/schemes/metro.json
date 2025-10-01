@@ -1,0 +1,512 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 533,
+    "images": [
+        "res/schemes/detroit.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "008000",
+            "line_color": "008000",
+            "line_width": 10,
+            "name": "Peoplemover",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            327,
+                            175
+                        ],
+                        [
+                            307.0,
+                            156.0
+                        ],
+                        [
+                            307,
+                            120
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    0,
+                    12,
+                    [
+                        [
+                            262,
+                            80
+                        ],
+                        [
+                            285.0,
+                            80.0
+                        ],
+                        [
+                            307.0,
+                            101.0
+                        ],
+                        [
+                            307,
+                            120
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            392,
+                            230
+                        ],
+                        [
+                            392.0,
+                            215.0
+                        ],
+                        [
+                            369.0,
+                            193.0
+                        ],
+                        [
+                            345.0,
+                            193.0
+                        ],
+                        [
+                            327,
+                            175
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            392,
+                            280
+                        ],
+                        [
+                            392,
+                            230
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            377,
+                            320
+                        ],
+                        [
+                            392.0,
+                            304.0
+                        ],
+                        [
+                            392,
+                            280
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            332,
+                            335
+                        ],
+                        [
+                            361.0,
+                            335.0
+                        ],
+                        [
+                            377,
+                            320
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            212,
+                            355
+                        ],
+                        [
+                            233.0,
+                            335.0
+                        ],
+                        [
+                            332,
+                            335
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            112,
+                            345
+                        ],
+                        [
+                            112.0,
+                            364.0
+                        ],
+                        [
+                            131.0,
+                            383.0
+                        ],
+                        [
+                            185.0,
+                            383.0
+                        ],
+                        [
+                            212,
+                            355
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            182,
+                            265
+                        ],
+                        [
+                            182.0,
+                            282.0
+                        ],
+                        [
+                            161.0,
+                            303.0
+                        ],
+                        [
+                            135.0,
+                            303.0
+                        ],
+                        [
+                            112.0,
+                            325.0
+                        ],
+                        [
+                            112,
+                            345
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            182,
+                            220
+                        ],
+                        [
+                            182,
+                            265
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            182,
+                            165
+                        ],
+                        [
+                            182,
+                            220
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            202,
+                            110
+                        ],
+                        [
+                            182.0,
+                            130.0
+                        ],
+                        [
+                            182,
+                            165
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            262,
+                            80
+                        ],
+                        [
+                            233.0,
+                            80.0
+                        ],
+                        [
+                            202,
+                            110
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        307,
+                        120
+                    ],
+                    "is_working": true,
+                    "name": "Broadway",
+                    "rect": [
+                        321,
+                        112,
+                        52,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        327,
+                        175
+                    ],
+                    "is_working": true,
+                    "name": "Cadillac Square",
+                    "rect": [
+                        339,
+                        159,
+                        81,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        392,
+                        230
+                    ],
+                    "is_working": true,
+                    "name": "Greektown",
+                    "rect": [
+                        404,
+                        226,
+                        55,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        392,
+                        280
+                    ],
+                    "is_working": true,
+                    "name": "Bricktown",
+                    "rect": [
+                        406,
+                        275,
+                        52,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        377,
+                        320
+                    ],
+                    "is_working": true,
+                    "name": "Renaissance Center",
+                    "rect": [
+                        389,
+                        326,
+                        103,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        332,
+                        335
+                    ],
+                    "is_working": true,
+                    "name": "Millender Center",
+                    "rect": [
+                        330,
+                        347,
+                        84,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        212,
+                        355
+                    ],
+                    "is_working": true,
+                    "name": "Financial District",
+                    "rect": [
+                        220,
+                        365,
+                        86,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        112,
+                        345
+                    ],
+                    "is_working": true,
+                    "name": "Joe Louis Arena",
+                    "rect": [
+                        14,
+                        337,
+                        83,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        182,
+                        265
+                    ],
+                    "is_working": true,
+                    "name": "Cobo Center",
+                    "rect": [
+                        104,
+                        256,
+                        64,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        182,
+                        220
+                    ],
+                    "is_working": true,
+                    "name": "Fort/Cass",
+                    "rect": [
+                        115,
+                        209,
+                        50,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        182,
+                        165
+                    ],
+                    "is_working": true,
+                    "name": "Michigan Avenue",
+                    "rect": [
+                        78,
+                        154,
+                        88,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        202,
+                        110
+                    ],
+                    "is_working": true,
+                    "name": "Times Square",
+                    "rect": [
+                        119,
+                        90,
+                        70,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        262,
+                        80
+                    ],
+                    "is_working": true,
+                    "name": "Grand Circus Park",
+                    "rect": [
+                        213,
+                        55,
+                        94,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                }
+            ],
+            "text_id": 13
+        }
+    ],
+    "lines_width": 10,
+    "name": "metro",
+    "name_text_id": 14,
+    "stations_diameter": 15.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 15,
+    "upper_case": false,
+    "width": 542,
+    "word_wrap": false
+}

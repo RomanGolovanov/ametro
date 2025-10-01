@@ -1,0 +1,5332 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 970,
+    "images": [
+        "res/schemes/lublinskayaline.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "E41c0c",
+            "line_width": 9,
+            "name": "Сокольническая",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Бульвар Рокоссовского",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Черкизовская",
+                    "rect": null,
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Преображенская площадь",
+                    "rect": null,
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Сокольники",
+                    "rect": null,
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Красносельская",
+                    "rect": null,
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Комсомольская",
+                    "rect": null,
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Красные ворота",
+                    "rect": null,
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        208,
+                        413
+                    ],
+                    "is_working": true,
+                    "name": "Чистые пруды",
+                    "rect": [
+                        144,
+                        398,
+                        50,
+                        28
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Лубянка",
+                    "rect": null,
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Охотный ряд",
+                    "rect": null,
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Библиотека имени Ленина",
+                    "rect": null,
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Кропоткинская",
+                    "rect": null,
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Парк культуры",
+                    "rect": null,
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Фрунзенская",
+                    "rect": null,
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Спортивная",
+                    "rect": null,
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Воробьевы горы",
+                    "rect": null,
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Университет",
+                    "rect": null,
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Проспект Вернадского",
+                    "rect": null,
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Юго-Западная",
+                    "rect": null,
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Тропарёво",
+                    "rect": null,
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Румянцево",
+                    "rect": null,
+                    "text_id": 20,
+                    "uid": 20
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Саларьево",
+                    "rect": null,
+                    "text_id": 21,
+                    "uid": 21
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Филатов луг",
+                    "rect": null,
+                    "text_id": 22,
+                    "uid": 22
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Прокшино",
+                    "rect": null,
+                    "text_id": 23,
+                    "uid": 23
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ольховая",
+                    "rect": null,
+                    "text_id": 24,
+                    "uid": 24
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Новомосковская",
+                    "rect": null,
+                    "text_id": 25,
+                    "uid": 25
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Потапово",
+                    "rect": null,
+                    "text_id": 26,
+                    "uid": 26
+                }
+            ],
+            "text_id": 27
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "34349C",
+            "line_width": 9,
+            "name": "Арбатско-Покровская",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Щелковская",
+                    "rect": null,
+                    "text_id": 305,
+                    "uid": 342
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Первомайская",
+                    "rect": null,
+                    "text_id": 306,
+                    "uid": 343
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Измайловская",
+                    "rect": null,
+                    "text_id": 307,
+                    "uid": 344
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Партизанская",
+                    "rect": null,
+                    "text_id": 308,
+                    "uid": 345
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Семеновская",
+                    "rect": null,
+                    "text_id": 309,
+                    "uid": 346
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Электрозаводская",
+                    "rect": null,
+                    "text_id": 102,
+                    "uid": 347
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Бауманская",
+                    "rect": null,
+                    "text_id": 310,
+                    "uid": 348
+                },
+                {
+                    "coord": [
+                        213,
+                        470
+                    ],
+                    "is_working": true,
+                    "name": "Курская",
+                    "rect": [
+                        122,
+                        464,
+                        51,
+                        15
+                    ],
+                    "text_id": 198,
+                    "uid": 349
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Площадь Революции",
+                    "rect": null,
+                    "text_id": 311,
+                    "uid": 350
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Арбатская",
+                    "rect": null,
+                    "text_id": 312,
+                    "uid": 351
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Смоленская",
+                    "rect": null,
+                    "text_id": 313,
+                    "uid": 352
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Киевская",
+                    "rect": null,
+                    "text_id": 314,
+                    "uid": 353
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Парк Победы",
+                    "rect": null,
+                    "text_id": 315,
+                    "uid": 354
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Славянский бульвар",
+                    "rect": null,
+                    "text_id": 177,
+                    "uid": 355
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Кунцевская",
+                    "rect": null,
+                    "text_id": 86,
+                    "uid": 356
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Молодёжная",
+                    "rect": null,
+                    "text_id": 316,
+                    "uid": 357
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Крылатское",
+                    "rect": null,
+                    "text_id": 317,
+                    "uid": 358
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Строгино",
+                    "rect": null,
+                    "text_id": 318,
+                    "uid": 359
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Мякинино",
+                    "rect": null,
+                    "text_id": 319,
+                    "uid": 360
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Волоколамская",
+                    "rect": null,
+                    "text_id": 191,
+                    "uid": 361
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Митино",
+                    "rect": null,
+                    "text_id": 320,
+                    "uid": 362
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Пятницкое шоссе",
+                    "rect": null,
+                    "text_id": 321,
+                    "uid": 363
+                }
+            ],
+            "text_id": 322
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "046434",
+            "line_width": 9,
+            "name": "Замоскворецкая",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ховрино",
+                    "rect": null,
+                    "text_id": 225,
+                    "uid": 277
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Беломорская",
+                    "rect": null,
+                    "text_id": 252,
+                    "uid": 278
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Речной вокзал",
+                    "rect": null,
+                    "text_id": 253,
+                    "uid": 279
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Водный стадион",
+                    "rect": null,
+                    "text_id": 254,
+                    "uid": 280
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Войковская",
+                    "rect": null,
+                    "text_id": 255,
+                    "uid": 281
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Сокол",
+                    "rect": null,
+                    "text_id": 256,
+                    "uid": 282
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Аэропорт",
+                    "rect": null,
+                    "text_id": 257,
+                    "uid": 283
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Динамо",
+                    "rect": null,
+                    "text_id": 258,
+                    "uid": 284
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Белорусская",
+                    "rect": null,
+                    "text_id": 173,
+                    "uid": 285
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Маяковская",
+                    "rect": null,
+                    "text_id": 259,
+                    "uid": 286
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Тверская",
+                    "rect": null,
+                    "text_id": 260,
+                    "uid": 287
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Театральная",
+                    "rect": null,
+                    "text_id": 261,
+                    "uid": 288
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Новокузнецкая",
+                    "rect": null,
+                    "text_id": 262,
+                    "uid": 289
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Павелецкая",
+                    "rect": null,
+                    "text_id": 263,
+                    "uid": 290
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Автозаводская",
+                    "rect": null,
+                    "text_id": 124,
+                    "uid": 291
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Технопарк",
+                    "rect": null,
+                    "text_id": 264,
+                    "uid": 292
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Коломенская",
+                    "rect": null,
+                    "text_id": 265,
+                    "uid": 293
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Каширская",
+                    "rect": null,
+                    "text_id": 95,
+                    "uid": 294
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Кантемировская",
+                    "rect": null,
+                    "text_id": 266,
+                    "uid": 295
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Царицыно",
+                    "rect": null,
+                    "text_id": 205,
+                    "uid": 296
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Орехово",
+                    "rect": null,
+                    "text_id": 267,
+                    "uid": 297
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Домодедовская",
+                    "rect": null,
+                    "text_id": 268,
+                    "uid": 298
+                },
+                {
+                    "coord": [
+                        208,
+                        820
+                    ],
+                    "is_working": true,
+                    "name": "Красногвардейская",
+                    "rect": [
+                        66,
+                        815,
+                        128,
+                        15
+                    ],
+                    "text_id": 269,
+                    "uid": 299
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Алма-Атинская",
+                    "rect": null,
+                    "text_id": 270,
+                    "uid": 300
+                }
+            ],
+            "text_id": 271
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "543C04",
+            "line_width": 9,
+            "name": "Кольцевая",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Парк культуры",
+                    "rect": null,
+                    "text_id": 12,
+                    "uid": 377
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Октябрьская",
+                    "rect": null,
+                    "text_id": 330,
+                    "uid": 378
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Добрынинская",
+                    "rect": null,
+                    "text_id": 331,
+                    "uid": 379
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Павелецкая",
+                    "rect": null,
+                    "text_id": 263,
+                    "uid": 380
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Таганская",
+                    "rect": null,
+                    "text_id": 332,
+                    "uid": 381
+                },
+                {
+                    "coord": [
+                        213,
+                        436
+                    ],
+                    "is_working": true,
+                    "name": "Курская",
+                    "rect": [
+                        122,
+                        430,
+                        51,
+                        15
+                    ],
+                    "text_id": 198,
+                    "uid": 382
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Комсомольская",
+                    "rect": null,
+                    "text_id": 5,
+                    "uid": 383
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Проспект Мира",
+                    "rect": null,
+                    "text_id": 333,
+                    "uid": 384
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Новослободская",
+                    "rect": null,
+                    "text_id": 334,
+                    "uid": 385
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Белорусская",
+                    "rect": null,
+                    "text_id": 173,
+                    "uid": 386
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Краснопресненская",
+                    "rect": null,
+                    "text_id": 335,
+                    "uid": 387
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Киевская",
+                    "rect": null,
+                    "text_id": 314,
+                    "uid": 388
+                }
+            ],
+            "text_id": 336
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "FC9C54",
+            "line_width": 9,
+            "name": "Калужско-Рижская",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Медведково",
+                    "rect": null,
+                    "text_id": 337,
+                    "uid": 389
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Бабушкинская",
+                    "rect": null,
+                    "text_id": 338,
+                    "uid": 390
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Свиблово",
+                    "rect": null,
+                    "text_id": 339,
+                    "uid": 391
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ботанический сад",
+                    "rect": null,
+                    "text_id": 114,
+                    "uid": 392
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "ВДНХ",
+                    "rect": null,
+                    "text_id": 340,
+                    "uid": 393
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Алексеевская",
+                    "rect": null,
+                    "text_id": 341,
+                    "uid": 394
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Рижская",
+                    "rect": null,
+                    "text_id": 103,
+                    "uid": 395
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Проспект Мира",
+                    "rect": null,
+                    "text_id": 333,
+                    "uid": 396
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Сухаревская",
+                    "rect": null,
+                    "text_id": 342,
+                    "uid": 397
+                },
+                {
+                    "coord": [
+                        208,
+                        387
+                    ],
+                    "is_working": true,
+                    "name": "Тургеневская",
+                    "rect": [
+                        107,
+                        380,
+                        87,
+                        15
+                    ],
+                    "text_id": 343,
+                    "uid": 398
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Китай-город",
+                    "rect": null,
+                    "text_id": 344,
+                    "uid": 399
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Третьяковская",
+                    "rect": null,
+                    "text_id": 345,
+                    "uid": 400
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Октябрьская",
+                    "rect": null,
+                    "text_id": 330,
+                    "uid": 401
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Шаболовская",
+                    "rect": null,
+                    "text_id": 346,
+                    "uid": 402
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ленинский проспект",
+                    "rect": null,
+                    "text_id": 347,
+                    "uid": 403
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Академическая",
+                    "rect": null,
+                    "text_id": 149,
+                    "uid": 404
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Профсоюзная",
+                    "rect": null,
+                    "text_id": 348,
+                    "uid": 405
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Новые Черемушки",
+                    "rect": null,
+                    "text_id": 349,
+                    "uid": 406
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Калужская",
+                    "rect": null,
+                    "text_id": 350,
+                    "uid": 407
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Беляево",
+                    "rect": null,
+                    "text_id": 351,
+                    "uid": 408
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Коньково",
+                    "rect": null,
+                    "text_id": 352,
+                    "uid": 409
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Теплый Стан",
+                    "rect": null,
+                    "text_id": 353,
+                    "uid": 410
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ясенево",
+                    "rect": null,
+                    "text_id": 354,
+                    "uid": 411
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Новоясеневская",
+                    "rect": null,
+                    "text_id": 355,
+                    "uid": 412
+                }
+            ],
+            "text_id": 356
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "AC24AC",
+            "line_width": 9,
+            "name": "Таганско-Краснопресненская",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Планерная",
+                    "rect": null,
+                    "text_id": 357,
+                    "uid": 413
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Сходненская",
+                    "rect": null,
+                    "text_id": 358,
+                    "uid": 414
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Тушинская",
+                    "rect": null,
+                    "text_id": 193,
+                    "uid": 415
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Спартак",
+                    "rect": null,
+                    "text_id": 359,
+                    "uid": 416
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Щукинская",
+                    "rect": null,
+                    "text_id": 194,
+                    "uid": 417
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Октябрьское поле",
+                    "rect": null,
+                    "text_id": 360,
+                    "uid": 418
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Полежаевская",
+                    "rect": null,
+                    "text_id": 361,
+                    "uid": 419
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Беговая",
+                    "rect": null,
+                    "text_id": 174,
+                    "uid": 420
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Улица 1905 года",
+                    "rect": null,
+                    "text_id": 362,
+                    "uid": 421
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Баррикадная",
+                    "rect": null,
+                    "text_id": 363,
+                    "uid": 422
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Пушкинская",
+                    "rect": null,
+                    "text_id": 364,
+                    "uid": 423
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Кузнецкий мост",
+                    "rect": null,
+                    "text_id": 365,
+                    "uid": 424
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Китай-город",
+                    "rect": null,
+                    "text_id": 344,
+                    "uid": 425
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Таганская",
+                    "rect": null,
+                    "text_id": 332,
+                    "uid": 426
+                },
+                {
+                    "coord": [
+                        208,
+                        520
+                    ],
+                    "is_working": true,
+                    "name": "Пролетарская",
+                    "rect": [
+                        104,
+                        513,
+                        90,
+                        15
+                    ],
+                    "text_id": 366,
+                    "uid": 427
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Волгоградский проспект",
+                    "rect": null,
+                    "text_id": 367,
+                    "uid": 428
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Текстильщики",
+                    "rect": null,
+                    "text_id": 98,
+                    "uid": 429
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Кузьминки",
+                    "rect": null,
+                    "text_id": 368,
+                    "uid": 430
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Рязанский проспект",
+                    "rect": null,
+                    "text_id": 369,
+                    "uid": 431
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Выхино",
+                    "rect": null,
+                    "text_id": 235,
+                    "uid": 432
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Лермонтовский проспект",
+                    "rect": null,
+                    "text_id": 370,
+                    "uid": 433
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Жулебино",
+                    "rect": null,
+                    "text_id": 371,
+                    "uid": 434
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Котельники",
+                    "rect": null,
+                    "text_id": 372,
+                    "uid": 435
+                }
+            ],
+            "text_id": 373
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "FCCC04",
+            "line_width": 9,
+            "name": "Калининско-Солнцевская",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Новокосино",
+                    "rect": null,
+                    "text_id": 374,
+                    "uid": 436
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Новогиреево",
+                    "rect": null,
+                    "text_id": 295,
+                    "uid": 437
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Перово",
+                    "rect": null,
+                    "text_id": 232,
+                    "uid": 438
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Шоссе Энтузиастов",
+                    "rect": null,
+                    "text_id": 120,
+                    "uid": 439
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Авиамоторная",
+                    "rect": null,
+                    "text_id": 100,
+                    "uid": 440
+                },
+                {
+                    "coord": [
+                        213,
+                        495
+                    ],
+                    "is_working": true,
+                    "name": "Площадь Ильича",
+                    "rect": [
+                        108,
+                        481,
+                        61,
+                        28
+                    ],
+                    "text_id": 375,
+                    "uid": 441
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Марксистская",
+                    "rect": null,
+                    "text_id": 376,
+                    "uid": 442
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Третьяковская",
+                    "rect": null,
+                    "text_id": 345,
+                    "uid": 443
+                }
+            ],
+            "text_id": 377
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "9CA4A4",
+            "line_width": 9,
+            "name": "Серпуховско-Тимирязевская",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Алтуфьево",
+                    "rect": null,
+                    "text_id": 28,
+                    "uid": 27
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Бибирево",
+                    "rect": null,
+                    "text_id": 29,
+                    "uid": 28
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Отрадное",
+                    "rect": null,
+                    "text_id": 30,
+                    "uid": 29
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Владыкино",
+                    "rect": null,
+                    "text_id": 31,
+                    "uid": 30
+                },
+                {
+                    "coord": [
+                        216,
+                        230
+                    ],
+                    "is_working": true,
+                    "name": "Петровско-Разумовская",
+                    "rect": [
+                        33,
+                        222,
+                        154,
+                        15
+                    ],
+                    "text_id": 32,
+                    "uid": 31
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Тимирязевская",
+                    "rect": null,
+                    "text_id": 33,
+                    "uid": 32
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Дмитровская",
+                    "rect": null,
+                    "text_id": 34,
+                    "uid": 33
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Савёловская",
+                    "rect": null,
+                    "text_id": 35,
+                    "uid": 34
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Менделеевская",
+                    "rect": null,
+                    "text_id": 36,
+                    "uid": 35
+                },
+                {
+                    "coord": [
+                        208,
+                        363
+                    ],
+                    "is_working": true,
+                    "name": "Цветной бульвар",
+                    "rect": [
+                        137,
+                        350,
+                        57,
+                        28
+                    ],
+                    "text_id": 37,
+                    "uid": 36
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Чеховская",
+                    "rect": null,
+                    "text_id": 38,
+                    "uid": 37
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Боровицкая",
+                    "rect": null,
+                    "text_id": 39,
+                    "uid": 38
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Полянка",
+                    "rect": null,
+                    "text_id": 40,
+                    "uid": 39
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Серпуховская",
+                    "rect": null,
+                    "text_id": 41,
+                    "uid": 40
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Тульская",
+                    "rect": null,
+                    "text_id": 42,
+                    "uid": 41
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Нагатинская",
+                    "rect": null,
+                    "text_id": 43,
+                    "uid": 42
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Нагорная",
+                    "rect": null,
+                    "text_id": 44,
+                    "uid": 43
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Нахимовский проспект",
+                    "rect": null,
+                    "text_id": 45,
+                    "uid": 44
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Севастопольская",
+                    "rect": null,
+                    "text_id": 46,
+                    "uid": 45
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Чертановская",
+                    "rect": null,
+                    "text_id": 47,
+                    "uid": 46
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Южная",
+                    "rect": null,
+                    "text_id": 48,
+                    "uid": 47
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Пражская",
+                    "rect": null,
+                    "text_id": 49,
+                    "uid": 48
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Улица Академика Янгеля",
+                    "rect": null,
+                    "text_id": 50,
+                    "uid": 49
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Аннино",
+                    "rect": null,
+                    "text_id": 51,
+                    "uid": 50
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Бульвар Дмитрия Донского",
+                    "rect": null,
+                    "text_id": 52,
+                    "uid": 51
+                }
+            ],
+            "text_id": 53
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "84BC54",
+            "line_width": 9,
+            "name": "Люблинско-Дмитровская",
+            "segments": [
+                [
+                    52,
+                    53,
+                    [
+                        [
+                            230,
+                            68
+                        ],
+                        [
+                            230,
+                            39
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    53,
+                    54,
+                    [
+                        [
+                            230,
+                            97
+                        ],
+                        [
+                            230,
+                            68
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    54,
+                    55,
+                    [
+                        [
+                            230,
+                            126
+                        ],
+                        [
+                            230,
+                            97
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    55,
+                    56,
+                    [
+                        [
+                            230,
+                            156
+                        ],
+                        [
+                            230,
+                            126
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    56,
+                    57,
+                    [
+                        [
+                            230,
+                            186
+                        ],
+                        [
+                            230,
+                            156
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    57,
+                    58,
+                    [
+                        [
+                            230,
+                            216
+                        ],
+                        [
+                            230,
+                            186
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    58,
+                    59,
+                    [
+                        [
+                            230,
+                            250
+                        ],
+                        [
+                            230,
+                            216
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    59,
+                    60,
+                    [
+                        [
+                            230,
+                            276
+                        ],
+                        [
+                            230,
+                            250
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    60,
+                    61,
+                    [
+                        [
+                            230,
+                            306
+                        ],
+                        [
+                            230,
+                            276
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    61,
+                    62,
+                    [
+                        [
+                            230,
+                            336
+                        ],
+                        [
+                            230,
+                            306
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    62,
+                    63,
+                    [
+                        [
+                            230,
+                            363
+                        ],
+                        [
+                            230,
+                            336
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    63,
+                    64,
+                    [
+                        [
+                            230,
+                            402
+                        ],
+                        [
+                            230,
+                            363
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    64,
+                    65,
+                    [
+                        [
+                            230,
+                            453
+                        ],
+                        [
+                            230,
+                            402
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    65,
+                    66,
+                    [
+                        [
+                            230,
+                            495
+                        ],
+                        [
+                            230,
+                            453
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    66,
+                    67,
+                    [
+                        [
+                            230,
+                            520
+                        ],
+                        [
+                            230,
+                            495
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    67,
+                    68,
+                    [
+                        [
+                            230,
+                            550
+                        ],
+                        [
+                            230,
+                            520
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    68,
+                    69,
+                    [
+                        [
+                            230,
+                            580
+                        ],
+                        [
+                            230,
+                            550
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    69,
+                    70,
+                    [
+                        [
+                            230,
+                            610
+                        ],
+                        [
+                            230,
+                            580
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    70,
+                    71,
+                    [
+                        [
+                            230,
+                            642
+                        ],
+                        [
+                            230,
+                            610
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    71,
+                    72,
+                    [
+                        [
+                            230,
+                            673
+                        ],
+                        [
+                            230,
+                            642
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    72,
+                    73,
+                    [
+                        [
+                            230,
+                            702
+                        ],
+                        [
+                            230,
+                            673
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    73,
+                    74,
+                    [
+                        [
+                            230,
+                            731
+                        ],
+                        [
+                            230,
+                            702
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    74,
+                    75,
+                    [
+                        [
+                            230,
+                            761
+                        ],
+                        [
+                            230,
+                            731
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    75,
+                    76,
+                    [
+                        [
+                            230,
+                            791
+                        ],
+                        [
+                            230,
+                            761
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    76,
+                    77,
+                    [
+                        [
+                            230,
+                            820
+                        ],
+                        [
+                            230,
+                            791
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        230,
+                        39
+                    ],
+                    "is_working": true,
+                    "name": "Физтех",
+                    "rect": [
+                        245,
+                        31,
+                        46,
+                        15
+                    ],
+                    "text_id": 54,
+                    "uid": 52
+                },
+                {
+                    "coord": [
+                        230,
+                        68
+                    ],
+                    "is_working": true,
+                    "name": "Лианозово",
+                    "rect": [
+                        245,
+                        60,
+                        72,
+                        15
+                    ],
+                    "text_id": 55,
+                    "uid": 53
+                },
+                {
+                    "coord": [
+                        230,
+                        97
+                    ],
+                    "is_working": true,
+                    "name": "Яхромская",
+                    "rect": [
+                        245,
+                        90,
+                        71,
+                        15
+                    ],
+                    "text_id": 56,
+                    "uid": 54
+                },
+                {
+                    "coord": [
+                        230,
+                        126
+                    ],
+                    "is_working": true,
+                    "name": "Селигерская",
+                    "rect": [
+                        245,
+                        118,
+                        82,
+                        15
+                    ],
+                    "text_id": 57,
+                    "uid": 55
+                },
+                {
+                    "coord": [
+                        230,
+                        156
+                    ],
+                    "is_working": true,
+                    "name": "Верхние Лихоборы",
+                    "rect": [
+                        245,
+                        143,
+                        65,
+                        28
+                    ],
+                    "text_id": 58,
+                    "uid": 56
+                },
+                {
+                    "coord": [
+                        230,
+                        186
+                    ],
+                    "is_working": true,
+                    "name": "Окружная",
+                    "rect": [
+                        245,
+                        178,
+                        62,
+                        15
+                    ],
+                    "text_id": 59,
+                    "uid": 57
+                },
+                {
+                    "coord": [
+                        230,
+                        216
+                    ],
+                    "is_working": true,
+                    "name": "Петровско-Разумовская",
+                    "rect": [
+                        244,
+                        208,
+                        154,
+                        15
+                    ],
+                    "text_id": 32,
+                    "uid": 58
+                },
+                {
+                    "coord": [
+                        230,
+                        250
+                    ],
+                    "is_working": true,
+                    "name": "Фонвизинская",
+                    "rect": [
+                        245,
+                        238,
+                        96,
+                        15
+                    ],
+                    "text_id": 60,
+                    "uid": 59
+                },
+                {
+                    "coord": [
+                        230,
+                        276
+                    ],
+                    "is_working": true,
+                    "name": "Бутырская",
+                    "rect": [
+                        245,
+                        268,
+                        69,
+                        15
+                    ],
+                    "text_id": 61,
+                    "uid": 60
+                },
+                {
+                    "coord": [
+                        230,
+                        306
+                    ],
+                    "is_working": true,
+                    "name": "Марьина роща",
+                    "rect": [
+                        245,
+                        293,
+                        60,
+                        28
+                    ],
+                    "text_id": 62,
+                    "uid": 61
+                },
+                {
+                    "coord": [
+                        230,
+                        336
+                    ],
+                    "is_working": true,
+                    "name": "Достоевская",
+                    "rect": [
+                        245,
+                        329,
+                        84,
+                        15
+                    ],
+                    "text_id": 63,
+                    "uid": 62
+                },
+                {
+                    "coord": [
+                        230,
+                        363
+                    ],
+                    "is_working": true,
+                    "name": "Трубная",
+                    "rect": [
+                        245,
+                        356,
+                        53,
+                        15
+                    ],
+                    "text_id": 64,
+                    "uid": 63
+                },
+                {
+                    "coord": [
+                        230,
+                        402
+                    ],
+                    "is_working": true,
+                    "name": "Сретенский бульвар",
+                    "rect": [
+                        245,
+                        388,
+                        77,
+                        28
+                    ],
+                    "text_id": 65,
+                    "uid": 64
+                },
+                {
+                    "coord": [
+                        230,
+                        453
+                    ],
+                    "is_working": true,
+                    "name": "Чкаловская",
+                    "rect": [
+                        245,
+                        445,
+                        76,
+                        15
+                    ],
+                    "text_id": 66,
+                    "uid": 65
+                },
+                {
+                    "coord": [
+                        230,
+                        495
+                    ],
+                    "is_working": true,
+                    "name": "Римская",
+                    "rect": [
+                        245,
+                        486,
+                        56,
+                        15
+                    ],
+                    "text_id": 67,
+                    "uid": 66
+                },
+                {
+                    "coord": [
+                        230,
+                        520
+                    ],
+                    "is_working": true,
+                    "name": "Крестьянская застава",
+                    "rect": [
+                        245,
+                        507,
+                        92,
+                        28
+                    ],
+                    "text_id": 68,
+                    "uid": 67
+                },
+                {
+                    "coord": [
+                        230,
+                        550
+                    ],
+                    "is_working": true,
+                    "name": "Дубровка",
+                    "rect": [
+                        245,
+                        541,
+                        60,
+                        15
+                    ],
+                    "text_id": 69,
+                    "uid": 68
+                },
+                {
+                    "coord": [
+                        230,
+                        580
+                    ],
+                    "is_working": true,
+                    "name": "Кожуховская",
+                    "rect": [
+                        245,
+                        573,
+                        84,
+                        15
+                    ],
+                    "text_id": 70,
+                    "uid": 69
+                },
+                {
+                    "coord": [
+                        230,
+                        610
+                    ],
+                    "is_working": true,
+                    "name": "Печатники",
+                    "rect": [
+                        245,
+                        603,
+                        68,
+                        15
+                    ],
+                    "text_id": 71,
+                    "uid": 70
+                },
+                {
+                    "coord": [
+                        230,
+                        642
+                    ],
+                    "is_working": true,
+                    "name": "Волжская",
+                    "rect": [
+                        245,
+                        635,
+                        64,
+                        15
+                    ],
+                    "text_id": 72,
+                    "uid": 71
+                },
+                {
+                    "coord": [
+                        230,
+                        673
+                    ],
+                    "is_working": true,
+                    "name": "Люблино",
+                    "rect": [
+                        245,
+                        666,
+                        59,
+                        15
+                    ],
+                    "text_id": 73,
+                    "uid": 72
+                },
+                {
+                    "coord": [
+                        230,
+                        702
+                    ],
+                    "is_working": true,
+                    "name": "Братиславская",
+                    "rect": [
+                        245,
+                        696,
+                        100,
+                        15
+                    ],
+                    "text_id": 74,
+                    "uid": 73
+                },
+                {
+                    "coord": [
+                        230,
+                        731
+                    ],
+                    "is_working": true,
+                    "name": "Марьино",
+                    "rect": [
+                        245,
+                        725,
+                        58,
+                        15
+                    ],
+                    "text_id": 75,
+                    "uid": 74
+                },
+                {
+                    "coord": [
+                        230,
+                        761
+                    ],
+                    "is_working": true,
+                    "name": "Борисово",
+                    "rect": [
+                        245,
+                        755,
+                        65,
+                        15
+                    ],
+                    "text_id": 76,
+                    "uid": 75
+                },
+                {
+                    "coord": [
+                        230,
+                        791
+                    ],
+                    "is_working": true,
+                    "name": "Шипиловская",
+                    "rect": [
+                        245,
+                        785,
+                        89,
+                        15
+                    ],
+                    "text_id": 77,
+                    "uid": 76
+                },
+                {
+                    "coord": [
+                        230,
+                        820
+                    ],
+                    "is_working": true,
+                    "name": "Зябликово",
+                    "rect": [
+                        245,
+                        814,
+                        70,
+                        15
+                    ],
+                    "text_id": 78,
+                    "uid": 77
+                }
+            ],
+            "text_id": 79
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "30D5C8",
+            "line_width": 9,
+            "name": "БКЛ",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Савёловская",
+                    "rect": null,
+                    "text_id": 35,
+                    "uid": 78
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Петровский парк",
+                    "rect": null,
+                    "text_id": 80,
+                    "uid": 79
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "ЦСКА",
+                    "rect": null,
+                    "text_id": 81,
+                    "uid": 80
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Хорошёвская",
+                    "rect": null,
+                    "text_id": 82,
+                    "uid": 81
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Народное ополчение",
+                    "rect": null,
+                    "text_id": 83,
+                    "uid": 82
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Мнёвники",
+                    "rect": null,
+                    "text_id": 84,
+                    "uid": 83
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Терехово",
+                    "rect": null,
+                    "text_id": 85,
+                    "uid": 84
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Кунцевская",
+                    "rect": null,
+                    "text_id": 86,
+                    "uid": 85
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Давыдково",
+                    "rect": null,
+                    "text_id": 87,
+                    "uid": 86
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Аминьевская",
+                    "rect": null,
+                    "text_id": 88,
+                    "uid": 87
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Мичуринский проспект",
+                    "rect": null,
+                    "text_id": 89,
+                    "uid": 88
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Проспект Вернадского",
+                    "rect": null,
+                    "text_id": 17,
+                    "uid": 89
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Новаторская",
+                    "rect": null,
+                    "text_id": 90,
+                    "uid": 90
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Воронцовская",
+                    "rect": null,
+                    "text_id": 91,
+                    "uid": 91
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Зюзино",
+                    "rect": null,
+                    "text_id": 92,
+                    "uid": 92
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Каховская",
+                    "rect": null,
+                    "text_id": 93,
+                    "uid": 93
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Варшавская",
+                    "rect": null,
+                    "text_id": 94,
+                    "uid": 94
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Каширская",
+                    "rect": null,
+                    "text_id": 95,
+                    "uid": 95
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Кленовый бульвар",
+                    "rect": null,
+                    "text_id": 96,
+                    "uid": 96
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Нагатинский Затон",
+                    "rect": null,
+                    "text_id": 97,
+                    "uid": 97
+                },
+                {
+                    "coord": [
+                        208,
+                        597
+                    ],
+                    "is_working": true,
+                    "name": "Печатники",
+                    "rect": [
+                        126,
+                        590,
+                        68,
+                        15
+                    ],
+                    "text_id": 71,
+                    "uid": 98
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Текстильщики",
+                    "rect": null,
+                    "text_id": 98,
+                    "uid": 99
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Нижегородская",
+                    "rect": null,
+                    "text_id": 99,
+                    "uid": 100
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Авиамоторная",
+                    "rect": null,
+                    "text_id": 100,
+                    "uid": 101
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Лефортово",
+                    "rect": null,
+                    "text_id": 101,
+                    "uid": 102
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Электрозаводская",
+                    "rect": null,
+                    "text_id": 102,
+                    "uid": 103
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Сокольники",
+                    "rect": null,
+                    "text_id": 3,
+                    "uid": 104
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Рижская",
+                    "rect": null,
+                    "text_id": 103,
+                    "uid": 105
+                },
+                {
+                    "coord": [
+                        214,
+                        321
+                    ],
+                    "is_working": true,
+                    "name": "Марьина Роща",
+                    "rect": [
+                        130,
+                        319,
+                        60,
+                        28
+                    ],
+                    "text_id": 104,
+                    "uid": 106
+                }
+            ],
+            "text_id": 105
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "DE7272",
+            "line_width": 9,
+            "name": "МЦК",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Окружная",
+                    "rect": null,
+                    "text_id": 59,
+                    "uid": 114
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Владыкино",
+                    "rect": null,
+                    "text_id": 31,
+                    "uid": 115
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ботанический сад",
+                    "rect": null,
+                    "text_id": 114,
+                    "uid": 116
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ростокино",
+                    "rect": null,
+                    "text_id": 115,
+                    "uid": 117
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Белокаменная",
+                    "rect": null,
+                    "text_id": 116,
+                    "uid": 118
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Бульвар Рокоссовского",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 119
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Локомотив",
+                    "rect": null,
+                    "text_id": 117,
+                    "uid": 120
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Измайлово",
+                    "rect": null,
+                    "text_id": 118,
+                    "uid": 121
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Соколиная Гора",
+                    "rect": null,
+                    "text_id": 119,
+                    "uid": 122
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Шоссе Энтузиастов",
+                    "rect": null,
+                    "text_id": 120,
+                    "uid": 123
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Андроновка",
+                    "rect": null,
+                    "text_id": 121,
+                    "uid": 124
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Нижегородская",
+                    "rect": null,
+                    "text_id": 99,
+                    "uid": 125
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Новохохловская",
+                    "rect": null,
+                    "text_id": 122,
+                    "uid": 126
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Угрешская",
+                    "rect": null,
+                    "text_id": 123,
+                    "uid": 127
+                },
+                {
+                    "coord": [
+                        208,
+                        550
+                    ],
+                    "is_working": true,
+                    "name": "Дубровка",
+                    "rect": [
+                        134,
+                        543,
+                        60,
+                        15
+                    ],
+                    "text_id": 69,
+                    "uid": 128
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Автозаводская",
+                    "rect": null,
+                    "text_id": 124,
+                    "uid": 129
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "ЗИЛ",
+                    "rect": null,
+                    "text_id": 125,
+                    "uid": 130
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Верхние Котлы",
+                    "rect": null,
+                    "text_id": 126,
+                    "uid": 131
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Крымская",
+                    "rect": null,
+                    "text_id": 127,
+                    "uid": 132
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Площадь Гагарина",
+                    "rect": null,
+                    "text_id": 128,
+                    "uid": 133
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Лужники",
+                    "rect": null,
+                    "text_id": 129,
+                    "uid": 134
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Кутузовская",
+                    "rect": null,
+                    "text_id": 130,
+                    "uid": 135
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Москва-Сити",
+                    "rect": null,
+                    "text_id": 131,
+                    "uid": 136
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Шелепиха",
+                    "rect": null,
+                    "text_id": 132,
+                    "uid": 137
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Хорошёво",
+                    "rect": null,
+                    "text_id": 133,
+                    "uid": 138
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Зорге",
+                    "rect": null,
+                    "text_id": 134,
+                    "uid": 139
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Панфиловская",
+                    "rect": null,
+                    "text_id": 135,
+                    "uid": 140
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Стрешнево",
+                    "rect": null,
+                    "text_id": 136,
+                    "uid": 141
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Балтийская",
+                    "rect": null,
+                    "text_id": 137,
+                    "uid": 142
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Коптево",
+                    "rect": null,
+                    "text_id": 138,
+                    "uid": 143
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Лихоборы",
+                    "rect": null,
+                    "text_id": 139,
+                    "uid": 144
+                }
+            ],
+            "text_id": 140
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "F6A800",
+            "line_width": 9,
+            "name": "МЦД1",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Лобня",
+                    "rect": null,
+                    "text_id": 163,
+                    "uid": 170
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Шереметьевская",
+                    "rect": null,
+                    "text_id": 164,
+                    "uid": 171
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Хлебниково",
+                    "rect": null,
+                    "text_id": 165,
+                    "uid": 172
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Водники",
+                    "rect": null,
+                    "text_id": 166,
+                    "uid": 173
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Долгопрудная",
+                    "rect": null,
+                    "text_id": 167,
+                    "uid": 174
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Новодачная",
+                    "rect": null,
+                    "text_id": 168,
+                    "uid": 175
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Марк",
+                    "rect": null,
+                    "text_id": 169,
+                    "uid": 176
+                },
+                {
+                    "coord": [
+                        210,
+                        68
+                    ],
+                    "is_working": true,
+                    "name": "Лианозово",
+                    "rect": [
+                        124,
+                        61,
+                        72,
+                        15
+                    ],
+                    "text_id": 55,
+                    "uid": 177
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Илимская",
+                    "rect": null,
+                    "text_id": 170,
+                    "uid": 178
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Бескудниково",
+                    "rect": null,
+                    "text_id": 171,
+                    "uid": 179
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Дегунино",
+                    "rect": null,
+                    "text_id": 172,
+                    "uid": 180
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Окружная",
+                    "rect": null,
+                    "text_id": 59,
+                    "uid": 181
+                },
+                {
+                    "coord": [
+                        216,
+                        202
+                    ],
+                    "is_working": false,
+                    "name": "Петровско-Разумовская",
+                    "rect": [
+                        33,
+                        193,
+                        154,
+                        15
+                    ],
+                    "text_id": 32,
+                    "uid": 182
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Тимирязевская",
+                    "rect": null,
+                    "text_id": 33,
+                    "uid": 183
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Дмитровская",
+                    "rect": null,
+                    "text_id": 34,
+                    "uid": 184
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Савёловская",
+                    "rect": null,
+                    "text_id": 35,
+                    "uid": 185
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Белорусская",
+                    "rect": null,
+                    "text_id": 173,
+                    "uid": 186
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Беговая",
+                    "rect": null,
+                    "text_id": 174,
+                    "uid": 187
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Тестовская <Москва-Сити>",
+                    "rect": null,
+                    "text_id": 175,
+                    "uid": 188
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Фили",
+                    "rect": null,
+                    "text_id": 176,
+                    "uid": 189
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Славянский бульвар",
+                    "rect": null,
+                    "text_id": 177,
+                    "uid": 190
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Кунцевская",
+                    "rect": null,
+                    "text_id": 86,
+                    "uid": 191
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Рабочий Посёлок",
+                    "rect": null,
+                    "text_id": 178,
+                    "uid": 192
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Сетунь",
+                    "rect": null,
+                    "text_id": 179,
+                    "uid": 193
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Немчиновка",
+                    "rect": null,
+                    "text_id": 180,
+                    "uid": 194
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Сколково",
+                    "rect": null,
+                    "text_id": 181,
+                    "uid": 195
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Баковка",
+                    "rect": null,
+                    "text_id": 182,
+                    "uid": 196
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Одинцово",
+                    "rect": null,
+                    "text_id": 183,
+                    "uid": 197
+                }
+            ],
+            "text_id": 184
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "E83F83",
+            "line_width": 9,
+            "name": "МЦД2",
+            "segments": [
+                [
+                    215,
+                    216,
+                    [
+                        [
+                            180,
+                            495
+                        ],
+                        [
+                            180,
+                            453
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Нахабино",
+                    "rect": null,
+                    "text_id": 185,
+                    "uid": 198
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Аникеевка",
+                    "rect": null,
+                    "text_id": 186,
+                    "uid": 199
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Опалиха",
+                    "rect": null,
+                    "text_id": 187,
+                    "uid": 200
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Красногорская",
+                    "rect": null,
+                    "text_id": 188,
+                    "uid": 201
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Павшино",
+                    "rect": null,
+                    "text_id": 189,
+                    "uid": 202
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Пенягино",
+                    "rect": null,
+                    "text_id": 190,
+                    "uid": 203
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Волоколамская",
+                    "rect": null,
+                    "text_id": 191,
+                    "uid": 204
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Трикотажная",
+                    "rect": null,
+                    "text_id": 192,
+                    "uid": 205
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Тушинская",
+                    "rect": null,
+                    "text_id": 193,
+                    "uid": 206
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Щукинская",
+                    "rect": null,
+                    "text_id": 194,
+                    "uid": 207
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Стрешнево",
+                    "rect": null,
+                    "text_id": 136,
+                    "uid": 208
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Красный Балтиец",
+                    "rect": null,
+                    "text_id": 195,
+                    "uid": 209
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Гражданская",
+                    "rect": null,
+                    "text_id": 196,
+                    "uid": 210
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Дмитровская",
+                    "rect": null,
+                    "text_id": 34,
+                    "uid": 211
+                },
+                {
+                    "coord": [
+                        214,
+                        290
+                    ],
+                    "is_working": true,
+                    "name": "Марьина Роща",
+                    "rect": [
+                        131,
+                        261,
+                        60,
+                        28
+                    ],
+                    "text_id": 104,
+                    "uid": 212
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Рижская",
+                    "rect": null,
+                    "text_id": 103,
+                    "uid": 213
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Площадь трёх вокзалов",
+                    "rect": null,
+                    "text_id": 197,
+                    "uid": 214
+                },
+                {
+                    "coord": [
+                        180,
+                        453
+                    ],
+                    "is_working": true,
+                    "name": "Курская",
+                    "rect": [
+                        116,
+                        446,
+                        51,
+                        15
+                    ],
+                    "text_id": 198,
+                    "uid": 215
+                },
+                {
+                    "coord": [
+                        180,
+                        495
+                    ],
+                    "is_working": true,
+                    "name": "Москва Товарная",
+                    "rect": [
+                        32,
+                        494,
+                        63,
+                        28
+                    ],
+                    "text_id": 199,
+                    "uid": 216
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Калитники",
+                    "rect": null,
+                    "text_id": 200,
+                    "uid": 217
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Новохохловская",
+                    "rect": null,
+                    "text_id": 122,
+                    "uid": 218
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Текстильщики",
+                    "rect": null,
+                    "text_id": 98,
+                    "uid": 219
+                },
+                {
+                    "coord": [
+                        208,
+                        624
+                    ],
+                    "is_working": true,
+                    "name": "Печатники",
+                    "rect": [
+                        126,
+                        618,
+                        68,
+                        15
+                    ],
+                    "text_id": 71,
+                    "uid": 220
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Люблино",
+                    "rect": null,
+                    "text_id": 73,
+                    "uid": 221
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Депо",
+                    "rect": null,
+                    "text_id": 201,
+                    "uid": 222
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Перерва",
+                    "rect": null,
+                    "text_id": 202,
+                    "uid": 223
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Курьяново",
+                    "rect": null,
+                    "text_id": 203,
+                    "uid": 224
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Москворечье",
+                    "rect": null,
+                    "text_id": 204,
+                    "uid": 225
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Царицыно",
+                    "rect": null,
+                    "text_id": 205,
+                    "uid": 226
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Котляково",
+                    "rect": null,
+                    "text_id": 206,
+                    "uid": 227
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Покровское",
+                    "rect": null,
+                    "text_id": 207,
+                    "uid": 228
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Красный Строитель",
+                    "rect": null,
+                    "text_id": 208,
+                    "uid": 229
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Битца",
+                    "rect": null,
+                    "text_id": 209,
+                    "uid": 230
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Бутово",
+                    "rect": null,
+                    "text_id": 210,
+                    "uid": 231
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Щербинка",
+                    "rect": null,
+                    "text_id": 211,
+                    "uid": 232
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Остафьево",
+                    "rect": null,
+                    "text_id": 212,
+                    "uid": 233
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Силикатная",
+                    "rect": null,
+                    "text_id": 213,
+                    "uid": 234
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Подольск",
+                    "rect": null,
+                    "text_id": 214,
+                    "uid": 235
+                }
+            ],
+            "text_id": 215
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "EA5B04",
+            "line_width": 9,
+            "name": "МЦД3",
+            "segments": [
+                [
+                    249,
+                    250,
+                    [
+                        [
+                            202,
+                            250
+                        ],
+                        [
+                            202,
+                            216
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Зеленоград",
+                    "rect": null,
+                    "text_id": 216,
+                    "uid": 236
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Малино",
+                    "rect": null,
+                    "text_id": 217,
+                    "uid": 237
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Фирсановская",
+                    "rect": null,
+                    "text_id": 218,
+                    "uid": 238
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Сходня",
+                    "rect": null,
+                    "text_id": 219,
+                    "uid": 239
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Подрезково",
+                    "rect": null,
+                    "text_id": 220,
+                    "uid": 240
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Новоподрезково",
+                    "rect": null,
+                    "text_id": 221,
+                    "uid": 241
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Молжаниново",
+                    "rect": null,
+                    "text_id": 222,
+                    "uid": 242
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Химки",
+                    "rect": null,
+                    "text_id": 223,
+                    "uid": 243
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Левобережная",
+                    "rect": null,
+                    "text_id": 224,
+                    "uid": 244
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ховрино",
+                    "rect": null,
+                    "text_id": 225,
+                    "uid": 245
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Грачёвская",
+                    "rect": null,
+                    "text_id": 226,
+                    "uid": 246
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Моссельмаш",
+                    "rect": null,
+                    "text_id": 227,
+                    "uid": 247
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Лихоборы",
+                    "rect": null,
+                    "text_id": 139,
+                    "uid": 248
+                },
+                {
+                    "coord": [
+                        202,
+                        216
+                    ],
+                    "is_working": true,
+                    "name": "Петровско-разумовская",
+                    "rect": [
+                        33,
+                        208,
+                        154,
+                        15
+                    ],
+                    "text_id": 228,
+                    "uid": 249
+                },
+                {
+                    "coord": [
+                        202,
+                        250
+                    ],
+                    "is_working": true,
+                    "name": "Останкино",
+                    "rect": [
+                        118,
+                        242,
+                        70,
+                        15
+                    ],
+                    "text_id": 229,
+                    "uid": 250
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Рижская",
+                    "rect": null,
+                    "text_id": 103,
+                    "uid": 251
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Митьково",
+                    "rect": null,
+                    "text_id": 230,
+                    "uid": 252
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Электрозаводская",
+                    "rect": null,
+                    "text_id": 102,
+                    "uid": 253
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Сортировочная",
+                    "rect": null,
+                    "text_id": 231,
+                    "uid": 254
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Авиамоторная",
+                    "rect": null,
+                    "text_id": 100,
+                    "uid": 255
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Андроновка",
+                    "rect": null,
+                    "text_id": 121,
+                    "uid": 256
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Перово",
+                    "rect": null,
+                    "text_id": 232,
+                    "uid": 257
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Плющево",
+                    "rect": null,
+                    "text_id": 233,
+                    "uid": 258
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Вешняки",
+                    "rect": null,
+                    "text_id": 234,
+                    "uid": 259
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Выхино",
+                    "rect": null,
+                    "text_id": 235,
+                    "uid": 260
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Косино",
+                    "rect": null,
+                    "text_id": 144,
+                    "uid": 261
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ухтомская",
+                    "rect": null,
+                    "text_id": 236,
+                    "uid": 262
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Люберцы-1",
+                    "rect": null,
+                    "text_id": 237,
+                    "uid": 263
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Панки",
+                    "rect": null,
+                    "text_id": 238,
+                    "uid": 264
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Томилино",
+                    "rect": null,
+                    "text_id": 239,
+                    "uid": 265
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Красково",
+                    "rect": null,
+                    "text_id": 240,
+                    "uid": 266
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Малаховка",
+                    "rect": null,
+                    "text_id": 241,
+                    "uid": 267
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Удельная",
+                    "rect": null,
+                    "text_id": 242,
+                    "uid": 268
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Быково",
+                    "rect": null,
+                    "text_id": 243,
+                    "uid": 269
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ильинская",
+                    "rect": null,
+                    "text_id": 244,
+                    "uid": 270
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Отдых",
+                    "rect": null,
+                    "text_id": 245,
+                    "uid": 271
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Кратово",
+                    "rect": null,
+                    "text_id": 246,
+                    "uid": 272
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Есенинская",
+                    "rect": null,
+                    "text_id": 247,
+                    "uid": 273
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Фабричная",
+                    "rect": null,
+                    "text_id": 248,
+                    "uid": 274
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Раменское",
+                    "rect": null,
+                    "text_id": 249,
+                    "uid": 275
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ипподром",
+                    "rect": null,
+                    "text_id": 250,
+                    "uid": 276
+                }
+            ],
+            "text_id": 251
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "3FB585",
+            "line_width": 9,
+            "name": "МЦД4",
+            "segments": [
+                [
+                    328,
+                    329,
+                    [
+                        [
+                            196,
+                            495
+                        ],
+                        [
+                            196,
+                            453
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Апрелевка",
+                    "rect": null,
+                    "text_id": 272,
+                    "uid": 301
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Победа",
+                    "rect": null,
+                    "text_id": 273,
+                    "uid": 302
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Крёкшино",
+                    "rect": null,
+                    "text_id": 274,
+                    "uid": 303
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Санино",
+                    "rect": null,
+                    "text_id": 275,
+                    "uid": 304
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Кокошкино",
+                    "rect": null,
+                    "text_id": 276,
+                    "uid": 305
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Толстопальцево",
+                    "rect": null,
+                    "text_id": 277,
+                    "uid": 306
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Лесной Городок",
+                    "rect": null,
+                    "text_id": 278,
+                    "uid": 307
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Внуково",
+                    "rect": null,
+                    "text_id": 279,
+                    "uid": 308
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Мичуринец",
+                    "rect": null,
+                    "text_id": 280,
+                    "uid": 309
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Переделкино",
+                    "rect": null,
+                    "text_id": 281,
+                    "uid": 310
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Солнечная",
+                    "rect": null,
+                    "text_id": 282,
+                    "uid": 311
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Мещерская",
+                    "rect": null,
+                    "text_id": 283,
+                    "uid": 312
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Очаково",
+                    "rect": null,
+                    "text_id": 284,
+                    "uid": 313
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Аминьевская",
+                    "rect": null,
+                    "text_id": 88,
+                    "uid": 314
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Матвеевская",
+                    "rect": null,
+                    "text_id": 285,
+                    "uid": 315
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Минская",
+                    "rect": null,
+                    "text_id": 286,
+                    "uid": 316
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Поклонная",
+                    "rect": null,
+                    "text_id": 287,
+                    "uid": 317
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Кутузовская",
+                    "rect": null,
+                    "text_id": 130,
+                    "uid": 318
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Москва-Сити",
+                    "rect": null,
+                    "text_id": 131,
+                    "uid": 319
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Ермакова Роща",
+                    "rect": null,
+                    "text_id": 288,
+                    "uid": 320
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Беговая",
+                    "rect": null,
+                    "text_id": 174,
+                    "uid": 321
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Москва Белорусская",
+                    "rect": null,
+                    "text_id": 289,
+                    "uid": 322
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Савёловская",
+                    "rect": null,
+                    "text_id": 35,
+                    "uid": 323
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Станколит",
+                    "rect": null,
+                    "text_id": 290,
+                    "uid": 324
+                },
+                {
+                    "coord": [
+                        198,
+                        306
+                    ],
+                    "is_working": true,
+                    "name": "Марьина Роща",
+                    "rect": [
+                        112,
+                        289,
+                        60,
+                        28
+                    ],
+                    "text_id": 104,
+                    "uid": 325
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Рижская",
+                    "rect": null,
+                    "text_id": 103,
+                    "uid": 326
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Площадь трёх вокзалов",
+                    "rect": null,
+                    "text_id": 197,
+                    "uid": 327
+                },
+                {
+                    "coord": [
+                        196,
+                        453
+                    ],
+                    "is_working": true,
+                    "name": "Москва Курская",
+                    "rect": [
+                        -2,
+                        0,
+                        51,
+                        28
+                    ],
+                    "text_id": 291,
+                    "uid": 328
+                },
+                {
+                    "coord": [
+                        196,
+                        495
+                    ],
+                    "is_working": true,
+                    "name": "Серп и Молот",
+                    "rect": [
+                        44,
+                        469,
+                        51,
+                        28
+                    ],
+                    "text_id": 292,
+                    "uid": 329
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Нижегородская",
+                    "rect": null,
+                    "text_id": 99,
+                    "uid": 330
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Чухлинка",
+                    "rect": null,
+                    "text_id": 293,
+                    "uid": 331
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Кусково",
+                    "rect": null,
+                    "text_id": 294,
+                    "uid": 332
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Новогиреево",
+                    "rect": null,
+                    "text_id": 295,
+                    "uid": 333
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Реутов",
+                    "rect": null,
+                    "text_id": 296,
+                    "uid": 334
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Никольское",
+                    "rect": null,
+                    "text_id": 297,
+                    "uid": 335
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Салтыковская",
+                    "rect": null,
+                    "text_id": 298,
+                    "uid": 336
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Кучино",
+                    "rect": null,
+                    "text_id": 299,
+                    "uid": 337
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ольгино",
+                    "rect": null,
+                    "text_id": 300,
+                    "uid": 338
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Железнодорожная",
+                    "rect": null,
+                    "text_id": 301,
+                    "uid": 339
+                }
+            ],
+            "text_id": 302
+        }
+    ],
+    "lines_width": 9,
+    "name": "lublinskayaline",
+    "name_text_id": 79,
+    "stations_diameter": 16.0,
+    "transfers": [
+        [
+            181,
+            57,
+            null,
+            [
+                230,
+                186
+            ]
+        ],
+        [
+            181,
+            114,
+            null,
+            null
+        ],
+        [
+            182,
+            58,
+            [
+                216,
+                202
+            ],
+            [
+                230,
+                216
+            ]
+        ],
+        [
+            182,
+            31,
+            [
+                216,
+                202
+            ],
+            [
+                216,
+                230
+            ]
+        ],
+        [
+            183,
+            32,
+            null,
+            null
+        ],
+        [
+            184,
+            33,
+            null,
+            null
+        ],
+        [
+            185,
+            34,
+            null,
+            null
+        ],
+        [
+            185,
+            78,
+            null,
+            null
+        ],
+        [
+            186,
+            285,
+            null,
+            null
+        ],
+        [
+            186,
+            386,
+            null,
+            null
+        ],
+        [
+            187,
+            420,
+            null,
+            null
+        ],
+        [
+            190,
+            355,
+            null,
+            null
+        ],
+        [
+            206,
+            415,
+            null,
+            null
+        ],
+        [
+            207,
+            417,
+            null,
+            null
+        ],
+        [
+            208,
+            141,
+            null,
+            null
+        ],
+        [
+            211,
+            33,
+            null,
+            null
+        ],
+        [
+            211,
+            184,
+            null,
+            null
+        ],
+        [
+            212,
+            61,
+            [
+                214,
+                290
+            ],
+            [
+                230,
+                306
+            ]
+        ],
+        [
+            213,
+            395,
+            null,
+            null
+        ],
+        [
+            214,
+            5,
+            null,
+            null
+        ],
+        [
+            214,
+            383,
+            null,
+            null
+        ],
+        [
+            215,
+            382,
+            [
+                180,
+                453
+            ],
+            [
+                213,
+                436
+            ]
+        ],
+        [
+            215,
+            349,
+            [
+                180,
+                453
+            ],
+            [
+                213,
+                470
+            ]
+        ],
+        [
+            215,
+            65,
+            [
+                180,
+                453
+            ],
+            [
+                230,
+                453
+            ]
+        ],
+        [
+            218,
+            126,
+            null,
+            null
+        ],
+        [
+            219,
+            429,
+            null,
+            null
+        ],
+        [
+            220,
+            70,
+            [
+                208,
+                624
+            ],
+            [
+                230,
+                610
+            ]
+        ],
+        [
+            226,
+            296,
+            null,
+            null
+        ],
+        [
+            204,
+            361,
+            null,
+            null
+        ],
+        [
+            85,
+            356,
+            null,
+            null
+        ],
+        [
+            89,
+            17,
+            null,
+            null
+        ],
+        [
+            93,
+            45,
+            null,
+            null
+        ],
+        [
+            91,
+            407,
+            null,
+            null
+        ],
+        [
+            106,
+            61,
+            [
+                214,
+                321
+            ],
+            [
+                230,
+                306
+            ]
+        ],
+        [
+            106,
+            212,
+            [
+                214,
+                321
+            ],
+            [
+                214,
+                290
+            ]
+        ],
+        [
+            105,
+            395,
+            null,
+            null
+        ],
+        [
+            105,
+            213,
+            null,
+            null
+        ],
+        [
+            104,
+            3,
+            null,
+            null
+        ],
+        [
+            103,
+            347,
+            null,
+            null
+        ],
+        [
+            101,
+            440,
+            null,
+            null
+        ],
+        [
+            100,
+            125,
+            null,
+            null
+        ],
+        [
+            99,
+            429,
+            null,
+            null
+        ],
+        [
+            99,
+            219,
+            null,
+            null
+        ],
+        [
+            98,
+            70,
+            [
+                208,
+                597
+            ],
+            [
+                230,
+                610
+            ]
+        ],
+        [
+            98,
+            220,
+            [
+                208,
+                597
+            ],
+            [
+                208,
+                624
+            ]
+        ],
+        [
+            245,
+            277,
+            null,
+            null
+        ],
+        [
+            144,
+            248,
+            null,
+            null
+        ],
+        [
+            249,
+            182,
+            [
+                202,
+                216
+            ],
+            [
+                216,
+                202
+            ]
+        ],
+        [
+            249,
+            58,
+            [
+                202,
+                216
+            ],
+            [
+                230,
+                216
+            ]
+        ],
+        [
+            249,
+            31,
+            [
+                202,
+                216
+            ],
+            [
+                216,
+                230
+            ]
+        ],
+        [
+            250,
+            59,
+            [
+                202,
+                250
+            ],
+            [
+                230,
+                250
+            ]
+        ],
+        [
+            251,
+            105,
+            null,
+            null
+        ],
+        [
+            251,
+            395,
+            null,
+            null
+        ],
+        [
+            251,
+            213,
+            null,
+            null
+        ],
+        [
+            252,
+            104,
+            null,
+            null
+        ],
+        [
+            252,
+            3,
+            null,
+            null
+        ],
+        [
+            253,
+            103,
+            null,
+            null
+        ],
+        [
+            253,
+            347,
+            null,
+            null
+        ],
+        [
+            255,
+            440,
+            null,
+            null
+        ],
+        [
+            255,
+            101,
+            null,
+            null
+        ],
+        [
+            256,
+            124,
+            null,
+            null
+        ],
+        [
+            259,
+            431,
+            null,
+            null
+        ],
+        [
+            260,
+            432,
+            null,
+            null
+        ],
+        [
+            261,
+            433,
+            null,
+            null
+        ],
+        [
+            314,
+            87,
+            null,
+            null
+        ],
+        [
+            317,
+            354,
+            null,
+            null
+        ],
+        [
+            318,
+            135,
+            null,
+            null
+        ],
+        [
+            319,
+            136,
+            null,
+            null
+        ],
+        [
+            321,
+            420,
+            null,
+            null
+        ],
+        [
+            321,
+            187,
+            null,
+            null
+        ],
+        [
+            322,
+            186,
+            null,
+            null
+        ],
+        [
+            322,
+            285,
+            null,
+            null
+        ],
+        [
+            322,
+            386,
+            null,
+            null
+        ],
+        [
+            323,
+            34,
+            null,
+            null
+        ],
+        [
+            323,
+            78,
+            null,
+            null
+        ],
+        [
+            323,
+            185,
+            null,
+            null
+        ],
+        [
+            325,
+            61,
+            [
+                198,
+                306
+            ],
+            [
+                230,
+                306
+            ]
+        ],
+        [
+            325,
+            212,
+            [
+                198,
+                306
+            ],
+            [
+                214,
+                290
+            ]
+        ],
+        [
+            325,
+            106,
+            [
+                198,
+                306
+            ],
+            [
+                214,
+                321
+            ]
+        ],
+        [
+            326,
+            105,
+            null,
+            null
+        ],
+        [
+            326,
+            251,
+            null,
+            null
+        ],
+        [
+            327,
+            5,
+            null,
+            null
+        ],
+        [
+            327,
+            383,
+            null,
+            null
+        ],
+        [
+            327,
+            214,
+            null,
+            null
+        ],
+        [
+            328,
+            349,
+            [
+                196,
+                453
+            ],
+            [
+                213,
+                470
+            ]
+        ],
+        [
+            328,
+            382,
+            [
+                196,
+                453
+            ],
+            [
+                213,
+                436
+            ]
+        ],
+        [
+            328,
+            65,
+            [
+                196,
+                453
+            ],
+            [
+                230,
+                453
+            ]
+        ],
+        [
+            328,
+            215,
+            [
+                196,
+                453
+            ],
+            [
+                180,
+                453
+            ]
+        ],
+        [
+            329,
+            441,
+            [
+                196,
+                495
+            ],
+            [
+                213,
+                495
+            ]
+        ],
+        [
+            329,
+            66,
+            [
+                196,
+                495
+            ],
+            [
+                230,
+                495
+            ]
+        ],
+        [
+            329,
+            216,
+            [
+                196,
+                495
+            ],
+            [
+                180,
+                495
+            ]
+        ],
+        [
+            330,
+            100,
+            null,
+            null
+        ],
+        [
+            330,
+            125,
+            null,
+            null
+        ],
+        [
+            331,
+            257,
+            null,
+            null
+        ],
+        [
+            333,
+            437,
+            null,
+            null
+        ],
+        [
+            334,
+            436,
+            null,
+            null
+        ],
+        [
+            177,
+            53,
+            [
+                210,
+                68
+            ],
+            [
+                230,
+                68
+            ]
+        ],
+        [
+            10,
+            38,
+            null,
+            null
+        ],
+        [
+            38,
+            351,
+            null,
+            null
+        ],
+        [
+            351,
+            10,
+            null,
+            null
+        ],
+        [
+            79,
+            284,
+            null,
+            null
+        ],
+        [
+            81,
+            419,
+            null,
+            null
+        ],
+        [
+            285,
+            386,
+            null,
+            null
+        ],
+        [
+            40,
+            379,
+            null,
+            null
+        ],
+        [
+            77,
+            299,
+            [
+                230,
+                820
+            ],
+            [
+                208,
+                820
+            ]
+        ],
+        [
+            95,
+            294,
+            null,
+            null
+        ],
+        [
+            388,
+            353,
+            null,
+            null
+        ],
+        [
+            425,
+            399,
+            null,
+            null
+        ],
+        [
+            5,
+            383,
+            null,
+            null
+        ],
+        [
+            422,
+            387,
+            null,
+            null
+        ],
+        [
+            424,
+            8,
+            null,
+            null
+        ],
+        [
+            349,
+            382,
+            [
+                213,
+                470
+            ],
+            [
+                213,
+                436
+            ]
+        ],
+        [
+            382,
+            65,
+            [
+                213,
+                436
+            ],
+            [
+                230,
+                453
+            ]
+        ],
+        [
+            349,
+            65,
+            [
+                213,
+                470
+            ],
+            [
+                230,
+                453
+            ]
+        ],
+        [
+            30,
+            115,
+            null,
+            null
+        ],
+        [
+            142,
+            281,
+            null,
+            null
+        ],
+        [
+            0,
+            119,
+            null,
+            null
+        ],
+        [
+            418,
+            140,
+            null,
+            null
+        ],
+        [
+            57,
+            114,
+            [
+                230,
+                186
+            ],
+            null
+        ],
+        [
+            42,
+            131,
+            null,
+            null
+        ],
+        [
+            392,
+            116,
+            null,
+            null
+        ],
+        [
+            1,
+            120,
+            null,
+            null
+        ],
+        [
+            345,
+            121,
+            null,
+            null
+        ],
+        [
+            439,
+            123,
+            null,
+            null
+        ],
+        [
+            68,
+            128,
+            [
+                230,
+                550
+            ],
+            [
+                208,
+                550
+            ]
+        ],
+        [
+            291,
+            129,
+            null,
+            null
+        ],
+        [
+            133,
+            403,
+            null,
+            null
+        ],
+        [
+            134,
+            14,
+            null,
+            null
+        ],
+        [
+            35,
+            385,
+            null,
+            null
+        ],
+        [
+            401,
+            378,
+            null,
+            null
+        ],
+        [
+            9,
+            288,
+            null,
+            null
+        ],
+        [
+            288,
+            350,
+            null,
+            null
+        ],
+        [
+            290,
+            380,
+            null,
+            null
+        ],
+        [
+            12,
+            377,
+            null,
+            null
+        ],
+        [
+            58,
+            31,
+            [
+                230,
+                216
+            ],
+            [
+                216,
+                230
+            ]
+        ],
+        [
+            441,
+            66,
+            [
+                213,
+                495
+            ],
+            [
+                230,
+                495
+            ]
+        ],
+        [
+            67,
+            427,
+            [
+                230,
+                520
+            ],
+            [
+                208,
+                520
+            ]
+        ],
+        [
+            396,
+            384,
+            null,
+            null
+        ],
+        [
+            423,
+            37,
+            null,
+            null
+        ],
+        [
+            37,
+            287,
+            null,
+            null
+        ],
+        [
+            423,
+            287,
+            null,
+            null
+        ],
+        [
+            78,
+            34,
+            null,
+            null
+        ],
+        [
+            442,
+            381,
+            null,
+            null
+        ],
+        [
+            381,
+            426,
+            null,
+            null
+        ],
+        [
+            442,
+            426,
+            null,
+            null
+        ],
+        [
+            443,
+            400,
+            null,
+            null
+        ],
+        [
+            400,
+            289,
+            null,
+            null
+        ],
+        [
+            443,
+            289,
+            null,
+            null
+        ],
+        [
+            398,
+            7,
+            [
+                208,
+                387
+            ],
+            [
+                208,
+                413
+            ]
+        ],
+        [
+            398,
+            64,
+            [
+                208,
+                387
+            ],
+            [
+                230,
+                402
+            ]
+        ],
+        [
+            7,
+            64,
+            [
+                208,
+                413
+            ],
+            [
+                230,
+                402
+            ]
+        ],
+        [
+            36,
+            63,
+            [
+                208,
+                363
+            ],
+            [
+                230,
+                363
+            ]
+        ]
+    ],
+    "transports": [
+        "metro",
+        "trains",
+        "trams",
+        "tramsriver"
+    ],
+    "type_name": "Метро",
+    "type_text_id": 1542,
+    "upper_case": true,
+    "width": 380,
+    "word_wrap": true
+}

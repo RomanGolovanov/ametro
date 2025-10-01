@@ -1,0 +1,770 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 870,
+    "images": [
+        "res/schemes/chilonzorline.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "F52D35",
+            "line_width": 9,
+            "name": "Chilonzor",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            200,
+                            120
+                        ],
+                        [
+                            200,
+                            80
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            200,
+                            160
+                        ],
+                        [
+                            200,
+                            120
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            200,
+                            200
+                        ],
+                        [
+                            200,
+                            160
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            200,
+                            240
+                        ],
+                        [
+                            200,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            200,
+                            280
+                        ],
+                        [
+                            200,
+                            240
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            200,
+                            320
+                        ],
+                        [
+                            200,
+                            280
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            200,
+                            360
+                        ],
+                        [
+                            200,
+                            320
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            200,
+                            400
+                        ],
+                        [
+                            200,
+                            360
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            200,
+                            440
+                        ],
+                        [
+                            200,
+                            400
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            200,
+                            480
+                        ],
+                        [
+                            200,
+                            440
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            200,
+                            520
+                        ],
+                        [
+                            200,
+                            480
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            200,
+                            560
+                        ],
+                        [
+                            200,
+                            520
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            200,
+                            600
+                        ],
+                        [
+                            200,
+                            560
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            200,
+                            640
+                        ],
+                        [
+                            200,
+                            600
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            200,
+                            680
+                        ],
+                        [
+                            200,
+                            640
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            200,
+                            720
+                        ],
+                        [
+                            200,
+                            680
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        200,
+                        80
+                    ],
+                    "is_working": true,
+                    "name": "Chinor",
+                    "rect": [
+                        215,
+                        70,
+                        100,
+                        20
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        200,
+                        120
+                    ],
+                    "is_working": true,
+                    "name": "Yangihayot",
+                    "rect": [
+                        215,
+                        110,
+                        100,
+                        20
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        200,
+                        160
+                    ],
+                    "is_working": true,
+                    "name": "Sergeli",
+                    "rect": [
+                        215,
+                        150,
+                        100,
+                        20
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        200,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "O'zgarish",
+                    "rect": [
+                        215,
+                        190,
+                        100,
+                        20
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        200,
+                        240
+                    ],
+                    "is_working": true,
+                    "name": "Choshtepa",
+                    "rect": [
+                        215,
+                        230,
+                        100,
+                        20
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        200,
+                        280
+                    ],
+                    "is_working": true,
+                    "name": "Olmazor",
+                    "rect": [
+                        215,
+                        270,
+                        100,
+                        20
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        200,
+                        320
+                    ],
+                    "is_working": true,
+                    "name": "Chilonzor",
+                    "rect": [
+                        215,
+                        310,
+                        100,
+                        20
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        200,
+                        360
+                    ],
+                    "is_working": true,
+                    "name": "Mirzo Ulug'bek",
+                    "rect": [
+                        215,
+                        350,
+                        100,
+                        20
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        200,
+                        400
+                    ],
+                    "is_working": true,
+                    "name": "Novza",
+                    "rect": [
+                        215,
+                        390,
+                        100,
+                        20
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        200,
+                        440
+                    ],
+                    "is_working": true,
+                    "name": "Milliy bog'",
+                    "rect": [
+                        215,
+                        430,
+                        100,
+                        20
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        200,
+                        480
+                    ],
+                    "is_working": true,
+                    "name": "Xalqlar do'stligi",
+                    "rect": [
+                        215,
+                        470,
+                        100,
+                        20
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        200,
+                        520
+                    ],
+                    "is_working": true,
+                    "name": "Paxtakor",
+                    "rect": [
+                        215,
+                        510,
+                        100,
+                        20
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        200,
+                        560
+                    ],
+                    "is_working": true,
+                    "name": "Mustaqillik Maydoni",
+                    "rect": [
+                        215,
+                        550,
+                        100,
+                        20
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        200,
+                        600
+                    ],
+                    "is_working": true,
+                    "name": "Amir Temur Xiyoboni",
+                    "rect": [
+                        215,
+                        590,
+                        100,
+                        20
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        200,
+                        640
+                    ],
+                    "is_working": true,
+                    "name": "Hamid Olimjon",
+                    "rect": [
+                        215,
+                        630,
+                        100,
+                        20
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        200,
+                        680
+                    ],
+                    "is_working": true,
+                    "name": "Pushkin",
+                    "rect": [
+                        215,
+                        670,
+                        100,
+                        20
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        200,
+                        720
+                    ],
+                    "is_working": true,
+                    "name": "Buyuk Ipak Yo'li",
+                    "rect": [
+                        215,
+                        710,
+                        100,
+                        20
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                }
+            ],
+            "text_id": 6
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "2D3C9B",
+            "line_width": 9,
+            "name": "O'zbekiston",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Beruniy",
+                    "rect": null,
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Tinchlik",
+                    "rect": null,
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Chorsu",
+                    "rect": null,
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "G'afur G'ulom",
+                    "rect": null,
+                    "text_id": 20,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        181,
+                        520
+                    ],
+                    "is_working": true,
+                    "name": "Alisher Navoiy",
+                    "rect": [
+                        70,
+                        510,
+                        100,
+                        20
+                    ],
+                    "text_id": 21,
+                    "uid": 21
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "O'zbekiston",
+                    "rect": null,
+                    "text_id": 22,
+                    "uid": 22
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Kosmonavtlar",
+                    "rect": null,
+                    "text_id": 23,
+                    "uid": 23
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Oybek",
+                    "rect": null,
+                    "text_id": 24,
+                    "uid": 24
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Toshkent",
+                    "rect": null,
+                    "text_id": 25,
+                    "uid": 25
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Mashinasozlar",
+                    "rect": null,
+                    "text_id": 26,
+                    "uid": 26
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Do'stlik",
+                    "rect": null,
+                    "text_id": 27,
+                    "uid": 27
+                }
+            ],
+            "text_id": 22
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "4B7D43",
+            "line_width": 9,
+            "name": "Yunusobod",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ming o'rik",
+                    "rect": null,
+                    "text_id": 28,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        181,
+                        600
+                    ],
+                    "is_working": true,
+                    "name": "Yunus Rajabiy",
+                    "rect": [
+                        70,
+                        590,
+                        100,
+                        20
+                    ],
+                    "text_id": 29,
+                    "uid": 29
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Abdulla Qodiriy",
+                    "rect": null,
+                    "text_id": 30,
+                    "uid": 30
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Minor",
+                    "rect": null,
+                    "text_id": 31,
+                    "uid": 31
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Bodomzor",
+                    "rect": null,
+                    "text_id": 32,
+                    "uid": 32
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Shaxriston",
+                    "rect": null,
+                    "text_id": 33,
+                    "uid": 33
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Yunusobod",
+                    "rect": null,
+                    "text_id": 34,
+                    "uid": 34
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Turkiston",
+                    "rect": null,
+                    "text_id": 35,
+                    "uid": 35
+                }
+            ],
+            "text_id": 34
+        }
+    ],
+    "lines_width": 9,
+    "name": "chilonzor",
+    "name_text_id": 6,
+    "stations_diameter": 16.0,
+    "transfers": [
+        [
+            11,
+            21,
+            [
+                200,
+                520
+            ],
+            [
+                181,
+                520
+            ]
+        ],
+        [
+            24,
+            28,
+            null,
+            null
+        ],
+        [
+            29,
+            13,
+            [
+                181,
+                600
+            ],
+            [
+                200,
+                600
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "Метро",
+    "type_text_id": 53,
+    "upper_case": true,
+    "width": 350,
+    "word_wrap": true
+}

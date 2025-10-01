@@ -1,0 +1,4022 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 350,
+    "images": [
+        "res/schemes/l2.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "d3232e",
+            "line_color": "d3232e",
+            "line_width": 7,
+            "name": "L1",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Hospital de Bellvitge",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Bellvitge",
+                    "rect": null,
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Av. Carrilet",
+                    "rect": null,
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Rambla Just Oliveras",
+                    "rect": null,
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Can Serra",
+                    "rect": null,
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Florida",
+                    "rect": null,
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Torrassa",
+                    "rect": null,
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Santa Eulalia",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Mercat Nou",
+                    "rect": null,
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Placa de Sants",
+                    "rect": null,
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Hostafrancs",
+                    "rect": null,
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Espanya",
+                    "rect": null,
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Rocafort",
+                    "rect": null,
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Urgell",
+                    "rect": null,
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        65,
+                        183
+                    ],
+                    "is_working": true,
+                    "name": "Universitat",
+                    "rect": null,
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Catalunya",
+                    "rect": null,
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Urquinaona",
+                    "rect": null,
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Arc de Triomf",
+                    "rect": null,
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Marina",
+                    "rect": null,
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Glories",
+                    "rect": null,
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        215,
+                        183
+                    ],
+                    "is_working": true,
+                    "name": "Clot",
+                    "rect": null,
+                    "text_id": 20,
+                    "uid": 20
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Navas",
+                    "rect": null,
+                    "text_id": 21,
+                    "uid": 21
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "La Sagrera",
+                    "rect": null,
+                    "text_id": 22,
+                    "uid": 22
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Fabra i Puig",
+                    "rect": null,
+                    "text_id": 23,
+                    "uid": 23
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sant Andreu",
+                    "rect": null,
+                    "text_id": 24,
+                    "uid": 24
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Torras i Bages",
+                    "rect": null,
+                    "text_id": 25,
+                    "uid": 25
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Trinitat Vella",
+                    "rect": null,
+                    "text_id": 26,
+                    "uid": 26
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Baro de Viver",
+                    "rect": null,
+                    "text_id": 27,
+                    "uid": 27
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Santa Coloma",
+                    "rect": null,
+                    "text_id": 28,
+                    "uid": 28
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Fondo",
+                    "rect": null,
+                    "text_id": 29,
+                    "uid": 29
+                }
+            ],
+            "text_id": 30
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "6b2c72",
+            "line_color": "6b2c72",
+            "line_width": 7,
+            "name": "L2",
+            "segments": [
+                [
+                    30,
+                    31,
+                    [
+                        [
+                            40,
+                            200
+                        ],
+                        [
+                            15,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    31,
+                    32,
+                    [
+                        [
+                            65,
+                            200
+                        ],
+                        [
+                            40,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    32,
+                    33,
+                    [
+                        [
+                            90,
+                            200
+                        ],
+                        [
+                            65,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    33,
+                    34,
+                    [
+                        [
+                            115,
+                            200
+                        ],
+                        [
+                            90,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    34,
+                    35,
+                    [
+                        [
+                            140,
+                            200
+                        ],
+                        [
+                            115,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    35,
+                    36,
+                    [
+                        [
+                            165,
+                            200
+                        ],
+                        [
+                            140,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    36,
+                    37,
+                    [
+                        [
+                            190,
+                            200
+                        ],
+                        [
+                            165,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    37,
+                    38,
+                    [
+                        [
+                            215,
+                            200
+                        ],
+                        [
+                            190,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    38,
+                    39,
+                    [
+                        [
+                            240,
+                            200
+                        ],
+                        [
+                            215,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    39,
+                    40,
+                    [
+                        [
+                            265,
+                            200
+                        ],
+                        [
+                            240,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    40,
+                    41,
+                    [
+                        [
+                            290,
+                            200
+                        ],
+                        [
+                            265,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    41,
+                    42,
+                    [
+                        [
+                            315,
+                            200
+                        ],
+                        [
+                            290,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    42,
+                    43,
+                    [
+                        [
+                            340,
+                            200
+                        ],
+                        [
+                            315,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    43,
+                    44,
+                    [
+                        [
+                            365,
+                            200
+                        ],
+                        [
+                            340,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    44,
+                    45,
+                    [
+                        [
+                            390,
+                            200
+                        ],
+                        [
+                            365,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    45,
+                    46,
+                    [
+                        [
+                            415,
+                            200
+                        ],
+                        [
+                            390,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    46,
+                    47,
+                    [
+                        [
+                            440,
+                            200
+                        ],
+                        [
+                            415,
+                            200
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        15,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Paral·lel",
+                    "rect": [
+                        7,
+                        215,
+                        14,
+                        46
+                    ],
+                    "text_id": 31,
+                    "uid": 30
+                },
+                {
+                    "coord": [
+                        40,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Sant Antoni",
+                    "rect": [
+                        32,
+                        215,
+                        14,
+                        66
+                    ],
+                    "text_id": 32,
+                    "uid": 31
+                },
+                {
+                    "coord": [
+                        65,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Universitat",
+                    "rect": [
+                        57,
+                        215,
+                        13,
+                        63
+                    ],
+                    "text_id": 14,
+                    "uid": 32
+                },
+                {
+                    "coord": [
+                        90,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Passeig de Gracia",
+                    "rect": [
+                        83,
+                        215,
+                        13,
+                        100
+                    ],
+                    "text_id": 33,
+                    "uid": 33
+                },
+                {
+                    "coord": [
+                        115,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Tetuan",
+                    "rect": [
+                        108,
+                        215,
+                        14,
+                        43
+                    ],
+                    "text_id": 34,
+                    "uid": 34
+                },
+                {
+                    "coord": [
+                        140,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Monumental",
+                    "rect": [
+                        132,
+                        215,
+                        15,
+                        70
+                    ],
+                    "text_id": 35,
+                    "uid": 35
+                },
+                {
+                    "coord": [
+                        165,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Sagrada Familia",
+                    "rect": [
+                        159,
+                        215,
+                        14,
+                        92
+                    ],
+                    "text_id": 36,
+                    "uid": 36
+                },
+                {
+                    "coord": [
+                        190,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Encants",
+                    "rect": [
+                        185,
+                        215,
+                        13,
+                        52
+                    ],
+                    "text_id": 37,
+                    "uid": 37
+                },
+                {
+                    "coord": [
+                        215,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Clot",
+                    "rect": [
+                        209,
+                        215,
+                        14,
+                        24
+                    ],
+                    "text_id": 20,
+                    "uid": 38
+                },
+                {
+                    "coord": [
+                        240,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Bac de Roda",
+                    "rect": [
+                        234,
+                        215,
+                        14,
+                        73
+                    ],
+                    "text_id": 38,
+                    "uid": 39
+                },
+                {
+                    "coord": [
+                        265,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Sant Marti",
+                    "rect": [
+                        259,
+                        215,
+                        12,
+                        59
+                    ],
+                    "text_id": 39,
+                    "uid": 40
+                },
+                {
+                    "coord": [
+                        290,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "La Pau",
+                    "rect": [
+                        283,
+                        215,
+                        15,
+                        41
+                    ],
+                    "text_id": 40,
+                    "uid": 41
+                },
+                {
+                    "coord": [
+                        315,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Verneda",
+                    "rect": [
+                        309,
+                        215,
+                        11,
+                        48
+                    ],
+                    "text_id": 41,
+                    "uid": 42
+                },
+                {
+                    "coord": [
+                        340,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Artigues Sant Adria",
+                    "rect": [
+                        332,
+                        215,
+                        15,
+                        113
+                    ],
+                    "text_id": 42,
+                    "uid": 43
+                },
+                {
+                    "coord": [
+                        365,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Sant Roc",
+                    "rect": [
+                        359,
+                        215,
+                        14,
+                        55
+                    ],
+                    "text_id": 43,
+                    "uid": 44
+                },
+                {
+                    "coord": [
+                        390,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Gorg",
+                    "rect": [
+                        385,
+                        215,
+                        14,
+                        31
+                    ],
+                    "text_id": 44,
+                    "uid": 45
+                },
+                {
+                    "coord": [
+                        415,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Pep Ventura",
+                    "rect": [
+                        410,
+                        215,
+                        14,
+                        71
+                    ],
+                    "text_id": 45,
+                    "uid": 46
+                },
+                {
+                    "coord": [
+                        440,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Badalona Pompeu Fabra",
+                    "rect": [
+                        436,
+                        215,
+                        15,
+                        139
+                    ],
+                    "text_id": 46,
+                    "uid": 47
+                }
+            ],
+            "text_id": 47
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "088c2f",
+            "line_color": "088c2f",
+            "line_width": 7,
+            "name": "L3",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Zona Universitaria",
+                    "rect": null,
+                    "text_id": 48,
+                    "uid": 48
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Palau Reial",
+                    "rect": null,
+                    "text_id": 49,
+                    "uid": 49
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Maria Cristina",
+                    "rect": null,
+                    "text_id": 50,
+                    "uid": 50
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Les Corts",
+                    "rect": null,
+                    "text_id": 51,
+                    "uid": 51
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Placa del Centre",
+                    "rect": null,
+                    "text_id": 52,
+                    "uid": 52
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sants Estacio",
+                    "rect": null,
+                    "text_id": 53,
+                    "uid": 53
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Tarragona",
+                    "rect": null,
+                    "text_id": 54,
+                    "uid": 54
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Espanya",
+                    "rect": null,
+                    "text_id": 11,
+                    "uid": 55
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Poble Sec",
+                    "rect": null,
+                    "text_id": 55,
+                    "uid": 56
+                },
+                {
+                    "coord": [
+                        15,
+                        183
+                    ],
+                    "is_working": true,
+                    "name": "Paral·lel",
+                    "rect": null,
+                    "text_id": 31,
+                    "uid": 57
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Drassanes",
+                    "rect": null,
+                    "text_id": 56,
+                    "uid": 58
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Liceu",
+                    "rect": null,
+                    "text_id": 57,
+                    "uid": 59
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Catalunya",
+                    "rect": null,
+                    "text_id": 15,
+                    "uid": 60
+                },
+                {
+                    "coord": [
+                        90,
+                        183
+                    ],
+                    "is_working": true,
+                    "name": "Passeig de Gracia",
+                    "rect": null,
+                    "text_id": 33,
+                    "uid": 61
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Diagonal",
+                    "rect": null,
+                    "text_id": 58,
+                    "uid": 62
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Fontana",
+                    "rect": null,
+                    "text_id": 59,
+                    "uid": 63
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Lesseps",
+                    "rect": null,
+                    "text_id": 60,
+                    "uid": 64
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Vallcarca",
+                    "rect": null,
+                    "text_id": 61,
+                    "uid": 65
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Penitents",
+                    "rect": null,
+                    "text_id": 62,
+                    "uid": 66
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Vall d’Hebron",
+                    "rect": null,
+                    "text_id": 63,
+                    "uid": 67
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Montbau",
+                    "rect": null,
+                    "text_id": 64,
+                    "uid": 68
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Mundet",
+                    "rect": null,
+                    "text_id": 65,
+                    "uid": 69
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Valldaura",
+                    "rect": null,
+                    "text_id": 66,
+                    "uid": 70
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Canyelles",
+                    "rect": null,
+                    "text_id": 67,
+                    "uid": 71
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Roquetes",
+                    "rect": null,
+                    "text_id": 68,
+                    "uid": 72
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Trinitat Nova",
+                    "rect": null,
+                    "text_id": 69,
+                    "uid": 73
+                }
+            ],
+            "text_id": 70
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "F49E01",
+            "line_color": "FCCC04",
+            "line_width": 7,
+            "name": "L4",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": [
+                        290,
+                        183
+                    ],
+                    "is_working": true,
+                    "name": "La Pau",
+                    "rect": null,
+                    "text_id": 40,
+                    "uid": 74
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Besos",
+                    "rect": null,
+                    "text_id": 71,
+                    "uid": 75
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Besos Mar",
+                    "rect": null,
+                    "text_id": 72,
+                    "uid": 76
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "El Maresme|Forum",
+                    "rect": null,
+                    "text_id": 73,
+                    "uid": 77
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Selva de Mar",
+                    "rect": null,
+                    "text_id": 74,
+                    "uid": 78
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Poblenou",
+                    "rect": null,
+                    "text_id": 75,
+                    "uid": 79
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Llacuna",
+                    "rect": null,
+                    "text_id": 76,
+                    "uid": 80
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Bogatell",
+                    "rect": null,
+                    "text_id": 77,
+                    "uid": 81
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ciutadella|Vila Olimpica",
+                    "rect": null,
+                    "text_id": 78,
+                    "uid": 82
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Barceloneta",
+                    "rect": null,
+                    "text_id": 79,
+                    "uid": 83
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Jaume I",
+                    "rect": null,
+                    "text_id": 80,
+                    "uid": 84
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Urquinaona",
+                    "rect": null,
+                    "text_id": 16,
+                    "uid": 85
+                },
+                {
+                    "coord": [
+                        90,
+                        166
+                    ],
+                    "is_working": true,
+                    "name": "Passeig de Gracia",
+                    "rect": null,
+                    "text_id": 33,
+                    "uid": 86
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Girona",
+                    "rect": null,
+                    "text_id": 81,
+                    "uid": 87
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Verdaguer",
+                    "rect": null,
+                    "text_id": 82,
+                    "uid": 88
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Joanic",
+                    "rect": null,
+                    "text_id": 83,
+                    "uid": 89
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Alfons X",
+                    "rect": null,
+                    "text_id": 84,
+                    "uid": 90
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Guinardo Hospital de Sant Pau",
+                    "rect": null,
+                    "text_id": 85,
+                    "uid": 91
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Maragall",
+                    "rect": null,
+                    "text_id": 86,
+                    "uid": 92
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Llucmajor",
+                    "rect": null,
+                    "text_id": 87,
+                    "uid": 93
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Via Julia",
+                    "rect": null,
+                    "text_id": 88,
+                    "uid": 94
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Trinitat Nova",
+                    "rect": null,
+                    "text_id": 69,
+                    "uid": 95
+                }
+            ],
+            "text_id": 89
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "1967a4",
+            "line_color": "1967a4",
+            "line_width": 7,
+            "name": "L5",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Cornella Centre",
+                    "rect": null,
+                    "text_id": 90,
+                    "uid": 96
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Gavarra",
+                    "rect": null,
+                    "text_id": 91,
+                    "uid": 97
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sant Ildefons",
+                    "rect": null,
+                    "text_id": 92,
+                    "uid": 98
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Can Boixeres",
+                    "rect": null,
+                    "text_id": 93,
+                    "uid": 99
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Can Vidalet",
+                    "rect": null,
+                    "text_id": 94,
+                    "uid": 100
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Pubilla Cases",
+                    "rect": null,
+                    "text_id": 95,
+                    "uid": 101
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Ernest Lluch",
+                    "rect": null,
+                    "text_id": 96,
+                    "uid": 102
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Collblanc",
+                    "rect": null,
+                    "text_id": 97,
+                    "uid": 103
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Badal",
+                    "rect": null,
+                    "text_id": 98,
+                    "uid": 104
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Placa de Sants",
+                    "rect": null,
+                    "text_id": 9,
+                    "uid": 105
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sants Estacio",
+                    "rect": null,
+                    "text_id": 53,
+                    "uid": 106
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Entenca",
+                    "rect": null,
+                    "text_id": 99,
+                    "uid": 107
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Hospital Clinic",
+                    "rect": null,
+                    "text_id": 100,
+                    "uid": 108
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Diagonal",
+                    "rect": null,
+                    "text_id": 58,
+                    "uid": 109
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Verdaguer",
+                    "rect": null,
+                    "text_id": 82,
+                    "uid": 110
+                },
+                {
+                    "coord": [
+                        165,
+                        183
+                    ],
+                    "is_working": true,
+                    "name": "Sagrada Familia",
+                    "rect": null,
+                    "text_id": 36,
+                    "uid": 111
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sant Pau Dos de Maig",
+                    "rect": null,
+                    "text_id": 101,
+                    "uid": 112
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Camp de l’Arpa",
+                    "rect": null,
+                    "text_id": 102,
+                    "uid": 113
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "La Sagrera",
+                    "rect": null,
+                    "text_id": 22,
+                    "uid": 114
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Congres",
+                    "rect": null,
+                    "text_id": 103,
+                    "uid": 115
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Maragall",
+                    "rect": null,
+                    "text_id": 86,
+                    "uid": 116
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Virrei Amat",
+                    "rect": null,
+                    "text_id": 104,
+                    "uid": 117
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Vilapicina",
+                    "rect": null,
+                    "text_id": 105,
+                    "uid": 118
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Horta",
+                    "rect": null,
+                    "text_id": 106,
+                    "uid": 119
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "El Carmel",
+                    "rect": null,
+                    "text_id": 107,
+                    "uid": 120
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "El Coll La Teixonera",
+                    "rect": null,
+                    "text_id": 108,
+                    "uid": 121
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Vall d'Hebron",
+                    "rect": null,
+                    "text_id": 109,
+                    "uid": 122
+                }
+            ],
+            "text_id": 110
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "1967a4",
+            "line_color": "1967a4",
+            "line_width": 7,
+            "name": "L6",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Catalunya",
+                    "rect": null,
+                    "text_id": 15,
+                    "uid": 145
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Provenca",
+                    "rect": null,
+                    "text_id": 128,
+                    "uid": 146
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Gracia",
+                    "rect": null,
+                    "text_id": 129,
+                    "uid": 147
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sant Gervasi",
+                    "rect": null,
+                    "text_id": 130,
+                    "uid": 148
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Muntaner",
+                    "rect": null,
+                    "text_id": 131,
+                    "uid": 149
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "La Bonanova",
+                    "rect": null,
+                    "text_id": 132,
+                    "uid": 150
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Les Tres Torres",
+                    "rect": null,
+                    "text_id": 133,
+                    "uid": 151
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sarria",
+                    "rect": null,
+                    "text_id": 134,
+                    "uid": 152
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Reina Elisenda",
+                    "rect": null,
+                    "text_id": 135,
+                    "uid": 153
+                }
+            ],
+            "text_id": 136
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "543C04",
+            "line_color": "543C04",
+            "line_width": 7,
+            "name": "L7",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Catalunya",
+                    "rect": null,
+                    "text_id": 15,
+                    "uid": 154
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Provenca",
+                    "rect": null,
+                    "text_id": 128,
+                    "uid": 155
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Gracia",
+                    "rect": null,
+                    "text_id": 129,
+                    "uid": 156
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Pl. Molina",
+                    "rect": null,
+                    "text_id": 137,
+                    "uid": 157
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Padua",
+                    "rect": null,
+                    "text_id": 138,
+                    "uid": 158
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "El Putxet",
+                    "rect": null,
+                    "text_id": 139,
+                    "uid": 159
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Av. Tibidabo",
+                    "rect": null,
+                    "text_id": 140,
+                    "uid": 160
+                }
+            ],
+            "text_id": 141
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "da70d6",
+            "line_color": "da70d6",
+            "line_width": 7,
+            "name": "L8",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Espanya",
+                    "rect": null,
+                    "text_id": 11,
+                    "uid": 161
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Magoria La Campana",
+                    "rect": null,
+                    "text_id": 142,
+                    "uid": 162
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ildefons Cerda",
+                    "rect": null,
+                    "text_id": 143,
+                    "uid": 163
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Europa|Fira",
+                    "rect": null,
+                    "text_id": 144,
+                    "uid": 164
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Gornal",
+                    "rect": null,
+                    "text_id": 145,
+                    "uid": 165
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sant Josep",
+                    "rect": null,
+                    "text_id": 146,
+                    "uid": 166
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "L'Hospitalet Av. Carrilet",
+                    "rect": null,
+                    "text_id": 147,
+                    "uid": 167
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Almeda",
+                    "rect": null,
+                    "text_id": 148,
+                    "uid": 168
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Cornella Riera",
+                    "rect": null,
+                    "text_id": 149,
+                    "uid": 169
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sant Boi",
+                    "rect": null,
+                    "text_id": 150,
+                    "uid": 170
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Moli Nou Ciutat Cooperativa",
+                    "rect": null,
+                    "text_id": 151,
+                    "uid": 171
+                }
+            ],
+            "text_id": 152
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "ff8800",
+            "line_color": "ff8800",
+            "line_width": 7,
+            "name": "L9",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "La Sagrera",
+                    "rect": null,
+                    "text_id": 22,
+                    "uid": 123
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Estacio AVE",
+                    "rect": null,
+                    "text_id": 111,
+                    "uid": 124
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Onze de Setembre",
+                    "rect": null,
+                    "text_id": 112,
+                    "uid": 125
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Bon Pastor",
+                    "rect": null,
+                    "text_id": 113,
+                    "uid": 126
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Can Peixauet",
+                    "rect": null,
+                    "text_id": 114,
+                    "uid": 127
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Santa Rosa",
+                    "rect": null,
+                    "text_id": 115,
+                    "uid": 128
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Fondo",
+                    "rect": null,
+                    "text_id": 29,
+                    "uid": 129
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Esglesia Major",
+                    "rect": null,
+                    "text_id": 116,
+                    "uid": 130
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Singuerlin",
+                    "rect": null,
+                    "text_id": 117,
+                    "uid": 131
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Can Zam",
+                    "rect": null,
+                    "text_id": 118,
+                    "uid": 132
+                }
+            ],
+            "text_id": 119
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "42aaff",
+            "line_color": "42aaff",
+            "line_width": 7,
+            "name": "L10",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "La Sagrera",
+                    "rect": null,
+                    "text_id": 22,
+                    "uid": 133
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Estacio AVE",
+                    "rect": null,
+                    "text_id": 111,
+                    "uid": 134
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Onze de Setembre",
+                    "rect": null,
+                    "text_id": 112,
+                    "uid": 135
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Bon Pastor",
+                    "rect": null,
+                    "text_id": 113,
+                    "uid": 136
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Llefia",
+                    "rect": null,
+                    "text_id": 120,
+                    "uid": 137
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "La Salut",
+                    "rect": null,
+                    "text_id": 121,
+                    "uid": 138
+                },
+                {
+                    "coord": [
+                        390,
+                        183
+                    ],
+                    "is_working": true,
+                    "name": "Gorg",
+                    "rect": null,
+                    "text_id": 44,
+                    "uid": 139
+                }
+            ],
+            "text_id": 122
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "42aaff",
+            "line_color": "42aaff",
+            "line_width": 7,
+            "name": "R1",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Molins de Rei",
+                    "rect": null,
+                    "text_id": 153,
+                    "uid": 172
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sant Feliu de Llobregat",
+                    "rect": null,
+                    "text_id": 154,
+                    "uid": 173
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sant Joan Despi",
+                    "rect": null,
+                    "text_id": 155,
+                    "uid": 174
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Cornella",
+                    "rect": null,
+                    "text_id": 156,
+                    "uid": 175
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "L'Hospitalet de Llobregat",
+                    "rect": null,
+                    "text_id": 157,
+                    "uid": 176
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sants",
+                    "rect": null,
+                    "text_id": 158,
+                    "uid": 177
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Catalunya",
+                    "rect": null,
+                    "text_id": 15,
+                    "uid": 178
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Arc de Triomf",
+                    "rect": null,
+                    "text_id": 17,
+                    "uid": 179
+                },
+                {
+                    "coord": [
+                        215,
+                        107
+                    ],
+                    "is_working": true,
+                    "name": "El Clot-Arago",
+                    "rect": null,
+                    "text_id": 159,
+                    "uid": 180
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sant Adria de Besos",
+                    "rect": null,
+                    "text_id": 160,
+                    "uid": 181
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Badalona",
+                    "rect": null,
+                    "text_id": 161,
+                    "uid": 182
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Montgat",
+                    "rect": null,
+                    "text_id": 162,
+                    "uid": 183
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Montgat Nord",
+                    "rect": null,
+                    "text_id": 163,
+                    "uid": 184
+                }
+            ],
+            "text_id": 164
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "5DA130",
+            "line_color": "5DA130",
+            "line_width": 7,
+            "name": "R2",
+            "segments": [
+                [
+                    191,
+                    192,
+                    [
+                        [
+                            215,
+                            141
+                        ],
+                        [
+                            90,
+                            141
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Castelldefels",
+                    "rect": null,
+                    "text_id": 165,
+                    "uid": 185
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Gava",
+                    "rect": null,
+                    "text_id": 166,
+                    "uid": 186
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Viladecans",
+                    "rect": null,
+                    "text_id": 167,
+                    "uid": 187
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "El Prat de Llobregat",
+                    "rect": null,
+                    "text_id": 168,
+                    "uid": 188
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Bellvitge",
+                    "rect": null,
+                    "text_id": 1,
+                    "uid": 189
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sants",
+                    "rect": null,
+                    "text_id": 158,
+                    "uid": 190
+                },
+                {
+                    "coord": [
+                        90,
+                        141
+                    ],
+                    "is_working": true,
+                    "name": "Passeig de Gracia",
+                    "rect": null,
+                    "text_id": 33,
+                    "uid": 191
+                },
+                {
+                    "coord": [
+                        215,
+                        141
+                    ],
+                    "is_working": true,
+                    "name": "El Clot-Arago",
+                    "rect": null,
+                    "text_id": 159,
+                    "uid": 192
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sant Andreu Comtal",
+                    "rect": null,
+                    "text_id": 169,
+                    "uid": 193
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Montcada i Reixac",
+                    "rect": null,
+                    "text_id": 170,
+                    "uid": 194
+                }
+            ],
+            "text_id": 171
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "34c924",
+            "line_color": "34C924",
+            "line_width": 7,
+            "name": "R2-Nord",
+            "segments": [
+                [
+                    199,
+                    200,
+                    [
+                        [
+                            215,
+                            124
+                        ],
+                        [
+                            90,
+                            124
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Aeroport",
+                    "rect": null,
+                    "text_id": 172,
+                    "uid": 195
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "El Prat de Llobregat",
+                    "rect": null,
+                    "text_id": 168,
+                    "uid": 196
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Bellvitge",
+                    "rect": null,
+                    "text_id": 1,
+                    "uid": 197
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sants",
+                    "rect": null,
+                    "text_id": 158,
+                    "uid": 198
+                },
+                {
+                    "coord": [
+                        90,
+                        124
+                    ],
+                    "is_working": true,
+                    "name": "Passeig de Gracia",
+                    "rect": null,
+                    "text_id": 33,
+                    "uid": 199
+                },
+                {
+                    "coord": [
+                        215,
+                        124
+                    ],
+                    "is_working": true,
+                    "name": "El Clot-Arago",
+                    "rect": null,
+                    "text_id": 159,
+                    "uid": 200
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sant Andreu Comtal",
+                    "rect": null,
+                    "text_id": 169,
+                    "uid": 201
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Montcada i Reixac",
+                    "rect": null,
+                    "text_id": 170,
+                    "uid": 202
+                }
+            ],
+            "text_id": 173
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "013220",
+            "line_color": "013220",
+            "line_width": 7,
+            "name": "R2-Sud",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Platja de Castelldefels",
+                    "rect": null,
+                    "text_id": 174,
+                    "uid": 203
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Castelldefels",
+                    "rect": null,
+                    "text_id": 165,
+                    "uid": 204
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Gava",
+                    "rect": null,
+                    "text_id": 166,
+                    "uid": 205
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Viladecans",
+                    "rect": null,
+                    "text_id": 167,
+                    "uid": 206
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "El Prat de Llobregat",
+                    "rect": null,
+                    "text_id": 168,
+                    "uid": 207
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Bellvitge",
+                    "rect": null,
+                    "text_id": 1,
+                    "uid": 208
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sants",
+                    "rect": null,
+                    "text_id": 158,
+                    "uid": 209
+                },
+                {
+                    "coord": [
+                        90,
+                        107
+                    ],
+                    "is_working": true,
+                    "name": "Passeig de Gracia",
+                    "rect": null,
+                    "text_id": 33,
+                    "uid": 210
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Estacio de Franca",
+                    "rect": null,
+                    "text_id": 175,
+                    "uid": 211
+                }
+            ],
+            "text_id": 176
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "ff0033",
+            "line_color": "ff0033",
+            "line_width": 7,
+            "name": "R3",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "L'Hospitalet de Llobregat",
+                    "rect": null,
+                    "text_id": 157,
+                    "uid": 212
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sants",
+                    "rect": null,
+                    "text_id": 158,
+                    "uid": 213
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Catalunya",
+                    "rect": null,
+                    "text_id": 15,
+                    "uid": 214
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Arc de Triomf",
+                    "rect": null,
+                    "text_id": 17,
+                    "uid": 215
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "La Sagrera-Meridiana",
+                    "rect": null,
+                    "text_id": 177,
+                    "uid": 216
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sant Andreu Arenal",
+                    "rect": null,
+                    "text_id": 178,
+                    "uid": 217
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Torre del Baro",
+                    "rect": null,
+                    "text_id": 179,
+                    "uid": 218
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Montcada Bifurcacio",
+                    "rect": null,
+                    "text_id": 180,
+                    "uid": 219
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Montcada Ripollet",
+                    "rect": null,
+                    "text_id": 181,
+                    "uid": 220
+                }
+            ],
+            "text_id": 182
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "cd5b45",
+            "line_color": "cd5b45",
+            "line_width": 7,
+            "name": "R4",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Molins de Rei",
+                    "rect": null,
+                    "text_id": 153,
+                    "uid": 221
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sant Feliu de Llobregat",
+                    "rect": null,
+                    "text_id": 154,
+                    "uid": 222
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sant Joan Despi",
+                    "rect": null,
+                    "text_id": 155,
+                    "uid": 223
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Cornella",
+                    "rect": null,
+                    "text_id": 156,
+                    "uid": 224
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "L'Hospitalet de Llobregat",
+                    "rect": null,
+                    "text_id": 157,
+                    "uid": 225
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sants",
+                    "rect": null,
+                    "text_id": 158,
+                    "uid": 226
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Catalunya",
+                    "rect": null,
+                    "text_id": 15,
+                    "uid": 227
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Arc de Triomf",
+                    "rect": null,
+                    "text_id": 17,
+                    "uid": 228
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "La Sagrera-Meridiana",
+                    "rect": null,
+                    "text_id": 177,
+                    "uid": 229
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sant Andreu Arenal",
+                    "rect": null,
+                    "text_id": 178,
+                    "uid": 230
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Torre del Baro",
+                    "rect": null,
+                    "text_id": 179,
+                    "uid": 231
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Montcada Bifurcacio",
+                    "rect": null,
+                    "text_id": 180,
+                    "uid": 232
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Montcada i Reixac-Manresa",
+                    "rect": null,
+                    "text_id": 183,
+                    "uid": 233
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Montcada i Reixac-Santa Maria",
+                    "rect": null,
+                    "text_id": 184,
+                    "uid": 234
+                }
+            ],
+            "text_id": 185
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "da70d6",
+            "line_color": "da70d6",
+            "line_width": 7,
+            "name": "R7",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sant Andreu Arenal",
+                    "rect": null,
+                    "text_id": 178,
+                    "uid": 235
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Torre del Baro",
+                    "rect": null,
+                    "text_id": 179,
+                    "uid": 236
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Montcada Bifurcacio",
+                    "rect": null,
+                    "text_id": 180,
+                    "uid": 237
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Montcada i Reixac-Manresa",
+                    "rect": null,
+                    "text_id": 183,
+                    "uid": 238
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Montcada i Reixac-Santa Maria",
+                    "rect": null,
+                    "text_id": 184,
+                    "uid": 239
+                }
+            ],
+            "text_id": 186
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "013220",
+            "line_color": "013220",
+            "line_width": 7,
+            "name": "T6",
+            "segments": [
+                [
+                    332,
+                    333,
+                    [
+                        [
+                            365,
+                            125
+                        ],
+                        [
+                            390,
+                            125
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        390,
+                        125
+                    ],
+                    "is_working": true,
+                    "name": "Gorg",
+                    "rect": null,
+                    "text_id": 44,
+                    "uid": 332
+                },
+                {
+                    "coord": [
+                        365,
+                        125
+                    ],
+                    "is_working": true,
+                    "name": "Sant Roc",
+                    "rect": null,
+                    "text_id": 43,
+                    "uid": 333
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Encants de Sant Adria",
+                    "rect": null,
+                    "text_id": 233,
+                    "uid": 334
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sant Joan Baptista",
+                    "rect": null,
+                    "text_id": 232,
+                    "uid": 335
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "La Catalana",
+                    "rect": null,
+                    "text_id": 231,
+                    "uid": 336
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "La Mina",
+                    "rect": null,
+                    "text_id": 235,
+                    "uid": 337
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Central Termica del Besos",
+                    "rect": null,
+                    "text_id": 222,
+                    "uid": 338
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Estacio de Sant Adria",
+                    "rect": null,
+                    "text_id": 223,
+                    "uid": 339
+                }
+            ],
+            "text_id": 236
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "013220",
+            "line_color": "013220",
+            "line_width": 7,
+            "name": "T5",
+            "segments": [
+                [
+                    330,
+                    331,
+                    [
+                        [
+                            390,
+                            142
+                        ],
+                        [
+                            365,
+                            142
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Glories",
+                    "rect": null,
+                    "text_id": 19,
+                    "uid": 319
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "La Farinera",
+                    "rect": null,
+                    "text_id": 225,
+                    "uid": 320
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Can Jaumandreu",
+                    "rect": null,
+                    "text_id": 226,
+                    "uid": 321
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Espronceda",
+                    "rect": null,
+                    "text_id": 227,
+                    "uid": 322
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sant Marti de Provencais",
+                    "rect": null,
+                    "text_id": 228,
+                    "uid": 323
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Besos",
+                    "rect": null,
+                    "text_id": 71,
+                    "uid": 324
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Alfons el Magnanim",
+                    "rect": null,
+                    "text_id": 229,
+                    "uid": 325
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Parc del Besos",
+                    "rect": null,
+                    "text_id": 230,
+                    "uid": 326
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "La Catalana",
+                    "rect": null,
+                    "text_id": 231,
+                    "uid": 327
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sant Joan Baptista",
+                    "rect": null,
+                    "text_id": 232,
+                    "uid": 328
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Encants de Sant Adria",
+                    "rect": null,
+                    "text_id": 233,
+                    "uid": 329
+                },
+                {
+                    "coord": [
+                        365,
+                        142
+                    ],
+                    "is_working": true,
+                    "name": "Sant Roc",
+                    "rect": null,
+                    "text_id": 43,
+                    "uid": 330
+                },
+                {
+                    "coord": [
+                        390,
+                        142
+                    ],
+                    "is_working": true,
+                    "name": "Gorg",
+                    "rect": null,
+                    "text_id": 44,
+                    "uid": 331
+                }
+            ],
+            "text_id": 234
+        }
+    ],
+    "lines_width": 7,
+    "name": "l2",
+    "name_text_id": 47,
+    "stations_diameter": 13.0,
+    "transfers": [
+        [
+            134,
+            124,
+            null,
+            null
+        ],
+        [
+            15,
+            60,
+            null,
+            null
+        ],
+        [
+            20,
+            38,
+            [
+                215,
+                183
+            ],
+            [
+                215,
+                200
+            ]
+        ],
+        [
+            62,
+            109,
+            null,
+            null
+        ],
+        [
+            11,
+            55,
+            null,
+            null
+        ],
+        [
+            129,
+            29,
+            null,
+            null
+        ],
+        [
+            45,
+            139,
+            [
+                390,
+                200
+            ],
+            [
+                390,
+                183
+            ]
+        ],
+        [
+            41,
+            74,
+            [
+                290,
+                200
+            ],
+            [
+                290,
+                183
+            ]
+        ],
+        [
+            22,
+            114,
+            null,
+            null
+        ],
+        [
+            133,
+            22,
+            null,
+            null
+        ],
+        [
+            22,
+            123,
+            null,
+            null
+        ],
+        [
+            114,
+            133,
+            null,
+            null
+        ],
+        [
+            123,
+            114,
+            null,
+            null
+        ],
+        [
+            133,
+            123,
+            null,
+            null
+        ],
+        [
+            92,
+            116,
+            null,
+            null
+        ],
+        [
+            30,
+            57,
+            [
+                15,
+                200
+            ],
+            [
+                15,
+                183
+            ]
+        ],
+        [
+            33,
+            61,
+            [
+                90,
+                200
+            ],
+            [
+                90,
+                183
+            ]
+        ],
+        [
+            33,
+            86,
+            [
+                90,
+                200
+            ],
+            [
+                90,
+                166
+            ]
+        ],
+        [
+            61,
+            86,
+            [
+                90,
+                183
+            ],
+            [
+                90,
+                166
+            ]
+        ],
+        [
+            9,
+            105,
+            null,
+            null
+        ],
+        [
+            36,
+            111,
+            [
+                165,
+                200
+            ],
+            [
+                165,
+                183
+            ]
+        ],
+        [
+            53,
+            106,
+            null,
+            null
+        ],
+        [
+            95,
+            73,
+            null,
+            null
+        ],
+        [
+            14,
+            32,
+            [
+                65,
+                183
+            ],
+            [
+                65,
+                200
+            ]
+        ],
+        [
+            16,
+            85,
+            null,
+            null
+        ],
+        [
+            88,
+            110,
+            null,
+            null
+        ],
+        [
+            136,
+            126,
+            null,
+            null
+        ],
+        [
+            67,
+            122,
+            null,
+            null
+        ],
+        [
+            135,
+            125,
+            null,
+            null
+        ],
+        [
+            145,
+            154,
+            null,
+            null
+        ],
+        [
+            15,
+            154,
+            null,
+            null
+        ],
+        [
+            60,
+            154,
+            null,
+            null
+        ],
+        [
+            145,
+            15,
+            null,
+            null
+        ],
+        [
+            145,
+            60,
+            null,
+            null
+        ],
+        [
+            146,
+            155,
+            null,
+            null
+        ],
+        [
+            62,
+            155,
+            null,
+            null
+        ],
+        [
+            109,
+            155,
+            null,
+            null
+        ],
+        [
+            146,
+            62,
+            null,
+            null
+        ],
+        [
+            146,
+            109,
+            null,
+            null
+        ],
+        [
+            147,
+            156,
+            null,
+            null
+        ],
+        [
+            148,
+            157,
+            null,
+            null
+        ],
+        [
+            161,
+            11,
+            null,
+            null
+        ],
+        [
+            161,
+            55,
+            null,
+            null
+        ],
+        [
+            167,
+            2,
+            null,
+            null
+        ],
+        [
+            172,
+            221,
+            null,
+            null
+        ],
+        [
+            173,
+            222,
+            null,
+            null
+        ],
+        [
+            174,
+            223,
+            null,
+            null
+        ],
+        [
+            175,
+            224,
+            null,
+            null
+        ],
+        [
+            175,
+            96,
+            null,
+            null
+        ],
+        [
+            96,
+            224,
+            null,
+            null
+        ],
+        [
+            176,
+            212,
+            null,
+            null
+        ],
+        [
+            176,
+            225,
+            null,
+            null
+        ],
+        [
+            225,
+            212,
+            null,
+            null
+        ],
+        [
+            3,
+            212,
+            null,
+            null
+        ],
+        [
+            3,
+            176,
+            null,
+            null
+        ],
+        [
+            3,
+            225,
+            null,
+            null
+        ],
+        [
+            190,
+            177,
+            null,
+            null
+        ],
+        [
+            198,
+            213,
+            null,
+            null
+        ],
+        [
+            198,
+            226,
+            null,
+            null
+        ],
+        [
+            209,
+            213,
+            null,
+            null
+        ],
+        [
+            209,
+            226,
+            null,
+            null
+        ],
+        [
+            213,
+            226,
+            null,
+            null
+        ],
+        [
+            177,
+            53,
+            null,
+            null
+        ],
+        [
+            190,
+            53,
+            null,
+            null
+        ],
+        [
+            209,
+            53,
+            null,
+            null
+        ],
+        [
+            198,
+            53,
+            null,
+            null
+        ],
+        [
+            190,
+            198,
+            null,
+            null
+        ],
+        [
+            213,
+            53,
+            null,
+            null
+        ],
+        [
+            226,
+            53,
+            null,
+            null
+        ],
+        [
+            177,
+            106,
+            null,
+            null
+        ],
+        [
+            190,
+            106,
+            null,
+            null
+        ],
+        [
+            209,
+            106,
+            null,
+            null
+        ],
+        [
+            198,
+            106,
+            null,
+            null
+        ],
+        [
+            213,
+            106,
+            null,
+            null
+        ],
+        [
+            226,
+            106,
+            null,
+            null
+        ],
+        [
+            209,
+            190,
+            null,
+            null
+        ],
+        [
+            213,
+            190,
+            null,
+            null
+        ],
+        [
+            226,
+            190,
+            null,
+            null
+        ],
+        [
+            177,
+            198,
+            null,
+            null
+        ],
+        [
+            177,
+            209,
+            null,
+            null
+        ],
+        [
+            177,
+            213,
+            null,
+            null
+        ],
+        [
+            177,
+            226,
+            null,
+            null
+        ],
+        [
+            198,
+            209,
+            null,
+            null
+        ],
+        [
+            178,
+            214,
+            null,
+            null
+        ],
+        [
+            178,
+            227,
+            null,
+            null
+        ],
+        [
+            227,
+            214,
+            null,
+            null
+        ],
+        [
+            178,
+            15,
+            null,
+            null
+        ],
+        [
+            214,
+            15,
+            null,
+            null
+        ],
+        [
+            227,
+            15,
+            null,
+            null
+        ],
+        [
+            178,
+            60,
+            null,
+            null
+        ],
+        [
+            214,
+            60,
+            null,
+            null
+        ],
+        [
+            227,
+            60,
+            null,
+            null
+        ],
+        [
+            179,
+            215,
+            null,
+            null
+        ],
+        [
+            179,
+            228,
+            null,
+            null
+        ],
+        [
+            228,
+            215,
+            null,
+            null
+        ],
+        [
+            17,
+            215,
+            null,
+            null
+        ],
+        [
+            179,
+            17,
+            null,
+            null
+        ],
+        [
+            17,
+            228,
+            null,
+            null
+        ],
+        [
+            180,
+            192,
+            [
+                215,
+                107
+            ],
+            [
+                215,
+                141
+            ]
+        ],
+        [
+            180,
+            200,
+            [
+                215,
+                107
+            ],
+            [
+                215,
+                124
+            ]
+        ],
+        [
+            200,
+            192,
+            [
+                215,
+                124
+            ],
+            [
+                215,
+                141
+            ]
+        ],
+        [
+            20,
+            180,
+            [
+                215,
+                183
+            ],
+            [
+                215,
+                107
+            ]
+        ],
+        [
+            20,
+            192,
+            [
+                215,
+                183
+            ],
+            [
+                215,
+                141
+            ]
+        ],
+        [
+            20,
+            200,
+            [
+                215,
+                183
+            ],
+            [
+                215,
+                124
+            ]
+        ],
+        [
+            38,
+            180,
+            [
+                215,
+                200
+            ],
+            [
+                215,
+                107
+            ]
+        ],
+        [
+            38,
+            192,
+            [
+                215,
+                200
+            ],
+            [
+                215,
+                141
+            ]
+        ],
+        [
+            38,
+            200,
+            [
+                215,
+                200
+            ],
+            [
+                215,
+                124
+            ]
+        ],
+        [
+            216,
+            229,
+            null,
+            null
+        ],
+        [
+            216,
+            22,
+            null,
+            null
+        ],
+        [
+            229,
+            22,
+            null,
+            null
+        ],
+        [
+            216,
+            114,
+            null,
+            null
+        ],
+        [
+            229,
+            114,
+            null,
+            null
+        ],
+        [
+            216,
+            133,
+            null,
+            null
+        ],
+        [
+            229,
+            133,
+            null,
+            null
+        ],
+        [
+            216,
+            123,
+            null,
+            null
+        ],
+        [
+            229,
+            123,
+            null,
+            null
+        ],
+        [
+            217,
+            230,
+            null,
+            null
+        ],
+        [
+            217,
+            23,
+            null,
+            null
+        ],
+        [
+            230,
+            23,
+            null,
+            null
+        ],
+        [
+            235,
+            23,
+            null,
+            null
+        ],
+        [
+            217,
+            235,
+            null,
+            null
+        ],
+        [
+            235,
+            230,
+            null,
+            null
+        ],
+        [
+            218,
+            231,
+            null,
+            null
+        ],
+        [
+            218,
+            236,
+            null,
+            null
+        ],
+        [
+            236,
+            231,
+            null,
+            null
+        ],
+        [
+            219,
+            232,
+            null,
+            null
+        ],
+        [
+            237,
+            232,
+            null,
+            null
+        ],
+        [
+            219,
+            237,
+            null,
+            null
+        ],
+        [
+            234,
+            239,
+            null,
+            null
+        ],
+        [
+            233,
+            238,
+            null,
+            null
+        ],
+        [
+            185,
+            204,
+            null,
+            null
+        ],
+        [
+            186,
+            205,
+            null,
+            null
+        ],
+        [
+            187,
+            206,
+            null,
+            null
+        ],
+        [
+            188,
+            207,
+            null,
+            null
+        ],
+        [
+            188,
+            196,
+            null,
+            null
+        ],
+        [
+            196,
+            207,
+            null,
+            null
+        ],
+        [
+            189,
+            208,
+            null,
+            null
+        ],
+        [
+            189,
+            197,
+            null,
+            null
+        ],
+        [
+            197,
+            208,
+            null,
+            null
+        ],
+        [
+            191,
+            210,
+            [
+                90,
+                141
+            ],
+            [
+                90,
+                107
+            ]
+        ],
+        [
+            210,
+            86,
+            [
+                90,
+                107
+            ],
+            [
+                90,
+                166
+            ]
+        ],
+        [
+            199,
+            86,
+            [
+                90,
+                124
+            ],
+            [
+                90,
+                166
+            ]
+        ],
+        [
+            191,
+            199,
+            [
+                90,
+                141
+            ],
+            [
+                90,
+                124
+            ]
+        ],
+        [
+            199,
+            210,
+            [
+                90,
+                124
+            ],
+            [
+                90,
+                107
+            ]
+        ],
+        [
+            191,
+            33,
+            [
+                90,
+                141
+            ],
+            [
+                90,
+                200
+            ]
+        ],
+        [
+            210,
+            33,
+            [
+                90,
+                107
+            ],
+            [
+                90,
+                200
+            ]
+        ],
+        [
+            199,
+            33,
+            [
+                90,
+                124
+            ],
+            [
+                90,
+                200
+            ]
+        ],
+        [
+            191,
+            61,
+            [
+                90,
+                141
+            ],
+            [
+                90,
+                183
+            ]
+        ],
+        [
+            210,
+            61,
+            [
+                90,
+                107
+            ],
+            [
+                90,
+                183
+            ]
+        ],
+        [
+            199,
+            61,
+            [
+                90,
+                124
+            ],
+            [
+                90,
+                183
+            ]
+        ],
+        [
+            191,
+            86,
+            [
+                90,
+                141
+            ],
+            [
+                90,
+                166
+            ]
+        ],
+        [
+            83,
+            211,
+            null,
+            null
+        ],
+        [
+            193,
+            201,
+            null,
+            null
+        ],
+        [
+            24,
+            201,
+            null,
+            null
+        ],
+        [
+            193,
+            24,
+            null,
+            null
+        ],
+        [
+            194,
+            202,
+            null,
+            null
+        ],
+        [
+            319,
+            19,
+            null,
+            null
+        ],
+        [
+            327,
+            336,
+            null,
+            null
+        ],
+        [
+            328,
+            335,
+            null,
+            null
+        ],
+        [
+            329,
+            334,
+            null,
+            null
+        ],
+        [
+            330,
+            333,
+            [
+                365,
+                142
+            ],
+            [
+                365,
+                125
+            ]
+        ],
+        [
+            330,
+            44,
+            [
+                365,
+                142
+            ],
+            [
+                365,
+                200
+            ]
+        ],
+        [
+            44,
+            333,
+            [
+                365,
+                200
+            ],
+            [
+                365,
+                125
+            ]
+        ],
+        [
+            331,
+            332,
+            [
+                390,
+                142
+            ],
+            [
+                390,
+                125
+            ]
+        ],
+        [
+            45,
+            332,
+            [
+                390,
+                200
+            ],
+            [
+                390,
+                125
+            ]
+        ],
+        [
+            331,
+            45,
+            [
+                390,
+                142
+            ],
+            [
+                390,
+                200
+            ]
+        ],
+        [
+            324,
+            75,
+            null,
+            null
+        ]
+    ],
+    "transports": [
+        "metro",
+        "tram",
+        "fgc",
+        "rodalies"
+    ],
+    "type_name": "TMB Metro",
+    "type_text_id": 240,
+    "upper_case": false,
+    "width": 590,
+    "word_wrap": true
+}

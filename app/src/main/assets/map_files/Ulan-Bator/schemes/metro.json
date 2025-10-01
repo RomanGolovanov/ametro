@@ -1,0 +1,208 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 630,
+    "images": [
+        "res/schemes/ulan-bator.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "CC6600",
+            "line_color": "CC6600",
+            "line_width": 9,
+            "name": "1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            150,
+                            150
+                        ],
+                        [
+                            20,
+                            20
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            250,
+                            150
+                        ],
+                        [
+                            150,
+                            150
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            350,
+                            250
+                        ],
+                        [
+                            250,
+                            150
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            350,
+                            350
+                        ],
+                        [
+                            350,
+                            250
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            480,
+                            480
+                        ],
+                        [
+                            350,
+                            350
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        20,
+                        20
+                    ],
+                    "is_working": true,
+                    "name": "Kosmonavt Uuly",
+                    "rect": [
+                        37,
+                        10,
+                        84,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        150,
+                        150
+                    ],
+                    "is_working": true,
+                    "name": "Choybalsan",
+                    "rect": [
+                        68,
+                        142,
+                        61,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        250,
+                        150
+                    ],
+                    "is_working": true,
+                    "name": "Moskva Uuly",
+                    "rect": [
+                        272,
+                        139,
+                        67,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        350,
+                        250
+                    ],
+                    "is_working": true,
+                    "name": "Zuun Urt",
+                    "rect": [
+                        371,
+                        243,
+                        44,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        350,
+                        350
+                    ],
+                    "is_working": true,
+                    "name": "Baruun Urt",
+                    "rect": [
+                        274,
+                        342,
+                        56,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        480,
+                        480
+                    ],
+                    "is_working": true,
+                    "name": "Suhbaatar",
+                    "rect": [
+                        408,
+                        475,
+                        52,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                }
+            ],
+            "text_id": 6
+        }
+    ],
+    "lines_width": 9,
+    "name": "metro",
+    "name_text_id": 7,
+    "stations_diameter": 19.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 8,
+    "upper_case": false,
+    "width": 630,
+    "word_wrap": false
+}

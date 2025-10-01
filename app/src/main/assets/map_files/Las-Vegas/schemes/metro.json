@@ -1,0 +1,239 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 470,
+    "images": [
+        "res/schemes/las-vegas.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "af0000",
+            "line_color": "cf0000",
+            "line_width": 7,
+            "name": "Monorail",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            40,
+                            120
+                        ],
+                        [
+                            40,
+                            80
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            40,
+                            160
+                        ],
+                        [
+                            40,
+                            120
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            40,
+                            200
+                        ],
+                        [
+                            40,
+                            160
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            40,
+                            240
+                        ],
+                        [
+                            40,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            40,
+                            280
+                        ],
+                        [
+                            40,
+                            240
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            40,
+                            320
+                        ],
+                        [
+                            40,
+                            280
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        40,
+                        80
+                    ],
+                    "is_working": true,
+                    "name": "Sahara",
+                    "rect": [
+                        52,
+                        73,
+                        37,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        40,
+                        120
+                    ],
+                    "is_working": true,
+                    "name": "Las Vegas Hilton",
+                    "rect": [
+                        52,
+                        113,
+                        86,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        40,
+                        160
+                    ],
+                    "is_working": true,
+                    "name": "Las Vegas Convention Center",
+                    "rect": [
+                        52,
+                        153,
+                        149,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        40,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Harrah's / Imperial Palace",
+                    "rect": [
+                        52,
+                        193,
+                        130,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        40,
+                        240
+                    ],
+                    "is_working": true,
+                    "name": "Flamingo / Caesars Palace",
+                    "rect": [
+                        52,
+                        233,
+                        135,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        40,
+                        280
+                    ],
+                    "is_working": true,
+                    "name": "Bally's & Paris",
+                    "rect": [
+                        52,
+                        273,
+                        76,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        40,
+                        320
+                    ],
+                    "is_working": true,
+                    "name": "MGM Grand",
+                    "rect": [
+                        53,
+                        313,
+                        61,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                }
+            ],
+            "text_id": 7
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 8,
+    "stations_diameter": 13.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 9,
+    "upper_case": false,
+    "width": 190,
+    "word_wrap": false
+}

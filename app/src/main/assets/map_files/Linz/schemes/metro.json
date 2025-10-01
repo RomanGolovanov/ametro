@@ -1,0 +1,554 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 520,
+    "images": [
+        "res/schemes/linz.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "f7ad10",
+            "line_width": 2,
+            "name": "Tram",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            160,
+                            45
+                        ],
+                        [
+                            140,
+                            45
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            180,
+                            45
+                        ],
+                        [
+                            160,
+                            45
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            190,
+                            75
+                        ],
+                        [
+                            190.0,
+                            45.0
+                        ],
+                        [
+                            180,
+                            45
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            220,
+                            65
+                        ],
+                        [
+                            190.0,
+                            65.0
+                        ],
+                        [
+                            190,
+                            75
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    7,
+                    [
+                        [
+                            190,
+                            115
+                        ],
+                        [
+                            190,
+                            75
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            250,
+                            65
+                        ],
+                        [
+                            220,
+                            65
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            280,
+                            40
+                        ],
+                        [
+                            280.0,
+                            50.0
+                        ],
+                        [
+                            265.0,
+                            65.0
+                        ],
+                        [
+                            250,
+                            65
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            190,
+                            145
+                        ],
+                        [
+                            190,
+                            115
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            190,
+                            180
+                        ],
+                        [
+                            190,
+                            145
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            190,
+                            210
+                        ],
+                        [
+                            190,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            190,
+                            235
+                        ],
+                        [
+                            190,
+                            210
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            155,
+                            280
+                        ],
+                        [
+                            170.0,
+                            260.0
+                        ],
+                        [
+                            180.0,
+                            260.0
+                        ],
+                        [
+                            190.0,
+                            250.0
+                        ],
+                        [
+                            190,
+                            235
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            190,
+                            310
+                        ],
+                        [
+                            175.0,
+                            295.0
+                        ],
+                        [
+                            160.0,
+                            295.0
+                        ],
+                        [
+                            155,
+                            280
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            190,
+                            340
+                        ],
+                        [
+                            190,
+                            310
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            190,
+                            370
+                        ],
+                        [
+                            190,
+                            340
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        140,
+                        45
+                    ],
+                    "is_working": true,
+                    "name": "Bergbahnhof Urfahr",
+                    "rect": [
+                        46,
+                        54,
+                        99,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        160,
+                        45
+                    ],
+                    "is_working": true,
+                    "name": "Muhlkreisbahnhof",
+                    "rect": [
+                        79,
+                        23,
+                        90,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        180,
+                        45
+                    ],
+                    "is_working": true,
+                    "name": "Biegung",
+                    "rect": [
+                        179,
+                        23,
+                        43,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        190,
+                        75
+                    ],
+                    "is_working": true,
+                    "name": "Rudolfstrasse",
+                    "rect": [
+                        111,
+                        70,
+                        71,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        220,
+                        65
+                    ],
+                    "is_working": true,
+                    "name": "Wildbergstrasse",
+                    "rect": [
+                        212,
+                        74,
+                        15,
+                        83
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        250,
+                        65
+                    ],
+                    "is_working": true,
+                    "name": "Peuerbachstrasse",
+                    "rect": [
+                        244,
+                        73,
+                        15,
+                        92
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        280,
+                        40
+                    ],
+                    "is_working": true,
+                    "name": "Linke Bruckenstrasse",
+                    "rect": [
+                        289,
+                        40,
+                        15,
+                        111
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        190,
+                        115
+                    ],
+                    "is_working": true,
+                    "name": "Hauptplatz",
+                    "rect": [
+                        127,
+                        109,
+                        54,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        190,
+                        145
+                    ],
+                    "is_working": true,
+                    "name": "Taubenmarkt",
+                    "rect": [
+                        115,
+                        138,
+                        66,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        190,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Mozartkreuzung",
+                    "rect": [
+                        101,
+                        171,
+                        80,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        190,
+                        210
+                    ],
+                    "is_working": true,
+                    "name": "Burgerstrasse",
+                    "rect": [
+                        198,
+                        202,
+                        73,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        190,
+                        235
+                    ],
+                    "is_working": true,
+                    "name": "Goethekreuzung",
+                    "rect": [
+                        199,
+                        228,
+                        82,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        155,
+                        280
+                    ],
+                    "is_working": true,
+                    "name": "Hauptbahnhof",
+                    "rect": [
+                        167,
+                        272,
+                        70,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        190,
+                        310
+                    ],
+                    "is_working": true,
+                    "name": "Unionkreuzung",
+                    "rect": [
+                        201,
+                        302,
+                        76,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        190,
+                        340
+                    ],
+                    "is_working": true,
+                    "name": "Herz-Jesu-Kirche",
+                    "rect": [
+                        200,
+                        331,
+                        88,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        190,
+                        370
+                    ],
+                    "is_working": true,
+                    "name": "Bulgariplatz",
+                    "rect": [
+                        199,
+                        361,
+                        61,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                }
+            ],
+            "text_id": 16
+        }
+    ],
+    "lines_width": 2,
+    "name": "metro",
+    "name_text_id": 17,
+    "stations_diameter": 11.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 18,
+    "upper_case": false,
+    "width": 430,
+    "word_wrap": false
+}

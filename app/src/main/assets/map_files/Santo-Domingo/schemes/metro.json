@@ -1,0 +1,1081 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 615,
+    "images": [
+        "res/schemes/santo-domingo.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "0000FF",
+            "line_width": 7,
+            "name": "1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            386,
+                            49
+                        ],
+                        [
+                            386,
+                            16
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            386,
+                            82
+                        ],
+                        [
+                            386,
+                            49
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            351,
+                            113
+                        ],
+                        [
+                            386,
+                            82
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            351,
+                            148
+                        ],
+                        [
+                            351,
+                            113
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            351,
+                            187
+                        ],
+                        [
+                            351,
+                            148
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            351,
+                            232
+                        ],
+                        [
+                            351,
+                            187
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            351,
+                            267
+                        ],
+                        [
+                            351,
+                            232
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            351,
+                            299
+                        ],
+                        [
+                            351,
+                            267
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            351,
+                            328
+                        ],
+                        [
+                            351,
+                            299
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            351,
+                            360
+                        ],
+                        [
+                            351,
+                            328
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            351,
+                            393
+                        ],
+                        [
+                            351,
+                            360
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            351,
+                            428
+                        ],
+                        [
+                            351,
+                            393
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            293,
+                            428
+                        ],
+                        [
+                            351,
+                            428
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            234,
+                            428
+                        ],
+                        [
+                            293,
+                            428
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            234,
+                            465
+                        ],
+                        [
+                            234,
+                            428
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        386,
+                        16
+                    ],
+                    "is_working": true,
+                    "name": "Mama Tingo",
+                    "rect": [
+                        313,
+                        9,
+                        62,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        386,
+                        49
+                    ],
+                    "is_working": true,
+                    "name": "Gregorio Urbano Gilbert",
+                    "rect": [
+                        256,
+                        43,
+                        120,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        386,
+                        82
+                    ],
+                    "is_working": true,
+                    "name": "Gregorio Luperon",
+                    "rect": [
+                        281,
+                        72,
+                        88,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        351,
+                        113
+                    ],
+                    "is_working": true,
+                    "name": "Jose Francisco Pena Gomez",
+                    "rect": [
+                        198,
+                        107,
+                        143,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        351,
+                        148
+                    ],
+                    "is_working": true,
+                    "name": "Hermanas Mirabal",
+                    "rect": [
+                        246,
+                        142,
+                        93,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        351,
+                        187
+                    ],
+                    "is_working": true,
+                    "name": "Maximo Gomez",
+                    "rect": [
+                        262,
+                        179,
+                        78,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        351,
+                        232
+                    ],
+                    "is_working": true,
+                    "name": "Los Tainos",
+                    "rect": [
+                        284,
+                        224,
+                        56,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        351,
+                        267
+                    ],
+                    "is_working": true,
+                    "name": "Pedro Livio Cedeno",
+                    "rect": [
+                        238,
+                        256,
+                        99,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        351,
+                        299
+                    ],
+                    "is_working": true,
+                    "name": "Pena Battle",
+                    "rect": [
+                        281,
+                        291,
+                        59,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        351,
+                        328
+                    ],
+                    "is_working": true,
+                    "name": "Juan Pablo Duarte",
+                    "rect": [
+                        363,
+                        221,
+                        15,
+                        93
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        351,
+                        360
+                    ],
+                    "is_working": true,
+                    "name": "Prof. Juan Bosch",
+                    "rect": [
+                        361,
+                        355,
+                        87,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        351,
+                        393
+                    ],
+                    "is_working": true,
+                    "name": "Casandra Damiron",
+                    "rect": [
+                        362,
+                        386,
+                        95,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        351,
+                        428
+                    ],
+                    "is_working": true,
+                    "name": "Joaquin Balaguer",
+                    "rect": [
+                        362,
+                        421,
+                        89,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        293,
+                        428
+                    ],
+                    "is_working": true,
+                    "name": "Amin Abel",
+                    "rect": [
+                        286,
+                        364,
+                        15,
+                        54
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        234,
+                        428
+                    ],
+                    "is_working": true,
+                    "name": "Francisco Alberto Caamano",
+                    "rect": [
+                        84,
+                        421,
+                        140,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        234,
+                        465
+                    ],
+                    "is_working": true,
+                    "name": "Centro de los Heroes",
+                    "rect": [
+                        117,
+                        457,
+                        107,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                }
+            ],
+            "text_id": 16
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "FF0000",
+            "line_width": 7,
+            "name": "2",
+            "segments": [
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            70,
+                            328
+                        ],
+                        [
+                            21,
+                            328
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            114,
+                            328
+                        ],
+                        [
+                            70,
+                            328
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            163,
+                            328
+                        ],
+                        [
+                            114,
+                            328
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            209,
+                            328
+                        ],
+                        [
+                            163,
+                            328
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            255,
+                            328
+                        ],
+                        [
+                            209,
+                            328
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            300,
+                            328
+                        ],
+                        [
+                            255,
+                            328
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            367,
+                            328
+                        ],
+                        [
+                            300,
+                            328
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    23,
+                    24,
+                    [
+                        [
+                            409,
+                            328
+                        ],
+                        [
+                            367,
+                            328
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            409,
+                            287
+                        ],
+                        [
+                            409,
+                            328
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    25,
+                    26,
+                    [
+                        [
+                            432,
+                            264
+                        ],
+                        [
+                            409,
+                            287
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    26,
+                    27,
+                    [
+                        [
+                            457,
+                            239
+                        ],
+                        [
+                            432,
+                            264
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    27,
+                    28,
+                    [
+                        [
+                            483,
+                            213
+                        ],
+                        [
+                            457,
+                            239
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            506,
+                            190
+                        ],
+                        [
+                            483,
+                            213
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    29,
+                    30,
+                    [
+                        [
+                            546,
+                            150
+                        ],
+                        [
+                            506,
+                            190
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    30,
+                    31,
+                    [
+                        [
+                            585,
+                            150
+                        ],
+                        [
+                            546,
+                            150
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    31,
+                    32,
+                    [
+                        [
+                            655,
+                            150
+                        ],
+                        [
+                            585,
+                            150
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    32,
+                    33,
+                    [
+                        [
+                            700,
+                            195
+                        ],
+                        [
+                            655,
+                            150
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        21,
+                        328
+                    ],
+                    "is_working": true,
+                    "name": "Maria Montez",
+                    "rect": [
+                        13,
+                        248,
+                        15,
+                        68
+                    ],
+                    "text_id": 17,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        70,
+                        328
+                    ],
+                    "is_working": true,
+                    "name": "Pedro F. Bono",
+                    "rect": [
+                        65,
+                        244,
+                        15,
+                        72
+                    ],
+                    "text_id": 18,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        114,
+                        328
+                    ],
+                    "is_working": true,
+                    "name": "Francisco G. Billini",
+                    "rect": [
+                        108,
+                        219,
+                        15,
+                        97
+                    ],
+                    "text_id": 19,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        163,
+                        328
+                    ],
+                    "is_working": true,
+                    "name": "Ulises F. Espaillat",
+                    "rect": [
+                        157,
+                        225,
+                        15,
+                        92
+                    ],
+                    "text_id": 20,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        209,
+                        328
+                    ],
+                    "is_working": true,
+                    "name": "Pedro Mir",
+                    "rect": [
+                        201,
+                        267,
+                        15,
+                        50
+                    ],
+                    "text_id": 21,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        255,
+                        328
+                    ],
+                    "is_working": true,
+                    "name": "Freddy Beras Goico",
+                    "rect": [
+                        248,
+                        339,
+                        15,
+                        101
+                    ],
+                    "text_id": 22,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        300,
+                        328
+                    ],
+                    "is_working": true,
+                    "name": "Juan Ulises Garcia",
+                    "rect": [
+                        308,
+                        338,
+                        15,
+                        97
+                    ],
+                    "text_id": 23,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        367,
+                        328
+                    ],
+                    "is_working": true,
+                    "name": "Juan Pablo Duarte",
+                    "rect": null,
+                    "text_id": 9,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        409,
+                        328
+                    ],
+                    "is_working": true,
+                    "name": "Coronel Rafael Tomas Fernandez",
+                    "rect": [
+                        420,
+                        320,
+                        166,
+                        15
+                    ],
+                    "text_id": 24,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        409,
+                        287
+                    ],
+                    "is_working": true,
+                    "name": "Mauricio Baez",
+                    "rect": [
+                        423,
+                        282,
+                        73,
+                        15
+                    ],
+                    "text_id": 25,
+                    "uid": 25
+                },
+                {
+                    "coord": [
+                        432,
+                        264
+                    ],
+                    "is_working": true,
+                    "name": "Ramon Caceres",
+                    "rect": [
+                        446,
+                        258,
+                        82,
+                        15
+                    ],
+                    "text_id": 26,
+                    "uid": 26
+                },
+                {
+                    "coord": [
+                        457,
+                        239
+                    ],
+                    "is_working": true,
+                    "name": "Horacio Vasquez",
+                    "rect": [
+                        470,
+                        235,
+                        86,
+                        15
+                    ],
+                    "text_id": 27,
+                    "uid": 27
+                },
+                {
+                    "coord": [
+                        483,
+                        213
+                    ],
+                    "is_working": true,
+                    "name": "Manuel de Jesus Abreu Galvan",
+                    "rect": [
+                        498,
+                        209,
+                        157,
+                        15
+                    ],
+                    "text_id": 28,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        506,
+                        190
+                    ],
+                    "is_working": true,
+                    "name": "Eduardo Brito",
+                    "rect": [
+                        422,
+                        180,
+                        70,
+                        15
+                    ],
+                    "text_id": 29,
+                    "uid": 29
+                },
+                {
+                    "coord": [
+                        546,
+                        150
+                    ],
+                    "is_working": true,
+                    "name": "Ercilia Pepin",
+                    "rect": [
+                        465,
+                        142,
+                        65,
+                        15
+                    ],
+                    "text_id": 30,
+                    "uid": 30
+                },
+                {
+                    "coord": [
+                        585,
+                        150
+                    ],
+                    "is_working": true,
+                    "name": "Rosa Duarte",
+                    "rect": [
+                        559,
+                        163,
+                        64,
+                        15
+                    ],
+                    "text_id": 31,
+                    "uid": 31
+                },
+                {
+                    "coord": [
+                        655,
+                        150
+                    ],
+                    "is_working": true,
+                    "name": "Trina de Moya Vasquez",
+                    "rect": [
+                        608,
+                        125,
+                        117,
+                        15
+                    ],
+                    "text_id": 32,
+                    "uid": 32
+                },
+                {
+                    "coord": [
+                        700,
+                        195
+                    ],
+                    "is_working": true,
+                    "name": "Concepcion Bona",
+                    "rect": [
+                        596,
+                        190,
+                        90,
+                        15
+                    ],
+                    "text_id": 33,
+                    "uid": 33
+                }
+            ],
+            "text_id": 34
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 35,
+    "stations_diameter": 13.0,
+    "transfers": [
+        [
+            9,
+            23,
+            [
+                351,
+                328
+            ],
+            [
+                367,
+                328
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 36,
+    "upper_case": false,
+    "width": 850,
+    "word_wrap": false
+}

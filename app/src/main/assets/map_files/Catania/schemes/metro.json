@@ -1,0 +1,208 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 246,
+    "images": [
+        "res/schemes/catania.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "E41c0c",
+            "line_color": "E41c0c",
+            "line_width": 9,
+            "name": "Linea 1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            121,
+                            96
+                        ],
+                        [
+                            35,
+                            96
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            201,
+                            96
+                        ],
+                        [
+                            121,
+                            96
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            292,
+                            96
+                        ],
+                        [
+                            201,
+                            96
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            377,
+                            96
+                        ],
+                        [
+                            292,
+                            96
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            461,
+                            96
+                        ],
+                        [
+                            377,
+                            96
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        35,
+                        96
+                    ],
+                    "is_working": true,
+                    "name": "Borgo",
+                    "rect": [
+                        16,
+                        109,
+                        42,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        121,
+                        96
+                    ],
+                    "is_working": true,
+                    "name": "Giuffrida",
+                    "rect": [
+                        91,
+                        110,
+                        60,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        201,
+                        96
+                    ],
+                    "is_working": true,
+                    "name": "Italia",
+                    "rect": [
+                        181,
+                        110,
+                        36,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        292,
+                        96
+                    ],
+                    "is_working": true,
+                    "name": "Galatea",
+                    "rect": [
+                        268,
+                        108,
+                        53,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        377,
+                        96
+                    ],
+                    "is_working": true,
+                    "name": "Stazione Centrale F.S.",
+                    "rect": [
+                        333,
+                        57,
+                        82,
+                        28
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        461,
+                        96
+                    ],
+                    "is_working": true,
+                    "name": "Porto",
+                    "rect": [
+                        441,
+                        110,
+                        39,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                }
+            ],
+            "text_id": 6
+        }
+    ],
+    "lines_width": 9,
+    "name": "metro",
+    "name_text_id": 7,
+    "stations_diameter": 17.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 8,
+    "upper_case": true,
+    "width": 611,
+    "word_wrap": true
+}

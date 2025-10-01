@@ -1,0 +1,491 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 626,
+    "images": [
+        "res/schemes/buffalo.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "0000af",
+            "line_color": "0000cf",
+            "line_width": 7,
+            "name": "1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            255,
+                            56
+                        ],
+                        [
+                            285,
+                            26
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            225,
+                            86
+                        ],
+                        [
+                            255,
+                            56
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            195,
+                            116
+                        ],
+                        [
+                            225,
+                            86
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            170,
+                            141
+                        ],
+                        [
+                            195,
+                            116
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            150,
+                            191
+                        ],
+                        [
+                            150.0,
+                            161.0
+                        ],
+                        [
+                            170,
+                            141
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            150,
+                            231
+                        ],
+                        [
+                            150,
+                            191
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            150,
+                            266
+                        ],
+                        [
+                            150,
+                            231
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            150,
+                            321
+                        ],
+                        [
+                            150,
+                            266
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            150,
+                            346
+                        ],
+                        [
+                            150,
+                            321
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            150,
+                            376
+                        ],
+                        [
+                            150,
+                            346
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            150,
+                            401
+                        ],
+                        [
+                            150,
+                            376
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            150,
+                            426
+                        ],
+                        [
+                            150,
+                            401
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            150,
+                            451
+                        ],
+                        [
+                            150,
+                            426
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            150,
+                            476
+                        ],
+                        [
+                            150,
+                            451
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        285,
+                        26
+                    ],
+                    "is_working": true,
+                    "name": "University",
+                    "rect": [
+                        217,
+                        18,
+                        53,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        255,
+                        56
+                    ],
+                    "is_working": true,
+                    "name": "LaSalle",
+                    "rect": [
+                        199,
+                        49,
+                        39,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        225,
+                        86
+                    ],
+                    "is_working": true,
+                    "name": "Amherst Street",
+                    "rect": [
+                        132,
+                        78,
+                        76,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        195,
+                        116
+                    ],
+                    "is_working": true,
+                    "name": "Humboldt-Hospital",
+                    "rect": [
+                        89,
+                        107,
+                        93,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        170,
+                        141
+                    ],
+                    "is_working": true,
+                    "name": "Delavan-Canisius College",
+                    "rect": [
+                        28,
+                        131,
+                        131,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        150,
+                        191
+                    ],
+                    "is_working": true,
+                    "name": "Utica",
+                    "rect": [
+                        161,
+                        184,
+                        28,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        150,
+                        231
+                    ],
+                    "is_working": true,
+                    "name": "Summer-Best",
+                    "rect": [
+                        162,
+                        224,
+                        69,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        150,
+                        266
+                    ],
+                    "is_working": true,
+                    "name": "Allen-Medical Campus",
+                    "rect": [
+                        162,
+                        262,
+                        114,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        150,
+                        321
+                    ],
+                    "is_working": true,
+                    "name": "Theater",
+                    "rect": [
+                        163,
+                        315,
+                        39,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        150,
+                        346
+                    ],
+                    "is_working": true,
+                    "name": "Fountain Plaza",
+                    "rect": [
+                        161,
+                        340,
+                        74,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        150,
+                        376
+                    ],
+                    "is_working": true,
+                    "name": "Lafayette Square",
+                    "rect": [
+                        160,
+                        370,
+                        85,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        150,
+                        401
+                    ],
+                    "is_working": true,
+                    "name": "Church",
+                    "rect": [
+                        161,
+                        395,
+                        38,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        150,
+                        426
+                    ],
+                    "is_working": true,
+                    "name": "Seneca",
+                    "rect": [
+                        163,
+                        419,
+                        39,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        150,
+                        451
+                    ],
+                    "is_working": true,
+                    "name": "Erie Canal-Harbor",
+                    "rect": [
+                        161,
+                        442,
+                        91,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        150,
+                        476
+                    ],
+                    "is_working": true,
+                    "name": "Special Events",
+                    "rect": [
+                        161,
+                        470,
+                        76,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                }
+            ],
+            "text_id": 15
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 16,
+    "stations_diameter": 13.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 17,
+    "upper_case": false,
+    "width": 435,
+    "word_wrap": false
+}

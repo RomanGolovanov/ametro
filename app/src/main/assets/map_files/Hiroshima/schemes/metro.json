@@ -1,0 +1,716 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 528,
+    "images": [
+        "res/schemes/hiroshima.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "af0000",
+            "line_color": "cf0000",
+            "line_width": 7,
+            "name": "Astram",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            47,
+                            125
+                        ],
+                        [
+                            22,
+                            150
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            74,
+                            98
+                        ],
+                        [
+                            47,
+                            125
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            101,
+                            71
+                        ],
+                        [
+                            74,
+                            98
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            143,
+                            39
+                        ],
+                        [
+                            133.0,
+                            39.0
+                        ],
+                        [
+                            101,
+                            71
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            176,
+                            39
+                        ],
+                        [
+                            143,
+                            39
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            212,
+                            39
+                        ],
+                        [
+                            176,
+                            39
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            253,
+                            39
+                        ],
+                        [
+                            212,
+                            39
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            287,
+                            61
+                        ],
+                        [
+                            265.0,
+                            39.0
+                        ],
+                        [
+                            253,
+                            39
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            308,
+                            82
+                        ],
+                        [
+                            287,
+                            61
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            334,
+                            108
+                        ],
+                        [
+                            308,
+                            82
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            357,
+                            131
+                        ],
+                        [
+                            334,
+                            108
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            377,
+                            167
+                        ],
+                        [
+                            377.0,
+                            151.0
+                        ],
+                        [
+                            357,
+                            131
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            377,
+                            191
+                        ],
+                        [
+                            377,
+                            167
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            377,
+                            214
+                        ],
+                        [
+                            377,
+                            191
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            377,
+                            239
+                        ],
+                        [
+                            377,
+                            214
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            377,
+                            262
+                        ],
+                        [
+                            377,
+                            239
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            377,
+                            286
+                        ],
+                        [
+                            377,
+                            262
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            377,
+                            309
+                        ],
+                        [
+                            377,
+                            286
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            377,
+                            332
+                        ],
+                        [
+                            377,
+                            309
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            377,
+                            355
+                        ],
+                        [
+                            377,
+                            332
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            377,
+                            378
+                        ],
+                        [
+                            377,
+                            355
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        22,
+                        150
+                    ],
+                    "is_working": true,
+                    "name": "Koiki-koen-mae",
+                    "rect": [
+                        31,
+                        147,
+                        79,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        47,
+                        125
+                    ],
+                    "is_working": true,
+                    "name": "Ozuka",
+                    "rect": [
+                        56,
+                        122,
+                        33,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        74,
+                        98
+                    ],
+                    "is_working": true,
+                    "name": "Tomo-chuo",
+                    "rect": [
+                        83,
+                        95,
+                        56,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        101,
+                        71
+                    ],
+                    "is_working": true,
+                    "name": "Obara",
+                    "rect": [
+                        110,
+                        68,
+                        32,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        143,
+                        39
+                    ],
+                    "is_working": true,
+                    "name": "Tomo",
+                    "rect": [
+                        135,
+                        47,
+                        29,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        176,
+                        39
+                    ],
+                    "is_working": true,
+                    "name": "Chorakuji",
+                    "rect": [
+                        154,
+                        17,
+                        50,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        212,
+                        39
+                    ],
+                    "is_working": true,
+                    "name": "Takatori",
+                    "rect": [
+                        194,
+                        46,
+                        42,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        253,
+                        39
+                    ],
+                    "is_working": true,
+                    "name": "Kamiyasu",
+                    "rect": [
+                        232,
+                        17,
+                        52,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        287,
+                        61
+                    ],
+                    "is_working": true,
+                    "name": "Yasuhigashi",
+                    "rect": [
+                        216,
+                        64,
+                        63,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        308,
+                        82
+                    ],
+                    "is_working": true,
+                    "name": "Bishamondai",
+                    "rect": [
+                        233,
+                        84,
+                        67,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        334,
+                        108
+                    ],
+                    "is_working": true,
+                    "name": "Omachi",
+                    "rect": [
+                        285,
+                        106,
+                        40,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        357,
+                        131
+                    ],
+                    "is_working": true,
+                    "name": "Furuichi",
+                    "rect": [
+                        306,
+                        129,
+                        42,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        377,
+                        167
+                    ],
+                    "is_working": true,
+                    "name": "Nakasuji",
+                    "rect": [
+                        323,
+                        159,
+                        46,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        377,
+                        191
+                    ],
+                    "is_working": true,
+                    "name": "Nishihara",
+                    "rect": [
+                        319,
+                        183,
+                        50,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        377,
+                        214
+                    ],
+                    "is_working": true,
+                    "name": "Gion-shinbashi-kita",
+                    "rect": [
+                        272,
+                        206,
+                        97,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        377,
+                        239
+                    ],
+                    "is_working": true,
+                    "name": "Fudoin-mae",
+                    "rect": [
+                        310,
+                        231,
+                        59,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        377,
+                        262
+                    ],
+                    "is_working": true,
+                    "name": "Ushita",
+                    "rect": [
+                        335,
+                        254,
+                        34,
+                        15
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        377,
+                        286
+                    ],
+                    "is_working": true,
+                    "name": "Hakushima",
+                    "rect": [
+                        311,
+                        278,
+                        58,
+                        15
+                    ],
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        377,
+                        309
+                    ],
+                    "is_working": true,
+                    "name": "Shin-Hakushima",
+                    "rect": [
+                        286,
+                        301,
+                        83,
+                        15
+                    ],
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        377,
+                        332
+                    ],
+                    "is_working": true,
+                    "name": "Johoku",
+                    "rect": [
+                        331,
+                        324,
+                        38,
+                        15
+                    ],
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        377,
+                        355
+                    ],
+                    "is_working": true,
+                    "name": "Kencho-mae",
+                    "rect": [
+                        305,
+                        347,
+                        64,
+                        15
+                    ],
+                    "text_id": 20,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        377,
+                        378
+                    ],
+                    "is_working": true,
+                    "name": "Hondori",
+                    "rect": [
+                        328,
+                        370,
+                        41,
+                        15
+                    ],
+                    "text_id": 21,
+                    "uid": 21
+                }
+            ],
+            "text_id": 22
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 23,
+    "stations_diameter": 13.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 24,
+    "upper_case": false,
+    "width": 527,
+    "word_wrap": false
+}

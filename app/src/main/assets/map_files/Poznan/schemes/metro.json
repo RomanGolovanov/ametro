@@ -1,0 +1,208 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 320,
+    "images": [
+        "res/schemes/poznan.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "0000ff",
+            "line_width": 4,
+            "name": "Fast Tram",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            35,
+                            90
+                        ],
+                        [
+                            35,
+                            70
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            35,
+                            110
+                        ],
+                        [
+                            35,
+                            90
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            35,
+                            130
+                        ],
+                        [
+                            35,
+                            110
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            35,
+                            150
+                        ],
+                        [
+                            35,
+                            130
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            35,
+                            170
+                        ],
+                        [
+                            35,
+                            150
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        35,
+                        70
+                    ],
+                    "is_working": true,
+                    "name": "Osiedle Jana III Sobieskiego",
+                    "rect": [
+                        46,
+                        65,
+                        143,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        35,
+                        90
+                    ],
+                    "is_working": true,
+                    "name": "Szymanowskiego",
+                    "rect": [
+                        47,
+                        84,
+                        88,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        35,
+                        110
+                    ],
+                    "is_working": true,
+                    "name": "Kurpinskiego",
+                    "rect": [
+                        48,
+                        104,
+                        68,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        35,
+                        130
+                    ],
+                    "is_working": true,
+                    "name": "Lechicka/Poznan Plaza",
+                    "rect": [
+                        48,
+                        124,
+                        116,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        35,
+                        150
+                    ],
+                    "is_working": true,
+                    "name": "Al. Solidarnosci",
+                    "rect": [
+                        48,
+                        144,
+                        78,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        35,
+                        170
+                    ],
+                    "is_working": true,
+                    "name": "Slowianska",
+                    "rect": [
+                        48,
+                        163,
+                        59,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                }
+            ],
+            "text_id": 6
+        }
+    ],
+    "lines_width": 4,
+    "name": "metro",
+    "name_text_id": 7,
+    "stations_diameter": 13.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 8,
+    "upper_case": false,
+    "width": 185,
+    "word_wrap": false
+}

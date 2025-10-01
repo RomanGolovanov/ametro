@@ -1,0 +1,301 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 282,
+    "images": [
+        "res/schemes/mecca.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "C80903",
+            "line_color": "C80903",
+            "line_width": 7,
+            "name": "1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            83,
+                            66
+                        ],
+                        [
+                            33,
+                            66
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            128,
+                            66
+                        ],
+                        [
+                            83,
+                            66
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            164,
+                            102
+                        ],
+                        [
+                            128,
+                            66
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            194,
+                            132
+                        ],
+                        [
+                            164,
+                            102
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            246,
+                            132
+                        ],
+                        [
+                            194,
+                            132
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            357,
+                            132
+                        ],
+                        [
+                            246,
+                            132
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            414,
+                            132
+                        ],
+                        [
+                            357,
+                            132
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            468,
+                            132
+                        ],
+                        [
+                            414,
+                            132
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        33,
+                        66
+                    ],
+                    "is_working": true,
+                    "name": "Jamarat",
+                    "rect": [
+                        10,
+                        42,
+                        42,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        83,
+                        66
+                    ],
+                    "is_working": true,
+                    "name": "Mina 2",
+                    "rect": [
+                        65,
+                        42,
+                        35,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        128,
+                        66
+                    ],
+                    "is_working": true,
+                    "name": "Mina 1",
+                    "rect": [
+                        113,
+                        42,
+                        35,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        164,
+                        102
+                    ],
+                    "is_working": true,
+                    "name": "Muzdalifah 3",
+                    "rect": [
+                        91,
+                        99,
+                        64,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        194,
+                        132
+                    ],
+                    "is_working": true,
+                    "name": "Muzdalifah 2",
+                    "rect": [
+                        142,
+                        141,
+                        64,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        246,
+                        132
+                    ],
+                    "is_working": true,
+                    "name": "Muzdalifah 1",
+                    "rect": [
+                        228,
+                        141,
+                        64,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        357,
+                        132
+                    ],
+                    "is_working": true,
+                    "name": "Arafat 3",
+                    "rect": [
+                        337,
+                        141,
+                        41,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        414,
+                        132
+                    ],
+                    "is_working": true,
+                    "name": "Arafat 2",
+                    "rect": [
+                        392,
+                        141,
+                        41,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        468,
+                        132
+                    ],
+                    "is_working": true,
+                    "name": "Arafat 1",
+                    "rect": [
+                        448,
+                        141,
+                        41,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                }
+            ],
+            "text_id": 9
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 10,
+    "stations_diameter": 13.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 11,
+    "upper_case": false,
+    "width": 618,
+    "word_wrap": false
+}

@@ -1,0 +1,141 @@
+{
+    "city_id": 2759794,
+    "comments_text_id": 273,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 272,
+    "file": "Amsterdam.zip",
+    "latitude": 52.37403,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": 4.88969,
+    "map_id": "Amsterdam.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 268,
+            "root": true,
+            "transports": [
+                "metro",
+                "tram"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 269
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/amstelveenlijn.json",
+            "name": "amstelveenlijn",
+            "name_text_id": 47,
+            "root": false,
+            "transports": [
+                "metro",
+                "tram"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 270
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/gaasperplaslijn.json",
+            "name": "gaasperplaslijn",
+            "name_text_id": 54,
+            "root": false,
+            "transports": [
+                "metro",
+                "tram"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 270
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/geinlijn.json",
+            "name": "geinlijn",
+            "name_text_id": 55,
+            "root": false,
+            "transports": [
+                "metro",
+                "tram"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 270
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/ringlijn.json",
+            "name": "ringlijn",
+            "name_text_id": 20,
+            "root": false,
+            "transports": [
+                "metro",
+                "tram"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 270
+        },
+        {
+            "default_transports": [
+                "metro",
+                "tram"
+            ],
+            "file": "schemes/tramways.json",
+            "name": "tramways",
+            "name_text_id": 271,
+            "root": true,
+            "transports": [
+                "metro",
+                "tram"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 269
+        }
+    ],
+    "timestamp": 1754434800.0,
+    "transport_types": [
+        "Tram",
+        "Метро"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Метро"
+        },
+        {
+            "file": "transports/tram.json",
+            "name": "tram",
+            "type": "Tram"
+        }
+    ]
+}

@@ -1,0 +1,488 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 410,
+    "images": [
+        "res/schemes/rt.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "34B454",
+            "line_width": 9,
+            "name": "Bloor-Danforth",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": [
+                        181,
+                        260
+                    ],
+                    "is_working": true,
+                    "name": "Kennedy",
+                    "rect": [
+                        60,
+                        250,
+                        100,
+                        20
+                    ],
+                    "text_id": 33,
+                    "uid": 32
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Warden",
+                    "rect": null,
+                    "text_id": 34,
+                    "uid": 33
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Victoria Park",
+                    "rect": null,
+                    "text_id": 35,
+                    "uid": 34
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Main Street",
+                    "rect": null,
+                    "text_id": 36,
+                    "uid": 35
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Woodbine",
+                    "rect": null,
+                    "text_id": 37,
+                    "uid": 36
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Coxwell",
+                    "rect": null,
+                    "text_id": 38,
+                    "uid": 37
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Greenwood",
+                    "rect": null,
+                    "text_id": 39,
+                    "uid": 38
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Donlands",
+                    "rect": null,
+                    "text_id": 40,
+                    "uid": 39
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Pape",
+                    "rect": null,
+                    "text_id": 41,
+                    "uid": 40
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Chester",
+                    "rect": null,
+                    "text_id": 42,
+                    "uid": 41
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Broadview",
+                    "rect": null,
+                    "text_id": 43,
+                    "uid": 42
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Castle Frank",
+                    "rect": null,
+                    "text_id": 44,
+                    "uid": 43
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sherbourne",
+                    "rect": null,
+                    "text_id": 45,
+                    "uid": 44
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Bloor-Yonge",
+                    "rect": null,
+                    "text_id": 10,
+                    "uid": 45
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Bay",
+                    "rect": null,
+                    "text_id": 46,
+                    "uid": 46
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "St.George",
+                    "rect": null,
+                    "text_id": 22,
+                    "uid": 47
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Spadina",
+                    "rect": null,
+                    "text_id": 23,
+                    "uid": 48
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Bathurst",
+                    "rect": null,
+                    "text_id": 47,
+                    "uid": 49
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Christie",
+                    "rect": null,
+                    "text_id": 48,
+                    "uid": 50
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ossington",
+                    "rect": null,
+                    "text_id": 49,
+                    "uid": 51
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Dufferin",
+                    "rect": null,
+                    "text_id": 50,
+                    "uid": 52
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Lansdowne",
+                    "rect": null,
+                    "text_id": 51,
+                    "uid": 53
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Dundas West",
+                    "rect": null,
+                    "text_id": 52,
+                    "uid": 54
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Keele",
+                    "rect": null,
+                    "text_id": 53,
+                    "uid": 55
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "High Park",
+                    "rect": null,
+                    "text_id": 54,
+                    "uid": 56
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Runnymede",
+                    "rect": null,
+                    "text_id": 55,
+                    "uid": 57
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Jane",
+                    "rect": null,
+                    "text_id": 56,
+                    "uid": 58
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Old Mill",
+                    "rect": null,
+                    "text_id": 57,
+                    "uid": 59
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Royal York",
+                    "rect": null,
+                    "text_id": 58,
+                    "uid": 60
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Islington",
+                    "rect": null,
+                    "text_id": 59,
+                    "uid": 61
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Kipling",
+                    "rect": null,
+                    "text_id": 60,
+                    "uid": 62
+                }
+            ],
+            "text_id": 61
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "05AAE9",
+            "line_width": 9,
+            "name": "Scarborough RT",
+            "segments": [
+                [
+                    63,
+                    64,
+                    [
+                        [
+                            200,
+                            100
+                        ],
+                        [
+                            200,
+                            60
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    64,
+                    65,
+                    [
+                        [
+                            200,
+                            140
+                        ],
+                        [
+                            200,
+                            100
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    65,
+                    66,
+                    [
+                        [
+                            200,
+                            180
+                        ],
+                        [
+                            200,
+                            140
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    66,
+                    67,
+                    [
+                        [
+                            200,
+                            220
+                        ],
+                        [
+                            200,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    67,
+                    68,
+                    [
+                        [
+                            200,
+                            260
+                        ],
+                        [
+                            200,
+                            220
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        200,
+                        60
+                    ],
+                    "is_working": true,
+                    "name": "McCowan",
+                    "rect": [
+                        215,
+                        50,
+                        100,
+                        20
+                    ],
+                    "text_id": 62,
+                    "uid": 63
+                },
+                {
+                    "coord": [
+                        200,
+                        100
+                    ],
+                    "is_working": true,
+                    "name": "Scarborough Centre",
+                    "rect": [
+                        215,
+                        90,
+                        100,
+                        20
+                    ],
+                    "text_id": 63,
+                    "uid": 64
+                },
+                {
+                    "coord": [
+                        200,
+                        140
+                    ],
+                    "is_working": true,
+                    "name": "Midland",
+                    "rect": [
+                        215,
+                        130,
+                        100,
+                        20
+                    ],
+                    "text_id": 64,
+                    "uid": 65
+                },
+                {
+                    "coord": [
+                        200,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Ellesmere",
+                    "rect": [
+                        215,
+                        170,
+                        100,
+                        20
+                    ],
+                    "text_id": 65,
+                    "uid": 66
+                },
+                {
+                    "coord": [
+                        200,
+                        220
+                    ],
+                    "is_working": true,
+                    "name": "Lawrence East",
+                    "rect": [
+                        215,
+                        210,
+                        100,
+                        20
+                    ],
+                    "text_id": 66,
+                    "uid": 67
+                },
+                {
+                    "coord": [
+                        200,
+                        260
+                    ],
+                    "is_working": true,
+                    "name": "Kennedy",
+                    "rect": [
+                        215,
+                        250,
+                        100,
+                        20
+                    ],
+                    "text_id": 33,
+                    "uid": 68
+                }
+            ],
+            "text_id": 67
+        }
+    ],
+    "lines_width": 9,
+    "name": "rt",
+    "name_text_id": 67,
+    "stations_diameter": 16.0,
+    "transfers": [
+        [
+            32,
+            68,
+            [
+                181,
+                260
+            ],
+            [
+                200,
+                260
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "Метро",
+    "type_text_id": 75,
+    "upper_case": true,
+    "width": 350,
+    "word_wrap": true
+}

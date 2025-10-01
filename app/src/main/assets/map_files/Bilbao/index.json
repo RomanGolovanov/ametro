@@ -1,0 +1,381 @@
+{
+    "city_id": 3128026,
+    "comments_text_id": 46,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "name_id": 47,
+            "ranges": [
+                "07:06-07:22"
+            ],
+            "type": "custom",
+            "weekdays": "workdays"
+        },
+        {
+            "name_id": 47,
+            "ranges": [
+                "07:22-09:52"
+            ],
+            "type": "custom",
+            "weekdays": "workdays"
+        },
+        {
+            "name_id": 47,
+            "ranges": [
+                "09:52-21:45"
+            ],
+            "type": "custom",
+            "weekdays": "workdays"
+        },
+        {
+            "name_id": 47,
+            "ranges": [
+                "21:45-22:45"
+            ],
+            "type": "custom",
+            "weekdays": "workdays"
+        },
+        {
+            "name_id": 47,
+            "ranges": null,
+            "type": "custom",
+            "weekdays": "saturday"
+        },
+        {
+            "name_id": 47,
+            "ranges": [
+                "08:05-15:56"
+            ],
+            "type": "custom",
+            "weekdays": "saturday"
+        },
+        {
+            "name_id": 47,
+            "ranges": [
+                "15:56-21:05"
+            ],
+            "type": "custom",
+            "weekdays": "saturday"
+        },
+        {
+            "name_id": 47,
+            "ranges": [
+                "21:05-22:45"
+            ],
+            "type": "custom",
+            "weekdays": "saturday"
+        },
+        {
+            "name_id": 47,
+            "ranges": [
+                "07:06-08:45"
+            ],
+            "type": "custom",
+            "weekdays": "sunday"
+        },
+        {
+            "name_id": 47,
+            "ranges": [
+                "08:45-22:05"
+            ],
+            "type": "custom",
+            "weekdays": "sunday"
+        },
+        {
+            "name_id": 48,
+            "ranges": [
+                "06:44-10:14"
+            ],
+            "type": "custom",
+            "weekdays": "workdays"
+        },
+        {
+            "name_id": 48,
+            "ranges": [
+                "10:14-20:44"
+            ],
+            "type": "custom",
+            "weekdays": "workdays"
+        },
+        {
+            "name_id": 48,
+            "ranges": [
+                "20:44-22:34"
+            ],
+            "type": "custom",
+            "weekdays": "workdays"
+        },
+        {
+            "name_id": 48,
+            "ranges": [
+                "06:54-07:54"
+            ],
+            "type": "custom",
+            "weekdays": "saturday"
+        },
+        {
+            "name_id": 48,
+            "ranges": [
+                "07:54-15:54"
+            ],
+            "type": "custom",
+            "weekdays": "saturday"
+        },
+        {
+            "name_id": 48,
+            "ranges": [
+                "15:54-20:54"
+            ],
+            "type": "custom",
+            "weekdays": "saturday"
+        },
+        {
+            "name_id": 48,
+            "ranges": [
+                "20:54-22:34"
+            ],
+            "type": "custom",
+            "weekdays": "saturday"
+        },
+        {
+            "name_id": 48,
+            "ranges": [
+                "22:34-23:14"
+            ],
+            "type": "custom",
+            "weekdays": "saturday"
+        },
+        {
+            "name_id": 48,
+            "ranges": [
+                "06:14-06:34"
+            ],
+            "type": "custom",
+            "weekdays": "sunday"
+        },
+        {
+            "name_id": 48,
+            "ranges": [
+                "06:34-22:14"
+            ],
+            "type": "custom",
+            "weekdays": "sunday"
+        },
+        {
+            "name_id": 49,
+            "ranges": [
+                "06:45-09:55"
+            ],
+            "type": "custom",
+            "weekdays": "workdays"
+        },
+        {
+            "name_id": 49,
+            "ranges": [
+                "09:55-20:20"
+            ],
+            "type": "custom",
+            "weekdays": "workdays"
+        },
+        {
+            "name_id": 49,
+            "ranges": [
+                "20:20-22:40"
+            ],
+            "type": "custom",
+            "weekdays": "workdays"
+        },
+        {
+            "name_id": 49,
+            "ranges": [
+                "06:01-08:00"
+            ],
+            "type": "custom",
+            "weekdays": "saturday"
+        },
+        {
+            "name_id": 49,
+            "ranges": [
+                "08:00-15:53"
+            ],
+            "type": "custom",
+            "weekdays": "saturday"
+        },
+        {
+            "name_id": 49,
+            "ranges": [
+                "15:53-21:00"
+            ],
+            "type": "custom",
+            "weekdays": "saturday"
+        },
+        {
+            "name_id": 49,
+            "ranges": [
+                "21:00-22:40"
+            ],
+            "type": "custom",
+            "weekdays": "saturday"
+        },
+        {
+            "name_id": 49,
+            "ranges": [
+                "06:01-08:40"
+            ],
+            "type": "custom",
+            "weekdays": "sunday"
+        },
+        {
+            "name_id": 49,
+            "ranges": [
+                "08:40-22:00"
+            ],
+            "type": "custom",
+            "weekdays": "sunday"
+        },
+        {
+            "name_id": 49,
+            "ranges": [
+                "22:00-22:40"
+            ],
+            "type": "custom",
+            "weekdays": "sunday"
+        },
+        {
+            "name_id": 50,
+            "ranges": [
+                "06:58-10:23"
+            ],
+            "type": "custom",
+            "weekdays": "workdays"
+        },
+        {
+            "name_id": 50,
+            "ranges": [
+                "10:23-20:55"
+            ],
+            "type": "custom",
+            "weekdays": "workdays"
+        },
+        {
+            "name_id": 50,
+            "ranges": [
+                "20:55-22:35"
+            ],
+            "type": "custom",
+            "weekdays": "workdays"
+        },
+        {
+            "name_id": 50,
+            "ranges": [
+                "06:25-08:05"
+            ],
+            "type": "custom",
+            "weekdays": "saturday"
+        },
+        {
+            "name_id": 50,
+            "ranges": [
+                "08:05-15:57"
+            ],
+            "type": "custom",
+            "weekdays": "saturday"
+        },
+        {
+            "name_id": 50,
+            "ranges": [
+                "15:57-21:15"
+            ],
+            "type": "custom",
+            "weekdays": "saturday"
+        },
+        {
+            "name_id": 50,
+            "ranges": [
+                "21:15-22:35"
+            ],
+            "type": "custom",
+            "weekdays": null
+        },
+        {
+            "name_id": 50,
+            "ranges": [
+                "06:25-08:25"
+            ],
+            "type": "custom",
+            "weekdays": "sunday"
+        },
+        {
+            "name_id": 50,
+            "ranges": [
+                "08:25-22:35"
+            ],
+            "type": "custom",
+            "weekdays": "sunday"
+        }
+    ],
+    "description_text_id": 45,
+    "file": "Bilbao.zip",
+    "latitude": 43.26271,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": -2.92528,
+    "map_id": "Bilbao.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 42,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 43
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/1.json",
+            "name": "1",
+            "name_text_id": 28,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 44
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/2.json",
+            "name": "2",
+            "name_text_id": 41,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 44
+        }
+    ],
+    "timestamp": 1426982400.0,
+    "transport_types": [
+        "Метро"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Метро"
+        }
+    ]
+}

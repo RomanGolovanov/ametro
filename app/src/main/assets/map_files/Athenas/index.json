@@ -1,0 +1,153 @@
+{
+    "city_id": 264371,
+    "comments_text_id": 95,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "05:00-08:00"
+            ],
+            "type": "mourning",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": "workdays"
+        },
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": "weekend"
+        },
+        {
+            "ranges": [
+                "19:00-24:00"
+            ],
+            "type": "evening",
+            "weekdays": "workdays"
+        },
+        {
+            "ranges": [
+                "19:00-24:00"
+            ],
+            "type": "evening",
+            "weekdays": "weekend"
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 94,
+    "file": "Athenas.zip",
+    "latitude": 37.98376,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": 23.72784,
+    "map_id": "Athenas.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 90,
+            "root": true,
+            "transports": [
+                "metro",
+                "proastiakos"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 91
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/1.json",
+            "name": "1",
+            "name_text_id": 24,
+            "root": false,
+            "transports": [
+                "metro",
+                "proastiakos"
+            ],
+            "type_name": "Metro",
+            "type_text_id": 92
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/2.json",
+            "name": "2",
+            "name_text_id": 43,
+            "root": false,
+            "transports": [
+                "metro",
+                "proastiakos"
+            ],
+            "type_name": "Metro",
+            "type_text_id": 92
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/3.json",
+            "name": "3",
+            "name_text_id": 68,
+            "root": false,
+            "transports": [
+                "metro",
+                "proastiakos"
+            ],
+            "type_name": "Metro",
+            "type_text_id": 92
+        },
+        {
+            "default_transports": [
+                "proastiakos"
+            ],
+            "file": "schemes/proastiakos.json",
+            "name": "proastiakos",
+            "name_text_id": 93,
+            "root": true,
+            "transports": [
+                "metro",
+                "proastiakos"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 91
+        }
+    ],
+    "timestamp": 1426464000.0,
+    "transport_types": [
+        "Proastiakos",
+        "Metro"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Metro"
+        },
+        {
+            "file": "transports/proastiakos.json",
+            "name": "proastiakos",
+            "type": "Proastiakos"
+        }
+    ]
+}

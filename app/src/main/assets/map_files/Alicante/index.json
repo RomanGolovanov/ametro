@@ -1,0 +1,142 @@
+{
+    "city_id": 2521978,
+    "comments_text_id": 81,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 80,
+    "file": "Alicante.zip",
+    "latitude": 38.34517,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": -0.48149,
+    "map_id": "Alicante.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 77,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 78
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/l1.json",
+            "name": "l1",
+            "name_text_id": 21,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Трамвай",
+            "type_text_id": 79
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/l2.json",
+            "name": "l2",
+            "name_text_id": 33,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Трамвай",
+            "type_text_id": 79
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/l3.json",
+            "name": "l3",
+            "name_text_id": 44,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Трамвай",
+            "type_text_id": 79
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/l4.json",
+            "name": "l4",
+            "name_text_id": 56,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Трамвай",
+            "type_text_id": 79
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/l5.json",
+            "name": "l5",
+            "name_text_id": 59,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Трамвай",
+            "type_text_id": 79
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/l9.json",
+            "name": "l9",
+            "name_text_id": 76,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Трамвай",
+            "type_text_id": 79
+        }
+    ],
+    "timestamp": 1566169200.0,
+    "transport_types": [
+        "Трамвай"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Трамвай"
+        }
+    ]
+}

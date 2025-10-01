@@ -1,0 +1,487 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 372,
+    "images": [
+        "res/schemes/uijeongbu.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "cf0000",
+            "line_color": "ff0000",
+            "line_width": 7,
+            "name": "1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            154,
+                            222
+                        ],
+                        [
+                            200,
+                            222
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            133,
+                            201
+                        ],
+                        [
+                            154,
+                            222
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            133,
+                            162
+                        ],
+                        [
+                            133,
+                            201
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            87,
+                            162
+                        ],
+                        [
+                            133,
+                            162
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            87,
+                            94
+                        ],
+                        [
+                            87,
+                            162
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            160,
+                            94
+                        ],
+                        [
+                            87,
+                            94
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            223,
+                            94
+                        ],
+                        [
+                            160,
+                            94
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            257,
+                            60
+                        ],
+                        [
+                            223,
+                            94
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            288,
+                            29
+                        ],
+                        [
+                            257,
+                            60
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            360,
+                            29
+                        ],
+                        [
+                            288,
+                            29
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            384,
+                            53
+                        ],
+                        [
+                            360,
+                            29
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            410,
+                            79
+                        ],
+                        [
+                            384,
+                            53
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            410,
+                            115
+                        ],
+                        [
+                            410,
+                            79
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            410,
+                            147
+                        ],
+                        [
+                            410,
+                            115
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        200,
+                        222
+                    ],
+                    "is_working": true,
+                    "name": "Balgok",
+                    "rect": [
+                        194,
+                        231,
+                        37,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        154,
+                        222
+                    ],
+                    "is_working": true,
+                    "name": "Hoeryong",
+                    "rect": [
+                        122,
+                        231,
+                        50,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        133,
+                        201
+                    ],
+                    "is_working": true,
+                    "name": "Beomgol",
+                    "rect": [
+                        77,
+                        194,
+                        46,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        133,
+                        162
+                    ],
+                    "is_working": true,
+                    "name": "Uijeongbu",
+                    "rect": [
+                        143,
+                        155,
+                        52,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        87,
+                        162
+                    ],
+                    "is_working": true,
+                    "name": "City Hall",
+                    "rect": [
+                        32,
+                        156,
+                        45,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        87,
+                        94
+                    ],
+                    "is_working": true,
+                    "name": "Heungseon",
+                    "rect": [
+                        19,
+                        87,
+                        58,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        160,
+                        94
+                    ],
+                    "is_working": true,
+                    "name": "Uijeongbu Jungang",
+                    "rect": [
+                        117,
+                        70,
+                        97,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        223,
+                        94
+                    ],
+                    "is_working": true,
+                    "name": "Dongo",
+                    "rect": [
+                        233,
+                        90,
+                        34,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        257,
+                        60
+                    ],
+                    "is_working": true,
+                    "name": "Saemal",
+                    "rect": [
+                        267,
+                        56,
+                        39,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        288,
+                        29
+                    ],
+                    "is_working": true,
+                    "name": "Gyeonggi-do-cheong Bukbu Cheongsa",
+                    "rect": [
+                        87,
+                        18,
+                        191,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        360,
+                        29
+                    ],
+                    "is_working": true,
+                    "name": "Hyoja",
+                    "rect": [
+                        370,
+                        18,
+                        31,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        384,
+                        53
+                    ],
+                    "is_working": true,
+                    "name": "Gonje",
+                    "rect": [
+                        394,
+                        42,
+                        31,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        410,
+                        79
+                    ],
+                    "is_working": true,
+                    "name": "Eoryong",
+                    "rect": [
+                        420,
+                        72,
+                        43,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        410,
+                        115
+                    ],
+                    "is_working": true,
+                    "name": "Songsan",
+                    "rect": [
+                        420,
+                        108,
+                        45,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        410,
+                        147
+                    ],
+                    "is_working": true,
+                    "name": "Tapseok",
+                    "rect": [
+                        420,
+                        140,
+                        44,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                }
+            ],
+            "text_id": 15
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 16,
+    "stations_diameter": 13.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 17,
+    "upper_case": false,
+    "width": 560,
+    "word_wrap": false
+}

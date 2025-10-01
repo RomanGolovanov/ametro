@@ -1,0 +1,114 @@
+{
+    "city_id": 3173435,
+    "comments_text_id": 114,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 113,
+    "file": "Milano.zip",
+    "latitude": 45.46427,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": 9.18951,
+    "map_id": "Milano.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 110,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 111
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/m1.json",
+            "name": "m1",
+            "name_text_id": 38,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 112
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/m2.json",
+            "name": "m2",
+            "name_text_id": 72,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 112
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/m3.json",
+            "name": "m3",
+            "name_text_id": 92,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 112
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/m5.json",
+            "name": "m5",
+            "name_text_id": 109,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 112
+        }
+    ],
+    "timestamp": 1754434800.0,
+    "transport_types": [
+        "Метро"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Метро"
+        }
+    ]
+}

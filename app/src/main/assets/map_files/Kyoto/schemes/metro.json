@@ -1,0 +1,1047 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 605,
+    "images": [
+        "res/schemes/kyoto.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "3CB371",
+            "line_color": "3CB371",
+            "line_width": 7,
+            "name": "Karasuma",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            193,
+                            30
+                        ],
+                        [
+                            213.0,
+                            30.0
+                        ],
+                        [
+                            223,
+                            20
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            168,
+                            40
+                        ],
+                        [
+                            178.0,
+                            30.0
+                        ],
+                        [
+                            193,
+                            30
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            158,
+                            65
+                        ],
+                        [
+                            158.0,
+                            50.0
+                        ],
+                        [
+                            168,
+                            40
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            158,
+                            95
+                        ],
+                        [
+                            158,
+                            65
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            158,
+                            125
+                        ],
+                        [
+                            158,
+                            95
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            158,
+                            160
+                        ],
+                        [
+                            158,
+                            125
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            158,
+                            195
+                        ],
+                        [
+                            158,
+                            160
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            158,
+                            222
+                        ],
+                        [
+                            158,
+                            195
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            158,
+                            250
+                        ],
+                        [
+                            158,
+                            222
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            158,
+                            280
+                        ],
+                        [
+                            158,
+                            250
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            158,
+                            310
+                        ],
+                        [
+                            158,
+                            280
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            158,
+                            335
+                        ],
+                        [
+                            158,
+                            310
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            158,
+                            365
+                        ],
+                        [
+                            158,
+                            335
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            148,
+                            390
+                        ],
+                        [
+                            148.0,
+                            375.0
+                        ],
+                        [
+                            158,
+                            365
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        223,
+                        20
+                    ],
+                    "is_working": true,
+                    "name": "Kokusaikaikan",
+                    "rect": [
+                        233,
+                        13,
+                        70,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        193,
+                        30
+                    ],
+                    "is_working": true,
+                    "name": "Matsugasaki",
+                    "rect": [
+                        144,
+                        7,
+                        65,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        168,
+                        40
+                    ],
+                    "is_working": true,
+                    "name": "Kitayama",
+                    "rect": [
+                        109,
+                        27,
+                        49,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        158,
+                        65
+                    ],
+                    "is_working": true,
+                    "name": "Kitaoji",
+                    "rect": [
+                        113,
+                        58,
+                        34,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        158,
+                        95
+                    ],
+                    "is_working": true,
+                    "name": "Kuramaguchi",
+                    "rect": [
+                        80,
+                        88,
+                        68,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        158,
+                        125
+                    ],
+                    "is_working": true,
+                    "name": "Imadegawa",
+                    "rect": [
+                        90,
+                        117,
+                        58,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        158,
+                        160
+                    ],
+                    "is_working": true,
+                    "name": "Marutamachi",
+                    "rect": [
+                        82,
+                        149,
+                        66,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        158,
+                        195
+                    ],
+                    "is_working": true,
+                    "name": "Karasuma Oike",
+                    "rect": [
+                        74,
+                        168,
+                        79,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        158,
+                        222
+                    ],
+                    "is_working": true,
+                    "name": "Shijo",
+                    "rect": [
+                        167,
+                        215,
+                        27,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        158,
+                        250
+                    ],
+                    "is_working": true,
+                    "name": "Gojo",
+                    "rect": [
+                        167,
+                        243,
+                        25,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        158,
+                        280
+                    ],
+                    "is_working": true,
+                    "name": "Kyoto",
+                    "rect": [
+                        167,
+                        274,
+                        31,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        158,
+                        310
+                    ],
+                    "is_working": true,
+                    "name": "Kujo",
+                    "rect": [
+                        168,
+                        304,
+                        25,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        158,
+                        335
+                    ],
+                    "is_working": true,
+                    "name": "Jujo",
+                    "rect": [
+                        167,
+                        328,
+                        23,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        158,
+                        365
+                    ],
+                    "is_working": true,
+                    "name": "Kuinabashi",
+                    "rect": [
+                        168,
+                        357,
+                        58,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        148,
+                        390
+                    ],
+                    "is_working": true,
+                    "name": "Takeda",
+                    "rect": [
+                        159,
+                        384,
+                        38,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                }
+            ],
+            "text_id": 15
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "FF4500",
+            "line_color": "FF4500",
+            "line_width": 7,
+            "name": "Tozai",
+            "segments": [
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            45,
+                            195
+                        ],
+                        [
+                            16,
+                            195
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            78,
+                            195
+                        ],
+                        [
+                            45,
+                            195
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            113,
+                            195
+                        ],
+                        [
+                            78,
+                            195
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            143,
+                            195
+                        ],
+                        [
+                            113,
+                            195
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            188,
+                            195
+                        ],
+                        [
+                            143,
+                            195
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            216,
+                            195
+                        ],
+                        [
+                            188,
+                            195
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            248,
+                            195
+                        ],
+                        [
+                            216,
+                            195
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            278,
+                            195
+                        ],
+                        [
+                            248,
+                            195
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    23,
+                    24,
+                    [
+                        [
+                            303,
+                            220
+                        ],
+                        [
+                            278,
+                            195
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            338,
+                            245
+                        ],
+                        [
+                            328.0,
+                            235.0
+                        ],
+                        [
+                            318.0,
+                            235.0
+                        ],
+                        [
+                            303,
+                            220
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    25,
+                    26,
+                    [
+                        [
+                            338,
+                            280
+                        ],
+                        [
+                            338,
+                            245
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    26,
+                    27,
+                    [
+                        [
+                            338,
+                            315
+                        ],
+                        [
+                            338,
+                            280
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    27,
+                    28,
+                    [
+                        [
+                            338,
+                            350
+                        ],
+                        [
+                            338,
+                            315
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            338,
+                            390
+                        ],
+                        [
+                            338,
+                            350
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    29,
+                    30,
+                    [
+                        [
+                            313,
+                            430
+                        ],
+                        [
+                            338.0,
+                            405.0
+                        ],
+                        [
+                            338,
+                            390
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    30,
+                    31,
+                    [
+                        [
+                            288,
+                            455
+                        ],
+                        [
+                            313,
+                            430
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        16,
+                        195
+                    ],
+                    "is_working": true,
+                    "name": "Uzumasa Tenjingawa",
+                    "rect": [
+                        7,
+                        205,
+                        15,
+                        107
+                    ],
+                    "text_id": 16,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        45,
+                        195
+                    ],
+                    "is_working": true,
+                    "name": "Nishioji-oike",
+                    "rect": [
+                        38,
+                        205,
+                        15,
+                        64
+                    ],
+                    "text_id": 17,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        78,
+                        195
+                    ],
+                    "is_working": true,
+                    "name": "Nijo",
+                    "rect": [
+                        71,
+                        205,
+                        15,
+                        22
+                    ],
+                    "text_id": 18,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        113,
+                        195
+                    ],
+                    "is_working": true,
+                    "name": "Nijojo-mae",
+                    "rect": [
+                        106,
+                        205,
+                        15,
+                        55
+                    ],
+                    "text_id": 19,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        143,
+                        195
+                    ],
+                    "is_working": true,
+                    "name": "Karasuma Oike",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        188,
+                        195
+                    ],
+                    "is_working": true,
+                    "name": "Kyoto Shiyakusho-mae",
+                    "rect": [
+                        181,
+                        70,
+                        15,
+                        116
+                    ],
+                    "text_id": 20,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        216,
+                        195
+                    ],
+                    "is_working": true,
+                    "name": "Sanjo Keihan",
+                    "rect": [
+                        209,
+                        118,
+                        15,
+                        68
+                    ],
+                    "text_id": 21,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        248,
+                        195
+                    ],
+                    "is_working": true,
+                    "name": "Higashiyama",
+                    "rect": [
+                        241,
+                        119,
+                        15,
+                        67
+                    ],
+                    "text_id": 22,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        278,
+                        195
+                    ],
+                    "is_working": true,
+                    "name": "Keage",
+                    "rect": [
+                        291,
+                        183,
+                        34,
+                        15
+                    ],
+                    "text_id": 23,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        303,
+                        220
+                    ],
+                    "is_working": true,
+                    "name": "Misasagi",
+                    "rect": [
+                        315,
+                        205,
+                        47,
+                        15
+                    ],
+                    "text_id": 24,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        338,
+                        245
+                    ],
+                    "is_working": true,
+                    "name": "Yamashina",
+                    "rect": [
+                        347,
+                        236,
+                        57,
+                        15
+                    ],
+                    "text_id": 25,
+                    "uid": 25
+                },
+                {
+                    "coord": [
+                        338,
+                        280
+                    ],
+                    "is_working": true,
+                    "name": "Higashino",
+                    "rect": [
+                        348,
+                        272,
+                        52,
+                        15
+                    ],
+                    "text_id": 26,
+                    "uid": 26
+                },
+                {
+                    "coord": [
+                        338,
+                        315
+                    ],
+                    "is_working": true,
+                    "name": "Nagitsuji",
+                    "rect": [
+                        347,
+                        306,
+                        46,
+                        15
+                    ],
+                    "text_id": 27,
+                    "uid": 27
+                },
+                {
+                    "coord": [
+                        338,
+                        350
+                    ],
+                    "is_working": true,
+                    "name": "Ono",
+                    "rect": [
+                        347,
+                        342,
+                        22,
+                        15
+                    ],
+                    "text_id": 28,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        338,
+                        390
+                    ],
+                    "is_working": true,
+                    "name": "Daigo",
+                    "rect": [
+                        348,
+                        384,
+                        31,
+                        15
+                    ],
+                    "text_id": 29,
+                    "uid": 29
+                },
+                {
+                    "coord": [
+                        313,
+                        430
+                    ],
+                    "is_working": true,
+                    "name": "Ishida",
+                    "rect": [
+                        325,
+                        431,
+                        32,
+                        15
+                    ],
+                    "text_id": 30,
+                    "uid": 30
+                },
+                {
+                    "coord": [
+                        288,
+                        455
+                    ],
+                    "is_working": true,
+                    "name": "Rokujizo",
+                    "rect": [
+                        304,
+                        451,
+                        45,
+                        15
+                    ],
+                    "text_id": 31,
+                    "uid": 31
+                }
+            ],
+            "text_id": 32
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 33,
+    "stations_diameter": 13.0,
+    "transfers": [
+        [
+            7,
+            19,
+            [
+                158,
+                195
+            ],
+            [
+                143,
+                195
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 34,
+    "upper_case": false,
+    "width": 488,
+    "word_wrap": false
+}

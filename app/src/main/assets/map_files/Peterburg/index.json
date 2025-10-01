@@ -1,0 +1,244 @@
+{
+    "city_id": 498817,
+    "comments_text_id": 574,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 573,
+    "file": "Peterburg.zip",
+    "latitude": 59.93863,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": 30.31413,
+    "map_id": "Peterburg.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 566,
+            "root": true,
+            "transports": [
+                "metro",
+                "train"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 567
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/1.json",
+            "name": "1",
+            "name_text_id": 19,
+            "root": false,
+            "transports": [
+                "metro",
+                "train"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 568
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/2.json",
+            "name": "2",
+            "name_text_id": 38,
+            "root": false,
+            "transports": [
+                "metro",
+                "train"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 568
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/3.json",
+            "name": "3",
+            "name_text_id": 51,
+            "root": false,
+            "transports": [
+                "metro",
+                "train"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 568
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/4.json",
+            "name": "4",
+            "name_text_id": 62,
+            "root": false,
+            "transports": [
+                "metro",
+                "train"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 568
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/5.json",
+            "name": "5",
+            "name_text_id": 78,
+            "root": false,
+            "transports": [
+                "metro",
+                "train"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 568
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/6.json",
+            "name": "6",
+            "name_text_id": 85,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 568
+        },
+        {
+            "default_transports": [
+                "train"
+            ],
+            "file": "schemes/railways_baltic.json",
+            "name": "railways_baltic",
+            "name_text_id": 149,
+            "root": false,
+            "transports": [
+                "metro",
+                "train"
+            ],
+            "type_name": "Электричка",
+            "type_text_id": 569
+        },
+        {
+            "default_transports": [
+                "train"
+            ],
+            "file": "schemes/railways_bologoe.json",
+            "name": "railways_bologoe",
+            "name_text_id": 570,
+            "root": true,
+            "transports": [
+                "metro",
+                "train"
+            ],
+            "type_name": "OTHER",
+            "type_text_id": 571
+        },
+        {
+            "default_transports": [
+                "train"
+            ],
+            "file": "schemes/railways_finland.json",
+            "name": "railways_finland",
+            "name_text_id": 526,
+            "root": false,
+            "transports": [
+                "metro",
+                "train"
+            ],
+            "type_name": "Электричка",
+            "type_text_id": 569
+        },
+        {
+            "default_transports": [
+                "train"
+            ],
+            "file": "schemes/railways_moscow.json",
+            "name": "railways_moscow",
+            "name_text_id": 416,
+            "root": false,
+            "transports": [
+                "metro",
+                "train"
+            ],
+            "type_name": "Электричка",
+            "type_text_id": 569
+        },
+        {
+            "default_transports": [
+                "train"
+            ],
+            "file": "schemes/railways_novgorod_pskov.json",
+            "name": "railways_novgorod_pskov",
+            "name_text_id": 572,
+            "root": true,
+            "transports": [
+                "metro",
+                "train"
+            ],
+            "type_name": "OTHER",
+            "type_text_id": 571
+        },
+        {
+            "default_transports": [
+                "train"
+            ],
+            "file": "schemes/railways_vitebsk.json",
+            "name": "railways_vitebsk",
+            "name_text_id": 209,
+            "root": false,
+            "transports": [
+                "metro",
+                "train"
+            ],
+            "type_name": "Электричка",
+            "type_text_id": 569
+        }
+    ],
+    "timestamp": 1754434800.0,
+    "transport_types": [
+        "Электричка",
+        "Метро"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Метро"
+        },
+        {
+            "file": "transports/train.json",
+            "name": "train",
+            "type": "Электричка"
+        }
+    ]
+}

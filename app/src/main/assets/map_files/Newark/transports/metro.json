@@ -1,0 +1,269 @@
+{
+    "lines": [
+        {
+            "delays": [],
+            "name": "Newark City Subway",
+            "scheme": null,
+            "segments": [
+                [
+                    0,
+                    1,
+                    120
+                ],
+                [
+                    1,
+                    0,
+                    120
+                ],
+                [
+                    1,
+                    2,
+                    120
+                ],
+                [
+                    2,
+                    1,
+                    120
+                ],
+                [
+                    2,
+                    3,
+                    120
+                ],
+                [
+                    3,
+                    2,
+                    120
+                ],
+                [
+                    3,
+                    4,
+                    120
+                ],
+                [
+                    4,
+                    3,
+                    120
+                ],
+                [
+                    4,
+                    5,
+                    120
+                ],
+                [
+                    5,
+                    4,
+                    120
+                ],
+                [
+                    5,
+                    6,
+                    120
+                ],
+                [
+                    6,
+                    5,
+                    120
+                ],
+                [
+                    6,
+                    7,
+                    120
+                ],
+                [
+                    7,
+                    6,
+                    120
+                ],
+                [
+                    7,
+                    8,
+                    120
+                ],
+                [
+                    8,
+                    7,
+                    120
+                ],
+                [
+                    8,
+                    9,
+                    120
+                ],
+                [
+                    9,
+                    8,
+                    120
+                ],
+                [
+                    9,
+                    10,
+                    120
+                ],
+                [
+                    10,
+                    9,
+                    120
+                ],
+                [
+                    10,
+                    11,
+                    60
+                ],
+                [
+                    11,
+                    10,
+                    60
+                ]
+            ],
+            "stations": [
+                [
+                    0,
+                    "Grove Street",
+                    0
+                ],
+                [
+                    1,
+                    "Silver Lake",
+                    1
+                ],
+                [
+                    2,
+                    "Branch Brook Park",
+                    2
+                ],
+                [
+                    3,
+                    "Davenport Avenue",
+                    3
+                ],
+                [
+                    4,
+                    "Bloomfield Avenue",
+                    4
+                ],
+                [
+                    5,
+                    "Park Avenue",
+                    5
+                ],
+                [
+                    6,
+                    "Orange Street",
+                    6
+                ],
+                [
+                    7,
+                    "Norfolk Street",
+                    7
+                ],
+                [
+                    8,
+                    "Warren Street",
+                    8
+                ],
+                [
+                    9,
+                    "Washington Street",
+                    9
+                ],
+                [
+                    10,
+                    "Military Park",
+                    10
+                ],
+                [
+                    11,
+                    "Newark Penn Station",
+                    11
+                ]
+            ],
+            "text_id": 12
+        },
+        {
+            "delays": [],
+            "name": "Newark Light Rail",
+            "scheme": null,
+            "segments": [
+                [
+                    12,
+                    13,
+                    120
+                ],
+                [
+                    13,
+                    12,
+                    120
+                ],
+                [
+                    13,
+                    14,
+                    120
+                ],
+                [
+                    14,
+                    15,
+                    120
+                ],
+                [
+                    15,
+                    16,
+                    120
+                ],
+                [
+                    16,
+                    17,
+                    120
+                ],
+                [
+                    17,
+                    13,
+                    120
+                ]
+            ],
+            "stations": [
+                [
+                    12,
+                    "Newark Penn Station",
+                    11
+                ],
+                [
+                    13,
+                    "NJPAC/Center Street",
+                    13
+                ],
+                [
+                    14,
+                    "Atlantic Street",
+                    14
+                ],
+                [
+                    15,
+                    "Riverfront Stadium",
+                    15
+                ],
+                [
+                    16,
+                    "Broad Street Station",
+                    16
+                ],
+                [
+                    17,
+                    "Washington Park",
+                    17
+                ]
+            ],
+            "text_id": 18
+        }
+    ],
+    "name": "metro",
+    "transfers": [
+        [
+            11,
+            12,
+            120,
+            true
+        ]
+    ],
+    "type_name": "Электричка"
+}

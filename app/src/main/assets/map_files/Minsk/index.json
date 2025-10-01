@@ -1,0 +1,294 @@
+{
+    "city_id": 625144,
+    "comments_text_id": 279,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "name_id": null,
+            "ranges": [
+                "05:30-07:00"
+            ],
+            "type": "custom",
+            "weekdays": null
+        },
+        {
+            "name_id": null,
+            "ranges": [
+                "07:00-09:00"
+            ],
+            "type": "custom",
+            "weekdays": null
+        },
+        {
+            "name_id": null,
+            "ranges": [
+                "09:00-16:00"
+            ],
+            "type": "custom",
+            "weekdays": null
+        },
+        {
+            "name_id": null,
+            "ranges": [
+                "16:00-19:00"
+            ],
+            "type": "custom",
+            "weekdays": null
+        },
+        {
+            "name_id": null,
+            "ranges": [
+                "19:00-22:00"
+            ],
+            "type": "custom",
+            "weekdays": null
+        },
+        {
+            "name_id": null,
+            "ranges": [
+                "22:00-23:00"
+            ],
+            "type": "custom",
+            "weekdays": null
+        },
+        {
+            "name_id": null,
+            "ranges": [
+                "23:00-01:30"
+            ],
+            "type": "custom",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 278,
+    "file": "Minsk.zip",
+    "latitude": 53.90019,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": 27.56653,
+    "map_id": "Minsk.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro",
+                "train",
+                "childtrain"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 270,
+            "root": true,
+            "transports": [
+                "metro",
+                "train",
+                "tram",
+                "childtrain"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 271
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/avtozavodskaya.json",
+            "name": "avtozavodskaya",
+            "name_text_id": 16,
+            "root": false,
+            "transports": [
+                "metro",
+                "train",
+                "tram",
+                "childtrain"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 272
+        },
+        {
+            "default_transports": [
+                "train"
+            ],
+            "file": "schemes/borisov.json",
+            "name": "borisov",
+            "name_text_id": 88,
+            "root": false,
+            "transports": [
+                "metro",
+                "train",
+                "tram",
+                "childtrain"
+            ],
+            "type_name": "Электричка",
+            "type_text_id": 273
+        },
+        {
+            "default_transports": [
+                "train"
+            ],
+            "file": "schemes/brest.json",
+            "name": "brest",
+            "name_text_id": 151,
+            "root": false,
+            "transports": [
+                "metro",
+                "train",
+                "tram",
+                "childtrain"
+            ],
+            "type_name": "Электричка",
+            "type_text_id": 273
+        },
+        {
+            "default_transports": [
+                "tram"
+            ],
+            "file": "schemes/molodechno.json",
+            "name": "molodechno",
+            "name_text_id": 178,
+            "root": false,
+            "transports": [
+                "metro",
+                "train",
+                "tram",
+                "childtrain"
+            ],
+            "type_name": "Электричка",
+            "type_text_id": 273
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/moskovskayaline.json",
+            "name": "moskovskayaline",
+            "name_text_id": 11,
+            "root": false,
+            "transports": [
+                "metro",
+                "train",
+                "tram",
+                "childtrain"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 272
+        },
+        {
+            "default_transports": [
+                "train"
+            ],
+            "file": "schemes/osipovichi.json",
+            "name": "osipovichi",
+            "name_text_id": 206,
+            "root": false,
+            "transports": [
+                "metro",
+                "train",
+                "tram",
+                "childtrain"
+            ],
+            "type_name": "Электричка",
+            "type_text_id": 273
+        },
+        {
+            "default_transports": [
+                "tram"
+            ],
+            "file": "schemes/tram.json",
+            "name": "tram",
+            "name_text_id": 274,
+            "root": false,
+            "transports": [
+                "metro",
+                "train",
+                "tram",
+                "childtrain"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 271
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/zelenoluzhskayaline.json",
+            "name": "zelenoluzhskayaline",
+            "name_text_id": 36,
+            "root": false,
+            "transports": [
+                "metro",
+                "train",
+                "tram",
+                "childtrain"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 272
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/only_metro.json",
+            "name": "only_metro",
+            "name_text_id": 275,
+            "root": true,
+            "transports": [
+                "metro",
+                "train",
+                "tram",
+                "childtrain"
+            ],
+            "type_name": "OTHER",
+            "type_text_id": 276
+        },
+        {
+            "default_transports": [
+                "metro",
+                "train",
+                "childtrain"
+            ],
+            "file": "schemes/zd.json",
+            "name": "zd",
+            "name_text_id": 277,
+            "root": true,
+            "transports": [
+                "metro",
+                "train",
+                "tram",
+                "childtrain"
+            ],
+            "type_name": "OTHER",
+            "type_text_id": 276
+        }
+    ],
+    "timestamp": 1743634800.0,
+    "transport_types": [
+        "Детская железная дорога",
+        "Электричка",
+        "Метро",
+        "Трамвай"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Метро"
+        },
+        {
+            "file": "transports/childtrain.json",
+            "name": "childtrain",
+            "type": "Детская железная дорога"
+        },
+        {
+            "file": "transports/train.json",
+            "name": "train",
+            "type": "Электричка"
+        },
+        {
+            "file": "transports/tram.json",
+            "name": "tram",
+            "type": "Трамвай"
+        }
+    ]
+}

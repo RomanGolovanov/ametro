@@ -1,0 +1,673 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 770,
+    "images": [
+        "res/schemes/c.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "008700",
+            "line_width": 9,
+            "name": "C",
+            "segments": [
+                [
+                    53,
+                    54,
+                    [
+                        [
+                            200,
+                            50
+                        ],
+                        [
+                            200,
+                            20
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    54,
+                    55,
+                    [
+                        [
+                            200,
+                            80
+                        ],
+                        [
+                            200,
+                            50
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    55,
+                    56,
+                    [
+                        [
+                            200,
+                            110
+                        ],
+                        [
+                            200,
+                            80
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    56,
+                    57,
+                    [
+                        [
+                            200,
+                            140
+                        ],
+                        [
+                            200,
+                            110
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    57,
+                    58,
+                    [
+                        [
+                            200,
+                            170
+                        ],
+                        [
+                            200,
+                            140
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    58,
+                    59,
+                    [
+                        [
+                            200,
+                            200
+                        ],
+                        [
+                            200,
+                            170
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    59,
+                    60,
+                    [
+                        [
+                            200,
+                            230
+                        ],
+                        [
+                            200,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    60,
+                    61,
+                    [
+                        [
+                            200,
+                            260
+                        ],
+                        [
+                            200,
+                            230
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    61,
+                    62,
+                    [
+                        [
+                            200,
+                            290
+                        ],
+                        [
+                            200,
+                            260
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    62,
+                    63,
+                    [
+                        [
+                            200,
+                            320
+                        ],
+                        [
+                            200,
+                            290
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    63,
+                    64,
+                    [
+                        [
+                            200,
+                            350
+                        ],
+                        [
+                            200,
+                            320
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    64,
+                    65,
+                    [
+                        [
+                            200,
+                            380
+                        ],
+                        [
+                            200,
+                            350
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    65,
+                    66,
+                    [
+                        [
+                            200,
+                            410
+                        ],
+                        [
+                            200,
+                            380
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    66,
+                    67,
+                    [
+                        [
+                            200,
+                            440
+                        ],
+                        [
+                            200,
+                            410
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    67,
+                    68,
+                    [
+                        [
+                            200,
+                            470
+                        ],
+                        [
+                            200,
+                            440
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    68,
+                    69,
+                    [
+                        [
+                            200,
+                            500
+                        ],
+                        [
+                            200,
+                            470
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    69,
+                    70,
+                    [
+                        [
+                            200,
+                            530
+                        ],
+                        [
+                            200,
+                            500
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    70,
+                    71,
+                    [
+                        [
+                            200,
+                            560
+                        ],
+                        [
+                            200,
+                            530
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    71,
+                    72,
+                    [
+                        [
+                            200,
+                            590
+                        ],
+                        [
+                            200,
+                            560
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    72,
+                    73,
+                    [
+                        [
+                            200,
+                            620
+                        ],
+                        [
+                            200,
+                            590
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        200,
+                        20
+                    ],
+                    "is_working": true,
+                    "name": "Lodi",
+                    "rect": [
+                        215,
+                        10,
+                        110,
+                        20
+                    ],
+                    "text_id": 54,
+                    "uid": 53
+                },
+                {
+                    "coord": [
+                        200,
+                        50
+                    ],
+                    "is_working": true,
+                    "name": "Pigneto",
+                    "rect": [
+                        215,
+                        40,
+                        110,
+                        20
+                    ],
+                    "text_id": 55,
+                    "uid": 54
+                },
+                {
+                    "coord": [
+                        200,
+                        80
+                    ],
+                    "is_working": true,
+                    "name": "Malatesta",
+                    "rect": [
+                        215,
+                        70,
+                        110,
+                        20
+                    ],
+                    "text_id": 56,
+                    "uid": 55
+                },
+                {
+                    "coord": [
+                        200,
+                        110
+                    ],
+                    "is_working": true,
+                    "name": "Teano",
+                    "rect": [
+                        215,
+                        100,
+                        110,
+                        20
+                    ],
+                    "text_id": 57,
+                    "uid": 56
+                },
+                {
+                    "coord": [
+                        200,
+                        140
+                    ],
+                    "is_working": true,
+                    "name": "Gardenie",
+                    "rect": [
+                        215,
+                        130,
+                        110,
+                        20
+                    ],
+                    "text_id": 58,
+                    "uid": 57
+                },
+                {
+                    "coord": [
+                        200,
+                        170
+                    ],
+                    "is_working": true,
+                    "name": "Mirti",
+                    "rect": [
+                        215,
+                        160,
+                        110,
+                        20
+                    ],
+                    "text_id": 59,
+                    "uid": 58
+                },
+                {
+                    "coord": [
+                        200,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Parco di Centocelle",
+                    "rect": [
+                        215,
+                        190,
+                        100,
+                        20
+                    ],
+                    "text_id": 60,
+                    "uid": 59
+                },
+                {
+                    "coord": [
+                        200,
+                        230
+                    ],
+                    "is_working": true,
+                    "name": "Alessandrino",
+                    "rect": [
+                        215,
+                        220,
+                        100,
+                        20
+                    ],
+                    "text_id": 61,
+                    "uid": 60
+                },
+                {
+                    "coord": [
+                        200,
+                        260
+                    ],
+                    "is_working": true,
+                    "name": "Torre Spaccata",
+                    "rect": [
+                        215,
+                        250,
+                        100,
+                        20
+                    ],
+                    "text_id": 62,
+                    "uid": 61
+                },
+                {
+                    "coord": [
+                        200,
+                        290
+                    ],
+                    "is_working": true,
+                    "name": "Torre Maura",
+                    "rect": [
+                        215,
+                        280,
+                        100,
+                        20
+                    ],
+                    "text_id": 63,
+                    "uid": 62
+                },
+                {
+                    "coord": [
+                        200,
+                        320
+                    ],
+                    "is_working": true,
+                    "name": "Giardinetti",
+                    "rect": [
+                        215,
+                        310,
+                        100,
+                        20
+                    ],
+                    "text_id": 64,
+                    "uid": 63
+                },
+                {
+                    "coord": [
+                        200,
+                        350
+                    ],
+                    "is_working": true,
+                    "name": "Torrenova",
+                    "rect": [
+                        215,
+                        340,
+                        100,
+                        20
+                    ],
+                    "text_id": 65,
+                    "uid": 64
+                },
+                {
+                    "coord": [
+                        200,
+                        380
+                    ],
+                    "is_working": true,
+                    "name": "Torre Angela",
+                    "rect": [
+                        215,
+                        370,
+                        100,
+                        20
+                    ],
+                    "text_id": 66,
+                    "uid": 65
+                },
+                {
+                    "coord": [
+                        200,
+                        410
+                    ],
+                    "is_working": true,
+                    "name": "Torre Gaia",
+                    "rect": [
+                        215,
+                        400,
+                        100,
+                        20
+                    ],
+                    "text_id": 67,
+                    "uid": 66
+                },
+                {
+                    "coord": [
+                        200,
+                        440
+                    ],
+                    "is_working": true,
+                    "name": "Grotte Celoni",
+                    "rect": [
+                        215,
+                        430,
+                        100,
+                        20
+                    ],
+                    "text_id": 68,
+                    "uid": 67
+                },
+                {
+                    "coord": [
+                        200,
+                        470
+                    ],
+                    "is_working": true,
+                    "name": "Due Leoni-Fontana Candida",
+                    "rect": [
+                        215,
+                        460,
+                        100,
+                        20
+                    ],
+                    "text_id": 69,
+                    "uid": 68
+                },
+                {
+                    "coord": [
+                        200,
+                        500
+                    ],
+                    "is_working": true,
+                    "name": "Borghesiana",
+                    "rect": [
+                        215,
+                        490,
+                        100,
+                        20
+                    ],
+                    "text_id": 70,
+                    "uid": 69
+                },
+                {
+                    "coord": [
+                        200,
+                        530
+                    ],
+                    "is_working": true,
+                    "name": "Bolognetta",
+                    "rect": [
+                        215,
+                        520,
+                        100,
+                        20
+                    ],
+                    "text_id": 71,
+                    "uid": 70
+                },
+                {
+                    "coord": [
+                        200,
+                        560
+                    ],
+                    "is_working": true,
+                    "name": "Finocchio",
+                    "rect": [
+                        215,
+                        550,
+                        100,
+                        20
+                    ],
+                    "text_id": 72,
+                    "uid": 71
+                },
+                {
+                    "coord": [
+                        200,
+                        590
+                    ],
+                    "is_working": true,
+                    "name": "Graniti",
+                    "rect": [
+                        215,
+                        580,
+                        100,
+                        20
+                    ],
+                    "text_id": 73,
+                    "uid": 72
+                },
+                {
+                    "coord": [
+                        200,
+                        620
+                    ],
+                    "is_working": true,
+                    "name": "Monte Compatri-Pantano",
+                    "rect": [
+                        215,
+                        610,
+                        100,
+                        20
+                    ],
+                    "text_id": 74,
+                    "uid": 73
+                }
+            ],
+            "text_id": 75
+        }
+    ],
+    "lines_width": 9,
+    "name": "c",
+    "name_text_id": 75,
+    "stations_diameter": 16.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "Метро",
+    "type_text_id": 78,
+    "upper_case": true,
+    "width": 350,
+    "word_wrap": true
+}

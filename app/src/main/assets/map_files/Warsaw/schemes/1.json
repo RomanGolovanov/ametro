@@ -1,0 +1,673 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 1010,
+    "images": [
+        "res/schemes/1.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "07397D",
+            "line_color": "07397D",
+            "line_width": 9,
+            "name": "I linia",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            120,
+                            100
+                        ],
+                        [
+                            120,
+                            60
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            120,
+                            140
+                        ],
+                        [
+                            120,
+                            100
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            120,
+                            180
+                        ],
+                        [
+                            120,
+                            140
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            120,
+                            220
+                        ],
+                        [
+                            120,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            120,
+                            260
+                        ],
+                        [
+                            120,
+                            220
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            120,
+                            300
+                        ],
+                        [
+                            120,
+                            260
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            120,
+                            340
+                        ],
+                        [
+                            120,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            120,
+                            380
+                        ],
+                        [
+                            120,
+                            340
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            120,
+                            420
+                        ],
+                        [
+                            120,
+                            380
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            120,
+                            460
+                        ],
+                        [
+                            120,
+                            420
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            120,
+                            500
+                        ],
+                        [
+                            120,
+                            460
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            120,
+                            540
+                        ],
+                        [
+                            120,
+                            500
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            120,
+                            580
+                        ],
+                        [
+                            120,
+                            540
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            120,
+                            620
+                        ],
+                        [
+                            120,
+                            580
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            120,
+                            660
+                        ],
+                        [
+                            120,
+                            620
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            120,
+                            700
+                        ],
+                        [
+                            120,
+                            660
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            120,
+                            740
+                        ],
+                        [
+                            120,
+                            700
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            120,
+                            780
+                        ],
+                        [
+                            120,
+                            740
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            120,
+                            820
+                        ],
+                        [
+                            120,
+                            780
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            120,
+                            860
+                        ],
+                        [
+                            120,
+                            820
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        120,
+                        60
+                    ],
+                    "is_working": true,
+                    "name": "Mlociny",
+                    "rect": [
+                        135,
+                        50,
+                        100,
+                        20
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        120,
+                        100
+                    ],
+                    "is_working": true,
+                    "name": "Wawrzyszew",
+                    "rect": [
+                        135,
+                        90,
+                        100,
+                        20
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        120,
+                        140
+                    ],
+                    "is_working": true,
+                    "name": "Stare Bielany",
+                    "rect": [
+                        135,
+                        127,
+                        100,
+                        30
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        120,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Slodowiec",
+                    "rect": [
+                        135,
+                        170,
+                        100,
+                        20
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        120,
+                        220
+                    ],
+                    "is_working": true,
+                    "name": "Marymont",
+                    "rect": [
+                        135,
+                        210,
+                        100,
+                        20
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        120,
+                        260
+                    ],
+                    "is_working": true,
+                    "name": "Plac Wilsona",
+                    "rect": [
+                        135,
+                        246,
+                        100,
+                        29
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        120,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Dworzec Gdanski",
+                    "rect": [
+                        135,
+                        287,
+                        100,
+                        29
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        120,
+                        340
+                    ],
+                    "is_working": true,
+                    "name": "Ratusz-Arsenal",
+                    "rect": [
+                        135,
+                        330,
+                        100,
+                        20
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        120,
+                        380
+                    ],
+                    "is_working": true,
+                    "name": "Swietokrzyska",
+                    "rect": [
+                        135,
+                        370,
+                        100,
+                        20
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        120,
+                        420
+                    ],
+                    "is_working": true,
+                    "name": "Centrum",
+                    "rect": [
+                        135,
+                        410,
+                        100,
+                        20
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        120,
+                        460
+                    ],
+                    "is_working": true,
+                    "name": "Politechnika",
+                    "rect": [
+                        135,
+                        450,
+                        100,
+                        20
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        120,
+                        500
+                    ],
+                    "is_working": true,
+                    "name": "Pole Mokotowskie",
+                    "rect": [
+                        135,
+                        485,
+                        100,
+                        29
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        120,
+                        540
+                    ],
+                    "is_working": true,
+                    "name": "Raclawicka",
+                    "rect": [
+                        135,
+                        530,
+                        100,
+                        20
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        120,
+                        580
+                    ],
+                    "is_working": true,
+                    "name": "Wierzbno",
+                    "rect": [
+                        135,
+                        570,
+                        100,
+                        20
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        120,
+                        620
+                    ],
+                    "is_working": true,
+                    "name": "Wilanowska",
+                    "rect": [
+                        135,
+                        610,
+                        100,
+                        20
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        120,
+                        660
+                    ],
+                    "is_working": true,
+                    "name": "Sluzew",
+                    "rect": [
+                        135,
+                        650,
+                        100,
+                        20
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        120,
+                        700
+                    ],
+                    "is_working": true,
+                    "name": "Ursynow",
+                    "rect": [
+                        135,
+                        690,
+                        100,
+                        20
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        120,
+                        740
+                    ],
+                    "is_working": true,
+                    "name": "Stoklosy",
+                    "rect": [
+                        135,
+                        730,
+                        100,
+                        20
+                    ],
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        120,
+                        780
+                    ],
+                    "is_working": true,
+                    "name": "Imielin",
+                    "rect": [
+                        135,
+                        770,
+                        100,
+                        20
+                    ],
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        120,
+                        820
+                    ],
+                    "is_working": true,
+                    "name": "Natolin",
+                    "rect": [
+                        135,
+                        810,
+                        100,
+                        20
+                    ],
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        120,
+                        860
+                    ],
+                    "is_working": true,
+                    "name": "Kabaty",
+                    "rect": [
+                        135,
+                        850,
+                        100,
+                        20
+                    ],
+                    "text_id": 20,
+                    "uid": 20
+                }
+            ],
+            "text_id": 21
+        }
+    ],
+    "lines_width": 9,
+    "name": "1",
+    "name_text_id": 21,
+    "stations_diameter": 16.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "Метро",
+    "type_text_id": 24,
+    "upper_case": true,
+    "width": 270,
+    "word_wrap": true
+}

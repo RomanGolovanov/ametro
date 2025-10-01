@@ -1,0 +1,387 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 391,
+    "images": [
+        "res/schemes/genova.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "07397D",
+            "line_color": "07397D",
+            "line_width": 9,
+            "name": "Prima linea",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            100,
+                            124
+                        ],
+                        [
+                            92.0,
+                            116.0
+                        ],
+                        [
+                            92,
+                            89
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            182,
+                            177
+                        ],
+                        [
+                            153.0,
+                            177.0
+                        ],
+                        [
+                            100,
+                            124
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            209,
+                            150
+                        ],
+                        [
+                            182,
+                            177
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            264,
+                            162
+                        ],
+                        [
+                            252.0,
+                            150.0
+                        ],
+                        [
+                            209,
+                            150
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            270,
+                            207
+                        ],
+                        [
+                            270.0,
+                            168.0
+                        ],
+                        [
+                            264,
+                            162
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            304,
+                            241
+                        ],
+                        [
+                            270,
+                            207
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            327,
+                            204
+                        ],
+                        [
+                            327.0,
+                            218.0
+                        ],
+                        [
+                            304,
+                            241
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            345,
+                            178
+                        ],
+                        [
+                            327.0,
+                            196.0
+                        ],
+                        [
+                            327,
+                            204
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    7,
+                    9,
+                    [
+                        [
+                            397,
+                            195
+                        ],
+                        [
+                            380.0,
+                            178.0
+                        ],
+                        [
+                            345.0,
+                            178.0
+                        ],
+                        [
+                            327.0,
+                            196.0
+                        ],
+                        [
+                            327,
+                            204
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            397,
+                            195
+                        ],
+                        [
+                            380.0,
+                            178.0
+                        ],
+                        [
+                            345,
+                            178
+                        ]
+                    ],
+                    false
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        92,
+                        89
+                    ],
+                    "is_working": false,
+                    "name": "Canepari",
+                    "rect": [
+                        24,
+                        82,
+                        59,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        100,
+                        124
+                    ],
+                    "is_working": true,
+                    "name": "Brin",
+                    "rect": [
+                        63,
+                        123,
+                        29,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        182,
+                        177
+                    ],
+                    "is_working": true,
+                    "name": "Dinegro",
+                    "rect": [
+                        159,
+                        183,
+                        52,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        209,
+                        150
+                    ],
+                    "is_working": true,
+                    "name": "Principe",
+                    "rect": [
+                        179,
+                        127,
+                        53,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        264,
+                        162
+                    ],
+                    "is_working": true,
+                    "name": "Darsena",
+                    "rect": [
+                        268,
+                        138,
+                        56,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        270,
+                        207
+                    ],
+                    "is_working": true,
+                    "name": "San Giorgio",
+                    "rect": [
+                        213,
+                        203,
+                        48,
+                        28
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        304,
+                        241
+                    ],
+                    "is_working": true,
+                    "name": "Sarzano",
+                    "rect": [
+                        313,
+                        243,
+                        55,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        327,
+                        204
+                    ],
+                    "is_working": true,
+                    "name": "De Ferrari",
+                    "rect": [
+                        337,
+                        202,
+                        50,
+                        28
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        345,
+                        178
+                    ],
+                    "is_working": false,
+                    "name": "Corvetto",
+                    "rect": [
+                        335,
+                        154,
+                        60,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        397,
+                        195
+                    ],
+                    "is_working": true,
+                    "name": "Bringole",
+                    "rect": [
+                        409,
+                        189,
+                        58,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                }
+            ],
+            "text_id": 10
+        }
+    ],
+    "lines_width": 9,
+    "name": "metro",
+    "name_text_id": 11,
+    "stations_diameter": 15.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 12,
+    "upper_case": true,
+    "width": 547,
+    "word_wrap": true
+}

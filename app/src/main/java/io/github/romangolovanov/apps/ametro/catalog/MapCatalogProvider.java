@@ -4,19 +4,23 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.util.Log;
 
+import java.io.IOException;
+
 import io.github.romangolovanov.apps.ametro.app.Constants;
 import io.github.romangolovanov.apps.ametro.catalog.entities.MapCatalog;
 import io.github.romangolovanov.apps.ametro.catalog.entities.MapInfo;
+import io.github.romangolovanov.apps.ametro.model.serialization.FileAssetsMapProvider;
+import io.github.romangolovanov.apps.ametro.model.serialization.GlobalIdentifierProvider;
+import io.github.romangolovanov.apps.ametro.model.serialization.MapProvider;
+import io.github.romangolovanov.apps.ametro.model.serialization.ZipArchiveMapProvider;
 import io.github.romangolovanov.apps.ametro.utils.FileUtils;
-
-import java.io.IOException;
-import java.io.InputStream;
 
 public class MapCatalogProvider {
 
     private final Context context;
     private final MapInfoLocalizationProvider localizationProvider;
     private MapCatalog catalog;
+    private final GlobalIdentifierProvider identifierProvider = new GlobalIdentifierProvider();
 
     public MapCatalogProvider(Context context, MapInfoLocalizationProvider localizationProvider) {
         this.context = context;
@@ -63,12 +67,33 @@ public class MapCatalogProvider {
         }
     }
 
+    public MapProvider getMapProvider(MapInfo mapInfo) throws IOException {
+        String fileAssetsPath = "map_files/" + mapInfo.getFileName();
+        var assets = context.getAssets();
 
-    public InputStream openMapAssetStream(MapInfo map)  {
+        // 1. Try if it's a zip file directly in assets
         try {
-            return context.getAssets().open("map_files/" + map.getFileName());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            try (var is = assets.open(fileAssetsPath)) {
+                return new ZipArchiveMapProvider(identifierProvider, is);
+            }
+        } catch (IOException ignored) {
+            // not a zip, continue
         }
+
+        // 2. Otherwise try as a folder (strip ".zip" suffix if present)
+        var folderPath = fileAssetsPath.endsWith(".zip")
+                ? fileAssetsPath.substring(0, fileAssetsPath.length() - 4)
+                : fileAssetsPath;
+
+        try {
+            String[] entries = assets.list(folderPath);
+            if (entries != null && entries.length > 0) {
+                return new FileAssetsMapProvider(identifierProvider, assets, folderPath);
+            }
+        } catch (IOException ignored) {
+            // continue to error
+        }
+
+        throw new IOException("Map " + mapInfo.getFileName() + " assets not found");
     }
 }

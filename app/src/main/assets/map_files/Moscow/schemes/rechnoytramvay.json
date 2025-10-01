@@ -1,0 +1,3952 @@
+{
+    "default_transports": [
+        "tramsriver"
+    ],
+    "height": 694,
+    "images": [
+        "res/schemes/rechnoytramvay.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "E41c0c",
+            "line_width": 6,
+            "name": "Сокольническая",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Бульвар Рокоссовского",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Черкизовская",
+                    "rect": null,
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Преображенская площадь",
+                    "rect": null,
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Сокольники",
+                    "rect": null,
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Красносельская",
+                    "rect": null,
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Комсомольская",
+                    "rect": null,
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Красные ворота",
+                    "rect": null,
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Чистые пруды",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Лубянка",
+                    "rect": null,
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Охотный ряд",
+                    "rect": null,
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        303,
+                        131
+                    ],
+                    "is_working": true,
+                    "name": "Библиотека имени Ленина",
+                    "rect": [
+                        304,
+                        89,
+                        74,
+                        28
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Кропоткинская",
+                    "rect": null,
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        216,
+                        264
+                    ],
+                    "is_working": true,
+                    "name": "Парк культуры",
+                    "rect": [
+                        188,
+                        221,
+                        52,
+                        28
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Фрунзенская",
+                    "rect": null,
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Спортивная",
+                    "rect": null,
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        92,
+                        400
+                    ],
+                    "is_working": true,
+                    "name": "Воробьевы горы",
+                    "rect": [
+                        100,
+                        401,
+                        63,
+                        28
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Университет",
+                    "rect": null,
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Проспект Вернадского",
+                    "rect": null,
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Юго-Западная",
+                    "rect": null,
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Тропарёво",
+                    "rect": null,
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Румянцево",
+                    "rect": null,
+                    "text_id": 20,
+                    "uid": 20
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Саларьево",
+                    "rect": null,
+                    "text_id": 21,
+                    "uid": 21
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Филатов луг",
+                    "rect": null,
+                    "text_id": 22,
+                    "uid": 22
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Прокшино",
+                    "rect": null,
+                    "text_id": 23,
+                    "uid": 23
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ольховая",
+                    "rect": null,
+                    "text_id": 24,
+                    "uid": 24
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Новомосковская",
+                    "rect": null,
+                    "text_id": 25,
+                    "uid": 25
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Потапово",
+                    "rect": null,
+                    "text_id": 26,
+                    "uid": 26
+                }
+            ],
+            "text_id": 27
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "34349C",
+            "line_width": 6,
+            "name": "Арбатско-Покровская",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Щелковская",
+                    "rect": null,
+                    "text_id": 305,
+                    "uid": 342
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Первомайская",
+                    "rect": null,
+                    "text_id": 306,
+                    "uid": 343
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Измайловская",
+                    "rect": null,
+                    "text_id": 307,
+                    "uid": 344
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Партизанская",
+                    "rect": null,
+                    "text_id": 308,
+                    "uid": 345
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Семеновская",
+                    "rect": null,
+                    "text_id": 309,
+                    "uid": 346
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Электрозаводская",
+                    "rect": null,
+                    "text_id": 102,
+                    "uid": 347
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Бауманская",
+                    "rect": null,
+                    "text_id": 310,
+                    "uid": 348
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Курская",
+                    "rect": null,
+                    "text_id": 198,
+                    "uid": 349
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Площадь Революции",
+                    "rect": null,
+                    "text_id": 311,
+                    "uid": 350
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Арбатская",
+                    "rect": null,
+                    "text_id": 312,
+                    "uid": 351
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Смоленская",
+                    "rect": null,
+                    "text_id": 313,
+                    "uid": 352
+                },
+                {
+                    "coord": [
+                        57,
+                        122
+                    ],
+                    "is_working": true,
+                    "name": "Киевская",
+                    "rect": [
+                        84,
+                        96,
+                        49,
+                        15
+                    ],
+                    "text_id": 314,
+                    "uid": 353
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Парк Победы",
+                    "rect": null,
+                    "text_id": 315,
+                    "uid": 354
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Славянский бульвар",
+                    "rect": null,
+                    "text_id": 177,
+                    "uid": 355
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Кунцевская",
+                    "rect": null,
+                    "text_id": 86,
+                    "uid": 356
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Молодёжная",
+                    "rect": null,
+                    "text_id": 316,
+                    "uid": 357
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Крылатское",
+                    "rect": null,
+                    "text_id": 317,
+                    "uid": 358
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Строгино",
+                    "rect": null,
+                    "text_id": 318,
+                    "uid": 359
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Мякинино",
+                    "rect": null,
+                    "text_id": 319,
+                    "uid": 360
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Волоколамская",
+                    "rect": null,
+                    "text_id": 191,
+                    "uid": 361
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Митино",
+                    "rect": null,
+                    "text_id": 320,
+                    "uid": 362
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Пятницкое шоссе",
+                    "rect": null,
+                    "text_id": 321,
+                    "uid": 363
+                }
+            ],
+            "text_id": 322
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "1C54BC",
+            "line_width": 6,
+            "name": "Филевская",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Кунцевская",
+                    "rect": null,
+                    "text_id": 86,
+                    "uid": 364
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Пионерская",
+                    "rect": null,
+                    "text_id": 323,
+                    "uid": 365
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Филевский парк",
+                    "rect": null,
+                    "text_id": 324,
+                    "uid": 366
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Багратионовская",
+                    "rect": null,
+                    "text_id": 325,
+                    "uid": 367
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Фили",
+                    "rect": null,
+                    "text_id": 176,
+                    "uid": 368
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Кутузовская",
+                    "rect": null,
+                    "text_id": 130,
+                    "uid": 369
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Студенческая",
+                    "rect": null,
+                    "text_id": 326,
+                    "uid": 370
+                },
+                {
+                    "coord": [
+                        76,
+                        124
+                    ],
+                    "is_working": true,
+                    "name": "Киевская",
+                    "rect": [
+                        84,
+                        96,
+                        49,
+                        15
+                    ],
+                    "text_id": 314,
+                    "uid": 371
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Смоленская",
+                    "rect": null,
+                    "text_id": 313,
+                    "uid": 372
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Арбатская",
+                    "rect": null,
+                    "text_id": 312,
+                    "uid": 373
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Александровский сад",
+                    "rect": null,
+                    "text_id": 327,
+                    "uid": 374
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Деловой центр",
+                    "rect": null,
+                    "text_id": 328,
+                    "uid": 375
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Москва-Сити",
+                    "rect": null,
+                    "text_id": 131,
+                    "uid": 376
+                }
+            ],
+            "text_id": 329
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "543C04",
+            "line_width": 6,
+            "name": "Кольцевая",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": [
+                        200,
+                        275
+                    ],
+                    "is_working": true,
+                    "name": "Парк культуры",
+                    "rect": [
+                        132,
+                        249,
+                        52,
+                        28
+                    ],
+                    "text_id": 12,
+                    "uid": 377
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Октябрьская",
+                    "rect": null,
+                    "text_id": 330,
+                    "uid": 378
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Добрынинская",
+                    "rect": null,
+                    "text_id": 331,
+                    "uid": 379
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Павелецкая",
+                    "rect": null,
+                    "text_id": 263,
+                    "uid": 380
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Таганская",
+                    "rect": null,
+                    "text_id": 332,
+                    "uid": 381
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Курская",
+                    "rect": null,
+                    "text_id": 198,
+                    "uid": 382
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Комсомольская",
+                    "rect": null,
+                    "text_id": 5,
+                    "uid": 383
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Проспект Мира",
+                    "rect": null,
+                    "text_id": 333,
+                    "uid": 384
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Новослободская",
+                    "rect": null,
+                    "text_id": 334,
+                    "uid": 385
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Белорусская",
+                    "rect": null,
+                    "text_id": 173,
+                    "uid": 386
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Краснопресненская",
+                    "rect": null,
+                    "text_id": 335,
+                    "uid": 387
+                },
+                {
+                    "coord": [
+                        68,
+                        107
+                    ],
+                    "is_working": true,
+                    "name": "Киевская",
+                    "rect": [
+                        84,
+                        96,
+                        49,
+                        15
+                    ],
+                    "text_id": 314,
+                    "uid": 388
+                }
+            ],
+            "text_id": 336
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "FC9C54",
+            "line_width": 6,
+            "name": "Калужско-Рижская",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Медведково",
+                    "rect": null,
+                    "text_id": 337,
+                    "uid": 389
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Бабушкинская",
+                    "rect": null,
+                    "text_id": 338,
+                    "uid": 390
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Свиблово",
+                    "rect": null,
+                    "text_id": 339,
+                    "uid": 391
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ботанический сад",
+                    "rect": null,
+                    "text_id": 114,
+                    "uid": 392
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "ВДНХ",
+                    "rect": null,
+                    "text_id": 340,
+                    "uid": 393
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Алексеевская",
+                    "rect": null,
+                    "text_id": 341,
+                    "uid": 394
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Рижская",
+                    "rect": null,
+                    "text_id": 103,
+                    "uid": 395
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Проспект Мира",
+                    "rect": null,
+                    "text_id": 333,
+                    "uid": 396
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Сухаревская",
+                    "rect": null,
+                    "text_id": 342,
+                    "uid": 397
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Тургеневская",
+                    "rect": null,
+                    "text_id": 343,
+                    "uid": 398
+                },
+                {
+                    "coord": [
+                        462,
+                        114
+                    ],
+                    "is_working": true,
+                    "name": "Китай-город",
+                    "rect": [
+                        441,
+                        86,
+                        63,
+                        15
+                    ],
+                    "text_id": 344,
+                    "uid": 399
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Третьяковская",
+                    "rect": null,
+                    "text_id": 345,
+                    "uid": 400
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Октябрьская",
+                    "rect": null,
+                    "text_id": 330,
+                    "uid": 401
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Шаболовская",
+                    "rect": null,
+                    "text_id": 346,
+                    "uid": 402
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ленинский проспект",
+                    "rect": null,
+                    "text_id": 347,
+                    "uid": 403
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Академическая",
+                    "rect": null,
+                    "text_id": 149,
+                    "uid": 404
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Профсоюзная",
+                    "rect": null,
+                    "text_id": 348,
+                    "uid": 405
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Новые Черемушки",
+                    "rect": null,
+                    "text_id": 349,
+                    "uid": 406
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Калужская",
+                    "rect": null,
+                    "text_id": 350,
+                    "uid": 407
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Беляево",
+                    "rect": null,
+                    "text_id": 351,
+                    "uid": 408
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Коньково",
+                    "rect": null,
+                    "text_id": 352,
+                    "uid": 409
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Теплый Стан",
+                    "rect": null,
+                    "text_id": 353,
+                    "uid": 410
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ясенево",
+                    "rect": null,
+                    "text_id": 354,
+                    "uid": 411
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Новоясеневская",
+                    "rect": null,
+                    "text_id": 355,
+                    "uid": 412
+                }
+            ],
+            "text_id": 356
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "AC24AC",
+            "line_width": 6,
+            "name": "Таганско-Краснопресненская",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Планерная",
+                    "rect": null,
+                    "text_id": 357,
+                    "uid": 413
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Сходненская",
+                    "rect": null,
+                    "text_id": 358,
+                    "uid": 414
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Тушинская",
+                    "rect": null,
+                    "text_id": 193,
+                    "uid": 415
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Спартак",
+                    "rect": null,
+                    "text_id": 359,
+                    "uid": 416
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Щукинская",
+                    "rect": null,
+                    "text_id": 194,
+                    "uid": 417
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Октябрьское поле",
+                    "rect": null,
+                    "text_id": 360,
+                    "uid": 418
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Полежаевская",
+                    "rect": null,
+                    "text_id": 361,
+                    "uid": 419
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Беговая",
+                    "rect": null,
+                    "text_id": 174,
+                    "uid": 420
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Улица 1905 года",
+                    "rect": null,
+                    "text_id": 362,
+                    "uid": 421
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Баррикадная",
+                    "rect": null,
+                    "text_id": 363,
+                    "uid": 422
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Пушкинская",
+                    "rect": null,
+                    "text_id": 364,
+                    "uid": 423
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Кузнецкий мост",
+                    "rect": null,
+                    "text_id": 365,
+                    "uid": 424
+                },
+                {
+                    "coord": [
+                        479,
+                        114
+                    ],
+                    "is_working": true,
+                    "name": "Китай-город",
+                    "rect": [
+                        441,
+                        86,
+                        63,
+                        15
+                    ],
+                    "text_id": 344,
+                    "uid": 425
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Таганская",
+                    "rect": null,
+                    "text_id": 332,
+                    "uid": 426
+                },
+                {
+                    "coord": [
+                        580,
+                        278
+                    ],
+                    "is_working": true,
+                    "name": "Пролетарская",
+                    "rect": [
+                        574,
+                        252,
+                        75,
+                        15
+                    ],
+                    "text_id": 366,
+                    "uid": 427
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Волгоградский проспект",
+                    "rect": null,
+                    "text_id": 367,
+                    "uid": 428
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Текстильщики",
+                    "rect": null,
+                    "text_id": 98,
+                    "uid": 429
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Кузьминки",
+                    "rect": null,
+                    "text_id": 368,
+                    "uid": 430
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Рязанский проспект",
+                    "rect": null,
+                    "text_id": 369,
+                    "uid": 431
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Выхино",
+                    "rect": null,
+                    "text_id": 235,
+                    "uid": 432
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Лермонтовский проспект",
+                    "rect": null,
+                    "text_id": 370,
+                    "uid": 433
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Жулебино",
+                    "rect": null,
+                    "text_id": 371,
+                    "uid": 434
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Котельники",
+                    "rect": null,
+                    "text_id": 372,
+                    "uid": 435
+                }
+            ],
+            "text_id": 373
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "9CA4A4",
+            "line_width": 6,
+            "name": "Серпуховско-Тимирязевская",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Алтуфьево",
+                    "rect": null,
+                    "text_id": 28,
+                    "uid": 27
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Бибирево",
+                    "rect": null,
+                    "text_id": 29,
+                    "uid": 28
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Отрадное",
+                    "rect": null,
+                    "text_id": 30,
+                    "uid": 29
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Владыкино",
+                    "rect": null,
+                    "text_id": 31,
+                    "uid": 30
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Петровско-Разумовская",
+                    "rect": null,
+                    "text_id": 32,
+                    "uid": 31
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Тимирязевская",
+                    "rect": null,
+                    "text_id": 33,
+                    "uid": 32
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Дмитровская",
+                    "rect": null,
+                    "text_id": 34,
+                    "uid": 33
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Савёловская",
+                    "rect": null,
+                    "text_id": 35,
+                    "uid": 34
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Менделеевская",
+                    "rect": null,
+                    "text_id": 36,
+                    "uid": 35
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Цветной бульвар",
+                    "rect": null,
+                    "text_id": 37,
+                    "uid": 36
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Чеховская",
+                    "rect": null,
+                    "text_id": 38,
+                    "uid": 37
+                },
+                {
+                    "coord": [
+                        286,
+                        131
+                    ],
+                    "is_working": true,
+                    "name": "Боровицкая",
+                    "rect": [
+                        206,
+                        111,
+                        63,
+                        15
+                    ],
+                    "text_id": 39,
+                    "uid": 38
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Полянка",
+                    "rect": null,
+                    "text_id": 40,
+                    "uid": 39
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Серпуховская",
+                    "rect": null,
+                    "text_id": 41,
+                    "uid": 40
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Тульская",
+                    "rect": null,
+                    "text_id": 42,
+                    "uid": 41
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Нагатинская",
+                    "rect": null,
+                    "text_id": 43,
+                    "uid": 42
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Нагорная",
+                    "rect": null,
+                    "text_id": 44,
+                    "uid": 43
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Нахимовский проспект",
+                    "rect": null,
+                    "text_id": 45,
+                    "uid": 44
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Севастопольская",
+                    "rect": null,
+                    "text_id": 46,
+                    "uid": 45
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Чертановская",
+                    "rect": null,
+                    "text_id": 47,
+                    "uid": 46
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Южная",
+                    "rect": null,
+                    "text_id": 48,
+                    "uid": 47
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Пражская",
+                    "rect": null,
+                    "text_id": 49,
+                    "uid": 48
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Улица Академика Янгеля",
+                    "rect": null,
+                    "text_id": 50,
+                    "uid": 49
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Аннино",
+                    "rect": null,
+                    "text_id": 51,
+                    "uid": 50
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Бульвар Дмитрия Донского",
+                    "rect": null,
+                    "text_id": 52,
+                    "uid": 51
+                }
+            ],
+            "text_id": 53
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "7919D2",
+            "line_width": 6,
+            "name": "Речной трамвай",
+            "segments": [
+                [
+                    2311,
+                    2312,
+                    [
+                        [
+                            37.0,
+                            379.0
+                        ],
+                        [
+                            38.2,
+                            377.09
+                        ],
+                        [
+                            39.16,
+                            375.12
+                        ],
+                        [
+                            39.88,
+                            373.09
+                        ],
+                        [
+                            40.38,
+                            371.0
+                        ],
+                        [
+                            40.67,
+                            368.84
+                        ],
+                        [
+                            40.73,
+                            366.62
+                        ],
+                        [
+                            40.53,
+                            364.33
+                        ],
+                        [
+                            40.0,
+                            362.0
+                        ],
+                        [
+                            39.01,
+                            359.63
+                        ],
+                        [
+                            37.74,
+                            357.2
+                        ],
+                        [
+                            36.28,
+                            354.7
+                        ],
+                        [
+                            34.69,
+                            352.12
+                        ],
+                        [
+                            33.01,
+                            349.49
+                        ],
+                        [
+                            31.31,
+                            346.76
+                        ],
+                        [
+                            29.6,
+                            343.94
+                        ],
+                        [
+                            28.0,
+                            341.0
+                        ],
+                        [
+                            26.63,
+                            337.88
+                        ],
+                        [
+                            25.41,
+                            334.64
+                        ],
+                        [
+                            24.28,
+                            331.33
+                        ],
+                        [
+                            23.25,
+                            327.94
+                        ],
+                        [
+                            22.29,
+                            324.5
+                        ],
+                        [
+                            21.43,
+                            321.03
+                        ],
+                        [
+                            20.67,
+                            317.52
+                        ],
+                        [
+                            20.0,
+                            314.0
+                        ],
+                        [
+                            19.38,
+                            310.48
+                        ],
+                        [
+                            18.88,
+                            306.97
+                        ],
+                        [
+                            18.54,
+                            303.45
+                        ],
+                        [
+                            18.38,
+                            299.94
+                        ],
+                        [
+                            18.37,
+                            296.41
+                        ],
+                        [
+                            18.61,
+                            292.9
+                        ],
+                        [
+                            19.11,
+                            289.42
+                        ],
+                        [
+                            20.0,
+                            286.0
+                        ],
+                        [
+                            21.46,
+                            282.69
+                        ],
+                        [
+                            23.3,
+                            279.44
+                        ],
+                        [
+                            25.39,
+                            276.22
+                        ],
+                        [
+                            27.69,
+                            273.0
+                        ],
+                        [
+                            30.13,
+                            269.77
+                        ],
+                        [
+                            32.69,
+                            266.53
+                        ],
+                        [
+                            35.34,
+                            263.28
+                        ],
+                        [
+                            38.0,
+                            260.0
+                        ],
+                        [
+                            40.54,
+                            256.69
+                        ],
+                        [
+                            43.06,
+                            253.34
+                        ],
+                        [
+                            45.61,
+                            249.95
+                        ],
+                        [
+                            48.19,
+                            246.5
+                        ],
+                        [
+                            50.83,
+                            242.98
+                        ],
+                        [
+                            53.51,
+                            239.39
+                        ],
+                        [
+                            56.23,
+                            235.73
+                        ],
+                        [
+                            59.0,
+                            232.0
+                        ],
+                        [
+                            61.83,
+                            228.22
+                        ],
+                        [
+                            64.71,
+                            224.36
+                        ],
+                        [
+                            67.61,
+                            220.36
+                        ],
+                        [
+                            70.5,
+                            216.25
+                        ],
+                        [
+                            73.34,
+                            212.08
+                        ],
+                        [
+                            76.18,
+                            207.71
+                        ],
+                        [
+                            79.04,
+                            203.09
+                        ],
+                        [
+                            82.0,
+                            198.0
+                        ],
+                        [
+                            85.24,
+                            192.04
+                        ],
+                        [
+                            88.51,
+                            185.69
+                        ],
+                        [
+                            91.66,
+                            179.25
+                        ],
+                        [
+                            94.62,
+                            172.81
+                        ],
+                        [
+                            97.34,
+                            166.54
+                        ],
+                        [
+                            99.7,
+                            160.56
+                        ],
+                        [
+                            101.64,
+                            154.95
+                        ],
+                        [
+                            103.0,
+                            150.0
+                        ],
+                        [
+                            103.51,
+                            146.11
+                        ],
+                        [
+                            103.37,
+                            142.97
+                        ],
+                        [
+                            102.69,
+                            140.4
+                        ],
+                        [
+                            101.5,
+                            138.38
+                        ],
+                        [
+                            99.87,
+                            136.77
+                        ],
+                        [
+                            97.75,
+                            135.66
+                        ],
+                        [
+                            95.12,
+                            135.07
+                        ],
+                        [
+                            92.0,
+                            135.0
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2312,
+                    2313,
+                    [
+                        [
+                            182.0,
+                            350.0
+                        ],
+                        [
+                            184.56,
+                            352.0
+                        ],
+                        [
+                            186.5,
+                            354.0
+                        ],
+                        [
+                            187.81,
+                            356.0
+                        ],
+                        [
+                            188.5,
+                            358.0
+                        ],
+                        [
+                            188.62,
+                            359.98
+                        ],
+                        [
+                            188.1,
+                            361.96
+                        ],
+                        [
+                            186.93,
+                            363.96
+                        ],
+                        [
+                            185.0,
+                            366.0
+                        ],
+                        [
+                            182.14,
+                            368.16
+                        ],
+                        [
+                            178.59,
+                            370.35
+                        ],
+                        [
+                            174.47,
+                            372.52
+                        ],
+                        [
+                            169.88,
+                            374.62
+                        ],
+                        [
+                            164.9,
+                            376.64
+                        ],
+                        [
+                            159.56,
+                            378.55
+                        ],
+                        [
+                            153.91,
+                            380.34
+                        ],
+                        [
+                            148.0,
+                            382.0
+                        ],
+                        [
+                            141.92,
+                            383.5
+                        ],
+                        [
+                            135.69,
+                            384.83
+                        ],
+                        [
+                            129.33,
+                            385.95
+                        ],
+                        [
+                            122.88,
+                            386.88
+                        ],
+                        [
+                            116.36,
+                            387.66
+                        ],
+                        [
+                            109.84,
+                            388.18
+                        ],
+                        [
+                            103.37,
+                            388.35
+                        ],
+                        [
+                            97.0,
+                            388.0
+                        ],
+                        [
+                            90.8,
+                            386.76
+                        ],
+                        [
+                            84.78,
+                            385.04
+                        ],
+                        [
+                            78.97,
+                            383.12
+                        ],
+                        [
+                            73.38,
+                            381.06
+                        ],
+                        [
+                            68.01,
+                            379.02
+                        ],
+                        [
+                            62.95,
+                            377.09
+                        ],
+                        [
+                            58.24,
+                            375.34
+                        ],
+                        [
+                            54.0,
+                            374.0
+                        ],
+                        [
+                            50.37,
+                            373.41
+                        ],
+                        [
+                            47.24,
+                            373.32
+                        ],
+                        [
+                            44.54,
+                            373.56
+                        ],
+                        [
+                            42.25,
+                            374.12
+                        ],
+                        [
+                            40.33,
+                            374.91
+                        ],
+                        [
+                            38.81,
+                            375.97
+                        ],
+                        [
+                            37.7,
+                            377.34
+                        ],
+                        [
+                            37.0,
+                            379.0
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2313,
+                    2314,
+                    [
+                        [
+                            228.0,
+                            341.0
+                        ],
+                        [
+                            225.6,
+                            340.11
+                        ],
+                        [
+                            223.28,
+                            339.44
+                        ],
+                        [
+                            221.04,
+                            338.99
+                        ],
+                        [
+                            218.88,
+                            338.75
+                        ],
+                        [
+                            216.77,
+                            338.67
+                        ],
+                        [
+                            214.74,
+                            338.82
+                        ],
+                        [
+                            212.81,
+                            339.23
+                        ],
+                        [
+                            211.0,
+                            340.0
+                        ],
+                        [
+                            209.39,
+                            341.34
+                        ],
+                        [
+                            207.88,
+                            342.99
+                        ],
+                        [
+                            206.43,
+                            344.77
+                        ],
+                        [
+                            205.0,
+                            346.62
+                        ],
+                        [
+                            203.57,
+                            348.46
+                        ],
+                        [
+                            202.12,
+                            350.2
+                        ],
+                        [
+                            200.61,
+                            351.77
+                        ],
+                        [
+                            199.0,
+                            353.0
+                        ],
+                        [
+                            197.19,
+                            353.63
+                        ],
+                        [
+                            195.26,
+                            353.87
+                        ],
+                        [
+                            193.23,
+                            353.82
+                        ],
+                        [
+                            191.12,
+                            353.5
+                        ],
+                        [
+                            188.96,
+                            352.99
+                        ],
+                        [
+                            186.72,
+                            352.25
+                        ],
+                        [
+                            184.4,
+                            351.25
+                        ],
+                        [
+                            182.0,
+                            350.0
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2314,
+                    2315,
+                    [
+                        [
+                            221.0,
+                            293.0
+                        ],
+                        [
+                            223.29,
+                            295.18
+                        ],
+                        [
+                            225.28,
+                            297.34
+                        ],
+                        [
+                            226.97,
+                            299.49
+                        ],
+                        [
+                            228.38,
+                            301.62
+                        ],
+                        [
+                            229.55,
+                            303.74
+                        ],
+                        [
+                            230.41,
+                            305.84
+                        ],
+                        [
+                            230.94,
+                            307.93
+                        ],
+                        [
+                            231.0,
+                            310.0
+                        ],
+                        [
+                            230.37,
+                            312.05
+                        ],
+                        [
+                            229.34,
+                            314.09
+                        ],
+                        [
+                            228.11,
+                            316.12
+                        ],
+                        [
+                            226.75,
+                            318.12
+                        ],
+                        [
+                            225.36,
+                            320.12
+                        ],
+                        [
+                            224.04,
+                            322.09
+                        ],
+                        [
+                            222.85,
+                            324.05
+                        ],
+                        [
+                            222.0,
+                            326.0
+                        ],
+                        [
+                            221.78,
+                            327.93
+                        ],
+                        [
+                            221.96,
+                            329.84
+                        ],
+                        [
+                            222.42,
+                            331.74
+                        ],
+                        [
+                            223.12,
+                            333.62
+                        ],
+                        [
+                            224.0,
+                            335.49
+                        ],
+                        [
+                            225.09,
+                            337.34
+                        ],
+                        [
+                            226.43,
+                            339.18
+                        ],
+                        [
+                            228.0,
+                            341.0
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2315,
+                    2316,
+                    [
+                        [
+                            320.0,
+                            177.0
+                        ],
+                        [
+                            318.03,
+                            175.21
+                        ],
+                        [
+                            316.12,
+                            173.72
+                        ],
+                        [
+                            314.28,
+                            172.53
+                        ],
+                        [
+                            312.5,
+                            171.62
+                        ],
+                        [
+                            310.78,
+                            170.99
+                        ],
+                        [
+                            309.12,
+                            170.66
+                        ],
+                        [
+                            307.53,
+                            170.65
+                        ],
+                        [
+                            306.0,
+                            171.0
+                        ],
+                        [
+                            304.55,
+                            171.83
+                        ],
+                        [
+                            303.16,
+                            173.0
+                        ],
+                        [
+                            301.83,
+                            174.42
+                        ],
+                        [
+                            300.56,
+                            176.06
+                        ],
+                        [
+                            299.33,
+                            177.91
+                        ],
+                        [
+                            298.16,
+                            179.89
+                        ],
+                        [
+                            297.04,
+                            181.96
+                        ],
+                        [
+                            296.0,
+                            184.0
+                        ],
+                        [
+                            295.08,
+                            185.81
+                        ],
+                        [
+                            294.22,
+                            187.58
+                        ],
+                        [
+                            293.38,
+                            189.43
+                        ],
+                        [
+                            292.56,
+                            191.38
+                        ],
+                        [
+                            291.75,
+                            193.43
+                        ],
+                        [
+                            290.91,
+                            195.67
+                        ],
+                        [
+                            290.01,
+                            198.13
+                        ],
+                        [
+                            289.0,
+                            201.0
+                        ],
+                        [
+                            287.76,
+                            204.56
+                        ],
+                        [
+                            286.41,
+                            208.49
+                        ],
+                        [
+                            285.0,
+                            212.55
+                        ],
+                        [
+                            283.56,
+                            216.69
+                        ],
+                        [
+                            282.11,
+                            220.82
+                        ],
+                        [
+                            280.68,
+                            224.82
+                        ],
+                        [
+                            279.29,
+                            228.63
+                        ],
+                        [
+                            278.0,
+                            232.0
+                        ],
+                        [
+                            276.93,
+                            234.54
+                        ],
+                        [
+                            275.97,
+                            236.62
+                        ],
+                        [
+                            275.04,
+                            238.44
+                        ],
+                        [
+                            274.12,
+                            240.06
+                        ],
+                        [
+                            273.2,
+                            241.61
+                        ],
+                        [
+                            272.23,
+                            243.1
+                        ],
+                        [
+                            271.19,
+                            244.52
+                        ],
+                        [
+                            270.0,
+                            246.0
+                        ],
+                        [
+                            268.51,
+                            247.68
+                        ],
+                        [
+                            266.86,
+                            249.43
+                        ],
+                        [
+                            265.17,
+                            251.21
+                        ],
+                        [
+                            263.44,
+                            253.0
+                        ],
+                        [
+                            261.71,
+                            254.76
+                        ],
+                        [
+                            260.04,
+                            256.51
+                        ],
+                        [
+                            258.43,
+                            258.26
+                        ],
+                        [
+                            257.0,
+                            260.0
+                        ],
+                        [
+                            255.89,
+                            261.7
+                        ],
+                        [
+                            254.96,
+                            263.39
+                        ],
+                        [
+                            254.11,
+                            265.1
+                        ],
+                        [
+                            253.31,
+                            266.81
+                        ],
+                        [
+                            252.5,
+                            268.51
+                        ],
+                        [
+                            251.69,
+                            270.25
+                        ],
+                        [
+                            250.87,
+                            272.06
+                        ],
+                        [
+                            250.0,
+                            274.0
+                        ],
+                        [
+                            249.05,
+                            276.24
+                        ],
+                        [
+                            248.03,
+                            278.59
+                        ],
+                        [
+                            246.93,
+                            280.94
+                        ],
+                        [
+                            245.75,
+                            283.25
+                        ],
+                        [
+                            244.49,
+                            285.46
+                        ],
+                        [
+                            243.13,
+                            287.52
+                        ],
+                        [
+                            241.65,
+                            289.41
+                        ],
+                        [
+                            240.0,
+                            291.0
+                        ],
+                        [
+                            238.14,
+                            292.15
+                        ],
+                        [
+                            236.12,
+                            292.98
+                        ],
+                        [
+                            233.94,
+                            293.55
+                        ],
+                        [
+                            231.62,
+                            293.88
+                        ],
+                        [
+                            229.18,
+                            294.0
+                        ],
+                        [
+                            226.59,
+                            293.91
+                        ],
+                        [
+                            223.87,
+                            293.57
+                        ],
+                        [
+                            221.0,
+                            293.0
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2316,
+                    2317,
+                    [
+                        [
+                            480.0,
+                            141.0
+                        ],
+                        [
+                            479.05,
+                            143.05
+                        ],
+                        [
+                            477.94,
+                            144.84
+                        ],
+                        [
+                            476.67,
+                            146.36
+                        ],
+                        [
+                            475.25,
+                            147.62
+                        ],
+                        [
+                            473.69,
+                            148.66
+                        ],
+                        [
+                            471.97,
+                            149.43
+                        ],
+                        [
+                            470.08,
+                            149.9
+                        ],
+                        [
+                            468.0,
+                            150.0
+                        ],
+                        [
+                            465.67,
+                            149.59
+                        ],
+                        [
+                            463.16,
+                            148.86
+                        ],
+                        [
+                            460.52,
+                            147.92
+                        ],
+                        [
+                            457.75,
+                            146.81
+                        ],
+                        [
+                            454.86,
+                            145.61
+                        ],
+                        [
+                            451.91,
+                            144.36
+                        ],
+                        [
+                            448.93,
+                            143.12
+                        ],
+                        [
+                            446.0,
+                            142.0
+                        ],
+                        [
+                            443.3,
+                            141.19
+                        ],
+                        [
+                            440.65,
+                            140.54
+                        ],
+                        [
+                            437.93,
+                            139.98
+                        ],
+                        [
+                            435.12,
+                            139.5
+                        ],
+                        [
+                            432.19,
+                            139.05
+                        ],
+                        [
+                            429.07,
+                            138.65
+                        ],
+                        [
+                            425.72,
+                            138.31
+                        ],
+                        [
+                            422.0,
+                            138.0
+                        ],
+                        [
+                            417.68,
+                            137.68
+                        ],
+                        [
+                            412.99,
+                            137.41
+                        ],
+                        [
+                            408.08,
+                            137.23
+                        ],
+                        [
+                            403.0,
+                            137.12
+                        ],
+                        [
+                            397.85,
+                            137.12
+                        ],
+                        [
+                            392.62,
+                            137.25
+                        ],
+                        [
+                            387.33,
+                            137.52
+                        ],
+                        [
+                            382.0,
+                            138.0
+                        ],
+                        [
+                            376.67,
+                            138.77
+                        ],
+                        [
+                            371.38,
+                            139.75
+                        ],
+                        [
+                            366.14,
+                            140.87
+                        ],
+                        [
+                            361.0,
+                            142.12
+                        ],
+                        [
+                            355.97,
+                            143.47
+                        ],
+                        [
+                            351.1,
+                            144.9
+                        ],
+                        [
+                            346.43,
+                            146.42
+                        ],
+                        [
+                            342.0,
+                            148.0
+                        ],
+                        [
+                            337.89,
+                            149.61
+                        ],
+                        [
+                            334.09,
+                            151.25
+                        ],
+                        [
+                            330.58,
+                            152.95
+                        ],
+                        [
+                            327.38,
+                            154.69
+                        ],
+                        [
+                            324.47,
+                            156.48
+                        ],
+                        [
+                            321.91,
+                            158.3
+                        ],
+                        [
+                            319.74,
+                            160.15
+                        ],
+                        [
+                            318.0,
+                            162.0
+                        ],
+                        [
+                            316.78,
+                            163.83
+                        ],
+                        [
+                            316.02,
+                            165.67
+                        ],
+                        [
+                            315.68,
+                            167.51
+                        ],
+                        [
+                            315.75,
+                            169.38
+                        ],
+                        [
+                            316.21,
+                            171.26
+                        ],
+                        [
+                            317.06,
+                            173.16
+                        ],
+                        [
+                            318.33,
+                            175.07
+                        ],
+                        [
+                            320.0,
+                            177.0
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2317,
+                    2318,
+                    [
+                        [
+                            553.0,
+                            289.0
+                        ],
+                        [
+                            551.1,
+                            289.86
+                        ],
+                        [
+                            549.28,
+                            290.44
+                        ],
+                        [
+                            547.54,
+                            290.73
+                        ],
+                        [
+                            545.88,
+                            290.75
+                        ],
+                        [
+                            544.28,
+                            290.51
+                        ],
+                        [
+                            542.77,
+                            289.98
+                        ],
+                        [
+                            541.34,
+                            289.16
+                        ],
+                        [
+                            540.0,
+                            288.0
+                        ],
+                        [
+                            538.77,
+                            286.42
+                        ],
+                        [
+                            537.64,
+                            284.52
+                        ],
+                        [
+                            536.57,
+                            282.37
+                        ],
+                        [
+                            535.56,
+                            280.0
+                        ],
+                        [
+                            534.61,
+                            277.45
+                        ],
+                        [
+                            533.7,
+                            274.75
+                        ],
+                        [
+                            532.83,
+                            271.92
+                        ],
+                        [
+                            532.0,
+                            269.0
+                        ],
+                        [
+                            531.2,
+                            266.07
+                        ],
+                        [
+                            530.43,
+                            263.09
+                        ],
+                        [
+                            529.68,
+                            260.05
+                        ],
+                        [
+                            528.94,
+                            256.94
+                        ],
+                        [
+                            528.21,
+                            253.75
+                        ],
+                        [
+                            527.48,
+                            250.52
+                        ],
+                        [
+                            526.74,
+                            247.26
+                        ],
+                        [
+                            526.0,
+                            244.0
+                        ],
+                        [
+                            525.24,
+                            240.77
+                        ],
+                        [
+                            524.46,
+                            237.54
+                        ],
+                        [
+                            523.65,
+                            234.3
+                        ],
+                        [
+                            522.81,
+                            231.06
+                        ],
+                        [
+                            521.95,
+                            227.81
+                        ],
+                        [
+                            521.03,
+                            224.55
+                        ],
+                        [
+                            520.06,
+                            221.28
+                        ],
+                        [
+                            519.0,
+                            218.0
+                        ],
+                        [
+                            517.81,
+                            214.68
+                        ],
+                        [
+                            516.53,
+                            211.36
+                        ],
+                        [
+                            515.2,
+                            208.04
+                        ],
+                        [
+                            513.81,
+                            204.75
+                        ],
+                        [
+                            512.39,
+                            201.5
+                        ],
+                        [
+                            510.95,
+                            198.28
+                        ],
+                        [
+                            509.47,
+                            195.11
+                        ],
+                        [
+                            508.0,
+                            192.0
+                        ],
+                        [
+                            506.56,
+                            188.95
+                        ],
+                        [
+                            505.12,
+                            185.97
+                        ],
+                        [
+                            503.66,
+                            183.07
+                        ],
+                        [
+                            502.19,
+                            180.25
+                        ],
+                        [
+                            500.71,
+                            177.5
+                        ],
+                        [
+                            499.21,
+                            174.86
+                        ],
+                        [
+                            497.65,
+                            172.34
+                        ],
+                        [
+                            496.0,
+                            170.0
+                        ],
+                        [
+                            494.14,
+                            167.94
+                        ],
+                        [
+                            492.2,
+                            166.05
+                        ],
+                        [
+                            490.27,
+                            164.27
+                        ],
+                        [
+                            488.38,
+                            162.56
+                        ],
+                        [
+                            486.56,
+                            160.91
+                        ],
+                        [
+                            484.87,
+                            159.28
+                        ],
+                        [
+                            483.32,
+                            157.66
+                        ],
+                        [
+                            482.0,
+                            156.0
+                        ],
+                        [
+                            481.03,
+                            154.22
+                        ],
+                        [
+                            480.32,
+                            152.38
+                        ],
+                        [
+                            479.81,
+                            150.51
+                        ],
+                        [
+                            479.5,
+                            148.62
+                        ],
+                        [
+                            479.35,
+                            146.74
+                        ],
+                        [
+                            479.38,
+                            144.84
+                        ],
+                        [
+                            479.59,
+                            142.93
+                        ],
+                        [
+                            480.0,
+                            141.0
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2318,
+                    2319,
+                    [
+                        [
+                            425.0,
+                            465.0
+                        ],
+                        [
+                            422.56,
+                            463.43
+                        ],
+                        [
+                            420.5,
+                            461.84
+                        ],
+                        [
+                            418.82,
+                            460.24
+                        ],
+                        [
+                            417.5,
+                            458.62
+                        ],
+                        [
+                            416.52,
+                            457.02
+                        ],
+                        [
+                            415.93,
+                            455.39
+                        ],
+                        [
+                            415.73,
+                            453.74
+                        ],
+                        [
+                            416.0,
+                            452.0
+                        ],
+                        [
+                            416.85,
+                            450.1
+                        ],
+                        [
+                            418.13,
+                            448.14
+                        ],
+                        [
+                            419.74,
+                            446.2
+                        ],
+                        [
+                            421.62,
+                            444.31
+                        ],
+                        [
+                            423.74,
+                            442.48
+                        ],
+                        [
+                            426.04,
+                            440.79
+                        ],
+                        [
+                            428.48,
+                            439.25
+                        ],
+                        [
+                            431.0,
+                            438.0
+                        ],
+                        [
+                            433.46,
+                            437.23
+                        ],
+                        [
+                            435.93,
+                            436.75
+                        ],
+                        [
+                            438.47,
+                            436.43
+                        ],
+                        [
+                            441.06,
+                            436.25
+                        ],
+                        [
+                            443.74,
+                            436.12
+                        ],
+                        [
+                            446.48,
+                            436.05
+                        ],
+                        [
+                            449.24,
+                            436.02
+                        ],
+                        [
+                            452.0,
+                            436.0
+                        ],
+                        [
+                            454.73,
+                            435.93
+                        ],
+                        [
+                            457.46,
+                            435.83
+                        ],
+                        [
+                            460.2,
+                            435.69
+                        ],
+                        [
+                            462.94,
+                            435.5
+                        ],
+                        [
+                            465.67,
+                            435.27
+                        ],
+                        [
+                            468.42,
+                            434.95
+                        ],
+                        [
+                            471.18,
+                            434.54
+                        ],
+                        [
+                            474.0,
+                            434.0
+                        ],
+                        [
+                            476.95,
+                            433.29
+                        ],
+                        [
+                            479.93,
+                            432.42
+                        ],
+                        [
+                            482.87,
+                            431.41
+                        ],
+                        [
+                            485.75,
+                            430.25
+                        ],
+                        [
+                            488.55,
+                            428.98
+                        ],
+                        [
+                            491.23,
+                            427.53
+                        ],
+                        [
+                            493.74,
+                            425.89
+                        ],
+                        [
+                            496.0,
+                            424.0
+                        ],
+                        [
+                            497.86,
+                            421.73
+                        ],
+                        [
+                            499.46,
+                            419.22
+                        ],
+                        [
+                            500.87,
+                            416.55
+                        ],
+                        [
+                            502.12,
+                            413.75
+                        ],
+                        [
+                            503.28,
+                            410.87
+                        ],
+                        [
+                            504.3,
+                            407.93
+                        ],
+                        [
+                            505.21,
+                            404.96
+                        ],
+                        [
+                            506.0,
+                            402.0
+                        ],
+                        [
+                            506.67,
+                            399.15
+                        ],
+                        [
+                            507.26,
+                            396.35
+                        ],
+                        [
+                            507.78,
+                            393.57
+                        ],
+                        [
+                            508.25,
+                            390.81
+                        ],
+                        [
+                            508.69,
+                            388.07
+                        ],
+                        [
+                            509.11,
+                            385.35
+                        ],
+                        [
+                            509.54,
+                            382.67
+                        ],
+                        [
+                            510.0,
+                            380.0
+                        ],
+                        [
+                            510.54,
+                            377.33
+                        ],
+                        [
+                            511.14,
+                            374.71
+                        ],
+                        [
+                            511.79,
+                            372.16
+                        ],
+                        [
+                            512.5,
+                            369.69
+                        ],
+                        [
+                            513.24,
+                            367.28
+                        ],
+                        [
+                            514.05,
+                            365.0
+                        ],
+                        [
+                            514.96,
+                            362.88
+                        ],
+                        [
+                            516.0,
+                            361.0
+                        ],
+                        [
+                            517.25,
+                            359.52
+                        ],
+                        [
+                            518.63,
+                            358.28
+                        ],
+                        [
+                            520.1,
+                            357.16
+                        ],
+                        [
+                            521.62,
+                            356.12
+                        ],
+                        [
+                            523.18,
+                            355.13
+                        ],
+                        [
+                            524.77,
+                            354.13
+                        ],
+                        [
+                            526.39,
+                            353.12
+                        ],
+                        [
+                            528.0,
+                            352.0
+                        ],
+                        [
+                            529.59,
+                            350.66
+                        ],
+                        [
+                            531.16,
+                            349.18
+                        ],
+                        [
+                            532.72,
+                            347.62
+                        ],
+                        [
+                            534.25,
+                            346.0
+                        ],
+                        [
+                            535.74,
+                            344.34
+                        ],
+                        [
+                            537.2,
+                            342.62
+                        ],
+                        [
+                            538.62,
+                            340.84
+                        ],
+                        [
+                            540.0,
+                            339.0
+                        ],
+                        [
+                            541.37,
+                            337.11
+                        ],
+                        [
+                            542.67,
+                            335.16
+                        ],
+                        [
+                            543.88,
+                            333.14
+                        ],
+                        [
+                            545.0,
+                            331.06
+                        ],
+                        [
+                            546.05,
+                            328.94
+                        ],
+                        [
+                            546.94,
+                            326.75
+                        ],
+                        [
+                            547.64,
+                            324.45
+                        ],
+                        [
+                            548.0,
+                            322.0
+                        ],
+                        [
+                            547.79,
+                            319.27
+                        ],
+                        [
+                            547.28,
+                            316.41
+                        ],
+                        [
+                            546.64,
+                            313.52
+                        ],
+                        [
+                            545.94,
+                            310.62
+                        ],
+                        [
+                            545.26,
+                            307.78
+                        ],
+                        [
+                            544.66,
+                            305.03
+                        ],
+                        [
+                            544.19,
+                            302.41
+                        ],
+                        [
+                            544.0,
+                            300.0
+                        ],
+                        [
+                            544.3,
+                            297.95
+                        ],
+                        [
+                            544.93,
+                            296.16
+                        ],
+                        [
+                            545.8,
+                            294.55
+                        ],
+                        [
+                            546.88,
+                            293.12
+                        ],
+                        [
+                            548.11,
+                            291.84
+                        ],
+                        [
+                            549.53,
+                            290.72
+                        ],
+                        [
+                            551.16,
+                            289.77
+                        ],
+                        [
+                            553.0,
+                            289.0
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2319,
+                    2320,
+                    [
+                        [
+                            534.0,
+                            544.0
+                        ],
+                        [
+                            533.38,
+                            541.73
+                        ],
+                        [
+                            532.66,
+                            539.69
+                        ],
+                        [
+                            531.82,
+                            537.86
+                        ],
+                        [
+                            530.88,
+                            536.25
+                        ],
+                        [
+                            529.82,
+                            534.83
+                        ],
+                        [
+                            528.65,
+                            533.63
+                        ],
+                        [
+                            527.38,
+                            532.67
+                        ],
+                        [
+                            526.0,
+                            532.0
+                        ],
+                        [
+                            524.52,
+                            531.71
+                        ],
+                        [
+                            522.94,
+                            531.68
+                        ],
+                        [
+                            521.25,
+                            531.83
+                        ],
+                        [
+                            519.44,
+                            532.12
+                        ],
+                        [
+                            517.49,
+                            532.54
+                        ],
+                        [
+                            515.43,
+                            533.02
+                        ],
+                        [
+                            513.26,
+                            533.53
+                        ],
+                        [
+                            511.0,
+                            534.0
+                        ],
+                        [
+                            508.71,
+                            534.28
+                        ],
+                        [
+                            506.32,
+                            534.48
+                        ],
+                        [
+                            503.77,
+                            534.68
+                        ],
+                        [
+                            501.06,
+                            534.88
+                        ],
+                        [
+                            498.23,
+                            535.09
+                        ],
+                        [
+                            495.16,
+                            535.34
+                        ],
+                        [
+                            491.81,
+                            535.62
+                        ],
+                        [
+                            488.0,
+                            536.0
+                        ],
+                        [
+                            483.42,
+                            536.58
+                        ],
+                        [
+                            478.43,
+                            537.23
+                        ],
+                        [
+                            473.27,
+                            537.88
+                        ],
+                        [
+                            468.0,
+                            538.5
+                        ],
+                        [
+                            462.74,
+                            539.07
+                        ],
+                        [
+                            457.58,
+                            539.53
+                        ],
+                        [
+                            452.6,
+                            539.87
+                        ],
+                        [
+                            448.0,
+                            540.0
+                        ],
+                        [
+                            444.13,
+                            539.79
+                        ],
+                        [
+                            440.7,
+                            539.34
+                        ],
+                        [
+                            437.57,
+                            538.74
+                        ],
+                        [
+                            434.69,
+                            538.0
+                        ],
+                        [
+                            431.96,
+                            537.16
+                        ],
+                        [
+                            429.43,
+                            536.22
+                        ],
+                        [
+                            427.12,
+                            535.16
+                        ],
+                        [
+                            425.0,
+                            534.0
+                        ],
+                        [
+                            423.06,
+                            532.75
+                        ],
+                        [
+                            421.29,
+                            531.41
+                        ],
+                        [
+                            419.69,
+                            529.99
+                        ],
+                        [
+                            418.25,
+                            528.5
+                        ],
+                        [
+                            416.97,
+                            526.94
+                        ],
+                        [
+                            415.84,
+                            525.32
+                        ],
+                        [
+                            414.85,
+                            523.67
+                        ],
+                        [
+                            414.0,
+                            522.0
+                        ],
+                        [
+                            413.3,
+                            520.37
+                        ],
+                        [
+                            412.73,
+                            518.74
+                        ],
+                        [
+                            412.25,
+                            517.08
+                        ],
+                        [
+                            411.88,
+                            515.38
+                        ],
+                        [
+                            411.58,
+                            513.62
+                        ],
+                        [
+                            411.34,
+                            511.8
+                        ],
+                        [
+                            411.16,
+                            509.94
+                        ],
+                        [
+                            411.0,
+                            508.0
+                        ],
+                        [
+                            410.82,
+                            505.98
+                        ],
+                        [
+                            410.66,
+                            503.88
+                        ],
+                        [
+                            410.5,
+                            501.72
+                        ],
+                        [
+                            410.38,
+                            499.5
+                        ],
+                        [
+                            410.31,
+                            497.27
+                        ],
+                        [
+                            410.25,
+                            494.96
+                        ],
+                        [
+                            410.17,
+                            492.57
+                        ],
+                        [
+                            410.0,
+                            490.0
+                        ],
+                        [
+                            409.61,
+                            487.1
+                        ],
+                        [
+                            409.16,
+                            484.07
+                        ],
+                        [
+                            408.76,
+                            481.04
+                        ],
+                        [
+                            408.44,
+                            478.06
+                        ],
+                        [
+                            408.25,
+                            475.2
+                        ],
+                        [
+                            408.25,
+                            472.53
+                        ],
+                        [
+                            408.47,
+                            470.08
+                        ],
+                        [
+                            409.0,
+                            468.0
+                        ],
+                        [
+                            410.0,
+                            466.48
+                        ],
+                        [
+                            411.34,
+                            465.38
+                        ],
+                        [
+                            412.97,
+                            464.6
+                        ],
+                        [
+                            414.88,
+                            464.12
+                        ],
+                        [
+                            417.01,
+                            463.9
+                        ],
+                        [
+                            419.41,
+                            463.97
+                        ],
+                        [
+                            422.07,
+                            464.34
+                        ],
+                        [
+                            425.0,
+                            465.0
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        92,
+                        135
+                    ],
+                    "is_working": true,
+                    "name": "Киевский вокзал",
+                    "rect": [
+                        32,
+                        142,
+                        51,
+                        28
+                    ],
+                    "text_id": 1396,
+                    "uid": 2311
+                },
+                {
+                    "coord": [
+                        37,
+                        379
+                    ],
+                    "is_working": true,
+                    "name": "Воробьевы горы",
+                    "rect": [
+                        7,
+                        397,
+                        63,
+                        28
+                    ],
+                    "text_id": 15,
+                    "uid": 2312
+                },
+                {
+                    "coord": [
+                        182,
+                        350
+                    ],
+                    "is_working": true,
+                    "name": "Фрунзенская набережная",
+                    "rect": [
+                        104,
+                        322,
+                        71,
+                        28
+                    ],
+                    "text_id": 1397,
+                    "uid": 2313
+                },
+                {
+                    "coord": [
+                        228,
+                        341
+                    ],
+                    "is_working": true,
+                    "name": "Парк Культуры",
+                    "rect": [
+                        237,
+                        337,
+                        53,
+                        28
+                    ],
+                    "text_id": 1398,
+                    "uid": 2314
+                },
+                {
+                    "coord": [
+                        221,
+                        293
+                    ],
+                    "is_working": true,
+                    "name": "Крымский мост",
+                    "rect": [
+                        153,
+                        285,
+                        56,
+                        28
+                    ],
+                    "text_id": 1399,
+                    "uid": 2315
+                },
+                {
+                    "coord": [
+                        320,
+                        177
+                    ],
+                    "is_working": true,
+                    "name": "Театр эстрады",
+                    "rect": [
+                        330,
+                        174,
+                        47,
+                        28
+                    ],
+                    "text_id": 1400,
+                    "uid": 2316
+                },
+                {
+                    "coord": [
+                        480,
+                        141
+                    ],
+                    "is_working": true,
+                    "name": "Гостиница \"Россия\"",
+                    "rect": [
+                        501,
+                        118,
+                        57,
+                        28
+                    ],
+                    "text_id": 1401,
+                    "uid": 2317
+                },
+                {
+                    "coord": [
+                        553,
+                        289
+                    ],
+                    "is_working": true,
+                    "name": "Новоспасский мост",
+                    "rect": [
+                        562,
+                        293,
+                        77,
+                        28
+                    ],
+                    "text_id": 1316,
+                    "uid": 2318
+                },
+                {
+                    "coord": [
+                        425,
+                        465
+                    ],
+                    "is_working": true,
+                    "name": "Южный речной вокзал",
+                    "rect": [
+                        434,
+                        454,
+                        76,
+                        28
+                    ],
+                    "text_id": 1402,
+                    "uid": 2319
+                },
+                {
+                    "coord": [
+                        534,
+                        544
+                    ],
+                    "is_working": true,
+                    "name": "Музей-заповедник \"Коломенское\"",
+                    "rect": [
+                        451,
+                        555,
+                        98,
+                        28
+                    ],
+                    "text_id": 1403,
+                    "uid": 2320
+                }
+            ],
+            "text_id": 1404
+        }
+    ],
+    "lines_width": 6,
+    "name": "rechnoytramvay",
+    "name_text_id": 1404,
+    "stations_diameter": 12.0,
+    "transfers": [
+        [
+            10,
+            38,
+            [
+                303,
+                131
+            ],
+            [
+                286,
+                131
+            ]
+        ],
+        [
+            10,
+            374,
+            [
+                303,
+                131
+            ],
+            null
+        ],
+        [
+            38,
+            351,
+            [
+                286,
+                131
+            ],
+            null
+        ],
+        [
+            351,
+            374,
+            null,
+            null
+        ],
+        [
+            351,
+            10,
+            null,
+            [
+                303,
+                131
+            ]
+        ],
+        [
+            40,
+            379,
+            null,
+            null
+        ],
+        [
+            371,
+            388,
+            [
+                76,
+                124
+            ],
+            [
+                68,
+                107
+            ]
+        ],
+        [
+            388,
+            353,
+            [
+                68,
+                107
+            ],
+            [
+                57,
+                122
+            ]
+        ],
+        [
+            353,
+            371,
+            [
+                57,
+                122
+            ],
+            [
+                76,
+                124
+            ]
+        ],
+        [
+            425,
+            399,
+            [
+                479,
+                114
+            ],
+            [
+                462,
+                114
+            ]
+        ],
+        [
+            5,
+            383,
+            null,
+            null
+        ],
+        [
+            422,
+            387,
+            null,
+            null
+        ],
+        [
+            424,
+            8,
+            null,
+            null
+        ],
+        [
+            356,
+            364,
+            null,
+            null
+        ],
+        [
+            349,
+            382,
+            null,
+            null
+        ],
+        [
+            35,
+            385,
+            null,
+            null
+        ],
+        [
+            401,
+            378,
+            null,
+            null
+        ],
+        [
+            12,
+            377,
+            [
+                216,
+                264
+            ],
+            [
+                200,
+                275
+            ]
+        ],
+        [
+            396,
+            384,
+            null,
+            null
+        ],
+        [
+            423,
+            37,
+            null,
+            null
+        ],
+        [
+            381,
+            426,
+            null,
+            null
+        ],
+        [
+            398,
+            7,
+            null,
+            null
+        ]
+    ],
+    "transports": [
+        "metro",
+        "tramsriver"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 1541,
+    "upper_case": false,
+    "width": 730,
+    "word_wrap": true
+}

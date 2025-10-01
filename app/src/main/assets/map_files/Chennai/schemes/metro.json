@@ -1,0 +1,838 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 823,
+    "images": [
+        "res/schemes/chennai.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "007F00",
+            "line_color": "007F00",
+            "line_width": 7,
+            "name": "Green line",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            51,
+                            504
+                        ],
+                        [
+                            51,
+                            560
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            51,
+                            444
+                        ],
+                        [
+                            51,
+                            504
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            51,
+                            380
+                        ],
+                        [
+                            51,
+                            444
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            51,
+                            319
+                        ],
+                        [
+                            51,
+                            380
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            51,
+                            267
+                        ],
+                        [
+                            51,
+                            319
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            51,
+                            215
+                        ],
+                        [
+                            51,
+                            267
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            51,
+                            168
+                        ],
+                        [
+                            51,
+                            215
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        51,
+                        560
+                    ],
+                    "is_working": false,
+                    "name": "St. Thomas Mount",
+                    "rect": [
+                        59,
+                        553,
+                        90,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        51,
+                        504
+                    ],
+                    "is_working": true,
+                    "name": "Alandur",
+                    "rect": [
+                        59,
+                        497,
+                        41,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        51,
+                        444
+                    ],
+                    "is_working": true,
+                    "name": "Ekkattuthangal",
+                    "rect": [
+                        59,
+                        437,
+                        75,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        51,
+                        380
+                    ],
+                    "is_working": true,
+                    "name": "Ashok Nagar",
+                    "rect": [
+                        59,
+                        373,
+                        67,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        51,
+                        319
+                    ],
+                    "is_working": true,
+                    "name": "Vadapazhani",
+                    "rect": [
+                        59,
+                        312,
+                        65,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        51,
+                        267
+                    ],
+                    "is_working": true,
+                    "name": "Arumbakkam",
+                    "rect": [
+                        59,
+                        261,
+                        68,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        51,
+                        215
+                    ],
+                    "is_working": true,
+                    "name": "CMBT",
+                    "rect": [
+                        59,
+                        208,
+                        33,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        51,
+                        168
+                    ],
+                    "is_working": true,
+                    "name": "Koyambedu",
+                    "rect": [
+                        59,
+                        161,
+                        61,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                }
+            ],
+            "text_id": 8
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "7F7F7F",
+            "line_color": "7F7F7F",
+            "line_width": 7,
+            "name": "Railway",
+            "segments": [
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            493,
+                            99
+                        ],
+                        [
+                            513.0,
+                            79.0
+                        ],
+                        [
+                            513,
+                            20
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            461,
+                            116
+                        ],
+                        [
+                            476.0,
+                            116.0
+                        ],
+                        [
+                            493,
+                            99
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            437,
+                            146
+                        ],
+                        [
+                            437.0,
+                            131.0
+                        ],
+                        [
+                            452.0,
+                            116.0
+                        ],
+                        [
+                            461,
+                            116
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            467,
+                            204
+                        ],
+                        [
+                            467.0,
+                            189.0
+                        ],
+                        [
+                            437.0,
+                            159.0
+                        ],
+                        [
+                            437,
+                            146
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            467,
+                            237
+                        ],
+                        [
+                            467,
+                            204
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            467,
+                            289
+                        ],
+                        [
+                            467,
+                            237
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            431,
+                            342
+                        ],
+                        [
+                            467.0,
+                            306.0
+                        ],
+                        [
+                            467,
+                            289
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            431,
+                            396
+                        ],
+                        [
+                            431,
+                            342
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            373,
+                            408
+                        ],
+                        [
+                            419.0,
+                            408.0
+                        ],
+                        [
+                            431,
+                            396
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            299,
+                            408
+                        ],
+                        [
+                            373,
+                            408
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            282,
+                            458
+                        ],
+                        [
+                            282.0,
+                            425.0
+                        ],
+                        [
+                            299,
+                            408
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            282,
+                            515
+                        ],
+                        [
+                            282,
+                            458
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            264,
+                            558
+                        ],
+                        [
+                            282.0,
+                            540.0
+                        ],
+                        [
+                            282,
+                            515
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            217,
+                            605
+                        ],
+                        [
+                            264,
+                            558
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            174,
+                            648
+                        ],
+                        [
+                            217,
+                            605
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    23,
+                    24,
+                    [
+                        [
+                            123,
+                            673
+                        ],
+                        [
+                            149.0,
+                            673.0
+                        ],
+                        [
+                            174,
+                            648
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        513,
+                        20
+                    ],
+                    "is_working": true,
+                    "name": "Chennai Beach",
+                    "rect": [
+                        523,
+                        14,
+                        78,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        493,
+                        99
+                    ],
+                    "is_working": true,
+                    "name": "Fort",
+                    "rect": [
+                        502,
+                        95,
+                        21,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        461,
+                        116
+                    ],
+                    "is_working": true,
+                    "name": "Park Town",
+                    "rect": [
+                        423,
+                        92,
+                        54,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        437,
+                        146
+                    ],
+                    "is_working": true,
+                    "name": "Chintadripet",
+                    "rect": [
+                        367,
+                        139,
+                        62,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        467,
+                        204
+                    ],
+                    "is_working": true,
+                    "name": "Chepauk",
+                    "rect": [
+                        475,
+                        197,
+                        46,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        467,
+                        237
+                    ],
+                    "is_working": true,
+                    "name": "Tiruvellikeni",
+                    "rect": [
+                        475,
+                        230,
+                        63,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        467,
+                        289
+                    ],
+                    "is_working": true,
+                    "name": "Light House",
+                    "rect": [
+                        475,
+                        281,
+                        61,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        431,
+                        342
+                    ],
+                    "is_working": true,
+                    "name": "Tirumailai",
+                    "rect": [
+                        439,
+                        339,
+                        51,
+                        15
+                    ],
+                    "text_id": 16,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        431,
+                        396
+                    ],
+                    "is_working": true,
+                    "name": "Mandaveli",
+                    "rect": [
+                        439,
+                        389,
+                        53,
+                        15
+                    ],
+                    "text_id": 17,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        373,
+                        408
+                    ],
+                    "is_working": true,
+                    "name": "Greenways Rd",
+                    "rect": [
+                        337,
+                        415,
+                        75,
+                        15
+                    ],
+                    "text_id": 18,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        299,
+                        408
+                    ],
+                    "is_working": true,
+                    "name": "Kotturpuram",
+                    "rect": [
+                        271,
+                        385,
+                        63,
+                        15
+                    ],
+                    "text_id": 19,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        282,
+                        458
+                    ],
+                    "is_working": true,
+                    "name": "Kasturba Nagar",
+                    "rect": [
+                        290,
+                        451,
+                        80,
+                        15
+                    ],
+                    "text_id": 20,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        282,
+                        515
+                    ],
+                    "is_working": true,
+                    "name": "Indira Nagar",
+                    "rect": [
+                        290,
+                        509,
+                        63,
+                        15
+                    ],
+                    "text_id": 21,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        264,
+                        558
+                    ],
+                    "is_working": true,
+                    "name": "Tiruvanmiyur",
+                    "rect": [
+                        272,
+                        555,
+                        67,
+                        15
+                    ],
+                    "text_id": 22,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        217,
+                        605
+                    ],
+                    "is_working": true,
+                    "name": "Taramani",
+                    "rect": [
+                        225,
+                        602,
+                        48,
+                        15
+                    ],
+                    "text_id": 23,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        174,
+                        648
+                    ],
+                    "is_working": true,
+                    "name": "Perungudi",
+                    "rect": [
+                        182,
+                        645,
+                        52,
+                        15
+                    ],
+                    "text_id": 24,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        123,
+                        673
+                    ],
+                    "is_working": true,
+                    "name": "Velachery",
+                    "rect": [
+                        97,
+                        680,
+                        52,
+                        15
+                    ],
+                    "text_id": 25,
+                    "uid": 24
+                }
+            ],
+            "text_id": 26
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 27,
+    "stations_diameter": 13.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 28,
+    "upper_case": false,
+    "width": 663,
+    "word_wrap": false
+}

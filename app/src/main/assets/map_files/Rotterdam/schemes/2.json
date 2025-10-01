@@ -1,0 +1,1537 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 1170,
+    "images": [
+        "res/schemes/2.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "34349C",
+            "line_width": 9,
+            "name": "Erasmuslijn",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            231,
+                            90
+                        ],
+                        [
+                            231,
+                            60
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            231,
+                            120
+                        ],
+                        [
+                            231,
+                            90
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            231,
+                            150
+                        ],
+                        [
+                            231,
+                            120
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            231,
+                            180
+                        ],
+                        [
+                            231,
+                            150
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            231,
+                            210
+                        ],
+                        [
+                            231,
+                            180
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        231,
+                        60
+                    ],
+                    "is_working": true,
+                    "name": "De Akkers",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        231,
+                        90
+                    ],
+                    "is_working": true,
+                    "name": "Heemraadlaan",
+                    "rect": null,
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        231,
+                        120
+                    ],
+                    "is_working": true,
+                    "name": "Spijkenisse Centrum",
+                    "rect": null,
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        231,
+                        150
+                    ],
+                    "is_working": true,
+                    "name": "Zlmplaat",
+                    "rect": null,
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        231,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Hoogvliet",
+                    "rect": null,
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        231,
+                        210
+                    ],
+                    "is_working": true,
+                    "name": "Tussenwater",
+                    "rect": null,
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Poortugal",
+                    "rect": null,
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Rhoon",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Slinge",
+                    "rect": null,
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Zuidplein",
+                    "rect": null,
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Maashaven",
+                    "rect": null,
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Rijnhaven",
+                    "rect": null,
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Wilhelminaplein",
+                    "rect": null,
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Leuvehaven",
+                    "rect": null,
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        231,
+                        540
+                    ],
+                    "is_working": true,
+                    "name": "Beurs",
+                    "rect": null,
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Stadhuis",
+                    "rect": null,
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Central Station",
+                    "rect": null,
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Blijdorp",
+                    "rect": null,
+                    "text_id": 17,
+                    "uid": 17
+                }
+            ],
+            "text_id": 18
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "E41c0c",
+            "line_width": 9,
+            "name": "Calandlijn",
+            "segments": [
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            251,
+                            90
+                        ],
+                        [
+                            251,
+                            60
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            251,
+                            120
+                        ],
+                        [
+                            251,
+                            90
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            251,
+                            150
+                        ],
+                        [
+                            251,
+                            120
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            251,
+                            180
+                        ],
+                        [
+                            251,
+                            150
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            251,
+                            210
+                        ],
+                        [
+                            251,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    23,
+                    24,
+                    [
+                        [
+                            251,
+                            240
+                        ],
+                        [
+                            251,
+                            210
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            251,
+                            270
+                        ],
+                        [
+                            251,
+                            240
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    25,
+                    26,
+                    [
+                        [
+                            251,
+                            300
+                        ],
+                        [
+                            251,
+                            270
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    26,
+                    27,
+                    [
+                        [
+                            251,
+                            330
+                        ],
+                        [
+                            251,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    27,
+                    28,
+                    [
+                        [
+                            251,
+                            360
+                        ],
+                        [
+                            251,
+                            330
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            251,
+                            390
+                        ],
+                        [
+                            251,
+                            360
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    29,
+                    30,
+                    [
+                        [
+                            251,
+                            420
+                        ],
+                        [
+                            251,
+                            390
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    30,
+                    31,
+                    [
+                        [
+                            251,
+                            450
+                        ],
+                        [
+                            251,
+                            420
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    31,
+                    32,
+                    [
+                        [
+                            251,
+                            480
+                        ],
+                        [
+                            251,
+                            450
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    32,
+                    33,
+                    [
+                        [
+                            251,
+                            510
+                        ],
+                        [
+                            251,
+                            480
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    33,
+                    34,
+                    [
+                        [
+                            251,
+                            540
+                        ],
+                        [
+                            251,
+                            510
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    34,
+                    35,
+                    [
+                        [
+                            251,
+                            570
+                        ],
+                        [
+                            251,
+                            540
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    35,
+                    36,
+                    [
+                        [
+                            251,
+                            600
+                        ],
+                        [
+                            251,
+                            570
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    36,
+                    37,
+                    [
+                        [
+                            251,
+                            630
+                        ],
+                        [
+                            251,
+                            600
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    37,
+                    38,
+                    [
+                        [
+                            251,
+                            660
+                        ],
+                        [
+                            251,
+                            630
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    38,
+                    39,
+                    [
+                        [
+                            251,
+                            690
+                        ],
+                        [
+                            251,
+                            660
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    39,
+                    40,
+                    [
+                        [
+                            251,
+                            720
+                        ],
+                        [
+                            251,
+                            690
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    40,
+                    41,
+                    [
+                        [
+                            251,
+                            750
+                        ],
+                        [
+                            251,
+                            720
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    40,
+                    44,
+                    [
+                        [
+                            320,
+                            750
+                        ],
+                        [
+                            251,
+                            720
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    41,
+                    42,
+                    [
+                        [
+                            251,
+                            780
+                        ],
+                        [
+                            251,
+                            750
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    42,
+                    43,
+                    [
+                        [
+                            251,
+                            810
+                        ],
+                        [
+                            251,
+                            780
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    44,
+                    45,
+                    [
+                        [
+                            320,
+                            780
+                        ],
+                        [
+                            320,
+                            750
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    45,
+                    46,
+                    [
+                        [
+                            320,
+                            810
+                        ],
+                        [
+                            320,
+                            780
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    46,
+                    47,
+                    [
+                        [
+                            320,
+                            840
+                        ],
+                        [
+                            320,
+                            810
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    47,
+                    48,
+                    [
+                        [
+                            320,
+                            870
+                        ],
+                        [
+                            320,
+                            840
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    48,
+                    49,
+                    [
+                        [
+                            320,
+                            900
+                        ],
+                        [
+                            320,
+                            870
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    48,
+                    54,
+                    [
+                        [
+                            390,
+                            900
+                        ],
+                        [
+                            320,
+                            870
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    49,
+                    50,
+                    [
+                        [
+                            320,
+                            930
+                        ],
+                        [
+                            320,
+                            900
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    50,
+                    51,
+                    [
+                        [
+                            320,
+                            960
+                        ],
+                        [
+                            320,
+                            930
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    51,
+                    52,
+                    [
+                        [
+                            320,
+                            990
+                        ],
+                        [
+                            320,
+                            960
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    52,
+                    53,
+                    [
+                        [
+                            320,
+                            1020
+                        ],
+                        [
+                            320,
+                            990
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    54,
+                    55,
+                    [
+                        [
+                            390,
+                            900
+                        ],
+                        [
+                            390,
+                            930
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        251,
+                        60
+                    ],
+                    "is_working": true,
+                    "name": "De Akkers",
+                    "rect": [
+                        266,
+                        50,
+                        100,
+                        20
+                    ],
+                    "text_id": 0,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        251,
+                        90
+                    ],
+                    "is_working": true,
+                    "name": "Heemraadlaan",
+                    "rect": [
+                        266,
+                        80,
+                        100,
+                        20
+                    ],
+                    "text_id": 1,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        251,
+                        120
+                    ],
+                    "is_working": true,
+                    "name": "Spijkenisse Centrum",
+                    "rect": [
+                        266,
+                        110,
+                        100,
+                        20
+                    ],
+                    "text_id": 2,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        251,
+                        150
+                    ],
+                    "is_working": true,
+                    "name": "Zlmplaat",
+                    "rect": [
+                        266,
+                        140,
+                        100,
+                        20
+                    ],
+                    "text_id": 3,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        251,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Hoogvliet",
+                    "rect": [
+                        266,
+                        170,
+                        100,
+                        20
+                    ],
+                    "text_id": 4,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        251,
+                        210
+                    ],
+                    "is_working": true,
+                    "name": "Tussenwater",
+                    "rect": [
+                        266,
+                        200,
+                        100,
+                        20
+                    ],
+                    "text_id": 5,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        251,
+                        240
+                    ],
+                    "is_working": true,
+                    "name": "Pernis",
+                    "rect": [
+                        266,
+                        230,
+                        100,
+                        20
+                    ],
+                    "text_id": 19,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        251,
+                        270
+                    ],
+                    "is_working": true,
+                    "name": "Vijfsluitzen",
+                    "rect": [
+                        266,
+                        260,
+                        100,
+                        20
+                    ],
+                    "text_id": 20,
+                    "uid": 25
+                },
+                {
+                    "coord": [
+                        251,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Troelstralaan",
+                    "rect": [
+                        266,
+                        290,
+                        100,
+                        20
+                    ],
+                    "text_id": 21,
+                    "uid": 26
+                },
+                {
+                    "coord": [
+                        251,
+                        330
+                    ],
+                    "is_working": true,
+                    "name": "Parkweg",
+                    "rect": [
+                        266,
+                        320,
+                        100,
+                        20
+                    ],
+                    "text_id": 22,
+                    "uid": 27
+                },
+                {
+                    "coord": [
+                        251,
+                        360
+                    ],
+                    "is_working": true,
+                    "name": "Sciedam Centrum",
+                    "rect": [
+                        266,
+                        350,
+                        100,
+                        20
+                    ],
+                    "text_id": 23,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        251,
+                        390
+                    ],
+                    "is_working": true,
+                    "name": "Marconiplein",
+                    "rect": [
+                        266,
+                        380,
+                        100,
+                        20
+                    ],
+                    "text_id": 24,
+                    "uid": 29
+                },
+                {
+                    "coord": [
+                        251,
+                        420
+                    ],
+                    "is_working": true,
+                    "name": "Delfshafen",
+                    "rect": [
+                        266,
+                        410,
+                        100,
+                        20
+                    ],
+                    "text_id": 25,
+                    "uid": 30
+                },
+                {
+                    "coord": [
+                        251,
+                        450
+                    ],
+                    "is_working": true,
+                    "name": "Coolhaven",
+                    "rect": [
+                        266,
+                        440,
+                        100,
+                        20
+                    ],
+                    "text_id": 26,
+                    "uid": 31
+                },
+                {
+                    "coord": [
+                        251,
+                        480
+                    ],
+                    "is_working": true,
+                    "name": "Dijkzigt",
+                    "rect": [
+                        266,
+                        470,
+                        100,
+                        20
+                    ],
+                    "text_id": 27,
+                    "uid": 32
+                },
+                {
+                    "coord": [
+                        251,
+                        510
+                    ],
+                    "is_working": true,
+                    "name": "Eendrachtsplein",
+                    "rect": [
+                        266,
+                        500,
+                        100,
+                        20
+                    ],
+                    "text_id": 28,
+                    "uid": 33
+                },
+                {
+                    "coord": [
+                        251,
+                        540
+                    ],
+                    "is_working": true,
+                    "name": "Beurs",
+                    "rect": [
+                        266,
+                        530,
+                        100,
+                        20
+                    ],
+                    "text_id": 14,
+                    "uid": 34
+                },
+                {
+                    "coord": [
+                        251,
+                        570
+                    ],
+                    "is_working": true,
+                    "name": "Blaak",
+                    "rect": [
+                        266,
+                        560,
+                        100,
+                        20
+                    ],
+                    "text_id": 29,
+                    "uid": 35
+                },
+                {
+                    "coord": [
+                        251,
+                        600
+                    ],
+                    "is_working": true,
+                    "name": "Oostplein",
+                    "rect": [
+                        266,
+                        590,
+                        100,
+                        20
+                    ],
+                    "text_id": 30,
+                    "uid": 36
+                },
+                {
+                    "coord": [
+                        251,
+                        630
+                    ],
+                    "is_working": true,
+                    "name": "Gerdesiaweg",
+                    "rect": [
+                        266,
+                        620,
+                        100,
+                        20
+                    ],
+                    "text_id": 31,
+                    "uid": 37
+                },
+                {
+                    "coord": [
+                        251,
+                        660
+                    ],
+                    "is_working": true,
+                    "name": "Voorshorteer-Iann",
+                    "rect": [
+                        266,
+                        650,
+                        100,
+                        20
+                    ],
+                    "text_id": 32,
+                    "uid": 38
+                },
+                {
+                    "coord": [
+                        251,
+                        690
+                    ],
+                    "is_working": true,
+                    "name": "Kranlingse Zoom",
+                    "rect": [
+                        266,
+                        680,
+                        100,
+                        20
+                    ],
+                    "text_id": 33,
+                    "uid": 39
+                },
+                {
+                    "coord": [
+                        251,
+                        720
+                    ],
+                    "is_working": true,
+                    "name": "Capelsebrug",
+                    "rect": [
+                        135,
+                        710,
+                        100,
+                        20
+                    ],
+                    "text_id": 34,
+                    "uid": 40
+                },
+                {
+                    "coord": [
+                        251,
+                        750
+                    ],
+                    "is_working": true,
+                    "name": "Slotlaan",
+                    "rect": [
+                        135,
+                        740,
+                        100,
+                        20
+                    ],
+                    "text_id": 35,
+                    "uid": 41
+                },
+                {
+                    "coord": [
+                        251,
+                        780
+                    ],
+                    "is_working": true,
+                    "name": "Capelle Centrum",
+                    "rect": [
+                        135,
+                        770,
+                        100,
+                        20
+                    ],
+                    "text_id": 36,
+                    "uid": 42
+                },
+                {
+                    "coord": [
+                        251,
+                        810
+                    ],
+                    "is_working": true,
+                    "name": "De Terp",
+                    "rect": [
+                        135,
+                        800,
+                        100,
+                        20
+                    ],
+                    "text_id": 37,
+                    "uid": 43
+                },
+                {
+                    "coord": [
+                        320,
+                        750
+                    ],
+                    "is_working": true,
+                    "name": "Schenkel",
+                    "rect": [
+                        335,
+                        740,
+                        100,
+                        20
+                    ],
+                    "text_id": 38,
+                    "uid": 44
+                },
+                {
+                    "coord": [
+                        320,
+                        780
+                    ],
+                    "is_working": true,
+                    "name": "Prinsenlaan",
+                    "rect": [
+                        335,
+                        770,
+                        100,
+                        20
+                    ],
+                    "text_id": 39,
+                    "uid": 45
+                },
+                {
+                    "coord": [
+                        320,
+                        810
+                    ],
+                    "is_working": true,
+                    "name": "Oosterflank",
+                    "rect": [
+                        335,
+                        800,
+                        100,
+                        20
+                    ],
+                    "text_id": 40,
+                    "uid": 46
+                },
+                {
+                    "coord": [
+                        320,
+                        840
+                    ],
+                    "is_working": true,
+                    "name": "Alexander",
+                    "rect": [
+                        335,
+                        830,
+                        100,
+                        20
+                    ],
+                    "text_id": 41,
+                    "uid": 47
+                },
+                {
+                    "coord": [
+                        320,
+                        870
+                    ],
+                    "is_working": true,
+                    "name": "Graskruid",
+                    "rect": [
+                        200,
+                        860,
+                        100,
+                        20
+                    ],
+                    "text_id": 42,
+                    "uid": 48
+                },
+                {
+                    "coord": [
+                        320,
+                        900
+                    ],
+                    "is_working": true,
+                    "name": "Heisseplaats",
+                    "rect": [
+                        200,
+                        890,
+                        100,
+                        20
+                    ],
+                    "text_id": 43,
+                    "uid": 49
+                },
+                {
+                    "coord": [
+                        320,
+                        930
+                    ],
+                    "is_working": true,
+                    "name": "Nienw Verlaat",
+                    "rect": [
+                        200,
+                        920,
+                        100,
+                        20
+                    ],
+                    "text_id": 44,
+                    "uid": 50
+                },
+                {
+                    "coord": [
+                        320,
+                        960
+                    ],
+                    "is_working": true,
+                    "name": "Ambachts- land",
+                    "rect": [
+                        335,
+                        950,
+                        100,
+                        20
+                    ],
+                    "text_id": 45,
+                    "uid": 51
+                },
+                {
+                    "coord": [
+                        320,
+                        990
+                    ],
+                    "is_working": true,
+                    "name": "De Tochen",
+                    "rect": [
+                        335,
+                        980,
+                        100,
+                        20
+                    ],
+                    "text_id": 46,
+                    "uid": 52
+                },
+                {
+                    "coord": [
+                        320,
+                        1020
+                    ],
+                    "is_working": true,
+                    "name": "Nesselande",
+                    "rect": [
+                        335,
+                        1010,
+                        100,
+                        20
+                    ],
+                    "text_id": 47,
+                    "uid": 53
+                },
+                {
+                    "coord": [
+                        390,
+                        900
+                    ],
+                    "is_working": true,
+                    "name": "Romeynshof",
+                    "rect": [
+                        405,
+                        890,
+                        100,
+                        20
+                    ],
+                    "text_id": 48,
+                    "uid": 54
+                },
+                {
+                    "coord": [
+                        390,
+                        930
+                    ],
+                    "is_working": true,
+                    "name": "Binnenhof",
+                    "rect": [
+                        405,
+                        920,
+                        100,
+                        20
+                    ],
+                    "text_id": 49,
+                    "uid": 55
+                }
+            ],
+            "text_id": 50
+        }
+    ],
+    "lines_width": 9,
+    "name": "2",
+    "name_text_id": 50,
+    "stations_diameter": 16.0,
+    "transfers": [
+        [
+            18,
+            0,
+            [
+                251,
+                60
+            ],
+            [
+                231,
+                60
+            ]
+        ],
+        [
+            19,
+            1,
+            [
+                251,
+                90
+            ],
+            [
+                231,
+                90
+            ]
+        ],
+        [
+            20,
+            2,
+            [
+                251,
+                120
+            ],
+            [
+                231,
+                120
+            ]
+        ],
+        [
+            21,
+            3,
+            [
+                251,
+                150
+            ],
+            [
+                231,
+                150
+            ]
+        ],
+        [
+            22,
+            4,
+            [
+                251,
+                180
+            ],
+            [
+                231,
+                180
+            ]
+        ],
+        [
+            23,
+            5,
+            [
+                251,
+                210
+            ],
+            [
+                231,
+                210
+            ]
+        ],
+        [
+            34,
+            14,
+            [
+                251,
+                540
+            ],
+            [
+                231,
+                540
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "Метро",
+    "type_text_id": 53,
+    "upper_case": true,
+    "width": 540,
+    "word_wrap": true
+}

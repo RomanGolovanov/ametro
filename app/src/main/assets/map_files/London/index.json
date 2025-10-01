@@ -1,0 +1,226 @@
+{
+    "city_id": 2643743,
+    "comments_text_id": 323,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 322,
+    "file": "London.zip",
+    "latitude": 51.50853,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": -0.12574,
+    "map_id": "London.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 319,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 320
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/bakerloo.json",
+            "name": "bakerloo",
+            "name_text_id": 25,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 321
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/central.json",
+            "name": "central",
+            "name_text_id": 177,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 321
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/circle.json",
+            "name": "circle",
+            "name_text_id": 245,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 321
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/dlr.json",
+            "name": "dlr",
+            "name_text_id": 131,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 321
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/district.json",
+            "name": "district",
+            "name_text_id": 230,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 321
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/eastlondon.json",
+            "name": "eastlondon",
+            "name_text_id": 238,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 321
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/jubilee.json",
+            "name": "jubilee",
+            "name_text_id": 263,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 321
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metropolitan.json",
+            "name": "metropolitan",
+            "name_text_id": 280,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 321
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/northern.json",
+            "name": "northern",
+            "name_text_id": 318,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 321
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/piccadilli.json",
+            "name": "piccadilli",
+            "name_text_id": 78,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 321
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/victoria.json",
+            "name": "victoria",
+            "name_text_id": 86,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 321
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/waterlooandcity.json",
+            "name": "waterlooandcity",
+            "name_text_id": 92,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 321
+        }
+    ],
+    "timestamp": 1754434800.0,
+    "transport_types": [
+        "Метро"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Метро"
+        }
+    ]
+}

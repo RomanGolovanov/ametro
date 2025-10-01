@@ -1,0 +1,114 @@
+{
+    "city_id": 3169070,
+    "comments_text_id": 81,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 80,
+    "file": "Roma.zip",
+    "latitude": 41.89193,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": 12.51133,
+    "map_id": "Roma.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 76,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 77
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/a.json",
+            "name": "a",
+            "name_text_id": 27,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 78
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/b.json",
+            "name": "b",
+            "name_text_id": 53,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 78
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/c.json",
+            "name": "c",
+            "name_text_id": 75,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 78
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/railway.json",
+            "name": "railway",
+            "name_text_id": 79,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 77
+        }
+    ],
+    "timestamp": 1754434800.0,
+    "transport_types": [
+        "Метро"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Метро"
+        }
+    ]
+}

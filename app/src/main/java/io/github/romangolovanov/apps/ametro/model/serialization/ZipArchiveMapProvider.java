@@ -7,13 +7,6 @@ import com.caverock.androidsvg.SVGParseException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
 
-import io.github.romangolovanov.apps.ametro.model.entities.MapLocale;
-import io.github.romangolovanov.apps.ametro.model.entities.MapMetadata;
-import io.github.romangolovanov.apps.ametro.model.entities.MapScheme;
-import io.github.romangolovanov.apps.ametro.model.entities.MapStationInformation;
-import io.github.romangolovanov.apps.ametro.model.entities.MapTransportScheme;
-import io.github.romangolovanov.apps.ametro.utils.FileUtils;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -26,11 +19,18 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 
+import io.github.romangolovanov.apps.ametro.model.entities.MapLocale;
+import io.github.romangolovanov.apps.ametro.model.entities.MapMetadata;
+import io.github.romangolovanov.apps.ametro.model.entities.MapScheme;
+import io.github.romangolovanov.apps.ametro.model.entities.MapStationInformation;
+import io.github.romangolovanov.apps.ametro.model.entities.MapTransportScheme;
+import io.github.romangolovanov.apps.ametro.utils.FileUtils;
+
 /**
  * Provides access to map archive (.zip) contents.
  * Now supports creation from either a File or an InputStream (assets).
  */
-public class ZipArchiveMapProvider implements AutoCloseable {
+public class ZipArchiveMapProvider implements MapProvider {
 
     private final ObjectReader reader;
     private final GlobalIdentifierProvider identifierProvider;

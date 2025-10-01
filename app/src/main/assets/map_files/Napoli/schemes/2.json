@@ -1,0 +1,724 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 700,
+    "images": [
+        "res/schemes/2.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "E41c0c",
+            "line_width": 9,
+            "name": "Metropolitana Collinare",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Centro Direzionale",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Tribunale",
+                    "rect": null,
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Poggioreale",
+                    "rect": null,
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Capodichino",
+                    "rect": null,
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Di Vittorio",
+                    "rect": null,
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Secondigliano",
+                    "rect": null,
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Regina Margherita",
+                    "rect": null,
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Miano",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Piscinola",
+                    "rect": null,
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Chiaiano",
+                    "rect": null,
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Frullone",
+                    "rect": null,
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Colli Aminei",
+                    "rect": null,
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Policlinico",
+                    "rect": null,
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Rione Alto",
+                    "rect": null,
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Montedonzelli",
+                    "rect": null,
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Medaglie d'Oro",
+                    "rect": null,
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Vanvitelli",
+                    "rect": null,
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Quattro Giornate",
+                    "rect": null,
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Salvator Rosa",
+                    "rect": null,
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Materdei",
+                    "rect": null,
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        171,
+                        350
+                    ],
+                    "is_working": true,
+                    "name": "Museo",
+                    "rect": [
+                        113,
+                        342,
+                        41,
+                        15
+                    ],
+                    "text_id": 20,
+                    "uid": 20
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Dante",
+                    "rect": null,
+                    "text_id": 21,
+                    "uid": 21
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Toledo",
+                    "rect": null,
+                    "text_id": 22,
+                    "uid": 22
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Municipio",
+                    "rect": null,
+                    "text_id": 23,
+                    "uid": 23
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Universita",
+                    "rect": null,
+                    "text_id": 24,
+                    "uid": 24
+                },
+                {
+                    "coord": null,
+                    "is_working": false,
+                    "name": "Duomo",
+                    "rect": null,
+                    "text_id": 25,
+                    "uid": 25
+                },
+                {
+                    "coord": [
+                        171,
+                        390
+                    ],
+                    "is_working": false,
+                    "name": "Garibaldi",
+                    "rect": [
+                        92,
+                        383,
+                        62,
+                        15
+                    ],
+                    "text_id": 26,
+                    "uid": 26
+                }
+            ],
+            "text_id": 27
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "34349C",
+            "line_width": 9,
+            "name": "Metropolitana F. S.",
+            "segments": [
+                [
+                    27,
+                    28,
+                    [
+                        [
+                            190,
+                            70
+                        ],
+                        [
+                            190,
+                            30
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            190,
+                            110
+                        ],
+                        [
+                            190,
+                            70
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    29,
+                    30,
+                    [
+                        [
+                            190,
+                            150
+                        ],
+                        [
+                            190,
+                            110
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    30,
+                    31,
+                    [
+                        [
+                            190,
+                            190
+                        ],
+                        [
+                            190,
+                            150
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    31,
+                    32,
+                    [
+                        [
+                            190,
+                            230
+                        ],
+                        [
+                            190,
+                            190
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    32,
+                    33,
+                    [
+                        [
+                            190,
+                            270
+                        ],
+                        [
+                            190,
+                            230
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    33,
+                    34,
+                    [
+                        [
+                            190,
+                            310
+                        ],
+                        [
+                            190,
+                            270
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    34,
+                    35,
+                    [
+                        [
+                            190,
+                            350
+                        ],
+                        [
+                            190,
+                            310
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    35,
+                    36,
+                    [
+                        [
+                            190,
+                            390
+                        ],
+                        [
+                            190,
+                            350
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    36,
+                    37,
+                    [
+                        [
+                            190,
+                            430
+                        ],
+                        [
+                            190,
+                            390
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    37,
+                    38,
+                    [
+                        [
+                            190,
+                            470
+                        ],
+                        [
+                            190,
+                            430
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    38,
+                    39,
+                    [
+                        [
+                            190,
+                            510
+                        ],
+                        [
+                            190,
+                            470
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    39,
+                    40,
+                    [
+                        [
+                            190,
+                            550
+                        ],
+                        [
+                            190,
+                            510
+                        ]
+                    ],
+                    false
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        190,
+                        30
+                    ],
+                    "is_working": true,
+                    "name": "Pozzuoli",
+                    "rect": [
+                        205,
+                        24,
+                        54,
+                        15
+                    ],
+                    "text_id": 28,
+                    "uid": 27
+                },
+                {
+                    "coord": [
+                        190,
+                        70
+                    ],
+                    "is_working": true,
+                    "name": "Bagnoli",
+                    "rect": [
+                        205,
+                        62,
+                        51,
+                        15
+                    ],
+                    "text_id": 29,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        190,
+                        110
+                    ],
+                    "is_working": true,
+                    "name": "Cavalleggeri d'Aosta",
+                    "rect": [
+                        205,
+                        96,
+                        88,
+                        28
+                    ],
+                    "text_id": 30,
+                    "uid": 29
+                },
+                {
+                    "coord": [
+                        190,
+                        150
+                    ],
+                    "is_working": true,
+                    "name": "Campi Flegrei",
+                    "rect": [
+                        205,
+                        135,
+                        47,
+                        28
+                    ],
+                    "text_id": 31,
+                    "uid": 30
+                },
+                {
+                    "coord": [
+                        190,
+                        190
+                    ],
+                    "is_working": true,
+                    "name": "Leopardi",
+                    "rect": [
+                        205,
+                        182,
+                        57,
+                        15
+                    ],
+                    "text_id": 32,
+                    "uid": 31
+                },
+                {
+                    "coord": [
+                        190,
+                        230
+                    ],
+                    "is_working": true,
+                    "name": "Mergellina",
+                    "rect": [
+                        205,
+                        223,
+                        72,
+                        15
+                    ],
+                    "text_id": 33,
+                    "uid": 32
+                },
+                {
+                    "coord": [
+                        190,
+                        270
+                    ],
+                    "is_working": true,
+                    "name": "Piazza Amedeo",
+                    "rect": [
+                        205,
+                        256,
+                        49,
+                        28
+                    ],
+                    "text_id": 34,
+                    "uid": 33
+                },
+                {
+                    "coord": [
+                        190,
+                        310
+                    ],
+                    "is_working": true,
+                    "name": "Montesanto",
+                    "rect": [
+                        205,
+                        302,
+                        77,
+                        15
+                    ],
+                    "text_id": 35,
+                    "uid": 34
+                },
+                {
+                    "coord": [
+                        190,
+                        350
+                    ],
+                    "is_working": true,
+                    "name": "Piazza Cavour",
+                    "rect": [
+                        205,
+                        336,
+                        49,
+                        28
+                    ],
+                    "text_id": 36,
+                    "uid": 35
+                },
+                {
+                    "coord": [
+                        190,
+                        390
+                    ],
+                    "is_working": true,
+                    "name": "Garibaldi",
+                    "rect": [
+                        205,
+                        383,
+                        62,
+                        15
+                    ],
+                    "text_id": 26,
+                    "uid": 36
+                },
+                {
+                    "coord": [
+                        190,
+                        430
+                    ],
+                    "is_working": true,
+                    "name": "Gianturco",
+                    "rect": [
+                        205,
+                        422,
+                        67,
+                        15
+                    ],
+                    "text_id": 37,
+                    "uid": 37
+                },
+                {
+                    "coord": [
+                        190,
+                        470
+                    ],
+                    "is_working": false,
+                    "name": "Ferraris",
+                    "rect": [
+                        205,
+                        460,
+                        57,
+                        15
+                    ],
+                    "text_id": 38,
+                    "uid": 38
+                },
+                {
+                    "coord": [
+                        190,
+                        510
+                    ],
+                    "is_working": false,
+                    "name": "Vigliena",
+                    "rect": [
+                        205,
+                        502,
+                        52,
+                        15
+                    ],
+                    "text_id": 39,
+                    "uid": 39
+                },
+                {
+                    "coord": [
+                        190,
+                        550
+                    ],
+                    "is_working": false,
+                    "name": "San Giovanni",
+                    "rect": [
+                        205,
+                        537,
+                        55,
+                        28
+                    ],
+                    "text_id": 40,
+                    "uid": 40
+                }
+            ],
+            "text_id": 41
+        }
+    ],
+    "lines_width": 9,
+    "name": "2",
+    "name_text_id": 41,
+    "stations_diameter": 16.0,
+    "transfers": [
+        [
+            35,
+            20,
+            [
+                190,
+                350
+            ],
+            [
+                171,
+                350
+            ]
+        ],
+        [
+            36,
+            26,
+            [
+                190,
+                390
+            ],
+            [
+                171,
+                390
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "Метро",
+    "type_text_id": 50,
+    "upper_case": true,
+    "width": 340,
+    "word_wrap": true
+}

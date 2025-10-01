@@ -1,0 +1,399 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 340,
+    "images": [
+        "res/schemes/antwerpen.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "cf0000",
+            "line_width": 7,
+            "name": "Premetro",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            140,
+                            125
+                        ],
+                        [
+                            55,
+                            125
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            180,
+                            125
+                        ],
+                        [
+                            140,
+                            125
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            225,
+                            125
+                        ],
+                        [
+                            180,
+                            125
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            265,
+                            150
+                        ],
+                        [
+                            265.0,
+                            135.0
+                        ],
+                        [
+                            255.0,
+                            125.0
+                        ],
+                        [
+                            225,
+                            125
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    6,
+                    [
+                        [
+                            264,
+                            95
+                        ],
+                        [
+                            264.0,
+                            115.0
+                        ],
+                        [
+                            255.0,
+                            125.0
+                        ],
+                        [
+                            225,
+                            125
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            265,
+                            190
+                        ],
+                        [
+                            265,
+                            150
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            285,
+                            60
+                        ],
+                        [
+                            275.0,
+                            60.0
+                        ],
+                        [
+                            265.0,
+                            70.0
+                        ],
+                        [
+                            264,
+                            95
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            335,
+                            55
+                        ],
+                        [
+                            330.0,
+                            60.0
+                        ],
+                        [
+                            285,
+                            60
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            375,
+                            35
+                        ],
+                        [
+                            355.0,
+                            35.0
+                        ],
+                        [
+                            335,
+                            55
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            415,
+                            20
+                        ],
+                        [
+                            400.0,
+                            35.0
+                        ],
+                        [
+                            375,
+                            35
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        55,
+                        125
+                    ],
+                    "is_working": true,
+                    "name": "Frederik van Eeden",
+                    "rect": [
+                        27,
+                        87,
+                        54,
+                        28
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        140,
+                        125
+                    ],
+                    "is_working": true,
+                    "name": "Groenplaats",
+                    "rect": [
+                        113,
+                        134,
+                        62,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        180,
+                        125
+                    ],
+                    "is_working": true,
+                    "name": "Meir",
+                    "rect": [
+                        168,
+                        100,
+                        24,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        225,
+                        125
+                    ],
+                    "is_working": true,
+                    "name": "Opera",
+                    "rect": [
+                        214,
+                        135,
+                        32,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        265,
+                        150
+                    ],
+                    "is_working": true,
+                    "name": "Diamant",
+                    "rect": [
+                        277,
+                        143,
+                        43,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        265,
+                        190
+                    ],
+                    "is_working": true,
+                    "name": "Plantin",
+                    "rect": [
+                        277,
+                        184,
+                        36,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        264,
+                        95
+                    ],
+                    "is_working": true,
+                    "name": "Astrid",
+                    "rect": [
+                        224,
+                        88,
+                        32,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        285,
+                        60
+                    ],
+                    "is_working": true,
+                    "name": "Elisabeth",
+                    "rect": [
+                        242,
+                        36,
+                        48,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        335,
+                        55
+                    ],
+                    "is_working": true,
+                    "name": "Handel",
+                    "rect": [
+                        298,
+                        31,
+                        37,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        375,
+                        35
+                    ],
+                    "is_working": true,
+                    "name": "Schijnpoort",
+                    "rect": [
+                        314,
+                        11,
+                        58,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        415,
+                        20
+                    ],
+                    "is_working": true,
+                    "name": "Sport",
+                    "rect": [
+                        378,
+                        3,
+                        28,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                }
+            ],
+            "text_id": 11
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 12,
+    "stations_diameter": 13.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 13,
+    "upper_case": false,
+    "width": 565,
+    "word_wrap": true
+}

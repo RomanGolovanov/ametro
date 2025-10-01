@@ -1,0 +1,1406 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 1410,
+    "images": [
+        "res/schemes/bloor.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "FBBB24",
+            "line_width": 9,
+            "name": "Yonge-University-Spadina",
+            "segments": [
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            181,
+                            700
+                        ],
+                        [
+                            181,
+                            660
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Finch",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "North York Centre",
+                    "rect": null,
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sheppard-Yonge",
+                    "rect": null,
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "York Mills",
+                    "rect": null,
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Lawrence",
+                    "rect": null,
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Eglinton",
+                    "rect": null,
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Davisville",
+                    "rect": null,
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "St.Clair",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Summerhill",
+                    "rect": null,
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Rosedale",
+                    "rect": null,
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        181,
+                        580
+                    ],
+                    "is_working": true,
+                    "name": "Bloor-Yonge",
+                    "rect": [
+                        60,
+                        570,
+                        100,
+                        20
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Wellesley",
+                    "rect": null,
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "College",
+                    "rect": null,
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Dundas",
+                    "rect": null,
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Queen",
+                    "rect": null,
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "King",
+                    "rect": null,
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Union",
+                    "rect": null,
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "St.Andrew",
+                    "rect": null,
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Osgoode",
+                    "rect": null,
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "St.Patrick",
+                    "rect": null,
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Queens Park",
+                    "rect": null,
+                    "text_id": 20,
+                    "uid": 20
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Museum",
+                    "rect": null,
+                    "text_id": 21,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        181,
+                        660
+                    ],
+                    "is_working": true,
+                    "name": "St.George",
+                    "rect": [
+                        60,
+                        650,
+                        100,
+                        20
+                    ],
+                    "text_id": 22,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        181,
+                        700
+                    ],
+                    "is_working": true,
+                    "name": "Spadina",
+                    "rect": [
+                        60,
+                        690,
+                        100,
+                        20
+                    ],
+                    "text_id": 23,
+                    "uid": 23
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Dupont",
+                    "rect": null,
+                    "text_id": 24,
+                    "uid": 24
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "St.Clair West",
+                    "rect": null,
+                    "text_id": 25,
+                    "uid": 25
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Eglinton West",
+                    "rect": null,
+                    "text_id": 26,
+                    "uid": 26
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Glencairn",
+                    "rect": null,
+                    "text_id": 27,
+                    "uid": 27
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Lawrence West",
+                    "rect": null,
+                    "text_id": 28,
+                    "uid": 28
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Yorkdale",
+                    "rect": null,
+                    "text_id": 29,
+                    "uid": 29
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Wilson",
+                    "rect": null,
+                    "text_id": 30,
+                    "uid": 30
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Downsview",
+                    "rect": null,
+                    "text_id": 31,
+                    "uid": 31
+                }
+            ],
+            "text_id": 32
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "05AAE9",
+            "line_width": 9,
+            "name": "Scarborough RT",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "McCowan",
+                    "rect": null,
+                    "text_id": 62,
+                    "uid": 63
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Scarborough Centre",
+                    "rect": null,
+                    "text_id": 63,
+                    "uid": 64
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Midland",
+                    "rect": null,
+                    "text_id": 64,
+                    "uid": 65
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ellesmere",
+                    "rect": null,
+                    "text_id": 65,
+                    "uid": 66
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Lawrence East",
+                    "rect": null,
+                    "text_id": 66,
+                    "uid": 67
+                },
+                {
+                    "coord": [
+                        181,
+                        60
+                    ],
+                    "is_working": true,
+                    "name": "Kennedy",
+                    "rect": [
+                        60,
+                        50,
+                        100,
+                        20
+                    ],
+                    "text_id": 33,
+                    "uid": 68
+                }
+            ],
+            "text_id": 67
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "34B454",
+            "line_width": 9,
+            "name": "Bloor-Danforth",
+            "segments": [
+                [
+                    32,
+                    33,
+                    [
+                        [
+                            200,
+                            100
+                        ],
+                        [
+                            200,
+                            60
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    33,
+                    34,
+                    [
+                        [
+                            200,
+                            140
+                        ],
+                        [
+                            200,
+                            100
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    34,
+                    35,
+                    [
+                        [
+                            200,
+                            180
+                        ],
+                        [
+                            200,
+                            140
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    35,
+                    36,
+                    [
+                        [
+                            200,
+                            220
+                        ],
+                        [
+                            200,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    36,
+                    37,
+                    [
+                        [
+                            200,
+                            260
+                        ],
+                        [
+                            200,
+                            220
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    37,
+                    38,
+                    [
+                        [
+                            200,
+                            300
+                        ],
+                        [
+                            200,
+                            260
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    38,
+                    39,
+                    [
+                        [
+                            200,
+                            340
+                        ],
+                        [
+                            200,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    39,
+                    40,
+                    [
+                        [
+                            200,
+                            380
+                        ],
+                        [
+                            200,
+                            340
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    40,
+                    41,
+                    [
+                        [
+                            200,
+                            414
+                        ],
+                        [
+                            200,
+                            380
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    41,
+                    42,
+                    [
+                        [
+                            200,
+                            460
+                        ],
+                        [
+                            200,
+                            414
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    42,
+                    43,
+                    [
+                        [
+                            200,
+                            500
+                        ],
+                        [
+                            200,
+                            460
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    43,
+                    44,
+                    [
+                        [
+                            200,
+                            540
+                        ],
+                        [
+                            200,
+                            500
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    44,
+                    45,
+                    [
+                        [
+                            200,
+                            580
+                        ],
+                        [
+                            200,
+                            540
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    45,
+                    46,
+                    [
+                        [
+                            200,
+                            620
+                        ],
+                        [
+                            200,
+                            580
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    46,
+                    47,
+                    [
+                        [
+                            200,
+                            660
+                        ],
+                        [
+                            200,
+                            620
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    47,
+                    48,
+                    [
+                        [
+                            200,
+                            700
+                        ],
+                        [
+                            200,
+                            660
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    48,
+                    49,
+                    [
+                        [
+                            200,
+                            740
+                        ],
+                        [
+                            200,
+                            700
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    49,
+                    50,
+                    [
+                        [
+                            200,
+                            780
+                        ],
+                        [
+                            200,
+                            740
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    50,
+                    51,
+                    [
+                        [
+                            200,
+                            820
+                        ],
+                        [
+                            200,
+                            780
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    51,
+                    52,
+                    [
+                        [
+                            200,
+                            860
+                        ],
+                        [
+                            200,
+                            820
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    52,
+                    53,
+                    [
+                        [
+                            200,
+                            900
+                        ],
+                        [
+                            200,
+                            860
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    53,
+                    54,
+                    [
+                        [
+                            200,
+                            940
+                        ],
+                        [
+                            200,
+                            900
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    54,
+                    55,
+                    [
+                        [
+                            200,
+                            980
+                        ],
+                        [
+                            200,
+                            940
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    55,
+                    56,
+                    [
+                        [
+                            200,
+                            1020
+                        ],
+                        [
+                            200,
+                            980
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    56,
+                    57,
+                    [
+                        [
+                            200,
+                            1060
+                        ],
+                        [
+                            200,
+                            1020
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    57,
+                    58,
+                    [
+                        [
+                            200,
+                            1100
+                        ],
+                        [
+                            200,
+                            1060
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    58,
+                    59,
+                    [
+                        [
+                            200,
+                            1140
+                        ],
+                        [
+                            200,
+                            1100
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    59,
+                    60,
+                    [
+                        [
+                            200,
+                            1180
+                        ],
+                        [
+                            200,
+                            1140
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    60,
+                    61,
+                    [
+                        [
+                            200,
+                            1220
+                        ],
+                        [
+                            200,
+                            1180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    61,
+                    62,
+                    [
+                        [
+                            200,
+                            1260
+                        ],
+                        [
+                            200,
+                            1220
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        200,
+                        60
+                    ],
+                    "is_working": true,
+                    "name": "Kennedy",
+                    "rect": [
+                        215,
+                        50,
+                        100,
+                        20
+                    ],
+                    "text_id": 33,
+                    "uid": 32
+                },
+                {
+                    "coord": [
+                        200,
+                        100
+                    ],
+                    "is_working": true,
+                    "name": "Warden",
+                    "rect": [
+                        215,
+                        90,
+                        100,
+                        20
+                    ],
+                    "text_id": 34,
+                    "uid": 33
+                },
+                {
+                    "coord": [
+                        200,
+                        140
+                    ],
+                    "is_working": true,
+                    "name": "Victoria Park",
+                    "rect": [
+                        215,
+                        130,
+                        100,
+                        20
+                    ],
+                    "text_id": 35,
+                    "uid": 34
+                },
+                {
+                    "coord": [
+                        200,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Main Street",
+                    "rect": [
+                        215,
+                        170,
+                        100,
+                        20
+                    ],
+                    "text_id": 36,
+                    "uid": 35
+                },
+                {
+                    "coord": [
+                        200,
+                        220
+                    ],
+                    "is_working": true,
+                    "name": "Woodbine",
+                    "rect": [
+                        215,
+                        210,
+                        100,
+                        20
+                    ],
+                    "text_id": 37,
+                    "uid": 36
+                },
+                {
+                    "coord": [
+                        200,
+                        260
+                    ],
+                    "is_working": true,
+                    "name": "Coxwell",
+                    "rect": [
+                        215,
+                        250,
+                        100,
+                        20
+                    ],
+                    "text_id": 38,
+                    "uid": 37
+                },
+                {
+                    "coord": [
+                        200,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Greenwood",
+                    "rect": [
+                        215,
+                        290,
+                        100,
+                        20
+                    ],
+                    "text_id": 39,
+                    "uid": 38
+                },
+                {
+                    "coord": [
+                        200,
+                        340
+                    ],
+                    "is_working": true,
+                    "name": "Donlands",
+                    "rect": [
+                        215,
+                        330,
+                        100,
+                        20
+                    ],
+                    "text_id": 40,
+                    "uid": 39
+                },
+                {
+                    "coord": [
+                        200,
+                        380
+                    ],
+                    "is_working": true,
+                    "name": "Pape",
+                    "rect": [
+                        215,
+                        370,
+                        100,
+                        20
+                    ],
+                    "text_id": 41,
+                    "uid": 40
+                },
+                {
+                    "coord": [
+                        200,
+                        414
+                    ],
+                    "is_working": true,
+                    "name": "Chester",
+                    "rect": [
+                        215,
+                        410,
+                        100,
+                        20
+                    ],
+                    "text_id": 42,
+                    "uid": 41
+                },
+                {
+                    "coord": [
+                        200,
+                        460
+                    ],
+                    "is_working": true,
+                    "name": "Broadview",
+                    "rect": [
+                        215,
+                        450,
+                        100,
+                        20
+                    ],
+                    "text_id": 43,
+                    "uid": 42
+                },
+                {
+                    "coord": [
+                        200,
+                        500
+                    ],
+                    "is_working": true,
+                    "name": "Castle Frank",
+                    "rect": [
+                        215,
+                        490,
+                        100,
+                        20
+                    ],
+                    "text_id": 44,
+                    "uid": 43
+                },
+                {
+                    "coord": [
+                        200,
+                        540
+                    ],
+                    "is_working": true,
+                    "name": "Sherbourne",
+                    "rect": [
+                        215,
+                        530,
+                        100,
+                        20
+                    ],
+                    "text_id": 45,
+                    "uid": 44
+                },
+                {
+                    "coord": [
+                        200,
+                        580
+                    ],
+                    "is_working": true,
+                    "name": "Bloor-Yonge",
+                    "rect": [
+                        215,
+                        570,
+                        100,
+                        20
+                    ],
+                    "text_id": 10,
+                    "uid": 45
+                },
+                {
+                    "coord": [
+                        200,
+                        620
+                    ],
+                    "is_working": true,
+                    "name": "Bay",
+                    "rect": [
+                        215,
+                        610,
+                        100,
+                        20
+                    ],
+                    "text_id": 46,
+                    "uid": 46
+                },
+                {
+                    "coord": [
+                        200,
+                        660
+                    ],
+                    "is_working": true,
+                    "name": "St.George",
+                    "rect": [
+                        215,
+                        650,
+                        100,
+                        20
+                    ],
+                    "text_id": 22,
+                    "uid": 47
+                },
+                {
+                    "coord": [
+                        200,
+                        700
+                    ],
+                    "is_working": true,
+                    "name": "Spadina",
+                    "rect": [
+                        215,
+                        690,
+                        100,
+                        20
+                    ],
+                    "text_id": 23,
+                    "uid": 48
+                },
+                {
+                    "coord": [
+                        200,
+                        740
+                    ],
+                    "is_working": true,
+                    "name": "Bathurst",
+                    "rect": [
+                        215,
+                        730,
+                        100,
+                        20
+                    ],
+                    "text_id": 47,
+                    "uid": 49
+                },
+                {
+                    "coord": [
+                        200,
+                        780
+                    ],
+                    "is_working": true,
+                    "name": "Christie",
+                    "rect": [
+                        215,
+                        770,
+                        100,
+                        20
+                    ],
+                    "text_id": 48,
+                    "uid": 50
+                },
+                {
+                    "coord": [
+                        200,
+                        820
+                    ],
+                    "is_working": true,
+                    "name": "Ossington",
+                    "rect": [
+                        215,
+                        810,
+                        100,
+                        20
+                    ],
+                    "text_id": 49,
+                    "uid": 51
+                },
+                {
+                    "coord": [
+                        200,
+                        860
+                    ],
+                    "is_working": true,
+                    "name": "Dufferin",
+                    "rect": [
+                        215,
+                        850,
+                        100,
+                        20
+                    ],
+                    "text_id": 50,
+                    "uid": 52
+                },
+                {
+                    "coord": [
+                        200,
+                        900
+                    ],
+                    "is_working": true,
+                    "name": "Lansdowne",
+                    "rect": [
+                        215,
+                        890,
+                        100,
+                        20
+                    ],
+                    "text_id": 51,
+                    "uid": 53
+                },
+                {
+                    "coord": [
+                        200,
+                        940
+                    ],
+                    "is_working": true,
+                    "name": "Dundas West",
+                    "rect": [
+                        215,
+                        930,
+                        100,
+                        20
+                    ],
+                    "text_id": 52,
+                    "uid": 54
+                },
+                {
+                    "coord": [
+                        200,
+                        980
+                    ],
+                    "is_working": true,
+                    "name": "Keele",
+                    "rect": [
+                        215,
+                        970,
+                        100,
+                        20
+                    ],
+                    "text_id": 53,
+                    "uid": 55
+                },
+                {
+                    "coord": [
+                        200,
+                        1020
+                    ],
+                    "is_working": true,
+                    "name": "High Park",
+                    "rect": [
+                        215,
+                        1010,
+                        100,
+                        20
+                    ],
+                    "text_id": 54,
+                    "uid": 56
+                },
+                {
+                    "coord": [
+                        200,
+                        1060
+                    ],
+                    "is_working": true,
+                    "name": "Runnymede",
+                    "rect": [
+                        200,
+                        1050,
+                        100,
+                        20
+                    ],
+                    "text_id": 55,
+                    "uid": 57
+                },
+                {
+                    "coord": [
+                        200,
+                        1100
+                    ],
+                    "is_working": true,
+                    "name": "Jane",
+                    "rect": [
+                        215,
+                        1090,
+                        100,
+                        20
+                    ],
+                    "text_id": 56,
+                    "uid": 58
+                },
+                {
+                    "coord": [
+                        200,
+                        1140
+                    ],
+                    "is_working": true,
+                    "name": "Old Mill",
+                    "rect": [
+                        215,
+                        1130,
+                        100,
+                        20
+                    ],
+                    "text_id": 57,
+                    "uid": 59
+                },
+                {
+                    "coord": [
+                        200,
+                        1180
+                    ],
+                    "is_working": true,
+                    "name": "Royal York",
+                    "rect": [
+                        215,
+                        1170,
+                        100,
+                        20
+                    ],
+                    "text_id": 58,
+                    "uid": 60
+                },
+                {
+                    "coord": [
+                        200,
+                        1220
+                    ],
+                    "is_working": true,
+                    "name": "Islington",
+                    "rect": [
+                        215,
+                        1210,
+                        100,
+                        20
+                    ],
+                    "text_id": 59,
+                    "uid": 61
+                },
+                {
+                    "coord": [
+                        200,
+                        1260
+                    ],
+                    "is_working": true,
+                    "name": "Kipling",
+                    "rect": [
+                        215,
+                        1250,
+                        100,
+                        20
+                    ],
+                    "text_id": 60,
+                    "uid": 62
+                }
+            ],
+            "text_id": 61
+        }
+    ],
+    "lines_width": 9,
+    "name": "bloor",
+    "name_text_id": 61,
+    "stations_diameter": 16.0,
+    "transfers": [
+        [
+            10,
+            45,
+            [
+                181,
+                580
+            ],
+            [
+                200,
+                580
+            ]
+        ],
+        [
+            22,
+            47,
+            [
+                181,
+                660
+            ],
+            [
+                200,
+                660
+            ]
+        ],
+        [
+            23,
+            48,
+            [
+                181,
+                700
+            ],
+            [
+                200,
+                700
+            ]
+        ],
+        [
+            32,
+            68,
+            [
+                200,
+                60
+            ],
+            [
+                181,
+                60
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "Метро",
+    "type_text_id": 75,
+    "upper_case": true,
+    "width": 350,
+    "word_wrap": true
+}

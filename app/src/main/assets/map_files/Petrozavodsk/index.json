@@ -1,0 +1,78 @@
+{
+    "city_id": 509820,
+    "comments_text_id": 64,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": null,
+            "type": "direct",
+            "weekdays": null
+        },
+        {
+            "ranges": null,
+            "type": "north-south",
+            "weekdays": null
+        },
+        {
+            "ranges": null,
+            "type": "south-north",
+            "weekdays": null
+        },
+        {
+            "ranges": null,
+            "type": "north-west",
+            "weekdays": null
+        },
+        {
+            "ranges": null,
+            "type": "west-north",
+            "weekdays": null
+        },
+        {
+            "ranges": null,
+            "type": "south-west",
+            "weekdays": null
+        },
+        {
+            "ranges": null,
+            "type": "west-south",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 63,
+    "file": "Petrozavodsk.zip",
+    "latitude": 61.78491,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": 34.34691,
+    "map_id": "Petrozavodsk.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 61,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 62
+        }
+    ],
+    "timestamp": 1242774000.0,
+    "transport_types": [
+        "Электричка"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Электричка"
+        }
+    ]
+}

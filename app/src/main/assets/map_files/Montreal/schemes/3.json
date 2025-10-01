@@ -1,0 +1,694 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 650,
+    "images": [
+        "res/schemes/3.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "f68736",
+            "line_width": 18,
+            "name": "2 ORANGE CФTE-VERTU - MONTMORENCY",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Cфte-Vertu",
+                    "rect": null,
+                    "text_id": 28,
+                    "uid": 27
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Du Collиge",
+                    "rect": null,
+                    "text_id": 29,
+                    "uid": 28
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "De La Savane",
+                    "rect": null,
+                    "text_id": 30,
+                    "uid": 29
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Namur",
+                    "rect": null,
+                    "text_id": 31,
+                    "uid": 30
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Plamondon",
+                    "rect": null,
+                    "text_id": 32,
+                    "uid": 31
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Cфte-Sainte-Catherine",
+                    "rect": null,
+                    "text_id": 33,
+                    "uid": 32
+                },
+                {
+                    "coord": [
+                        181,
+                        60
+                    ],
+                    "is_working": true,
+                    "name": "Snowdon",
+                    "rect": [
+                        60,
+                        50,
+                        100,
+                        20
+                    ],
+                    "text_id": 34,
+                    "uid": 33
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Villa-Maria",
+                    "rect": null,
+                    "text_id": 35,
+                    "uid": 34
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Vendфme",
+                    "rect": null,
+                    "text_id": 36,
+                    "uid": 35
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Place-St-Henri",
+                    "rect": null,
+                    "text_id": 37,
+                    "uid": 36
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Lionel-Groulx",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 37
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Georges-Vanier",
+                    "rect": null,
+                    "text_id": 38,
+                    "uid": 38
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Lucien-l'Allier",
+                    "rect": null,
+                    "text_id": 39,
+                    "uid": 39
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Bonaventure",
+                    "rect": null,
+                    "text_id": 40,
+                    "uid": 40
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Square-Victoria",
+                    "rect": null,
+                    "text_id": 41,
+                    "uid": 41
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Place-d'Armes",
+                    "rect": null,
+                    "text_id": 42,
+                    "uid": 42
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Champ-de-Mars",
+                    "rect": null,
+                    "text_id": 43,
+                    "uid": 43
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Berri-UQAM",
+                    "rect": null,
+                    "text_id": 14,
+                    "uid": 44
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sherbrooke",
+                    "rect": null,
+                    "text_id": 44,
+                    "uid": 45
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Mont-Royal",
+                    "rect": null,
+                    "text_id": 45,
+                    "uid": 46
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Laurier",
+                    "rect": null,
+                    "text_id": 46,
+                    "uid": 47
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Rosemont",
+                    "rect": null,
+                    "text_id": 47,
+                    "uid": 48
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Beaubien",
+                    "rect": null,
+                    "text_id": 48,
+                    "uid": 49
+                },
+                {
+                    "coord": [
+                        181,
+                        380
+                    ],
+                    "is_working": true,
+                    "name": "Jean-Talon",
+                    "rect": [
+                        60,
+                        370,
+                        100,
+                        20
+                    ],
+                    "text_id": 49,
+                    "uid": 50
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Jarry",
+                    "rect": null,
+                    "text_id": 50,
+                    "uid": 51
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Crйmazie",
+                    "rect": null,
+                    "text_id": 51,
+                    "uid": 52
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sauvй",
+                    "rect": null,
+                    "text_id": 52,
+                    "uid": 53
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Henri-Bourassa",
+                    "rect": null,
+                    "text_id": 53,
+                    "uid": 54
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Cartier",
+                    "rect": null,
+                    "text_id": 54,
+                    "uid": 55
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Concorde",
+                    "rect": null,
+                    "text_id": 55,
+                    "uid": 56
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Montmorency",
+                    "rect": null,
+                    "text_id": 56,
+                    "uid": 57
+                }
+            ],
+            "text_id": 57
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "038ace",
+            "line_width": 18,
+            "name": "3 BLUE SNOWDON - SAINT-MICHEL",
+            "segments": [
+                [
+                    58,
+                    59,
+                    [
+                        [
+                            200,
+                            100
+                        ],
+                        [
+                            200,
+                            60
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    59,
+                    60,
+                    [
+                        [
+                            200,
+                            140
+                        ],
+                        [
+                            200,
+                            100
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    60,
+                    61,
+                    [
+                        [
+                            200,
+                            180
+                        ],
+                        [
+                            200,
+                            140
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    61,
+                    62,
+                    [
+                        [
+                            200,
+                            220
+                        ],
+                        [
+                            200,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    62,
+                    63,
+                    [
+                        [
+                            200,
+                            260
+                        ],
+                        [
+                            200,
+                            220
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    63,
+                    64,
+                    [
+                        [
+                            200,
+                            300
+                        ],
+                        [
+                            200,
+                            260
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    64,
+                    65,
+                    [
+                        [
+                            200,
+                            340
+                        ],
+                        [
+                            200,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    65,
+                    66,
+                    [
+                        [
+                            200,
+                            380
+                        ],
+                        [
+                            200,
+                            340
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    66,
+                    67,
+                    [
+                        [
+                            200,
+                            414
+                        ],
+                        [
+                            200,
+                            380
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    67,
+                    68,
+                    [
+                        [
+                            200,
+                            460
+                        ],
+                        [
+                            200,
+                            414
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    68,
+                    69,
+                    [
+                        [
+                            200,
+                            500
+                        ],
+                        [
+                            200,
+                            460
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        200,
+                        60
+                    ],
+                    "is_working": true,
+                    "name": "Snowdon",
+                    "rect": [
+                        215,
+                        50,
+                        100,
+                        20
+                    ],
+                    "text_id": 34,
+                    "uid": 58
+                },
+                {
+                    "coord": [
+                        200,
+                        100
+                    ],
+                    "is_working": true,
+                    "name": "Cфte-des-Neiges",
+                    "rect": [
+                        215,
+                        90,
+                        100,
+                        20
+                    ],
+                    "text_id": 58,
+                    "uid": 59
+                },
+                {
+                    "coord": [
+                        200,
+                        140
+                    ],
+                    "is_working": true,
+                    "name": "Universitй-de-Montrйal",
+                    "rect": [
+                        215,
+                        130,
+                        100,
+                        20
+                    ],
+                    "text_id": 59,
+                    "uid": 60
+                },
+                {
+                    "coord": [
+                        200,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Йdouard-Montpetit",
+                    "rect": [
+                        215,
+                        170,
+                        100,
+                        20
+                    ],
+                    "text_id": 60,
+                    "uid": 61
+                },
+                {
+                    "coord": [
+                        200,
+                        220
+                    ],
+                    "is_working": true,
+                    "name": "Outremont",
+                    "rect": [
+                        215,
+                        210,
+                        100,
+                        20
+                    ],
+                    "text_id": 61,
+                    "uid": 62
+                },
+                {
+                    "coord": [
+                        200,
+                        260
+                    ],
+                    "is_working": true,
+                    "name": "Acadie",
+                    "rect": [
+                        215,
+                        250,
+                        100,
+                        20
+                    ],
+                    "text_id": 62,
+                    "uid": 63
+                },
+                {
+                    "coord": [
+                        200,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Parc",
+                    "rect": [
+                        215,
+                        290,
+                        100,
+                        20
+                    ],
+                    "text_id": 63,
+                    "uid": 64
+                },
+                {
+                    "coord": [
+                        200,
+                        340
+                    ],
+                    "is_working": true,
+                    "name": "De Castelnau",
+                    "rect": [
+                        215,
+                        330,
+                        100,
+                        20
+                    ],
+                    "text_id": 64,
+                    "uid": 65
+                },
+                {
+                    "coord": [
+                        200,
+                        380
+                    ],
+                    "is_working": true,
+                    "name": "Jean-Talon",
+                    "rect": [
+                        215,
+                        370,
+                        100,
+                        20
+                    ],
+                    "text_id": 49,
+                    "uid": 66
+                },
+                {
+                    "coord": [
+                        200,
+                        414
+                    ],
+                    "is_working": true,
+                    "name": "Fabre",
+                    "rect": [
+                        215,
+                        410,
+                        100,
+                        20
+                    ],
+                    "text_id": 65,
+                    "uid": 67
+                },
+                {
+                    "coord": [
+                        200,
+                        460
+                    ],
+                    "is_working": true,
+                    "name": "D'Iberville",
+                    "rect": [
+                        215,
+                        450,
+                        100,
+                        20
+                    ],
+                    "text_id": 66,
+                    "uid": 68
+                },
+                {
+                    "coord": [
+                        200,
+                        500
+                    ],
+                    "is_working": true,
+                    "name": "Saint-Michel",
+                    "rect": [
+                        215,
+                        490,
+                        100,
+                        20
+                    ],
+                    "text_id": 67,
+                    "uid": 69
+                }
+            ],
+            "text_id": 68
+        }
+    ],
+    "lines_width": 18,
+    "name": "3",
+    "name_text_id": 68,
+    "stations_diameter": 16.0,
+    "transfers": [
+        [
+            33,
+            58,
+            [
+                181,
+                60
+            ],
+            [
+                200,
+                60
+            ]
+        ],
+        [
+            50,
+            66,
+            [
+                181,
+                380
+            ],
+            [
+                200,
+                380
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "Метро",
+    "type_text_id": 74,
+    "upper_case": true,
+    "width": 350,
+    "word_wrap": true
+}

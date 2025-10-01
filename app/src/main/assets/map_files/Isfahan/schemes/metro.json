@@ -1,0 +1,332 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 430,
+    "images": [
+        "res/schemes/isfahan.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "cf0000",
+            "line_color": "cf0000",
+            "line_width": 7,
+            "name": "1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            70,
+                            100
+                        ],
+                        [
+                            30,
+                            100
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            110,
+                            100
+                        ],
+                        [
+                            70,
+                            100
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            150,
+                            100
+                        ],
+                        [
+                            110,
+                            100
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            190,
+                            100
+                        ],
+                        [
+                            150,
+                            100
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            220,
+                            130
+                        ],
+                        [
+                            190,
+                            100
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            250,
+                            160
+                        ],
+                        [
+                            220,
+                            130
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            250,
+                            200
+                        ],
+                        [
+                            250,
+                            160
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            250,
+                            240
+                        ],
+                        [
+                            250,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            250,
+                            280
+                        ],
+                        [
+                            250,
+                            240
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        30,
+                        100
+                    ],
+                    "is_working": true,
+                    "name": "Qods",
+                    "rect": [
+                        16,
+                        108,
+                        28,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        70,
+                        100
+                    ],
+                    "is_working": true,
+                    "name": "Baharestan",
+                    "rect": [
+                        42,
+                        77,
+                        59,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        110,
+                        100
+                    ],
+                    "is_working": true,
+                    "name": "Golestan",
+                    "rect": [
+                        90,
+                        108,
+                        46,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        150,
+                        100
+                    ],
+                    "is_working": true,
+                    "name": "Shahid Mofatteh",
+                    "rect": [
+                        120,
+                        77,
+                        81,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        190,
+                        100
+                    ],
+                    "is_working": true,
+                    "name": "Shahid Alikhani",
+                    "rect": [
+                        199,
+                        89,
+                        80,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        220,
+                        130
+                    ],
+                    "is_working": true,
+                    "name": "Jaber",
+                    "rect": [
+                        229,
+                        118,
+                        30,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        250,
+                        160
+                    ],
+                    "is_working": true,
+                    "name": "Kaveh",
+                    "rect": [
+                        259,
+                        153,
+                        34,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        250,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Shahid Shamran",
+                    "rect": [
+                        259,
+                        192,
+                        83,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        250,
+                        240
+                    ],
+                    "is_working": true,
+                    "name": "Shahid Bahonar",
+                    "rect": [
+                        259,
+                        233,
+                        81,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        250,
+                        280
+                    ],
+                    "is_working": true,
+                    "name": "Shohada",
+                    "rect": [
+                        259,
+                        272,
+                        45,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                }
+            ],
+            "text_id": 10
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 11,
+    "stations_diameter": 13.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 12,
+    "upper_case": false,
+    "width": 400,
+    "word_wrap": false
+}

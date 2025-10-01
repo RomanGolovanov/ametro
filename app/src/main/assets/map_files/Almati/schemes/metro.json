@@ -1,0 +1,332 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 540,
+    "images": [
+        "res/schemes/almati.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "E41c0c",
+            "line_color": "E41c0c",
+            "line_width": 9,
+            "name": "Первая",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            365,
+                            210
+                        ],
+                        [
+                            361,
+                            147
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            370,
+                            256
+                        ],
+                        [
+                            365,
+                            210
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            391,
+                            291
+                        ],
+                        [
+                            370,
+                            256
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            316,
+                            300
+                        ],
+                        [
+                            391,
+                            291
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            279,
+                            285
+                        ],
+                        [
+                            316,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            207,
+                            308
+                        ],
+                        [
+                            279,
+                            285
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            156,
+                            314
+                        ],
+                        [
+                            207,
+                            308
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            107,
+                            358
+                        ],
+                        [
+                            156,
+                            314
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            26,
+                            390
+                        ],
+                        [
+                            107,
+                            358
+                        ]
+                    ],
+                    false
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        361,
+                        147
+                    ],
+                    "is_working": true,
+                    "name": "Райымбек батыр",
+                    "rect": [
+                        371,
+                        139,
+                        107,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        365,
+                        210
+                    ],
+                    "is_working": true,
+                    "name": "Жибек Жолы",
+                    "rect": [
+                        375,
+                        204,
+                        77,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        370,
+                        256
+                    ],
+                    "is_working": true,
+                    "name": "Алмалы",
+                    "rect": [
+                        380,
+                        247,
+                        51,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        391,
+                        291
+                    ],
+                    "is_working": true,
+                    "name": "Абай",
+                    "rect": [
+                        400,
+                        294,
+                        34,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        316,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Байконыр",
+                    "rect": [
+                        282,
+                        310,
+                        65,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        279,
+                        285
+                    ],
+                    "is_working": true,
+                    "name": "Театр им. М.Ауэзова",
+                    "rect": [
+                        200,
+                        261,
+                        126,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        207,
+                        308
+                    ],
+                    "is_working": true,
+                    "name": "Алатау",
+                    "rect": [
+                        190,
+                        318,
+                        45,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        156,
+                        314
+                    ],
+                    "is_working": true,
+                    "name": "Сайран",
+                    "rect": [
+                        131,
+                        289,
+                        49,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        107,
+                        358
+                    ],
+                    "is_working": true,
+                    "name": "Москва",
+                    "rect": [
+                        101,
+                        368,
+                        49,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        26,
+                        390
+                    ],
+                    "is_working": false,
+                    "name": "Сарыарка",
+                    "rect": [
+                        13,
+                        403,
+                        64,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                }
+            ],
+            "text_id": 10
+        }
+    ],
+    "lines_width": 9,
+    "name": "metro",
+    "name_text_id": 11,
+    "stations_diameter": 16.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 12,
+    "upper_case": true,
+    "width": 541,
+    "word_wrap": false
+}

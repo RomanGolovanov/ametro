@@ -1,0 +1,766 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 960,
+    "images": [
+        "res/schemes/helsinki.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "FF4D00",
+            "line_width": 9,
+            "name": "Metro",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            100,
+                            50
+                        ],
+                        [
+                            100,
+                            10
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            100,
+                            90
+                        ],
+                        [
+                            100,
+                            50
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            100,
+                            130
+                        ],
+                        [
+                            100,
+                            90
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            100,
+                            170
+                        ],
+                        [
+                            100,
+                            130
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            100,
+                            210
+                        ],
+                        [
+                            100,
+                            170
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            100,
+                            250
+                        ],
+                        [
+                            100,
+                            210
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            100,
+                            290
+                        ],
+                        [
+                            100,
+                            250
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            100,
+                            330
+                        ],
+                        [
+                            100,
+                            290
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            100,
+                            370
+                        ],
+                        [
+                            100,
+                            330
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            100,
+                            410
+                        ],
+                        [
+                            100,
+                            370
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            100,
+                            450
+                        ],
+                        [
+                            100,
+                            410
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            100,
+                            490
+                        ],
+                        [
+                            100,
+                            450
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            100,
+                            530
+                        ],
+                        [
+                            100,
+                            490
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            100,
+                            570
+                        ],
+                        [
+                            100,
+                            530
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            100,
+                            610
+                        ],
+                        [
+                            100,
+                            570
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            100,
+                            650
+                        ],
+                        [
+                            100,
+                            610
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            100,
+                            690
+                        ],
+                        [
+                            100,
+                            650
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            100,
+                            730
+                        ],
+                        [
+                            100,
+                            690
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    21,
+                    [
+                        [
+                            230,
+                            730
+                        ],
+                        [
+                            100,
+                            690
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            100,
+                            770
+                        ],
+                        [
+                            100,
+                            730
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            100,
+                            810
+                        ],
+                        [
+                            100,
+                            770
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            230,
+                            770
+                        ],
+                        [
+                            230,
+                            730
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            230,
+                            810
+                        ],
+                        [
+                            230,
+                            770
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        100,
+                        10
+                    ],
+                    "is_working": false,
+                    "name": "Matinkyla",
+                    "rect": [
+                        115,
+                        0,
+                        100,
+                        20
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        100,
+                        50
+                    ],
+                    "is_working": false,
+                    "name": "Niittymaa",
+                    "rect": [
+                        115,
+                        40,
+                        100,
+                        20
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        100,
+                        90
+                    ],
+                    "is_working": false,
+                    "name": "Tapiola",
+                    "rect": [
+                        115,
+                        80,
+                        100,
+                        20
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        100,
+                        130
+                    ],
+                    "is_working": false,
+                    "name": "Otaniemi",
+                    "rect": [
+                        115,
+                        120,
+                        100,
+                        20
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        100,
+                        170
+                    ],
+                    "is_working": false,
+                    "name": "Keilaniemi",
+                    "rect": [
+                        115,
+                        160,
+                        100,
+                        20
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        100,
+                        210
+                    ],
+                    "is_working": false,
+                    "name": "Koivusaari",
+                    "rect": [
+                        115,
+                        200,
+                        100,
+                        20
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        100,
+                        250
+                    ],
+                    "is_working": false,
+                    "name": "Lauttasaari",
+                    "rect": [
+                        115,
+                        240,
+                        100,
+                        20
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        100,
+                        290
+                    ],
+                    "is_working": true,
+                    "name": "Ruoholahti",
+                    "rect": [
+                        115,
+                        280,
+                        100,
+                        20
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        100,
+                        330
+                    ],
+                    "is_working": true,
+                    "name": "Kamppi",
+                    "rect": [
+                        115,
+                        320,
+                        100,
+                        20
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        100,
+                        370
+                    ],
+                    "is_working": true,
+                    "name": "Rautatientori",
+                    "rect": [
+                        115,
+                        360,
+                        100,
+                        20
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        100,
+                        410
+                    ],
+                    "is_working": true,
+                    "name": "Kaisaniemi",
+                    "rect": [
+                        115,
+                        400,
+                        100,
+                        20
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        100,
+                        450
+                    ],
+                    "is_working": true,
+                    "name": "Hakaniemi",
+                    "rect": [
+                        115,
+                        440,
+                        100,
+                        20
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        100,
+                        490
+                    ],
+                    "is_working": true,
+                    "name": "Sornainen",
+                    "rect": [
+                        115,
+                        480,
+                        100,
+                        20
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        100,
+                        530
+                    ],
+                    "is_working": true,
+                    "name": "Kalasatama",
+                    "rect": [
+                        115,
+                        520,
+                        100,
+                        20
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        100,
+                        570
+                    ],
+                    "is_working": true,
+                    "name": "Kulosaari",
+                    "rect": [
+                        115,
+                        560,
+                        100,
+                        20
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        100,
+                        610
+                    ],
+                    "is_working": true,
+                    "name": "Herttoniemi",
+                    "rect": [
+                        115,
+                        600,
+                        100,
+                        20
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        100,
+                        650
+                    ],
+                    "is_working": true,
+                    "name": "Siilitie",
+                    "rect": [
+                        115,
+                        640,
+                        100,
+                        20
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        100,
+                        690
+                    ],
+                    "is_working": true,
+                    "name": "Itakeskus",
+                    "rect": [
+                        115,
+                        680,
+                        100,
+                        20
+                    ],
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        100,
+                        730
+                    ],
+                    "is_working": true,
+                    "name": "Puotila",
+                    "rect": [
+                        115,
+                        720,
+                        100,
+                        20
+                    ],
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        100,
+                        770
+                    ],
+                    "is_working": true,
+                    "name": "Rastila",
+                    "rect": [
+                        115,
+                        760,
+                        100,
+                        20
+                    ],
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        100,
+                        810
+                    ],
+                    "is_working": true,
+                    "name": "Vuosaari",
+                    "rect": [
+                        115,
+                        800,
+                        100,
+                        20
+                    ],
+                    "text_id": 20,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        230,
+                        730
+                    ],
+                    "is_working": true,
+                    "name": "Myllypuro",
+                    "rect": [
+                        245,
+                        720,
+                        100,
+                        20
+                    ],
+                    "text_id": 21,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        230,
+                        770
+                    ],
+                    "is_working": true,
+                    "name": "Kontula",
+                    "rect": [
+                        245,
+                        760,
+                        100,
+                        20
+                    ],
+                    "text_id": 22,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        230,
+                        810
+                    ],
+                    "is_working": true,
+                    "name": "Mellunmaki",
+                    "rect": [
+                        245,
+                        800,
+                        100,
+                        20
+                    ],
+                    "text_id": 23,
+                    "uid": 23
+                }
+            ],
+            "text_id": 24
+        }
+    ],
+    "lines_width": 9,
+    "name": "metro",
+    "name_text_id": 25,
+    "stations_diameter": 16.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 26,
+    "upper_case": true,
+    "width": 380,
+    "word_wrap": true
+}

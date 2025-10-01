@@ -1,0 +1,123 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 315,
+    "images": [
+        "res/schemes/novyafon.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "E14664",
+            "line_color": "E14664",
+            "line_width": 9,
+            "name": "1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            209,
+                            90
+                        ],
+                        [
+                            138.0,
+                            90.0
+                        ],
+                        [
+                            63,
+                            165
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            310,
+                            63
+                        ],
+                        [
+                            256.0,
+                            90.0
+                        ],
+                        [
+                            209,
+                            90
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        63,
+                        165
+                    ],
+                    "is_working": true,
+                    "name": "Входные ворота",
+                    "rect": [
+                        22,
+                        178,
+                        88,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        209,
+                        90
+                    ],
+                    "is_working": true,
+                    "name": "Зал Апсны",
+                    "rect": [
+                        179,
+                        63,
+                        60,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        310,
+                        63
+                    ],
+                    "is_working": true,
+                    "name": "Зал Анакопея",
+                    "rect": [
+                        278,
+                        34,
+                        74,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                }
+            ],
+            "text_id": 3
+        }
+    ],
+    "lines_width": 9,
+    "name": "metro",
+    "name_text_id": 4,
+    "stations_diameter": 19.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 5,
+    "upper_case": false,
+    "width": 460,
+    "word_wrap": false
+}

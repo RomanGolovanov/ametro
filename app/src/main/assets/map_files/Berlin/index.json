@@ -1,0 +1,66 @@
+{
+    "city_id": 2950159,
+    "comments_text_id": 328,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 327,
+    "file": "Berlin.zip",
+    "latitude": 52.52437,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": 13.41053,
+    "map_id": "Berlin.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro",
+                "s-bahn"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 325,
+            "root": true,
+            "transports": [
+                "metro",
+                "s-bahn"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 326
+        }
+    ],
+    "timestamp": 1754434800.0,
+    "transport_types": [
+        "U-bahn",
+        "S-bahn"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "U-bahn"
+        },
+        {
+            "file": "transports/s-bahn.json",
+            "name": "s-bahn",
+            "type": "S-bahn"
+        }
+    ]
+}

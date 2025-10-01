@@ -1,0 +1,1668 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 1080,
+    "images": [
+        "res/schemes/m2.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "CC3333",
+            "line_width": 9,
+            "name": "M1",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sesto FS 1 Maggio",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sesto Rondo",
+                    "rect": null,
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sesto Marelli",
+                    "rect": null,
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Villa San Giovanni",
+                    "rect": null,
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Precotto",
+                    "rect": null,
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Gorla",
+                    "rect": null,
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Turro",
+                    "rect": null,
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Rovereto",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Pasteur",
+                    "rect": null,
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        270,
+                        510
+                    ],
+                    "is_working": true,
+                    "name": "Loreto",
+                    "rect": [
+                        212,
+                        503,
+                        45,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Lima",
+                    "rect": null,
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Porta Venezia",
+                    "rect": null,
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Palestro",
+                    "rect": null,
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "San Babila",
+                    "rect": null,
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Duomo",
+                    "rect": null,
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Cordusio",
+                    "rect": null,
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Cairoli",
+                    "rect": null,
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        270,
+                        720
+                    ],
+                    "is_working": true,
+                    "name": "Cadorna",
+                    "rect": [
+                        199,
+                        713,
+                        58,
+                        15
+                    ],
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Conciliazioni",
+                    "rect": null,
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Pagano",
+                    "rect": null,
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Buonarroti",
+                    "rect": null,
+                    "text_id": 20,
+                    "uid": 20
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Amendola Fiera",
+                    "rect": null,
+                    "text_id": 21,
+                    "uid": 21
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Lotto",
+                    "rect": null,
+                    "text_id": 22,
+                    "uid": 22
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Q.T.8",
+                    "rect": null,
+                    "text_id": 23,
+                    "uid": 23
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Lampugnano",
+                    "rect": null,
+                    "text_id": 24,
+                    "uid": 24
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Uruguay",
+                    "rect": null,
+                    "text_id": 25,
+                    "uid": 25
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Bonola",
+                    "rect": null,
+                    "text_id": 26,
+                    "uid": 26
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "San Leonardo",
+                    "rect": null,
+                    "text_id": 27,
+                    "uid": 27
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Molino Dorino",
+                    "rect": null,
+                    "text_id": 28,
+                    "uid": 28
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Pero",
+                    "rect": null,
+                    "text_id": 29,
+                    "uid": 29
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Rho Fiera",
+                    "rect": null,
+                    "text_id": 30,
+                    "uid": 30
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Wagner",
+                    "rect": null,
+                    "text_id": 31,
+                    "uid": 31
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "De Angeli",
+                    "rect": null,
+                    "text_id": 32,
+                    "uid": 32
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Gambara",
+                    "rect": null,
+                    "text_id": 33,
+                    "uid": 33
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Bande Nere",
+                    "rect": null,
+                    "text_id": 34,
+                    "uid": 34
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Primaticcio",
+                    "rect": null,
+                    "text_id": 35,
+                    "uid": 35
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Inganni",
+                    "rect": null,
+                    "text_id": 36,
+                    "uid": 36
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Bisceglie",
+                    "rect": null,
+                    "text_id": 37,
+                    "uid": 37
+                }
+            ],
+            "text_id": 38
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "046434",
+            "line_width": 9,
+            "name": "M2",
+            "segments": [
+                [
+                    38,
+                    41,
+                    [
+                        [
+                            300,
+                            870
+                        ],
+                        [
+                            330,
+                            900
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    39,
+                    40,
+                    [
+                        [
+                            300,
+                            900
+                        ],
+                        [
+                            300,
+                            930
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    40,
+                    41,
+                    [
+                        [
+                            300,
+                            870
+                        ],
+                        [
+                            300,
+                            900
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    41,
+                    42,
+                    [
+                        [
+                            300,
+                            840
+                        ],
+                        [
+                            300,
+                            870
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    42,
+                    43,
+                    [
+                        [
+                            300,
+                            810
+                        ],
+                        [
+                            300,
+                            840
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    43,
+                    44,
+                    [
+                        [
+                            300,
+                            780
+                        ],
+                        [
+                            300,
+                            810
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    44,
+                    45,
+                    [
+                        [
+                            300,
+                            750
+                        ],
+                        [
+                            300,
+                            780
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    45,
+                    46,
+                    [
+                        [
+                            300,
+                            720
+                        ],
+                        [
+                            300,
+                            750
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    46,
+                    47,
+                    [
+                        [
+                            300,
+                            690
+                        ],
+                        [
+                            300,
+                            720
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    47,
+                    48,
+                    [
+                        [
+                            300,
+                            660
+                        ],
+                        [
+                            300,
+                            690
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    48,
+                    49,
+                    [
+                        [
+                            300,
+                            630
+                        ],
+                        [
+                            300,
+                            660
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    49,
+                    50,
+                    [
+                        [
+                            300,
+                            600
+                        ],
+                        [
+                            300,
+                            630
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    50,
+                    51,
+                    [
+                        [
+                            300,
+                            570
+                        ],
+                        [
+                            300,
+                            600
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    51,
+                    52,
+                    [
+                        [
+                            300,
+                            540
+                        ],
+                        [
+                            300,
+                            570
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    52,
+                    53,
+                    [
+                        [
+                            300,
+                            510
+                        ],
+                        [
+                            300,
+                            540
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    53,
+                    54,
+                    [
+                        [
+                            300,
+                            480
+                        ],
+                        [
+                            300,
+                            510
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    54,
+                    55,
+                    [
+                        [
+                            300,
+                            450
+                        ],
+                        [
+                            300,
+                            480
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    55,
+                    56,
+                    [
+                        [
+                            300,
+                            420
+                        ],
+                        [
+                            300,
+                            450
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    56,
+                    57,
+                    [
+                        [
+                            300,
+                            390
+                        ],
+                        [
+                            300,
+                            420
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    57,
+                    58,
+                    [
+                        [
+                            300,
+                            360
+                        ],
+                        [
+                            300,
+                            390
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    58,
+                    59,
+                    [
+                        [
+                            300,
+                            330
+                        ],
+                        [
+                            300,
+                            360
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    59,
+                    60,
+                    [
+                        [
+                            300,
+                            300
+                        ],
+                        [
+                            300,
+                            330
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    59,
+                    70,
+                    [
+                        [
+                            270,
+                            300
+                        ],
+                        [
+                            300,
+                            330
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    60,
+                    61,
+                    [
+                        [
+                            300,
+                            270
+                        ],
+                        [
+                            300,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    61,
+                    62,
+                    [
+                        [
+                            300,
+                            240
+                        ],
+                        [
+                            300,
+                            270
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    62,
+                    63,
+                    [
+                        [
+                            300,
+                            210
+                        ],
+                        [
+                            300,
+                            240
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    63,
+                    64,
+                    [
+                        [
+                            300,
+                            180
+                        ],
+                        [
+                            300,
+                            210
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    64,
+                    65,
+                    [
+                        [
+                            300,
+                            150
+                        ],
+                        [
+                            300,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    65,
+                    66,
+                    [
+                        [
+                            300,
+                            120
+                        ],
+                        [
+                            300,
+                            150
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    66,
+                    67,
+                    [
+                        [
+                            300,
+                            90
+                        ],
+                        [
+                            300,
+                            120
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    67,
+                    68,
+                    [
+                        [
+                            300,
+                            60
+                        ],
+                        [
+                            300,
+                            90
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    68,
+                    69,
+                    [
+                        [
+                            300,
+                            30
+                        ],
+                        [
+                            300,
+                            60
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    70,
+                    71,
+                    [
+                        [
+                            240,
+                            270
+                        ],
+                        [
+                            270,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    71,
+                    72,
+                    [
+                        [
+                            210,
+                            240
+                        ],
+                        [
+                            240,
+                            270
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        330,
+                        900
+                    ],
+                    "is_working": true,
+                    "name": "Abbiategrasso",
+                    "rect": [
+                        342,
+                        893,
+                        96,
+                        15
+                    ],
+                    "text_id": 39,
+                    "uid": 38
+                },
+                {
+                    "coord": [
+                        300,
+                        930
+                    ],
+                    "is_working": true,
+                    "name": "Milanofiori Forum",
+                    "rect": [
+                        174,
+                        922,
+                        114,
+                        15
+                    ],
+                    "text_id": 40,
+                    "uid": 39
+                },
+                {
+                    "coord": [
+                        300,
+                        900
+                    ],
+                    "is_working": true,
+                    "name": "Milanofiori Nord",
+                    "rect": [
+                        181,
+                        893,
+                        107,
+                        15
+                    ],
+                    "text_id": 41,
+                    "uid": 40
+                },
+                {
+                    "coord": [
+                        300,
+                        870
+                    ],
+                    "is_working": true,
+                    "name": "Famagosta",
+                    "rect": [
+                        312,
+                        857,
+                        70,
+                        15
+                    ],
+                    "text_id": 42,
+                    "uid": 41
+                },
+                {
+                    "coord": [
+                        300,
+                        840
+                    ],
+                    "is_working": true,
+                    "name": "Romolo FS",
+                    "rect": [
+                        312,
+                        833,
+                        65,
+                        15
+                    ],
+                    "text_id": 43,
+                    "uid": 42
+                },
+                {
+                    "coord": [
+                        300,
+                        810
+                    ],
+                    "is_working": true,
+                    "name": "Porta Genova FS",
+                    "rect": [
+                        312,
+                        802,
+                        104,
+                        15
+                    ],
+                    "text_id": 44,
+                    "uid": 43
+                },
+                {
+                    "coord": [
+                        300,
+                        780
+                    ],
+                    "is_working": true,
+                    "name": "Sant Agostino",
+                    "rect": [
+                        312,
+                        772,
+                        90,
+                        15
+                    ],
+                    "text_id": 45,
+                    "uid": 44
+                },
+                {
+                    "coord": [
+                        300,
+                        750
+                    ],
+                    "is_working": true,
+                    "name": "Sant Ambrogio",
+                    "rect": [
+                        312,
+                        742,
+                        94,
+                        15
+                    ],
+                    "text_id": 46,
+                    "uid": 45
+                },
+                {
+                    "coord": [
+                        300,
+                        720
+                    ],
+                    "is_working": true,
+                    "name": "Cadorna",
+                    "rect": [
+                        312,
+                        712,
+                        58,
+                        15
+                    ],
+                    "text_id": 17,
+                    "uid": 46
+                },
+                {
+                    "coord": [
+                        300,
+                        690
+                    ],
+                    "is_working": true,
+                    "name": "Lanza",
+                    "rect": [
+                        312,
+                        682,
+                        38,
+                        15
+                    ],
+                    "text_id": 47,
+                    "uid": 47
+                },
+                {
+                    "coord": [
+                        300,
+                        660
+                    ],
+                    "is_working": true,
+                    "name": "Moscova",
+                    "rect": [
+                        312,
+                        652,
+                        57,
+                        15
+                    ],
+                    "text_id": 48,
+                    "uid": 48
+                },
+                {
+                    "coord": [
+                        300,
+                        630
+                    ],
+                    "is_working": true,
+                    "name": "Garibaldi",
+                    "rect": [
+                        312,
+                        622,
+                        118,
+                        15
+                    ],
+                    "text_id": 49,
+                    "uid": 49
+                },
+                {
+                    "coord": [
+                        300,
+                        600
+                    ],
+                    "is_working": true,
+                    "name": "Gioia",
+                    "rect": [
+                        312,
+                        592,
+                        32,
+                        15
+                    ],
+                    "text_id": 50,
+                    "uid": 50
+                },
+                {
+                    "coord": [
+                        300,
+                        570
+                    ],
+                    "is_working": true,
+                    "name": "Centrale FS",
+                    "rect": [
+                        312,
+                        562,
+                        76,
+                        15
+                    ],
+                    "text_id": 51,
+                    "uid": 51
+                },
+                {
+                    "coord": [
+                        300,
+                        540
+                    ],
+                    "is_working": true,
+                    "name": "Caiazzo",
+                    "rect": [
+                        312,
+                        532,
+                        49,
+                        15
+                    ],
+                    "text_id": 52,
+                    "uid": 52
+                },
+                {
+                    "coord": [
+                        300,
+                        510
+                    ],
+                    "is_working": true,
+                    "name": "Loreto",
+                    "rect": [
+                        312,
+                        502,
+                        45,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 53
+                },
+                {
+                    "coord": [
+                        300,
+                        480
+                    ],
+                    "is_working": true,
+                    "name": "Piola",
+                    "rect": [
+                        312,
+                        472,
+                        34,
+                        15
+                    ],
+                    "text_id": 53,
+                    "uid": 54
+                },
+                {
+                    "coord": [
+                        300,
+                        450
+                    ],
+                    "is_working": true,
+                    "name": "Lambrate FS",
+                    "rect": [
+                        312,
+                        442,
+                        78,
+                        15
+                    ],
+                    "text_id": 54,
+                    "uid": 55
+                },
+                {
+                    "coord": [
+                        300,
+                        420
+                    ],
+                    "is_working": true,
+                    "name": "Udine",
+                    "rect": [
+                        312,
+                        412,
+                        36,
+                        15
+                    ],
+                    "text_id": 55,
+                    "uid": 56
+                },
+                {
+                    "coord": [
+                        300,
+                        390
+                    ],
+                    "is_working": true,
+                    "name": "Cimiano",
+                    "rect": [
+                        312,
+                        382,
+                        49,
+                        15
+                    ],
+                    "text_id": 56,
+                    "uid": 57
+                },
+                {
+                    "coord": [
+                        300,
+                        360
+                    ],
+                    "is_working": true,
+                    "name": "Crescenzago",
+                    "rect": [
+                        312,
+                        352,
+                        85,
+                        15
+                    ],
+                    "text_id": 57,
+                    "uid": 58
+                },
+                {
+                    "coord": [
+                        300,
+                        330
+                    ],
+                    "is_working": true,
+                    "name": "Cascina Gobba",
+                    "rect": [
+                        312,
+                        322,
+                        95,
+                        15
+                    ],
+                    "text_id": 58,
+                    "uid": 59
+                },
+                {
+                    "coord": [
+                        300,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Vimodrone",
+                    "rect": [
+                        312,
+                        292,
+                        68,
+                        15
+                    ],
+                    "text_id": 59,
+                    "uid": 60
+                },
+                {
+                    "coord": [
+                        300,
+                        270
+                    ],
+                    "is_working": true,
+                    "name": "Cascina Burrona",
+                    "rect": [
+                        312,
+                        262,
+                        111,
+                        15
+                    ],
+                    "text_id": 60,
+                    "uid": 61
+                },
+                {
+                    "coord": [
+                        300,
+                        240
+                    ],
+                    "is_working": true,
+                    "name": "Cernusco S.N.",
+                    "rect": [
+                        312,
+                        232,
+                        88,
+                        15
+                    ],
+                    "text_id": 61,
+                    "uid": 62
+                },
+                {
+                    "coord": [
+                        300,
+                        210
+                    ],
+                    "is_working": true,
+                    "name": "Villa Fiorita",
+                    "rect": [
+                        312,
+                        202,
+                        77,
+                        15
+                    ],
+                    "text_id": 62,
+                    "uid": 63
+                },
+                {
+                    "coord": [
+                        300,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Cassina de' Pecchi",
+                    "rect": [
+                        312,
+                        172,
+                        115,
+                        15
+                    ],
+                    "text_id": 63,
+                    "uid": 64
+                },
+                {
+                    "coord": [
+                        300,
+                        150
+                    ],
+                    "is_working": true,
+                    "name": "Bussero",
+                    "rect": [
+                        312,
+                        142,
+                        55,
+                        15
+                    ],
+                    "text_id": 64,
+                    "uid": 65
+                },
+                {
+                    "coord": [
+                        300,
+                        120
+                    ],
+                    "is_working": true,
+                    "name": "Villa Pompea",
+                    "rect": [
+                        312,
+                        112,
+                        81,
+                        15
+                    ],
+                    "text_id": 65,
+                    "uid": 66
+                },
+                {
+                    "coord": [
+                        300,
+                        90
+                    ],
+                    "is_working": true,
+                    "name": "Gorgonzola",
+                    "rect": [
+                        312,
+                        82,
+                        78,
+                        15
+                    ],
+                    "text_id": 66,
+                    "uid": 67
+                },
+                {
+                    "coord": [
+                        300,
+                        60
+                    ],
+                    "is_working": true,
+                    "name": "Cascina Antonietta",
+                    "rect": [
+                        312,
+                        52,
+                        123,
+                        15
+                    ],
+                    "text_id": 67,
+                    "uid": 68
+                },
+                {
+                    "coord": [
+                        300,
+                        30
+                    ],
+                    "is_working": true,
+                    "name": "Gessate",
+                    "rect": [
+                        312,
+                        22,
+                        52,
+                        15
+                    ],
+                    "text_id": 68,
+                    "uid": 69
+                },
+                {
+                    "coord": [
+                        270,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Cologno Sud",
+                    "rect": [
+                        176,
+                        295,
+                        82,
+                        15
+                    ],
+                    "text_id": 69,
+                    "uid": 70
+                },
+                {
+                    "coord": [
+                        240,
+                        270
+                    ],
+                    "is_working": true,
+                    "name": "Cologno Centro",
+                    "rect": [
+                        124,
+                        265,
+                        104,
+                        15
+                    ],
+                    "text_id": 70,
+                    "uid": 71
+                },
+                {
+                    "coord": [
+                        210,
+                        240
+                    ],
+                    "is_working": true,
+                    "name": "Cologno Nord",
+                    "rect": [
+                        107,
+                        232,
+                        91,
+                        15
+                    ],
+                    "text_id": 71,
+                    "uid": 72
+                }
+            ],
+            "text_id": 72
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "FCCC04",
+            "line_width": 9,
+            "name": "M3",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Comasina",
+                    "rect": null,
+                    "text_id": 73,
+                    "uid": 73
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Affori FN",
+                    "rect": null,
+                    "text_id": 74,
+                    "uid": 74
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Affori Centro",
+                    "rect": null,
+                    "text_id": 75,
+                    "uid": 75
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Dergano",
+                    "rect": null,
+                    "text_id": 76,
+                    "uid": 76
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Maciachini",
+                    "rect": null,
+                    "text_id": 77,
+                    "uid": 77
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Zara",
+                    "rect": null,
+                    "text_id": 78,
+                    "uid": 78
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sondrio",
+                    "rect": null,
+                    "text_id": 79,
+                    "uid": 79
+                },
+                {
+                    "coord": [
+                        270,
+                        570
+                    ],
+                    "is_working": true,
+                    "name": "Centrale FS",
+                    "rect": [
+                        181,
+                        563,
+                        76,
+                        15
+                    ],
+                    "text_id": 51,
+                    "uid": 80
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Repubblica",
+                    "rect": null,
+                    "text_id": 80,
+                    "uid": 81
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Turati",
+                    "rect": null,
+                    "text_id": 81,
+                    "uid": 82
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Monte Napoleone",
+                    "rect": null,
+                    "text_id": 82,
+                    "uid": 83
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Duomo",
+                    "rect": null,
+                    "text_id": 14,
+                    "uid": 84
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Missori",
+                    "rect": null,
+                    "text_id": 83,
+                    "uid": 85
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Crocetta",
+                    "rect": null,
+                    "text_id": 84,
+                    "uid": 86
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Porta Romana",
+                    "rect": null,
+                    "text_id": 85,
+                    "uid": 87
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Lodi T.I.B.B.",
+                    "rect": null,
+                    "text_id": 86,
+                    "uid": 88
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Brenta",
+                    "rect": null,
+                    "text_id": 87,
+                    "uid": 89
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Corvetto",
+                    "rect": null,
+                    "text_id": 88,
+                    "uid": 90
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Porto di Mare",
+                    "rect": null,
+                    "text_id": 89,
+                    "uid": 91
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Rogoredo",
+                    "rect": null,
+                    "text_id": 90,
+                    "uid": 92
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "S.Donato",
+                    "rect": null,
+                    "text_id": 91,
+                    "uid": 93
+                }
+            ],
+            "text_id": 92
+        }
+    ],
+    "lines_width": 9,
+    "name": "m2",
+    "name_text_id": 72,
+    "stations_diameter": 16.0,
+    "transfers": [
+        [
+            9,
+            53,
+            [
+                270,
+                510
+            ],
+            [
+                300,
+                510
+            ]
+        ],
+        [
+            14,
+            84,
+            null,
+            null
+        ],
+        [
+            17,
+            46,
+            [
+                270,
+                720
+            ],
+            [
+                300,
+                720
+            ]
+        ],
+        [
+            51,
+            80,
+            [
+                300,
+                570
+            ],
+            [
+                270,
+                570
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "Метро",
+    "type_text_id": 112,
+    "upper_case": true,
+    "width": 480,
+    "word_wrap": false
+}

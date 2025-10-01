@@ -1,0 +1,2538 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 805,
+    "images": [
+        "res/schemes/bielefeld.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "8484ff",
+            "line_color": "8484ff",
+            "line_width": 5,
+            "name": "1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            345,
+                            55
+                        ],
+                        [
+                            345,
+                            20
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            345,
+                            80
+                        ],
+                        [
+                            345,
+                            55
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            345,
+                            110
+                        ],
+                        [
+                            345,
+                            80
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            345,
+                            135
+                        ],
+                        [
+                            345,
+                            110
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            330,
+                            155
+                        ],
+                        [
+                            345.0,
+                            140.0
+                        ],
+                        [
+                            345,
+                            135
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            315,
+                            235
+                        ],
+                        [
+                            315.0,
+                            225.0
+                        ],
+                        [
+                            330.0,
+                            210.0
+                        ],
+                        [
+                            330,
+                            155
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            315,
+                            270
+                        ],
+                        [
+                            315,
+                            235
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            315,
+                            300
+                        ],
+                        [
+                            315,
+                            270
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            315,
+                            335
+                        ],
+                        [
+                            315,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            275,
+                            355
+                        ],
+                        [
+                            315.0,
+                            355.0
+                        ],
+                        [
+                            315,
+                            335
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            250,
+                            380
+                        ],
+                        [
+                            275,
+                            355
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            220,
+                            410
+                        ],
+                        [
+                            250,
+                            380
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            180,
+                            450
+                        ],
+                        [
+                            220,
+                            410
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            180,
+                            515
+                        ],
+                        [
+                            180,
+                            450
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            200,
+                            535
+                        ],
+                        [
+                            180,
+                            515
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            215,
+                            550
+                        ],
+                        [
+                            200,
+                            535
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            235,
+                            570
+                        ],
+                        [
+                            215,
+                            550
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            255,
+                            590
+                        ],
+                        [
+                            235,
+                            570
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            276,
+                            611
+                        ],
+                        [
+                            255,
+                            590
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            299,
+                            634
+                        ],
+                        [
+                            276,
+                            611
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            320,
+                            655
+                        ],
+                        [
+                            299,
+                            634
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        345,
+                        20
+                    ],
+                    "is_working": true,
+                    "name": "Schildesche",
+                    "rect": [
+                        352,
+                        13,
+                        63,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        345,
+                        55
+                    ],
+                    "is_working": true,
+                    "name": "Heidegarten",
+                    "rect": [
+                        352,
+                        47,
+                        62,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        345,
+                        80
+                    ],
+                    "is_working": true,
+                    "name": "Kattenkamp",
+                    "rect": [
+                        352,
+                        73,
+                        61,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        345,
+                        110
+                    ],
+                    "is_working": true,
+                    "name": "Deciusstrasse",
+                    "rect": [
+                        352,
+                        103,
+                        74,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        345,
+                        135
+                    ],
+                    "is_working": true,
+                    "name": "Johannesstift",
+                    "rect": [
+                        352,
+                        128,
+                        68,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        330,
+                        155
+                    ],
+                    "is_working": true,
+                    "name": "Sudbrackstrasse",
+                    "rect": [
+                        337,
+                        153,
+                        86,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        315,
+                        235
+                    ],
+                    "is_working": true,
+                    "name": "Hauptbahnhof",
+                    "rect": [
+                        335,
+                        228,
+                        70,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        315,
+                        270
+                    ],
+                    "is_working": true,
+                    "name": "Jahnplatz",
+                    "rect": [
+                        335,
+                        262,
+                        49,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        315,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Rathaus",
+                    "rect": [
+                        242,
+                        293,
+                        43,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        315,
+                        335
+                    ],
+                    "is_working": true,
+                    "name": "Landgericht",
+                    "rect": [
+                        245,
+                        327,
+                        60,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        275,
+                        355
+                    ],
+                    "is_working": true,
+                    "name": "Adenauerplatz",
+                    "rect": [
+                        195,
+                        343,
+                        73,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        250,
+                        380
+                    ],
+                    "is_working": true,
+                    "name": "Bethel",
+                    "rect": [
+                        209,
+                        368,
+                        34,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        220,
+                        410
+                    ],
+                    "is_working": true,
+                    "name": "Friedrich-List-Strasse",
+                    "rect": [
+                        105,
+                        398,
+                        108,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        180,
+                        450
+                    ],
+                    "is_working": true,
+                    "name": "Eggeweg",
+                    "rect": [
+                        187,
+                        447,
+                        47,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        180,
+                        515
+                    ],
+                    "is_working": true,
+                    "name": "Brackwede Bahnhof",
+                    "rect": [
+                        187,
+                        503,
+                        102,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        200,
+                        535
+                    ],
+                    "is_working": true,
+                    "name": "Gaswerkstrasse",
+                    "rect": [
+                        207,
+                        523,
+                        83,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        215,
+                        550
+                    ],
+                    "is_working": true,
+                    "name": "Normannenstrasse",
+                    "rect": [
+                        222,
+                        538,
+                        96,
+                        15
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        235,
+                        570
+                    ],
+                    "is_working": true,
+                    "name": "Brackwede Kirche",
+                    "rect": [
+                        242,
+                        558,
+                        94,
+                        15
+                    ],
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        255,
+                        590
+                    ],
+                    "is_working": true,
+                    "name": "Windelsbleicher Strasse",
+                    "rect": [
+                        262,
+                        578,
+                        123,
+                        15
+                    ],
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        276,
+                        611
+                    ],
+                    "is_working": true,
+                    "name": "Rosenhohe",
+                    "rect": [
+                        283,
+                        599,
+                        58,
+                        15
+                    ],
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        299,
+                        634
+                    ],
+                    "is_working": true,
+                    "name": "Sennefriedhof",
+                    "rect": [
+                        306,
+                        622,
+                        70,
+                        15
+                    ],
+                    "text_id": 20,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        320,
+                        655
+                    ],
+                    "is_working": true,
+                    "name": "Senne",
+                    "rect": [
+                        327,
+                        647,
+                        33,
+                        15
+                    ],
+                    "text_id": 21,
+                    "uid": 21
+                }
+            ],
+            "text_id": 22
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "00c600",
+            "line_color": "00c600",
+            "line_width": 5,
+            "name": "2",
+            "segments": [
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            655,
+                            40
+                        ],
+                        [
+                            675,
+                            20
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    23,
+                    24,
+                    [
+                        [
+                            635,
+                            60
+                        ],
+                        [
+                            655,
+                            40
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            615,
+                            80
+                        ],
+                        [
+                            635,
+                            60
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    25,
+                    26,
+                    [
+                        [
+                            590,
+                            105
+                        ],
+                        [
+                            615,
+                            80
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    26,
+                    27,
+                    [
+                        [
+                            570,
+                            125
+                        ],
+                        [
+                            590,
+                            105
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    27,
+                    28,
+                    [
+                        [
+                            550,
+                            145
+                        ],
+                        [
+                            570,
+                            125
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            525,
+                            170
+                        ],
+                        [
+                            550,
+                            145
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    29,
+                    30,
+                    [
+                        [
+                            505,
+                            190
+                        ],
+                        [
+                            525,
+                            170
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    30,
+                    31,
+                    [
+                        [
+                            460,
+                            190
+                        ],
+                        [
+                            505,
+                            190
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    31,
+                    32,
+                    [
+                        [
+                            410,
+                            190
+                        ],
+                        [
+                            460,
+                            190
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    32,
+                    33,
+                    [
+                        [
+                            360,
+                            190
+                        ],
+                        [
+                            410,
+                            190
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    33,
+                    34,
+                    [
+                        [
+                            325,
+                            235
+                        ],
+                        [
+                            325.0,
+                            225.0
+                        ],
+                        [
+                            360,
+                            190
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    34,
+                    35,
+                    [
+                        [
+                            325,
+                            270
+                        ],
+                        [
+                            325,
+                            235
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    35,
+                    36,
+                    [
+                        [
+                            325,
+                            300
+                        ],
+                        [
+                            325,
+                            270
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    36,
+                    37,
+                    [
+                        [
+                            325,
+                            335
+                        ],
+                        [
+                            325,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    37,
+                    38,
+                    [
+                        [
+                            354,
+                            389
+                        ],
+                        [
+                            325.0,
+                            360.0
+                        ],
+                        [
+                            325,
+                            335
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    38,
+                    39,
+                    [
+                        [
+                            371,
+                            406
+                        ],
+                        [
+                            354,
+                            389
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    39,
+                    40,
+                    [
+                        [
+                            388,
+                            423
+                        ],
+                        [
+                            371,
+                            406
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    40,
+                    41,
+                    [
+                        [
+                            405,
+                            440
+                        ],
+                        [
+                            388,
+                            423
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    41,
+                    42,
+                    [
+                        [
+                            455,
+                            440
+                        ],
+                        [
+                            405,
+                            440
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        675,
+                        20
+                    ],
+                    "is_working": true,
+                    "name": "Altenhagen",
+                    "rect": [
+                        610,
+                        8,
+                        58,
+                        15
+                    ],
+                    "text_id": 23,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        655,
+                        40
+                    ],
+                    "is_working": true,
+                    "name": "Buschbachtal",
+                    "rect": [
+                        578,
+                        28,
+                        70,
+                        15
+                    ],
+                    "text_id": 24,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        635,
+                        60
+                    ],
+                    "is_working": true,
+                    "name": "Milse",
+                    "rect": [
+                        642,
+                        57,
+                        29,
+                        15
+                    ],
+                    "text_id": 25,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        615,
+                        80
+                    ],
+                    "is_working": true,
+                    "name": "Schelpmilser Weg",
+                    "rect": [
+                        622,
+                        77,
+                        92,
+                        15
+                    ],
+                    "text_id": 26,
+                    "uid": 25
+                },
+                {
+                    "coord": [
+                        590,
+                        105
+                    ],
+                    "is_working": true,
+                    "name": "Baumheide",
+                    "rect": [
+                        597,
+                        102,
+                        58,
+                        15
+                    ],
+                    "text_id": 27,
+                    "uid": 26
+                },
+                {
+                    "coord": [
+                        570,
+                        125
+                    ],
+                    "is_working": true,
+                    "name": "Seidenstickerstrasse",
+                    "rect": [
+                        577,
+                        122,
+                        107,
+                        15
+                    ],
+                    "text_id": 28,
+                    "uid": 27
+                },
+                {
+                    "coord": [
+                        550,
+                        145
+                    ],
+                    "is_working": true,
+                    "name": "Schuco",
+                    "rect": [
+                        557,
+                        142,
+                        39,
+                        15
+                    ],
+                    "text_id": 29,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        525,
+                        170
+                    ],
+                    "is_working": true,
+                    "name": "Ziegelstrasse",
+                    "rect": [
+                        532,
+                        167,
+                        69,
+                        15
+                    ],
+                    "text_id": 30,
+                    "uid": 29
+                },
+                {
+                    "coord": [
+                        505,
+                        190
+                    ],
+                    "is_working": true,
+                    "name": "Finkenstrasse",
+                    "rect": [
+                        512,
+                        187,
+                        72,
+                        15
+                    ],
+                    "text_id": 31,
+                    "uid": 30
+                },
+                {
+                    "coord": [
+                        460,
+                        190
+                    ],
+                    "is_working": true,
+                    "name": "Schillerstrasse",
+                    "rect": [
+                        422,
+                        169,
+                        77,
+                        15
+                    ],
+                    "text_id": 32,
+                    "uid": 31
+                },
+                {
+                    "coord": [
+                        410,
+                        190
+                    ],
+                    "is_working": true,
+                    "name": "Stadtheider Strasse",
+                    "rect": [
+                        367,
+                        196,
+                        99,
+                        15
+                    ],
+                    "text_id": 33,
+                    "uid": 32
+                },
+                {
+                    "coord": [
+                        360,
+                        190
+                    ],
+                    "is_working": true,
+                    "name": "Beckhausstrasse",
+                    "rect": [
+                        321,
+                        169,
+                        89,
+                        15
+                    ],
+                    "text_id": 34,
+                    "uid": 33
+                },
+                {
+                    "coord": [
+                        325,
+                        235
+                    ],
+                    "is_working": true,
+                    "name": "Hauptbahnhof",
+                    "rect": null,
+                    "text_id": 6,
+                    "uid": 34
+                },
+                {
+                    "coord": [
+                        325,
+                        270
+                    ],
+                    "is_working": true,
+                    "name": "Jahnplatz",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 35
+                },
+                {
+                    "coord": [
+                        325,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Rathaus",
+                    "rect": null,
+                    "text_id": 8,
+                    "uid": 36
+                },
+                {
+                    "coord": [
+                        325,
+                        335
+                    ],
+                    "is_working": true,
+                    "name": "Landgericht",
+                    "rect": null,
+                    "text_id": 9,
+                    "uid": 37
+                },
+                {
+                    "coord": [
+                        354,
+                        389
+                    ],
+                    "is_working": true,
+                    "name": "August-Bebel-Strasse",
+                    "rect": [
+                        361,
+                        377,
+                        110,
+                        15
+                    ],
+                    "text_id": 35,
+                    "uid": 38
+                },
+                {
+                    "coord": [
+                        371,
+                        406
+                    ],
+                    "is_working": true,
+                    "name": "Teutoburger Strasse",
+                    "rect": [
+                        378,
+                        394,
+                        102,
+                        15
+                    ],
+                    "text_id": 36,
+                    "uid": 39
+                },
+                {
+                    "coord": [
+                        388,
+                        423
+                    ],
+                    "is_working": true,
+                    "name": "Mozartstrasse",
+                    "rect": [
+                        395,
+                        411,
+                        72,
+                        15
+                    ],
+                    "text_id": 37,
+                    "uid": 40
+                },
+                {
+                    "coord": [
+                        405,
+                        440
+                    ],
+                    "is_working": true,
+                    "name": "Priessallee",
+                    "rect": [
+                        378,
+                        446,
+                        58,
+                        15
+                    ],
+                    "text_id": 38,
+                    "uid": 41
+                },
+                {
+                    "coord": [
+                        455,
+                        440
+                    ],
+                    "is_working": true,
+                    "name": "Sieker",
+                    "rect": [
+                        462,
+                        433,
+                        34,
+                        15
+                    ],
+                    "text_id": 39,
+                    "uid": 42
+                }
+            ],
+            "text_id": 40
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "ffce31",
+            "line_color": "ffce31",
+            "line_width": 5,
+            "name": "3",
+            "segments": [
+                [
+                    43,
+                    44,
+                    [
+                        [
+                            265,
+                            45
+                        ],
+                        [
+                            265,
+                            20
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    44,
+                    45,
+                    [
+                        [
+                            265,
+                            70
+                        ],
+                        [
+                            265,
+                            45
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    45,
+                    46,
+                    [
+                        [
+                            265,
+                            95
+                        ],
+                        [
+                            265,
+                            70
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    46,
+                    47,
+                    [
+                        [
+                            265,
+                            125
+                        ],
+                        [
+                            265,
+                            95
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    47,
+                    48,
+                    [
+                        [
+                            265,
+                            160
+                        ],
+                        [
+                            265,
+                            125
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    48,
+                    49,
+                    [
+                        [
+                            275,
+                            190
+                        ],
+                        [
+                            265.0,
+                            180.0
+                        ],
+                        [
+                            265,
+                            160
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    49,
+                    50,
+                    [
+                        [
+                            305,
+                            235
+                        ],
+                        [
+                            305.0,
+                            220.0
+                        ],
+                        [
+                            275,
+                            190
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    50,
+                    51,
+                    [
+                        [
+                            305,
+                            270
+                        ],
+                        [
+                            305,
+                            235
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    51,
+                    52,
+                    [
+                        [
+                            305,
+                            300
+                        ],
+                        [
+                            305,
+                            270
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    52,
+                    53,
+                    [
+                        [
+                            350,
+                            320
+                        ],
+                        [
+                            305.0,
+                            320.0
+                        ],
+                        [
+                            305,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    53,
+                    54,
+                    [
+                        [
+                            365,
+                            335
+                        ],
+                        [
+                            365.0,
+                            320.0
+                        ],
+                        [
+                            350,
+                            320
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    54,
+                    55,
+                    [
+                        [
+                            395,
+                            355
+                        ],
+                        [
+                            365.0,
+                            355.0
+                        ],
+                        [
+                            365,
+                            335
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    55,
+                    56,
+                    [
+                        [
+                            440,
+                            355
+                        ],
+                        [
+                            395,
+                            355
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    56,
+                    57,
+                    [
+                        [
+                            475,
+                            355
+                        ],
+                        [
+                            440,
+                            355
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    57,
+                    58,
+                    [
+                        [
+                            510,
+                            355
+                        ],
+                        [
+                            475,
+                            355
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    58,
+                    59,
+                    [
+                        [
+                            534,
+                            379
+                        ],
+                        [
+                            510,
+                            355
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    59,
+                    60,
+                    [
+                        [
+                            560,
+                            405
+                        ],
+                        [
+                            534,
+                            379
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    60,
+                    61,
+                    [
+                        [
+                            586,
+                            431
+                        ],
+                        [
+                            560,
+                            405
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    61,
+                    62,
+                    [
+                        [
+                            610,
+                            455
+                        ],
+                        [
+                            586,
+                            431
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    62,
+                    63,
+                    [
+                        [
+                            630,
+                            475
+                        ],
+                        [
+                            610,
+                            455
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        265,
+                        20
+                    ],
+                    "is_working": true,
+                    "name": "Babenhausen Sud",
+                    "rect": [
+                        166,
+                        13,
+                        92,
+                        15
+                    ],
+                    "text_id": 41,
+                    "uid": 43
+                },
+                {
+                    "coord": [
+                        265,
+                        45
+                    ],
+                    "is_working": true,
+                    "name": "Voltmannstrasse",
+                    "rect": [
+                        173,
+                        38,
+                        85,
+                        15
+                    ],
+                    "text_id": 42,
+                    "uid": 44
+                },
+                {
+                    "coord": [
+                        265,
+                        70
+                    ],
+                    "is_working": true,
+                    "name": "Koblenzer Strasse",
+                    "rect": [
+                        165,
+                        62,
+                        93,
+                        15
+                    ],
+                    "text_id": 43,
+                    "uid": 45
+                },
+                {
+                    "coord": [
+                        265,
+                        95
+                    ],
+                    "is_working": true,
+                    "name": "Lange Strasse",
+                    "rect": [
+                        185,
+                        87,
+                        73,
+                        15
+                    ],
+                    "text_id": 44,
+                    "uid": 46
+                },
+                {
+                    "coord": [
+                        265,
+                        125
+                    ],
+                    "is_working": true,
+                    "name": "Auf der Hufe",
+                    "rect": [
+                        194,
+                        118,
+                        64,
+                        15
+                    ],
+                    "text_id": 45,
+                    "uid": 47
+                },
+                {
+                    "coord": [
+                        265,
+                        160
+                    ],
+                    "is_working": true,
+                    "name": "Nordpark",
+                    "rect": [
+                        210,
+                        153,
+                        48,
+                        15
+                    ],
+                    "text_id": 46,
+                    "uid": 48
+                },
+                {
+                    "coord": [
+                        275,
+                        190
+                    ],
+                    "is_working": true,
+                    "name": "Wittekindstrasse",
+                    "rect": [
+                        181,
+                        185,
+                        85,
+                        15
+                    ],
+                    "text_id": 47,
+                    "uid": 49
+                },
+                {
+                    "coord": [
+                        305,
+                        235
+                    ],
+                    "is_working": true,
+                    "name": "Hauptbahnhof",
+                    "rect": null,
+                    "text_id": 6,
+                    "uid": 50
+                },
+                {
+                    "coord": [
+                        305,
+                        270
+                    ],
+                    "is_working": true,
+                    "name": "Jahnplatz",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 51
+                },
+                {
+                    "coord": [
+                        305,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Rathaus",
+                    "rect": null,
+                    "text_id": 8,
+                    "uid": 52
+                },
+                {
+                    "coord": [
+                        350,
+                        320
+                    ],
+                    "is_working": true,
+                    "name": "August-Schroder-Strasse",
+                    "rect": [
+                        351,
+                        298,
+                        126,
+                        15
+                    ],
+                    "text_id": 48,
+                    "uid": 53
+                },
+                {
+                    "coord": [
+                        365,
+                        335
+                    ],
+                    "is_working": true,
+                    "name": "Ravensberger Strasse",
+                    "rect": [
+                        371,
+                        319,
+                        113,
+                        15
+                    ],
+                    "text_id": 49,
+                    "uid": 54
+                },
+                {
+                    "coord": [
+                        395,
+                        355
+                    ],
+                    "is_working": true,
+                    "name": "Krankenhaus Mitte",
+                    "rect": [
+                        344,
+                        361,
+                        95,
+                        15
+                    ],
+                    "text_id": 50,
+                    "uid": 55
+                },
+                {
+                    "coord": [
+                        440,
+                        355
+                    ],
+                    "is_working": true,
+                    "name": "Oststrasse",
+                    "rect": [
+                        413,
+                        334,
+                        56,
+                        15
+                    ],
+                    "text_id": 51,
+                    "uid": 56
+                },
+                {
+                    "coord": [
+                        475,
+                        355
+                    ],
+                    "is_working": true,
+                    "name": "Hartlager Weg",
+                    "rect": [
+                        442,
+                        361,
+                        73,
+                        15
+                    ],
+                    "text_id": 52,
+                    "uid": 57
+                },
+                {
+                    "coord": [
+                        510,
+                        355
+                    ],
+                    "is_working": true,
+                    "name": "Sieker Mitte",
+                    "rect": [
+                        493,
+                        334,
+                        61,
+                        15
+                    ],
+                    "text_id": 53,
+                    "uid": 58
+                },
+                {
+                    "coord": [
+                        534,
+                        379
+                    ],
+                    "is_working": true,
+                    "name": "Luther-Kirche",
+                    "rect": [
+                        541,
+                        367,
+                        69,
+                        15
+                    ],
+                    "text_id": 54,
+                    "uid": 59
+                },
+                {
+                    "coord": [
+                        560,
+                        405
+                    ],
+                    "is_working": true,
+                    "name": "Roggenkamp",
+                    "rect": [
+                        567,
+                        393,
+                        67,
+                        15
+                    ],
+                    "text_id": 55,
+                    "uid": 60
+                },
+                {
+                    "coord": [
+                        586,
+                        431
+                    ],
+                    "is_working": true,
+                    "name": "Elpke",
+                    "rect": [
+                        593,
+                        419,
+                        30,
+                        15
+                    ],
+                    "text_id": 56,
+                    "uid": 61
+                },
+                {
+                    "coord": [
+                        610,
+                        455
+                    ],
+                    "is_working": true,
+                    "name": "Gesamtschule Stieghorst",
+                    "rect": [
+                        477,
+                        452,
+                        126,
+                        15
+                    ],
+                    "text_id": 57,
+                    "uid": 62
+                },
+                {
+                    "coord": [
+                        630,
+                        475
+                    ],
+                    "is_working": true,
+                    "name": "Stieghorst-Zentrum",
+                    "rect": [
+                        528,
+                        472,
+                        95,
+                        15
+                    ],
+                    "text_id": 58,
+                    "uid": 63
+                }
+            ],
+            "text_id": 59
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "ff0000",
+            "line_color": "ff0000",
+            "line_width": 5,
+            "name": "4",
+            "segments": [
+                [
+                    64,
+                    65,
+                    [
+                        [
+                            95,
+                            140
+                        ],
+                        [
+                            70,
+                            115
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    65,
+                    66,
+                    [
+                        [
+                            120,
+                            165
+                        ],
+                        [
+                            95,
+                            140
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    66,
+                    67,
+                    [
+                        [
+                            150,
+                            195
+                        ],
+                        [
+                            120,
+                            165
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    67,
+                    68,
+                    [
+                        [
+                            180,
+                            225
+                        ],
+                        [
+                            150,
+                            195
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    68,
+                    69,
+                    [
+                        [
+                            225,
+                            240
+                        ],
+                        [
+                            195.0,
+                            240.0
+                        ],
+                        [
+                            180,
+                            225
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    69,
+                    70,
+                    [
+                        [
+                            255,
+                            220
+                        ],
+                        [
+                            235.0,
+                            240.0
+                        ],
+                        [
+                            225,
+                            240
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    70,
+                    71,
+                    [
+                        [
+                            295,
+                            235
+                        ],
+                        [
+                            295.0,
+                            225.0
+                        ],
+                        [
+                            280.0,
+                            210.0
+                        ],
+                        [
+                            265.0,
+                            210.0
+                        ],
+                        [
+                            255,
+                            220
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    71,
+                    72,
+                    [
+                        [
+                            295,
+                            270
+                        ],
+                        [
+                            295,
+                            235
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    72,
+                    73,
+                    [
+                        [
+                            295,
+                            300
+                        ],
+                        [
+                            295,
+                            270
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        70,
+                        115
+                    ],
+                    "is_working": true,
+                    "name": "Lohmannshof",
+                    "rect": [
+                        77,
+                        103,
+                        68,
+                        15
+                    ],
+                    "text_id": 60,
+                    "uid": 64
+                },
+                {
+                    "coord": [
+                        95,
+                        140
+                    ],
+                    "is_working": true,
+                    "name": "Wellensiek",
+                    "rect": [
+                        102,
+                        128,
+                        57,
+                        15
+                    ],
+                    "text_id": 61,
+                    "uid": 65
+                },
+                {
+                    "coord": [
+                        120,
+                        165
+                    ],
+                    "is_working": true,
+                    "name": "Universitat",
+                    "rect": [
+                        127,
+                        153,
+                        56,
+                        15
+                    ],
+                    "text_id": 62,
+                    "uid": 66
+                },
+                {
+                    "coord": [
+                        150,
+                        195
+                    ],
+                    "is_working": true,
+                    "name": "Bultmannshof",
+                    "rect": [
+                        73,
+                        192,
+                        70,
+                        15
+                    ],
+                    "text_id": 63,
+                    "uid": 67
+                },
+                {
+                    "coord": [
+                        180,
+                        225
+                    ],
+                    "is_working": true,
+                    "name": "Graf-von-Stauffenberg-Strasse",
+                    "rect": [
+                        23,
+                        222,
+                        150,
+                        15
+                    ],
+                    "text_id": 64,
+                    "uid": 68
+                },
+                {
+                    "coord": [
+                        225,
+                        240
+                    ],
+                    "is_working": true,
+                    "name": "Rudolf-Oetker-Halle",
+                    "rect": [
+                        175,
+                        246,
+                        99,
+                        15
+                    ],
+                    "text_id": 65,
+                    "uid": 69
+                },
+                {
+                    "coord": [
+                        255,
+                        220
+                    ],
+                    "is_working": true,
+                    "name": "Siegfriedplatz",
+                    "rect": [
+                        187,
+                        200,
+                        69,
+                        15
+                    ],
+                    "text_id": 66,
+                    "uid": 70
+                },
+                {
+                    "coord": [
+                        295,
+                        235
+                    ],
+                    "is_working": true,
+                    "name": "Hauptbahnhof",
+                    "rect": null,
+                    "text_id": 6,
+                    "uid": 71
+                },
+                {
+                    "coord": [
+                        295,
+                        270
+                    ],
+                    "is_working": true,
+                    "name": "Jahnplatz",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 72
+                },
+                {
+                    "coord": [
+                        295,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Rathaus",
+                    "rect": null,
+                    "text_id": 8,
+                    "uid": 73
+                }
+            ],
+            "text_id": 67
+        }
+    ],
+    "lines_width": 5,
+    "name": "metro",
+    "name_text_id": 68,
+    "stations_diameter": 10.0,
+    "transfers": [
+        [
+            6,
+            50,
+            [
+                315,
+                235
+            ],
+            [
+                305,
+                235
+            ]
+        ],
+        [
+            6,
+            71,
+            [
+                315,
+                235
+            ],
+            [
+                295,
+                235
+            ]
+        ],
+        [
+            34,
+            50,
+            [
+                325,
+                235
+            ],
+            [
+                305,
+                235
+            ]
+        ],
+        [
+            34,
+            71,
+            [
+                325,
+                235
+            ],
+            [
+                295,
+                235
+            ]
+        ],
+        [
+            50,
+            71,
+            [
+                305,
+                235
+            ],
+            [
+                295,
+                235
+            ]
+        ],
+        [
+            7,
+            35,
+            [
+                315,
+                270
+            ],
+            [
+                325,
+                270
+            ]
+        ],
+        [
+            7,
+            51,
+            [
+                315,
+                270
+            ],
+            [
+                305,
+                270
+            ]
+        ],
+        [
+            7,
+            72,
+            [
+                315,
+                270
+            ],
+            [
+                295,
+                270
+            ]
+        ],
+        [
+            35,
+            51,
+            [
+                325,
+                270
+            ],
+            [
+                305,
+                270
+            ]
+        ],
+        [
+            35,
+            72,
+            [
+                325,
+                270
+            ],
+            [
+                295,
+                270
+            ]
+        ],
+        [
+            51,
+            72,
+            [
+                305,
+                270
+            ],
+            [
+                295,
+                270
+            ]
+        ],
+        [
+            9,
+            37,
+            [
+                315,
+                335
+            ],
+            [
+                325,
+                335
+            ]
+        ],
+        [
+            8,
+            36,
+            [
+                315,
+                300
+            ],
+            [
+                325,
+                300
+            ]
+        ],
+        [
+            8,
+            52,
+            [
+                315,
+                300
+            ],
+            [
+                305,
+                300
+            ]
+        ],
+        [
+            8,
+            73,
+            [
+                315,
+                300
+            ],
+            [
+                295,
+                300
+            ]
+        ],
+        [
+            36,
+            52,
+            [
+                325,
+                300
+            ],
+            [
+                305,
+                300
+            ]
+        ],
+        [
+            36,
+            73,
+            [
+                325,
+                300
+            ],
+            [
+                295,
+                300
+            ]
+        ],
+        [
+            52,
+            73,
+            [
+                305,
+                300
+            ],
+            [
+                295,
+                300
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 69,
+    "upper_case": false,
+    "width": 825,
+    "word_wrap": false
+}

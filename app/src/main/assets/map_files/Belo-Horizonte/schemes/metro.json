@@ -1,0 +1,611 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 516,
+    "images": [
+        "res/schemes/belo-horizonte.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "0000AF",
+            "line_width": 7,
+            "name": "1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            280,
+                            79
+                        ],
+                        [
+                            259,
+                            46
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            298,
+                            113
+                        ],
+                        [
+                            280,
+                            79
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            294,
+                            139
+                        ],
+                        [
+                            298,
+                            113
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            316,
+                            152
+                        ],
+                        [
+                            294,
+                            139
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            314,
+                            179
+                        ],
+                        [
+                            316,
+                            152
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            345,
+                            205
+                        ],
+                        [
+                            314,
+                            179
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            348,
+                            236
+                        ],
+                        [
+                            345,
+                            205
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            346,
+                            268
+                        ],
+                        [
+                            348,
+                            236
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            346,
+                            297
+                        ],
+                        [
+                            346,
+                            268
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            325,
+                            296
+                        ],
+                        [
+                            346,
+                            297
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            301,
+                            291
+                        ],
+                        [
+                            325,
+                            296
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            275,
+                            280
+                        ],
+                        [
+                            301,
+                            291
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            239,
+                            293
+                        ],
+                        [
+                            275,
+                            280
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            211,
+                            306
+                        ],
+                        [
+                            239,
+                            293
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            168,
+                            322
+                        ],
+                        [
+                            211,
+                            306
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            132,
+                            351
+                        ],
+                        [
+                            168,
+                            322
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            98,
+                            366
+                        ],
+                        [
+                            132,
+                            351
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            76,
+                            345
+                        ],
+                        [
+                            98,
+                            366
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        259,
+                        46
+                    ],
+                    "is_working": true,
+                    "name": "Vilarinho",
+                    "rect": [
+                        272,
+                        35,
+                        46,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        280,
+                        79
+                    ],
+                    "is_working": true,
+                    "name": "Floramar",
+                    "rect": [
+                        288,
+                        68,
+                        46,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        298,
+                        113
+                    ],
+                    "is_working": true,
+                    "name": "Waldomiro Lobo",
+                    "rect": [
+                        309,
+                        102,
+                        82,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        294,
+                        139
+                    ],
+                    "is_working": true,
+                    "name": "Primeiro de Maio",
+                    "rect": [
+                        196,
+                        131,
+                        86,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        316,
+                        152
+                    ],
+                    "is_working": true,
+                    "name": "Sao Gabriel",
+                    "rect": [
+                        326,
+                        143,
+                        60,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        314,
+                        179
+                    ],
+                    "is_working": true,
+                    "name": "Minas Shopping",
+                    "rect": [
+                        323,
+                        165,
+                        81,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        345,
+                        205
+                    ],
+                    "is_working": true,
+                    "name": "Jose Candido Silveira",
+                    "rect": [
+                        355,
+                        190,
+                        111,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        348,
+                        236
+                    ],
+                    "is_working": true,
+                    "name": "Santa Ines",
+                    "rect": [
+                        357,
+                        230,
+                        54,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        346,
+                        268
+                    ],
+                    "is_working": true,
+                    "name": "Horto",
+                    "rect": [
+                        357,
+                        256,
+                        29,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        346,
+                        297
+                    ],
+                    "is_working": true,
+                    "name": "Santa Tereza",
+                    "rect": [
+                        361,
+                        292,
+                        66,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        325,
+                        296
+                    ],
+                    "is_working": true,
+                    "name": "Santa Efigenia",
+                    "rect": [
+                        260,
+                        303,
+                        73,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        301,
+                        291
+                    ],
+                    "is_working": true,
+                    "name": "Central",
+                    "rect": [
+                        301,
+                        267,
+                        38,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        275,
+                        280
+                    ],
+                    "is_working": true,
+                    "name": "Lagoinha",
+                    "rect": [
+                        227,
+                        258,
+                        47,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        239,
+                        293
+                    ],
+                    "is_working": true,
+                    "name": "Carlos Prates",
+                    "rect": [
+                        157,
+                        277,
+                        70,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        211,
+                        306
+                    ],
+                    "is_working": true,
+                    "name": "Calafate",
+                    "rect": [
+                        199,
+                        320,
+                        43,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        168,
+                        322
+                    ],
+                    "is_working": true,
+                    "name": "Gameleira",
+                    "rect": [
+                        109,
+                        303,
+                        53,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        132,
+                        351
+                    ],
+                    "is_working": true,
+                    "name": "Vila Oeste",
+                    "rect": [
+                        141,
+                        351,
+                        53,
+                        15
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        98,
+                        366
+                    ],
+                    "is_working": true,
+                    "name": "Cidade Industrial",
+                    "rect": [
+                        72,
+                        373,
+                        86,
+                        15
+                    ],
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        76,
+                        345
+                    ],
+                    "is_working": true,
+                    "name": "Eldorado",
+                    "rect": [
+                        43,
+                        320,
+                        46,
+                        15
+                    ],
+                    "text_id": 18,
+                    "uid": 18
+                }
+            ],
+            "text_id": 19
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 20,
+    "stations_diameter": 13.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 21,
+    "upper_case": false,
+    "width": 498,
+    "word_wrap": false
+}

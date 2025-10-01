@@ -1,0 +1,58 @@
+{
+    "city_id": 1502026,
+    "comments_text_id": 8,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 7,
+    "file": "Krasnoyarsk.zip",
+    "latitude": 56.03742,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": 92.93136,
+    "map_id": "Krasnoyarsk.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 5,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 6
+        }
+    ],
+    "timestamp": 1243897200.0,
+    "transport_types": [
+        "Метро"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Метро"
+        }
+    ]
+}

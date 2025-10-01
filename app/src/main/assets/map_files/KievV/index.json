@@ -1,0 +1,72 @@
+{
+    "city_id": 703448,
+    "comments_text_id": 100,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 99,
+    "file": "KievV.zip",
+    "latitude": 50.45466,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": 30.5238,
+    "map_id": "KievV.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 96,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 97
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/railway.json",
+            "name": "railway",
+            "name_text_id": 98,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 97
+        }
+    ],
+    "timestamp": 1426636800.0,
+    "transport_types": [
+        "Метро"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Метро"
+        }
+    ]
+}

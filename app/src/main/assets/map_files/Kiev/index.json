@@ -1,0 +1,215 @@
+{
+    "city_id": 703448,
+    "comments_text_id": 358,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 357,
+    "file": "Kiev.zip",
+    "latitude": 50.45466,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": 30.5238,
+    "map_id": "Kiev.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 352,
+            "root": true,
+            "transports": [
+                "metro",
+                "train"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 353
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/kyr-kras.json",
+            "name": "kyr-kras",
+            "name_text_id": 37,
+            "root": false,
+            "transports": [
+                "metro",
+                "train"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 354
+        },
+        {
+            "default_transports": [
+                "train"
+            ],
+            "file": "schemes/railway.json",
+            "name": "railway",
+            "name_text_id": 355,
+            "root": true,
+            "transports": [
+                "metro",
+                "train"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 353
+        },
+        {
+            "default_transports": [
+                "train"
+            ],
+            "file": "schemes/railways_fastov.json",
+            "name": "railways_fastov",
+            "name_text_id": 196,
+            "root": false,
+            "transports": [
+                "metro",
+                "train"
+            ],
+            "type_name": "Электричка",
+            "type_text_id": 356
+        },
+        {
+            "default_transports": [
+                "train"
+            ],
+            "file": "schemes/railways_greben.json",
+            "name": "railways_greben",
+            "name_text_id": 272,
+            "root": false,
+            "transports": [
+                "metro",
+                "train"
+            ],
+            "type_name": "Электричка",
+            "type_text_id": 356
+        },
+        {
+            "default_transports": [
+                "train"
+            ],
+            "file": "schemes/railways_koltsevaya.json",
+            "name": "railways_koltsevaya",
+            "name_text_id": 351,
+            "root": false,
+            "transports": [
+                "metro",
+                "train"
+            ],
+            "type_name": "Электричка",
+            "type_text_id": 356
+        },
+        {
+            "default_transports": [
+                "train"
+            ],
+            "file": "schemes/railways_mironov.json",
+            "name": "railways_mironov",
+            "name_text_id": 240,
+            "root": false,
+            "transports": [
+                "metro",
+                "train"
+            ],
+            "type_name": "Электричка",
+            "type_text_id": 356
+        },
+        {
+            "default_transports": [
+                "train"
+            ],
+            "file": "schemes/railways_nejun.json",
+            "name": "railways_nejun",
+            "name_text_id": 350,
+            "root": false,
+            "transports": [
+                "metro",
+                "train"
+            ],
+            "type_name": "Электричка",
+            "type_text_id": 356
+        },
+        {
+            "default_transports": [
+                "train"
+            ],
+            "file": "schemes/railways_teterev.json",
+            "name": "railways_teterev",
+            "name_text_id": 99,
+            "root": false,
+            "transports": [
+                "metro",
+                "train"
+            ],
+            "type_name": "Электричка",
+            "type_text_id": 356
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/sur-pech.json",
+            "name": "sur-pech",
+            "name_text_id": 54,
+            "root": false,
+            "transports": [
+                "metro",
+                "train"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 354
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/svjat-brov.json",
+            "name": "svjat-brov",
+            "name_text_id": 18,
+            "root": false,
+            "transports": [
+                "metro",
+                "train"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 354
+        }
+    ],
+    "timestamp": 1754434800.0,
+    "transport_types": [
+        "Электричка",
+        "Метро"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Метро"
+        },
+        {
+            "file": "transports/train.json",
+            "name": "train",
+            "type": "Электричка"
+        }
+    ]
+}

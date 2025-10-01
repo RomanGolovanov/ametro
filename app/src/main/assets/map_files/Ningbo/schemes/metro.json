@@ -1,0 +1,1334 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 766,
+    "images": [
+        "res/schemes/ningbo.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "3280B7",
+            "line_color": "3280B7",
+            "line_width": 9,
+            "name": "1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            155,
+                            136
+                        ],
+                        [
+                            125,
+                            106
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            190,
+                            171
+                        ],
+                        [
+                            155,
+                            136
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            235,
+                            171
+                        ],
+                        [
+                            190,
+                            171
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            265,
+                            201
+                        ],
+                        [
+                            235,
+                            171
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            295,
+                            231
+                        ],
+                        [
+                            265,
+                            201
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            325,
+                            261
+                        ],
+                        [
+                            295,
+                            231
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            355,
+                            291
+                        ],
+                        [
+                            325,
+                            261
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            385,
+                            321
+                        ],
+                        [
+                            355,
+                            291
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            415,
+                            351
+                        ],
+                        [
+                            385,
+                            321
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            460,
+                            351
+                        ],
+                        [
+                            415,
+                            351
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            505,
+                            351
+                        ],
+                        [
+                            460,
+                            351
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            550,
+                            351
+                        ],
+                        [
+                            505,
+                            351
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            595,
+                            351
+                        ],
+                        [
+                            550,
+                            351
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            640,
+                            351
+                        ],
+                        [
+                            595,
+                            351
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            685,
+                            351
+                        ],
+                        [
+                            640,
+                            351
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            730,
+                            351
+                        ],
+                        [
+                            685,
+                            351
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            775,
+                            351
+                        ],
+                        [
+                            730,
+                            351
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            820,
+                            351
+                        ],
+                        [
+                            775,
+                            351
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            865,
+                            351
+                        ],
+                        [
+                            820,
+                            351
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        125,
+                        106
+                    ],
+                    "is_working": true,
+                    "name": "Gaoqiao West",
+                    "rect": [
+                        135,
+                        81,
+                        45,
+                        28
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        155,
+                        136
+                    ],
+                    "is_working": true,
+                    "name": "Gaoqiao",
+                    "rect": [
+                        165,
+                        124,
+                        43,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        190,
+                        171
+                    ],
+                    "is_working": true,
+                    "name": "Liangzhu",
+                    "rect": [
+                        171,
+                        180,
+                        46,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        235,
+                        171
+                    ],
+                    "is_working": true,
+                    "name": "Lugang",
+                    "rect": [
+                        216,
+                        147,
+                        38,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        265,
+                        201
+                    ],
+                    "is_working": true,
+                    "name": "Xujiacao Changle",
+                    "rect": [
+                        275,
+                        176,
+                        47,
+                        28
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        295,
+                        231
+                    ],
+                    "is_working": true,
+                    "name": "Wangchun Bridge",
+                    "rect": [
+                        305,
+                        206,
+                        56,
+                        28
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        325,
+                        261
+                    ],
+                    "is_working": true,
+                    "name": "Zemin",
+                    "rect": [
+                        283,
+                        258,
+                        32,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        355,
+                        291
+                    ],
+                    "is_working": true,
+                    "name": "Daqing Bridge",
+                    "rect": [
+                        365,
+                        266,
+                        39,
+                        28
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        385,
+                        321
+                    ],
+                    "is_working": true,
+                    "name": "Ximenkou",
+                    "rect": [
+                        324,
+                        318,
+                        51,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        415,
+                        351
+                    ],
+                    "is_working": true,
+                    "name": "Gulou",
+                    "rect": [
+                        363,
+                        340,
+                        31,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        460,
+                        351
+                    ],
+                    "is_working": true,
+                    "name": "Dongmenkou",
+                    "rect": [
+                        431,
+                        360,
+                        67,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        505,
+                        351
+                    ],
+                    "is_working": true,
+                    "name": "Jiangxia Bridge East",
+                    "rect": [
+                        477,
+                        314,
+                        60,
+                        28
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        550,
+                        351
+                    ],
+                    "is_working": true,
+                    "name": "Zhoumeng North Road",
+                    "rect": [
+                        523,
+                        360,
+                        58,
+                        28
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        595,
+                        351
+                    ],
+                    "is_working": true,
+                    "name": "Sakura Park",
+                    "rect": [
+                        574,
+                        314,
+                        39,
+                        28
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        640,
+                        351
+                    ],
+                    "is_working": true,
+                    "name": "Fuming Road",
+                    "rect": [
+                        621,
+                        360,
+                        40,
+                        28
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        685,
+                        351
+                    ],
+                    "is_working": true,
+                    "name": "Shiji Avenue",
+                    "rect": [
+                        664,
+                        314,
+                        40,
+                        28
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        730,
+                        351
+                    ],
+                    "is_working": true,
+                    "name": "Haiyan North Road",
+                    "rect": [
+                        699,
+                        360,
+                        58,
+                        28
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        775,
+                        351
+                    ],
+                    "is_working": true,
+                    "name": "Fuqing North Road",
+                    "rect": [
+                        746,
+                        314,
+                        58,
+                        28
+                    ],
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        820,
+                        351
+                    ],
+                    "is_working": true,
+                    "name": "Shengmo Road",
+                    "rect": [
+                        796,
+                        360,
+                        50,
+                        28
+                    ],
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        865,
+                        351
+                    ],
+                    "is_working": true,
+                    "name": "Donghuan South Road",
+                    "rect": [
+                        836,
+                        314,
+                        59,
+                        28
+                    ],
+                    "text_id": 19,
+                    "uid": 19
+                }
+            ],
+            "text_id": 20
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "CA0000",
+            "line_color": "CA0000",
+            "line_width": 9,
+            "name": "2",
+            "segments": [
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            150,
+                            616
+                        ],
+                        [
+                            110,
+                            616
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            175,
+                            591
+                        ],
+                        [
+                            150,
+                            616
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            200,
+                            566
+                        ],
+                        [
+                            175,
+                            591
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    23,
+                    24,
+                    [
+                        [
+                            225,
+                            541
+                        ],
+                        [
+                            200,
+                            566
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            250,
+                            516
+                        ],
+                        [
+                            225,
+                            541
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    25,
+                    26,
+                    [
+                        [
+                            275,
+                            491
+                        ],
+                        [
+                            250,
+                            516
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    26,
+                    27,
+                    [
+                        [
+                            300,
+                            466
+                        ],
+                        [
+                            275,
+                            491
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    27,
+                    28,
+                    [
+                        [
+                            325,
+                            441
+                        ],
+                        [
+                            300,
+                            466
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            350,
+                            416
+                        ],
+                        [
+                            325,
+                            441
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    29,
+                    30,
+                    [
+                        [
+                            375,
+                            391
+                        ],
+                        [
+                            350,
+                            416
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    30,
+                    31,
+                    [
+                        [
+                            400,
+                            366
+                        ],
+                        [
+                            375,
+                            391
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    31,
+                    32,
+                    [
+                        [
+                            455,
+                            311
+                        ],
+                        [
+                            400,
+                            366
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    32,
+                    33,
+                    [
+                        [
+                            490,
+                            276
+                        ],
+                        [
+                            455,
+                            311
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    33,
+                    34,
+                    [
+                        [
+                            520,
+                            246
+                        ],
+                        [
+                            490,
+                            276
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    34,
+                    35,
+                    [
+                        [
+                            550,
+                            216
+                        ],
+                        [
+                            520,
+                            246
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    35,
+                    36,
+                    [
+                        [
+                            580,
+                            186
+                        ],
+                        [
+                            550,
+                            216
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    36,
+                    37,
+                    [
+                        [
+                            610,
+                            156
+                        ],
+                        [
+                            580,
+                            186
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    37,
+                    38,
+                    [
+                        [
+                            645,
+                            121
+                        ],
+                        [
+                            610,
+                            156
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    38,
+                    39,
+                    [
+                        [
+                            695,
+                            121
+                        ],
+                        [
+                            645,
+                            121
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    39,
+                    40,
+                    [
+                        [
+                            745,
+                            121
+                        ],
+                        [
+                            695,
+                            121
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    40,
+                    41,
+                    [
+                        [
+                            770,
+                            96
+                        ],
+                        [
+                            745,
+                            121
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        110,
+                        616
+                    ],
+                    "is_working": true,
+                    "name": "Lishe International Airport",
+                    "rect": [
+                        21,
+                        578,
+                        100,
+                        28
+                    ],
+                    "text_id": 21,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        150,
+                        616
+                    ],
+                    "is_working": true,
+                    "name": "Lishe",
+                    "rect": [
+                        138,
+                        625,
+                        29,
+                        15
+                    ],
+                    "text_id": 22,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        175,
+                        591
+                    ],
+                    "is_working": true,
+                    "name": "Yinzhou Avenue",
+                    "rect": [
+                        185,
+                        588,
+                        43,
+                        28
+                    ],
+                    "text_id": 23,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        200,
+                        566
+                    ],
+                    "is_working": true,
+                    "name": "Shiqi",
+                    "rect": [
+                        163,
+                        554,
+                        27,
+                        15
+                    ],
+                    "text_id": 24,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        225,
+                        541
+                    ],
+                    "is_working": true,
+                    "name": "Qingfangcheng",
+                    "rect": [
+                        235,
+                        538,
+                        76,
+                        15
+                    ],
+                    "text_id": 25,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        250,
+                        516
+                    ],
+                    "is_working": true,
+                    "name": "Ouchi",
+                    "rect": [
+                        209,
+                        504,
+                        31,
+                        15
+                    ],
+                    "text_id": 26,
+                    "uid": 25
+                },
+                {
+                    "coord": [
+                        275,
+                        491
+                    ],
+                    "is_working": true,
+                    "name": "Coach Terminal",
+                    "rect": [
+                        285,
+                        488,
+                        45,
+                        28
+                    ],
+                    "text_id": 27,
+                    "uid": 26
+                },
+                {
+                    "coord": [
+                        300,
+                        466
+                    ],
+                    "is_working": true,
+                    "name": "Liyuan South Road",
+                    "rect": [
+                        231,
+                        441,
+                        59,
+                        28
+                    ],
+                    "text_id": 28,
+                    "uid": 27
+                },
+                {
+                    "coord": [
+                        325,
+                        441
+                    ],
+                    "is_working": true,
+                    "name": "Yunxia Road",
+                    "rect": [
+                        335,
+                        438,
+                        38,
+                        28
+                    ],
+                    "text_id": 29,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        350,
+                        416
+                    ],
+                    "is_working": true,
+                    "name": "Ningbo Railway Station",
+                    "rect": [
+                        261,
+                        391,
+                        79,
+                        28
+                    ],
+                    "text_id": 30,
+                    "uid": 29
+                },
+                {
+                    "coord": [
+                        375,
+                        391
+                    ],
+                    "is_working": true,
+                    "name": "Chenghuangmiao",
+                    "rect": [
+                        385,
+                        388,
+                        88,
+                        15
+                    ],
+                    "text_id": 31,
+                    "uid": 30
+                },
+                {
+                    "coord": [
+                        400,
+                        366
+                    ],
+                    "is_working": true,
+                    "name": "Gulou",
+                    "rect": [
+                        363,
+                        340,
+                        31,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 31
+                },
+                {
+                    "coord": [
+                        455,
+                        311
+                    ],
+                    "is_working": true,
+                    "name": "Waitan Bridge",
+                    "rect": [
+                        407,
+                        286,
+                        38,
+                        28
+                    ],
+                    "text_id": 32,
+                    "uid": 32
+                },
+                {
+                    "coord": [
+                        490,
+                        276
+                    ],
+                    "is_working": true,
+                    "name": "Zhengda Road",
+                    "rect": [
+                        434,
+                        251,
+                        46,
+                        28
+                    ],
+                    "text_id": 33,
+                    "uid": 33
+                },
+                {
+                    "coord": [
+                        520,
+                        246
+                    ],
+                    "is_working": true,
+                    "name": "Nijiayan",
+                    "rect": [
+                        530,
+                        243,
+                        43,
+                        15
+                    ],
+                    "text_id": 34,
+                    "uid": 34
+                },
+                {
+                    "coord": [
+                        550,
+                        216
+                    ],
+                    "is_working": true,
+                    "name": "Yasaiyan",
+                    "rect": [
+                        492,
+                        204,
+                        48,
+                        15
+                    ],
+                    "text_id": 35,
+                    "uid": 35
+                },
+                {
+                    "coord": [
+                        580,
+                        186
+                    ],
+                    "is_working": true,
+                    "name": "Datong Bridge",
+                    "rect": [
+                        590,
+                        183,
+                        39,
+                        28
+                    ],
+                    "text_id": 36,
+                    "uid": 36
+                },
+                {
+                    "coord": [
+                        610,
+                        156
+                    ],
+                    "is_working": true,
+                    "name": "Kongpu",
+                    "rect": [
+                        560,
+                        144,
+                        40,
+                        15
+                    ],
+                    "text_id": 37,
+                    "uid": 37
+                },
+                {
+                    "coord": [
+                        645,
+                        121
+                    ],
+                    "is_working": true,
+                    "name": "Lulin",
+                    "rect": [
+                        630,
+                        97,
+                        26,
+                        15
+                    ],
+                    "text_id": 38,
+                    "uid": 38
+                },
+                {
+                    "coord": [
+                        695,
+                        121
+                    ],
+                    "is_working": true,
+                    "name": "Sanguantang",
+                    "rect": [
+                        667,
+                        130,
+                        66,
+                        15
+                    ],
+                    "text_id": 39,
+                    "uid": 39
+                },
+                {
+                    "coord": [
+                        745,
+                        121
+                    ],
+                    "is_working": true,
+                    "name": "Ningbo University",
+                    "rect": [
+                        748,
+                        130,
+                        53,
+                        28
+                    ],
+                    "text_id": 40,
+                    "uid": 40
+                },
+                {
+                    "coord": [
+                        770,
+                        96
+                    ],
+                    "is_working": true,
+                    "name": "Qingshuipu",
+                    "rect": [
+                        780,
+                        88,
+                        58,
+                        15
+                    ],
+                    "text_id": 41,
+                    "uid": 41
+                }
+            ],
+            "text_id": 42
+        }
+    ],
+    "lines_width": 9,
+    "name": "metro",
+    "name_text_id": 43,
+    "stations_diameter": 15.0,
+    "transfers": [
+        [
+            31,
+            9,
+            [
+                400,
+                366
+            ],
+            [
+                415,
+                351
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 44,
+    "upper_case": false,
+    "width": 1015,
+    "word_wrap": true
+}

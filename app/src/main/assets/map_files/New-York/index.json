@@ -1,0 +1,86 @@
+{
+    "city_id": 5128581,
+    "comments_text_id": 416,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 415,
+    "file": "New-York.zip",
+    "latitude": 40.71427,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": -74.00597,
+    "map_id": "New-York.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 412,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 413
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/airtrainjfk.json",
+            "name": "airtrainjfk",
+            "name_text_id": 304,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 414
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/statenisland.json",
+            "name": "statenisland",
+            "name_text_id": 328,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 414
+        }
+    ],
+    "timestamp": 1754434800.0,
+    "transport_types": [
+        "Метро"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Метро"
+        }
+    ]
+}

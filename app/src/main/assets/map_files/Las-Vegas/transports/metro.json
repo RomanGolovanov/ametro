@@ -1,0 +1,112 @@
+{
+    "lines": [
+        {
+            "delays": [],
+            "name": "Monorail",
+            "scheme": null,
+            "segments": [
+                [
+                    0,
+                    1,
+                    120
+                ],
+                [
+                    1,
+                    0,
+                    120
+                ],
+                [
+                    1,
+                    2,
+                    120
+                ],
+                [
+                    2,
+                    1,
+                    120
+                ],
+                [
+                    2,
+                    3,
+                    120
+                ],
+                [
+                    3,
+                    2,
+                    120
+                ],
+                [
+                    3,
+                    4,
+                    120
+                ],
+                [
+                    4,
+                    3,
+                    120
+                ],
+                [
+                    4,
+                    5,
+                    120
+                ],
+                [
+                    5,
+                    4,
+                    120
+                ],
+                [
+                    5,
+                    6,
+                    120
+                ],
+                [
+                    6,
+                    5,
+                    120
+                ]
+            ],
+            "stations": [
+                [
+                    0,
+                    "Sahara",
+                    0
+                ],
+                [
+                    1,
+                    "Las Vegas Hilton",
+                    1
+                ],
+                [
+                    2,
+                    "Las Vegas Convention Center",
+                    2
+                ],
+                [
+                    3,
+                    "Harrah's / Imperial Palace",
+                    3
+                ],
+                [
+                    4,
+                    "Flamingo / Caesars Palace",
+                    4
+                ],
+                [
+                    5,
+                    "Bally's & Paris",
+                    5
+                ],
+                [
+                    6,
+                    "MGM Grand",
+                    6
+                ]
+            ],
+            "text_id": 7
+        }
+    ],
+    "name": "metro",
+    "transfers": [],
+    "type_name": "Электричка"
+}

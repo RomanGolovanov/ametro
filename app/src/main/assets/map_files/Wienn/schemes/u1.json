@@ -1,0 +1,1239 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 880,
+    "images": [
+        "res/schemes/u1.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "E41c0c",
+            "line_width": 9,
+            "name": "U1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            200,
+                            50
+                        ],
+                        [
+                            200,
+                            10
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            200,
+                            90
+                        ],
+                        [
+                            200,
+                            50
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            200,
+                            130
+                        ],
+                        [
+                            200,
+                            90
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            200,
+                            170
+                        ],
+                        [
+                            200,
+                            130
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            200,
+                            210
+                        ],
+                        [
+                            200,
+                            170
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            200,
+                            250
+                        ],
+                        [
+                            200,
+                            210
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            200,
+                            290
+                        ],
+                        [
+                            200,
+                            250
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            200,
+                            330
+                        ],
+                        [
+                            200,
+                            290
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            200,
+                            370
+                        ],
+                        [
+                            200,
+                            330
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            200,
+                            410
+                        ],
+                        [
+                            200,
+                            370
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            200,
+                            450
+                        ],
+                        [
+                            200,
+                            410
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            200,
+                            490
+                        ],
+                        [
+                            200,
+                            450
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            200,
+                            530
+                        ],
+                        [
+                            200,
+                            490
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            200,
+                            570
+                        ],
+                        [
+                            200,
+                            530
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            200,
+                            610
+                        ],
+                        [
+                            200,
+                            570
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            200,
+                            650
+                        ],
+                        [
+                            200,
+                            610
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            200,
+                            690
+                        ],
+                        [
+                            200,
+                            650
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            200,
+                            730
+                        ],
+                        [
+                            200,
+                            690
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        200,
+                        10
+                    ],
+                    "is_working": true,
+                    "name": "Leopoldau",
+                    "rect": [
+                        215,
+                        0,
+                        100,
+                        20
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        200,
+                        50
+                    ],
+                    "is_working": true,
+                    "name": "Grossfeldsiedlung",
+                    "rect": [
+                        215,
+                        40,
+                        100,
+                        20
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        200,
+                        90
+                    ],
+                    "is_working": true,
+                    "name": "Aderklaaer Strasse",
+                    "rect": [
+                        215,
+                        80,
+                        100,
+                        20
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        200,
+                        130
+                    ],
+                    "is_working": true,
+                    "name": "Rennbahnweg",
+                    "rect": [
+                        215,
+                        120,
+                        100,
+                        20
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        200,
+                        170
+                    ],
+                    "is_working": true,
+                    "name": "Karganer Platz",
+                    "rect": [
+                        215,
+                        160,
+                        100,
+                        20
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        200,
+                        210
+                    ],
+                    "is_working": true,
+                    "name": "Kagran",
+                    "rect": [
+                        215,
+                        200,
+                        100,
+                        20
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        200,
+                        250
+                    ],
+                    "is_working": true,
+                    "name": "Alte Donau",
+                    "rect": [
+                        215,
+                        240,
+                        100,
+                        20
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        200,
+                        290
+                    ],
+                    "is_working": true,
+                    "name": "Kaisermuhlan - VIC",
+                    "rect": [
+                        215,
+                        280,
+                        100,
+                        20
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        200,
+                        330
+                    ],
+                    "is_working": true,
+                    "name": "Donauinsel",
+                    "rect": [
+                        215,
+                        320,
+                        100,
+                        20
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        200,
+                        370
+                    ],
+                    "is_working": true,
+                    "name": "Vorgartenstrasse",
+                    "rect": [
+                        215,
+                        360,
+                        100,
+                        20
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        200,
+                        410
+                    ],
+                    "is_working": true,
+                    "name": "Praterstern",
+                    "rect": [
+                        215,
+                        400,
+                        100,
+                        20
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        200,
+                        450
+                    ],
+                    "is_working": true,
+                    "name": "Nestroyplatz",
+                    "rect": [
+                        215,
+                        440,
+                        100,
+                        20
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        200,
+                        490
+                    ],
+                    "is_working": true,
+                    "name": "Schweden- platz",
+                    "rect": [
+                        215,
+                        480,
+                        100,
+                        20
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        200,
+                        530
+                    ],
+                    "is_working": true,
+                    "name": "Stephans- platz",
+                    "rect": [
+                        215,
+                        520,
+                        100,
+                        20
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        200,
+                        570
+                    ],
+                    "is_working": true,
+                    "name": "Karls- platz",
+                    "rect": [
+                        215,
+                        560,
+                        100,
+                        20
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        200,
+                        610
+                    ],
+                    "is_working": true,
+                    "name": "Taubstummengasse",
+                    "rect": [
+                        215,
+                        600,
+                        100,
+                        20
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        200,
+                        650
+                    ],
+                    "is_working": true,
+                    "name": "Sudtiroler Platz",
+                    "rect": [
+                        215,
+                        640,
+                        100,
+                        20
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        200,
+                        690
+                    ],
+                    "is_working": true,
+                    "name": "Keplrerplatz",
+                    "rect": [
+                        215,
+                        685,
+                        100,
+                        20
+                    ],
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        200,
+                        730
+                    ],
+                    "is_working": true,
+                    "name": "Reumannplatz",
+                    "rect": [
+                        215,
+                        720,
+                        100,
+                        20
+                    ],
+                    "text_id": 18,
+                    "uid": 18
+                }
+            ],
+            "text_id": 19
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "AC24AC",
+            "line_width": 9,
+            "name": "U2",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Aspernstrasse",
+                    "rect": null,
+                    "text_id": 20,
+                    "uid": 19
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Donauspital",
+                    "rect": null,
+                    "text_id": 21,
+                    "uid": 20
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Hardegggasse",
+                    "rect": null,
+                    "text_id": 22,
+                    "uid": 21
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Stadlau",
+                    "rect": null,
+                    "text_id": 23,
+                    "uid": 22
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Donaustadtbrucke",
+                    "rect": null,
+                    "text_id": 24,
+                    "uid": 23
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Donaumarina",
+                    "rect": null,
+                    "text_id": 25,
+                    "uid": 24
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Stadion",
+                    "rect": null,
+                    "text_id": 26,
+                    "uid": 25
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Krieau",
+                    "rect": null,
+                    "text_id": 27,
+                    "uid": 26
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Messe-Prater",
+                    "rect": null,
+                    "text_id": 28,
+                    "uid": 27
+                },
+                {
+                    "coord": [
+                        181,
+                        410
+                    ],
+                    "is_working": true,
+                    "name": "Praterstern",
+                    "rect": [
+                        60,
+                        401,
+                        100,
+                        20
+                    ],
+                    "text_id": 10,
+                    "uid": 28
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Taborstrasse",
+                    "rect": null,
+                    "text_id": 29,
+                    "uid": 29
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Schottenring",
+                    "rect": null,
+                    "text_id": 30,
+                    "uid": 30
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Shottentor Universitat",
+                    "rect": null,
+                    "text_id": 31,
+                    "uid": 31
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Rathaus",
+                    "rect": null,
+                    "text_id": 32,
+                    "uid": 32
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Volks- theater",
+                    "rect": null,
+                    "text_id": 33,
+                    "uid": 33
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Museumsquartier",
+                    "rect": null,
+                    "text_id": 34,
+                    "uid": 34
+                },
+                {
+                    "coord": [
+                        181,
+                        560
+                    ],
+                    "is_working": true,
+                    "name": "Karls- platz",
+                    "rect": [
+                        60,
+                        550,
+                        100,
+                        20
+                    ],
+                    "text_id": 14,
+                    "uid": 35
+                }
+            ],
+            "text_id": 35
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "FC9C54",
+            "line_width": 9,
+            "name": "U3",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ottarking",
+                    "rect": null,
+                    "text_id": 36,
+                    "uid": 36
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Kendlerstrasse",
+                    "rect": null,
+                    "text_id": 37,
+                    "uid": 37
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Hutteldorfer Strasse",
+                    "rect": null,
+                    "text_id": 38,
+                    "uid": 38
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Johnstrasse",
+                    "rect": null,
+                    "text_id": 39,
+                    "uid": 39
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Schweglerstrasse",
+                    "rect": null,
+                    "text_id": 40,
+                    "uid": 40
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "West- bahnhof",
+                    "rect": null,
+                    "text_id": 41,
+                    "uid": 41
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ziegler- gasse",
+                    "rect": null,
+                    "text_id": 42,
+                    "uid": 42
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Neubau- gasse",
+                    "rect": null,
+                    "text_id": 43,
+                    "uid": 43
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Volks- theater",
+                    "rect": null,
+                    "text_id": 33,
+                    "uid": 44
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Herren- gasse",
+                    "rect": null,
+                    "text_id": 44,
+                    "uid": 45
+                },
+                {
+                    "coord": [
+                        181,
+                        530
+                    ],
+                    "is_working": true,
+                    "name": "Stephansplatz",
+                    "rect": [
+                        60,
+                        520,
+                        100,
+                        20
+                    ],
+                    "text_id": 45,
+                    "uid": 46
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Stubentor",
+                    "rect": null,
+                    "text_id": 46,
+                    "uid": 47
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Landstrasse",
+                    "rect": null,
+                    "text_id": 47,
+                    "uid": 48
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Rochusgasse",
+                    "rect": null,
+                    "text_id": 48,
+                    "uid": 49
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Kardinal-Nagl-Platz",
+                    "rect": null,
+                    "text_id": 49,
+                    "uid": 50
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Schlachthausgasse",
+                    "rect": null,
+                    "text_id": 50,
+                    "uid": 51
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Erdberg",
+                    "rect": null,
+                    "text_id": 51,
+                    "uid": 52
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Gasometer",
+                    "rect": null,
+                    "text_id": 52,
+                    "uid": 53
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Zippererstrasse",
+                    "rect": null,
+                    "text_id": 53,
+                    "uid": 54
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Enkplatz",
+                    "rect": null,
+                    "text_id": 54,
+                    "uid": 55
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Simmering",
+                    "rect": null,
+                    "text_id": 55,
+                    "uid": 56
+                }
+            ],
+            "text_id": 56
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "84BC54",
+            "line_width": 9,
+            "name": "U4",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Heiligenstadt",
+                    "rect": null,
+                    "text_id": 57,
+                    "uid": 57
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Spittelau",
+                    "rect": null,
+                    "text_id": 58,
+                    "uid": 58
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Friedensbrucke",
+                    "rect": null,
+                    "text_id": 59,
+                    "uid": 59
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Rossauer Lande",
+                    "rect": null,
+                    "text_id": 60,
+                    "uid": 60
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Schottenring",
+                    "rect": null,
+                    "text_id": 30,
+                    "uid": 61
+                },
+                {
+                    "coord": [
+                        181,
+                        490
+                    ],
+                    "is_working": true,
+                    "name": "Schwedenplatz",
+                    "rect": [
+                        60,
+                        480,
+                        100,
+                        20
+                    ],
+                    "text_id": 61,
+                    "uid": 62
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Landstrasse",
+                    "rect": null,
+                    "text_id": 47,
+                    "uid": 63
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Stadtpark",
+                    "rect": null,
+                    "text_id": 62,
+                    "uid": 64
+                },
+                {
+                    "coord": [
+                        181,
+                        580
+                    ],
+                    "is_working": true,
+                    "name": "Karls- platz",
+                    "rect": [
+                        60,
+                        575,
+                        100,
+                        20
+                    ],
+                    "text_id": 14,
+                    "uid": 65
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Kettenbruckengasse",
+                    "rect": null,
+                    "text_id": 63,
+                    "uid": 66
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Pilgramgasse",
+                    "rect": null,
+                    "text_id": 64,
+                    "uid": 67
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Margareten- gurtel",
+                    "rect": null,
+                    "text_id": 65,
+                    "uid": 68
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Langenfeldgasse",
+                    "rect": null,
+                    "text_id": 66,
+                    "uid": 69
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Meidling Haupstrasse",
+                    "rect": null,
+                    "text_id": 67,
+                    "uid": 70
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Schonbrunn",
+                    "rect": null,
+                    "text_id": 68,
+                    "uid": 71
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Hiezing",
+                    "rect": null,
+                    "text_id": 69,
+                    "uid": 72
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Braunschweiggasse",
+                    "rect": null,
+                    "text_id": 70,
+                    "uid": 73
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Unter St. Veit",
+                    "rect": null,
+                    "text_id": 71,
+                    "uid": 74
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ober St.Veit",
+                    "rect": null,
+                    "text_id": 72,
+                    "uid": 75
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Hutteldorf",
+                    "rect": null,
+                    "text_id": 73,
+                    "uid": 76
+                }
+            ],
+            "text_id": 74
+        }
+    ],
+    "lines_width": 9,
+    "name": "u1",
+    "name_text_id": 19,
+    "stations_diameter": 16.0,
+    "transfers": [
+        [
+            14,
+            35,
+            [
+                200,
+                570
+            ],
+            [
+                181,
+                560
+            ]
+        ],
+        [
+            65,
+            35,
+            [
+                181,
+                580
+            ],
+            [
+                181,
+                560
+            ]
+        ],
+        [
+            28,
+            10,
+            [
+                181,
+                410
+            ],
+            [
+                200,
+                410
+            ]
+        ],
+        [
+            33,
+            44,
+            null,
+            null
+        ],
+        [
+            13,
+            46,
+            [
+                200,
+                530
+            ],
+            [
+                181,
+                530
+            ]
+        ],
+        [
+            61,
+            30,
+            null,
+            null
+        ],
+        [
+            62,
+            12,
+            [
+                181,
+                490
+            ],
+            [
+                200,
+                490
+            ]
+        ],
+        [
+            63,
+            48,
+            null,
+            null
+        ],
+        [
+            65,
+            14,
+            [
+                181,
+                580
+            ],
+            [
+                200,
+                570
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "Метро",
+    "type_text_id": 99,
+    "upper_case": true,
+    "width": 350,
+    "word_wrap": true
+}

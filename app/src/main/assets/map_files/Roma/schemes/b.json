@@ -1,0 +1,984 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 870,
+    "images": [
+        "res/schemes/b.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "FF6300",
+            "line_width": 9,
+            "name": "A",
+            "segments": [],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Battistini",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Cornelia",
+                    "rect": null,
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Baldo degli Ubaldi",
+                    "rect": null,
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Valle Aurelia",
+                    "rect": null,
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Cipro - Musei Vaticani",
+                    "rect": null,
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ottaviano S.Pietro",
+                    "rect": null,
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Lepanto",
+                    "rect": null,
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Flaminio",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Piazza di Spagna",
+                    "rect": null,
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Barberini",
+                    "rect": null,
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Repubblica",
+                    "rect": null,
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        221,
+                        440
+                    ],
+                    "is_working": true,
+                    "name": "Termini",
+                    "rect": [
+                        107,
+                        431,
+                        100,
+                        20
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Vittorio Emanuele",
+                    "rect": null,
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Manzoni",
+                    "rect": null,
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "San Giovani",
+                    "rect": null,
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Re di Roma",
+                    "rect": null,
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Ponte Lungo",
+                    "rect": null,
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Furio Camillo",
+                    "rect": null,
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Colli Albani",
+                    "rect": null,
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Arco di Travertino",
+                    "rect": null,
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Porta Furba - Quadraro",
+                    "rect": null,
+                    "text_id": 20,
+                    "uid": 20
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Numidio Quadrato",
+                    "rect": null,
+                    "text_id": 21,
+                    "uid": 21
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Lucio Sestio",
+                    "rect": null,
+                    "text_id": 22,
+                    "uid": 22
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Giuglio Agricola",
+                    "rect": null,
+                    "text_id": 23,
+                    "uid": 23
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Subaugusta",
+                    "rect": null,
+                    "text_id": 24,
+                    "uid": 24
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Cinecitta",
+                    "rect": null,
+                    "text_id": 25,
+                    "uid": 25
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Anagnina",
+                    "rect": null,
+                    "text_id": 26,
+                    "uid": 26
+                }
+            ],
+            "text_id": 27
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "8787FD",
+            "line_width": 9,
+            "name": "B",
+            "segments": [
+                [
+                    27,
+                    28,
+                    [
+                        [
+                            186,
+                            240
+                        ],
+                        [
+                            186,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            186,
+                            280
+                        ],
+                        [
+                            186,
+                            240
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    29,
+                    30,
+                    [
+                        [
+                            186,
+                            320
+                        ],
+                        [
+                            186,
+                            280
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    30,
+                    38,
+                    [
+                        [
+                            240,
+                            320
+                        ],
+                        [
+                            186,
+                            320
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    31,
+                    32,
+                    [
+                        [
+                            240,
+                            80
+                        ],
+                        [
+                            240,
+                            40
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    32,
+                    33,
+                    [
+                        [
+                            240,
+                            120
+                        ],
+                        [
+                            240,
+                            80
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    33,
+                    34,
+                    [
+                        [
+                            240,
+                            160
+                        ],
+                        [
+                            240,
+                            120
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    34,
+                    35,
+                    [
+                        [
+                            240,
+                            200
+                        ],
+                        [
+                            240,
+                            160
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    35,
+                    36,
+                    [
+                        [
+                            240,
+                            240
+                        ],
+                        [
+                            240,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    36,
+                    37,
+                    [
+                        [
+                            240,
+                            280
+                        ],
+                        [
+                            240,
+                            240
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    37,
+                    38,
+                    [
+                        [
+                            240,
+                            320
+                        ],
+                        [
+                            240,
+                            280
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    38,
+                    39,
+                    [
+                        [
+                            240,
+                            360
+                        ],
+                        [
+                            240,
+                            320
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    39,
+                    40,
+                    [
+                        [
+                            240,
+                            400
+                        ],
+                        [
+                            240,
+                            360
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    40,
+                    41,
+                    [
+                        [
+                            240,
+                            440
+                        ],
+                        [
+                            240,
+                            400
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    41,
+                    42,
+                    [
+                        [
+                            240,
+                            480
+                        ],
+                        [
+                            240,
+                            440
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    42,
+                    43,
+                    [
+                        [
+                            240,
+                            520
+                        ],
+                        [
+                            240,
+                            480
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    43,
+                    44,
+                    [
+                        [
+                            240,
+                            560
+                        ],
+                        [
+                            240,
+                            520
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    44,
+                    45,
+                    [
+                        [
+                            240,
+                            600
+                        ],
+                        [
+                            240,
+                            560
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    45,
+                    46,
+                    [
+                        [
+                            240,
+                            640
+                        ],
+                        [
+                            240,
+                            600
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    46,
+                    47,
+                    [
+                        [
+                            240,
+                            680
+                        ],
+                        [
+                            240,
+                            640
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    47,
+                    48,
+                    [
+                        [
+                            240,
+                            720
+                        ],
+                        [
+                            240,
+                            680
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        186,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Jonio",
+                    "rect": [
+                        74,
+                        190,
+                        100,
+                        20
+                    ],
+                    "text_id": 28,
+                    "uid": 27
+                },
+                {
+                    "coord": [
+                        186,
+                        240
+                    ],
+                    "is_working": true,
+                    "name": "Conca d'Oro",
+                    "rect": [
+                        74,
+                        230,
+                        100,
+                        20
+                    ],
+                    "text_id": 29,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        186,
+                        280
+                    ],
+                    "is_working": true,
+                    "name": "Libia",
+                    "rect": [
+                        74,
+                        270,
+                        100,
+                        20
+                    ],
+                    "text_id": 30,
+                    "uid": 29
+                },
+                {
+                    "coord": [
+                        186,
+                        320
+                    ],
+                    "is_working": true,
+                    "name": "Annibaliano",
+                    "rect": [
+                        74,
+                        310,
+                        100,
+                        20
+                    ],
+                    "text_id": 31,
+                    "uid": 30
+                },
+                {
+                    "coord": [
+                        240,
+                        40
+                    ],
+                    "is_working": true,
+                    "name": "Rebibbia",
+                    "rect": [
+                        255,
+                        30,
+                        100,
+                        20
+                    ],
+                    "text_id": 32,
+                    "uid": 31
+                },
+                {
+                    "coord": [
+                        240,
+                        80
+                    ],
+                    "is_working": true,
+                    "name": "Ponte Mammolo",
+                    "rect": [
+                        255,
+                        70,
+                        100,
+                        20
+                    ],
+                    "text_id": 33,
+                    "uid": 32
+                },
+                {
+                    "coord": [
+                        240,
+                        120
+                    ],
+                    "is_working": true,
+                    "name": "Santa Maria del Soccorso",
+                    "rect": [
+                        255,
+                        110,
+                        100,
+                        20
+                    ],
+                    "text_id": 34,
+                    "uid": 33
+                },
+                {
+                    "coord": [
+                        240,
+                        160
+                    ],
+                    "is_working": true,
+                    "name": "Pietralata",
+                    "rect": [
+                        255,
+                        150,
+                        100,
+                        20
+                    ],
+                    "text_id": 35,
+                    "uid": 34
+                },
+                {
+                    "coord": [
+                        240,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Monti Tiburtini",
+                    "rect": [
+                        255,
+                        190,
+                        100,
+                        20
+                    ],
+                    "text_id": 36,
+                    "uid": 35
+                },
+                {
+                    "coord": [
+                        240,
+                        240
+                    ],
+                    "is_working": true,
+                    "name": "Quintiliani",
+                    "rect": [
+                        255,
+                        230,
+                        100,
+                        20
+                    ],
+                    "text_id": 37,
+                    "uid": 36
+                },
+                {
+                    "coord": [
+                        240,
+                        280
+                    ],
+                    "is_working": true,
+                    "name": "Tiburtina",
+                    "rect": [
+                        255,
+                        270,
+                        100,
+                        20
+                    ],
+                    "text_id": 38,
+                    "uid": 37
+                },
+                {
+                    "coord": [
+                        240,
+                        320
+                    ],
+                    "is_working": true,
+                    "name": "Bologna",
+                    "rect": [
+                        255,
+                        310,
+                        100,
+                        20
+                    ],
+                    "text_id": 39,
+                    "uid": 38
+                },
+                {
+                    "coord": [
+                        240,
+                        360
+                    ],
+                    "is_working": true,
+                    "name": "Policlinico",
+                    "rect": [
+                        255,
+                        350,
+                        100,
+                        20
+                    ],
+                    "text_id": 40,
+                    "uid": 39
+                },
+                {
+                    "coord": [
+                        240,
+                        400
+                    ],
+                    "is_working": true,
+                    "name": "Castro Pretorio",
+                    "rect": [
+                        255,
+                        390,
+                        100,
+                        20
+                    ],
+                    "text_id": 41,
+                    "uid": 40
+                },
+                {
+                    "coord": [
+                        240,
+                        440
+                    ],
+                    "is_working": true,
+                    "name": "Termini",
+                    "rect": [
+                        255,
+                        430,
+                        100,
+                        20
+                    ],
+                    "text_id": 11,
+                    "uid": 41
+                },
+                {
+                    "coord": [
+                        240,
+                        480
+                    ],
+                    "is_working": true,
+                    "name": "Cavour",
+                    "rect": [
+                        255,
+                        470,
+                        100,
+                        20
+                    ],
+                    "text_id": 42,
+                    "uid": 42
+                },
+                {
+                    "coord": [
+                        240,
+                        520
+                    ],
+                    "is_working": true,
+                    "name": "Colosseo",
+                    "rect": [
+                        255,
+                        510,
+                        100,
+                        20
+                    ],
+                    "text_id": 43,
+                    "uid": 43
+                },
+                {
+                    "coord": [
+                        240,
+                        560
+                    ],
+                    "is_working": true,
+                    "name": "Circo Massimo",
+                    "rect": [
+                        255,
+                        550,
+                        100,
+                        20
+                    ],
+                    "text_id": 44,
+                    "uid": 44
+                },
+                {
+                    "coord": [
+                        240,
+                        600
+                    ],
+                    "is_working": true,
+                    "name": "Piramide",
+                    "rect": [
+                        255,
+                        590,
+                        100,
+                        20
+                    ],
+                    "text_id": 45,
+                    "uid": 45
+                },
+                {
+                    "coord": [
+                        240,
+                        640
+                    ],
+                    "is_working": true,
+                    "name": "Garbatella",
+                    "rect": [
+                        255,
+                        630,
+                        100,
+                        20
+                    ],
+                    "text_id": 46,
+                    "uid": 46
+                },
+                {
+                    "coord": [
+                        240,
+                        680
+                    ],
+                    "is_working": true,
+                    "name": "Basilica San Paolo",
+                    "rect": [
+                        255,
+                        670,
+                        100,
+                        20
+                    ],
+                    "text_id": 47,
+                    "uid": 47
+                },
+                {
+                    "coord": [
+                        240,
+                        720
+                    ],
+                    "is_working": true,
+                    "name": "Marconi",
+                    "rect": [
+                        255,
+                        710,
+                        100,
+                        20
+                    ],
+                    "text_id": 48,
+                    "uid": 48
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Eur Magliana",
+                    "rect": null,
+                    "text_id": 49,
+                    "uid": 49
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Eur Palasport",
+                    "rect": null,
+                    "text_id": 50,
+                    "uid": 50
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Eur Fermi",
+                    "rect": null,
+                    "text_id": 51,
+                    "uid": 51
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Laurentina",
+                    "rect": null,
+                    "text_id": 52,
+                    "uid": 52
+                }
+            ],
+            "text_id": 53
+        }
+    ],
+    "lines_width": 9,
+    "name": "b",
+    "name_text_id": 53,
+    "stations_diameter": 16.0,
+    "transfers": [
+        [
+            11,
+            41,
+            [
+                221,
+                440
+            ],
+            [
+                240,
+                440
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "Метро",
+    "type_text_id": 78,
+    "upper_case": true,
+    "width": 390,
+    "word_wrap": true
+}

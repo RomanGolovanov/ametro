@@ -1,0 +1,4300 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 903,
+    "images": [
+        "res/schemes/munich.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "006400",
+            "line_color": "006400",
+            "line_width": 7,
+            "name": "U1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            256,
+                            225
+                        ],
+                        [
+                            256,
+                            179
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            256,
+                            249
+                        ],
+                        [
+                            256,
+                            225
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            256,
+                            273
+                        ],
+                        [
+                            256,
+                            249
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            289,
+                            309
+                        ],
+                        [
+                            256.0,
+                            309.0
+                        ],
+                        [
+                            256,
+                            273
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            353,
+                            309
+                        ],
+                        [
+                            289,
+                            309
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            419,
+                            309
+                        ],
+                        [
+                            353,
+                            309
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            446,
+                            433
+                        ],
+                        [
+                            446.0,
+                            309.0
+                        ],
+                        [
+                            419,
+                            309
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            519,
+                            513
+                        ],
+                        [
+                            446.0,
+                            513.0
+                        ],
+                        [
+                            446,
+                            433
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            593,
+                            513
+                        ],
+                        [
+                            519,
+                            513
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            649,
+                            513
+                        ],
+                        [
+                            593,
+                            513
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            673,
+                            546
+                        ],
+                        [
+                            673.0,
+                            513.0
+                        ],
+                        [
+                            649,
+                            513
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            673,
+                            583
+                        ],
+                        [
+                            673,
+                            546
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            673,
+                            623
+                        ],
+                        [
+                            673,
+                            583
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            673,
+                            659
+                        ],
+                        [
+                            673,
+                            623
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        256,
+                        179
+                    ],
+                    "is_working": true,
+                    "name": "OEZ",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        256,
+                        225
+                    ],
+                    "is_working": true,
+                    "name": "Georg-Brauchle-Ring",
+                    "rect": [
+                        141,
+                        218,
+                        106,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        256,
+                        249
+                    ],
+                    "is_working": true,
+                    "name": "Westfriedhof",
+                    "rect": [
+                        183,
+                        242,
+                        64,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        256,
+                        273
+                    ],
+                    "is_working": true,
+                    "name": "Gern",
+                    "rect": [
+                        221,
+                        266,
+                        26,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        289,
+                        309
+                    ],
+                    "is_working": true,
+                    "name": "Rotkreuzplatz",
+                    "rect": [
+                        258,
+                        319,
+                        69,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        353,
+                        309
+                    ],
+                    "is_working": true,
+                    "name": "Maillingerstrasse",
+                    "rect": [
+                        315,
+                        284,
+                        88,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        419,
+                        309
+                    ],
+                    "is_working": true,
+                    "name": "Stiglmaierplatz",
+                    "rect": [
+                        368,
+                        318,
+                        75,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        446,
+                        433
+                    ],
+                    "is_working": true,
+                    "name": "Hauptbahnhof Central Station",
+                    "rect": [
+                        291,
+                        410,
+                        146,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        519,
+                        513
+                    ],
+                    "is_working": true,
+                    "name": "Sendlinger Tor",
+                    "rect": [
+                        426,
+                        517,
+                        74,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        593,
+                        513
+                    ],
+                    "is_working": true,
+                    "name": "Fraunhoferstrasse",
+                    "rect": [
+                        550,
+                        523,
+                        92,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        649,
+                        513
+                    ],
+                    "is_working": true,
+                    "name": "Kolumbusplatz",
+                    "rect": [
+                        630,
+                        481,
+                        75,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        673,
+                        546
+                    ],
+                    "is_working": true,
+                    "name": "Candidplatz",
+                    "rect": [
+                        682,
+                        540,
+                        60,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        673,
+                        583
+                    ],
+                    "is_working": true,
+                    "name": "Wettersteinplatz",
+                    "rect": [
+                        682,
+                        576,
+                        81,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        673,
+                        623
+                    ],
+                    "is_working": true,
+                    "name": "St.-Quirin-Platz",
+                    "rect": [
+                        683,
+                        616,
+                        75,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        673,
+                        659
+                    ],
+                    "is_working": true,
+                    "name": "Mangfallplatz",
+                    "rect": [
+                        683,
+                        653,
+                        67,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                }
+            ],
+            "text_id": 15
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "b22222",
+            "line_color": "b22222",
+            "line_width": 7,
+            "name": "U2",
+            "segments": [
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            223,
+                            116
+                        ],
+                        [
+                            169,
+                            116
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            289,
+                            116
+                        ],
+                        [
+                            223,
+                            116
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            353,
+                            116
+                        ],
+                        [
+                            289,
+                            116
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            416,
+                            116
+                        ],
+                        [
+                            353,
+                            116
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            456,
+                            126
+                        ],
+                        [
+                            456.0,
+                            116.0
+                        ],
+                        [
+                            416,
+                            116
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            456,
+                            146
+                        ],
+                        [
+                            456,
+                            126
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            456,
+                            179
+                        ],
+                        [
+                            456,
+                            146
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            456,
+                            213
+                        ],
+                        [
+                            456,
+                            179
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    23,
+                    24,
+                    [
+                        [
+                            456,
+                            249
+                        ],
+                        [
+                            456,
+                            213
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            456,
+                            283
+                        ],
+                        [
+                            456,
+                            249
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    25,
+                    26,
+                    [
+                        [
+                            456,
+                            332
+                        ],
+                        [
+                            456,
+                            283
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    26,
+                    27,
+                    [
+                        [
+                            456,
+                            443
+                        ],
+                        [
+                            456,
+                            332
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    27,
+                    28,
+                    [
+                        [
+                            529,
+                            503
+                        ],
+                        [
+                            456.0,
+                            503.0
+                        ],
+                        [
+                            456,
+                            443
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            593,
+                            503
+                        ],
+                        [
+                            529,
+                            503
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    29,
+                    30,
+                    [
+                        [
+                            649,
+                            503
+                        ],
+                        [
+                            593,
+                            503
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    30,
+                    31,
+                    [
+                        [
+                            713,
+                            503
+                        ],
+                        [
+                            649,
+                            503
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    31,
+                    32,
+                    [
+                        [
+                            773,
+                            503
+                        ],
+                        [
+                            713,
+                            503
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    32,
+                    33,
+                    [
+                        [
+                            816,
+                            503
+                        ],
+                        [
+                            773,
+                            503
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    33,
+                    34,
+                    [
+                        [
+                            879,
+                            503
+                        ],
+                        [
+                            816,
+                            503
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    34,
+                    35,
+                    [
+                        [
+                            929,
+                            503
+                        ],
+                        [
+                            879,
+                            503
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    35,
+                    36,
+                    [
+                        [
+                            999,
+                            486
+                        ],
+                        [
+                            983.0,
+                            503.0
+                        ],
+                        [
+                            929,
+                            503
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    36,
+                    37,
+                    [
+                        [
+                            1023,
+                            463
+                        ],
+                        [
+                            999,
+                            486
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    37,
+                    38,
+                    [
+                        [
+                            1053,
+                            433
+                        ],
+                        [
+                            1023,
+                            463
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    38,
+                    39,
+                    [
+                        [
+                            1087,
+                            399
+                        ],
+                        [
+                            1053,
+                            433
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    39,
+                    40,
+                    [
+                        [
+                            1126,
+                            386
+                        ],
+                        [
+                            1100.0,
+                            386.0
+                        ],
+                        [
+                            1087,
+                            399
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    40,
+                    41,
+                    [
+                        [
+                            1169,
+                            386
+                        ],
+                        [
+                            1126,
+                            386
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        169,
+                        116
+                    ],
+                    "is_working": true,
+                    "name": "Feldmoching",
+                    "rect": [
+                        140,
+                        94,
+                        65,
+                        15
+                    ],
+                    "text_id": 16,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        223,
+                        116
+                    ],
+                    "is_working": true,
+                    "name": "Hasenbergl",
+                    "rect": [
+                        199,
+                        124,
+                        59,
+                        15
+                    ],
+                    "text_id": 17,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        289,
+                        116
+                    ],
+                    "is_working": true,
+                    "name": "Dulferstrasse",
+                    "rect": [
+                        261,
+                        94,
+                        69,
+                        15
+                    ],
+                    "text_id": 18,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        353,
+                        116
+                    ],
+                    "is_working": true,
+                    "name": "Harthof",
+                    "rect": [
+                        337,
+                        124,
+                        38,
+                        15
+                    ],
+                    "text_id": 19,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        416,
+                        116
+                    ],
+                    "is_working": true,
+                    "name": "Am Hart",
+                    "rect": [
+                        398,
+                        94,
+                        43,
+                        15
+                    ],
+                    "text_id": 20,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        456,
+                        126
+                    ],
+                    "is_working": true,
+                    "name": "Frankfurter Ring",
+                    "rect": [
+                        465,
+                        119,
+                        82,
+                        15
+                    ],
+                    "text_id": 21,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        456,
+                        146
+                    ],
+                    "is_working": true,
+                    "name": "Milbertshofen",
+                    "rect": [
+                        465,
+                        139,
+                        69,
+                        15
+                    ],
+                    "text_id": 22,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        456,
+                        179
+                    ],
+                    "is_working": true,
+                    "name": "Scheidplatz",
+                    "rect": [
+                        464,
+                        185,
+                        59,
+                        15
+                    ],
+                    "text_id": 23,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        456,
+                        213
+                    ],
+                    "is_working": true,
+                    "name": "Hohenzollernplatz",
+                    "rect": [
+                        465,
+                        207,
+                        90,
+                        15
+                    ],
+                    "text_id": 24,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        456,
+                        249
+                    ],
+                    "is_working": true,
+                    "name": "Josephsplatz",
+                    "rect": [
+                        466,
+                        243,
+                        67,
+                        15
+                    ],
+                    "text_id": 25,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        456,
+                        283
+                    ],
+                    "is_working": true,
+                    "name": "Theresienstrasse",
+                    "rect": [
+                        465,
+                        276,
+                        88,
+                        15
+                    ],
+                    "text_id": 26,
+                    "uid": 25
+                },
+                {
+                    "coord": [
+                        456,
+                        332
+                    ],
+                    "is_working": true,
+                    "name": "Konigsplatz",
+                    "rect": [
+                        465,
+                        325,
+                        60,
+                        15
+                    ],
+                    "text_id": 27,
+                    "uid": 26
+                },
+                {
+                    "coord": [
+                        456,
+                        443
+                    ],
+                    "is_working": true,
+                    "name": "Hauptbahnhof Central Station",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 27
+                },
+                {
+                    "coord": [
+                        529,
+                        503
+                    ],
+                    "is_working": true,
+                    "name": "Sendlinger Tor",
+                    "rect": null,
+                    "text_id": 8,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        593,
+                        503
+                    ],
+                    "is_working": true,
+                    "name": "Fraunhoferstrasse",
+                    "rect": null,
+                    "text_id": 9,
+                    "uid": 29
+                },
+                {
+                    "coord": [
+                        649,
+                        503
+                    ],
+                    "is_working": true,
+                    "name": "Kolumbusplatz",
+                    "rect": null,
+                    "text_id": 10,
+                    "uid": 30
+                },
+                {
+                    "coord": [
+                        713,
+                        503
+                    ],
+                    "is_working": true,
+                    "name": "Silberhornstrasse",
+                    "rect": [
+                        690,
+                        510,
+                        90,
+                        15
+                    ],
+                    "text_id": 28,
+                    "uid": 31
+                },
+                {
+                    "coord": [
+                        773,
+                        503
+                    ],
+                    "is_working": true,
+                    "name": "Untersbergstrasse",
+                    "rect": [
+                        732,
+                        477,
+                        94,
+                        15
+                    ],
+                    "text_id": 29,
+                    "uid": 32
+                },
+                {
+                    "coord": [
+                        816,
+                        503
+                    ],
+                    "is_working": true,
+                    "name": "Giesing",
+                    "rect": [
+                        797,
+                        511,
+                        40,
+                        15
+                    ],
+                    "text_id": 30,
+                    "uid": 33
+                },
+                {
+                    "coord": [
+                        879,
+                        503
+                    ],
+                    "is_working": true,
+                    "name": "Karl-Preis-Platz",
+                    "rect": [
+                        843,
+                        481,
+                        79,
+                        15
+                    ],
+                    "text_id": 31,
+                    "uid": 34
+                },
+                {
+                    "coord": [
+                        929,
+                        503
+                    ],
+                    "is_working": true,
+                    "name": "Innsbrucker Ring",
+                    "rect": [
+                        943,
+                        511,
+                        87,
+                        15
+                    ],
+                    "text_id": 32,
+                    "uid": 35
+                },
+                {
+                    "coord": [
+                        999,
+                        486
+                    ],
+                    "is_working": true,
+                    "name": "Josephsburg",
+                    "rect": [
+                        1009,
+                        488,
+                        66,
+                        15
+                    ],
+                    "text_id": 33,
+                    "uid": 36
+                },
+                {
+                    "coord": [
+                        1023,
+                        463
+                    ],
+                    "is_working": true,
+                    "name": "Kreillerstrasse",
+                    "rect": [
+                        1033,
+                        459,
+                        76,
+                        15
+                    ],
+                    "text_id": 34,
+                    "uid": 37
+                },
+                {
+                    "coord": [
+                        1053,
+                        433
+                    ],
+                    "is_working": true,
+                    "name": "Trudering",
+                    "rect": [
+                        991,
+                        419,
+                        49,
+                        15
+                    ],
+                    "text_id": 35,
+                    "uid": 38
+                },
+                {
+                    "coord": [
+                        1087,
+                        399
+                    ],
+                    "is_working": true,
+                    "name": "Moosfeld",
+                    "rect": [
+                        1028,
+                        387,
+                        47,
+                        15
+                    ],
+                    "text_id": 36,
+                    "uid": 39
+                },
+                {
+                    "coord": [
+                        1126,
+                        386
+                    ],
+                    "is_working": true,
+                    "name": "Messestadt-West",
+                    "rect": [
+                        1068,
+                        362,
+                        87,
+                        15
+                    ],
+                    "text_id": 37,
+                    "uid": 40
+                },
+                {
+                    "coord": [
+                        1169,
+                        386
+                    ],
+                    "is_working": true,
+                    "name": "Messestadt-Ost",
+                    "rect": [
+                        1125,
+                        399,
+                        79,
+                        15
+                    ],
+                    "text_id": 38,
+                    "uid": 41
+                }
+            ],
+            "text_id": 39
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "ff8c00",
+            "line_color": "ff8c00",
+            "line_width": 7,
+            "name": "U3",
+            "segments": [
+                [
+                    42,
+                    43,
+                    [
+                        [
+                            176,
+                            179
+                        ],
+                        [
+                            75,
+                            179
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    43,
+                    44,
+                    [
+                        [
+                            245,
+                            179
+                        ],
+                        [
+                            176,
+                            179
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    44,
+                    45,
+                    [
+                        [
+                            311,
+                            179
+                        ],
+                        [
+                            245,
+                            179
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    45,
+                    46,
+                    [
+                        [
+                            359,
+                            179
+                        ],
+                        [
+                            311,
+                            179
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    46,
+                    47,
+                    [
+                        [
+                            413,
+                            179
+                        ],
+                        [
+                            359,
+                            179
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    47,
+                    48,
+                    [
+                        [
+                            446,
+                            179
+                        ],
+                        [
+                            413,
+                            179
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    48,
+                    49,
+                    [
+                        [
+                            516,
+                            179
+                        ],
+                        [
+                            446,
+                            179
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    49,
+                    50,
+                    [
+                        [
+                            603,
+                            223
+                        ],
+                        [
+                            559.0,
+                            179.0
+                        ],
+                        [
+                            516,
+                            179
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    50,
+                    51,
+                    [
+                        [
+                            603,
+                            253
+                        ],
+                        [
+                            603,
+                            223
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    51,
+                    52,
+                    [
+                        [
+                            603,
+                            279
+                        ],
+                        [
+                            603,
+                            253
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    52,
+                    53,
+                    [
+                        [
+                            603,
+                            313
+                        ],
+                        [
+                            603,
+                            279
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    53,
+                    54,
+                    [
+                        [
+                            603,
+                            429
+                        ],
+                        [
+                            603,
+                            313
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    54,
+                    55,
+                    [
+                        [
+                            519,
+                            503
+                        ],
+                        [
+                            519.0,
+                            479.0
+                        ],
+                        [
+                            603.0,
+                            479.0
+                        ],
+                        [
+                            603,
+                            429
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    55,
+                    56,
+                    [
+                        [
+                            509,
+                            533
+                        ],
+                        [
+                            519.0,
+                            523.0
+                        ],
+                        [
+                            519,
+                            503
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    56,
+                    57,
+                    [
+                        [
+                            493,
+                            549
+                        ],
+                        [
+                            509,
+                            533
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    57,
+                    58,
+                    [
+                        [
+                            466,
+                            556
+                        ],
+                        [
+                            486.0,
+                            556.0
+                        ],
+                        [
+                            493,
+                            549
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    58,
+                    59,
+                    [
+                        [
+                            436,
+                            596
+                        ],
+                        [
+                            436.0,
+                            556.0
+                        ],
+                        [
+                            466,
+                            556
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    59,
+                    60,
+                    [
+                        [
+                            396,
+                            616
+                        ],
+                        [
+                            436.0,
+                            616.0
+                        ],
+                        [
+                            436,
+                            596
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    60,
+                    61,
+                    [
+                        [
+                            269,
+                            616
+                        ],
+                        [
+                            396,
+                            616
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    61,
+                    62,
+                    [
+                        [
+                            219,
+                            616
+                        ],
+                        [
+                            269,
+                            616
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    62,
+                    63,
+                    [
+                        [
+                            179,
+                            629
+                        ],
+                        [
+                            193.0,
+                            616.0
+                        ],
+                        [
+                            219,
+                            616
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    63,
+                    64,
+                    [
+                        [
+                            163,
+                            686
+                        ],
+                        [
+                            163.0,
+                            646.0
+                        ],
+                        [
+                            179,
+                            629
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    64,
+                    65,
+                    [
+                        [
+                            163,
+                            719
+                        ],
+                        [
+                            163,
+                            686
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    65,
+                    66,
+                    [
+                        [
+                            163,
+                            753
+                        ],
+                        [
+                            163,
+                            719
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        75,
+                        179
+                    ],
+                    "is_working": true,
+                    "name": "Moosach",
+                    "rect": [
+                        53,
+                        188,
+                        47,
+                        15
+                    ],
+                    "text_id": 40,
+                    "uid": 42
+                },
+                {
+                    "coord": [
+                        176,
+                        179
+                    ],
+                    "is_working": true,
+                    "name": "Moosacher St-Martins-Platz",
+                    "rect": [
+                        102,
+                        155,
+                        137,
+                        15
+                    ],
+                    "text_id": 41,
+                    "uid": 43
+                },
+                {
+                    "coord": [
+                        245,
+                        179
+                    ],
+                    "is_working": true,
+                    "name": "OEZ",
+                    "rect": [
+                        226,
+                        191,
+                        23,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 44
+                },
+                {
+                    "coord": [
+                        311,
+                        179
+                    ],
+                    "is_working": true,
+                    "name": "Oberwiesenfeld",
+                    "rect": [
+                        280,
+                        155,
+                        79,
+                        15
+                    ],
+                    "text_id": 42,
+                    "uid": 45
+                },
+                {
+                    "coord": [
+                        359,
+                        179
+                    ],
+                    "is_working": true,
+                    "name": "Olympiazentrum",
+                    "rect": [
+                        320,
+                        188,
+                        82,
+                        15
+                    ],
+                    "text_id": 43,
+                    "uid": 46
+                },
+                {
+                    "coord": [
+                        413,
+                        179
+                    ],
+                    "is_working": true,
+                    "name": "Petuelring",
+                    "rect": [
+                        381,
+                        157,
+                        52,
+                        15
+                    ],
+                    "text_id": 44,
+                    "uid": 47
+                },
+                {
+                    "coord": [
+                        446,
+                        179
+                    ],
+                    "is_working": true,
+                    "name": "Scheidplatz",
+                    "rect": null,
+                    "text_id": 23,
+                    "uid": 48
+                },
+                {
+                    "coord": [
+                        516,
+                        179
+                    ],
+                    "is_working": true,
+                    "name": "Bonner Platz",
+                    "rect": [
+                        492,
+                        157,
+                        65,
+                        15
+                    ],
+                    "text_id": 45,
+                    "uid": 49
+                },
+                {
+                    "coord": [
+                        603,
+                        223
+                    ],
+                    "is_working": true,
+                    "name": "Munchner Freiheit",
+                    "rect": [
+                        625,
+                        216,
+                        91,
+                        15
+                    ],
+                    "text_id": 46,
+                    "uid": 50
+                },
+                {
+                    "coord": [
+                        603,
+                        253
+                    ],
+                    "is_working": true,
+                    "name": "Giselastrasse",
+                    "rect": [
+                        625,
+                        246,
+                        71,
+                        15
+                    ],
+                    "text_id": 47,
+                    "uid": 51
+                },
+                {
+                    "coord": [
+                        603,
+                        279
+                    ],
+                    "is_working": true,
+                    "name": "Universitat",
+                    "rect": [
+                        625,
+                        272,
+                        56,
+                        15
+                    ],
+                    "text_id": 48,
+                    "uid": 52
+                },
+                {
+                    "coord": [
+                        603,
+                        313
+                    ],
+                    "is_working": true,
+                    "name": "Odeonsplatz",
+                    "rect": [
+                        531,
+                        292,
+                        63,
+                        15
+                    ],
+                    "text_id": 49,
+                    "uid": 53
+                },
+                {
+                    "coord": [
+                        603,
+                        429
+                    ],
+                    "is_working": true,
+                    "name": "Marienplatz City Center",
+                    "rect": [
+                        625,
+                        422,
+                        118,
+                        15
+                    ],
+                    "text_id": 50,
+                    "uid": 54
+                },
+                {
+                    "coord": [
+                        519,
+                        503
+                    ],
+                    "is_working": true,
+                    "name": "Sendlinger Tor",
+                    "rect": null,
+                    "text_id": 8,
+                    "uid": 55
+                },
+                {
+                    "coord": [
+                        509,
+                        533
+                    ],
+                    "is_working": true,
+                    "name": "Goetheplatz",
+                    "rect": [
+                        526,
+                        538,
+                        60,
+                        15
+                    ],
+                    "text_id": 51,
+                    "uid": 56
+                },
+                {
+                    "coord": [
+                        493,
+                        549
+                    ],
+                    "is_working": true,
+                    "name": "Poccistrasse",
+                    "rect": [
+                        509,
+                        557,
+                        67,
+                        15
+                    ],
+                    "text_id": 52,
+                    "uid": 57
+                },
+                {
+                    "coord": [
+                        466,
+                        556
+                    ],
+                    "is_working": true,
+                    "name": "Implerstrasse",
+                    "rect": [
+                        450,
+                        576,
+                        70,
+                        15
+                    ],
+                    "text_id": 53,
+                    "uid": 58
+                },
+                {
+                    "coord": [
+                        436,
+                        596
+                    ],
+                    "is_working": true,
+                    "name": "Brudermuhlstrasse",
+                    "rect": [
+                        444,
+                        597,
+                        97,
+                        15
+                    ],
+                    "text_id": 54,
+                    "uid": 59
+                },
+                {
+                    "coord": [
+                        396,
+                        616
+                    ],
+                    "is_working": true,
+                    "name": "Thalkirchen",
+                    "rect": [
+                        350,
+                        595,
+                        60,
+                        15
+                    ],
+                    "text_id": 55,
+                    "uid": 60
+                },
+                {
+                    "coord": [
+                        269,
+                        616
+                    ],
+                    "is_working": true,
+                    "name": "Obersendling",
+                    "rect": [
+                        258,
+                        624,
+                        68,
+                        15
+                    ],
+                    "text_id": 56,
+                    "uid": 61
+                },
+                {
+                    "coord": [
+                        219,
+                        616
+                    ],
+                    "is_working": true,
+                    "name": "Aidenbachstrasse",
+                    "rect": [
+                        161,
+                        593,
+                        92,
+                        15
+                    ],
+                    "text_id": 57,
+                    "uid": 62
+                },
+                {
+                    "coord": [
+                        179,
+                        629
+                    ],
+                    "is_working": true,
+                    "name": "Machtlfinger Strasse",
+                    "rect": [
+                        181,
+                        638,
+                        104,
+                        15
+                    ],
+                    "text_id": 58,
+                    "uid": 63
+                },
+                {
+                    "coord": [
+                        163,
+                        686
+                    ],
+                    "is_working": true,
+                    "name": "Forstenrieder Allee",
+                    "rect": [
+                        173,
+                        679,
+                        97,
+                        15
+                    ],
+                    "text_id": 59,
+                    "uid": 64
+                },
+                {
+                    "coord": [
+                        163,
+                        719
+                    ],
+                    "is_working": true,
+                    "name": "Basler Strasse",
+                    "rect": [
+                        173,
+                        712,
+                        76,
+                        15
+                    ],
+                    "text_id": 60,
+                    "uid": 65
+                },
+                {
+                    "coord": [
+                        163,
+                        753
+                    ],
+                    "is_working": true,
+                    "name": "Furstenried West",
+                    "rect": [
+                        173,
+                        746,
+                        86,
+                        15
+                    ],
+                    "text_id": 61,
+                    "uid": 66
+                }
+            ],
+            "text_id": 62
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "20b2aa",
+            "line_color": "20b2aa",
+            "line_width": 7,
+            "name": "U4",
+            "segments": [
+                [
+                    67,
+                    68,
+                    [
+                        [
+                            256,
+                            499
+                        ],
+                        [
+                            216,
+                            499
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    68,
+                    69,
+                    [
+                        [
+                            363,
+                            499
+                        ],
+                        [
+                            256,
+                            499
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    69,
+                    70,
+                    [
+                        [
+                            399,
+                            459
+                        ],
+                        [
+                            399.0,
+                            499.0
+                        ],
+                        [
+                            363,
+                            499
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    70,
+                    71,
+                    [
+                        [
+                            456,
+                            433
+                        ],
+                        [
+                            399.0,
+                            433.0
+                        ],
+                        [
+                            399,
+                            459
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    71,
+                    72,
+                    [
+                        [
+                            509,
+                            389
+                        ],
+                        [
+                            509.0,
+                            433.0
+                        ],
+                        [
+                            456,
+                            433
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    72,
+                    73,
+                    [
+                        [
+                            613,
+                            313
+                        ],
+                        [
+                            509.0,
+                            313.0
+                        ],
+                        [
+                            509,
+                            389
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    73,
+                    74,
+                    [
+                        [
+                            659,
+                            313
+                        ],
+                        [
+                            613,
+                            313
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    74,
+                    75,
+                    [
+                        [
+                            726,
+                            313
+                        ],
+                        [
+                            659,
+                            313
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    75,
+                    76,
+                    [
+                        [
+                            766,
+                            289
+                        ],
+                        [
+                            766.0,
+                            313.0
+                        ],
+                        [
+                            726,
+                            313
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    76,
+                    77,
+                    [
+                        [
+                            766,
+                            256
+                        ],
+                        [
+                            766,
+                            289
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    77,
+                    78,
+                    [
+                        [
+                            766,
+                            226
+                        ],
+                        [
+                            766,
+                            256
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    78,
+                    79,
+                    [
+                        [
+                            806,
+                            193
+                        ],
+                        [
+                            766.0,
+                            193.0
+                        ],
+                        [
+                            766,
+                            226
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        216,
+                        499
+                    ],
+                    "is_working": true,
+                    "name": "Westendstrasse",
+                    "rect": [
+                        154,
+                        474,
+                        82,
+                        15
+                    ],
+                    "text_id": 63,
+                    "uid": 67
+                },
+                {
+                    "coord": [
+                        256,
+                        499
+                    ],
+                    "is_working": true,
+                    "name": "Heimeranplatz",
+                    "rect": [
+                        243,
+                        520,
+                        73,
+                        15
+                    ],
+                    "text_id": 64,
+                    "uid": 68
+                },
+                {
+                    "coord": [
+                        363,
+                        499
+                    ],
+                    "is_working": true,
+                    "name": "Schwanthalerhohe",
+                    "rect": [
+                        297,
+                        475,
+                        93,
+                        15
+                    ],
+                    "text_id": 65,
+                    "uid": 69
+                },
+                {
+                    "coord": [
+                        399,
+                        459
+                    ],
+                    "is_working": true,
+                    "name": "Theresienwiese",
+                    "rect": [
+                        309,
+                        451,
+                        80,
+                        15
+                    ],
+                    "text_id": 66,
+                    "uid": 70
+                },
+                {
+                    "coord": [
+                        456,
+                        433
+                    ],
+                    "is_working": true,
+                    "name": "Hauptbahnhof Central Station",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 71
+                },
+                {
+                    "coord": [
+                        509,
+                        389
+                    ],
+                    "is_working": true,
+                    "name": "Karlsplatz",
+                    "rect": [
+                        531,
+                        381,
+                        52,
+                        15
+                    ],
+                    "text_id": 67,
+                    "uid": 72
+                },
+                {
+                    "coord": [
+                        613,
+                        313
+                    ],
+                    "is_working": true,
+                    "name": "Odeonsplatz",
+                    "rect": null,
+                    "text_id": 49,
+                    "uid": 73
+                },
+                {
+                    "coord": [
+                        659,
+                        313
+                    ],
+                    "is_working": true,
+                    "name": "Lehel",
+                    "rect": [
+                        645,
+                        335,
+                        29,
+                        15
+                    ],
+                    "text_id": 68,
+                    "uid": 74
+                },
+                {
+                    "coord": [
+                        726,
+                        313
+                    ],
+                    "is_working": true,
+                    "name": "Max-Weber-Platz",
+                    "rect": [
+                        701,
+                        335,
+                        85,
+                        15
+                    ],
+                    "text_id": 69,
+                    "uid": 75
+                },
+                {
+                    "coord": [
+                        766,
+                        289
+                    ],
+                    "is_working": true,
+                    "name": "Prinzregentenplatz",
+                    "rect": [
+                        776,
+                        281,
+                        93,
+                        15
+                    ],
+                    "text_id": 70,
+                    "uid": 76
+                },
+                {
+                    "coord": [
+                        766,
+                        256
+                    ],
+                    "is_working": true,
+                    "name": "Bohmerwaldplatz",
+                    "rect": [
+                        775,
+                        250,
+                        87,
+                        15
+                    ],
+                    "text_id": 71,
+                    "uid": 77
+                },
+                {
+                    "coord": [
+                        766,
+                        226
+                    ],
+                    "is_working": true,
+                    "name": "Richard-Strauss-Strasse",
+                    "rect": [
+                        776,
+                        218,
+                        123,
+                        15
+                    ],
+                    "text_id": 72,
+                    "uid": 78
+                },
+                {
+                    "coord": [
+                        806,
+                        193
+                    ],
+                    "is_working": true,
+                    "name": "Arabellapark",
+                    "rect": [
+                        780,
+                        171,
+                        66,
+                        15
+                    ],
+                    "text_id": 73,
+                    "uid": 79
+                }
+            ],
+            "text_id": 74
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "b8860b",
+            "line_color": "b8860b",
+            "line_width": 7,
+            "name": "U5",
+            "segments": [
+                [
+                    80,
+                    81,
+                    [
+                        [
+                            166,
+                            509
+                        ],
+                        [
+                            113,
+                            509
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    81,
+                    82,
+                    [
+                        [
+                            216,
+                            509
+                        ],
+                        [
+                            166,
+                            509
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    82,
+                    83,
+                    [
+                        [
+                            256,
+                            509
+                        ],
+                        [
+                            216,
+                            509
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    83,
+                    84,
+                    [
+                        [
+                            363,
+                            509
+                        ],
+                        [
+                            256,
+                            509
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    84,
+                    85,
+                    [
+                        [
+                            409,
+                            459
+                        ],
+                        [
+                            409.0,
+                            509.0
+                        ],
+                        [
+                            363,
+                            509
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    85,
+                    86,
+                    [
+                        [
+                            446,
+                            443
+                        ],
+                        [
+                            409.0,
+                            443.0
+                        ],
+                        [
+                            409,
+                            459
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    86,
+                    87,
+                    [
+                        [
+                            519,
+                            389
+                        ],
+                        [
+                            519.0,
+                            443.0
+                        ],
+                        [
+                            446,
+                            443
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    87,
+                    88,
+                    [
+                        [
+                            603,
+                            323
+                        ],
+                        [
+                            519.0,
+                            323.0
+                        ],
+                        [
+                            519,
+                            389
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    88,
+                    89,
+                    [
+                        [
+                            659,
+                            323
+                        ],
+                        [
+                            603,
+                            323
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    89,
+                    90,
+                    [
+                        [
+                            726,
+                            323
+                        ],
+                        [
+                            659,
+                            323
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    90,
+                    91,
+                    [
+                        [
+                            826,
+                            399
+                        ],
+                        [
+                            826.0,
+                            323.0
+                        ],
+                        [
+                            726,
+                            323
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    91,
+                    92,
+                    [
+                        [
+                            939,
+                            503
+                        ],
+                        [
+                            939.0,
+                            463.0
+                        ],
+                        [
+                            826.0,
+                            463.0
+                        ],
+                        [
+                            826,
+                            399
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    92,
+                    93,
+                    [
+                        [
+                            939,
+                            539
+                        ],
+                        [
+                            939,
+                            503
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    93,
+                    94,
+                    [
+                        [
+                            939,
+                            563
+                        ],
+                        [
+                            939,
+                            539
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    94,
+                    95,
+                    [
+                        [
+                            939,
+                            586
+                        ],
+                        [
+                            939,
+                            563
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    95,
+                    96,
+                    [
+                        [
+                            939,
+                            613
+                        ],
+                        [
+                            939,
+                            586
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    96,
+                    97,
+                    [
+                        [
+                            939,
+                            639
+                        ],
+                        [
+                            939,
+                            613
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        113,
+                        509
+                    ],
+                    "is_working": true,
+                    "name": "Laimer Platz",
+                    "rect": [
+                        72,
+                        485,
+                        63,
+                        15
+                    ],
+                    "text_id": 75,
+                    "uid": 80
+                },
+                {
+                    "coord": [
+                        166,
+                        509
+                    ],
+                    "is_working": true,
+                    "name": "Friedenheimer Strasse",
+                    "rect": [
+                        113,
+                        521,
+                        114,
+                        15
+                    ],
+                    "text_id": 76,
+                    "uid": 81
+                },
+                {
+                    "coord": [
+                        216,
+                        509
+                    ],
+                    "is_working": true,
+                    "name": "Westendstrasse",
+                    "rect": null,
+                    "text_id": 63,
+                    "uid": 82
+                },
+                {
+                    "coord": [
+                        256,
+                        509
+                    ],
+                    "is_working": true,
+                    "name": "Heimeranplatz",
+                    "rect": null,
+                    "text_id": 64,
+                    "uid": 83
+                },
+                {
+                    "coord": [
+                        363,
+                        509
+                    ],
+                    "is_working": true,
+                    "name": "Schwanthalerhohe",
+                    "rect": null,
+                    "text_id": 65,
+                    "uid": 84
+                },
+                {
+                    "coord": [
+                        409,
+                        459
+                    ],
+                    "is_working": true,
+                    "name": "Theresienwiese",
+                    "rect": null,
+                    "text_id": 66,
+                    "uid": 85
+                },
+                {
+                    "coord": [
+                        446,
+                        443
+                    ],
+                    "is_working": true,
+                    "name": "Hauptbahnhof Central Station",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 86
+                },
+                {
+                    "coord": [
+                        519,
+                        389
+                    ],
+                    "is_working": true,
+                    "name": "Karlsplatz",
+                    "rect": null,
+                    "text_id": 67,
+                    "uid": 87
+                },
+                {
+                    "coord": [
+                        603,
+                        323
+                    ],
+                    "is_working": true,
+                    "name": "Odeonsplatz",
+                    "rect": null,
+                    "text_id": 49,
+                    "uid": 88
+                },
+                {
+                    "coord": [
+                        659,
+                        323
+                    ],
+                    "is_working": true,
+                    "name": "Lehel",
+                    "rect": null,
+                    "text_id": 68,
+                    "uid": 89
+                },
+                {
+                    "coord": [
+                        726,
+                        323
+                    ],
+                    "is_working": true,
+                    "name": "Max-Weber-Platz",
+                    "rect": null,
+                    "text_id": 69,
+                    "uid": 90
+                },
+                {
+                    "coord": [
+                        826,
+                        399
+                    ],
+                    "is_working": true,
+                    "name": "Ostbahnhof",
+                    "rect": [
+                        835,
+                        392,
+                        58,
+                        15
+                    ],
+                    "text_id": 77,
+                    "uid": 91
+                },
+                {
+                    "coord": [
+                        939,
+                        503
+                    ],
+                    "is_working": true,
+                    "name": "Innsbrucker Ring",
+                    "rect": null,
+                    "text_id": 32,
+                    "uid": 92
+                },
+                {
+                    "coord": [
+                        939,
+                        539
+                    ],
+                    "is_working": true,
+                    "name": "Michaelibad",
+                    "rect": [
+                        947,
+                        533,
+                        62,
+                        15
+                    ],
+                    "text_id": 78,
+                    "uid": 93
+                },
+                {
+                    "coord": [
+                        939,
+                        563
+                    ],
+                    "is_working": true,
+                    "name": "Quiddestrasse",
+                    "rect": [
+                        947,
+                        557,
+                        74,
+                        15
+                    ],
+                    "text_id": 79,
+                    "uid": 94
+                },
+                {
+                    "coord": [
+                        939,
+                        586
+                    ],
+                    "is_working": true,
+                    "name": "Neuperlach Zentrum",
+                    "rect": [
+                        947,
+                        579,
+                        102,
+                        15
+                    ],
+                    "text_id": 80,
+                    "uid": 95
+                },
+                {
+                    "coord": [
+                        939,
+                        613
+                    ],
+                    "is_working": true,
+                    "name": "Therese-Giehse-Allee",
+                    "rect": [
+                        947,
+                        606,
+                        109,
+                        15
+                    ],
+                    "text_id": 81,
+                    "uid": 96
+                },
+                {
+                    "coord": [
+                        939,
+                        639
+                    ],
+                    "is_working": true,
+                    "name": "Neuperlach Sud",
+                    "rect": [
+                        947,
+                        632,
+                        81,
+                        15
+                    ],
+                    "text_id": 82,
+                    "uid": 97
+                }
+            ],
+            "text_id": 83
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "1e90ff",
+            "line_color": "1e90ff",
+            "line_width": 7,
+            "name": "U6",
+            "segments": [
+                [
+                    98,
+                    99,
+                    [
+                        [
+                            613,
+                            43
+                        ],
+                        [
+                            613,
+                            26
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    99,
+                    100,
+                    [
+                        [
+                            613,
+                            63
+                        ],
+                        [
+                            613,
+                            43
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    100,
+                    101,
+                    [
+                        [
+                            613,
+                            86
+                        ],
+                        [
+                            613,
+                            63
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    101,
+                    102,
+                    [
+                        [
+                            613,
+                            103
+                        ],
+                        [
+                            613,
+                            86
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    102,
+                    103,
+                    [
+                        [
+                            613,
+                            123
+                        ],
+                        [
+                            613,
+                            103
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    103,
+                    104,
+                    [
+                        [
+                            613,
+                            146
+                        ],
+                        [
+                            613,
+                            123
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    104,
+                    105,
+                    [
+                        [
+                            613,
+                            163
+                        ],
+                        [
+                            613,
+                            146
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    105,
+                    106,
+                    [
+                        [
+                            613,
+                            183
+                        ],
+                        [
+                            613,
+                            163
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    106,
+                    107,
+                    [
+                        [
+                            613,
+                            203
+                        ],
+                        [
+                            613,
+                            183
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    107,
+                    108,
+                    [
+                        [
+                            613,
+                            223
+                        ],
+                        [
+                            613,
+                            203
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    108,
+                    109,
+                    [
+                        [
+                            613,
+                            253
+                        ],
+                        [
+                            613,
+                            223
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    109,
+                    110,
+                    [
+                        [
+                            613,
+                            279
+                        ],
+                        [
+                            613,
+                            253
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    110,
+                    111,
+                    [
+                        [
+                            613,
+                            323
+                        ],
+                        [
+                            613,
+                            279
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    111,
+                    112,
+                    [
+                        [
+                            613,
+                            429
+                        ],
+                        [
+                            613,
+                            323
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    112,
+                    113,
+                    [
+                        [
+                            529,
+                            513
+                        ],
+                        [
+                            529.0,
+                            489.0
+                        ],
+                        [
+                            613.0,
+                            489.0
+                        ],
+                        [
+                            613,
+                            429
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    113,
+                    114,
+                    [
+                        [
+                            516,
+                            539
+                        ],
+                        [
+                            529.0,
+                            526.0
+                        ],
+                        [
+                            529,
+                            513
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    114,
+                    115,
+                    [
+                        [
+                            499,
+                            556
+                        ],
+                        [
+                            516,
+                            539
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    115,
+                    116,
+                    [
+                        [
+                            466,
+                            566
+                        ],
+                        [
+                            489.0,
+                            566.0
+                        ],
+                        [
+                            499,
+                            556
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    116,
+                    117,
+                    [
+                        [
+                            259,
+                            566
+                        ],
+                        [
+                            466,
+                            566
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    117,
+                    118,
+                    [
+                        [
+                            199,
+                            566
+                        ],
+                        [
+                            259,
+                            566
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    118,
+                    119,
+                    [
+                        [
+                            139,
+                            566
+                        ],
+                        [
+                            199,
+                            566
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    119,
+                    120,
+                    [
+                        [
+                            106,
+                            573
+                        ],
+                        [
+                            113.0,
+                            566.0
+                        ],
+                        [
+                            139,
+                            566
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    120,
+                    121,
+                    [
+                        [
+                            76,
+                            603
+                        ],
+                        [
+                            106,
+                            573
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    121,
+                    122,
+                    [
+                        [
+                            69,
+                            633
+                        ],
+                        [
+                            69.0,
+                            609.0
+                        ],
+                        [
+                            76,
+                            603
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    122,
+                    123,
+                    [
+                        [
+                            69,
+                            659
+                        ],
+                        [
+                            69,
+                            633
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        613,
+                        26
+                    ],
+                    "is_working": true,
+                    "name": "Garching-Forschungszentrum",
+                    "rect": [
+                        622,
+                        18,
+                        147,
+                        15
+                    ],
+                    "text_id": 84,
+                    "uid": 98
+                },
+                {
+                    "coord": [
+                        613,
+                        43
+                    ],
+                    "is_working": true,
+                    "name": "Garching",
+                    "rect": [
+                        622,
+                        36,
+                        47,
+                        15
+                    ],
+                    "text_id": 85,
+                    "uid": 99
+                },
+                {
+                    "coord": [
+                        613,
+                        63
+                    ],
+                    "is_working": true,
+                    "name": "Garching-Hochbruck",
+                    "rect": [
+                        622,
+                        57,
+                        104,
+                        15
+                    ],
+                    "text_id": 86,
+                    "uid": 100
+                },
+                {
+                    "coord": [
+                        613,
+                        86
+                    ],
+                    "is_working": true,
+                    "name": "Frottmaning",
+                    "rect": [
+                        622,
+                        79,
+                        60,
+                        15
+                    ],
+                    "text_id": 87,
+                    "uid": 101
+                },
+                {
+                    "coord": [
+                        613,
+                        103
+                    ],
+                    "is_working": true,
+                    "name": "Kieferngarten",
+                    "rect": [
+                        622,
+                        98,
+                        69,
+                        15
+                    ],
+                    "text_id": 88,
+                    "uid": 102
+                },
+                {
+                    "coord": [
+                        613,
+                        123
+                    ],
+                    "is_working": true,
+                    "name": "Freimann",
+                    "rect": [
+                        622,
+                        117,
+                        48,
+                        15
+                    ],
+                    "text_id": 89,
+                    "uid": 103
+                },
+                {
+                    "coord": [
+                        613,
+                        146
+                    ],
+                    "is_working": true,
+                    "name": "Studentenstadt",
+                    "rect": [
+                        622,
+                        138,
+                        75,
+                        15
+                    ],
+                    "text_id": 90,
+                    "uid": 104
+                },
+                {
+                    "coord": [
+                        613,
+                        163
+                    ],
+                    "is_working": true,
+                    "name": "Alte Heide",
+                    "rect": [
+                        622,
+                        158,
+                        54,
+                        15
+                    ],
+                    "text_id": 91,
+                    "uid": 105
+                },
+                {
+                    "coord": [
+                        613,
+                        183
+                    ],
+                    "is_working": true,
+                    "name": "Nordfriedhof",
+                    "rect": [
+                        622,
+                        177,
+                        63,
+                        15
+                    ],
+                    "text_id": 92,
+                    "uid": 106
+                },
+                {
+                    "coord": [
+                        613,
+                        203
+                    ],
+                    "is_working": true,
+                    "name": "Dietlindenstrasse",
+                    "rect": [
+                        622,
+                        196,
+                        89,
+                        15
+                    ],
+                    "text_id": 93,
+                    "uid": 107
+                },
+                {
+                    "coord": [
+                        613,
+                        223
+                    ],
+                    "is_working": true,
+                    "name": "Munchner Freiheit",
+                    "rect": null,
+                    "text_id": 46,
+                    "uid": 108
+                },
+                {
+                    "coord": [
+                        613,
+                        253
+                    ],
+                    "is_working": true,
+                    "name": "Giselastrasse",
+                    "rect": null,
+                    "text_id": 47,
+                    "uid": 109
+                },
+                {
+                    "coord": [
+                        613,
+                        279
+                    ],
+                    "is_working": true,
+                    "name": "Universitat",
+                    "rect": null,
+                    "text_id": 48,
+                    "uid": 110
+                },
+                {
+                    "coord": [
+                        613,
+                        323
+                    ],
+                    "is_working": true,
+                    "name": "Odeonsplatz",
+                    "rect": null,
+                    "text_id": 49,
+                    "uid": 111
+                },
+                {
+                    "coord": [
+                        613,
+                        429
+                    ],
+                    "is_working": true,
+                    "name": "Marienplatz City Center",
+                    "rect": null,
+                    "text_id": 50,
+                    "uid": 112
+                },
+                {
+                    "coord": [
+                        529,
+                        513
+                    ],
+                    "is_working": true,
+                    "name": "Sendlinger Tor",
+                    "rect": null,
+                    "text_id": 8,
+                    "uid": 113
+                },
+                {
+                    "coord": [
+                        516,
+                        539
+                    ],
+                    "is_working": true,
+                    "name": "Goetheplatz",
+                    "rect": null,
+                    "text_id": 51,
+                    "uid": 114
+                },
+                {
+                    "coord": [
+                        499,
+                        556
+                    ],
+                    "is_working": true,
+                    "name": "Poccistrasse",
+                    "rect": null,
+                    "text_id": 52,
+                    "uid": 115
+                },
+                {
+                    "coord": [
+                        466,
+                        566
+                    ],
+                    "is_working": true,
+                    "name": "Implerstrasse",
+                    "rect": null,
+                    "text_id": 53,
+                    "uid": 116
+                },
+                {
+                    "coord": [
+                        259,
+                        566
+                    ],
+                    "is_working": true,
+                    "name": "Harras",
+                    "rect": [
+                        246,
+                        543,
+                        36,
+                        15
+                    ],
+                    "text_id": 94,
+                    "uid": 117
+                },
+                {
+                    "coord": [
+                        199,
+                        566
+                    ],
+                    "is_working": true,
+                    "name": "Partnachplatz",
+                    "rect": [
+                        175,
+                        574,
+                        69,
+                        15
+                    ],
+                    "text_id": 95,
+                    "uid": 118
+                },
+                {
+                    "coord": [
+                        139,
+                        566
+                    ],
+                    "is_working": true,
+                    "name": "Westpark",
+                    "rect": [
+                        120,
+                        544,
+                        49,
+                        15
+                    ],
+                    "text_id": 96,
+                    "uid": 119
+                },
+                {
+                    "coord": [
+                        106,
+                        573
+                    ],
+                    "is_working": true,
+                    "name": "Holzapfelkreuth",
+                    "rect": [
+                        23,
+                        554,
+                        79,
+                        15
+                    ],
+                    "text_id": 97,
+                    "uid": 120
+                },
+                {
+                    "coord": [
+                        76,
+                        603
+                    ],
+                    "is_working": true,
+                    "name": "Haderner Stern",
+                    "rect": [
+                        83,
+                        606,
+                        77,
+                        15
+                    ],
+                    "text_id": 98,
+                    "uid": 121
+                },
+                {
+                    "coord": [
+                        69,
+                        633
+                    ],
+                    "is_working": true,
+                    "name": "Grosshadern",
+                    "rect": [
+                        78,
+                        626,
+                        66,
+                        15
+                    ],
+                    "text_id": 99,
+                    "uid": 122
+                },
+                {
+                    "coord": [
+                        69,
+                        659
+                    ],
+                    "is_working": true,
+                    "name": "Klinikum Grosshadern",
+                    "rect": [
+                        30,
+                        669,
+                        113,
+                        15
+                    ],
+                    "text_id": 100,
+                    "uid": 123
+                }
+            ],
+            "text_id": 101
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 102,
+    "stations_diameter": 13.0,
+    "transfers": [
+        [
+            9,
+            29,
+            [
+                593,
+                513
+            ],
+            [
+                593,
+                503
+            ]
+        ],
+        [
+            7,
+            27,
+            [
+                446,
+                433
+            ],
+            [
+                456,
+                443
+            ]
+        ],
+        [
+            10,
+            30,
+            [
+                649,
+                513
+            ],
+            [
+                649,
+                503
+            ]
+        ],
+        [
+            8,
+            28,
+            [
+                519,
+                513
+            ],
+            [
+                529,
+                503
+            ]
+        ],
+        [
+            0,
+            44,
+            [
+                256,
+                179
+            ],
+            [
+                245,
+                179
+            ]
+        ],
+        [
+            8,
+            55,
+            [
+                519,
+                513
+            ],
+            [
+                519,
+                503
+            ]
+        ],
+        [
+            7,
+            71,
+            [
+                446,
+                433
+            ],
+            [
+                456,
+                433
+            ]
+        ],
+        [
+            7,
+            86,
+            [
+                446,
+                433
+            ],
+            [
+                446,
+                443
+            ]
+        ],
+        [
+            8,
+            113,
+            [
+                519,
+                513
+            ],
+            [
+                529,
+                513
+            ]
+        ],
+        [
+            22,
+            48,
+            [
+                456,
+                179
+            ],
+            [
+                446,
+                179
+            ]
+        ],
+        [
+            28,
+            55,
+            [
+                529,
+                503
+            ],
+            [
+                519,
+                503
+            ]
+        ],
+        [
+            27,
+            71,
+            [
+                456,
+                443
+            ],
+            [
+                456,
+                433
+            ]
+        ],
+        [
+            27,
+            86,
+            [
+                456,
+                443
+            ],
+            [
+                446,
+                443
+            ]
+        ],
+        [
+            35,
+            92,
+            [
+                929,
+                503
+            ],
+            [
+                939,
+                503
+            ]
+        ],
+        [
+            28,
+            113,
+            [
+                529,
+                503
+            ],
+            [
+                529,
+                513
+            ]
+        ],
+        [
+            53,
+            73,
+            [
+                603,
+                313
+            ],
+            [
+                613,
+                313
+            ]
+        ],
+        [
+            53,
+            88,
+            [
+                603,
+                313
+            ],
+            [
+                603,
+                323
+            ]
+        ],
+        [
+            51,
+            109,
+            [
+                603,
+                253
+            ],
+            [
+                613,
+                253
+            ]
+        ],
+        [
+            56,
+            114,
+            [
+                509,
+                533
+            ],
+            [
+                516,
+                539
+            ]
+        ],
+        [
+            58,
+            116,
+            [
+                466,
+                556
+            ],
+            [
+                466,
+                566
+            ]
+        ],
+        [
+            54,
+            112,
+            [
+                603,
+                429
+            ],
+            [
+                613,
+                429
+            ]
+        ],
+        [
+            50,
+            108,
+            [
+                603,
+                223
+            ],
+            [
+                613,
+                223
+            ]
+        ],
+        [
+            53,
+            111,
+            [
+                603,
+                313
+            ],
+            [
+                613,
+                323
+            ]
+        ],
+        [
+            57,
+            115,
+            [
+                493,
+                549
+            ],
+            [
+                499,
+                556
+            ]
+        ],
+        [
+            55,
+            113,
+            [
+                519,
+                503
+            ],
+            [
+                529,
+                513
+            ]
+        ],
+        [
+            52,
+            110,
+            [
+                603,
+                279
+            ],
+            [
+                613,
+                279
+            ]
+        ],
+        [
+            71,
+            86,
+            [
+                456,
+                433
+            ],
+            [
+                446,
+                443
+            ]
+        ],
+        [
+            68,
+            83,
+            [
+                256,
+                499
+            ],
+            [
+                256,
+                509
+            ]
+        ],
+        [
+            72,
+            87,
+            [
+                509,
+                389
+            ],
+            [
+                519,
+                389
+            ]
+        ],
+        [
+            74,
+            89,
+            [
+                659,
+                313
+            ],
+            [
+                659,
+                323
+            ]
+        ],
+        [
+            75,
+            90,
+            [
+                726,
+                313
+            ],
+            [
+                726,
+                323
+            ]
+        ],
+        [
+            73,
+            88,
+            [
+                613,
+                313
+            ],
+            [
+                603,
+                323
+            ]
+        ],
+        [
+            69,
+            84,
+            [
+                363,
+                499
+            ],
+            [
+                363,
+                509
+            ]
+        ],
+        [
+            70,
+            85,
+            [
+                399,
+                459
+            ],
+            [
+                409,
+                459
+            ]
+        ],
+        [
+            67,
+            82,
+            [
+                216,
+                499
+            ],
+            [
+                216,
+                509
+            ]
+        ],
+        [
+            73,
+            111,
+            [
+                613,
+                313
+            ],
+            [
+                613,
+                323
+            ]
+        ],
+        [
+            88,
+            111,
+            [
+                603,
+                323
+            ],
+            [
+                613,
+                323
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 103,
+    "upper_case": false,
+    "width": 1319,
+    "word_wrap": false
+}

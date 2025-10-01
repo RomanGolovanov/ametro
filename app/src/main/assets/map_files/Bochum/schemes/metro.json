@@ -1,0 +1,685 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 645,
+    "images": [
+        "res/schemes/bochum.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "0000c6",
+            "line_color": "0000c6",
+            "line_width": 6,
+            "name": "U35",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            201,
+                            105
+                        ],
+                        [
+                            201,
+                            80
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            201,
+                            125
+                        ],
+                        [
+                            201,
+                            105
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            201,
+                            145
+                        ],
+                        [
+                            201,
+                            125
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            201,
+                            165
+                        ],
+                        [
+                            201,
+                            145
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            181,
+                            185
+                        ],
+                        [
+                            201,
+                            165
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            166,
+                            220
+                        ],
+                        [
+                            166.0,
+                            200.0
+                        ],
+                        [
+                            181,
+                            185
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            166,
+                            240
+                        ],
+                        [
+                            166,
+                            220
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            166,
+                            265
+                        ],
+                        [
+                            166,
+                            240
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            166,
+                            290
+                        ],
+                        [
+                            166,
+                            265
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            166,
+                            320
+                        ],
+                        [
+                            166,
+                            290
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            166,
+                            350
+                        ],
+                        [
+                            166,
+                            320
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            186,
+                            380
+                        ],
+                        [
+                            166.0,
+                            360.0
+                        ],
+                        [
+                            166,
+                            350
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            186,
+                            400
+                        ],
+                        [
+                            186,
+                            380
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            186,
+                            420
+                        ],
+                        [
+                            186,
+                            400
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            191,
+                            450
+                        ],
+                        [
+                            186.0,
+                            445.0
+                        ],
+                        [
+                            186,
+                            420
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            206,
+                            465
+                        ],
+                        [
+                            191,
+                            450
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            221,
+                            480
+                        ],
+                        [
+                            206,
+                            465
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            236,
+                            495
+                        ],
+                        [
+                            221,
+                            480
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            271,
+                            495
+                        ],
+                        [
+                            236,
+                            495
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            296,
+                            495
+                        ],
+                        [
+                            271,
+                            495
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        201,
+                        80
+                    ],
+                    "is_working": true,
+                    "name": "Schloss Strunkede",
+                    "rect": [
+                        97,
+                        73,
+                        95,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        201,
+                        105
+                    ],
+                    "is_working": true,
+                    "name": "Herne Bahnhof",
+                    "rect": [
+                        116,
+                        97,
+                        76,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        201,
+                        125
+                    ],
+                    "is_working": true,
+                    "name": "Herne Mitte",
+                    "rect": [
+                        134,
+                        118,
+                        59,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        201,
+                        145
+                    ],
+                    "is_working": true,
+                    "name": "An der Kreuzkirche",
+                    "rect": [
+                        96,
+                        136,
+                        98,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        201,
+                        165
+                    ],
+                    "is_working": true,
+                    "name": "Holkeskampring",
+                    "rect": [
+                        109,
+                        154,
+                        83,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        181,
+                        185
+                    ],
+                    "is_working": true,
+                    "name": "Beminghausstrasse",
+                    "rect": [
+                        70,
+                        176,
+                        101,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        166,
+                        220
+                    ],
+                    "is_working": true,
+                    "name": "Rensingstrasse",
+                    "rect": [
+                        175,
+                        213,
+                        80,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        166,
+                        240
+                    ],
+                    "is_working": true,
+                    "name": "Riemke Markt",
+                    "rect": [
+                        175,
+                        233,
+                        71,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        166,
+                        265
+                    ],
+                    "is_working": true,
+                    "name": "Zeche Constantin",
+                    "rect": [
+                        176,
+                        259,
+                        88,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        166,
+                        290
+                    ],
+                    "is_working": true,
+                    "name": "Feldsieper Strasse",
+                    "rect": [
+                        176,
+                        283,
+                        95,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        166,
+                        320
+                    ],
+                    "is_working": true,
+                    "name": "Deutsches Bergbau-Museum",
+                    "rect": [
+                        175,
+                        314,
+                        145,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        166,
+                        350
+                    ],
+                    "is_working": true,
+                    "name": "Rathaus Nord",
+                    "rect": [
+                        177,
+                        341,
+                        70,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        186,
+                        380
+                    ],
+                    "is_working": true,
+                    "name": "Bochum Hauptbahnhof",
+                    "rect": [
+                        63,
+                        375,
+                        114,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        186,
+                        400
+                    ],
+                    "is_working": true,
+                    "name": "Oskar-Hoffmann-Strasse",
+                    "rect": [
+                        53,
+                        392,
+                        123,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        186,
+                        420
+                    ],
+                    "is_working": true,
+                    "name": "Waldring",
+                    "rect": [
+                        131,
+                        411,
+                        46,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        191,
+                        450
+                    ],
+                    "is_working": true,
+                    "name": "Wasserstrasse",
+                    "rect": [
+                        100,
+                        442,
+                        77,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        206,
+                        465
+                    ],
+                    "is_working": true,
+                    "name": "Brenschederstrasse",
+                    "rect": [
+                        91,
+                        459,
+                        103,
+                        15
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        221,
+                        480
+                    ],
+                    "is_working": true,
+                    "name": "Markstrasse",
+                    "rect": [
+                        145,
+                        476,
+                        64,
+                        15
+                    ],
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        236,
+                        495
+                    ],
+                    "is_working": true,
+                    "name": "Ruhr-Universitat",
+                    "rect": [
+                        143,
+                        493,
+                        83,
+                        15
+                    ],
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        271,
+                        495
+                    ],
+                    "is_working": true,
+                    "name": "Lennershof",
+                    "rect": [
+                        245,
+                        473,
+                        57,
+                        15
+                    ],
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        296,
+                        495
+                    ],
+                    "is_working": true,
+                    "name": "Hustadt",
+                    "rect": [
+                        308,
+                        488,
+                        40,
+                        15
+                    ],
+                    "text_id": 20,
+                    "uid": 20
+                }
+            ],
+            "text_id": 21
+        }
+    ],
+    "lines_width": 6,
+    "name": "metro",
+    "name_text_id": 22,
+    "stations_diameter": 12.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 23,
+    "upper_case": false,
+    "width": 446,
+    "word_wrap": false
+}

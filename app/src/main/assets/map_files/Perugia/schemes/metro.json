@@ -1,0 +1,251 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 330,
+    "images": [
+        "res/schemes/perugia.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "1C35B1",
+            "line_color": "1C35B1",
+            "line_width": 9,
+            "name": "Minimetro",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            90,
+                            147
+                        ],
+                        [
+                            37,
+                            94
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            155,
+                            180
+                        ],
+                        [
+                            123.0,
+                            180.0
+                        ],
+                        [
+                            90,
+                            147
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            226,
+                            137
+                        ],
+                        [
+                            183.0,
+                            180.0
+                        ],
+                        [
+                            155,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            265,
+                            98
+                        ],
+                        [
+                            226,
+                            137
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            368,
+                            30
+                        ],
+                        [
+                            333.0,
+                            30.0
+                        ],
+                        [
+                            265,
+                            98
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            432,
+                            30
+                        ],
+                        [
+                            368,
+                            30
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        37,
+                        94
+                    ],
+                    "is_working": true,
+                    "name": "Pian di Maasiano",
+                    "rect": [
+                        49,
+                        79,
+                        87,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        90,
+                        147
+                    ],
+                    "is_working": true,
+                    "name": "Cortonese",
+                    "rect": [
+                        103,
+                        132,
+                        53,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        155,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Madonna Alta",
+                    "rect": [
+                        121,
+                        192,
+                        70,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        226,
+                        137
+                    ],
+                    "is_working": true,
+                    "name": "Fontivegge FS",
+                    "rect": [
+                        241,
+                        136,
+                        72,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        265,
+                        98
+                    ],
+                    "is_working": true,
+                    "name": "Case Bruciate",
+                    "rect": [
+                        280,
+                        98,
+                        73,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        368,
+                        30
+                    ],
+                    "is_working": true,
+                    "name": "Cupa",
+                    "rect": [
+                        355,
+                        41,
+                        28,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        432,
+                        30
+                    ],
+                    "is_working": true,
+                    "name": "Pincetto",
+                    "rect": [
+                        408,
+                        43,
+                        42,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                }
+            ],
+            "text_id": 7
+        }
+    ],
+    "lines_width": 9,
+    "name": "metro",
+    "name_text_id": 8,
+    "stations_diameter": 17.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 9,
+    "upper_case": true,
+    "width": 582,
+    "word_wrap": false
+}

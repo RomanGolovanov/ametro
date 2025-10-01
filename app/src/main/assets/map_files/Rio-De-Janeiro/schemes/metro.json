@@ -1,0 +1,1761 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 802,
+    "images": [
+        "res/schemes/rio-de-janeiro.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "F7630B",
+            "line_color": "F7630B",
+            "line_width": 7,
+            "name": "1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            232,
+                            430
+                        ],
+                        [
+                            188,
+                            434
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            276,
+                            419
+                        ],
+                        [
+                            232,
+                            430
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            311,
+                            406
+                        ],
+                        [
+                            276,
+                            419
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            339,
+                            389
+                        ],
+                        [
+                            311,
+                            406
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            370,
+                            374
+                        ],
+                        [
+                            339,
+                            389
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            394,
+                            357
+                        ],
+                        [
+                            370,
+                            374
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            426,
+                            336
+                        ],
+                        [
+                            394,
+                            357
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            442,
+                            355
+                        ],
+                        [
+                            426,
+                            336
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            448,
+                            379
+                        ],
+                        [
+                            442,
+                            355
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            441,
+                            408
+                        ],
+                        [
+                            448,
+                            379
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            435,
+                            431
+                        ],
+                        [
+                            441,
+                            408
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            428,
+                            454
+                        ],
+                        [
+                            435,
+                            431
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            423,
+                            476
+                        ],
+                        [
+                            428,
+                            454
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            415,
+                            498
+                        ],
+                        [
+                            423,
+                            476
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            413,
+                            532
+                        ],
+                        [
+                            415,
+                            498
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            418,
+                            566
+                        ],
+                        [
+                            413,
+                            532
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            405,
+                            588
+                        ],
+                        [
+                            418,
+                            566
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            392,
+                            605
+                        ],
+                        [
+                            405,
+                            588
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            374,
+                            622
+                        ],
+                        [
+                            392,
+                            605
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        188,
+                        434
+                    ],
+                    "is_working": true,
+                    "name": "Uruguai",
+                    "rect": [
+                        161,
+                        447,
+                        41,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        232,
+                        430
+                    ],
+                    "is_working": true,
+                    "name": "Saens Pena",
+                    "rect": [
+                        212,
+                        447,
+                        61,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        276,
+                        419
+                    ],
+                    "is_working": true,
+                    "name": "Sao Francisco Xavier",
+                    "rect": [
+                        269,
+                        431,
+                        108,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        311,
+                        406
+                    ],
+                    "is_working": true,
+                    "name": "Afonso Pena",
+                    "rect": [
+                        310,
+                        415,
+                        65,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        339,
+                        389
+                    ],
+                    "is_working": true,
+                    "name": "Estacio",
+                    "rect": [
+                        338,
+                        398,
+                        39,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        370,
+                        374
+                    ],
+                    "is_working": true,
+                    "name": "Praca Onze",
+                    "rect": [
+                        366,
+                        383,
+                        59,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        394,
+                        357
+                    ],
+                    "is_working": true,
+                    "name": "Central",
+                    "rect": [
+                        361,
+                        321,
+                        38,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        426,
+                        336
+                    ],
+                    "is_working": true,
+                    "name": "Presidente Vargas",
+                    "rect": [
+                        399,
+                        298,
+                        93,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        442,
+                        355
+                    ],
+                    "is_working": true,
+                    "name": "Uruguaiana",
+                    "rect": [
+                        463,
+                        340,
+                        59,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        448,
+                        379
+                    ],
+                    "is_working": true,
+                    "name": "Carioca",
+                    "rect": [
+                        470,
+                        370,
+                        41,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        441,
+                        408
+                    ],
+                    "is_working": true,
+                    "name": "Cinelandia",
+                    "rect": [
+                        463,
+                        404,
+                        55,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        435,
+                        431
+                    ],
+                    "is_working": true,
+                    "name": "Gloria",
+                    "rect": [
+                        457,
+                        428,
+                        32,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        428,
+                        454
+                    ],
+                    "is_working": true,
+                    "name": "Catete",
+                    "rect": [
+                        450,
+                        451,
+                        34,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        423,
+                        476
+                    ],
+                    "is_working": true,
+                    "name": "Largo do Machado",
+                    "rect": [
+                        445,
+                        472,
+                        93,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        415,
+                        498
+                    ],
+                    "is_working": true,
+                    "name": "Flamengo",
+                    "rect": [
+                        437,
+                        494,
+                        50,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        413,
+                        532
+                    ],
+                    "is_working": true,
+                    "name": "Botafogo",
+                    "rect": [
+                        435,
+                        524,
+                        46,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        418,
+                        566
+                    ],
+                    "is_working": true,
+                    "name": "Cardeal Arcoverde",
+                    "rect": [
+                        426,
+                        559,
+                        96,
+                        15
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        405,
+                        588
+                    ],
+                    "is_working": true,
+                    "name": "Siqueira Campos",
+                    "rect": [
+                        415,
+                        581,
+                        87,
+                        15
+                    ],
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        392,
+                        605
+                    ],
+                    "is_working": true,
+                    "name": "Cantagalo",
+                    "rect": [
+                        401,
+                        601,
+                        52,
+                        15
+                    ],
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        374,
+                        622
+                    ],
+                    "is_working": true,
+                    "name": "General Osorio",
+                    "rect": [
+                        386,
+                        621,
+                        77,
+                        15
+                    ],
+                    "text_id": 19,
+                    "uid": 19
+                }
+            ],
+            "text_id": 20
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "269E34",
+            "line_color": "269E34",
+            "line_width": 7,
+            "name": "2",
+            "segments": [
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            426,
+                            500
+                        ],
+                        [
+                            424,
+                            531
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            434,
+                            479
+                        ],
+                        [
+                            426,
+                            500
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            439,
+                            457
+                        ],
+                        [
+                            434,
+                            479
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    23,
+                    24,
+                    [
+                        [
+                            446,
+                            434
+                        ],
+                        [
+                            439,
+                            457
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            452,
+                            411
+                        ],
+                        [
+                            446,
+                            434
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    25,
+                    26,
+                    [
+                        [
+                            459,
+                            379
+                        ],
+                        [
+                            452,
+                            411
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    26,
+                    27,
+                    [
+                        [
+                            452,
+                            350
+                        ],
+                        [
+                            459,
+                            379
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    27,
+                    28,
+                    [
+                        [
+                            427,
+                            325
+                        ],
+                        [
+                            452,
+                            350
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            389,
+                            347
+                        ],
+                        [
+                            427,
+                            325
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    29,
+                    30,
+                    [
+                        [
+                            337,
+                            355
+                        ],
+                        [
+                            389,
+                            347
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    30,
+                    31,
+                    [
+                        [
+                            283,
+                            359
+                        ],
+                        [
+                            337,
+                            355
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    31,
+                    32,
+                    [
+                        [
+                            245,
+                            358
+                        ],
+                        [
+                            283,
+                            359
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    32,
+                    33,
+                    [
+                        [
+                            210,
+                            351
+                        ],
+                        [
+                            245,
+                            358
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    33,
+                    34,
+                    [
+                        [
+                            184,
+                            334
+                        ],
+                        [
+                            210,
+                            351
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    34,
+                    35,
+                    [
+                        [
+                            162,
+                            315
+                        ],
+                        [
+                            184,
+                            334
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    35,
+                    36,
+                    [
+                        [
+                            141,
+                            293
+                        ],
+                        [
+                            162,
+                            315
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    36,
+                    37,
+                    [
+                        [
+                            115,
+                            268
+                        ],
+                        [
+                            141,
+                            293
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    37,
+                    38,
+                    [
+                        [
+                            93,
+                            243
+                        ],
+                        [
+                            115,
+                            268
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    38,
+                    39,
+                    [
+                        [
+                            77,
+                            221
+                        ],
+                        [
+                            93,
+                            243
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    39,
+                    40,
+                    [
+                        [
+                            63,
+                            196
+                        ],
+                        [
+                            77,
+                            221
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    40,
+                    41,
+                    [
+                        [
+                            57,
+                            172
+                        ],
+                        [
+                            63,
+                            196
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    41,
+                    42,
+                    [
+                        [
+                            57,
+                            147
+                        ],
+                        [
+                            57,
+                            172
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    42,
+                    43,
+                    [
+                        [
+                            57,
+                            123
+                        ],
+                        [
+                            57,
+                            147
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    43,
+                    44,
+                    [
+                        [
+                            57,
+                            94
+                        ],
+                        [
+                            57,
+                            123
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    44,
+                    45,
+                    [
+                        [
+                            57,
+                            70
+                        ],
+                        [
+                            57,
+                            94
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        424,
+                        531
+                    ],
+                    "is_working": true,
+                    "name": "Botafogo",
+                    "rect": [
+                        435,
+                        524,
+                        46,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        426,
+                        500
+                    ],
+                    "is_working": true,
+                    "name": "Flamengo",
+                    "rect": [
+                        437,
+                        494,
+                        50,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        434,
+                        479
+                    ],
+                    "is_working": true,
+                    "name": "Largo do Machado",
+                    "rect": [
+                        445,
+                        472,
+                        93,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        439,
+                        457
+                    ],
+                    "is_working": true,
+                    "name": "Catete",
+                    "rect": [
+                        450,
+                        451,
+                        34,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        446,
+                        434
+                    ],
+                    "is_working": true,
+                    "name": "Gloria",
+                    "rect": [
+                        457,
+                        428,
+                        32,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        452,
+                        411
+                    ],
+                    "is_working": true,
+                    "name": "Cinelandia",
+                    "rect": [
+                        463,
+                        404,
+                        55,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 25
+                },
+                {
+                    "coord": [
+                        459,
+                        379
+                    ],
+                    "is_working": true,
+                    "name": "Carioca",
+                    "rect": [
+                        470,
+                        370,
+                        41,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 26
+                },
+                {
+                    "coord": [
+                        452,
+                        350
+                    ],
+                    "is_working": true,
+                    "name": "Uruguaiana",
+                    "rect": [
+                        463,
+                        340,
+                        59,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 27
+                },
+                {
+                    "coord": [
+                        427,
+                        325
+                    ],
+                    "is_working": true,
+                    "name": "Presidente Vargas",
+                    "rect": [
+                        399,
+                        298,
+                        93,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        389,
+                        347
+                    ],
+                    "is_working": true,
+                    "name": "Central",
+                    "rect": [
+                        361,
+                        321,
+                        38,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 29
+                },
+                {
+                    "coord": [
+                        337,
+                        355
+                    ],
+                    "is_working": true,
+                    "name": "Cidade Nova",
+                    "rect": [
+                        297,
+                        362,
+                        66,
+                        15
+                    ],
+                    "text_id": 21,
+                    "uid": 30
+                },
+                {
+                    "coord": [
+                        283,
+                        359
+                    ],
+                    "is_working": true,
+                    "name": "Sao Cristovao",
+                    "rect": [
+                        255,
+                        334,
+                        72,
+                        15
+                    ],
+                    "text_id": 22,
+                    "uid": 31
+                },
+                {
+                    "coord": [
+                        245,
+                        358
+                    ],
+                    "is_working": true,
+                    "name": "Maracana",
+                    "rect": [
+                        213,
+                        367,
+                        51,
+                        15
+                    ],
+                    "text_id": 23,
+                    "uid": 32
+                },
+                {
+                    "coord": [
+                        210,
+                        351
+                    ],
+                    "is_working": true,
+                    "name": "Triagem",
+                    "rect": [
+                        159,
+                        351,
+                        42,
+                        15
+                    ],
+                    "text_id": 24,
+                    "uid": 33
+                },
+                {
+                    "coord": [
+                        184,
+                        334
+                    ],
+                    "is_working": true,
+                    "name": "Maria da Graca",
+                    "rect": [
+                        96,
+                        332,
+                        78,
+                        15
+                    ],
+                    "text_id": 25,
+                    "uid": 34
+                },
+                {
+                    "coord": [
+                        162,
+                        315
+                    ],
+                    "is_working": true,
+                    "name": "Nova America/Del Castilho",
+                    "rect": [
+                        171,
+                        302,
+                        137,
+                        15
+                    ],
+                    "text_id": 26,
+                    "uid": 35
+                },
+                {
+                    "coord": [
+                        141,
+                        293
+                    ],
+                    "is_working": true,
+                    "name": "Inhauma",
+                    "rect": [
+                        150,
+                        281,
+                        44,
+                        15
+                    ],
+                    "text_id": 27,
+                    "uid": 36
+                },
+                {
+                    "coord": [
+                        115,
+                        268
+                    ],
+                    "is_working": true,
+                    "name": "Engenho da Rainha",
+                    "rect": [
+                        124,
+                        256,
+                        98,
+                        15
+                    ],
+                    "text_id": 28,
+                    "uid": 37
+                },
+                {
+                    "coord": [
+                        93,
+                        243
+                    ],
+                    "is_working": true,
+                    "name": "Thomaz Coelho",
+                    "rect": [
+                        102,
+                        232,
+                        78,
+                        15
+                    ],
+                    "text_id": 29,
+                    "uid": 38
+                },
+                {
+                    "coord": [
+                        77,
+                        221
+                    ],
+                    "is_working": true,
+                    "name": "Vicente de Carvalho",
+                    "rect": [
+                        86,
+                        210,
+                        102,
+                        15
+                    ],
+                    "text_id": 30,
+                    "uid": 39
+                },
+                {
+                    "coord": [
+                        63,
+                        196
+                    ],
+                    "is_working": true,
+                    "name": "Iraja",
+                    "rect": [
+                        72,
+                        187,
+                        24,
+                        15
+                    ],
+                    "text_id": 31,
+                    "uid": 40
+                },
+                {
+                    "coord": [
+                        57,
+                        172
+                    ],
+                    "is_working": true,
+                    "name": "Colegio",
+                    "rect": [
+                        66,
+                        165,
+                        40,
+                        15
+                    ],
+                    "text_id": 32,
+                    "uid": 41
+                },
+                {
+                    "coord": [
+                        57,
+                        147
+                    ],
+                    "is_working": true,
+                    "name": "Coelho Neto",
+                    "rect": [
+                        66,
+                        140,
+                        63,
+                        15
+                    ],
+                    "text_id": 33,
+                    "uid": 42
+                },
+                {
+                    "coord": [
+                        57,
+                        123
+                    ],
+                    "is_working": true,
+                    "name": "Acari/Fazenda Botafogo",
+                    "rect": [
+                        66,
+                        116,
+                        120,
+                        15
+                    ],
+                    "text_id": 34,
+                    "uid": 43
+                },
+                {
+                    "coord": [
+                        57,
+                        94
+                    ],
+                    "is_working": true,
+                    "name": "Engenheiro Rubens Paiva",
+                    "rect": [
+                        66,
+                        86,
+                        130,
+                        15
+                    ],
+                    "text_id": 35,
+                    "uid": 44
+                },
+                {
+                    "coord": [
+                        57,
+                        70
+                    ],
+                    "is_working": true,
+                    "name": "Pavuna",
+                    "rect": [
+                        66,
+                        63,
+                        39,
+                        15
+                    ],
+                    "text_id": 36,
+                    "uid": 45
+                }
+            ],
+            "text_id": 37
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "CCA320",
+            "line_color": "FFCC29",
+            "line_width": 7,
+            "name": "4",
+            "segments": [
+                [
+                    46,
+                    47,
+                    [
+                        [
+                            339,
+                            635
+                        ],
+                        [
+                            374,
+                            634
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    47,
+                    48,
+                    [
+                        [
+                            299,
+                            635
+                        ],
+                        [
+                            339,
+                            635
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    48,
+                    49,
+                    [
+                        [
+                            252,
+                            636
+                        ],
+                        [
+                            299,
+                            635
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    49,
+                    50,
+                    [
+                        [
+                            192,
+                            637
+                        ],
+                        [
+                            252,
+                            636
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    50,
+                    51,
+                    [
+                        [
+                            60,
+                            652
+                        ],
+                        [
+                            192,
+                            637
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        374,
+                        634
+                    ],
+                    "is_working": true,
+                    "name": "General Osorio",
+                    "rect": [
+                        386,
+                        621,
+                        77,
+                        15
+                    ],
+                    "text_id": 19,
+                    "uid": 46
+                },
+                {
+                    "coord": [
+                        339,
+                        635
+                    ],
+                    "is_working": true,
+                    "name": "Nossa Senhora da Paz",
+                    "rect": [
+                        329,
+                        646,
+                        114,
+                        15
+                    ],
+                    "text_id": 38,
+                    "uid": 47
+                },
+                {
+                    "coord": [
+                        299,
+                        635
+                    ],
+                    "is_working": true,
+                    "name": "Jardim de Alah",
+                    "rect": [
+                        267,
+                        610,
+                        77,
+                        15
+                    ],
+                    "text_id": 39,
+                    "uid": 48
+                },
+                {
+                    "coord": [
+                        252,
+                        636
+                    ],
+                    "is_working": true,
+                    "name": "Antero de Quental",
+                    "rect": [
+                        207,
+                        646,
+                        91,
+                        15
+                    ],
+                    "text_id": 40,
+                    "uid": 49
+                },
+                {
+                    "coord": [
+                        192,
+                        637
+                    ],
+                    "is_working": true,
+                    "name": "Sao Conrado",
+                    "rect": [
+                        156,
+                        613,
+                        66,
+                        15
+                    ],
+                    "text_id": 41,
+                    "uid": 50
+                },
+                {
+                    "coord": [
+                        60,
+                        652
+                    ],
+                    "is_working": true,
+                    "name": "Jardim Oceanico",
+                    "rect": [
+                        23,
+                        627,
+                        86,
+                        15
+                    ],
+                    "text_id": 42,
+                    "uid": 51
+                }
+            ],
+            "text_id": 43
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 44,
+    "stations_diameter": 13.0,
+    "transfers": [
+        [
+            15,
+            20,
+            [
+                413,
+                532
+            ],
+            [
+                424,
+                531
+            ]
+        ],
+        [
+            9,
+            26,
+            [
+                448,
+                379
+            ],
+            [
+                459,
+                379
+            ]
+        ],
+        [
+            12,
+            23,
+            [
+                428,
+                454
+            ],
+            [
+                439,
+                457
+            ]
+        ],
+        [
+            6,
+            29,
+            [
+                394,
+                357
+            ],
+            [
+                389,
+                347
+            ]
+        ],
+        [
+            10,
+            25,
+            [
+                441,
+                408
+            ],
+            [
+                452,
+                411
+            ]
+        ],
+        [
+            14,
+            21,
+            [
+                415,
+                498
+            ],
+            [
+                426,
+                500
+            ]
+        ],
+        [
+            19,
+            46,
+            [
+                374,
+                622
+            ],
+            [
+                374,
+                634
+            ]
+        ],
+        [
+            11,
+            24,
+            [
+                435,
+                431
+            ],
+            [
+                446,
+                434
+            ]
+        ],
+        [
+            13,
+            22,
+            [
+                423,
+                476
+            ],
+            [
+                434,
+                479
+            ]
+        ],
+        [
+            7,
+            28,
+            [
+                426,
+                336
+            ],
+            [
+                427,
+                325
+            ]
+        ],
+        [
+            8,
+            27,
+            [
+                442,
+                355
+            ],
+            [
+                452,
+                350
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 45,
+    "upper_case": false,
+    "width": 609,
+    "word_wrap": false
+}

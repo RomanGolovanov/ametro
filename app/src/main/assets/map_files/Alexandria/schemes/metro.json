@@ -1,0 +1,1238 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 815,
+    "images": [
+        "res/schemes/alexandria.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "0000cf",
+            "line_width": 5,
+            "name": "Tram Al Raml",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            161,
+                            85
+                        ],
+                        [
+                            161,
+                            65
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            161,
+                            105
+                        ],
+                        [
+                            161,
+                            85
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            161,
+                            125
+                        ],
+                        [
+                            161,
+                            105
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            161,
+                            145
+                        ],
+                        [
+                            161,
+                            125
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            161,
+                            165
+                        ],
+                        [
+                            161,
+                            145
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            161,
+                            185
+                        ],
+                        [
+                            161,
+                            165
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            161,
+                            185
+                        ],
+                        [
+                            141,
+                            205
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    13,
+                    [
+                        [
+                            181,
+                            205
+                        ],
+                        [
+                            161,
+                            185
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            141,
+                            205
+                        ],
+                        [
+                            141,
+                            225
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            141,
+                            225
+                        ],
+                        [
+                            141,
+                            245
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            141,
+                            245
+                        ],
+                        [
+                            141,
+                            265
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            141,
+                            265
+                        ],
+                        [
+                            141,
+                            285
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            141,
+                            285
+                        ],
+                        [
+                            141.0,
+                            305.0
+                        ],
+                        [
+                            161,
+                            325
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    18,
+                    [
+                        [
+                            161,
+                            325
+                        ],
+                        [
+                            181,
+                            305
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    19,
+                    [
+                        [
+                            161,
+                            345
+                        ],
+                        [
+                            161,
+                            325
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            181,
+                            225
+                        ],
+                        [
+                            181,
+                            205
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            181,
+                            245
+                        ],
+                        [
+                            181,
+                            225
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            181,
+                            265
+                        ],
+                        [
+                            181,
+                            245
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            181,
+                            285
+                        ],
+                        [
+                            181,
+                            265
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            181,
+                            305
+                        ],
+                        [
+                            181,
+                            285
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            161,
+                            365
+                        ],
+                        [
+                            161,
+                            345
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            161,
+                            385
+                        ],
+                        [
+                            161,
+                            365
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            161,
+                            385
+                        ],
+                        [
+                            141,
+                            405
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    26,
+                    [
+                        [
+                            181,
+                            405
+                        ],
+                        [
+                            161,
+                            385
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            141,
+                            405
+                        ],
+                        [
+                            141,
+                            425
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    23,
+                    24,
+                    [
+                        [
+                            141,
+                            425
+                        ],
+                        [
+                            141,
+                            445
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            141,
+                            445
+                        ],
+                        [
+                            161,
+                            465
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    25,
+                    27,
+                    [
+                        [
+                            161,
+                            465
+                        ],
+                        [
+                            181.0,
+                            445.0
+                        ],
+                        [
+                            181,
+                            425
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    25,
+                    28,
+                    [
+                        [
+                            161,
+                            485
+                        ],
+                        [
+                            161,
+                            465
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    26,
+                    27,
+                    [
+                        [
+                            181,
+                            425
+                        ],
+                        [
+                            181,
+                            405
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            161,
+                            505
+                        ],
+                        [
+                            161,
+                            485
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    29,
+                    30,
+                    [
+                        [
+                            161,
+                            525
+                        ],
+                        [
+                            161,
+                            505
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    30,
+                    31,
+                    [
+                        [
+                            161,
+                            545
+                        ],
+                        [
+                            161,
+                            525
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    31,
+                    32,
+                    [
+                        [
+                            161,
+                            565
+                        ],
+                        [
+                            161,
+                            545
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    32,
+                    33,
+                    [
+                        [
+                            161,
+                            585
+                        ],
+                        [
+                            161,
+                            565
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    33,
+                    34,
+                    [
+                        [
+                            161,
+                            605
+                        ],
+                        [
+                            161,
+                            585
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    34,
+                    35,
+                    [
+                        [
+                            161,
+                            625
+                        ],
+                        [
+                            161,
+                            605
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    35,
+                    36,
+                    [
+                        [
+                            161,
+                            645
+                        ],
+                        [
+                            161,
+                            625
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    36,
+                    37,
+                    [
+                        [
+                            161,
+                            665
+                        ],
+                        [
+                            161,
+                            645
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        161,
+                        65
+                    ],
+                    "is_working": true,
+                    "name": "El Nasr",
+                    "rect": [
+                        172,
+                        59,
+                        39,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        161,
+                        85
+                    ],
+                    "is_working": true,
+                    "name": "El Seiouff",
+                    "rect": [
+                        171,
+                        79,
+                        49,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        161,
+                        105
+                    ],
+                    "is_working": true,
+                    "name": "Sidi Bishr",
+                    "rect": [
+                        170,
+                        99,
+                        51,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        161,
+                        125
+                    ],
+                    "is_working": true,
+                    "name": "El Sariya",
+                    "rect": [
+                        172,
+                        118,
+                        47,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        161,
+                        145
+                    ],
+                    "is_working": true,
+                    "name": "Louran",
+                    "rect": [
+                        172,
+                        137,
+                        36,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        161,
+                        165
+                    ],
+                    "is_working": true,
+                    "name": "Tharwat",
+                    "rect": [
+                        172,
+                        159,
+                        41,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        161,
+                        185
+                    ],
+                    "is_working": true,
+                    "name": "San Stefano",
+                    "rect": [
+                        174,
+                        179,
+                        61,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        141,
+                        205
+                    ],
+                    "is_working": true,
+                    "name": "Kasr El Safa",
+                    "rect": [
+                        68,
+                        198,
+                        64,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        141,
+                        225
+                    ],
+                    "is_working": true,
+                    "name": "Glym",
+                    "rect": [
+                        103,
+                        218,
+                        28,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        141,
+                        245
+                    ],
+                    "is_working": true,
+                    "name": "Ramsis",
+                    "rect": [
+                        91,
+                        239,
+                        40,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        141,
+                        265
+                    ],
+                    "is_working": true,
+                    "name": "El Bostan",
+                    "rect": [
+                        82,
+                        259,
+                        50,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        141,
+                        285
+                    ],
+                    "is_working": true,
+                    "name": "El Hadaya",
+                    "rect": [
+                        79,
+                        279,
+                        53,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        161,
+                        325
+                    ],
+                    "is_working": true,
+                    "name": "Isis",
+                    "rect": [
+                        175,
+                        321,
+                        20,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        181,
+                        205
+                    ],
+                    "is_working": true,
+                    "name": "Janakleece",
+                    "rect": [
+                        191,
+                        200,
+                        59,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        181,
+                        225
+                    ],
+                    "is_working": true,
+                    "name": "Schutz",
+                    "rect": [
+                        190,
+                        219,
+                        35,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        181,
+                        245
+                    ],
+                    "is_working": true,
+                    "name": "Safar",
+                    "rect": [
+                        191,
+                        239,
+                        28,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        181,
+                        265
+                    ],
+                    "is_working": true,
+                    "name": "Bacous",
+                    "rect": [
+                        190,
+                        258,
+                        40,
+                        15
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        181,
+                        285
+                    ],
+                    "is_working": true,
+                    "name": "El Karnak",
+                    "rect": [
+                        190,
+                        280,
+                        51,
+                        15
+                    ],
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        181,
+                        305
+                    ],
+                    "is_working": true,
+                    "name": "El Wezarah",
+                    "rect": [
+                        191,
+                        299,
+                        58,
+                        15
+                    ],
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        161,
+                        345
+                    ],
+                    "is_working": true,
+                    "name": "Roushdy",
+                    "rect": [
+                        175,
+                        340,
+                        46,
+                        15
+                    ],
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        161,
+                        365
+                    ],
+                    "is_working": true,
+                    "name": "Mohamed Mahfouz",
+                    "rect": [
+                        174,
+                        361,
+                        94,
+                        15
+                    ],
+                    "text_id": 20,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        161,
+                        385
+                    ],
+                    "is_working": true,
+                    "name": "Moustafa Kamel",
+                    "rect": [
+                        174,
+                        381,
+                        82,
+                        15
+                    ],
+                    "text_id": 21,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        141,
+                        405
+                    ],
+                    "is_working": true,
+                    "name": "Sidi Gaber El Sheikh",
+                    "rect": [
+                        26,
+                        399,
+                        104,
+                        15
+                    ],
+                    "text_id": 22,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        141,
+                        425
+                    ],
+                    "is_working": true,
+                    "name": "Cleopatra El Hammat",
+                    "rect": [
+                        24,
+                        419,
+                        107,
+                        15
+                    ],
+                    "text_id": 23,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        141,
+                        445
+                    ],
+                    "is_working": true,
+                    "name": "Cleopatra El Soghrah",
+                    "rect": [
+                        25,
+                        439,
+                        107,
+                        15
+                    ],
+                    "text_id": 24,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        161,
+                        465
+                    ],
+                    "is_working": true,
+                    "name": "Sporting",
+                    "rect": [
+                        173,
+                        460,
+                        43,
+                        15
+                    ],
+                    "text_id": 25,
+                    "uid": 25
+                },
+                {
+                    "coord": [
+                        181,
+                        405
+                    ],
+                    "is_working": true,
+                    "name": "Sidi Gaber El Mahat",
+                    "rect": [
+                        193,
+                        399,
+                        100,
+                        15
+                    ],
+                    "text_id": 26,
+                    "uid": 26
+                },
+                {
+                    "coord": [
+                        181,
+                        425
+                    ],
+                    "is_working": true,
+                    "name": "Cleopatra",
+                    "rect": [
+                        192,
+                        418,
+                        50,
+                        15
+                    ],
+                    "text_id": 27,
+                    "uid": 27
+                },
+                {
+                    "coord": [
+                        161,
+                        485
+                    ],
+                    "is_working": true,
+                    "name": "Small Sporting",
+                    "rect": [
+                        174,
+                        480,
+                        74,
+                        15
+                    ],
+                    "text_id": 28,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        161,
+                        505
+                    ],
+                    "is_working": true,
+                    "name": "El Ibrahima",
+                    "rect": [
+                        174,
+                        500,
+                        58,
+                        15
+                    ],
+                    "text_id": 29,
+                    "uid": 29
+                },
+                {
+                    "coord": [
+                        161,
+                        525
+                    ],
+                    "is_working": true,
+                    "name": "El Moaskar",
+                    "rect": [
+                        173,
+                        516,
+                        58,
+                        15
+                    ],
+                    "text_id": 30,
+                    "uid": 30
+                },
+                {
+                    "coord": [
+                        161,
+                        545
+                    ],
+                    "is_working": true,
+                    "name": "Gamaa",
+                    "rect": [
+                        172,
+                        538,
+                        37,
+                        15
+                    ],
+                    "text_id": 31,
+                    "uid": 31
+                },
+                {
+                    "coord": [
+                        161,
+                        565
+                    ],
+                    "is_working": true,
+                    "name": "El Shatby",
+                    "rect": [
+                        173,
+                        560,
+                        49,
+                        15
+                    ],
+                    "text_id": 32,
+                    "uid": 32
+                },
+                {
+                    "coord": [
+                        161,
+                        585
+                    ],
+                    "is_working": true,
+                    "name": "El Shoban El Moslemin",
+                    "rect": [
+                        173,
+                        580,
+                        116,
+                        15
+                    ],
+                    "text_id": 33,
+                    "uid": 33
+                },
+                {
+                    "coord": [
+                        161,
+                        605
+                    ],
+                    "is_working": true,
+                    "name": "Moustafa Zayan",
+                    "rect": [
+                        174,
+                        600,
+                        80,
+                        15
+                    ],
+                    "text_id": 34,
+                    "uid": 34
+                },
+                {
+                    "coord": [
+                        161,
+                        625
+                    ],
+                    "is_working": true,
+                    "name": "Hasan Rasen",
+                    "rect": [
+                        174,
+                        620,
+                        69,
+                        15
+                    ],
+                    "text_id": 35,
+                    "uid": 35
+                },
+                {
+                    "coord": [
+                        161,
+                        645
+                    ],
+                    "is_working": true,
+                    "name": "Ibrahim Mosque",
+                    "rect": [
+                        174,
+                        640,
+                        81,
+                        15
+                    ],
+                    "text_id": 36,
+                    "uid": 36
+                },
+                {
+                    "coord": [
+                        161,
+                        665
+                    ],
+                    "is_working": true,
+                    "name": "Ramleh",
+                    "rect": [
+                        174,
+                        658,
+                        40,
+                        15
+                    ],
+                    "text_id": 37,
+                    "uid": 37
+                }
+            ],
+            "text_id": 38
+        }
+    ],
+    "lines_width": 5,
+    "name": "metro",
+    "name_text_id": 39,
+    "stations_diameter": 13.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 40,
+    "upper_case": false,
+    "width": 331,
+    "word_wrap": false
+}

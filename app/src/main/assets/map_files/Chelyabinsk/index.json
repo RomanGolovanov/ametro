@@ -1,0 +1,58 @@
+{
+    "city_id": 1508291,
+    "comments_text_id": 8,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 7,
+    "file": "Chelyabinsk.zip",
+    "latitude": 55.1611,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": 61.42877,
+    "map_id": "Chelyabinsk.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 5,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 6
+        }
+    ],
+    "timestamp": 1238713200.0,
+    "transport_types": [
+        "Метро"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Метро"
+        }
+    ]
+}

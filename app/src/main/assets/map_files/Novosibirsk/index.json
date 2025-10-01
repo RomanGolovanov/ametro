@@ -1,0 +1,155 @@
+{
+    "city_id": 1496747,
+    "comments_text_id": 153,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 152,
+    "file": "Novosibirsk.zip",
+    "latitude": 55.02259,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": 82.93175,
+    "map_id": "Novosibirsk.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 147,
+            "root": true,
+            "transports": [
+                "metro",
+                "train"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 148
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/dzerdzhinskaja.json",
+            "name": "dzerdzhinskaja",
+            "name_text_id": 15,
+            "root": false,
+            "transports": [
+                "metro",
+                "train"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 149
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/leninskaja.json",
+            "name": "leninskaja",
+            "name_text_id": 9,
+            "root": false,
+            "transports": [
+                "metro",
+                "train"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 149
+        },
+        {
+            "default_transports": [
+                "train"
+            ],
+            "file": "schemes/railway.json",
+            "name": "railway",
+            "name_text_id": 150,
+            "root": true,
+            "transports": [
+                "metro",
+                "train"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 148
+        },
+        {
+            "default_transports": [
+                "train"
+            ],
+            "file": "schemes/vostok.json",
+            "name": "vostok",
+            "name_text_id": 40,
+            "root": false,
+            "transports": [
+                "metro",
+                "train"
+            ],
+            "type_name": "Электричка",
+            "type_text_id": 151
+        },
+        {
+            "default_transports": [
+                "train"
+            ],
+            "file": "schemes/yug.json",
+            "name": "yug",
+            "name_text_id": 114,
+            "root": false,
+            "transports": [
+                "metro",
+                "train"
+            ],
+            "type_name": "Электричка",
+            "type_text_id": 151
+        },
+        {
+            "default_transports": [
+                "train"
+            ],
+            "file": "schemes/zapad.json",
+            "name": "zapad",
+            "name_text_id": 146,
+            "root": false,
+            "transports": [
+                "metro",
+                "train"
+            ],
+            "type_name": "Электричка",
+            "type_text_id": 151
+        }
+    ],
+    "timestamp": 1754434800.0,
+    "transport_types": [
+        "Электричка",
+        "Метро"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Метро"
+        },
+        {
+            "file": "transports/train.json",
+            "name": "train",
+            "type": "Электричка"
+        }
+    ]
+}

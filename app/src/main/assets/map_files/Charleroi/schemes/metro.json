@@ -1,0 +1,961 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 345,
+    "images": [
+        "res/schemes/charleroi.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "ff0000",
+            "line_width": 7,
+            "name": "Premetro",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            747,
+                            51
+                        ],
+                        [
+                            766,
+                            32
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            718,
+                            51
+                        ],
+                        [
+                            747,
+                            51
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            699,
+                            70
+                        ],
+                        [
+                            718,
+                            51
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            674,
+                            85
+                        ],
+                        [
+                            686.0,
+                            84.0
+                        ],
+                        [
+                            699,
+                            70
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            624,
+                            90
+                        ],
+                        [
+                            630.0,
+                            85.0
+                        ],
+                        [
+                            674,
+                            85
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            574,
+                            95
+                        ],
+                        [
+                            620.0,
+                            95.0
+                        ],
+                        [
+                            624,
+                            90
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            549,
+                            120
+                        ],
+                        [
+                            574,
+                            95
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    24,
+                    [
+                        [
+                            604,
+                            115
+                        ],
+                        [
+                            584.0,
+                            95.0
+                        ],
+                        [
+                            574,
+                            95
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            519,
+                            120
+                        ],
+                        [
+                            549,
+                            120
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    26,
+                    [
+                        [
+                            534,
+                            145
+                        ],
+                        [
+                            534.0,
+                            135.0
+                        ],
+                        [
+                            549,
+                            120
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            479,
+                            120
+                        ],
+                        [
+                            519,
+                            120
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            424,
+                            140
+                        ],
+                        [
+                            449.0,
+                            140.0
+                        ],
+                        [
+                            469.0,
+                            120.0
+                        ],
+                        [
+                            479,
+                            120
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            399,
+                            165
+                        ],
+                        [
+                            424,
+                            140
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            359,
+                            165
+                        ],
+                        [
+                            399,
+                            165
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            329,
+                            160
+                        ],
+                        [
+                            354.0,
+                            160.0
+                        ],
+                        [
+                            359,
+                            165
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            299,
+                            160
+                        ],
+                        [
+                            329,
+                            160
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            269,
+                            160
+                        ],
+                        [
+                            299,
+                            160
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            239,
+                            160
+                        ],
+                        [
+                            269,
+                            160
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            209,
+                            160
+                        ],
+                        [
+                            239,
+                            160
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            179,
+                            160
+                        ],
+                        [
+                            209,
+                            160
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            149,
+                            160
+                        ],
+                        [
+                            179,
+                            160
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            119,
+                            160
+                        ],
+                        [
+                            149,
+                            160
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            89,
+                            160
+                        ],
+                        [
+                            119,
+                            160
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            59,
+                            160
+                        ],
+                        [
+                            89,
+                            160
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            29,
+                            160
+                        ],
+                        [
+                            59,
+                            160
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            614,
+                            145
+                        ],
+                        [
+                            614.0,
+                            123.0
+                        ],
+                        [
+                            604,
+                            115
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    26,
+                    27,
+                    [
+                        [
+                            534,
+                            170
+                        ],
+                        [
+                            534,
+                            145
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    27,
+                    28,
+                    [
+                        [
+                            539,
+                            195
+                        ],
+                        [
+                            534.0,
+                            187.0
+                        ],
+                        [
+                            534,
+                            170
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        766,
+                        32
+                    ],
+                    "is_working": true,
+                    "name": "Soleilmont",
+                    "rect": [
+                        720,
+                        7,
+                        54,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        747,
+                        51
+                    ],
+                    "is_working": true,
+                    "name": "Sart Culpart",
+                    "rect": [
+                        752,
+                        58,
+                        38,
+                        28
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        718,
+                        51
+                    ],
+                    "is_working": true,
+                    "name": "Marabout",
+                    "rect": [
+                        670,
+                        25,
+                        48,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        699,
+                        70
+                    ],
+                    "is_working": true,
+                    "name": "Gilly",
+                    "rect": [
+                        662,
+                        58,
+                        25,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        674,
+                        85
+                    ],
+                    "is_working": true,
+                    "name": "Gazometre",
+                    "rect": [
+                        669,
+                        94,
+                        55,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        624,
+                        90
+                    ],
+                    "is_working": true,
+                    "name": "Samaritaine",
+                    "rect": [
+                        591,
+                        64,
+                        61,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        574,
+                        95
+                    ],
+                    "is_working": true,
+                    "name": "Waterloo",
+                    "rect": [
+                        528,
+                        71,
+                        46,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        549,
+                        120
+                    ],
+                    "is_working": true,
+                    "name": "Beaux Arts",
+                    "rect": [
+                        559,
+                        118,
+                        36,
+                        28
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        519,
+                        120
+                    ],
+                    "is_working": true,
+                    "name": "Piges",
+                    "rect": [
+                        510,
+                        98,
+                        30,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        479,
+                        120
+                    ],
+                    "is_working": true,
+                    "name": "Dampremy",
+                    "rect": [
+                        443,
+                        98,
+                        56,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        424,
+                        140
+                    ],
+                    "is_working": true,
+                    "name": "Providence",
+                    "rect": [
+                        432,
+                        148,
+                        58,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        399,
+                        165
+                    ],
+                    "is_working": true,
+                    "name": "De Cartier",
+                    "rect": [
+                        406,
+                        169,
+                        36,
+                        28
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        359,
+                        165
+                    ],
+                    "is_working": true,
+                    "name": "Moulin",
+                    "rect": [
+                        349,
+                        139,
+                        35,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        329,
+                        160
+                    ],
+                    "is_working": true,
+                    "name": "Morgnies",
+                    "rect": [
+                        321,
+                        170,
+                        15,
+                        48
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        299,
+                        160
+                    ],
+                    "is_working": true,
+                    "name": "Leernes",
+                    "rect": [
+                        291,
+                        170,
+                        15,
+                        42
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        269,
+                        160
+                    ],
+                    "is_working": true,
+                    "name": "Paradis",
+                    "rect": [
+                        261,
+                        170,
+                        15,
+                        40
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        239,
+                        160
+                    ],
+                    "is_working": true,
+                    "name": "Fontaine",
+                    "rect": [
+                        231,
+                        170,
+                        15,
+                        44
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        209,
+                        160
+                    ],
+                    "is_working": true,
+                    "name": "Petria",
+                    "rect": [
+                        201,
+                        170,
+                        15,
+                        31
+                    ],
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        179,
+                        160
+                    ],
+                    "is_working": true,
+                    "name": "Coron de Berger",
+                    "rect": [
+                        171,
+                        170,
+                        15,
+                        84
+                    ],
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        149,
+                        160
+                    ],
+                    "is_working": true,
+                    "name": "Surchiste",
+                    "rect": [
+                        141,
+                        170,
+                        15,
+                        49
+                    ],
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        119,
+                        160
+                    ],
+                    "is_working": true,
+                    "name": "Route de Thuin",
+                    "rect": [
+                        111,
+                        170,
+                        15,
+                        76
+                    ],
+                    "text_id": 20,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        89,
+                        160
+                    ],
+                    "is_working": true,
+                    "name": "Jonction",
+                    "rect": [
+                        81,
+                        170,
+                        15,
+                        44
+                    ],
+                    "text_id": 21,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        59,
+                        160
+                    ],
+                    "is_working": true,
+                    "name": "Rue de la Station",
+                    "rect": [
+                        51,
+                        170,
+                        15,
+                        86
+                    ],
+                    "text_id": 22,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        29,
+                        160
+                    ],
+                    "is_working": true,
+                    "name": "Monument",
+                    "rect": [
+                        21,
+                        170,
+                        15,
+                        53
+                    ],
+                    "text_id": 23,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        604,
+                        115
+                    ],
+                    "is_working": true,
+                    "name": "Janson",
+                    "rect": [
+                        618,
+                        104,
+                        38,
+                        15
+                    ],
+                    "text_id": 24,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        614,
+                        145
+                    ],
+                    "is_working": true,
+                    "name": "Parc",
+                    "rect": [
+                        625,
+                        139,
+                        25,
+                        15
+                    ],
+                    "text_id": 25,
+                    "uid": 25
+                },
+                {
+                    "coord": [
+                        534,
+                        145
+                    ],
+                    "is_working": true,
+                    "name": "Ouest",
+                    "rect": [
+                        543,
+                        149,
+                        31,
+                        15
+                    ],
+                    "text_id": 26,
+                    "uid": 26
+                },
+                {
+                    "coord": [
+                        534,
+                        170
+                    ],
+                    "is_working": true,
+                    "name": "Villette",
+                    "rect": [
+                        544,
+                        166,
+                        36,
+                        15
+                    ],
+                    "text_id": 27,
+                    "uid": 27
+                },
+                {
+                    "coord": [
+                        539,
+                        195
+                    ],
+                    "is_working": true,
+                    "name": "Sud",
+                    "rect": [
+                        551,
+                        188,
+                        21,
+                        15
+                    ],
+                    "text_id": 28,
+                    "uid": 28
+                }
+            ],
+            "text_id": 29
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 30,
+    "stations_diameter": 13.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 31,
+    "upper_case": false,
+    "width": 916,
+    "word_wrap": true
+}

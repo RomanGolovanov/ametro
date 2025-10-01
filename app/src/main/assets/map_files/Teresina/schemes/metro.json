@@ -1,0 +1,317 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 407,
+    "images": [
+        "res/schemes/teresina.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "af0000",
+            "line_color": "cf0000",
+            "line_width": 7,
+            "name": "Linha 1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            311,
+                            239
+                        ],
+                        [
+                            293,
+                            257
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            328,
+                            222
+                        ],
+                        [
+                            311,
+                            239
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            323,
+                            191
+                        ],
+                        [
+                            341.0,
+                            209.0
+                        ],
+                        [
+                            328,
+                            222
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            254,
+                            151
+                        ],
+                        [
+                            283.0,
+                            151.0
+                        ],
+                        [
+                            323,
+                            191
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            166,
+                            116
+                        ],
+                        [
+                            200.0,
+                            151.0
+                        ],
+                        [
+                            254,
+                            151
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            112,
+                            116
+                        ],
+                        [
+                            166,
+                            116
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            57,
+                            116
+                        ],
+                        [
+                            112,
+                            116
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            62,
+                            183
+                        ],
+                        [
+                            49.0,
+                            127.0
+                        ],
+                        [
+                            57,
+                            116
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        293,
+                        257
+                    ],
+                    "is_working": true,
+                    "name": "Mercado",
+                    "rect": [
+                        303,
+                        253,
+                        45,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        311,
+                        239
+                    ],
+                    "is_working": true,
+                    "name": "Itarare",
+                    "rect": [
+                        321,
+                        235,
+                        34,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        328,
+                        222
+                    ],
+                    "is_working": true,
+                    "name": "Novo Horizonte",
+                    "rect": [
+                        338,
+                        218,
+                        78,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        323,
+                        191
+                    ],
+                    "is_working": true,
+                    "name": "Renascenca",
+                    "rect": [
+                        332,
+                        179,
+                        64,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        254,
+                        151
+                    ],
+                    "is_working": true,
+                    "name": "Esperanca",
+                    "rect": [
+                        235,
+                        127,
+                        55,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        166,
+                        116
+                    ],
+                    "is_working": true,
+                    "name": "Ilhotas",
+                    "rect": [
+                        136,
+                        94,
+                        35,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        112,
+                        116
+                    ],
+                    "is_working": true,
+                    "name": "Frei Serafim",
+                    "rect": [
+                        80,
+                        125,
+                        62,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        57,
+                        116
+                    ],
+                    "is_working": true,
+                    "name": "Matinha",
+                    "rect": [
+                        44,
+                        93,
+                        41,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        62,
+                        183
+                    ],
+                    "is_working": true,
+                    "name": "Bandeira",
+                    "rect": [
+                        72,
+                        177,
+                        47,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                }
+            ],
+            "text_id": 9
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 10,
+    "stations_diameter": 13.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 11,
+    "upper_case": false,
+    "width": 491,
+    "word_wrap": false
+}

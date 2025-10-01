@@ -1,0 +1,1285 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 913,
+    "images": [
+        "res/schemes/shenyang.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "008000",
+            "line_color": "008000",
+            "line_width": 9,
+            "name": "Line 1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            123,
+                            441
+                        ],
+                        [
+                            55,
+                            441
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            188,
+                            441
+                        ],
+                        [
+                            123,
+                            441
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            254,
+                            441
+                        ],
+                        [
+                            188,
+                            441
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            320,
+                            441
+                        ],
+                        [
+                            254,
+                            441
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            353,
+                            408
+                        ],
+                        [
+                            320,
+                            441
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            353,
+                            342
+                        ],
+                        [
+                            353,
+                            408
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            386,
+                            309
+                        ],
+                        [
+                            353,
+                            342
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            450,
+                            309
+                        ],
+                        [
+                            386,
+                            309
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            517,
+                            309
+                        ],
+                        [
+                            450,
+                            309
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            552,
+                            344
+                        ],
+                        [
+                            517,
+                            309
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            584,
+                            376
+                        ],
+                        [
+                            552,
+                            344
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            618,
+                            342
+                        ],
+                        [
+                            584,
+                            376
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            683,
+                            342
+                        ],
+                        [
+                            618,
+                            342
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            750,
+                            342
+                        ],
+                        [
+                            683,
+                            342
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            813,
+                            342
+                        ],
+                        [
+                            750,
+                            342
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            882,
+                            342
+                        ],
+                        [
+                            813,
+                            342
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            961,
+                            342
+                        ],
+                        [
+                            882,
+                            342
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            993,
+                            310
+                        ],
+                        [
+                            961,
+                            342
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            1043,
+                            310
+                        ],
+                        [
+                            993,
+                            310
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            1077,
+                            276
+                        ],
+                        [
+                            1043,
+                            310
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            1145,
+                            276
+                        ],
+                        [
+                            1077,
+                            276
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        55,
+                        441
+                    ],
+                    "is_working": true,
+                    "name": "Shisanhao Jie",
+                    "rect": [
+                        33,
+                        417,
+                        72,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        123,
+                        441
+                    ],
+                    "is_working": true,
+                    "name": "Zhongyang Dajie",
+                    "rect": [
+                        88,
+                        450,
+                        85,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        188,
+                        441
+                    ],
+                    "is_working": true,
+                    "name": "Qihao Jie",
+                    "rect": [
+                        166,
+                        417,
+                        49,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        254,
+                        441
+                    ],
+                    "is_working": true,
+                    "name": "Sihao Jie",
+                    "rect": [
+                        232,
+                        450,
+                        48,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        320,
+                        441
+                    ],
+                    "is_working": true,
+                    "name": "Zhangshi",
+                    "rect": [
+                        330,
+                        439,
+                        47,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        353,
+                        408
+                    ],
+                    "is_working": true,
+                    "name": "Kaifa Dadao",
+                    "rect": [
+                        363,
+                        401,
+                        63,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        353,
+                        342
+                    ],
+                    "is_working": true,
+                    "name": "Yuhong Square",
+                    "rect": [
+                        266,
+                        335,
+                        77,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        386,
+                        309
+                    ],
+                    "is_working": true,
+                    "name": "Yingbin Lu",
+                    "rect": [
+                        358,
+                        285,
+                        54,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        450,
+                        309
+                    ],
+                    "is_working": true,
+                    "name": "Zhonggong Jie",
+                    "rect": [
+                        419,
+                        318,
+                        74,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        517,
+                        309
+                    ],
+                    "is_working": true,
+                    "name": "Qigong Jie",
+                    "rect": [
+                        495,
+                        285,
+                        55,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        552,
+                        344
+                    ],
+                    "is_working": true,
+                    "name": "Baogong Jie",
+                    "rect": [
+                        478,
+                        341,
+                        64,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        584,
+                        376
+                    ],
+                    "is_working": true,
+                    "name": "Tiexi Square",
+                    "rect": [
+                        555,
+                        385,
+                        64,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        618,
+                        342
+                    ],
+                    "is_working": true,
+                    "name": "Yunfeng Square",
+                    "rect": [
+                        586,
+                        318,
+                        80,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        683,
+                        342
+                    ],
+                    "is_working": true,
+                    "name": "Shenyang Station",
+                    "rect": [
+                        649,
+                        351,
+                        88,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        750,
+                        342
+                    ],
+                    "is_working": true,
+                    "name": "Taiyuan Jie",
+                    "rect": [
+                        725,
+                        318,
+                        59,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        813,
+                        342
+                    ],
+                    "is_working": true,
+                    "name": "South Market",
+                    "rect": [
+                        783,
+                        351,
+                        67,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        882,
+                        342
+                    ],
+                    "is_working": true,
+                    "name": "Qingnian Dajie",
+                    "rect": null,
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        961,
+                        342
+                    ],
+                    "is_working": true,
+                    "name": "Huaiyuanmen",
+                    "rect": [
+                        941,
+                        351,
+                        70,
+                        15
+                    ],
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        993,
+                        310
+                    ],
+                    "is_working": true,
+                    "name": "Zhong Jie",
+                    "rect": [
+                        970,
+                        285,
+                        50,
+                        15
+                    ],
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        1043,
+                        310
+                    ],
+                    "is_working": true,
+                    "name": "Zhong Jie East",
+                    "rect": [
+                        1019,
+                        319,
+                        75,
+                        15
+                    ],
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        1077,
+                        276
+                    ],
+                    "is_working": true,
+                    "name": "Pangjiang Jie",
+                    "rect": [
+                        1041,
+                        252,
+                        69,
+                        15
+                    ],
+                    "text_id": 20,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        1145,
+                        276
+                    ],
+                    "is_working": true,
+                    "name": "Liming Square",
+                    "rect": [
+                        1110,
+                        285,
+                        73,
+                        15
+                    ],
+                    "text_id": 21,
+                    "uid": 21
+                }
+            ],
+            "text_id": 22
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "FFAD00",
+            "line_color": "FFAD00",
+            "line_width": 9,
+            "name": "Line 2",
+            "segments": [
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            808,
+                            56
+                        ],
+                        [
+                            808,
+                            23
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    23,
+                    24,
+                    [
+                        [
+                            808,
+                            90
+                        ],
+                        [
+                            808,
+                            56
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            808,
+                            127
+                        ],
+                        [
+                            808,
+                            90
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    25,
+                    26,
+                    [
+                        [
+                            840,
+                            159
+                        ],
+                        [
+                            808,
+                            127
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    26,
+                    27,
+                    [
+                        [
+                            840,
+                            203
+                        ],
+                        [
+                            840,
+                            159
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    27,
+                    28,
+                    [
+                        [
+                            867,
+                            230
+                        ],
+                        [
+                            840,
+                            203
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            867,
+                            267
+                        ],
+                        [
+                            867,
+                            230
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    29,
+                    30,
+                    [
+                        [
+                            867,
+                            303
+                        ],
+                        [
+                            867,
+                            267
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    30,
+                    31,
+                    [
+                        [
+                            867,
+                            342
+                        ],
+                        [
+                            867,
+                            303
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    31,
+                    32,
+                    [
+                        [
+                            867,
+                            404
+                        ],
+                        [
+                            867,
+                            342
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    32,
+                    33,
+                    [
+                        [
+                            867,
+                            461
+                        ],
+                        [
+                            867,
+                            404
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    33,
+                    34,
+                    [
+                        [
+                            867,
+                            519
+                        ],
+                        [
+                            867,
+                            461
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    34,
+                    35,
+                    [
+                        [
+                            920,
+                            572
+                        ],
+                        [
+                            867,
+                            519
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    35,
+                    36,
+                    [
+                        [
+                            976,
+                            628
+                        ],
+                        [
+                            920,
+                            572
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    36,
+                    37,
+                    [
+                        [
+                            976,
+                            671
+                        ],
+                        [
+                            976,
+                            628
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    37,
+                    38,
+                    [
+                        [
+                            976,
+                            710
+                        ],
+                        [
+                            976,
+                            671
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    38,
+                    39,
+                    [
+                        [
+                            1004,
+                            738
+                        ],
+                        [
+                            976,
+                            710
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    39,
+                    40,
+                    [
+                        [
+                            1029,
+                            763
+                        ],
+                        [
+                            1004,
+                            738
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        808,
+                        23
+                    ],
+                    "is_working": true,
+                    "name": "Santaizi",
+                    "rect": [
+                        818,
+                        16,
+                        41,
+                        15
+                    ],
+                    "text_id": 23,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        808,
+                        56
+                    ],
+                    "is_working": true,
+                    "name": "Lingxi",
+                    "rect": [
+                        818,
+                        49,
+                        32,
+                        15
+                    ],
+                    "text_id": 24,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        808,
+                        90
+                    ],
+                    "is_working": true,
+                    "name": "Xinleyizhi",
+                    "rect": [
+                        818,
+                        83,
+                        50,
+                        15
+                    ],
+                    "text_id": 25,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        808,
+                        127
+                    ],
+                    "is_working": true,
+                    "name": "Beilinggongyuan",
+                    "rect": [
+                        818,
+                        115,
+                        85,
+                        15
+                    ],
+                    "text_id": 26,
+                    "uid": 25
+                },
+                {
+                    "coord": [
+                        840,
+                        159
+                    ],
+                    "is_working": true,
+                    "name": "Zhongyiyaodaxue",
+                    "rect": [
+                        850,
+                        151,
+                        89,
+                        15
+                    ],
+                    "text_id": 27,
+                    "uid": 26
+                },
+                {
+                    "coord": [
+                        840,
+                        203
+                    ],
+                    "is_working": true,
+                    "name": "Qishanlu",
+                    "rect": [
+                        850,
+                        190,
+                        46,
+                        15
+                    ],
+                    "text_id": 28,
+                    "uid": 27
+                },
+                {
+                    "coord": [
+                        867,
+                        230
+                    ],
+                    "is_working": true,
+                    "name": "Shenyangbeizhan",
+                    "rect": [
+                        877,
+                        223,
+                        89,
+                        15
+                    ],
+                    "text_id": 29,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        867,
+                        267
+                    ],
+                    "is_working": true,
+                    "name": "Jinrongzhongxin",
+                    "rect": [
+                        877,
+                        260,
+                        83,
+                        15
+                    ],
+                    "text_id": 30,
+                    "uid": 29
+                },
+                {
+                    "coord": [
+                        867,
+                        303
+                    ],
+                    "is_working": true,
+                    "name": "Shifuguangchang",
+                    "rect": [
+                        877,
+                        297,
+                        87,
+                        15
+                    ],
+                    "text_id": 31,
+                    "uid": 30
+                },
+                {
+                    "coord": [
+                        867,
+                        342
+                    ],
+                    "is_working": true,
+                    "name": "Qingnian Dajie",
+                    "rect": [
+                        872,
+                        315,
+                        75,
+                        15
+                    ],
+                    "text_id": 16,
+                    "uid": 31
+                },
+                {
+                    "coord": [
+                        867,
+                        404
+                    ],
+                    "is_working": true,
+                    "name": "Qingniangongyuan",
+                    "rect": [
+                        877,
+                        397,
+                        94,
+                        15
+                    ],
+                    "text_id": 32,
+                    "uid": 32
+                },
+                {
+                    "coord": [
+                        867,
+                        461
+                    ],
+                    "is_working": true,
+                    "name": "Gongyezhanlanguan",
+                    "rect": [
+                        877,
+                        454,
+                        102,
+                        15
+                    ],
+                    "text_id": 33,
+                    "uid": 33
+                },
+                {
+                    "coord": [
+                        867,
+                        519
+                    ],
+                    "is_working": true,
+                    "name": "Shitushuguan",
+                    "rect": [
+                        877,
+                        507,
+                        69,
+                        15
+                    ],
+                    "text_id": 34,
+                    "uid": 34
+                },
+                {
+                    "coord": [
+                        920,
+                        572
+                    ],
+                    "is_working": true,
+                    "name": "Wulihe",
+                    "rect": [
+                        930,
+                        559,
+                        36,
+                        15
+                    ],
+                    "text_id": 35,
+                    "uid": 35
+                },
+                {
+                    "coord": [
+                        976,
+                        628
+                    ],
+                    "is_working": true,
+                    "name": "Aotizhongxin",
+                    "rect": [
+                        900,
+                        625,
+                        66,
+                        15
+                    ],
+                    "text_id": 36,
+                    "uid": 36
+                },
+                {
+                    "coord": [
+                        976,
+                        671
+                    ],
+                    "is_working": true,
+                    "name": "Yingpanjie",
+                    "rect": [
+                        912,
+                        664,
+                        54,
+                        15
+                    ],
+                    "text_id": 37,
+                    "uid": 37
+                },
+                {
+                    "coord": [
+                        976,
+                        710
+                    ],
+                    "is_working": true,
+                    "name": "Shijidasha",
+                    "rect": [
+                        912,
+                        703,
+                        54,
+                        15
+                    ],
+                    "text_id": 38,
+                    "uid": 38
+                },
+                {
+                    "coord": [
+                        1004,
+                        738
+                    ],
+                    "is_working": true,
+                    "name": "Baitahelu",
+                    "rect": [
+                        945,
+                        735,
+                        49,
+                        15
+                    ],
+                    "text_id": 39,
+                    "uid": 39
+                },
+                {
+                    "coord": [
+                        1029,
+                        763
+                    ],
+                    "is_working": true,
+                    "name": "Quanyunlu",
+                    "rect": [
+                        964,
+                        760,
+                        55,
+                        15
+                    ],
+                    "text_id": 40,
+                    "uid": 40
+                }
+            ],
+            "text_id": 41
+        }
+    ],
+    "lines_width": 9,
+    "name": "metro",
+    "name_text_id": 42,
+    "stations_diameter": 15.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 43,
+    "upper_case": false,
+    "width": 1295,
+    "word_wrap": false
+}

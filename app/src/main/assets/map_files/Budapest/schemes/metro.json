@@ -1,0 +1,1427 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 1100,
+    "images": [
+        "res/schemes/budapest.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "F49E01",
+            "line_color": "FFCD31",
+            "line_width": 10,
+            "name": "M1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            438,
+                            431
+                        ],
+                        [
+                            455.0,
+                            414.0
+                        ],
+                        [
+                            497,
+                            414
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            406,
+                            463
+                        ],
+                        [
+                            438,
+                            431
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            381,
+                            488
+                        ],
+                        [
+                            406,
+                            463
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            354,
+                            515
+                        ],
+                        [
+                            381,
+                            488
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            329,
+                            540
+                        ],
+                        [
+                            354,
+                            515
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            304,
+                            565
+                        ],
+                        [
+                            329,
+                            540
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            284,
+                            585
+                        ],
+                        [
+                            304,
+                            565
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            268,
+                            601
+                        ],
+                        [
+                            284,
+                            585
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            251,
+                            618
+                        ],
+                        [
+                            268,
+                            601
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            228,
+                            641
+                        ],
+                        [
+                            251,
+                            618
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        497,
+                        414
+                    ],
+                    "is_working": true,
+                    "name": "Mexikoi Ut",
+                    "rect": [
+                        509,
+                        406,
+                        55,
+                        15
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        438,
+                        431
+                    ],
+                    "is_working": true,
+                    "name": "Szechenyi furdo",
+                    "rect": [
+                        448,
+                        430,
+                        81,
+                        15
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        406,
+                        463
+                    ],
+                    "is_working": true,
+                    "name": "Hosok tere",
+                    "rect": [
+                        417,
+                        461,
+                        56,
+                        15
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        381,
+                        488
+                    ],
+                    "is_working": true,
+                    "name": "Bajza utca",
+                    "rect": [
+                        390,
+                        489,
+                        54,
+                        15
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        354,
+                        515
+                    ],
+                    "is_working": true,
+                    "name": "Kodaly korond",
+                    "rect": [
+                        365,
+                        514,
+                        74,
+                        15
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        329,
+                        540
+                    ],
+                    "is_working": true,
+                    "name": "Vorosmarty utca",
+                    "rect": [
+                        339,
+                        540,
+                        83,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        304,
+                        565
+                    ],
+                    "is_working": true,
+                    "name": "Oktogon",
+                    "rect": [
+                        315,
+                        566,
+                        43,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        284,
+                        585
+                    ],
+                    "is_working": true,
+                    "name": "Opera",
+                    "rect": [
+                        295,
+                        584,
+                        32,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        268,
+                        601
+                    ],
+                    "is_working": true,
+                    "name": "Bajcsy- Zsilinszky ut",
+                    "rect": [
+                        277,
+                        602,
+                        105,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        251,
+                        618
+                    ],
+                    "is_working": true,
+                    "name": "Deak Ferenc ter",
+                    "rect": [
+                        147,
+                        603,
+                        81,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        228,
+                        641
+                    ],
+                    "is_working": true,
+                    "name": "Vorosmarty ter",
+                    "rect": [
+                        160,
+                        650,
+                        75,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                }
+            ],
+            "text_id": 11
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "FD0000",
+            "line_color": "FD0000",
+            "line_width": 10,
+            "name": "M2",
+            "segments": [
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            662,
+                            606
+                        ],
+                        [
+                            779,
+                            606
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            574,
+                            606
+                        ],
+                        [
+                            662,
+                            606
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            438,
+                            606
+                        ],
+                        [
+                            574,
+                            606
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            371,
+                            635
+                        ],
+                        [
+                            400.0,
+                            606.0
+                        ],
+                        [
+                            438,
+                            606
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            304,
+                            667
+                        ],
+                        [
+                            339.0,
+                            667.0
+                        ],
+                        [
+                            371,
+                            635
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            251,
+                            646
+                        ],
+                        [
+                            272.0,
+                            667.0
+                        ],
+                        [
+                            304,
+                            667
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            200,
+                            548
+                        ],
+                        [
+                            236.0,
+                            584.0
+                        ],
+                        [
+                            236.0,
+                            631.0
+                        ],
+                        [
+                            251,
+                            646
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            134,
+                            548
+                        ],
+                        [
+                            200,
+                            548
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            27,
+                            531
+                        ],
+                        [
+                            53.0,
+                            505.0
+                        ],
+                        [
+                            85.0,
+                            505.0
+                        ],
+                        [
+                            129.0,
+                            549.0
+                        ],
+                        [
+                            134,
+                            548
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            27,
+                            587
+                        ],
+                        [
+                            27,
+                            531
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        779,
+                        606
+                    ],
+                    "is_working": true,
+                    "name": "Ors Vezer tere",
+                    "rect": [
+                        738,
+                        582,
+                        73,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        662,
+                        606
+                    ],
+                    "is_working": true,
+                    "name": "Pillango utca",
+                    "rect": [
+                        636,
+                        581,
+                        66,
+                        15
+                    ],
+                    "text_id": 13,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        574,
+                        606
+                    ],
+                    "is_working": true,
+                    "name": "Stadionok",
+                    "rect": [
+                        547,
+                        581,
+                        51,
+                        15
+                    ],
+                    "text_id": 14,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        438,
+                        606
+                    ],
+                    "is_working": true,
+                    "name": "Keleti palyaudvar",
+                    "rect": [
+                        409,
+                        582,
+                        89,
+                        15
+                    ],
+                    "text_id": 15,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        371,
+                        635
+                    ],
+                    "is_working": true,
+                    "name": "Blaha Lujza ter",
+                    "rect": [
+                        378,
+                        640,
+                        76,
+                        15
+                    ],
+                    "text_id": 16,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        304,
+                        667
+                    ],
+                    "is_working": true,
+                    "name": "Astoria",
+                    "rect": [
+                        286,
+                        645,
+                        38,
+                        15
+                    ],
+                    "text_id": 17,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        251,
+                        646
+                    ],
+                    "is_working": true,
+                    "name": "Deak Ferenc ter",
+                    "rect": [
+                        147,
+                        603,
+                        81,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        200,
+                        548
+                    ],
+                    "is_working": true,
+                    "name": "Kossuth Lajos ter",
+                    "rect": [
+                        198,
+                        523,
+                        89,
+                        15
+                    ],
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        134,
+                        548
+                    ],
+                    "is_working": true,
+                    "name": "Batthyany ter",
+                    "rect": [
+                        73,
+                        558,
+                        68,
+                        15
+                    ],
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        27,
+                        531
+                    ],
+                    "is_working": true,
+                    "name": "Moszkva ter",
+                    "rect": [
+                        36,
+                        533,
+                        62,
+                        15
+                    ],
+                    "text_id": 20,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        27,
+                        587
+                    ],
+                    "is_working": true,
+                    "name": "Deli palyaudvar",
+                    "rect": [
+                        11,
+                        596,
+                        80,
+                        15
+                    ],
+                    "text_id": 21,
+                    "uid": 21
+                }
+            ],
+            "text_id": 22
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "8383FF",
+            "line_color": "8383FF",
+            "line_width": 10,
+            "name": "M3",
+            "segments": [
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            710,
+                            927
+                        ],
+                        [
+                            785.0,
+                            927.0
+                        ],
+                        [
+                            808,
+                            950
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    23,
+                    24,
+                    [
+                        [
+                            647,
+                            927
+                        ],
+                        [
+                            710,
+                            927
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            580,
+                            927
+                        ],
+                        [
+                            647,
+                            927
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    25,
+                    26,
+                    [
+                        [
+                            480,
+                            898
+                        ],
+                        [
+                            509.0,
+                            927.0
+                        ],
+                        [
+                            580,
+                            927
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    26,
+                    27,
+                    [
+                        [
+                            432,
+                            850
+                        ],
+                        [
+                            480,
+                            898
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    27,
+                    28,
+                    [
+                        [
+                            398,
+                            816
+                        ],
+                        [
+                            432,
+                            850
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            356,
+                            774
+                        ],
+                        [
+                            398,
+                            816
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    29,
+                    30,
+                    [
+                        [
+                            313,
+                            731
+                        ],
+                        [
+                            356,
+                            774
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    30,
+                    31,
+                    [
+                        [
+                            270,
+                            688
+                        ],
+                        [
+                            313,
+                            731
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    31,
+                    32,
+                    [
+                        [
+                            251,
+                            631
+                        ],
+                        [
+                            251.0,
+                            669.0
+                        ],
+                        [
+                            270,
+                            688
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    32,
+                    33,
+                    [
+                        [
+                            251,
+                            571
+                        ],
+                        [
+                            251,
+                            631
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    33,
+                    34,
+                    [
+                        [
+                            251,
+                            492
+                        ],
+                        [
+                            251,
+                            571
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    34,
+                    35,
+                    [
+                        [
+                            262,
+                            424
+                        ],
+                        [
+                            251.0,
+                            435.0
+                        ],
+                        [
+                            251,
+                            492
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    35,
+                    36,
+                    [
+                        [
+                            310,
+                            349
+                        ],
+                        [
+                            310.0,
+                            376.0
+                        ],
+                        [
+                            262,
+                            424
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    36,
+                    37,
+                    [
+                        [
+                            310,
+                            287
+                        ],
+                        [
+                            310,
+                            349
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    37,
+                    38,
+                    [
+                        [
+                            359,
+                            219
+                        ],
+                        [
+                            310.0,
+                            268.0
+                        ],
+                        [
+                            310,
+                            287
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    38,
+                    39,
+                    [
+                        [
+                            400,
+                            132
+                        ],
+                        [
+                            400.0,
+                            178.0
+                        ],
+                        [
+                            359,
+                            219
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    39,
+                    40,
+                    [
+                        [
+                            416,
+                            24
+                        ],
+                        [
+                            400.0,
+                            40.0
+                        ],
+                        [
+                            400,
+                            132
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    40,
+                    41,
+                    [
+                        [
+                            500,
+                            12
+                        ],
+                        [
+                            428.0,
+                            12.0
+                        ],
+                        [
+                            416,
+                            24
+                        ]
+                    ],
+                    false
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        808,
+                        950
+                    ],
+                    "is_working": true,
+                    "name": "Kobanya-Kispest",
+                    "rect": [
+                        737,
+                        958,
+                        87,
+                        15
+                    ],
+                    "text_id": 23,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        710,
+                        927
+                    ],
+                    "is_working": true,
+                    "name": "Hatar ut",
+                    "rect": [
+                        692,
+                        903,
+                        41,
+                        15
+                    ],
+                    "text_id": 24,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        647,
+                        927
+                    ],
+                    "is_working": true,
+                    "name": "Pottyos utca",
+                    "rect": [
+                        617,
+                        937,
+                        63,
+                        15
+                    ],
+                    "text_id": 25,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        580,
+                        927
+                    ],
+                    "is_working": true,
+                    "name": "Ecseri ut",
+                    "rect": [
+                        565,
+                        903,
+                        46,
+                        15
+                    ],
+                    "text_id": 26,
+                    "uid": 25
+                },
+                {
+                    "coord": [
+                        480,
+                        898
+                    ],
+                    "is_working": true,
+                    "name": "Nepliget",
+                    "rect": [
+                        490,
+                        884,
+                        43,
+                        15
+                    ],
+                    "text_id": 27,
+                    "uid": 26
+                },
+                {
+                    "coord": [
+                        432,
+                        850
+                    ],
+                    "is_working": true,
+                    "name": "Nagyvarad ter",
+                    "rect": [
+                        442,
+                        837,
+                        72,
+                        15
+                    ],
+                    "text_id": 28,
+                    "uid": 27
+                },
+                {
+                    "coord": [
+                        398,
+                        816
+                    ],
+                    "is_working": true,
+                    "name": "Klinikak",
+                    "rect": [
+                        407,
+                        802,
+                        43,
+                        15
+                    ],
+                    "text_id": 29,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        356,
+                        774
+                    ],
+                    "is_working": true,
+                    "name": "Ferenc Korut",
+                    "rect": [
+                        365,
+                        759,
+                        66,
+                        15
+                    ],
+                    "text_id": 30,
+                    "uid": 29
+                },
+                {
+                    "coord": [
+                        313,
+                        731
+                    ],
+                    "is_working": true,
+                    "name": "Kalvin ter",
+                    "rect": [
+                        323,
+                        718,
+                        50,
+                        15
+                    ],
+                    "text_id": 31,
+                    "uid": 30
+                },
+                {
+                    "coord": [
+                        270,
+                        688
+                    ],
+                    "is_working": true,
+                    "name": "Ferenciek tere",
+                    "rect": [
+                        282,
+                        677,
+                        73,
+                        15
+                    ],
+                    "text_id": 32,
+                    "uid": 31
+                },
+                {
+                    "coord": [
+                        251,
+                        631
+                    ],
+                    "is_working": true,
+                    "name": "Deak Ferenc ter",
+                    "rect": [
+                        147,
+                        603,
+                        81,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 32
+                },
+                {
+                    "coord": [
+                        251,
+                        571
+                    ],
+                    "is_working": true,
+                    "name": "Arany Janos utca",
+                    "rect": [
+                        228,
+                        544,
+                        89,
+                        15
+                    ],
+                    "text_id": 33,
+                    "uid": 33
+                },
+                {
+                    "coord": [
+                        251,
+                        492
+                    ],
+                    "is_working": true,
+                    "name": "Nyugati ter",
+                    "rect": [
+                        261,
+                        484,
+                        56,
+                        15
+                    ],
+                    "text_id": 34,
+                    "uid": 34
+                },
+                {
+                    "coord": [
+                        262,
+                        424
+                    ],
+                    "is_working": true,
+                    "name": "Lehel ter",
+                    "rect": [
+                        273,
+                        423,
+                        45,
+                        15
+                    ],
+                    "text_id": 35,
+                    "uid": 35
+                },
+                {
+                    "coord": [
+                        310,
+                        349
+                    ],
+                    "is_working": true,
+                    "name": "Dozsa Gyorgy ut",
+                    "rect": [
+                        319,
+                        342,
+                        84,
+                        15
+                    ],
+                    "text_id": 36,
+                    "uid": 36
+                },
+                {
+                    "coord": [
+                        310,
+                        287
+                    ],
+                    "is_working": true,
+                    "name": "Arpad hid",
+                    "rect": [
+                        319,
+                        280,
+                        50,
+                        15
+                    ],
+                    "text_id": 37,
+                    "uid": 37
+                },
+                {
+                    "coord": [
+                        359,
+                        219
+                    ],
+                    "is_working": true,
+                    "name": "Forgach utca",
+                    "rect": [
+                        369,
+                        219,
+                        66,
+                        15
+                    ],
+                    "text_id": 38,
+                    "uid": 38
+                },
+                {
+                    "coord": [
+                        400,
+                        132
+                    ],
+                    "is_working": true,
+                    "name": "Gyongyosi utca",
+                    "rect": [
+                        409,
+                        125,
+                        79,
+                        15
+                    ],
+                    "text_id": 39,
+                    "uid": 39
+                },
+                {
+                    "coord": [
+                        416,
+                        24
+                    ],
+                    "is_working": true,
+                    "name": "Ujpest Varoskapu",
+                    "rect": [
+                        426,
+                        25,
+                        90,
+                        15
+                    ],
+                    "text_id": 40,
+                    "uid": 40
+                },
+                {
+                    "coord": [
+                        500,
+                        12
+                    ],
+                    "is_working": false,
+                    "name": "Ujpest-kozpont",
+                    "rect": [
+                        510,
+                        5,
+                        75,
+                        15
+                    ],
+                    "text_id": 41,
+                    "uid": 41
+                }
+            ],
+            "text_id": 42
+        }
+    ],
+    "lines_width": 10,
+    "name": "metro",
+    "name_text_id": 43,
+    "stations_diameter": 12.0,
+    "transfers": [
+        [
+            9,
+            17,
+            [
+                251,
+                618
+            ],
+            [
+                251,
+                646
+            ]
+        ],
+        [
+            9,
+            32,
+            [
+                251,
+                618
+            ],
+            [
+                251,
+                631
+            ]
+        ],
+        [
+            17,
+            32,
+            [
+                251,
+                646
+            ],
+            [
+                251,
+                631
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 44,
+    "upper_case": false,
+    "width": 958,
+    "word_wrap": false
+}

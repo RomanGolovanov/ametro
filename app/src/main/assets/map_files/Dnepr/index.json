@@ -1,0 +1,73 @@
+{
+    "city_id": 709930,
+    "comments_text_id": 16,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "08:00-10:00",
+                "17:00-19:00"
+            ],
+            "type": "rush",
+            "weekdays": "workdays"
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": "weekend"
+        }
+    ],
+    "description_text_id": 15,
+    "file": "Dnepr.zip",
+    "latitude": 48.46664,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": 35.04066,
+    "map_id": "Dnepr.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 13,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 14
+        }
+    ],
+    "timestamp": 1516060800.0,
+    "transport_types": [
+        "Метро"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Метро"
+        }
+    ]
+}

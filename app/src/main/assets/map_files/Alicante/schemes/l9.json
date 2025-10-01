@@ -1,0 +1,836 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 720,
+    "images": [
+        "res/schemes/l9.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "000000",
+            "line_color": "E12734",
+            "line_width": 8,
+            "name": "L1",
+            "segments": [
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            25,
+                            540
+                        ],
+                        [
+                            25,
+                            570
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Luceros",
+                    "rect": null,
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Mercado",
+                    "rect": null,
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "MARQ-CASTILLO",
+                    "rect": null,
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Sangueta",
+                    "rect": null,
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "La Isleta",
+                    "rect": null,
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Lucentum",
+                    "rect": null,
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "El Campello",
+                    "rect": null,
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Poble Espanyol",
+                    "rect": null,
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Amerador",
+                    "rect": null,
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Coveta Fuma",
+                    "rect": null,
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Cala Piteres",
+                    "rect": null,
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Venta Lanuza",
+                    "rect": null,
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Paradis",
+                    "rect": null,
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "La Vila Joiosa",
+                    "rect": null,
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Creueta",
+                    "rect": null,
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Costera Pastor",
+                    "rect": null,
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Hospital Vila",
+                    "rect": null,
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "C.C La Marina-Finestrat",
+                    "rect": null,
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": null,
+                    "is_working": true,
+                    "name": "Terra Mitica",
+                    "rect": null,
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        25,
+                        570
+                    ],
+                    "is_working": true,
+                    "name": "Benidorm",
+                    "rect": null,
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        25,
+                        540
+                    ],
+                    "is_working": true,
+                    "name": "Benidorm Intermodal",
+                    "rect": null,
+                    "text_id": 20,
+                    "uid": 20
+                }
+            ],
+            "text_id": 21
+        },
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "7B6664",
+            "line_color": "7B6664",
+            "line_width": 8,
+            "name": "L9",
+            "segments": [
+                [
+                    87,
+                    88,
+                    [
+                        [
+                            45,
+                            540
+                        ],
+                        [
+                            45,
+                            570
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    88,
+                    89,
+                    [
+                        [
+                            45,
+                            510
+                        ],
+                        [
+                            45,
+                            540
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    89,
+                    90,
+                    [
+                        [
+                            45,
+                            480
+                        ],
+                        [
+                            45,
+                            510
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    90,
+                    91,
+                    [
+                        [
+                            45,
+                            450
+                        ],
+                        [
+                            45,
+                            480
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    91,
+                    92,
+                    [
+                        [
+                            45,
+                            420
+                        ],
+                        [
+                            45,
+                            450
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    92,
+                    93,
+                    [
+                        [
+                            45,
+                            390
+                        ],
+                        [
+                            45,
+                            420
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    93,
+                    94,
+                    [
+                        [
+                            45,
+                            360
+                        ],
+                        [
+                            45,
+                            390
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    94,
+                    95,
+                    [
+                        [
+                            45,
+                            330
+                        ],
+                        [
+                            45,
+                            360
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    95,
+                    96,
+                    [
+                        [
+                            45,
+                            300
+                        ],
+                        [
+                            45,
+                            330
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    96,
+                    97,
+                    [
+                        [
+                            45,
+                            270
+                        ],
+                        [
+                            45,
+                            300
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    96,
+                    98,
+                    [
+                        [
+                            45,
+                            240
+                        ],
+                        [
+                            45,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    97,
+                    98,
+                    [
+                        [
+                            45,
+                            240
+                        ],
+                        [
+                            45,
+                            270
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    98,
+                    99,
+                    [
+                        [
+                            45,
+                            210
+                        ],
+                        [
+                            45,
+                            240
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    99,
+                    100,
+                    [
+                        [
+                            45,
+                            180
+                        ],
+                        [
+                            45,
+                            210
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    100,
+                    101,
+                    [
+                        [
+                            45,
+                            150
+                        ],
+                        [
+                            45,
+                            180
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    101,
+                    102,
+                    [
+                        [
+                            45,
+                            120
+                        ],
+                        [
+                            45,
+                            150
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    101,
+                    103,
+                    [
+                        [
+                            45,
+                            90
+                        ],
+                        [
+                            45,
+                            150
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    102,
+                    103,
+                    [
+                        [
+                            45,
+                            90
+                        ],
+                        [
+                            45,
+                            120
+                        ]
+                    ],
+                    false
+                ],
+                [
+                    103,
+                    104,
+                    [
+                        [
+                            45,
+                            90
+                        ],
+                        [
+                            45,
+                            60
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        45,
+                        570
+                    ],
+                    "is_working": true,
+                    "name": "Benidorm",
+                    "rect": [
+                        60,
+                        563,
+                        50,
+                        15
+                    ],
+                    "text_id": 19,
+                    "uid": 87
+                },
+                {
+                    "coord": [
+                        45,
+                        540
+                    ],
+                    "is_working": true,
+                    "name": "Benidorm Intermodal",
+                    "rect": [
+                        60,
+                        533,
+                        105,
+                        15
+                    ],
+                    "text_id": 20,
+                    "uid": 88
+                },
+                {
+                    "coord": [
+                        45,
+                        510
+                    ],
+                    "is_working": true,
+                    "name": "Cami Coves",
+                    "rect": [
+                        60,
+                        503,
+                        63,
+                        15
+                    ],
+                    "text_id": 60,
+                    "uid": 89
+                },
+                {
+                    "coord": [
+                        45,
+                        480
+                    ],
+                    "is_working": true,
+                    "name": "L'Alfas del Pi",
+                    "rect": [
+                        60,
+                        473,
+                        67,
+                        15
+                    ],
+                    "text_id": 61,
+                    "uid": 90
+                },
+                {
+                    "coord": [
+                        45,
+                        450
+                    ],
+                    "is_working": true,
+                    "name": "El Albir",
+                    "rect": [
+                        60,
+                        443,
+                        39,
+                        15
+                    ],
+                    "text_id": 62,
+                    "uid": 91
+                },
+                {
+                    "coord": [
+                        45,
+                        420
+                    ],
+                    "is_working": true,
+                    "name": "Altea",
+                    "rect": [
+                        60,
+                        413,
+                        28,
+                        15
+                    ],
+                    "text_id": 63,
+                    "uid": 92
+                },
+                {
+                    "coord": [
+                        45,
+                        390
+                    ],
+                    "is_working": true,
+                    "name": "Garganes",
+                    "rect": [
+                        60,
+                        383,
+                        50,
+                        15
+                    ],
+                    "text_id": 64,
+                    "uid": 93
+                },
+                {
+                    "coord": [
+                        45,
+                        360
+                    ],
+                    "is_working": true,
+                    "name": "Cap Negret",
+                    "rect": [
+                        60,
+                        353,
+                        58,
+                        15
+                    ],
+                    "text_id": 65,
+                    "uid": 94
+                },
+                {
+                    "coord": [
+                        45,
+                        330
+                    ],
+                    "is_working": true,
+                    "name": "Olla Altea",
+                    "rect": [
+                        60,
+                        323,
+                        51,
+                        15
+                    ],
+                    "text_id": 66,
+                    "uid": 95
+                },
+                {
+                    "coord": [
+                        45,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Calp",
+                    "rect": [
+                        60,
+                        293,
+                        25,
+                        15
+                    ],
+                    "text_id": 67,
+                    "uid": 96
+                },
+                {
+                    "coord": [
+                        45,
+                        270
+                    ],
+                    "is_working": false,
+                    "name": "Ferrandet",
+                    "rect": [
+                        60,
+                        263,
+                        49,
+                        15
+                    ],
+                    "text_id": 68,
+                    "uid": 97
+                },
+                {
+                    "coord": [
+                        45,
+                        240
+                    ],
+                    "is_working": true,
+                    "name": "Benissa",
+                    "rect": [
+                        60,
+                        233,
+                        43,
+                        15
+                    ],
+                    "text_id": 69,
+                    "uid": 98
+                },
+                {
+                    "coord": [
+                        45,
+                        210
+                    ],
+                    "is_working": true,
+                    "name": "Teulada",
+                    "rect": [
+                        60,
+                        203,
+                        41,
+                        15
+                    ],
+                    "text_id": 70,
+                    "uid": 99
+                },
+                {
+                    "coord": [
+                        45,
+                        180
+                    ],
+                    "is_working": true,
+                    "name": "Gata",
+                    "rect": [
+                        60,
+                        173,
+                        25,
+                        15
+                    ],
+                    "text_id": 71,
+                    "uid": 100
+                },
+                {
+                    "coord": [
+                        45,
+                        150
+                    ],
+                    "is_working": true,
+                    "name": "La Xara",
+                    "rect": [
+                        60,
+                        143,
+                        40,
+                        15
+                    ],
+                    "text_id": 72,
+                    "uid": 101
+                },
+                {
+                    "coord": [
+                        45,
+                        120
+                    ],
+                    "is_working": false,
+                    "name": "La Pedrera",
+                    "rect": [
+                        60,
+                        113,
+                        56,
+                        15
+                    ],
+                    "text_id": 73,
+                    "uid": 102
+                },
+                {
+                    "coord": [
+                        45,
+                        90
+                    ],
+                    "is_working": true,
+                    "name": "Alqueries",
+                    "rect": [
+                        60,
+                        83,
+                        50,
+                        15
+                    ],
+                    "text_id": 74,
+                    "uid": 103
+                },
+                {
+                    "coord": [
+                        45,
+                        60
+                    ],
+                    "is_working": true,
+                    "name": "Denia",
+                    "rect": [
+                        60,
+                        53,
+                        31,
+                        15
+                    ],
+                    "text_id": 75,
+                    "uid": 104
+                }
+            ],
+            "text_id": 76
+        }
+    ],
+    "lines_width": 8,
+    "name": "l9",
+    "name_text_id": 76,
+    "stations_diameter": 12.0,
+    "transfers": [
+        [
+            19,
+            87,
+            [
+                25,
+                570
+            ],
+            [
+                45,
+                570
+            ]
+        ],
+        [
+            20,
+            88,
+            [
+                25,
+                540
+            ],
+            [
+                45,
+                540
+            ]
+        ]
+    ],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "Трамвай",
+    "type_text_id": 79,
+    "upper_case": false,
+    "width": 195,
+    "word_wrap": false
+}

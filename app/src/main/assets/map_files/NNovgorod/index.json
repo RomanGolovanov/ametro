@@ -1,0 +1,86 @@
+{
+    "city_id": 520555,
+    "comments_text_id": 23,
+    "default_locale": "ru",
+    "delays": [
+        {
+            "ranges": [
+                "08:00-20:00"
+            ],
+            "type": "day",
+            "weekdays": null
+        },
+        {
+            "ranges": [
+                "20:00-24:00",
+                "00:00-05:00"
+            ],
+            "type": "night",
+            "weekdays": null
+        }
+    ],
+    "description_text_id": 22,
+    "file": "NNovgorod.zip",
+    "latitude": 56.32867,
+    "locales": [
+        "ru",
+        "en"
+    ],
+    "longitude": 44.00205,
+    "map_id": "NNovgorod.zip",
+    "schemes": [
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/metro.json",
+            "name": "metro",
+            "name_text_id": 19,
+            "root": true,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "ROOT",
+            "type_text_id": 20
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/avtozavodskaja.json",
+            "name": "avtozavodskaja",
+            "name_text_id": 8,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 21
+        },
+        {
+            "default_transports": [
+                "metro"
+            ],
+            "file": "schemes/sormovskaja.json",
+            "name": "sormovskaja",
+            "name_text_id": 12,
+            "root": false,
+            "transports": [
+                "metro"
+            ],
+            "type_name": "Метро",
+            "type_text_id": 21
+        }
+    ],
+    "timestamp": 1754434800.0,
+    "transport_types": [
+        "Метро"
+    ],
+    "transports": [
+        {
+            "file": "transports/metro.json",
+            "name": "metro",
+            "type": "Метро"
+        }
+    ]
+}

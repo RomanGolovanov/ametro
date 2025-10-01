@@ -1,0 +1,999 @@
+{
+    "default_transports": [
+        "metro"
+    ],
+    "height": 470,
+    "images": [
+        "res/schemes/bursa.svg"
+    ],
+    "is_vector": true,
+    "lines": [
+        {
+            "labels_bg_color": "-1",
+            "labels_color": "af0000",
+            "line_color": "cf0000",
+            "line_width": 7,
+            "name": "1",
+            "segments": [
+                [
+                    0,
+                    1,
+                    [
+                        [
+                            733,
+                            300
+                        ],
+                        [
+                            760,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    1,
+                    2,
+                    [
+                        [
+                            704,
+                            300
+                        ],
+                        [
+                            733,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    2,
+                    3,
+                    [
+                        [
+                            676,
+                            300
+                        ],
+                        [
+                            704,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    3,
+                    4,
+                    [
+                        [
+                            650,
+                            310
+                        ],
+                        [
+                            660.0,
+                            300.0
+                        ],
+                        [
+                            676,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    4,
+                    5,
+                    [
+                        [
+                            620,
+                            320
+                        ],
+                        [
+                            640.0,
+                            320.0
+                        ],
+                        [
+                            650,
+                            310
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    5,
+                    6,
+                    [
+                        [
+                            580,
+                            320
+                        ],
+                        [
+                            620,
+                            320
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    6,
+                    7,
+                    [
+                        [
+                            560,
+                            300
+                        ],
+                        [
+                            580,
+                            320
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    7,
+                    8,
+                    [
+                        [
+                            535,
+                            275
+                        ],
+                        [
+                            560,
+                            300
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    8,
+                    9,
+                    [
+                        [
+                            515,
+                            275
+                        ],
+                        [
+                            535,
+                            275
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    9,
+                    10,
+                    [
+                        [
+                            485,
+                            245
+                        ],
+                        [
+                            515,
+                            275
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    10,
+                    11,
+                    [
+                        [
+                            455,
+                            215
+                        ],
+                        [
+                            485,
+                            245
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    11,
+                    12,
+                    [
+                        [
+                            400,
+                            200
+                        ],
+                        [
+                            440.0,
+                            200.0
+                        ],
+                        [
+                            455,
+                            215
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    13,
+                    [
+                        [
+                            321,
+                            200
+                        ],
+                        [
+                            400,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    12,
+                    24,
+                    [
+                        [
+                            335,
+                            175
+                        ],
+                        [
+                            360.0,
+                            200.0
+                        ],
+                        [
+                            400,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    13,
+                    14,
+                    [
+                        [
+                            293,
+                            200
+                        ],
+                        [
+                            321,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    14,
+                    15,
+                    [
+                        [
+                            266,
+                            200
+                        ],
+                        [
+                            293,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    15,
+                    16,
+                    [
+                        [
+                            237,
+                            200
+                        ],
+                        [
+                            266,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    16,
+                    17,
+                    [
+                        [
+                            207,
+                            200
+                        ],
+                        [
+                            237,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    17,
+                    18,
+                    [
+                        [
+                            167,
+                            160
+                        ],
+                        [
+                            207,
+                            200
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    18,
+                    19,
+                    [
+                        [
+                            135,
+                            160
+                        ],
+                        [
+                            167,
+                            160
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    19,
+                    20,
+                    [
+                        [
+                            104,
+                            160
+                        ],
+                        [
+                            135,
+                            160
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    20,
+                    21,
+                    [
+                        [
+                            74,
+                            160
+                        ],
+                        [
+                            104,
+                            160
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    21,
+                    22,
+                    [
+                        [
+                            42,
+                            160
+                        ],
+                        [
+                            74,
+                            160
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    22,
+                    23,
+                    [
+                        [
+                            15,
+                            187
+                        ],
+                        [
+                            42,
+                            160
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    24,
+                    25,
+                    [
+                        [
+                            309,
+                            149
+                        ],
+                        [
+                            335,
+                            175
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    25,
+                    26,
+                    [
+                        [
+                            284,
+                            124
+                        ],
+                        [
+                            309,
+                            149
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    26,
+                    27,
+                    [
+                        [
+                            259,
+                            99
+                        ],
+                        [
+                            284,
+                            124
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    27,
+                    28,
+                    [
+                        [
+                            232,
+                            72
+                        ],
+                        [
+                            259,
+                            99
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    28,
+                    29,
+                    [
+                        [
+                            208,
+                            48
+                        ],
+                        [
+                            232,
+                            72
+                        ]
+                    ],
+                    true
+                ],
+                [
+                    29,
+                    30,
+                    [
+                        [
+                            182,
+                            22
+                        ],
+                        [
+                            208,
+                            48
+                        ]
+                    ],
+                    true
+                ]
+            ],
+            "stations": [
+                {
+                    "coord": [
+                        760,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Arabayatagi",
+                    "rect": [
+                        753,
+                        229,
+                        15,
+                        62
+                    ],
+                    "text_id": 0,
+                    "uid": 0
+                },
+                {
+                    "coord": [
+                        733,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Yuksek Ihtisas Hastahanesi",
+                    "rect": [
+                        726,
+                        151,
+                        15,
+                        140
+                    ],
+                    "text_id": 1,
+                    "uid": 1
+                },
+                {
+                    "coord": [
+                        704,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Duacinari",
+                    "rect": [
+                        697,
+                        241,
+                        15,
+                        50
+                    ],
+                    "text_id": 2,
+                    "uid": 2
+                },
+                {
+                    "coord": [
+                        676,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Davutdede",
+                    "rect": [
+                        669,
+                        236,
+                        15,
+                        55
+                    ],
+                    "text_id": 3,
+                    "uid": 3
+                },
+                {
+                    "coord": [
+                        650,
+                        310
+                    ],
+                    "is_working": true,
+                    "name": "Gokdere",
+                    "rect": [
+                        637,
+                        257,
+                        15,
+                        44
+                    ],
+                    "text_id": 4,
+                    "uid": 4
+                },
+                {
+                    "coord": [
+                        620,
+                        320
+                    ],
+                    "is_working": true,
+                    "name": "Demirtaspasa",
+                    "rect": [
+                        596,
+                        329,
+                        71,
+                        15
+                    ],
+                    "text_id": 5,
+                    "uid": 5
+                },
+                {
+                    "coord": [
+                        580,
+                        320
+                    ],
+                    "is_working": true,
+                    "name": "Sehrekustu",
+                    "rect": [
+                        513,
+                        317,
+                        58,
+                        15
+                    ],
+                    "text_id": 6,
+                    "uid": 6
+                },
+                {
+                    "coord": [
+                        560,
+                        300
+                    ],
+                    "is_working": true,
+                    "name": "Osmangazi",
+                    "rect": [
+                        494,
+                        297,
+                        57,
+                        15
+                    ],
+                    "text_id": 7,
+                    "uid": 7
+                },
+                {
+                    "coord": [
+                        535,
+                        275
+                    ],
+                    "is_working": true,
+                    "name": "Merinos",
+                    "rect": [
+                        544,
+                        263,
+                        42,
+                        15
+                    ],
+                    "text_id": 8,
+                    "uid": 8
+                },
+                {
+                    "coord": [
+                        515,
+                        275
+                    ],
+                    "is_working": true,
+                    "name": "Kulturpark",
+                    "rect": [
+                        452,
+                        272,
+                        54,
+                        15
+                    ],
+                    "text_id": 9,
+                    "uid": 9
+                },
+                {
+                    "coord": [
+                        485,
+                        245
+                    ],
+                    "is_working": true,
+                    "name": "Sirameseler",
+                    "rect": [
+                        494,
+                        233,
+                        62,
+                        15
+                    ],
+                    "text_id": 10,
+                    "uid": 10
+                },
+                {
+                    "coord": [
+                        455,
+                        215
+                    ],
+                    "is_working": true,
+                    "name": "Pasa Ciftligi",
+                    "rect": [
+                        464,
+                        203,
+                        62,
+                        15
+                    ],
+                    "text_id": 11,
+                    "uid": 11
+                },
+                {
+                    "coord": [
+                        400,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Acemler",
+                    "rect": [
+                        380,
+                        209,
+                        44,
+                        15
+                    ],
+                    "text_id": 12,
+                    "uid": 12
+                },
+                {
+                    "coord": [
+                        321,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Nilufer",
+                    "rect": [
+                        314,
+                        209,
+                        15,
+                        35
+                    ],
+                    "text_id": 13,
+                    "uid": 13
+                },
+                {
+                    "coord": [
+                        293,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Fatih S. Mehmet",
+                    "rect": [
+                        286,
+                        209,
+                        15,
+                        81
+                    ],
+                    "text_id": 14,
+                    "uid": 14
+                },
+                {
+                    "coord": [
+                        266,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Besevler",
+                    "rect": [
+                        259,
+                        209,
+                        15,
+                        47
+                    ],
+                    "text_id": 15,
+                    "uid": 15
+                },
+                {
+                    "coord": [
+                        237,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Ataevler",
+                    "rect": [
+                        230,
+                        209,
+                        15,
+                        44
+                    ],
+                    "text_id": 16,
+                    "uid": 16
+                },
+                {
+                    "coord": [
+                        207,
+                        200
+                    ],
+                    "is_working": true,
+                    "name": "Kucuk Sanayi",
+                    "rect": [
+                        200,
+                        209,
+                        15,
+                        71
+                    ],
+                    "text_id": 17,
+                    "uid": 17
+                },
+                {
+                    "coord": [
+                        167,
+                        160
+                    ],
+                    "is_working": true,
+                    "name": "Altinsehir",
+                    "rect": [
+                        155,
+                        169,
+                        15,
+                        50
+                    ],
+                    "text_id": 18,
+                    "uid": 18
+                },
+                {
+                    "coord": [
+                        135,
+                        160
+                    ],
+                    "is_working": true,
+                    "name": "Ertugrul",
+                    "rect": [
+                        128,
+                        169,
+                        15,
+                        41
+                    ],
+                    "text_id": 19,
+                    "uid": 19
+                },
+                {
+                    "coord": [
+                        104,
+                        160
+                    ],
+                    "is_working": true,
+                    "name": "Ozluce",
+                    "rect": [
+                        97,
+                        169,
+                        15,
+                        36
+                    ],
+                    "text_id": 20,
+                    "uid": 20
+                },
+                {
+                    "coord": [
+                        74,
+                        160
+                    ],
+                    "is_working": true,
+                    "name": "Batikent",
+                    "rect": [
+                        67,
+                        169,
+                        15,
+                        43
+                    ],
+                    "text_id": 21,
+                    "uid": 21
+                },
+                {
+                    "coord": [
+                        42,
+                        160
+                    ],
+                    "is_working": true,
+                    "name": "Yuzuncuyil",
+                    "rect": [
+                        39,
+                        169,
+                        15,
+                        56
+                    ],
+                    "text_id": 22,
+                    "uid": 22
+                },
+                {
+                    "coord": [
+                        15,
+                        187
+                    ],
+                    "is_working": true,
+                    "name": "Universite",
+                    "rect": [
+                        8,
+                        196,
+                        15,
+                        53
+                    ],
+                    "text_id": 23,
+                    "uid": 23
+                },
+                {
+                    "coord": [
+                        335,
+                        175
+                    ],
+                    "is_working": true,
+                    "name": "Karaman",
+                    "rect": [
+                        344,
+                        163,
+                        47,
+                        15
+                    ],
+                    "text_id": 24,
+                    "uid": 24
+                },
+                {
+                    "coord": [
+                        309,
+                        149
+                    ],
+                    "is_working": true,
+                    "name": "Ihsaniye",
+                    "rect": [
+                        318,
+                        137,
+                        44,
+                        15
+                    ],
+                    "text_id": 25,
+                    "uid": 25
+                },
+                {
+                    "coord": [
+                        284,
+                        124
+                    ],
+                    "is_working": true,
+                    "name": "Baglarbasi / Esentepe",
+                    "rect": [
+                        293,
+                        112,
+                        111,
+                        15
+                    ],
+                    "text_id": 26,
+                    "uid": 26
+                },
+                {
+                    "coord": [
+                        259,
+                        99
+                    ],
+                    "is_working": true,
+                    "name": "Hamitler / Fethiye",
+                    "rect": [
+                        268,
+                        87,
+                        89,
+                        15
+                    ],
+                    "text_id": 27,
+                    "uid": 27
+                },
+                {
+                    "coord": [
+                        232,
+                        72
+                    ],
+                    "is_working": true,
+                    "name": "Organize Sanayi",
+                    "rect": [
+                        241,
+                        60,
+                        83,
+                        15
+                    ],
+                    "text_id": 28,
+                    "uid": 28
+                },
+                {
+                    "coord": [
+                        208,
+                        48
+                    ],
+                    "is_working": true,
+                    "name": "Korupark",
+                    "rect": [
+                        217,
+                        36,
+                        48,
+                        15
+                    ],
+                    "text_id": 29,
+                    "uid": 29
+                },
+                {
+                    "coord": [
+                        182,
+                        22
+                    ],
+                    "is_working": true,
+                    "name": "Emek",
+                    "rect": [
+                        191,
+                        10,
+                        30,
+                        15
+                    ],
+                    "text_id": 30,
+                    "uid": 30
+                }
+            ],
+            "text_id": 31
+        }
+    ],
+    "lines_width": 7,
+    "name": "metro",
+    "name_text_id": 32,
+    "stations_diameter": 13.0,
+    "transfers": [],
+    "transports": [
+        "metro"
+    ],
+    "type_name": "ROOT",
+    "type_text_id": 33,
+    "upper_case": false,
+    "width": 910,
+    "word_wrap": false
+}
