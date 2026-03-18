@@ -397,7 +397,7 @@ class Map : AppCompatActivity(),
     override fun onRouteSelectionComplete(begin: MapSchemeStation?, end: MapSchemeStation?) {
         val routes = MapRouteProvider.findRoutes(
             MapRouteQueryParameters(
-                container,
+                container!!,
                 enabledTransportsSet,
                 currentDelayIndex,
                 mapSelectionIndicators.beginStation!!.uid,
@@ -415,7 +415,7 @@ class Map : AppCompatActivity(),
             ).show()
             return
         }
-        mapView?.highlightsElements(RouteUtils.convertRouteToSchemeObjectIds(routes[0], scheme))
+        mapView?.highlightsElements(RouteUtils.convertRouteToSchemeObjectIds(routes[0], scheme!!))
         mapTopPanel.show(
             String.format(
                 getString(R.string.msg_from_to),

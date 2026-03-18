@@ -21,7 +21,7 @@ class ApplicationEx : Application() {
     val countryFlagProvider: IconProvider by lazy {
         IconProvider(
             this,
-            ContextCompat.getDrawable(applicationContext, R.drawable.no_country),
+            ContextCompat.getDrawable(applicationContext, R.drawable.no_country)!!,
             "country_icons"
         )
     }
