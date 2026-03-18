@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./gradlew :app:compileDebugKotlin)",
+      "Bash(./gradlew :app:assembleDebug)",
+      "Bash(./gradlew :app:compileDebugKotlin --info)",
+      "Bash(JAVA_HOME=\"/c/Program Files/Android/Android Studio/jbr\" ANDROID_HOME=\"/c/Users/skiif/AppData/Local/Android/Sdk\" ./gradlew assembleDebug)",
+      "Bash(JAVA_HOME=\"/c/Program Files/Android/Android Studio/jbr\" ANDROID_HOME=\"/c/Users/skiif/AppData/Local/Android/Sdk\" ./gradlew assembleDebug --stacktrace)",
+      "Bash(./gradlew :app:compileDebugJavaWithJavac)"
+    ]
+  }
+}
