@@ -9,7 +9,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.app.NavUtils;
-import androidx.core.view.MenuItemCompat;
 
 import io.github.romangolovanov.apps.ametro.R;
 import io.github.romangolovanov.apps.ametro.app.Constants;
@@ -53,7 +52,7 @@ public class MapList extends AppCompatActivity implements MapListFragment.IMapLi
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_map_list, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setOnQueryTextListener(listFragment);
         return true;
     }
