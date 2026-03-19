@@ -10,7 +10,7 @@ import io.github.romangolovanov.apps.ametro.model.entities.MapScheme
 import io.github.romangolovanov.apps.ametro.model.entities.MapSchemeLine
 import io.github.romangolovanov.apps.ametro.model.entities.MapSchemeStation
 import io.github.romangolovanov.apps.ametro.render.RenderConstants
-import io.github.romangolovanov.apps.ametro.render.utils.RenderUtils
+import io.github.romangolovanov.apps.ametro.render.utils.getGrayedColor
 
 class StationElement(scheme: MapScheme, line: MapSchemeLine, station: MapSchemeStation) : DrawingElement() {
 
@@ -38,7 +38,7 @@ class StationElement(scheme: MapScheme, line: MapSchemeLine, station: MapSchemeS
         val isWorking = station.isWorking
 
         paints[RenderConstants.LAYER_VISIBLE] = createPaint(lineColor, radius.toFloat(), isWorking)
-        paints[RenderConstants.LAYER_GRAYED] = createPaint(RenderUtils.getGrayedColor(lineColor), radius.toFloat(), isWorking)
+        paints[RenderConstants.LAYER_GRAYED] = createPaint(getGrayedColor(lineColor), radius.toFloat(), isWorking)
 
         setBoxAndPriority(
             Rect(

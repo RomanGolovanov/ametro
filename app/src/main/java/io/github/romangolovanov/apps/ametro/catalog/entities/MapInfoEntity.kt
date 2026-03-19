@@ -10,14 +10,6 @@ open class MapInfoEntity(
     val latitude: Double,
     val longitude: Double
 ) {
-    constructor(city_id: Int, fileName: String, latitude: Double, longitude: Double,
-                size: Int, timestamp: Int, types: Array<TransportType>, uid: String)
-        : this(uid, city_id, types, fileName, size, timestamp, latitude, longitude)
-
-    constructor(src: MapInfoEntity) : this(
-        src.uid, src.cityId, src.types, src.fileName, src.size, src.timestamp, src.latitude, src.longitude
-    )
-
     override fun equals(other: Any?): Boolean {
         if (other === this) return true
         if (other is MapInfoEntity) return fileName == other.fileName

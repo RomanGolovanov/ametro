@@ -11,7 +11,6 @@ object StringUtils {
     private val SI_UNITS = arrayOf("k", "M", "G", "T", "P", "E")
     private val COMPUTING_UNITS = arrayOf("Ki", "Mi", "Gi", "Ti", "Pi", "Ei")
 
-    @JvmStatic
     fun humanReadableByteCount(bytes: Long, si: Boolean): String {
         val unit = if (si) 1000 else 1024
         if (bytes < unit) return "$bytes B"
@@ -20,7 +19,6 @@ object StringUtils {
         return String.format("%.1f %sB", bytes / Math.pow(unit.toDouble(), exp.toDouble()), pre)
     }
 
-    @JvmStatic
     fun startsWithoutDiacritics(text: String, prefix: String): Boolean {
         val textLength = text.length
         val prefixLength = prefix.length
@@ -31,12 +29,6 @@ object StringUtils {
         return COLLATOR.compare(textPrefix, prefix) == 0
     }
 
-    @JvmStatic
-    fun isNullOrEmpty(value: String?): Boolean {
-        return value == null || value.trim().isEmpty()
-    }
-
-    @JvmStatic
     fun humanReadableTime(totalSeconds: Int): String {
         val seconds = totalSeconds % 60
         val minutes = (totalSeconds / 60) % 60

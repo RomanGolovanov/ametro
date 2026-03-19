@@ -12,15 +12,15 @@ import io.github.romangolovanov.apps.ametro.model.entities.MapScheme
 import io.github.romangolovanov.apps.ametro.model.entities.MapSchemeLine
 import io.github.romangolovanov.apps.ametro.model.entities.MapSchemeStation
 import io.github.romangolovanov.apps.ametro.render.RenderConstants
-import io.github.romangolovanov.apps.ametro.render.utils.RenderUtils
-import io.github.romangolovanov.apps.ametro.utils.ModelUtils
+import io.github.romangolovanov.apps.ametro.render.utils.getGrayedColor
+import io.github.romangolovanov.apps.ametro.utils.toRect
 
 class StationNameElement(scheme: MapScheme, line: MapSchemeLine, station: MapSchemeStation) : DrawingElement() {
 
     private val vertical: Boolean
 
-    private val textPaints: Array<Paint?> = arrayOfNulls(RenderConstants.LAYER_COUNT)
-    private val borderPaints: Array<Paint?> = arrayOfNulls(RenderConstants.LAYER_COUNT)
+    private lateinit var textPaints: Array<Paint>
+    private lateinit var borderPaints: Array<Paint>
 
     private val firstLine: String
     private val firstLinePosition: MapPoint
@@ -38,7 +38,7 @@ class StationNameElement(scheme: MapScheme, line: MapSchemeLine, station: MapSch
         }
 
         val textLength = name.length
-        val textRect = ModelUtils.toRect(station.labelPosition)!!
+        val textRect = toRect(station.labelPosition)!!
         val point = station.position!!
 
         vertical = textRect.width() < textRect.height()
@@ -50,28 +50,22 @@ class StationNameElement(scheme: MapScheme, line: MapSchemeLine, station: MapSch
         }
 
         val textColor = line.labelColor
-        val paint = createTextPaint(textColor)
-
-        textPaints[RenderConstants.LAYER_VISIBLE] = paint
-        textPaints[RenderConstants.LAYER_VISIBLE]!!.textAlign = align
-
-        textPaints[RenderConstants.LAYER_GRAYED] = createTextPaint(RenderUtils.getGrayedColor(textColor))
-        textPaints[RenderConstants.LAYER_GRAYED]!!.textAlign = align
+        val visiblePaint = createTextPaint(textColor).also { it.textAlign = align }
+        val grayedPaint = createTextPaint(getGrayedColor(textColor)).also { it.textAlign = align }
+        textPaints = arrayOf(grayedPaint, visiblePaint)
 
         var borderColor = line.labelBackgroundColor
-        var borderGrayedColor = RenderUtils.getGrayedColor(borderColor)
+        var borderGrayedColor = getGrayedColor(borderColor)
         if (borderColor == -1) {
             borderColor = Color.WHITE
             borderGrayedColor = Color.WHITE
         }
 
-        borderPaints[RenderConstants.LAYER_VISIBLE] = createBorderPaint(paint, borderColor)
-        borderPaints[RenderConstants.LAYER_VISIBLE]!!.textAlign = align
+        val visibleBorderPaint = createBorderPaint(visiblePaint, borderColor).also { it.textAlign = align }
+        val grayedBorderPaint = createBorderPaint(visiblePaint, borderGrayedColor).also { it.textAlign = align }
+        borderPaints = arrayOf(grayedBorderPaint, visibleBorderPaint)
 
-        borderPaints[RenderConstants.LAYER_GRAYED] = createBorderPaint(paint, borderGrayedColor)
-        borderPaints[RenderConstants.LAYER_GRAYED]!!.textAlign = align
-
-        val result = splitTextToLines(scheme, name, textLength, textRect, align, paint)
+        val result = splitTextToLines(scheme, name, textLength, textRect, align, visiblePaint)
         firstLine = result.first
         firstLinePosition = result.second
         secondLine = result.third
@@ -148,14 +142,14 @@ class StationNameElement(scheme: MapScheme, line: MapSchemeLine, station: MapSch
         if (vertical) {
             canvas.rotate(-90f)
         }
-        canvas.drawText(firstLine, 0f, 0f, borderPaints[layer]!!)
-        canvas.drawText(firstLine, 0f, 0f, textPaints[layer]!!)
+        canvas.drawText(firstLine, 0f, 0f, borderPaints[layer])
+        canvas.drawText(firstLine, 0f, 0f, textPaints[layer])
         val sl = secondLine
         val slp = secondLinePosition
         if (sl != null && slp != null) {
             canvas.translate(slp.x, slp.y)
-            canvas.drawText(sl, 0f, 0f, borderPaints[layer]!!)
-            canvas.drawText(sl, 0f, 0f, textPaints[layer]!!)
+            canvas.drawText(sl, 0f, 0f, borderPaints[layer])
+            canvas.drawText(sl, 0f, 0f, textPaints[layer])
         }
         canvas.restore()
     }

@@ -9,15 +9,12 @@ import com.fasterxml.jackson.databind.ObjectMapper
 
 import java.io.IOException
 import java.io.InputStream
-import java.util.ArrayList
-import java.util.HashMap
 
 import io.github.romangolovanov.apps.ametro.model.entities.MapLocale
 import io.github.romangolovanov.apps.ametro.model.entities.MapMetadata
 import io.github.romangolovanov.apps.ametro.model.entities.MapScheme
 import io.github.romangolovanov.apps.ametro.model.entities.MapStationInformation
 import io.github.romangolovanov.apps.ametro.model.entities.MapTransportScheme
-import io.github.romangolovanov.apps.ametro.utils.FileUtils
 
 /**
  * Provides access to map contents extracted under a relative folder in assets/.
@@ -36,29 +33,18 @@ class FileAssetsMapProvider(
     override fun getSupportedLocales(): Array<String> = getMetadata(null).locales
 
     @Throws(IOException::class)
-    override fun getTextsMap(languageCode: String): HashMap<Int, String> {
+    override fun getTextsMap(languageCode: String): Map<Int, String> {
         getInputStream("texts/$languageCode.json").use { stream ->
             return MetadataTypes.asTextMap(reader.readTree(stream))
         }
     }
 
     @Throws(IOException::class)
-    override fun getAllTextsMap(): HashMap<Int, MutableList<String>> {
-        val locales = getSupportedLocales()
-        val map = HashMap<Int, MutableList<String>>()
-        for (locale in locales) {
-            val localeTexts = getTextsMap(locale)
-            for (textId in localeTexts.keys) {
-                if (map.containsKey(textId)) {
-                    map[textId]!!.add(localeTexts[textId]!!)
-                } else {
-                    val list = ArrayList<String>()
-                    list.add(localeTexts[textId]!!)
-                    map[textId] = list
-                }
-            }
-        }
-        return map
+    override fun getAllTextsMap(): Map<Int, MutableList<String>> {
+        return getSupportedLocales()
+            .flatMap { locale -> getTextsMap(locale).entries }
+            .groupBy({ it.key }, { it.value })
+            .mapValues { (_, values) -> values.toMutableList() }
     }
 
     @Throws(IOException::class)
@@ -115,7 +101,7 @@ class FileAssetsMapProvider(
     @Throws(IOException::class)
     override fun getFileContent(name: String): String {
         getInputStream(name).use { stream ->
-            return FileUtils.readAllText(stream)
+            return stream.bufferedReader().readText()
         }
     }
 

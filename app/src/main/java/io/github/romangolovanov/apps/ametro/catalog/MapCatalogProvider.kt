@@ -10,7 +10,6 @@ import io.github.romangolovanov.apps.ametro.model.serialization.FileAssetsMapPro
 import io.github.romangolovanov.apps.ametro.model.serialization.GlobalIdentifierProvider
 import io.github.romangolovanov.apps.ametro.model.serialization.MapProvider
 import io.github.romangolovanov.apps.ametro.model.serialization.ZipArchiveMapProvider
-import io.github.romangolovanov.apps.ametro.utils.FileUtils
 import java.io.IOException
 
 class MapCatalogProvider(
@@ -32,9 +31,9 @@ class MapCatalogProvider(
 
     private fun loadCatalog(): MapCatalog {
         return try {
-            val json = context.assets.open("map_files/index.json").use { FileUtils.readAllText(it) }
+            val json = context.assets.open("map_files/index.json").use { it.bufferedReader().readText() }
             val maps = MapCatalogSerializer.deserializeMapInfoArray(json)
-            val localizations = localizationProvider.getLocalizationMap()
+            val localizations = localizationProvider.localizationMap
             val localizedMaps = Array(maps.size) { i ->
                 val loc = localizations[maps[i].cityId]
                 MapInfo(

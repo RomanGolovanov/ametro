@@ -10,7 +10,6 @@ object MapCatalogSerializer {
 
     private val reader = ObjectMapper().reader()
 
-    @JvmStatic
     @Throws(SerializationException::class)
     fun deserializeMapInfoArray(jsonText: String): Array<MapInfoEntity> {
         try {
@@ -18,14 +17,14 @@ object MapCatalogSerializer {
             return Array(json.size()) { i ->
                 val jsonMap = json.get(i)
                 MapInfoEntity(
-                    jsonMap.get("city_id").asInt(),
-                    jsonMap.get("file").asText(),
-                    jsonMap.get("latitude").asDouble(),
-                    jsonMap.get("longitude").asDouble(),
-                    jsonMap.get("size").asInt(),
-                    jsonMap.get("timestamp").asInt(),
-                    deserializeTransports(jsonMap.get("transports")),
-                    jsonMap.get("uid").asText()
+                    uid = jsonMap.get("uid").asText(),
+                    cityId = jsonMap.get("city_id").asInt(),
+                    types = deserializeTransports(jsonMap.get("transports")),
+                    fileName = jsonMap.get("file").asText(),
+                    size = jsonMap.get("size").asInt(),
+                    timestamp = jsonMap.get("timestamp").asInt(),
+                    latitude = jsonMap.get("latitude").asDouble(),
+                    longitude = jsonMap.get("longitude").asDouble()
                 )
             }
         } catch (ex: Exception) {
@@ -33,7 +32,6 @@ object MapCatalogSerializer {
         }
     }
 
-    @JvmStatic
     @Throws(SerializationException::class)
     fun deserializeLocalization(jsonText: String): Array<MapInfoEntityName> {
         try {

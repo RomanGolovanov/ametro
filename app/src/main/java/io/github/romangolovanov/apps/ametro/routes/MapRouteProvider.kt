@@ -4,11 +4,9 @@ import io.github.romangolovanov.apps.ametro.routes.algorithms.DijkstraHeap
 import io.github.romangolovanov.apps.ametro.routes.entities.MapRoute
 import io.github.romangolovanov.apps.ametro.routes.entities.MapRoutePart
 import io.github.romangolovanov.apps.ametro.routes.entities.MapRouteQueryParameters
-import java.util.Collections
 
 object MapRouteProvider {
 
-    @JvmStatic
     fun findRoutes(parameters: MapRouteQueryParameters): Array<MapRoute> {
         val graph = DijkstraHeap.TransportGraph(parameters.stationCount)
         createGraphEdges(graph, parameters)
@@ -34,8 +32,7 @@ object MapRouteProvider {
             from = predecessors[to]
         }
 
-        Collections.reverse(parts)
-        return MapRoute(parts.toTypedArray())
+        return MapRoute(parts.reversed().toTypedArray())
     }
 
     private fun createGraphEdges(graph: DijkstraHeap.TransportGraph, parameters: MapRouteQueryParameters) {
@@ -53,8 +50,9 @@ object MapRouteProvider {
             val delayIndex = parameters.delayIndex
             for (transfer in scheme.transfers) {
                 var delay = transfer.delay
-                if (delayIndex != null && stationLines[transfer.to] != null) {
-                    val lineDelays = stationLines[transfer.to]!!.delays
+                val lineAtTransfer = stationLines[transfer.to]
+                if (delayIndex != null && lineAtTransfer != null) {
+                    val lineDelays = lineAtTransfer.delays
                     if (lineDelays.isNotEmpty()) {
                         delay += lineDelays[delayIndex]
                     }

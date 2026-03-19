@@ -12,7 +12,6 @@ import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import io.github.romangolovanov.apps.ametro.R
-import io.github.romangolovanov.apps.ametro.utils.FileUtils
 import java.io.IOException
 
 class About : AppCompatActivity() {
@@ -38,7 +37,8 @@ class About : AppCompatActivity() {
         scrollView = findViewById(R.id.scrollView)
         if (savedInstanceState != null) {
             val y = savedInstanceState.getInt("scrollY", 0)
-            scrollView!!.post { scrollView!!.scrollTo(0, y) }
+            val sv = scrollView
+            sv?.post { sv.scrollTo(0, y) }
         }
     }
 
@@ -55,7 +55,7 @@ class About : AppCompatActivity() {
             Html.FROM_HTML_MODE_LEGACY
         ))
         builder.append(Html.fromHtml(
-            FileUtils.readAllText(resources.openRawResource(R.raw.about)),
+            resources.openRawResource(R.raw.about).bufferedReader().readText(),
             Html.FROM_HTML_MODE_LEGACY
         ))
         Linkify.addLinks(builder, Linkify.ALL)

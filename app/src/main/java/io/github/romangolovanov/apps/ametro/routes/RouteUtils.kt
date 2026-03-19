@@ -1,27 +1,24 @@
 package io.github.romangolovanov.apps.ametro.routes
 
-import android.util.Pair
 import io.github.romangolovanov.apps.ametro.model.entities.MapScheme
 import io.github.romangolovanov.apps.ametro.routes.entities.MapRoute
-import java.util.HashSet
 
 object RouteUtils {
 
-    @JvmStatic
-    fun convertRouteToSchemeObjectIds(route: MapRoute, scheme: MapScheme): HashSet<Int> {
-        val ids = HashSet<Int>()
-        val transfers = HashSet<Pair<Int, Int>>()
+    fun convertRouteToSchemeObjectIds(route: MapRoute, scheme: MapScheme): Set<Int> {
+        val ids = mutableSetOf<Int>()
+        val transfers = mutableSetOf<Pair<Int, Int>>()
 
         for (part in route.parts) {
             ids.add(part.from)
             ids.add(part.to)
-            transfers.add(Pair(part.from, part.to))
+            transfers.add(part.from to part.to)
         }
 
         for (line in scheme.lines) {
             for (segment in line.segments) {
-                val id = Pair(segment.from, segment.to)
-                val reverseId = Pair(segment.to, segment.from)
+                val id = segment.from to segment.to
+                val reverseId = segment.to to segment.from
                 if (transfers.contains(id) || transfers.contains(reverseId)) {
                     ids.add(segment.uid)
                 }
@@ -29,8 +26,8 @@ object RouteUtils {
         }
 
         for (transfer in scheme.transfers) {
-            val id = Pair(transfer.from, transfer.to)
-            val reverseId = Pair(transfer.to, transfer.from)
+            val id = transfer.from to transfer.to
+            val reverseId = transfer.to to transfer.from
             if (transfers.contains(id) || transfers.contains(reverseId)) {
                 ids.add(transfer.uid)
             }

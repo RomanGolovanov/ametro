@@ -11,14 +11,9 @@ abstract class DrawingElement : Comparable<DrawingElement> {
 
     private var priority: Int = 0
 
-    @JvmField
-    protected var layer: Int = 0
+    internal var layer: Int = 0
 
     fun getBoundingBox(): Rect? = boundingBox
-
-    fun setLayer(layer: Int) {
-        this.layer = layer
-    }
 
     abstract fun draw(canvas: Canvas)
 

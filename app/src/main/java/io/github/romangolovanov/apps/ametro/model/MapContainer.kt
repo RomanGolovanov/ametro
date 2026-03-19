@@ -3,8 +3,6 @@ package io.github.romangolovanov.apps.ametro.model
 import android.util.Log
 
 import java.io.IOException
-import java.util.Arrays
-import java.util.HashMap
 
 import io.github.romangolovanov.apps.ametro.app.Constants
 import io.github.romangolovanov.apps.ametro.catalog.MapCatalogProvider
@@ -12,15 +10,9 @@ import io.github.romangolovanov.apps.ametro.catalog.entities.MapInfo
 import io.github.romangolovanov.apps.ametro.model.entities.MapLocale
 import io.github.romangolovanov.apps.ametro.model.entities.MapMetadata
 import io.github.romangolovanov.apps.ametro.model.entities.MapScheme
-import io.github.romangolovanov.apps.ametro.model.entities.MapSchemeLine
-import io.github.romangolovanov.apps.ametro.model.entities.MapSchemeSegment
 import io.github.romangolovanov.apps.ametro.model.entities.MapSchemeStation
-import io.github.romangolovanov.apps.ametro.model.entities.MapSchemeTransfer
 import io.github.romangolovanov.apps.ametro.model.entities.MapStationInformation
-import io.github.romangolovanov.apps.ametro.model.entities.MapTransportLine
 import io.github.romangolovanov.apps.ametro.model.entities.MapTransportScheme
-import io.github.romangolovanov.apps.ametro.model.entities.MapTransportSegment
-import io.github.romangolovanov.apps.ametro.model.entities.MapTransportTransfer
 import io.github.romangolovanov.apps.ametro.model.serialization.MapProvider
 import io.github.romangolovanov.apps.ametro.model.serialization.MapSerializationException
 
@@ -29,27 +21,27 @@ class MapContainer(
     val mapInfo: MapInfo,
     private val preferredLanguage: String
 ) {
-    private var locale: MapLocale? = null
+    private lateinit var locale: MapLocale
     var metadata: MapMetadata? = null
         private set
-    private var stations: Array<MapStationInformation>? = null
-    private var transports: HashMap<String, MapTransportScheme>? = null
-    private var schemes: HashMap<String, MapScheme>? = null
+    private lateinit var stations: Array<MapStationInformation>
+    private lateinit var transports: MutableMap<String, MapTransportScheme>
+    private lateinit var schemes: MutableMap<String, MapScheme>
 
     @Throws(MapSerializationException::class)
     fun loadSchemeWithTransports(schemeName: String, enabledTransports: Array<String>?) {
         try {
             catalogManager.getMapProvider(mapInfo).use { mapProvider ->
-                if (metadata == null) {
+                if (!::stations.isInitialized) {
                     val texts = mapProvider.getTextsMap(suggestLanguage(mapProvider.getSupportedLocales(), preferredLanguage))
                     val allTexts = mapProvider.getAllTextsMap()
                     locale = MapLocale(texts, allTexts)
                     metadata = mapProvider.getMetadata(locale)
                     stations = mapProvider.getStationInformation()
-                    schemes = HashMap()
-                    transports = HashMap()
+                    schemes = mutableMapOf()
+                    transports = mutableMapOf()
                 }
-                val scheme = loadSchemeFile(mapProvider, schemeName, locale!!)
+                val scheme = loadSchemeFile(mapProvider, schemeName, locale)
                 loadTransportFiles(mapProvider, enabledTransports ?: scheme.defaultTransports)
             }
         } catch (e: MapSerializationException) {
@@ -61,29 +53,22 @@ class MapContainer(
         }
     }
 
-    fun getScheme(schemeName: String): MapScheme? = schemes?.get(schemeName)
+    fun getScheme(schemeName: String): MapScheme? = if (::schemes.isInitialized) schemes[schemeName] else null
 
     fun getTransportSchemes(transportNames: Collection<String>): Array<MapTransportScheme> {
-        val result = mutableListOf<MapTransportScheme>()
-        for (name in transportNames) {
-            val transport = transports?.get(name)
-                ?: throw AssertionError("Transport scheme $name not loaded")
-            result.add(transport)
-        }
-        return result.toTypedArray()
+        return transportNames.map { name ->
+            transports[name] ?: error("Transport scheme $name not loaded")
+        }.toTypedArray()
     }
 
     fun findStationInformation(lineName: String, stationName: String): MapStationInformation? {
-        for (stationScheme in stations ?: return null) {
-            if (stationScheme.line == lineName && stationScheme.station == stationName) {
-                return stationScheme
-            }
-        }
-        return null
+        if (!::stations.isInitialized) return null
+        return stations.firstOrNull { it.line == lineName && it.station == stationName }
     }
 
     fun findSchemeStation(schemeName: String, lineName: String, stationName: String): MapSchemeStation? {
-        for (line in getScheme(schemeName)?.lines ?: return null) {
+        val scheme = getScheme(schemeName) ?: return null
+        for (line in scheme.lines) {
             if (line.name != lineName) continue
             for (stationScheme in line.stations) {
                 if (stationScheme.name == stationName) return stationScheme
@@ -106,7 +91,7 @@ class MapContainer(
 
     fun getMaxStationUid(): Int {
         var max = 0
-        for (transport in transports!!.values) {
+        for (transport in transports.values) {
             for (line in transport.lines) {
                 for (segment in line.segments) {
                     max = maxOf(max, segment.from, segment.to)
@@ -116,7 +101,7 @@ class MapContainer(
                 max = maxOf(max, transfer.from, transfer.to)
             }
         }
-        for (scheme in schemes!!.values) {
+        for (scheme in schemes.values) {
             for (line in scheme.lines) {
                 for (segment in line.segments) {
                     max = maxOf(max, segment.from, segment.to)
@@ -131,10 +116,10 @@ class MapContainer(
 
     @Throws(IOException::class, MapSerializationException::class)
     private fun loadSchemeFile(mapProvider: MapProvider, schemeName: String, locale: MapLocale): MapScheme {
-        var scheme = schemes!![schemeName]
+        var scheme = schemes[schemeName]
         if (scheme == null) {
             scheme = mapProvider.getScheme(metadata!!.getScheme(schemeName).fileName, locale)
-            schemes!![scheme.name] = scheme
+            schemes[scheme.name] = scheme
         }
         return scheme
     }
@@ -148,17 +133,16 @@ class MapContainer(
 
     @Throws(IOException::class)
     private fun loadTransport(mapProvider: MapProvider, transportName: String) {
-        var transport = transports!![transportName]
+        var transport = transports[transportName]
         if (transport == null) {
             transport = mapProvider.getTransportScheme(metadata!!.getTransport(transportName).fileName)
-            transports!![transport.name] = transport
+            transports[transport.name] = transport
         }
     }
 
     companion object {
         private fun suggestLanguage(supportedLanguages: Array<String>, preferredLanguage: String): String {
-            val locales = Arrays.asList(*supportedLanguages)
-            return if (!locales.contains(preferredLanguage)) locales[0] else preferredLanguage
+            return if (preferredLanguage in supportedLanguages) preferredLanguage else supportedLanguages[0]
         }
     }
 }

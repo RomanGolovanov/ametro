@@ -10,40 +10,27 @@ import io.github.romangolovanov.apps.ametro.model.entities.MapLocale
 import io.github.romangolovanov.apps.ametro.model.entities.MapMetadata
 import io.github.romangolovanov.apps.ametro.model.entities.MapStationInformation
 
-import java.util.ArrayList
-import java.util.HashMap
-
 object MetadataTypes {
 
-    @JvmStatic
     fun asStationInformation(arrayNode: JsonNode?): Array<MapStationInformation> {
         if (arrayNode == null || arrayNode.isNull) return emptyArray()
-        val list = ArrayList<MapStationInformation>()
-        for (i in 0 until arrayNode.size()) {
+        return Array(arrayNode.size()) { i ->
             val node = arrayNode.get(i)
-            list.add(MapStationInformation(
+            MapStationInformation(
                 node.get("line").asText(),
                 node.get("station").asText(),
                 node.get("image").asText(),
                 node.get("caption").asText(),
                 null
-            ))
+            )
         }
-        return list.toTypedArray()
     }
 
-    @JvmStatic
-    fun asTextMap(node: JsonNode): HashMap<Int, String> {
-        val textMap = HashMap<Int, String>(node.size())
-        val iterator = node.fields()
-        while (iterator.hasNext()) {
-            val entry = iterator.next()
-            textMap[entry.key.toInt()] = node.get(entry.key).asText()
-        }
-        return textMap
+    fun asTextMap(node: JsonNode): Map<Int, String> {
+        return node.fields().asSequence()
+            .associate { entry -> entry.key.toInt() to node.get(entry.key).asText() }
     }
 
-    @JvmStatic
     fun asMetadata(node: JsonNode, locale: MapLocale?): MapMetadata {
         return MapMetadata(
             locale,
@@ -135,9 +122,8 @@ object MetadataTypes {
     }
 
     private fun asSchemeDictionary(arrayNode: JsonNode?, locale: MapLocale?): Map<String, MapMetadata.Scheme> {
-        if (arrayNode == null || arrayNode.isNull) return HashMap()
-        val dict = HashMap<String, MapMetadata.Scheme>()
-        for (i in 0 until arrayNode.size()) {
+        if (arrayNode == null || arrayNode.isNull) return emptyMap()
+        return (0 until arrayNode.size()).associate { i ->
             val node = arrayNode.get(i)
             val scheme = MapMetadata.Scheme(
                 locale,
@@ -150,23 +136,20 @@ object MetadataTypes {
                 CommonTypes.asStringArray(node.get("default_transports")),
                 node.get("root").asBoolean()
             )
-            dict[scheme.name] = scheme
+            scheme.name to scheme
         }
-        return dict
     }
 
     private fun asTransportSchemeDictionary(arrayNode: JsonNode?): Map<String, MapMetadata.TransportScheme> {
-        if (arrayNode == null || arrayNode.isNull) return HashMap()
-        val dict = HashMap<String, MapMetadata.TransportScheme>()
-        for (i in 0 until arrayNode.size()) {
+        if (arrayNode == null || arrayNode.isNull) return emptyMap()
+        return (0 until arrayNode.size()).associate { i ->
             val node = arrayNode.get(i)
             val scheme = MapMetadata.TransportScheme(
                 node.get("name").asText(),
                 node.get("file").asText(),
                 node.get("type").asText()
             )
-            dict[scheme.name] = scheme
+            scheme.name to scheme
         }
-        return dict
     }
 }

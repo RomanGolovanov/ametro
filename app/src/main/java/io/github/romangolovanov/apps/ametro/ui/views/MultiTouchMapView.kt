@@ -9,7 +9,6 @@ import android.graphics.PointF
 import android.graphics.RectF
 import android.os.Handler
 import android.os.Looper
-import android.util.Pair
 import android.view.MotionEvent
 import android.view.ViewConfiguration
 import android.widget.ScrollView
@@ -19,7 +18,7 @@ import io.github.romangolovanov.apps.ametro.model.entities.MapPoint
 import io.github.romangolovanov.apps.ametro.model.entities.MapScheme
 import io.github.romangolovanov.apps.ametro.render.CanvasRenderer
 import io.github.romangolovanov.apps.ametro.render.RenderProgram
-import io.github.romangolovanov.apps.ametro.render.utils.Algorithms
+import io.github.romangolovanov.apps.ametro.render.utils.calculateDistance
 import io.github.romangolovanov.apps.ametro.ui.controllers.MultiTouchController
 import java.util.HashSet
 
@@ -138,7 +137,7 @@ class MultiTouchMapView : ScrollView, MultiTouchController.IMultiTouchListener {
             return
         }
 
-        val distance = Algorithms.calculateDistance(lastClickPosition!!, multiTouchController.getScreenTouchPoint())
+        val distance = calculateDistance(lastClickPosition!!, multiTouchController.getScreenTouchPoint())
 
         dispatcher.removeCallbacks(performClickRunnable)
         lastClickPosition = null
@@ -170,14 +169,14 @@ class MultiTouchMapView : ScrollView, MultiTouchController.IMultiTouchListener {
         }
     }
 
-    val centerPositionAndScale: Pair<PointF, Float>
+    val centerPositionAndScale: kotlin.Pair<PointF, Float>
         get() {
             val position = PointF()
             val scale = multiTouchController.getPositionAndScale(position)
             val width = width / scale
             val height = height / scale
             position.offset(width / 2, height / 2)
-            return Pair(position, scale)
+            return position to scale
         }
 
     val scale: Float get() = multiTouchController.getScale()
@@ -198,7 +197,7 @@ class MultiTouchMapView : ScrollView, MultiTouchController.IMultiTouchListener {
         super.onSizeChanged(w, h, oldWidth, oldHeight)
     }
 
-    fun highlightsElements(ids: HashSet<Int>?) {
+    fun highlightsElements(ids: Set<Int>?) {
         rendererProgram.highlightsElements(ids)
         renderer.recycleCache()
         invalidate()

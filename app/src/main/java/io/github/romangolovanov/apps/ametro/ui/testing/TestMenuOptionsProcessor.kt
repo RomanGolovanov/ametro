@@ -6,6 +6,7 @@ import android.widget.Toast
 import io.github.romangolovanov.apps.ametro.R
 import io.github.romangolovanov.apps.ametro.app.ApplicationEx
 import io.github.romangolovanov.apps.ametro.catalog.entities.MapInfo
+import io.github.romangolovanov.apps.ametro.catalog.entities.MapInfoEntity
 
 class TestMenuOptionsProcessor(private val activity: Activity) {
 
@@ -17,14 +18,16 @@ class TestMenuOptionsProcessor(private val activity: Activity) {
             val maps = localMapCatalogProvider.mapCatalog.maps
             if (maps.isNotEmpty()) {
                 val outdatedFirstMap = MapInfo(
-                    maps[0].cityId,
-                    maps[0].fileName,
-                    maps[0].latitude,
-                    maps[0].longitude,
-                    maps[0].size,
-                    maps[0].timestamp - 100,
-                    maps[0].types,
-                    maps[0].uid,
+                    MapInfoEntity(
+                        uid = maps[0].uid,
+                        cityId = maps[0].cityId,
+                        types = maps[0].types,
+                        fileName = maps[0].fileName,
+                        size = maps[0].size,
+                        timestamp = maps[0].timestamp - 100,
+                        latitude = maps[0].latitude,
+                        longitude = maps[0].longitude
+                    ),
                     maps[0].city,
                     maps[0].country,
                     maps[0].iso

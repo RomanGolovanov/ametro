@@ -11,7 +11,7 @@ import android.graphics.Rect
 import io.github.romangolovanov.apps.ametro.model.entities.MapSchemeLine
 import io.github.romangolovanov.apps.ametro.model.entities.MapSchemeSegment
 import io.github.romangolovanov.apps.ametro.render.RenderConstants
-import io.github.romangolovanov.apps.ametro.render.utils.RenderUtils
+import io.github.romangolovanov.apps.ametro.render.utils.getGrayedColor
 import kotlin.math.max
 import kotlin.math.min
 
@@ -28,7 +28,7 @@ class SegmentElement(line: MapSchemeLine, segment: MapSchemeSegment) : DrawingEl
         val lineWidth = line.lineWidth.toFloat()
 
         paints[RenderConstants.LAYER_VISIBLE] = createPaint(lineColor, lineWidth, isWorking)
-        paints[RenderConstants.LAYER_GRAYED] = createPaint(RenderUtils.getGrayedColor(lineColor), lineWidth, isWorking)
+        paints[RenderConstants.LAYER_GRAYED] = createPaint(getGrayedColor(lineColor), lineWidth, isWorking)
 
         val points = segment.points
 

@@ -1,7 +1,6 @@
 package io.github.romangolovanov.apps.ametro.model.serialization
 
 import java.io.IOException
-import java.util.HashMap
 
 import io.github.romangolovanov.apps.ametro.model.entities.MapLocale
 import io.github.romangolovanov.apps.ametro.model.entities.MapMetadata
@@ -17,10 +16,10 @@ interface MapProvider : AutoCloseable {
     fun getSupportedLocales(): Array<String>
 
     @Throws(IOException::class)
-    fun getTextsMap(languageCode: String): HashMap<Int, String>
+    fun getTextsMap(languageCode: String): Map<Int, String>
 
     @Throws(IOException::class)
-    fun getAllTextsMap(): HashMap<Int, MutableList<String>>
+    fun getAllTextsMap(): Map<Int, MutableList<String>>
 
     @Throws(IOException::class)
     fun getMetadata(locale: MapLocale?): MapMetadata

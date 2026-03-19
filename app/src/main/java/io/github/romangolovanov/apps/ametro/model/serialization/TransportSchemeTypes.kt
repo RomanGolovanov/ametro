@@ -9,7 +9,6 @@ import io.github.romangolovanov.apps.ametro.model.entities.MapTransportTransfer
 
 object TransportSchemeTypes {
 
-    @JvmStatic
     fun asMapTransportScheme(node: JsonNode): MapTransportScheme {
         return MapTransportScheme(
             node.get("name").asText(),

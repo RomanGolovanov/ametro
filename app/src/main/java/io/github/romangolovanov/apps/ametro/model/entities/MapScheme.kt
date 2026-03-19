@@ -17,7 +17,7 @@ class MapScheme(
     var width: Int,
     var height: Int
 ) {
-    var images: MutableMap<String, Any> = HashMap()
+    var images: MutableMap<String, Any> = mutableMapOf()
 
     val displayName: String? get() = locale.getText(nameTextId)
     val typeName: String? get() = locale.getText(typeTextId)

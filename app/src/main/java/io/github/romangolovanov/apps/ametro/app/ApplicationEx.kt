@@ -3,7 +3,6 @@ package io.github.romangolovanov.apps.ametro.app
 import android.app.Activity
 import android.app.Application
 import android.graphics.PointF
-import android.util.Pair
 import androidx.core.content.ContextCompat
 import io.github.romangolovanov.apps.ametro.R
 import io.github.romangolovanov.apps.ametro.catalog.MapCatalogProvider
@@ -39,7 +38,7 @@ class ApplicationEx : Application() {
     var container: MapContainer? = null
     var schemeName: String? = null
     var enabledTransports: Array<String>? = null
-    var centerPositionAndScale: Pair<PointF, Float>? = null
+    var centerPositionAndScale: kotlin.Pair<PointF, Float>? = null
     // Named to match the Java caller API: getSelectedBeginUid() / getSelectedEndUid()
     var selectedBeginUid: Int? = null
     var selectedEndUid: Int? = null
@@ -62,7 +61,6 @@ class ApplicationEx : Application() {
     }
 
     companion object {
-        @JvmStatic
         fun getInstance(activity: Activity): ApplicationEx =
             activity.application as ApplicationEx
     }

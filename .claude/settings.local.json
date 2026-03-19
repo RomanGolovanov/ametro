@@ -6,7 +6,9 @@
       "Bash(./gradlew :app:compileDebugKotlin --info)",
       "Bash(JAVA_HOME=\"/c/Program Files/Android/Android Studio/jbr\" ANDROID_HOME=\"/c/Users/skiif/AppData/Local/Android/Sdk\" ./gradlew assembleDebug)",
       "Bash(JAVA_HOME=\"/c/Program Files/Android/Android Studio/jbr\" ANDROID_HOME=\"/c/Users/skiif/AppData/Local/Android/Sdk\" ./gradlew assembleDebug --stacktrace)",
-      "Bash(./gradlew :app:compileDebugJavaWithJavac)"
+      "Bash(./gradlew :app:compileDebugJavaWithJavac)",
+      "Bash(./gradlew assembleDebug)",
+      "Bash(./gradlew test:*)"
     ]
   }
 }

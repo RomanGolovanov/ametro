@@ -7,7 +7,6 @@ object DijkstraHeap {
     const val INF: Long = Long.MAX_VALUE / 10
     const val NO_WAY: Int = -1
 
-    @JvmStatic
     fun dijkstra(graph: TransportGraph, start: Int): Result {
         val distances = LongArray(graph.count) { INF }
         val predecessors = IntArray(graph.count) { NO_WAY }
@@ -17,7 +16,7 @@ object DijkstraHeap {
         queue.add(QueueItem(0L, start))
 
         while (queue.isNotEmpty()) {
-            val currentItem = queue.poll()!!
+            val currentItem = queue.poll() ?: break
             if (currentItem.priority != distances[currentItem.value]) continue
 
             for (edge in graph.edges[currentItem.value]) {
@@ -35,7 +34,7 @@ object DijkstraHeap {
     class Result(val distances: LongArray, val predecessors: IntArray)
 
     class TransportGraph(val count: Int) {
-        internal val edges: Array<ArrayList<Edge>> = Array(count) { ArrayList() }
+        internal val edges: Array<MutableList<Edge>> = Array(count) { mutableListOf() }
 
         fun addEdge(start: Int, end: Int, weight: Int) {
             edges[start].add(Edge(start, end, weight))
@@ -45,7 +44,6 @@ object DijkstraHeap {
     internal class Edge(val start: Int, val end: Int, val weight: Int)
 
     internal class QueueItem(val priority: Long, val value: Int) : Comparable<QueueItem> {
-        override fun compareTo(other: QueueItem): Int =
-            if (priority < other.priority) -1 else if (priority > other.priority) 1 else 0
+        override fun compareTo(other: QueueItem): Int = priority.compareTo(other.priority)
     }
 }

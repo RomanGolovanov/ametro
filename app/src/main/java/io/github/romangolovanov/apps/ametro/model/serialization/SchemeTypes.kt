@@ -11,7 +11,6 @@ import io.github.romangolovanov.apps.ametro.model.entities.MapSchemeTransfer
 
 object SchemeTypes {
 
-    @JvmStatic
     fun asMapScheme(identifierProvider: GlobalIdentifierProvider, node: JsonNode, locale: MapLocale): MapScheme {
         return MapScheme(
             locale,

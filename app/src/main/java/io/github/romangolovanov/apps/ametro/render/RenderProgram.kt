@@ -30,30 +30,17 @@ class RenderProgram(container: MapContainer, schemeName: String) {
     }
 
     private fun getBoundingBox(elements: Collection<DrawingElement>): Rect? {
-        var bounds: Rect? = null
-        for (element in elements) {
-            val box = element.getBoundingBox() ?: continue
-            if (bounds == null) {
-                bounds = box
-                continue
-            }
-            bounds.union(box)
-        }
-        return bounds
+        return elements.mapNotNull { it.getBoundingBox() }
+            .reduceOrNull { acc, box -> Rect(acc).apply { union(box) } }
     }
 
-    fun highlightsElements(ids: HashSet<Int>?) {
-        for (element in elements) {
-            if (ids == null) {
-                element.setLayer(RenderConstants.LAYER_VISIBLE)
-                continue
-            }
-            element.setLayer(
-                if (element.uid != null && ids.contains(element.uid))
+    fun highlightsElements(ids: Set<Int>?) {
+        elements.forEach { element ->
+            element.layer =
+                if (ids == null || (element.uid != null && ids.contains(element.uid)))
                     RenderConstants.LAYER_VISIBLE
                 else
                     RenderConstants.LAYER_GRAYED
-            )
         }
         elements.sort()
     }

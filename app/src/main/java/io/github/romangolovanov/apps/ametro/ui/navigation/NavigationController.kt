@@ -31,8 +31,6 @@ import io.github.romangolovanov.apps.ametro.ui.navigation.entities.NavigationSpl
 import io.github.romangolovanov.apps.ametro.ui.navigation.entities.NavigationSubHeader
 import io.github.romangolovanov.apps.ametro.ui.navigation.entities.NavigationTextItem
 import io.github.romangolovanov.apps.ametro.ui.navigation.helpers.DelayResources
-import io.github.romangolovanov.apps.ametro.utils.ListUtils
-import io.github.romangolovanov.apps.ametro.utils.StringUtils
 
 class NavigationController(
     activity: AppCompatActivity,
@@ -204,7 +202,7 @@ class NavigationController(
         if (container == null) return emptyArray()
         val meta = container.metadata ?: return emptyArray()
 
-        val schemeMetadataList = ListUtils.filter(meta.schemes.values) { !it.typeName.equals(SCHEME_TYPE_OTHER) }
+        val schemeMetadataList = meta.schemes.values.filter { !it.typeName.equals(SCHEME_TYPE_OTHER) }
             .toMutableList()
         schemeMetadataList.sortWith(SchemeNavigationListComparator())
 
@@ -212,10 +210,7 @@ class NavigationController(
         for (schemeMeta in schemeMetadataList) {
             var icon: Drawable? = null
             if (schemeMeta.typeName == SCHEME_TYPE_ROOT) {
-                val defaultTransport = ListUtils.firstOrDefault(
-                    schemeMeta.defaultTransports.toList(),
-                    ListUtils.firstOrDefault(schemeMeta.defaultTransports.toList(), null)
-                )
+                val defaultTransport = schemeMeta.defaultTransports.firstOrNull()
                 if (defaultTransport != null) {
                     icon = transportIconProvider.getTransportIcon(
                         TransportTypeHelper.parseTransportType(
@@ -319,7 +314,7 @@ class NavigationController(
     private fun createDelayName(name: String?, weekdayName: String?, ranges: Array<out Any>?): String {
         val sb = StringBuilder()
         if (name != null) sb.append(name)
-        if (!StringUtils.isNullOrEmpty(weekdayName)) {
+        if (!weekdayName.isNullOrBlank()) {
             sb.append(" [")
             sb.append(weekdayName)
             sb.append("]")
@@ -337,12 +332,8 @@ class NavigationController(
     }
 
     private fun createTransportsLocalizationTable() {
-        val map = mutableMapOf<String, String>()
-        val transportTypes = resources.getStringArray(R.array.transport_types)
-        val transportTypeNames = resources.getStringArray(R.array.transport_type_names)
-        for (i in transportTypes.indices) {
-            map[transportTypes[i].lowercase()] = transportTypeNames[i]
-        }
-        transportNameLocalizations = map
+        transportNameLocalizations = resources.getStringArray(R.array.transport_types)
+            .zip(resources.getStringArray(R.array.transport_type_names))
+            .associate { (type, name) -> type.lowercase() to name }
     }
 }

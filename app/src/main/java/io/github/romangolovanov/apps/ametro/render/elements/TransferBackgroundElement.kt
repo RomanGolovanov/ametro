@@ -8,7 +8,7 @@ import io.github.romangolovanov.apps.ametro.model.entities.MapPoint
 import io.github.romangolovanov.apps.ametro.model.entities.MapScheme
 import io.github.romangolovanov.apps.ametro.model.entities.MapSchemeTransfer
 import io.github.romangolovanov.apps.ametro.render.RenderConstants
-import io.github.romangolovanov.apps.ametro.render.utils.RenderUtils
+import io.github.romangolovanov.apps.ametro.render.utils.getGrayedColor
 import kotlin.math.max
 import kotlin.math.min
 
@@ -27,7 +27,7 @@ class TransferBackgroundElement(scheme: MapScheme, transfer: MapSchemeTransfer) 
         val linesWidth = scheme.linesWidth.toFloat()
 
         paints[RenderConstants.LAYER_VISIBLE] = createPaint(Color.BLACK, linesWidth)
-        paints[RenderConstants.LAYER_GRAYED] = createPaint(RenderUtils.getGrayedColor(Color.BLACK), linesWidth)
+        paints[RenderConstants.LAYER_GRAYED] = createPaint(getGrayedColor(Color.BLACK), linesWidth)
 
         setBoxAndPriority(
             Rect(
