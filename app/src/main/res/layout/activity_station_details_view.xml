@@ -8,24 +8,17 @@
 
     <include layout="@layout/widget_toolbar" />
 
-    <io.github.romangolovanov.apps.ametro.ui.views.SlidingTabLayout
-        android:id="@+id/sliding_tabs"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/primary"
-        />
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:contentDescription="@string/empty"
-        android:src="@drawable/white_gradient_bottom" />
+        android:background="@color/primary" />
 
-    <androidx.viewpager.widget.ViewPager
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="0px"
-        android:layout_weight="1"
-        />
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
 
 </LinearLayout>

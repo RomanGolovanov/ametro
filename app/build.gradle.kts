@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
 }
 
 android {
@@ -14,7 +15,7 @@ android {
         versionName = "3.0.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        setProperty("archivesBaseName", "$applicationId-$versionName")
+        //setProperty("archivesBaseName", "$applicationId-$versionName")
     }
 
     buildTypes {
@@ -35,8 +36,18 @@ android {
     }
 }
 
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile>().configureEach {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
+    }
+}
+
 dependencies {
 
+   implementation(libs.kotlin.stdlib)
+   implementation(libs.coroutines.android)
+   implementation(libs.viewpager2)
+   implementation(libs.preference.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
@@ -51,9 +62,9 @@ dependencies {
     implementation(libs.core)
     implementation(libs.loader)
 
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.20.0")
-    implementation("com.fasterxml.jackson.core:jackson-core:2.20.0")
-    implementation("com.fasterxml.jackson.core:jackson-annotations:2.20")
+    implementation(libs.jackson.databind)
+    implementation(libs.jackson.core)
+    implementation(libs.jackson.annotations)
 
-    implementation("com.caverock:androidsvg:1.4")
+    implementation(libs.androidsvg)
 }
